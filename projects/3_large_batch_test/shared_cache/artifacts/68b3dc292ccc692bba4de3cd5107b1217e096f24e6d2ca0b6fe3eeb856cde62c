@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_fae263fd27f9",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis focuses on how the speech balances appeals to 'the people' with a strong emphasis on institutional reform, bipartisan cooperation, and a civic, inclusive national identity. The vertical axis score reflects a moderate populist lean due to explicit critiques of political dysfunction and economic inequality, while solutions remain largely pluralist. The horizontal axis score shows a strong emphasis on civic patriotism, with national pride rooted in ideals and opportunity rather than exclusionary identity.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2011.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"But when that debate prevents us from carrying out even the most basic functions of our democracy\u2014when our differences shut down Government or threaten the full faith and credit of the United States\u2014then we are not doing right by the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"critique of political gridlock\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"I'm committed to making Washington work better and rebuilding the trust of the people who sent us here. And I believe most of you are too. Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year's severe cuts to priorities like education.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"commitment to institutional reform and bipartisan cooperation\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"America is better positioned for the 21st century than any other nation on Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"assertion of national strength and exceptionalism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"And what I believe unites the people of this Nation\u2014regardless of race or region or party, young or old, rich or poor\u2014is the simple, profound belief in opportunity for all: the notion that if you work hard and take responsibility, you can get ahead in America.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"definition of inclusive national identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:52:30.519639+00:00",
+    "end_time": "2025-08-02T02:53:03.118483+00:00",
+    "duration_seconds": 32.598844,
+    "llm_interaction_hash": "29168c642ae83fe0"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

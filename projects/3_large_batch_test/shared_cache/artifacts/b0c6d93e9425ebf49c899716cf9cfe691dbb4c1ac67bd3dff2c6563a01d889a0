@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_efcc20e7935f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed using the Political Discourse Analysis Framework v7.1. The framework was applied to identify and score dimensions related to populism and nationalism, focusing on the provided 'analysis_prompt' for dimensional interpretation. Evidence extraction prioritized strong, direct quotes supporting the dimensional assessments.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2023.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My plan will lower your costs and lower the deficit. Seventeen Nobel laureates in economics say my plan will ease long-term inflation worries. Top business leaders and I, I believe, most Americans support the plan. And here's the plan. First, cut the cost of prescription drugs.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, tonight we've gathered in a sacred space: the citadel of democracy. In this Capitol, generation after generation of Americans have debated great questions amid great strife and have done great things.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"direct_democracy_appeals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:14.830033+00:00",
+    "end_time": "2025-08-02T15:17:17.384737+00:00",
+    "duration_seconds": 2.554704,
+    "llm_interaction_hash": "e1d0bfabd35fec40"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

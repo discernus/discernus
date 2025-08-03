@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted based on the 'default' variant of the Political Discourse Analysis Framework v7.0, focusing on Populism-Pluralism and Nationalism-Patriotism axes. Scores reflect the intensity and salience of these dimensions as present in the inaugural address, with particular attention to linguistic markers and overall rhetorical strategy."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.2,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.3,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "deepened the wellspring of justice by making a revolution in civil rights for African-Americans and all minorities and extending the circle of citizenship, opportunity, and dignity to women.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Our rich texture of racial, religious, and political diversity will be a godsend in the 21st century.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "The promise of America was born in the 18th century out of the bold conviction that we are all created equal.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "America stands alone as the world's indispensable nation.",
+          "confidence": 0.85,
+          "context_type": "direct quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

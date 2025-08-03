@@ -185,16 +185,16 @@ class PreFlightValidator:
             with open(structure["framework_file"], 'r') as f:
                 content = f.read()
                 
-            # Check framework character limit (15KB maximum)
+            # Check framework character limit (30KB maximum)
             framework_size = len(content)  
-            if framework_size > 15000:
+            if framework_size > 30000:
                 compliance["valid"] = False
-                compliance["issues"].append(f"Framework exceeds 15KB limit: {framework_size:,} characters (limit: 15,000)")
-                compliance["missing_elements"].append("Framework must be reduced to 15KB per Framework Specification v4.0")
+                compliance["issues"].append(f"Framework exceeds 30KB limit: {framework_size:,} characters (limit: 30,000)")
+                compliance["missing_elements"].append("Framework must be reduced to 30KB per Framework Specification v7.0")
                 self.compliance_help.append({
                     "issue": "Framework size exceeds limit",
                     "current_size": f"{framework_size:,} characters", 
-                    "size_limit": "15,000 characters (15KB)",
+                    "size_limit": "30,000 characters (30KB)",
                     "reduction_strategies": [
                         "Streamline dimension definitions (2-3 sentences max)",
                         "Eliminate redundant explanatory text", 

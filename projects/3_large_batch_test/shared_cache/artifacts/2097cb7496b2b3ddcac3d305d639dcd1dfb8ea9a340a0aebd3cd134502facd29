@@ -1,0 +1,80 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis focused on identifying populist and nationalist themes and their salience within the provided document, using the framework's specified linguistic markers and contextual indicators. Confidence is high due to the explicit nature of many phrases aligning with the framework's definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2342a5d0808e...",
+      "document_name": "Democratic_Platform_2000.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.88,
+          "salience": 0.92,
+          "confidence": 0.98
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "This election will be about the big choices we have to make to secure prosperity that is broadly shared and progress that reaches all families in this new American century.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must remember that our achievements were accomplished only with creativity, courage, and conscience; with a willingness to innovate and imagine; and with a recommitment to our basic American values of hard work, community, embracing diversity, faith, family, and personal responsibility.",
+          "confidence": 0.90,
+          "context_type": "common_sense"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "This is a 21st century platform for the 21st century party. A people's platform for the people's party.",
+          "confidence": 0.98,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "If one theme runs through this 2000 Democratic platform, it is this: if America is to secure prosperity, progress, peace and security for all, we cannot afford to go back. We must move forward together and we must not leave anyone behind.",
+          "confidence": 0.92,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Today, America finds itself in the midst of prosperity, progress, and peace.",
+          "confidence": 0.85,
+          "context_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America enjoys unparalleled affluence at home and influence abroad.",
+          "confidence": 0.80,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Eight years ago, America was facing a big challenge. Under the Bush-Quayle Administration, the American economy was floundering. Slow growth had turned into no growth and into a jobless recovery.",
+          "confidence": 0.90,
+          "context_type": "foreign_influence"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's future did not always seem so bright. Under the Bush-Quayle Administration, the American economy was floundering.",
+          "confidence": 0.95,
+          "context_type": "historical_mythology"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

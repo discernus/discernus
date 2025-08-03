@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. Focus on identifying populist and nationalist rhetoric as defined by the framework. Scores are assigned based on the presence and intensity of keywords, thematic elements, and rhetorical strategies characteristic of each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2b92606713cd...",
+      "document_name": "Democratic_Platform_2012.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.82,
+          "salience": 0.88,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.75,
+          "salience": 0.79,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We Democrats offer America the opportunity to move our country forward by creating an economy built to last and built from the middle out. Mitt Romney and the Republican Party have a drastically different vision. They still believe the best way to grow the economy is from the top down – the same approach that benefited the wealthy few but crashed the economy and crashed the middle class.",
+          "confidence": 0.95,
+          "context_type": "Populist Appeal - The People vs. Elite"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "This is not another trivial political argument. It’s the defining issue of our time and at the core of the American Dream. And now we stand at a make-or-break moment, and are faced with a choice between moving forward toward a nation built from the middle class out where everyone has the chance to get ahead, or go back to the same failed ideas that created the crisis in the first place.",
+          "confidence": 0.94,
+          "context_type": "Populist Appeal - Core Values"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "We believe America can succeed because the American people have never failed and there is not anything that together we cannot accomplish.",
+          "confidence": 0.90,
+          "context_type": "Nationalist Appeal - National Superiority"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "We see a young country continually made stronger by the greatest diversity of talent and ingenuity in the world, and a nation of people drawn to our shores from every corner of the globe.",
+          "confidence": 0.88,
+          "context_type": "Nationalist Appeal - Inclusivity of National Identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

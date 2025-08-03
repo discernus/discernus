@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.98,
+    "analysis_notes": "Comprehensive analysis of the 2016 Republican Platform focusing on Populism-Pluralism and Nationalism-Patriotism axes. Strong emphasis on anti-elite sentiment, popular sovereignty, national exceptionalism, and border security."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2016.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe that people are the ultimate resource — and that the people, not the government, are the best stewards of our country’s God-given natural resources.",
+          "confidence": 1.0,
+          "context_type": "core_populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "This means removing the power from unelected, unaccountable government. This means relieving the burden and expense of punishing government regulations. And this means returning to the people and the states the control that belongs to them.",
+          "confidence": 1.0,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We believe in American exceptionalism. We believe the United States of America is unlike any other nation on earth. We believe America is exceptional because of our historic role — first as refuge, then as defender, and now as example of liberty for the world to see.",
+          "confidence": 1.0,
+          "context_type": "national_supremacy_claim"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our highest priority, therefore, must be to secure our borders and all ports of entry and to enforce our immigration laws. That is why we support building a wall along our southern border and protecting all ports of entry. The border wall must cover the entirety of the southern border and must be sufficient to stop both vehicular and pedestrian traffic.",
+          "confidence": 0.9,
+          "context_type": "territorial_claims_security"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

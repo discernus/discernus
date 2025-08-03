@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politiccal_discount_populism_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1 with a focus on identifying populism and nationalism markers within the provided State of the Union address."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimensional_scores": {
+        "populism_plurallism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "Let us build the America with reach, and an America where everybody has a chance to get ahead with hard work; where every citizen can live in a safe community; where families are strong, schools are good, and all our young people can go on to college; an America where scientists find cures for diseases from diabetes to Alzheimer's to AIDS; an America where every child can sketch a hand across a keyboard and reach every book ever written, every painting ever painted, every symphony ever composed; where government provides opportunity and citizens honor the responsibility to give something back to their communities; and an America which leads the world to new heights of peace and prosperity.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "We have moved past the sterile debate between those who say government is the enemy and those who say government is the answer. My fellow Americans, we have found a third way. We have the smallest Government in 35 years, but a more progressive one. We have a smaller Government, but a stronger Nation.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "My plan to balance the budget next year includes both new investments and new tax cuts targeted to the needs of working families, for education, for child care, and for the environment.",
+          "confidence": 0.85,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "My plan to balance the budget next year includes both new investments and new tax cuts targeted to the needs of working families, for education, for child care, and for the environment.",
+          "confidence": 0.80,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "Let us say to them: Stop promoting children who don't learn, and we will give you the tools to make sure they do.",
+          "confidence": 0.75,
+          "context_type": "anti_elite"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "We have to make it possible for all hardworking families to meet their most important obligations to be good workers and their even more important obligations to be good parents. The Family and Medical Leave Act was the very first bill I was privileged to sign into law as President in 1993.",
+          "confidence": 0.70,
+          "context_type": "manichean_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The analysis focused on identifying populist and nationalist rhetoric within the provided State of the Union address. Evidence extraction prioritized direct quotes that exemplify the defined dimensional markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.70,
+          "salience": 0.80,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We have built a new economy. And our economic revolution has been matched by a revival of the American spirit: crime down by 20 percent, to its lowest level in 25 years; teen births down 7 years in a row; adoption up by 30 percent; we welfare rolls cut in half, to their lowest levels in 30 years.",
+          "confidence": 0.95,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "As always, the real credit belongs to the American people. My gratitude also goes to those of you in this Chamber who have worked with us to put progress over partisanship.",
+          "confidence": 0.90,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, the state of our Union is the strongest it has ever been.",
+          "confidence": 0.90,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We begin the new century with over 20 million new jobs; the fastest economic growth in more than 30 years; the lowest unemployment rate in 30 years; the lowest poverty rate in 20 years; the lowest African-American and Hispanic unemployment rate on record; the first back-to-back surpluses in 42 years; and next month, America will achieve the longest period of economic growth in our entire history. We have built a new economy.",
+          "confidence": 0.90,
+          "context_type": "American Greatness"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "To the 21st century America, let us pledge these things: Every child will begin school ready to learn and graduate ready to succeed. Every family will be able to succeed at home and at work, and no child will be raised in poverty.",
+          "confidence": 0.85,
+          "context_type": "Civic Duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We will meet the challenge of aging of America. We will assure quality, affordable health care, at last, for all Americans. We will make America the safest big country on Earth. We will pay off our national debt for the first time since 1835.",
+          "confidence": 0.85,
+          "context_type": "American Greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

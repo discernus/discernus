@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_33ba0da32d3c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.92,\n    \"analysis_notes\": \"Analysis of President Obama's 2017 State of the Union address. The speech presents a nuanced position, acknowledging populist grievances against elites and institutions while strongly advocating for pluralist solutions, institutional reform, and inclusive civic patriotism.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2017.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"In 2008, the house of cards collapsed. We learned that mortgages had been sold to people who couldn\u2019t afford or understand them. Banks had made huge bets and bonuses with other people\u2019s money. Regulators had looked the other way or didn\u2019t have the authority to stop the bad behavior. It was wrong, it was irresponsible, and it plunged our economy into a crisis that put millions out of work, saddled us with more debt, and left innocent, hard-working Americans holding the bag.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Critique of elite/institutional failure and impact on the common person\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We need to end the notion that the two parties must be locked in a perpetual campaign of mutual destruction, that politics is about clinging to rigid ideologies instead of building consensus around commonsense ideas.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call for pluralist consensus and institutional functionality\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"When you put on that uniform, it doesn't matter if you're Black or White, Asian, Latino, Native American; conservative, liberal; rich, poor; gay, straight. When you're marching into battle, you look out for the person next to you or the mission fails. When you're in the thick of the fight, you rise or fall as one unit, serving one Nation, leaving no one behind.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Strong emphasis on inclusive civic patriotism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Our workers are the most productive on Earth, and if the playing field is level, I promise you, America will always win.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Assertion of national economic superiority/competitiveness\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:56:05.109576+00:00",
+    "end_time": "2025-08-02T02:56:53.649466+00:00",
+    "duration_seconds": 48.53989,
+    "llm_interaction_hash": "345730780e66ab1d"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

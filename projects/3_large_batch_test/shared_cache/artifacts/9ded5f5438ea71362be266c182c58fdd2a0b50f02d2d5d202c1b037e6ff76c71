@@ -1,0 +1,62 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on populist and nationalistic rhetoric as defined in the framework. The Gasket schema was utilized for structured extraction of dimensional scores and supporting evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "0e7342da7ee6...",
+      "document_name": "Republican_Platform_2016.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We believe in American exceptionalism. We believe the United States of America is unlike any other nation on earth.",
+          "confidence": 0.95,
+          "context_type": "core_populism_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We believe the Constitution was written not as a flexible document, but as our enduring covenant. We believe our constitutional system limited government, separation of powers, federalism, and the rights of the people must be preserved uncompromised for future generations.",
+          "confidence": 0.90,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The people are the ultimate resource, and that the people, not the government, are the best stewards of our country's God-given natural resources.",
+          "confidence": 0.90,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "We believe American greatness. We believe the United States of America is unlike any other nation on earth. We believe America is exceptional because of our historical role, first as refuge, then as defender, and now as exemplar of liberty for the world to see.",
+          "confidence": 0.95,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "As Americans and as Republicans we reaffirm the principles that unite us in a common purpose. We believe American exceptionalism.",
+          "confidence": 0.90,
+          "context_type": "national_identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

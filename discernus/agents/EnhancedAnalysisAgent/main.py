@@ -133,7 +133,9 @@ class EnhancedAnalysisAgent:
                      experiment_config: Dict[str, Any],
                      model: str = "vertex_ai/gemini-2.5-flash",
                      current_scores_hash: Optional[str] = None,
-                     current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
+                     current_evidence_hash: Optional[str] = None,
+                     ensemble_run: Optional[int] = None,
+                     total_ensemble_runs: Optional[int] = None) -> Dict[str, Any]:
         """
         Perform enhanced batch analysis of documents using framework.
         
@@ -144,6 +146,8 @@ class EnhancedAnalysisAgent:
             model: LLM model to use
             current_scores_hash: Hash of the current scores.csv artifact
             current_evidence_hash: Hash of the current evidence.csv artifact
+            ensemble_run: Current ensemble run number (for session-based caching)
+            total_ensemble_runs: Total number of ensemble runs
             
         Returns:
             Analysis results with mathematical validation and updated CSV artifact hashes
@@ -167,9 +171,22 @@ class EnhancedAnalysisAgent:
         }
         
         # Create deterministic batch_id for perfect caching (THIN principle)
-        # Hash based on framework + document contents only, not timestamp
+        # Hash based on framework + document contents + model, not timestamp
         doc_content_hash = hashlib.sha256(corpus_content.encode()).hexdigest()[:16]
-        batch_id = f"batch_{hashlib.sha256(f'{framework_content}{doc_content_hash}'.encode()).hexdigest()[:12]}"
+        
+        # TODO: Ensemble runs disabled pending architectural review
+        # Create a consistent session ID for all ensemble runs on the same content
+        # session_base_content = f'{framework_content}{doc_content_hash}{model}'
+        # session_id = f"ensemble_session_{hashlib.sha256(session_base_content.encode()).hexdigest()[:12]}"
+        
+        # Batch ID must be unique for each run to store separate artifacts
+        # if ensemble_run is not None and total_ensemble_runs is not None:
+        #     batch_id = f"batch_{hashlib.sha256(f'{session_base_content}{ensemble_run}'.encode()).hexdigest()[:12]}"
+        # else:
+        #     batch_id = f"batch_{hashlib.sha256(session_base_content.encode()).hexdigest()[:12]}"
+        
+        # Simplified batch_id for single runs only
+        batch_id = f"batch_{hashlib.sha256(f'{framework_content}{doc_content_hash}{model}'.encode()).hexdigest()[:12]}"
         
         self.audit.log_agent_event(self.agent_name, "batch_analysis_start", {
             "batch_id": batch_id,
@@ -294,16 +311,48 @@ class EnhancedAnalysisAgent:
             
             # Call LLM with enhanced mathematical validation prompt
             # Removed temperature setting per Issue #211 debugging - let LLM use default
-            response = completion(
-                model=model,
-                messages=[{"role": "user", "content": prompt_text}],
-                safety_settings=[
+            
+            # Prepare completion parameters based on model provider
+            completion_params = {
+                "model": model,
+                "messages": [{"role": "user", "content": prompt_text}]
+            }
+            
+            # TODO: Ensemble runs disabled pending architectural review
+            # Add session-based caching for ensemble runs with Vertex AI
+            # if model.startswith("vertex_ai/") and ensemble_run is not None and total_ensemble_runs is not None:
+            #     completion_params["vertex_ai_cache_id"] = session_id
+            #     completion_params["vertex_ai_cache_ttl"] = 3600  # 1 hour TTL
+            #     print(f"    🔄 Using session-based caching: {session_id} (run {ensemble_run}/{total_ensemble_runs})")
+            
+            # Add safety settings only for Vertex AI models (not supported by Anthropic)
+            if model.startswith("vertex_ai/"):
+                completion_params["safety_settings"] = [
                     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
                 ]
-            )
+            
+            response = completion(**completion_params)
+            
+            # TODO: Ensemble runs disabled pending architectural review
+            # Monitor cached tokens for Vertex AI (if available)
+            # if model.startswith("vertex_ai/"):
+            #     try:
+            #         usage_metadata = getattr(response, 'usage_metadata', None)
+            #         if usage_metadata:
+            #             cached_tokens = getattr(usage_metadata, 'cached_content_token_count', 0)
+            #             if cached_tokens > 0:
+            #             print(f"    💾 Vertex AI cache hit: {cached_tokens} tokens reused")
+            #             # Log cache hit to audit trail
+            #             self.audit.log_agent_event(self.agent_name, "vertex_cache_hit", {
+            #             "session_id": session_id,
+            #             "cached_tokens": cached_tokens
+            #             })
+            #     except Exception as e:
+            #         # Silently continue if cached token monitoring fails
+            #         pass
             
             # Extract and validate response
             if not response or not response.choices:

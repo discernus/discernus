@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d167f1d42a4a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. Focus on identifying populism-pluralism and nationalism-patriotism dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1998.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let me begin by saying that it has been too long, at least three decades, since a President has come and challenged Americans to join him on a great national journey, not merely to consume the bounty of today but to invest for a much greater one tomorrow.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populism_marker\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"anti_elite_sentiment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must break the habits of both political parties and say there can be no more 'something for nothing' and admit frankly that we are all in this together.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"people_versus_establishment\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:22:52.576267+00:00",
+    "end_time": "2025-08-02T15:22:55.303832+00:00",
+    "duration_seconds": 2.727565,
+    "llm_interaction_hash": "e2d7f6c581d35456"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

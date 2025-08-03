@@ -1,0 +1,54 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed G.W. Bush's 2001 SOTU speech for populist and nationalist themes. Identified a strong emphasis on institutional democracy and global leadership, with specific critiques that lean populist regarding domestic issues."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2001.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We must be good stewards of this economy and renew the great institutions on which millions of our fellow citizens rely.",
+          "confidence": 0.9,
+          "context_type": "Institutional Respect"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Year after year, Americans are burdened by an archaic, incoherent Federal Tax Code.",
+          "confidence": 0.85,
+          "context_type": "Critique of System/Elite"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Our Nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing.",
+          "confidence": 0.9,
+          "context_type": "National Strength/Action"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "America will stand with the allies of freedom to support democratic movements in the Middle East and beyond, with the ultimate goal of ending tyranny in our world.",
+          "confidence": 0.9,
+          "context_type": "American Exceptionalism/Global Mission"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

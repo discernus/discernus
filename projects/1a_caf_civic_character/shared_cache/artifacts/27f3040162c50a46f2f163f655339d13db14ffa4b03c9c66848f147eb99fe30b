@@ -1,0 +1,108 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed document for civic virtue dimensions as defined by the Civic Analysis Framework v7.0. Focused on direct textual evidence and nuanced interpretation of the speaker's civic character."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "Tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "Truth": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "Manipulation": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "Justice": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Resentment": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "Hope": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "Fear": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "Pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "Fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Dignity",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.9,
+          "context_type": "oath and personal conviction"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+          "confidence": 0.9,
+          "context_type": "judgment on president's actions"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.8,
+          "context_type": "sense of duty and historical accountability"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government, which was at war with Russian invaders. The president's purpose was personal and political.",
+          "confidence": 0.7,
+          "context_type": "articulation of accusations"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "I am aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+          "confidence": 0.6,
+          "context_type": "acknowledgment of party dissent"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "I will not be one who enlists in the ranks of those who would condemn the president for acting in a manner that is not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "confidence": 0.7,
+          "context_type": "balancing criticism with a refusal to condemn all actions"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

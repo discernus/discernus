@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b222292c09a9",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. The focus was on identifying and scoring populism-pluralism and nationalism-patriotism dimensions based on specific linguistic markers. Evidence extraction prioritized direct quotes supporting the identified scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2004.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must have the will to face difficult challenges and determined enemies and the wisdom to face them together.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populism_intent\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our job is to make life better for our fellow Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"core_populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We need to uphold the great tradition of the melting pot that welcomes and assimilates new arrivals.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"assimilation_narrative\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"For all of us in this room, there is no higher responsibility than to protect the people of this country from danger.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populist_framing\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We've had time to take stock of our situation. We've added many critical protections to guard the homeland.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_security\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We've added many critical protections to guard the homeland.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_security\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"From the start, America and our allies have protected our people by staying on the offense.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"national_interest\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is on the verge of technological breakthroughs that will enable us to live our lives less dependent on oil.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_self-sufficiency\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"It's in our vital interest to diversify America's energy supply.\",\n          \"confidence\": 0.87,\n          \"context_type\": \"national_interest\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We must continue to invest in new methods of producing ethanol, using everything from wood chips to grasses to agricultural waste.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"national_innovation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:14:00.679315+00:00",
+    "end_time": "2025-08-02T00:14:03.946398+00:00",
+    "duration_seconds": 3.267083,
+    "llm_interaction_hash": "4ea0cdedc9d82d77"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

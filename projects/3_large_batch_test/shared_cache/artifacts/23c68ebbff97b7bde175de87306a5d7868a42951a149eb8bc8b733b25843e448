@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_bf17be7ff4a1",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focused on the consistent and central themes of unity, institutional reverence, and civic patriotism in the speech. The document provides a clear and unambiguous example of pluralistic and patriotic discourse, making scoring and evidence extraction straightforward.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_Inaugural_2021.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism\",\n          \"quote_text\": \"To overcome these challenges\u2014to restore the soul and secure the future of America\u2014requires so much more than words. It requires the most elusive of all things in a democracy: unity.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Reaffirmation of Democratic Norms\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism\",\n          \"quote_text\": \"That\u2019s democracy. That\u2019s America. The right to dissent peaceably, within the guardrails of our Republic, is perhaps this Nation\u2019s greatest strength. Yet hear me clearly: Disagreement must not lead to disunion.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"Emphasis on Pluralistic Process\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism\",\n          \"quote_text\": \"Our history has been a constant struggle between the American ideal that we all are created equal and the harsh, ugly reality that racism, nativism, fear, demonization have long torn us apart.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Definition of National Identity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism\",\n          \"quote_text\": \"And we\u2019ll lead not merely by the example of our power, but by the power of our example. We will be a strong and trusted partner for peace, progress, and security.\",\n          \"confidence\": 0.96,\n          \"context_type\": \"Assertion of Civic Values in Foreign Policy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T14:04:24.479520+00:00",
+    "end_time": "2025-08-02T14:05:01.846865+00:00",
+    "duration_seconds": 37.367345,
+    "llm_interaction_hash": "bde76dea01e8dece"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T140424Z_551baad3"
+  }
+}

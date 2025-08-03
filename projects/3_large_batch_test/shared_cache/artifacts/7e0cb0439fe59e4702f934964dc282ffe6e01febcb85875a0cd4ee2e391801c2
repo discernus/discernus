@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.96,
+    "analysis_notes": "Analyzed SOTU address for populist and nationalist discourse using defined linguistic markers and thematic interpretations."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2021.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.95,
+          "salience": 0.98,
+          "confidence": 0.98
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "To those watching at home tonight, I want you to know: We will never let socialism destroy American health care. Over 130 legislators in this Chamber have endorsed legislation that would bankrupt our Nation by providing free taxpayer-funded health care to millions of illegal aliens, forcing taxpayers to subsidize free care for anyone in the world who unlawfully crosses our borders.",
+          "confidence": 0.98,
+          "context_type": "Manichaean Framing & Anti-Elite Language"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The people are the heart of our country, their dreams are the soul of our country, and their love is what powers and sustains our country. We must always remember that our job is to put America first.",
+          "confidence": 0.95,
+          "context_type": "Core Populist Appeals & Anti-Elite Contrast"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "The years of economic decay are over. The days of our country being used, taken advantage of, and even scorned by other nations are long behind us. Gone too are the broken promises, jobless recoveries, tired platitudes, and constant excuses for the depletion of American wealth, power, and prestige.",
+          "confidence": 0.98,
+          "context_type": "Cultural Supremacy & Foreign Threat"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "The American nation was carved out of the vast frontier by the toughest, strongest, fiercest, and most determined men and women ever to walk on the face of the Earth. Our ancestors braved the unknown; tamed the wilderness; settled the Wild West; lifted millions from poverty, disease, and hunger; vanquished tyranny and fascism; ushered the world to new heights of science and medicine; laid down the railroads, dug out the canals, raised up the skyscrapers. And, ladies and gentlemen, our ancestors built the most exceptional republic ever to exist in all of human history, and we are making it greater than ever before.",
+          "confidence": 0.99,
+          "context_type": "Historical Mythology & Cultural Supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

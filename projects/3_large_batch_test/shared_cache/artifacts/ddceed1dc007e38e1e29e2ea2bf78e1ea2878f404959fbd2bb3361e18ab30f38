@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_4b3ab74589d0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populist and nationalist themes within the provided inaugural address. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to assess the rhetorical dimensions. Evidence extraction prioritized direct quotes that clearly exemplify the identified dimensional scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_Inaugural_2021.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"The people\u2019s will of the people has been heard, and the will of the people has been heeded. We\u2019ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"This is a great Nation; we are good people. ... I know the resilience of our Constitution and the strength, the strength of our Nation, as does President Carter, who I spoke with last night, who cannot be with us today, but who we salute for his lifetime of service.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Constitutional Reverence\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans, we have to be different than this. America has to be better than this. And I believe America is so much better than this.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Populist Framing\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Today, we celebrate the triumph not of a candidate, but of a cause, the cause of democracy.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Civic Duty\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Here we stand, in the shadow of the Capitol dome, as mentioned earlier, completed amid the Civil War, when the Union itself was literally hanging in the balance. Yet we endured, we prevailed.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Historical Patriotism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"And here we stand, just days after a rioutous mob thought they could use violence to silence the will of the people, to stop the work of our democracy, to drive us from this sacred ground. It did not happen. It will never happen, not today, not tomorrow, not ever.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Defense of Nation\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Let\u2019s begin to listen to one another, hear one another, see one another, show respect to one another. Politics does not have to be a raging fire destroying everything in its path. Every disagreement does not have to be a cause for total war.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"National Unity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:51:42.238642+00:00",
+    "end_time": "2025-08-02T00:51:45.444905+00:00",
+    "duration_seconds": 3.206263,
+    "llm_interaction_hash": "39228786b259636a"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

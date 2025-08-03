@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on populism and nationalism dimensions. The Gasket architecture was utilized for structured data extraction. Confidence is high due to clear language and relevant keywords. Evidence extraction prioritized direct quotes supporting the identified dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2001.txt",
+      "dimensional_scores": {
+        "populism_plur(vertical)_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriot(horizontal)_axis": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plur(vertical)_axis",
+          "quote_text": "We've been placed in office by the votes of the people we serve.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur(vertical)_axis",
+          "quote_text": "And tonight, with a healthy, growing economy, with more Americans going back to work, with our Nation an active force for good in the world, the state of our Union is confident and strong.",
+          "confidence": 0.90,
+          "context_type": "manichean_framing"
+        },
+        {
+          "dimension": "populism_plur(vertical)_axis",
+          "quote_text": "My budget substantially reduces or eliminates more than 150 Government programs that are not getting results or do not fulfill essential priorities. The principle here is clear: Taxpayer dollars must be spent wisely or not at all.",
+          "confidence": 0.85,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "nationalism_patriot(horizontal)_axis",
+          "quote_text": "And I will set forth policies to advance that ideal at home and around the world.",
+          "confidence": 0.90,
+          "context_type": "national_identity_assertion"
+        },
+        {
+          "dimension": "nationalism_patriot(horizontal)_axis",
+          "quote_text": "America's prosperity requires restraining the spending appetite of the Federal Government.",
+          "confidence": 0.85,
+          "context_type": "national_economic_interest"
+        },
+        {
+          "dimension": "nationalism_patriot(horizontal)_axis",
+          "quote_text": "Our Nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing. All Qaeda terror network that attacked our country still has leaders, but many of its top commanders have been removed. There are still governments that sponsor and harbor terrorists, but their number has declined. There are still regimes seeking weapons of mass destruction but no longer without attention and without consequence. Our country is still the target of terrorists who want to kill many and intimidate us all, and we will stay on the offensive against them until the fight is won.",
+          "confidence": 0.95,
+          "context_type": "foreign_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

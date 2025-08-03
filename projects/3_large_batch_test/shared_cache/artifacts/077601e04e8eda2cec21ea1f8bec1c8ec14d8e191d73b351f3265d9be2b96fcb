@@ -1,0 +1,54 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focused on the consistent and central themes of unity, institutional reverence, and civic patriotism in the speech. The document provides a clear and unambiguous example of pluralistic and patriotic discourse, making scoring and evidence extraction straightforward."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism": {
+          "raw_score": 0.15,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism": {
+          "raw_score": 0.10,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism",
+          "quote_text": "To overcome these challenges—to restore the soul and secure the future of America—requires so much more than words. It requires the most elusive of all things in a democracy: unity.",
+          "confidence": 0.98,
+          "context_type": "Reaffirmation of Democratic Norms"
+        },
+        {
+          "dimension": "Populism-Pluralism",
+          "quote_text": "That’s democracy. That’s America. The right to dissent peaceably, within the guardrails of our Republic, is perhaps this Nation’s greatest strength. Yet hear me clearly: Disagreement must not lead to disunion.",
+          "confidence": 0.97,
+          "context_type": "Emphasis on Pluralistic Process"
+        },
+        {
+          "dimension": "Nationalism-Patriotism",
+          "quote_text": "Our history has been a constant struggle between the American ideal that we all are created equal and the harsh, ugly reality that racism, nativism, fear, demonization have long torn us apart.",
+          "confidence": 0.98,
+          "context_type": "Definition of National Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism",
+          "quote_text": "And we’ll lead not merely by the example of our power, but by the power of our example. We will be a strong and trusted partner for peace, progress, and security.",
+          "confidence": 0.96,
+          "context_type": "Assertion of Civic Values in Foreign Policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

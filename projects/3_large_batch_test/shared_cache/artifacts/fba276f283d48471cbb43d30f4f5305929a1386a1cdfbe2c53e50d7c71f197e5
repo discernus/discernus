@@ -1,0 +1,98 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The framework focuses on the two axes of populism-pluralism and nationalism-patriotism. All scores are raw and derived metrics are excluded as per instructions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+          "confidence": 0.90,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We the American people we are the solution. Our Founders understood that well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.",
+          "confidence": 0.95,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We need a new Government for a new century, humble enough not to try to solve all our problems for us but strong enough to give us the tools to solve our problems for ourselves, a Government that is smaller, lives within its means, and does more with less.",
+          "confidence": 0.85,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Pluralism-Enriched Linguistic Markers",
+          "quote_text": "Our streets will echo again with the laughter of our children, because no one will try to shoot them or sell them drugs anymore.",
+          "confidence": 0.70,
+          "context_type": "Pluralist Inclusion"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America became the world's mightiest industrial power, saved the world from tyranny in two World Wars and a long cold war, and time and again reached out across the globe to millions who, like us, long for the blessings of liberty.",
+          "confidence": 0.90,
+          "context_type": "National Supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our streets are safer, and record numbers of our fellow citizens have moved from welfare to work.",
+          "confidence": 0.80,
+          "context_type": "National Achievement"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America stands alone as the world's indispensable nation.",
+          "confidence": 0.95,
+          "context_type": "National Supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our greatest responsibility is to embrace a new spirit of community for a new century.",
+          "confidence": 0.75,
+          "context_type": "National Unity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "For any one of us to succeed, we must succeed as one America.",
+          "confidence": 0.85,
+          "context_type": "National Unity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "The divide of race has been America's constant curse. And each new wave of immigrants gives new targets to old prejudices.",
+          "confidence": 0.80,
+          "context_type": "Foreign Threat/Internal Division"
+        },
+        {
+          "dimension": "Patriotism-Enriched Linguistic Markers",
+          "quote_text": "Let us build our bridge, a bridge wide enough and strong enough for every American to cross over to a blessed land of new promise.",
+          "confidence": 0.85,
+          "context_type": "Civic Duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

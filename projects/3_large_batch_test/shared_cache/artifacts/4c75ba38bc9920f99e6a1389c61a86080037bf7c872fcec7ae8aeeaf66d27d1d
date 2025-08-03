@@ -1,0 +1,80 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism framework v7.0. Focus on identifying populist and nationalist themes. Confidence is high due to clear and consistent language across both dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.90,
+          "salience": 0.93,
+          "confidence": 0.96
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "America is back. Six weeks ago, I stood before you in this capital and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "confidence": 0.99,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation?",
+          "confidence": 0.95,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it's our presidency, is the most successful in the history of our nation. By many.",
+          "confidence": 0.97,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "On behalf of our nation, we must also bring back law and order to our cities and towns. In recent years, our justice system has been turned upside down by radical left lunatics.",
+          "confidence": 0.93,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Make America great again.",
+          "confidence": 0.98,
+          "context_type": "nationalism_emphasis"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our ancestors crossed a vast ocean, strode into the unknown wilderness, and carved their fortunes from the rock and soil of a perilous and very dangerous frontier.",
+          "confidence": 0.90,
+          "context_type": "historical_mythology"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We are going to rebuild our military, including commercial shipbuilding and military shipbuilding. And for that purpose, I am announcing tonight that we will create a new office of shipbuilding in the White House and offer special tax incentives to bring this industry home to America, where it belongs.",
+          "confidence": 0.92,
+          "context_type": "economic_nationalism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We need Greenland for national security and even international security.",
+          "confidence": 0.88,
+          "context_type": "territorial_claims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

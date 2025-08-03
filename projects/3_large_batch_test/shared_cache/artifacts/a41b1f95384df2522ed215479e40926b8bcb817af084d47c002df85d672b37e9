@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_239903d01039",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Document exhibits strong populist and nationalist rhetoric, aligning with the framework's core dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"e6e1a161348f...\",\n      \"document_name\": \"Republican_Platform_2004.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"He believed that America was not just a place in the world, but the hope of the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"When America was struck by terrorists on September 11, 2001, President Bush realized that it was an act of war, not just a crime.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We are proud of our agenda for America's future. President George W. Bush will lead this nation with courage, hope, and resolve over the next four years.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Our plans focus on ensuring that America remains safe, terrorists are defeated, and democracy flourishes in the world on expanding opportunities for ownership and investment on making tax relief permanent and ensuring greater energy independence on increasing the affordability and accessibility of health care on promoting works of compassion and strengthening our greatest values on preparing students for success in life by bringing the benefits of education reform to high schools.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Ronald Reagan believed that people were basically good, and had the right to be free.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"He believed that America was not just a place in the world, but the hope of the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"As Ronald Wilson Reagan goes his way, we are left with a joyful hope he shared. May God bless Ronald Reagan and the country he loved.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Our nation's cause has always been larger than our nation's defense. We fight, as we always fight, for a just peace, a peace that favors liberty. We will defend the peace against the threats from terrorists and tyrants. We will preserve the peace by building good relations among the great powers. And we will extend the peace by encouraging free and open societies on every continent.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T13:04:24.609547+00:00",
+    "end_time": "2025-08-02T13:04:30.091718+00:00",
+    "duration_seconds": 5.482171,
+    "llm_interaction_hash": "ed6d9c223c81f401"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "e6e1a161348f5e1022b7057d23c85f451dd2bd584a9d74e6739984b689c3b402"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T130119Z_e2bdd00c"
+  }
+}

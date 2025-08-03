@@ -1,0 +1,80 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis performed according to the provided framework for Political Discourse Analysis v7.1. Focus on identifying populist and nationalist themes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.88,
+          "salience": 0.93,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "From this day forward, our country will flourish and be respected again all over the world. We will be the envy of every nation, and we will not allow ourselves to be taken advantage of any longer. During every single day of the Trump administration, I will, very simply, put America first.",
+          "confidence": 0.95,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have a government that cannot manage even a simple crisis at home, while, at the same time, stumbling into a continuing catalog of catastrophic events abroad. It fails to protect our magnificent, law-abiding American citizens, but provides sanctuary and protection for dangerous criminals, many from prisons and mental institutions, that have illegally entered our country from all over the world.",
+          "confidence": 0.90,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom. From this moment on, America's decline is over.",
+          "confidence": 0.92,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+          "confidence": 0.85,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America will be a manufacturing nation once again, and we have something that no other manufacturing nation will ever have, the largest amount of oil and gas of any country on earth, and we are going to use it.",
+          "confidence": 0.90,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will build automobiles in America again at a rate that nobody could have dreamt possible just a few years ago.",
+          "confidence": 0.85,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will restore the name of a great president, William McKinley, to Mount McKinley, where it should be and where it belongs.",
+          "confidence": 0.80,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's ships are being severely overcharged and not treated fairly in any way, shape, or form. And that includes the United States Navy. And above all, China is operating the Panama Canal. And we didn't give it to China. We gave it to Panama, and we're taking it back.",
+          "confidence": 0.90,
+          "context_type": "nationalism_indicators"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

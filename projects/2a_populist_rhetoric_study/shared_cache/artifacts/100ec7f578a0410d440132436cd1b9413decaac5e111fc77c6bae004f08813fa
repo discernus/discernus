@@ -1,0 +1,175 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of a speech transcript, focusing on identifying and scoring populist discourse elements as defined by the PDAF framework. Confidence is high due to clear linguistic markers, but some nuances in the scale of 0.0-2.0 require careful interpretation within the 0.0-1.0 output constraint."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.75
+        },
+        "polar_sovereignty_claims_score": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.7,
+          "salience": 0.65,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "In comparison, under Joe Biden, the worst president in American history, there were hundreds of thousands of illegal crossings a month, and virtually all of them, including murderers, drug dealers, gang members and people from mental institutions and insane asylums, were released into our country.",
+          "confidence": 0.95,
+          "context_type": "direct_accusation"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation?",
+          "confidence": 0.9,
+          "context_type": "challenge_to_opponents"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Six weeks ago, I stood beneath the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "confidence": 0.8,
+          "context_type": "restoration_claim"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "America is back. Our moment is back. Our spirit is back. Our pride is back. Our confidence is back.",
+          "confidence": 0.7,
+          "context_type": "restoration_claim"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "My administration is also working on a gigantic natural gas pipeline in Alaska, among the largest in the world, where Japan, South Korea and other nations want to be our partner with investments of trillions of dollars each.",
+          "confidence": 0.85,
+          "context_type": "national_interest_claim"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "America is on the verge of a comeback that the like of which the world has never witnessed, and perhaps will never witness again.",
+          "confidence": 0.8,
+          "context_type": "national_destiny_claim"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let us work together and let us truly make America great again.",
+          "confidence": 0.8,
+          "context_type": "exclusionary_invitation"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "If you do not do non-monetary tariffs to keep us out of their market, then we will do non-monetary barriers to keep them out of our market.",
+          "confidence": 0.7,
+          "context_type": "reciprocal_exclusion"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "The problem with it was that Biden did not enforce it. He did not enforce it. $50 billion of purchases. And we were doing great. But Biden did not enforce it, and it hurt our farmers.",
+          "confidence": 0.85,
+          "context_type": "accusation_of_failure_elite"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "The government accountability office, federal government office, has estimated annual fraud of over $500 billion in our nation, and we are working very hard to stop it.",
+          "confidence": 0.75,
+          "context_type": "accusation_of_fraud"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I could find a cure to the most devastating disease, a disease that would wipe out entire nations, or announce the answers to the greatest economy in history or the stopping of crime to the lowest levels ever recorded, and these people sitting right here will not clap, will not stand and certainly will not cheer for these astronomical achievements.",
+          "confidence": 0.95,
+          "context_type": "self_praise_contrast_with_elite"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "They just do not want to admit that. It’s very sad, and it just shouldn’t be this way.",
+          "confidence": 0.9,
+          "context_type": "criticism_of_opponents_lack_of_recognition"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "America is on the verge of a comeback that the like of which the world has never witnessed, and perhaps will never witness again.",
+          "confidence": 0.7,
+          "context_type": "shared_national_destiny"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The people elected me to do the job, and I am doing it.",
+          "confidence": 0.65,
+          "context_type": "appeal_to_the_people"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "I renamed the Gulf of Mexico the Gulf of America. And likewise, I renamed for a great president, William McKinley, Mount McKinley, again. Beautiful Alaska. We love Alaska. We've ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military.",
+          "confidence": 0.6,
+          "context_type": "nationalist_symbolism_and_policy_shift"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "And I also signed an executive order to ban men from playing in women's sports.",
+          "confidence": 0.5,
+          "context_type": "exclusionary_policy"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Our goal is to get toxins out of our environment, poisons out of our food supply, and keep our children healthy and strong.",
+          "confidence": 0.8,
+          "context_type": "economic_welfare_promise"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "My advice to everyone looking to build in America is to build here, or you will pay a tariff, and in some cases a rather large one.",
+          "confidence": 0.9,
+          "context_type": "protectionist_economic_policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

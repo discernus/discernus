@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted based on the provided framework, focusing on civic virtues and their manifestations in the provided text. All dimensions were assessed with accompanying evidence. Confidence is high due to clear textual indicators."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "Tribalism": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "Truth": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "Manipulation": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "Justice": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Resentment": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "Hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "Fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "Pragmatism": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "Fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Dignity",
+          "quote_text": "I believe you can tell a lot about a nation not by its buildings, not by its measures or its wealth, but you can tell a lot about the true character of the nation by looking at its prisons and seeing who they incarcerate.",
+          "confidence": 0.8,
+          "context_type": "primary_assertion"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "I'm the only United States Senator that lives in a majority black and brown community.",
+          "confidence": 0.6,
+          "context_type": "identifying_group"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound. This bill is a step - a step towards healing.",
+          "confidence": 0.9,
+          "context_type": "factual_statement"
+        },
+        {
+          "dimension": "Manipulation",
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "confidence": 0.7,
+          "context_type": "metaphorical_framing"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "We have a system that - over a century, we in a nation have overcome slavery, decades of Jim Crow - but as one author, Michelle Alexander, calls our criminal justice system, she calls it the new Jim Crow because of its disproportionate impact on people of color.",
+          "confidence": 0.9,
+          "context_type": "critical_assessment"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "The scales of justice in America are not balanced. You cannot keep injustice for some without it cheapening the justice of us all.",
+          "confidence": 0.7,
+          "context_type": "statement_of_injustice"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "We are Americans. We have ideals of restoration, of rehabilitation. Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+          "confidence": 0.8,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Our criminal justice system violates those values. I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds.",
+          "confidence": 0.6,
+          "context_type": "contrast_of_values"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "This bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back – not legislators, but judges who sit and see all the totality of the facts.",
+          "confidence": 0.8,
+          "context_type": "policy_mechanism"
+        },
+        {
+          "dimension": "Fantasy",
+          "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.",
+          "confidence": 0.6,
+          "context_type": "exaggerated_claim"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

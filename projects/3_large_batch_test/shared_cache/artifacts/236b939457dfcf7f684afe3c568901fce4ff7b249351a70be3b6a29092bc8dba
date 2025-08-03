@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_47d7d42f89b0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted on a State of the Union address, which inherently balances popular appeal with institutional function. The speech demonstrates a clear distinction between 'the people' and 'elites/institutions' in economic terms (populist) but simultaneously advocates for institutional reform and bipartisan cooperation (pluralist). On the horizontal axis, it balances American exceptionalism and national interest (nationalism) with calls for civic duty, constitutional values, and global cooperation (patriotism).\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2014.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.68,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.42,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"It's not about helping banks; it's about helping people. [Applause] It's not about helping banks; it's about helping people. Because when credit is available again, that young family can finally buy a new home.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"economic_populism_vs_anti_elite\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system. It is time to put in place tough, new, commonsense rules of the road so that our financial market rewards drive and innovation, and punishes shortcuts and abuse.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"institutional_reform_call\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Those qualities that have made America the greatest force of progress and prosperity in human history, we still possess in ample measure. What is required now is for this country to pull together, confront boldly the challenges we face, and take responsibility for our future once more.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"american_exceptionalism_and_civic_duty\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"this is not a Democratic issue or a Republican issue; that's an American issue.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"inclusive_civic_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:54:19.450703+00:00",
+    "end_time": "2025-08-02T02:54:57.634970+00:00",
+    "duration_seconds": 38.184267,
+    "llm_interaction_hash": "b2ae6f736ef07a71"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

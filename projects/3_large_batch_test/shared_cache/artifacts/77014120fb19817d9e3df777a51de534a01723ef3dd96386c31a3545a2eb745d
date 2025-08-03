@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_2a9e72241693",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of President Biden's State of the Union address focusing on populist and nationalist rhetoric. The analysis identifies instances of 'us vs. them' framing, appeals to the 'common person', and nationalistic pride, alongside references to institutions and civic duty. Confidence is high due to explicit language and framing consistent with populist and nationalist discourse.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2024.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.80,\n          \"confidence\": 0.88\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.72,\n          \"salience\": 0.75,\n          \"confidence\": 0.82\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"You know, we're often told that Democrats and Republicans can't work together. But over the past 2 years, we've proved the cynics and naysayers wrong. Yes, we disagree plenty. And yet, there were times when Democrats and Republicans came together. Came together to defend a stronger and safer Europe. You came together to pass one-in-a-generation infrastructure law building bridges connecting our Nation and our people. We came together to pass one of the most significant law ever helping victims exposed to toxic burn pits.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Populist - Framing (Us vs. Them/Compromise)\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"I ran for President to fundamentally change things. To make sure our economy works for everyone so we can all feel that pride in what we do. To build an economy from the bottom up and the middle out, not from the top down. Because when the middle class does well, the poor have a ladder up, and the wealthy still do very well. We all do well.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Nationalistic Pride\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"They were invented in America. And we used to make 40 percent of the world's chips. In the last several decades, we lost our edge. We're down to only producing 10 percent.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Nationalistic Pride/Economic Nationalism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Let's get that straight: They were invented in America.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"Nationalistic Pride\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:54:04.289456+00:00",
+    "end_time": "2025-08-02T00:54:07.995027+00:00",
+    "duration_seconds": 3.705571,
+    "llm_interaction_hash": "86a3799bb0a608b8"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

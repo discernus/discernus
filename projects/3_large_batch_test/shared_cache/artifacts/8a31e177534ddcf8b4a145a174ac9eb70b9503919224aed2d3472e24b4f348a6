@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_01a2f1b464de",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed President Biden's 2022 State of the Union address for populist and pluralist, and nationalist and patriotic themes. The speech exhibits a blend, leaning towards civic patriotism and institutional pluralism while incorporating elements of economic populism and national competitiveness.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2022.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Because of you, the American people, our progress these past hundred days against one of the worst pandemics in history has been one of the greatest logistical achievements this country has ever seen.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populist Appeal - Direct Address to the People\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans, trickle-down economics has never worked, and it\u2019s time to grow the economy from the bottom up and the middle out.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Populist Economic Anti-Elite Sentiment\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans, we have to come together to heal the soul of this Nation... to rebuild trust between law enforcement and the people they serve, to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd\u2019s name that passed the House already.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Pluralist Call for Institutional Reform and Unity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America is rising anew, choosing hope over fear, truth over lies, and light over darkness... We\u2019re working again, dreaming again, discovering again, and leading the world again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Nationalist Assertion of American Exceptionalism and Leadership\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"My discussions with President Xi, I told him, 'We welcome the competition. We\u2019re not looking for conflict.' But I made absolutely clear that we will defend America\u2019s interests across the board.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Nationalist Focus on American Interests in Global Competition\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America is an idea, the most unique idea in history: We are created, all of us, equal.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Patriotic Embrace of Founding Ideals and Equality\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:38:53.501895+00:00",
+    "end_time": "2025-08-02T02:39:24.084358+00:00",
+    "duration_seconds": 30.582463,
+    "llm_interaction_hash": "67e6af9851e062e2"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

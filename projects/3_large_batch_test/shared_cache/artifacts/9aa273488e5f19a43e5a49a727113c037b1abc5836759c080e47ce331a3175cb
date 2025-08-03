@@ -1,0 +1,72 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. Evidence extraction prioritized strong thematic alignment with defined markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have a place, all of us, in a long story, a story we continue but whose end we will not see.",
+          "confidence": 0.7,
+          "context_type": "general_rhetoric"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Americans are called to enact this promise in our lives and in our laws.",
+          "confidence": 0.8,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is the American story, a story of flawed and fallible people united across the generations by grand and enduring ideals.",
+          "confidence": 0.9,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "It is the American story, a story of flawed and fallible people united across the generations by grand and enduring ideals.",
+          "confidence": 0.9,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America at its best matches a commitment to principle with a concern for civility.",
+          "confidence": 0.8,
+          "context_type": "civic_duty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America has never been united by blood or birth or soil. We are bound by ideals that move us beyond our backgrounds, lift us above our interests, and teach us what it means to be citizens.",
+          "confidence": 0.95,
+          "context_type": "ethnic_identity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "God bless you all, and God bless America.",
+          "confidence": 0.9,
+          "context_type": "cultural_purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

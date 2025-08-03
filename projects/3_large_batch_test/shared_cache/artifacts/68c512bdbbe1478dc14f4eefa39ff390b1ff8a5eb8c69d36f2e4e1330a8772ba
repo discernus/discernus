@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.98,
+    "analysis_notes": "Analyzed speech for populist and nationalist discourse based on linguistic markers and thematic content. The speech exhibits consistently high scores on both axes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it’s our presidency, is the most successful in the history of our nation. By many.",
+          "confidence": 0.95,
+          "context_type": "Direct Democracy Appeal/Anti-Elite"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "And we’ve ended weaponized government, where, as an example, a sitting president is allowed to viciously prosecute his political opponent like me. How did that work out? Not too good, not too good. And I have stopped all government censorship and brought back free speech in America, it’s back. And two days ago I signed an order making English the official language of the United States of America.",
+          "confidence": 0.95,
+          "context_type": "Anti-Elite Language/Cultural Populism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "confidence": 0.95,
+          "context_type": "Cultural Supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We’ve ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military. And our country will be woke no longer.",
+          "confidence": 0.95,
+          "context_type": "Cultural Purity/Anti-Foreign Influence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

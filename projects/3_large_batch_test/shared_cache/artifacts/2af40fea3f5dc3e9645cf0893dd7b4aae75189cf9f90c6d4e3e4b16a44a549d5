@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_cac7e0bb86d4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on the two core axes of Populism-Pluralism and Nationalism-Patriotism. Evidence extraction prioritized direct quotes supporting the dimensional scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"c3c591512bd6...\",\n      \"document_name\": \"Clinton_Inaugural_1993.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our democracy must be not only the envy of the world but the engine of our own renewal. There is nothing wrong with America that cannot be cured by what is right with America.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let us resolve to make our Government a place for what Franklin Roosevelt called bold, persistent experimentation, a Government for our tomorrows, not our yesterdays.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"My fellow citizens, today we celebrate the mystery of American renewal.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Let us begin a new with energy and hope, with faith and discipline. And let us work until our work is done.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:20:00.828297+00:00",
+    "end_time": "2025-08-02T15:20:03.376263+00:00",
+    "duration_seconds": 2.547966,
+    "llm_interaction_hash": "ed22d51a42bfc9ef"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

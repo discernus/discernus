@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to the provided document to assess the prevalence and intensity of populist and nationalist rhetoric. Evidence extraction focused on identifying key phrases and sentences that directly exemplify the defined dimensional markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe a thriving private sector is the lifeblood of our economy... And because we did, because we saw opportunity with where others saw peril, we emerged stronger and better than before.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But today, technology doesn't just replace jobs on the assembly line, but any job where work can be automated. Companies in a global economy can locate anywhere, and they face tough competition.",
+          "confidence": 0.75,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But the point is, I believe that in this new economy, workers and startups and small businesses need more of a voice, not less.",
+          "confidence": 0.90,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights.",
+          "confidence": 0.80,
+          "context_type": "historical_mythology"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is Thomas Edison and the Wright Brothers and George Washington Carver. America is Grace Hopper and Katherine Johnson and Sally Ride.",
+          "confidence": 0.95,
+          "context_type": "civic_duty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our unique strengths as a nation, our optimism and work ethic, our spirit of discovery, our commitment to rule of law—these things give us everything we need to ensure prosperity and security for generations to come.",
+          "confidence": 0.95,
+          "context_type": "national_supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

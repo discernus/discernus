@@ -1,0 +1,86 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the v7.1 framework, focusing on the two-axis model of populism-pluralism and nationalism-patriotism. Emphasis was placed on identifying core populist and nationalist rhetoric, including appeals to 'the people' versus 'elites' and claims of national superiority, while also noting evidence of pluralistic or patriotic counter-themes. Confidence is high due to clear alignment of text segments with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "eed439106e33",
+      "document_name": "Republican_Platform_2008.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.90,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our party embodies a unique American spirit. It is the spirit of independent minds, the conviction that open and honest debate is essential to the freedom we enjoy as Americans. This platform is a testament to that freedom and stands as our promise to future generations that we will do whatever it takes to preserve it.",
+          "confidence": 0.95,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe government should not interfere with the people's lives. We believe in the will of the people, the voice of the people, and the people's choice.",
+          "confidence": 0.90,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We reject any treaty or agreement that would violate those values. That includes the UN convention on women's rights, signed in the last months of the Carter Administration, and the UN convention on the rights of the child.",
+          "confidence": 0.85,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We oppose any attempts to create race-based governments within the United States, as well as any domestic governments not bound by the Constitution or the Bill of Rights.",
+          "confidence": 0.80,
+          "context_type": "pluralist_inclusion"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Defending Our Nation, Supporting Our Heroes, Securing the Peace. Three decades ago, in a world as dangerous as today's, Americans of all stripes came together to advance the cause of freedom.",
+          "confidence": 0.95,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "American greatness, our exceptional nation, our greatest country, superior civilization.",
+          "confidence": 0.90,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our current destiny is to have a robust energy future. We can construct better and smarter technologies for a more advanced and robust United States.",
+          "confidence": 0.85,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The U.S. has become the world's economic powerhouse. It is time we shared our prosperity with the rest of humanity.",
+          "confidence": 0.80,
+          "context_type": "nationalism_indicators"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our policy toward Taiwan, a sound democracy and economic model for mainland China, must continue to be based upon the provisions of the Taiwan Relations Act.",
+          "confidence": 0.75,
+          "context_type": "nationalism_indicators"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

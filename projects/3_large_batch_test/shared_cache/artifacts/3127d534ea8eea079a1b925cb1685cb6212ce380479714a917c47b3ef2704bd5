@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e7c4a4e513bf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted based on the Political Discourse Analysis Framework v7.0. Focus on assessing the intensity and salience of Populism/Pluralism and Nationalism/Patriotism axes using linguistic markers and overall rhetorical patterns. Due to the nature of a political platform, general confidence in score differentiation is high.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"The Democratic Party accepted that malaise as the price the nation had to pay for Big Government, and in so doing lost the confidence of the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti_elite_language\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We believe in service to the common good \u2013 and that good is not common until it is shared.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeal\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Our platform is uplifting and visionary. It reflects the views of countless Americans all across this country who believe in prosperity with a purpose \u2013 who believe in Renewing America\u2019s Purpose.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_identity_and_purpose\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"To all Americans, particularly immigrants and minorities, we send a clear message: this is the party of freedom and progress, and it is your home.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"inclusive_civic_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T03:44:17.715896+00:00",
+    "end_time": "2025-08-02T03:44:44.935495+00:00",
+    "duration_seconds": 27.219599,
+    "llm_interaction_hash": "f50e8c1a808290d4"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "233ca2aa895c18d0ec09c39a0c08cda75a118477cb100c9f6615034f1d452a62"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

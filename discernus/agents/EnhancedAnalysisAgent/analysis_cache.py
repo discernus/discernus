@@ -36,16 +36,17 @@ class AnalysisCacheManager:
         self.storage = storage
         self.audit = audit
     
-    def generate_batch_id(self, framework_content: str, corpus_documents: List[Dict[str, Any]]) -> str:
+    def generate_batch_id(self, framework_content: str, corpus_documents: List[Dict[str, Any]], model: str) -> str:
         """
         Generate deterministic batch ID for perfect caching.
         
         Args:
             framework_content: Framework markdown content
             corpus_documents: List of document dictionaries
+            model: LLM model to use for analysis
             
         Returns:
-            Deterministic batch ID based on content hashes
+            Deterministic batch ID based on content hashes and model
         """
         # Create content hash from documents
         corpus_content = ''.join([
@@ -54,8 +55,8 @@ class AnalysisCacheManager:
         ])
         doc_content_hash = hashlib.sha256(corpus_content.encode()).hexdigest()[:16]
         
-        # Combine framework and document content for batch ID
-        batch_content = f'{framework_content}{doc_content_hash}'
+        # Combine framework, document content, and model for batch ID
+        batch_content = f'{framework_content}{doc_content_hash}{model}'
         batch_hash = hashlib.sha256(batch_content.encode()).hexdigest()[:12]
         
         return f"batch_{batch_hash}"

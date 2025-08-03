@@ -1,0 +1,55 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis of Clinton's 1993 State of the Union address reveals a highly pluralistic and patriotic discourse. The speech consistently emphasizes collaboration, strengthening democratic institutions, and inclusive national identity, rather than an anti-elite or ethno-nationalist stance. Rhetorical prominence is given to unity, shared responsibility, and America's global role as a beacon of democracy and diversity."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimensional_scores": {
+        "populism_pluralism_score": {
+          "raw_score": 0.1,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_score": {
+          "raw_score": 0.15,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_score",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans.",
+          "confidence": 0.9,
+          "context_type": "bipartisan_cooperation"
+        },
+        {
+          "dimension": "populism_pluralism_score",
+          "quote_text": "We are the world's most diverse democracy, and the world looks to us to show that it is possible to live and advance together across those kinds of differences.",
+          "confidence": 0.9,
+          "context_type": "inclusive_democracy"
+        },
+        {
+          "dimension": "nationalism_patriotism_score",
+          "quote_text": "America has always been a nation of immigrants. From the start, a steady stream of people in search of freedom and opportunity have left their own lands to make this land their home. We started as an experiment in democracy fueled by Europeans. We have grown into an experiment in democratic diversity fueled by openness and promise.",
+          "confidence": 0.9,
+          "context_type": "inclusive_citizenship"
+        },
+        {
+          "dimension": "nationalism_patriotism_score",
+          "quote_text": "My fellow Americans, we must never, ever believe that our diversity is a weakness. It is our greatest strength.",
+          "confidence": 0.9,
+          "context_type": "inclusive_citizenship"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

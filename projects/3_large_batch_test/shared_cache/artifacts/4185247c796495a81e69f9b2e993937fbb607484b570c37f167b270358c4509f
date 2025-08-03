@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a State of the Union address, which naturally covers a broad range of policy and rhetorical themes. The framework's detailed linguistic markers provided strong guidance. The speech demonstrates a strategic blend of populist appeals to 'the people' with a strong emphasis on institutional processes and civic patriotism."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.65,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.30,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But I am persuaded that the real credit belongs to the people who sent us here, who pay our salaries, who hold our feet to the fire.",
+          "confidence": 0.9,
+          "context_type": "anti-establishment sentiment, popular sovereignty"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The American people provide those of us in Government service with terrific health care benefits at reasonable costs. We have health care that's always there. I think we need to give every hard-working, tax-paying American the same health care security they have already given to us.",
+          "confidence": 0.85,
+          "context_type": "us versus them framing (people vs. government elite)"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our American heritage has always been to master such change, to use it to expand opportunity at home and our leadership abroad.",
+          "confidence": 0.8,
+          "context_type": "civic nationalism, American exceptionalism framed as leadership"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Ultimately, the best strategy to ensure our security and to build a durable peace is to support the advancement of democracy elsewhere. Democracies don't attack each other. They make better trading partners and partners in diplomacy.",
+          "confidence": 0.9,
+          "context_type": "promotion of democratic values, international cooperation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

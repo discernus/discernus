@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis completed using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist themes within the document. Scores are based on the presence and prominence of keywords and rhetorical strategies outlined in the framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "0e7342da7ee6...",
+      "document_name": "Republican_Platform_2016.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We believe in American exceptionalism. We believe the United States of America is unlike any other nation on earth.",
+          "confidence": 0.95,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The President has been regulating to death a free market economy that he does not like and does not understand.",
+          "confidence": 0.9,
+          "context_type": "Anti-Elite Sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We believe that people are the ultimate resource, and that the people, not the government, are the best stewards of our country's God-given natural resources.",
+          "confidence": 0.95,
+          "context_type": "Direct Democracy Appeal"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "As Americans and as Republicans, we cannot allow this to continue. That is why the many sections of this platform affirm our trust in the people, our faith in their judgment, and our determination to help them take back their country.",
+          "confidence": 0.9,
+          "context_type": "National Unity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our vision: A Rebirthing of Constitutional Government. America's Natural Resources: Agriculture, Energy, and the Environment.",
+          "confidence": 0.85,
+          "context_type": "National Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "American exceptionalism, exceptional nation, greatest country, superior civilization",
+          "confidence": 0.9,
+          "context_type": "Cultural Supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

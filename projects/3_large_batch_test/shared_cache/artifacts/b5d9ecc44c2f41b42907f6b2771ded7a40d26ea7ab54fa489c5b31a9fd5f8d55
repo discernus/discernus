@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b593ed7eb5d0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions as per the provided prompt.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2003.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"To confront the great issues before us, we must act in a spirit of good will and respect for one another, and I will do my part. Tonight the state of our Union is strong, and together we will make it stronger.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"In this decisive year, you and I will make choices that determine both the future and the character of our country. We will choose to act confidently in pursuing the enemies of freedom, or retreat from our duties in the hope of an easier life. We will choose to build our prosperity by leading the world economy, or shut ourselves off from trade and opportunities. In a complex and challenging time, the road of isolationism and protectionism may seem broad and inviting, yet it ends in danger and decline. The only way to protect our people, the only way to secure the peace, the only way to control our destiny is by our leadership.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Populist Framing\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"So tonight I ask you to join me in creating a commission to examine the full impact of baby boom retirement on Social Security, Medicare, and Medicaid. This commission should include Members of Congress of both parties and offer bipartisan solutions. We need to put aside partisan politics and work together and get this problem solved.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Our Nation is grateful to the fallen, who live in the memory of our country. We're grateful to all who volunteer to wear our Nation's uniform. And as honor our brave troops, let us never forget the sacrifices of America's military families.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"Patriotism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America rejects the false comfort of isolationism. We are the nation that saved liberty in Europe and liberated death camps and helped raise up democracies and faced down an evil empire. Once again, we accept the call of history to deliver the oppressed and move this world toward peace. We remain on the offensive against terror networks.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"National Identity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Far from being a hopeless dream, the advance of freedom is the great story of our time. In 1945, there were about two dozen lonely democracies in the world. Today, there are 122. And we're writing a new chapter in the story of self-government with women lining up to vote in Afghanistan, and millions of Iraqis marking their liberty with purple ink, and men and women from Lebanon to Egypt debating the rights of individuals and the necessity of freedom.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"National Superiority\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:54:19.135266+00:00",
+    "end_time": "2025-08-02T00:54:22.822626+00:00",
+    "duration_seconds": 3.68736,
+    "llm_interaction_hash": "1eba1c2cad1d440b"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

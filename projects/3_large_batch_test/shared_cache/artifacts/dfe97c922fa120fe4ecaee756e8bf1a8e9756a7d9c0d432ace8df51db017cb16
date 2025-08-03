@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c0313c8292ea",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on populist and nationalistic rhetoric as defined in the framework. The Gasket schema was utilized for structured extraction of dimensional scores and supporting evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"0e7342da7ee6...\",\n      \"document_name\": \"Republican_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We believe in American exceptionalism. We believe the United States of America is unlike any other nation on earth.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populism_appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We believe the Constitution was written not as a flexible document, but as our enduring covenant. We believe our constitutional system limited government, separation of powers, federalism, and the rights of the people must be preserved uncompromised for future generations.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"anti_elite_language\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"The people are the ultimate resource, and that the people, not the government, are the best stewards of our country's God-given natural resources.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We believe American greatness. We believe the United States of America is unlike any other nation on earth. We believe America is exceptional because of our historical role, first as refuge, then as defender, and now as exemplar of liberty for the world to see.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"cultural_supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"As Americans and as Republicans we reaffirm the principles that unite us in a common purpose. We believe American exceptionalism.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:29:33.541503+00:00",
+    "end_time": "2025-08-02T15:29:37.847349+00:00",
+    "duration_seconds": 4.305846,
+    "llm_interaction_hash": "9ed93d4a031ae2da"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "0e7342da7ee614d58d7d414bab087621c93299e774592d8b09a88f6f6c171734"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

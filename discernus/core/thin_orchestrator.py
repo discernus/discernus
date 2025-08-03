@@ -185,7 +185,7 @@ Respond with only the JSON object."""
                 "reuse_recommendation": "NONE"
             }
         
-    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str, debug_agent: Optional[str] = None, debug_level: str = "info") -> ProductionThinSynthesisPipeline:
+    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str, debug_agent: Optional[str] = None, debug_level: str = "info", analysis_model: Optional[str] = None) -> ProductionThinSynthesisPipeline:
         """Create a ProductionThinSynthesisPipeline with proper infrastructure."""
         
         # Create MinIO-compatible wrapper for LocalArtifactStorage
@@ -201,10 +201,12 @@ Respond with only the JSON object."""
         
         compatible_storage = MinIOCompatibleStorage(storage)
         
+        print(f"🔧 Creating synthesis pipeline with model: {model}")
         return ProductionThinSynthesisPipeline(
             artifact_client=compatible_storage,
             audit_logger=audit_logger,
-            model=model
+            model=model,
+            analysis_model=analysis_model
         )
 
     def _run_thin_synthesis(self,
@@ -218,6 +220,7 @@ Respond with only the JSON object."""
                            framework_hash: str,
                            corpus_hash: str,
                            corpus_manifest: Optional[Dict[str, Any]] = None,
+                           analysis_model: Optional[str] = None,
                            debug_agent: Optional[str] = None,
                            debug_level: str = "info") -> Dict[str, Any]:
         """
@@ -227,7 +230,7 @@ Respond with only the JSON object."""
         """
         
         # Create THIN synthesis pipeline
-        pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level)
+        pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level, analysis_model)
         
         # Build THIN-compliant experiment context - raw data for LLM intelligence
         experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
@@ -292,6 +295,7 @@ Respond with only the JSON object."""
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
+                      ensemble_runs: int = 1,
                       resume_stage: Optional[str] = None,
                       debug_agent: Optional[str] = None,
                       debug_level: str = "info") -> Dict[str, Any]:
@@ -303,6 +307,7 @@ Respond with only the JSON object."""
             synthesis_model: LLM model to use for synthesis
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             analysis_only: If True, run only analysis phase and save artifacts
+            ensemble_runs: Number of ensemble runs for self-consistency (1 = single run, 3-5 recommended)
             resume_stage: Resume at specific THIN synthesis sub-stage ('thin-gen', 'thin-exec', 'thin-cure', 'thin-interp')
             
         Returns:
@@ -351,10 +356,10 @@ Respond with only the JSON object."""
             # Load framework
             framework_content = self._load_framework(experiment_config["framework"])
             
-            # Store framework content and audit logger for gasket integration
+            # Store framework content, audit logger, and analysis model for gasket integration
             self._current_framework_content = framework_content
             self._current_audit_logger = audit
-            
+            self._current_analysis_model = analysis_model
             framework_hash = storage.put_artifact(
                 framework_content.encode('utf-8'),
                 {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
@@ -757,7 +762,8 @@ Respond with only the JSON object."""
                 corpus_documents,
                 framework_content,
                 experiment_config,
-                analysis_model
+                analysis_model,
+                ensemble_runs
             )
             
             # Display analysis progress and cost
@@ -766,6 +772,11 @@ Respond with only the JSON object."""
             print(f"✅ Analysis phase complete: {successful_count}/{len(corpus_documents)} documents processed")
             print(f"   💰 Analysis cost so far: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
             print(f"   🔢 Tokens used: {analysis_costs.get('total_tokens', 0):,}")
+
+            # TODO: Ensemble runs disabled pending architectural review
+            # Report ensemble quality summary if ensemble runs were used
+            # if ensemble_runs > 1:
+            #     self._report_ensemble_summary(all_analysis_results, ensemble_runs)
 
             # Check if any analysis tasks succeeded
             successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
@@ -800,6 +811,7 @@ Respond with only the JSON object."""
                 framework_hash=framework_hash,
                 corpus_hash=corpus_hash,
                 corpus_manifest=corpus_manifest,  # THIN approach: pass raw corpus content
+                analysis_model=analysis_model,
                 debug_agent=debug_agent,
                 debug_level=debug_level
             )
@@ -943,18 +955,52 @@ Respond with only the JSON object."""
                                        corpus_documents: List[Dict[str, Any]],
                                        framework_content: str,
                                        experiment_config: Dict[str, Any],
-                                       model: str) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
+                                       model: str,
+                                       ensemble_runs: int = 1) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
         """
-        Executes the analysis agent for each document, then combines all results into a single artifact.
+        Executes the analysis agent for each document with optional ensemble runs for self-consistency.
         """
         all_analysis_results = []
         total_docs = len(corpus_documents)
+        
+        # TODO: Ensemble runs disabled pending architectural review
+        # if ensemble_runs > 1:
+        #     print(f"\n🚀 Starting ensemble analysis of {total_docs} documents with {ensemble_runs} runs per document...")
+        # else:
+        #     print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
         print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
 
         for i, doc in enumerate(corpus_documents):
             print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
+            
+            # TODO: Ensemble runs disabled pending architectural review
+            # if ensemble_runs > 1:
+            #     # Ensemble analysis with multiple runs
+            #     ensemble_results = []
+            #     for run in range(ensemble_runs):
+            #         print(f"  🔄 Ensemble run {run + 1}/{ensemble_runs}...")
+            #         try:
+            #             result = analysis_agent.analyze_batch(
+            #             framework_content=framework_content,
+            #             corpus_documents=[doc],  # Pass a list with a single document
+            #             experiment_config=experiment_config,
+            #             model=model,
+            #             current_scores_hash=None,  # Don't accumulate hashes
+            #             current_evidence_hash=None,
+            #             ensemble_run=run + 1,
+            #             total_ensemble_runs=ensemble_runs
+            #             )
+            #         ensemble_results.append(result)
+            #     except Exception as e:
+            #         print(f"    ❌ Ensemble run {run + 1} failed: {e}")
+            #         ensemble_results.append({"error": str(e), "document": doc.get('filename'), "run": run + 1})
+            #     
+            #     # Aggregate ensemble results using median aggregation
+            #     aggregated_result = self._aggregate_ensemble_results(ensemble_results, doc.get('filename'))
+            #     all_analysis_results.append(aggregated_result)
+            # else:
+            # Single run analysis
             try:
-                # Analyze each document individually
                 result = analysis_agent.analyze_batch(
                     framework_content=framework_content,
                     corpus_documents=[doc],  # Pass a list with a single document
@@ -1031,11 +1077,12 @@ Respond with only the JSON object."""
                     # We need framework content for gasket schema extraction
                     framework_content = getattr(self, '_current_framework_content', None)
                     if framework_content:
-                        extracted_data = self._extract_and_map_with_gasket(
-                            raw_response, 
-                            framework_content, 
-                            getattr(self, '_current_audit_logger', None)
-                        )
+                                            extracted_data = self._extract_and_map_with_gasket(
+                        raw_response, 
+                        framework_content, 
+                        getattr(self, '_current_audit_logger', None),
+                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                    )
                     else:
                         # Fallback to legacy parsing if framework content not available
                         extracted_data = self._legacy_json_parsing(raw_response)
@@ -1128,7 +1175,8 @@ Respond with only the JSON object."""
 
     def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, List[str]]]:
         """
-        Extract gasket_schema from framework v7.0 JSON appendix.
+        Extract gasket_schema from framework v7.0/v7.1 JSON appendix.
+        Converts v7.1 enhanced format to v7.0 format for Intelligent Extractor compatibility.
         
         Args:
             framework_content: Raw framework markdown content
@@ -1137,19 +1185,44 @@ Respond with only the JSON object."""
             gasket_schema dict or None if not found/invalid
         """
         try:
-            # Look for JSON code block in framework
-            if '```json' in framework_content:
-                json_start = framework_content.rfind('```json') + 7
-                json_end = framework_content.find('```', json_start)
+            # Look for gasket_schema specifically in framework
+            # Search for "gasket_schema" keyword first, then find the containing JSON block
+            if 'gasket_schema' in framework_content:
+                gasket_pos = framework_content.find('gasket_schema')
                 
-                if json_end != -1:
-                    json_content = framework_content[json_start:json_end].strip()
-                    framework_config = json.loads(json_content)
+                # Find the JSON block that contains gasket_schema
+                json_blocks = []
+                start_pos = 0
+                while True:
+                    json_start_marker = framework_content.find('```json', start_pos)
+                    if json_start_marker == -1:
+                        break
                     
-                    # Extract gasket_schema if present
-                    gasket_schema = framework_config.get('gasket_schema')
-                    if gasket_schema and 'target_keys' in gasket_schema and 'target_dimensions' in gasket_schema:
-                        return gasket_schema
+                    json_start = json_start_marker + 7
+                    json_end = framework_content.find('```', json_start)
+                    
+                    if json_end != -1:
+                        json_content = framework_content[json_start:json_end].strip()
+                        
+                        # Check if this JSON block contains gasket_schema
+                        if json_start <= gasket_pos <= json_end:
+                            try:
+                                framework_config = json.loads(json_content)
+                                
+                                # Extract gasket_schema if present
+                                gasket_schema = framework_config.get('gasket_schema')
+                                if gasket_schema:
+                                    # Handle v7.0 format (legacy)
+                                    if 'target_keys' in gasket_schema and 'target_dimensions' in gasket_schema:
+                                        return gasket_schema
+                                    
+                                    # Handle v7.1 enhanced format - convert to v7.0 format
+                                    elif 'extraction_targets' in gasket_schema:
+                                        return self._convert_v71_gasket_to_v70(gasket_schema)
+                            except json.JSONDecodeError:
+                                pass  # Try next JSON block
+                    
+                    start_pos = json_end + 3 if json_end != -1 else json_start_marker + 7
             
             return None
             
@@ -1157,11 +1230,57 @@ Respond with only the JSON object."""
             print(f"Warning: Failed to extract gasket_schema from framework: {e}")
             return None
 
+    def _convert_v71_gasket_to_v70(self, v71_schema: Dict[str, Any]) -> Dict[str, List[str]]:
+        """
+        Convert v7.1 enhanced gasket schema to v7.0 format for Intelligent Extractor compatibility.
+        
+        Args:
+            v71_schema: v7.1 gasket_schema with extraction_targets structure
+            
+        Returns:
+            v7.0 compatible gasket_schema with target_keys and target_dimensions
+        """
+        try:
+            extraction_targets = v71_schema.get('extraction_targets', {})
+            
+            # Extract all score keys from core_scores and metadata_scores
+            target_keys = []
+            
+            # Add core scores (required)
+            core_scores = extraction_targets.get('core_scores', {})
+            target_keys.extend(core_scores.keys())
+            
+            # Add metadata scores (optional)
+            metadata_scores = extraction_targets.get('metadata_scores', {})
+            target_keys.extend(metadata_scores.keys())
+            
+            # Create target_dimensions from score descriptions
+            target_dimensions = []
+            for score_key, score_config in {**core_scores, **metadata_scores}.items():
+                description = score_config.get('description', score_key)
+                target_dimensions.append(description)
+            
+            # Return v7.0 compatible format
+            v70_schema = {
+                'target_keys': target_keys,
+                'target_dimensions': target_dimensions,
+                'version': '7.1_converted',
+                'conversion_source': 'v7.1_enhanced'
+            }
+            
+            print(f"✅ Converted v7.1 gasket schema: {len(target_keys)} target keys")
+            return v70_schema
+            
+        except Exception as e:
+            print(f"❌ Failed to convert v7.1 gasket schema: {e}")
+            return None
+
     def _extract_and_map_with_gasket(
         self,
         raw_analysis_response: str,
         framework_content: str,
-        audit_logger: AuditLogger
+        audit_logger: AuditLogger,
+        model: str = "vertex_ai/gemini-2.5-flash-lite"
     ) -> Optional[Dict[str, Any]]:
         """
         Extract scores using Intelligent Extractor gasket (Gasket #2).
@@ -1182,11 +1301,19 @@ Respond with only the JSON object."""
         if not gasket_schema:
             # Fallback to legacy parsing for non-v7.0 frameworks
             print("⚠️  No gasket_schema found, falling back to legacy JSON parsing")
+            print(f"🔍 Debug: Framework content length: {len(framework_content)}")
+            print(f"🔍 Debug: Contains ```json: {'```json' in framework_content}")
+            if '```json' in framework_content:
+                json_start = framework_content.rfind('```json') + 7
+                json_end = framework_content.find('```', json_start)
+                if json_end != -1:
+                    json_content = framework_content[json_start:json_end].strip()
+                    print(f"🔍 Debug: JSON content preview: {json_content[:200]}...")
             return self._legacy_json_parsing(raw_analysis_response)
         
         # Initialize Intelligent Extractor Agent
         extractor = IntelligentExtractorAgent(
-            model="vertex_ai/gemini-2.5-flash",
+            model=model,
             audit_logger=audit_logger
         )
         
@@ -1352,6 +1479,328 @@ Respond with only the JSON object."""
                 } for r in batch_results
             ]
         }
+
+    def _aggregate_ensemble_results(self, ensemble_results: List[Dict[str, Any]], document_name: str) -> Dict[str, Any]:
+        """
+        Aggregates multiple ensemble runs using median aggregation for self-consistency.
+        
+        Args:
+            ensemble_results: List of analysis results from ensemble runs
+            document_name: Name of the document being analyzed
+            
+        Returns:
+            Aggregated result with median scores and consensus metrics
+        """
+        import statistics
+        import json
+        
+        # Filter out failed runs
+        successful_runs = [r for r in ensemble_results if "error" not in r and "analysis_result" in r]
+        
+        if not successful_runs:
+            # If all runs failed, return the first error result
+            return ensemble_results[0] if ensemble_results else {"error": "All ensemble runs failed", "document": document_name}
+        
+        print(f"    ✅ {len(successful_runs)}/{len(ensemble_results)} ensemble runs successful")
+        
+        # Extract scores from each successful run
+        all_scores = []
+        all_raw_responses = []
+        all_durations = []
+        
+        for run in successful_runs:
+            try:
+                # Extract raw analysis response
+                cached_result = run["analysis_result"]["result_content"]
+                raw_response = cached_result["raw_analysis_response"]
+                all_raw_responses.append(raw_response)
+                
+                # Extract scores using gasket or legacy parsing
+                framework_content = getattr(self, '_current_framework_content', None)
+                if framework_content:
+                    extracted_data = self._extract_and_map_with_gasket(
+                        raw_response, 
+                        framework_content, 
+                        getattr(self, '_current_audit_logger', None),
+                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                    )
+                else:
+                    extracted_data = self._legacy_json_parsing(raw_response)
+                
+                if extracted_data and "document_analyses" in extracted_data:
+                    all_scores.append(extracted_data["document_analyses"])
+                
+                # Collect duration
+                duration = run["analysis_result"].get("duration_seconds", 0)
+                all_durations.append(duration)
+                
+            except Exception as e:
+                print(f"    ⚠️ Failed to extract scores from ensemble run: {e}")
+                continue
+        
+        if not all_scores:
+            return {"error": "Failed to extract scores from any ensemble run", "document": document_name}
+        
+        # Perform median aggregation on scores
+        aggregated_scores = self._median_aggregate_scores(all_scores)
+        
+        # Calculate consensus metrics
+        consensus_metrics = self._calculate_consensus_metrics(all_scores)
+        
+        # Log ensemble quality metrics
+        self._log_ensemble_quality_metrics(consensus_metrics, document_name, len(successful_runs))
+        
+        # Use the first successful run as template, but replace with aggregated data
+        template_run = successful_runs[0]
+        aggregated_result = template_run.copy()
+        
+        # Update with aggregated scores and consensus metrics
+        if "analysis_result" in aggregated_result:
+            aggregated_result["analysis_result"]["ensemble_aggregated"] = True
+            aggregated_result["analysis_result"]["ensemble_runs"] = len(successful_runs)
+            aggregated_result["analysis_result"]["consensus_metrics"] = consensus_metrics
+            aggregated_result["analysis_result"]["median_duration"] = statistics.median(all_durations) if all_durations else 0
+            
+            # Replace the raw response with a combined one for evidence extraction
+            combined_raw_response = "\n\n=== ENSEMBLE RUNS ===\n\n".join(all_raw_responses)
+            aggregated_result["analysis_result"]["result_content"]["raw_analysis_response"] = combined_raw_response
+        
+        return aggregated_result
+
+    def _median_aggregate_scores(self, all_scores: List[List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
+        """
+        Performs median aggregation on scores from multiple ensemble runs.
+        
+        Args:
+            all_scores: List of score lists from each ensemble run
+            
+        Returns:
+            List of aggregated scores using median values
+        """
+        if not all_scores or not all_scores[0]:
+            return []
+        
+        # Get the first run's structure as template
+        template_scores = all_scores[0]
+        aggregated_scores = []
+        
+        for doc_analysis in template_scores:
+            doc_name = doc_analysis.get("document_name", "unknown")
+            analysis_scores = doc_analysis.get("analysis_scores", {})
+            
+            # Collect all scores for each dimension across runs
+            dimension_scores = {}
+            for scores_run in all_scores:
+                for doc in scores_run:
+                    if doc.get("document_name") == doc_name:
+                        run_scores = doc.get("analysis_scores", {})
+                        for dimension, score in run_scores.items():
+                            if dimension not in dimension_scores:
+                                dimension_scores[dimension] = []
+                            # Only add non-None scores
+                            if score is not None:
+                                dimension_scores[dimension].append(score)
+            
+            # Calculate median for each dimension
+            median_scores = {}
+            for dimension, scores in dimension_scores.items():
+                if scores:
+                    import statistics
+                    median_scores[dimension] = statistics.median(scores)
+                else:
+                    # If no valid scores, use the first available score
+                    for scores_run in all_scores:
+                        for doc in scores_run:
+                            if doc.get("document_name") == doc_name:
+                                run_scores = doc.get("analysis_scores", {})
+                                if dimension in run_scores and run_scores[dimension] is not None:
+                                    median_scores[dimension] = run_scores[dimension]
+                                    break
+                        if dimension in median_scores:
+                            break
+            
+            # Create aggregated document analysis
+            aggregated_doc = {
+                "document_name": doc_name,
+                "analysis_scores": median_scores,
+                "aggregation_method": "median",
+                "ensemble_runs": len(all_scores)
+            }
+            
+            aggregated_scores.append(aggregated_doc)
+        
+        return aggregated_scores
+
+    def _calculate_consensus_metrics(self, all_scores: List[List[Dict[str, Any]]]) -> Dict[str, Any]:
+        """
+        Calculates consensus metrics for ensemble runs.
+        
+        Args:
+            all_scores: List of score lists from each ensemble run
+            
+        Returns:
+            Dictionary with consensus metrics
+        """
+        if not all_scores or len(all_scores) < 2:
+            return {"consensus_level": "single_run", "variance": 0.0}
+        
+        # Calculate variance for each dimension across runs
+        dimension_variances = {}
+        
+        for scores_run in all_scores:
+            for doc in scores_run:
+                doc_name = doc.get("document_name", "unknown")
+                analysis_scores = doc.get("analysis_scores", {})
+                
+                for dimension, score in analysis_scores.items():
+                    if dimension not in dimension_variances:
+                        dimension_variances[dimension] = []
+                    # Only add non-None scores to avoid mathematical errors
+                    if score is not None:
+                        dimension_variances[dimension].append(score)
+        
+        # Calculate statistics for each dimension
+        consensus_metrics = {}
+        total_variance = 0.0
+        dimension_count = 0
+        
+        for dimension, scores in dimension_variances.items():
+            if len(scores) > 1:
+                import statistics
+                variance = statistics.variance(scores)
+                mean = statistics.mean(scores)
+                dimension_count += 1
+                total_variance += variance
+                
+                consensus_metrics[dimension] = {
+                    "mean": mean,
+                    "variance": variance,
+                    "std_dev": statistics.stdev(scores) if len(scores) > 1 else 0
+                }
+        
+        # Overall consensus metrics
+        avg_variance = total_variance / dimension_count if dimension_count > 0 else 0.0
+        
+        # Determine consensus level based on variance
+        if avg_variance < 0.1:
+            consensus_level = "high"
+        elif avg_variance < 0.3:
+            consensus_level = "medium"
+        else:
+            consensus_level = "low"
+        
+        return {
+            "consensus_level": consensus_level,
+            "average_variance": avg_variance,
+            "dimension_metrics": consensus_metrics,
+            "ensemble_runs": len(all_scores)
+        }
+
+    def _log_ensemble_quality_metrics(self, consensus_metrics: Dict[str, Any], document_name: str, successful_runs: int) -> None:
+        """
+        Log ensemble quality metrics for transparency and debugging.
+        
+        Args:
+            consensus_metrics: Calculated consensus metrics
+            document_name: Name of the document analyzed
+            successful_runs: Number of successful ensemble runs
+        """
+        consensus_level = consensus_metrics.get("consensus_level", "unknown")
+        avg_variance = consensus_metrics.get("average_variance", 0.0)
+        ensemble_runs = consensus_metrics.get("ensemble_runs", 0)
+        
+        print(f"    📊 Ensemble Quality for {document_name}:")
+        print(f"       • Consensus Level: {consensus_level.upper()}")
+        print(f"       • Average Variance: {avg_variance:.3f}")
+        print(f"       • Successful Runs: {successful_runs}/{ensemble_runs}")
+        
+        # Log detailed dimension metrics if consensus is concerning
+        if consensus_level == "low":
+            print(f"    ⚠️  Low consensus detected - dimension details:")
+            dimension_metrics = consensus_metrics.get("dimension_metrics", {})
+            for dimension, metrics in dimension_metrics.items():
+                variance = metrics.get("variance", 0.0)
+                if variance > 0.3:  # High variance threshold
+                    mean = metrics.get("mean", 0.0)
+                    std_dev = metrics.get("std_dev", 0.0)
+                    print(f"       • {dimension}: mean={mean:.2f}, variance={variance:.3f}, std_dev={std_dev:.3f}")
+        
+        # Log to audit system for permanent record
+        if hasattr(self, '_current_audit_logger') and self._current_audit_logger:
+            self._current_audit_logger.log_agent_event(
+                "EnsembleAggregator",
+                "ensemble_quality_assessment",
+                {
+                    "document_name": document_name,
+                    "consensus_level": consensus_level,
+                    "average_variance": avg_variance,
+                    "successful_runs": successful_runs,
+                    "total_runs": ensemble_runs,
+                    "dimension_count": len(consensus_metrics.get("dimension_metrics", {}))
+                }
+            )
+
+    def _report_ensemble_summary(self, all_analysis_results: List[Dict[str, Any]], ensemble_runs: int) -> None:
+        """
+        Generate a summary report of ensemble quality across all documents.
+        
+        Args:
+            all_analysis_results: List of analysis results (potentially aggregated from ensemble runs)
+            ensemble_runs: Number of ensemble runs performed
+        """
+        print(f"\n📊 Ensemble Analysis Summary ({ensemble_runs} runs per document):")
+        
+        # Collect consensus metrics from all documents
+        consensus_levels = []
+        avg_variances = []
+        total_dimensions = 0
+        
+        for result in all_analysis_results:
+            if ("analysis_result" in result and 
+                "consensus_metrics" in result["analysis_result"]):
+                
+                consensus_metrics = result["analysis_result"]["consensus_metrics"]
+                consensus_level = consensus_metrics.get("consensus_level", "unknown")
+                avg_variance = consensus_metrics.get("average_variance", 0.0)
+                dimension_count = len(consensus_metrics.get("dimension_metrics", {}))
+                
+                consensus_levels.append(consensus_level)
+                avg_variances.append(avg_variance)
+                total_dimensions += dimension_count
+        
+        if consensus_levels:
+            # Calculate summary statistics
+            high_consensus = consensus_levels.count("high")
+            medium_consensus = consensus_levels.count("medium") 
+            low_consensus = consensus_levels.count("low")
+            total_docs = len(consensus_levels)
+            overall_avg_variance = sum(avg_variances) / len(avg_variances) if avg_variances else 0.0
+            
+            print(f"   📈 Consensus Distribution:")
+            print(f"      • High Consensus: {high_consensus}/{total_docs} documents ({high_consensus/total_docs*100:.1f}%)")
+            print(f"      • Medium Consensus: {medium_consensus}/{total_docs} documents ({medium_consensus/total_docs*100:.1f}%)")
+            print(f"      • Low Consensus: {low_consensus}/{total_docs} documents ({low_consensus/total_docs*100:.1f}%)")
+            print(f"   📊 Overall Quality:")
+            print(f"      • Average Variance: {overall_avg_variance:.3f}")
+            print(f"      • Total Dimensions Analyzed: {total_dimensions}")
+            
+            # Provide interpretation
+            if overall_avg_variance < 0.1:
+                quality_assessment = "EXCELLENT - Very high ensemble agreement"
+            elif overall_avg_variance < 0.2:
+                quality_assessment = "GOOD - Strong ensemble agreement"
+            elif overall_avg_variance < 0.3:
+                quality_assessment = "FAIR - Moderate ensemble agreement"
+            else:
+                quality_assessment = "CONCERNING - Low ensemble agreement"
+            
+            print(f"   🎯 Quality Assessment: {quality_assessment}")
+            
+            # Warn if many documents have low consensus
+            if low_consensus > total_docs * 0.3:  # More than 30% low consensus
+                print(f"   ⚠️  WARNING: {low_consensus} documents show low consensus - consider reviewing analysis or increasing ensemble runs")
+        else:
+            print(f"   ⚠️  No ensemble metrics found in analysis results")
 
     def _load_experiment_config(self) -> Dict[str, Any]:
         """Load and validate the experiment.md file."""

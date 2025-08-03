@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d72cc5ad0e59",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the political_discourse_populism_v7 framework, focusing on the two-axis model of populism and nationalism. Extracted evidence for each dimension with associated confidence levels and salience. The analysis prioritizes direct textual support for the identified dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2011.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So our job is to reverse these trends. It won't happen right away, and we won't agree on everything. But what I offer tonight is a set of concrete, practical proposals to speed up growth, strengthen the middle class, and build new ladders of opportunity into the middle class. Some require congressional action, and I am eager to work with all of you. But America does not stand still, and neither will I. So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that's what I'm going to do.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The bottom line is, Michele and I want every child to have the same chance this country gave us. But we know our opportunity agenda won't be complete, and too many young people entering the workforce today will see the American Dream as an empty promise, unless we also do more to make sure our economy honors the dignity of work and hard work pays off for every single American.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"And here are the results of your efforts: the lowest unemployment rate in over 5 years; a rebounding housing market; a manufacturing sector that's adding jobs for the first time since the 1990s; more oil produced at home than we buy from the rest of the world, the first time that's happened in nearly 20 years; our deficits cut by more than half. And for the first time in over a decade, business leaders around the world have declared that China is no longer the number-one place to invest, America is.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"cultural_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"That's why I believe this can be a breakthrough year for America. After 5 years of grit and determined effort, the United States is better positioned for the 21st century than any other nation on Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"exceptional_nation\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"So tonight, I'm announcing, we'll launch six more this year. Bipartisan bills in both Houses could double the number of these hubs and the jobs they create. So get those bills to my desk. But more Americans back to work.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"cultural_purity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:17:49.731130+00:00",
+    "end_time": "2025-08-02T00:17:53.218611+00:00",
+    "duration_seconds": 3.487481,
+    "llm_interaction_hash": "a50dc8f74b9aab1d"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

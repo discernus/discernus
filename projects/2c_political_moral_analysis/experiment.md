@@ -1,14 +1,15 @@
 ---
+version: "7.0"
 name: political_moral_analysis
 description: |
-  This experiment validates the Moral Foundations Theory v6.0 framework using a diverse corpus 
+  This experiment validates the Moral Foundations Theory v7.0 framework using a diverse corpus 
   of American political speeches spanning 60 years of political discourse. The corpus includes 
   8 speeches from different ideological positions, historical periods (1963-2022), and contexts 
   (electoral, legislative, policy advocacy). This heterogeneous design provides a robust test 
   of the framework's analytical capabilities across varied political discourse contexts while 
   enabling comprehensive moral foundation pattern analysis.
 hypothesis: |
-  The Moral Foundations Theory v6.0 framework will demonstrate reliable dimensional scoring 
+  The Moral Foundations Theory v7.0 framework will demonstrate reliable dimensional scoring 
   across diverse political discourse contexts, with measurable variation in moral foundation 
   emphasis patterns between speakers and ideological positions. The framework's tension analysis 
   capabilities will reveal different patterns of moral rhetorical coherence through the Moral 
@@ -48,15 +49,21 @@ workflow:
       - framework
       - corpus
     outputs:
-      - analysis_results
-  - agent: EnhancedSynthesisAgent
+      - raw_analysis_log
+  - agent: IntelligentExtractorAgent
     inputs:
-      - analysis_results
+      - raw_analysis_log
+      - framework
+    outputs:
+      - structured_data
+  - agent: ProductionThinSynthesisPipeline
+    inputs:
+      - structured_data
       - experiment
       - framework
     outputs:
       - final_report.md
-      - results.csv
+      - statistical_results.json
 hypotheses:
   H1_Reliability: "Framework will maintain inter-evaluation reliability with coefficient > 0.70 across all moral foundations"
   H2_Validity: "Moral foundation scores will show expected correlational patterns based on moral psychology theory"

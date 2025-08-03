@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c8d6bc12c5c7",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "constitutional_health_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"chf_v7_0\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of the \\\"March on Washington\\\" speech by John Lewis. The speech strongly advocates for civil rights and highlights the failures of existing legislative processes to address systemic injustices, leaning towards more direct action and societal upheaval. The framework's dimensions are applied to assess the rhetorical emphasis on procedural legitimacy, institutional respect, and systemic continuity versus their subversions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy_score\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"procedural_rejection_score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect_score\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"institutional_subversion_score\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity_score\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.6\n        },\n        \"systemic_replacement_score\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_rejection_score\",\n          \"quote_text\": \"We must have legislation that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"demand\"\n        },\n        {\n          \"dimension\": \"procedural_rejection_score\",\n          \"quote_text\": \"You do not know where our party is? Where is the political party that will make it unnecessary to march on Washington? Where is the political party that will make it unnecessary to march in the streets of Birmingham?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical_question\"\n        },\n        {\n          \"dimension\": \"institutional_subversion_score\",\n          \"quote_text\": \"But what did the federal government do when Albany police deputized? Beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slated King, and she lost her baby?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation\"\n        },\n        {\n          \"dimension\": \"institutional_subversion_score\",\n          \"quote_text\": \"But to those who have said, 'Be patient and wait,' we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"demand\"\n        },\n        {\n          \"dimension\": \"systemic_replacement_score\",\n          \"quote_text\": \"We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, 'Be patient.' How long can we be patient? We want our freedom and we want it now!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"demand\"\n        },\n        {\n          \"dimension\": \"systemic_replacement_score\",\n          \"quote_text\": \"We must get into this revolution and complete the revolution. For in the Delta of Mississippi, in southwest Georgia, in the Black Belt of Alabama, in Harlem, in Chicago, Detroit, Philadelphia, and all over this nation, the black masses are on the march for jobs and freedom.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_action\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:49:21.923662+00:00",
+    "end_time": "2025-08-01T23:49:25.057373+00:00",
+    "duration_seconds": 3.133711,
+    "llm_interaction_hash": "216c5e3a4c5225cb"
+  },
+  "input_artifacts": {
+    "framework_hash": "be988ee14dc81d52ce0d52810c0cf3d8e94168ff491a084c90586a856f548d1c",
+    "document_hashes": [
+      "5d90554fc13f33de69af63f31b143a6dbb25a23b12df577629756f3d1863021a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_character_heuristics",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_character_heuristics",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234902Z_e6b5ae08"
+  }
+}

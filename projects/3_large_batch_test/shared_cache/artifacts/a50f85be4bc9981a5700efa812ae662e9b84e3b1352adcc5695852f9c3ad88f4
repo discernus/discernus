@@ -1,0 +1,74 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism dimensions. Evidence extraction prioritized direct quotes supporting the dimensional scoring."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My<bos> fellow citizens, today we celebrate the mystery of American renewal. ... When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 0.95,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We have not done so; instead, we have drifted. And that drifting has eroded our resources, fractured our economy, and shaken our confidence.",
+          "confidence": 0.90,
+          "context_type": "Anti-Elite Language"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Our democracy must be not only the envy of the world but the engine of our own renewal. There is nothing wrong with America that cannot be cured by what is right with America.",
+          "confidence": 0.92,
+          "context_type": "Direct Democracy Appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.90,
+          "context_type": "Civic Duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We hear the trumpets. We have changed the guard. And now, each in our own way and with God's help, we must answer the call.",
+          "confidence": 0.88,
+          "context_type": "Historical Mythology"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "The world economy, the world environment, the world AIDS crisis, the world arms race: they affect us all. Today, as an older order passes, the new world is more free but less stable.",
+          "confidence": 0.93,
+          "context_type": "Foreign Threat"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "The American people have summoned the change we celebrate today. You have raised your voices in an unmistakable chorus. You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself.",
+          "confidence": 0.95,
+          "context_type": "Civic Duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

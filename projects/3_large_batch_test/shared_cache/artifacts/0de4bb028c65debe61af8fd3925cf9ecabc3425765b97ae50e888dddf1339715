@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of the 2014 State of the Union address. Focused on identifying populist and nationalist rhetoric, with a strong emphasis on the framework's provided keywords and concepts. Confidence is high due to clear examples of 'the people' vs 'the establishment' and strong nationalistic undertones."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But what is required now is for this country to pull together, confront boldly the challenges we face, and take responsibility for our future once more. Now is the time to jump-start job creation, restart lending, and invest in areas like energy, health care, and education that will grow our economy, even as we make hard choices to bring our deficit down. That is what my economic agenda is designed to do, and that is what I'd like to talk about tonight. It's an agenda that begins with jobs.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "I know that for many Americans watching right now, the state of our economy is a concern that rises above all others, and rightly so. If you haven't been personally affected by this recession, you probably know someone who has: a friend, a neighbor, a member of your family. You don't need to hear another list of statistics to know that our economy is in crisis, because you live it every day.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "But while our economy may be weakened and our confidence shaken, United States of America will emerge stronger than before. The weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth.",
+          "confidence": 0.90,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We are a nation that has seen promise amid peril and claimed opportunity from our ordeal. Now we must be that nation again, and that is why, even as it cuts back on programs we don't need, the budget I submit will invest in the three areas that are absolutely critical to our economic future: energy, health care, and education.",
+          "confidence": 0.90,
+          "context_type": "historical_mythology"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

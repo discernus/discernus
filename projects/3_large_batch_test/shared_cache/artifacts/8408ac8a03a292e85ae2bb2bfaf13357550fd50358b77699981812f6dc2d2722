@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. Confidence is high due to clear linguistic markers and explicit references within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Will we accept an economy where only a few of us do spectacularly well? Or will we commit ourselves to an economy that generates rising incomes and chances for everyone who makes the effort?",
+          "confidence": 0.95,
+          "context_type": "people_vs_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It begins with our economy. Seven years ago, Rebekah and Ben Epler of Minneapolis were newlyweds. [...] As the crisis worsened, Ben's business dried up, so he took whatever jobs he could find, even if they kept him on the road for long stretches of time. Rebekah took out student loans and enrolled in community college and retrained for a new career. They sacrificed for each other. And slowly, it paid off.",
+          "confidence": 0.90,
+          "context_type": "people_vs_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So what does middle class economics require in our time? First, middle class economics means helping working families feel more secure in a world of constant change. That means helping folks afford child care, college, health care, a home, retirement. And my budget will address each of these issues, lowering the taxes of working families and putting thousands of dollars back into their pockets each year.",
+          "confidence": 0.95,
+          "context_type": "direct_democracy_appeal"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "And we are as free from the grip of foreign oil as we've been in almost 30 years.",
+          "confidence": 0.80,
+          "context_type": "foreign_threat"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America, Rebekah and Ben's story is our story. They represent the millions who have worked hard and scrimped and sacrificed and retooled. You are the reason that I ran for this office. You are the people I was thinking of 6 years ago today, in the darkest months of the crisis, when I stood on the steps of this Capitol and promised we would rebuild our economy on a new foundation.",
+          "confidence": 0.90,
+          "context_type": "civic_duty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "As Americans, we have a profound commitment to justice. So it makes no sense to spend $3 million per prisoner to keep open a prison that the world condemns and terrorists use to recruit.",
+          "confidence": 0.85,
+          "context_type": "civic_duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

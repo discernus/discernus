@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "chf_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis focused on identifying statements that either support or oppose established procedures, institutional authority, and systemic continuity. High confidence in identifying key phrases, though some contextual interpretation was needed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy_score": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "procedural_rejection_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect_score": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "institutional_subversion_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "systemic_continuity_score": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "systemic_replacement_score": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_rejection_score",
+          "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this. But neither here nor there, um, the reason I'm most optimistic about the future of this movement and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor who's desperate for cheap labor and it's not some random person who claims to speak for this or that constituency. The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.9,
+          "context_type": "Rhetorical framing of a political leader's agenda"
+        },
+        {
+          "dimension": "procedural_rejection_score",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "confidence": 0.9,
+          "context_type": "Characterization of policy as detrimental to democracy"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "The places in our own communities, in our own, uh, states that have the highest immigration rates are the places with the highest home prices. And it's not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+          "confidence": 0.7,
+          "context_type": "Assertion of negative economic impact tied to immigration"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "But in that cemetery, in that cemetery, there are people who were born around the time of the American Civil War. And if, as I hope, my, my wife and I eventually are laid to rest there and our kids follow us, there will be seven generations just in that small mountain cemetery plot in Eastern Kentucky. Seven generations of people who have fought for this country, who have built this country, who have made things in this country and who would fight and die to protect this country if they were asked to.",
+          "confidence": 0.6,
+          "context_type": "Historical framing of patriotism and sacrifice"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "In my home state of Ohio, we've had a couple of ballot referenda that have not gone the right way. We lost some elections in 2022 that I think that we should have won.",
+          "confidence": 0.7,
+          "context_type": "Critique of electoral outcomes and party performance"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "The places in our own communities, in our own, uh, states that have the highest immigration rates are the places with the highest home prices. And it's not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+          "confidence": 0.7,
+          "context_type": "Assertion of negative economic impact tied to immigration"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

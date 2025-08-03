@@ -68,8 +68,9 @@ framework: "framework_v7.0.md"
 corpus_path: "corpus/"
 
 # REQUIRED: List of LiteLLM-compatible model identifiers
+# Default: Flash Lite for integration testing, Pro for production analysis
 models:
-  - "vertex_ai/gemini-2.5-pro"
+  - "vertex_ai/gemini-2.5-flash-lite"
 
 # REQUIRED: Number of analysis runs per model (integer ≥ 1)
 runs_per_model: 1

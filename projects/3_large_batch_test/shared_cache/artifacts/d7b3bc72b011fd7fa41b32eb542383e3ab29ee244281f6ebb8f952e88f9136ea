@@ -1,0 +1,74 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Republican Platform 2024 focusing on populism and nationalism dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2024.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.92,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.95,
+          "salience": 0.98,
+          "confidence": 0.97
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "For decades, our politicians sold our jobs and livelhoods to the highest bidders overseas with unfair Trade\nDeals and a blind faith in the siren song of globalism. They insulated themselves from criticism and the\nconsequences of their own bad actions, allowing our Borders to be overrun, our cities to be overtaken by crime,\nour System of Justice to be weaponized, and our young people to develop a sense of hopelessness and despair.\nThey rejected our History and our Values. Quite simply, they did everything in their power to destroy our Country.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "In 2016, President Donald J. Trump was elected as an unapologetic Champion of the American People. He\nreignited the American Spirit and called on us to renew our National Pride. His Policies spurred Historic\nEconomic Growth, Job Creation, and a Resurgence of American Manufacturing. President Trump and the\nRepublican Party led America out of the pessimism induced by decades of failed leadership, showing us that\nthe American People want Greatness for our Country again.",
+          "confidence": 0.93,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "MAKING AMERICA GREAT AGAIN!",
+          "confidence": 1.0,
+          "context_type": "headline"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "REAL THE BORDER, AND STOP THE MIGRANT INVASION\nCARRY OUT THE LARGEST DEPORTATION OPERATION IN AMERICAN HISTORY\nEND INFLATION, AND MAKE AMERICA AFFORDABLE AGAIN\nMAKE AMERICA THE DOMINANT ENERGY PRODUCER IN THE WORLD. BY FAR!\nSTOP OUTSOURCING, AND TURN THE UNITED STATES INTO A MANUFACTURING SUPERPOWER\nLARGE TAX CUTS FOR WORKERS, AND NO TAX ON TIPS",
+          "confidence": 0.98,
+          "context_type": "list"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We will be a Nation based on Truth, Justice, and Common Sense.",
+          "confidence": 0.95,
+          "context_type": "statement"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Common Sense tells us clearly that if we don't have a Border, we do not have a Country.",
+          "confidence": 0.97,
+          "context_type": "statement"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We must secure our Southern Border by completing the Border Wall that President Trump started. Hundreds of miles\nhave already been built and work magnificently. The remaining Wall construction can be completed quickly,\neffectively, and inexpensively. We must also vigilantly check those who enter our Country by other routes and\nensure that no one can enter our Country who does not have the Legal Right to do so, and we must deport the\nmillions of illegal Migrants who Joe Biden has deliberately encouraged to invade our Country. We will start by\nprioritizing the most dangerous criminals and working with local Police.",
+          "confidence": 0.96,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,88 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "chf_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of the \"March on Washington\" speech by John Lewis. The speech strongly advocates for civil rights and highlights the failures of existing legislative processes to address systemic injustices, leaning towards more direct action and societal upheaval. The framework's dimensions are applied to assess the rhetorical emphasis on procedural legitimacy, institutional respect, and systemic continuity versus their subversions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "procedural_rejection_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_respect_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "institutional_subversion_score": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_continuity_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "systemic_replacement_score": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_rejection_score",
+          "quote_text": "We must have legislation that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+          "confidence": 0.8,
+          "context_type": "demand"
+        },
+        {
+          "dimension": "procedural_rejection_score",
+          "quote_text": "You do not know where our party is? Where is the political party that will make it unnecessary to march on Washington? Where is the political party that will make it unnecessary to march in the streets of Birmingham?",
+          "confidence": 0.9,
+          "context_type": "rhetorical_question"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "But what did the federal government do when Albany police deputized? Beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slated King, and she lost her baby?",
+          "confidence": 0.9,
+          "context_type": "accusation"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "But to those who have said, 'Be patient and wait,' we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!",
+          "confidence": 0.9,
+          "context_type": "demand"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, 'Be patient.' How long can we be patient? We want our freedom and we want it now!",
+          "confidence": 0.9,
+          "context_type": "demand"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "We must get into this revolution and complete the revolution. For in the Delta of Mississippi, in southwest Georgia, in the Black Belt of Alabama, in Harlem, in Chicago, Detroit, Philadelphia, and all over this nation, the black masses are on the march for jobs and freedom.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

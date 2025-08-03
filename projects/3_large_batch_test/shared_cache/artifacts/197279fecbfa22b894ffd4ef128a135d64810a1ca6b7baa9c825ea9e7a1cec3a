@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism Framework v7.0. Document analyzed for populism-pluralism and nationalism-patriotism dimensions. Evidence extraction focused on direct quotes aligning with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.82,
+          "salience": 0.90,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "As Americans, we believe in the power of individuals to determine their destiny and shape the course of history. We believe that the most reliable guide for our country is the collective wisdom of ordinary citizens.",
+          "confidence": 0.90,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must also find a sensible and humane way to deal with people here illegally. Illegal immigration is complicated, but it can be resolved. And it must be resolved in a way that upholds both our laws and our highest ideals.",
+          "confidence": 0.85,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our nation owes them our thanks. We are proud of your accomplishments. And tonight in this hallowed Chamber, with the American people as our witness, we make you a solemn pledge: In the fight ahead, you will have all you need to protect our Nation.",
+          "confidence": 0.95,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "From expanding opportunity to protecting our country, we've made good progress. Yet we have unfinished business before us, and the American people expect us to get it done.",
+          "confidence": 0.90,
+          "context_type": "national_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "My administration is taking steps to do so. We're increasing workforce enforcement, deploying fences and advanced technologies to stop illegal crossings. We've effectively ended the policy of catch-and-release at the border, and by the end of this year, we will have doubled the number of Border Patrol agents.",
+          "confidence": 0.85,
+          "context_type": "territorial_claims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

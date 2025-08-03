@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b89558cac201",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The speech exhibits a blend of populist and pluralist rhetoric domestically, with a stronger lean towards nationalism in its foreign policy and national security framing. The 'us vs. them' narrative is predominantly applied to external threats (terrorism, hostile regimes) rather than internal elites, though anti-establishment sentiments regarding government inefficiency and special interests are present. Calls for bipartisanship and adherence to constitutional principles are notable.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2005.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical emphasis\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti-elite sentiment\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Let us show them that Republicans and Democrats can compete for votes and cooperate for results at the same time.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"bipartisan cooperation\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"I've submitted judicial nominees who will rule by the letter of the law, not the whim of the gavel.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"institutional respect\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Yet history will record that amid our differences, we acted with purpose, and together we showed the world the power and resilience of American self-government.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national greatness\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"These horrific images serve as a grim reminder: The advance of liberty is opposed by terrorists and extremists, evil men who despise freedom, despise America, and aim to subject millions to their violent rule.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"foreign threat - manichaean framing\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"On the homefront, we will continue to take every lawful and effective measure to protect our country. This is our most solemn duty.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"homeland defense\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"By trusting the people, our Founders wagered that a great and noble nation could be built on the liberty that resides in the hearts of all men and women.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"founding principles\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:43:09.026729+00:00",
+    "end_time": "2025-08-02T02:43:43.787547+00:00",
+    "duration_seconds": 34.760818,
+    "llm_interaction_hash": "4fab8b63c6d18fad"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

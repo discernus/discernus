@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_88fad50902a6",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The speech prioritizes national security and the War on Terror, framing global engagement and domestic policy through this lens. It balances appeals to 'the people' with a strong emphasis on institutional cooperation, and projects a powerful national image while advocating for universal values and civic duty.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2007.txt\",\n      \"dimensional_scores\": {\n        \"Populusm-Pluralism Axis\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populusm-Pluralism Axis\",\n          \"quote_text\": \"The American people have responded magnificently, with courage and compassion, strength and resolve. As I have met the heroes, hugged the families, and looked into the tired faces of rescuers, I have stood in awe of the American people.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populusm-Pluralism Axis\",\n          \"quote_text\": \"States like these and their terrorist allies constitute an axis of evil, arming to threaten the peace of the world.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Manichaean Framing\"\n        },\n        {\n          \"dimension\": \"Populusm-Pluralism Axis\",\n          \"quote_text\": \"Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Bipartisan Cooperation\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"When I called our troops into action, I did so with complete confidence in their courage and skill. And tonight, thanks to them, we are winning the war on terror.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"National Strength/Victory\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"America is no longer protected by vast oceans. We are protected from attack only by vigorous action abroad and increased vigilance at home.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"National Vulnerability/Proactive Defense\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We have no intention of imposing our culture. But America will always stand firm for the nonnegotiable demands of human dignity: the rule of law; limits on the power of the state; respect for women; private property; free speech; equal justice; and religious tolerance.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Universal Values/American Leadership\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:44:21.614544+00:00",
+    "end_time": "2025-08-02T02:44:52.037989+00:00",
+    "duration_seconds": 30.423445,
+    "llm_interaction_hash": "756901b4949c3e3f"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

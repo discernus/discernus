@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8d423d9e83d0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed a State of the Union address, which despite the filename 'Obama_SOTU_2009.txt', contains content referencing events and policies from 2011 onwards, suggesting it is a later SOTU speech (likely 2013 or 2014). The analysis focuses on the interplay between populist and pluralist themes, and nationalist and patriotic sentiments. The speech frequently employs populist rhetoric to champion the 'many' against 'the few' and 'wealthy interests', while simultaneously advocating for pluralist principles like bipartisanship and institutional adherence. Patriotism is overwhelmingly civic, emphasizing shared values and duties, with economic nationalism and national security featuring as secondary themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"It is our unfinished task to make sure that this Government works on behalf of the many, and not just the few\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"we can't ask senior citizens and working families to shoulder the entire burden of deficit reduction while asking nothing more from the wealthiest and the most powerful.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Anti-Elite Sentiment; Economic Populism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"As Americans, we all share the same proud title: We are citizens. It's a word that doesn't just describe our nationality or legal status. It describes the way we're made. It describes what we believe. It captures the enduring idea that this country only works when we accept certain obligations to one another and to future generations; that our rights are wrapped up in the rights of others; and that well into our third century as a nation, it remains the task of us all, as citizens of these United States, to be the authors of the next great chapter of our American story.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Civic Patriotism; Inclusive Citizenship\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Our first priority is making America a magnet for new jobs and manufacturing. After shedding jobs for more than 10 years, our manufacturers have added about 500,000 jobs over the past 3. Caterpillar is bringing jobs back from Japan. Ford is bringing jobs back from Mexico. And this year, Apple will start making Macs in America again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Economic Nationalism; National Strength\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:51:21.532577+00:00",
+    "end_time": "2025-08-02T02:52:09.714140+00:00",
+    "duration_seconds": 48.181563,
+    "llm_interaction_hash": "ec2eb9ad50463016"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "88257ffe3d95f6abf22d9b4d3453784595248cbcea18dc16d04b795cd7fa4e17"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_2d9f7588362e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework (CAF)\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Civic Analysis Framework (CAF) v7.0. Focused on identifying civic virtues and their counterpoints within the provided text. All scores are raw and represent intensity; no calculations are performed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"Truth\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"Justice\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"Hope\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Fear\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.6\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_appeal_for_policy\"\n        },\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"statement_of_suffering\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"For the party of Kennedy is also the party of Eastland. The party of Javits is also the party of Goldwater.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"critique_of_political_parties\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is completed.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"But what did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby? To those who have said, 'Be patient and wait,' we must say that we cannot be patient.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"grievance_narration\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"statement_of_consequence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:41:23.493751+00:00",
+    "end_time": "2025-08-01T23:41:26.572691+00:00",
+    "duration_seconds": 3.07894,
+    "llm_interaction_hash": "98b1eabf3a50169a"
+  },
+  "input_artifacts": {
+    "framework_hash": "8bc00e4ac64007df2165eddc4fcec4df7dd70a0160679ce761c5035277d983a0",
+    "document_hashes": [
+      "5d90554fc13f33de69af63f31b143a6dbb25a23b12df577629756f3d1863021a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234107Z_f0fe52bc"
+  }
+}

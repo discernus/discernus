@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist rhetoric within the provided State of the Union address. Salience and confidence scores were assigned based on the directness and frequency of relevant linguistic markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.",
+          "confidence": 0.85,
+          "context_type": "Direct appeal to the people"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "So tonight I issue a call to action: action by this Congress, action by our States, by our people, to prepare America for the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build stronger families and stronger communities and a safer environment; and above all, action to build a more perfect Union here at home.",
+          "confidence": 0.90,
+          "context_type": "Call to action for 'all our people'"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans.",
+          "confidence": 0.80,
+          "context_type": "Framing of 'the people' vs. 'partisans'"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Let this Congress be the Congress that finally balances the budget. [Applause] Thank you. In 2 days I will propose a detailed plan to balance the budget by 2002. This plan will balance the budget and invest in our people while protecting Medicare, Medicaid, education, and the environment.",
+          "confidence": 0.85,
+          "context_type": "Focus on national economic policy and 'our people'"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "The spirit we bring to our work will make all the difference. We must be committed to the pursuit of opportunity for all Americans, responsibility from all Americans, in a community of all Americans.",
+          "confidence": 0.80,
+          "context_type": "Emphasis on shared American identity and values"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "To prepare America for the 21st century, we must harness the powerful forces of science and technology to benefit all Americans. This is the first State of the Union carried live in video over the Internet. But we've only begun to spread the benefits of a technology revolution that should become the modern birthright of every citizen.",
+          "confidence": 0.75,
+          "context_type": "National technological advancement for 'all Americans'"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is far more than a place. It is an idea, the most powerful idea in the history of nations. And all of us in this Chamber, we are now the bearers of that idea, leading a great people into a new world.",
+          "confidence": 0.90,
+          "context_type": "Assertion of American exceptionalism and leadership"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "American scientists have discovered genes linked to breast cancer and ovarian cancer and medication that stops a stroke in progress and begins to reverse its effects and treatments that dramatically lengthen the lives of people with HIV and AIDS.",
+          "confidence": 0.70,
+          "context_type": "Highlighting American scientific achievements"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

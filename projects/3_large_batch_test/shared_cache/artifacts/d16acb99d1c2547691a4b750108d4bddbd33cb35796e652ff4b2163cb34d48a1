@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the specified framework, focusing on populist and nationalist dimensions as defined. Evidence extraction prioritized quotes directly reflecting the defined dimensional markers. Overall confidence is high due to clear textual indicators."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d37860f456a6",
+      "document_name": "Democratic_Platform_2008.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe that every American, whatever their background or station in life, should have the chance to get a good education, to work at a good job with good wages, to raise and provide for a family, to live in safe surroundings, and to retire with dignity and security.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe that quality and affordable health care is a basic right.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But today, we are at a crossroads. As we meet, we are in the sixth year of a two-front war. Our economy is struggling. Our planet is in peril. A great nation now demands that its leaders abandon the politics of partisan division and find creative solutions to promote the common good.",
+          "confidence": 0.92,
+          "context_type": "manichean_framing"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We can do better. And so, Democrats – and through the most open platform process in history – are reaching out today to Republicans, Independents, and all Americans who hunger for a new direction and a reason to hope.",
+          "confidence": 0.93,
+          "context_type": "direct_democracy_appeals"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

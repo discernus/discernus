@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e3ebb4645ba4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "constitutional_health_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"chf_v7_0\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed using the CHF v7.0 framework. Scores reflect the intensity and prominence of the six dimensions across the three axes of constitutional health. Evidence is extracted from the provided text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.50,\n          \"confidence\": 0.70\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.60,\n          \"confidence\": 0.75\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.85\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.30,\n          \"confidence\": 0.60\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"description\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"description\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"We need a Democratic Party that fights harder for us too.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"description\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"description\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do.\",\n          \"confidence\": 0.60,\n          \"context_type\": \"description\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"This is not just about Republicans. We need a Democratic Party that fights harder for us too. But, Greely, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class. You know which Coloradans did vote to gut medicaid and jack up healthcare costs? Gabe Evans and Lauren Boebert right next door. So folks, you know what that means, right? We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"description\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:49:02.326080+00:00",
+    "end_time": "2025-08-01T23:49:05.532969+00:00",
+    "duration_seconds": 3.206889,
+    "llm_interaction_hash": "3787643dc1056927"
+  },
+  "input_artifacts": {
+    "framework_hash": "be988ee14dc81d52ce0d52810c0cf3d8e94168ff491a084c90586a856f548d1c",
+    "document_hashes": [
+      "1661752fdc6cf5affaa5456dc84e1a7530fa34f85086c7d82edf4f35ae6cd987"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_character_heuristics",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_character_heuristics",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234902Z_e6b5ae08"
+  }
+}

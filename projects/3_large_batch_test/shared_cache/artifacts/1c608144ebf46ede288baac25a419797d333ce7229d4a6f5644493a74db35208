@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a54569f5c394",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist-patriotic themes, evaluating their intensity and rhetorical prominence. Evidence extraction prioritized direct quotes supporting dimensional assessments. Overall confidence is high due to clear language and thematic consistency.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score (Vertical)\": {\n          \"raw_score\": 0.92,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Score (Horizontal)\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.88,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score (Vertical)\",\n          \"quote_text\": \"But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach. As working people struggle, the top one percent accrues more wealth and more power. Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It's no wonder that so many feel like the deck is stacked against them.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Ant-Elite Sentiment\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score (Vertical)\",\n          \"quote_text\": \"Democrats believe that today's extreme level of income and wealth inequality, where the majority of the economic gains go to the top one percent and the richest 20 people own more wealth than the bottom 150 million, makes our economy weaker, our communities poorer, and our politics poisonous. And we know that our nation's long struggle with race is far from over. More than half a century after Rosa Parks sat and Dr. King marched and John Lewis bled, race still plays a significant role in determining who gets ahead in America and who gets left behind. We must face that reality and we must fix it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Manichean Framing\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score (Horizontal)\",\n          \"quote_text\": \"We are proud of our heritage as a nation of immigrants. We know that today's immigrants are tomorrow's teachers, doctors, lawyers, government leaders, soldiers, entrepreneurs, activists, PTA members, and pillars of our communities.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Cultural Purity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score (Horizontal)\",\n          \"quote_text\": \"We believe in protecting civil liberties and guaranteeing civil rights, women's rights and workers' rights, LGBTQ rights, and rights for people with disabilities. We believe America is still, as Robert Kennedy said, 'a great country, and unselfish country, and a compassionate country.'\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Cultural Superiority\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T13:04:09.306431+00:00",
+    "end_time": "2025-08-02T13:04:13.409112+00:00",
+    "duration_seconds": 4.102681,
+    "llm_interaction_hash": "32530c189c35c425"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "341e811f3a2704147f0b21aebc89096315cea92214afe35b045681f863b32222"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T130119Z_e2bdd00c"
+  }
+}

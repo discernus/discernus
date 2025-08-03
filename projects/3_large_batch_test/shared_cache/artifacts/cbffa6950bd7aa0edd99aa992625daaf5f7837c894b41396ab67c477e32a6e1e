@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_016b14807c77",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to the provided document to assess the prevalence and intensity of populist and nationalist rhetoric. Evidence extraction focused on identifying key phrases and sentences that directly exemplify the defined dimensional markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2013.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.80,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.92\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We believe a thriving private sector is the lifeblood of our economy... And because we did, because we saw opportunity with where others saw peril, we emerged stronger and better than before.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But today, technology doesn't just replace jobs on the assembly line, but any job where work can be automated. Companies in a global economy can locate anywhere, and they face tough competition.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But the point is, I believe that in this new economy, workers and startups and small businesses need more of a voice, not less.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is Thomas Edison and the Wright Brothers and George Washington Carver. America is Grace Hopper and Katherine Johnson and Sally Ride.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"civic_duty\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our unique strengths as a nation, our optimism and work ethic, our spirit of discovery, our commitment to rule of law\u2014these things give us everything we need to ensure prosperity and security for generations to come.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national_supremacy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:25:56.874806+00:00",
+    "end_time": "2025-08-02T15:26:00.139728+00:00",
+    "duration_seconds": 3.264922,
+    "llm_interaction_hash": "014807f8a4cd5cca"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

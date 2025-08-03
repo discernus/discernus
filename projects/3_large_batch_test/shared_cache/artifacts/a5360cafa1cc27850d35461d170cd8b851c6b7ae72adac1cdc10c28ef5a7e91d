@@ -1,0 +1,62 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the political_discourse_populism_v7 framework, focusing on the two-axis model of populism and nationalism. Extracted evidence for each dimension with associated confidence levels and salience. The analysis prioritizes direct textual support for the identified dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So our job is to reverse these trends. It won't happen right away, and we won't agree on everything. But what I offer tonight is a set of concrete, practical proposals to speed up growth, strengthen the middle class, and build new ladders of opportunity into the middle class. Some require congressional action, and I am eager to work with all of you. But America does not stand still, and neither will I. So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that's what I'm going to do.",
+          "confidence": 0.85,
+          "context_type": "populist_intensity_index"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The bottom line is, Michele and I want every child to have the same chance this country gave us. But we know our opportunity agenda won't be complete, and too many young people entering the workforce today will see the American Dream as an empty promise, unless we also do more to make sure our economy honors the dignity of work and hard work pays off for every single American.",
+          "confidence": 0.75,
+          "context_type": "populist_intensity_index"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "And here are the results of your efforts: the lowest unemployment rate in over 5 years; a rebounding housing market; a manufacturing sector that's adding jobs for the first time since the 1990s; more oil produced at home than we buy from the rest of the world, the first time that's happened in nearly 20 years; our deficits cut by more than half. And for the first time in over a decade, business leaders around the world have declared that China is no longer the number-one place to invest, America is.",
+          "confidence": 0.95,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "That's why I believe this can be a breakthrough year for America. After 5 years of grit and determined effort, the United States is better positioned for the 21st century than any other nation on Earth.",
+          "confidence": 0.90,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "So tonight, I'm announcing, we'll launch six more this year. Bipartisan bills in both Houses could double the number of these hubs and the jobs they create. So get those bills to my desk. But more Americans back to work.",
+          "confidence": 0.80,
+          "context_type": "cultural_purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

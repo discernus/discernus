@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_435d8e97f32b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus on identifying populist and nationalist rhetoric within the provided State of the Union address. Evidence extraction prioritized direct quotes that exemplify the defined dimensional markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2013.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.80,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans: Tonight marks the eighth year that I've come here to report on the State of the Union. And for this final one, I'm going to try to make it a little shorter. I know some of you are antsy to get back to Iowa.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But for my final address to this Chamber, I don't want to just talk about next year. I want to focus on the next 5 years, the next 10 years, and beyond. I want to focus on our future.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"All these trends have squeezed workers, even when they have jobs, even when the economy is growing. It's made it harder for a hard-working family to pull itself out of poverty, harder for young people to start their careers, tougher for workers to retire when they want to.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Manichean Framing\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And that's why Social Security and Medicare are more important than ever. We shouldn't weaken them, we should strengthen them.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Anti-Elite Sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Historical Mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is not just the nation that invented the Internet, but any internet entrepreneur from Boston to Austin to Silicon Valley, racing to shape a better future.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"American Greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We spend more on our military than the next eight nations combined. Our troops are the finest fighting force in the history of the world.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"American Greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our foreign policy has to be focused on the threat from ISIL and Al Qaeda, but it can't stop there. For even without ISIL, even without Al Qaeda, instability will continue for decades in many parts of the world: in the Middle East, in Afghanistan and parts of Pakistan, in parts of Central America, in Africa and Asia.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Foreign Threat\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:17:56.702481+00:00",
+    "end_time": "2025-08-02T00:18:00.281515+00:00",
+    "duration_seconds": 3.579034,
+    "llm_interaction_hash": "b322950dc5c34acd"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

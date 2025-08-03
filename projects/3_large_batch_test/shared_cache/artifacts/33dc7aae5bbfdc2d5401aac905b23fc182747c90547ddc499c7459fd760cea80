@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions as per the provided prompt."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "To confront the great issues before us, we must act in a spirit of good will and respect for one another, and I will do my part. Tonight the state of our Union is strong, and together we will make it stronger.",
+          "confidence": 0.88,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "In this decisive year, you and I will make choices that determine both the future and the character of our country. We will choose to act confidently in pursuing the enemies of freedom, or retreat from our duties in the hope of an easier life. We will choose to build our prosperity by leading the world economy, or shut ourselves off from trade and opportunities. In a complex and challenging time, the road of isolationism and protectionism may seem broad and inviting, yet it ends in danger and decline. The only way to protect our people, the only way to secure the peace, the only way to control our destiny is by our leadership.",
+          "confidence": 0.90,
+          "context_type": "Populist Framing"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "So tonight I ask you to join me in creating a commission to examine the full impact of baby boom retirement on Social Security, Medicare, and Medicaid. This commission should include Members of Congress of both parties and offer bipartisan solutions. We need to put aside partisan politics and work together and get this problem solved.",
+          "confidence": 0.85,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our Nation is grateful to the fallen, who live in the memory of our country. We're grateful to all who volunteer to wear our Nation's uniform. And as honor our brave troops, let us never forget the sacrifices of America's military families.",
+          "confidence": 0.88,
+          "context_type": "Patriotism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America rejects the false comfort of isolationism. We are the nation that saved liberty in Europe and liberated death camps and helped raise up democracies and faced down an evil empire. Once again, we accept the call of history to deliver the oppressed and move this world toward peace. We remain on the offensive against terror networks.",
+          "confidence": 0.92,
+          "context_type": "National Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Far from being a hopeless dream, the advance of freedom is the great story of our time. In 1945, there were about two dozen lonely democracies in the world. Today, there are 122. And we're writing a new chapter in the story of self-government with women lining up to vote in Afghanistan, and millions of Iraqis marking their liberty with purple ink, and men and women from Lebanon to Egypt debating the rights of individuals and the necessity of freedom.",
+          "confidence": 0.85,
+          "context_type": "National Superiority"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

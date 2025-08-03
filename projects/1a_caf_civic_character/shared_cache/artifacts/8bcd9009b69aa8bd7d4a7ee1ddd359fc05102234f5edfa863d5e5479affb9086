@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_2381b95e4dd0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework (CAF)\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed document for civic virtue dimensions as defined by the Civic Analysis Framework v7.0. Focused on direct textual evidence and nuanced interpretation of the speaker's civic character.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.8\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"Truth\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"Justice\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        },\n        \"Hope\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.6\n        },\n        \"Fear\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"oath and personal conviction\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"judgment on president's actions\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"sense of duty and historical accountability\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government, which was at war with Russian invaders. The president's purpose was personal and political.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"articulation of accusations\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"I am aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"acknowledgment of party dissent\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"I will not be one who enlists in the ranks of those who would condemn the president for acting in a manner that is not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"balancing criticism with a refusal to condemn all actions\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:41:30.673978+00:00",
+    "end_time": "2025-08-01T23:41:33.735248+00:00",
+    "duration_seconds": 3.06127,
+    "llm_interaction_hash": "2004fc198fa990f0"
+  },
+  "input_artifacts": {
+    "framework_hash": "8bc00e4ac64007df2165eddc4fcec4df7dd70a0160679ce761c5035277d983a0",
+    "document_hashes": [
+      "f9b2e86ae9bcdee55757a5c6caecc03225c0bb6532154c38cde5f14dc4d3cae6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234107Z_f0fe52bc"
+  }
+}

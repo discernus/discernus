@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of SOTU 2006 address focusing on populism and nationalism. Initial assessment indicates a moderate to high level of populism and a low to moderate level of nationalism, with some patriotic undertones. The framework's two-axis model for populism-pluralism and nationalism-patriotism was applied."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.90,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.65,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "I invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people. Some of these resources will come from Government—some, but not all.",
+          "confidence": 0.85,
+          "context_type": "direct_appeal_to_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My new Freedom Initiative for Americans with disabilities funds new technologies, expands opportunities to work, and makes our society more welcoming. For the more than 50 million Americans with disabilities, we must continue to break down barriers to equality.",
+          "confidence": 0.75,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The people of America have been overcharged, and on their behalf, I am here asking for a refund. My tax plan restores basic fairness. Right now, complicated tax rules punish hard work. A waitres supporting two children on $25,000 a year can lose nearly half of every additional dollar she earns above that $25,000. Her overtime, her hardest hours, are taxed at nearly 50 percent. This sends a terrible message: 'You'll never get ahead.'",
+          "confidence": 0.90,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America today is a nation with great challenges but greater resources.",
+          "confidence": 0.70,
+          "context_type": "national_strength"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "A strong America is the world's best hope for peace and freedom.",
+          "confidence": 0.60,
+          "context_type": "national_identity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our parks have a special place in our country's life. Our parks are places of great natural beauty and history. As good stewards, we must leave them better than we found them.",
+          "confidence": 0.55,
+          "context_type": "cultural_patriotism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

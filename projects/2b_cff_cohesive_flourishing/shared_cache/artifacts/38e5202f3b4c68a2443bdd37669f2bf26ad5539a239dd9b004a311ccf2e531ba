@@ -1,0 +1,162 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cff_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Cohesive Flourishing Framework v7.0. The focus was on identifying and scoring the ten specified dimensions across five axes, extracting supporting evidence, and assigning confidence levels. The document was rich in content related to national pride, economic policy, and social issues, allowing for a comprehensive analysis."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "individual_dignity": {
+          "raw_score": 0.70,
+          "salience": 0.65,
+          "confidence": 0.80
+        },
+        "fear": {
+          "raw_score": 0.40,
+          "salience": 0.50,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.90,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.60
+        },
+        "companionship": {
+          "raw_score": 0.60,
+          "salience": 0.55,
+          "confidence": 0.70
+        },
+        "enmity": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.85
+        },
+        "amity": {
+          "raw_score": 0.50,
+          "salience": 0.45,
+          "confidence": 0.70
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.45,
+          "salience": 0.50,
+          "confidence": 0.75
+        },
+        "cohesive_goals": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "When we have all of this, we will have made America greater than ever before. This is our vision. This is our mission. But we can only get there together. We are one people with one destiny. We all ble[ed] the same blood. We all salute the same great American flag.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "My administration wants to work with members of both parties to make childcare accessible and affordable; to help ensure new parents that they have paid family leave; to invest in women's health; and to promote clean air and clean water; and to rebuild our military and our infrastructure.",
+          "confidence": 0.90,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "What kind of country will we leave for our children? I will not allow the mistakes of recent decades past to define the course of our future. For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fate of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "confidence": 0.85,
+          "context_type": "problem_identification"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.98,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Dream big and daring things for our people. Our children will grow up in a nation of miracles. Cures to the illnesses that have always plagued us are not too much to hope. American footprints on distant worlds are not too big a dream. Millions lifted from welfare to work is not too much to expect. And streets where mothers are safe from fear, schools where children learn in peace, and jobs where Americans prosper and grow are not too much to ask.",
+          "confidence": 0.95,
+          "context_type": "visionary_statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We must stop the drugs from pouring into our country and poisoning our youth, and we will expand treatment for those who have become so badly addicted.",
+          "confidence": 0.70,
+          "context_type": "threat_identification"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We have seen the attacks in France, in Belgium, in Germany, and all over the world. It is not compassionate, but reckless to allow uncontrolled entry from places where proper vetting cannot occur. Those given the high honor of admission to the United States should support this country and love its people and its values. We cannot allow a beachhead of terrorism to form inside America. We cannot allow our Nation to become a sanctuary for extremists.",
+          "confidence": 0.80,
+          "context_type": "security_concern"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We have to stop the drugs from pouring into our country and poisoning our youth, and we will expand treatment for those who have become so badly addicted. That is why my administration has been working on improving vetting procedures, and we will shortly take new steps to keep our Nation safe and to keep those out who will do us harm.",
+          "confidence": 0.85,
+          "context_type": "adversarial_stance"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "To protect our citizens, I have directed the Department of Justice to form a Task Force on Reducing Violent Crime. I have further ordered the Departments of Homeland Security and Justice, along with the Department of State and the Director of National Intelligence, to coordinate an aggressive strategy to dismantle the criminal cartels that have spread all across our Nation. We will stop the drugs from pouring into our country and poisoning our youth, and we will expand treatment for those who have become so badly addicted.",
+          "confidence": 0.80,
+          "context_type": "adversarial_strategy"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Our allies will find that America is once again ready to lead. All the nations of the world—friend or foe—will find that America is strong, America is proud, and America is free.",
+          "confidence": 0.75,
+          "context_type": "alliance_statement"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We have to build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is: division. It's pure, unadulterated division. We have to unify.",
+          "confidence": 0.60,
+          "context_type": "call_for_unity"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Our current, outdated system depresses wages for our poorest workers and puts great pressure on taxpayers. Nation[s] around the world like Canada, Australia, and many others, have a merit-based immigration system. It's a basic principle that those seeking to enter a country ought to be able to support themselves financially. Yet, in America, we do not enforce this rule, straining the very public resources that our poorest citizens rely upon.",
+          "confidence": 0.70,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "I am asking all Democrats and Republicans in Congress to join me in dreaming big and bold, and daring things for our country. I am asking everyone watching tonight to seize this moment. Believe in yourselves, believe in your future, and believe, once more, in America.",
+          "confidence": 0.65,
+          "context_type": "partisan_appeal"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Real and positive immigration reform is possible, as long as we focus on the following goals: to improve jobs and wages for Americans, to strengthen our Nation's security, and to restore respect for our laws. If we are guided by the well-being of American citizens, then I believe Republicans and Democrats can work together to achieve an outcome that has eluded our country for decades.",
+          "confidence": 0.90,
+          "context_type": "policy_proposal"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "True love for our people requires us to find common ground, to advance the common good, and to cooperate on behalf of every American child who deserves a much brighter future.",
+          "confidence": 0.85,
+          "context_type": "shared_objective"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

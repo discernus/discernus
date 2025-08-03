@@ -1,0 +1,66 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political_Discourse_Populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "The analysis focused on identifying populist and nationalist rhetoric within the provided document. Evidence extraction prioritized direct quotes that clearly exemplified the defined markers for each dimension. Salience was assessed based on the prominence and repetition of these markers within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2024.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must reclaim the voice of the people from the corrupt elites and special interests that have long dominated Washington.",
+          "confidence": 0.90,
+          "context_type": "populist_anti_elite_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The will of the people, not the dictates of the establishment, must guide our nation's future.",
+          "confidence": 0.85,
+          "context_type": "populist_direct_democracy_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It's time for the common sense of ordinary Americans to take back their government.",
+          "confidence": 0.75,
+          "context_type": "populist_core_appeal"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America First: Our economy, our jobs, our workers, our sovereignty – these must be our absolute priorities.",
+          "confidence": 0.95,
+          "context_type": "nationalism_economic_focus"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are a nation of exceptional destiny, a beacon of freedom unmatched in human history.",
+          "confidence": 0.90,
+          "context_type": "nationalism_exceptionalism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must defend our borders, our culture, and our heritage from foreign threats and alien values.",
+          "confidence": 0.85,
+          "context_type": "nationalism_cultural_purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,80 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. Focused on identifying populist and nationalist rhetoric within the provided State of the Union address."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "And most importantly, as Americans with a duty to one another, to America, to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But Putin was wrong. We are ready. We are united. And that's what we did: We stayed united. We prepared extensively and carefully. We spent months building coalitions of other freedom-loving nations in Europe and the Americas to confront Putin.",
+          "confidence": 0.95,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "To all Americans, I'll be honest with you, as I've always promised I would be. A Russian dictator invading a foreign country has costs around the world. And I'm taking robust action to make sure the pain of our sanctions is targeted at Russian economy and that we use every tool at our disposal to protect American businesses and consumers.",
+          "confidence": 0.90,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My plan will not only lower costs and give families a fair shot, it will lower the deficit. The previous administration not only ballooned the deficit with those tax cuts for the very wealthy and corporations, it undermined the watchdogs that were meant to be doing the job of those to keep pandemic relief funds from being wasted.",
+          "confidence": 0.95,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "In fact, our economy created over 6.5 million new jobs just last year, more jobs in 1 year than ever before in the history of the United States. The economy grew at a rate of 5.7 last year, the strongest growth rate in 40 years and the first step in bringing fundamental change to our economy that hasn't worked for working people in this Nation for too long.",
+          "confidence": 0.90,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America used to have the best roads, bridges, and airports on Earth. And now our infrastructure is ranked 13th in the world. We won't be able to compete for the jobs of the 21st century if we don't fix it. That's why it was so important to pass the bipartisan infrastructure law. And I thank my Republican friends who joined to invest and rebuild America, the single biggest investment in history.",
+          "confidence": 0.95,
+          "context_type": "historical_mythology"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We'll build a national network of 500,000 electric vehicle charging stations; begin to replace the poisonous lead pipes so every child, every American has clean water to drink at home and at school.",
+          "confidence": 0.90,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Buy American. Support American jobs. The Federal Government spends about $600 billion a year to keep this country safe and secure. There's been a law on the books for almost a century to make sure taxpayers' dollars support American jobs and businesses. Every administration, Democrat and Republican, says they'll do it, but we're actually doing it.",
+          "confidence": 0.95,
+          "context_type": "national_supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

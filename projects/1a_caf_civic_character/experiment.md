@@ -1,4 +1,5 @@
 ---
+version: "7.0"
 name: "speaker_character_pattern_analysis"
 description: |
   This experiment tests the Character Assessment Framework's ability to detect 
@@ -13,7 +14,7 @@ hypothesis: |
   for each speaker across virtues and vices, and demonstrate meaningful variation 
   in MC-SCI character coherence patterns.
 
-framework: "caf_v6.1.md"
+framework: "../../frameworks/reference/core/caf_v7.0.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -51,7 +52,7 @@ hypotheses:
   H2_Character_Signatures: "Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices"
   H3_MC_SCI_Patterns: "MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence"
 
-# Required Workflow Steps
+# Required Workflow Steps (v7.0 Gasket Architecture)
 workflow:
   - agent: EnhancedAnalysisAgent
     inputs:
@@ -59,11 +60,18 @@ workflow:
       - framework
       - corpus
     outputs:
-      - analysis_results
+      - raw_analysis_log
+
+  - agent: IntelligentExtractorAgent
+    inputs:
+      - raw_analysis_log
+      - framework
+    outputs:
+      - structured_data
 
   - agent: ProductionThinSynthesisPipeline
     inputs:
-      - analysis_results
+      - structured_data
       - experiment
       - framework
     outputs:

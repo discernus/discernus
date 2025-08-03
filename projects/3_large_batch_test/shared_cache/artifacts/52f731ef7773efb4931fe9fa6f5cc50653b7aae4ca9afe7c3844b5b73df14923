@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a85ede365db4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on the two core axes: Populism-Pluralism and Nationalism-Patriotism.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2010.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight, thanks to the grit and determination of the American people, there is much progress to report.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"restoration_of_bargain\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But today, even with mortgage rates near a 50-year low, too many families with solid credit who want to buy a home are being rejected. Too many families who never missed a payment and want to refinance are being told no.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_grievance\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"So tonight I ask Congress to declare that in the wealthiest nation on Earth, no one who works full-time should have to live in poverty and raise the Federal minimum wage to $9 an hour.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"national_wellbeing\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We can give new tax credits to companies that hire Americans who've been out of work so long that no one will give them a chance anymore. Let's put people back to work rebuilding vacant homes in rundown neighborhoods.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"job_creation_national\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America must also face the rapidly growing threat from cyber attacks. Now, we know hackers steal people's identities and infiltrate private e-mails. We know foreign countries and companies swipe our corporate secrets. Now our enemies are also seeking the ability to sabotage our power grid, our financial institutions, our air traffic control systems.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"national_security_threat\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:25:45.505356+00:00",
+    "end_time": "2025-08-02T15:25:48.973122+00:00",
+    "duration_seconds": 3.467766,
+    "llm_interaction_hash": "c69a1b724f55ee6d"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

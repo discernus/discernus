@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f105f941f940",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework (CAF)\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis focused on identifying civic virtues and their opposites as defined in the CAF v7.0. Emphasis placed on direct textual evidence and the underlying civic character implications of the discourse.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Truth\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"Justice\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"Hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"Fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.4\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how greedles greed is costing the lives of everyone else.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"Manipulation\",\n          \"quote_text\": \"Mass media and Fox News, and the right well have you believe that these American values are something out of the Communist Manifesto.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"framing_tactic\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"Our lives deserve dignity and our work deserves respect.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"statement_of_principle\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"This is not just about Republicans. We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"accusation_of_harm\"\n        },\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"definition_of_problem\"\n        },\n        {\n          \"dimension\": \"Manipulation\",\n          \"quote_text\": \"Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"characterization_of_opponent\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"So to all of those who came here today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'\",\n          \"confidence\": 0.8,\n          \"context_type\": \"rallying_cry\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"inclusive_framing\"\n        },\n        {\n          \"dimension\": \"Manipulation\",\n          \"quote_text\": \"And by the way, not them, because those billionaires haven't paid their fair share of taxes in years.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"accusation_of_unfairness\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:41:07.750013+00:00",
+    "end_time": "2025-08-01T23:41:11.825536+00:00",
+    "duration_seconds": 4.075523,
+    "llm_interaction_hash": "050d29a0c0f8f72a"
+  },
+  "input_artifacts": {
+    "framework_hash": "8bc00e4ac64007df2165eddc4fcec4df7dd70a0160679ce761c5035277d983a0",
+    "document_hashes": [
+      "1661752fdc6cf5affaa5456dc84e1a7530fa34f85086c7d82edf4f35ae6cd987"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234107Z_f0fe52bc"
+  }
+}

@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework was applied to assess populism-pluralism and nationalism-patriotism dimensions based on the provided text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.25,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.80,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Each time we gather to inaugurate a President we bear witness to the enduring strength of our Constitution. We affirm the promise of our democracy.",
+          "confidence": 0.80,
+          "context_type": "institutional_respect"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We, the people, still believe that every citizen deserves a basic measure of security and dignity. We must make the hard choices to reduce the cost of health care and the size of our deficit.",
+          "confidence": 0.90,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "For we remember the lessons of our past, when twilight years were spent in poverty and parents of a disability had nowhere to turn.",
+          "confidence": 0.75,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "What makes us exceptional—what makes us American—is our allegiance to an idea articulated in a declaration made more than two centuries ago: We hold these truths to be self-evident, that all men are created equal;",
+          "confidence": 0.95,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For history tells us that while these truths may be self-evident, they've never been self-executing; that while freedom is a gift from God, it must be secured by His people here on Earth.",
+          "confidence": 0.90,
+          "context_type": "founding_fathers_vision"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America will remain the anchor of strong alliances in every corner of the globe. And we will renew those institutions that extend our capacity to manage crises abroad, for no one has a greater stake in a peaceful world than its most powerful nation.",
+          "confidence": 0.85,
+          "context_type": "national_strength"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

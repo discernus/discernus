@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted on a State of the Union address, which inherently balances popular appeal with institutional function. The speech demonstrates a clear distinction between 'the people' and 'elites/institutions' in economic terms (populist) but simultaneously advocates for institutional reform and bipartisan cooperation (pluralist). On the horizontal axis, it balances American exceptionalism and national interest (nationalism) with calls for civic duty, constitutional values, and global cooperation (patriotism)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.68,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.42,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "It's not about helping banks; it's about helping people. [Applause] It's not about helping banks; it's about helping people. Because when credit is available again, that young family can finally buy a new home.",
+          "confidence": 0.95,
+          "context_type": "economic_populism_vs_anti_elite"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system. It is time to put in place tough, new, commonsense rules of the road so that our financial market rewards drive and innovation, and punishes shortcuts and abuse.",
+          "confidence": 0.85,
+          "context_type": "institutional_reform_call"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Those qualities that have made America the greatest force of progress and prosperity in human history, we still possess in ample measure. What is required now is for this country to pull together, confront boldly the challenges we face, and take responsibility for our future once more.",
+          "confidence": 0.9,
+          "context_type": "american_exceptionalism_and_civic_duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "this is not a Democratic issue or a Republican issue; that's an American issue.",
+          "confidence": 0.95,
+          "context_type": "inclusive_civic_identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

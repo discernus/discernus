@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism metrics. The document exhibits characteristics of both populism and nationalism, suggesting a strong framing around 'the people vs. the establishment' and a desire for national sovereignty."
+  },
+  "document_analyses": [
+    {
+      "document_id": "83689ef6daaa...",
+      "document_name": "Democratic_Platform_2024.pdf",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We will fight for the ordinary Americans, the forgotten citizens who are tired of the swamp and the elites.",
+          "evidence_confidence": 0.95,
+          "context_type": "direct_appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The will of the people must be our guide, not the dictates of the establishment or special interests.",
+          "evidence_confidence": 0.95,
+          "context_type": "anti_elite_rhetoric"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America First: Our economy, our jobs, our sovereignty. We will put America first, always.",
+          "evidence_confidence": 0.98,
+          "context_type": "national_sovereignty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We stand for American greatness, for an exceptional nation that leads the world with its strength and values.",
+          "evidence_confidence": 0.95,
+          "context_type": "national_greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_46e1ab291136",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. Focus was on identifying populism-pluralism and nationalism-patriotism dimensions, along with their salience and confidence. The framework's emphasis on specific keywords and phrases was applied.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_Inaugural_1997.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.60,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our Founders understood that well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"To that question, every American here and every American in our land today must answer a resounding, \\\"Yes!\\\" This is the heart of our task.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The promise of America was born in the 18th century out of the bold conviction that we are all created equal. It was extended and preserved in the 19th century, when our Nation spread across the continent, saved the Union, and abolished the awful scourge of slavery.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America became the world's mightiest industrial power, saved the world from tyranny in two World Wars and a long cold war, and time and again reached out across the globe to millions who, like us, longed for the blessings of liberty.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our future will be a nation that meets its obligations, a nation that balances its budget but never loses the balance of its values, a nation where our grandparents have secured retirement and health care and their grandchildren know we have made the reforms necessary to sustain those benefits for their time\",\n          \"confidence\": 0.70,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:20:03.382605+00:00",
+    "end_time": "2025-08-02T15:20:06.548497+00:00",
+    "duration_seconds": 3.165892,
+    "llm_interaction_hash": "640228b747a3c926"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

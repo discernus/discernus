@@ -1,8 +1,9 @@
 ---
+version: "7.0"
 name: "cohesive_flourishing_factorial_analysis"
 description: |
   This experiment analyzes discourse patterns in presidential speeches using the 
-  Cohesive Flourishing Framework (CFF) v6.0. The corpus employs a temporal design 
+  Cohesive Flourishing Framework (CFF) v7.0. The corpus employs a temporal design 
   examining presidential speeches across different contexts spanning 2017-2025. 
   The analysis will measure cohesion and strategic framing dimensions to identify 
   any statistical patterns, relationships, or temporal trends present in the data.
@@ -15,7 +16,7 @@ hypothesis: |
   determine if significant relationships exist between experimental factors and 
   Strategic Contradiction Index scores.
 
-framework: "../../frameworks/reference/flagship/cff_v6.0.md"
+framework: "../../frameworks/reference/flagship/cff_v7.0.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -69,11 +70,18 @@ workflow:
       - framework
       - corpus
     outputs:
-      - analysis_results
+      - raw_analysis_log
+
+  - agent: IntelligentExtractorAgent
+    inputs:
+      - raw_analysis_log
+      - framework
+    outputs:
+      - structured_data
 
   - agent: ProductionThinSynthesisPipeline
     inputs:
-      - analysis_results
+      - structured_data
       - experiment
       - framework
     outputs:

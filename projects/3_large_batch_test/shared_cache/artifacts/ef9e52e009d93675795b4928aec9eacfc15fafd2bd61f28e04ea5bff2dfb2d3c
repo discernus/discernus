@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b243b1f649bf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. Focus on identifying populist and nationalist rhetoric as defined by the framework. Scores are assigned based on the presence and intensity of keywords, thematic elements, and rhetorical strategies characteristic of each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"2b92606713cd...\",\n      \"document_name\": \"Democratic_Platform_2012.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.82,\n          \"salience\": 0.88,\n          \"confidence\": 0.92\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.79,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We Democrats offer America the opportunity to move our country forward by creating an economy built to last and built from the middle out. Mitt Romney and the Republican Party have a drastically different vision. They still believe the best way to grow the economy is from the top down \u2013 the same approach that benefited the wealthy few but crashed the economy and crashed the middle class.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populist Appeal - The People vs. Elite\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"This is not another trivial political argument. It\u2019s the defining issue of our time and at the core of the American Dream. And now we stand at a make-or-break moment, and are faced with a choice between moving forward toward a nation built from the middle class out where everyone has the chance to get ahead, or go back to the same failed ideas that created the crisis in the first place.\",\n          \"confidence\": 0.94,\n          \"context_type\": \"Populist Appeal - Core Values\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We believe America can succeed because the American people have never failed and there is not anything that together we cannot accomplish.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Nationalist Appeal - National Superiority\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We see a young country continually made stronger by the greatest diversity of talent and ingenuity in the world, and a nation of people drawn to our shores from every corner of the globe.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"Nationalist Appeal - Inclusivity of National Identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:26:54.475425+00:00",
+    "end_time": "2025-08-02T15:26:58.411544+00:00",
+    "duration_seconds": 3.936119,
+    "llm_interaction_hash": "ff6280d561a4e5f5"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "2b92606713cd02bfe0a90cfae8d3da308df90bf4120135baf008566dcc8b6210"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the two axes of Populism-Pluralism and Nationalism-Patriotism. Evidence extraction prioritized quotes directly supporting the scoring of each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.75
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.70,
+          "confidence": 0.70
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have always been a people of youthful energy and daring spirit. And at this historic moment, as communism has fallen, as freedom is spreading around the world, as a global economy is taking shape before our eyes, Americans have called for change. And now it is up to those of us in this room to deliver for them.",
+          "confidence": 0.80,
+          "context_type": "direct_support"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course. I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+          "confidence": 0.70,
+          "context_type": "direct_support"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+          "confidence": 0.70,
+          "context_type": "direct_support"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We have always been a people of youthful energy and daring spirit. And at this historic moment, as communism has fallen, as freedom is spreading around the world, as a global economy is taking shape before our eyes, Americans have called for change.",
+          "confidence": 0.70,
+          "context_type": "direct_support"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are the world's strongest economy, the world's only military superpower.",
+          "confidence": 0.75,
+          "context_type": "direct_support"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course.",
+          "confidence": 0.65,
+          "context_type": "direct_support"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

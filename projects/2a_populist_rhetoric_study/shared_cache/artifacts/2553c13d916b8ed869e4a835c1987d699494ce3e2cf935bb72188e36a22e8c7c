@@ -1,0 +1,175 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed using the Populist Discourse Analysis Framework (PDAF) v7.0, focusing on raw dimensional scores, salience, and confidence levels. Evidence extraction prioritizes strong quotes supporting each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We must be united at home to defeat our adversaries abroad. This new era of cooperation can start with finally confirming the more than 300 highly qualified nominees who are still stuck in the Senate, in some cases, for years and years waiting.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Over the last 2 years, my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "confidence": 0.75,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Victory is not winning for our party, victory is winning for our country.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "We must be united at home to defeat our adversaries abroad.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Tolerance for illegal immigration is not compassion; it is actually very cruel.",
+          "confidence": 0.7,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "For years, politicians promised them they would renegotiate for a better deal, but no one ever tried, until now.",
+          "confidence": 0.75,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "For years, the United States was being taken advantage of by countries that were ripping off our great country. That is why I had to do what I had to do.",
+          "confidence": 0.7,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Many of us have campaigned on the same core promises: to defend American jobs and demand fair trade for American workers; to rebuild and revitalize our Nation's infrastructure; to reduce the price of health care and prescription drugs; to create an immigration system that is safe, lawful, modern, and secure; and to pursue a foreign policy that puts America's interests first.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "This year, America will recognize two important anniversaries that show us the majesty of America's mission and the power of American pride.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Our country is vibrant, and our economy is thriving like never before.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All Americans can be proud that we have more women in the workforce than ever before.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "We must be united at home to defeat our adversaries abroad.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Our most chilling achievement is still ahead. Our most exciting journeys still await. Our biggest victories are still to come. We have not yet begun to dream.",
+          "confidence": 0.75,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We have created 5.3 million new jobs, and importantly, added 600,000 new manufacturing jobs, something almost everyone said was impossible to do.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Wages are rising at the fastest pace in decades and growing for blue-collar workers, who I promised to fight for.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

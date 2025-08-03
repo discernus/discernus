@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_5a4154902cd2",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis based on the provided framework, focusing on populism and nationalism dimensions within the Republican Platform 2004. Confidence is high due to clear language and consistent themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"c4cc6452ee09...\",\n      \"document_name\": \"Republican_Platform_2004.pdf\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We believe that government should be limited in scope and size, and that the free market is the engine of economic prosperity. We champion individual liberty, limited government, and the rule of law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Pluralism-related\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We believe in the free market, not government intervention, as the engine of economic prosperity. We champion individual liberty, limited government, and the rule of law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Pluralism-related\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We believe in a strong national defense and that America must lead the world in promoting democracy and freedom.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Populism-related\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We believe in the American dream, and that it is achievable for all Americans. We are committed to ensuring that America remains a beacon of hope and opportunity for generations to come.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Nationalism-related\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We believe in America's exceptionalism and its role as a global leader. We are committed to promoting American values and interests around the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Nationalism-related\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We believe in a strong national defense and that America must lead the world in promoting democracy and freedom.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Nationalism-related\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T01:03:54.307527+00:00",
+    "end_time": "2025-08-02T01:03:59.445751+00:00",
+    "duration_seconds": 5.138224,
+    "llm_interaction_hash": "55424d2ef4a6c3bb"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "c4cc6452ee09cc4d103ee8d997d090fbaf3f3e46b26bccf0b6a26ffb4565a66e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

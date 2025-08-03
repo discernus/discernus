@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on the 'Populism-Pluralism' and 'Nationalism-Patriotism' axes. Extracted raw scores for each dimension along with supporting evidence. Confidence levels reflect the clarity and directness of the language used in relation to the framework's defined markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.80,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "My fellow Americans: We are 15 years into this new century. Fifteen years that dawned with terror touching our shores, that unfolded with a new generation fighting two long and costly wars, that saw a vicious recession spread across our Nation and the world. It has been and still is a hard time for many. But tonight we turn the page. Tonight, after a breakthrough year for America, our economy is growing and creating jobs at the fastest pace since 1999. Our unemployment rate is now lower than it was before the financial crisis. More of our kids are graduating than ever before. More of our people are insured than ever before. And we are as free from the grip of foreign oil as we’ve been in almost 30 years.",
+          "confidence": 0.95,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "So what does middle class economics works? Expanding opportunity works. And these policies will continue to work as long as policies don't get in the way. We can't slow down business or put our economy at risk with government shutdowns or fiscal showdowns. We can't put the security of families at risk by taking away their health insurance or unraveling the new rules on Wall Street or refinancing past battles on immigration when we've got to fix a broken system.",
+          "confidence": 0.85,
+          "context_type": "Anti-Elite Sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Because families like Rebekah’s still need our help. She and Ben are working as hard as ever, but they’ve had to forego vacations and a new car so that they can pay off student loans and save for retirement. Friday night pizza, that’s a big splurge. Basic childcare for Jack and Henry costs more than their mortgage and almost as much as a year at the University of.",
+          "confidence": 0.80,
+          "context_type": "Manichean Framing"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Tonight, for the first time since 9/11, our combat mission in Afghanistan is over. Six years ago, nearly 180,000 American troops served in Iraq and Afghanistan. Today, fewer than 15,000 remain. And we salute the courage and sacrifice of every man and woman in this 9/11 generation who has had CD-OBAMA), America, for all that we have endured, for all the grit and hard work required to come back, for all the tasks that lie ahead, know this: The shadow of crisis has passed, and the State of the Union is strong.",
+          "confidence": 0.90,
+          "context_type": "National Pride"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "As President Francis has said, diplomacy is the work of \"small steps.\" And these small steps have added up to new hope for the future in Cuba. And after years in prison, we are overjoyed that Alan P. Gross is back where he belongs. Welcome home, Alan. We’re glad you’re here.",
+          "confidence": 0.70,
+          "context_type": "Civic Duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "In Iraq and Syria, American leadership—including our military power—is stopping ISIS's advance. Instead of getting dragged into another ground war in the Middle East, we are leading a broad coalition, including Arab nations, to degrade and ultimately destroy this terrorist group. We're also supporting a moderate opposition in Syria that can help us in this effort and assisting people everywhere who stand up to the ideology of violent extremism.",
+          "confidence": 0.80,
+          "context_type": "National Supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

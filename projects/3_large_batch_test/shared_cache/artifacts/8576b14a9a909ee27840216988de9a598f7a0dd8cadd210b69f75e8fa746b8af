@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d0f501702822",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politic_discourse_populism_v7_1\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the framework v7.1. Document identified as a political platform document, likely from the Democratic Party. Content analyzed for populist and nationalist tendencies.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"bcd15012ae42...\",\n      \"document_name\": \"Democratic_Platform_2020.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"WE MUST REBUILD AMERICA\u2019S TOOL OF FIRST RESORT\\nDiplomacy and America's national security interests are enhanced when the United States leads with its allies and partners to advance our shared prosperity, security, and values and shape the unfolding Pacific Century. When the United States hosts the leaders of our G7 partners at next year\u2019s Summit of the Americas\u2014the first to be held here since the 1994 inaugural meeting in Miami\u2014we will turn the page on the Trump Administration\u2019s alienation of our neighbors, our allies, and our partners, and we will chart a new era of cooperation based on partnership and shared responsibility for the region and the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"DEMOCRATS WILL FIGHT TO RAISE WAGES FOR WORKING PEOPLE AND IMPROVE JOB QUALITY AND SECURITY, INCLUDING BY RAISING THE FEDERAL MINIMUM WAGE TO $15 AN HOUR BY 2026. Raising the federal minimum wage, so fewer workers are forced to hold down multiple jobs to make ends meet, will significantly decrease risks of infection from COVID-19 and in the future. We know that strong American labor unions help increase wages and job standards for workers across the economy, which is why Democrats will prioritize passing the PRO Act and restoring workers\u2019 rights, including the right to organize, join a union, and collectively bargain.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"WE MUST PROTECT THE RIGHTS OF ALL AMERICANS,INCLUDING WOMEN, LGBTQ+ PEOPLE, RACIAL MINORITIES, PEOPLE WITH DISABILITIES, NATIVE AMERICANS, AND ALL WHO HAVE BEEN DISCRIMINATED AGAINST IN TOO MANY WAYS AND FOR TOO MANY GENERATIONS. We commit ourselves to the vision articulated by Frederick Douglass of \u201ca Government founded upon justice, and recognizing the equal rights of all,\u201d and recognize the equal rights of all\u2019.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_appeal_to_marginalized\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"AMERICA IS AN IDEA THAT HAS ENDURED AND EVOLVED THROUGH WAR AND DEPRESSION, PREVAILING OVER FASCISM AND COMMUNISM, AND RADIATED HOPE TO FAR DISTANT CORNERS OF THE EARTH. Americans believe that diversity is our greatest strength. That protest is among the highest forms of patriotism. That our fates and our fortunes are bound to rise and fall together. That even when we fall short of our highest ideals, we never stop trying to build a more perfect union.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"civic_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:27:02.615241+00:00",
+    "end_time": "2025-08-02T15:27:08.345524+00:00",
+    "duration_seconds": 5.730283,
+    "llm_interaction_hash": "ad10e031b489ca94"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "bcd15012ae4248549a74ff3b5aabe2e33da82616498df49e4cc7103c70596b43"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

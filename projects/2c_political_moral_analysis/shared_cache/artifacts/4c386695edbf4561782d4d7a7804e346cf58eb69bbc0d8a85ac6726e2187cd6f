@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_3b1704da1930",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "political_moral_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"moral_foundations_theory_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Moral Foundations Theory v7.0 framework. Focus was on identifying raw dimensional scores, salience, and confidence levels, along with extracting supporting evidence. No mathematical calculations or derived metrics were performed, as per instructions. The text primarily discusses political and economic issues, with underlying moral themes related to national interest, immigration, and leadership.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"jd_vance_2022_natcon_conference.txt\",\n      \"dimensional_scores\": {\n        \"care\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"harm\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"fairness\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"cheating\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.8\n        },\n        \"loyalty\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        },\n        \"betrayal\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.65\n        },\n        \"authority\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"subversion\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.45,\n          \"confidence\": 0.6\n        },\n        \"sanctity\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.35,\n          \"confidence\": 0.5\n        },\n        \"degradation\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.55,\n          \"confidence\": 0.65\n        },\n        \"liberty\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.45,\n          \"confidence\": 0.6\n        },\n        \"oppression\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.65,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"harm\",\n          \"quote_text\": \"But as much as our leaders have forgotten that and as much as I think that the most significant example of that is in Ukraine, uh, where we have sent hundreds of billions of dollars of weaponry with no obvious end in sight and no obvious conclusion or even objective that we're close to getting, uh, getting accomplished there.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"political_discourse\"\n        },\n        {\n          \"dimension\": \"harm\",\n          \"quote_text\": \"But the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China. Okay? We should, we should, in my view, not fight a war with China if we can avoid it.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"political_discourse\"\n        },\n        {\n          \"dimension\": \"cheating\",\n          \"quote_text\": \"And then we let the Chinese make all of our stuff. And then we should fight a war with China. Okay? We should, we should, in my view, not fight a war with China if we can avoid it. We should also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base overseas.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_policy\"\n        },\n        {\n          \"dimension\": \"authority\",\n          \"quote_text\": \"Now, the national conservative movement has made the most progress, not just here, but I think overseas as well, is the recognition that the real threat to American democracy, it's not certainly not Donald Trump, it's not even some foreign dictator who does not like America or our values. The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"political_ideology\"\n        },\n        {\n          \"dimension\": \"oppression\",\n          \"quote_text\": \"But no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced. Now, I remember getting into some argument with some loser on Twitter a year or so ago about whether immigration raised housing prices. And of course the argument is that, yeah, maybe immigrants take up some more demand for housing, but they, they build all the houses.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"socioeconomic_impact\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:02:56.391860+00:00",
+    "end_time": "2025-08-02T00:03:00.279243+00:00",
+    "duration_seconds": 3.887383,
+    "llm_interaction_hash": "86c1911b76ee0981"
+  },
+  "input_artifacts": {
+    "framework_hash": "cf59247a351f231bf3ef00ec4d11b0ec5ed16ef834174ba5228b2b4bbc57781f",
+    "document_hashes": [
+      "9528fee13b53dcda9ddbc12d40370265424e8c39b520ce0bc5b787cc6d978fc4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2c_political_moral_analysis",
+      "experiment_root": "/Volumes/code/discernus/projects/2c_political_moral_analysis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000243Z_1593675a"
+  }
+}

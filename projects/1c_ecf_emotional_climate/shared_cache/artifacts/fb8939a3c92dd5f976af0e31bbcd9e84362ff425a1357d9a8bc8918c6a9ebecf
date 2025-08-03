@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8ee06a76d7ea",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"efc_v7_0\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted according to the Emotional Climate Framework v7.0. Focus on raw dimensional scores, salience, confidence, and direct evidence extraction.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"hope\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.40,\n          \"confidence\": 0.60\n        },\n        \"enity\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.80\n        },\n        \"amity\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.15,\n          \"confidence\": 0.50\n        },\n        \"envy\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"compression\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.10,\n          \"confidence\": 0.50\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"The American people are outragged at what's going on, and the American people are saying loud and clear, \\\"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\\\"\",\n          \"confidence\": 0.80,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"enity\",\n          \"quote_text\": \"And what these guys are busy doing right now is going after Medicare, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They own mansions all over the world. They go on vacations to their own private islands. When they want to go someplace, they don't go into their car. They go into the planes or the helicopters that they own.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"descriptive_statement\"\n        },\n        {\n          \"dimension\": \"enity\",\n          \"quote_text\": \"You got a President Trump getting inaugurated. And I must tell you one of the more bizarre experiences of my life was I was kind of pushed into the front row of that. And there I am, there's Trump, and right behind him, you got Musk, Bezos, and Zuckerberg, three wealthiest guys in the country. And then behind them, you got 13 other billionaires who Trump nominated to head various government agencies.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"observation_statement\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"You know why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"analytical_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:51:51.197414+00:00",
+    "end_time": "2025-08-01T23:51:54.061427+00:00",
+    "duration_seconds": 2.864013,
+    "llm_interaction_hash": "59c0b7f478d0e675"
+  },
+  "input_artifacts": {
+    "framework_hash": "6b5b48bb6cd91bf3e3b30b83fad57eff8079c66c43afac7129fba885e272ae1a",
+    "document_hashes": [
+      "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T235148Z_84037ff6"
+  }
+}

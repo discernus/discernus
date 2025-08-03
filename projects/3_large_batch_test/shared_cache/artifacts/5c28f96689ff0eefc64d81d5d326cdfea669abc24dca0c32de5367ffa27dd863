@@ -1,0 +1,55 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed a State of the Union address, focusing on the explicit use of populist and patriotic rhetoric versus pluralist and nationalistic themes as defined by the framework. The speech exhibited a blend, particularly emphasizing economic populism and a civic/economic nationalism balanced by calls for bipartisanship and institutional respect."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.6,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "The American Rescue Plan helped working people and left no one behind... For the past 40 years, we were told that tax breaks for those at the top... would trickle down... But that trickle-down theory led to a weaker economy... building the economy from the bottom up and the middle out, not from the top down.",
+          "confidence": 0.95,
+          "context_type": "Economic Populism and Anti-Elite Language"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the American people, and to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+          "confidence": 0.9,
+          "context_type": "Pluralism (Unity and Institutional Respect)"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "I’ve told Xi Jinping: It’s never been a good bet to bet against the American people. We’ll create good jobs for millions of Americans—modernizing roads, airports, ports, waterways—all across America. And we’ll do it to withstand the devastating effects of climate crisis and promote environmental justice. We’ll build a national network of 500,000 electric vehicle charging stations; begin to replace the poisonous lead pipes so every child, every American has clean water to drink at home and at school.",
+          "confidence": 0.95,
+          "context_type": "Economic Nationalism and American Exceptionalism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We’re the only nation on Earth that has always turned every crisis we’ve faced into an opportunity... the only nation that can be defined by a single word: possibilities. So, on this night, on our 245th year as a nation, I’ve come to report on the State of the Nation—the state of the Union. And my report is this: The state of the Union is strong because you, the American people, are strong.",
+          "confidence": 0.95,
+          "context_type": "American Exceptionalism and Civic Pride"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

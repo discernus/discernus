@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f6e213ee2332",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis of Clinton's 1993 State of the Union address reveals a highly pluralistic and patriotic discourse. The speech consistently emphasizes collaboration, strengthening democratic institutions, and inclusive national identity, rather than an anti-elite or ethno-nationalist stance. Rhetorical prominence is given to unity, shared responsibility, and America's global role as a beacon of democracy and diversity.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1993.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_score\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_score\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_score\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"bipartisan_cooperation\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_score\",\n          \"quote_text\": \"We are the world's most diverse democracy, and the world looks to us to show that it is possible to live and advance together across those kinds of differences.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_democracy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_score\",\n          \"quote_text\": \"America has always been a nation of immigrants. From the start, a steady stream of people in search of freedom and opportunity have left their own lands to make this land their home. We started as an experiment in democracy fueled by Europeans. We have grown into an experiment in democratic diversity fueled by openness and promise.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_citizenship\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_score\",\n          \"quote_text\": \"My fellow Americans, we must never, ever believe that our diversity is a weakness. It is our greatest strength.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_citizenship\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:46:55.230828+00:00",
+    "end_time": "2025-08-02T02:47:21.488478+00:00",
+    "duration_seconds": 26.25765,
+    "llm_interaction_hash": "cb3f16399fba8722"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

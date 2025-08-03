@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7ba8ab469e8a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on populism-pluralism and nationalism-patriotism dimensions. Evidence extraction prioritized direct quotes supporting the identified dimensional scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"b34ee65a1168...\",\n      \"document_name\": \"Republican_Platform_2008.pdf\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.20,\n          \"confidence\": 0.70\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must protect the institution of marriage, as the foundation of our society.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"pronoun\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We believe in the sanctity of life from conception to natural death.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"pronoun\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America First: We believe that America's interests should always come first.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"concept\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We stand for American exceptionalism, the belief that America is a unique and indispensable nation.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"concept\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:30:37.861569+00:00",
+    "end_time": "2025-08-02T15:30:51.698916+00:00",
+    "duration_seconds": 13.837347,
+    "llm_interaction_hash": "8d11077815f914c5"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "b34ee65a1168419036cf032f32629f981a919e8c458167e5eea462ef3305f807"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The document was analyzed for populism-pluralism and nationalism-patriotism dimensions. Evidence extraction focused on direct quotes demonstrating these concepts. Confidence levels reflect the clarity and prevalence of the identified markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.78
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.82,
+          "salience": 0.88,
+          "confidence": 0.83
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have a plan to build a strong, respected America: protecting our people, rebuilding our alliances, and leading the way to a more peaceful and prosperous world.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is time for a new direction. John Kerry, John Edwards and the Democratic Party bringing a new vision for America – strong at home, respected abroad.",
+          "confidence": 0.75,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is time for a new direction.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "As we come together to declare our vision as Democrats, we are mindful that the challenges of our times are new and profound.",
+          "confidence": 0.80,
+          "context_type": "national_identity_emphasis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "As Americans, we respect and honor our veterans. We are indebted to all those courageous men and women who have answered our country's call to duty. Their service and sacrifice, their dedication and love of country advances our cause of freedom and uphold our finest traditions as a nation.",
+          "confidence": 0.90,
+          "context_type": "civic_duty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "That is the America we believe in. That is the America we are fighting for. That is the America we can build together.",
+          "confidence": 0.95,
+          "context_type": "national_pride"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
