@@ -2164,6 +2164,28 @@ This research was conducted using the Discernus computational research platform,
 """
         
         return cost_section
+    def _validate_artifact_hashes(self, *hashes: str) -> Dict[str, bool]:
+        """Validate that all provided artifact hashes exist and are accessible."""
+        validation_results = {}
+        
+        for hash_value in hashes:
+            if not hash_value:
+                validation_results[hash_value] = False
+                continue
+                
+            try:
+                # Check if artifact exists in storage
+                artifact_exists = self.artifact_storage.artifact_exists(hash_value)
+                validation_results[hash_value] = artifact_exists
+                
+                if not artifact_exists:
+                    self.logger.error(f"Artifact hash {hash_value} not found in storage")
+                    
+            except Exception as e:
+                self.logger.error(f"Error validating artifact hash {hash_value}: {e}")
+                validation_results[hash_value] = False
+        
+        return validation_results
     
     def _export_final_synthesis_csv_files(
         self,
@@ -2198,6 +2220,16 @@ This research was conducted using the Discernus computational research platform,
         """
         try:
             from discernus.agents.csv_export_agent import CSVExportAgent, ExportOptions
+            
+            # Validate all hashes before proceeding
+            hash_validation = self._validate_artifact_hashes(
+                scores_hash, evidence_hash, statistical_results_hash, curated_evidence_hash
+            )
+            
+            # Log validation results
+            for hash_value, is_valid in hash_validation.items():
+                if not is_valid and hash_value:  # Only log errors for non-empty hashes
+                    audit.log_error(f"Invalid artifact hash: {hash_value}")
             
             # Initialize CSV Export Agent with storage access
             csv_agent = CSVExportAgent(audit_logger=audit)
