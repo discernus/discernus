@@ -798,6 +798,16 @@ Return only valid JSON.
             
         except Exception as e:
             self.logger.error(f"Failed to load evidence data: {str(e)}")
+            self.logger.error(f"Evidence data type: {type(evidence_data)}")
+            self.logger.error(f"Evidence data length: {len(evidence_data) if hasattr(evidence_data, '__len__') else 'No length'}")
+            if isinstance(evidence_data, bytes):
+                try:
+                    json_str = evidence_data.decode('utf-8')
+                    self.logger.error(f"JSON string preview (first 500 chars): {json_str[:500]}")
+                except:
+                    self.logger.error("Could not decode evidence data as UTF-8")
+            import traceback
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return None
     
     def _curate_descriptive_evidence(self, descriptive_stats: Dict[str, Any], 
