@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_0230252cbb7a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed on the 2000 Republican Party Platform. Focus was on identifying populist and nationalist rhetoric, along with evidence of anti-elite sentiment and direct appeals to the populace. The framework was applied to assess the intensity and salience of these dimensions. Confidence is high due to clear markers within the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.92,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We are the party of ideas. We are the party that follows its bold words with bold deeds. Since the election of 1860, the Republican Party has had a special calling \u2013 to advance the founding principles of freedom and limited government and the dignity and worth of every individual.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"The twenty-fifth man to receive our party\u2019s nomination is equal to the challenges facing our country. After a period of bitter division in national politics, our nominee is a leader who brings people together. In a time of fierce partisanship, he calls all citizens to common goals. To longstanding problems, he brings a fresh outlook and innovative ideas and a record of results.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"leader_of_the_people\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We commit ourselves to bold reforms in education \u2013 to make every school a place of learning and achievement for every child. We will preserve local control of public schools, while demanding high standards and accountability for results.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Our country, after an era of drift, must now set itself to important tasks and higher goals. The Republican Party has the vision and leadership to address these issues.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We will rebuild the American military and returning to a foreign policy of strength and purpose and a renewed commitment to our allies. We will deploy defenses against ballistic missiles and develop the weapons and strategies needed to win battles in this new technological era.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We commit ourselves to taking reforms that will sustain our nation's prosperity and reflect its decency. We will reduce the burden on all Americans, especially those who struggle most.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T01:03:48.241219+00:00",
+    "end_time": "2025-08-02T01:03:54.306121+00:00",
+    "duration_seconds": 6.064902,
+    "llm_interaction_hash": "723d5a889a5e6e65"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "233ca2aa895c18d0ec09c39a0c08cda75a118477cb100c9f6615034f1d452a62"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

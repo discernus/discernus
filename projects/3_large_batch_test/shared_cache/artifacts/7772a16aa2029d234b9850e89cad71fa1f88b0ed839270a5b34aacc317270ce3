@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_bc15ddeddb7a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"The document provided (Republican_Platform_1996.txt) is a 404 'Page Not Found' error page, not the intended political discourse text. Therefore, the analysis reflects the absence of relevant content for scoring the specified dimensions. Scores are minimal, salience is zero, and confidence in this assessment is high due to the clear nature of the document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_1996.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"404 Page Not Found\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Technical Error Message\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We're Sorry! We did not locate the page or resource you requested.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Technical Error Message\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"404 Page Not Found\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Technical Error Message\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We're Sorry! We did not locate the page or resource you requested.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Technical Error Message\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T03:43:57.644276+00:00",
+    "end_time": "2025-08-02T03:44:17.709373+00:00",
+    "duration_seconds": 20.065097,
+    "llm_interaction_hash": "cdba2e8d615c6e49"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "284bc95ad09d6f185720ecd20946aa08d524cd683523bf1c36ca32c5145184c4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

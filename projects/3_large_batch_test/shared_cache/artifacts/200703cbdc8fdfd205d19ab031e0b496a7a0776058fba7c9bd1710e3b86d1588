@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on identifying populist and nationalist rhetoric within the provided document. Scores are based on the presence and intensity of specific linguistic markers associated with each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1992.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.95,
+          "salience": 0.98,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.",
+          "confidence": 0.95,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Therefore we call for a revolution in government, to take power away from entrenched bureaucracies and narrow interests in Washington and put it back in the hands of ordinary people.",
+          "confidence": 0.98,
+          "context_type": "direct_democracy_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The Revolution of 1992 is about restoring America's economic greatness.",
+          "confidence": 0.90,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Party's first priority is opportunity—broad-based, non-inflationary economic growth and the opportunity that flows from it.",
+          "confidence": 0.85,
+          "context_type": "national_economic_opportunity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "President Bush, with no interest in domestic policy, has given America the slowest economic growth, the slowest income growth, and the slowest jobs growth since the Great Depression.",
+          "confidence": 0.90,
+          "context_type": "criticism_of_opposing_administration"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We believe in the American people. We will challenge all Americans to give something back to their country.",
+          "confidence": 0.80,
+          "context_type": "civic_duty_appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

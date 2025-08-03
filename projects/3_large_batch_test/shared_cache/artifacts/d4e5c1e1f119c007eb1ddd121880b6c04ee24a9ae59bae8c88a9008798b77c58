@@ -1,0 +1,74 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of Trump's 2025 Inaugural Address focusing on populism and nationalism dimensions. Framework v7.0 applied with emphasis on raw scores, salience, confidence, and evidence extraction as per instructions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimensional_scores": {
+        "populism_plurialism_axis": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plurialism_axis",
+          "quote_text": "For decades, a radical and corrupt establishment has extracted power and wealth from our citizens while the pillars of our society lay broken and seemingly in complete disrepair.\nWe now have a Government that cannot manage even a simple crisis at home while, at the same time, stumbling into a continuing catologue of catastrophic events abroad.",
+          "confidence": 0.98,
+          "context_type": "anti-elite sentiment"
+        },
+        {
+          "dimension": "populism_plurialism_axis",
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.",
+          "confidence": 0.97,
+          "context_type": "people versus establishment"
+        },
+        {
+          "dimension": "populism_plurialism_axis",
+          "quote_text": "I will sign a series of historic Executive orders. With these actions, we will begin the complete restoration of America and the revolution of common sense.",
+          "confidence": 0.95,
+          "context_type": "direct democracy appeal"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "From this day forward, our country will flourish and be respected again all over the world. We will be the envy of every nation, and we will not allow ourselves to be taken advantage of any longer.",
+          "confidence": 0.96,
+          "context_type": "American greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our sovereignty will be reclaimed. Our safety will be restored. The scales of justice will be rebalanced.",
+          "confidence": 0.94,
+          "context_type": "national sovereignty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will make America great, stronger, and far more exceptional than ever before.",
+          "confidence": 0.93,
+          "context_type": "American exceptionalism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our American ancestors turned a small group of colonies on the edge of a vast continent into a mighty republic of the most extraordinary citizens on Earth.",
+          "confidence": 0.92,
+          "context_type": "historical mythos"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

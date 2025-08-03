@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d748334494c1",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the two axes of Populism-Pluralism and Nationalism-Patriotism. Evidence extraction prioritized quotes directly supporting the scoring of each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1998.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.80,\n          \"confidence\": 0.75\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.70,\n          \"confidence\": 0.70\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We have always been a people of youthful energy and daring spirit. And at this historic moment, as communism has fallen, as freedom is spreading around the world, as a global economy is taking shape before our eyes, Americans have called for change. And now it is up to those of us in this room to deliver for them.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"direct_support\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course. I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"direct_support\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"direct_support\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We have always been a people of youthful energy and daring spirit. And at this historic moment, as communism has fallen, as freedom is spreading around the world, as a global economy is taking shape before our eyes, Americans have called for change.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"direct_support\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We are the world's strongest economy, the world's only military superpower.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"direct_support\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"direct_support\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:17:17.884080+00:00",
+    "end_time": "2025-08-02T00:17:20.864712+00:00",
+    "duration_seconds": 2.980632,
+    "llm_interaction_hash": "c3a27e084a0e35cd"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

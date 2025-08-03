@@ -1,0 +1,31 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the v7.1 framework, focusing on identifying populist and nationalist discourse markers within the provided document. Salience and confidence scores are assigned based on the frequency, placement, and explicit nature of these markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2016.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.7
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.6
+        }
+      },
+      "evidence": []
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

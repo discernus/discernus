@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_9df703bfde40",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed President Clinton's 1996 State of the Union Address. The speech demonstrates a strong emphasis on pluralism and patriotism, focusing on institutional processes, bipartisan cooperation, and inclusive national identity. There is minimal to no evidence of populist anti-elite or nationalist exclusionary rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1996.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Mr. Speaker, at your swearing-in, you asked us all to work together in a spirit of civility and bipartisanship. Mr. Speaker, let's do exactly that.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct call for bipartisan cooperation and institutional harmony\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"I think trade has divided us, and divided Americans outside this Chamber, for too long. Somehow we have to find a common ground on which business and workers and environmentalists and farmers and Government can stand together.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"emphasis on finding common ground and inclusive stakeholder engagement within the existing system\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"Whether our ancestors came here on the Mayflower, on slave ships, whether they came to Ellis Island or LAX in Los Angeles, whether they came yesterday or walked this land a thousand years ago, our great challenge for the 21st century is to find a way to be one America. We can meet all the other challenges if we can go forward as one America.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"inclusive definition of American identity, civic attachment transcending origin\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"No one anywhere in the world can doubt the enduring resolve and boundless capacity of the American people to work toward that 'more perfect Union' of our Founders' dream.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"commitment to the constitutional ideal of a 'more perfect Union' and the vision of the founders\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:48:00.371283+00:00",
+    "end_time": "2025-08-02T02:48:40.990333+00:00",
+    "duration_seconds": 40.61905,
+    "llm_interaction_hash": "b527fa8e259cb94e"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "5b94e74c506174c0d896282c89875b3ab5c530f0d83ec86f93852c71985241c3"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

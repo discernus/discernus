@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_5bf0f98cdc3f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework (CAF)\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted based on the provided framework, focusing on civic virtues and their manifestations in the provided text. All dimensions were assessed with accompanying evidence. Confidence is high due to clear textual indicators.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"cory_booker_2018_first_step_act.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"Truth\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.8\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"Justice\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"Hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.8\n        },\n        \"Fear\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.6\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"I believe you can tell a lot about a nation not by its buildings, not by its measures or its wealth, but you can tell a lot about the true character of the nation by looking at its prisons and seeing who they incarcerate.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"primary_assertion\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"I'm the only United States Senator that lives in a majority black and brown community.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"identifying_group\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"Our criminal justice system, as it stands right now, is a gaping self-inflicted wound. This bill is a step - a step towards healing.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"factual_statement\"\n        },\n        {\n          \"dimension\": \"Manipulation\",\n          \"quote_text\": \"This system as a whole is a cancer on the soul of our country, and it's hurting every single American.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"metaphorical_framing\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"We have a system that - over a century, we in a nation have overcome slavery, decades of Jim Crow - but as one author, Michelle Alexander, calls our criminal justice system, she calls it the new Jim Crow because of its disproportionate impact on people of color.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"critical_assessment\"\n        },\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"The scales of justice in America are not balanced. You cannot keep injustice for some without it cheapening the justice of us all.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement_of_injustice\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"We are Americans. We have ideals of restoration, of rehabilitation. Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"aspirational_statement\"\n        },\n        {\n          \"dimension\": \"Fear\",\n          \"quote_text\": \"Our criminal justice system violates those values. I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"contrast_of_values\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"This bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back \u2013 not legislators, but judges who sit and see all the totality of the facts.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"policy_mechanism\"\n        },\n        {\n          \"dimension\": \"Fantasy\",\n          \"quote_text\": \"This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"exaggerated_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:41:15.205623+00:00",
+    "end_time": "2025-08-01T23:41:18.888625+00:00",
+    "duration_seconds": 3.683002,
+    "llm_interaction_hash": "0504a2b1f7d53a72"
+  },
+  "input_artifacts": {
+    "framework_hash": "8bc00e4ac64007df2165eddc4fcec4df7dd70a0160679ce761c5035277d983a0",
+    "document_hashes": [
+      "c17e2dffe9d25092d7d17294ac3857c4273de3d752314169727a0f64ec9acab2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T234107Z_f0fe52bc"
+  }
+}

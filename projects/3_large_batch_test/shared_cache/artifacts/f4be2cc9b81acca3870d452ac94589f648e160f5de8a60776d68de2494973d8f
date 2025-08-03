@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of President Clinton's 1995 State of the Union address using the Political Discourse Analysis Framework v7.0. Focused on identifying populist and nationalist rhetoric. The analysis covers both vertical (Populism-Pluralism) and horizontal (Nationalism-Patriotism) axes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "For 209 years, it has been the President's duty to report to you on the state of the Union. Because of the hard work and high purpose of the American people, these are good times for America.",
+          "confidence": 0.90,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, we have begun to build; to build the America within reach, and an America where everybody has a chance to get ahead with hard work; where every citizen can live in a safe community; where families are strong, schools are good, and all our young people can go on to college; an America where scientists find cures for diseases from diabetes to Alzheimer's to AIDS; an America where every child can stretch a hand across a keyboard and reach every book ever written, every painting ever painted, every symphony ever composed; where government provides opportunity and citizen honor the responsibility to give something back to their communities; and an America which leads the world to new heights of peace and prosperity.",
+          "confidence": 0.85,
+          "context_type": "Direct Democracy Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We have moved past the sterile debate between those who say government is the enemy and those who say government is the answer. My fellow Americans, we have found a third way. We have the smallest Government in 35 years, but a more progressive one.",
+          "confidence": 0.95,
+          "context_type": "Populist Framing (Us vs. Them)"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "For 209 years, it has been the President's duty to report to you on the state of the Union. Because of the hard work and high purpose of the American people, these are good times for America.",
+          "confidence": 0.80,
+          "context_type": "American Greatness"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Let us strengthen our Nation for the 21st century.",
+          "confidence": 0.85,
+          "context_type": "Civic Duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We have opened wide the doors of the world's best system of higher education. Now we must make our public elementary and secondary schools the world's best, as well, by raising standards, raising expectations, and raising accountability.",
+          "confidence": 0.85,
+          "context_type": "Exceptional Nation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

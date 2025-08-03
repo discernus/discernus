@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e4b392d18d31",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed a 404 error page. The content is entirely about the error, with no substantive political discourse to analyze for populism or nationalism. Therefore, all scores are 0.0.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_1996.txt\",\n      \"dimensional_scores\": {\n        \"populism_plururalism_axis\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"404 Page Not Found\",\n          \"confidence\": 0.1,\n          \"context_type\": \"title\"\n        },\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"We're Sorry! We did not locate the page or resource you requested. If you landed on this page from a bookmark (probably including the expression \\\"pid=\\\" followed by a number) please use the left sidebar to find the document by number.\",\n          \"confidence\": 0.1,\n          \"context_type\": \"body\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American Presidency Project\",\n          \"confidence\": 0.1,\n          \"context_type\": \"site_title\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Here are some other links that may help you get back on track: Articles of Impeachment concerning Richard Nixon\",\n          \"confidence\": 0.1,\n          \"context_type\": \"suggestion_link\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:29:12.038727+00:00",
+    "end_time": "2025-08-02T15:29:14.347571+00:00",
+    "duration_seconds": 2.308844,
+    "llm_interaction_hash": "01686557395b43c0"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "284bc95ad09d6f185720ecd20946aa08d524cd683523bf1c36ca32c5145184c4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

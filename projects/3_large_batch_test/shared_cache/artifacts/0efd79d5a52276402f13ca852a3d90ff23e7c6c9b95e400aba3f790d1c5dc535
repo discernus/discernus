@@ -1,0 +1,62 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. Raw scores and supporting evidence extracted as per framework guidelines."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.80,
+          "salience": 0.90,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But tonight I want to go easy on the traditional list of proposals for the year ahead. Don't worry, I've got plenty... from helping students learn to be done: fixing a broken immigration system, protecting our kids from gun violence, equal pay for equal work, paid leave, raising the minimum wage. All these things still matter to hard-working families.",
+          "confidence": 0.90,
+          "context_type": "Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But such progress is not inevitable. It's the result of choices we make together. And we face such choices right now. Will we respond to the changes of our time with fear, turning inward as a nation, turning against each other as a people? Or will we face the future with confidence in who we are, in what we stand for, in the incredible things that we can do together?",
+          "confidence": 0.85,
+          "context_type": "People vs. Fear"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights. Each time, there have been those who told us to fear the future; who claimed we could slam the brakes on change; who promised to restore past glory if we just got some group or idea that was threatening America under control. And each time, we overcame those fears. We did not, in the words of Lincoln, adhere to the \"dogmas of the quiet past.\"",
+          "confidence": 0.95,
+          "context_type": "Historical Exceptionalism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is Thomas Edison and the Wright Brothers and George Washington Carver. America is Grace Hopper and Katherine Johnson and Sally Ride. America is every immigrant and entrepreneur from Boston to Austin to Silicon Valley, racing to shape a better future.",
+          "confidence": 0.95,
+          "context_type": "National Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our foreign policy has to be focused on the threat from ISIS and Al Qaeda, but it can't stop there. For even without ISIS, even without Al Qaeda, instability will continue for decades in many parts of the world: in the Middle East, in Afghanistan and parts of Pakistan, in parts of Central America, in Africa. And some of these places may become safe havens for new terrorist networks. Others will just fall victim to ethnic conflict or famine, feeding the next wave of refugees. The world will look to us to help solve these problems, and our answer needs to be more than tough talk or calls to carb-bomb civilians. That may work as a TV sound bite, but it doesn't pass muster on the world stage.",
+          "confidence": 0.90,
+          "context_type": "Global Leadership"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

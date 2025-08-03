@@ -1,0 +1,116 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of Obama's 2013 Inaugural Address using the Populism-Pluralism and Nationalism-Patriotism axes. Focus on identifying explicit mentions and implicit themes related to the framework's markers. Confidence is high due to clear language, but some nuance in interpretation exists."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimensional_scores": {
+        "populism_plururalism_axis": {
+          "raw_score": 0.35,
+          "salience": 0.60,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable rights; that among these are life, liberty, and the pursuit of happiness.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "We, the people, understand that our country cannot succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broader shoulders of a rising middle class.",
+          "confidence": 0.70,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "For we, the people, understand that our country can not succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broader shoulders of a rising middle class.",
+          "confidence": 0.70,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "Let us, each of us, now embrace with solemn duty and awesome joy what is our lasting birthright. With common effort and common purpose, with passion and dedication, let us answer the call of history and carry into an uncertain future that uncertain future that precious light of freedom.",
+          "confidence": 0.65,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "For if we are truly created equal, then surely the love we commit to one another must be equal as well.",
+          "confidence": 0.50,
+          "context_type": "cultural_populism"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "We must make the hard choices to reduce the cost of health care and the size of our deficit. But we reject the belief that America must choose between caring for the generation that built this country and investing in the generation that will build its future.",
+          "confidence": 0.60,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "populism_plururalism_axis",
+          "quote_text": "Our journey is not complete until our wives, our mothers and our daughters can earn a living equal to their efforts. Our journey is not complete until our gay brothers and sisters are treated like anyone else under the law—for if we are truly created equal, then surely the love we commit to one another must be equal as well.",
+          "confidence": 0.70,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "What makes us exceptional—what makes us American—is our allegiance to an idea articulated in a declaration made more than two centuries ago:",
+          "confidence": 0.80,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The patriots of 1776 did not fight to replace the tyranny of a king with the privileges of a few or the rule of a mob. They gave to us a republic, a government of and by and for the people, entrusting each generation to keep safe our founding creed.",
+          "confidence": 0.85,
+          "context_type": "historical_mythology"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For history tells us that while these truths may be self-evident, they've never been self-executing; that while freedom is a gift from God, it must be secured by His people here on Earth.",
+          "confidence": 0.80,
+          "context_type": "founding_fathers_vision"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America will remain the anchor of strong alliances in every corner of the globe. And we will renew those institutions that extend our capacity to manage crises abroad, for no one has a greater stake in a peaceful world than its most powerful nation. We will support democracy from Asia to Africa, from the Americas to the Middle East, because our interests and our conscience compel us to act on behalf of those who long for freedom. And",
+          "confidence": 0.85,
+          "context_type": "civic_duty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Let us, each of us, now embrace with solemn duty and awesome joy what is our lasting birthright.",
+          "confidence": 0.75,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will defend our people and uphold our values through strength of arms and rule of law. We will show the courage to try and resolve our differences with other nations peacefully—not because we are naive about the dangers we face, but because engagement can more durably lift suspicion and fear.",
+          "confidence": 0.90,
+          "context_type": "national_security_and_sovereignty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For we, the people, still believe that every citizen deserves a basic measure of security and dignity. We must make the hard choices to reduce the cost of health care and the size of our deficit.",
+          "confidence": 0.70,
+          "context_type": "civic_duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

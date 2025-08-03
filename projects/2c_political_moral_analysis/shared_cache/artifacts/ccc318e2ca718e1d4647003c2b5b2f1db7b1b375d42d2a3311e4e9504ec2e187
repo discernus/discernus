@@ -1,0 +1,142 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Moral Foundations Theory Framework",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using Moral Foundations Theory Framework v7.0, focusing on raw dimensional scores, salience, and evidence extraction as per instructions. No mathematical calculations or derived metrics were performed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "care": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "harm": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fairness": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "cheating": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "loyalty": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "betrayal": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "authority": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "subversion": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "sanctity": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "degradation": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "liberty": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "oppression": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "harm",
+          "quote_text": "Uniless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 0.9,
+          "context_type": "Negative Framing"
+        },
+        {
+          "dimension": "harm",
+          "quote_text": "What about the three young men - SNCC field secretaries in America, Georgia - who face the death penalty for engaging in peaceful protest?",
+          "confidence": 0.9,
+          "context_type": "Negative Framing"
+        },
+        {
+          "dimension": "fairness",
+          "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation.",
+          "confidence": 0.95,
+          "context_type": "Call for Protection/Equity"
+        },
+        {
+          "dimension": "fairness",
+          "quote_text": "We need a good FQPC bill.",
+          "confidence": 0.8,
+          "context_type": "Demand for Legislation"
+        },
+        {
+          "dimension": "liberty",
+          "quote_text": "We do not want to go to jail, but we will go to jail if this is the price we must pay for love, brotherhood, and true peace.",
+          "confidence": 0.85,
+          "context_type": "Assertion of Values"
+        },
+        {
+          "dimension": "liberty",
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "confidence": 0.9,
+          "context_type": "Demand for Freedom"
+        },
+        {
+          "dimension": "oppression",
+          "quote_text": "We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 0.95,
+          "context_type": "Description of Oppression"
+        },
+        {
+          "dimension": "oppression",
+          "quote_text": "But what did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+          "confidence": 0.95,
+          "context_type": "Description of Oppression"
+        },
+        {
+          "dimension": "degradation",
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution. By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with opene forms of political, economic, and social exploitation.",
+          "confidence": 0.85,
+          "context_type": "Critique of Political System"
+        },
+        {
+          "dimension": "cheating",
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution. By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with opene forms of political, economic, and social exploitation.",
+          "confidence": 0.8,
+          "context_type": "Critique of Political System"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

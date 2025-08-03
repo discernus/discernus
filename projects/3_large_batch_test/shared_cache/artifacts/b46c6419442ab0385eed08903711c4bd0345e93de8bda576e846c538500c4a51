@@ -1,0 +1,93 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of Clinton's 1993 inaugural address. Focused on identifying populist and nationalist rhetorical markers as defined by the framework. Initial assessment suggests a blend of populist appeals and some degree of nationalistic framing, but with a strong emphasis on civic duty and institutional renewal."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "populism_plur_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.85
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.70,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plur_axis",
+          "quote_text": "My fellow citizens, today we celebrate the mystery of American renewal. This ceremony is held in the depth of winter, but by the words we speak and the faces we show the world, we force the spring, a spring reborn in the world's oldest democracy that brings forth the vision and courage to reinvent America.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur_axis",
+          "quote_text": "We know we have to face hard truths and take strong steps, but we have not done so; instead, we have drifted. And that drifting has eroded our resources, fractured our economy, and shaken our confidence. Though our challenges are fearsome, so are our strengths.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur_axis",
+          "quote_text": "Let us resolve to reform our politics so that power and privilege no longer shout down the voice of the people. Let us put aside personal advantage so that we can feel the pain and see the promise of America. Let us resolve to make our Government a place for what Franklin Roosevelt called bold, persistent experimentation, a Government for our tomorrow, not our yesterday.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur_axis",
+          "quote_text": "America's greatest strength is the power of our ideals, which are still new in many lands. Across the world we see them embraced, and we rejoice. Our hopes, our hearts, our hands are with those on every continent who are building democracy and freedom. Their cause is America's cause.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur_axis",
+          "quote_text": "We need each other, and we must care for one another.",
+          "confidence": 0.70,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 0.85,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.70,
+          "context_type": "constitutional_devotion"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Founders saw themselves in the light of posterity. We can do no less. Anyone who has ever watched a child's eyes wander into sleep knows what posterity is. Posterity is the world to come: the world for whom we hold our ideals, from whom we have borrowed our planet, and to whom we have "`
+          "sacred responsibility.",
+          "confidence": 0.80,
+          "context_type": "historical_mythology"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "To renew America, we must revitalize our democracy. This beautiful Capital, like every capital since the dawn of civilization, is often a place of intrigue and calculation. Powerful people maneuver for position and worry endlessly about who is in and who is out, forgetting those people whose toil and sweat sends us here and pays our way.",
+          "confidence": 0.75,
+          "context_type": "constitutional_devotion"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Americans deserve better. And in this city today there are people who want to do better. And so I say to all of you here: Let us resolve to reform our politics so that power and privilege no longer shout down the voice of the people.",
+          "confidence": 0.70,
+          "context_type": "civic_duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

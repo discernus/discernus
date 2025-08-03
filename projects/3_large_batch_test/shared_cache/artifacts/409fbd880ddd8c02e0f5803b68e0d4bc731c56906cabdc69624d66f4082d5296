@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b4a9743e40c0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis based on President Bush's 2004 State of the Union address, highlighting an emphasis on institutional cooperation and civic patriotism rather than populist or nationalist sentiments.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2004.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_score\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_score\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_score\",\n          \"quote_text\": \"Our citizens don't much care which side of the aisle we sit on, as long as we're willing to cross that aisle when there is work to be done.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"bipartisan cooperation\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_score\",\n          \"quote_text\": \"Our goal is a democratic Iraq that upholds the rule of law, respects the rights of its people, provides them security, and is an ally in the war on terror.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"institutional norms\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_score\",\n          \"quote_text\": \"The State of our Union is strong; our cause in the world is right; and tonight that cause goes on. God bless.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"civic pride and purpose\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_score\",\n          \"quote_text\": \"to guard America against all evil, and to keep faith with those we have sent forth to defend us.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national defense\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:42:42.974206+00:00",
+    "end_time": "2025-08-02T02:43:09.025832+00:00",
+    "duration_seconds": 26.051626,
+    "llm_interaction_hash": "9cc9f0a14303f59a"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

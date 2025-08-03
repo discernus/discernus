@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_cae8ad1b4a76",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis based on the provided framework, focusing on populist and nationalist rhetoric within the document. All required dimensions have been assessed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1993.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We have to do something else, too, so something else both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortune strikes immigrants who came to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"People vs. Elites\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"To prepare America for the 21st century, we must harness the powerful forces of science and technology to benefit all Americans.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Cultural Supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"My fellow Americans, we must never, ever believe that our diversity is a weakness. It is our greatest strength.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Ethnic Identity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America is far more than a place. It is an idea, the most powerful idea in the history of nations. And all of us in this Chamber, we are the bearers of that idea, leading a great people into a new world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"American Greatness\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:56:54.959664+00:00",
+    "end_time": "2025-08-02T00:56:57.962790+00:00",
+    "duration_seconds": 3.003126,
+    "llm_interaction_hash": "69c6705c1ef86e72"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

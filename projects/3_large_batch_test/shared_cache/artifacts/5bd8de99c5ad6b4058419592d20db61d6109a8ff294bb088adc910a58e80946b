@@ -1,0 +1,74 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Policy_Discourse_Populism_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Policy Discourse Analysis Framework v7.1. Focus on identifying populist-pluralist and nationalist-patriotic dimensions within the provided document. Confidence is high due to explicit language aligning with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2016.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.88,
+          "confidence": 0.85
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Democrats believe that we are stronger together. Democrats believe we are stronger when we have an economy that works for everyone—an economy that grows incomes for working people, creates good-paying jobs, and puts a middleclass life within reach for more Americans.",
+          "confidence": 0.90,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It’s a simple but powerful idea: we are stronger together.",
+          "confidence": 0.95,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise.",
+          "confidence": 0.90,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face.",
+          "confidence": 0.85,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are proud of our heritage as a nation of immigrants. We know that today's immigrants are tomorrow's teachers, doctors, lawyers, government leaders, soldiers, entrepreneurs,.",
+          "confidence": 0.70,
+          "context_type": "civic_identity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We believe America is still, as Robert Kennedy said, “a great country, and unselfish country, and a compassionate country.”",
+          "confidence": 0.80,
+          "context_type": "national_pride"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Two hundred and forty years ago, in Philadelphia, we started a revolution of ideas and of action that continues to this day.",
+          "confidence": 0.85,
+          "context_type": "historical_mythology"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

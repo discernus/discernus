@@ -1,0 +1,54 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on identifying populist and nationalist tendencies within the provided text. The framework's 'analysis_prompt' was used for dimensional interpretation. Raw scores, salience, and confidence levels were assessed for each dimension, along with supporting evidence extracted as quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+          "confidence": 0.8,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Tonight, with a healthy, growing economy, with more Americans going back to work, with our Nation and an active force for good in the world, the state of our Union is confident and strong.",
+          "confidence": 0.7,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "And tonight, with a healthy, growing economy, with more Americans going back to work, with our Nation and an active force for good in the world, the state of our Union is confident and strong.",
+          "confidence": 0.8,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My goal here is greater security in retirement, so we will field careful guidelines for personal accounts. We'll make sure the money can only go into a conservative mix of bonds and stock funds. We'll make sure your earnings are not eaten up by hidden Wall Street fees. We'll make sure there are good options to protect your investments from sudden market swings on the eve of your retirement.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

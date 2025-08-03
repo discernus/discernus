@@ -1,0 +1,96 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on the provided Civic Analysis Framework (CAF) v7.0, focusing on the provided text's civic character. The framework was applied to identify and score dimensions of civic virtue and their potential manipulation or absence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "Tribalism": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Truth": {
+          "raw_score": 0.4,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "Manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "Justice": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Resentment": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "Hope": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "Fear": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "Pragmatism": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "Fantasy": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Tribalism",
+          "quote_text": "I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government. That's not just Republicans. Let's be clear. Billionaires are funding the Democratic Party and preventing that party from standing up for working families.",
+          "confidence": 0.95,
+          "context_type": "Direct statement framing political groups as opposing forces."
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\"",
+          "confidence": 0.9,
+          "context_type": "Statement highlighting perceived injustice and inequity in wealth distribution and government policy."
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "The rich want to get richer and they don't care whom they step on. You know why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 0.85,
+          "context_type": "Focus on wealth transfer and perceived economic rigging, fueling anger."
+        },
+        {
+          "dimension": "Manipulation",
+          "quote_text": "They own mansions all over the world. They go on vacations to their own private islands. When they want to go somewhere, they don't go into their car. They go into the planes or the helicopters that they own. Send their kids to the best private schools and colleges. That is their world.",
+          "confidence": 0.8,
+          "context_type": "Description of the elite's lifestyle, contrasting with ordinary citizens, potentially implying detachment and a different set of priorities or rules."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

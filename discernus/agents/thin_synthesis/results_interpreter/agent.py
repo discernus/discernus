@@ -74,7 +74,7 @@ class ResultsInterpreter:
     evidence in a coherent narrative.
     """
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-pro", audit_logger=None):
+    def __init__(self, model: str, audit_logger=None):
         """
         Initialize the ResultsInterpreter.
         

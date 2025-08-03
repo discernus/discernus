@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_4fa9ab71bcd4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed President George W. Bush's 2009 State of the Union address, focusing on the interplay between populist and pluralist rhetoric, and nationalistic versus patriotic themes. The speech exhibits a strong emphasis on national security and American exceptionalism, alongside calls for institutional cooperation and occasional populist appeals.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Meeting these goals requires bipartisan effort, and 2 months ago, you showed the way. By strengthening Medicare and adding a prescription drug benefit, you kept a basic commitment to our seniors.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"bipartisan_cooperation_institutional_focus\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Activists judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti_elite_judicial_critique_will_of_the_people\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"America is a nation with a mission, and that mission comes from our most basic beliefs. We have no desire to dominate, no ambitions of empire. Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national_exceptionalism_and_mission\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"America will never seek a permission slip to defend the security of our country.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"unilateral_national_sovereignty\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:45:35.261010+00:00",
+    "end_time": "2025-08-02T02:45:57.559553+00:00",
+    "duration_seconds": 22.298543,
+    "llm_interaction_hash": "0c92fd1c312e5db5"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

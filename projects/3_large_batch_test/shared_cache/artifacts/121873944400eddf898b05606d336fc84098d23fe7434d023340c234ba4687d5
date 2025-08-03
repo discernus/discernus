@@ -1,0 +1,50 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of the Biden Inaugural Address 2021 using the specified framework. Focus on identifying populist and nationalist-patriotic discourse markers and their salience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.82,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.82
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The people's will has been heard, and the will of the people has been heeded. We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "confidence": 0.85,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So now, on this hallowed ground where just a few days ago violence sought to shake the Capitol's very foundation, we come together as one Nation under God, indivisible, to carry out the peaceful transfer of power as we have for more than two centuries.",
+          "confidence": 0.75,
+          "context_type": "Manichean Framing"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "This is a great Nation; we are good people. Over the centuries, through storm and strife, in peace and in war, we've come so far. But we still have far to go.",
+          "confidence": 0.70,
+          "context_type": "Populist Vision"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis based on the provided framework, focusing on populist and nationalist rhetoric within the document. All required dimensions have been assessed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.",
+          "confidence": 0.95,
+          "context_type": "Direct Populist Appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We have to do something else, too, so something else both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortune strikes immigrants who came to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.",
+          "confidence": 0.90,
+          "context_type": "People vs. Elites"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century.",
+          "confidence": 0.85,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "To prepare America for the 21st century, we must harness the powerful forces of science and technology to benefit all Americans.",
+          "confidence": 0.90,
+          "context_type": "Cultural Supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "My fellow Americans, we must never, ever believe that our diversity is a weakness. It is our greatest strength.",
+          "confidence": 0.95,
+          "context_type": "Ethnic Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is far more than a place. It is an idea, the most powerful idea in the history of nations. And all of us in this Chamber, we are the bearers of that idea, leading a great people into a new world.",
+          "confidence": 0.95,
+          "context_type": "American Greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

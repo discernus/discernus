@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed President George W. Bush's 2009 State of the Union address, focusing on the interplay between populist and pluralist rhetoric, and nationalistic versus patriotic themes. The speech exhibits a strong emphasis on national security and American exceptionalism, alongside calls for institutional cooperation and occasional populist appeals."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.45,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Meeting these goals requires bipartisan effort, and 2 months ago, you showed the way. By strengthening Medicare and adding a prescription drug benefit, you kept a basic commitment to our seniors.",
+          "confidence": 0.95,
+          "context_type": "bipartisan_cooperation_institutional_focus"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Activists judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+          "confidence": 0.9,
+          "context_type": "anti_elite_judicial_critique_will_of_the_people"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "America is a nation with a mission, and that mission comes from our most basic beliefs. We have no desire to dominate, no ambitions of empire. Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman.",
+          "confidence": 0.95,
+          "context_type": "national_exceptionalism_and_mission"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "America will never seek a permission slip to defend the security of our country.",
+          "confidence": 0.98,
+          "context_type": "unilateral_national_sovereignty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

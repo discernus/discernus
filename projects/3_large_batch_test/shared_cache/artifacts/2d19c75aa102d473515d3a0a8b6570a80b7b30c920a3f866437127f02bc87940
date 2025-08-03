@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to assess dimensional intensity and rhetorical prominence. Evidence was extracted based on the framework's defined linguistic markers. The overall confidence in the analysis is high, reflecting a thorough application of the framework's guidelines."
+  },
+  "document_analyses": [
+    {
+      "document_id": "a9bd0c1f6436",
+      "document_name": "Democratic_Platform_2024.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.90
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.88,
+          "salience": 0.90,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Our nation is at an inflection point. What kind of America will we be? A land of more freedom, or less freedom? More rights or fewer? An economy rigged for the rich and powerful, or where everyone has a fair shot at getting ahead? Will we lower the temperature in our policies and come together, or treat each other as enemies instead? The stakes in this election are enormously high.",
+          "confidence": 0.95,
+          "context_type": "direct_populist_appeal"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Donald Trump has a very different vision – one focused not on opportunity and optimism, but on revenge and retribution; not on the American people, but on himself. He and his extreme MAGA allies are ripping away our bedrock personal freedoms, dictating what healthcare decisions women can make, banning books, and telling people who they can love.",
+          "confidence": 0.95,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "American farmers are the backbone of our country. They feed America, and help feed the world. But over the years, trickle-down economics has hit rural America hard. Farming costs have gone up and incomes have gone down. Big Agriculture moved in, telling too many small farms that the surest path to success was to get big or get out. As a result, we lost over 400,000 farms in America in the last 40 years, and rural communities have paid a steep price.",
+          "confidence": 0.90,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We will keep America at the forefront of scientific discovery and innovation, responding responsibly to climate change, reducing pollution, and fueling a clean energy boom. We’re rebuilding our nation’s roads, bridges, ports, airports, water systems, electric grids, and more. We’re seizing record amounts of fentanyl and securing our border in the face of Republican inaction. We’re closing the racial wealth gap and the gender pay gap. We’ve expanded benefits and services for toxic-exposed veterans; and we’re strengthening NATO and restoring American leadership in the world.",
+          "confidence": 0.90,
+          "context_type": "national_pride"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

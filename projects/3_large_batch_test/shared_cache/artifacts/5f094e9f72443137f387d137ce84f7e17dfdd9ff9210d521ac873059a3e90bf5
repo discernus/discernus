@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7ef566c8fbdf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed inaugural address for populist and nationalist elements, focusing on the emphasis on institutions versus direct popular will and civic patriotism versus ethnic nationalism. The speech strongly emphasizes pluralist and patriotic themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2005.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Institutional Respect / Rule of Law\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Freedom, by its nature, must be chosen and defended by citizens and sustained by the rule of law and the protection of minorities.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Rule of Law / Minority Protection\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matchless value, because they bear the image of the Maker of heaven and Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Universal Rights / Inclusive Citizenship\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"So it is the policy of the United States to seek and support the growth of democratic movements and institutions in every nation and culture, with the ultimate goal of ending tyranny in our world.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Civic Duty / Global Idealism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:40:44.722501+00:00",
+    "end_time": "2025-08-02T02:41:04.409386+00:00",
+    "duration_seconds": 19.686885,
+    "llm_interaction_hash": "e96bcefe2dff4107"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

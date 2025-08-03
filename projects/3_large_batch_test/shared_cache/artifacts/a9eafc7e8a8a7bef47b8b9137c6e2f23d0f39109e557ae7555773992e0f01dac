@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_fcdd5aa26359",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Comprehensive analysis of the 2016 Republican Platform focusing on Populism-Pluralism and Nationalism-Patriotism axes. Strong emphasis on anti-elite sentiment, popular sovereignty, national exceptionalism, and border security.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We believe that people are the ultimate resource \u2014 and that the people, not the government, are the best stewards of our country\u2019s God-given natural resources.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"This means removing the power from unelected, unaccountable government. This means relieving the burden and expense of punishing government regulations. And this means returning to the people and the states the control that belongs to them.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"anti_elite_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We believe in American exceptionalism. We believe the United States of America is unlike any other nation on earth. We believe America is exceptional because of our historic role \u2014 first as refuge, then as defender, and now as example of liberty for the world to see.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"national_supremacy_claim\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our highest priority, therefore, must be to secure our borders and all ports of entry and to enforce our immigration laws. That is why we support building a wall along our southern border and protecting all ports of entry. The border wall must cover the entirety of the southern border and must be sufficient to stop both vehicular and pedestrian traffic.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"territorial_claims_security\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T03:56:26.413576+00:00",
+    "end_time": "2025-08-02T03:57:59.629665+00:00",
+    "duration_seconds": 93.216089,
+    "llm_interaction_hash": "7b836ec12eb74d33"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "0e7342da7ee614d58d7d414bab087621c93299e774592d8b09a88f6f6c171734"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

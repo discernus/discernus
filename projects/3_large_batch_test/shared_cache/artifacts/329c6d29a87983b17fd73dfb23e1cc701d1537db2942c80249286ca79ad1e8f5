@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d67b208a650b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of President Bush's 2009 State of the Union address focusing on populism and nationalism, utilizing the framework's two-axis model.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"Americans are rising to the tasks of history, and they expect the same from us. In their efforts, their enterprise, and their character, the American people are showing that the state of our Union is confident and strong.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"Our greatest responsibility is the active defense of the American people.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"So tonight I ask you to codify this into law, so people of faith can know that the law will never discriminate against them again.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is on the offensive against the terrorists who started this war. Last month, Khalid Sheik Mohammed, a mastermind of September the 11th, awoke to find himself in the custody of U.S. and Pakistani authorities.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"nationalist_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Nation's health care system, like our economy, is also in a time of change. Amazing medical technologies are improving and saving lives. This dramatic progress has brought its own challenge, in the rising costs of medical care and health insurance.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"nationalist_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America acts in this cause with friends and allies at our side, yet we understand our special calling: This great Republic will lead the cause of freedom.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalist_sentiment\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:19:58.061469+00:00",
+    "end_time": "2025-08-02T15:20:00.822296+00:00",
+    "duration_seconds": 2.760827,
+    "llm_interaction_hash": "15e1063aec664e18"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

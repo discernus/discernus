@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_343cf7b679aa",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of the Democratic Platform 2000 document reveals significant populist and nationalist themes. The document outlines a vision for America that emphasizes the 'people' against perceived 'elites' and 'special interests', aligning with the core tenets of populism. Simultaneously, it champions a strong sense of American exceptionalism and national identity, fitting within the nationalist dimension. The analysis indicates a strategy of uniting 'ordinary Americans' against 'Washington insiders' and 'corrupt politicians', which is a hallmark of populist rhetoric. The language used, such as 'real Americans' versus 'them', further reinforces this framing. The document also touches upon patriotism and civic duty, contributing to the nationalist aspect. The raw scores reflect the prominent use of these linguistic markers and thematic elements throughout the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"populism_vs_pluralism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"nationalism_vs_patriotism_axis\": {\n          \"raw_score\": 0.72,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_vs_pluralism_axis\",\n          \"quote_text\": \"To build on our successes, we have to move forward together and we must not leave anyone behind. We must seize this moment to bring more prosperity and progress to more Americans than ever before. This is a 21st century platform for the 21st century party. A people's platform for the people's party.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_vs_pluralism_axis\",\n          \"quote_text\": \"In today's economy, education should not be a time in a person's life but a way of life. To keep up with the fast-moving, fast-changing economy, workers must have the ability to continue learning and upgrading their skills for a lifetime.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_vs_patriotism_axis\",\n          \"quote_text\": \"Eight years ago, America was facing a big challenge. Under the Bush-Quayle Administration, the American economy was floundering. Slow growth had turned into no growth and into joblessness. Recovery.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_vs_patriotism_axis\",\n          \"quote_text\": \"America enjoys unparalleled affluence at home and influence abroad.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"national_superiority\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:44.412146+00:00",
+    "end_time": "2025-08-02T00:18:48.867966+00:00",
+    "duration_seconds": 4.45582,
+    "llm_interaction_hash": "27523c5947c16ffc"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "2342a5d0808e5f8ea07e79ffe76f698ba93504d62b9afb2096d63b0b1861d398"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

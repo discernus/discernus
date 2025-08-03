@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analyzed the 1996 Democratic Party Platform. The analysis focused on identifying populist tendencies related to anti-elite sentiment and direct popular sovereignty, and nationalist tendencies related to ethnic/cultural identity versus civic patriotism. The document exhibits a moderate populist leaning due to its 'people vs. Republican establishment' framing and a strong civic patriotic stance, rather than an exclusionary nationalist one."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1996.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.2,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The American people do not want big government solutions and they do not want empty promises. They want a government that is for them, not against them; that doesn't interfere with their lives but enhances their quality of life.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We must take the reins of democracy away from big money and put them back in the hands of the American people, where they belong.",
+          "confidence": 0.85,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Our vision is simple. We want an America that gives all Americans the chance to live out their dreams and achieve their God-given potential. We want an America that is still the world's strongest force for peace and freedom. And we want an America that is coming together around our enduring values, instead of drifting apart.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Democrats remember that we are a nation of immigrants. We recognize the extraordinary contribution of immigrants to America throughout our history. We welcome legal immigrants to America.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

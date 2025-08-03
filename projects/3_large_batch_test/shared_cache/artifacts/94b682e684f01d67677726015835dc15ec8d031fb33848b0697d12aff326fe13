@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_161cb018c7ef",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of President Clinton's 1995 State of the Union address using the Political Discourse Analysis Framework v7.0. Focused on identifying populist and nationalist rhetoric. The analysis covers both vertical (Populism-Pluralism) and horizontal (Nationalism-Patriotism) axes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1995.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.60,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"For 209 years, it has been the President's duty to report to you on the state of the Union. Because of the hard work and high purpose of the American people, these are good times for America.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans, we have begun to build; to build the America within reach, and an America where everybody has a chance to get ahead with hard work; where every citizen can live in a safe community; where families are strong, schools are good, and all our young people can go on to college; an America where scientists find cures for diseases from diabetes to Alzheimer's to AIDS; an America where every child can stretch a hand across a keyboard and reach every book ever written, every painting ever painted, every symphony ever composed; where government provides opportunity and citizen honor the responsibility to give something back to their communities; and an America which leads the world to new heights of peace and prosperity.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Direct Democracy Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We have moved past the sterile debate between those who say government is the enemy and those who say government is the answer. My fellow Americans, we have found a third way. We have the smallest Government in 35 years, but a more progressive one.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populist Framing (Us vs. Them)\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"For 209 years, it has been the President's duty to report to you on the state of the Union. Because of the hard work and high purpose of the American people, these are good times for America.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"American Greatness\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Let us strengthen our Nation for the 21st century.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Civic Duty\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We have opened wide the doors of the world's best system of higher education. Now we must make our public elementary and secondary schools the world's best, as well, by raising standards, raising expectations, and raising accountability.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Exceptional Nation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:57:01.867182+00:00",
+    "end_time": "2025-08-02T00:57:05.228449+00:00",
+    "duration_seconds": 3.361267,
+    "llm_interaction_hash": "13d15dda5cd45300"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

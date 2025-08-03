@@ -1,0 +1,86 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes as defined in the framework. All scores are raw dimensional scores. Confidence levels reflect the clarity and directness of evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.90,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We can do this. I know we can, because we've done it before. At the end of World War II, when another generation of heroes returned home from combat, they built the strongest economy and middle class the world has ever known.",
+          "confidence": 0.90,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The defining issue of our time is how to keep that promise alive. No challenge is more urgent. No debate is more important. We can either settle for a country where a shrinking number of people do really well while a growing number of Americans barely get by, or we can restore an economy where everyone gets a fair shot and everyone does their fair share and everyone plays by the same set of rules. What's at stake aren't Democratic values or Republican values, but American values.",
+          "confidence": 0.95,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My message is simple: It is time to stop rewarding businesses that ship jobs overseas and start rewarding companies that create jobs right here in America.",
+          "confidence": 0.85,
+          "context_type": "manichaean_framing"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let's also remember that hundreds of thousands of talented, hard-working students in this country face another challenge: the fact that they are not yet American citizens. Many were brought here as small children, are American through and through, yet they live every day with the threat of deportation.",
+          "confidence": 0.80,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For the first time in 9 years, there are no Americans fighting in Iraq. For the first time in two decades, Usama bin Laden is not a threat to this country.",
+          "confidence": 0.95,
+          "context_type": "national_sovereignty"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "My administration has made it clear that America is a Pacific power, and a new beginning in Burma has lit a new hope. From the coalitions we've built to secure nuclear materials to the missions we've led against hunger and disease, from the blows we've dealt to our enemies to the enduring power of our moral example, America is back.",
+          "confidence": 0.90,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "My goal is simple: It is time to stop rewarding businesses that ship jobs overseas and start rewarding companies that create jobs right here in America. Send me these tax reforms, and I will sign them right away.",
+          "confidence": 0.85,
+          "context_type": "economic_nationalism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "After all, innovation is what America has always been about. Most new jobs are created in startups and small businesses. So let's pass an agenda that helps them succeed. Tear down regulations that slow down our construction projects and give businesses incentives to upgrade their buildings.",
+          "confidence": 0.80,
+          "context_type": "cultural_purity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We've made it easier for American businesses to sell products all over the world. Two years ago, I set a goal of doubling U.S. exports over 5 years. With the bipartisan trade agreements we've signed into law, we're on track to meet that goal ahead of schedule.",
+          "confidence": 0.85,
+          "context_type": "economic_nationalism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

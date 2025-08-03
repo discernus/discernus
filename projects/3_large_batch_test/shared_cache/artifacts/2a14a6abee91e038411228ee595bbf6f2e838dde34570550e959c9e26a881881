@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist rhetoric within the provided document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1992.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score (Vertical Axis)": {
+          "raw_score": 0.90,
+          "salience": 0.88,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Score (Horizontal Axis)": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score (Vertical Axis)",
+          "quote_text": "We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.",
+          "confidence": 0.95,
+          "context_type": "Populist Appeal - People vs. Elite"
+        },
+        {
+          "dimension": "Populism-Pluralism Score (Vertical Axis)",
+          "quote_text": "The Revolution of 1992 is about restoring America's economic greatness. We need to rebuild America by abandoning the something-for-nothing ethic of the last decade and putting people first for a change.",
+          "confidence": 0.90,
+          "context_type": "Populist Appeal - Economic Nostalgia/Restoration"
+        },
+        {
+          "dimension": "Populism-Pluralism Score (Vertical Axis)",
+          "quote_text": "There is no relief for America's frustration in the policies of division and evasion, of false choices or of no choices at all.",
+          "confidence": 0.85,
+          "context_type": "Populist Appeal - Anti-Establishment Rhetoric"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score (Horizontal Axis)",
+          "quote_text": "Our Party's first priority is opportunity—broad-based, non-inflationary economic growth and the opportunity that flows from it.",
+          "confidence": 0.75,
+          "context_type": "National Economic Interest"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score (Horizontal Axis)",
+          "quote_text": "We must make sure that our future generations can reach school ready to learn, and guarantee all children access to quality, affordable child care.",
+          "confidence": 0.70,
+          "context_type": "National Interest - Future Generations"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score (Horizontal Axis)",
+          "quote_text": "We will work to expand trade, while insisting that the conduct of world trade is fair. It must fight to uphold America's interests—promoting exports, expanding trade in agricultural and other products, opening markets in major product and service sectors with our principal competitors, and achieving reciprocity.",
+          "confidence": 0.80,
+          "context_type": "National Economic Interest - Trade Policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

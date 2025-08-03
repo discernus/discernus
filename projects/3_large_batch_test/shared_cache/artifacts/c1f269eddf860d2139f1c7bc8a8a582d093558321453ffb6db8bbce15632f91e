@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f29663d47faf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. The analysis focused on identifying populist and nationalist rhetoric within the provided document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2019.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.92,\n          \"confidence\": 0.96\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.88,\n          \"confidence\": 0.94\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"There is a new opportunity in American politics, if only we have the courage, together, to seize it.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"anti_elite_sentiment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"anti_establishment_language\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"This year, America will recognize two important anniversaries that show up the majesty of America's mission and the power of American pride.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"national_pride\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"No one should ever have to suffer that heartache that they have had to endure.\",\n          \"confidence\": 0.91,\n          \"context_type\": \"national_grievance\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will never apologize for advancing America's interests.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"national_interest_first\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:27.012323+00:00",
+    "end_time": "2025-08-02T00:18:29.775553+00:00",
+    "duration_seconds": 2.76323,
+    "llm_interaction_hash": "9115ae23e496f036"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "108b22db857087a88dea308234ca32200a9b99a9f284d4f21032d9739d6a63cd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

@@ -1,0 +1,118 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "ecf_v7_0",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed using the ECF v7.0 framework. Emphasis on extracting raw dimensional scores, salience, confidence, and supporting evidence as per the framework's requirements."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "hope": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "enmity": {
+          "raw_score": 0.40,
+          "salience": 0.50,
+          "confidence": 0.70
+        },
+        "amity": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "envy": {
+          "raw_score": 0.20,
+          "salience": 0.30,
+          "confidence": 0.60
+        },
+        "compersion": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent - an 800 percent increase in our prison population. And this is because of failed policies by this body that created harsh sentences, harsh mandatory minimums, three-strikes-you're-out, the kind of bills that have helped this population of prisoners to grow to be the largest in percentage on the planet Earth.",
+          "confidence": 0.85,
+          "context_type": "crisis/threat language"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound. This bill is a step - a step towards healing.",
+          "confidence": 0.75,
+          "context_type": "crisis/threat language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But today, we have an opportunity to do something about addressing the ills of this system. And that's why I'm proud that this is a bipartisan compromise bill with leadership - extraordinary leadership on both sides of the aisle - saying, hey, there are things we need to begin to correct in this system. There's ways to make this system more fair. There's ways to make the system better reflect our collective values and ideals.",
+          "confidence": 0.95,
+          "context_type": "opportunity/progress language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We know that our nation's history - bills and debates we've seen in this very body - we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation. But like people, individuals who've done wrong in the past, like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve. Like people, we have demonstrated as a nation the capacity to redeem ourselves.",
+          "confidence": 0.90,
+          "context_type": "opportunity/progress language"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We have a criminal justice system where there are more African-American men under criminal supervision than there were enslaved in 1850. This is a punishing reality. I've seen with my own eyes where people in certain privileged communities don't face the kind of scrutiny, the kind of arrests that you do in other communities in our country.",
+          "confidence": 0.70,
+          "context_type": "hostility/conflict language"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "confidence": 0.65,
+          "context_type": "hostility/conflict language"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds. This is how change has been made in this country for generations. But I want to return to this fact: that we are poised to do this bill because of the deeply savage, broken criminal justice system that we have.",
+          "confidence": 0.85,
+          "context_type": "unity/cooperation language"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Let's make no mistake, this legislation, which is one small step, will affect thousands and thousands of lives. Those are not just some people. When you affect the lives of some Americans on issues of justice, you affect the lives of all Americans, because we as a people cannot fall into that trap of separation, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+          "confidence": 0.80,
+          "context_type": "unity/cooperation language"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "As Brian Stevenson has said, we live in a nation that treats you better if you're rich and guilty than if you're poor and innocent. We see in the United States of America Americans getting trapped in a system that - we know the data is clear - there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "confidence": 0.60,
+          "context_type": "resentment/grievance language"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "This bill includes a provision that I've worked on for the past four years that will effectively end the use of juvenile solitary confinement among young people under federal supervision. This bill takes an important step, but still incomplete step, in reforming the way women are treated behind bars. This bill will ensure incarcerated women have access to free sanitary products and ban the shackling of pregnant incarcerated women.",
+          "confidence": 0.85,
+          "context_type": "celebration/merit language"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "We know that our nation's history - bills and debates we've seen in this very body - we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation. But like people, individuals who've done wrong in the past, like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve. Like people, we have demonstrated as a nation the capacity to redeem ourselves.",
+          "confidence": 0.80,
+          "context_type": "celebration/merit language"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8661553c7927",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of the Biden Inaugural Address 2021 using the specified framework. Focus on identifying populist and nationalist-patriotic discourse markers and their salience.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_Inaugural_2021.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.82,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.82\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The people's will has been heard, and the will of the people has been heeded. We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So now, on this hallowed ground where just a few days ago violence sought to shake the Capitol's very foundation, we come together as one Nation under God, indivisible, to carry out the peaceful transfer of power as we have for more than two centuries.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Manichean Framing\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"This is a great Nation; we are good people. Over the centuries, through storm and strife, in peace and in war, we've come so far. But we still have far to go.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"Populist Vision\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:07.099608+00:00",
+    "end_time": "2025-08-02T15:17:09.219717+00:00",
+    "duration_seconds": 2.120109,
+    "llm_interaction_hash": "edc4ced2765212dc"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

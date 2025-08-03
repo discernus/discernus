@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1a805433b49d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. Focused on identifying populist and nationalist-patriotic discourse markers as defined by the framework. Confidence is high due to clear and abundant evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2018.txt\",\n      \"dimensional_scores\": {\n        \"populism_plur<a>lism_axis\": {\n          \"raw_score\": 0.92,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.88,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plur<a>lism_axis\",\n          \"quote_text\": \"To make America great again for all Americans.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plur<a>lism_axis\",\n          \"quote_text\": \"This is your time. If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plur<a>lism_axis\",\n          \"quote_text\": \"My highest loyalty, my greatest compassion, my constant concern is for America's children, America's struggling workers, and America's forgotten communities.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"As long as we are proud of who we are and what we are fighting for, there is nothing we cannot achieve.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"In America, we know that no people on Earth are so fearless or daring or determined as Americans.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will build great gleaming new roads, bridges, highways, railways, and waterways all across our land. And we will do it with American heart and American hands and American grit. We want every American to know the dignity of a hard day's work.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"civic_duty\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:26:18.473260+00:00",
+    "end_time": "2025-08-02T15:26:21.217644+00:00",
+    "duration_seconds": 2.744384,
+    "llm_interaction_hash": "402c6d0ca2d11584"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "50d7b4edd349e52a5cba523a3656e1f2f94c0875c5af4a08185b15241f4282a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

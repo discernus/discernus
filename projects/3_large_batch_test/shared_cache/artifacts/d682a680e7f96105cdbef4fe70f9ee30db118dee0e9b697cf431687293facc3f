@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_994d7ebc76d2",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of Republican Platform Resolution focusing on populism and nationalism dimensions as per framework v7.0.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Resolution_on_Platform_2020.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurualism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurualism_axis\",\n          \"quote_text\": \"WEHEREAS, The Republican National Committee (RNC) has significantly scaled back the size and scope of the 2020 Republican National Convention in Charlotte due to strict restrictions on gatherings and meetings, and out of concern for the safety of convention attendees and our hosts;\",\n          \"confidence\": 0.8,\n          \"context_type\": \"contextual_variation\"\n        },\n        {\n          \"dimension\": \"populism_plurualism_axis\",\n          \"quote_text\": \"WHEREAS, The RNC, had the Platform Committee been able to convene in 2020, would have undoubtedly unanimously agreed to reassert the Party's strong support for President Donald Trump and his Administration;\",\n          \"confidence\": 0.9,\n          \"context_type\": \"populist_intensity\"\n        },\n        {\n          \"dimension\": \"populism_plurualism_axis\",\n          \"quote_text\": \"RESOLVED, That the Republican Party has and will continue to enthusiastically support the President's America-first agenda;\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"RESOLVED, That the Republican Party has and will continue to enthusiastically support the President's America-first agenda;\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"WHEREAS, The media has outrageously misrepresented the implications of the RNC not adopting a new platform in 2020 and continues to engage in misleading advocacy for the failed policies of the Obama-Biden Administration, rather than providing the public with unbiased reporting of facts;\",\n          \"confidence\": 0.8,\n          \"context_type\": \"foreign_threat\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"WHEREAS, The RNC enthusiastically supports President Trump and continues to reject the policy positions of the Obama-Biden Administration, as well as those espoused by the Democratic National Committee today; therefore, be it\",\n          \"confidence\": 0.85,\n          \"context_type\": \"ethnic_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:20:35.321371+00:00",
+    "end_time": "2025-08-02T00:20:37.772513+00:00",
+    "duration_seconds": 2.451142,
+    "llm_interaction_hash": "c850b433fdf23d2c"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "c9f656eda264e39220fceca06fec5649275ff3c8e7e8b78abd729060b7d48810"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

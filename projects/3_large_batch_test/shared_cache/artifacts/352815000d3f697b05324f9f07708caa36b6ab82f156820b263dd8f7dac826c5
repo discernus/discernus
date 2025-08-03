@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_be7c05b98af3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. The analysis extracted raw scores for identified discourse markers and provided supporting evidence with confidence levels. No mathematical calculations or derived metrics were performed as per instructions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1994.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known. The new promise of the global economy, the information age, unimagined new work, life-enhancing technology, all these are ours to seize. That is our honor and our challenge. We must be shapers of events, not observers, for if we do not act, the moment will pass, and we will lose the best possibilities of our future.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight I issue a challenge to the Nation: Every State should adopt high national standards, and by 1999, every State should test every fourth grader in reading and every eighth grader in math to make sure these standards are met.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row. Now, here is the direction I believe we should take.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"To prepare America for the 21st century, we must harness the powerful forces of science and technology to benefit all Americans. This is the first State of the Union carried live in video over the Internet. But we've only begun to spread the benefits of a technology revolution that should become the modern birthright of every citizen.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"cultural_purity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"American scientists have discovered genes linked to breast cancer and ovarian cancer and medication that stops a stroke in progress and begins to reverse its effects and treatments that dramatically lengthen the lives of people with HIV and AIDS.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"american_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We must continue, step by step, to give more families access to affordable, quality health care. Forty million Americans still lack health insurance. Ten million children still lack health insurance; 80 percent of them have working parents who pay taxes. That is wrong. My balanced budget will extend health coverage to up to 5 million of those children. Since nearly half of all children who lose their insurance do so because their parents lose or change a job, my budget will also ensure that people who temporarily lose their jobs can still afford to keep their health insurance.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"ethinic_identity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is far more than a place. It is an idea, the most powerful idea in the history of nations. And all of us in this Chamber, we are now the bearers of that idea, leading a great people into a new world. A child born tonight will have almost no memory of the 20th century. Everything that child will know about America will be because of what we do now to build a new century.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:14:50.586931+00:00",
+    "end_time": "2025-08-02T00:14:55.348399+00:00",
+    "duration_seconds": 4.761468,
+    "llm_interaction_hash": "309dc19349554ef0"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

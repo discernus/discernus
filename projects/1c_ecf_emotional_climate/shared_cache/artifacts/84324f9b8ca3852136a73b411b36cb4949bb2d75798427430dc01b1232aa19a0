@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_290777612a70",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"ecf_v7_0\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis based on the provided framework, focusing on extracting raw dimensional scores, salience, confidence, and supporting evidence. The document discusses political discourse related to the Supreme Court and immigration, with a strong underlying tone of fear and criticism towards current administration policies. The framework's dimensions of 'Fear' and 'Envy' appear to be most prominent.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.5\n        },\n        \"enmity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.55,\n          \"confidence\": 0.7\n        },\n        \"amity\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.02,\n          \"confidence\": 0.4\n        },\n        \"envy\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.65\n        },\n        \"compression\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.4\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"This is a localized, this is the face of one of these perpetrators, Mauricio Hernandez. What did he do? Mauricio Hernandez, a sexual predator who impregnated a 13-year-old daughter of his living girlfriend. And took this repeatedly, had sexual relations with her in ways that I won't repeat here on the floor. Took her off to soccer games where he gave. He also gave her an abortion inducing drug. And she went into into a porta pot and had the baby that was alive. And then he went in and saw that baby. And this girl was then hauled home. The baby was left to die. That baby died. Mauricio Hernandez is the perpetrator. He's another illegal alien. Another one who had been encountered by law. Another one that had been granted this de facto amnesty because of the President's policy.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"strong_evidence\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"And so our obligation then is to say, 'Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.'\",\n          \"confidence\": 0.75,\n          \"context_type\": \"supporting_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We have a Constitution to preserve, protect, defend and defend. And so our obligation then is to say, 'Mr. President, you're lame duck.'\",\n          \"confidence\": 0.7,\n          \"context_type\": \"strong_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"supporting_evidence\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"And so there therefore, if Congress wants the law to say something different, we have to amend it here in the House and the Senate and get a presidential signature on it. That is the constitutional structure of this government that we have.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"supporting_evidence\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.\",\n          \"confidence\": 0.55,\n          \"context_type\": \"supporting_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:52:11.995644+00:00",
+    "end_time": "2025-08-01T23:52:15.770748+00:00",
+    "duration_seconds": 3.775104,
+    "llm_interaction_hash": "bc7888c5708a6781"
+  },
+  "input_artifacts": {
+    "framework_hash": "6b5b48bb6cd91bf3e3b30b83fad57eff8079c66c43afac7129fba885e272ae1a",
+    "document_hashes": [
+      "6d762d9a0ecb770b6a20c17994e6a3bd5051fa062012466a1e8934d43a4f1708"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T235148Z_84037ff6"
+  }
+}

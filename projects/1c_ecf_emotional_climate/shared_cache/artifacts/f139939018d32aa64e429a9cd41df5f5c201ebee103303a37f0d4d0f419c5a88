@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_accc5c911464",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"ecf_v7_0\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Emotional Climate Framework v7.0. Focus was on identifying the intensity, prominence, and evidential support for the six defined emotional climate dimensions within the provided document. Confidence levels reflect the clarity and directness of the language used.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"jd_vance_2022_natcon_conference.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"amity\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        },\n        \"envy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"comprehension\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But I will say on the good news, the majority of the Republican house and the majority of the Republican Senate, the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"And I think that real matters. Now, just, just on that particular topic, I have to take a shot, I think, as I have done at every single NatCon, at the Wall Street Journal editorial page.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"But the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They actually do not like the people who make up the domestic populations of their own country. This, one of the things that we consistently find, uh, from the UK elites to certainly the American elites, is that they seem to really not like their own fellow citizens.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"comprehension\",\n          \"quote_text\": \"The real threat to American democracy, it's not certainly not Donald Trump, it's not even some foreign dictator who does not like America or our values. The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"And that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"secondary\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:51:59.183854+00:00",
+    "end_time": "2025-08-01T23:52:02.251967+00:00",
+    "duration_seconds": 3.068113,
+    "llm_interaction_hash": "2f35eda405f3acf9"
+  },
+  "input_artifacts": {
+    "framework_hash": "6b5b48bb6cd91bf3e3b30b83fad57eff8079c66c43afac7129fba885e272ae1a",
+    "document_hashes": [
+      "9528fee13b53dcda9ddbc12d40370265424e8c39b520ce0bc5b787cc6d978fc4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T235148Z_84037ff6"
+  }
+}

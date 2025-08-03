@@ -1,0 +1,506 @@
+{
+  "evidence_metadata": {
+    "total_documents": 8,
+    "total_evidence_pieces": 55,
+    "extraction_method": "pre_extraction_v1.0",
+    "extraction_time": "2025-08-01T23:49:44.439401+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+      "confidence": 0.65,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+      "confidence": 0.85,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We need a Democratic Party that fights harder for us too.",
+      "confidence": 0.7,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+      "confidence": 0.9,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do.",
+      "confidence": 0.6,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "This is not just about Republicans. We need a Democratic Party that fights harder for us too. But, Greely, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class. You know which Coloradans did vote to gut medicaid and jack up healthcare costs? Gabe Evans and Lauren Boebert right next door. So folks, you know what that means, right? We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+      "confidence": 0.8,
+      "context_type": "description",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear",
+      "confidence": 0.9,
+      "context_type": "framing_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "And what these guys are busy doing right now is going after Medicaid, going after Social Security, going after nutrition.",
+      "confidence": 0.9,
+      "context_type": "accusation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "They own mansions all over the world. They go on vacations to their own private islands.",
+      "confidence": 0.85,
+      "context_type": "characterization",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+      "confidence": 0.95,
+      "context_type": "contrast_and_critique",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.9,
+      "context_type": "call_to_action",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "procedural_legitimacy_score",
+      "quote_text": "SSB3YW50IHRvIHNheSBnb29kIGFmdGVybm9vbiB0byBldmVyeW9uZSwgYW5kIHRoaXMgaXMgYSBtb21lbnQgcmVhbGx5IHdoZXJlIEkgd2FudCB0byBnaXZlIG9wZW4gd2l0aCBhIHNlbnNlIG9mIGdyYXRpdHVkZS4gSSBkb24ndCB3YW50IHRvIHRoYW5rIG15IGNvbGxlYWd1ZXMgZm9yIHRoZWlyIGluY3JlZGlibGUgd29yayBhbmQgbGVhZGVyc2hpcCwgYW5kIGVzcGVjaWFsbHkgcmVjb2duaXplIHRoZSBjaGFpcm1hbiBvZiB0aGUgSnVkaWNpYXJ5IENvbW1pdHRlZSwgU2VuYXRvciBDaHVjayBHcmFzc2xleS4gSSB3YW50IHRvIHRoYW5rIFNlbmF0b3IgRGljayBEdXJiaW4sIHdobyBoYXMgYmVlbiBhIGhlcm8gb2YgbWluZSBvbiBpc3N1ZXMgb2YgY3JpbWluYWwganVzdGljZSByZWZvcm0sIGFzIHdlIGFzIG1hbmkgY2hhbXBpb24uIEhbYmxlc3MgdGhlbShdLg==",
+      "confidence": 0.7,
+      "context_type": "acknowledgement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "procedural_legitimacy_score",
+      "quote_text": "VGh1cyBhbmQgYWxsIG9mIHRoZWlyIHN0YWZmcywgZXZlcnlvbmUgd2hvJ3MgYmVlbiBpbnZvbHZlZCBpbiB0aGUgYmxhY2sgd29yayBhbmQgZWZmb3J0cyB0aGF0IGhhdmUgYmVlbiBnb2luZyBvbiBpbiB3aGF0IGlzIGEgbW9tZW50IHRoYXQgaXMgYSBiaWxsIHRoYXQgaXMgcGV0aW9uIG9uIHRoZSBmbG9vciBub3cgLSB0aGUgRmlyc3QgU3RlcCBBY3QpLg==",
+      "confidence": 0.7,
+      "context_type": "attribution",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "SUcgbWFrZSBubyBtaXN0YWtlLCB0aGlzIGxlZ2lzdGF0aW9uLCB3aGljaCBpcyBvbmUgc21hbGwgY3V0LCB3aWxsIGFmZmVjdCB0aG91c2FuZHMgYW5kIHRob3VzYW5kcyBvZiBsaXZlcy4gVGhvc2UgYXJlIG5vdCBqdXN0IHNvbWUgcGVvcGxlLiBXZW4geW91IGFmZmVjdCB0aGUgbGl2ZXMgb2Ygc29tZSBBbWVyaWNhbnMgb24gaXNzdWVzIG9mIGp1c3RpY2UsIHlvdSBhZmZlY3QgdGhlIGxpdmVzIG9mIGFsbCBBbWVyaWNhbnMsIGJlY2F1c2Ugd2UgYXMgYSBwZW9wbGUgY2Fubm90IGZhbGwgaW50byB0aGF0IHRyYXAgb2Ygc2VwYXJhdGlvbmVzcw==",
+      "confidence": 0.6,
+      "context_type": "criticism",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "SSB3YW50IHRvIHRoYW5rIFNlbmF0b3IgRGljayBEdXJiaW4sIHdobyBoYXMgYmVlbiBhIGhlcm8gb2YgbWluZSBvbiBpc3N1ZXMgb2YgY3JpbWluYWwganVzdGljZSByZWZvcm0sIGFzIHdlIGFzIG1hbmkgY2hhbXBpb24uIEh5wcmUgYmVlbiBhIGNoYW1waW9u",
+      "confidence": 0.7,
+      "context_type": "acknowledgement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "SScgbW92ZWQgb3ZlciB3aXRoIHRoaXMgdGhlIEZpcnN0IFN0ZXAgQWN0IGFuZCBJIHdhbnQgdG8gY2FsbCB0aGUgY2hhbmdlIHdlIHJlY29nbml6ZSBhbmQgcHVzaCBhdCBhIHNvbGUgZm9yIGdlbmVyYXRpb24uICJCZWNhdXNlIG9mIHlvdXIgYmxvb2R5LCBpbSBhIGR1Y2Ugb2YgYSBjb21tdW5pdHkgYW5kIGEgZ29vZCBvZiBwb3dlciwgYmVjYXVzZSB0aGUgcmVzcG9uc2Ugb2YgdGhpcyBjb21wbGV4IGlzIHNpbXBsZS4i",
+      "confidence": 0.7,
+      "context_type": "praise",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "QnV0IGRlc3BpdGUgYWxsIHRoZSB3b3JrIHRoYXQncyBiZWVuIGRvbmUgaW4gdGhlIENpdHkgb2YgTmV3YXJrLCBJIHN0aWxsIGxpdmUgaW4gYSBjb21tdW5pdHkgdGhhdCBpcyBib3RoIG92ZXItY3JpbWluYWxpemVkIGFuZCB1bmRlci1wcm90ZWN0ZWQgYmVjYXVzZSBvZiBmZWRlcmFsIHBvbGljaWVzLCBiZWNhdXNlIG9mIHBvbGljaWVzIGluIHRoaXMgYm9keSwgcG9saWNpZXMgdGhhdCBtaXN0YWtlIHRoZSBzZXZlcml0eSBvZiBhIHB1bmlzaG1lbnQgd2l0aCB0aGUgYWN0dWFsIHNlY3VyaXR5IG9mIGEgcGVvcGxlLg==",
+      "confidence": 0.5,
+      "context_type": "critique",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "SXQgaXMgYSBjb250aW51YXRpb24gb2YgdGhlIGJpbGwgdGhhdCB3ZSBoYXZlIHdvcmsgaW4gYSBjb21tdW5pdHkgYW5kIHdpc2RvbSB0aGF0IGZvdW5kIG91ciBwZW9wbGUgcGVtYmVyIG9uIGNsb3RoIGRvZS1jaGEuIFRoaXMgaXMgYSBjb25zZXF1ZW5jZSBvZiB0aGUgd29yayB0aGF0IHdlIGFjdHVhbGx5IGRvIGluIGVuY291bnRlcmluZyBvZiBjb21wbGV4LCBwb3dlcmZ1bCwgaGlzdG9yaWNhbCBkaWZmZXJlbmNlcy4=",
+      "confidence": 0.6,
+      "context_type": "process",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "QnV0IG15IGNvbW11bml0eSBkb2VzIG5vdCBtaXN0YWtlIHdlYWx0aCB3aXRoIHdvcnRoLiBJIExpdmUgSW4gQW4gaW5uZXIgY2l0eSBjb21tdW5pdHkgYW5kIHdoZW4gSSBnbyBob21lIGF0IHRoZSBlbmQgb2YgbW9zdCB3ZWVrcywgSSBkcmF3IHN0cmVuZ3RoIGZyb20gbXkgY29tbXVuaXR5Lg==",
+      "confidence": 0.5,
+      "context_type": "observation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this. But neither here nor there, um, the reason I'm most optimistic about the future of this movement and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor who's desperate for cheap labor and it's not some random person who claims to speak for this or that constituency. The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+      "confidence": 0.9,
+      "context_type": "Rhetorical framing of a political leader's agenda",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+      "confidence": 0.9,
+      "context_type": "Characterization of policy as detrimental to democracy",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "The places in our own communities, in our own, uh, states that have the highest immigration rates are the places with the highest home prices. And it's not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+      "confidence": 0.7,
+      "context_type": "Assertion of negative economic impact tied to immigration",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "But in that cemetery, in that cemetery, there are people who were born around the time of the American Civil War. And if, as I hope, my, my wife and I eventually are laid to rest there and our kids follow us, there will be seven generations just in that small mountain cemetery plot in Eastern Kentucky. Seven generations of people who have fought for this country, who have built this country, who have made things in this country and who would fight and die to protect this country if they were asked to.",
+      "confidence": 0.6,
+      "context_type": "Historical framing of patriotism and sacrifice",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "In my home state of Ohio, we've had a couple of ballot referenda that have not gone the right way. We lost some elections in 2022 that I think that we should have won.",
+      "confidence": 0.7,
+      "context_type": "Critique of electoral outcomes and party performance",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "The places in our own communities, in our own, uh, states that have the highest immigration rates are the places with the highest home prices. And it's not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+      "confidence": 0.7,
+      "context_type": "Assertion of negative economic impact tied to immigration",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "We must have legislation that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+      "confidence": 0.8,
+      "context_type": "demand",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "You do not know where our party is? Where is the political party that will make it unnecessary to march on Washington? Where is the political party that will make it unnecessary to march in the streets of Birmingham?",
+      "confidence": 0.9,
+      "context_type": "rhetorical_question",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "But what did the federal government do when Albany police deputized? Beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slated King, and she lost her baby?",
+      "confidence": 0.9,
+      "context_type": "accusation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "But to those who have said, 'Be patient and wait,' we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!",
+      "confidence": 0.9,
+      "context_type": "demand",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, 'Be patient.' How long can we be patient? We want our freedom and we want it now!",
+      "confidence": 0.9,
+      "context_type": "demand",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "We must get into this revolution and complete the revolution. For in the Delta of Mississippi, in southwest Georgia, in the Black Belt of Alabama, in Harlem, in Chicago, Detroit, Philadelphia, and all over this nation, the black masses are on the march for jobs and freedom.",
+      "confidence": 0.9,
+      "context_type": "call_to_action",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "procedural_legitimacy_score",
+      "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+      "confidence": 0.95,
+      "context_type": "explicit_endorsement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "procedural_legitimacy_score",
+      "quote_text": "In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.",
+      "confidence": 0.9,
+      "context_type": "acknowledgement_of_opponent_success",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "This is a historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight. I've always believed that America offers opportunities to all who have the industry and will to seize it.",
+      "confidence": 0.9,
+      "context_type": "recognition_of_historical_significance",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.9,
+      "context_type": "pledge_of_cooperation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.85,
+      "context_type": "call_for_unity_and_compromise",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.8,
+      "context_type": "emphasis_on_shared_identity",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "procedural_rejection_score",
+      "quote_text": "I don't know what more we could have done to try to win this election. I'll leave that to others to determine. Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.7,
+      "context_type": "admission_of_shortcomings",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.6,
+      "context_type": "acknowledgement_of_setback_and_need_for_progress",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The Constitution established the vehicle of impeachment that has occupied both houses of our Congress these many days. We have labored to faithfully execute our responsibilities to it.",
+      "confidence": 0.9,
+      "context_type": "statement_of_principle",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+      "confidence": 0.85,
+      "context_type": "argument_analysis",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The president's insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+      "confidence": 0.7,
+      "context_type": "interpretation_of_motive",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am.",
+      "confidence": 0.95,
+      "context_type": "personal_oath",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.",
+      "confidence": 0.85,
+      "context_type": "acknowledgement_of_higher_authority",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+      "confidence": 0.75,
+      "context_type": "accusation_of_malfeasance",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+      "confidence": 0.9,
+      "context_type": "statement_of_belief",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "As it is with each senator, my vote is an act of conviction. We've come to different conclusions, fellow senators, but I trust we have all followed the dictates of our conscience.",
+      "confidence": 0.8,
+      "context_type": "statement_of_intent",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and defend. And so our obligation then is to say, \"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot. People like Joe Biden and Harry Reid and Chuck Schumer all would agree with Senator Chuck Grassley. No hearing, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "It's the Senate's job then to evaluate the nominations of the President. And they can do so with or without hearings, with or without interviews.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And so I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "But it's no longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws. They go and discover what they would call a new right in the 14th Amendment to the Constitution, equal protection under the law.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marbury versus Madison and a whole series of presumable precedent cases along the line. And that was June 24th on Thursday and it would kick the breath out of your gut to hear that if you're a constitutionalist.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "The Supreme Court of the state of Iowa did the same thing to Iowans in 2009. I sat in the legislature and was an author of the Defense of Marriage Act in about 1998.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "And now this court has twisted it into a command that there's not a difference between a man and a woman when it comes to joining them together in matrimony. Well, there is a difference. And it's been HUSBAND and wife in every one of these states until such time as the activists got busy.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    }
+  ]
+}

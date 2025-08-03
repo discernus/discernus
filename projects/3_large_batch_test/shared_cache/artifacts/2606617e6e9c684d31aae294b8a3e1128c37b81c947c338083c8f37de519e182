@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed Bill Clinton's 1994 State of the Union address, focusing on the Populism-Pluralism and Nationalism-Patriotism axes. The speech exhibits strong pluralist and patriotic themes, emphasizing institutional cooperation, civic responsibility, and inclusive national identity rather than anti-elite sentiment or exclusionary nationalism."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimensional_scores": {
+        "populism_pluralism_score": {
+          "raw_score": 0.2,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_score": {
+          "raw_score": 0.1,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_score",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.",
+          "confidence": 0.95,
+          "context_type": "bipartisan_cooperation"
+        },
+        {
+          "dimension": "populism_pluralism_score",
+          "quote_text": "We must agree to a bipartisan process to preserve Social Security and reform Medicare for the long run, so that these fundamental programs will be as strong for our children as they are for our parents.",
+          "confidence": 0.9,
+          "context_type": "institutional_integrity"
+        },
+        {
+          "dimension": "nationalism_patriotism_score",
+          "quote_text": "America has always been a nation of immigrants. From the start, a steady stream of people in search of freedom and opportunity have left their own lands to make this land their home.",
+          "confidence": 0.95,
+          "context_type": "inclusive_citizenship"
+        },
+        {
+          "dimension": "nationalism_patriotism_score",
+          "quote_text": "We are the world's most diverse democracy, and the world looks to us to show that it is possible to live and advance together across those kinds of differences.",
+          "confidence": 0.9,
+          "context_type": "civic_pride"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

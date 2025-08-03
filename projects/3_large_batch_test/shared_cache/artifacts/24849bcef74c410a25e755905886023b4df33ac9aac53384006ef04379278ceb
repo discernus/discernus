@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of President Biden's State of the Union address focusing on populist and nationalist rhetoric. The analysis identifies instances of 'us vs. them' framing, appeals to the 'common person', and nationalistic pride, alongside references to institutions and civic duty. Confidence is high due to explicit language and framing consistent with populist and nationalist discourse."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.78,
+          "salience": 0.80,
+          "confidence": 0.88
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.72,
+          "salience": 0.75,
+          "confidence": 0.82
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.90,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "You know, we're often told that Democrats and Republicans can't work together. But over the past 2 years, we've proved the cynics and naysayers wrong. Yes, we disagree plenty. And yet, there were times when Democrats and Republicans came together. Came together to defend a stronger and safer Europe. You came together to pass one-in-a-generation infrastructure law building bridges connecting our Nation and our people. We came together to pass one of the most significant law ever helping victims exposed to toxic burn pits.",
+          "confidence": 0.85,
+          "context_type": "Populist - Framing (Us vs. Them/Compromise)"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "I ran for President to fundamentally change things. To make sure our economy works for everyone so we can all feel that pride in what we do. To build an economy from the bottom up and the middle out, not from the top down. Because when the middle class does well, the poor have a ladder up, and the wealthy still do very well. We all do well.",
+          "confidence": 0.88,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.80,
+          "context_type": "Nationalistic Pride"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "They were invented in America. And we used to make 40 percent of the world's chips. In the last several decades, we lost our edge. We're down to only producing 10 percent.",
+          "confidence": 0.75,
+          "context_type": "Nationalistic Pride/Economic Nationalism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Let's get that straight: They were invented in America.",
+          "confidence": 0.70,
+          "context_type": "Nationalistic Pride"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

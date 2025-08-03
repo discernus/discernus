@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on the two core axes of Populism-Pluralism and Nationalism-Patriotism. Evidence extraction prioritized direct quotes supporting the dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c3c591512bd6...",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 0.8,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our democracy must be not only the envy of the world but the engine of our own renewal. There is nothing wrong with America that cannot be cured by what is right with America.",
+          "confidence": 0.7,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let us resolve to make our Government a place for what Franklin Roosevelt called bold, persistent experimentation, a Government for our tomorrows, not our yesterdays.",
+          "confidence": 0.7,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "My fellow citizens, today we celebrate the mystery of American renewal.",
+          "confidence": 0.6,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.6,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Let us begin a new with energy and hope, with faith and discipline. And let us work until our work is done.",
+          "confidence": 0.7,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

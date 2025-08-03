@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1b53d9b9705a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the provided framework, focusing on populism-pluralism and nationalism-patriotism axes. Evidence extraction prioritized direct quotes reflecting the defined markers for each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"trump_sotu_2017.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.88,\n          \"salience\": 0.92,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.80\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My job is not to represent the world. My job is to represent the United States of America.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_framing\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must restore integrity and the rule of law at our borders.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Buy American and hire American.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our allies will find that America is once again ready to lead. All the nations of the world\u2014friend or foe\u2014will find that America is strong, America is proud, and America is free.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"exceptional_nation\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We have seen the attacks in France, in Belgium, in Germany, and all over the world. It is not compassion, but reckless to allow uncontrolled entry from places where proper vetting cannot occur.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"foreign_threat\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:20:37.774757+00:00",
+    "end_time": "2025-08-02T00:20:40.336057+00:00",
+    "duration_seconds": 2.5613,
+    "llm_interaction_hash": "ce94d8f2c3e11a18"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

@@ -1,0 +1,74 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions as defined. The approach prioritized qualitative interpretation of the provided text to extract raw scores and supporting evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimensional_scores": {
+        "Popuplism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Popuplism-Pluralism Score",
+          "quote_text": "Our job is to make life better for our fellows Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.",
+          "confidence": 0.9,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Popuplism-Pluralism Score",
+          "quote_text": "The future of hope and opportunity begins with a growing economy, and that is what we have. We're now in the 41st month of uninterrupted job growth, a recovery that has created 7.2 million new jobs so far.",
+          "confidence": 0.85,
+          "context_type": "Economic Populism"
+        },
+        {
+          "dimension": "Popuplism-Pluralism Score",
+          "quote_text": "My second proposal is to help the States that are coming up with innovative ways to cover the uninsured.",
+          "confidence": 0.8,
+          "context_type": "Direct Democracy Appeals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "To secure our border, we're doubling the size of the Border Patrol and funding new infrastructure and technology.",
+          "confidence": 0.9,
+          "context_type": "Territorial Claims"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "All of us in this room, the future of our Nation is in the balance. To prevail, we must remove the conditions that inspire blind hatred and drive 19 men to get onto airplanes and to come and kill us.",
+          "confidence": 0.85,
+          "context_type": "Foreign Threat"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We've added many critical protections to guard the homeland. We know with certainty that the horrors of that September morning were just a glimpse of what the terrorists intend for us, unless we stop them.",
+          "confidence": 0.85,
+          "context_type": "Foreign Threat"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is on the verge of technological breakthroughs that will enable us to live our lives less dependent on oil. And these technologies will help us to be better stewards of the environment, and they will help us to confront the serious challenge of global climate change.",
+          "confidence": 0.8,
+          "context_type": "American Greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

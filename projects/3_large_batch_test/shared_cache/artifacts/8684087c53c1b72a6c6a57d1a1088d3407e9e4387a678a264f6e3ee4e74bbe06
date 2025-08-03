@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the Populism-Pluralism and Nationalism-Patriotism axes. The document is Obama's 2013 State of the Union address, which generally demonstrates a pluralistic and patriotic stance, while acknowledging populist grievances and asserting national strength."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.3,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.4,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agree with us.",
+          "confidence": 0.9,
+          "context_type": "Support for pluralism, emphasizing compromise and open discourse."
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We have to change the system to reflect our better selves. I think we’ve got to end the practice of drawing our congressional districts so that politicians can pick their voters and not the other way around. Let a bipartisan group do it.",
+          "confidence": 0.88,
+          "context_type": "Call for systemic, bipartisan reform to democratic processes, reflecting pluralistic problem-solving."
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "it has been difficult to find agreement over the last 7 years. And a lot of them fall under the category of what role the Government should play in making sure the system’s not rigged in favor of the wealthiest and biggest corporations.",
+          "confidence": 0.85,
+          "context_type": "Acknowledgement of a 'rigged system' favoring elites, a populist grievance, but framed as a problem to be solved institutionally."
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "food stamp recipients did not cause the financial crisis; recklessness on Wall Street did.",
+          "confidence": 0.8,
+          "context_type": "Directly blames 'Wall Street' (an elite institution) for a societal problem, a clear populist framing of economic issues."
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Our unique strengths as a nation—our optimism and work ethic, our spirit of discovery, our diversity, our commitment to rule of law—these things give us everything we need to ensure prosperity and security for generations to come.",
+          "confidence": 0.9,
+          "context_type": "Emphasis on inclusive national characteristics and civic values (diversity, rule of law) as sources of strength, aligning with patriotism."
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Voices that help us see ourselves not, first and foremost, as Black or White or Asian or Latino, not as gay or straight, immigrant or native born, not Democrat or Republican, but as Americans first, bound by a common creed.",
+          "confidence": 0.9,
+          "context_type": "Strong appeal for inclusive citizenship and unity transcending identity categories, rooted in a shared national 'creed'."
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Let me tell you something: The United States of America is the most powerful nation on Earth. Period. ... Our troops are the finest fighting force in the history of the world.",
+          "confidence": 0.85,
+          "context_type": "Strong assertion of national supremacy and military power, indicating a degree of nationalistic pride."
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "With TPP, China does not set the rules in that region, we do. You want to show our strength in this new century? Approve this agreement. Give us the tools to enforce it.",
+          "confidence": 0.8,
+          "context_type": "Framing trade policy as a means for the US to assert global rule-setting authority and competitive strength."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

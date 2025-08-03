@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis applied according to the provided framework. Scores reflect dimensional intensity and rhetorical prominence. Evidence extraction focused on strongest supporting quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c4cc6452ee09",
+      "document_name": "Republican_Platform_2004.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe that the will of the people should be the ultimate guide for government action, and that individual liberties and constitutional principles must be protected.",
+          "confidence": 0.90,
+          "context_type": "Direct Democracy Appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The economic policies of this administration have been designed to create jobs and opportunity for all Americans, not just the wealthy elite.",
+          "confidence": 0.85,
+          "context_type": "Economic Populism Appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is a nation exceptional in its history and mission, a beacon of freedom and opportunity for the world.",
+          "confidence": 0.95,
+          "context_type": "Cultural Supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must defend our borders and our sovereignty against foreign influence and illegal immigration.",
+          "confidence": 0.90,
+          "context_type": "Foreign Threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

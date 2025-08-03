@@ -29,9 +29,9 @@ To ensure consistency across all frameworks, these terms have specific meanings:
 
 ### Character Limit Policy
 
-**Maximum Framework Size**: 15,000 characters (15KB)
+**Maximum Framework Size**: 30,000 characters (30KB)
 
-**Rationale**: Concise frameworks ensure lower operational costs, reduce LLM processing latency, and promote clear, focused instructions that improve analytical reliability. The v7.0 gasket architecture dramatically simplifies Analysis Agent requirements while eliminating parsing brittleness.
+**Rationale**: Framework quality and comprehensiveness are prioritized over size constraints. Modern LLM context windows and negligible token costs make the previous 15KB limit an unnecessary constraint on analytical sophistication. The v7.0 gasket architecture dramatically simplifies Analysis Agent requirements while eliminating parsing brittleness.
 
 **Validation**: The system enforces this limit during experiment ingest.
 

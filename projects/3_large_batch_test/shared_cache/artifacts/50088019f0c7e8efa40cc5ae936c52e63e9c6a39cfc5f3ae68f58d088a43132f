@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the provided framework, focusing on populism-pluralism and nationalism-patriotism axes. Evidence extraction prioritized direct quotes reflecting the defined markers for each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "trump_sotu_2017.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.88,
+          "salience": 0.92,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+          "confidence": 0.95,
+          "context_type": "populist_framing"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must restore integrity and the rule of law at our borders.",
+          "confidence": 0.90,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Buy American and hire American.",
+          "confidence": 0.90,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation.",
+          "confidence": 0.90,
+          "context_type": "national_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our allies will find that America is once again ready to lead. All the nations of the world—friend or foe—will find that America is strong, America is proud, and America is free.",
+          "confidence": 0.85,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We have seen the attacks in France, in Belgium, in Germany, and all over the world. It is not compassion, but reckless to allow uncontrolled entry from places where proper vetting cannot occur.",
+          "confidence": 0.80,
+          "context_type": "foreign_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

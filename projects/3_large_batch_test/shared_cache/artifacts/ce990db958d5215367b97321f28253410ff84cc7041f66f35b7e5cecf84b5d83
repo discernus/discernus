@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on populism and nationalism dimensions. The document was processed with the intention extraction module of the enhanced Gasket architecture."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.55,
+          "confidence": 0.8
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.55,
+          "salience": 0.65,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The Democratic Platform stands for the ordinary Americans, for real Americans, not for the special interests or the swamp in Washington.",
+          "confidence": 0.85,
+          "context_type": "populist_core_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe in the will of the people, the voice of the people, and the people's choice, not the dictates of the elites.",
+          "confidence": 0.8,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is the greatest country on Earth, an exceptional nation with a superior civilization and a unique heritage.",
+          "confidence": 0.9,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must protect our borders, our culture, and our way of life from foreign influence and invasion.",
+          "confidence": 0.85,
+          "context_type": "foreign_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

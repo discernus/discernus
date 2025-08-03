@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_174273e78798",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the Populism-Pluralism axis and the Nationalism-Patriotism axis. Emphasis placed on identifying rhetorical markers indicative of populist appeals, anti-elite sentiment, national pride, and calls for collective action or identity.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"233ca2aa895c...\",\n      \"document_name\": \"Republican_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"populism_plur(alism)_axis\": {\n          \"raw_score\": 0.92,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plur(alism)_axis\",\n          \"quote_text\": \"The Republican Party has the vision and leadership to address these issues. We will preserve local control of public schools, while demanding high standards and accountability for results.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plur(alism)_axis\",\n          \"quote_text\": \"We commit ourselves to bold reforms in education \u2013 to make every school a place of learning and achievement for every child. We will preserve local control of public schools, while demanding high standards and accountability for results.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plur(alism)_axis\",\n          \"quote_text\": \"We are the party of ideas. We are the party that follows its bold words with bold deeds.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our country, after an era of drift, must now set itself to important tasks and higher goals. The Republican Party has the vision and leadership to address these issues.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"nationalistic_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America First economic policies\",\n          \"confidence\": 0.85,\n          \"context_type\": \"nationalistic_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will rebuild the American military and returning to a foreign policy of strength and purpose and a renewed commitment to our allies. We will deploy defenses against ballistic missiles and develop the weapons and strategies needed to win battles in this new technological era.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"nationalistic_sentiment\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:19:43.599456+00:00",
+    "end_time": "2025-08-02T00:19:48.798394+00:00",
+    "duration_seconds": 5.198938,
+    "llm_interaction_hash": "436c2a4cf4d8ca28"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "233ca2aa895c18d0ec09c39a0c08cda75a118477cb100c9f6615034f1d452a62"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

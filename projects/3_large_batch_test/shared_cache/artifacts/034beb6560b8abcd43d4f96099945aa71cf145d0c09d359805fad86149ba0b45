@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_97fdec99d774",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. The analysis focused on identifying populist and nationalist-patriotic themes within the provided inaugural address. Evidence extraction prioritized direct quotes that clearly illustrate the identified dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2009.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.80,\n          \"confidence\": 0.75\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.85,\n          \"confidence\": 0.80\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"For forty-four Americans have now taken the Presidential oath. The words have been spoken during rising tides of prosperity and the still waters of peace.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"General statement on national history and aspirations\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We remain a young nation, but in the words of Scripture, the time has come to set aside childish things. The time has come to reaffirm our enduring spirit, to choose our better history, to take hold of that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Focus on people's shared history and idealized future\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"In reaffirming the greatness of our Nation, we understand that greatness is never a given. It must be earned. Our journey has never been one of short-cuts or settling for less.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Emphasis on collective effort and shared destiny\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"For in this crisis, we know that our people have remained faithful to the ideals of our forefathers and true to our founding documents.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Reference to foundational principles and ancestors\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We are a young nation, but in the words of Scripture, the time has come to set aside childish things. The time has come to reaffirm our enduring spirit, to choose our better history, to take hold of that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Emphasis on historical continuity and national ideals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"To the Muslim world, we seek a new beginning, based on mutual interest and mutual respect.\",\n          \"confidence\": 0.60,\n          \"context_type\": \"Expression of global engagement with respect for other nations\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"For we know that our patchwork heritage is a strength, not a weakness. We are a nation of Christians and Muslims, Jews and Hindus, and nonbelievers.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"Acknowledgement of diverse national identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:59:36.198776+00:00",
+    "end_time": "2025-08-02T00:59:39.171474+00:00",
+    "duration_seconds": 2.972698,
+    "llm_interaction_hash": "b841ab78d1f49fe0"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The speech exhibits a blend of populist and pluralist rhetoric domestically, with a stronger lean towards nationalism in its foreign policy and national security framing. The 'us vs. them' narrative is predominantly applied to external threats (terrorism, hostile regimes) rather than internal elites, though anti-establishment sentiments regarding government inefficiency and special interests are present. Calls for bipartisanship and adherence to constitutional principles are notable."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.65,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.75,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+          "confidence": 0.9,
+          "context_type": "rhetorical emphasis"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+          "confidence": 0.9,
+          "context_type": "anti-elite sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "Let us show them that Republicans and Democrats can compete for votes and cooperate for results at the same time.",
+          "confidence": 0.9,
+          "context_type": "bipartisan cooperation"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "I've submitted judicial nominees who will rule by the letter of the law, not the whim of the gavel.",
+          "confidence": 0.9,
+          "context_type": "institutional respect"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Yet history will record that amid our differences, we acted with purpose, and together we showed the world the power and resilience of American self-government.",
+          "confidence": 0.9,
+          "context_type": "national greatness"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "These horrific images serve as a grim reminder: The advance of liberty is opposed by terrorists and extremists, evil men who despise freedom, despise America, and aim to subject millions to their violent rule.",
+          "confidence": 0.9,
+          "context_type": "foreign threat - manichaean framing"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "On the homefront, we will continue to take every lawful and effective measure to protect our country. This is our most solemn duty.",
+          "confidence": 0.9,
+          "context_type": "homeland defense"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "By trusting the people, our Founders wagered that a great and noble nation could be built on the liberty that resides in the hearts of all men and women.",
+          "confidence": 0.9,
+          "context_type": "founding principles"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

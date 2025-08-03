@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_3f300370aa76",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Analyzed speech for populist and nationalist discourse based on linguistic markers and thematic content. The speech exhibits consistently high scores on both axes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2025.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it\u2019s our presidency, is the most successful in the history of our nation. By many.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct Democracy Appeal/Anti-Elite\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"And we\u2019ve ended weaponized government, where, as an example, a sitting president is allowed to viciously prosecute his political opponent like me. How did that work out? Not too good, not too good. And I have stopped all government censorship and brought back free speech in America, it\u2019s back. And two days ago I signed an order making English the official language of the United States of America.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Anti-Elite Language/Cultural Populism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Cultural Supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We\u2019ve ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military. And our country will be woke no longer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Cultural Purity/Anti-Foreign Influence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:59:32.686169+00:00",
+    "end_time": "2025-08-02T02:59:55.241693+00:00",
+    "duration_seconds": 22.555524,
+    "llm_interaction_hash": "34c1f57aa9bb804b"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

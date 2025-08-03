@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_93ff1c53fd5c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "cohesive_flourishing_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"coeff_v7_0\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Cohesive Flourishing Framework v7.0. The document was analyzed across ten dimensions. Confidence is high due to clear and abundant textual evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2020.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"envy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.7\n        },\n        \"emulation\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.75\n        },\n        \"enmity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.85\n        },\n        \"amity\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Now Republicans and Democrats must join forces again to confront an urgent national crisis.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"We can make our communities safer, our families stronger, our culture richer, our faith deeper, and our middle class bigger and more prosperous than ever before.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"aspirational\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"Ten of thousands of innocent Americans are murdered by criminal illegal aliens.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"threat_portrayal\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"We have a moral duty to create an immigration system that protects the lives and jobs of our citizens.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"justification\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"The American people can be proud that we have more women in the workforce than ever before.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"achievement_claim\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"To build on our incredible economic success, one priority is paramount: reversing decades of calamitous trade policies.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"future_orientation\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We are now making it clear to China that, after years of targeting our industries and stealing our intellectual property, the theft of American jobs and wealth has come to an end.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"adversarial_stance\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"I have ordered an end to the disastrous Iran nuclear deal.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"confrontational_action\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"Chairman Kim and I will meet again on February 27 and 28 in Vietnam.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"diplomatic_engagement\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"unity_call\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"Let us work together to build a culture that cherishes innocent life.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"shared_value\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:59:52.379841+00:00",
+    "end_time": "2025-08-01T23:59:56.777365+00:00",
+    "duration_seconds": 4.397524,
+    "llm_interaction_hash": "0e28a048d30587ed"
+  },
+  "input_artifacts": {
+    "framework_hash": "40fd20a6807a0907c775c9b52b51695898a830d6ed7e91a008b717dd67e985ed",
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2b_cff_cohesive_flourishing",
+      "experiment_root": "/Volumes/code/discernus/projects/2b_cff_cohesive_flourishing",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T235941Z_95b623ab"
+  }
+}

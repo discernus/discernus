@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The framework was applied to identify and score populism and nationalism-patriotism dimensions within the provided document. Evidence extraction focused on direct quotes that exemplify the identified themes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "You're raising the standards for our public schools, and you are giving our seniors prescription drug coverage under Medicare. We have faced serious challenges together, and now we face a choice: We can go forward with confidence and resolve, or we can turn back to the dangerous illusion that terrors are not plotting and outlaw regimes are no threat to us.",
+          "confidence": 0.9,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My administration is promoting free and fair trade to open up new markets for America's entrepreneurs and manufacturers and farmers, to create jobs for American workers. Younger workers should have the opportunity to build a nest egg by saving part of their Social Security taxes in a personal retirement account. We should make the Social Security system a source of ownership for the American people.",
+          "confidence": 0.85,
+          "context_type": "Economic Populism"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "I know that some people question if America is really in a war at all. They view terrorists more as a crime, a problem to be solved mainly with law enforcement and indictments. After the World Trade Center was first attacked in 1993, some of the guilty were indicted and tried and convicted and sent to prison. But the matter was not settled. The terrorists were still training and plotting in other nations and drawing up more ambitious plans. After the chaos and carnage of September the 11th, it is not enough to serve our enemies with legal papers. The terrorists and their supporters declared war on the United States, and war is what they got.",
+          "confidence": 0.95,
+          "context_type": "Us vs. Them Framing"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Our greatest responsibility is the active defense of the American people. Twenty-eight months have passed since September the 11th, 2001. Over two years without an attack on American soil. And it is tempting to believe that the danger is behind us. That hope is understandable, comforting—and false. The killing has continued in Bali, Jakarta, Casablanca, Riyadh, Mogadishu, Jerusalem, Istanbul, and Baghdad. The terrorists continue to plot against America and the civilized world. And by our will and courage, this danger will be defeated.",
+          "confidence": 0.9,
+          "context_type": "American Greatness"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "With the help from the new Afghan army, our coalition is leading aggressive raids against the surviving members of the Taliban and Al Qaeda. The men and women of Afghanisan are building a nation that is free and proud and fighting terror, and America is honored to be their friend.",
+          "confidence": 0.8,
+          "context_type": "Ethnic Identity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We are living in a time of great change in our world, in our economy, in science and medicine. Yet some things endure: courage and compassion, reverence and integrity, respect for differences of faith and race. The values we try to live by never change, and they are instilled in us by fundamental institutions such as families and schools and religious congregations. Those institutions, those unseen pillars of civilization, must remain strong in America, and we will defend them. We must stand with our families to help them raise healthy, responsible children. When it comes to helping children make right choices, there is work for all of us to do.",
+          "confidence": 0.75,
+          "context_type": "Cultural Purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

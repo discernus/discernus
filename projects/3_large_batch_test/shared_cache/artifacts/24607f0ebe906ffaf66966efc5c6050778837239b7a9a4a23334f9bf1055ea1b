@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e1233cbe3c96",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1, focusing on identifying populist and nationalist themes in the provided text. The framework's comprehensive list of markers for each dimension was utilized to assess the raw scores for Populism-Pluralism and Nationalism-Patriotism, along with their respective salience and confidence levels. Evidence extraction prioritized quotes that directly exemplify the identified markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2005.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.88\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"As Americans, we believe in the power of individuals to determine their destiny and shape the course of history.\",\n          \"confidence\": 0.89,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"To build a prosperous future, we must trust people with their own money and empower them to grow our economy.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The American people expect us to get it done.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"people_vs_establishment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We face hard decisions about peace and war, rising competition in the world economy, and the health and welfare of our citizens. These issues call for vigorous debate, and I think it's fair to say, we've answered the call.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_interest_focus\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Yet history will record that amid our differences, we acted with purpose, and together we showed the world the power and resilience of American self-government.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_superiority\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is a force for hope in the world because we are a compassionate people, and some of the most compassionate Americans are those who have risked life and limb so that we might live in freedom and peace.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national_exceptionalism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our mission in Iraq has been difficult and trying for our Nation, but it is in the vital interest of the United States that we succeed. A free Iraq will deny Al Qaeda a safe haven. A free Iraq will show millions across the Middle East that a future of liberty is possible. A free Iraq will be a friend of America, a partner in fighting terror, and a source of stability in a dangerous part of the world.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"geopolitical_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:37.970480+00:00",
+    "end_time": "2025-08-02T15:17:41.347832+00:00",
+    "duration_seconds": 3.377352,
+    "llm_interaction_hash": "c919cac8aa5ecda7"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

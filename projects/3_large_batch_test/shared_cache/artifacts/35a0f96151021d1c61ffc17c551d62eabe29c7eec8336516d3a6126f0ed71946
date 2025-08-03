@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_cf14e9ac7f38",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the populism-pluralism and nationalism-patriotism axes. Evidence extraction prioritized strong linguistic markers as defined by the framework. Confidence levels reflect the clarity and directness of the language used in relation to the defined dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2002.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.92,\n          \"confidence\": 0.94\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve. And tonight that is a privilege we share with newly elected leaders of Afghanistan, the Palestinian Territories, Ukraine, and a free and sovereign Iraq.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My goal here is to build and preserve a community of free and independent nations, with governments that answer to their citizens and reflect their own cultures. And because democracy respects their own people and their neighbors, the advance of freedom will lead to peace.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My second great responsibility to our children and grandchildren is to honor and to pass along the values that sustain a free society. So many of my generation, after a long journey, have come home to family and faith and are determined to bring up responsible, moral children. Government is not the source of these values, but Government should never undermine them.\",\n          \"confidence\": 0.91,\n          \"context_type\": \"common_sense\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Two weeks ago, I stood on the steps of this Capitol and renewed the commitment of our Nation to the guiding ideal of liberty for all.\",\n          \"confidence\": 0.96,\n          \"context_type\": \"national_identity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing. The Al Qaida terror network that attacked our country still has leaders, but many of its top commanders have been removed. There are still governments that sponsor and harbor terrorists, but their number has shrunk. There are still regimes seeking weapons of mass destruction but no longer with attention and without consequence. Our country is still the target of terrorists who want to kill many and intimidate us all, and we will stay on the offensive against them until the fight is won.\",\n          \"confidence\": 0.94,\n          \"context_type\": \"foreign_threat\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America will continue to lead the world in medical research that is ambitious, aggressive, and always ethical.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"exceptional_nation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:11:43.087891+00:00",
+    "end_time": "2025-08-02T00:11:46.625931+00:00",
+    "duration_seconds": 3.53804,
+    "llm_interaction_hash": "6e69d7c942475bca"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

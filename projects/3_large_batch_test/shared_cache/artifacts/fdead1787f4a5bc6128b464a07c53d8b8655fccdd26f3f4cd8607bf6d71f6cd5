@@ -1,0 +1,80 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism dimensions. Evidence extraction prioritized direct quotes supporting identified markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2009.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.72,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.68,
+          "salience": 0.75,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is our task, to report the state of the Union; to improve it is the task of us all.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But we can't ask senior citizens and working families to shoulder the entire burden of deficit reduction while asking nothing more from the wealthiest and the most powerful.",
+          "confidence": 0.90,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So tonight I offer a plan to put people to work as soon as possible on our most urgent repairs, like the nearly 70,000 structuraly deficient bridges across the country.",
+          "confidence": 0.80,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "So tonight, thanks to the grit and determination of the American people, there is much progress to report.",
+          "confidence": 0.85,
+          "context_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We buy more American cars than we have in 5 years and less foreign oil than we have in 20.",
+          "confidence": 0.80,
+          "context_type": "economic_nationalism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our first priority is making America a magnet for new jobs and manufacturing.",
+          "confidence": 0.85,
+          "context_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The greatest nation on Earth.",
+          "confidence": 0.90,
+          "context_type": "american_greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

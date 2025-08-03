@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_376d6dd03c88",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2013.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.65,\n          \"confidence\": 0.8\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable Rights; that among these are Life, liberty, and the pursuit of happiness.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Core Populist Appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"For the American people can no more meet the demands of today's world by acting alone than American soldiers could have met the forces of fascism or communism with muskets and militias.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Populist Framing (Us vs. Them - implicitly)\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"For we remember that in this country of plenty no person can no longer meet the demands of today's world by acting alone than American soldiers could have met the forces of fascism or communism with muskets and militias. No single person can train all the math and science teachers we'll need to equip our children for the future, or build the roads and networks and research labs that will bring new jobs and businesses to our shores.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"Critique of Individualism/Elite\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"What makes us exceptional\u2014what makes us America\u2014is our allegiance to an idea articulated in a declaration made more than two centuries ago: We hold these truths to be self-evident, that all men are created equal;\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Exceptionalism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"The patriots of 1776 did not fight to replace the tyranny of a king with the privileges of a few or the rule of a mob. They gave to us a republic, a government of and by and for the people, entrusting each generation to keep safe our founding creed.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Founding Principles/Patriotism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We must harness new ideas and technology to remake our government, revamp our Tax Code, reform our schools, and empower our citizens with the skills they need to work harder, learn more, reach higher.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"National Progress/Renewal\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America will remain the anchor of strong alliances in every corner of the globe. And we will renew those institutions that extend our capacity to manage crises abroad, for no one has a greater stake in a peaceful world than its most powerful nation. We will support democracy from Asia to Africa, from the Americas to the Middle East, because our interests and our conscience compel us to act on behalf of those who long for freedom. And we must be a source of hope to the poor, the sick, the marginalized, the victims of prejudice\u2014not out of mere charity, but because peace in our time requires the constant advance of those principles that our common creed describes: tolerance and opportunity, human dignity and justice.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Global Role/National Interest\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:59:39.178183+00:00",
+    "end_time": "2025-08-02T00:59:42.623124+00:00",
+    "duration_seconds": 3.444941,
+    "llm_interaction_hash": "61220362f588a64e"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

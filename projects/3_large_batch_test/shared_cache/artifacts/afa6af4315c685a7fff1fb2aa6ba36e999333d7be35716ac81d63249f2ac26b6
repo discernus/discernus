@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to assess the rhetorical strategies employed in the document. Emphasis was placed on identifying markers for each dimension and extracting supporting evidence. The analysis focused on identifying the raw intensity, salience, and confidence for each dimension as per the framework's prompt."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "It is my task, he said, to report the state of the Union; to improve it is the task of us all. Tonight, thanks to the grit and determination of the American people, there is much progress to report.",
+          "confidence": 0.90,
+          "context_type": "Core Populist Appeals"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "But we can't expect seniors and working families to shoulder the entire burden of deficit reduction while asking nothing more from the wealthiest and the most powerful. How is that fair? Why is it that sequestration of deficit reduction is a big emergency justifying making cuts in education and job training, Medicare, and Social Security benefits, but not closing some loopholes?",
+          "confidence": 0.90,
+          "context_type": "Anti-Elite Language"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "Tonight, I'm announcing a new challenge to redesign America's high schools so they better equip graduates for the demands of a high-tech economy. And we'll reward schools that develop new partnerships with colleges and employers and create classes that focus on science, technology, engineering, and math: the skills today's employers are looking for to fill the jobs that are there right now and will be there in the future.",
+          "confidence": 0.85,
+          "context_type": "Civic Duty"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.",
+          "confidence": 0.90,
+          "context_type": "Civic Duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

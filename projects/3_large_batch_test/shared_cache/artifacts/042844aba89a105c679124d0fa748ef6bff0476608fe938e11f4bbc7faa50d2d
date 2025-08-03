@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_420a52557e59",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. The document exhibits strong populist rhetoric and moderate nationalist sentiment.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2012.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My fellow Americans: We are 15 years into this new century. Fifteen years that dawned with terror touching our shores, that unfolded with a new generation fighting two long and costly wars, that saw a vicious recession spread across our Nation and the world. It has been and still is a hard time for many. But tonight we turn the page. Tonight, after a breakthrough year for America, our economy is growing and creating jobs at the fastest pace since 1999.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"So tonight, I want to focus less on a checklist of proposals and focus more on the values at stake in the choices before us. It begins with our economy. Seven years ago, when my grandfather went off to war, having women like my grandmother in the workforce was a national security priority, so this country provided universal child care. In today's economy, when having both parents in the workforce is an economic necessity for many families, we need affordable, high-quality child care more than ever.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Populist Framing of Economic Hardship\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"It's not a nice-to-have, it's a must-have. So it's time we stop treating child care as a side issue, or as a woman's issue, and treat it like the national economic priority that it is for all of us.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populist Framing of Economic Hardship\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"And today, America is number one in oil and gas. America is number one in wind power. Every 3 weeks, we bring online as much solar power as we did in all of 2008.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"National Superiority Claims\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"As Americans, we cherish our civil liberties, and we need to uphold that commitment if we want maximum cooperation from other countries and industry in our fight against terrorist networks. So while some have moved on from the debates over our surveillance programs, I have not. As promised, our intelligence agencies have worked hard, with the recommendations of privacy advocates, to increase transparency and build more safeguards against potential abuse. And next month, we'll issue a report on how we're keeping our promise to keep our country safe while strengthening privacy.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Civic Duty/Protection\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"In West Africa, our troops, our scientists, our doctors, our nurses, our health care workers are rolling back Ebola, saving countless lives and stopping the spread of disease. I could not be prouder of them, and I thank this Congress for your bipartisan support of their efforts. But the job is not yet done, and the world needs to use this lesson to build a more effective global effort to prevent the spread of future pandemics, invest in smart development, and eradicate extreme poverty.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Civic Duty/Protection\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:59:52.815894+00:00",
+    "end_time": "2025-08-02T00:59:56.704856+00:00",
+    "duration_seconds": 3.888962,
+    "llm_interaction_hash": "90a6b727933e7d02"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

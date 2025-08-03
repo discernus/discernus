@@ -1,0 +1,74 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the specified framework, focusing on identifying populist and nationalist rhetoric. Evidence extraction prioritized direct quotes aligning with the framework's dimensional markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2012.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.92,
+          "confidence": 0.88
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.82
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our nation and our people cannot afford the status quo. We must begin anew, with profound changes in the way government operates; the way it budgets, taxes, and regulates. Jefferson's vision of a 'wise and frugal government' must be restored.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Put simply: The times call for trustworthy leadership and honest talk about the challenges we face. Our nation and our people cannot afford the status quo. We must begin anew, with profound changes in the way government operates; the way it budgets, taxes, and regulates.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Put simply: The times call for trustworthy leadership and honest talk about the challenges we face.",
+          "confidence": 0.75,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The American Dream is at risk. Our nation faces unprecedented uncertainty with great fiscal and economic challenges, and under the current Administration has suffered through the longest and most severe economic downturn since the Great Depression.",
+          "confidence": 0.88,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We believe in America. Republican National Convention. The 2012 Republican Platform is a statement of who we are and what we believe as a Party and our vision for a stronger and freer America. The pursuit of opportunity has defined America from our very beginning. This is a land of opportunity. The American Dream is a dream of equal opportunity for all.",
+          "confidence": 0.85,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our nation faces unprecedented uncertainty with great fiscal and economic challenges, and under the current Administration has suffered through the longest and most severe economic downturn since the Great Depression.",
+          "confidence": 0.8,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's best days lay ahead. It will take honest, results-oriented, conservative leadership to enact good policies for our people. They will provide it.",
+          "confidence": 0.78,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

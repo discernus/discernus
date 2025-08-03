@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_986a2553722c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on identifying populist and nationalist rhetoric within the provided document. Scores are based on the presence and intensity of specific linguistic markers associated with each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_1992.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.98,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.85,\n          \"confidence\": 0.80\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Therefore we call for a revolution in government, to take power away from entrenched bureaucracies and narrow interests in Washington and put it back in the hands of ordinary people.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_democracy_appeal\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The Revolution of 1992 is about restoring America's economic greatness.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Party's first priority is opportunity\u2014broad-based, non-inflationary economic growth and the opportunity that flows from it.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_economic_opportunity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"President Bush, with no interest in domestic policy, has given America the slowest economic growth, the slowest income growth, and the slowest jobs growth since the Great Depression.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"criticism_of_opposing_administration\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We believe in the American people. We will challenge all Americans to give something back to their country.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"civic_duty_appeal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:36.740130+00:00",
+    "end_time": "2025-08-02T00:18:40.630268+00:00",
+    "duration_seconds": 3.890138,
+    "llm_interaction_hash": "e649144f6779460a"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "80416d50539e9b67331b85e8e63e2f7f223b07444b178ad95bd33eabb6828870"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

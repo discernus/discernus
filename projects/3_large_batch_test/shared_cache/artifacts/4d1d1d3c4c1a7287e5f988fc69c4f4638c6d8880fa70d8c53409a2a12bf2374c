@@ -1,0 +1,66 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of President Bush's 2009 State of the Union address focusing on populism and nationalism, utilizing the framework's two-axis model."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "populism_plurallism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "Americans are rising to the tasks of history, and they expect the same from us. In their efforts, their enterprise, and their character, the American people are showing that the state of our Union is confident and strong.",
+          "confidence": 0.8,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "Our greatest responsibility is the active defense of the American people.",
+          "confidence": 0.7,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "So tonight I ask you to codify this into law, so people of faith can know that the law will never discriminate against them again.",
+          "confidence": 0.75,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is on the offensive against the terrorists who started this war. Last month, Khalid Sheik Mohammed, a mastermind of September the 11th, awoke to find himself in the custody of U.S. and Pakistani authorities.",
+          "confidence": 0.9,
+          "context_type": "nationalist_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Nation's health care system, like our economy, is also in a time of change. Amazing medical technologies are improving and saving lives. This dramatic progress has brought its own challenge, in the rising costs of medical care and health insurance.",
+          "confidence": 0.85,
+          "context_type": "nationalist_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America acts in this cause with friends and allies at our side, yet we understand our special calling: This great Republic will lead the cause of freedom.",
+          "confidence": 0.95,
+          "context_type": "nationalist_sentiment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

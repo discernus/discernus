@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_037c3bbb1534",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus on identifying populist and nationalist themes within the provided document. The analysis prioritizes raw scores for populism-pluralism and nationalism-patriotism axes, alongside supporting evidence and confidence levels.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2015.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"For these Americans and so many others, change has not come fast enough. So some are frustrated, some are angry. They don't understand why it seems like bad behavior on Wall Street is rewarded, but hard work on Main Street isn't, or why Washington has been unable to or unwilling to solve any of our problems.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_sentiment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And you know what else they share? They share a stubborn resilience in the face of adversity. After one of the most difficult years in our history, they remain busy building cars and teaching kids, starting businesses and going back to school.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight I'm proposing that we take $30 billion of the money Wall Street banks have repaid and use it to help community banks give small businesses the credit they need to stay afloat.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"And again, we must answer history's call. One year ago, I took office amid two wars, and an economy rocked by a severe recession, a financial system on the verge of collapse, and a government deeply in debt.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"historical_context\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Despite all our divisions and disagreements, our hesitations and our fears, America prevailed because we chose to move forward as one Nation, as one people.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"national_unity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We must continue to go through the budget, line by line, page by page, to eliminate programs that we can't afford and don't work.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"fiscal_responsibility\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:03.154614+00:00",
+    "end_time": "2025-08-02T00:18:06.324668+00:00",
+    "duration_seconds": 3.170054,
+    "llm_interaction_hash": "1bce15a62944234f"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

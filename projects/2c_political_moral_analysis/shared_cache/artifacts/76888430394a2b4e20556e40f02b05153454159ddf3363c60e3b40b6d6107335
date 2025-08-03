@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b06b2f1c9026",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "political_moral_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Moral Foundations Theory Framework\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Moral Foundations Theory Framework v7.0. Focus was on identifying and scoring raw dimensional intensities, salience, and confidence levels for each foundation pair as defined in the framework. Evidence extraction prioritized direct quotes supporting the assessed dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"care\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"harm\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"fairness\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"cheating\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.6\n        },\n        \"loyalty\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.7\n        },\n        \"betrayal\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 0.6\n        },\n        \"authority\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 0.6\n        },\n        \"sanctity\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.6\n        },\n        \"degradation\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 0.6\n        },\n        \"liberty\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"oppression\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.6\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"care\",\n          \"quote_text\": \"My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"acknowledgment\"\n        },\n        {\n          \"dimension\": \"care\",\n          \"quote_text\": \"I am so deeply grateful to all of you for the great honor of your support and for all you have done for me. I wish the outcome had been different, my friends. The road was a difficult one from the outset, but your support and friendship never wavered. I cannot adequately express how deeply indebted I am to you.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"gratitude\"\n        },\n        {\n          \"dimension\": \"fairness\",\n          \"quote_text\": \"A century ago, President Theodore Roosevelt's invitation of Booker T. Washington to dine at the White House was taken as an outrage in many quarters. America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"historical comparison\"\n        },\n        {\n          \"dimension\": \"fairness\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth. Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"recognition of achievement\"\n        },\n        {\n          \"dimension\": \"liberty\",\n          \"quote_text\": \"I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"call for unity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:03:03.947272+00:00",
+    "end_time": "2025-08-02T00:03:07.450753+00:00",
+    "duration_seconds": 3.503481,
+    "llm_interaction_hash": "c3f5dde16807a0b2"
+  },
+  "input_artifacts": {
+    "framework_hash": "cf59247a351f231bf3ef00ec4d11b0ec5ed16ef834174ba5228b2b4bbc57781f",
+    "document_hashes": [
+      "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2c_political_moral_analysis",
+      "experiment_root": "/Volumes/code/discernus/projects/2c_political_moral_analysis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000243Z_1593675a"
+  }
+}

@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The document, Obama's 2009 Inaugural Address, strongly emphasizes institutional pluralism and civic patriotism. It consistently appeals to shared values, collective action, constitutional principles, and an inclusive national identity. There is a deliberate avoidance of anti-elite or Manichaean framing, and national pride is rooted in ideals and earned effort rather than ethnic or cultural supremacy."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.15,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.1,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "America has carried on not simply because of the skill or vision of those in high office, but because we the people have remained faithful to the ideals of our forebears and true to our founding documents.",
+          "confidence": 0.95,
+          "context_type": "Institutional Respect, Civic Duty"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The question we ask today is not whether our Government is too big or too small, but whether it works; whether it helps families find jobs at a decent wage, care they can afford, a retirement that is dignified. Where the answer is yes, we intend to move forward. Where the answer is no, programs will end.",
+          "confidence": 0.9,
+          "context_type": "Data-Driven Decisions, Pragmatism"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "To reaffirm our enduring spirit, to choose our better history, to carry forward that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+          "confidence": 0.95,
+          "context_type": "Constitutional Devotion, Universal Rights"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "We are a nation of Christians and Muslims, Jews and Hindus and nonbelievers. We are shaped by every language and culture, drawn from every end of this Earth.",
+          "confidence": 0.9,
+          "context_type": "Inclusive Citizenship, Diversity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

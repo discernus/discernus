@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_06cabad0f235",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus on populism-pluralism and nationalism-patriotism axes. Evidence extracted for key dimensions as per framework guidelines. Confidence levels reflect the clarity and directness of linguistic markers in the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2014.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.88,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.92,\n          \"confidence\": 0.92\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But while our economy may be weakened and our confidence shaken, United States of America will emerge stronger than before.\\n\\nThe weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"populist_intensity\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Now, if we're honest with ourselves, we'll admit that for too long, we have not always met these responsibilities as a Government or as a people. I say this not to lay blame or to look backwards, but because it is only by understanding how we arrived at this moment that we'll be able to lift ourselves out of this predicament.\",\n          \"confidence\": 0.89,\n          \"context_type\": \"populist_framing\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Those qualities that have made America the greatest force of progress and prosperity in human history, we still possess in ample measure. What is required now is for this country to pull together, confront boldly the challenges we face, and take responsibility for our future once more.\",\n          \"confidence\": 0.94,\n          \"context_type\": \"national_strength\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We are a nation that has seen progress amidst peril and claimed opportunity from our ordeedom. No longer will we hide it its price. We can make that commitment here tonight.\",\n          \"confidence\": 0.91,\n          \"context_type\": \"national_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:00.282934+00:00",
+    "end_time": "2025-08-02T00:18:03.151855+00:00",
+    "duration_seconds": 2.868921,
+    "llm_interaction_hash": "ee9e8ca34cab8c88"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

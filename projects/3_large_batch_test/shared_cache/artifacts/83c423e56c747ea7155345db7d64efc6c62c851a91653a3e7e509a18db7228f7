@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_2a4ce49ca94d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using the Political Discourse Analysis Framework v7.1. Focus was on identifying populist and nationalist rhetoric within the provided State of the Union address.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2004.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"Our job is to make life better for our fellow Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We've not found it in ourselves to act. So let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Call to Action / Populist Framing\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"My fellow citizens, our military commanders and I have carefully weighed the options. We discussed every possible approach. In the end, I chose this course of action because it provides the best chance for success.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Populist Framing / Us vs. Them\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:35.720047+00:00",
+    "end_time": "2025-08-02T15:17:37.966060+00:00",
+    "duration_seconds": 2.246013,
+    "llm_interaction_hash": "23cc0b4e452b55f1"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

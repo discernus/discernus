@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_9d5344af86b0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis completed following the framework's guidelines, focusing on populism and nationalism dimensions. Confidence is high due to clear linguistic markers and contextual cues. No mathematical calculations or derived metrics were performed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_2001.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.70,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let me begin tonight by saying to our men and women in uniform around the world and especially those helping peace take root in Bosnia and to their families, I thank you. America is very, very proud of you.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must answer here three fundamental questions: First, how do we make the American dream of opportunity for all a reality for all Americans who are willing to work for it? Second, how do we preserve our old and enduring values as we move into the future? And third, how do we meet these challenges together, as one America?\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We know big Government does not have all the answers. We know there's not a program for every problem. We know, and we have worked to give the American people a smaller, less bureaucratic Government in Washington.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Manichean Framing\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"I want to challenge every business that can possibly afford it to provide pension for your employees. And I challenge Congress to pass a proposal recommended by the White House Conference on Small Business that would make it easier for small businesses and farmers to establish their own pension plans.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Economic Populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Civic Duty\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America was built on challenges, not promises. And when we work together to meet them, we never fail. That is the key to a more perfect Union. Our individual dreams must be realized by our common efforts.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Founding Fathers Vision\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"All over the world, even after the cold war fades into memory, people still look to us and trust us to help them seek the blessings of peace and freedom.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"National Superiority\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America has always sought and always risen to every challenge. Who would say that having come so far together, we will not go forward from here? Who would say that this age of possibility is not for all Americans? Our country is a and always has been a great and good nation. But the best is yet to come if we all do our part.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"American Greatness\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:17:28.947329+00:00",
+    "end_time": "2025-08-02T00:17:32.635821+00:00",
+    "duration_seconds": 3.688492,
+    "llm_interaction_hash": "858d2c9976177405"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

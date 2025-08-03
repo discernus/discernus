@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_52ed57dce9a3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed using the provided framework to identify and score populism and nationalism dimensions in the provided document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2003.txt\",\n      \"dimensional_scores\": {\n        \"populism_plururalism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.92,\n          \"confidence\": 0.93\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"In this decisive year, you and I will make choices that determine both the future and the character of our country. We will choose to act confidently in pursuing the enemies of freedom, or retreat from our duties in the hope of an easier life. We will choose to build our prosperity by leading the world economy, or shut ourselves off from trade and opportunity.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"choice between paths\"\n        },\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"So the United States of America will continue to lead. Abroad, our Nation is committed to an historic, long-term goal: We seek the end of tyranny in our world. Some dismiss that goal as misguided idealism. In reality, the future security of America depends upon it. On September the 11th, 2001, we found that problems originating in a failed and oppressive state 7,000 miles away could bring murder and destruction to our country.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"leadership and threat\"\n        },\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"The road of victory is the road that will take our troops home. As we make progress on the ground and Iraqi forces increasingly take the lead, we should be able to further decrease our troop levels. But those decisions will be made by our military commanders, not by politicians in Washington, D.C.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"military decision-making\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:31.725730+00:00",
+    "end_time": "2025-08-02T15:17:35.716299+00:00",
+    "duration_seconds": 3.990569,
+    "llm_interaction_hash": "ff93494d1e61a3a7"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

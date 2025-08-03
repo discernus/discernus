@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis applied the Political Discourse Analysis Framework v7.1, focusing on the two-axis model of populism-pluralism and nationalism-patriotism. The document exhibits strong populist and nationalist rhetoric, particularly concerning the 'people' versus 'elites' and 'American greatness' versus 'foreign influence'."
+  },
+  "document_analyses": [
+    {
+      "document_id": "da746b046112",
+      "document_name": "Democratic_Platform_2012.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.82,
+          "confidence": 0.88
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "the people versus the elites",
+          "confidence": 0.95,
+          "context_type": "general_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We need to fight for the forgotten Americans",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeal"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America First policies",
+          "confidence": 0.90,
+          "context_type": "nationalistic_claim"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Make America great again",
+          "confidence": 0.85,
+          "context_type": "nationalistic_sentiment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

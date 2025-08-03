@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_4cee6a6ea30f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of President Clinton's 1994 State of the Union address. Focused on identifying populist and nationalist rhetoric, assessing their intensity and prominence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1994.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.72,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.60,\n          \"confidence\": 0.70\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populism_plurallism_axis\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"So tonight I am issuing a call to action: action by this Congress, action by our States, by our people, to prepare America for the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build stronger families and stronger communities and a safer environment; action to keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"populism_plurallism_axis\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"populism_plurallism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"To prepare America for the 21st century, we must have honor and our challenge. We must be shapers of events, not observers, for if we do not act, the moment will pass, and we will lose the best possibilities of our future.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is far more than a place. It is an idea, the most powerful idea in the history of nations. And all of us in this Chamber, we are now the bearers of that idea, leading a great people into a new world.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:20:09.703601+00:00",
+    "end_time": "2025-08-02T15:20:12.786818+00:00",
+    "duration_seconds": 3.083217,
+    "llm_interaction_hash": "c0674db0b4262a59"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

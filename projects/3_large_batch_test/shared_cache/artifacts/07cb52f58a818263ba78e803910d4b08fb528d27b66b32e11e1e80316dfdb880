@@ -1,0 +1,74 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The document was analyzed for Populism-Pluralism and Nationalism-Patriotism dimensions, along with their salience and confidence levels."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1992.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We call for a revolution in government, to take power away from entrenched bureaucrats and narrow interests in Washington and put it back in the hands of ordinary people.",
+          "confidence": 0.90,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The Revolution of 1992 is about restoring America's economic greatness. We need to rebuild America by investing more in transportation, environmental technologies, defense conversion, and a national information network.",
+          "confidence": 0.85,
+          "context_type": "populism_indicators"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is time to listen to the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.",
+          "confidence": 0.80,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Therefore we call for a revolution in government, to take power away from entrenched bureaucrats and narrow interests in Washington and put it back in the hands of ordinary people.",
+          "confidence": 0.80,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Party's first priority is opportunity—broad-based, non-inflationary economic growth and the opportunity that flows from it. Democrats in 1992 hold nothing more important for America than an economy that offers growth and jobs for all.",
+          "confidence": 0.75,
+          "context_type": "national_economic_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is the world's strongest military power and we must remain so. A post-Cold War restructuring of American forces will produce substantial savings beyond those promised by the Bush administration, but that restructuring must be achieved without undermining our ability to meet future threats to our security.",
+          "confidence": 0.70,
+          "context_type": "national_strength"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must restore America's economic leadership. The United States cannot be strong abroad if it is weak at home. Restoring our economic leadership must become a central element of our national security policies.",
+          "confidence": 0.70,
+          "context_type": "american_greatness"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

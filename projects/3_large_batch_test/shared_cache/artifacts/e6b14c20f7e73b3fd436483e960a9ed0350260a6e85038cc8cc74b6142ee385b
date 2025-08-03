@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e938c2a5e1b1",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was placed on identifying populist and nationalist rhetoric. Evidence extraction prioritized direct quotes that exemplify the identified dimensions. Confidence levels reflect the clarity and strength of the linguistic markers present in the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2002.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.92\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"And tonight, with a healthy, growing economy, with more Americans going back to work, with our Nation and an active force for good in the world, the state of our Union is confident and strong.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"First, we must be good stewards of this economy and renew the great institutions on which millions of our fellow citizens rely. America's economy is the fastest growing of any major industrialized nation.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Our generation has been blessed by the expansion of opportunity, by advances in medicine, by the security purchased by our parents' sacrifice.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_strength\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"To keep our economy strong and more competitive, America must reward, not punish, the efforts and dreams of entrepreneurs. Small business is the path of advancement, especially for women and minorities, so we must free small businesses from needless regulation and protect honest job-creators from junk lawsuits.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"economic_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:54:16.369304+00:00",
+    "end_time": "2025-08-02T00:54:19.134480+00:00",
+    "duration_seconds": 2.765176,
+    "llm_interaction_hash": "8976298926d61881"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

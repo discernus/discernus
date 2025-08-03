@@ -1,0 +1,74 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. The analysis focused on identifying populist and nationalist-patriotic themes within the provided inaugural address. Evidence extraction prioritized direct quotes that clearly illustrate the identified dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.65,
+          "salience": 0.80,
+          "confidence": 0.75
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "For forty-four Americans have now taken the Presidential oath. The words have been spoken during rising tides of prosperity and the still waters of peace.",
+          "confidence": 0.70,
+          "context_type": "General statement on national history and aspirations"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We remain a young nation, but in the words of Scripture, the time has come to set aside childish things. The time has come to reaffirm our enduring spirit, to choose our better history, to take hold of that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+          "confidence": 0.80,
+          "context_type": "Focus on people's shared history and idealized future"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "In reaffirming the greatness of our Nation, we understand that greatness is never a given. It must be earned. Our journey has never been one of short-cuts or settling for less.",
+          "confidence": 0.75,
+          "context_type": "Emphasis on collective effort and shared destiny"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "For in this crisis, we know that our people have remained faithful to the ideals of our forefathers and true to our founding documents.",
+          "confidence": 0.85,
+          "context_type": "Reference to foundational principles and ancestors"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "We are a young nation, but in the words of Scripture, the time has come to set aside childish things. The time has come to reaffirm our enduring spirit, to choose our better history, to take hold of that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+          "confidence": 0.80,
+          "context_type": "Emphasis on historical continuity and national ideals"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "To the Muslim world, we seek a new beginning, based on mutual interest and mutual respect.",
+          "confidence": 0.60,
+          "context_type": "Expression of global engagement with respect for other nations"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "For we know that our patchwork heritage is a strength, not a weakness. We are a nation of Christians and Muslims, Jews and Hindus, and nonbelievers.",
+          "confidence": 0.70,
+          "context_type": "Acknowledgement of diverse national identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist rhetoric within the provided document. Scores were assigned based on the presence and intensity of specific linguistic markers and themes as defined in the framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "Nationalsm-Patriotism Score": {
+          "raw_score": 0.60,
+          "salience": 0.70,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "America today is a nation with great challenges but greater resources. An artist using statistics as a brush could paint two very different pictures of our country.",
+          "confidence": 0.85,
+          "context_type": "introduction_contrast"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "We should leave those arguments to the last century and chart a different course.",
+          "confidence": 0.80,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My new Freedom Initiative for Americans with disabilities funds new technologies, expands opportunities to work, and makes our society more welcoming.",
+          "confidence": 0.85,
+          "context_type": "people_versus_institutions"
+        },
+        {
+          "dimension": "Nationalsm-Patriotism Score",
+          "quote_text": "America today is a nation with great challenges but greater resources.",
+          "confidence": 0.75,
+          "context_type": "national_pride"
+        },
+        {
+          "dimension": "Nationalsm-Patriotism Score",
+          "quote_text": "Our greatest strength, concerned citizens who care for our country and care for each other.",
+          "confidence": 0.80,
+          "context_type": "national_identity"
+        },
+        {
+          "dimension": "Nationalsm-Patriotism Score",
+          "quote_text": "I think teachers are so much, I married one. Laura has begun a new effort to recruit Americans to the profession that will shape our future, teaching.",
+          "confidence": 0.70,
+          "context_type": "cultural_purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

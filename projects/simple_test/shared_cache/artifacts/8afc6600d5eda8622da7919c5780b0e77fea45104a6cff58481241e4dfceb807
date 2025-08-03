@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a86efd8f453a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_character_validation_v7",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted following the Civic Analysis Framework (v7.0) for document 'john_mccain_2008_concession.txt'. Focused on identifying civic virtues and their prominence, alongside any indications of their counterpoints or strategic deviations. Scoring is based on the direct expression of concepts within the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"Diginity\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.60,\n          \"confidence\": 0.80\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.20,\n          \"confidence\": 0.75\n        },\n        \"Truth\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.50,\n          \"confidence\": 0.70\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.10,\n          \"confidence\": 0.65\n        },\n        \"Justice\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.40,\n          \"confidence\": 0.70\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.25,\n          \"confidence\": 0.65\n        },\n        \"Hope\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"Fear\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.30,\n          \"confidence\": 0.65\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.55,\n          \"confidence\": 0.80\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_expression\"\n        },\n        {\n          \"dimension\": \"Diginity\",\n          \"quote_text\": \"This is a historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_expression\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"direct_expression\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"acknowledgement_of_fallibility\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"Because nothing is inevitable here. Americans never quit. We never surrender. We never hide from history. We make history.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"rallying_cry\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"A century ago, President Theodore Roosevelt's invitation of Booker T. Washington to dine at the White House was taken as an outrage in many quarters. America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"historical_comparison\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T23:13:13.653653+00:00",
+    "end_time": "2025-08-01T23:13:17.047649+00:00",
+    "duration_seconds": 3.393996,
+    "llm_interaction_hash": "c2985ad97b0d40a5"
+  },
+  "input_artifacts": {
+    "framework_hash": "8bc00e4ac64007df2165eddc4fcec4df7dd70a0160679ce761c5035277d983a0",
+    "document_hashes": [
+      "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T231309Z_334e286c"
+  }
+}

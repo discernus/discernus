@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes. Confidence is high due to clear linguistic markers and thematic coherence within the document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.92,
+          "salience": 0.98,
+          "confidence": 0.97
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.88,
+          "salience": 0.96,
+          "confidence": 0.94
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America is back. Six weeks ago, I stood before the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country. We have accomplished more in 43 days than most administrations accomplished in 4 years, 8 years — and we are just getting started. I return to this chamber tonight to report that America’s momentum is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "confidence": 0.98,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let’s work together and let’s truly make America great again. Every day my administration is fighting to deliver the change America needs to bring a future America deserves and we’re doing it. This is a time for big dreams and bold action.",
+          "confidence": 0.95,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "I renamed the beautiful Forest Service to the Forest Service of America. And likewise, I renamed for a great president, William McKinley, Mount McKinley, again. Beautiful Alaska. We love Alaska. We’ve ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military. And our country will be woke no longer.",
+          "confidence": 0.96,
+          "context_type": "national_superiority"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We need Greenland for national security and even international security. And we’re working with everybody involved to try and get it. But we need it really for international world security. And I think we’re going to get it. One way or the other, we’re going to get it.",
+          "confidence": 0.93,
+          "context_type": "national_interest"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

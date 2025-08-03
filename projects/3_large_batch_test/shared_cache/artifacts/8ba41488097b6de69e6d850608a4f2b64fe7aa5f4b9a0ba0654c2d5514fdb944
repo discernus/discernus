@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1f5e4b1f0cb4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on the two-axis model of populism and nationalism. The report for document 1 (Clinton_SOTU_2001.txt) indicates a mixed but generally low score on the populism-pluralism axis and a moderate to high score on the nationalism-patriotism axis. The language used often appeals to 'the people' and contrasts them with 'elites' or 'the establishment,' but also emphasizes shared American values and identity. Evidence extraction focused on identifying specific phrases and keywords as defined in the framework. Confidence in the scoring is high due to clear linguistic markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_2001.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.75,\n          \"confidence\": 0.90\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We must answer here three fundamental questions: First, how do we make the American dream of opportunity a reality for all Americans who are willing to work for it? Second, how do we preserve our old and enduring values as we move into the future? And third, how do we meet these challenges together, as one America?\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Direct Democracy Appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"The era of big Government does not have all the answers. We know there's not a program for every problem. We know, and we have worked to give the American people a smaller, less bureaucratic Government in Washington.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Anti-Elite Language\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"America is very, very proud of you.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"American Greatness\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"Our nation was built on challenges. America was built on challenges, not promises. And when we work together to meet them, we never fail. That is the key to a more perfect Union. Our individual dreams must be realized by our common efforts.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Historical Mythology\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"My fellow Americans, the six challenges I have just discussed are for all of us. Our seventh challenge is really America's challenge to those of us in this hallowed Hall tonight: to reinvent our Government and make our democracy work for them.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Civic Duty\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"As we remember what happened in the Japanese subway, we can outlast poison gas forever if the Senate ratifies the Chemical Weapons Convention this year.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Foreign Threat\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:59:32.585764+00:00",
+    "end_time": "2025-08-02T00:59:36.184940+00:00",
+    "duration_seconds": 3.599176,
+    "llm_interaction_hash": "6a9dac969683ec6a"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

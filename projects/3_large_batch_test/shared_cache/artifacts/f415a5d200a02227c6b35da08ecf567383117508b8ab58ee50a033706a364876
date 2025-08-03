@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to the provided inaugural address. Evidence extraction focused on identifying direct quotes that exemplify the defined dimensional markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We are led, by events and common sense, to one conclusion: The survival of liberty in our land increasingly depends on the success of liberty in other lands. The best hope for peace in our world is the expansion of freedom in all the world.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America's influence is not unlimited, but fortunately for the oppressed, America's influence is considerable and we will use it confidently in freedom's cause.",
+          "confidence": 0.80,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "From the day of our Founding, we have proclaimed that every man and woman on this Earth has rights, and dignity, and is a reflection of the Maker of heaven and Earth.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's vital interests and our deepest beliefs are now one. From the day of our founding, we have proclaimed that every man and woman on this Earth has rights, and dignity, and is a reflection of the Maker of heaven and Earth.",
+          "confidence": 0.90,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

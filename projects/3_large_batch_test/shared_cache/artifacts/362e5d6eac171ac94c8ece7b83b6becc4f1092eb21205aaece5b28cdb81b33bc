@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on the provided framework, focusing on identifying populist and nationalist-patriotic discourse markers. Confidence is high due to clear language and the explicit nature of the speech's themes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.95,
+          "salience": 0.98,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.92,
+          "salience": 0.96,
+          "confidence": 0.93
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. Washington has flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.",
+          "confidence": 0.98,
+          "context_type": "anti-elite sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We are transferring power from Washington, D.C., and giving it back to you, the people.",
+          "confidence": 0.97,
+          "context_type": "people versus establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success.",
+          "confidence": 0.96,
+          "context_type": "unity of the people"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will be rough on the countries that take advantage of us, and we will protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+          "confidence": 0.95,
+          "context_type": "foreign threat"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "From this day forward, it’s going to be only America first. America first.",
+          "confidence": 0.98,
+          "context_type": "national supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.",
+          "confidence": 0.94,
+          "context_type": "national restoration"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -99,7 +99,8 @@ class ProductionThinSynthesisPipeline:
     def __init__(self,
                  artifact_client: DiscernusArtifactClient,
                  audit_logger: AuditLogger,
-                 model: str = "vertex_ai/gemini-2.5-pro",
+                 model: str,
+                 analysis_model: Optional[str] = None,
                  debug_agent: Optional[str] = None,
                  debug_level: str = "info"):
         """
@@ -113,6 +114,7 @@ class ProductionThinSynthesisPipeline:
         self.artifact_client = artifact_client
         self.audit_logger = audit_logger
         self.model = model
+        self.analysis_model = analysis_model
         self.debug_agent = debug_agent
         self.debug_level = debug_level
         
@@ -141,6 +143,7 @@ class ProductionThinSynthesisPipeline:
         )
         
         self.logger.info("🏭 Production THIN Synthesis Pipeline initialized")
+        self.logger.info(f"🔧 Synthesis pipeline using model: {model}")
 
     def run(self, request: ProductionPipelineRequest) -> ProductionPipelineResponse:
         """
@@ -788,7 +791,10 @@ Raw Analysis Data:
             
             # Provenance metadata
             run_id=run_id,
-            models_used={"synthesis": self.model},
+            models_used={
+                "synthesis": self.model,
+                "analysis": self.analysis_model if self.analysis_model else "unknown"
+            },
             execution_timestamp_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
             execution_timestamp_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
             framework_name=framework_name,

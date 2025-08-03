@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_ec707d544d2f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of the 2014 State of the Union address. Focused on identifying populist and nationalist rhetoric, with a strong emphasis on the framework's provided keywords and concepts. Confidence is high due to clear examples of 'the people' vs 'the establishment' and strong nationalistic undertones.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2014.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"But what is required now is for this country to pull together, confront boldly the challenges we face, and take responsibility for our future once more. Now is the time to jump-start job creation, restart lending, and invest in areas like energy, health care, and education that will grow our economy, even as we make hard choices to bring our deficit down. That is what my economic agenda is designed to do, and that is what I'd like to talk about tonight. It's an agenda that begins with jobs.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"I know that for many Americans watching right now, the state of our economy is a concern that rises above all others, and rightly so. If you haven't been personally affected by this recession, you probably know someone who has: a friend, a neighbor, a member of your family. You don't need to hear another list of statistics to know that our economy is in crisis, because you live it every day.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"But while our economy may be weakened and our confidence shaken, United States of America will emerge stronger than before. The weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"cultural_supremacy\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We are a nation that has seen promise amid peril and claimed opportunity from our ordeal. Now we must be that nation again, and that is why, even as it cuts back on programs we don't need, the budget I submit will invest in the three areas that are absolutely critical to our economic future: energy, health care, and education.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"historical_mythology\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T01:00:00.234014+00:00",
+    "end_time": "2025-08-02T01:00:03.305562+00:00",
+    "duration_seconds": 3.071548,
+    "llm_interaction_hash": "426597ccb209b58e"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

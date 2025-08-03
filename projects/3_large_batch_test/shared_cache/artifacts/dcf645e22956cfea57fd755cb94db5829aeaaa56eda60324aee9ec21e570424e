@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to assess the rhetorical strategies employed in the provided document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "108b22db8570",
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.",
+          "confidence": 0.95,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We can make our communities safer, our families stronger, our culture richer, our faith deeper, and our middle class bigger and more prosperous than ever before.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must reject the politics of revenge, recistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "confidence": 0.8,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "This year, America astronauts will go back to space on American rockets.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is a nation that believes in liberty and independence and not government coercion, domination, and control. We are born free, and we will stay free.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must keep America first in our hearts, we must keep freedom alive in our souls, and we must always keep faith in America's destiny that one Nation, under God, must be the hope and the promise and the light and the glory among all the nations of the world.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

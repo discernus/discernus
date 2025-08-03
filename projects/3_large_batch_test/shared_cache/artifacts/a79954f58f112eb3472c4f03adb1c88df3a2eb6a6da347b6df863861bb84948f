@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_ca1d9e5090aa",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.88,\n    \"analysis_notes\": \"The 1992 Democratic Platform strategically employs populist rhetoric to galvanize 'the people' against perceived 'establishment' failures, while simultaneously affirming commitment to democratic institutions. Economic nationalism is balanced by strong civic and inclusive patriotic appeals.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_1992.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.85,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Therefore we call for a revolution in government \u2013 to take power away from entrenched bureaucracies and narrow interests in Washington and put it back in the hands of ordinary people.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Political Call to Action\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Critique of Government/Elite\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"The Revolution of 1992 is about restoring America\u2019s economic greatness... putting people first for a change.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"National Economic Vision\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We must help all Americans understand the diversity of our cultural heritage. But it is also essential that we preserve and pass on to our children the common elements that hold this mosaic together as we work to make our country a land of freedom and opportunity for all.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Cultural Identity and Inclusion\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:59:55.255682+00:00",
+    "end_time": "2025-08-02T03:00:27.193525+00:00",
+    "duration_seconds": 31.937843,
+    "llm_interaction_hash": "a95617d1589be742"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "80416d50539e9b67331b85e8e63e2f7f223b07444b178ad95bd33eabb6828870"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

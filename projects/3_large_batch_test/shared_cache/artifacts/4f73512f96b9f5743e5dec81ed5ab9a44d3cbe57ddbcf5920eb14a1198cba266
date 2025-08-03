@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_507ab8f1c77b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. The framework's two-axis model (Populism-Pluralism and Nationalism-Patriotism) was applied to the provided inaugural address. Evidence extraction focused on identifying direct quotes that exemplify the defined dimensional markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2005.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We are led, by events and common sense, to one conclusion: The survival of liberty in our land increasingly depends on the success of liberty in other lands. The best hope for peace in our world is the expansion of freedom in all the world.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"America's influence is not unlimited, but fortunately for the oppressed, America's influence is considerable and we will use it confidently in freedom's cause.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"From the day of our Founding, we have proclaimed that every man and woman on this Earth has rights, and dignity, and is a reflection of the Maker of heaven and Earth.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America's vital interests and our deepest beliefs are now one. From the day of our founding, we have proclaimed that every man and woman on this Earth has rights, and dignity, and is a reflection of the Maker of heaven and Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:17:23.534026+00:00",
+    "end_time": "2025-08-02T15:17:25.748414+00:00",
+    "duration_seconds": 2.214388,
+    "llm_interaction_hash": "e1026ecafbbdad5f"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

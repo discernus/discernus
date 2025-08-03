@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_9872405dd542",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions. Document identified as potentially relevant to the study's scope.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"81e77038355c...\",\n      \"document_name\": \"Democratic_Platform_2016.pdf\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.92\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"This is our opportunity to take back our country and build a future for all Americans. It\u2019s time to put the people first, not special interests in Washington.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We will fight for the forgotten men and women of this country, the workers and the families who have been left behind by the elites and the political establishment.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"anti_elite_rhetoric\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America First. It\u2019s not just a slogan, it\u2019s a principle. We will put American jobs, American workers, and American security before anything else.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"nationalist_slogan\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will rebuild our military, secure our borders, and ensure that America is respected around the world. We will make America great again.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"national_sovereignty_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:19:07.662920+00:00",
+    "end_time": "2025-08-02T00:19:16.990801+00:00",
+    "duration_seconds": 9.327881,
+    "llm_interaction_hash": "79e8ee5a3527c124"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "81e77038355ca1522d070debededd047457336fc67f669f2e1637b1b7ec6a0f3"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

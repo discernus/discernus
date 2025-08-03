@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a488c142790e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis based on the provided framework, focusing on populist and nationalist rhetoric. Confidence is high due to clear linguistic markers aligning with the framework's definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2018.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"This night, our new administration has already taken very swift action. A new tide of optimism was already sweeping across our land. Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let's begin tonight by recognizing that the state of our Union is strong because our people are strong. And together, we are building a safe, strong, and proud America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is time for Congress to send me a bill that generates at least $1.5 trillion for the new infrastructure investment that our country so desperately needs.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight, I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed. My duty, and the sacred duty of every elected official in this Chamber, is to defend Americans, to protect their safety, their families, their communities, and their right to the American Dream.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_intensity_index\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Over the last year, we have made incredible progress and achieved extraordinary success. We have faced challenges we expected and others we could never have imagined. We have shared in the heights of victory and the pains of hardship. We have endured floods and fires and storms. But through it all, we have seen the beauty of America's soul and the steel in America's spine.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"nationalism_identity_ethos\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Americans love their country, and they deserve a Government that shows them the same love and loyalty in return.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"patriotism_civic_duty\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. But now they are roaring back. They're coming back. They want to be where the action is.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"nationalism_economic_nationalism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"As long as we are proud of who we are and what we are fighting for, there is nothing we cannot achieve. As long as we have confidence in our values, faith in our citizens, and trust in our God, we will never fail. Our families will thrive. Our people will prosper. And our Nation will forever be safe and strong and proud and mighty and free.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"nationalism_identity_ethos\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:18:20.761648+00:00",
+    "end_time": "2025-08-02T00:18:27.010133+00:00",
+    "duration_seconds": 6.248485,
+    "llm_interaction_hash": "7b30e8c28eb2ee03"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "50d7b4edd349e52a5cba523a3656e1f2f94c0875c5af4a08185b15241f4282a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

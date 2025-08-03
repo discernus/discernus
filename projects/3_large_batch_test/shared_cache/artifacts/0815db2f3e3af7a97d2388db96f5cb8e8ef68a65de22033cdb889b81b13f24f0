@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e01ab9b34217",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism and nationalism dimensions. Raw scores and supporting evidence extracted as per framework guidelines. Confidence is high due to clear linguistic markers present in the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_Inaugural_2017.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.90,\n          \"salience\": 0.92,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.94\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"For too long, a small group in our Nation's Capital has reaped the rewards of government while the people have borne the cost. Washington has flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victory has not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Populism-Pluralism Score\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"That all changes starting right here and right now, because this moment is your moment. It belongs to you. It belongs to everyone gathered here today and everyone watching all across America. This is your day. This is your celebration. And this, the United States of America, is your country.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"Populism-Pluralism Score\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Populism-Pluralism Score\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We will make America strong again. We will make America wealthy again. We will make America proud again. We will make America safe again. And, yes, together, we will make America great again.\",\n          \"confidence\": 0.96,\n          \"context_type\": \"Nationalism-Patriotism Score\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"From this day forward, a new vision will govern our land. From this day forward, it's going to be only America first. America first.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"Nationalism-Patriotism Score\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs. Protection will lead to great prosperity and strength.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Nationalism-Patriotism Score\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We will seek friendship and goodwill with the nations of the world, but we do so with the understanding that it is the right of all nations to put their own interests first.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"Nationalism-Patriotism Score\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T01:00:14.160670+00:00",
+    "end_time": "2025-08-02T01:00:17.232581+00:00",
+    "duration_seconds": 3.071911,
+    "llm_interaction_hash": "5a50414a150d80b2"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

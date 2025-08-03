@@ -39,7 +39,7 @@ class RawDataAnalysisPlanResponse:
 class RawDataAnalysisPlanner:
     """Agent that generates structured analysis plans for raw data collection only."""
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-pro", audit_logger: Optional[AuditLogger] = None):
+    def __init__(self, model: str, audit_logger: Optional[AuditLogger] = None):
         self.model = model
         self.audit_logger = audit_logger
         self.model_registry = ModelRegistry()

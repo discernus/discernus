@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a State of the Union address, focusing on the interplay between populist/pluralist and nationalist/patriotic discourse. The speech consistently framed national achievements and public well-being through inclusive, institutional, and globally collaborative lenses, minimizing overt anti-elite or ethno-nationalist rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.3,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.2,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "This is what middle class economics is: the idea that this country does best when everyone gets their fair shot, everyone does their fair share, everyone plays by the same set of rules.",
+          "confidence": 0.9,
+          "context_type": "Pluralism-Inclusive Growth"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We can’t slow down businesses or put our economy at risk with Government shutdowns or fiscal showdowns. We can’t put the security of families at risk by taking away their health insurance or unraveling the new rules on Wall Street or refighting past battles on immigration when we’ve got to fix a broken system. And if a bill comes to my desk that tries to do any of these things, I will veto it. It will have earned my veto.",
+          "confidence": 0.85,
+          "context_type": "Pluralism-Institutional Stability"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "I said there wasn’t a liberal America or a conservative America, a Black America or a White America, but a United States of America.",
+          "confidence": 0.9,
+          "context_type": "Patriotism-Civic Unity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "As Americans, we cherish our civil liberties, and we need to uphold that commitment if we want maximum cooperation from other countries and industry in our fight against terrorist networks.",
+          "confidence": 0.85,
+          "context_type": "Patriotism-Global Cooperation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

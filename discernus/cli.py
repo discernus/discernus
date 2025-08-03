@@ -19,6 +19,8 @@ Management Commands:
 """
 
 import click
+import datetime
+import shutil
 import subprocess
 import sys
 import time
@@ -104,13 +106,13 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     if not framework_file.exists():
         return False, f"❌ Framework file not found: {framework_file}", {}
     
-    # Check framework character limit (15KB maximum)
+    # Check framework character limit (30KB maximum)
     try:
         with open(framework_file, 'r') as f:
             framework_content = f.read()
         framework_size = len(framework_content)
-        if framework_size > 15000:
-            return False, f"❌ Framework exceeds 15KB limit: {framework_size:,} characters (limit: 15,000). See Framework Specification v7.0 for reduction strategies.", {}
+        if framework_size > 30000:
+            return False, f"❌ Framework exceeds 30KB limit: {framework_size:,} characters (limit: 30,000). See Framework Specification v7.0 for reduction strategies.", {}
     except Exception as e:
         return False, f"❌ Error reading framework file: {e}", {}
     
@@ -145,7 +147,8 @@ def cli():
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, help='Run analysis and CSV export only, skip synthesis')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool):
+@click.option('--ensemble-runs', default=1, help='Number of ensemble runs for self-consistency (default: 1, recommended: 3-5)')
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool, ensemble_runs: int = 1):
     """Execute complete experiment (analysis + synthesis)"""
     exp_path = Path(experiment_path)
     
@@ -164,7 +167,7 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         click.echo("🔍 Validating experiment coherence...")
         try:
             from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
-            validator = ExperimentCoherenceAgent()
+            validator = ExperimentCoherenceAgent(model=analysis_model)
             validation_result = validator.validate_experiment(exp_path)
             
             if not validation_result.success:
@@ -199,6 +202,9 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         click.echo(f"   Mode: {execution_mode}")
         click.echo(f"   Analysis Model: {analysis_model}")
         click.echo(f"   Synthesis Model: {synthesis_model}")
+        # TODO: Ensemble runs disabled pending architectural review
+        # click.echo(f"   Ensemble Runs: {ensemble_runs}")
+        click.echo(f"   Ensemble Runs: 1 (disabled)")
         return
     
     # Ensure infrastructure is running
@@ -221,7 +227,10 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         result = orchestrator.run_experiment(
             analysis_model=analysis_model,
             synthesis_model=synthesis_model,
-            analysis_only=analysis_only
+            analysis_only=analysis_only,
+            # TODO: Ensemble runs disabled pending architectural review
+        # ensemble_runs=ensemble_runs
+        ensemble_runs=1
         )
         
         # Show completion with enhanced details
@@ -404,6 +413,313 @@ def validate(experiment_path: str):
         click.echo(f"   📁 Corpus: {experiment['corpus_path']} ({experiment['_corpus_file_count']} files)")
     
     sys.exit(0 if valid else 1)
+
+
+@cli.command()
+@click.argument('experiment_path')
+@click.option('--dry-run', is_flag=True, help='Show what would be promoted without executing')
+@click.option('--cleanup', is_flag=True, help='Clean up leftover development files after promotion')
+@click.option('--force', is_flag=True, help='Skip cleanup confirmation prompts')
+def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
+    """Promote workbench files to operational status"""
+    exp_path = Path(experiment_path)
+    
+    click.echo(f"🔄 Discernus Workbench - Promoting: {experiment_path}")
+    
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    workbench_dir = exp_path / "workbench"
+    archive_dir = exp_path / "archive"
+    
+    # Check if workbench directory exists
+    if not workbench_dir.exists():
+        click.echo(f"❌ No workbench directory found: {workbench_dir}")
+        click.echo("   💡 Create workbench/ directory and add files to promote")
+        sys.exit(1)
+    
+    # Find files to promote
+    promotable_files = {}
+    
+    # Look for experiment files (using os.listdir to avoid potential glob conflicts)
+    import os
+    import fnmatch
+    
+    if workbench_dir.exists():
+        workbench_files = os.listdir(workbench_dir)
+        
+        # Find experiment files
+        experiment_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "experiment*.md")]
+        if experiment_files:
+            # Get the most recently modified experiment file
+            latest_experiment = max(experiment_files, key=lambda f: f.stat().st_mtime)
+            promotable_files['experiment.md'] = latest_experiment
+        
+        # Find framework files  
+        framework_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "framework*.md")]
+        if framework_files:
+            # Get the most recently modified framework file
+            latest_framework = max(framework_files, key=lambda f: f.stat().st_mtime)
+            promotable_files['framework.md'] = latest_framework
+        
+        # Find corpus files (v7.0 compatible - corpus.md files)
+        corpus_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "corpus*.md")]
+        if corpus_files:
+            latest_corpus = max(corpus_files, key=lambda f: f.stat().st_mtime)
+            promotable_files['corpus/corpus.md'] = latest_corpus
+    
+    if not promotable_files:
+        click.echo("❌ No promotable files found in workbench/")
+        click.echo("   💡 Add experiment*.md, framework*.md, or corpus*.md files to workbench/")
+        sys.exit(1)
+    
+    # Show what will be promoted
+    click.echo("📋 Files to promote:")
+    for target, source in promotable_files.items():
+        mtime = source.stat().st_mtime
+        mtime_str = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
+        click.echo(f"   📄 {source.name} → {target} (modified: {mtime_str})")
+    
+    if dry_run:
+        click.echo("🧪 DRY RUN - No files were actually promoted")
+        return
+    
+    # Create archive directory if it doesn't exist
+    if not archive_dir.exists():
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        click.echo(f"📁 Created archive directory: {archive_dir}")
+    
+    # Archive existing operational files
+    archived_files = []
+    timestamp = datetime.datetime.now().strftime('%Y%m%dT%H%M%S')
+    
+    for target_file, _ in promotable_files.items():
+        target_path = exp_path / target_file
+        if target_path.exists():
+            # Create archive filename with timestamp
+            archive_name = f"{timestamp}_{target_path.name}"
+            archive_path = archive_dir / archive_name
+            
+            # Copy to archive
+            shutil.copy2(target_path, archive_path)
+            archived_files.append((target_file, archive_name))
+            click.echo(f"📦 Archived: {target_file} → archive/{archive_name}")
+    
+    # Promote workbench files to operational
+    promoted_files = []
+    for target_file, source_path in promotable_files.items():
+        target_path = exp_path / target_file
+        
+        # Ensure target directory exists (for corpus/corpus.md)
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Copy workbench file to operational location
+        shutil.copy2(source_path, target_path)
+        promoted_files.append((source_path.name, target_file))
+        click.echo(f"⬆️  Promoted: workbench/{source_path.name} → {target_file}")
+    
+    # Clear workbench (move promoted files to archive)
+    for target_file, source_path in promotable_files.items():
+        workbench_archive_name = f"{timestamp}_workbench_{source_path.name}"
+        workbench_archive_path = archive_dir / workbench_archive_name
+        shutil.move(source_path, workbench_archive_path)
+        click.echo(f"🗂️  Workbench archived: {source_path.name} → archive/{workbench_archive_name}")
+    
+    # Summary
+    click.echo(f"\n✅ Promotion complete!")
+    click.echo(f"   📦 Archived: {len(archived_files)} operational files")
+    click.echo(f"   ⬆️  Promoted: {len(promoted_files)} workbench files")
+    click.echo(f"   🗂️  Cleared: {len(promotable_files)} workbench files")
+    
+    # Validate the promoted experiment
+    click.echo(f"\n🔍 Validating promoted experiment...")
+    valid, message, experiment = validate_experiment_structure(exp_path)
+    if valid:
+        click.echo(f"✅ {message}")
+        click.echo(f"   📋 Ready to run: discernus run {experiment_path}")
+    else:
+        click.echo(f"❌ {message}")
+        click.echo("   💡 Check promoted files and fix any issues")
+    
+    # Optional cleanup of development files
+    if cleanup and not dry_run:
+        _cleanup_development_files(exp_path, force)
+
+
+def _cleanup_development_files(exp_path: Path, force: bool):
+    """Clean up leftover development files from experiment root"""
+    import os
+    import fnmatch
+    
+    click.echo(f"\n🧹 Cleaning up development files...")
+    
+    # Define cleanup patterns
+    archive_patterns = [
+        "experiment_*.md",
+        "framework_*.md", 
+        "corpus_*.json",
+        "corpus_*.md"
+    ]
+    
+    delete_patterns = [
+        ".DS_Store",
+        "*_backup.md",
+        "*_temp.*",
+        "*.tmp",
+        "*_old.*"
+    ]
+    
+    # Find files to clean up
+    archive_files = []
+    delete_files = []
+    
+    for item in exp_path.iterdir():
+        if item.is_file():
+            # Skip operational files
+            if item.name in ['experiment.md', 'framework.md']:
+                continue
+                
+            # Check for archive patterns
+            for pattern in archive_patterns:
+                if fnmatch.fnmatch(item.name, pattern):
+                    archive_files.append(item)
+                    break
+            else:
+                # Check for delete patterns
+                for pattern in delete_patterns:
+                    if fnmatch.fnmatch(item.name, pattern):
+                        delete_files.append(item)
+                        break
+    
+    if not archive_files and not delete_files:
+        click.echo("   ✨ Experiment root is already clean")
+        return
+    
+    # Show what will be cleaned up
+    if archive_files:
+        click.echo("   📦 Files to archive:")
+        for file in archive_files:
+            click.echo(f"      • {file.name}")
+    
+    if delete_files:
+        click.echo("   🗑️  Files to delete:")
+        for file in delete_files:
+            click.echo(f"      • {file.name}")
+    
+    # Confirm cleanup (unless --force)
+    if not force:
+        if not click.confirm("\n   Continue with cleanup?"):
+            click.echo("   ⏭️  Cleanup skipped")
+            return
+    
+    # Perform cleanup
+    archive_dir = exp_path / "archive"
+    if not archive_dir.exists():
+        archive_dir.mkdir(parents=True, exist_ok=True)
+    
+    timestamp = datetime.datetime.now().strftime('%Y%m%dT%H%M%S')
+    archived_count = 0
+    deleted_count = 0
+    
+    # Archive development files
+    for file in archive_files:
+        archive_name = f"{timestamp}_cleanup_{file.name}"
+        archive_path = archive_dir / archive_name
+        shutil.move(file, archive_path)
+        archived_count += 1
+        click.echo(f"   📦 Archived: {file.name} → archive/{archive_name}")
+    
+    # Delete temporary files
+    for file in delete_files:
+        file.unlink()
+        deleted_count += 1
+        click.echo(f"   🗑️  Deleted: {file.name}")
+    
+    # Summary
+    click.echo(f"\n   ✅ Cleanup complete!")
+    if archived_count > 0:
+        click.echo(f"      📦 Archived: {archived_count} development files")
+    if deleted_count > 0:
+        click.echo(f"      🗑️  Deleted: {deleted_count} temporary files")
+
+
+@cli.command()
+@click.argument('args', nargs=-1, required=True)
+@click.option('--cleanup', is_flag=True, help='Clean up after promotion')
+@click.option('--force', is_flag=True, help='Skip confirmation prompts')
+@click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
+def workflow(args: tuple, cleanup: bool, force: bool, dry_run: bool):
+    """Chain multiple operations: discernus workflow promote run projects/experiment"""
+    
+    # Parse operations and experiment path
+    all_args = list(args)
+    if len(all_args) < 2:
+        click.echo("❌ Usage: discernus workflow <operation1> [operation2] ... <experiment_path>")
+        click.echo("   Example: discernus workflow promote run projects/experiment")
+        sys.exit(1)
+    
+    # Last argument is the experiment path
+    exp_path = all_args[-1]
+    ops = all_args[:-1]
+    
+    click.echo(f"🔗 Discernus Workflow - Chaining: {' → '.join(ops)}")
+    click.echo(f"   📁 Target: {exp_path}")
+    
+    if dry_run:
+        click.echo("🧪 DRY RUN - Operations that would be executed:")
+        for i, op in enumerate(ops, 1):
+            click.echo(f"   {i}. {op}")
+        return
+    
+    # Execute operations in sequence
+    for i, operation in enumerate(ops, 1):
+        click.echo(f"\n📋 Step {i}/{len(ops)}: {operation}")
+        
+        try:
+            if operation == 'promote':
+                # Call promote function directly
+                from click.testing import CliRunner
+                runner = CliRunner()
+                
+                # Build promote command args
+                promote_args = [exp_path]
+                if cleanup:
+                    promote_args.append('--cleanup')
+                if force:
+                    promote_args.append('--force')
+                
+                result = runner.invoke(promote, promote_args, catch_exceptions=False)
+                if result.exit_code != 0:
+                    click.echo(f"❌ Step {i} failed: promote")
+                    sys.exit(result.exit_code)
+                    
+            elif operation == 'run':
+                # Call run function directly  
+                runner = CliRunner()
+                result = runner.invoke(run, [exp_path], catch_exceptions=False)
+                if result.exit_code != 0:
+                    click.echo(f"❌ Step {i} failed: run")
+                    sys.exit(result.exit_code)
+                    
+            elif operation == 'validate':
+                # Call validate function directly
+                runner = CliRunner()
+                result = runner.invoke(validate, [exp_path], catch_exceptions=False)
+                if result.exit_code != 0:
+                    click.echo(f"❌ Step {i} failed: validate")
+                    sys.exit(result.exit_code)
+                    
+            else:
+                click.echo(f"❌ Unknown operation: {operation}")
+                click.echo("   Supported: promote, run, validate")
+                sys.exit(1)
+                
+        except Exception as e:
+            click.echo(f"❌ Step {i} failed with error: {e}")
+            sys.exit(1)
+    
+    click.echo(f"\n✅ Workflow complete! All {len(ops)} operations succeeded.")
 
 
 @cli.command()

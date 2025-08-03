@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_183d4ea19999",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0. The document was assessed for populism and nationalism based on its rhetorical content. The framework's definitions were applied to identify key markers and assess the intensity and salience of populist and nationalistic themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"13bb686ac9f0...\",\n      \"document_name\": \"Democratic_Platform_1996.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Today's Democratic Party is ready for that future. Our vision is simple. We want an America that gives all Americans the chance to live out their dreams and achieve their God-given potential. We want an America that is still the world's strongest force for peace and freedom. And we want an America that is coming together around our enduring values, instead of drifting apart.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"That is what today's Democratic Party offers: the end of the era of big government and a final rejection of the misguided call to leave our citizens to fend for themselves -- and bold leadership into the future: To meet America's challenges, protect America's values, and fulfill America dreams.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"For 220 years, America has been defined by a single ideal: Opportunity for all who take the responsibility to seize it. The mission of the Democratic Party in 1996 is to ensure that the great American Dream of opportunity for all is within reach for all, and that it travels with us, whole and intact, as we walk together into tomorrow.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"nationalistic_appeal\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We want an America that is still the world's strongest force for peace and freedom.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"nationalistic_appeal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T01:02:45.390200+00:00",
+    "end_time": "2025-08-02T01:02:49.299838+00:00",
+    "duration_seconds": 3.909638,
+    "llm_interaction_hash": "c212d21e997bd8df"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "13bb686ac9f0f7cca8597c8c268360361fc1bc437cc67a5fca635291dfcfc28c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}

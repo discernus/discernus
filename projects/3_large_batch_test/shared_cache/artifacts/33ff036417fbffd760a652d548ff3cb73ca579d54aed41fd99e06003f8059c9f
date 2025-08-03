@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_44db5aeda78f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.0, focusing on populism-pluralism and nationalism-patriotism axes as defined in the framework. Confidence is high due to clear markers in the text. No mathematical calculations or derived metrics were performed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2010.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight, thanks to the grit and determination of the American people, there is much progress to report. After a decade of grinding wait, our brave men and women in uniform are coming home.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is our unfinished task to make sure that this Government works on behalf of the many, and not just the few; that it encourages free enterprise, rewards individual initiative, and opens the doors of opportunity to every child across this great Nation.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The American people don't expect government to solve every problem. They do not expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"For fifty-one years ago, John F. Kennedy declared to this Chamber that \\\"the Constitution makes us not rivals for power, but partners for progress.\\\" \\\"It is my task,\\\" he said, \\\"to report the state of the Union; to improve it is the task of us all.\\\"\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"civic_pride\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American people don't expect government to solve every problem.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"civic_pride\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:17:46.255024+00:00",
+    "end_time": "2025-08-02T00:17:49.729692+00:00",
+    "duration_seconds": 3.474668,
+    "llm_interaction_hash": "604c3558e24abc00"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

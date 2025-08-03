@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d07d1a694f0b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.1 - Populism Emergence Study\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v7.1. The document was analyzed for populism-pluralism and nationalism-patriotism dimensions. Evidence extraction focused on identifying key phrases and claims aligning with the framework's dimensional markers. Confidence levels reflect the clarity and strength of the evidence found.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"e6e1a161348f\",\n      \"document_name\": \"Republican_Platform_2004.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"As Ronald Reagan goes his ways, we are left with a joyful hope he shared.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We are proud of our record we offer to the American people. We have helped America overcome extraordinary challenges. We are re-shaping our government to meet the demands of the modern world and better serve our citizens.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"When America was struck by terrorists on September 11, 2001, the President immediately realized that it was an act of war, not just a crime.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"manichean_framing\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Today, the Republican Party gathers to renominate a man who carries on the best traditions of our Party by carrying the banner of freedom.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our plans focus on ensuring that America remains safe, terrorists are defeated, and democracy flourishes in the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"exceptional_nation\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"American greatness, the American way of life, our heritage, our ancestors' vision, the founding fathers' vision.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"cultural_purity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We chose strength. We chose results. We chose optimism. We chose opportunity. We chose freedom. And we chose moving forward with President Bush.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_superiority\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T15:29:18.920454+00:00",
+    "end_time": "2025-08-02T15:29:23.932354+00:00",
+    "duration_seconds": 5.0119,
+    "llm_interaction_hash": "5124497923808403"
+  },
+  "input_artifacts": {
+    "framework_hash": "f1bd645a7a5cf7c30c80cef5d50df28061f907bc75860acae1514a63fb83b739",
+    "document_hashes": [
+      "e6e1a161348f5e1022b7057d23c85f451dd2bd584a9d74e6739984b689c3b402"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T151707Z_7c3a49e0"
+  }
+}

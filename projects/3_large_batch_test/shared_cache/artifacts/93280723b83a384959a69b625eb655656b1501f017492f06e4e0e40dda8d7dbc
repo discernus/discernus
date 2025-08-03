@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c81b9a82eec6",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.96,\n    \"analysis_notes\": \"Analyzed SOTU address for populist and nationalist discourse using defined linguistic markers and thematic interpretations.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2021.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.98,\n          \"confidence\": 0.98\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"To those watching at home tonight, I want you to know: We will never let socialism destroy American health care. Over 130 legislators in this Chamber have endorsed legislation that would bankrupt our Nation by providing free taxpayer-funded health care to millions of illegal aliens, forcing taxpayers to subsidize free care for anyone in the world who unlawfully crosses our borders.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Manichaean Framing & Anti-Elite Language\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"The people are the heart of our country, their dreams are the soul of our country, and their love is what powers and sustains our country. We must always remember that our job is to put America first.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeals & Anti-Elite Contrast\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"The years of economic decay are over. The days of our country being used, taken advantage of, and even scorned by other nations are long behind us. Gone too are the broken promises, jobless recoveries, tired platitudes, and constant excuses for the depletion of American wealth, power, and prestige.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Cultural Supremacy & Foreign Threat\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"The American nation was carved out of the vast frontier by the toughest, strongest, fiercest, and most determined men and women ever to walk on the face of the Earth. Our ancestors braved the unknown; tamed the wilderness; settled the Wild West; lifted millions from poverty, disease, and hunger; vanquished tyranny and fascism; ushered the world to new heights of science and medicine; laid down the railroads, dug out the canals, raised up the skyscrapers. And, ladies and gentlemen, our ancestors built the most exceptional republic ever to exist in all of human history, and we are making it greater than ever before.\",\n          \"confidence\": 0.99,\n          \"context_type\": \"Historical Mythology & Cultural Supremacy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:58:35.497702+00:00",
+    "end_time": "2025-08-02T02:59:32.684842+00:00",
+    "duration_seconds": 57.18714,
+    "llm_interaction_hash": "57682c184ffaff10"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "b8317c936f92d24ffb6ccfb4a45b4967374177dfdf2232e9e1b6f0be5ecabc9e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

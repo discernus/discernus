@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.0. Focus was on identifying populist and nationalist-patriotic themes, evaluating their intensity and rhetorical prominence. Evidence extraction prioritized direct quotes supporting dimensional assessments. Overall confidence is high due to clear language and thematic consistency."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2016.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score (Vertical)": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Nationalism-Patriotism Score (Horizontal)": {
+          "raw_score": 0.78,
+          "salience": 0.88,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score (Vertical)",
+          "quote_text": "But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach. As working people struggle, the top one percent accrues more wealth and more power. Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It's no wonder that so many feel like the deck is stacked against them.",
+          "confidence": 0.95,
+          "context_type": "Ant-Elite Sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Score (Vertical)",
+          "quote_text": "Democrats believe that today's extreme level of income and wealth inequality, where the majority of the economic gains go to the top one percent and the richest 20 people own more wealth than the bottom 150 million, makes our economy weaker, our communities poorer, and our politics poisonous. And we know that our nation's long struggle with race is far from over. More than half a century after Rosa Parks sat and Dr. King marched and John Lewis bled, race still plays a significant role in determining who gets ahead in America and who gets left behind. We must face that reality and we must fix it.",
+          "confidence": 0.95,
+          "context_type": "Manichean Framing"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score (Horizontal)",
+          "quote_text": "We are proud of our heritage as a nation of immigrants. We know that today's immigrants are tomorrow's teachers, doctors, lawyers, government leaders, soldiers, entrepreneurs, activists, PTA members, and pillars of our communities.",
+          "confidence": 0.90,
+          "context_type": "Cultural Purity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score (Horizontal)",
+          "quote_text": "We believe in protecting civil liberties and guaranteeing civil rights, women's rights and workers' rights, LGBTQ rights, and rights for people with disabilities. We believe America is still, as Robert Kennedy said, 'a great country, and unselfish country, and a compassionate country.'",
+          "confidence": 0.90,
+          "context_type": "Cultural Superiority"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

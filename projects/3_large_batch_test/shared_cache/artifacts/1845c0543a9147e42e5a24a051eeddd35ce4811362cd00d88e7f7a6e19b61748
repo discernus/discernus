@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_cde4f44b1642",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The Republican Platform of 2012 exhibits strong populist and nationalist tendencies. It frames current issues as a betrayal of core American principles by an overreaching government and elites, appealing directly to 'the people' while asserting American exceptionalism and economic self-interest.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2012.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Many Americans have experienced the burden of lost jobs, lost homes, and lost hopes. Our middle class has felt that burden most acutely. Meanwhile, the federal government has expanded its size and scope, its borrowing and spending, its debt and deficit. Federalism is threatened and liberty retreats.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"anti-elite sentiment and government criticism\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"Put simply: The times call for trustworthy leadership and honest talk about the challenges we face. Our nation and our people cannot afford the status quo. We must begin anew, with profound changes in the way government operates; the way it budgets, taxes, and regulates.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti-establishment and call for change\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"The 2012 Republican Platform is a statement of who we are and what we believe as a Party and our vision for a stronger and freer America. The pursuit of opportunity has defined America from our very beginning. This is a land of opportunity. The American Dream is a dream of equal opportunity for all. And the Republican Party is the party of opportunity.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"American exceptionalism and national identity\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"This platform affirms that America has always been a place of grand dreams and even grander realities; and so it will be again, if we return government to its proper role, making it smaller and smarter.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"American greatness and national strength\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T03:55:19.634685+00:00",
+    "end_time": "2025-08-02T03:56:26.405714+00:00",
+    "duration_seconds": 66.771029,
+    "llm_interaction_hash": "66dcc218611b7cff"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "22fbcf35d6a70a0174d7b95d2cab85664d7ceb812a73b2ab01ca69c4bd9e68b4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

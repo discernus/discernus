@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.0 - Populism Emergence Study",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Biden's 2022 State of the Union address for populist and pluralist, and nationalist and patriotic themes. The speech exhibits a blend, leaning towards civic patriotism and institutional pluralism while incorporating elements of economic populism and national competitiveness."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Score": {
+          "raw_score": 0.45,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Score": {
+          "raw_score": 0.6,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "Because of you, the American people, our progress these past hundred days against one of the worst pandemics in history has been one of the greatest logistical achievements this country has ever seen.",
+          "confidence": 0.95,
+          "context_type": "Populist Appeal - Direct Address to the People"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, trickle-down economics has never worked, and it’s time to grow the economy from the bottom up and the middle out.",
+          "confidence": 0.9,
+          "context_type": "Populist Economic Anti-Elite Sentiment"
+        },
+        {
+          "dimension": "Populism-Pluralism Score",
+          "quote_text": "My fellow Americans, we have to come together to heal the soul of this Nation... to rebuild trust between law enforcement and the people they serve, to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd’s name that passed the House already.",
+          "confidence": 0.95,
+          "context_type": "Pluralist Call for Institutional Reform and Unity"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is rising anew, choosing hope over fear, truth over lies, and light over darkness... We’re working again, dreaming again, discovering again, and leading the world again.",
+          "confidence": 0.9,
+          "context_type": "Nationalist Assertion of American Exceptionalism and Leadership"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "My discussions with President Xi, I told him, 'We welcome the competition. We’re not looking for conflict.' But I made absolutely clear that we will defend America’s interests across the board.",
+          "confidence": 0.9,
+          "context_type": "Nationalist Focus on American Interests in Global Competition"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Score",
+          "quote_text": "America is an idea, the most unique idea in history: We are created, all of us, equal.",
+          "confidence": 0.95,
+          "context_type": "Patriotic Embrace of Founding Ideals and Equality"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

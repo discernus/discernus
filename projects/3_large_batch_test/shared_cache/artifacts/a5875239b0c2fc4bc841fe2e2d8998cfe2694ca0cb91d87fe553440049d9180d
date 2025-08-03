@@ -1,0 +1,50 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. Focus on identifying populism-pluralism and nationalism-patriotism dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.85,
+          "confidence": 0.8
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.6,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let me begin by saying that it has been too long, at least three decades, since a President has come and challenged Americans to join him on a great national journey, not merely to consume the bounty of today but to invest for a much greater one tomorrow.",
+          "confidence": 0.85,
+          "context_type": "populism_marker"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+          "confidence": 0.8,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must break the habits of both political parties and say there can be no more 'something for nothing' and admit frankly that we are all in this together.",
+          "confidence": 0.75,
+          "context_type": "people_versus_establishment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

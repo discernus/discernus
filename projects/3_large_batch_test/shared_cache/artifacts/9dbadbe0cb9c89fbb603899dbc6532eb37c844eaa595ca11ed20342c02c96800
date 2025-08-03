@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v7.1 - Populism Emergence Study",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v7.1. Focused on identifying populist and nationalist-patriotic discourse markers as defined by the framework. Confidence is high due to clear and abundant evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimensional_scores": {
+        "populism_plur<a>lism_axis": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.88,
+          "salience": 0.90,
+          "confidence": 0.92
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plur<a>lism_axis",
+          "quote_text": "To make America great again for all Americans.",
+          "confidence": 0.98,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plur<a>lism_axis",
+          "quote_text": "This is your time. If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.",
+          "confidence": 0.95,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "populism_plur<a>lism_axis",
+          "quote_text": "My highest loyalty, my greatest compassion, my constant concern is for America's children, America's struggling workers, and America's forgotten communities.",
+          "confidence": 0.97,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "As long as we are proud of who we are and what we are fighting for, there is nothing we cannot achieve.",
+          "confidence": 0.90,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "In America, we know that no people on Earth are so fearless or daring or determined as Americans.",
+          "confidence": 0.92,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will build great gleaming new roads, bridges, highways, railways, and waterways all across our land. And we will do it with American heart and American hands and American grit. We want every American to know the dignity of a hard day's work.",
+          "confidence": 0.93,
+          "context_type": "civic_duty"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

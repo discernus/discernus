@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_634d3deddfd7",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v7\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document, Obama's 2009 Inaugural Address, strongly emphasizes institutional pluralism and civic patriotism. It consistently appeals to shared values, collective action, constitutional principles, and an inclusive national identity. There is a deliberate avoidance of anti-elite or Manichaean framing, and national pride is rooted in ideals and earned effort rather than ethnic or cultural supremacy.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2009.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Axis\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"Nationalism-Patriotism Axis\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"America has carried on not simply because of the skill or vision of those in high office, but because we the people have remained faithful to the ideals of our forebears and true to our founding documents.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Institutional Respect, Civic Duty\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Axis\",\n          \"quote_text\": \"The question we ask today is not whether our Government is too big or too small, but whether it works; whether it helps families find jobs at a decent wage, care they can afford, a retirement that is dignified. Where the answer is yes, we intend to move forward. Where the answer is no, programs will end.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Data-Driven Decisions, Pragmatism\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"To reaffirm our enduring spirit, to choose our better history, to carry forward that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Constitutional Devotion, Universal Rights\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Axis\",\n          \"quote_text\": \"We are a nation of Christians and Muslims, Jews and Hindus and nonbelievers. We are shaped by every language and culture, drawn from every end of this Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Inclusive Citizenship, Diversity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T02:50:49.412235+00:00",
+    "end_time": "2025-08-02T02:51:04.272299+00:00",
+    "duration_seconds": 14.860064,
+    "llm_interaction_hash": "ce43885ba04ea8a7"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T023800Z_6efcb22d"
+  }
+}

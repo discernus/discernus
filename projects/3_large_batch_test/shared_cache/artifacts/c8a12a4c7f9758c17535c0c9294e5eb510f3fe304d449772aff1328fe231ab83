@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v7",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted based on the Political Discourse Analysis Framework v7.0. Focus on assessing the intensity and salience of Populism/Pluralism and Nationalism/Patriotism axes using linguistic markers and overall rhetorical patterns. Due to the nature of a political platform, general confidence in score differentiation is high."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2000.txt",
+      "dimensional_scores": {
+        "Populism-Pluralism Axis": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "Nationalism-Patriotism Axis": {
+          "raw_score": 0.6,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "The Democratic Party accepted that malaise as the price the nation had to pay for Big Government, and in so doing lost the confidence of the American people.",
+          "confidence": 0.9,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "Populism-Pluralism Axis",
+          "quote_text": "We believe in service to the common good – and that good is not common until it is shared.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeal"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "Our platform is uplifting and visionary. It reflects the views of countless Americans all across this country who believe in prosperity with a purpose – who believe in Renewing America’s Purpose.",
+          "confidence": 0.9,
+          "context_type": "national_identity_and_purpose"
+        },
+        {
+          "dimension": "Nationalism-Patriotism Axis",
+          "quote_text": "To all Americans, particularly immigrants and minorities, we send a clear message: this is the party of freedom and progress, and it is your home.",
+          "confidence": 0.85,
+          "context_type": "inclusive_civic_nationalism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

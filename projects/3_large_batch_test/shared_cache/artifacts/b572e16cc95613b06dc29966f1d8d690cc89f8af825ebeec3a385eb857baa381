@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_94e702a747f5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed using the Political Discourse Analysis Framework v7.0. Focus on identifying populist and nationalist rhetoric within the provided inaugural address. The analysis prioritizes raw dimensional scores, salience, and confidence levels as per the framework's requirements.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2005.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We are led, by events and common sense, to one conclusion: The survival of liberty in our land increasingly depends on the success of liberty in other lands. The best hope for peace in our world is the expansion of freedom in all the world.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"Direct appeal to people's aspirations for freedom and influence\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So it is the policy of the United States to seek and support the growth of democratic movements and institutions in every nation and culture, with the ultimate goal of ending tyranny in our world.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"Policy statement framing US role in promoting democracy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America's vital interests and our deepest beliefs are now one. From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matches no value, because they bear the image of the Maker of heaven and Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Assertion of exceptionalism and divine mandate\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Across the generations, we have proclaimed the imperative of self-government, because no one is fit to be a master and no one deserves to be a slave.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Reference to founding principles and national ideals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America will not impose our own style of government on the unwilling. Our goal instead is to help others find their own voice, attain their own freedom, and make their own way.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Declaration of national purpose and exceptional role\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:09:23.264206+00:00",
+    "end_time": "2025-08-02T00:09:26.148568+00:00",
+    "duration_seconds": 2.884362,
+    "llm_interaction_hash": "4cdb8ab35c906cde"
+  },
+  "input_artifacts": {
+    "framework_hash": "1262b81fefcba81e20b7d9ee03211e49ad5eb527f5a675d5a930a4aca936875a",
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T000654Z_fffb33f6"
+  }
+}

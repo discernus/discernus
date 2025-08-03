@@ -98,7 +98,7 @@ class EvidenceCurator:
     The key innovation is that curation happens AFTER computation.
     """
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-flash", audit_logger=None):
+    def __init__(self, model: str, audit_logger=None):
         """
         Initialize the EvidenceCurator.
         

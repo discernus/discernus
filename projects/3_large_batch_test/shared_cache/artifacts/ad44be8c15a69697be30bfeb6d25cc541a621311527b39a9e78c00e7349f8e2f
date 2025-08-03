@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_73dd6af74d23",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v7.0 - Populism Emergence Study\",\n    \"framework_version\": \"v7.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the provided framework, focusing on identifying populist and nationalist rhetoric within the provided document. Confidence is high due to clear linguistic markers aligning with the framework's definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1998.txt\",\n      \"dimensional_scores\": {\n        \"Populism-Pluralism Score\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"Nationalism-Patriotism Score\": {\n          \"raw_score\": 0.68,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Let me begin by saying that it has been too long, at least three decades, since a President has come and challenged Americans to join him on a great national journey, not merely to consume the bounty of today but to invest for a much greater one tomorrow.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Direct appeal to 'the people' vs. an abstract 'national journey'\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course. I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Appeals to traditional values and 'the people's' needs\"\n        },\n        {\n          \"dimension\": \"Populism-Pluralism Score\",\n          \"quote_text\": \"And our political system so often seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Anti-establishment rhetoric targeting 'special interest groups'\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"We have always been a people of youthful energy and daring spirit. And at this historic moment, as communism has fallen, as freedom is spreading around the world, as a global economy is taking shape before our eyes, Americans have called for change.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Emphasis on American exceptionalism and global leadership\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"I believe we can do better because we remain the greatest nation on Earth, the world's strongest economy, the world's only military superpower.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"Assertion of national superiority and power\"\n        },\n        {\n          \"dimension\": \"Nationalism-Patriotism Score\",\n          \"quote_text\": \"To middle class Americans who have paid a great deal for the last 12 years and from whom I ask a contribution tonight, I will say again as I did on Monday night: You're not going alone any more, you're certainly not going first, and you're not going to pay more for less as you have too often in the past.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Direct address to 'middle class Americans' framing an 'us' vs. the system\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-02T00:59:22.979112+00:00",
+    "end_time": "2025-08-02T00:59:26.445571+00:00",
+    "duration_seconds": 3.466459,
+    "llm_interaction_hash": "087c59d7c2c06b0d"
+  },
+  "input_artifacts": {
+    "framework_hash": "a0fcb3ab38d9cd8c60573e1f19a910b3cbc59d8cca588b57bb2a799cf83834a3",
+    "document_hashes": [
+      "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250802T005142Z_f4184ce4"
+  }
+}
