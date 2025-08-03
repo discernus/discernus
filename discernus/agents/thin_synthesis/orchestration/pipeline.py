@@ -351,7 +351,7 @@ class ProductionThinSynthesisPipeline:
                 content=json.dumps(plan_response.analysis_plan),
                 artifact_type="analysis_plan",
                 stage="raw_data_analysis",
-                dependencies=[request.raw_data_hash]
+                dependencies=[request.scores_artifact_hash]
             )
             
             # Defensive JSON serialization for exec_response
@@ -371,13 +371,13 @@ class ProductionThinSynthesisPipeline:
                 content=json.dumps(safe_exec_response),
                 artifact_type="statistical_results",
                 stage="mathematical_analysis",
-                dependencies=[plan_hash, request.raw_data_hash]
+                dependencies=[plan_hash, request.scores_artifact_hash]
             )
             evidence_hash = self._store_artifact_with_metadata(
                 content=json.dumps(curation_response.to_json_serializable()),
                 artifact_type="curated_evidence",
                 stage="evidence_curation",
-                dependencies=[results_hash, request.raw_data_hash]
+                dependencies=[results_hash, request.scores_artifact_hash]
             )
             
             # Success! Create complete response
