@@ -198,6 +198,9 @@ Respond with only the JSON object."""
                 
             def get_artifact(self, hash_id: str):
                 return self.local_storage.get_artifact(hash_id)
+                
+            def artifact_exists(self, hash_id: str):
+                return self.local_storage.artifact_exists(hash_id)
         
         compatible_storage = MinIOCompatibleStorage(storage)
         
