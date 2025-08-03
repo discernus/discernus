@@ -870,10 +870,10 @@ Respond with only the JSON object."""
             curated_evidence_hash = ""
             
             # Check if synthesis metadata contains artifact references
-            if "statistical_results_artifact_hash" in synthesis_result:
-                statistical_results_hash = synthesis_result["statistical_results_artifact_hash"]
-            if "curated_evidence_artifact_hash" in synthesis_result:
-                curated_evidence_hash = synthesis_result["curated_evidence_artifact_hash"]
+            if "statistical_results_hash" in synthesis_result:
+                statistical_results_hash = synthesis_result["statistical_results_hash"]
+            if "curated_evidence_hash" in synthesis_result:
+                curated_evidence_hash = synthesis_result["curated_evidence_hash"]
                 
             # TODO: For now, we'll look for the most recent synthesis artifacts in the cache
             # This is a temporary solution until the synthesis pipeline returns proper hashes
