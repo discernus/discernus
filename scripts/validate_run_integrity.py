@@ -2,8 +2,8 @@
 """
 Discernus Research Run Integrity Validator
 
-This script provides comprehensive cryptographic validation of research run integrity.
-Designed for auditors to verify that no tampering has occurred and that the complete
+This script provides comprehensive integrity validation of research run consistency.
+Designed for auditors to verify content-addressed hashes and that the complete
 provenance chain is intact.
 
 Usage:
@@ -22,7 +22,7 @@ import sys
 
 
 class IntegrityValidator:
-    """Validates cryptographic integrity of research runs."""
+    """Validates content-addressed integrity of research runs."""
     
     def __init__(self, run_path: Path, verbose: bool = False):
         self.run_path = Path(run_path)
@@ -343,8 +343,8 @@ class IntegrityValidator:
         
         if all_passed and not self.errors:
             print(f"\n🎉 INTEGRITY VERIFICATION: PASSED")
-            print(f"   This research run has cryptographic integrity.")
-            print(f"   All artifacts are tamper-evident and traceable.")
+            print(f"   This research run has consistent content-addressed integrity.")
+            print(f"   All artifacts match expected hashes and are traceable.")
             return True
         else:
             print(f"\n⚠️  INTEGRITY VERIFICATION: FAILED")
@@ -354,7 +354,7 @@ class IntegrityValidator:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Validate cryptographic integrity of Discernus research runs",
+        description="Validate content-addressed integrity of Discernus research runs",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

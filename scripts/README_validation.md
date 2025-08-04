@@ -2,7 +2,7 @@
 
 ## Quick Start for Auditors
 
-The `validate_run_integrity.py` script provides comprehensive cryptographic validation of Discernus research runs.
+The `validate_run_integrity.py` script provides comprehensive integrity validation of Discernus research runs using content-addressed hashing.
 
 ### Basic Usage
 
@@ -67,8 +67,8 @@ python3 scripts/validate_run_integrity.py projects/simple_test/runs/20250804T175
 ✅ Checks Passed: 5/5
 
 🎉 INTEGRITY VERIFICATION: PASSED
-   This research run has cryptographic integrity.
-   All artifacts are tamper-evident and traceable.
+   This research run has consistent content-addressed integrity.
+   All artifacts match expected hashes and are traceable.
 ```
 
 ### Integration with Academic Workflows
@@ -88,4 +88,4 @@ The script validates that:
 - No artifacts have been tampered with or corrupted
 - Research runs are properly documented and preserved
 
-This provides mathematical proof of research integrity and enables trustworthy computational social science.
+This provides strong evidence of research consistency and enables trustworthy computational social science.
