@@ -2,7 +2,7 @@
 
 **Welcome to the complete audit trail for this computational research run.**
 
-This directory contains a fully transparent, cryptographically-secured record of a computational research experiment. Every artifact is content-addressable, tamper-evident, and preserved in Git for permanent academic provenance.
+This directory contains a fully transparent, integrity-checked record of a computational research experiment. Every artifact is content-addressable, enabling detection of modifications, and preserved in Git for academic provenance.
 
 ## Executive Summary
 
@@ -104,27 +104,27 @@ All artifacts are cryptographically hashed and linked. The complete dependency c
 4. **Reproducibility Testing**: Attempt replication using preserved inputs
 5. **Statistical Validation**: Independent verification of mathematical computations
 
-## 🔐 Cryptographic Provenance System
+## 🔐 Content-Addressed Provenance System
 
 ### Content-Addressable Storage
 Every artifact in this system is stored using **content-addressable hashing**:
 - **SHA-256 hashes**: Each file's content generates a unique 256-bit fingerprint
-- **Tamper detection**: Any modification changes the hash, making tampering immediately evident
+- **Modification detection**: Any change to content results in a different hash
 - **Deduplication**: Identical content across runs shares the same hash, ensuring efficiency
-- **Verification**: Run `sha256sum` on any artifact to verify its integrity
+- **Verification**: Run `sha256sum` on any artifact to check if content matches expected hash
 
 ### Hash-Based Artifact Identification
 ```bash
-# Example: Verify an artifact hasn't been tampered with
+# Example: Verify an artifact matches its expected hash
 sha256sum artifacts/analysis_results/analysis_response_185f5e58.json
-# Should match: 185f5e58f8a7a05836183257ddecd52a3f5768272a30e6a8c2e8865d8008c273
+# Should start with: 185f5e58... (first 8 characters of SHA-256)
 ```
 
 ### Git-Based Permanent Provenance
-- **Immutable history**: Every research run is committed to Git with timestamps
-- **Distributed verification**: Git's distributed nature enables independent verification
+- **Version history**: Every research run is committed to Git with timestamps
+- **Distributed storage**: Git's distributed nature enables independent verification
 - **Branching strategy**: Research runs are preserved across branches for long-term access
-- **Cryptographic signatures**: Git commits can be cryptographically signed for additional security
+- **Optional signatures**: Git commits can be cryptographically signed for additional verification
 
 ### Symlink Architecture for Efficiency
 - **Shared cache**: Common artifacts (frameworks, models) stored once, linked many times
@@ -133,19 +133,19 @@ sha256sum artifacts/analysis_results/analysis_response_185f5e58.json
 - **Transparency**: All links are relative and auditable
 
 ### Dependency Chain Verification
-The system maintains a complete **cryptographic dependency graph**:
+The system maintains a complete **content-addressed dependency graph**:
 ```
 Input Data (hash_A) → Analysis (hash_B) → Synthesis (hash_C) → Results (hash_D)
 ```
 - Each stage records the hashes of its inputs in metadata
 - Auditors can verify the complete chain from raw data to conclusions
-- Any break in the chain indicates potential tampering or data loss
+- Any break in the chain indicates potential modification or data loss
 
-### Academic Integrity Guarantees
-This cryptographic system provides **mathematical proof** of:
-1. **Data integrity**: Content hasn't been modified since creation
-2. **Provenance completeness**: All inputs to conclusions are preserved
-3. **Temporal ordering**: Git timestamps prove sequence of operations
+### Academic Integrity Features
+This content-addressed system provides **strong evidence** of:
+1. **Data consistency**: Content matches expected hashes when unmodified
+2. **Provenance completeness**: All inputs to conclusions are preserved and linked
+3. **Temporal ordering**: Git timestamps document sequence of operations
 4. **Reproducibility**: Exact inputs preserved for independent replication
 
 ### Automated Integrity Validation
@@ -179,7 +179,7 @@ grep -r "dependencies" artifacts/*/
 ## 🤝 Auditor Support
 
 ### Common Questions
-- **"Is this data fabricated?"** → All artifacts are cryptographically hashed and linked to source
+- **"Is this data fabricated?"** → All artifacts are content-addressed and linked to source
 - **"Can I trust the AI system outputs?"** → Raw AI responses preserved in `artifacts/analysis_results/`
 - **"How do I verify the computations?"** → Mathematical work in `artifacts/statistical_results/` with source data
 - **"What if I find issues?"** → Complete provenance chain enables precise issue identification
@@ -187,14 +187,14 @@ grep -r "dependencies" artifacts/*/
 ### Technical Support
 - **Automated Validation**: Run `python3 scripts/validate_run_integrity.py [run_path]` for comprehensive checks
 - **Symlink Issues**: All artifacts are symlinked to `../../shared_cache/artifacts/[hash]`
-- **Hash Verification**: Use `sha256sum` on any artifact to verify integrity
+- **Hash Verification**: Use `sha256sum` on any artifact to check content consistency
 - **Reproduction**: Use `manifest.json` to recreate exact experimental conditions
 
 ### Academic Standards Compliance
 - ✅ **Complete Transparency**: Every computation and decision preserved
 - ✅ **Reproducibility**: All inputs and parameters documented
 - ✅ **Traceability**: Complete audit trail from raw data to conclusions
-- ✅ **Integrity**: Cryptographic hashing prevents tampering
+- ✅ **Integrity**: Content-addressed hashing enables modification detection
 - ✅ **Accessibility**: Human-readable organization with clear navigation
 
 ## 📞 Contact Information
