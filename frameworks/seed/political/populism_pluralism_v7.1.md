@@ -46,7 +46,7 @@ Institutional mediation, minority rights, and procedural democracy emphasis
   "analysis_variants": {
     "default": {
       "description": "Salience-enhanced populist vs pluralist democratic authority analysis with raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert in democratic theory and political communication with deep understanding of populist and pluralist dynamics across diverse contexts. Phase 2: Framework Methodology: Your task is to analyze the text using the Populism vs Pluralism Framework v7.1, which measures democratic authority tensions through two key dimensions. Phase 3: Operational Definitions: Evaluate two dimensions: Populist Authority (direct popular will emphasis) and Pluralist Authority (institutional mediation emphasis). Each dimension receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each dimension, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with dimensional scores only - NO calculations of authority balance or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert in democratic theory and political communication with deep understanding of populist and pluralist dynamics across diverse contexts. Your task is to analyze the provided text using the Populism vs Pluralism Framework v7.1, which measures democratic authority tensions through two key dimensions with enhanced metadata reporting and salience-weighted analysis.\n\nThe framework evaluates democratic authority across two dimensions:\n\n**Populist Authority** (0.0-1.0): Direct popular will and majoritarian sovereignty emphasis, including markers like 'will of the people,' 'popular mandate,' 'majority rule,' 'corrupt elite,' 'establishment,' 'real people,' 'ordinary citizens,' 'bypass institutions.'\n\n**Pluralist Authority** (0.0-1.0): Institutional mediation, minority rights, and procedural democracy emphasis, including markers like 'checks and balances,' 'constitutional protections,' 'rule of law,' 'protect minorities,' 'diverse voices,' 'democratic deliberation,' 'due process.'\n\nFor each dimension, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this dimension to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Populism vs Pluralism methodology to this specific text\n- Detailed analysis of each dimension with scores, salience, confidence, and evidence\n- Assessment of democratic authority tensions and rhetorical emphasis patterns\n- Overall authority profile with salience weighting\n- Key insights about the speaker's approach to democratic legitimacy\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong populist authority (populist authority score: 0.8, salience: 0.9, confidence: 0.7) with frequent appeals to direct popular will.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -76,12 +76,12 @@ Institutional mediation, minority rights, and procedural democracy emphasis
       "pluralist_authority_confidence"
     ],
     "extraction_patterns": {
-      "populist_authority_score": ["populist.{0,20}authority.{0,20}score", "populist.{0,20}score"],
-      "pluralist_authority_score": ["pluralist.{0,20}authority.{0,20}score", "pluralist.{0,20}score"],
-      "populist_authority_salience": ["populist.{0,20}authority.{0,20}salience", "populist.{0,20}salience"],
-      "pluralist_authority_salience": ["pluralist.{0,20}authority.{0,20}salience", "pluralist.{0,20}salience"],
-      "populist_authority_confidence": ["populist.{0,20}authority.{0,20}confidence", "populist.{0,20}confidence"],
-      "pluralist_authority_confidence": ["pluralist.{0,20}authority.{0,20}confidence", "pluralist.{0,20}confidence"]
+      "populist_authority_score": ["populist.{0,20}authority.{0,20}score", "populist.{0,20}authority.{0,20}rating", "populist\\s*authority\\s*:\\s*[0-9]"],
+      "pluralist_authority_score": ["pluralist.{0,20}authority.{0,20}score", "pluralist.{0,20}authority.{0,20}rating", "pluralist\\s*authority\\s*:\\s*[0-9]"],
+      "populist_authority_salience": ["populist.{0,20}authority.{0,20}salience", "populist.{0,20}authority.{0,20}importance", "populist.{0,20}centrality"],
+      "pluralist_authority_salience": ["pluralist.{0,20}authority.{0,20}salience", "pluralist.{0,20}authority.{0,20}importance", "pluralist.{0,20}centrality"],
+      "populist_authority_confidence": ["populist.{0,20}authority.{0,20}confidence", "populist.{0,20}authority.{0,20}certainty", "populist.{0,20}sure"],
+      "pluralist_authority_confidence": ["pluralist.{0,20}authority.{0,20}confidence", "pluralist.{0,20}authority.{0,20}certainty", "pluralist.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -94,10 +94,6 @@ Institutional mediation, minority rights, and procedural democracy emphasis
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing dimensional scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with populism-pluralism analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```

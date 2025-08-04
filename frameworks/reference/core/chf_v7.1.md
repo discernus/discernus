@@ -81,12 +81,6 @@ The analysis agent outputs a raw analysis log containing:
       "institutional_subversion_confidence",
       "systemic_continuity_confidence",
       "systemic_replacement_confidence"
-    ],
-    "target_dimensions": [
-      "procedural_health_score",
-      "institutional_health_score", 
-      "systemic_health_score",
-      "constitutional_direction_index"
     ]
   }
 }
@@ -104,7 +98,7 @@ The analysis agent outputs a raw analysis log containing:
   "analysis_variants": {
     "default": {
       "description": "Complete constitutional health analysis with salience weighting and raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert constitutional health analyst with deep understanding of democratic institutional dynamics. Phase 2: Framework Methodology: Your task is to analyze the text using the Constitutional Health Framework (CHF) v7.1, which measures how political discourse affects constitutional system health through three critical axes. Phase 3: Operational Definitions: Evaluate six dimensions across three axes: Procedural (Legitimacy vs. Rejection), Institutional (Respect vs. Subversion), and Systemic (Continuity vs. Replacement). Each dimension receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each dimension, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with dimensional scores only - NO calculations of health indices or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert constitutional health analyst with deep understanding of democratic institutional dynamics. Your task is to analyze the provided text using the Constitutional Health Framework (CHF) v7.1, which measures how political discourse affects constitutional system health through three critical axes with enhanced metadata reporting.\n\nThe framework evaluates discourse across three constitutional axes:\n\n**Procedural Axis**: Procedural Legitimacy (0.0-1.0) - support for established procedures for political change and governance vs. Procedural Rejection (0.0-1.0) - rejecting established procedures in favor of circumvention or extra-constitutional action.\n\n**Institutional Axis**: Institutional Respect (0.0-1.0) - recognition of institutional authority, expertise, and legitimate governance role vs. Institutional Subversion (0.0-1.0) - attacking institutional authority, expertise, or legitimate governance role.\n\n**Systemic Axis**: Systemic Continuity (0.0-1.0) - support for maintaining and improving existing constitutional framework vs. Systemic Replacement (0.0-1.0) - advocating fundamental replacement rather than reform of constitutional framework.\n\nFor each dimension, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this dimension to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the CHF methodology to this specific text\n- Detailed analysis of each relevant dimension with scores, salience, confidence, and evidence\n- Assessment of constitutional health vs. pathology patterns\n- Overall constitutional direction profile with salience weighting\n- Key insights about the speaker's constitutional approach\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong procedural legitimacy (procedural legitimacy score: 0.8, salience: 0.9, confidence: 0.7) with frequent references to constitutional processes.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -151,24 +145,24 @@ The analysis agent outputs a raw analysis log containing:
       "systemic_replacement_confidence"
     ],
     "extraction_patterns": {
-      "procedural_legitimacy_score": ["procedural.{0,20}legitimacy.{0,20}score", "legitimacy.{0,20}score"],
-      "procedural_rejection_score": ["procedural.{0,20}rejection.{0,20}score", "rejection.{0,20}score"],
-      "institutional_respect_score": ["institutional.{0,20}respect.{0,20}score", "respect.{0,20}score"],
-      "institutional_subversion_score": ["institutional.{0,20}subversion.{0,20}score", "subversion.{0,20}score"],
-      "systemic_continuity_score": ["systemic.{0,20}continuity.{0,20}score", "continuity.{0,20}score"],
-      "systemic_replacement_score": ["systemic.{0,20}replacement.{0,20}score", "replacement.{0,20}score"],
-      "procedural_legitimacy_salience": ["procedural.{0,20}legitimacy.{0,20}salience", "legitimacy.{0,20}salience"],
-      "procedural_rejection_salience": ["procedural.{0,20}rejection.{0,20}salience", "rejection.{0,20}salience"],
-      "institutional_respect_salience": ["institutional.{0,20}respect.{0,20}salience", "respect.{0,20}salience"],
-      "institutional_subversion_salience": ["institutional.{0,20}subversion.{0,20}salience", "subversion.{0,20}salience"],
-      "systemic_continuity_salience": ["systemic.{0,20}continuity.{0,20}salience", "continuity.{0,20}salience"],
-      "systemic_replacement_salience": ["systemic.{0,20}replacement.{0,20}salience", "replacement.{0,20}salience"],
-      "procedural_legitimacy_confidence": ["procedural.{0,20}legitimacy.{0,20}confidence", "legitimacy.{0,20}confidence"],
-      "procedural_rejection_confidence": ["procedural.{0,20}rejection.{0,20}confidence", "rejection.{0,20}confidence"],
-      "institutional_respect_confidence": ["institutional.{0,20}respect.{0,20}confidence", "respect.{0,20}confidence"],
-      "institutional_subversion_confidence": ["institutional.{0,20}subversion.{0,20}confidence", "subversion.{0,20}confidence"],
-      "systemic_continuity_confidence": ["systemic.{0,20}continuity.{0,20}confidence", "continuity.{0,20}confidence"],
-      "systemic_replacement_confidence": ["systemic.{0,20}replacement.{0,20}confidence", "replacement.{0,20}confidence"]
+      "procedural_legitimacy_score": ["procedural.{0,20}legitimacy.{0,20}score", "procedural.{0,20}legitimacy.{0,20}rating", "legitimacy\\s*:\\s*[0-9]"],
+      "procedural_rejection_score": ["procedural.{0,20}rejection.{0,20}score", "procedural.{0,20}rejection.{0,20}rating", "rejection\\s*:\\s*[0-9]"],
+      "institutional_respect_score": ["institutional.{0,20}respect.{0,20}score", "institutional.{0,20}respect.{0,20}rating", "respect\\s*:\\s*[0-9]"],
+      "institutional_subversion_score": ["institutional.{0,20}subversion.{0,20}score", "institutional.{0,20}subversion.{0,20}rating", "subversion\\s*:\\s*[0-9]"],
+      "systemic_continuity_score": ["systemic.{0,20}continuity.{0,20}score", "systemic.{0,20}continuity.{0,20}rating", "continuity\\s*:\\s*[0-9]"],
+      "systemic_replacement_score": ["systemic.{0,20}replacement.{0,20}score", "systemic.{0,20}replacement.{0,20}rating", "replacement\\s*:\\s*[0-9]"],
+      "procedural_legitimacy_salience": ["procedural.{0,20}legitimacy.{0,20}salience", "legitimacy.{0,20}importance", "legitimacy.{0,20}centrality"],
+      "procedural_rejection_salience": ["procedural.{0,20}rejection.{0,20}salience", "rejection.{0,20}importance", "rejection.{0,20}centrality"],
+      "institutional_respect_salience": ["institutional.{0,20}respect.{0,20}salience", "respect.{0,20}importance", "respect.{0,20}centrality"],
+      "institutional_subversion_salience": ["institutional.{0,20}subversion.{0,20}salience", "subversion.{0,20}importance", "subversion.{0,20}centrality"],
+      "systemic_continuity_salience": ["systemic.{0,20}continuity.{0,20}salience", "continuity.{0,20}importance", "continuity.{0,20}centrality"],
+      "systemic_replacement_salience": ["systemic.{0,20}replacement.{0,20}salience", "replacement.{0,20}importance", "replacement.{0,20}centrality"],
+      "procedural_legitimacy_confidence": ["procedural.{0,20}legitimacy.{0,20}confidence", "legitimacy.{0,20}certainty", "legitimacy.{0,20}sure"],
+      "procedural_rejection_confidence": ["procedural.{0,20}rejection.{0,20}confidence", "rejection.{0,20}certainty", "rejection.{0,20}sure"],
+      "institutional_respect_confidence": ["institutional.{0,20}respect.{0,20}confidence", "respect.{0,20}certainty", "respect.{0,20}sure"],
+      "institutional_subversion_confidence": ["institutional.{0,20}subversion.{0,20}confidence", "subversion.{0,20}certainty", "subversion.{0,20}sure"],
+      "systemic_continuity_confidence": ["systemic.{0,20}continuity.{0,20}confidence", "continuity.{0,20}certainty", "continuity.{0,20}sure"],
+      "systemic_replacement_confidence": ["systemic.{0,20}replacement.{0,20}confidence", "replacement.{0,20}certainty", "replacement.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -182,10 +176,6 @@ The analysis agent outputs a raw analysis log containing:
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing dimensional scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with constitutional health analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```

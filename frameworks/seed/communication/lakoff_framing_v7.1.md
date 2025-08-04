@@ -54,7 +54,7 @@ The Lakoff Framing Framework v7.1 analyzes political and social discourse using 
   "analysis_variants": {
     "default": {
       "description": "Complete salience-weighted family model analysis with raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert in cognitive linguistics and political psychology, specializing in Lakoff's family model theory across diverse cultural contexts. Phase 2: Framework Methodology: Your task is to analyze the text using the Lakoff Framing Framework v7.1, which measures family model patterns through three bipolar dimensions. Phase 3: Operational Definitions: Evaluate three bipolar dimensions on a scale from Strict Father (1.0) to Nurturant Parent (0.0): Authority vs. Empathy, Competition vs. Cooperation, and Self-Reliance vs. Interdependence. Each dimension receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each dimension, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with dimensional scores only - NO calculations of tension scores or FMSCI (these will be computed by code)."
+      "analysis_prompt": "You are an expert in cognitive linguistics and political psychology, specializing in Lakoff's family model theory across diverse cultural contexts. Your task is to analyze the provided text using the Lakoff Framing Framework v7.1, which measures family model patterns through three bipolar dimensions with enhanced metadata scoring based on George Lakoff's model of family-based morality.\n\nThe framework evaluates discourse across three bipolar dimensions on a scale from Strict Father (1.0) to Nurturant Parent (0.0):\n\n**Authority vs Empathy** (0.0-1.0): Strict Father model emphasizes strong leadership, moral authority, decisive action (1.0) vs. Nurturant Parent model emphasizes understanding, inclusive dialogue, listening to voices (0.0).\n\n**Competition vs Cooperation** (0.0-1.0): Strict Father model emphasizes natural hierarchy, merit-based systems, individual achievement (1.0) vs. Nurturant Parent model emphasizes working together, shared responsibility, collaborative approaches (0.0).\n\n**Self-Reliance vs Interdependence** (0.0-1.0): Strict Father model emphasizes personal responsibility, self-reliance, bootstrap philosophy (1.0) vs. Nurturant Parent model emphasizes stronger together, mutual dependence, common good emphasis (0.0).\n\nFor each dimension, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text (0.0 = pure Nurturant Parent, 1.0 = pure Strict Father)\n- **Salience (0.0-1.0)**: How central is this dimension to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Lakoff Framing methodology to this specific text\n- Detailed analysis of each bipolar dimension with scores, salience, confidence, and evidence\n- Assessment of family model patterns and strategic moral framework deployment\n- Overall family model profile revealing Strict Father vs. Nurturant Parent orientation\n- Key insights about the speaker's approach to family-based moral reasoning\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong authority vs empathy tension (authority vs empathy score: 0.8, salience: 0.9, confidence: 0.7) with clear Strict Father model orientation.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -93,15 +93,15 @@ The Lakoff Framing Framework v7.1 analyzes political and social discourse using 
       "self_reliance_vs_interdependence_confidence"
     ],
     "extraction_patterns": {
-      "authority_vs_empathy_score": ["authority.{0,20}vs.{0,20}empathy.{0,20}score", "authority.{0,20}empathy.{0,20}score", "authority.{0,20}score"],
-      "competition_vs_cooperation_score": ["competition.{0,20}vs.{0,20}cooperation.{0,20}score", "competition.{0,20}cooperation.{0,20}score", "competition.{0,20}score"],
-      "self_reliance_vs_interdependence_score": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}score", "self.{0,20}reliance.{0,20}score", "interdependence.{0,20}score"],
-      "authority_vs_empathy_salience": ["authority.{0,20}vs.{0,20}empathy.{0,20}salience", "authority.{0,20}empathy.{0,20}salience", "authority.{0,20}salience"],
-      "competition_vs_cooperation_salience": ["competition.{0,20}vs.{0,20}cooperation.{0,20}salience", "competition.{0,20}cooperation.{0,20}salience", "competition.{0,20}salience"],
-      "self_reliance_vs_interdependence_salience": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}salience", "self.{0,20}reliance.{0,20}salience", "interdependence.{0,20}salience"],
-      "authority_vs_empathy_confidence": ["authority.{0,20}vs.{0,20}empathy.{0,20}confidence", "authority.{0,20}empathy.{0,20}confidence", "authority.{0,20}confidence"],
-      "competition_vs_cooperation_confidence": ["competition.{0,20}vs.{0,20}cooperation.{0,20}confidence", "competition.{0,20}cooperation.{0,20}confidence", "competition.{0,20}confidence"],
-      "self_reliance_vs_interdependence_confidence": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}confidence", "self.{0,20}reliance.{0,20}confidence", "interdependence.{0,20}confidence"]
+      "authority_vs_empathy_score": ["authority.{0,20}vs.{0,20}empathy.{0,20}score", "authority.{0,20}empathy.{0,20}rating", "authority\\s*vs\\s*empathy\\s*:\\s*[0-9]"],
+      "competition_vs_cooperation_score": ["competition.{0,20}vs.{0,20}cooperation.{0,20}score", "competition.{0,20}cooperation.{0,20}rating", "competition\\s*vs\\s*cooperation\\s*:\\s*[0-9]"],
+      "self_reliance_vs_interdependence_score": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}score", "self.{0,20}reliance.{0,20}rating", "self\\s*reliance\\s*vs\\s*interdependence\\s*:\\s*[0-9]"],
+      "authority_vs_empathy_salience": ["authority.{0,20}vs.{0,20}empathy.{0,20}salience", "authority.{0,20}empathy.{0,20}importance", "authority.{0,20}centrality"],
+      "competition_vs_cooperation_salience": ["competition.{0,20}vs.{0,20}cooperation.{0,20}salience", "competition.{0,20}cooperation.{0,20}importance", "competition.{0,20}centrality"],
+      "self_reliance_vs_interdependence_salience": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}salience", "self.{0,20}reliance.{0,20}importance", "interdependence.{0,20}centrality"],
+      "authority_vs_empathy_confidence": ["authority.{0,20}vs.{0,20}empathy.{0,20}confidence", "authority.{0,20}empathy.{0,20}certainty", "authority.{0,20}sure"],
+      "competition_vs_cooperation_confidence": ["competition.{0,20}vs.{0,20}cooperation.{0,20}confidence", "competition.{0,20}cooperation.{0,20}certainty", "competition.{0,20}sure"],
+      "self_reliance_vs_interdependence_confidence": ["self.{0,20}reliance.{0,20}vs.{0,20}interdependence.{0,20}confidence", "self.{0,20}reliance.{0,20}certainty", "interdependence.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -114,10 +114,6 @@ The Lakoff Framing Framework v7.1 analyzes political and social discourse using 
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing dimensional scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with family model analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```

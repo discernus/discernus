@@ -64,10 +64,6 @@ The analysis agent outputs a raw analysis log containing:
       "immutable_identity_politics_confidence",
       "tribal_domination_confidence",
       "pluralist_individual_dignity_confidence"
-    ],
-    "target_dimensions": [
-      "worldview_legitimacy_index",
-      "dominant_worldview"
     ]
   }
 }
@@ -85,7 +81,7 @@ The analysis agent outputs a raw analysis log containing:
   "analysis_variants": {
     "default": {
       "description": "Complete triadic worldview analysis across all three political legitimacy sources with raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in political worldview analysis and democratic legitimacy frameworks across diverse contexts. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Political Worldview Triad Framework v7.1, which captures competing sources of political legitimacy with enhanced metadata scoring. Phase 3: Operational Definitions: Evaluate 3 worldview dimensions: Immutable-Identity Politics, Tribal Domination, and Pluralist Individual Dignity. Each dimension receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each dimension, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Identify the dominant worldview (highest scoring). Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with worldview scores only - NO calculations of worldview indices or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert analyst specializing in political worldview analysis and democratic legitimacy frameworks across diverse contexts. Your task is to analyze the provided text using the Political Worldview Triad Framework v7.1, which captures competing sources of political legitimacy with enhanced metadata scoring and identifies fundamental value structures in political communication.\n\nThe framework evaluates discourse across three competing sources of political legitimacy:\n\n**Immutable-Identity Politics** (0.0-1.0): Politics that centers moral status on overlapping, unchosen personal attributes, with markers like 'As Black women, we,' 'Center disabled queer voices,' 'Our lived experience,' 'systemic oppression,' 'marginalized identities.'\n\n**Tribal Domination** (0.0-1.0): Politics that asserts the legitimacy of an in-group's supremacy over out-groups, with markers like 'We must put our nation first,' 'They will replace us,' 'take back our country,' 'real patriots,' 'dominant culture.'\n\n**Pluralist Individual Dignity** (0.0-1.0): Politics that locates legitimacy in the transcendent dignity and agency of each person, with markers like 'Every individual deserves equal voice,' 'Human dignity transcends race and class,' 'universal rights,' 'shared civic space.'\n\nFor each dimension, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this dimension to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Political Worldview Triad methodology to this specific text\n- Detailed analysis of each worldview dimension with scores, salience, confidence, and evidence\n- Assessment of competing legitimacy sources and value structure patterns\n- Overall worldview profile with identification of dominant legitimacy framework\n- Key insights about the speaker's approach to political legitimacy and moral authority\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong pluralist individual dignity (pluralist individual dignity score: 0.8, salience: 0.9, confidence: 0.7) with frequent appeals to universal human dignity.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -119,15 +115,15 @@ The analysis agent outputs a raw analysis log containing:
       "pluralist_individual_dignity_confidence"
     ],
     "extraction_patterns": {
-      "immutable_identity_politics_score": ["immutable.{0,20}identity.{0,20}politics.{0,20}score", "identity.{0,20}politics.{0,20}score"],
-      "tribal_domination_score": ["tribal.{0,20}domination.{0,20}score", "domination.{0,20}score"],
-      "pluralist_individual_dignity_score": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}score", "individual.{0,20}dignity.{0,20}score"],
-      "immutable_identity_politics_salience": ["immutable.{0,20}identity.{0,20}politics.{0,20}salience", "identity.{0,20}politics.{0,20}salience"],
-      "tribal_domination_salience": ["tribal.{0,20}domination.{0,20}salience", "domination.{0,20}salience"],
-      "pluralist_individual_dignity_salience": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}salience", "individual.{0,20}dignity.{0,20}salience"],
-      "immutable_identity_politics_confidence": ["immutable.{0,20}identity.{0,20}politics.{0,20}confidence", "identity.{0,20}politics.{0,20}confidence"],
-      "tribal_domination_confidence": ["tribal.{0,20}domination.{0,20}confidence", "domination.{0,20}confidence"],
-      "pluralist_individual_dignity_confidence": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}confidence", "individual.{0,20}dignity.{0,20}confidence"]
+      "immutable_identity_politics_score": ["immutable.{0,20}identity.{0,20}politics.{0,20}score", "identity.{0,20}politics.{0,20}rating", "identity\\s*politics\\s*:\\s*[0-9]"],
+      "tribal_domination_score": ["tribal.{0,20}domination.{0,20}score", "tribal.{0,20}domination.{0,20}rating", "tribal\\s*domination\\s*:\\s*[0-9]"],
+      "pluralist_individual_dignity_score": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}score", "individual.{0,20}dignity.{0,20}rating", "individual\\s*dignity\\s*:\\s*[0-9]"],
+      "immutable_identity_politics_salience": ["immutable.{0,20}identity.{0,20}politics.{0,20}salience", "identity.{0,20}politics.{0,20}importance", "identity.{0,20}politics.{0,20}centrality"],
+      "tribal_domination_salience": ["tribal.{0,20}domination.{0,20}salience", "tribal.{0,20}domination.{0,20}importance", "domination.{0,20}centrality"],
+      "pluralist_individual_dignity_salience": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}salience", "individual.{0,20}dignity.{0,20}importance", "individual.{0,20}dignity.{0,20}centrality"],
+      "immutable_identity_politics_confidence": ["immutable.{0,20}identity.{0,20}politics.{0,20}confidence", "identity.{0,20}politics.{0,20}certainty", "identity.{0,20}politics.{0,20}sure"],
+      "tribal_domination_confidence": ["tribal.{0,20}domination.{0,20}confidence", "tribal.{0,20}domination.{0,20}certainty", "domination.{0,20}sure"],
+      "pluralist_individual_dignity_confidence": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}confidence", "individual.{0,20}dignity.{0,20}certainty", "individual.{0,20}dignity.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -140,10 +136,6 @@ The analysis agent outputs a raw analysis log containing:
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing political worldview scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with worldview legitimacy analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```
