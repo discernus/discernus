@@ -32,16 +32,18 @@ class LocalArtifactStorage:
     external dependencies.
     """
     
-    def __init__(self, security_boundary: ExperimentSecurityBoundary, run_folder: Path):
+    def __init__(self, security_boundary: ExperimentSecurityBoundary, run_folder: Path, run_name: Optional[str] = None):
         """
         Initialize local artifact storage.
         
         Args:
             security_boundary: Security boundary to enforce file access
-            run_folder: The specific run folder for this experiment
+            run_folder: The specific run folder for this experiment  
+            run_name: Optional explicit run name for source_run tracking (defaults to run_folder.name)
         """
         self.security = security_boundary
         self.run_folder = security_boundary.validate_path(run_folder)
+        self.run_name = run_name or run_folder.name
         
         # Create artifacts directory within the run folder
         self.artifacts_dir = self.security.secure_mkdir(run_folder / "artifacts")
@@ -74,7 +76,7 @@ class LocalArtifactStorage:
     
     def put_artifact(self, content: bytes, metadata: Optional[dict] = None) -> str:
         """
-        Store content and return SHA256 hash.
+        Store content with human-readable filename and return SHA256 hash.
         
         Args:
             content: Raw bytes to store
@@ -86,14 +88,18 @@ class LocalArtifactStorage:
         try:
             # Calculate SHA256 hash
             hash_id = hashlib.sha256(content).hexdigest()
+            short_hash = hash_id[:8]
+            
+            # Generate human-readable filename
+            human_filename = self._generate_human_filename(metadata, short_hash)
             
             # Check if already exists (cache hit)
             if self.artifact_exists(hash_id):
-                print(f"💾 Cache hit for artifact: {hash_id[:12]}...")
+                print(f"💾 Cache hit for artifact: {human_filename}")
                 return hash_id
             
-            # Store the artifact
-            artifact_path = self.artifacts_dir / hash_id
+            # Store the artifact with human-readable filename
+            artifact_path = self.artifacts_dir / human_filename
             self.security.secure_write_bytes(artifact_path, content)
             
             # Update registry with metadata
@@ -101,15 +107,61 @@ class LocalArtifactStorage:
                 "size_bytes": len(content),
                 "created_at": self._get_timestamp(),
                 "artifact_path": str(artifact_path.relative_to(self.run_folder)),
-                "metadata": metadata or {}
+                "human_filename": human_filename,
+                "metadata": metadata or {},
+                "source_run": self.run_name  # Track which run generated this artifact
             }
             self._save_registry()
             
-            print(f"🗄️ Stored artifact: {hash_id[:12]}... ({len(content)} bytes)")
+            print(f"🗄️ Stored artifact: {human_filename} ({len(content)} bytes)")
             return hash_id
             
         except Exception as e:
             raise LocalArtifactStorageError(f"Failed to store artifact: {e}")
+    
+    def _generate_human_filename(self, metadata: Optional[dict], short_hash: str) -> str:
+        """
+        Generate human-readable filename with crypto hash.
+        
+        Args:
+            metadata: Artifact metadata
+            short_hash: 8-character hash for uniqueness
+            
+        Returns:
+            Human-readable filename like 'analysis_response_mccain_concession_04d1d18a.json'
+        """
+        if not metadata:
+            return f"artifact_{short_hash}"
+        
+        artifact_type = metadata.get("artifact_type", "unknown")
+        
+        # Generate descriptive name based on type and content
+        if artifact_type == "analysis_json_v6":
+            return f"analysis_response_{short_hash}.json"
+        elif artifact_type == "statistical_results":
+            return f"statistical_results_{short_hash}.json"
+        elif artifact_type == "curated_evidence":
+            return f"curated_evidence_{short_hash}.json"
+        elif artifact_type == "analysis_plan":
+            return f"analysis_plan_{short_hash}.md"
+        elif artifact_type == "final_report":
+            timestamp = self._get_timestamp()[:10]  # YYYY-MM-DD
+            return f"final_report_{timestamp}_{short_hash}.md"
+        elif artifact_type == "synthesis_report":
+            timestamp = self._get_timestamp()[:10]  # YYYY-MM-DD
+            return f"synthesis_report_{timestamp}_{short_hash}.md"
+        elif artifact_type == "corpus_document":
+            # Try to extract meaningful name from metadata
+            original_name = metadata.get("original_filename", "")
+            if original_name:
+                name_part = original_name.replace(".txt", "").replace(".md", "")
+                return f"corpus_{name_part}_{short_hash}.txt"
+            return f"corpus_document_{short_hash}.txt"
+        elif artifact_type == "framework":
+            framework_name = metadata.get("framework_name", "framework")
+            return f"framework_{framework_name}_{short_hash}.md"
+        else:
+            return f"{artifact_type}_{short_hash}"
     
     def get_artifact(self, hash_id: str) -> bytes:
         """
@@ -125,10 +177,17 @@ class LocalArtifactStorage:
             if not self.artifact_exists(hash_id):
                 raise LocalArtifactStorageError(f"Artifact not found: {hash_id}")
             
-            artifact_path = self.artifacts_dir / hash_id
+            # Get human filename from registry
+            human_filename = self.registry[hash_id].get("human_filename", hash_id)
+            artifact_path = self.artifacts_dir / human_filename
+            
+            # Fallback to hash-based filename for legacy artifacts
+            if not artifact_path.exists():
+                artifact_path = self.artifacts_dir / hash_id
+            
             content = self.security.secure_read_bytes(artifact_path)
             
-            print(f"📥 Retrieved artifact: {hash_id[:12]}... ({len(content)} bytes)")
+            print(f"📥 Retrieved artifact: {human_filename} ({len(content)} bytes)")
             return content
             
         except SecurityError as e:
@@ -147,7 +206,17 @@ class LocalArtifactStorage:
             True if artifact exists, False otherwise
         """
         try:
-            artifact_path = self.artifacts_dir / hash_id
+            if hash_id not in self.registry:
+                return False
+            
+            # Check if the actual file exists
+            human_filename = self.registry[hash_id].get("human_filename", hash_id)
+            artifact_path = self.artifacts_dir / human_filename
+            
+            # Fallback to hash-based filename for legacy artifacts
+            if not artifact_path.exists():
+                artifact_path = self.artifacts_dir / hash_id
+                
             return self.security.is_within_boundary(artifact_path) and artifact_path.exists()
         except Exception:
             return False

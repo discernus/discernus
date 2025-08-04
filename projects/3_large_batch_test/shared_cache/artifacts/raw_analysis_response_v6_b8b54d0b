@@ -1,0 +1,139 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdg_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the PopuList Discourse Analysis Framework (PDAF) v7.1. The framework was applied to identify and score nine core populist discourse anchors and their associated salience and confidence levels. Evidence was extracted from the document to support each scoring. Scores are presented as raw intensity values as defined by the framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We've been placed in office by the votes of the people we serve. And tonight that is a privilege we share with newly elected leaders of Afghanistan, the Palestinian Territories, Ukraine, and a free and sovereign Iraq.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "My goal here is to build and preserve a community of freedom in our country, to renew the values that sustain our liberty, and to spread the peace that freedom brings.",
+          "confidence": 0.85,
+          "context_type": "goal_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing.",
+          "confidence": 0.8,
+          "context_type": "contextual_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "All the Qaeda terror network that attacked our country still has leaders, but many of its top commanders have been removed.",
+          "confidence": 0.75,
+          "context_type": "assertion_of_progress"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "My administration will continue to build the coalitions that will defeat the dangers of our time, which is why the terrorist Zarqawi recently declared war on what he called the 'evil principle' of democracy.",
+          "confidence": 0.8,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We stand with the freedom of our Iraqi friends, and freedom in Iraq will strengthen a new ally in the war on terror, inspiring democratic reformers from Damascus to Tehran, bringing more hope and progress to a troubled region, and thereby lift a terrible threat from the lives of our children and grandchildren.",
+          "confidence": 0.75,
+          "context_type": "strategic_goal"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I know that none of these reforms would be easy. But we have to move ahead with courage and honesty, because our children's retirement security is more important than partisan politics.",
+          "confidence": 0.9,
+          "context_type": "contrast_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I will work with Members of Congress to find the most effective combination of reforms. I will listen to anyone who has a good idea to offer.",
+          "confidence": 0.8,
+          "context_type": "collaborative_stance"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "In America, we must make doubly sure no person is held to account for a crime he or she did not commit, so we are dramatically expanding the use of DNA evidence to prevent wrongful conviction.",
+          "confidence": 0.85,
+          "context_type": "justice_principle"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Because one of the deepest values of our country is compassion, we must never turn away from any citizen who feels isolated from the opportunities of America. Our Government will continue to support faith-based and community groups that bring hope to harsh places.",
+          "confidence": 0.75,
+          "context_type": "value_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "To make our economy stronger and more dynamic, we must prepare a rising generation to fill the jobs of the 21st century.",
+          "confidence": 0.9,
+          "context_type": "economic_imperative"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Small business is the path of advancement, especially for women and minorities, so we must free small businesses from needless regulation and protect honest job-creators from junk lawsuits.",
+          "confidence": 0.85,
+          "context_type": "economic_policy_advocacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

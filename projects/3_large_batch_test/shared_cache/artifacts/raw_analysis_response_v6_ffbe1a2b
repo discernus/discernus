@@ -1,0 +1,223 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of President Bush's 2006 State of the Union address using the Popuist Discourse Analysis Framework (PDAF) v7.1. The analysis focused on identifying and scoring nine core populist anchors, assessing their salience and confidence, and extracting supporting evidence. Due to the nature of the input text, some dimensions had lower raw scores and confidence as they were not explicitly or strongly present. The overall confidence reflects a thorough application of the framework to the provided text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.4,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.6,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.3,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.9,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.4
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.4
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.0,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.0,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.4,
+          "salience": 0.0,
+          "confidence": 0.4
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "America today is a nation with great challenges but greater resources. An artist using statistics as a brush could paint two very different pictures of our country. One would have warning signs: increasing layoffs, rising energy prices, too many failing schools, persistent poverty, the stubborn vestiges of racism. Another picture would be full of blessings: a balanced budget, big surpluses, a military that is second to none, a country at peace with its neighbors, technology that is revolutionizing the world, and our greatest strength, concerned citizens who care for our country and care for each other.",
+          "confidence": 0.9,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Neither picture is complete in and of itself. And tonight I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+          "confidence": 0.8,
+          "context_type": "call to action"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "Year after year in Washington, budget debates seem to come down to an old, tired argument: on one side, those who want more Government, regardless of the cost; on the other, those who want less Government, regardless of the need. We should leave those arguments to the last century and chart a different course.",
+          "confidence": 0.8,
+          "context_type": "historical framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Government has a role, and an important role. Yet, too much Government crowds out initiative and hard work, private charity and the private economy. Our new governing vision says Government should be active but limited, engaged but not overbearing.",
+          "confidence": 0.8,
+          "context_type": "governance philosophy"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "And my budget is based on that philosophy. It is reasonable, and it is responsible. It meets our obligations and funds our growing needs.",
+          "confidence": 0.7,
+          "context_type": "budget justification"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I believe in local control of schools. We should not, and we will not, run public schools from Washington, D.C. Yet when the Federal Government spends tax dollars, we must insist on results. Children should be tested on basic reading and math skills every year between grades three and eight.",
+          "confidence": 0.8,
+          "context_type": "decentralization vs. federal control"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My attitude is, Government should never stand in the way of families achieving their dreams. And as we debate this issue, always remember, the surplus is not the Government's money; the surplus is the people's money.",
+          "confidence": 0.8,
+          "context_type": "people's money framing"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All our citizens are created equal and must be treated equally.",
+          "confidence": 0.7,
+          "context_type": "equality principle"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Our generation must show courage in a time of blessing, as our Nation has always shown in times of crisis. And our courage, issue by issue, can gather to greatness and serve our country. This is the privilege and responsibility we share. And if we work together, we can prove that public service is noble.",
+          "confidence": 0.7,
+          "context_type": "shared national duty"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "A tax rate of 15 percent is too high for those who earn low wages, so we must lower the rate to 10 percent. No one should pay more than a third of the money they earn in Federal income taxes, so we lowered the top rate to 33 percent.",
+          "confidence": 0.9,
+          "context_type": "tax relief for low/middle income"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "This reform will be welcome relief for America's small businesses, which often pay taxes at the highest rate. And help for small business means jobs for Americans. We simplified the Tax Code by reducing the number of tax rates from the current five rates to four lower ones, 10 percent, 15, 25, and 33 percent. In my plan, no one is targeted in or targeted out. Everyone who pays income taxes will get relief.",
+          "confidence": 0.9,
+          "context_type": "tax reform for small business"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_bad06709e879",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"pdaf_v7_1\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed using the PDAF v7.1 framework. All identified dimensions have been scored and evidence has been extracted.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2003.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing_score\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion_score\": {\n          \"raw_score\": 1.1,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"elite_conspiracy_systemic_corruption_score\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"authenticity_vs_political_class_score\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction_score\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion_score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.5,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals_score\": {\n          \"raw_score\": 1.0,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"We will choose to act confidently in pursuing the enemies of freedom, or retreat from our duties in the hope of an easier life.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative_score\",\n          \"quote_text\": \"To overcome dangers in our world, we must also take the offensive by encouraging economic progress and fighting disease and spreading hope in hopeless lands.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims_score\",\n          \"quote_text\": \"The road of victory is the road that will take our troops home. As we make progress on the ground and Iraqi forces increasingly take the lead, we should be able to further decrease our troop levels.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion_score\",\n          \"quote_text\": \"In all these areas from the disruption of terror networks, to victory in Iraq, to the spread of freedom and hope in troubled regions, we need the support of our friends and allies.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"implicit\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption_score\",\n          \"quote_text\": \"The regime in that country sponsors terrorists in the Palestinian territories and in Lebanon, and that must come to an end. The Iranian Government is defying the world with its nuclear ambitions, and the nations of the world must not permit the Iranian regime to gain nuclear weapons.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"Members of Congress, how however we feel about the decisions and debates of the past, our Nation has only one option: We must keep our word, defeat our enemies, and stand behind the American military in this vital mission.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"For people everywhere, the United States is a partner for a better life. Showing compassion abroad because Americans believe in the God-given dignity and worth of a villager with HIV/AIDS or an infant with malaria or a refugee fleeing genocide or a young girl sold into slavery.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion_score\",\n          \"quote_text\": \"Some dismiss that goal as misguided idealism. In reality, the future security of America depends on it.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"implicit\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"America is a great force for freedom and prosperity. Yet our greatness is not measured in power or luxuries but by who we are and how we treat one another. So we strive to be a compassionate, decent, hopeful society.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:12:21.764166+00:00",
+    "end_time": "2025-08-04T15:12:30.659879+00:00",
+    "duration_seconds": 8.895713,
+    "llm_interaction_hash": "1b587ee70805e49d"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

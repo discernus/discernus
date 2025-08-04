@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_6efd61f09fe8",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"PDAF\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. All scores are raw and have not undergone any calculation or derivation.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2015.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.65\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"For those who make these claims, I have one simple question: How long should we wait? How long should America put its future on hold?\",\n          \"confidence\": 0.8,\n          \"context_type\": \"statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"One year ago, I took office amid two wars, an economy rocked by a severe recession, a financial system on the verge of collapse, and a Government deeply in debt. Experts from across the political spectrum warned that if we did not act, we might face a second depression. So we acted, immediately and aggressively. And 1 year later, the worst of the storm has passed.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"narrative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"And you know what else they share? They share a stubborn resilience in the face of adversity. After one of the most difficult years in our history, they remain busy building cars and teaching kids, starting businesses and going back to school.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"But the truth is, these steps won't make up for the 7 million jobs that we've lost over the last 2 years.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"But when you talk to small-business owners in places like Allentown, Pennsylvania, or Elyria, Ohio, you find out that even though banks on Wall Street are lending again, they're mostly lending to bigger companies.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"observation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"The reason I ran for President was to end the politics of cynicism and division, and to build a government that works for the people. And that's why, for the first time in history, my administration posts on\u2014our White House victories on\u2014online.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"statement\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"For when the Union was turned back at Bull Run and the Allies first landed at Omaha Beach, victory was very much in doubt. When the market crashed on Black Tuesday and marches were beaten on Bloody Sunday, the future was anything but certain.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"historical_analogy\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"So tonight I'm proposing that we take $30 billion of the money Wall Street banks have repaid, and use it to help community banks give small businesses the credit they need to stay afloat.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy_proposal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:14:37.305568+00:00",
+    "end_time": "2025-08-04T15:14:41.597673+00:00",
+    "duration_seconds": 4.292105,
+    "llm_interaction_hash": "ae3abefb87ec6981"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

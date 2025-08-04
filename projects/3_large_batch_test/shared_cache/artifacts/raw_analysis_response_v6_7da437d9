@@ -1,0 +1,199 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the PDAF v7.1 framework. Document interpreted for populist discourse patterns, focusing on core, mechanism, and boundary anchors, as well as economic direction. Raw scores are provided for each dimension, with salience and confidence levels."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.92
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.88
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.92
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.88
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.92,
+          "salience": 0.8,
+          "confidence": 0.92
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.88,
+          "salience": 0.75,
+          "confidence": 0.88
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.93,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "As we come together to declare our vision as Democrats, we are mindful that the challenges of our times are new and profound. This November, the choice we face as Americans may have more impact on our people and our place in the world than any in our lifetimes. We approach this task with seriousness that matches the challenges before us, but also with a profound optimism about our future — an optimism that springs from our great faith in America, and our great pride in what it means to be Americans.",
+          "confidence": 0.95,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "For the first time in generations, we have been attacked on our own shores. Our brave men and women in uniform are still in harm's way in Iraq, Afghanistan, and the war against terror. Our alliances are frayed, our credibility in doubt.",
+          "confidence": 0.9,
+          "context_type": "crisis description"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "It is time for a new direction. John Kerry, John Edwards and the Democratic Party bring a new vision for America — strong at home, respected abroad. An America that offers opportunity, rewards responsibility, and rejoices in diversity.",
+          "confidence": 0.92,
+          "context_type": "vision articulation"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "But the Bush Administration has walked away from more than a hundred years of American leadership in the world to embrace a new — and dangerously ineffective — disregard for the world. They rush to force before exhausting diplomacy. They bully rather than persuade. They act alone when they could assemble a team. They do not understand that real leadership means standing by your principles and relying others to join you.",
+          "confidence": 0.88,
+          "context_type": "criticism of current leadership"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "John Kerry, John Edwards and the Democratic Party believe in a better, stronger America — an America that is respected, not just feared, and an America that listens and leads. Our vision has deep roots in our Declaration of Independence and Franklin Delano Roosevelt's Four Freedoms, and in the tough-minded tradition of engagement and leadership forged by Wilson and Roosevelt in two world wars, then championed by Truman and Kennedy during the Cold War. We believe in an America that people around the world admire, because they know we cherish not just our freedom, but theirs. Not just our democracy, but their hope for it. Not just our peace and security, but the world's.",
+          "confidence": 0.93,
+          "context_type": "contrast with current administration"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "As Americans, we respect and honor our veterans. We are indebted to all those courageous men and women who have answered our country's call to duty. Their service and sacrifice, their dedication and love of country advance our cause of freedom and uphold our finest traditions as a nation.",
+          "confidence": 0.85,
+          "context_type": "valorization of a segment of the populace"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We have a plan to build a strong, growing economy: creating good jobs, rewarding hard work, and restoring fiscal discipline.",
+          "confidence": 0.9,
+          "context_type": "economic policy promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

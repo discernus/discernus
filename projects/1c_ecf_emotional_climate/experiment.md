@@ -3,7 +3,7 @@ version: "7.0"
 name: "emotional_climate_factorial_analysis"
 description: |
   This experiment analyzes emotional climate patterns in political discourse 
-  using the Emotional Climate Framework v7.0. The corpus employs a 2×3 factorial 
+  using the Emotional Climate Framework v7.1. The corpus employs a 2×3 factorial 
   design examining Ideology (Conservative/Progressive) × Era (Civil Rights/
   Institutional/Populist) spanning 60 years (1963-2025). The analysis will 
   measure emotional climate dimensions across experimental factors to identify 
@@ -17,7 +17,7 @@ hypothesis: |
   Statistical tests will determine if significant relationships exist between 
   experimental factors and emotional climate dimensions.
 
-framework: "../../frameworks/reference/core/ecf_v7.0.md"
+framework: "../../frameworks/reference/core/ecf_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -94,7 +94,7 @@ workflow:
 
 ## Overview
 
-This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v6.0. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025).
+This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v7.1. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025).
 
 ## Research Questions
 
@@ -106,7 +106,7 @@ This experiment analyzes emotional climate patterns in political discourse using
 ## Methodology
 
 ### Framework
-**Emotional Climate Framework v6.0** provides:
+**Emotional Climate Framework v7.1** provides:
 - 6-dimensional emotional climate analysis across 3 axes (fear/hope, enmity/amity, envy/compersion)
 - Emotional atmosphere measurement independent of rhetorical strategy
 - JSON-first architecture with enhanced synthesis integration

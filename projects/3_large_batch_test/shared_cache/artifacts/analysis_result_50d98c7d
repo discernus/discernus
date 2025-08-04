@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_0fb96fbc89fc",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"PopuList Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis applied the PDAF v7.1 framework. The document was analyzed for 9 primary and secondary anchors of populist discourse, along with the economic populist appeal. Scores reflect the intensity and rhetorical prominence of these elements within the provided text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2012.pdf\",\n      \"dimensional_scores\": {\n        \"core_anchors\": {\n          \"manipulation_of_people_elite_framing\": {\n            \"raw_score\": 0.15,\n            \"salience\": 0.10,\n            \"confidence\": 0.80\n          },\n          \"crisis_restoration_temporal_narrative\": {\n            \"raw_score\": 0.05,\n            \"salience\": 0.05,\n            \"confidence\": 0.75\n          },\n          \"popular_sovereignty_claims\": {\n            \"raw_score\": 0.10,\n            \"salience\": 0.15,\n            \"confidence\": 0.85\n          },\n          \"anti_pluralist_exclusion\": {\n            \"raw_score\": 0.05,\n            \"salience\": 0.05,\n            \"confidence\": 0.70\n          }\n        },\n        \"mechanism_anchors\": {\n          \"elite_conspiracy_systemic_corruption\": {\n            \"raw_score\": 0.10,\n            \"salience\": 0.10,\n            \"confidence\": 0.75\n          },\n          \"authenticity_vs_political_class\": {\n            \"raw_score\": 0.20,\n            \"salience\": 0.20,\n            \"confidence\": 0.90\n          },\n          \"homogeneous_people_construction\": {\n            \"raw_score\": 0.05,\n            \"salience\": 0.05,\n            \"confidence\": 0.70\n          }\n        },\n        \"boundary_anchors\": {\n          \"nationalist_exclusion\": {\n            \"raw_score\": 0.05,\n            \"salience\": 0.05,\n            \"confidence\": 0.70\n          },\n          \"economic_populist_appeals\": {\n            \"raw_score\": 0.25,\n            \"salience\": 0.30,\n            \"confidence\": 0.95\n          }\n        },\n        \"descriptive_classification\": {\n          \"economic_direction_indicator\": \"Progressive\"\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We believe that government should ensure that all citizens have access to affordable, quality health care, regardless of income or employment status.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_policy_statement\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"We must reject the notion that the policies that have served the wealthy and powerful have also served the interests of the vast majority of Americans.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"rhetorical_contrast\"\n        },\n        {\n          \"dimension\": \"manipulation_of_people_elite_framing\",\n          \"quote_text\": \"The economic policies of the past have benefited the few at the expense of the many.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"framing_statement\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"We believe that the people should have the power to shape their own destiny.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"declarative_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:17:24.182959+00:00",
+    "end_time": "2025-08-04T15:17:33.674816+00:00",
+    "duration_seconds": 9.491857,
+    "llm_interaction_hash": "a54b9349a7e8dd66"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "da746b0461121460254858ded9f587445963de342d94b0f75bdc23d354253cea"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

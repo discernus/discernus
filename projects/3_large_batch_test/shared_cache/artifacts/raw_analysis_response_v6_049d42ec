@@ -1,0 +1,151 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on the provided framework for identifying populist discourse patterns."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.6,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.0,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.3,
+          "salience": 0.65,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.1,
+          "salience": 0.55,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.9,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.45,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our enemies believe America was weak and materialistic, that we would splinter in fear and selfishness. They were as wrong as they are evil.",
+          "confidence": 0.95,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "The American people have responded magnificently, with courage and compassion, strength and resolve.",
+          "confidence": 0.9,
+          "context_type": "people_vs_enemies"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our nation will continue to be steadfast and patient and persistent in the pursuit of two great objectives. First, we will shut down terror camps, disrupt terror plans, and bring terrorists to justice. And second, we must prevent the terrorists and regimes who seek chemical, biological, or nuclear weapons from threatening the United States and our allies.",
+          "confidence": 0.85,
+          "context_type": "call_to_action_in_crisis"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our war on terror is well begun, but it is only begun.",
+          "confidence": 0.8,
+          "context_type": "ongoing_struggle_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "When I called our troops into action, I did so with complete confidence in their courage and skill.",
+          "confidence": 0.9,
+          "context_type": "leader_authority_from_people"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "My call tonight is for every American to commit at least 2 years, 4,000 hours over the rest of your lifetime, to the service of your neighbors and your nation.",
+          "confidence": 0.85,
+          "context_type": "appeal_to_citizen_duty"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Some of these regimes have been pretty quiet since September the 11th, but we know their true nature.",
+          "confidence": 0.7,
+          "context_type": "othering_and_suspicion"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "States like these and their terrorist allies constitute an axis of evil, arming to threaten the peace of the world.",
+          "confidence": 0.75,
+          "context_type": "identification_of_enemies"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "We have found diagrams of American nuclear powerplants and public water facilities, detailed instructions for making chemical weapons, surveillance maps of America and throughout the world.",
+          "confidence": 0.65,
+          "context_type": "indication_of_external_threat"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kenne­dy.",
+          "confidence": 0.8,
+          "context_type": "transcending_party_lines"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kenne­dy.",
+          "confidence": 0.75,
+          "context_type": "appealing_to_unity"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All fathers and mothers, in all societies, want their children to be educated and live free from poverty and violence. No people on Earth yearn to be oppressed or eagerly await the midnight knock of the secret police.",
+          "confidence": 0.7,
+          "context_type": "universal_desires_of_the_people"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Our enemies send other people's children on missions of suicide and murder. They embrace tyranny and death as a cause and a creed.",
+          "confidence": 0.6,
+          "context_type": "demonization_of_enemy"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Good jobs begin with good schools, and here we've made a fine start.",
+          "confidence": 0.6,
+          "context_type": "linking_jobs_to_policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

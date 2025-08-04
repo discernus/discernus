@@ -1,0 +1,229 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Obama's 2009 State of the Union address, focusing on populist discourse elements as defined by the PDAF v7.1 framework. Scores reflect the intensity and prominence of each dimension within the speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2009.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.4,
+          "salience": 0.2,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.98,
+          "salience": 0.98,
+          "confidence": 0.98
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "It is my task,\" he said, \"to report the state of the Union; to improve it is the task of us all.\"",
+          "confidence": 0.9,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded.",
+          "confidence": 0.9,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Tonight, thanks to the grit and determination of the American people, there is much progress to report.",
+          "confidence": 0.9,
+          "context_type": "narrative"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.",
+          "confidence": 0.95,
+          "context_type": "narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "It is our generation's task, then, to reignite the true engine of America's economic growth: a rising, thriving middle class.",
+          "confidence": 0.9,
+          "context_type": "claim"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "It is our unfulfilled task to make sure that this Government works on behalf of the many, and not just the few; that it encourages free enterprise, rewards individual initiative, and opens the doors of opportunity to every child across this great Nation.",
+          "confidence": 0.95,
+          "context_type": "claim"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party.",
+          "confidence": 0.98,
+          "context_type": "authenticity"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Let's set party interests aside and work to pass a budget that replaces reckless cuts with smart savings and wise investments in our future.",
+          "confidence": 0.95,
+          "context_type": "authenticity"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The American people deserve a Tax Code that helps small businesses spend less time filing complicated forms and more time expanding and hiring; a Tax Code that lowers incentives to move jobs overseas and lowers tax rates for businesses and manufacturers that are creating jobs right here in the United States of America.",
+          "confidence": 0.9,
+          "context_type": "construction"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "And that's what tax reform can deliver. That's what we can do together.",
+          "confidence": 0.85,
+          "context_type": "construction"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Let's cut in half the energy waste by our homes and businesses over the next 20 years. We'll work with the States to do it.",
+          "confidence": 0.9,
+          "context_type": "economic_appeal"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "So tonight, I propose a Fix-It-First program to put people to work as soon as possible on our most urgent repairs, like the nearly 70,000 structural deficits across the country.",
+          "confidence": 0.95,
+          "context_type": "economic_appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

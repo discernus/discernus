@@ -2,20 +2,20 @@
 version: "7.0"
 name: political_moral_analysis
 description: |
-  This experiment validates the Moral Foundations Theory v7.0 framework using a diverse corpus 
+  This experiment validates the Moral Foundations Theory v7.1 framework using a diverse corpus 
   of American political speeches spanning 60 years of political discourse. The corpus includes 
   8 speeches from different ideological positions, historical periods (1963-2022), and contexts 
   (electoral, legislative, policy advocacy). This heterogeneous design provides a robust test 
   of the framework's analytical capabilities across varied political discourse contexts while 
   enabling comprehensive moral foundation pattern analysis.
 hypothesis: |
-  The Moral Foundations Theory v7.0 framework will demonstrate reliable dimensional scoring 
+  The Moral Foundations Theory v7.1 framework will demonstrate reliable dimensional scoring 
   across diverse political discourse contexts, with measurable variation in moral foundation 
   emphasis patterns between speakers and ideological positions. The framework's tension analysis 
   capabilities will reveal different patterns of moral rhetorical coherence through the Moral 
   Strategic Contradiction Index (MSCI), validating the framework's capacity to detect and 
   quantify moral reasoning patterns in political discourse with statistical confidence.
-framework: "framework.md"
+framework: "../../frameworks/seed/political/moral_foundations_theory_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -76,7 +76,7 @@ hypotheses:
 
 ## Overview
 
-This experiment validates the Moral Foundations Theory v6.0 framework using a diverse corpus of American political speeches spanning 60 years of political discourse. The v3.0 experiment specification enables enhanced statistical rigor through multi-evaluation analysis and comprehensive reporting capabilities.
+This experiment validates the Moral Foundations Theory v7.1 framework using a diverse corpus of American political speeches spanning 60 years of political discourse. The v3.0 experiment specification enables enhanced statistical rigor through multi-evaluation analysis and comprehensive reporting capabilities.
 
 ## Research Question
 
@@ -85,7 +85,7 @@ Can computational moral analysis reliably detect and quantify moral foundation p
 ## Methodology
 
 ### Framework
-**Moral Foundations Theory v6.0** provides:
+**Moral Foundations Theory v7.1** provides:
 - Six moral foundation pairs (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression)
 - JSON-first architecture for reliable data generation and synthesis
 - Moral Strategic Contradiction Index (MSCI) calculated through explicit mathematical formulas
@@ -106,7 +106,7 @@ Can computational moral analysis reliably detect and quantify moral foundation p
 - **Quality assurance**: Verified sources, consistent formatting, validated metadata
 
 ### Expected Outcomes
-1. **Framework Validation**: v6.0 framework successfully processes diverse political discourse with statistical reliability
+1. **Framework Validation**: v7.1 framework successfully processes diverse political discourse with statistical reliability
 2. **Ideological Differentiation**: Measurable variation in moral foundation emphasis patterns across political perspectives
 3. **Tension Analysis**: MSCI reveals meaningful patterns of moral coherence/contradiction across speakers
 4. **Statistical Confidence**: Multi-evaluation approach demonstrates framework reliability with coefficient > 0.70
@@ -114,4 +114,4 @@ Can computational moral analysis reliably detect and quantify moral foundation p
 
 ## Significance
 
-This experiment establishes the Moral Foundations Theory v6.0 framework as a reliable tool for computational moral analysis in political discourse, providing both theoretical validation and practical demonstration of enhanced statistical capabilities. The v3.0 experiment specification ensures academic-quality rigor suitable for peer review and replication. 
+This experiment establishes the Moral Foundations Theory v7.1 framework as a reliable tool for computational moral analysis in political discourse, providing both theoretical validation and practical demonstration of enhanced statistical capabilities. The v3.0 experiment specification ensures academic-quality rigor suitable for peer review and replication. 

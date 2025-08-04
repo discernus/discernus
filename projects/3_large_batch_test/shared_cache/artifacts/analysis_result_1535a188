@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_70e3204b256b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"pdap_v7_1\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. All provided dimensions were assessed based on the framework's guidance. Confidence levels reflect the clarity and directness of evidence within the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_2000.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing_score\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative_score\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims_score\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.98\n        },\n        \"anti_pluralist_exclusion_score\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.5\n        },\n        \"elite_conspiracy_systemic_corruption_score\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.6\n        },\n        \"authenticity_vs_political_class_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.85,\n          \"confidence\": 0.92\n        },\n        \"homogeneous_people_construction_score\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion_score\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.4\n        },\n        \"economic_populist_appeals_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"But the rising tide is not lifting all boats. While our Nation is enjoying peace and prosperity, too many of our people are still working harder and harder, for less and less. While our businesses are restructuring and growing more productive, too many of our people still can't be sure of having a job next year or even next month. And far more than our material riches are threatened, things far more precious to us, our children, our families, our values.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative_score\",\n          \"quote_text\": \"So tonight we must forge a new social compact to meet the challenges of this time. As we enter a new era, we need a new set of understandings, not just with Government but, even more important, with one another Americans. That's what I want to talk with you about tonight. I call it the New Covenant.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"framing_statement\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims_score\",\n          \"quote_text\": \"The American people look at their Capitol, and they see a city where the well-connected and the well-protected can work the system, but the interests of ordinary citizens are often left out. The old way divided us by interest, constituency, or class. The New Covenant way should unite us behind a common vision of what's best for our country.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"statement_of_purpose\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"My fellow Americans, with without regard to party, let us rise to the occasion. Let us put aside partisanship and pettiness and pride. As we embark on this new course, let us put our country first, remembering that regardless of party label, we are all Americans. And let the final test of everything we do be a simple one: Is it good for the American people?\",\n          \"confidence\": 0.92,\n          \"context_type\": \"call_to_unity\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"So tonight we must forge a new social compact to meet the challenges of this time. As we enter a new era, we need a new set of understandings, not just with Government but, even more important, with one another Americans. That's what I want to talk with you about tonight. I call it the New Covenant.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"shared_identity_call\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"On the one hand, we have a chance to cut taxes for middle-income families. On the other hand, we could raise taxes on the wealthiest Americans. My budget cuts taxes for 15 million families with incomes under $27,000, a tax cut that this year will average about $1,000 a family.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"economic_policy_proposal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:13:42.506965+00:00",
+    "end_time": "2025-08-04T15:13:46.951874+00:00",
+    "duration_seconds": 4.444909,
+    "llm_interaction_hash": "c07d5f8f1def0899"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

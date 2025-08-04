@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8c78163a37dc",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"PDAF\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis completed using the provided framework, focusing on raw dimensional scores, salience, and evidence extraction as per the user's request.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"50d7b4edd349...\",\n      \"document_name\": \"Trump_SOTU_2018.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative_score\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.92,\n          \"confidence\": 0.92\n        },\n        \"anti_pluralist_exclusion_score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"elite_conspiracy_systemic_corruption_score\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        },\n        \"authenticity_vs_political_class_score\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction_score\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion_score\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"economic_populist_appeals_score\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.95,\n          \"confidence\": 0.98\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"But it is not enough to come together only in times of tragedy. Tonight I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people. This is the key.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_unity_against_adversity\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative_score\",\n          \"quote_text\": \"We have seen the beauty of America's soul and the steel in America's spine. Each test has forged new American heroes to remind us who we are and show us what we can be.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"heroic_narrative_of_national_resilience\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims_score\",\n          \"quote_text\": \"To every citizen watching at home tonight, no matter where you've been or where you've come from, this is your time. If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"empowerment_and_agency_of_citizens\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion_score\",\n          \"quote_text\": \"My duty, and the sacred duty of every elected official in this Chamber, is to defend Americans, to protect their safety, their families, their communities, and their right to the American Dream.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"defense_of_nation_and_citizens\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption_score\",\n          \"quote_text\": \"My administration is committed to fighting the drug epidemic and helping get treatment for those in need, for those who have been so terribly hurt. The struggle will be long, and it will be difficult, but as Americans always do, in the end, we will succeed. We will prevail.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"acknowledgment_of_difficult_struggles_and_commitment_to_overcome\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"In fact, this is our new American moment. There has never been a better time to start living the American Dream. So to every citizen watching at home tonight, no matter where you've been or where you've come from, this is your time.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"declaration_of_a_new_era_and_opportunity\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"One people, and one American family can do anything. We all share the same home, the same heart, the same destiny, and the same great American flag.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"unity_and_shared_identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion_score\",\n          \"quote_text\": \"We will protect American workers and American intellectual property through strong enforcement of our trade rules.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"protection_of_national_interests\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"We will also double the child tax credit. A typical family of four making $75,000 will see their tax bill reduced by $2,000, slashing their tax bill in half.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_economic_benefit_to_families\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:15:04.310895+00:00",
+    "end_time": "2025-08-04T15:15:08.883062+00:00",
+    "duration_seconds": 4.572167,
+    "llm_interaction_hash": "8c632faba44f2133"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "50d7b4edd349e52a5cba523a3656e1f2f94c0875c5af4a08185b15241f4282a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

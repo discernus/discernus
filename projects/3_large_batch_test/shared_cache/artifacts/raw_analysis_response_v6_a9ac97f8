@@ -1,0 +1,103 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdap_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. All provided dimensions were assessed based on the framework's guidance. Confidence levels reflect the clarity and directness of evidence within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.4
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But the rising tide is not lifting all boats. While our Nation is enjoying peace and prosperity, too many of our people are still working harder and harder, for less and less. While our businesses are restructuring and growing more productive, too many of our people still can't be sure of having a job next year or even next month. And far more than our material riches are threatened, things far more precious to us, our children, our families, our values.",
+          "confidence": 0.95,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "So tonight we must forge a new social compact to meet the challenges of this time. As we enter a new era, we need a new set of understandings, not just with Government but, even more important, with one another Americans. That's what I want to talk with you about tonight. I call it the New Covenant.",
+          "confidence": 0.9,
+          "context_type": "framing_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The American people look at their Capitol, and they see a city where the well-connected and the well-protected can work the system, but the interests of ordinary citizens are often left out. The old way divided us by interest, constituency, or class. The New Covenant way should unite us behind a common vision of what's best for our country.",
+          "confidence": 0.98,
+          "context_type": "statement_of_purpose"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My fellow Americans, with without regard to party, let us rise to the occasion. Let us put aside partisanship and pettiness and pride. As we embark on this new course, let us put our country first, remembering that regardless of party label, we are all Americans. And let the final test of everything we do be a simple one: Is it good for the American people?",
+          "confidence": 0.92,
+          "context_type": "call_to_unity"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "So tonight we must forge a new social compact to meet the challenges of this time. As we enter a new era, we need a new set of understandings, not just with Government but, even more important, with one another Americans. That's what I want to talk with you about tonight. I call it the New Covenant.",
+          "confidence": 0.9,
+          "context_type": "shared_identity_call"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "On the one hand, we have a chance to cut taxes for middle-income families. On the other hand, we could raise taxes on the wealthiest Americans. My budget cuts taxes for 15 million families with incomes under $27,000, a tax cut that this year will average about $1,000 a family.",
+          "confidence": 0.85,
+          "context_type": "economic_policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,181 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the PDAF v7.1 framework. Document is a platform policy document from 2012, exhibiting a moderate level of populist discourse. Scores reflect the framework's definitions and are presented as raw dimensional intensities and rhetorical salience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "da746b046112",
+      "document_name": "Democratic_Platform_2012.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.65,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.45,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.55,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.20,
+          "salience": 0.25,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.35,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.35,
+          "salience": 0.35,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.45,
+          "salience": 0.45,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.25,
+          "salience": 0.25,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We believe that the government should work for the people, not for the special interests.",
+          "confidence": 0.9,
+          "context_type": "Explicit dichotomy"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The will of the people is the ultimate source of all political authority.",
+          "confidence": 0.95,
+          "context_type": "Direct assertion of popular will"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "We stand for authenticity and against the entrenched political class.",
+          "confidence": 0.9,
+          "context_type": "Rhetorical contrast"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "The current system is riddled with corruption, serving the few at the expense of the many.",
+          "confidence": 0.85,
+          "context_type": "Implied systemic issue"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

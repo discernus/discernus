@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7554e42b5582",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"pdad_v7_1\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the 'pdad_v7_1' framework to assess populist discourse patterns in the provided document. The framework focuses on nine core anchors and assesses salience and confidence for each. Evidence extraction prioritizes direct quotes supporting the dimensional scoring.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2004.pdf\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.20,\n          \"confidence\": 0.80\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.10,\n          \"confidence\": 0.75\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.30,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.15,\n          \"confidence\": 0.70\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.60\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.25,\n          \"confidence\": 0.75\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.15,\n          \"confidence\": 0.70\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.10,\n          \"confidence\": 0.65\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.25,\n          \"confidence\": 0.80\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"The fundamental strength of America resides not in the power of the government, but in the character and will of the American people.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"declarative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"We believe in the right of the people to govern themselves, and that government should be the servant of the people, not their master.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"declarative\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"We must restore faith in our institutions by ensuring that government is accountable to the people, not to special interests or the political establishment.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"declarative\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will promote policies that create jobs, raise wages, and ensure that the fruits of our labor are shared by all Americans, not just a privileged few.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"declarative\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:18:08.202233+00:00",
+    "end_time": "2025-08-04T15:18:14.026750+00:00",
+    "duration_seconds": 5.824517,
+    "llm_interaction_hash": "96c7da7508bec799"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "c4cc6452ee09cc4d103ee8d997d090fbaf3f3e46b26bccf0b6a26ffb4565a66e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

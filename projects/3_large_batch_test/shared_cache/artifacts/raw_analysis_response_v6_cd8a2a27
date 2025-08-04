@@ -1,0 +1,127 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of Clinton's 1996 SOTU address using the PDAF v7.1 framework. Focus on identifying and scoring the nine core populist anchors and extracting supporting evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "5b94e74c5061",
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Pure people vs corrupt elite",
+          "confidence": 1.0,
+          "context_type": "direct_framing"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.9,
+          "context_type": "address_framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We must work to keep terroristic from disrupting computer networks. We must work to prepare local communities for biological and chemical emergencies, to support research into vaccines and treatments.",
+          "confidence": 0.8,
+          "context_type": "crisis_preparedness"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "America is working again. The promise of our future is limitless. But we cannot realize that promise if we allow the hum of our prosperity to lull us into complacency. How we fare as a nation far into the 21st century depends upon what we do as a nation today.",
+          "confidence": 0.85,
+          "context_type": "restoration_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.9,
+          "context_type": "direct_address_to_people"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "So with our budget surplus growing, our economy expanding, our confidence rising, now is the moment for this generation to meet our historic responsibility to the 21st century.",
+          "confidence": 0.8,
+          "context_type": "generational_responsibility"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Thank you to the pioneering leadership of all of you, we have the lowest violent crime rate in a quarter century and the cleanest environment in a quarter century.",
+          "confidence": 0.8,
+          "context_type": "claiming_credit_for_people"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Let's be clear: the Congress has passed our proposal to start hiring 100,000 new teachers to reduce class size in the early grades.",
+          "confidence": 0.7,
+          "context_type": "accountability_to_congress"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Tonight, I propose a new pension initiative for retirement security in the 21st century. I propose that we use a little over 11 percent of the surplus for the next 15 years to establish universal savings accounts.",
+          "confidence": 0.9,
+          "context_type": "economic_policy_proposal"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We must do more to bring the spark of private enterprise to every corner of America, to build a bridge from Wall Street to Appalachia to the Mississippi Delta to our Native American communities, with more support for community development banks, for empowerment zones, for 100,000 more vouchers for affordable housing.",
+          "confidence": 0.85,
+          "context_type": "economic_development_plan"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

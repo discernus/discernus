@@ -8,7 +8,7 @@
 
 ## Overview
 
-As marginalized mavericks introducing LLM methodology to academic research, we must work harder to gain respect. Traditional qualitative research relies on "3 undergrads, pizza, and κ = 0.67" yet questions our systematic, reproducible, and scalable approach. 
+As mavericks introducing LLM methodology to academic research, we must work harder to gain respect. Traditional qualitative research relies on "3 undergrads, pizza, and κ = 0.67" yet questions our systematic, reproducible, and scalable approach. 
 
 **Our mission**: Provide transparency so comprehensive that critics realize we are the opposite of a black box.
 

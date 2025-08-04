@@ -1,0 +1,265 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of the State of the Union address by President Clinton in 1996, focusing on populist discourse elements as defined by the PDAF v7.1 framework. The analysis identified significant populist themes, particularly concerning economic appeals, the framing of 'the people' versus 'elites', and calls for governmental reform and responsiveness."
+  },
+  "document_analyses": [
+    {
+      "document_id": "5b94e74c5061...",
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.9,
+          "salience": 0.98,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.98,
+          "salience": 0.98,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.65,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.98,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong. Now, America is working again. The promise of our future is limitless. But we cannot realize that promise if we allow the hum of our prosperity to lull us into complacency.",
+          "confidence": 0.9,
+          "context_type": "General framing of national well-being and future potential, contrasting with complacency."
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.9,
+          "context_type": "Direct address to 'fellow Americans' positions the speaker with the populace."
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "America is a strong force for peace from Northern Ireland to Bosnia to the Middle East.",
+          "confidence": 0.85,
+          "context_type": "Highlights American strength and positive global influence, implying a restoration of order."
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "The longest peace-time economic expansion in our history with nearly 18 million new jobs, wages rising at more than twice the rate of inflation, the highest homeownership in history, the smallest welfare rolls in 30 years, and the lowest peace-time unemployment since 1957.",
+          "confidence": 0.8,
+          "context_type": "Enumerates positive economic indicators as a narrative of progress and recovery."
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Thanks to the pioneering leadership of all of you, we have the lowest violent crime rate in a quarter century and the cleanest environment in a quarter century. America is a strong force for peace from Northern Ireland to Bosnia to the Middle East.",
+          "confidence": 0.9,
+          "context_type": "Attributes positive outcomes ('lowest violent crime rate', 'cleanest environment') to the collective action ('all of you'), implying popular agency."
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.9,
+          "context_type": "Direct address to 'fellow Americans' positions the speaker with the populace and speaks to the state of the nation."
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "So first, and above all, we must save Social Security for the 21st century.",
+          "confidence": 0.6,
+          "context_type": "While focused on a policy, the emphasis on 'saving' implies a threat that needs to be overcome, potentially excluding opposing views on how to achieve this."
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "So first, and above all, we must save Social Security for the 21st century.",
+          "confidence": 0.6,
+          "context_type": "The strong imperative 'must save' suggests a lack of tolerance for alternative approaches."
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "We must make the historic decision to invest the surpluses to save Social Security, investing a small portion in the private sector, just as any private or State Government pension would do.",
+          "confidence": 0.75,
+          "context_type": "Implies that current approaches to saving Social Security are inadequate, hinting at systemic issues with the current financial management ('invest the surpluses')."
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "My budget triples the money for crime prevention and law enforcement, doubles the resources for crime and drug prevention and education, and for the first time in history, it puts the Federal Government in the business of helping to tear down the drug rings that are poisoning our children.",
+          "confidence": 0.7,
+          "context_type": "Suggests an active federal role against 'drug rings' implies a systemic problem requiring direct government intervention."
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I was born in 1946, the first year of the baby boom. I can tell you that one of the greatest concerns of our generation is our absolute determination not to let our growing old place an intolerable burden on our children and their ability to raise our grandchildren.",
+          "confidence": 0.85,
+          "context_type": "Personal anecdote and framing of intergenerational responsibility to position the speaker as relatable and concerned with fundamental family values, contrasting with a detached political class."
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.85,
+          "context_type": "The use of 'My fellow Americans' establishes a direct, potentially authentic connection with the audience."
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All Americans can be proud that our leadership helped to bring peace in Northern Ireland. All Americans can be proud that our leadership has put Bosnia on the path to peace. And with our NATO allies, we are pressing the Serbian Government to stop its brutal repression in Kosovo, to bring those responsible to justice, and to give the people of Kosovo self-government they deserve.",
+          "confidence": 0.95,
+          "context_type": "Frames international peace efforts as a source of shared national pride, implying a unified American identity and purpose."
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.95,
+          "context_type": "The address begins with a broad, inclusive address to 'My fellow Americans', establishing a sense of shared identity."
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "America is a strong force for peace from Northern Ireland to Bosnia to the Middle East.",
+          "confidence": 0.6,
+          "context_type": "While mentioning international actions, the focus remains on America's singular role ('strong force'), implicitly positioning it above or apart from other nations."
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "America is a strong force for peace from Northern Ireland to Bosnia to the Middle East.",
+          "confidence": 0.6,
+          "context_type": "The statement positions America as the primary actor in global peace, subtly downplaying the roles of other nations."
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "The longest peace-time economic expansion in our history with nearly 18 million new jobs, wages rising at more than twice the rate of inflation, the highest homeownership in history, the smallest welfare rolls in 30 years, and the lowest peace-time unemployment since 1957.",
+          "confidence": 0.98,
+          "context_type": "Directly appeals to the economic well-being of ordinary Americans by citing achievements like job growth, rising wages, and low unemployment."
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "So first, and above all, we must save Social Security for the 21st century.",
+          "confidence": 0.95,
+          "context_type": "Focuses on a critical social safety net program (Social Security), highlighting its importance to the economic security of Americans, particularly the elderly."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

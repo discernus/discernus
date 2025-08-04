@@ -1,0 +1,97 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of President Bush's 2005 Inaugural Address using the PDAF v7.1 framework. Focus on identifying populist discourse patterns and their rhetorical prominence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.45,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.55
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "For as long as whole regions of the world simmer in resentment and tyranny, prone to ideologies that feed hatred and excuse murder, violence will gather and multiply in destructive power and cross the most defended borders and raise a mortal threat.",
+          "confidence": 0.7,
+          "context_type": "us_vs_them"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Our goal in all the world is to end tyranny in our world. This is not primarily the task of arms, though we will defend ourselves and our friends by force of arms when necessary.",
+          "confidence": 0.8,
+          "context_type": "assertion_of_will"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All Americans, of all people, should never be surprised by the power of our ideals. Eventually, the call of freedom comes to every mind and every soul.",
+          "confidence": 0.7,
+          "context_type": "shared_identity"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "The rulers of governments with long habits of control need to know: To serve your people, you must learn to trust them.",
+          "confidence": 0.65,
+          "context_type": "critique_of_rulers"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We have seen our vulnerability, and we have seen its deepest source. For as long as whole regions of the world simmer in resentment and tyranny, prone to ideologies that feed hatred and excuse murder, violence will gather and multiply in destructive power and cross the most defended borders and raise a mortal threat.",
+          "confidence": 0.75,
+          "context_type": "identification_of_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

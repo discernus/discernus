@@ -1,0 +1,139 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the 'Poplist Discourse Analysis Framework (PDAF) v7.1'. The framework was applied to identify and score nine core populist discourse anchors and their salience. Evidence was extracted from the document to support the assigned scores. Confidence levels reflect the clarity and directness of the evidence found for each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2009.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.65,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.65
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is adding jobs, but too many people still can't find full-time employment.",
+          "confidence": 0.9,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "It is our generation's task, then, to reignite the true engine of America's economic growth: a rising, thriving middle class.",
+          "confidence": 0.85,
+          "context_type": "people_centric_goal"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Tonight, thanks to the grit and determination of the American people, there is much progress to report. After a decade of grinding recession, our business have created over 6 million new jobs.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement_of_crisis_and_progress"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.",
+          "confidence": 0.9,
+          "context_type": "restoration_framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "It is our task, to report the state of the Union; to improve it is the task of us all.",
+          "confidence": 0.95,
+          "context_type": "collective_agency"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.",
+          "confidence": 0.9,
+          "context_type": "expectation_of_people"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like, or who you love.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_fundamental_values"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "So tonight I propose a Fix-It-First program to put people to work as soon as possible on our most urgent repairs, like the nearly 70,000 structural deficiencies across the country.",
+          "confidence": 0.9,
+          "context_type": "action_oriented_proposal"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.",
+          "confidence": 0.8,
+          "context_type": "collective_identity"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party.",
+          "confidence": 0.9,
+          "context_type": "shared_expectations"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Our housing market is finally healing from the collapse of 2007. Home prices are rising at the fastest pace in 6 years. Home purchases are up nearly 50 percent, and construction is expanding again.",
+          "confidence": 0.9,
+          "context_type": "economic_progress_indicators"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "So tonight I propose a Fix-It-First program to put people to work as soon as possible on our most urgent repairs, like the nearly 70,000 structural deficiencies across the country.",
+          "confidence": 0.85,
+          "context_type": "job_creation_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

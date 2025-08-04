@@ -1,0 +1,241 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis completed based on the provided framework. All dimensions were assessed. Confidence levels reflect the clarity and directness of the evidence found within the document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.9,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our enemies believe America was weak and materialistic, that we would splinter in fear and selfishness. They were as wrong as they are evil.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our enemies send other people's children on missions of suicide and murder. They embrace tyranny and death as a cause and a creed. We stand for a different choice, made long ago on the day of our founding. We affirm it again today. We choose freedom and the dignity of every life.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Steadfast in our purpose, we now press on. We have known freedom's price. We have shown freedom's power. And in this great conflict, my fellow Americans, we will see freedom's victory.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "My call tonight is for every American to commit at least 2 years, 4,000 hours over the rest of your lifetime, to the service of your neighbors and your Nation.",
+          "confidence": 0.8,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The American people have responded magnificently, with courage and compassion, strength and resolve.",
+          "confidence": 0.7,
+          "context_type": "description_of_people"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "I know the folks at the Crawfordsville coffee shop couldn't believe I'd say such a thing",
+          "confidence": 0.5,
+          "context_type": "anecdote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kennedy.",
+          "confidence": 0.8,
+          "context_type": "bipartisan_appeal"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Our work on this bill shows what is possible if we set aside posturing and focus on results.",
+          "confidence": 0.7,
+          "context_type": "statement_of_principle"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All fathers and mothers, in all societies, want their children to be educated and live free from poverty and violence. No people on Earth yearn to be oppressed or eagerly await the midnight knock of the secret police.",
+          "confidence": 0.9,
+          "context_type": "universal_aspiration"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Deep in the American character, there is honor, and it is stronger than cynicism. And many have discovered again that even in tragedy, especially in tragedy, God is near.",
+          "confidence": 0.8,
+          "context_type": "cultural_affirmation"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "America will take the side of brave men and women who advocate these values around the world, including the Islamic world, because we have a greater objective than eliminating threats and containing resentment. We seek a just and peaceful world beyond the war on terror.",
+          "confidence": 0.7,
+          "context_type": "values_promotion"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "America is not protected by vast oceans. We are protected from attack only by vigorous action abroad and increased vigilance at home.",
+          "confidence": 0.6,
+          "context_type": "security_imperative"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Good jobs begin with good schools, and here we've made a fine start.",
+          "confidence": 0.5,
+          "context_type": "economic_promise"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "For the sake of American workers, let's pass a stimulus package.",
+          "confidence": 0.4,
+          "context_type": "policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

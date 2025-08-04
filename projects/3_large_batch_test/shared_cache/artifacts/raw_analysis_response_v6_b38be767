@@ -1,0 +1,241 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed using the Populist Discourse Analysis Framework (PDAF) v7.1. The analysis focuses on identifying and scoring populist discourse patterns as defined by the framework's dimensions. Confidence levels reflect the clarity and directness of the evidence supporting each score."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 1.3,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.30,
+          "confidence": 0.50
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.8,
+          "salience": 0.50,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.0,
+          "salience": 0.60,
+          "confidence": 0.70
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.4,
+          "salience": 0.25,
+          "confidence": 0.40
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.70,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.30,
+          "salience": 0.30,
+          "confidence": 0.50
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.50,
+          "salience": 0.50,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.90,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.60,
+          "salience": 0.60,
+          "confidence": 0.70
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.25,
+          "salience": 0.25,
+          "confidence": 0.40
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.90,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.80,
+          "salience": 0.80,
+          "confidence": 0.80
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.50,
+          "salience": 0.50,
+          "confidence": 0.50
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.65,
+          "salience": 0.65,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.70,
+          "salience": 0.70,
+          "confidence": 0.70
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.40,
+          "salience": 0.40,
+          "confidence": 0.40
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "For decades, the middle class has been hollowed out in more than and not in one administration, but for a long time. Too many good paying manufacturing jobs moved overseas. Factories closed down. Once-thriving cities and towns that many of you represent became shadows of what they used to be. And along the way, something else we lost: pride, our sense of self-worth.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "When the middle class does well, the poor have a ladder up, and the wealthy still do very well. We all do well.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "Two years ago, the economy was reeling. I stand here tonight, after we've created, with the help of many people in this room, 12 million new jobs—more jobs created in 2 years than any President has created in 4 years.",
+          "confidence": 0.90,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "And two years ago, COVID had shut down our businesses, our schools were robbed of so much. And today, COVID no longer controls our lives.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "You know, we're often told that Democrats and Republicans can't work together. But over the past 2 years, we've proved the cynics and naysayers wrong. Yes, we disagreed plenty. And yes, there were times when Democrats went alone.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "But time and again, Democrats and Republicans came together. Came together to defend a stronger and safer Europe. You came together to pass one-in-a-generation—once-in-a-generation infrastructure law building bridges connecting our Nation and our people.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "The idea that in 2020, 55 of the largest corporations in America, the Fortune 500, made $40 billion in profits and paid zero in Federal taxes? Zero.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "But now, because of what you've all done, we're exporting American products and creating American jobs.",
+          "confidence": 0.55,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My economic plan is about investing in places and people that have been forgotten. So many of you listening tonight, I know you feel it. So many of you feel like you've just simply been forgotten. Amid the economic upheaval of the past four decades, too many people have been left behind and treated like they're invisible.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Maybe that's you, watching from home. You remember the jobs that went away. You remember them, don't you? The folks at home remember them.",
+          "confidence": 0.90,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The story of America is a story of progress and resilience, of always moving forward, of never, ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "When world leaders ask me to define America and they do, believe it or not I can define it in one word, and I mean this: possibilities. We don't think anything is beyond our capacity. Everything is a possibility.",
+          "confidence": 0.65,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Folks, insulin. Insulin has been around for over 100 years. The guy who invented it didn't even patent it because he wanted it to be available for everyone. It costs the drug companies roughly $10 a vial to make that insulin. Packaging it and all, you may get up to $13. But Big Pharma has been unfairly charging people hundreds of dollars, $4 to $500 a month, making record profits. Not anymore. Not anymore.",
+          "confidence": 0.98,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "My proposal for the billionaire minimum tax. You know, there's a thousand billionaires in America—it's up from about 600 at the beginning of my term—but no billionaire should be paying a lower tax rate than a schoolteacher or a firefighter. No, I mean it. Think about it.",
+          "confidence": 0.92,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

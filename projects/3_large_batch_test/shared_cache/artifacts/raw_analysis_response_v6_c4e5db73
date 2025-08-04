@@ -1,0 +1,103 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. Focus was on identifying and scoring the nine core populist anchors and related dimensions. Evidence extraction prioritized direct quotes supporting the assessed scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But there's a reason the tragedy in Tucson gave us pause. Amid all the noise and passion and rancor of our public debate, Tucson reminded us that no matter who we are or where we come from, each of us is a part of something greater, something more consequential than party or political preference. Every race and faith and point of view can be found, we are still bound together as one people, that we share common hopes and a common creed, that the dreams of a little girl in Tucson are not so different than those of our own children, that they all deserve the chance to be fulfilled.",
+          "confidence": 0.9,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Direct people's will as ultimate political authority. In America, innovation does not just change our lives. It is how we make our living. Our free enterprise system is what drives innovation. But because it's not always profitable for companies to invest in basic research, throughout our history, our Government has provided cutting-edge scientists and inventors with the support that they need. That's what planned the seeds for the Internet. That's what helped make possible things like computer chips and GPS. Just think of all the good jobs -- from manufacturing to retail -- that have come from these breakthroughs.",
+          "confidence": 0.8,
+          "context_type": "assertion_of_will"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "The two-party system fiscal commission I created last year made this crystal clear. I don't agree with all their proposals, but they made important progress. And their conclusion is that the only way to tackle our deficit is to cut excessive spending wherever we find it, in domestic spending, defense spending, health care spending, and spending through tax breaks and loopholes. It makes no sense, and it has to change.",
+          "confidence": 0.8,
+          "context_type": "critique_of_establishment"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Our troops come from every corner of this country. They're Black, White, Latino, Asian, Native American. They are Christian and Hindu, Jewish and Muslim. And yes, we know that some of them are gay. Starting this year, no American will be forbidden from serving the country they love because of who they love. And with that change, I call on all our college campuses to open their doors to our military recruiters and ROTC. It is time to leave behind the divisive battles of the past. It is time to move forward as one Nation.",
+          "confidence": 0.8,
+          "context_type": "inclusionary_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We have to do better. America is the nation that built the transcontinental rail-road, brought electricity to rural communities, constructed the Interstate Highway System. The jobs created by these projects didn't just come from laying down track or pavement. They came from businesses that opened near a town's new train station or the new off-ramp. So over the last 2 years, we've begun rebuilding for the 21st century, a project that has meant thousands of good jobs for the hard-hit construction industry. And tonight I'm proposing that we redouble those efforts.",
+          "confidence": 0.7,
+          "context_type": "narrative_of_decline_and_renewal"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "To help businesses sell more products abroad, we set a goal of doubling our exports by 2014. Because the more we export, the more jobs we create here at home. Already, our exports are up. Recently, we signed agreements with India and China that will support more than 250,000 jobs here in the United States. And last month, we finalized a trade agreement with South Korea that will support at least 70,000 American jobs.",
+          "confidence": 0.7,
+          "context_type": "economic_promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

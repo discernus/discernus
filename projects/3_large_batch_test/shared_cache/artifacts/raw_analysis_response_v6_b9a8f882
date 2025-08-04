@@ -1,0 +1,265 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. The agent focused on identifying and scoring populist discourse patterns across nine core dimensions. Evidence extraction prioritized clear and direct quotes. Confidence levels reflect the clarity and strength of evidence found within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.1,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.7,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.3,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.0,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.9,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Dictatorships shelter terrorists, and feed resentment and radicalism, and seek weapons of mass destruction. Democracies replace resentment with hope, respect the rights of their citizens and their neighbors, and join the fight against terror.",
+          "confidence": 0.9,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "The road of isolationism and protectionism may seem broad and inviting, yet it ends in danger and decline. The only way to protect our people, the only way to secure the peace, the only way to control our destiny is by our leadership.",
+          "confidence": 0.8,
+          "context_type": "framing_choice"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "On September the 11th, 2001, we found that problems originating in a failed and oppressive state 7,000 miles away could bring murder and destruction to our country.",
+          "confidence": 0.8,
+          "context_type": "crisis_definition"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our nation must also remain on the offensive against terror here at home. The enemy has not lost the desire or capability to attack us.",
+          "confidence": 0.7,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Direct the people's will as the ultimate political authority",
+          "confidence": 0.7,
+          "context_type": "rhetorical_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "For people everywhere, the United States is a partner for a better life. Shortchanging these efforts would increase the suffering and chaos of our world, undercutting our long-term security, and dull the conscience of our country.",
+          "confidence": 0.7,
+          "context_type": "promise_of_uplift"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Some things must be done by government, and some things should be left to the people. But the state must be able to enforce the law and protect the rights of minorities and strong, accountable institutions that last longer than a single vote.",
+          "confidence": 0.6,
+          "context_type": "exclusionary_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "We must also confront the larger challenge of mandatory spending, or entitlements. This year, the first of about 78 million by boomers turn 60, including two of my dad's favorite people and President Clinton.",
+          "confidence": 0.6,
+          "context_type": "framing_of_burden"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "The Iranian regime is defying the world with its nuclear ambitions, and the nations of the world must not permit the Iranian regime to gain nuclear weapons. America will continue to rally the world to face these threats.",
+          "confidence": 0.6,
+          "context_type": "accusation_of_deception"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Some temptations return. Protectionists want to escape competition, pretending that we can keep our high standard of living while walling off our economy. Others say that the government needs to take a larger role in directing the economy, centralizing more power in Washington D.C. and increasing taxes.",
+          "confidence": 0.5,
+          "context_type": "critique_of_policy_approaches"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "There is a difference between responsible criticism that aims for success and defeatism that refuses to acknowledge anything but failure. Hindsight alone is not wisdom, and second-guessing is not a strategy.",
+          "confidence": 0.8,
+          "context_type": "contrast_authentic_vs_ineffectual"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My plan for victory: I know what honor is, it has been an honor to protect and serve all of you. I faced death with the secure knowledge that you would not have to. Never falter. Don't hesitate to honor and support those of us who have the honor of protecting that which is worth protecting.",
+          "confidence": 0.8,
+          "context_type": "appeal_to_personal_sacrifice_and_duty"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All of us here tonight, Democrat and Republican, have a right to be proud of this record.",
+          "confidence": 0.8,
+          "context_type": "inclusive_framing"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "For people everywhere, the United States is a partner for a better life.",
+          "confidence": 0.7,
+          "context_type": "universal_appeal"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "We must also confront the larger challenge of mandatory spending, or entitlements. This year, the first of about 78 million by boomers turn 60, including two of my dad's favorite people and President Clinton.",
+          "confidence": 0.7,
+          "context_type": "framing_of_national_burden"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Our nation needs orderly and secure borders. To meet this goal, we must have stronger immigration enforcement and border protection.",
+          "confidence": 0.7,
+          "context_type": "border_security_emphasis"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Keeping America competitive requires an immigration system that upholds our laws, reflects our values, and serves the interests of our economy. Our nation needs orderly and secure borders.",
+          "confidence": 0.9,
+          "context_type": "economic_interest_linking"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Keeping America competitive requires affordable health care. Our Government has a responsibility to provide health care for the poor and the elderly, and we are meeting that responsibility.",
+          "confidence": 0.9,
+          "context_type": "economic_well_being_promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

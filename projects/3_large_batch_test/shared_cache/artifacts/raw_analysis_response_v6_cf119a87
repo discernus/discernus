@@ -1,0 +1,109 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAF",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the PopuList Discourse Analysis Framework (PDAF) v7.1. The focus was on identifying and scoring the nine core anchors of populist discourse, along with assessing their salience and confidence. Evidence extraction prioritized direct quotes supporting each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.4
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "What makes us exceptional?what makes us America?is our allegiance to an idea articulated in a declaration made more than two centuries ago: We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable Rights; that among these are Life, liberty, and the pursuit of happiness.",
+          "confidence": 0.8,
+          "context_type": "foundational_ideal"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "A decade of war is now ending. An economic recovery has begun. America's possibilities are limitless, for we possess all the qualities that this world without boundaries demands: youth and drive; diversity and openness; and an endless capacity for risk and a gift for reinvention.",
+          "confidence": 0.7,
+          "context_type": "state_of_nation"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We, the people, understand that our country cannot succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broad shoulders of a rising middle class.",
+          "confidence": 0.95,
+          "context_type": "collective_will"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We, the people, still believe that every citizen deserves a basic measure of security and dignity. We must make the hard choices to reduce the cost of health care and the size of our deficit.",
+          "confidence": 0.9,
+          "context_type": "collective_will"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "For our journey is not complete until our wives, our mothers and our daughters can earn a living equal to their efforts. Our journey is not complete until our gay brothers and sisters are treated like anyone else under the law—for if we are truly created equal, then surely the love we commit to one another must be equal as well.",
+          "confidence": 0.85,
+          "context_type": "equality_and_rights"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Let us, each of us, now embrace with solemn duty and awesome joy what is our lasting birthright. With common effort and common purpose, with passion and dedication, let us answer the call of history and carry forth into an uncertain future that precious light of freedom.",
+          "confidence": 0.7,
+          "context_type": "shared_destiny"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We must harness new ideas and technology to remake our government, revamp our Tax Code, reform our schools, and empower our citizens with the skills they need to work harder, learn more, reach higher.",
+          "confidence": 0.75,
+          "context_type": "economic_opportunity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

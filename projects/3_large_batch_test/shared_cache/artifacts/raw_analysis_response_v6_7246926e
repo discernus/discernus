@@ -1,0 +1,127 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis complete. Scoring based on framework v7.1. Confidence levels reflect the clarity and directness of the evidence supporting each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.55
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+          "confidence": 0.9,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Let history judge us. Let history remember that in this moment, in this nation, we chose to do the right thing. We chose to lift ourselves up. We chose to rebuild America.",
+          "confidence": 0.85,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "My plan to fight inflation will lower your costs and lower the deficit. Seven trillion dollars in deficits over the next 10 years. And that’s why I’ve proposed closing tax loopholes that allow the wealthiest people who pay a lower tax rate than a teacher and a firefighter.",
+          "confidence": 0.9,
+          "context_type": "restoration"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We’ve achieved this because we provided free vaccines, treatments, and masks. Of course, continuing this costs money, so it will not surprise you I’ll be back to see you all. And I’m going to soon send a request to Congress. The vast majority of Americans have used these tools and may want them again. So I expect Congress and I hope you’ll pass that quickly.",
+          "confidence": 0.8,
+          "context_type": "restoration"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Let us be clear. Our forces are not engaging and will not engage in conflict with Russian forces in Ukraine. Our forces are not going to Europe to fight in Ukraine but to defend our NATO allies in the event that Putin decides to keep moving west.",
+          "confidence": 0.8,
+          "context_type": "sovereignty claim"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The Ukrainian people. From President Zelensky, to their… to every Ukrainian, their fearlessness, their courage, their determination literally inspires the world.",
+          "confidence": 0.7,
+          "context_type": "sovereignty claim"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Like some of you that have been around for a while, I’ve worked with you on these issues for a long time. I know what works: Investing in crime prevention and community policing: cops who walk the beat, who know the neighborhood, and who can restore trust and safety.",
+          "confidence": 0.9,
+          "context_type": "authenticity"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My dad had to leave his home in Scranton, Pennsylvania, to find work. So, like many of you, I grew up in a family when the price of food went up, it was felt throughout the family; it had an impact.",
+          "confidence": 0.8,
+          "context_type": "authenticity"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "And the worst of all, the loss of life. Let’s use this moment to reset. So stop looking at COVID as a partisan dividing line. See it for what it is, a God-awful disease. Let’s stop sending each other as enemies and start seeing each other for who we are, fellow Americans.",
+          "confidence": 0.95,
+          "context_type": "economic appeal"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "For more than 2 years, COVID has impacted every decision in our lives and the life of this nation. And I know you’re tired, frustrated, and exhausted. That doesn’t even count the close to a million people who sit at a dining room table or a kitchen table and look at an empty chair because they lost someone.",
+          "confidence": 0.9,
+          "context_type": "economic appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

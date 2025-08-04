@@ -1,0 +1,265 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of the provided document using the PDAF v7.1 framework. The analysis focuses on identifying and scoring nine core populist discourse anchors and their corresponding salience and confidence levels. Evidence extraction prioritized direct quotes that most strongly support the assessed scores for each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.98,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.92,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.93,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.98,
+          "salience": 0.95,
+          "confidence": 0.98
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Less than 1 year has passed since I first stood at this podium, in this majestic Chamber, to speak on behalf of the American people and to address their concerns, their hopes, and their dreams.",
+          "confidence": 0.98,
+          "context_type": "introduction"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But it is the people who are strong. And together, we are building a safe, strong, and proud America.",
+          "confidence": 0.95,
+          "context_type": "conclusion"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Over the last year, we have made incredible progress and achieved extraordinary success. We have faced challenges we expected and others we could never have imagined.",
+          "confidence": 0.9,
+          "context_type": "progress_and_challenges"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "It was that same yearning for freedom that nearly 250 years ago gave birth to a special place called America. It was home to an incredible people with a revolutionary idea: that they could rule themselves; that they could chart their own destiny; and that, together, they could light up the entire world.",
+          "confidence": 0.85,
+          "context_type": "foundational_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "So to every citizen watching at home tonight, no matter where you've been or where you've come from, this is your time. If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.",
+          "confidence": 0.99,
+          "context_type": "empowerment_message"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "My duty, and the sacred duty of every elected official in this Chamber, is to defend Americans, to protect their safety, their families, their communities, and their right to the American Dream.",
+          "confidence": 0.97,
+          "context_type": "duty_of_representation"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "The third pillar ends the visa lottery, a program that randomly hands our green cards without any regard for skill, merit, or the safety of American people. It is time to begin moving toward a merit-based immigration system, one that admits people who are skilled, who want to work, who will contribute to our society, and who will love and respect our country.",
+          "confidence": 0.85,
+          "context_type": "immigration_reform_proposal"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities. They've allowed millions of low-wage workers to compete for jobs and wages against the poorest Americans. Most tragically, they have caused the loss of many innocent lives.",
+          "confidence": 0.78,
+          "context_type": "critique_of_immigration_policy"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "We eliminated an especially cruel tax that fell mostly on Americans making less than $50,000 a year, forcing them to pay tremendous penalties simply because they couldn't afford Government-ordered health plans. We repealed the core of the disastrous ObamaCare. Thank heavens. Great job.",
+          "confidence": 0.92,
+          "context_type": "repeal_of_obamacare"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "We will work to fix bad trade deals and negotiate new ones. And they'll be good ones, but they'll be fair. And we will protect American workers and American intellectual property through strong enforcement of our trade rules.",
+          "confidence": 0.9,
+          "context_type": "trade_policy"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Here tonight are Steve Staub and Sandy Keplinger of Staub Manufacturing, a small, beautiful business in Ohio. They've just finished the best year in their 20-year history. Because of tax reform, they are handing out raises, hiring an additional 14 people, and expanding into the building next door. It's a good feeling.",
+          "confidence": 0.95,
+          "context_type": "small_business_success"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "As long as we are proud of who we are and what we are fighting for, there is nothing we cannot achieve. As long as we have confidence in our values, faith in our citizens, and trust in our God, we will never fail. Our families will thrive. Our people will prosper. And our Nation will forever be safe and strong and mighty and free.",
+          "confidence": 0.9,
+          "context_type": "values_and_belief"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "So tonight I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed. My duty, and the sacred duty of every elected official in this Chamber, is to defend Americans, to protect their safety, their families, their communities, and their right to the American Dream.",
+          "confidence": 0.9,
+          "context_type": "call_for_unity"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We want every American to know the dignity of a hard day's work. We want every child to be safe in their home at night. And we want every citizen to be proud of this land that we all love so much.",
+          "confidence": 0.85,
+          "context_type": "aspiration_for_citizens"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Around the world, we face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values.",
+          "confidence": 0.75,
+          "context_type": "geopolitical_challenges"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "My administration has also imposed tough sanctions on the communist and socialist dictatorships in Cuba and Venezuela.",
+          "confidence": 0.7,
+          "context_type": "sanctions_policy"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We slashed the tax rate from 35 percent all the way down to 21 percent, so American companies can compete and win against anyone else anywhere in the world. These changes alone are estimated to increase average family income by more than $4,000, a lot of money. Small businesses have also received a massive tax cut and can now deduct 20 percent of their business income.",
+          "confidence": 0.98,
+          "context_type": "tax_cuts_economic_benefit"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "As America regains its strength and confidence at home, we are also restoring our strength and standing abroad. Around the world, we face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values.",
+          "confidence": 0.95,
+          "context_type": "economic_strength_and_global_standing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

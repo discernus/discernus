@@ -1,0 +1,2526 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artifact Browser - 20250804T111225Z</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .artifact-list { margin: 20px 0; }
+        .artifact-item { 
+            border: 1px solid #ddd; 
+            margin: 10px 0; 
+            padding: 15px; 
+            border-radius: 5px;
+            background: white;
+        }
+        .artifact-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .artifact-name { font-weight: bold; color: #333; }
+        .artifact-type { 
+            background: #e9ecef; 
+            padding: 4px 8px; 
+            border-radius: 3px; 
+            font-size: 12px;
+        }
+        .artifact-meta { 
+            font-size: 12px; 
+            color: #666; 
+            margin: 5px 0;
+        }
+        .search-box { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            margin: 10px 0;
+        }
+        .filter-buttons { margin: 10px 0; }
+        .filter-btn { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            margin: 2px; 
+            border-radius: 3px; 
+            cursor: pointer;
+        }
+        .filter-btn:hover { background: #0056b3; }
+        .filter-btn.active { background: #28a745; }
+        .preview { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 3px; 
+            font-family: monospace; 
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .relationships { margin-top: 10px; }
+        .relationship-list { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Artifact Browser</h1>
+        <p><strong>Experiment:</strong> 20250804T111225Z</p>
+        <p><strong>Total Artifacts:</strong> 98</p>
+        <p><strong>Generated:</strong> 2025-08-04T07:47:20.109868</p>
+    </div>
+    
+    <div>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search artifacts by name or type...">
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByType('all')">All</button>
+            <button class="filter-btn" onclick="filterByType('analysis_results')">Analysis</button>
+            <button class="filter-btn" onclick="filterByType('statistical_results')">Statistics</button>
+            <button class="filter-btn" onclick="filterByType('evidence')">Evidence</button>
+            <button class="filter-btn" onclick="filterByType('reports')">Reports</button>
+        </div>
+    </div>
+    
+    <div class="artifact-list" id="artifactList">
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (1234b75d)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 1234b75d | 
+                <strong>Created:</strong> 2025-08-03T20:10:12.939788 | 
+                <strong>Size:</strong> 8627 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (1234b75d)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (1234b75d)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (1234b75d)">📄 Artifact ID: 1234b75d8a3067b9...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • reliability_findings: [{'artifact_id': 'system_level_error', 'dimension'...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (1234b75d)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (0ee3757f)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 0ee3757f | 
+                <strong>Created:</strong> 2025-08-03T17:41:57.739638 | 
+                <strong>Size:</strong> 11125 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (0ee3757f)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (0ee3757f)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (0ee3757f)">📄 Artifact ID: 0ee3757f83ca9f55...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and i...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 4246 + 6020 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (0ee3757f)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (27287172)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 27287172 | 
+                <strong>Created:</strong> 2025-08-03T21:55:54.826380 | 
+                <strong>Size:</strong> 8770 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (27287172)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (27287172)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (27287172)">📄 Artifact ID: 27287172dd95f5e0...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': '{artifact_id}', 'dimension': 'Tr...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (27287172)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (06289c90)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 06289c90 | 
+                <strong>Created:</strong> 2025-08-03T16:45:58.238190 | 
+                <strong>Size:</strong> 14093 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (06289c90)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (06289c90)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (06289c90)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (06289c90)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (a45c48a2)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> a45c48a2 | 
+                <strong>Created:</strong> 2025-08-03T22:23:46.787842 | 
+                <strong>Size:</strong> 5597 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (a45c48a2)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (a45c48a2)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (a45c48a2)">📄 Artifact ID: a45c48a21dccea69...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_115a7a864fbe...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (a45c48a2)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (cfb683b7)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> cfb683b7 | 
+                <strong>Created:</strong> 2025-08-03T22:22:32.130403 | 
+                <strong>Size:</strong> 13072 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (cfb683b7)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (cfb683b7)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (cfb683b7)">📄 Artifact ID: cfb683b7336d9ec6...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the raw data collect...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 4748 + 7337 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (cfb683b7)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5100b808)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5100b808 | 
+                <strong>Created:</strong> 2025-08-03T17:39:13.328789 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5100b808)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5100b808)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5100b808)">📄 Artifact ID: 5100b8086f88602d...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (5100b808)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c5ca37c3)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c5ca37c3 | 
+                <strong>Created:</strong> 2025-08-03T21:54:37.178810 | 
+                <strong>Size:</strong> 17847 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c5ca37c3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c5ca37c3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c5ca37c3)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (c5ca37c3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (db03bb44)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> db03bb44 | 
+                <strong>Created:</strong> 2025-08-03T21:56:46.902938 | 
+                <strong>Size:</strong> 17723 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (db03bb44)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (db03bb44)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (db03bb44)">📄 Artifact ID: db03bb4417652f01...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': '{artifact_id}', 'dimension': 'Di...
+  • reliability_findings: [{'artifact_id': 'N/A', 'dimension': 'N/A', 'evide...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (db03bb44)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (bf4fa7c6)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> bf4fa7c6 | 
+                <strong>Created:</strong> 2025-08-03T20:05:59.752568 | 
+                <strong>Size:</strong> 9507 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (bf4fa7c6)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (bf4fa7c6)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (bf4fa7c6)">📄 Artifact ID: bf4fa7c6b4cfd26e...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'validate_data_completeness_by_group': {'type': '...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'calculate_derived_metrics': {'type': 'derived_me...
+📋 combined_summary: Two-stage execution: 1 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (bf4fa7c6)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (beac1da5)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> beac1da5 | 
+                <strong>Created:</strong> 2025-08-03T16:45:58.229367 | 
+                <strong>Size:</strong> 11012 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (beac1da5)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (beac1da5)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (beac1da5)">📄 Artifact ID: beac1da50095d9d5...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and v...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 3643 + 6502 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (beac1da5)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (8bccb547)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 8bccb547 | 
+                <strong>Created:</strong> 2025-08-03T22:43:52.733206 | 
+                <strong>Size:</strong> 13663 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (8bccb547)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (8bccb547)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (8bccb547)">📄 Artifact ID: 8bccb547d56fb081...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+  • correlation_findings: [{'artifact_id': 'bernie_sanders_2025_fighting_oli...
+📋 curation_summary:
+  • total_evidence_available: 18...
+  • high_confidence_evidence: 18...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (8bccb547)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (919850ce)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 919850ce | 
+                <strong>Created:</strong> 2025-08-03T21:56:46.903960 | 
+                <strong>Size:</strong> 22072 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (919850ce)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (919850ce)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (919850ce)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (919850ce)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (7837a508)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 7837a508 | 
+                <strong>Created:</strong> 2025-08-03T22:26:55.593378 | 
+                <strong>Size:</strong> 10478 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (7837a508)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (7837a508)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (7837a508)">📄 Artifact ID: 7837a50888194b37...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This stage focuses on the collection an...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 4739 + 4914 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (7837a508)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5740ec3d)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5740ec3d | 
+                <strong>Created:</strong> 2025-08-03T17:41:57.742684 | 
+                <strong>Size:</strong> 12456 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5740ec3d)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5740ec3d)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5740ec3d)">📄 Artifact ID: 5740ec3d42fa0cc0...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'generate_grouped_descriptive_statistics': {'type...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 1 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (5740ec3d)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (3ff111b3)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 3ff111b3 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.835554 | 
+                <strong>Size:</strong> 5027 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (3ff111b3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (3ff111b3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (3ff111b3)">📄 Artifact ID: 3ff111b3a8169fe0...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework (CAF)...
+  • framework_version: v7.0...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (3ff111b3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (43e28a10)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 43e28a10 | 
+                <strong>Created:</strong> 2025-08-03T16:37:12.571673 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (43e28a10)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (43e28a10)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (43e28a10)">📄 Artifact ID: 43e28a100ab88e34...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (43e28a10)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (cebabad5)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> cebabad5 | 
+                <strong>Created:</strong> 2025-08-04T07:15:35.332013 | 
+                <strong>Size:</strong> 17942 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (cebabad5)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (cebabad5)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (cebabad5)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (cebabad5)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ebaa9628)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ebaa9628 | 
+                <strong>Created:</strong> 2025-08-03T16:45:58.232038 | 
+                <strong>Size:</strong> 12298 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ebaa9628)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ebaa9628)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ebaa9628)">📄 Artifact ID: ebaa9628e48bc3ef...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'task_4_grouped_data_integrity_check': {'type': '...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 1 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (ebaa9628)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b7cf8927)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b7cf8927 | 
+                <strong>Created:</strong> 2025-08-03T20:10:12.933912 | 
+                <strong>Size:</strong> 9983 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b7cf8927)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b7cf8927)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b7cf8927)">📄 Artifact ID: b7cf892765e5f9c6...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and i...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 3795 + 5431 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (b7cf8927)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ccf9fb11)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ccf9fb11 | 
+                <strong>Created:</strong> 2025-08-03T20:02:45.688212 | 
+                <strong>Size:</strong> 920 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ccf9fb11)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ccf9fb11)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ccf9fb11)">📄 Artifact ID: ccf9fb11d162996f...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • hypothesis_findings: [{'artifact_id': 'bernie_sanders_2025_fighting_oli...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (ccf9fb11)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b309e7e7)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b309e7e7 | 
+                <strong>Created:</strong> 2025-08-03T16:45:58.234218 | 
+                <strong>Size:</strong> 6873 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b309e7e7)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b309e7e7)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b309e7e7)">📄 Artifact ID: b309e7e731211fd0...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (b309e7e7)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c227111f)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c227111f | 
+                <strong>Created:</strong> 2025-08-03T21:55:54.823605 | 
+                <strong>Size:</strong> 16661 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c227111f)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c227111f)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c227111f)">📄 Artifact ID: c227111fd229a59d...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "Collect raw dimensional scores, confide...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "Calculate derived civic character ...
+📋 combined_summary: Two-stage THIN analysis plan: 6450 + 8738 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (c227111f)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c20f6271)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c20f6271 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.837553 | 
+                <strong>Size:</strong> 25391 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c20f6271)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c20f6271)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c20f6271)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (c20f6271)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (a7478733)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> a7478733 | 
+                <strong>Created:</strong> 2025-08-03T22:23:31.058834 | 
+                <strong>Size:</strong> 12298 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (a7478733)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (a7478733)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (a7478733)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (a7478733)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d7b56bbc)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d7b56bbc | 
+                <strong>Created:</strong> 2025-08-03T22:19:52.189876 | 
+                <strong>Size:</strong> 9457 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d7b56bbc)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d7b56bbc)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d7b56bbc)">📄 Artifact ID: d7b56bbc44e66308...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 18...
+📋 evidence_data: [18 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (d7b56bbc)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b6e58c0c)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b6e58c0c | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.837290 | 
+                <strong>Size:</strong> 12798 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b6e58c0c)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b6e58c0c)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b6e58c0c)">📄 Artifact ID: b6e58c0cc8a96cfe...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "Collect raw dimensional scores, support...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "Calculate derived civic character ...
+📋 combined_summary: Two-stage THIN analysis plan: 3071 + 8648 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (b6e58c0c)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (7f4fbe88)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 7f4fbe88 | 
+                <strong>Created:</strong> 2025-08-03T16:43:28.868300 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (7f4fbe88)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (7f4fbe88)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (7f4fbe88)">📄 Artifact ID: 7f4fbe88c4f405b1...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (7f4fbe88)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (793e16e5)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 793e16e5 | 
+                <strong>Created:</strong> 2025-08-03T22:18:49.671645 | 
+                <strong>Size:</strong> 11536 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (793e16e5)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (793e16e5)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (793e16e5)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (793e16e5)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (322b4ec8)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 322b4ec8 | 
+                <strong>Created:</strong> 2025-08-03T20:02:45.690692 | 
+                <strong>Size:</strong> 12134 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (322b4ec8)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (322b4ec8)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (322b4ec8)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (322b4ec8)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5e8ae4a1)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5e8ae4a1 | 
+                <strong>Created:</strong> 2025-08-03T22:26:55.973978 | 
+                <strong>Size:</strong> 18311 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5e8ae4a1)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5e8ae4a1)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5e8ae4a1)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (5e8ae4a1)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (12c567ee)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 12c567ee | 
+                <strong>Created:</strong> 2025-08-03T20:02:45.686499 | 
+                <strong>Size:</strong> 12537 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (12c567ee)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (12c567ee)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (12c567ee)">📄 Artifact ID: 12c567ee0e42a596...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'grouped_data_readiness_check': {'type': 'descrip...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 1 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (12c567ee)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (681c24c1)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 681c24c1 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.836048 | 
+                <strong>Size:</strong> 6523 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (681c24c1)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (681c24c1)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (681c24c1)">📄 Artifact ID: 681c24c1797a244f...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_956d920ba1eb...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (681c24c1)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (beb03ac6)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> beb03ac6 | 
+                <strong>Created:</strong> 2025-08-03T20:05:59.750914 | 
+                <strong>Size:</strong> 8460 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (beb03ac6)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (beb03ac6)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (beb03ac6)">📄 Artifact ID: beb03ac6c63d535d...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and i...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "Plan for derived metric calculatio...
+📋 combined_summary: Two-stage THIN analysis plan: 2835 + 4943 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (beb03ac6)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (8afc6600)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 8afc6600 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.836382 | 
+                <strong>Size:</strong> 5827 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (8afc6600)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (8afc6600)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (8afc6600)">📄 Artifact ID: 8afc6600d5eda862...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_a86efd8f453a...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (8afc6600)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (66dfe15a)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 66dfe15a | 
+                <strong>Created:</strong> 2025-08-03T22:43:52.736794 | 
+                <strong>Size:</strong> 17691 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (66dfe15a)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (66dfe15a)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (66dfe15a)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (66dfe15a)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ec65352e)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ec65352e | 
+                <strong>Created:</strong> 2025-08-03T20:10:12.941854 | 
+                <strong>Size:</strong> 14232 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ec65352e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ec65352e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ec65352e)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (ec65352e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (6da27053)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 6da27053 | 
+                <strong>Created:</strong> 2025-08-03T20:02:45.693428 | 
+                <strong>Size:</strong> 13552 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (6da27053)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (6da27053)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (6da27053)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (6da27053)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (93e797ed)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 93e797ed | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.836714 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (93e797ed)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (93e797ed)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (93e797ed)">📄 Artifact ID: 93e797ede0a56b2b...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (93e797ed)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (db78f565)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> db78f565 | 
+                <strong>Created:</strong> 2025-08-03T22:22:32.137032 | 
+                <strong>Size:</strong> 4684 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (db78f565)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (db78f565)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (db78f565)">📄 Artifact ID: db78f5657d3972d4...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • reliability_findings: [{'artifact_id': 'Civic Analysis Framework (CAF) v...
+📋 curation_summary:
+  • total_evidence_available: 18...
+  • high_confidence_evidence: 18...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (db78f565)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (4904a14e)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 4904a14e | 
+                <strong>Created:</strong> 2025-08-03T22:43:52.740437 | 
+                <strong>Size:</strong> 19111 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (4904a14e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (4904a14e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (4904a14e)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (4904a14e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d31afdbd)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d31afdbd | 
+                <strong>Created:</strong> 2025-08-03T17:41:57.744524 | 
+                <strong>Size:</strong> 7307 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d31afdbd)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d31afdbd)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d31afdbd)">📄 Artifact ID: d31afdbd48323a60...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • reliability_findings: [{'artifact_id': 'bernie_sanders_2025_fighting_oli...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (d31afdbd)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="evidence">
+            <div class="artifact-header">
+                <span class="artifact-name">Evidence Data (8a1fdd39)</span>
+                <span class="artifact-type">evidence</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 8a1fdd39 | 
+                <strong>Created:</strong> 2025-08-04T07:12:28.547647 | 
+                <strong>Size:</strong> 9457 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Evidence Data (8a1fdd39)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Evidence Data (8a1fdd39)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Evidence Data (8a1fdd39)">📄 Artifact ID: 8a1fdd398510e7cc...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 18...
+📋 evidence_data: [18 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Evidence Data (8a1fdd39)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d9e2d400)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d9e2d400 | 
+                <strong>Created:</strong> 2025-08-03T22:22:32.139798 | 
+                <strong>Size:</strong> 13044 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d9e2d400)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d9e2d400)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d9e2d400)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (d9e2d400)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (8b9dc9bf)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 8b9dc9bf | 
+                <strong>Created:</strong> 2025-08-03T21:55:54.825292 | 
+                <strong>Size:</strong> 17898 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (8b9dc9bf)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (8b9dc9bf)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (8b9dc9bf)">📄 Artifact ID: 8b9dc9bfc1324bd0...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {}...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'calculate_tension_metrics': {'type': 'derived_me...
+📋 combined_summary: Two-stage execution: 0 raw data results + 4 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (8b9dc9bf)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c4f1e107)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c4f1e107 | 
+                <strong>Created:</strong> 2025-08-03T16:40:22.193935 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c4f1e107)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c4f1e107)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c4f1e107)">📄 Artifact ID: c4f1e10788ce2bb2...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (c4f1e107)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (1ea5da50)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 1ea5da50 | 
+                <strong>Created:</strong> 2025-08-03T20:05:59.756840 | 
+                <strong>Size:</strong> 14723 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (1ea5da50)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (1ea5da50)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (1ea5da50)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (1ea5da50)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d56466be)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d56466be | 
+                <strong>Created:</strong> 2025-08-03T22:23:49.490463 | 
+                <strong>Size:</strong> 2335 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d56466be)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d56466be)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d56466be)">📄 Artifact ID: d56466be0efee127...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': 'extracted_via_gasket', 'document_...</div>
+                <div class="relationships" id="relationships-Unknown (d56466be)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (6f13617c)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 6f13617c | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.836219 | 
+                <strong>Size:</strong> 10408 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (6f13617c)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (6f13617c)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (6f13617c)">📄 Artifact ID: 6f13617ca525ca29...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': 'bernie_sanders_2025_fighting_oli...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (6f13617c)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (9e9180d3)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 9e9180d3 | 
+                <strong>Created:</strong> 2025-08-03T22:40:19.016111 | 
+                <strong>Size:</strong> 2339 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (9e9180d3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (9e9180d3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (9e9180d3)">📄 Artifact ID: 9e9180d393b7ee9b...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': 'extracted_via_gasket', 'document_...</div>
+                <div class="relationships" id="relationships-Unknown (9e9180d3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (6f9ea84c)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 6f9ea84c | 
+                <strong>Created:</strong> 2025-08-03T22:23:43.332880 | 
+                <strong>Size:</strong> 7355 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (6f9ea84c)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (6f9ea84c)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (6f9ea84c)">📄 Artifact ID: 6f9ea84c5c2831a9...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_a0fdea4084d2...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (6f9ea84c)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (947f3726)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 947f3726 | 
+                <strong>Created:</strong> 2025-08-03T16:45:58.236305 | 
+                <strong>Size:</strong> 12675 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (947f3726)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (947f3726)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (947f3726)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (947f3726)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (44e818c1)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 44e818c1 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.835802 | 
+                <strong>Size:</strong> 1661 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (44e818c1)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (44e818c1)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (44e818c1)">📄 Artifact ID: 44e818c10e82e4c5...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': 'extracted_via_gasket', 'document_...</div>
+                <div class="relationships" id="relationships-Unknown (44e818c1)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c172ce0f)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c172ce0f | 
+                <strong>Created:</strong> 2025-08-03T20:03:24.751320 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c172ce0f)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c172ce0f)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c172ce0f)">📄 Artifact ID: c172ce0f0da3a103...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (c172ce0f)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (0639fa78)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 0639fa78 | 
+                <strong>Created:</strong> 2025-08-01T19:13:09.771004 | 
+                <strong>Size:</strong> 6509 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (0639fa78)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (0639fa78)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (0639fa78)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (0639fa78)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d7df7fb6)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d7df7fb6 | 
+                <strong>Created:</strong> 2025-08-03T22:43:52.730254 | 
+                <strong>Size:</strong> 32779 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d7df7fb6)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d7df7fb6)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d7df7fb6)">📄 Artifact ID: d7df7fb61c4cd17b...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'validate_dimensional_scores': {'type': 'summary_...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 4 raw data results + 6 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (d7df7fb6)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ade4fdb8)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ade4fdb8 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.837015 | 
+                <strong>Size:</strong> 26973 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ade4fdb8)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ade4fdb8)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ade4fdb8)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (ade4fdb8)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (60aaf7d1)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 60aaf7d1 | 
+                <strong>Created:</strong> 2025-08-03T16:33:58.096392 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (60aaf7d1)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (60aaf7d1)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (60aaf7d1)">📄 Artifact ID: 60aaf7d15e68c1f7...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (60aaf7d1)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (168d3bab)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 168d3bab | 
+                <strong>Created:</strong> 2025-08-03T22:23:49.488418 | 
+                <strong>Size:</strong> 8287 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (168d3bab)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (168d3bab)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (168d3bab)">📄 Artifact ID: 168d3baba6b76c63...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (168d3bab)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (ac2296e5)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ac2296e5 | 
+                <strong>Created:</strong> 2025-08-03T22:19:52.182932 | 
+                <strong>Size:</strong> 6013 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (ac2296e5)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (ac2296e5)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (ac2296e5)">📄 Artifact ID: ac2296e52a6cf96b...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework (CAF)...
+  • framework_version: v7.1...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (ac2296e5)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (48d21d5e)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 48d21d5e | 
+                <strong>Created:</strong> 2025-08-03T22:19:52.185922 | 
+                <strong>Size:</strong> 7549 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (48d21d5e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (48d21d5e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (48d21d5e)">📄 Artifact ID: 48d21d5ef97d182f...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_6b640faf310c...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (48d21d5e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (7326e22b)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 7326e22b | 
+                <strong>Created:</strong> 2025-08-03T22:22:32.133769 | 
+                <strong>Size:</strong> 14518 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (7326e22b)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (7326e22b)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (7326e22b)">📄 Artifact ID: 7326e22b72095833...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'grouped_data_integrity_check': {'type': 'descrip...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 1 raw data results + 4 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (7326e22b)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (69c8e0c2)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 69c8e0c2 | 
+                <strong>Created:</strong> 2025-08-03T21:56:46.901753 | 
+                <strong>Size:</strong> 21178 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (69c8e0c2)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (69c8e0c2)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (69c8e0c2)">📄 Artifact ID: 69c8e0c28114a62a...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {}...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'calculate_tension_metrics': {'type': 'derived_me...
+📋 combined_summary: Two-stage execution: 0 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (69c8e0c2)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ce471206)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ce471206 | 
+                <strong>Created:</strong> 2025-08-03T21:56:46.900428 | 
+                <strong>Size:</strong> 19486 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ce471206)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ce471206)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ce471206)">📄 Artifact ID: ce4712064d7fc4b3...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "Collect raw dimensional scores, confide...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "Calculate derived civic character ...
+📋 combined_summary: Two-stage THIN analysis plan: 6480 + 11295 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (ce471206)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (75ce6ed0)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 75ce6ed0 | 
+                <strong>Created:</strong> 2025-08-03T22:23:46.784402 | 
+                <strong>Size:</strong> 4161 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (75ce6ed0)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (75ce6ed0)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (75ce6ed0)">📄 Artifact ID: 75ce6ed07afb4e95...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework (CAF)...
+  • framework_version: v7.1...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (75ce6ed0)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b4294882)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b4294882 | 
+                <strong>Created:</strong> 2025-08-03T20:05:59.753960 | 
+                <strong>Size:</strong> 6166 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b4294882)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b4294882)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b4294882)">📄 Artifact ID: b4294882544825ca...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • reliability_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (b4294882)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5a96f043)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5a96f043 | 
+                <strong>Created:</strong> 2025-08-03T22:19:47.375561 | 
+                <strong>Size:</strong> 6227 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5a96f043)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5a96f043)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5a96f043)">📄 Artifact ID: 5a96f04327920588...
+📊 Type: dict
+🔑 Keys: ['batch_id', 'agent_name', 'agent_version', 'experiment_name', 'model_used', 'raw_analysis_response', 'mathematical_validation', 'execution_metadata', 'input_artifacts', 'provenance']
+
+📋 batch_id: batch_28cbddbda34e...
+📋 agent_name: EnhancedAnalysisAgent...
+📋 agent_version: enhanced_v2.1_raw_output...</div>
+                <div class="relationships" id="relationships-Unknown (5a96f043)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (0f555af7)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 0f555af7 | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.835295 | 
+                <strong>Size:</strong> 27234 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (0f555af7)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (0f555af7)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (0f555af7)">📄 Artifact ID: 0f555af72328ca1f...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'validate_score_completeness': {'type': 'descript...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'calculate_tension_metrics': {'type': 'derived_me...
+📋 combined_summary: Two-stage execution: 1 raw data results + 14 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (0f555af7)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (a487d631)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> a487d631 | 
+                <strong>Created:</strong> 2025-08-03T21:54:37.177217 | 
+                <strong>Size:</strong> 8001 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (a487d631)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (a487d631)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (a487d631)">📄 Artifact ID: a487d63100ed9507...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': '{artifact_id}', 'dimension': 'Di...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (a487d631)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5151f957)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5151f957 | 
+                <strong>Created:</strong> 2025-08-03T21:54:37.176181 | 
+                <strong>Size:</strong> 16101 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5151f957)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5151f957)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5151f957)">📄 Artifact ID: 5151f95750d56ab8...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {}...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'calculate_tension_metrics': {'type': 'derived_me...
+📋 combined_summary: Two-stage execution: 0 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (5151f957)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (ed88a1ae)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> ed88a1ae | 
+                <strong>Created:</strong> 2025-08-03T22:43:52.726609 | 
+                <strong>Size:</strong> 10963 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (ed88a1ae)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (ed88a1ae)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (ed88a1ae)">📄 Artifact ID: ed88a1ae42254ce7...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and i...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 3555 + 6527 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (ed88a1ae)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (98ace87d)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 98ace87d | 
+                <strong>Created:</strong> 2025-08-03T17:41:57.746720 | 
+                <strong>Size:</strong> 15468 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (98ace87d)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (98ace87d)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (98ace87d)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (98ace87d)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (51bc5368)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 51bc5368 | 
+                <strong>Created:</strong> 2025-08-03T22:26:55.972937 | 
+                <strong>Size:</strong> 16657 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (51bc5368)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (51bc5368)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (51bc5368)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (51bc5368)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (c91989fb)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c91989fb | 
+                <strong>Created:</strong> 2025-08-03T22:23:43.329962 | 
+                <strong>Size:</strong> 5839 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (c91989fb)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (c91989fb)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (c91989fb)">📄 Artifact ID: c91989fb871fe93d...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework (CAF)...
+  • framework_version: v7.1...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (c91989fb)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b8d95bda)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b8d95bda | 
+                <strong>Created:</strong> 2025-08-03T20:10:12.944284 | 
+                <strong>Size:</strong> 15650 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b8d95bda)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b8d95bda)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b8d95bda)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (b8d95bda)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="evidence">
+            <div class="artifact-header">
+                <span class="artifact-name">Evidence Data (e8c450c3)</span>
+                <span class="artifact-type">evidence</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> e8c450c3 | 
+                <strong>Created:</strong> 2025-08-04T07:12:28.550442 | 
+                <strong>Size:</strong> 10633 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Evidence Data (e8c450c3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Evidence Data (e8c450c3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Evidence Data (e8c450c3)">📄 Artifact ID: e8c450c3a857863b...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': 'extracted_via_gasket', 'document_...</div>
+                <div class="relationships" id="relationships-Evidence Data (e8c450c3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (390e8b0e)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 390e8b0e | 
+                <strong>Created:</strong> 2025-08-03T20:06:59.996243 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (390e8b0e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (390e8b0e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (390e8b0e)">📄 Artifact ID: 390e8b0ecdb8cf01...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (390e8b0e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="statistical_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Statistical Results (3a444568)</span>
+                <span class="artifact-type">statistical_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 3a444568 | 
+                <strong>Created:</strong> 2025-08-04T07:15:35.326694 | 
+                <strong>Size:</strong> 13072 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Statistical Results (3a444568)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Statistical Results (3a444568)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Statistical Results (3a444568)">📄 Artifact ID: 3a44456875702084...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+  • correlation_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+📋 curation_summary:
+  • total_evidence_available: 18...
+  • high_confidence_evidence: 18...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Statistical Results (3a444568)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (545d6886)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 545d6886 | 
+                <strong>Created:</strong> 2025-08-03T22:22:32.143132 | 
+                <strong>Size:</strong> 14695 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (545d6886)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (545d6886)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (545d6886)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (545d6886)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (d02a859b)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> d02a859b | 
+                <strong>Created:</strong> 2025-08-03T20:05:59.755431 | 
+                <strong>Size:</strong> 13307 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (d02a859b)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (d02a859b)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (d02a859b)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (d02a859b)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (898964f5)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 898964f5 | 
+                <strong>Created:</strong> 2025-08-03T22:19:52.192154 | 
+                <strong>Size:</strong> 7560 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (898964f5)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (898964f5)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (898964f5)">📄 Artifact ID: 898964f5c59b5912...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Unknown (898964f5)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (7896f85e)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 7896f85e | 
+                <strong>Created:</strong> 2025-08-03T20:10:12.936771 | 
+                <strong>Size:</strong> 11227 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (7896f85e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (7896f85e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (7896f85e)">📄 Artifact ID: 7896f85ecefe5905...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'generate_grouped_descriptive_stats_by_ideology':...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 2 raw data results + 3 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (7896f85e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (5808ae68)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 5808ae68 | 
+                <strong>Created:</strong> 2025-08-03T21:54:37.174711 | 
+                <strong>Size:</strong> 15051 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (5808ae68)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (5808ae68)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (5808ae68)">📄 Artifact ID: 5808ae683d3f2276...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "Collect raw dimensional scores, confide...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "Calculate derived civic character ...
+📋 combined_summary: Two-stage THIN analysis plan: 5858 + 7842 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (5808ae68)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (b54eca66)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> b54eca66 | 
+                <strong>Created:</strong> 2025-08-04T07:15:35.329544 | 
+                <strong>Size:</strong> 16522 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (b54eca66)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (b54eca66)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (b54eca66)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (b54eca66)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (962c43a3)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 962c43a3 | 
+                <strong>Created:</strong> 2025-08-03T22:40:19.014511 | 
+                <strong>Size:</strong> 9457 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (962c43a3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (962c43a3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (962c43a3)">📄 Artifact ID: 962c43a3b70478ee...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 18...
+📋 evidence_data: [18 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (962c43a3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (25305a5b)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 25305a5b | 
+                <strong>Created:</strong> 2025-08-03T21:55:54.827442 | 
+                <strong>Size:</strong> 19530 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (25305a5b)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (25305a5b)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (25305a5b)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (25305a5b)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (c5fb3730)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> c5fb3730 | 
+                <strong>Created:</strong> 2025-08-03T16:33:58.096770 | 
+                <strong>Size:</strong> 6619 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (c5fb3730)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (c5fb3730)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (c5fb3730)">📄 Artifact ID: c5fb373000b363d9...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: combined_analysis...
+  • framework_version: v6.0...
+📋 document_analyses: [2 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Unknown (c5fb3730)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (320c1d95)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 320c1d95 | 
+                <strong>Created:</strong> 2025-08-03T22:19:47.372269 | 
+                <strong>Size:</strong> 4727 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (320c1d95)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (320c1d95)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (320c1d95)">📄 Artifact ID: 320c1d95910aaef9...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework (CAF)...
+  • framework_version: v7.1...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (320c1d95)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (13dbbf57)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 13dbbf57 | 
+                <strong>Created:</strong> 2025-08-03T22:26:55.971292 | 
+                <strong>Size:</strong> 11216 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (13dbbf57)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (13dbbf57)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (13dbbf57)">📄 Artifact ID: 13dbbf57cea408a5...
+📊 Type: dict
+🔑 Keys: ['curated_evidence', 'curation_summary', 'success', 'error_message', 'footnote_registry']
+
+📋 curated_evidence:
+  • descriptive_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+  • correlation_findings: [{'artifact_id': 'john_mccain_2008_concession.txt'...
+📋 curation_summary:
+  • total_evidence_available: 14...
+  • high_confidence_evidence: 14...
+📋 success: True...</div>
+                <div class="relationships" id="relationships-Unknown (13dbbf57)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (8bc00e4a)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 8bc00e4a | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.836482 | 
+                <strong>Size:</strong> 9182 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (8bc00e4a)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (8bc00e4a)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (8bc00e4a)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (8bc00e4a)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="analysis_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results (04d1d18a)</span>
+                <span class="artifact-type">analysis_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 04d1d18a | 
+                <strong>Created:</strong> 2025-08-03T11:31:48.835027 | 
+                <strong>Size:</strong> 4371 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results (04d1d18a)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results (04d1d18a)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results (04d1d18a)">📄 Artifact ID: 04d1d18ac86e5347...
+📊 Type: dict
+🔑 Keys: ['analysis_metadata', 'document_analyses']
+
+📋 analysis_metadata:
+  • framework_name: Civic Analysis Framework...
+  • framework_version: v7.0...
+📋 document_analyses: [1 items]
+  • First item: {'document_id': '{artifact_id}', 'document_name': ...</div>
+                <div class="relationships" id="relationships-Analysis Results (04d1d18a)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="statistical_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Statistical Results (696ab3d3)</span>
+                <span class="artifact-type">statistical_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 696ab3d3 | 
+                <strong>Created:</strong> 2025-08-04T07:15:35.320327 | 
+                <strong>Size:</strong> 10644 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Statistical Results (696ab3d3)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Statistical Results (696ab3d3)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Statistical Results (696ab3d3)">📄 Artifact ID: 696ab3d3b280872c...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This plan outlines the collection and i...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 4092 + 5712 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Statistical Results (696ab3d3)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (9ba1c48a)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 9ba1c48a | 
+                <strong>Created:</strong> 2025-08-03T20:02:45.683971 | 
+                <strong>Size:</strong> 11503 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (9ba1c48a)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (9ba1c48a)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (9ba1c48a)">📄 Artifact ID: 9ba1c48afbb45c98...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data: {
+  "stage": "raw_data_collection",
+  "experiment_summary": "This stage focuses on the collection an...
+📋 stage_2_derived_metrics: {
+  "stage": "derived_metrics_analysis",
+  "experiment_summary": "This plan outlines the calculation...
+📋 combined_summary: Two-stage THIN analysis plan: 4098 + 6486 chars of raw LLM responses...</div>
+                <div class="relationships" id="relationships-Unknown (9ba1c48a)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (09e567ab)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 09e567ab | 
+                <strong>Created:</strong> 2025-08-03T17:41:57.748718 | 
+                <strong>Size:</strong> 16886 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (09e567ab)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (09e567ab)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (09e567ab)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (09e567ab)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="statistical_results">
+            <div class="artifact-header">
+                <span class="artifact-name">Statistical Results (007da56e)</span>
+                <span class="artifact-type">statistical_results</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 007da56e | 
+                <strong>Created:</strong> 2025-08-04T07:15:35.324130 | 
+                <strong>Size:</strong> 31617 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Statistical Results (007da56e)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Statistical Results (007da56e)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Statistical Results (007da56e)">📄 Artifact ID: 007da56e716e1f8f...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'validate_raw_data_ranges_and_completeness': {'ty...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 3 raw data results + 5 derived metrics results...</div>
+                <div class="relationships" id="relationships-Statistical Results (007da56e)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (9795fe30)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 9795fe30 | 
+                <strong>Created:</strong> 2025-08-01T19:13:09.770635 | 
+                <strong>Size:</strong> 4698 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (9795fe30)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (9795fe30)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (9795fe30)">❌ Error loading artifact: Expecting value: line 1 column 1 (char 0)</div>
+                <div class="relationships" id="relationships-Unknown (9795fe30)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (26136186)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 26136186 | 
+                <strong>Created:</strong> 2025-08-03T22:26:55.596789 | 
+                <strong>Size:</strong> 28230 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (26136186)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (26136186)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (26136186)">📄 Artifact ID: 2613618691821178...
+📊 Type: dict
+🔑 Keys: ['stage_1_raw_data', 'stage_2_derived_metrics', 'combined_summary']
+
+📋 stage_1_raw_data:
+  • analysis_plan: {'stage': 'raw_data_collection', 'experiment_summa...
+  • results: {'validate_data_completeness_and_range': {'type': ...
+📋 stage_2_derived_metrics:
+  • analysis_plan: {'stage': 'derived_metrics_analysis', 'experiment_...
+  • results: {'task_01_calculate_derived_metrics': {'type': 'de...
+📋 combined_summary: Two-stage execution: 5 raw data results + 4 derived metrics results...</div>
+                <div class="relationships" id="relationships-Unknown (26136186)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+        <div class="artifact-item" data-type="unknown">
+            <div class="artifact-header">
+                <span class="artifact-name">Unknown (07cf3747)</span>
+                <span class="artifact-type">unknown</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 07cf3747 | 
+                <strong>Created:</strong> 2025-08-03T20:00:08.454015 | 
+                <strong>Size:</strong> 7772 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Unknown (07cf3747)')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Unknown (07cf3747)" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Unknown (07cf3747)">📄 Artifact ID: 07cf374770f64a99...
+📊 Type: dict
+🔑 Keys: ['evidence_metadata', 'evidence_data']
+
+📋 evidence_metadata:
+  • total_documents: 2...
+  • total_evidence_pieces: 14...
+📋 evidence_data: [14 items]
+  • First item: {'document_name': 'bernie_sanders_2025_fighting_ol...</div>
+                <div class="relationships" id="relationships-Unknown (07cf3747)">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const items = document.querySelectorAll('.artifact-item');
+            
+            items.forEach(item => {
+                const name = item.querySelector('.artifact-name').textContent.toLowerCase();
+                const type = item.querySelector('.artifact-type').textContent.toLowerCase();
+                
+                if (name.includes(query) || type.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Filter functionality
+        function filterByType(type) {
+            const items = document.querySelectorAll('.artifact-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (type === 'all' || item.dataset.type === type) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Show details functionality
+        function showDetails(humanName) {
+            const detailsDiv = document.getElementById('details-' + humanName);
+            
+            if (detailsDiv.style.display === 'none') {
+                detailsDiv.style.display = 'block';
+                // Content is already embedded in the HTML
+            } else {
+                detailsDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

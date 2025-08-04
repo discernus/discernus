@@ -3,7 +3,7 @@ version: "7.0"
 name: "populist_discourse_factorial_analysis"
 description: |
   This experiment analyzes discourse patterns in presidential speeches using the 
-  Populist Discourse Analysis Framework (PDAF) v7.0. The corpus employs a 
+  Populist Discourse Analysis Framework (PDAF) v7.1. The corpus employs a 
   temporal design examining presidential speeches across multiple contexts 
   spanning 2017-2025. The analysis will measure populist discourse dimensions 
   to identify any statistical patterns, relationships, or temporal trends 
@@ -17,7 +17,7 @@ hypothesis: |
   if significant relationships exist between experimental factors and Populist 
   Strategic Contradiction Index scores.
 
-framework: "../../frameworks/reference/flagship/pdaf_v7.0.md"
+framework: "../../frameworks/reference/flagship/pdaf_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -93,7 +93,7 @@ workflow:
 
 ## Overview
 
-This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v6.0. The analysis employs a temporal design examining speech patterns across different contexts spanning 2017-2025.
+This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v7.1. The analysis employs a temporal design examining speech patterns across different contexts spanning 2017-2025.
 
 ## Research Questions
 
@@ -105,7 +105,7 @@ This experiment analyzes populist discourse patterns in presidential speeches us
 ## Methodology
 
 ### Framework
-**Populist Discourse Analysis Framework (PDAF) v6.0** provides:
+**Populist Discourse Analysis Framework (PDAF) v7.1** provides:
 - 9-dimensional populist anchor analysis across core, mechanism, and boundary dimensions
 - Populist Strategic Contradiction Index (PSCI) for strategic coherence measurement
 - JSON-first architecture with enhanced synthesis integration
