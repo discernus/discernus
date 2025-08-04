@@ -643,9 +643,22 @@ This cryptographic system provides **mathematical proof** of:
 3. **Temporal ordering**: Git timestamps prove sequence of operations
 4. **Reproducibility**: Exact inputs preserved for independent replication
 
-### Verification Commands for Auditors
+### Automated Integrity Validation
+**Recommended**: Use the provided validation script for comprehensive verification:
 ```bash
-# Verify artifact integrity
+# Quick integrity check (recommended for all audits)
+python3 scripts/validate_run_integrity.py {run_metadata['run_timestamp']}
+
+# Verbose output showing all validation steps
+python3 scripts/validate_run_integrity.py {run_metadata['run_timestamp']} --verbose
+
+# Include Git history validation
+python3 scripts/validate_run_integrity.py {run_metadata['run_timestamp']} --check-git
+```
+
+### Manual Verification Commands
+```bash
+# Verify artifact integrity manually
 sha256sum artifacts/statistical_results/*.json
 
 # Check Git history for this run
@@ -667,6 +680,7 @@ grep -r "dependencies" artifacts/*/
 - **"What if I find issues?"** → Complete provenance chain enables precise issue identification
 
 ### Technical Support
+- **Automated Validation**: Run `python3 scripts/validate_run_integrity.py [run_path]` for comprehensive checks
 - **Symlink Issues**: All artifacts are symlinked to `../../shared_cache/artifacts/[hash]`
 - **Hash Verification**: Use `sha256sum` on any artifact to verify integrity
 - **Reproduction**: Use `manifest.json` to recreate exact experimental conditions
