@@ -272,6 +272,9 @@ Respond with only the JSON object."""
                 "duration_seconds": duration_seconds,
                 "synthesis_confidence": 0.95,  # THIN architecture generally high confidence
                 "synthesis_report_markdown": response.narrative_report,
+                # Include artifact hashes for CSV export (Sprint 6 fix)
+                "statistical_results_hash": response.statistical_results_hash,
+                "curated_evidence_hash": response.curated_evidence_hash,
                 
                 # Additional THIN-specific metadata
                 "thin_metadata": {
