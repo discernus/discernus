@@ -148,7 +148,8 @@ def cli():
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, help='Run analysis and CSV export only, skip synthesis')
 @click.option('--ensemble-runs', default=1, help='Number of ensemble runs for self-consistency (default: 1, recommended: 3-5)')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool, ensemble_runs: int = 1):
+@click.option('--no-auto-commit', is_flag=True, help='Disable automatic Git commit after successful run completion')
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool, ensemble_runs: int = 1, no_auto_commit: bool = False):
     """Execute complete experiment (analysis + synthesis)"""
     exp_path = Path(experiment_path)
     
@@ -228,6 +229,7 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
             analysis_model=analysis_model,
             synthesis_model=synthesis_model,
             analysis_only=analysis_only,
+            auto_commit=(not no_auto_commit),
             # TODO: Ensemble runs disabled pending architectural review
         # ensemble_runs=ensemble_runs
         ensemble_runs=1

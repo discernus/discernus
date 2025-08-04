@@ -303,6 +303,7 @@ Respond with only the JSON object."""
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
                       ensemble_runs: int = 1,
+                      auto_commit: bool = True,
                       resume_stage: Optional[str] = None,
                       debug_agent: Optional[str] = None,
                       debug_level: str = "info") -> Dict[str, Any]:
@@ -315,6 +316,7 @@ Respond with only the JSON object."""
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             analysis_only: If True, run only analysis phase and save artifacts
             ensemble_runs: Number of ensemble runs for self-consistency (1 = single run, 3-5 recommended)
+            auto_commit: If True, automatically commit successful runs to Git (default: True)
             resume_stage: Resume at specific THIN synthesis sub-stage ('thin-gen', 'thin-exec', 'thin-cure', 'thin-interp')
             
         Returns:
@@ -476,13 +478,25 @@ Respond with only the JSON object."""
                 # Get cost information for analysis-only mode
                 session_costs = audit.get_session_costs()
                 
+                # Auto-commit successful analysis-only run to Git (if enabled)
+                commit_success = True
+                if auto_commit:
+                    commit_metadata = {
+                        "run_id": run_timestamp,
+                        "experiment_name": self.experiment_path.name
+                    }
+                    commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
+                    if not commit_success:
+                        print("⚠️  Auto-commit to Git failed (analysis completed successfully)")
+                
                 return {
                     "run_id": run_timestamp,
                     "status": "analysis_completed",
                     "scores_hash": scores_hash,
                     "evidence_hash": evidence_hash,
                     "duration": self._calculate_duration(start_time, end_time),
-                    "costs": session_costs
+                    "costs": session_costs,
+                    "auto_commit_success": auto_commit and commit_success if auto_commit else None
                 }
             
             # Handle resume from specific THIN synthesis stage
@@ -765,11 +779,23 @@ Respond with only the JSON object."""
                 # Get cost information for synthesis-only mode
                 session_costs = audit.get_session_costs()
                 
+                # Auto-commit successful synthesis-only run to Git (if enabled)
+                commit_success = True
+                if auto_commit:
+                    commit_metadata = {
+                        "run_id": run_timestamp,
+                        "experiment_name": self.experiment_path.name
+                    }
+                    commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
+                    if not commit_success:
+                        print("⚠️  Auto-commit to Git failed (synthesis completed successfully)")
+                
                 return {
                     "run_id": run_timestamp,
                     "status": "completed",
                     "duration": self._calculate_duration(start_time, end_time),
-                    "costs": session_costs
+                    "costs": session_costs,
+                    "auto_commit_success": auto_commit and commit_success if auto_commit else None
                 }
             
             # Normal full run - continue with analysis phase
@@ -992,6 +1018,16 @@ Respond with only the JSON object."""
                     calls = op_costs.get('calls', 0)
                     print(f"     • {op}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
             
+            # Auto-commit successful run to Git (if enabled)
+            if auto_commit:
+                commit_metadata = {
+                    "run_id": run_timestamp,
+                    "experiment_name": self.experiment_path.name
+                }
+                commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
+                if not commit_success:
+                    print("⚠️  Auto-commit to Git failed (run completed successfully)")
+            
             return {
                 "run_id": run_timestamp,
                 "run_folder": str(run_folder),
@@ -1003,7 +1039,8 @@ Respond with only the JSON object."""
                 "synthesis_result": synthesis_result,
                 "costs": session_costs,
                 "mathematical_validation": True,
-                "architecture": "thin_v2.0_direct_calls"
+                "architecture": "thin_v2.0_direct_calls",
+                "auto_commit_success": auto_commit and commit_success if auto_commit else None
             }
             
         except Exception as e:
@@ -2170,6 +2207,106 @@ This report presents the results of computational research analysis using the Di
             return (end_dt - start_dt).total_seconds()
         except Exception:
             return 0.0
+    
+    def _auto_commit_run(self, run_folder: Path, run_metadata: Dict[str, Any], audit: 'AuditLogger') -> bool:
+        """
+        Automatically commit completed research run to Git.
+        
+        Args:
+            run_folder: Path to the completed run directory
+            run_metadata: Metadata about the run (run_id, experiment_name, etc.)
+            audit: Audit logger for recording the commit attempt
+            
+        Returns:
+            True if commit succeeded, False if it failed (non-blocking)
+        """
+        import subprocess
+        
+        try:
+            # Get to repository root (run_folder is experiment_path/runs/timestamp)
+            repo_root = run_folder.parent.parent.parent
+            
+            # Add the run directory to Git (force to override .gitignore for research preservation)
+            result = subprocess.run(
+                ["git", "add", "--force", str(run_folder.relative_to(repo_root))],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            
+            if result.returncode != 0:
+                audit.log_error("auto_commit_add_failed", result.stderr, {
+                    "run_folder": str(run_folder),
+                    "git_add_stderr": result.stderr
+                })
+                return False
+            
+            # Create commit message (keep it short per .cursor/rules)
+            run_id = run_metadata.get('run_id', 'unknown')
+            experiment_name = run_metadata.get('experiment_name', 'experiment')
+            commit_msg = f"Complete run {run_id}: {experiment_name}"
+            
+            # Ensure commit message is under 50 characters
+            if len(commit_msg) > 47:  # Leave room for ellipsis
+                commit_msg = commit_msg[:44] + "..."
+            
+            # Commit the run
+            result = subprocess.run(
+                ["git", "commit", "-m", commit_msg],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            
+            if result.returncode != 0:
+                # Check if it's just "nothing to commit" (not an error)
+                if "nothing to commit" in result.stdout.lower() or "nothing to commit" in result.stderr.lower():
+                    audit.log_orchestrator_event("auto_commit_nothing_to_commit", {
+                        "message": "No new changes to commit"
+                    })
+                    return True
+                
+                audit.log_error("auto_commit_commit_failed", result.stderr, {
+                    "run_folder": str(run_folder),
+                    "commit_message": commit_msg,
+                    "git_commit_stderr": result.stderr
+                })
+                return False
+            
+            # Check for successful commit in output (git pre-commit hooks can write to stderr but still succeed)
+            if "nested repositories found" in result.stderr and "commit proceeding" in result.stderr:
+                # This is just the nested repo check - commit actually succeeded
+                pass
+            elif result.stderr and "nothing to commit" not in result.stderr.lower():
+                # Log as warning but don't fail if return code was 0
+                audit.log_orchestrator_event("auto_commit_warning", {
+                    "message": "Git commit succeeded but had stderr output",
+                    "stderr": result.stderr
+                })
+            
+            # Success
+            audit.log_orchestrator_event("auto_commit_success", {
+                "run_id": run_id,
+                "commit_message": commit_msg,
+                "committed_path": str(run_folder.relative_to(repo_root))
+            })
+            
+            print(f"📝 Auto-committed to Git: {commit_msg}")
+            return True
+            
+        except subprocess.TimeoutExpired:
+            audit.log_error("auto_commit_timeout", "Git command timed out", {
+                "run_folder": str(run_folder)
+            })
+            return False
+        except Exception as e:
+            audit.log_error("auto_commit_error", str(e), {
+                "run_folder": str(run_folder),
+                "error_type": type(e).__name__
+            })
+            return False
     
     def _generate_cost_summary_section(self, session_costs: Dict[str, Any], run_timestamp: str) -> str:
         """
