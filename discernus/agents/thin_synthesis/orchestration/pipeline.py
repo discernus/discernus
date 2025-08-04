@@ -175,7 +175,6 @@ class ProductionThinSynthesisPipeline:
             return hash_id
         
         # Store artifact with metadata using the artifact client interface
-        # Note: MinIOCompatibleStorage wrapper may not support metadata, fall back to regular storage
         try:
             if hasattr(self.artifact_client, 'client') and hasattr(self.artifact_client, 'bucket'):
                 # Direct MinIO client - store with metadata
@@ -186,13 +185,21 @@ class ProductionThinSynthesisPipeline:
                     length=len(content_bytes),
                     metadata=metadata
                 )
+                self.logger.debug(f"Stored artifact with MinIO metadata: {hash_id}")
+            elif hasattr(self.artifact_client, 'local_storage'):
+                # MinIOCompatibleStorage wrapper - call underlying storage with metadata
+                hash_result = self.artifact_client.local_storage.put_artifact(content_bytes, metadata)
+                if hash_result != hash_id:
+                    self.logger.warning(f"Hash mismatch: expected {hash_id}, got {hash_result}")
+                self.logger.debug(f"Stored artifact with LocalStorage metadata: {hash_id}")
             else:
-                # Wrapper client - use standard put_artifact method
+                # Unknown client type - use standard put_artifact method (no metadata)
                 hash_result = self.artifact_client.put_artifact(content_bytes)
                 if hash_result != hash_id:
                     self.logger.warning(f"Hash mismatch: expected {hash_id}, got {hash_result}")
+                self.logger.warning(f"Stored artifact without metadata (unknown client type): {hash_id}")
         except Exception as e:
-            # Fallback: use standard put_artifact method
+            # Fallback: use standard put_artifact method (no metadata)
             self.logger.warning(f"Metadata storage failed, using standard storage: {e}")
             self.artifact_client.put_artifact(content_bytes)
         
