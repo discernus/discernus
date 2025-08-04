@@ -99,11 +99,6 @@ The analysis agent outputs a raw analysis log containing:
       "care_confidence", "harm_confidence", "fairness_confidence", "cheating_confidence",
       "loyalty_confidence", "betrayal_confidence", "authority_confidence", "subversion_confidence",
       "sanctity_confidence", "degradation_confidence", "liberty_confidence", "oppression_confidence"
-    ],
-    "target_dimensions": [
-      "individualizing_foundations_score",
-      "binding_foundations_score",
-      "moral_strategic_contradiction_index"
     ]
   }
 }
@@ -121,7 +116,7 @@ The analysis agent outputs a raw analysis log containing:
   "analysis_variants": {
     "default": {
       "description": "Complete salience-weighted moral foundation analysis with tension pattern quantification and raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in moral psychology and Moral Foundations Theory across diverse contexts. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Moral Foundations Theory Framework v7.1, which captures moral reasoning patterns through six foundation pairs with enhanced metadata scoring. Phase 3: Operational Definitions: Evaluate 12 moral foundations across 6 pairs: Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, and Liberty/Oppression. Each foundation receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each foundation, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with foundation scores only - NO calculations of moral indices or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert analyst specializing in moral psychology and Moral Foundations Theory across diverse contexts. Your task is to analyze the provided text using the Moral Foundations Theory Framework v7.1, which captures moral reasoning patterns through six foundation pairs with enhanced metadata scoring and comprehensive moral assessment.\n\nThe framework evaluates moral reasoning across six foundation pairs:\n\n**Individualizing Foundations**: Care (0.0-1.0) - compassion, protection, suffering prevention vs. Harm (0.0-1.0) - cruelty concern, violence prevention; Fairness (0.0-1.0) - justice, equality, proportional treatment vs. Cheating (0.0-1.0) - unfairness concern, exploitation prevention.\n\n**Binding Foundations**: Loyalty (0.0-1.0) - group cohesion, fidelity, solidarity vs. Betrayal (0.0-1.0) - group abandonment concern; Authority (0.0-1.0) - hierarchy respect, tradition, legitimate order vs. Subversion (0.0-1.0) - rebellion concern, tradition undermining; Sanctity (0.0-1.0) - sacred preservation, purity, transcendence vs. Degradation (0.0-1.0) - contamination concern, profane prevention.\n\n**Liberty Foundation**: Liberty (0.0-1.0) - freedom, autonomy, self-determination vs. Oppression (0.0-1.0) - control concern, domination prevention.\n\nFor each foundation, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this foundation to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Moral Foundations Theory methodology to this specific text\n- Detailed analysis of each relevant foundation with scores, salience, confidence, and evidence\n- Assessment of moral reasoning patterns and strategic contradictions\n- Overall moral profile with salience weighting across all six foundation pairs\n- Key insights about the speaker's moral framework and rhetorical approach\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong care foundation appeals (care score: 0.8, salience: 0.9, confidence: 0.7) with frequent references to compassion and protection.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -166,42 +161,42 @@ The analysis agent outputs a raw analysis log containing:
       "sanctity_confidence", "degradation_confidence", "liberty_confidence", "oppression_confidence"
     ],
     "extraction_patterns": {
-      "care_score": ["care.{0,20}score"],
-      "harm_score": ["harm.{0,20}score"],
-      "fairness_score": ["fairness.{0,20}score"],
-      "cheating_score": ["cheating.{0,20}score"],
-      "loyalty_score": ["loyalty.{0,20}score"],
-      "betrayal_score": ["betrayal.{0,20}score"],
-      "authority_score": ["authority.{0,20}score"],
-      "subversion_score": ["subversion.{0,20}score"],
-      "sanctity_score": ["sanctity.{0,20}score"],
-      "degradation_score": ["degradation.{0,20}score"],
-      "liberty_score": ["liberty.{0,20}score"],
-      "oppression_score": ["oppression.{0,20}score"],
-      "care_salience": ["care.{0,20}salience"],
-      "harm_salience": ["harm.{0,20}salience"],
-      "fairness_salience": ["fairness.{0,20}salience"],
-      "cheating_salience": ["cheating.{0,20}salience"],
-      "loyalty_salience": ["loyalty.{0,20}salience"],
-      "betrayal_salience": ["betrayal.{0,20}salience"],
-      "authority_salience": ["authority.{0,20}salience"],
-      "subversion_salience": ["subversion.{0,20}salience"],
-      "sanctity_salience": ["sanctity.{0,20}salience"],
-      "degradation_salience": ["degradation.{0,20}salience"],
-      "liberty_salience": ["liberty.{0,20}salience"],
-      "oppression_salience": ["oppression.{0,20}salience"],
-      "care_confidence": ["care.{0,20}confidence"],
-      "harm_confidence": ["harm.{0,20}confidence"],
-      "fairness_confidence": ["fairness.{0,20}confidence"],
-      "cheating_confidence": ["cheating.{0,20}confidence"],
-      "loyalty_confidence": ["loyalty.{0,20}confidence"],
-      "betrayal_confidence": ["betrayal.{0,20}confidence"],
-      "authority_confidence": ["authority.{0,20}confidence"],
-      "subversion_confidence": ["subversion.{0,20}confidence"],
-      "sanctity_confidence": ["sanctity.{0,20}confidence"],
-      "degradation_confidence": ["degradation.{0,20}confidence"],
-      "liberty_confidence": ["liberty.{0,20}confidence"],
-      "oppression_confidence": ["oppression.{0,20}confidence"]
+      "care_score": ["care.{0,20}score", "care.{0,20}rating", "care\\s*:\\s*[0-9]"],
+      "harm_score": ["harm.{0,20}score", "harm.{0,20}rating", "harm\\s*:\\s*[0-9]"],
+      "fairness_score": ["fairness.{0,20}score", "fairness.{0,20}rating", "fairness\\s*:\\s*[0-9]"],
+      "cheating_score": ["cheating.{0,20}score", "cheating.{0,20}rating", "cheating\\s*:\\s*[0-9]"],
+      "loyalty_score": ["loyalty.{0,20}score", "loyalty.{0,20}rating", "loyalty\\s*:\\s*[0-9]"],
+      "betrayal_score": ["betrayal.{0,20}score", "betrayal.{0,20}rating", "betrayal\\s*:\\s*[0-9]"],
+      "authority_score": ["authority.{0,20}score", "authority.{0,20}rating", "authority\\s*:\\s*[0-9]"],
+      "subversion_score": ["subversion.{0,20}score", "subversion.{0,20}rating", "subversion\\s*:\\s*[0-9]"],
+      "sanctity_score": ["sanctity.{0,20}score", "sanctity.{0,20}rating", "sanctity\\s*:\\s*[0-9]"],
+      "degradation_score": ["degradation.{0,20}score", "degradation.{0,20}rating", "degradation\\s*:\\s*[0-9]"],
+      "liberty_score": ["liberty.{0,20}score", "liberty.{0,20}rating", "liberty\\s*:\\s*[0-9]"],
+      "oppression_score": ["oppression.{0,20}score", "oppression.{0,20}rating", "oppression\\s*:\\s*[0-9]"],
+      "care_salience": ["care.{0,20}salience", "care.{0,20}importance", "care.{0,20}centrality"],
+      "harm_salience": ["harm.{0,20}salience", "harm.{0,20}importance", "harm.{0,20}centrality"],
+      "fairness_salience": ["fairness.{0,20}salience", "fairness.{0,20}importance", "fairness.{0,20}centrality"],
+      "cheating_salience": ["cheating.{0,20}salience", "cheating.{0,20}importance", "cheating.{0,20}centrality"],
+      "loyalty_salience": ["loyalty.{0,20}salience", "loyalty.{0,20}importance", "loyalty.{0,20}centrality"],
+      "betrayal_salience": ["betrayal.{0,20}salience", "betrayal.{0,20}importance", "betrayal.{0,20}centrality"],
+      "authority_salience": ["authority.{0,20}salience", "authority.{0,20}importance", "authority.{0,20}centrality"],
+      "subversion_salience": ["subversion.{0,20}salience", "subversion.{0,20}importance", "subversion.{0,20}centrality"],
+      "sanctity_salience": ["sanctity.{0,20}salience", "sanctity.{0,20}importance", "sanctity.{0,20}centrality"],
+      "degradation_salience": ["degradation.{0,20}salience", "degradation.{0,20}importance", "degradation.{0,20}centrality"],
+      "liberty_salience": ["liberty.{0,20}salience", "liberty.{0,20}importance", "liberty.{0,20}centrality"],
+      "oppression_salience": ["oppression.{0,20}salience", "oppression.{0,20}importance", "oppression.{0,20}centrality"],
+      "care_confidence": ["care.{0,20}confidence", "care.{0,20}certainty", "care.{0,20}sure"],
+      "harm_confidence": ["harm.{0,20}confidence", "harm.{0,20}certainty", "harm.{0,20}sure"],
+      "fairness_confidence": ["fairness.{0,20}confidence", "fairness.{0,20}certainty", "fairness.{0,20}sure"],
+      "cheating_confidence": ["cheating.{0,20}confidence", "cheating.{0,20}certainty", "cheating.{0,20}sure"],
+      "loyalty_confidence": ["loyalty.{0,20}confidence", "loyalty.{0,20}certainty", "loyalty.{0,20}sure"],
+      "betrayal_confidence": ["betrayal.{0,20}confidence", "betrayal.{0,20}certainty", "betrayal.{0,20}sure"],
+      "authority_confidence": ["authority.{0,20}confidence", "authority.{0,20}certainty", "authority.{0,20}sure"],
+      "subversion_confidence": ["subversion.{0,20}confidence", "subversion.{0,20}certainty", "subversion.{0,20}sure"],
+      "sanctity_confidence": ["sanctity.{0,20}confidence", "sanctity.{0,20}certainty", "sanctity.{0,20}sure"],
+      "degradation_confidence": ["degradation.{0,20}confidence", "degradation.{0,20}certainty", "degradation.{0,20}sure"],
+      "liberty_confidence": ["liberty.{0,20}confidence", "liberty.{0,20}certainty", "liberty.{0,20}sure"],
+      "oppression_confidence": ["oppression.{0,20}confidence", "oppression.{0,20}certainty", "oppression.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -216,10 +211,6 @@ The analysis agent outputs a raw analysis log containing:
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing moral foundation scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with moral foundation analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```

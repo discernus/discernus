@@ -91,11 +91,6 @@ The analysis agent outputs a raw analysis log containing:
       "customer_service_confidence", "customer_exploitation_confidence", "employee_development_confidence", "employee_exploitation_confidence",
       "accountability_confidence", "opacity_confidence", "financial_responsibility_confidence", "financial_manipulation_confidence",
       "sustainable_purpose_confidence", "short_term_extraction_confidence"
-    ],
-    "target_dimensions": [
-      "stakeholder_focus_index",
-      "operational_integrity_index",
-      "strategic_sustainability_score"
     ]
   }
 }
@@ -113,7 +108,7 @@ The analysis agent outputs a raw analysis log containing:
   "analysis_variants": {
     "default": {
       "description": "Complete multi-dimensional business ethics analysis with raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in business ethics and corporate responsibility across diverse contexts. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Business Ethics Framework v7.1, which captures business ethics patterns through three domains with enhanced metadata scoring. Phase 3: Operational Definitions: Evaluate 10 dimensions across three domains: Stakeholder Relations (Customer Service/Exploitation, Employee Development/Exploitation), Operational Integrity (Accountability/Opacity, Financial Responsibility/Manipulation), and Strategic Vision (Sustainable Purpose/Short-Term Extraction). Each dimension receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each dimension, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing dimensional scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with dimension scores only - NO calculations of ethics indices or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert analyst specializing in business ethics and corporate responsibility across diverse contexts. Your task is to analyze the provided text using the Business Ethics Framework v7.1, which captures business ethics patterns through three domains with enhanced metadata scoring and comprehensive corporate responsibility assessment.\n\nThe framework evaluates business ethics across three domains:\n\n**Stakeholder Relations Domain**: Customer Service (0.0-1.0) - genuine customer benefit and transparent value delivery vs. Customer Exploitation (0.0-1.0) - extraction of value from customers over genuine service; Employee Development (0.0-1.0) - worker growth, safety, and meaningful contribution vs. Employee Exploitation (0.0-1.0) - treating workers as disposable resources.\n\n**Operational Integrity Domain**: Accountability (0.0-1.0) - transparent governance and responsible decision-making vs. Opacity (0.0-1.0) - concealing decision-making processes; Financial Responsibility (0.0-1.0) - prudent financial management and honest reporting vs. Financial Manipulation (0.0-1.0) - accounting manipulation or unsustainable practices.\n\n**Strategic Vision Domain**: Sustainable Purpose (0.0-1.0) - long-term value creation for society and stakeholders vs. Short Term Extraction (0.0-1.0) - focusing solely on short-term profit extraction.\n\nFor each dimension, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this dimension to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Business Ethics methodology to this specific text\n- Detailed analysis of each relevant dimension with scores, salience, confidence, and evidence\n- Assessment of business ethics patterns across all three domains\n- Overall corporate responsibility profile with domain weighting\n- Key insights about the organization's ethical approach and stakeholder orientation\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong customer service orientation (customer service score: 0.8, salience: 0.9, confidence: 0.7) with frequent references to genuine customer benefit.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -150,36 +145,36 @@ The analysis agent outputs a raw analysis log containing:
       "sustainable_purpose_confidence", "short_term_extraction_confidence"
     ],
     "extraction_patterns": {
-      "customer_service_score": ["customer.{0,20}service.{0,20}score"],
-      "customer_exploitation_score": ["customer.{0,20}exploitation.{0,20}score"],
-      "employee_development_score": ["employee.{0,20}development.{0,20}score"],
-      "employee_exploitation_score": ["employee.{0,20}exploitation.{0,20}score"],
-      "accountability_score": ["accountability.{0,20}score"],
-      "opacity_score": ["opacity.{0,20}score"],
-      "financial_responsibility_score": ["financial.{0,20}responsibility.{0,20}score"],
-      "financial_manipulation_score": ["financial.{0,20}manipulation.{0,20}score"],
-      "sustainable_purpose_score": ["sustainable.{0,20}purpose.{0,20}score"],
-      "short_term_extraction_score": ["short.{0,20}term.{0,20}extraction.{0,20}score"],
-      "customer_service_salience": ["customer.{0,20}service.{0,20}salience"],
-      "customer_exploitation_salience": ["customer.{0,20}exploitation.{0,20}salience"],
-      "employee_development_salience": ["employee.{0,20}development.{0,20}salience"],
-      "employee_exploitation_salience": ["employee.{0,20}exploitation.{0,20}salience"],
-      "accountability_salience": ["accountability.{0,20}salience"],
-      "opacity_salience": ["opacity.{0,20}salience"],
-      "financial_responsibility_salience": ["financial.{0,20}responsibility.{0,20}salience"],
-      "financial_manipulation_salience": ["financial.{0,20}manipulation.{0,20}salience"],
-      "sustainable_purpose_salience": ["sustainable.{0,20}purpose.{0,20}salience"],
-      "short_term_extraction_salience": ["short.{0,20}term.{0,20}extraction.{0,20}salience"],
-      "customer_service_confidence": ["customer.{0,20}service.{0,20}confidence"],
-      "customer_exploitation_confidence": ["customer.{0,20}exploitation.{0,20}confidence"],
-      "employee_development_confidence": ["employee.{0,20}development.{0,20}confidence"],
-      "employee_exploitation_confidence": ["employee.{0,20}exploitation.{0,20}confidence"],
-      "accountability_confidence": ["accountability.{0,20}confidence"],
-      "opacity_confidence": ["opacity.{0,20}confidence"],
-      "financial_responsibility_confidence": ["financial.{0,20}responsibility.{0,20}confidence"],
-      "financial_manipulation_confidence": ["financial.{0,20}manipulation.{0,20}confidence"],
-      "sustainable_purpose_confidence": ["sustainable.{0,20}purpose.{0,20}confidence"],
-      "short_term_extraction_confidence": ["short.{0,20}term.{0,20}extraction.{0,20}confidence"]
+      "customer_service_score": ["customer.{0,20}service.{0,20}score", "customer.{0,20}service.{0,20}rating", "customer\\s*service\\s*:\\s*[0-9]"],
+      "customer_exploitation_score": ["customer.{0,20}exploitation.{0,20}score", "customer.{0,20}exploitation.{0,20}rating", "customer\\s*exploitation\\s*:\\s*[0-9]"],
+      "employee_development_score": ["employee.{0,20}development.{0,20}score", "employee.{0,20}development.{0,20}rating", "employee\\s*development\\s*:\\s*[0-9]"],
+      "employee_exploitation_score": ["employee.{0,20}exploitation.{0,20}score", "employee.{0,20}exploitation.{0,20}rating", "employee\\s*exploitation\\s*:\\s*[0-9]"],
+      "accountability_score": ["accountability.{0,20}score", "accountability.{0,20}rating", "accountability\\s*:\\s*[0-9]"],
+      "opacity_score": ["opacity.{0,20}score", "opacity.{0,20}rating", "opacity\\s*:\\s*[0-9]"],
+      "financial_responsibility_score": ["financial.{0,20}responsibility.{0,20}score", "financial.{0,20}responsibility.{0,20}rating", "financial\\s*responsibility\\s*:\\s*[0-9]"],
+      "financial_manipulation_score": ["financial.{0,20}manipulation.{0,20}score", "financial.{0,20}manipulation.{0,20}rating", "financial\\s*manipulation\\s*:\\s*[0-9]"],
+      "sustainable_purpose_score": ["sustainable.{0,20}purpose.{0,20}score", "sustainable.{0,20}purpose.{0,20}rating", "sustainable\\s*purpose\\s*:\\s*[0-9]"],
+      "short_term_extraction_score": ["short.{0,20}term.{0,20}extraction.{0,20}score", "short.{0,20}term.{0,20}extraction.{0,20}rating", "short\\s*term\\s*extraction\\s*:\\s*[0-9]"],
+      "customer_service_salience": ["customer.{0,20}service.{0,20}salience", "customer.{0,20}service.{0,20}importance", "customer.{0,20}service.{0,20}centrality"],
+      "customer_exploitation_salience": ["customer.{0,20}exploitation.{0,20}salience", "customer.{0,20}exploitation.{0,20}importance", "customer.{0,20}exploitation.{0,20}centrality"],
+      "employee_development_salience": ["employee.{0,20}development.{0,20}salience", "employee.{0,20}development.{0,20}importance", "employee.{0,20}development.{0,20}centrality"],
+      "employee_exploitation_salience": ["employee.{0,20}exploitation.{0,20}salience", "employee.{0,20}exploitation.{0,20}importance", "employee.{0,20}exploitation.{0,20}centrality"],
+      "accountability_salience": ["accountability.{0,20}salience", "accountability.{0,20}importance", "accountability.{0,20}centrality"],
+      "opacity_salience": ["opacity.{0,20}salience", "opacity.{0,20}importance", "opacity.{0,20}centrality"],
+      "financial_responsibility_salience": ["financial.{0,20}responsibility.{0,20}salience", "financial.{0,20}responsibility.{0,20}importance", "financial.{0,20}responsibility.{0,20}centrality"],
+      "financial_manipulation_salience": ["financial.{0,20}manipulation.{0,20}salience", "financial.{0,20}manipulation.{0,20}importance", "financial.{0,20}manipulation.{0,20}centrality"],
+      "sustainable_purpose_salience": ["sustainable.{0,20}purpose.{0,20}salience", "sustainable.{0,20}purpose.{0,20}importance", "sustainable.{0,20}purpose.{0,20}centrality"],
+      "short_term_extraction_salience": ["short.{0,20}term.{0,20}extraction.{0,20}salience", "short.{0,20}term.{0,20}extraction.{0,20}importance", "short.{0,20}term.{0,20}extraction.{0,20}centrality"],
+      "customer_service_confidence": ["customer.{0,20}service.{0,20}confidence", "customer.{0,20}service.{0,20}certainty", "customer.{0,20}service.{0,20}sure"],
+      "customer_exploitation_confidence": ["customer.{0,20}exploitation.{0,20}confidence", "customer.{0,20}exploitation.{0,20}certainty", "customer.{0,20}exploitation.{0,20}sure"],
+      "employee_development_confidence": ["employee.{0,20}development.{0,20}confidence", "employee.{0,20}development.{0,20}certainty", "employee.{0,20}development.{0,20}sure"],
+      "employee_exploitation_confidence": ["employee.{0,20}exploitation.{0,20}confidence", "employee.{0,20}exploitation.{0,20}certainty", "employee.{0,20}exploitation.{0,20}sure"],
+      "accountability_confidence": ["accountability.{0,20}confidence", "accountability.{0,20}certainty", "accountability.{0,20}sure"],
+      "opacity_confidence": ["opacity.{0,20}confidence", "opacity.{0,20}certainty", "opacity.{0,20}sure"],
+      "financial_responsibility_confidence": ["financial.{0,20}responsibility.{0,20}confidence", "financial.{0,20}responsibility.{0,20}certainty", "financial.{0,20}responsibility.{0,20}sure"],
+      "financial_manipulation_confidence": ["financial.{0,20}manipulation.{0,20}confidence", "financial.{0,20}manipulation.{0,20}certainty", "financial.{0,20}manipulation.{0,20}sure"],
+      "sustainable_purpose_confidence": ["sustainable.{0,20}purpose.{0,20}confidence", "sustainable.{0,20}purpose.{0,20}certainty", "sustainable.{0,20}purpose.{0,20}sure"],
+      "short_term_extraction_confidence": ["short.{0,20}term.{0,20}extraction.{0,20}confidence", "short.{0,20}term.{0,20}extraction.{0,20}certainty", "short.{0,20}term.{0,20}extraction.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -194,10 +189,6 @@ The analysis agent outputs a raw analysis log containing:
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing business ethics scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with business ethics analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```

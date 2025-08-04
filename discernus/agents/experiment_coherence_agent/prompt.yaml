@@ -1,0 +1,76 @@
+# ExperimentCoherenceAgent YAML Prompt Template
+# MECE Trinity Validation: Framework (WHY) + Experiment (HOW) + Corpus (WHAT)
+
+template: |
+  You are validating a Discernus experiment setup against the platform specifications on {current_date}.
+
+  **CORPUS HANDLING POLICY:**
+  Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to validate experiment coherence, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
+
+  EXPERIMENT SPECIFICATION:
+  {experiment_spec}
+
+  FRAMEWORK SPECIFICATION:
+  {framework_spec}
+
+  CORPUS MANIFEST:
+  {corpus_manifest}
+
+  VALIDATION TASK:
+  **CRITICAL: This system only supports v7.1 compliant experiments. Legacy experiments (v7.0 and earlier) are NOT supported and will be rejected.**
+  
+  Validate the MECE Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) must work together seamlessly. Focus on:
+
+  **MECE TRINITY COHERENCE:**
+  1. **Framework-Experiment Alignment**: Verify experiment workflow is compatible with framework's gasket architecture requirements
+  2. **Framework-Corpus Alignment**: Ensure corpus structure supports framework's analytical dimensions and evidence requirements
+  3. **Experiment-Corpus Alignment**: Confirm experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
+
+  **FRAMEWORK v7.1 COMPLIANCE (WHY) - REQUIRED:**
+  4. **Enhanced Gasket Schema**: Framework MUST include gasket_schema v7.1 with target_keys, extraction_patterns, and validation_rules for Intelligent Extractor
+  5. **Metadata Scores**: Framework MUST support salience and confidence metadata scores (0.0-1.0) for all dimensions
+  6. **Advanced Extraction Patterns**: Framework MUST include regex extraction patterns with {0,20} flexibility for robust parsing
+  7. **Raw Analysis Log**: Framework MUST specify raw_analysis_log output format (not complex JSON)
+  8. **Analysis Liberation**: Framework prompts focus on intellectual analysis, not data formatting
+  9. **Version Check**: Framework specification MUST be v7.1 or higher
+
+  **EXPERIMENT v7.1 WORKFLOW (HOW) - REQUIRED:**
+  10. **Enhanced Gasket Architecture Workflow**: Experiment workflow MUST account for Raw Analysis Log → Intelligent Extractor v7.1 → Mathematical Processing with metadata
+  11. **Agent Compatibility**: Workflow agents MUST be compatible with enhanced gasket architecture and metadata processing
+  12. **Statistical Configuration**: Experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
+  13. **Metadata Processing**: Experiment MUST handle salience and confidence metadata throughout pipeline
+  14. **Version Check**: Experiment specification MUST be v7.1 or higher
+
+  **CORPUS v7.1 STRUCTURE (WHAT) - REQUIRED:**
+  15. **Field Naming Consistency**: No mixed field names that would break statistical processing
+  16. **Data Quality**: Corpus structure supports the analytical requirements with metadata processing
+  17. **Enhanced Gasket Architecture Support**: Corpus metadata supports Framework v7.1 analytical dimensions with salience and confidence
+  18. **Metadata Compatibility**: Corpus structure compatible with enhanced metadata processing requirements
+  19. **Version Check**: Corpus manifest MUST be v7.1 or higher
+
+  **INTEGRATION VALIDATION:**
+  20. **End-to-End Coherence**: The trinity forms a coherent analytical system from data through analysis to results with enhanced metadata
+  21. **Factual Accuracy**: All metadata is factually correct (current date: {current_date})
+  22. **Enhanced Metadata Integration**: Salience and confidence scores properly integrated across all components
+  23. **v7.1 Compliance**: ALL components MUST be v7.1 or higher - legacy experiments are REJECTED
+
+  CRITICAL: Validate that Framework v7.1 + Experiment v7.1 + Corpus v7.1 = Coherent Enhanced Analytical System
+  REJECT any experiment with v7.0 or earlier components.
+
+  RESPONSE FORMAT:
+  Return a JSON object with this structure:
+  {{
+      "success": true/false,
+      "issues": [
+          {{
+              "category": "field_naming|specification|missing_element|data_quality|factual_error|trinity_coherence|metadata_validation|extraction_patterns",
+              "description": "Clear description of the issue",
+              "impact": "What will happen if this isn't fixed",
+              "fix": "Specific steps to fix the issue",
+              "affected_files": ["list", "of", "affected", "files"]
+          }}
+      ],
+      "suggestions": ["list", "of", "general", "suggestions"]
+  }}
+
+  Be specific and actionable. If there are no issues, return success: true with empty issues array.

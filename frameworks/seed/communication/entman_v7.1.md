@@ -66,10 +66,6 @@ The analysis agent outputs a raw analysis log containing:
       "causal_attribution_confidence",
       "moral_evaluation_confidence",
       "treatment_recommendation_confidence"
-    ],
-    "target_dimensions": [
-      "message_completeness_score",
-      "framing_coherence_index"
     ]
   }
 }
@@ -87,7 +83,7 @@ The analysis agent outputs a raw analysis log containing:
   "analysis_variants": {
     "default": {
       "description": "Complete four-function framing analysis with raw analysis log output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in communication framing and strategic messaging across diverse contexts. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Entman Framing Functions Framework v7.1, which captures communication patterns through four independent framing functions with enhanced metadata scoring. Phase 3: Operational Definitions: Evaluate 4 framing functions: Problem Definition, Causal Attribution, Moral Evaluation, and Treatment Recommendation. Each function receives a score (0.0-1.0), salience weight (0.0-1.0), and confidence rating (0.0-1.0). Phase 4: Scoring Protocol: For each function, provide ONLY: (1) score (0.0-1.0), (2) salience (0.0-1.0), (3) confidence (0.0-1.0), (4) evidence quotes with justification. Phase 5: Raw Analysis Log Requirements: Your response must be a raw analysis log containing function scores, evidence, and reasoning - NO JSON structure or derived calculations. Phase 6: Output Specification: Return raw analysis log with function scores only - NO calculations of message indices or derived metrics (these will be computed by code)."
+      "analysis_prompt": "You are an expert analyst specializing in communication framing and strategic messaging across diverse contexts. Your task is to analyze the provided text using the Entman Framing Functions Framework v7.1, which captures communication patterns through four independent framing functions with enhanced metadata scoring based on Robert Entman's systematic communication analysis theory.\n\nThe framework evaluates discourse across four independent framing functions:\n\n**Problem Definition** (0.0-1.0): What issues are identified as requiring attention and how problems are conceptualized, with markers like 'the real issue is,' 'we face a crisis of,' 'the challenge before us,' 'the problem we must address,' 'what's really at stake.'\n\n**Causal Attribution** (0.0-1.0): What factors or actors are presented as causing problems and how responsibility is assigned, with markers like 'X is responsible for,' 'this stems from Y's actions,' 'the fault lies with,' 'caused by,' 'accountable for,' 'the roots of this problem.'\n\n**Moral Evaluation** (0.0-1.0): What values and moral judgments are invoked and how actions are evaluated ethically, with markers like 'justice demands,' 'fairness requires,' 'liberty is at stake,' 'fundamental rights,' 'moral imperative,' 'ethically unacceptable.'\n\n**Treatment Recommendation** (0.0-1.0): What solutions are proposed and how policy options are presented and prioritized, with markers like 'we must immediately,' 'the answer is,' 'the only way forward,' 'solution requires,' 'necessary action,' 'concrete measures.'\n\nFor each function, provide:\n- **Score (0.0-1.0)**: Based on strength of evidence in the text\n- **Salience (0.0-1.0)**: How central is this function to this specific text?\n- **Confidence (0.0-1.0)**: How certain are you in this assessment?\n\nWrite a comprehensive analytical report that covers:\n- Application of the Entman Framing Functions methodology to this specific text\n- Detailed analysis of each framing function with scores, salience, confidence, and evidence\n- Assessment of systematic message construction and framing independence\n- Overall communication profile revealing message completeness and strategic framing\n- Key insights about the speaker's approach to systematic message construction\n\nEmbed your numerical assessments naturally within the analysis. For example: 'This text demonstrates strong problem definition (problem definition score: 0.8, salience: 0.9, confidence: 0.7) with clear issue identification.' Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata."
     }
   },
   "dimension_groups": {
@@ -124,18 +120,18 @@ The analysis agent outputs a raw analysis log containing:
       "treatment_recommendation_confidence"
     ],
     "extraction_patterns": {
-      "problem_definition_score": ["problem.{0,20}definition.{0,20}score"],
-      "causal_attribution_score": ["causal.{0,20}attribution.{0,20}score"],
-      "moral_evaluation_score": ["moral.{0,20}evaluation.{0,20}score"],
-      "treatment_recommendation_score": ["treatment.{0,20}recommendation.{0,20}score"],
-      "problem_definition_salience": ["problem.{0,20}definition.{0,20}salience"],
-      "causal_attribution_salience": ["causal.{0,20}attribution.{0,20}salience"],
-      "moral_evaluation_salience": ["moral.{0,20}evaluation.{0,20}salience"],
-      "treatment_recommendation_salience": ["treatment.{0,20}recommendation.{0,20}salience"],
-      "problem_definition_confidence": ["problem.{0,20}definition.{0,20}confidence"],
-      "causal_attribution_confidence": ["causal.{0,20}attribution.{0,20}confidence"],
-      "moral_evaluation_confidence": ["moral.{0,20}evaluation.{0,20}confidence"],
-      "treatment_recommendation_confidence": ["treatment.{0,20}recommendation.{0,20}confidence"]
+      "problem_definition_score": ["problem.{0,20}definition.{0,20}score", "problem.{0,20}definition.{0,20}rating", "problem\\s*definition\\s*:\\s*[0-9]"],
+      "causal_attribution_score": ["causal.{0,20}attribution.{0,20}score", "causal.{0,20}attribution.{0,20}rating", "causal\\s*attribution\\s*:\\s*[0-9]"],
+      "moral_evaluation_score": ["moral.{0,20}evaluation.{0,20}score", "moral.{0,20}evaluation.{0,20}rating", "moral\\s*evaluation\\s*:\\s*[0-9]"],
+      "treatment_recommendation_score": ["treatment.{0,20}recommendation.{0,20}score", "treatment.{0,20}recommendation.{0,20}rating", "treatment\\s*recommendation\\s*:\\s*[0-9]"],
+      "problem_definition_salience": ["problem.{0,20}definition.{0,20}salience", "problem.{0,20}definition.{0,20}importance", "problem.{0,20}definition.{0,20}centrality"],
+      "causal_attribution_salience": ["causal.{0,20}attribution.{0,20}salience", "causal.{0,20}attribution.{0,20}importance", "causal.{0,20}attribution.{0,20}centrality"],
+      "moral_evaluation_salience": ["moral.{0,20}evaluation.{0,20}salience", "moral.{0,20}evaluation.{0,20}importance", "moral.{0,20}evaluation.{0,20}centrality"],
+      "treatment_recommendation_salience": ["treatment.{0,20}recommendation.{0,20}salience", "treatment.{0,20}recommendation.{0,20}importance", "treatment.{0,20}recommendation.{0,20}centrality"],
+      "problem_definition_confidence": ["problem.{0,20}definition.{0,20}confidence", "problem.{0,20}definition.{0,20}certainty", "problem.{0,20}definition.{0,20}sure"],
+      "causal_attribution_confidence": ["causal.{0,20}attribution.{0,20}confidence", "causal.{0,20}attribution.{0,20}certainty", "causal.{0,20}attribution.{0,20}sure"],
+      "moral_evaluation_confidence": ["moral.{0,20}evaluation.{0,20}confidence", "moral.{0,20}evaluation.{0,20}certainty", "moral.{0,20}evaluation.{0,20}sure"],
+      "treatment_recommendation_confidence": ["treatment.{0,20}recommendation.{0,20}confidence", "treatment.{0,20}recommendation.{0,20}certainty", "treatment.{0,20}recommendation.{0,20}sure"]
     },
     "validation_rules": {
       "required_fields": [
@@ -148,10 +144,6 @@ The analysis agent outputs a raw analysis log containing:
       },
       "fallback_strategy": "use_default_values"
     }
-  },
-  "raw_analysis_log_format": {
-    "description": "Raw analysis log containing framing function scores, evidence, and reasoning without structured JSON",
-    "content": "Free-form text with communication framing analysis including scores, evidence quotes, and qualitative reasoning"
   }
 }
 ```
