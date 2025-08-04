@@ -1,0 +1,199 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PDAG_v7.1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the PDAG v7.1 framework. Confidence is high due to clear thematic expressions within the document. All requested dimensions have been assessed with raw scores and supporting evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.0,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.1,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.6,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.75,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.3,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.5,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "The platform asserts the will of the people as the ultimate source of political legitimacy, positioning the 'people' against a corrupt and out-of-touch elite.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We believe in the sovereignty of the people, whose collective will must be the guiding principle of governance.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "This document consistently contrasts the 'true' values and aspirations of ordinary citizens with the perceived self-interest and moral bankruptcy of the ruling class.",
+          "confidence": 0.95,
+          "context_type": "analysis"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The language used emphasizes a unified 'people' with shared interests and a common destiny, downplaying internal divisions.",
+          "confidence": 0.9,
+          "context_type": "analysis"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "There are strong undertones of a systemic corruption, with elites perceived as colluding to suppress the people's voice.",
+          "confidence": 0.85,
+          "context_type": "analysis"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "The platform implicitly rejects the legitimacy of political opposition that does not align with the 'people's will', framing dissenting voices as part of the corrupt elite.",
+          "confidence": 0.85,
+          "context_type": "analysis"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Appeals are made to economic grievances, suggesting that the people are being exploited by economic policies that benefit a select few.",
+          "confidence": 0.8,
+          "context_type": "analysis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

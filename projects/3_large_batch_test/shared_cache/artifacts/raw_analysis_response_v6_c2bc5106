@@ -1,0 +1,164 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdad_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Popularist Discourse Analysis Framework (PDAF) v7.1. All nine core anchors were assessed for intensity and salience, along with confidence levels. Evidence was extracted from the document to support each dimensional score. The 'Economic Direction Indicator' was classified as per the framework's definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "In Washington, the President and his allies stubbornly press on, without regard to the needs of our people or the challenges of our time.",
+          "confidence": 0.8,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "It is time for a new direction.\nJohn Kerry, John Edwards and the Democratic Party bring a new vision for America – strong at\nhome, respect abroad.",
+          "confidence": 0.7,
+          "context_type": "solution"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "This November, the choice we face as Americans may have more impact on our people and our place in the world than any in our lifetimes. We approach this task with a seriousness that matches the challenges before us, but also with a profound optimism about our future",
+          "confidence": 0.9,
+          "context_type": "urgency"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Our great middle class is hard-pressed. Millions of Americans have lost their jobs, and millions more are struggling under the mounting burden of life's everyday costs.",
+          "confidence": 0.8,
+          "context_type": "problem_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "John Kerry, John Edwards and the Democratic Party bring a new vision for America – strong at\nhome, respect abroad. An America that offers opportunity, rewards responsibility, and rejoices in\ndiversity.",
+          "confidence": 0.8,
+          "context_type": "policy_promise"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "That is the America we believe in. That is the America we are fighting for. That is the America we\ncan be.",
+          "confidence": 0.9,
+          "context_type": "aspirational"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "The Bush Administration has walked away from more than a hundred years of American leadership in the world to embrace a new – and dangerously ineffective – disregard for the world.",
+          "confidence": 0.6,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "In Washington, the President and his allies stubbornly press on, without regard to the needs of our people or the challenges of our time.",
+          "confidence": 0.7,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Their energy policy is simple: government by big oil, of big oil, and for big oil. This Administration let oil industry lobbyists and executives write our nation's energy policy in secret.",
+          "confidence": 0.9,
+          "context_type": "accusation"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "John Kerry, John Edwards and the Democratic Party bring a new vision for America – strong at\nhome, respect abroad.",
+          "confidence": 0.9,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "John Kerry, John Edwards and the Democratic Party believe in a better, stronger, more American\nAmerica – an America that is respected, not just feared, and an America that listens and leads.",
+          "confidence": 0.9,
+          "context_type": "vision"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "As we come together to declare our vision as Democrats, we are mindful that the challenges of our\ntimes are new and profound.",
+          "confidence": 0.7,
+          "context_type": "unity_appeal"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "That is the America we believe in. That is the America we are fighting for. That is the America we\ncan be.",
+          "confidence": 0.7,
+          "context_type": "unity_appeal"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Alone among nations, America was born in pursuit of an idea – that a free people with diverse beliefs\ncould govern themselves in peace.",
+          "confidence": 0.6,
+          "context_type": "exceptionalism"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Our great middle class is hard-pressed. Millions of Americans have lost their jobs, and millions more\nare struggling under the mounting burden of life's everyday costs.",
+          "confidence": 0.8,
+          "context_type": "economic_hardship"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We have a plan to build a strong, growing economy: creating good jobs, rewarding hard work, and\nrestoring fiscal discipline.",
+          "confidence": 0.8,
+          "context_type": "economic_policy"
+        }
+      ],
+      "economic_direction_indicator": "Redistributive vs. Nationalist economic orientation"
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

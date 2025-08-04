@@ -1,0 +1,127 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdab_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Public Discourse Analysis Framework (PDAF) v7.1. The document content was processed to identify dimensions related to populist discourse. Scores represent the intensity and salience of these dimensions within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1996.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 0.70,
+          "salience": 0.65,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.88
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.40,
+          "salience": 0.30,
+          "confidence": 0.70
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.60,
+          "salience": 0.55,
+          "confidence": 0.80
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.70,
+          "salience": 0.60,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.35,
+          "salience": 0.25,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.90,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "In 1996, America will choose the President who will lead us from the millennium which saw the birth of our nation, and into a future that has all the potential to be even greater than our magnificent past. Today's Democratic Party is ready for that future.",
+          "confidence": 0.95,
+          "context_type": "introduction"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Today's Democratic Party knows that the best way to bring jobs and growth back to our poorest urban and rural areas is to harness the job-creating power of the private sector.",
+          "confidence": 0.90,
+          "context_type": "economic_policy"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "For four years, Republicans talked about making government smaller while letting it grow -- Democrats are doing it. For four years, Republicans talked about cutting the deficit while letting it climb -- Democrats are doing it.",
+          "confidence": 0.85,
+          "context_type": "political_strategy"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "In the last four years, President Clinton took strong steps to protect the pensions of more than 40 million workers and retirees by fixing the federal pension insurance system and demanding that companies fund their retirement plans fully.",
+          "confidence": 0.80,
+          "context_type": "economic_policy"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Today's Democratic Party believes we have a duty to care for our parents, so they can live their lives in dignity.",
+          "confidence": 0.88,
+          "context_type": "social_policy"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The American people deserve a government that works better and costs less -- not works less and costs more.",
+          "confidence": 0.90,
+          "context_type": "governance"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We know that government workers are good people trapped in bad systems, and we are committed to reinventing government to reform those systems.",
+          "confidence": 0.92,
+          "context_type": "governance"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "They want a government that is for them, not against them; that doesn't interfere with their lives but enhances their quality of life. They want a course that is reasonable, help that is realistic, and solutions that can be delivered -- a moderate, achievable, common-sense agenda that will improve people's daily lives and not increase the size of government.",
+          "confidence": 0.90,
+          "context_type": "governance"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Since Bill Clinton became President, America has seen an explosion of job growth, economic renewal, and opportunity. The American people have created more than 10 million new jobs.",
+          "confidence": 0.98,
+          "context_type": "economic_policy"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Now we must move forward, and we know the course we must follow. We need a smaller, more effective, more efficient, less bureaucratic government that reflects our time-honored values.",
+          "confidence": 0.95,
+          "context_type": "governance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,199 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdxf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the PDFA v7.1 framework. The document strongly advocates for a significant shift in governance and economic policy, aligning with populist rhetoric by emphasizing the \"people\" versus \"elites\" and calling for a \"revolution\" to restore perceived lost greatness. The language is highly charged and uses strong emotional appeals. Some dimensions were difficult to score due to the programmatic nature of the text, which often involves broad policy statements rather than specific actions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1992.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "manichean_people_elite_framing_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "manichean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing_score",
+          "quote_text": "The last 12 years have been a nightmare of Republican irresponsibility and neglect. America's leadership is indifferent at home and uncertain in the world. Republican mismanagement has disarmed government as an instrument to make our economy work and support the people's most basic values, needs and hopes. The Republicans brought America a false and fragile prosperity based on borrowing, not income, and so will leave behind a mountain of public debt and a backbreaking annual burden in interest.",
+          "confidence": 0.95,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself. The time for revolution is about to take power away from entrenched bureaucracies and narrow interests in Washington and put it back in the hands of ordinary people.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The Revolution of 1992 is about restoring the basic American values that built this country and will always make it great: personal responsibility, individual liberty, tolerance, faith, family and hard work.",
+          "confidence": 0.9,
+          "context_type": "foundational_values"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "America's corporate leaders have a responsibility to invest in their country. CEOs, who pay themselves 100 times what they pay the average worker, should not get big raises unrelated to performance. If a company wants to overpay its executives and underinvest in the future or transfer jobs overseas, it should not get special treatment and tax breaks from the Treasury. Managers must work with employees to make the workplace safer, more satisfying and more efficient.",
+          "confidence": 0.8,
+          "context_type": "economic_policy_critique"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "We reject both the do-nothing government of the last twelve years and the big government theory that says we can hamstring business and tax and spend our way to prosperity. Instead we offer a third way, beyond the old approaches to put government back on the side of citizens who play by the rules.",
+          "confidence": 0.85,
+          "context_type": "political_philosophy"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "All Americans, producers and consumers alike, benefit when our food and fiber are produced by hundreds of thousands of family farmers receiving fair prices for their products. The abundance of our nation's food and fiber system should not be taken for granted. The revolution that lifted America to the forefront of world agriculture was achieved through a unique partnership of public and private interests.",
+          "confidence": 0.8,
+          "context_type": "economic_policy_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We will make college affordable to all students who are qualified to attend, regardless of family income. A Domestic G.I. Bill will enable all Americans to borrow money for college, so long as they are willing to pay it back as a percentage of their income over time or through national service addressing unmet community needs.",
+          "confidence": 0.95,
+          "context_type": "economic_policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

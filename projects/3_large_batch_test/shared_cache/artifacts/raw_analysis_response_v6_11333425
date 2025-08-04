@@ -1,0 +1,193 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pd_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis completed successfully, adhering to all specified constraints. All requested dimensions have been assessed based on the provided framework and document content."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.0,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.2,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.3,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.65,
+          "salience": 0.0,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our economy is adding jobs, but too many people still can't find full-time employment. Corporate profits have skyrocketed to all-time highs, but for more than a decade, wages and incomes have barely budged.",
+          "confidence": 0.95,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "So tonight, thanks to the grit and determination of the American people, there is much progress to report. After a decade of grinding weirs, our brave men and women in uniform are coming home. After years of grueling recession, our businesses have created over 6 million new jobs.",
+          "confidence": 0.95,
+          "context_type": "progress claim"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "It is my task, he said, to report the state of the Union; to improve it is the task of us all. Tonight, thanks to the grit and determination of the American people, there is much progress to report.",
+          "confidence": 0.9,
+          "context_type": "attribution"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Let's also make sure that a high school diploma puts our kids on a path to a good job. Right now, even with mortgage rates near a 50-year low, too many families with solid credit who want to buy a home are being rejected. Too many families who never missed a payment and want to refinance are being told no.",
+          "confidence": 0.95,
+          "context_type": "problem description"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "But we can't ask senior citizens and working families to shoulder the entire burden of deficit reduction while asking nothing more from the wealthiest and the most powerful. How is that fair? Why is it that deficit reduction is an emergency justifying making cuts in education and Medicare, but not closing some loopholes?",
+          "confidence": 0.9,
+          "context_type": "critique of established order"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "The American people don't expect government to solve every problem. They do not expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.",
+          "confidence": 0.8,
+          "context_type": "shared expectation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

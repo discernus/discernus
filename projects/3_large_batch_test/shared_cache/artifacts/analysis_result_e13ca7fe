@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_2716da1b3b14",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse\",\n    \"framework_version\": \"7.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political platform outlining the Democratic Party's agenda. The analysis focused on identifying populist rhetoric and its alignment with the framework's dimensions. High confidence was maintained due to clear articulation of themes related to 'the people' vs. 'the elite' and calls for collective action.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"2342a5d0808e\",\n      \"document_name\": \"Democratic_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.98\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.92\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.88\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.93\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.94\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But in 1992, Bill Clinton and Al Gore were elected to turn the American economy around and point upward toward the future. They took office with a new set of ideas about how to get the economy moving again.\",\n          \"confidence\": 0.99,\n          \"context_type\": \"policy_contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"Eight years ago, many citizens had come to accept the idea that America's best days were behind her: that crime, welfare, teen births, divisiveness and irresponsibility would continue to rise; that our air and water would keep getting dirtier; and that our essential social safety net programs were fated to go broke.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"historical_context\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"This is a 21st century platform for the 21st century's party. A people's platform for the people's party.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"statement_of_authority\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"The Republican Party, having first opposed the administration's efforts to rebuild these shattered societies, now tries to impede the administration's efforts to rebuild these shattered societies.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"political_opposition\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We must also ensure that schools have the resources to meet the challenges of an increasingly diverse student population with programs for English language learners, including bilingual education, to close the achievement gap.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"social_inclusion_goal\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"For the past eight years, Democrats have been working to offer tax relief to the Americans who need it the most where they need it the most. We cut taxes for working parents who were struggling to make ends meet.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"economic_policy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:03:30.339764+00:00",
+    "end_time": "2025-08-04T15:03:35.583537+00:00",
+    "duration_seconds": 5.243773,
+    "llm_interaction_hash": "8057be4d83a567f7"
+  },
+  "input_artifacts": {
+    "framework_hash": "ef4dda6279ba924e9316addfd1bd6efbc9f30c83c83d5d78f52f3739797f34ae",
+    "document_hashes": [
+      "2342a5d0808e5f8ea07e79ffe76f698ba93504d62b9afb2096d63b0b1861d398"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T145536Z_66a60224"
+  }
+}

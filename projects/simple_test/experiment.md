@@ -1,32 +1,32 @@
 ---
 name: "simple_character_validation_v7"
 description: |
-  A minimal test experiment for validating the Discernus v7.0 gasket architecture using 
-  the Character Assessment Framework v7.0. This experiment tests MECE Trinity coherence
-  (Framework v7.0 + Experiment v7.0 + Corpus v7.0) and Raw Analysis Log processing with 
+  A minimal test experiment for validating the Discernus v7.1 enhanced gasket architecture using 
+  the Character Assessment Framework v7.1. This experiment tests enhanced framework compatibility
+  with metadata scores (salience, confidence) and advanced extraction patterns with 
   a 2-document ideological contrast design (Conservative vs Progressive speakers). 
-  Designed as a comprehensive smoke test for validating complete gasket architecture implementation.
+  Designed as a comprehensive smoke test for validating v7.1 gasket architecture implementation.
 
 hypothesis: |
   Character dimensions will show measurable differences between conservative 
   and progressive speakers, validating the framework's ability to detect 
-  ideological character signatures through Raw Analysis Log processing. 
-  The gasket architecture will successfully extract, process, and synthesize 
-  character coherence patterns across different political approaches.
+  ideological character signatures through enhanced v7.1 analysis with metadata scores. 
+  The enhanced gasket architecture will successfully extract, process, and synthesize 
+  character coherence patterns with salience and confidence metadata across different political approaches.
 
-framework: "../../frameworks/reference/core/caf_v7.0.md"
+framework: "../../frameworks/reference/core/caf_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 10
+runs_per_model: 3
 analysis_variant: "default"
 
-# 🆕 V7.0 GASKET ARCHITECTURE CONFIGURATION
+# 🆕 V7.1 ENHANCED GASKET ARCHITECTURE CONFIGURATION
 gasket_workflow:
-  validate_trinity_coherence: true
-  raw_analysis_log_processing: true
+  enhanced_metadata_extraction: true
   intelligent_extractor_enabled: true
-  parallel_streams: true
+  advanced_pattern_matching: true
+  metadata_scores_required: true
 
 # Enhanced v7.0 Analysis Configuration  
 analysis:
@@ -57,7 +57,7 @@ reporting:
 hypotheses:
   H1_Ideological: "Character dimensions will show significant differences between conservative (McCain) and progressive (Sanders) speakers"
   H2_Coherence: "MC-SCI scores will successfully differentiate between gracious institutional discourse and passionate populist critique"
-  H3_Architecture: "The v7.0 gasket architecture will successfully process 2-document character analysis with Raw Analysis Log processing"
+  H3_Architecture: "The v7.1 gasket architecture will successfully process 2-document character analysis with Raw Analysis Log processing"
 
 # Required Workflow Steps
 workflow:
@@ -83,18 +83,18 @@ workflow:
 
 ## Overview
 
-This experiment serves as a minimal validation test for the Discernus v6.0 architecture, specifically testing synthesis coordination and JSON-first processing using the Character Assessment Framework v6.0.
+This experiment serves as a minimal validation test for the Discernus v7.1 architecture, specifically testing synthesis coordination and JSON-first processing using the Character Assessment Framework v7.1.
 
 ## Research Questions
 
 1. Can the synthesis pipeline successfully coordinate character analysis across ideologically contrasting speakers?
-2. Do the v6.0 JSON structures flow correctly through the analysis → synthesis pathway?
+2. Do the v7.1 JSON structures flow correctly through the analysis → synthesis pathway?
 3. Can the MC-SCI calculations differentiate between institutional vs populist discourse styles?
 
 ## Methodology
 
 ### Framework
-**Character Assessment Framework v6.0** provides:
+**Character Assessment Framework v7.1** provides:
 - 10-dimensional character analysis (5 virtues vs 5 vices)
 - Moral Character Strategic Contradiction Index (MC-SCI)
 - JSON-first architecture validation
@@ -109,11 +109,11 @@ This experiment serves as a minimal validation test for the Discernus v6.0 archi
 ### Expected Outcomes
 1. **Character Differentiation**: Measurable differences in virtue/vice patterns between speakers
 2. **MC-SCI Validation**: Coherence metrics reflecting discourse styles (institutional grace vs populist intensity)
-3. **Architecture Testing**: Successful v6.0 JSON synthesis without coordination failures
+3. **Architecture Testing**: Successful v7.1 JSON synthesis without coordination failures
 4. **Debugging Support**: Clear identification of any synthesis pipeline issues
 
 ## Significance
 
-This experiment validates the core v6.0 architecture components in a controlled, minimal environment. Success confirms the synthesis coordination fixes and provides a reliable baseline for more complex factorial experiments.
+This experiment validates the core v7.1 architecture components in a controlled, minimal environment. Success confirms the synthesis coordination fixes and provides a reliable baseline for more complex factorial experiments.
 
 The 2-document design enables rapid iteration and debugging while maintaining analytical meaningfulness through ideological character contrasts.

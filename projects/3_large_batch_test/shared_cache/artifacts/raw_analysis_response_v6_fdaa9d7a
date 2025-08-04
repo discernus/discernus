@@ -1,0 +1,265 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted based on the provided framework for populist discourse. Confidence is high due to clear thematic alignment with populist rhetoric, though some nuances in scoring were necessary to reflect the intensity and prominence of each dimension within the speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.3,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "To tonight I say to the Russian oligarchs and the corrupt leaders who have bilkled billions of dollars off of this violent regime: No more.",
+          "confidence": 0.95,
+          "context_type": "direct_accusation"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "My plan will lower your costs and lower the deficit. Seventeen Nobel laureates in economics said my plan will ease long-term inflation pressures.",
+          "confidence": 0.9,
+          "context_type": "economic_contrast"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "Six days ago, Russia's Vladimir Putin sought to shake the very foundations of the free world, thinking he could make it bend to his menacing ways. But he badly miscalculated.",
+          "confidence": 0.9,
+          "context_type": "historical_framing"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "We've achieved this because we provided free vaccines, treatments, tests, and masks. Of course, continuing this costs money, so it will not surprise you I'll be back to see you all.",
+          "confidence": 0.85,
+          "context_type": "crisis_response"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Tonight I say to the Russian oligarchs and the corrupt leaders who have bilkled billions of dollars off of this violent regime: No more.",
+          "confidence": 0.8,
+          "context_type": "direct_address_to_people"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "My plan to fight inflation will lower your costs and lower the deficit.",
+          "confidence": 0.75,
+          "context_type": "policy_promise"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "My Republican friends who joined to invest and rebuild America, the single biggest investment in history.",
+          "confidence": 0.6,
+          "context_type": "partisan_acknowledgement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "For the past 40 years, we were told that tax breaks for those at the top and benefits would trickle down and everyone would benefit. But that trickle-down theory led to weaker economic growth, lower wages, bigger deficits.",
+          "confidence": 0.65,
+          "context_type": "critique_of_opposing_ideology"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "To the Russian oligarchs and the corrupt leaders who have bilkled billions of dollars off of this violent regime: No more.",
+          "confidence": 0.9,
+          "context_type": "accusation_of_corruption"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "They have the money. We can all play a part. Sign up to be a tutor or a mentor. Children were also struggling before the pandemic: bullying, violence, trauma, and the harms of social media.",
+          "confidence": 0.8,
+          "context_type": "identification_of_systemic_issues"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Like many of you, I spent countless hours unifying our European allies. We shared with the world in advance what we knew Putin was planning and precisely how he would try to falsify and justify his aggression.",
+          "confidence": 0.95,
+          "context_type": "empathetic_connection_to_audience"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I understand, like many of you did. My dad had to leave his home in Scranton, Pennsylvania, to find work.",
+          "confidence": 0.95,
+          "context_type": "personal_anecdote_relatability"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Tonight, we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+          "confidence": 0.8,
+          "context_type": "unity_framing"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Let us come together and protect our communities, restore trust, and hold law enforcement accountable.",
+          "confidence": 0.65,
+          "context_type": "call_for_collective_action"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We're cutting off Russia's largest banks from the international financial system; preventing Russia's Central Bank from defending the Russian ruble, making Putin's $630 billion war fund worthless.",
+          "confidence": 0.7,
+          "context_type": "economic_sanctions_foreign_policy"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We're joining with European allies to find and seize their yachts, their luxury apartments, their private jets. We're coming for your ill-begotten gains.",
+          "confidence": 0.7,
+          "context_type": "international_action"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "For the past 40 years, we were told that tax breaks for those at the top and benefits would trickle down and everyone would benefit. But that trickle-down theory led to weaker economic growth, lower wages, bigger deficits, and a widening gap between the top and everyone else in the nation for nearly a century.",
+          "confidence": 0.9,
+          "context_type": "economic_inequality_critique"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "My plan to fight inflation will lower your costs and lower the deficit. Seventeen Nobel laureates in economics said my plan will ease long-term inflation pressures.",
+          "confidence": 0.8,
+          "context_type": "economic_policy_promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

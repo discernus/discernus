@@ -1,0 +1,91 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis completed using the PopuList Discourse Analysis Framework (PDAF) v7.1. The framework's core anchors and mechanisms were applied to identify and score populist discourse patterns within the provided document. Confidence is high due to clear thematic alignment with the framework's dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.40,
+          "salience": 0.50,
+          "confidence": 0.70
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.30,
+          "salience": 0.40,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.80
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.65
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.45,
+          "salience": 0.50,
+          "confidence": 0.70
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The platform advocates for a government that is truly of, by, and for the people, distinguishing itself from a corrupt elite that has lost touch with the common citizen.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We believe in the inherent power of the electorate to direct the course of our nation, and that all policy decisions must ultimately be accountable to the will of the majority.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Our movement represents genuine aspiration, unburdened by the cynicism and self-interest that has come to define the entrenched political class.",
+          "confidence": 0.90,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "There are powerful interests, operating within shadowy networks, that actively work to undermine the will of the people and perpetuate a system rigged in their favor.",
+          "confidence": 0.80,
+          "context_type": "implication"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

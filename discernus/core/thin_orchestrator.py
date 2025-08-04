@@ -27,6 +27,7 @@ from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
+from .provenance_organizer import ProvenanceOrganizer
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
@@ -335,7 +336,7 @@ Respond with only the JSON object."""
             # Initialize experiment-level shared cache for perfect THIN caching
             shared_cache_dir = self.experiment_path / "shared_cache"
             self.security.secure_mkdir(shared_cache_dir)
-            storage = LocalArtifactStorage(self.security, shared_cache_dir)
+            storage = LocalArtifactStorage(self.security, shared_cache_dir, run_timestamp)
             
             # Initialize enhanced manifest
             manifest = EnhancedManifest(self.security, run_folder, audit, storage)
@@ -709,6 +710,46 @@ Respond with only the JSON object."""
                 with open(results_dir / "final_report.md", "w") as f:
                     f.write(final_report)
                 
+                # Export comprehensive final CSV files including synthesis artifacts (Issue #295 regression fix)
+                # Extract synthesis artifact hashes from synthesis metadata
+                statistical_results_hash = ""
+                curated_evidence_hash = ""
+                
+                # Check if synthesis metadata contains artifact references
+                if "statistical_results_hash" in synthesis_result:
+                    statistical_results_hash = synthesis_result["statistical_results_hash"]
+                if "curated_evidence_hash" in synthesis_result:
+                    curated_evidence_hash = synthesis_result["curated_evidence_hash"]
+                
+                final_csv_export_result = self._export_final_synthesis_csv_files(
+                    scores_hash, evidence_hash, statistical_results_hash,
+                    curated_evidence_hash, framework_content, 
+                    experiment_config, corpus_manifest, synthesis_result, results_dir, audit
+                )
+                
+                # Create provenance-first artifact organization (Issue #297)
+                try:
+                    provenance_organizer = ProvenanceOrganizer(self.security, audit)
+                    experiment_metadata = {
+                        "experiment_name": experiment_config.get("name", "Unknown Experiment"),
+                        "run_timestamp": run_timestamp,
+                        "framework_version": experiment_config.get("framework", "Unknown Framework"),
+                        "model_used": synthesis_model
+                    }
+                    
+                    provenance_result = provenance_organizer.organize_run_artifacts(
+                        run_folder, shared_cache_dir, experiment_metadata
+                    )
+                    
+                    if provenance_result["success"]:
+                        print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                    else:
+                        print("⚠️  Provenance organization failed, continuing with standard structure")
+                        
+                except Exception as e:
+                    print(f"⚠️  Provenance organization error: {str(e)}")
+                    audit.log_error("provenance_organization_error", str(e), {})
+                
                 # Update manifest
                 end_time = datetime.now(timezone.utc).isoformat()
                 manifest.add_execution_stage(
@@ -867,6 +908,29 @@ Respond with only the JSON object."""
             results_dir = self.security.secure_mkdir(run_folder / "results")
             report_file = results_dir / "final_report.md"
             self.security.secure_write_text(report_file, final_report_content)
+            
+            # Create provenance-first artifact organization (Issue #297)
+            try:
+                provenance_organizer = ProvenanceOrganizer(self.security, audit)
+                experiment_metadata = {
+                    "experiment_name": experiment_config.get("name", "Unknown Experiment"),
+                    "run_timestamp": run_timestamp,
+                    "framework_version": experiment_config.get("framework", "Unknown Framework"),
+                    "model_used": analysis_model
+                }
+                
+                provenance_result = provenance_organizer.organize_run_artifacts(
+                    run_folder, shared_cache_dir, experiment_metadata
+                )
+                
+                if provenance_result["success"]:
+                    print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                else:
+                    print("⚠️  Provenance organization failed, continuing with standard structure")
+                    
+            except Exception as e:
+                print(f"⚠️  Provenance organization error: {str(e)}")
+                audit.log_error("provenance_organization_error", str(e), {})
             
             # Export comprehensive final CSV files including synthesis artifacts (Gasket #3a)
             # Extract synthesis artifact hashes from synthesis metadata
@@ -1179,16 +1243,16 @@ Respond with only the JSON object."""
         
         return combined_result, evidence_hash
 
-    def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, List[str]]]:
+    def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, Any]]:
         """
-        Extract gasket_schema from framework v7.0/v7.1 JSON appendix.
-        Converts v7.1 enhanced format to v7.0 format for Intelligent Extractor compatibility.
+        Extract gasket_schema from framework v7.1 JSON appendix.
+        Only supports v7.1 enhanced format - no backward compatibility.
         
         Args:
             framework_content: Raw framework markdown content
             
         Returns:
-            gasket_schema dict or None if not found/invalid
+            gasket_schema dict (v7.1 format) or None if not found/invalid
         """
         try:
             # Look for gasket_schema specifically in framework
@@ -1218,13 +1282,12 @@ Respond with only the JSON object."""
                                 # Extract gasket_schema if present
                                 gasket_schema = framework_config.get('gasket_schema')
                                 if gasket_schema:
-                                    # Handle v7.0 format (legacy)
-                                    if 'target_keys' in gasket_schema and 'target_dimensions' in gasket_schema:
+                                    # Only support v7.1 format - no backward compatibility
+                                    if gasket_schema.get('version') == '7.1' and 'target_keys' in gasket_schema:
                                         return gasket_schema
-                                    
-                                    # Handle v7.1 enhanced format - convert to v7.0 format
-                                    elif 'extraction_targets' in gasket_schema:
-                                        return self._convert_v71_gasket_to_v70(gasket_schema)
+                                    else:
+                                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Only v7.1 is supported.")
+                                        return None
                             except json.JSONDecodeError:
                                 pass  # Try next JSON block
                     
@@ -1305,17 +1368,14 @@ Respond with only the JSON object."""
         gasket_schema = self._extract_gasket_schema_from_framework(framework_content)
         
         if not gasket_schema:
-            # Fallback to legacy parsing for non-v7.0 frameworks
-            print("⚠️  No gasket_schema found, falling back to legacy JSON parsing")
-            print(f"🔍 Debug: Framework content length: {len(framework_content)}")
-            print(f"🔍 Debug: Contains ```json: {'```json' in framework_content}")
-            if '```json' in framework_content:
-                json_start = framework_content.rfind('```json') + 7
-                json_end = framework_content.find('```', json_start)
-                if json_end != -1:
-                    json_content = framework_content[json_start:json_end].strip()
-                    print(f"🔍 Debug: JSON content preview: {json_content[:200]}...")
-            return self._legacy_json_parsing(raw_analysis_response)
+            # No backward compatibility - error out on non-v7.1 frameworks
+            print("❌ No valid v7.1 gasket_schema found in framework")
+            print(f"🔍 Framework content length: {len(framework_content)}")
+            print(f"🔍 Contains ```json: {'```json' in framework_content}")
+            raise ValueError("Framework must have valid v7.1 gasket_schema. No backward compatibility with v7.0 or earlier.")
+        
+        # Extract evidence from raw response for v7.1 integration (Issue #281)
+        document_evidence_list = self._extract_evidence_from_delimited(raw_analysis_response)
         
         # Initialize Intelligent Extractor Agent
         extractor = IntelligentExtractorAgent(
@@ -1330,8 +1390,8 @@ Respond with only the JSON object."""
         
         if not extraction_result.success:
             print(f"❌ Intelligent Extractor failed: {extraction_result.error_message}")
-            # Fallback to legacy parsing
-            return self._legacy_json_parsing(raw_analysis_response)
+            # No fallback - fail fast on extraction errors
+            raise ValueError(f"v7.1 Intelligent Extractor failed: {extraction_result.error_message}. No legacy fallback available.")
         
         # Check if we have multi-document extraction results (THIN approach)
         if "_document_analyses" in extraction_result.extracted_scores:
@@ -1340,16 +1400,21 @@ Respond with only the JSON object."""
             
             document_analyses = []
             for doc_data in document_analyses_data:
+                # Find evidence for this specific document
+                doc_name = doc_data["document_name"]
+                doc_evidence = [ev for ev in document_evidence_list if ev.get("document_name") == doc_name]
+                
                 document_analysis = {
                     "document_id": "extracted_via_gasket",
                     "document_name": doc_data["document_name"],  # Preserve actual filename
                     "analysis_scores": doc_data["analysis_scores"],
+                    "evidence": doc_evidence,  # Add evidence for v7.1 compatibility
                     "extraction_metadata": {
                         "extraction_time_seconds": extraction_result.extraction_time_seconds,
                         "tokens_used": extraction_result.tokens_used,
                         "cost_usd": extraction_result.cost_usd,
                         "attempts": extraction_result.attempts,
-                        "gasket_version": "v7.0",
+                        "gasket_version": "v7.1",
                         "document_identity_preserved": True
                     }
                 }
@@ -1359,9 +1424,9 @@ Respond with only the JSON object."""
                 "document_analyses": document_analyses,
                 "analysis_metadata": {
                     "framework_name": "gasket_extracted",
-                    "framework_version": "v7.0",
+                    "framework_version": "v7.1",
                     "analyst_confidence": 0.95,
-                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts, preserving {len(document_analyses)} document identities"
+                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts, preserving {len(document_analyses)} document identities with evidence"
                 }
             }
         else:
@@ -1370,12 +1435,13 @@ Respond with only the JSON object."""
                 "document_id": "extracted_via_gasket",
                 "document_name": "gasket_extraction",
                 "analysis_scores": extraction_result.extracted_scores,
+                "evidence": document_evidence_list,  # Add all evidence for single-document case
                 "extraction_metadata": {
                     "extraction_time_seconds": extraction_result.extraction_time_seconds,
                     "tokens_used": extraction_result.tokens_used,
                     "cost_usd": extraction_result.cost_usd,
                     "attempts": extraction_result.attempts,
-                    "gasket_version": "v7.0"
+                    "gasket_version": "v7.1"
                 }
             }
             
@@ -1383,9 +1449,9 @@ Respond with only the JSON object."""
                 "document_analyses": [document_analysis],
                 "analysis_metadata": {
                     "framework_name": "gasket_extracted",
-                    "framework_version": "v7.0",
+                    "framework_version": "v7.1",
                     "analyst_confidence": 0.95,
-                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts"
+                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts with evidence"
                 }
             }
 
@@ -2248,7 +2314,7 @@ This research was conducted using the Discernus computational research platform,
             else:
                 # Fallback: recreate storage from experiment path
                 shared_cache_dir = self.experiment_path / "shared_cache"
-                storage = LocalArtifactStorage(self.security, shared_cache_dir)
+                storage = LocalArtifactStorage(self.security, shared_cache_dir, "unknown_run")
             
             csv_agent.artifact_storage = storage
             
@@ -2331,7 +2397,7 @@ This research was conducted using the Discernus computational research platform,
             else:
                 # Fallback: recreate storage from experiment path
                 shared_cache_dir = self.experiment_path / "shared_cache"
-                storage = LocalArtifactStorage(self.security, shared_cache_dir)
+                storage = LocalArtifactStorage(self.security, shared_cache_dir, "unknown_run")
             
             csv_agent.artifact_storage = storage
             

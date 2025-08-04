@@ -3,7 +3,7 @@ version: "7.0"
 name: "constitutional_health_factorial_analysis"
 description: |
   This experiment analyzes constitutional health patterns across American political 
-  discourse using the Constitutional Health Framework v7.0. The corpus employs a 
+  discourse using the Constitutional Health Framework v7.1. The corpus employs a 
   2×3 factorial design examining Ideology (Conservative/Progressive) × Era 
   (Civil Rights/Institutional/Populist) spanning 60 years (1963-2025). The analysis 
   will measure constitutional health dimensions across experimental factors to 
@@ -18,7 +18,7 @@ hypothesis: |
   determine if significant relationships exist between experimental factors and 
   Constitutional Direction Index scores.
 
-framework: "../../frameworks/reference/core/chf_v7.0.md"
+framework: "../../frameworks/reference/core/chf_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -95,7 +95,7 @@ workflow:
 
 ## Overview
 
-This experiment analyzes constitutional health patterns across American political discourse using the Constitutional Health Framework v6.0. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025).
+This experiment analyzes constitutional health patterns across American political discourse using the Constitutional Health Framework v7.1. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025).
 
 ## Research Questions
 
@@ -107,7 +107,7 @@ This experiment analyzes constitutional health patterns across American politica
 ## Methodology
 
 ### Framework
-**Constitutional Health Framework v6.0** provides:
+**Constitutional Health Framework v7.1** provides:
 - 6-dimensional constitutional health analysis (3 health vs 3 pathology dimensions)
 - Constitutional Direction Index (CDI) for overall health measurement
 - JSON-first architecture with enhanced synthesis integration

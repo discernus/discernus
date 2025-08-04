@@ -1,0 +1,211 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.8,
+    "analysis_notes": "The document appears to be a 404 error page, not the Republican Platform of 1992. Analysis of the provided HTML content will focus on the structure and messaging of the error page itself, rather than the intended document content."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_1992.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "404 Page Not Found",
+          "confidence": 0.7,
+          "context_type": "standalone_text"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "We\u2019re Sorry! We did not locate the page or resource you requested.",
+          "confidence": 0.6,
+          "context_type": "standalone_text"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "If you landed on this page from a bookmark (probably including the expression \"pid=\" followed by a number) the number has been populated already for you below.",
+          "confidence": 0.5,
+          "context_type": "instructional_text"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Please use the left sidebar to find the document by entering the number.",
+          "confidence": 0.5,
+          "context_type": "instructional_text"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "If you still cannot find the content you are looking for please Contact Us and we will get back to you.",
+          "confidence": 0.5,
+          "context_type": "instructional_text"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Here are some other links that may help you get back on track:",
+          "confidence": 0.5,
+          "context_type": "navigational_link_intro"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Year by Year",
+          "confidence": 0.5,
+          "context_type": "section_header"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Curated Data Archive",
+          "confidence": 0.5,
+          "context_type": "section_header"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Articles of Impeachment concerning Richard Nixon",
+          "confidence": 0.5,
+          "context_type": "document_link"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

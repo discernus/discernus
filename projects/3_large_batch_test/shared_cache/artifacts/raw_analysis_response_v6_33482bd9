@@ -1,0 +1,139 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the PopuList Discourse Analysis Framework (PDAF) v7.1. Focus was on identifying and scoring the nine core anchors and assessing salience and confidence for each dimension. Evidence extraction prioritized direct quotes that best exemplify the identified dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.55
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our enemy is quite explicit about their intentions. They want to overthrow moderate governments and establish safe havens from which to plan and carry out new attacks on our country.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "In the mind of the terrorist, this war began well before September the 11th and will not end until their radical vision is fulfilled. And so it remains the policy of this Government to use every lawful and proper tool of intelligence, diplomacy, law enforcement, and military action to find these enemies, and to protect the American people.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We've had time to take stock of our situation. We've been through a lot together. We've met challenges and faced dangers, and we know that more lie ahead. Yet we can go forward with confidence, because the State of our Union is strong; our cause in the world is right; and tonight that cause goes on.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "The war on terror we fight today is a generational struggle that will continue long after you and I have turned our duties over to others.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Our job is to make life better for our fellow Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "All of us in this chamber, there is no higher responsibility than to protect the people of this country from danger.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Some in this Chamber are new to the House and the Senate, and I congratulate the Democrat majority. Congress has changed, but not our responsibilities. Each of us is guided by our own convictions, and to these we must stay faithful.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Your job is to make life better for our fellow Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We can lift student achievement even higher by giving local leaders flexibility to turn around failing schools and by giving families with children stuck in failing schools the right to choose someplace better.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Let us build on the work we've done and reduce gasoline usage in the United States by 20 percent in the next 10 years.",
+          "confidence": 0.65,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We are now in the 41st month of uninterrupted job growth, a recovery that has created 7.2 million new jobs so far. Unemployment is low; inflation is low; wages are rising.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "First, we must balance the Federal budget. We can do so without raising taxes. What we need is spending discipline in Washington, D.C. We set a goal of cutting the deficit in half by 2009 and met that goal 3 years ahead of schedule. Now let us take the next step.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

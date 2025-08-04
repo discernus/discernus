@@ -1,0 +1,109 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis completed using the pdaf_v7_1 framework. The document exhibits strong populist themes across multiple dimensions, particularly concerning the framing of 'The People' versus 'The Elite' and claims of popular sovereignty. Evidence extraction focused on clear thematic resonance."
+  },
+  "document_analyses": [
+    {
+      "document_id": "22fbcf35d6a7",
+      "document_name": "Republican_Platform_2012.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "The American Dream is a dream of equal opportunity for all. And the Republican Party is the party of opportunity. Today, that American Dream is at risk. Our nation faces unprecedented uncertainty with great fiscal and economic challenges, and under the current Administration has suffered through the longest and most severe economic downturn since the Great Depression.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our nation and our people cannot afford the status quo. We must begin anew, with profound changes in the way government operates; the way it budgets, taxes, and regulates. Jefferson’s vision of a “wise and frugal government” must be restored.",
+          "confidence": 0.98,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We believe that the people possess vast reserves of courage and determination and the capacity to hear the truth and chart a strong course. They are eager for the opportunity to take on life’s challenges and, through faith and hard work, transform the future.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Federalism is threatened and liberty retreats. For the world, this has been four years of lost American leadership, leadership that depends upon economic vitality and peace through strength.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Put simply: The times call for trustworthy leadership and honest talk about the challenges we face.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Our nation and our people possess vast reserves of courage and determination and the capacity to hear the truth and chart a strong course.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Many Americans have experienced the burden of lost jobs, lost homes, and lost hopes. Our middle class has felt that burden most acutely. Meanwhile, the federal government has expanded its size and scope, its borrowing and deficit. Federalism is threatened and liberty retreats.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

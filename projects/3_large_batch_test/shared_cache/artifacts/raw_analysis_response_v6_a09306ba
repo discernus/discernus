@@ -1,0 +1,169 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdad_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis completed following the provided framework and constraints. All identified dimensions have been scored based on their presence and salience in the document. Confidence levels reflect the clarity and strength of evidence for each score."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.1,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.65
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Through our history, Presidents have come to this Chamber to speak to Congress, to the Nation, and to the world; to declare war, to celebrate peace; to announce new plans and possibilities. Tonight I come to talk about crisis and opportunity, about rebuilding the Nation, revitalizing our democracy, and winning the future for America.",
+          "confidence": 0.95,
+          "context_type": "primary_theme"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Now, after just 100 days, I can report to the Nation: America is on the move again, turning peril into possibility, setbacks into strength.",
+          "confidence": 0.9,
+          "context_type": "theme_elaboration"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "I want to speak directly to you. Because if you think about it, that's what people are most worried about: 'Can I fit in?' Independent experts estimate the American Jobs Plan will add millions of jobs and trillions of dollars to economic growth in the years to come.",
+          "confidence": 0.85,
+          "context_type": "direct_address_to_audience"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "It's not right. We're going to reform corporate taxes so they pay their fair share and help pay for the public investments their businesses will benefit from as well.",
+          "confidence": 0.8,
+          "context_type": "economic_discourse"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "I stand here tonight, 1 day shy of the hundredth day of my administration, hundred days since I took the oath of office and lifted my hand off our family, inherited a Nation—that was in crisis: the worst pandemic in a century, the worst economic crisis since the Great Depression, the worst attack on our democracy since the Civil War.",
+          "confidence": 0.9,
+          "context_type": "foundational_claims"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "You know, the theory that the sun is setting on American democracy does not track with the facts. The sun is setting on autocracy, not democracy.",
+          "confidence": 0.8,
+          "context_type": "ideological_contrast"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "It creates jobs, building a modern power grid. Our grids are vulnerable to storms, hacks, catastrophic failures, with tragic results, as we saw in Texas and elsewhere during the winter storms.",
+          "confidence": 0.9,
+          "context_type": "economic_policy_focus"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "The American Jobs Plan will help millions of people get back to their jobs and back to their careers. Two million women have dropped out of the workforce during this pandemic, and too often because they couldn't get the care they needed to care for their child or care for an elderly parent who needs help.",
+          "confidence": 0.85,
+          "context_type": "social_economic_impact"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I want to speak directly to you. Because if you think about it, that's what people are most worried about: 'Can I fit in?' Independent experts estimate the American Jobs Plan will add millions of jobs and trillions of dollars to economic growth in the years to come.",
+          "confidence": 0.75,
+          "context_type": "connecting_with_audience"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "And I want to thank the bipartisan group of world leaders, over 30 of them now, who have convened and affirmed that democracy is the best. They believe we are not going to go it alone.",
+          "confidence": 0.7,
+          "context_type": "inter_party_collaboration"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "And I want to thank the bipartisan group of world leaders, over 30 of them now, who have convened and affirmed that democracy is the best. They believe we are not going to go it alone.",
+          "confidence": 0.7,
+          "context_type": "inclusive_rhetoric"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "And when you hear someone say that they don't want to raise taxes on the wealthiest 1 percent or corporate America, ask them: Whose taxes do you want to raise instead? Whose are you going to cut?",
+          "confidence": 0.65,
+          "context_type": "economic_fairness_appeal"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "My fellow Americans, trickle-down economics has never worked, and it's time to grow the economy from the bottom and the middle out.",
+          "confidence": 0.7,
+          "context_type": "critique_of_economic_policy"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "A recent study shows that 55 of the nation's biggest corporations paid zero federal tax last year. That's a lot of companies also evade taxes through tax havens in Switzerland and Bermuda and the Cayman Islands. And they benefit from tax loopholes and deductions for offshoring jobs and shifting profits overseas. It's not right.",
+          "confidence": 0.8,
+          "context_type": "corporate_tax_evasion_critique"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "And when you hear someone say that they don't want to raise taxes on the wealthiest 1 percent or corporate America, ask them: Whose taxes do you want to raise instead? Whose are you going to cut?",
+          "confidence": 0.6,
+          "context_type": "rhetorical_question_divisive"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Buy American. Buy American. And I might not, parenthetically, that does not violate any trade agreement. It's been the law since the thirties: buy American.",
+          "confidence": 0.7,
+          "context_type": "economic_nationalism"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "American's adversaries are betting we can't do it. They're betting we'll be divided, that we'll be unable to meet this moment. They're betting we'll be unable to build back better.",
+          "confidence": 0.6,
+          "context_type": "external_threat_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

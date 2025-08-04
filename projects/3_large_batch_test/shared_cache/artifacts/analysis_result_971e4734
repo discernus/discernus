@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_6767ea1a7a67",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"pdaf_v7_1\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis based on PDAF v7.1 framework. High confidence in identifying core populist themes. Salience scores reflect the prominence of these themes within the document's overall narrative.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"341e811f3a27\",\n      \"document_name\": \"Democratic_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.6\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach. As working people struggle, the top one percent accrues more wealth and more power. Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It\u2019s no wonder so many feel like the system is rigged against them.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"In 2016, Democrats met in Philadelphia with the same basic beliefs that animated the Continental Congress when they gathered here 240 years ago: Out of many, we are one. Under President Obama\u2019s leadership, and thanks to the hard work and determination of the American people, we have come a long way from the Great Recession and the Republican policies that triggered it.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"It\u2019s a simple but powerful idea: we are stronger together. Democrats believe we are stronger when we have an economy that works for everyone\u2014an economy that grows incomes for working people, creates good paying jobs, and puts a middle class life within reach for more Americans. Democrats believe we can spur more sustainable economic growth, which will create good-paying jobs and raise wages. And we can have more economic fairness, so the rewards are shared broadly, not just with those at the top.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It\u2019s no wonder so many feel like the system is rigged against them.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"secondary\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"These principles stand in sharp contrast to the Republicans, who have nominated as the standardbearer for their party and their candidate for President a man who seeks to appeal to Americans\u2019 basest differences, rather than our better natures.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:16:03.777856+00:00",
+    "end_time": "2025-08-04T15:16:09.102013+00:00",
+    "duration_seconds": 5.324157,
+    "llm_interaction_hash": "c264bf6fe9cd245b"
+  },
+  "input_artifacts": {
+    "framework_hash": "6738909def5900612f5a8e0765d693174eb2bd6579f5656fc7fc4a9df0a5c528",
+    "document_hashes": [
+      "341e811f3a2704147f0b21aebc89096315cea92214afe35b045681f863b32222"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T151125Z_ee72b02e"
+  }
+}

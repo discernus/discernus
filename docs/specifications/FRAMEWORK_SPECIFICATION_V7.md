@@ -1,14 +1,22 @@
-# Framework Specification (v7.0)
+# Framework Specification (v7.1)
 
-**Version**: 7.0  
+**Version**: 7.1  
 **Status**: Active  
-**Major Change**: Paradigm Shift to Raw Analysis Log and Gasket Architecture
+**Major Change**: Enhanced Gasket Schema with Advanced Extraction Patterns and Metadata Scores
+
+**⚠️ BREAKING CHANGE: No Backward Compatibility**
+
+Version 7.1 does NOT support v5.0/v6.0/v7.0 frameworks. All frameworks must use the v7.1 enhanced gasket schema. This is a clean architectural break to establish a single, advanced standard.
 
 A Discernus framework is a self-contained markdown file that embodies the core principles of computational social science research. It serves as both human-readable methodology and machine-executable instructions, ensuring perfect coherence between theory and practice.
 
-**🚀 PARADIGM SHIFT IN V7.0: Liberation from JSON Complexity**
+**🚀 V7.1 ENHANCED GASKET ARCHITECTURE**
 
-Version 7.0 represents a fundamental architectural paradigm shift. Analysis Agents are liberated from complex JSON formatting requirements and instead produce natural, human-readable "Raw Analysis Logs." The new Intelligent Extractor (Gasket #2) handles all data extraction and semantic mapping, eliminating Data Sparsity warnings and brittle parsing failures entirely.
+Version 7.1 builds upon the Raw Analysis Log paradigm with advanced extraction capabilities:
+- **Advanced Extraction Patterns**: Regex-based pattern matching with multiple fallback strategies
+- **Metadata Scores**: Salience and confidence scores for academic-grade provenance
+- **Framework-Specific Validation**: Customizable validation rules and error handling
+- **Native v7.1 Processing**: No backward compatibility conversions or legacy format support
 
 ---
 
@@ -19,9 +27,11 @@ To ensure consistency across all frameworks, these terms have specific meanings:
 **Framework**: The complete analytical system including theory, methodology, and implementation.
 **Dimension**: Individual measurable element that receives a 0.0-1.0 score (e.g., Fear, Hope).
 **Analysis Variant**: Different analytical approaches within the same framework (e.g., a "default" full version vs. a "descriptive_only" simplified version).
-**🆕 Raw Analysis Log**: Single, human-readable text block containing scores, evidence, and reasoning from the Analysis Agent. This is the foundational artifact that feeds both quantitative and qualitative processing streams.
-**🆕 Gasket Schema**: Configuration for the Intelligent Extractor that maps framework dimensions to flat JSON keys for mathematical processing.
-**🆕 Intelligent Extractor**: Gasket #2 component that reads Raw Analysis Logs like a human and extracts structured data like a machine.
+**Raw Analysis Log**: Single, human-readable text block containing scores, evidence, and reasoning from the Analysis Agent with embedded metadata scores.
+**🆕 Enhanced Gasket Schema**: Advanced configuration with extraction patterns, validation rules, and metadata requirements for the Intelligent Extractor.
+**🆕 Extraction Patterns**: Regex patterns that enable flexible, robust extraction of scores and metadata from Raw Analysis Logs.
+**🆕 Metadata Scores**: Salience (0.0-1.0) and confidence (0.0-1.0) scores that provide additional analytical context.
+**Intelligent Extractor**: Native v7.1 component that uses advanced pattern matching to extract structured data from Raw Analysis Logs.
 
 ---
 
@@ -67,12 +77,12 @@ A framework file is a standard Markdown (`.md`) file containing:
 
 ### 2. The JSON Appendix: The Single Source of Truth
 
-#### Required JSON Schema (v7.0)
+#### Required JSON Schema (v7.1)
 
 ```json
 {
   "name": "unique_framework_name",
-  "version": "v7.0",
+  "version": "v7.1",
   "display_name": "Human-Readable Framework Name",
   "analysis_variants": {
     "default": {
@@ -90,13 +100,21 @@ A framework file is a standard Markdown (`.md`) file containing:
     "virtue_cluster": ["dignity", "truth", "justice", "hope", "pragmatism"]
   },
   "gasket_schema": {
+    "version": "7.1",
+    "extraction_method": "intelligent_extractor",
     "target_keys": [
       "dignity_score",
-      "tribalism_score", 
-      "dignity_tribalism_tension",
+      "tribalism_score",
+      "dignity_salience",
+      "tribalism_salience",
+      "dignity_confidence",
+      "tribalism_confidence",
       "truth_score",
       "manipulation_score",
-      "truth_manipulation_tension",
+      "truth_salience",
+      "manipulation_salience",
+      "truth_confidence",
+      "manipulation_confidence",
       "justice_score",
       "resentment_score",
       "justice_resentment_tension",
@@ -108,24 +126,23 @@ A framework file is a standard Markdown (`.md`) file containing:
       "pragmatism_fantasy_tension",
       "mc_sci_score"
     ],
-    "target_dimensions": [
-      "Dignity",
-      "Tribalism",
-      "Dignity-Tribalism Tension",
-      "Truth",
-      "Manipulation", 
-      "Truth-Manipulation Tension",
-      "Justice",
-      "Resentment",
-      "Justice-Resentment Tension",
-      "Hope",
-      "Fear",
-      "Hope-Fear Tension",
-      "Pragmatism",
-      "Fantasy",
-      "Pragmatism-Fantasy Tension",
-      "Moral Character Strategic Contradiction Index"
-    ]
+    "extraction_patterns": {
+      "dignity_score": ["dignity.{0,20}score", "dignity.{0,20}rating"],
+      "tribalism_score": ["tribalism.{0,20}score", "tribalism.{0,20}rating"],
+      "dignity_salience": ["dignity.{0,20}salience", "dignity.{0,20}importance"],
+      "tribalism_salience": ["tribalism.{0,20}salience", "tribalism.{0,20}importance"],
+      "dignity_confidence": ["dignity.{0,20}confidence", "dignity.{0,20}certainty"],
+      "tribalism_confidence": ["tribalism.{0,20}confidence", "tribalism.{0,20}certainty"]
+    },
+    "validation_rules": {
+      "required_fields": ["dignity_score", "tribalism_score"],
+      "score_ranges": {"min": 0.0, "max": 1.0},
+      "metadata_ranges": {
+        "salience": {"min": 0.0, "max": 1.0},
+        "confidence": {"min": 0.0, "max": 1.0}
+      },
+      "fallback_strategy": "use_default_values"
+    }
   },
   "calculation_spec": {
     "moral_character_sci": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5",

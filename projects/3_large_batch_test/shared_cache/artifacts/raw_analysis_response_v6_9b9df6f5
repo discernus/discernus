@@ -1,0 +1,157 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis performed according to the specified framework version. Confidence levels reflect the clarity and directness of the evidence supporting each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.6,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.1,
+          "salience": 0.7,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We are in the midst of crisis is now well understood. Our Nation is at war against a far-reaching network of violence and hatred. Our economy is badly weakened, a consequence of greed and irresponsibility on the part of some, but also our collective failure to make hard choices and prepare the Nation for a new age.",
+          "confidence": 0.95,
+          "context_type": "introduction"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Starting today, we must pick ourselves up, dust ourselves off, and begin again the work of remaking America. For everywhere we look, there is work to be done. The state of the economy calls for action, bold and swift, and we will act not only to create new jobs but to lay a new foundation for growth.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "So it has been; so it must be with this generation of Americans. That we are in the midst of crisis is now well understood. Our Nation is at war against a far-reaching network of violence and hatred.",
+          "confidence": 0.85,
+          "context_type": "people_as_agent"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "So it has been; so it must be with this generation of Americans. That we are in the midst of crisis is now well understood.",
+          "confidence": 0.8,
+          "context_type": "generational_duty"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We remain the most prosperous, powerful nation on Earth. Our workers are no less productive than when this crisis began. Our minds are no less inventive. Our goods and services no less needed than they were last week or last month or last year. Our capacity remains uniminished. But our time of standing pat, of protecting narrow interests and putting off unpleasant decisions, that time has surely passed.",
+          "confidence": 0.8,
+          "context_type": "nation_strength"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "What the cynics fail to understand is that the ground has shifted beneath them, that the stale political arguments that have consumed us for so long no longer apply. The question we ask of today is not whether our Government is too big or too small, but whether it works; whether it helps families find jobs at a decent wage, care they can afford, a retirement that is dignified.",
+          "confidence": 0.85,
+          "context_type": "rejection_of_old_arguments"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "For as much as Government can do and must do, it is ultimately the faith and determination of the American people upon which this Nation relies. It is the kindness to take in a stranger when the levee breaks, the selflessness of workers who would rather cut their hours than see a friend lose his job, which sees us through our darkest hours.",
+          "confidence": 0.85,
+          "context_type": "reliance_on_people"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "It is the kindness to take in a stranger when the levee breaks, the selflessness of workers who would rather cut their hours than see a friend lose his job, which sees us through our darkest hours. It is the firefighter's courage to storm a stairwell filled with smoke, but also a parent's willingness to nurture a child, that finally decides our fate.",
+          "confidence": 0.8,
+          "context_type": "virtuous_citizens"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "For as we embrace the greatness of our Nation, we understand that greatness is never a given. It must be earned. Our journey has never been one of shortcuts or settling for less. It has not been the path for the fainthearted, for those who prefer leisure over work or seek only the pleasures of riches and fame. Rather, it has been the risk-takers, the doers, the makers of things--some celebrated, but more often men and women obscure in their labor--who have carried us up the long, rugged path toward prosperity and freedom.",
+          "confidence": 0.8,
+          "context_type": "historical_narrative"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "America, in the face of our common dangers, in this winter of our hardship, let us remember these timeless words. With hope and virtue, let us brave once more the icy currents and endure what storms may come. Let it be told by our children's children that when we were tested, we refused to let this journey end; that we did not turn back, nor did we falter. And with eyes fixed on the horizon and God's grace upon us, we carried forward that great gift of freedom and delivered it safely to future generations.",
+          "confidence": 0.85,
+          "context_type": "shared_destiny"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Our economy calls for action, bold and swift, and we will act not only to create new jobs but to lay a new foundation for growth. We will build the roads and bridges, the electric grids and digital lines that feed our commerce and bind us together. We will restore science to its rightful place and wield technology's wonders to raise health care's quality and lower its cost. We will harness sun and the winds and the soil to fuel our cars and run our factories. And we will transform our schools and colleges and universities to meet the demands of a new age.",
+          "confidence": 0.85,
+          "context_type": "infrastructure_and_investment"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "For we know that our patchwork heritage is a strength, not a weakness. We are a nation of Christians and Muslims, Jews and Hindus and nonbelievers. We are shaped by every language and culture, drawn from every end of this Earth. And because we have tasted the bitter will of civil war and segregation and emerged from that dark chapter stronger and more united, we cannot help but believe that the old hatreds shall someday pass, that the lines of tribe shall soon dissolve; that as the world grows smaller, our common humanity shall reveal itself, and that America must play its role in ushering in a new era of peace.",
+          "confidence": 0.7,
+          "context_type": "diversity_as_strength"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Now, there are some who question the scale of our ambitions, who suggest that our system cannot tolerate too many big plans. Their memories are short, for they have forgotten what this country has already done, what free men and women can achieve when imagination is joined to common purpose and necessity to courage.",
+          "confidence": 0.7,
+          "context_type": "critique_of_skeptics"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Our economy is badly weakened, a consequence of greed and irresponsibility on the part of some, but also our collective failure to make hard choices and prepare the Nation for a new age.",
+          "confidence": 0.75,
+          "context_type": "economic_failure_attribution"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "To the Muslim world, we seek a new way forward based on mutual interest and mutual respect. To those leaders around the globe who seek to sow conflict or blame their society's ills on the West, know that you are on the wrong side of history, but that we will extend a hand if you are willing to unclench your fist.",
+          "confidence": 0.7,
+          "context_type": "global_relations"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

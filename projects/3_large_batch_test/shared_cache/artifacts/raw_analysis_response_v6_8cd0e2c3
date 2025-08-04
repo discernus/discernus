@@ -1,0 +1,265 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pd af_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted according to the provided framework and schema. Scores reflect the intensity and prominence of populist discourse elements. Evidence is extracted from the text to support the dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2024.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.3,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_salience": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But now we are a Nation in SERIOUS DECLINE. Our future, our identity, and our every way of life are under threat like never before.",
+          "confidence": 0.9,
+          "context_type": "Introduction"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "For decades, our politicians sold our jobs and livelihoods to the highest bidder overseas with unfair Trade Deals and a blind faith in the siren song of globalism. They insulated themselves from criticism and the consequences of their own bad actions, allowing our Borders to be overrun, our cities to be overtaken by crime, our System of Justice to be weaponized, and our young people to develop a sense of hopelessness and despair.",
+          "confidence": 0.95,
+          "context_type": "Critique of past policies"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "In 2016, President Donald J. Trump was elected as an unapologetic Champion of the American People. He reignited the American Spirit and called on us to renew our National Pride. His Policies spurred Historic Economic Growth, Job Creation, and a Resurgence of American Manufacturing. President Trump and the Republican Party led America out of the pessimism induced by decades of failed leadership, showing us that the American People want Greatness for our Country again.",
+          "confidence": 0.95,
+          "context_type": "Praise for past leadership"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Yet after nearly four years of the Biden administration, America is now rocked by Ragging Inflation, Open Borders, Rampant Crime, Attacks on our Children, and Global Conflict, Chaos, and Instability.",
+          "confidence": 0.95,
+          "context_type": "Critique of current administration"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "We will be a Nation based on Truth, Justice, and Common Sense.",
+          "confidence": 0.8,
+          "context_type": "Vision statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Common Sense tells us clearly that we must unleash American Energy if we want to destroy Inflation and rapidly bring down prices, build the Greatest Economy in History, revive our Defense Industrial Base, fuel Emerging Industries, and establish the United States as the Manufacturing Superpower of the World. We will DRILL, BABY, DRILL and we will become Energy Independent, and even Dominant again.",
+          "confidence": 0.85,
+          "context_type": "Economic policy promise"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "We will use existing Federal Law to strengthen ICE, increase penalties for illegal entry and overstaying Visas, and reinstate “Remain in Mexico” and other Policies that helped reduce Illegal Immigration by historic lows in President Trump’s first term. We will also invoke the Alien Enemies Act to remove all known or suspected gang members, drug dealers, or cartel members from the United States, ending the scourge of Illegal Alien gang violence once and for all.",
+          "confidence": 0.7,
+          "context_type": "Immigration policy"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Republicans will ban taxpayer funding for sex change surgeries, and stop Taxpayer-funded Schools from promoting gender transition, reverse Biden’s radical rewrite of Title IX Education Regulations, and restore protections for women and girls.",
+          "confidence": 0.75,
+          "context_type": "Social policy stance"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "They rejected our History and our Values. Quite simply, they did everything in their power to destroy our Country.",
+          "confidence": 0.9,
+          "context_type": "General accusation against opposition"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Our great Teachers, who are so important to the future wellbeing of our Country, will be cherished and protected by the Republican Party so that they can do the job of educating our students that they so dearly want to do. It is our goal to bring Education in the United States to the highest level, one that it has never attained before!",
+          "confidence": 0.8,
+          "context_type": "Education policy critique"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "In 2016, President Donald J. Trump was elected as an unapologetic Champion of the American People.",
+          "confidence": 0.95,
+          "context_type": "Praise for Trump's authenticity"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "For decades, our politicians sold our jobs and livelihoods to the highest bidder overseas with unfair Trade Deals and a blind faith in the siren song of globalism.",
+          "confidence": 0.9,
+          "context_type": "Critique of political class"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We will be a Nation based on Truth, Justice, and Common Sense.",
+          "confidence": 0.8,
+          "context_type": "Vision statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We will foster a Culture that values the Sanctity of Marriage, the blessings of childhood, the foundational role of families, and supports working parents.",
+          "confidence": 0.7,
+          "context_type": "Social policy"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "We will use extreme vetting to ensure that jihadists and jihadi sympathizers are not admitted and will hold accountable all bureaucrats involved with illegal censoring and persecution against Christians in America.",
+          "confidence": 0.9,
+          "context_type": "Religious/ideological exclusion"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "We will enforce immigration laws, increase penalties for illegal entry and overstaying Visas, and reinstate “Remain in Mexico” and other Policies that helped reduce Illegal Immigration by historic lows in President Trump’s first term.",
+          "confidence": 0.85,
+          "context_type": "Immigration policy"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "To make clear our commitment, we offer to the American people the 2024 GOP Platform to Make America Great Again! It is a forward-looking Agenda that begins with the following twenty promises that we will accomplish very quickly when we win the White House and Republican Majorities in the House and Senate.",
+          "confidence": 0.9,
+          "context_type": "Promise of economic revival"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Common Sense tells us clearly that we must unleash American Energy if we want to destroy Inflation and rapidly bring down prices, build the Greatest Economy in History, revive our Defense Industrial Base, fuel Emerging Industries, and establish the United States as the Manufacturing Superpower of the World.",
+          "confidence": 0.95,
+          "context_type": "Economic policy promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

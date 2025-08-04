@@ -1,0 +1,235 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pd_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. The analysis focuses on identifying and scoring populist discourse patterns across nine core dimensions, with a focus on raw intensity, salience, and confidence in evidence extraction. No calculations or derived metrics were performed, adhering to the critical separation of concerns."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.70
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.80
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.50,
+          "salience": 0.55,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.15,
+          "salience": 0.20,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "manichaean_people_elite_framing_salience": {
+          "raw_score": 0.90,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "crisis_restoration_temporal_narrative_salience": {
+          "raw_score": 0.75,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "popular_sovereignty_claims_salience": {
+          "raw_score": 0.65,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "anti_pluralist_exclusion_salience": {
+          "raw_score": 0.15,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "raw_score": 0.35,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "authenticity_vs_political_class_salience": {
+          "raw_score": 0.80,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "homogeneous_people_construction_salience": {
+          "raw_score": 0.55,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "nationalist_exclusion_salience": {
+          "raw_score": 0.20,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "economic_populist_appeals_salience": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "crisis_restoration_temporal_narrative_confidence": {
+          "raw_score": 0.90,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "popular_sovereignty_claims_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "raw_score": 0.70,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "raw_score": 0.80,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "authenticity_vs_political_class_confidence": {
+          "raw_score": 0.90,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "homogeneous_people_construction_confidence": {
+          "raw_score": 0.85,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "nationalist_exclusion_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "economic_populist_appeals_confidence": {
+          "raw_score": 0.95,
+          "salience": 0.0,
+          "confidence": 0.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We gather tonight knowing that this generation of heroes has made the United States safer and more respected around the world.",
+          "confidence": 0.85,
+          "context_type": "positive_framing"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "If you want to relocate in a community that was hit hard when a factory left town, you should get help financing a new plant, equipment, or training for new workers.",
+          "confidence": 0.90,
+          "context_type": "support_for_working_class"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "In 2008, the house of cards collapsed. We learned that mortgages had been sold to people who couldn't afford or understand them.",
+          "confidence": 0.80,
+          "context_type": "past_crisis_description"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "In the last 22 months, businesses have created more than 3 million jobs.",
+          "confidence": 0.70,
+          "context_type": "restoration_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The defining issue of our time is how to keep that promise alive. No challenge is more urgent. No debate is more important.",
+          "confidence": 0.70,
+          "context_type": "call_to_action_for_people"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Let's remember how we got here. Long before the recession, jobs and manufacturing began leaving our shores.",
+          "confidence": 0.60,
+          "context_type": "accountability_for_past_issues"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Banks had made huge bets and bonuses with other people's money. Regulators had looked the other way or didn't have the authority to stop the bad behavior.",
+          "confidence": 0.75,
+          "context_type": "critique_of_financial_elites"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "It was wrong, it was irresponsible, and it plunged our economy into a crisis that put millions out of work, saddled us with more debt, and left innocent, hard-working Americans holding the bag.",
+          "confidence": 0.85,
+          "context_type": "systemic_failure_blame"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "They're not consumed with personal ambition. They don't obsess over their differences.",
+          "confidence": 0.80,
+          "context_type": "praise_for_military_values"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I intend to fight obstruction with action, and I will oppose any effort to return to the very same policies that brought on this economic crisis in the first place.",
+          "confidence": 0.90,
+          "context_type": "contrast_with_political_establishment"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Imagine what we could accomplish if we followed their example. Think about the America within our reach: a country that leads the world in educating its people; an America that attracts a new generation of high-tech manufacturing and high-paying jobs; a future where we're in control of our own energy and our own security and prosperity aren't so tied to unstable parts of the world; an economy built to last, where hard work pays off and responsibility is rewarded.",
+          "confidence": 0.85,
+          "context_type": "vision_of_unified_national_success"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "So my message to business leaders tonight is simple: Ask yourselves what you can do to bring jobs back to your country, and your country will do everything we can to help you succeed.",
+          "confidence": 0.90,
+          "context_type": "appeal_to_business_for_national_benefit"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Let's start with our Tax Code. Right now, companies get tax breaks for moving jobs and profits overseas.",
+          "confidence": 0.80,
+          "context_type": "tax_policy_critique"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,109 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdag_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. All dimensions assessed for raw score, salience, and confidence. Evidence extracted from relevant text segments."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The spirit we bring to our work will make all the difference. We must be committed to the pursuit of opportunity for all Americans, responsibility from all Americans, in a community of all Americans. And we must be committed to a new kind of Government, not to solve all our problems for us but to give our people, all our people, the tools they need to make the most of their own lives.",
+          "confidence": 0.9,
+          "context_type": "Framing"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known. The new promise of the global economy, the information age, unimagined new work, life-enhancing technology, all these are ours to seize. That is our honor and our challenge. We must be shapers of events, not observers, for if we do not act, the moment will pass, and we will lose the best possibilities of our future.",
+          "confidence": 0.9,
+          "context_type": "Temporal"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row. Now, here is the direction I believe we should take.",
+          "confidence": 0.8,
+          "context_type": "Sovereignty"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "And let me say something that's not in my script tonight. I know this is not going to be easy. But I really believe one of the reasons the American people gave me a second term was to take the tough decisions in the next 4 years that will carry our country through the next 50 years. I know it is easier for me than for you to say or do. But another reason I was elected is to support all of you, without regard to party, to give you what is necessary to join in these decisions.",
+          "confidence": 0.9,
+          "context_type": "Authenticity"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We must join together to do something else, too, something both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortune strikes immigrants who come to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.",
+          "confidence": 0.85,
+          "context_type": "Homogeneity"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them. To help schools meet the standards and measure their progress, we will lead an effort over the next 2 years to develop national tests of student achievement in reading and math.",
+          "confidence": 0.95,
+          "context_type": "Economic Appeal"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create the conditions in which all families can flourish and to create jobs through investment by business and loans by banks. We should double the number of empowerment zones. They've already brought so much hope to communities like Detroit, where the unemployment rate has been cut in half in 4 years.",
+          "confidence": 0.9,
+          "context_type": "Economic Appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

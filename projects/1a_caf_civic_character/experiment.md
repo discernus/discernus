@@ -14,7 +14,7 @@ hypothesis: |
   for each speaker across virtues and vices, and demonstrate meaningful variation 
   in MC-SCI character coherence patterns.
 
-framework: "../../frameworks/reference/core/caf_v7.0.md"
+framework: "../../frameworks/reference/core/caf_v7.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
@@ -86,7 +86,7 @@ definition_of_success:
     - "Complete pipeline execution without errors through all workflow agents"
     - "All 8 corpus files analyzed successfully"
     - "Generation of final_report.md and statistical_results.json artifacts"
-    - "Valid JSON output from all analysis runs conforming to CAF v6.1 schema"
+    - "Valid JSON output from all analysis runs conforming to CAF v7.1 schema"
     - "Successful analysis and synthesis phases"
   
   # Data Quality Success Criteria
@@ -106,7 +106,7 @@ definition_of_success:
   
   # Framework Validation Success Criteria
   framework_validation_success:
-    - "CAF v6.1 framework successfully processes all 8 political speeches"
+    - "CAF v7.1 framework successfully processes all 8 political speeches"
     - "Character dimensions show appropriate variance (not all clustering around 0.5)"
     - "Virtue and vice dimensions demonstrate expected relationships"
     - "MC-SCI calculations are mathematically consistent"
@@ -146,7 +146,7 @@ This experiment provides a focused test of the Character Assessment Framework's 
 ## Methodology
 
 ### Framework
-**Character Assessment Framework v6.1-Factorial** provides:
+**Character Assessment Framework v7.1** provides:
 - 10-dimensional character analysis (5 virtues vs 5 vices)
 - Moral Character Strategic Contradiction Index (MC-SCI) for coherence measurement
 - JSON-first architecture with enhanced synthesis integration

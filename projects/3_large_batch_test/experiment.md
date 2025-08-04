@@ -52,7 +52,7 @@ model:
   analysis: "vertex_ai/gemini-2.5-flash-lite"
   synthesis: "vertex_ai/gemini-2.5-flash-lite"
 
-framework: "framework.md"
+framework: "../../frameworks/reference/flagship/pdaf_v7.1.md"
 corpus_path: "corpus/"
 
 document_processing_standards:

@@ -1,0 +1,163 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdad_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. Focus was on identifying populist discourse patterns and scoring based on the provided dimensions. Confidence is high due to clear examples within the text. Some dimensions had limited or no direct evidence, resulting in lower scores for those."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.8,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.5,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.3,
+          "salience": 0.65,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.4,
+          "salience": 0.35,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "We can either settle for a country where a shrinking number of people do really well while a growing number of Americans barely get by, or we can restore an economy where everyone gets a fair shot and everyone does their fair share and everyone plays by the same set of rules. What's at stake aren't Democratic values or Republican values, but American values.",
+          "confidence": 0.95,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Let's remember how we got here. Long before the recession, jobs and manufacturing began leaving our shores. Technology made businesses more efficient, but also made some jobs obsolete. Folks at the top saw their incomes rise like never before, but most hard-working Americans struggled with costs that weren't growing, paychecks that weren't coming, and personal debt that kept piling up.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "In 2008, the house of cards collapsed. We learned that mortgages had been sold to people who couldn't afford or understand them. Banks had made huge bets and bonuses with other people's money. Regulators had looked the other way or didn't have the authority to stop the bad behavior. It was wrong, it was irresponsible, and it plunged our economy into a crisis that put millions out of work, saddled us with more debt, and left innocent, hard-working Americans holding the bag.",
+          "confidence": 0.95,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "The state of our Union is getting stronger. And we've come too far to turn back now. As long as I'm President, I will work with anyone in this Chamber to build on this momentum. But I intend to fight obstruction with action, and I will oppose any effort to return to the very same policies that brought on this economic crisis in the first place.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Direct the people's will as ultimate political authority.",
+          "confidence": 0.85,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "My message is simple: It is time to stop rewarding businesses that ship jobs overseas and start rewarding companies that create jobs right here in America. Send me these tax reforms, and I will sign them right away.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "No challenge is more urgent. No debate is more important. We can either settle for a country where a shrinking number of people do really well while a growing number of Americans barely get by, or we can restore an economy where everyone gets a fair shot and everyone does their fair share and everyone plays by the same set of rules.",
+          "confidence": 0.7,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "In 2008, the house of cards collapsed. We learned that mortgages had been sold to people who couldn't afford or understand them. Banks had made huge bets and bonuses with other people's money. Regulators had looked the other way or didn't have the authority to stop the bad behavior.",
+          "confidence": 0.85,
+          "context_type": "mechanisms_anchor"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "So let's change it. First, if you're a business that wants to outsource jobs, you shouldn't get a tax deduction for doing it. That money should be used to cover expenses for companies like Master Lock that decide to bring jobs home. Second, no American company should be able to avoid paying its fair share of taxes by moving jobs and profits overseas. From now on, every multinational company should have to pay a basic minimum tax. And every penny should go towards lowering taxes for companies that choose to stay here and hire here in America.",
+          "confidence": 0.75,
+          "context_type": "mechanisms_anchor"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "My fellow Americans, we have to be united in our determination to get things done. We have to be united in our dedication to the common good. That's why I'm here tonight. I'm here to ask you to think about the America that we want to build together. Think about the America that's within our reach: an America that leads the world in educating its people; an America that attracts a new generation of high-tech manufacturing and high-paying jobs; a future where we're in control of our own energy and our own security and prosperity aren't so tied to unstable parts of the world; an economy built to last, where hard work pays off and responsibility is rewarded.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Let's remember how we got here. Long before the recession, jobs and manufacturing began leaving our shores. Technology made businesses more efficient, but also made some jobs obsolete. Folks at the top saw their incomes rise like never before, but most hard-working Americans struggled with costs that weren't growing, paychecks that weren't coming, and personal debt that kept piling up.",
+          "confidence": 0.85,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "When kids do graduate, the most daunting challenge can be the cost of college. At a time when Americans owe more in student loan debt than credit card debt, this Congress needs to stop the interest rates on student loans from doubling in July.",
+          "confidence": 0.8,
+          "context_type": "mechanisms_anchor"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "The American people know what the right choice is. So do I. As I told the State team tonight, I'm prepared to make more reforms that rein in the long-term costs of Medicare and Medicaid and strengthen Social Security, so long as those programs remain a guarantee of security for seniors. But in return, we need to change our Tax Code so that people like me, and an awful lot of Members of Congress, pay our fair share of taxes.",
+          "confidence": 0.7,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We've brought trade cases against China at nearly twice the rate as the last administration, and it's made a difference. Over a thousand Americans are working today because we stopped a surge in China's tariffs.",
+          "confidence": 0.7,
+          "context_type": "boundary_anchor"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "My message is simple: It is time to stop rewarding businesses that ship jobs overseas and start rewarding companies that create jobs right here in America. Send me these tax reforms, and I will sign them right away.",
+          "confidence": 0.95,
+          "context_type": "economic_anchor"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "So my message is simple: It's time to stop rewarding businesses that ship jobs overseas and start rewarding companies that create jobs right here in America. Send me these tax reforms, and I will sign them right away.",
+          "confidence": 0.95,
+          "context_type": "economic_anchor"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

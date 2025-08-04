@@ -884,6 +884,74 @@ def stop():
         click.echo(f"❌ Error stopping infrastructure: {e}")
 
 
+@cli.command()
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+def visualize_provenance(run_directory):
+    """
+    Generate provenance visualization for an experiment run.
+    
+    Creates an HTML report with interactive diagrams showing:
+    - Complete data flow from corpus to final results
+    - Artifact dependency relationships
+    - Timeline of artifact creation
+    - Health check of provenance completeness
+    
+    RUN_DIRECTORY: Path to the experiment run directory
+    """
+    try:
+        from discernus.core.provenance_visualizer import create_provenance_visualization
+        
+        print(f"🔍 Generating provenance visualization for: {run_directory}")
+        
+        report_path = create_provenance_visualization(run_directory)
+        
+        print(f"✅ Provenance visualization created: {report_path}")
+        print(f"📊 Open the HTML file in your browser to view the interactive diagrams")
+        print(f"🌐 Features:")
+        print(f"   • Complete data flow diagram")
+        print(f"   • Artifact dependency graph") 
+        print(f"   • Timeline visualization")
+        print(f"   • Health check indicators")
+        
+    except Exception as e:
+        print(f"❌ Failed to generate provenance visualization: {e}")
+        sys.exit(1)
+
+
+@cli.command()
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+def browse_artifacts(run_directory):
+    """
+    Generate human-friendly artifact browser for an experiment run.
+    
+    Creates an HTML report with interactive artifact exploration:
+    - Human-readable artifact names and descriptions
+    - Search and filter capabilities
+    - Artifact content preview
+    - Dependency relationship exploration
+    
+    RUN_DIRECTORY: Path to the experiment run directory
+    """
+    try:
+        from discernus.core.artifact_browser import create_artifact_browser
+        
+        print(f"🔍 Generating artifact browser for: {run_directory}")
+        
+        report_path = create_artifact_browser(run_directory)
+        
+        print(f"✅ Artifact browser created: {report_path}")
+        print(f"📊 Open the HTML file in your browser to explore artifacts")
+        print(f"🌐 Features:")
+        print(f"   • Human-readable artifact names")
+        print(f"   • Search and filter capabilities")
+        print(f"   • Content preview")
+        print(f"   • Dependency relationships")
+        
+    except Exception as e:
+        print(f"❌ Failed to generate artifact browser: {e}")
+        sys.exit(1)
+
+
 def main():
     """Entry point for the discernus CLI command"""
     cli()

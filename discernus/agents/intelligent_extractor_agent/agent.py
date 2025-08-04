@@ -106,7 +106,7 @@ class IntelligentExtractorAgent:
     def extract_scores_from_raw_analysis(
         self, 
         raw_analysis_text: str, 
-        gasket_schema: Dict[str, List[str]]
+        gasket_schema: Dict[str, Any]
     ) -> ExtractionResult:
         """
         Extract and map scores from Raw Analysis Log using LLM intelligence.
@@ -116,7 +116,7 @@ class IntelligentExtractorAgent:
         
         Args:
             raw_analysis_text: The Raw Analysis Log from Analysis Agent
-            gasket_schema: Framework gasket_schema with target_keys and target_dimensions
+            gasket_schema: Framework gasket_schema v7.1 with target_keys, extraction_patterns, and validation_rules
             
         Returns:
             ExtractionResult with extracted scores and metadata
@@ -135,7 +135,8 @@ class IntelligentExtractorAgent:
                 error_message="Empty or invalid raw analysis text"
             )
         
-        if not gasket_schema or 'target_keys' not in gasket_schema or 'target_dimensions' not in gasket_schema:
+        # Validate v7.1 gasket schema format
+        if not gasket_schema or 'target_keys' not in gasket_schema:
             return ExtractionResult(
                 success=False,
                 extracted_scores={},
@@ -143,7 +144,19 @@ class IntelligentExtractorAgent:
                 tokens_used=0,
                 cost_usd=0.0,
                 attempts=0,
-                error_message="Invalid gasket_schema: missing target_keys or target_dimensions"
+                error_message="Invalid gasket_schema: missing target_keys (v7.1 format required)"
+            )
+        
+        # Ensure v7.1 format (no backward compatibility)
+        if gasket_schema.get('version') != '7.1':
+            return ExtractionResult(
+                success=False,
+                extracted_scores={},
+                extraction_time_seconds=0.0,
+                tokens_used=0,
+                cost_usd=0.0,
+                attempts=0,
+                error_message=f"Unsupported gasket_schema version: {gasket_schema.get('version')}. Only v7.1 is supported."
             )
         
         # Log extraction start
@@ -154,7 +167,9 @@ class IntelligentExtractorAgent:
                 {
                     "raw_analysis_length": len(raw_analysis_text),
                     "target_keys_count": len(gasket_schema['target_keys']),
-                    "target_dimensions_count": len(gasket_schema['target_dimensions'])
+                    "gasket_version": gasket_schema.get('version', 'unknown'),
+                    "extraction_patterns_count": len(gasket_schema.get('extraction_patterns', {})),
+                    "validation_rules": gasket_schema.get('validation_rules', {})
                 }
             )
         
@@ -275,24 +290,31 @@ class IntelligentExtractorAgent:
     def _create_extraction_prompt(
         self, 
         raw_analysis_text: str, 
-        gasket_schema: Dict[str, List[str]]
+        gasket_schema: Dict[str, Any]
     ) -> str:
         """
-        Create framework-agnostic extraction prompt using externalized template.
+        Create framework-agnostic extraction prompt using v7.1 enhanced gasket schema.
         
         Args:
             raw_analysis_text: Raw Analysis Log to extract from
-            gasket_schema: Framework gasket schema
+            gasket_schema: Framework gasket schema v7.1 format
             
         Returns:
             Formatted extraction prompt
         """
-        target_dimensions = gasket_schema['target_dimensions']
         target_keys = gasket_schema['target_keys']
+        extraction_patterns = gasket_schema.get('extraction_patterns', {})
         
-        # Format dimensions and keys for prompt
-        dimensions_text = "\n".join(f"- {dim}" for dim in target_dimensions)
+        # Format target keys for prompt
         keys_text = "\n".join(f"- {key}" for key in target_keys)
+        
+        # Create pattern hints for better extraction
+        pattern_hints = []
+        for key in target_keys[:5]:  # Show first 5 as examples
+            patterns = extraction_patterns.get(key, [])
+            if patterns:
+                pattern_hints.append(f"- {key}: Look for patterns like '{patterns[0]}'")
+        pattern_hints_text = "\n".join(pattern_hints) if pattern_hints else "- Use natural language understanding to identify scores"
         
         # Create example mapping content (without document_name)
         example_mapping = {}
@@ -300,9 +322,9 @@ class IntelligentExtractorAgent:
             example_mapping[key] = round(0.75 + (i * 0.1), 2)
         example_json_content = ",\n      ".join(f'"{k}": {v}' for k, v in example_mapping.items())
         
-        # Use externalized template
+        # Use externalized template with v7.1 enhancements
         return self.prompt_template.format(
-            dimensions_text=dimensions_text,
+            pattern_hints_text=pattern_hints_text,
             keys_text=keys_text,
             example_json_content=example_json_content,
             raw_analysis_text=raw_analysis_text

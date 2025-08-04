@@ -1,0 +1,121 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pd_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. The document was assessed across nine core dimensions of populist discourse. Confidence is high due to clear linguistic markers consistent with populist rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2001.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.3,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.0,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We must be good stewards of this economy and renew the great institutions on which millions of our fellow citizens rely. America's economy is the fastest growing of any major industrialized nation. In the past 4 years, we've provided tax relief to every person who pays income taxes, overcome a recession, opened up new markets abroad, prosecuted corporate criminals, raised homeownership to its highest level in history.",
+          "confidence": 0.9,
+          "context_type": "high"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "Tonight, with a healthy, growing economy, with more Americans going back to work, with our Nation an active force for good in the world, the state of our Union is confident and strong.",
+          "confidence": 0.95,
+          "context_type": "high"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Our government is not the source of these values, but government should never undermine them. Because one of the deepest values of our country is compassion, we must never turn away from any citizen who feels isolated from the opportunities of America. Our Government will continue to support faith-based and community groups that bring hope to harsh places, and now we need to focus on giving young people, especially young men in our cities, better options than apathy or gangs or jail. Taking on gang life will be one part of a broader outreach to at-risk youth, which involves parents and pastors, coaches and community leaders in programs ranging from literacy to sports.",
+          "confidence": 0.9,
+          "context_type": "high"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our generation has been blessed by the expansion of opportunity, by advances in medicine, by the security purchased by our parents' sacrifice. Now, as we see a little gray in the mirror (laughter) or for a lot of gray (laughter) and we watch our children moving into adulthood, we ask the question: What will be the state of their Union?",
+          "confidence": 0.8,
+          "context_type": "medium"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Justice is distorted and our economy is held back by irresponsible class actions and frivolous asbestos claims, and I urge Congress to pass legal reforms this year.",
+          "confidence": 0.75,
+          "context_type": "medium"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "To build a culture of life, we must also ensure that scientific advances always serve human dignity, not take advantage of some lives for the benefit of others. We should all be able to agree on some clear standards. I will work with Congress to ensure that human embryos are not created for experimentation or grown for body parts and that human life is never bought or sold as a commodity.",
+          "confidence": 0.85,
+          "context_type": "high"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "America's immigration system is also outdated, unsuited to the needs of our economy and to the values of our country. We should not be content with laws that punish hardworking people who want only to provide for their families and deny business opportunities willing workers and invite chaos at our border. It is time for an immigration policy that permits temporary-guest workers to fill jobs Americans will not take, that rejects amnesties, that tells us who is entering and leaving our country, and that closes the border to drug dealers and terrorists.",
+          "confidence": 0.8,
+          "context_type": "high"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "To make our economy stronger and more dynamic, we must prepare a rising generation to fill the jobs of the 21st century. Under the No Child Left Behind Act, standards are higher, test scores are on the rise, and we're closing the achievement gap for minority students. Now we must demand better results from our high schools, so every high school diploma is a ticket to success.",
+          "confidence": 0.8,
+          "context_type": "high"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Our national unity is on the line. Our generation has been blessed by the expansion of opportunity, by advances in medicine, by the security purchased by our parents' sacrifice. Now, as we see a little gray in the mirror, or for a lot of gray, and we watch our children moving into adulthood, we ask the question: What will be the state of their Union?",
+          "confidence": 0.65,
+          "context_type": "medium"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

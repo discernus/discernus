@@ -1,0 +1,115 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Republican Platform 2024 document using the PDAF v7.1 framework. The document primarily focuses on policy and platform points, with less direct rhetorical appeals typical of populist discourse. Scores reflect the stated policy positions and general tone."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2024.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.45,
+          "salience": 0.60,
+          "confidence": 0.85
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.88
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.30,
+          "salience": 0.40,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.55,
+          "salience": 0.65,
+          "confidence": 0.80
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.92
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.60,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.50,
+          "salience": 0.60,
+          "confidence": 0.80
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "We are at a turning point in American history.",
+          "confidence": 0.95,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The power to govern belongs to the people, not to the entrenched bureaucracy.",
+          "confidence": 0.92,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We will restore the voice of hardworking Americans who have been ignored by the establishment.",
+          "confidence": 0.93,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Deep state actors and global elites seek to undermine our sovereignty and way of life.",
+          "confidence": 0.85,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We will put American workers first and renegotiate unfair trade deals that harm our economy.",
+          "confidence": 0.90,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "It's a battle between the forgotten men and women of this country and the corrupt political class.",
+          "confidence": 0.88,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We must unify the nation around core American values and traditions.",
+          "confidence": 0.85,
+          "context_type": "platform_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "America must secure its borders and protect its national interests above all else.",
+          "confidence": 0.80,
+          "context_type": "platform_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

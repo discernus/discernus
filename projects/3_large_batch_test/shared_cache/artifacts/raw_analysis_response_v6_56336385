@@ -1,0 +1,121 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdah_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.1. All nine core populist anchors were assessed. Confidence is high due to clear and direct expressions aligning with populist rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let’s work together and let’s truly make America great again. Every day my administration is fighting to deliver the change America needs to bring a future America deserves and we’re doing it. This is a time for big dreams and bold action.",
+          "confidence": 0.95,
+          "context_type": "direct statement of opposition/unity"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative_score",
+          "quote_text": "On taking office, I imposed an immediate freeze on all federal hiring, a freeze on all new federal regulations, and a freeze on all foreign aid. I terminated the ridiculous green new scam. I withdrew from the unfair Paris Climate Accord, which was costing us trillions of dollars that other countries were not paying. I withdrew from the corrupt World Health Organization, and I also withdrew from the anti-American U.N. Human Rights Council.",
+          "confidence": 0.9,
+          "context_type": "description of past actions for restoration"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it’s our presidency, is the most successful in the history of our nation. By many.",
+          "confidence": 1.0,
+          "context_type": "claim of direct mandate from the people"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "This is my fifth such speech to Congress, and once again, I look at the Democrats in front of me, and I realize there is absolutely nothing I can say to make them happy or to make them stand or smile or applaud, nothing I can do. I could find a cure to the most devastating disease, a disease that would wipe out entire nations, or announce the answers to the greatest economy in history or the stoppage of crime to the lowest levels ever recorded, and these people sitting right here will not clap, will not stand and certainly will not cheer for these astronomical achievements. They won’t do it no matter what, five, five times I’ve been up here. It’s very sad, and it just should not be this way.",
+          "confidence": 0.85,
+          "context_type": "demonization of political opponents"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "Joe Biden especially let the price of eggs get out of control. The egg prices out of control. And we are working hard to get it back down. Secretary, do a good job on that, you inherited a total mess from that administration. Do a good job. A major focus of our fight to defeat inflation is rapidly reducing the cost of energy.",
+          "confidence": 0.85,
+          "context_type": "criticism of current administration's economic policy"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "The American Dream is unstoppable, and our country is on the verge of a comeback the likes of which the world has never witnessed, and perhaps will never witness again. Never been anything like it. The presidential election of November 5th was a mandate like has not been seen in many decades. We won all seven swing states, giving us an Electoral College victory of 312 votes. We won the popular vote by big numbers and won counties in our country 2,700 to 525 on a map that reads almost completely red for Republican.",
+          "confidence": 0.95,
+          "context_type": "contrast of past success with current perceived failure/illegitimacy"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "My administration is also working on a gigantic natural gas pipeline in Alaska, among the largest in the world, where Japan, South Korea and other nations want to be our partner with investments of trillions of dollars each. It’s never been anything like that one. It will be truly spectacular. It’s all set to go. The permitting has gotten and late this week, I will also take historic action to dramatically expand production of critical minerals and rare earths here in the US.",
+          "confidence": 0.75,
+          "context_type": "focus on domestic production and national economic interest"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "And if you want to see numbers, just take a look at what happened in the women's boxing, weightlifting, track and field, swimming or cycling, where a male recently finished a long-distance race five hours and 14 minutes ahead of a woman for a new record by five hours. Broke the record by five hours. It’s demeaning for women, and it’s very bad for our country. We’re not going to put up with it any longer.",
+          "confidence": 0.7,
+          "context_type": "statement against a specific group perceived as infringing on another's domain"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "To further combat inflation, we will be ending the flagrant waste of taxpayer dollars. And to that end I have created the brand new Department of Government Efficiency. DOGE! Perhaps you’ve heard of it, perhaps. Which is headed by Elon Musk, who is in the gallery tonight. Thank you, Elon, you’re working very hard. He didn’t need this, he didn’t need this. Thank you very much. We appreciate it. Everybody here, even this side, appreciates it I believe. They just don’t want to admit that.",
+          "confidence": 0.9,
+          "context_type": "promise of economic relief and efficiency"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

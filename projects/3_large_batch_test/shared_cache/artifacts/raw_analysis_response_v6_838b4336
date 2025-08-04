@@ -1,0 +1,100 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "PopuList Discourse Analysis Framework (PDAF)",
+    "framework_version": "v7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis applied the PDAF v7.1 framework. The document was analyzed for 9 primary and secondary anchors of populist discourse, along with the economic populist appeal. Scores reflect the intensity and rhetorical prominence of these elements within the provided text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2012.pdf",
+      "dimensional_scores": {
+        "core_anchors": {
+          "manipulation_of_people_elite_framing": {
+            "raw_score": 0.15,
+            "salience": 0.10,
+            "confidence": 0.80
+          },
+          "crisis_restoration_temporal_narrative": {
+            "raw_score": 0.05,
+            "salience": 0.05,
+            "confidence": 0.75
+          },
+          "popular_sovereignty_claims": {
+            "raw_score": 0.10,
+            "salience": 0.15,
+            "confidence": 0.85
+          },
+          "anti_pluralist_exclusion": {
+            "raw_score": 0.05,
+            "salience": 0.05,
+            "confidence": 0.70
+          }
+        },
+        "mechanism_anchors": {
+          "elite_conspiracy_systemic_corruption": {
+            "raw_score": 0.10,
+            "salience": 0.10,
+            "confidence": 0.75
+          },
+          "authenticity_vs_political_class": {
+            "raw_score": 0.20,
+            "salience": 0.20,
+            "confidence": 0.90
+          },
+          "homogeneous_people_construction": {
+            "raw_score": 0.05,
+            "salience": 0.05,
+            "confidence": 0.70
+          }
+        },
+        "boundary_anchors": {
+          "nationalist_exclusion": {
+            "raw_score": 0.05,
+            "salience": 0.05,
+            "confidence": 0.70
+          },
+          "economic_populist_appeals": {
+            "raw_score": 0.25,
+            "salience": 0.30,
+            "confidence": 0.95
+          }
+        },
+        "descriptive_classification": {
+          "economic_direction_indicator": "Progressive"
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We believe that government should ensure that all citizens have access to affordable, quality health care, regardless of income or employment status.",
+          "confidence": 0.95,
+          "context_type": "direct_policy_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We must reject the notion that the policies that have served the wealthy and powerful have also served the interests of the vast majority of Americans.",
+          "confidence": 0.90,
+          "context_type": "rhetorical_contrast"
+        },
+        {
+          "dimension": "manipulation_of_people_elite_framing",
+          "quote_text": "The economic policies of the past have benefited the few at the expense of the many.",
+          "confidence": 0.80,
+          "context_type": "framing_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We believe that the people should have the power to shape their own destiny.",
+          "confidence": 0.85,
+          "context_type": "declarative_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

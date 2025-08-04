@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_9bca08d471b9",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Popularist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis applied according to PDAF v7.1 guidelines. Document content was assessed for nine core populist anchors and their respective dimensional scores (intensity, salience, confidence). Evidence extraction focused on direct quotes that best exemplify the identified dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"db2603b7a6ba\",\n      \"document_name\": \"Democratic_Platform_2008.pdf\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.7\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": []\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-04T15:05:29.890839+00:00",
+    "end_time": "2025-08-04T15:05:36.974669+00:00",
+    "duration_seconds": 7.08383,
+    "llm_interaction_hash": "092352d6bf9a874a"
+  },
+  "input_artifacts": {
+    "framework_hash": "ef4dda6279ba924e9316addfd1bd6efbc9f30c83c83d5d78f52f3739797f34ae",
+    "document_hashes": [
+      "db2603b7a6bac763ac36e0dbf9e1cea5c5498ee25d3ac74fb10ea6739becf694"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250804T145536Z_66a60224"
+  }
+}

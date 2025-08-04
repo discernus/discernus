@@ -1,0 +1,121 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "pdaf_v7_1",
+    "framework_version": "7.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis complete. All dimensions covered as per framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2b92606713cd...",
+      "document_name": "Democratic_Platform_2012.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.3,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "We Democrats offer America the opportunity to move our country forward by creating an economy built to last and built from the middle out. Mitt Romney and the Republican Party have a drastically different vision. They still believe the best way to grow the economy is from the top down—the same approach that benefited the wealthy few but crashed the economy and crushed the middle class.",
+          "confidence": 0.95,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "Four years ago, Democrats, independents, and many Republicans came together as Americans to move our country forward. We were in the midst of the greatest economic crisis since the Great Depression, the previous administration had put two wars on our nation's credit card, and the American Dream had slipped out of reach for too many.",
+          "confidence": 0.9,
+          "context_type": "historical_context"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We gather to reclaim the basic bargain that built the largest middle class and the most prosperous nation on Earth — the simple principle that in America, hard work should pay off, responsibility should be rewarded, and each one of us should be able to go as far as our talent and drive take us.",
+          "confidence": 0.85,
+          "context_type": "foundational_principle"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "This election is not simply a choice between two candidates or two political parties, but between two fundamentally different paths for our country and our families.",
+          "confidence": 0.8,
+          "context_type": "existential_choice"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Our opponents believe we should go back to the top-down economic policies of the last decade. They think that if we simply eliminate protections for families and consumers, let Wall Street write its own rules again, and cut taxes for the wealthiest, the market will solve all our problems on its own. They would repeal health reform, turn Medicare into a voucher program, and follow the same path of fiscal irresponsibility of the past administration — giving trillions of dollars in tax cuts weighted towards millionaires and billionaires while sticking the middle class with the bill.",
+          "confidence": 0.7,
+          "context_type": "critique_of_opposing_economic_policy"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We see a young country continually made stronger by the greatest diversity of talent and ingenuity in the world, and a nation of people drawn to our shores from every corner of the globe. We believe America can succeed because the American people have never failed and there is nothing that together we cannot accomplish.",
+          "confidence": 0.9,
+          "context_type": "national_identity_and_promise"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We Democrats know that America's workers are tougher than tough times. Since early 2010, the private sector has created 4.5 million jobs, and American manufacturing is growing for the first time since the 1990s.",
+          "confidence": 0.75,
+          "context_type": "focus_on_working_class_and_manufacturing"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "The Republican Party has turned its back on the middle class Americans who built this country. Our opponents believe we should go back to the top-down economic policies of the last decade.",
+          "confidence": 0.5,
+          "context_type": "critique_of_opposing_party_stance"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Rebuilding middle class security is the challenge we must overcome today. That begins by restoring the basic values that made our country great, and restoring for everyone who works hard and plays by the rules the opportunity to find a job that pays the bills, turn an idea into a profitable business, care for your family, afford a home you call your own and health care you can count on, retire with dignity and respect, and, most of all, give your children the kind of education that allows them to dream even bigger and go even further than you ever imagined.",
+          "confidence": 0.95,
+          "context_type": "economic_opportunity_and_security"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
