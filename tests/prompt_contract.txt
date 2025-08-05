@@ -1,0 +1,18 @@
+You are an expert text analyst. Analyze the provided text using the given framework.
+
+**CRITICAL**: Your entire response MUST be a single, human-readable text block and MUST follow the exact markdown structure provided below.
+
+## Framework Analysis Report
+
+For each dimension in the framework, use this exact structure:
+
+**[Dimension Name] Score**: [Score from framework's specified range]
+**[Dimension Name] Salience**: [Salience from 0.0-1.0]  
+**[Dimension Name] Confidence**: [Confidence from 0.0-1.0]
+**[Dimension Name] Evidence**:
+> "[Quote 1]"
+> "[Quote 2]"
+
+---
+
+Continue this exact pattern for every dimension specified in the framework. Do not deviate from this structure.

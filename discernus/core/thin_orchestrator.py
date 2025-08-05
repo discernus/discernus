@@ -236,8 +236,11 @@ Respond with only the JSON object."""
         # Create THIN synthesis pipeline
         pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level, analysis_model)
         
+        # Parse the framework config to access static_weights and other metadata
+        framework_config = self._parse_framework_config(framework_content)
+
         # Build THIN-compliant experiment context - raw data for LLM intelligence
-        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
+        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_config, corpus_manifest)
         
         # Create pipeline request
         request = ProductionPipelineRequest(
@@ -1972,7 +1975,7 @@ Respond with only the JSON object."""
         
         return config
     
-    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_content: str, corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
+    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_config: Dict[str, Any], corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
         """
         THIN-compliant experiment context building.
         
@@ -1985,47 +1988,15 @@ Respond with only the JSON object."""
         important and how to format it, rather than hardcoding assumptions.
         """
         
-        # Load additional corpus metadata if available  
-        corpus_metadata = None
-        try:
-            corpus_dir = self.experiment_path / experiment_config.get('corpus_path', 'corpus')
-            corpus_md_file = corpus_dir / "corpus.md"
-            if corpus_md_file.exists():
-                corpus_md_content = self.security.secure_read_text(corpus_md_file)
-                
-                # Extract manifest if present (but don't parse it - let LLM handle that)
-                if '```json' in corpus_md_content:
-                    json_start = corpus_md_content.find('```json') + 7
-                    json_end = corpus_md_content.find('```', json_start)
-                    if json_end > json_start:
-                        json_str = corpus_md_content[json_start:json_end].strip()
-                        corpus_metadata = json.loads(json_str)
-        except Exception:
-            # Don't fail on corpus metadata errors - just pass None
-            pass
+        # v7.3: Build a structured JSON context for the synthesis pipeline
+        context = {
+            "experiment_config": experiment_config,
+            "framework_config": framework_config,
+            "corpus_manifest": corpus_manifest
+        }
         
-        # THIN approach: Simple data concatenation - let LLMs do the intelligent processing
-        context_sections = [
-            "## EXPERIMENT CONFIGURATION",
-            "```json",
-            json.dumps(experiment_config, indent=2),
-            "```",
-            "",
-            "## FRAMEWORK SPECIFICATION",
-            framework_content,
-            "",
-            "## CORPUS MANIFEST", 
-            "```json" if corpus_manifest else "Not available",
-            json.dumps(corpus_manifest, indent=2) if corpus_manifest else "",
-            "```" if corpus_manifest else "",
-            "",
-            "## CORPUS METADATA",
-            "```json" if corpus_metadata else "Not available", 
-            json.dumps(corpus_metadata, indent=2) if corpus_metadata else "",
-            "```" if corpus_metadata else ""
-        ]
-        
-        return "\n".join(filter(None, context_sections))
+        # We now pass a structured JSON context string instead of a free-form string.
+        return json.dumps(context, indent=2)
     
     def _load_framework(self, framework_filename: str) -> str:
         """
@@ -2601,10 +2572,30 @@ This research was conducted using the Discernus computational research platform,
         try:
             # Extract JSON appendix from framework markdown
             import re
-            json_match = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
+            json_match = re.search(r'<details><summary>Machine-Readable Configuration</summary>\s*```json\s*\n(.*?)\n\s*```\s*</details>', framework_content, re.DOTALL)
             if json_match:
-                return json.loads(json_match.group(1))
+                config_str = json_match.group(1)
+                config = json.loads(config_str)
+                
+                # v7.3: Ensure static_weights is present, defaulting to empty dict if not
+                if 'static_weights' not in config:
+                    config['static_weights'] = {}
+                
+                # v7.3: Ensure pattern_classifications is present, defaulting to empty dict if not
+                if 'pattern_classifications' not in config:
+                    config['pattern_classifications'] = {}
+                
+                # v7.3: Ensure reporting_metadata is present, defaulting to empty dict if not
+                if 'reporting_metadata' not in config:
+                    config['reporting_metadata'] = {}
+                    
+                return config
             else:
-                return {"name": "unknown", "version": "unknown"}
-        except Exception:
-            return {"name": "unknown", "version": "unknown"} 
+                # Fallback for older formats or malformed files
+                json_match_fallback = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
+                if json_match_fallback:
+                    return json.loads(json_match_fallback.group(1))
+                return {"name": "unknown", "version": "unknown", "static_weights": {}}
+        except Exception as e:
+            print(f"⚠️  Framework parsing error: {e}. Defaulting to empty config.")
+            return {"name": "unknown", "version": "unknown", "static_weights": {}} 
