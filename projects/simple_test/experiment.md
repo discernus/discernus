@@ -6,77 +6,43 @@ description: |
   how different rhetorical strategies impact social fabric and democratic resilience using the 
   Cohesive Flourishing Framework v7.3 to analyze two paradigmatic examples of American political communication.
 
-hypothesis: |
-  McCain's institutional concession discourse will demonstrate higher social cohesion indices 
-  (dignity, hope, amity, cohesive goals) while Sanders' populist critique will show higher 
-  fragmentative elements (tribal dominance, enmity) but with strategic contradictions reflecting 
-  sophisticated rhetorical positioning. The analysis will reveal distinct social cohesion signatures 
-  between institutional democratic norms and populist democratic renewal approaches.
 
-framework: "../../frameworks/reference/flagship/cff_v7.3.md"
-corpus_path: "corpus/"
-models:
-  - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 3
-analysis_variant: "default"
 
-# 🆕 V7.3 SOCIAL COHESION ANALYSIS CONFIGURATION
-gasket_workflow:
-  enhanced_metadata_extraction: true
-  intelligent_extractor_enabled: true
-  advanced_pattern_matching: true
-  metadata_scores_required: true
-
-# Social Cohesion Analysis Configuration  
-analysis:
-  statistical_confidence: 0.95
-  variance_threshold: 0.20
-  focus_dimensions: ["identity_axis", "emotional_climate_axis", "relational_climate_axis"]
-
-# Social Cohesion Validation  
-validation:
-  required_tests: ["cohesion_correlation_matrix", "strategic_contradiction_analysis", "democratic_impact_assessment"]
-  reliability_threshold: 0.60
-  effect_size_reporting: true
-
-# Streamlined Academic Reporting
-reporting:
-  format: "academic"
-  structure:
-    - "executive_summary"
-    - "social_cohesion_comparative_analysis"
-    - "democratic_discourse_patterns"
-    - "strategic_contradiction_analysis"
-    - "democratic_resilience_implications"
-    - "statistical_methodology"
-    - "limitations_and_future_research"
-  show_statistical_work: true
-  include_confidence_metrics: true
-
-# Research Hypotheses Framework
+# Falsifiable hypotheses to be tested
 hypotheses:
   H1_Institutional_Cohesion: "McCain's institutional concession will demonstrate higher overall cohesion indices (dignity, hope, amity, cohesive goals) reflecting democratic norms of gracious transition"
   H2_Populist_Fragmentation: "Sanders' populist critique will show higher fragmentative elements (tribal dominance, enmity) but with strategic contradictions indicating sophisticated rhetorical positioning"
   H3_Democratic_Patterns: "The two discourse types will exhibit distinct social cohesion signatures corresponding to institutional versus populist democratic approaches"
 
-# Required Workflow Steps
-workflow:
-  - agent: EnhancedAnalysisAgent
-    inputs:
-      - experiment
-      - framework
-      - corpus
-    outputs:
-      - analysis_results
+# Path to the Framework v7.3 specification file
+framework: "../../frameworks/reference/flagship/cff_v7.3.md"
 
-  - agent: ProductionThinSynthesisPipeline
-    inputs:
-      - analysis_results
-      - experiment
-      - framework
-    outputs:
-      - final_report.md
-      - statistical_results.json
+# Path to the Corpus v7.1 directory
+corpus_path: "corpus/"
+
+# REQUIRED: Configuration for the analysis process
+analysis:
+  # The specific analysis variant to use from the framework file
+  variant: "default"
+  # List of LiteLLM-compatible model identifiers for analysis
+  models:
+    - "vertex_ai/gemini-2.5-pro"
+
+# OPTIONAL: Configuration for the synthesis process
+synthesis:
+  # Model to use for the final report synthesis
+  model: "vertex_ai/gemini-2.5-pro"
+
+# Expected outcomes and success criteria for the experiment
+expected_outcomes:
+  statistical_analysis:
+    - "Social cohesion comparative analysis between institutional and populist discourse"
+    - "Strategic contradiction analysis measuring rhetorical tension patterns"
+    - "Democratic resilience impact assessment across CFF dimensions"
+  quality_metrics:
+    - "Framework score extraction success rate > 95%"
+    - "Clear differentiation between institutional vs populist cohesion signatures"
+
 ---
 
 # Democratic Discourse and Social Cohesion: A Comparative Study
