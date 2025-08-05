@@ -1,0 +1,1 @@
+../../../../shared_cache/artifacts/moral_foundations_theory_v7.3_7a5f8f24.md
