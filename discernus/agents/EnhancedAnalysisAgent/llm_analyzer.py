@@ -98,12 +98,38 @@ class LLMAnalyzer:
     
     def _build_analysis_prompt(self, framework_config: FrameworkConfig, 
                               formatted_docs: str) -> str:
-        """Build the complete analysis prompt for the LLM."""
-        # This would use the full prompt template with framework dimensions
-        # For now, simplified version
-        dimensions_text = ", ".join(framework_config.dimensions)
+        """Build the complete analysis prompt for the LLM using framework-defined analysis_prompt."""
         
-        return f"""
+        # v7.3: Use framework-defined analysis_prompt if available
+        analysis_variants = framework_config.raw_config.get("analysis_variants", {})
+        default_variant = analysis_variants.get("default", {})
+        framework_prompt = default_variant.get("analysis_prompt", "")
+        
+        if framework_prompt:
+            # Use the framework's custom analysis prompt
+            return f"""
+{framework_prompt}
+
+Documents to analyze:
+{formatted_docs}
+
+CRITICAL: Your response MUST include the embedded CSV sections with exact delimiters:
+```
+<<<DISCERNUS_SCORES_CSV_v1>>>
+aid,[framework-defined score columns]
+{{artifact_id}},[framework-specific scores]
+<<<END_DISCERNUS_SCORES_CSV_v1>>>
+
+<<<DISCERNUS_EVIDENCE_CSV_v1>>>
+aid,dimension,[framework-defined evidence columns]
+{{artifact_id}},{{dimension_name}},[framework-specific evidence data]
+<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+```
+"""
+        else:
+            # Fallback to generic prompt for legacy frameworks
+            dimensions_text = ", ".join(framework_config.dimensions)
+            return f"""
         Analyze the following documents using the framework dimensions: {dimensions_text}
         
         Documents:

@@ -51,6 +51,9 @@ class InterpretationRequest:
     notable_errors: Optional[List[str]] = None
     warnings: Optional[List[str]] = None
     quality_alerts: Optional[List[str]] = None
+    
+    # v7.3: Framework reporting metadata for machine-readable summaries
+    reporting_metadata: Optional[Dict[str, Any]] = None
 
 @dataclass
 class InterpretationResponse:
@@ -238,6 +241,19 @@ Example References section:
         # Build provenance metadata string
         provenance_metadata = self._build_provenance_metadata(request)
         
+        # v7.3: Format reporting metadata for prompt
+        reporting_metadata_str = "Not provided"
+        if request.reporting_metadata:
+            metadata_parts = []
+            for key, value in request.reporting_metadata.items():
+                if isinstance(value, (str, int, float)):
+                    metadata_parts.append(f"- {key}: {value}")
+                elif isinstance(value, dict):
+                    metadata_parts.append(f"- {key}: {json.dumps(value, indent=2)}")
+                else:
+                    metadata_parts.append(f"- {key}: {str(value)}")
+            reporting_metadata_str = "\n".join(metadata_parts) if metadata_parts else "Not provided"
+        
         # Use YAML template with raw data
         prompt = self.prompt_template.format(
             provenance_metadata=provenance_metadata,
@@ -247,7 +263,8 @@ Example References section:
             total_evidence=total_evidence,
             evidence_summary=evidence_str,
             footnote_instructions=footnote_instructions,
-            run_id=request.run_id or "Not provided"
+            run_id=request.run_id or "Not provided",
+            reporting_metadata=reporting_metadata_str
         )
 
         return prompt

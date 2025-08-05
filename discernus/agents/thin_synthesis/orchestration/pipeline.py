@@ -43,6 +43,7 @@ from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAna
 from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
+from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
 
 # Import MathToolkit for reliable mathematical operations
 from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_plan_thin
@@ -125,6 +126,7 @@ class ProductionThinSynthesisPipeline:
         self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
         self.results_interpreter = ResultsInterpreter(model=model, audit_logger=audit_logger)
+        self.classification_agent = ClassificationAgent()
         
         # Set up logging
         self.logger = logging.getLogger(__name__)
@@ -872,6 +874,17 @@ Raw Analysis Data:
             if successful_tasks < total_tasks:
                 warnings.append(f"Statistical analysis: {successful_tasks}/{total_tasks} tasks completed successfully")
         
+        # v7.3: Extract reporting_metadata from experiment context
+        reporting_metadata = {}
+        try:
+            if request.experiment_context:
+                experiment_context = json.loads(request.experiment_context)
+                framework_config = experiment_context.get("framework_config", {})
+                reporting_metadata = framework_config.get("reporting_metadata", {})
+        except (json.JSONDecodeError, AttributeError):
+            # Fallback to empty metadata if parsing fails
+            reporting_metadata = {}
+        
         interpretation_request = InterpretationRequest(
             statistical_results=statistical_results,
             curated_evidence=curation_response.curated_evidence,
@@ -889,16 +902,15 @@ Raw Analysis Data:
             execution_timestamp_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
             framework_name=framework_name,
             framework_version=framework_version,
-            corpus_info={
-                "document_count": "2",  # Known from simple_test
-                "corpus_type": "Political Speeches",
-                "date_range": "2008-2025"
-            },
+            corpus_info=self._extract_corpus_info(request.experiment_context),
             
             # Error and warning tracking
             notable_errors=notable_errors if notable_errors else None,
             warnings=warnings if warnings else None,
-            quality_alerts=quality_alerts if quality_alerts else None
+            quality_alerts=quality_alerts if quality_alerts else None,
+            
+            # v7.3: Framework reporting metadata
+            reporting_metadata=reporting_metadata
         )
         
         # Log interpretation start
@@ -951,4 +963,30 @@ Raw Analysis Data:
             evidence_integration_summary="",
             statistical_summary="",
             error_message=f"{error_type}: {error_message}"
-        ) 
+        )
+    
+    def _extract_corpus_info(self, experiment_context: Optional[str]) -> Dict[str, Any]:
+        """Extract corpus information from experiment context in a framework-agnostic way."""
+        default_corpus_info = {
+            "document_count": "Unknown",
+            "corpus_type": "Text Corpus", 
+            "date_range": "Unknown"
+        }
+        
+        if not experiment_context:
+            return default_corpus_info
+            
+        try:
+            context = json.loads(experiment_context)
+            corpus_info = context.get("corpus_info", {})
+            
+            # Extract available corpus metadata
+            extracted_info = {}
+            extracted_info["document_count"] = str(corpus_info.get("document_count", "Unknown"))
+            extracted_info["corpus_type"] = corpus_info.get("corpus_type", "Text Corpus")
+            extracted_info["date_range"] = corpus_info.get("date_range", "Unknown")
+            
+            return extracted_info
+            
+        except (json.JSONDecodeError, AttributeError):
+            return default_corpus_info 
