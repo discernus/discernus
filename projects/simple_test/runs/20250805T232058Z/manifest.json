@@ -1,0 +1,169 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-08-05T23:21:31.954118+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/simple_test/runs/20250805T232058Z/logs",
+    "session_id": "20250805T232058Z_478a2e2c",
+    "start_time": "2025-08-05T23:20:58.015037+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/simple_test/shared_cache/artifacts",
+      "total_artifacts": 28,
+      "total_bytes": 470941,
+      "total_mb": 0.45
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.0
+  },
+  "created_at": "2025-08-05T23:20:58.016142+00:00",
+  "execution_timeline": [
+    {
+      "agent_name": "BatchPlannerAgent",
+      "duration_seconds": 8.8e-05,
+      "end_time": "2025-08-05T23:20:58.021650+00:00",
+      "metadata": {
+        "context_window_limit": 0,
+        "total_batches": 0,
+        "total_estimated_cost": 0.0,
+        "total_estimated_tokens": 0
+      },
+      "stage_name": "batch_planning",
+      "start_time": "2025-08-05T23:20:58.021562+00:00",
+      "status": "completed"
+    },
+    {
+      "agent_name": "ProductionThinSynthesisPipeline",
+      "duration_seconds": 30.32486,
+      "end_time": "2025-08-05T23:21:31.942077+00:00",
+      "metadata": {
+        "duration_seconds": 30.244871139526367,
+        "result_hash": "a9c377f504fe1cee8a85d4eec2bcb909d47ce860070fe3d994abe611564d4bea",
+        "synthesis_confidence": 0.95,
+        "thin_pipeline_data": {
+          "generated_artifacts": {
+            "analysis_plan": "419829006adb8e2c8715747d99793534a72ca5901576512c804f7decf0570489",
+            "curated_evidence": "7176af24744fc8b0f05ceb9d5b6558f95c0e3e21d02805071f1481c81797bbc1",
+            "statistical_results": "0b243b4faaabb806fd62897a920806e90b8843c57f899070030e2befda91defb"
+          },
+          "pipeline_version": "production_v1.0",
+          "stage_success": {
+            "analysis_execution": true,
+            "analysis_planning": true,
+            "evidence_curation": true,
+            "results_interpretation": true
+          },
+          "stage_timings": {
+            "analysis_execution": 0.05325198173522949,
+            "analysis_planning": 10.066366195678711,
+            "evidence_curation": 5.600056171417236,
+            "results_interpretation": 14.510295152664185
+          },
+          "word_count": 2994
+        }
+      },
+      "stage_name": "synthesis",
+      "start_time": "2025-08-05T23:21:01.617217+00:00",
+      "status": "completed"
+    }
+  ],
+  "experiment_config": {
+    "analysis": {
+      "models": [
+        "vertex_ai/gemini-2.5-pro"
+      ],
+      "variant": "default"
+    },
+    "corpus_path": "corpus/",
+    "description": "A comparative analysis of social cohesion patterns in contrasting approaches to democratic discourse: \ninstitutional gracious concession versus populist anti-establishment critique. This study examines \nhow different rhetorical strategies impact social fabric and democratic resilience using the \nCohesive Flourishing Framework v7.3 to analyze two paradigmatic examples of American political communication.\n",
+    "expected_outcomes": {
+      "quality_metrics": [
+        "Framework score extraction success rate > 95%",
+        "Clear differentiation between institutional vs populist cohesion signatures"
+      ],
+      "statistical_analysis": [
+        "Social cohesion comparative analysis between institutional and populist discourse",
+        "Strategic contradiction analysis measuring rhetorical tension patterns",
+        "Democratic resilience impact assessment across CFF dimensions"
+      ]
+    },
+    "framework": "../../frameworks/reference/flagship/cff_v7.3.md",
+    "hypotheses": {
+      "H1_Institutional_Cohesion": "McCain's institutional concession will demonstrate higher overall cohesion indices (dignity, hope, amity, cohesive goals) reflecting democratic norms of gracious transition",
+      "H2_Populist_Fragmentation": "Sanders' populist critique will show higher fragmentative elements (tribal dominance, enmity) but with strategic contradictions indicating sophisticated rhetorical positioning",
+      "H3_Democratic_Patterns": "The two discourse types will exhibit distinct social cohesion signatures corresponding to institutional versus populist democratic approaches"
+    },
+    "name": "democratic_discourse_cohesion_study",
+    "synthesis": {
+      "model": "vertex_ai/gemini-2.5-pro"
+    }
+  },
+  "finalized_at": "2025-08-05T23:21:31.954097+00:00",
+  "input_artifacts": {
+    "corpus_documents": [
+      {
+        "document_index": 1,
+        "hash": "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d",
+        "metadata": {
+          "filename": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "size_bytes": 4698
+        },
+        "registered_at": "2025-08-05T23:20:58.020040+00:00"
+      },
+      {
+        "document_index": 2,
+        "hash": "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d",
+        "metadata": {
+          "filename": "john_mccain_2008_concession.txt",
+          "size_bytes": 6509
+        },
+        "registered_at": "2025-08-05T23:20:58.020131+00:00"
+      }
+    ],
+    "framework": {
+      "hash": "cfd14ce9ca08e6cf959ac68abf2ab7cb1a959395af898e4c80318157e923573d",
+      "metadata": {
+        "filename": "../../frameworks/reference/flagship/cff_v7.3.md",
+        "size_bytes": 32012
+      },
+      "registered_at": "2025-08-05T23:20:58.018259+00:00"
+    }
+  },
+  "llm_interactions": [],
+  "manifest_version": "2.0",
+  "performance_metrics": {
+    "total_execution_time": {
+      "end_time": "2025-08-05T23:21:31.942077+00:00",
+      "start_time": "2025-08-05T23:20:58.021562+00:00",
+      "unit": "seconds",
+      "value": 33.920515
+    }
+  },
+  "quality_assurance": {},
+  "run_metadata": {
+    "audit_session_id": "20250805T232058Z_478a2e2c",
+    "created_at": "2025-08-05T23:20:58.016142+00:00",
+    "discernus_version": "thin_v2.0_alpha",
+    "experiment_name": "democratic_discourse_cohesion_study",
+    "experiment_path": "/Volumes/code/discernus/projects/simple_test",
+    "run_id": "20250805T232058Z",
+    "security_boundary": {
+      "boundary_type": "filesystem",
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "security_level": "experiment_scoped"
+    }
+  }
+}
