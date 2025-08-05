@@ -142,7 +142,10 @@ The analysis focuses on identifying specific textual evidence that demonstrates 
     "justice_resentment_tension": "(justice_score + (1 - resentment_score)) / 2",
     "hope_fear_tension": "(hope_score + (1 - fear_score)) / 2",
     "pragmatism_fantasy_tension": "(pragmatism_score + (1 - fantasy_score)) / 2",
-    "civic_character_index": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5"
+    "civic_character_index": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5",
+    "salience_weighted_civic_character_index": "(dignity_tribalism_tension * dignity_salience + truth_manipulation_tension * truth_salience + justice_resentment_tension * justice_salience + hope_fear_tension * hope_salience + pragmatism_fantasy_tension * pragmatism_salience) / (dignity_salience + truth_salience + justice_salience + hope_salience + pragmatism_salience)",
+    "salience_weighted_virtue_index": "(dignity_score * dignity_salience + truth_score * truth_salience + justice_score * justice_salience + hope_score * hope_salience + pragmatism_score * pragmatism_salience) / (dignity_salience + truth_salience + justice_salience + hope_salience + pragmatism_salience)",
+    "salience_weighted_pathology_index": "(tribalism_score * tribalism_salience + manipulation_score * manipulation_salience + resentment_score * resentment_salience + fear_score * fear_salience + fantasy_score * fantasy_salience) / (tribalism_salience + manipulation_salience + resentment_salience + fear_salience + fantasy_salience)"
   }
 }
 ```
