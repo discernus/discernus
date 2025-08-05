@@ -1,0 +1,150 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis performed following the sequential steps outlined in the framework. Emphasis placed on identifying semantic concepts rather than exact keyword matches. Confidence levels reflect the clarity and directness of evidence supporting each score."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "individual_dignity": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "fear": {
+          "raw_score": 0.55,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "envy": {
+          "raw_score": 0.60,
+          "salience": 0.50,
+          "confidence": 0.70
+        },
+        "companionship": {
+          "raw_score": 0.70,
+          "salience": 0.60,
+          "confidence": 0.75
+        },
+        "enmity": {
+          "raw_score": 0.50,
+          "salience": 0.40,
+          "confidence": 0.65
+        },
+        "amity": {
+          "raw_score": 0.55,
+          "salience": 0.50,
+          "confidence": 0.70
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.50,
+          "salience": 0.45,
+          "confidence": 0.60
+        },
+        "cohesive_goals": {
+          "raw_score": 0.65,
+          "salience": 0.60,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost.",
+          "confidence": 0.90,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "We will protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "The forgotten men and women of our country will be forgotten no longer.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "It belongs to you. It belongs to everyone gathered here today and everyone watching all across America. This is your day. This is your celebration.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "But for too many of our citizens, a different reality exists: Mothers and children trapped in poverty in our inner cities; rust-out factories scattered like tombstones across the landscape of our Nation; an education system, flushed with cash, but which leaves our young and beautiful students deprived of all knowledge; and the crime, and the gangs, and the drugs that have stolen too many lives and robbed our country of so much unrealized potential.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We will build new roads, and highways, and bridges, and airports, and tunnels, and railways all across our wonderful Nation.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We will get our jobs back. We will bring back our borders. We will bring back our wealth. And yes, together, we will make America great again.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "We've made other countries rich while the wealth, strength, and confidence of our country has dissipated over the horizon.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "companionship",
+          "quote_text": "To overcome the challenges of our time, we must find common ground, and we must come together as one people.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We will eradicate radical Islamic terrorism, which we will eradicate completely from the face of the Earth.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We will seek friendship and good will with the nations of the world, but we do so with the understanding that it is the right of all nations to put their own interests first.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Politicians who are all talk and no action, constantly complaining, but never doing anything about it. The time for empty talk is over. Now arrives the hour of action.",
+          "confidence": 0.60,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Together, we will make America strong again. We will make America wealthy again. We will make America proud again. We will make America safe again.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

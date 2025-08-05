@@ -1,0 +1,112 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Constitutional Health Framework (CHF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis performed sequentially according to the framework's stepped approach, focusing on textual evidence for each dimension before integration."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "institutional_respect": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.65
+        },
+        "institutional_subversion": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "systemic_continuity": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "systemic_replacement": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it. The Constitution established the vehicle of impeachment that has occupied both houses of our Congress these many days. We have labored to faithfully execute our responsibilities to it.",
+          "confidence": 0.7,
+          "context_type": "procedural_language"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We've come to different conclusions, fellow senators, but I trust we have all followed the dictates of our conscience. I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.6,
+          "context_type": "norm_adherence"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "The president's counsel also notes that Vice President Biden appeared to have a conflict of interest when he undertook an effort to remove the Ukrainian prosecutor general. If he knew of the exhorbitant compensation his son was receiving from a company actually under investigation, the Vice President should have recused himself. While ignoring a conflict of interest is not a crime, it is surely very wrong.",
+          "confidence": 0.7,
+          "context_type": "process_dismissal"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instinctions, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+          "confidence": 0.8,
+          "context_type": "process_bypass"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.7,
+          "context_type": "authority_recognition"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.6,
+          "context_type": "system_support"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The president's purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.",
+          "confidence": 0.7,
+          "context_type": "authority_attacks"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.7,
+          "context_type": "system_delegitimization"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "As it is with each senator, my vote is an act of conviction. We've come to different conclusions, fellow senators, but I trust we have all followed the dictates of our conscience.",
+          "confidence": 0.5,
+          "context_type": "gradual_reform"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "My vote will likely be in the minority in the Senate. But irrespective of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.5,
+          "context_type": "system_rejection"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

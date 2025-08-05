@@ -39,6 +39,7 @@ All documents in this corpus are:
 - **Document Types**: Presidential speeches (47), Party platforms (18)
 - **Size Range**: 8.7KB - 55KB per speech; 43KB - 942KB per platform
 - **Presidential Coverage**: Clinton (11), Bush (11), Obama (11), Trump (8), Biden (6)
+- **Recent Update**: Backfilled missing Trump_SOTU_2020.txt, removed erroneous Trump_SOTU_2021.txt
 - **Party Platform Coverage**: Democratic (9), Republican (9) spanning 1992-2024 elections
 
 **Document Distribution**:

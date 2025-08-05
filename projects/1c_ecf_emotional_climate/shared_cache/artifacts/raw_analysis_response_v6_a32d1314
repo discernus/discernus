@@ -1,0 +1,112 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis completed following the sequential, step-by-step methodology outlined in the framework. Each dimensional axis was analyzed independently before integration. Confidence in scoring and evidence extraction is high due to clear semantic markers and adherence to the framework's definition of each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.65,
+          "salience": 0.55,
+          "confidence": 0.70
+        },
+        "enmity": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "amity": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.65
+        },
+        "envy": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.70
+        },
+        "empathy": {
+          "raw_score": 0.35,
+          "salience": 0.40,
+          "confidence": 0.65
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+          "confidence": 0.80,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.70,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.75,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "My vote will likely be in the minority in the Senate. But irrespectively of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.70,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The president asked a foreign government to investigate his political rival.",
+          "confidence": 0.85,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The president withheld vital military funds from that government to press it to do so.",
+          "confidence": 0.80,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We have arrived at different judgments, but I hope we respect each other's good faith.",
+          "confidence": 0.60,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Like each member of this deliberative body, I love our country.",
+          "confidence": 0.50,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "With regard to Hunter Biden, taking excessive advantage of his father's name is unsavory but also not a crime.",
+          "confidence": 0.65,
+          "context_type": "semantic"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+          "confidence": 0.70,
+          "context_type": "semantic"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -18,7 +18,7 @@ hypothesis: |
   determine if significant relationships exist between experimental factors and 
   Constitutional Direction Index scores.
 
-framework: "../../frameworks/reference/core/chf_v7.1.md"
+framework: "../../frameworks/reference/core/chf_v7.3.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"

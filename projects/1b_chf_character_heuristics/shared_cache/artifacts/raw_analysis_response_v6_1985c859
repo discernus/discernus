@@ -1,0 +1,94 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on each constitutional axis independently before integration. Evidence extraction prioritized direct quotes supporting identified dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "institutional_respect": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "institutional_subversion": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "systemic_continuity": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "systemic_replacement": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We must have legislation that will protect the sharecropper who is put off of his farm because he dares to register to vote.",
+          "confidence": 0.6,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But what did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+          "confidence": 0.8,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "To those who have said, 'Be patient and wait,' we must say that we can not be patient. We do not want our freedom gradually, but we want to be free now!",
+          "confidence": 0.9,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We come here today with a great sense of misgiving. It is true that we support the administration's civil rights bill. We support it with great reservations, however.",
+          "confidence": 0.6,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?",
+          "confidence": 0.75,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South, through the streets of Jackson, through the streets of Danville, through the streets of Cambridge, through the streets of Birmingham.",
+          "confidence": 0.8,
+          "context_type": "identifying_markers"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.8,
+          "context_type": "identifying_markers"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

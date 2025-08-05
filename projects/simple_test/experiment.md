@@ -14,7 +14,7 @@ hypothesis: |
   The enhanced gasket architecture will successfully extract, process, and synthesize 
   character coherence patterns with salience and confidence metadata across different political approaches.
 
-framework: "../../frameworks/reference/core/caf_v7.1.md"
+framework: "../../frameworks/reference/core/caf_v7.3.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"

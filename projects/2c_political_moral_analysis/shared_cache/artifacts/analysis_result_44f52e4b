@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_62985f94fd1c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "political_moral_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Moral Foundations Theory Framework\",\n    \"framework_version\": \"7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a sequential chain-of-thought approach, focusing on defined moral dimensions. Evidence extraction prioritizes direct quotes reflecting the core concepts of each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"care\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"harm\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"fairness\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"cheating\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"loyalty\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.15,\n          \"confidence\": 0.7\n        },\n        \"betrayal\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.25,\n          \"confidence\": 0.75\n        },\n        \"authority\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.65\n        },\n        \"subversion\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.65,\n          \"confidence\": 0.8\n        },\n        \"sanctity\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"degradation\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.15,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"care\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Vete\u00adrans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"support_vulnerable\"\n        },\n        {\n          \"dimension\": \"harm\",\n          \"quote_text\": \"But I will tell you this, in the midst of all of these addiction, the worst and most dangerous addiction we have is the greed of the oligarchs.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"prevent_harm\"\n        },\n        {\n          \"dimension\": \"fairness\",\n          \"quote_text\": \"In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses. It's a serious problem in my state.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"equality_concern\"\n        },\n        {\n          \"dimension\": \"cheating\",\n          \"quote_text\": \"These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"prevent_exploitation\"\n        },\n        {\n          \"dimension\": \"loyalty\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"group_solidarity\"\n        },\n        {\n          \"dimension\": \"betrayal\",\n          \"quote_text\": \"The rich want to get richer and they don't care who they step on.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"group_abandonment\"\n        },\n        {\n          \"dimension\": \"authority\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"respect_authority\"\n        },\n        {\n          \"dimension\": \"subversion\",\n          \"quote_text\": \"What these guys are busy doing right now is going after Medica\u00adid, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"challenge_authority\"\n        },\n        {\n          \"dimension\": \"sanctity\",\n          \"quote_text\": \"You got a President Trump getting inaugurated. And I must tell you one of the more bizarre experiences of my life was I was kind of pushed into the front row of that. And there I am, there's Trump, and right behind him, you got Musk, Bezos, and Zuckerberg, three wealthiest guys in the country.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"sacred_values\"\n        },\n        {\n          \"dimension\": \"degradation\",\n          \"quote_text\": \"That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"moral_decay\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T19:00:58.545207+00:00",
+    "end_time": "2025-08-05T19:01:02.734029+00:00",
+    "duration_seconds": 4.188822,
+    "llm_interaction_hash": "108d6a5f786ecae8"
+  },
+  "input_artifacts": {
+    "framework_hash": "7a5f8f243d8414ebcb423170aaa44965fdcdd3e9bd9f47a48a894b332cdfd1b9",
+    "document_hashes": [
+      "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2c_political_moral_analysis",
+      "experiment_root": "/Volumes/code/discernus/projects/2c_political_moral_analysis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T190053Z_84e3de6e"
+  }
+}

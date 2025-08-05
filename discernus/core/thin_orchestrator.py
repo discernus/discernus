@@ -1351,11 +1351,12 @@ Respond with only the JSON object."""
                                 # Extract gasket_schema if present
                                 gasket_schema = framework_config.get('gasket_schema')
                                 if gasket_schema:
-                                    # Only support v7.1 format - no backward compatibility
-                                    if gasket_schema.get('version') == '7.1' and 'target_keys' in gasket_schema:
+                                    # Support v7.1 and v7.3 formats (v7.3 is backward compatible)
+                                    supported_versions = ['7.1', '7.3']
+                                    if gasket_schema.get('version') in supported_versions and 'target_keys' in gasket_schema:
                                         return gasket_schema
                                     else:
-                                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Only v7.1 is supported.")
+                                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}")
                                         return None
                             except json.JSONDecodeError:
                                 pass  # Try next JSON block
@@ -1437,11 +1438,11 @@ Respond with only the JSON object."""
         gasket_schema = self._extract_gasket_schema_from_framework(framework_content)
         
         if not gasket_schema:
-            # No backward compatibility - error out on non-v7.1 frameworks
-            print("❌ No valid v7.1 gasket_schema found in framework")
+            # No backward compatibility - error out on non-supported frameworks
+            print("❌ No valid gasket_schema found in framework")
             print(f"🔍 Framework content length: {len(framework_content)}")
             print(f"🔍 Contains ```json: {'```json' in framework_content}")
-            raise ValueError("Framework must have valid v7.1 gasket_schema. No backward compatibility with v7.0 or earlier.")
+            raise ValueError("Framework must have valid gasket_schema (v7.1 or v7.3). No backward compatibility with v7.0 or earlier.")
         
         # Extract evidence from raw response for v7.1 integration (Issue #281)
         document_evidence_list = self._extract_evidence_from_delimited(raw_analysis_response)
