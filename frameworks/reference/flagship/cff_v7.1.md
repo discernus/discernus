@@ -17,7 +17,7 @@ Traditional text analysis focuses on topical content or sentiment polarity, but 
 
 ## Research Foundations
 
-The CFF builds on established research in social cohesion theory (Putnam, 2000), emotional contagion studies (Hatfield et al., 2014), and democratic resilience literature (Levitsky & Ziblatt, 2018). Each analytical dimension is grounded in peer-reviewed social psychology and political science research.
+The CFF builds on established research in social cohesion theory (Putnam, 2000), emotional contagion studies (Hatfield et al., 1993), and democratic resilience literature (Levitsky & Ziblatt, 2018). Each analytical dimension is grounded in peer-reviewed social psychology and political science research.
 
 **Theoretical Innovation: Salience-Weighted Social Cohesion Analysis**
 
@@ -33,7 +33,7 @@ The CFF's salience weighting addresses this gap by measuring not just the presen
 - Fukuyama, F. (1995). *Trust: The Social Virtues and the Creation of Prosperity*. New York: Free Press.
 
 **Emotional Climate Research:**
-- Hatfield, E., Cacioppo, J. T., & Rapson, R. L. (2014). *Emotional Contagion*. Cambridge University Press.
+- Hatfield, E., Cacioppo, J. T., & Rapson, R. L. (1993). *Emotional Contagion*. Cambridge University Press.
 - Rimé, B. (2009). Emotion elicits the social sharing of emotion: Theory and empirical review. *Emotion Review*, 1(1), 60-85.
 - Marcus, G. E., Neuman, W. R., & MacKuen, M. (2000). *Affective Intelligence and Political Judgment*. University of Chicago Press.
 
@@ -86,7 +86,7 @@ The CFF analyzes discourse across five bipolar dimensions, each grounded in esta
 
 **Envy** (0.0-1.0): Resentment toward others' success, zero-sum framing where others' gains represent personal losses. Envy undermines social trust and cooperative behavior (Smith & Kim, 2007).
 
-**Compersion** (0.0-1.0): Celebration of others' success, abundance mindset where others' achievements inspire rather than threaten. Compersion strengthens social bonds and collective efficacy (Mudra, 2016).
+**Compersion** (0.0-1.0): Celebration of others' success, abundance mindset where others' achievements inspire rather than threaten. Compersion strengthens social bonds and collective efficacy through positive emotional contagion processes.
 
 ### **Relational Climate**
 *Grounded in intergroup contact theory (Allport, 1954) and conflict transformation research (Lederach, 1997)*
