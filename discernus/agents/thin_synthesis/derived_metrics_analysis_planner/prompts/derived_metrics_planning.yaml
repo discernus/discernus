@@ -1,0 +1,192 @@
+system_prompt: |
+  You are an expert research analyst. Always respond with valid JSON only.
+
+user_prompt_template: |
+  You are an expert research analyst tasked with creating a structured analysis plan for DERIVED METRICS CALCULATION AND STATISTICAL ANALYSIS. This is Stage 2 of a two-stage process.
+
+  ## EXPERIMENT CONTEXT
+  {experiment_context}
+
+  ## FRAMEWORK SPECIFICATION
+  {framework_spec}
+
+  ## CORPUS MANIFEST
+  {corpus_manifest}
+
+  ## RESEARCH QUESTIONS
+  {research_questions}
+
+  ## AVAILABLE RAW DATA
+  {raw_data_summary}
+
+  ## STRICT COLUMN DISCOVERY INSTRUCTIONS
+  **CRITICAL DATA-DRIVEN REQUIREMENT**: You MUST discover and use ONLY the column names that actually exist in the raw analysis data provided above.
+  
+  **DISCOVERY PROCESS:**
+  1. **EXAMINE the "Available Columns" list** in the raw data summary above
+  2. **IDENTIFY available grouping variables** from the actual column names (categorical metadata columns)
+  3. **IDENTIFY available dimensional scores** ending with _score, _salience, _confidence
+  4. **USE ONLY the exact column names** found in the Available Columns list
+  
+  **MANDATORY COLUMN VERIFICATION:**
+  Before referencing ANY column in your analysis plan, verify it exists in the Available Columns list from the raw data summary above.
+
+  **CRITICAL FAIL-FAST PRINCIPLE**: If a required column doesn't exist in Available Columns, DO NOT include tasks that reference it. Instead, skip those analyses and note the missing requirements. This prevents generating meaningless statistical results with wrong data.
+  
+  **ACADEMIC INTEGRITY**: Better to report "analysis could not be performed due to missing metadata" than to produce incorrect statistical results using wrong grouping variables.
+  
+  ## CRITICAL COLUMN NAMING RULES
+  **The DataFrame uses FLAT column names, NOT hierarchical JSON paths:**
+  - ❌ WRONG: scores.dimensions.fear.score → ✅ CORRECT: fear_score
+  - ❌ WRONG: scores.dimensions.hope.salience → ✅ CORRECT: hope_salience  
+  - ❌ WRONG: scores.dimensions.envy.confidence → ✅ CORRECT: envy_confidence
+  **Always use the FLAT column names from the Available Columns list**
+
+  ## STAGE 2 FOCUS: DERIVED METRICS AND STATISTICAL ANALYSIS
+  Your task is to plan how to calculate DERIVED METRICS and perform STATISTICAL ANALYSIS on the raw data collected in Stage 1.
+
+  **CRITICAL CONSTRAINTS:**
+  - Focus ONLY on derived metrics calculation and statistical analysis
+  - DO NOT plan raw data collection - that was done in Stage 1
+  - Plan mathematical operations, statistical tests, and hypothesis testing
+  - Focus on what calculations and analyses should be performed
+
+  **FRAMEWORK INTERPRETATION:**
+  - Read the framework specification to understand what derived metrics should be calculated
+  - Identify the mathematical formulas and calculation requirements
+  - Understand the statistical analysis needs for hypothesis testing
+  - Focus on Stage 2 calculations as defined in the framework
+
+  **TASK REQUIREMENTS:**
+  1. **Derived Metrics Calculation**: Plan how to calculate derived indices and metrics
+  2. **Statistical Analysis**: Plan hypothesis testing and statistical validation
+  3. **Data Transformation**: Plan any necessary data transformations or aggregations
+  4. **Quality Validation**: Plan validation of calculated metrics and statistical results
+
+  ## v7.3 STATIC WEIGHTS SUPPORT
+  **STATIC WEIGHTS USAGE**:
+  - The `experiment_context` may contain a `static_weights` object.
+  - If this object exists and is not empty, you MUST use these weights in your `calculate_derived_metrics` formulas.
+  - The framework's narrative will explain the theoretical basis for these weights.
+  - **Formula Syntax**: Reference static weights using `static_weights.weight_name` (e.g., `(dignity_score * static_weights.primary_dimension)`).
+  - If the `static_weights` object is empty or absent, generate formulas using dynamic weights (e.g., salience) or simple averages as specified by the framework.
+
+  ## AVAILABLE TOOLS FOR DERIVED METRICS AND ANALYSIS
+  You have access to these tools for planning derived metrics and statistical analysis:
+
+  1. **calculate_derived_metrics**: Calculate derived indices and metrics from raw data
+     - Parameters: metric_formulas (dict of formulas), input_columns (list of raw data columns)
+     - **MATHEMATICAL CAPABILITIES**: You have access to comprehensive mathematical functions:
+       * Python built-ins: min, max, abs, sum, len, round, pow, float, int, bool
+       * Math functions: sqrt, log, log10, exp, sin, cos, tan, asin, acos, atan, atan2, ceil, floor, pi, e
+       * NumPy operations: np.minimum, np.maximum, np.mean, np.median, np.std, np.var (full numpy access)
+       * Array operations: All numpy functions work with column data arrays
+
+  2. **perform_one_way_anova**: Perform one-way ANOVA for group differences
+     - Parameters: grouping_variable (string), dependent_variable (string)
+     - **USE ONLY AVAILABLE CATEGORICAL VARIABLES**: Check Available Columns list for categorical variables (corpus metadata columns)
+     - **USE ONLY AVAILABLE CONTINUOUS VARIABLES**: Use dimensional scores or calculated metrics that exist in Available Columns
+
+  3. **perform_two_way_anova**: Perform two-way ANOVA for factorial designs
+     - Parameters: factor1 (string), factor2 (string), dependent_variable (string)
+     - **USE ONLY AVAILABLE CATEGORICAL VARIABLES**: Check Available Columns list for categorical variables to use as factors
+
+  4. **calculate_descriptive_stats**: Generate descriptive statistics
+     - Parameters: columns (list of columns), grouping_variable (optional)
+
+  5. **generate_correlation_matrix**: Create correlation matrices for dimensional relationships
+     - Parameters: dimensions (list of dimensions to correlate), correlation_method
+
+  6. **validate_calculated_metrics**: Validate the quality and reliability of calculated metrics
+     - Parameters: validation_rules (list of validation rules), quality_thresholds
+     - **CRITICAL**: Only use these validation rule names:
+       * "missing_data_check" - Check for missing data in calculated metrics
+       * "range_check" - Validate value ranges for calculated metrics  
+       * "consistency_check" - Check logical consistency of calculated metrics
+     - Do NOT use any other validation rule names - they will fail
+
+  7. **create_summary_statistics**: Generate descriptive statistics for all metrics
+     - Parameters: metrics (list of metrics to summarize), summary_types (mean, std, etc.)
+
+  8. **Note**: Advanced temporal analysis functions (change point detection) are not available in this run.
+     For H8 hypothesis testing, use correlation analysis and descriptive statistics to identify patterns.
+
+  9. **Note**: Framework reliability metrics (Cronbach's alpha) are not available in this run.
+     For H7 hypothesis testing, use extraction success rates from available data.
+
+  ## INTELLIGENT PLANNING STRATEGY
+  **CRITICAL TASK ORDERING**:
+  1. **FIRST**: Calculate derived metrics using calculate_derived_metrics
+  2. **THEN**: Use those calculated metrics in statistical tests
+  3. **Use ONLY the columns you discover** from the raw data - no exceptions
+  4. **For ANOVA grouping variables**, use ONLY categorical variables found in Available Columns list
+  5. **For ANOVA dependent variables**, use dimensional scores or calculated metrics
+  6. **For correlation analysis**, use dimensional scores only
+  7. **For differentiation tests**, group by available categorical variables and test dimensional scores (continuous)
+  8. **For temporal/categorical analysis**, use only categorical variables found in Available Columns list
+  9. **Focus on proper statistical design** - categorical grouping variables, continuous dependent variables
+
+  **TASK SEQUENCING RULES**:
+  - Task 1: ALWAYS calculate_derived_metrics first
+  - Tasks 2+: Use calculated metrics from Task 1 in statistical tests
+  - Never reference derived metrics before they're calculated
+
+  **PARAMETER NAMING**:
+  - Use singular parameter names: dependent_variable, grouping_variable
+  - Call individual functions directly: perform_one_way_anova, perform_two_way_anova
+
+  **DATA-DRIVEN STATISTICAL TEST DESIGN RULES**:
+  - **ANOVA grouping variables**: Use ONLY categorical metadata columns that exist in Available Columns
+  - **Dependent variables**: Use ONLY continuous variables (dimensional scores, calculated metrics) that exist
+  - **Before planning any ANOVA**: Verify both grouping and dependent variables exist in Available Columns
+  - **If required columns don't exist**: Skip that analysis and note the missing requirements
+  - **Correlation analysis**: Use ONLY dimensional scores that exist in Available Columns
+  - **NO ASSUMPTIONS**: Every column reference must be verified against Available Columns
+  
+  **COLUMN USAGE PRINCIPLE**:
+  - ✅ ALWAYS use existing column names from Available Columns list exactly as discovered
+  - ✅ If temporal analysis is needed but no temporal columns exist, skip temporal analysis
+  - ✅ If categorical analysis is needed but required categorical columns don't exist, skip that analysis
+  - ✅ Report what analyses were skipped and why in the analysis plan
+
+  ## OUTPUT FORMAT
+  You must output a valid JSON object with this exact structure:
+
+  {{
+    "stage": "derived_metrics_analysis",
+    "experiment_summary": "Brief description of what derived metrics and analysis will be performed",
+    "tasks": {{
+      "task_name_1": {{
+        "tool": "tool_name",
+        "parameters": {{
+          "param1": "value1",
+          "param2": "value2"
+        }},
+        "purpose": "Why this calculation or analysis is needed"
+      }},
+      "task_name_2": {{
+        "tool": "tool_name",
+        "parameters": {{
+          "param1": "value1"
+        }},
+        "purpose": "Why this calculation or analysis is needed"
+      }}
+    }}
+  }}
+
+  ## REQUIREMENTS
+  1. Use only the available tools listed above
+  2. Focus exclusively on derived metrics and statistical analysis - no raw data collection
+  3. Reference specific framework requirements for calculations and analysis
+  4. Plan for all derived metrics and statistical tests specified in the framework
+  5. Include validation of calculated metrics and statistical results
+  6. Output only valid JSON - no markdown formatting, no explanations outside the JSON
+  7. **CRITICAL**: Discover column names from the raw data - do not assume any specific names
+  8. **MANDATORY**: Every column reference must exist in the Available Columns list - NO EXCEPTIONS
+  9. **FAILURE PREVENTION**: If a required column doesn't exist, skip that analysis task entirely
+
+  Generate your derived metrics and statistical analysis plan now:
+
+parameters:
+  temperature: 0.1
+  response_format: {"type": "json_object"} 

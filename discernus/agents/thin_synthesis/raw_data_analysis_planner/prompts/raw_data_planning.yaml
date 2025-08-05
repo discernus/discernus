@@ -1,0 +1,113 @@
+system_prompt: |
+  You are an expert research analyst. Always respond with valid JSON only.
+
+user_prompt_template: |
+  You are an expert research analyst tasked with creating a structured analysis plan for RAW DATA COLLECTION. This is Stage 1 of a two-stage process.
+
+  ## EXPERIMENT CONTEXT
+  {experiment_context}
+
+  ## FRAMEWORK SPECIFICATION
+  {framework_spec}
+
+  ## CORPUS MANIFEST
+  {corpus_manifest}
+
+  ## RESEARCH QUESTIONS
+  {research_questions}
+
+  ## STAGE 1 FOCUS: RAW DATA VALIDATION AND ORGANIZATION
+  Your task is to plan how to VALIDATE and ORGANIZE the raw data that already exists in the DataFrame. The data has already been collected from the LLM analysis phase.
+
+  **CRITICAL CONSTRAINTS:**
+  - The raw data ALREADY EXISTS in the DataFrame - do not try to "collect" it
+  - Focus ONLY on validation and descriptive analysis of existing data
+  - Plan validation checks and summary statistics for data quality
+  - DO NOT plan derived metrics or statistical tests - that's Stage 2
+
+  **FRAMEWORK INTERPRETATION:**
+  - Read the framework specification to understand what raw data should be collected
+  - Identify the dimensional scores, metadata, and evidence requirements
+  - Understand the output contract and data structure requirements
+  - Focus on Stage 1 data collection as defined in the framework
+
+  **TASK REQUIREMENTS:**
+  1. **Data Validation**: Plan validation of existing dimensional scores for completeness and quality
+  2. **Summary Statistics**: Plan descriptive statistics for existing raw data
+  3. **Data Quality Checks**: Plan validation of data integrity and ranges
+  4. **Basic Organization**: Plan simple organization and validation of existing data
+
+  ## AVAILABLE TOOLS FOR RAW DATA VALIDATION
+  You have access to these tools for planning raw data validation and organization:
+
+  1. **calculate_descriptive_stats**: Generate descriptive statistics for raw data validation
+     - Parameters: columns (list of columns), grouping_variable (optional)
+
+  2. **create_summary_statistics**: Generate summary statistics for raw data overview
+     - Parameters: metrics (list of column names), summary_types (list of summary types like ["mean", "std", "min", "max"])
+
+  ## DATA STRUCTURE GUIDANCE
+  **CRITICAL**: Only use columns that actually exist in the DataFrame:
+  - Use 'aid' as the primary document identifier
+  - Framework scores: Use flat column names ending in '_score' (e.g., 'dimension_name_score')
+  - Metadata: Use flat column names ending in '_confidence' and '_salience'
+  - Corpus metadata: Use ONLY columns that exist in the actual corpus manifest (check the Available Columns list)
+  - ❌ DO NOT reference 'evidence_quotes' - evidence is not available as a separate column
+  - ❌ DO NOT reference hierarchical paths like 'scores.dimensions.fear.score'
+  - ❌ DO NOT assume column names - always use the Available Columns list provided in the experiment context
+  
+  ## CRITICAL COLUMN NAMING RULES
+  **The DataFrame uses FLAT column names, NOT hierarchical JSON paths:**
+  - ❌ WRONG: scores.dimensions.fear.score → ✅ CORRECT: fear_score
+  - ❌ WRONG: scores.dimensions.hope.salience → ✅ CORRECT: hope_salience  
+  - ❌ WRONG: scores.dimensions.envy.confidence → ✅ CORRECT: envy_confidence
+  **Always use the FLAT column names shown in the Available Columns list**
+
+  ## INTELLIGENT PLANNING STRATEGY
+  Before planning raw data collection:
+  1. **Check the Available Columns list** provided in the experiment context - this is your authoritative source
+  2. **Focus on framework-agnostic dimensional scores** (columns ending in '_score')
+  3. **Plan validation using descriptive statistics** on dimensional score columns
+  4. **Use ONLY column names from the Available Columns list** - never assume column names
+  5. **Avoid referencing non-existent columns** like 'evidence_quotes' or hierarchical paths
+  6. **Plan simple validation tasks** like checking score ranges (0.0-1.0) and data completeness
+  7. **For grouping variables**, use only metadata columns that actually exist in the Available Columns list
+
+  ## OUTPUT FORMAT
+  You must output a valid JSON object with this exact structure:
+
+  {{
+    "stage": "raw_data_collection",
+    "experiment_summary": "Brief description of what raw data will be collected",
+    "tasks": {{
+      "task_name_1": {{
+        "tool": "tool_name",
+        "parameters": {{
+          "param1": "value1",
+          "param2": "value2"
+        }},
+        "purpose": "Why this data collection is needed"
+      }},
+      "task_name_2": {{
+        "tool": "tool_name",
+        "parameters": {{
+          "param1": "value1"
+        }},
+        "purpose": "Why this data collection is needed"
+      }}
+    }}
+  }}
+
+  ## REQUIREMENTS
+  1. Use only the available tools listed above
+  2. Focus exclusively on raw data collection - no derived metrics or statistical analysis
+  3. Reference specific framework requirements for data collection
+  4. Plan for all raw data requirements specified in the framework
+  5. Include validation of raw data quality and completeness
+  6. Output only valid JSON - no markdown formatting, no explanations outside the JSON
+
+  Generate your raw data collection plan now:
+
+parameters:
+  temperature: 0.1
+  response_format: {"type": "json_object"} 
