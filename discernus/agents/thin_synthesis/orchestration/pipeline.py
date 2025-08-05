@@ -4,7 +4,7 @@ THIN Declarative Mathematical Synthesis Pipeline - Production Version
 ===================================================================
 
 Integrates with Discernus infrastructure:
-- MinIO artifact storage for content-addressable data
+- LocalArtifactStorage for content-addressable data
 - AuditLogger for complete provenance
 - MathToolkit for reliable mathematical operations
 
@@ -35,7 +35,7 @@ import sys
 project_root = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from discernus.storage.minio_client import DiscernusArtifactClient
+# MinIO client removed - using LocalArtifactStorage via compatibility wrapper
 from discernus.core.audit_logger import AuditLogger
 
 # Import THIN synthesis agents
@@ -51,8 +51,8 @@ from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_
 class ProductionPipelineRequest:
     """Production pipeline request using artifact hashes instead of file paths."""
     framework_spec: str
-    scores_artifact_hash: str  # MinIO artifact hash for scores CSV
-    evidence_artifact_hash: str  # MinIO artifact hash for evidence CSV
+    scores_artifact_hash: str  # LocalArtifactStorage hash for scores CSV
+    evidence_artifact_hash: str  # LocalArtifactStorage hash for evidence CSV
     experiment_context: Optional[str] = None
     max_evidence_per_finding: int = 3
     min_confidence_threshold: float = 0.7
@@ -99,7 +99,7 @@ class ProductionThinSynthesisPipeline:
     """
     
     def __init__(self,
-                 artifact_client: DiscernusArtifactClient,
+                 artifact_client,  # LocalArtifactStorage compatibility wrapper
                  audit_logger: AuditLogger,
                  model: str,
                  analysis_model: Optional[str] = None,
@@ -109,7 +109,7 @@ class ProductionThinSynthesisPipeline:
         Initialize production pipeline with infrastructure dependencies.
         
         Args:
-            artifact_client: MinIO client for content-addressable storage
+            artifact_client: LocalArtifactStorage compatibility wrapper for content-addressable storage
             audit_logger: Audit logger for complete provenance
             model: LLM model for all agents
         """
@@ -166,7 +166,7 @@ class ProductionThinSynthesisPipeline:
             })
         }
         
-        # Store content with metadata using MinIO's metadata capabilities
+        # Store content with metadata using LocalArtifactStorage capabilities
         hash_id = hashlib.sha256(content_bytes).hexdigest()
         
         # Check if already exists (cache hit)
@@ -177,7 +177,7 @@ class ProductionThinSynthesisPipeline:
         # Store artifact with metadata using the artifact client interface
         try:
             if hasattr(self.artifact_client, 'client') and hasattr(self.artifact_client, 'bucket'):
-                # Direct MinIO client - store with metadata
+                # Direct LocalArtifactStorage client - store with metadata
                 self.artifact_client.client.put_object(
                     bucket_name=self.artifact_client.bucket,
                     object_name=hash_id,
@@ -185,9 +185,9 @@ class ProductionThinSynthesisPipeline:
                     length=len(content_bytes),
                     metadata=metadata
                 )
-                self.logger.debug(f"Stored artifact with MinIO metadata: {hash_id}")
+                self.logger.debug(f"Stored artifact with LocalArtifactStorage metadata: {hash_id}")
             elif hasattr(self.artifact_client, 'local_storage'):
-                # MinIOCompatibleStorage wrapper - call underlying storage with metadata
+                # LocalArtifactStorage compatibility wrapper - call underlying storage with metadata
                 hash_result = self.artifact_client.local_storage.put_artifact(content_bytes, metadata)
                 if hash_result != hash_id:
                     self.logger.warning(f"Hash mismatch: expected {hash_id}, got {hash_result}")

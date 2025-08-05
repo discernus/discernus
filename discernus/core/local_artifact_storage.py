@@ -151,15 +151,23 @@ class LocalArtifactStorage:
             timestamp = self._get_timestamp()[:10]  # YYYY-MM-DD
             return f"synthesis_report_{timestamp}_{short_hash}.md"
         elif artifact_type == "corpus_document":
-            # Try to extract meaningful name from metadata
+            # Extract meaningful name from original_filename
             original_name = metadata.get("original_filename", "")
             if original_name:
-                name_part = original_name.replace(".txt", "").replace(".md", "")
-                return f"corpus_{name_part}_{short_hash}.txt"
+                # Extract just the filename without path and extension
+                base_name = Path(original_name).stem
+                extension = Path(original_name).suffix or ".txt"
+                return f"{base_name}_{short_hash}{extension}"
             return f"corpus_document_{short_hash}.txt"
         elif artifact_type == "framework":
-            framework_name = metadata.get("framework_name", "framework")
-            return f"framework_{framework_name}_{short_hash}.md"
+            # Extract framework name from original_filename
+            original_name = metadata.get("original_filename", "")
+            if original_name:
+                # Extract just the filename without path and extension
+                base_name = Path(original_name).stem
+                extension = Path(original_name).suffix or ".md"
+                return f"{base_name}_{short_hash}{extension}"
+            return f"framework_{short_hash}.md"
         else:
             return f"{artifact_type}_{short_hash}"
     

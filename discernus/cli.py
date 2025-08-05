@@ -14,7 +14,7 @@ Management Commands:
 - discernus validate <experiment_path>  - Validate experiment structure  
 - discernus list                        - List available experiments
 - discernus status                      - Show infrastructure status
-- discernus start                       - Start required infrastructure (MinIO)
+- discernus run                         - Execute experiments (no infrastructure required)
 - discernus stop                        - Stop infrastructure services
 """
 
@@ -43,32 +43,13 @@ def check_infrastructure() -> Dict[str, bool]:
         except Exception:
             return False
     
-    return {
-        'minio': is_port_open('localhost', 9000),
-        'minio_console': is_port_open('localhost', 9001),
-    }
+    # Infrastructure checks removed - system now uses local storage only
+    return {}
 
 
 def ensure_infrastructure() -> bool:
-    """Ensure required infrastructure is running, start it if needed"""
-    status = check_infrastructure()
-    
-    if not status['minio']:
-        click.echo("🚀 Starting MinIO infrastructure...")
-        try:
-            # Use the infrastructure startup script we created
-            result = subprocess.run(['./scripts/start_infrastructure.sh'], 
-                                  capture_output=True, text=True, cwd='.')
-            if result.returncode == 0:
-                click.echo("✅ Infrastructure started successfully")
-                return True
-            else:
-                click.echo(f"❌ Failed to start infrastructure: {result.stderr}")
-                return False
-        except Exception as e:
-            click.echo(f"❌ Error starting infrastructure: {e}")
-            return False
-    
+    """Infrastructure startup removed - system now uses local storage only"""
+    # No infrastructure required for local storage
     return True
 
 
@@ -826,27 +807,14 @@ def artifacts(experiment_path: str):
 @cli.command()
 def status():
     """Show infrastructure and system status"""
-    click.echo("🔍 Discernus Infrastructure Status")
+    click.echo("🔍 Discernus System Status")
     
-    status = check_infrastructure()
-    
-    click.echo("📊 Services:")
-    click.echo(f"   MinIO Storage: {'✅ Running' if status['minio'] else '❌ Stopped'} (localhost:9000)")
-    click.echo(f"   MinIO Console: {'✅ Running' if status['minio_console'] else '❌ Stopped'} (localhost:9001)")
-    
-    # Test MinIO connection if running
-    if status['minio']:
-        try:
-            from discernus.storage.minio_client import get_default_client
-            client = get_default_client()
-            click.echo("   MinIO Connection: ✅ Connected")
-        except Exception as e:
-            click.echo(f"   MinIO Connection: ❌ Failed ({e})")
+    click.echo("📊 Storage:")
+    click.echo("   Local Storage: ✅ Ready (no external dependencies)")
     
     click.echo("")
     click.echo("💡 Commands:")
-    click.echo("   discernus start      - Start infrastructure services")
-    click.echo("   discernus stop       - Stop infrastructure services")
+    click.echo("   discernus run        - Run experiments using local storage")
     click.echo("   discernus run        - Execute complete experiment")
     click.echo("   discernus continue   - Resume from existing artifacts")
     click.echo("   discernus debug      - Interactive debugging mode")
@@ -854,36 +822,16 @@ def status():
 
 @cli.command()
 def start():
-    """Start required infrastructure services"""
-    click.echo("🚀 Starting Discernus infrastructure...")
-    
-    try:
-        result = subprocess.run(['./scripts/start_infrastructure.sh'], 
-                              capture_output=False, text=True)
-        if result.returncode == 0:
-            click.echo("✅ Infrastructure started successfully")
-        else:
-            click.echo("❌ Infrastructure startup failed")
-            sys.exit(1)
-    except Exception as e:
-        click.echo(f"❌ Error starting infrastructure: {e}")
-        sys.exit(1)
+    """Start command removed - no infrastructure services required"""
+    click.echo("ℹ️  No infrastructure services to start")
+    click.echo("   Discernus now uses local storage with no external dependencies")
 
 
 @cli.command()
 def stop():
-    """Stop infrastructure services"""
-    click.echo("🛑 Stopping Discernus infrastructure...")
-    
-    try:
-        # Stop MinIO
-        subprocess.run(['pkill', '-f', 'minio server'], capture_output=True)
-        # Stop Redis (if running)
-        subprocess.run(['pkill', 'redis-server'], capture_output=True)
-        
-        click.echo("✅ Infrastructure stopped")
-    except Exception as e:
-        click.echo(f"❌ Error stopping infrastructure: {e}")
+    """Stop command removed - no infrastructure services required"""
+    click.echo("ℹ️  No infrastructure services to stop")
+    click.echo("   Discernus now uses local storage with no external dependencies")
 
 
 @cli.command()
@@ -920,38 +868,10 @@ def visualize_provenance(run_directory):
         sys.exit(1)
 
 
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-def browse_artifacts(run_directory):
-    """
-    Generate human-friendly artifact browser for an experiment run.
-    
-    Creates an HTML report with interactive artifact exploration:
-    - Human-readable artifact names and descriptions
-    - Search and filter capabilities
-    - Artifact content preview
-    - Dependency relationship exploration
-    
-    RUN_DIRECTORY: Path to the experiment run directory
-    """
-    try:
-        from discernus.core.artifact_browser import create_artifact_browser
-        
-        print(f"🔍 Generating artifact browser for: {run_directory}")
-        
-        report_path = create_artifact_browser(run_directory)
-        
-        print(f"✅ Artifact browser created: {report_path}")
-        print(f"📊 Open the HTML file in your browser to explore artifacts")
-        print(f"🌐 Features:")
-        print(f"   • Human-readable artifact names")
-        print(f"   • Search and filter capabilities")
-        print(f"   • Content preview")
-        print(f"   • Dependency relationships")
-        
-    except Exception as e:
-        print(f"❌ Failed to generate artifact browser: {e}")
-        sys.exit(1)
+
+
+
+
 
 
 def main():

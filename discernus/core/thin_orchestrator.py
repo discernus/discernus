@@ -458,6 +458,33 @@ Respond with only the JSON object."""
                 else:
                     print(f"⚠️  CSV export failed - continuing without CSV files")
                 
+                            # Create provenance-first artifact organization for analysis-only runs
+            try:
+                from discernus.core.provenance_organizer import ProvenanceOrganizer
+                provenance_organizer = ProvenanceOrganizer(self.security, audit)
+                experiment_metadata = {
+                    "experiment_name": experiment_config.get("name", "Unknown Experiment"),
+                    "run_timestamp": run_timestamp,
+                    "framework_version": experiment_config.get("framework", "Unknown Framework"),
+                    "model_used": analysis_model,
+                    "mode": "analysis_only"
+                }
+                
+                provenance_result = provenance_organizer.organize_run_artifacts(
+                    run_folder, shared_cache_dir, experiment_metadata
+                )
+                
+                if provenance_result["success"]:
+                    print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                else:
+                    print("⚠️  Provenance organization failed, continuing with standard structure")
+                    
+            except Exception as e:
+                print(f"⚠️  Provenance organization error: {str(e)}")
+                audit.log_error("provenance_organization_error", str(e), {})
+            
+
+                
                 print(f"✅ Analysis completed - artifacts saved for synthesis:")
                 print(f"   - Scores: {scores_hash[:12]}...")
                 print(f"   - Evidence: {evidence_hash[:12]}...")
@@ -957,6 +984,8 @@ Respond with only the JSON object."""
             except Exception as e:
                 print(f"⚠️  Provenance organization error: {str(e)}")
                 audit.log_error("provenance_organization_error", str(e), {})
+            
+
             
             # Export comprehensive final CSV files including synthesis artifacts (Gasket #3a)
             # Extract synthesis artifact hashes from synthesis metadata

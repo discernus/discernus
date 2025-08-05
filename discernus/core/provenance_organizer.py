@@ -172,7 +172,8 @@ class ProvenanceOrganizer:
             try:
                 with open(manifest_path) as f:
                     manifest = json.load(f)
-                    # Extract artifact hashes from manifest
+                    
+                    # Extract artifact hashes from cache_analysis section
                     cache_analysis = manifest.get("cache_analysis", {})
                     artifact_storage = cache_analysis.get("artifact_storage", {})
                     for category, artifacts in artifact_storage.items():
@@ -180,6 +181,21 @@ class ProvenanceOrganizer:
                             used_artifacts.update(artifacts.keys())
                         elif isinstance(artifacts, list):
                             used_artifacts.update(artifacts)
+                    
+                    # Extract input artifacts (framework and corpus documents)
+                    input_artifacts = manifest.get("input_artifacts", {})
+                    
+                    # Add framework hash
+                    framework_info = input_artifacts.get("framework", {})
+                    if "hash" in framework_info:
+                        used_artifacts.add(framework_info["hash"])
+                    
+                    # Add corpus document hashes
+                    corpus_docs = input_artifacts.get("corpus_documents", [])
+                    for doc in corpus_docs:
+                        if "hash" in doc:
+                            used_artifacts.add(doc["hash"])
+                            
             except (json.JSONDecodeError, KeyError):
                 # If manifest parsing fails, continue with source_run filtering only
                 pass
@@ -276,12 +292,12 @@ class ProvenanceOrganizer:
             type_dir = artifacts_dir / target_dir
             
             for hash_id, metadata in artifacts:
-                # Use existing human-readable filename from registry
+                # Use the human-readable filename from registry (consistent with storage)
                 human_filename = metadata.get("human_filename", hash_id)
                 
-                # Create symlink to shared cache artifact (use relative path)
+                # Create symlink to shared cache artifact using human-readable name
                 symlink_path = type_dir / human_filename
-                target_path = shared_cache_dir / "artifacts" / human_filename
+                target_path = shared_cache_dir / "artifacts" / human_filename  # Target uses human-readable name
                 # Calculate relative path from run artifacts directory to shared cache
                 # From: projects/simple_test/runs/20250804T111225Z/artifacts/analysis_results/
                 # To:   projects/simple_test/shared_cache/artifacts/

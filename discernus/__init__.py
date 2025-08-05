@@ -6,7 +6,7 @@ A THIN architecture platform for systematic discourse analysis using LLMs.
 
 Main Components:
 - CLI: Command-line interface for experiment execution
-- Agents: Redis-based analysis agents with YAML prompts  
+- Agents: THIN analysis agents with YAML prompts (direct function calls)  
 - Core: Utilities for provenance, validation, and execution
 - Gateway: LLM provider abstraction layer
 """
