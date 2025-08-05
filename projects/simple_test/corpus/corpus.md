@@ -19,7 +19,7 @@ The corpus structure supports comparative analysis through consistent metadata f
 
 ```json
 {
-  "corpus_version": "v7.1",
+  "corpus_version": "v7.3",
   "file_manifest": [
     {
       "name": "john_mccain_2008_concession.txt",

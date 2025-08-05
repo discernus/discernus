@@ -695,15 +695,33 @@ Raw Analysis Data:
                 }
             )
             
+            # THIN: Extract framework calculation_spec for authoritative formulas
+            framework_calculation_spec = None
+            try:
+                import json
+                import re
+                # Extract JSON appendix from framework
+                json_pattern = r"```json\n(.*?)\n```"
+                json_match = re.search(json_pattern, request.framework_spec, re.DOTALL)
+                if json_match:
+                    framework_config = json.loads(json_match.group(1))
+                    framework_calculation_spec = framework_config.get("calculation_spec")
+                    if framework_calculation_spec:
+                        self.logger.info(f"THIN: Using framework calculation_spec with {len(framework_calculation_spec.get('formulas', {}))} authoritative formulas")
+                    else:
+                        self.logger.warning("THIN: No calculation_spec found in framework - falling back to LLM-generated formulas")
+            except Exception as e:
+                self.logger.warning(f"THIN: Failed to extract framework calculation_spec: {e} - falling back to LLM-generated formulas")
+            
             # Execute Stage 1: Raw data collection (THIN: Pass raw LLM response)
             stage_1_results = {}
             if raw_data_plan:  # THIN: Always try to execute if plan exists
                 self.logger.info("📊 Executing Stage 1: Raw data collection (THIN)...")
-                stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan, request.corpus_manifest)
+                stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan, request.corpus_manifest, framework_calculation_spec)
             
             # Execute Stage 2: Derived metrics and statistical analysis (THIN: Pass raw LLM response)
             self.logger.info("🧮 Executing Stage 2: Derived metrics and statistical analysis (THIN)...")
-            stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan, request.corpus_manifest)
+            stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan, request.corpus_manifest, framework_calculation_spec)
             
             # Combine results from both stages
             combined_results = {

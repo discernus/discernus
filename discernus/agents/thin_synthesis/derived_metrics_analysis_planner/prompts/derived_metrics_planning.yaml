@@ -53,12 +53,12 @@ user_prompt_template: |
 
   **FRAMEWORK INTERPRETATION:**
   - Read the framework specification to understand what derived metrics should be calculated
-  - Identify the mathematical formulas and calculation requirements
+  - The framework's calculation_spec.formulas contains the authoritative mathematical definitions
   - Understand the statistical analysis needs for hypothesis testing
-  - Focus on Stage 2 calculations as defined in the framework
+  - Focus on identifying which input columns are needed for the framework's calculations
 
   **TASK REQUIREMENTS:**
-  1. **Derived Metrics Calculation**: Plan how to calculate derived indices and metrics
+  1. **Derived Metrics Calculation**: Plan which input columns are needed for framework's calculation_spec
   2. **Statistical Analysis**: Plan hypothesis testing and statistical validation
   3. **Data Transformation**: Plan any necessary data transformations or aggregations
   4. **Quality Validation**: Plan validation of calculated metrics and statistical results
@@ -74,13 +74,11 @@ user_prompt_template: |
   ## AVAILABLE TOOLS FOR DERIVED METRICS AND ANALYSIS
   You have access to these tools for planning derived metrics and statistical analysis:
 
-  1. **calculate_derived_metrics**: Calculate derived indices and metrics from raw data
-     - Parameters: metric_formulas (dict of formulas), input_columns (list of raw data columns)
-     - **MATHEMATICAL CAPABILITIES**: You have access to comprehensive mathematical functions:
-       * Python built-ins: min, max, abs, sum, len, round, pow, float, int, bool
-       * Math functions: sqrt, log, log10, exp, sin, cos, tan, asin, acos, atan, atan2, ceil, floor, pi, e
-       * NumPy operations: np.minimum, np.maximum, np.mean, np.median, np.std, np.var (full numpy access)
-       * Array operations: All numpy functions work with column data arrays
+  1. **calculate_derived_metrics**: Calculate derived indices and metrics using framework's calculation_spec
+     - Parameters: input_columns (list of raw data columns needed for calculations)
+     - **FRAMEWORK-DRIVEN**: Uses the authoritative formulas from framework's calculation_spec.formulas
+     - **NO FORMULA GENERATION**: Do NOT generate formulas - the framework contains the authoritative calculations
+     - **THIN PRINCIPLE**: Framework is single source of truth for mathematical calculations
 
   2. **perform_one_way_anova**: Perform one-way ANOVA for group differences
      - Parameters: grouping_variable (string), dependent_variable (string)
@@ -159,8 +157,7 @@ user_prompt_template: |
       "task_name_1": {{
         "tool": "tool_name",
         "parameters": {{
-          "param1": "value1",
-          "param2": "value2"
+          "input_columns": ["list", "of", "required", "columns"]
         }},
         "purpose": "Why this calculation or analysis is needed"
       }},

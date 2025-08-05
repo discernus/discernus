@@ -264,19 +264,6 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
     "cohesive_goals": 0.10
   },
   "calculation_spec": {
-    "execution_order": [
-      "identity_tension",
-      "emotional_tension", 
-      "success_tension",
-      "relational_tension",
-      "goal_tension",
-      "cohesive_index",
-      "fragmentative_index",
-      "salience_weighted_cohesive_index",
-      "salience_weighted_fragmentative_index",
-      "strategic_contradiction_index",
-      "overall_cohesion_index"
-    ],
     "formulas": {
       "identity_tension": "min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)",
       "emotional_tension": "min(fear_score, hope_score) * abs(fear_salience - hope_salience)",

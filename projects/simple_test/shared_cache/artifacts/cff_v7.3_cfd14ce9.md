@@ -264,31 +264,18 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
     "cohesive_goals": 0.10
   },
   "calculation_spec": {
-    "execution_order": [
-      "identity_tension",
-      "emotional_tension", 
-      "success_tension",
-      "relational_tension",
-      "goal_tension",
-      "cohesive_index",
-      "fragmentative_index",
-      "salience_weighted_cohesive_index",
-      "salience_weighted_fragmentative_index",
-      "strategic_contradiction_index",
-      "overall_cohesion_index"
-    ],
     "formulas": {
-      "identity_tension": "min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)",
-      "emotional_tension": "min(fear_score, hope_score) * abs(fear_salience - hope_salience)",
-      "success_tension": "min(envy_score, compersion_score) * abs(envy_salience - compersion_salience)",
-      "relational_tension": "min(enmity_score, amity_score) * abs(enmity_salience - amity_salience)",
-      "goal_tension": "min(fragmentative_goals_score, cohesive_goals_score) * abs(fragmentative_goals_salience - cohesive_goals_salience)",
+      "identity_tension": "min(tribal_dominance, individual_dignity) * abs(tribal_dominance_salience - individual_dignity_salience)",
+      "emotional_tension": "min(fear, hope) * abs(fear_salience - hope_salience)",
+      "success_tension": "min(envy, compersion) * abs(envy_salience - compersion_salience)",
+      "relational_tension": "min(enmity, amity) * abs(enmity_salience - amity_salience)",
+      "goal_tension": "min(fragmentative_goals, cohesive_goals) * abs(fragmentative_goals_salience - cohesive_goals_salience)",
       "strategic_contradiction_index": "(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5",
-      "cohesive_index": "(individual_dignity_score + hope_score + compersion_score + amity_score + cohesive_goals_score) / 5",
-      "fragmentative_index": "(tribal_dominance_score + fear_score + envy_score + enmity_score + fragmentative_goals_score) / 5",
+      "cohesive_index": "(individual_dignity + hope + compersion + amity + cohesive_goals) / 5",
+      "fragmentative_index": "(tribal_dominance + fear + envy + enmity + fragmentative_goals) / 5",
       "overall_cohesion_index": "cohesive_index - fragmentative_index",
-      "salience_weighted_cohesive_index": "(individual_dignity_score * individual_dignity_salience + hope_score * hope_salience + compersion_score * compersion_salience + amity_score * amity_salience + cohesive_goals_score * cohesive_goals_salience) / (individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience)",
-      "salience_weighted_fragmentative_index": "(tribal_dominance_score * tribal_dominance_salience + fear_score * fear_salience + envy_score * envy_salience + enmity_score * enmity_salience + fragmentative_goals_score * fragmentative_goals_salience) / (tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience)"
+      "salience_weighted_cohesive_index": "(individual_dignity * individual_dignity_salience + hope * hope_salience + compersion * compersion_salience + amity * amity_salience + cohesive_goals * cohesive_goals_salience) / (individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience)",
+      "salience_weighted_fragmentative_index": "(tribal_dominance * tribal_dominance_salience + fear * fear_salience + envy * envy_salience + enmity * enmity_salience + fragmentative_goals * fragmentative_goals_salience) / (tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience)"
     },
     "pattern_classifications": {
       "social_cohesion_profile": {

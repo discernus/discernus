@@ -17,7 +17,7 @@ template: |
   {corpus_manifest}
 
   VALIDATION TASK:
-  **CRITICAL: This system only supports v7.1 compliant experiments. Legacy experiments (v7.0 and earlier) are NOT supported and will be rejected.**
+  **CRITICAL: This system only supports v7.3 compliant experiments. Legacy experiments (v7.2 and earlier) are NOT supported and will be rejected.**
   
   Validate the MECE Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) must work together seamlessly. Focus on:
 
@@ -26,36 +26,41 @@ template: |
   2. **Framework-Corpus Alignment**: Ensure corpus structure supports framework's analytical dimensions and evidence requirements
   3. **Experiment-Corpus Alignment**: Confirm experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
 
-  **FRAMEWORK v7.1 COMPLIANCE (WHY) - REQUIRED:**
-  4. **Enhanced Gasket Schema**: Framework MUST include gasket_schema v7.1 with target_keys, extraction_patterns, and validation_rules for Intelligent Extractor
+  **FRAMEWORK v7.3 COMPLIANCE (WHY) - REQUIRED:**
+  4. **Enhanced Gasket Schema**: Framework MUST include gasket_schema v7.3 with target_keys, extraction_patterns, and validation_rules for Intelligent Extractor
   5. **Metadata Scores**: Framework MUST support salience and confidence metadata scores (0.0-1.0) for all dimensions
   6. **Advanced Extraction Patterns**: Framework MUST include regex extraction patterns with {0,20} flexibility for robust parsing
   7. **Raw Analysis Log**: Framework MUST specify raw_analysis_log output format (not complex JSON)
   8. **Analysis Liberation**: Framework prompts focus on intellectual analysis, not data formatting
-  9. **Version Check**: Framework specification MUST be v7.1 or higher
+  9. **THIN Calculation Architecture**: Framework calculation_spec MUST be single source of truth with execution_order for dependent calculations
+  10. **Column Name Consistency**: All formula variables MUST use DataFrame column structure (dimension_name_score, dimension_name_salience, dimension_name_confidence)
+  11. **Mathematical Integrity**: Framework calculation_spec MUST contain syntactically valid formulas with proper dependencies and execution sequencing
+  12. **Version Check**: Framework specification MUST be v7.3 or higher
 
-  **EXPERIMENT v7.1 WORKFLOW (HOW) - REQUIRED:**
-  10. **Enhanced Gasket Architecture Workflow**: Experiment workflow MUST account for Raw Analysis Log → Intelligent Extractor v7.1 → Mathematical Processing with metadata
-  11. **Agent Compatibility**: Workflow agents MUST be compatible with enhanced gasket architecture and metadata processing
-  12. **Statistical Configuration**: Experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
-  13. **Metadata Processing**: Experiment MUST handle salience and confidence metadata throughout pipeline
-  14. **Version Check**: Experiment specification MUST be v7.1 or higher
+  **EXPERIMENT v7.3 WORKFLOW (HOW) - REQUIRED:**
+  13. **THIN Mathematical Processing**: Experiment workflow MUST use framework calculation_spec as single source of truth for all mathematical operations
+  14. **Enhanced Gasket Architecture Workflow**: Experiment workflow MUST account for Raw Analysis Log → Intelligent Extractor v7.3 → Mathematical Processing with metadata
+  15. **Agent Compatibility**: Workflow agents MUST be compatible with enhanced gasket architecture and metadata processing
+  16. **Statistical Configuration**: Experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
+  17. **Metadata Processing**: Experiment MUST handle salience and confidence metadata throughout pipeline
+  18. **Version Check**: Experiment specification MUST be v7.3 or higher
 
-  **CORPUS v7.1 STRUCTURE (WHAT) - REQUIRED:**
-  15. **Field Naming Consistency**: No mixed field names that would break statistical processing
-  16. **Data Quality**: Corpus structure supports the analytical requirements with metadata processing
-  17. **Enhanced Gasket Architecture Support**: Corpus metadata supports Framework v7.1 analytical dimensions with salience and confidence
-  18. **Metadata Compatibility**: Corpus structure compatible with enhanced metadata processing requirements
-  19. **Version Check**: Corpus manifest MUST be v7.1 or higher
+  **CORPUS v7.3 STRUCTURE (WHAT) - REQUIRED:**
+  19. **Field Naming Consistency**: No mixed field names that would break statistical processing
+  20. **Data Quality**: Corpus structure supports the analytical requirements with metadata processing
+  21. **Enhanced Gasket Architecture Support**: Corpus metadata supports Framework v7.3 analytical dimensions with salience and confidence
+  22. **Metadata Compatibility**: Corpus structure compatible with enhanced metadata processing requirements
+  23. **Version Check**: Corpus manifest MUST be v7.3 or higher
 
   **INTEGRATION VALIDATION:**
-  20. **End-to-End Coherence**: The trinity forms a coherent analytical system from data through analysis to results with enhanced metadata
-  21. **Factual Accuracy**: All metadata is factually correct (current date: {current_date})
-  22. **Enhanced Metadata Integration**: Salience and confidence scores properly integrated across all components
-  23. **v7.1 Compliance**: ALL components MUST be v7.1 or higher - legacy experiments are REJECTED
+  24. **End-to-End Coherence**: The trinity forms a coherent analytical system from data through analysis to results with enhanced metadata
+  25. **Factual Accuracy**: All metadata is factually correct (current date: {current_date})
+  26. **Enhanced Metadata Integration**: Salience and confidence scores properly integrated across all components
+  27. **THIN Mathematical Validation**: Framework calculation_spec is single source of truth with valid execution_order, proper column naming, and syntactically correct formulas
+  28. **v7.3 Compliance**: ALL components MUST be v7.3 or higher - legacy experiments are REJECTED
 
-  CRITICAL: Validate that Framework v7.1 + Experiment v7.1 + Corpus v7.1 = Coherent Enhanced Analytical System
-  REJECT any experiment with v7.0 or earlier components.
+  CRITICAL: Validate that Framework v7.3 + Experiment v7.3 + Corpus v7.3 = Coherent THIN Analytical System
+  REJECT any experiment with v7.2 or earlier components.
 
   RESPONSE FORMAT:
   Return a JSON object with this structure:
@@ -63,7 +68,7 @@ template: |
       "success": true/false,
       "issues": [
           {{
-              "category": "field_naming|specification|missing_element|data_quality|factual_error|trinity_coherence|metadata_validation|extraction_patterns",
+              "category": "field_naming|specification|missing_element|data_quality|factual_error|trinity_coherence|metadata_validation|extraction_patterns|mathematical_validation|thin_calculation_compliance",
               "description": "Clear description of the issue",
               "impact": "What will happen if this isn't fixed",
               "fix": "Specific steps to fix the issue",
