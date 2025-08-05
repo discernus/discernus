@@ -1,41 +1,41 @@
 ---
-name: "simple_character_validation_v7"
+name: "democratic_discourse_cohesion_study"
 description: |
-  A minimal test experiment for validating the Discernus v7.1 enhanced gasket architecture using 
-  the Character Assessment Framework v7.1. This experiment tests enhanced framework compatibility
-  with metadata scores (salience, confidence) and advanced extraction patterns with 
-  a 2-document ideological contrast design (Conservative vs Progressive speakers). 
-  Designed as a comprehensive smoke test for validating v7.1 gasket architecture implementation.
+  A comparative analysis of social cohesion patterns in contrasting approaches to democratic discourse: 
+  institutional gracious concession versus populist anti-establishment critique. This study examines 
+  how different rhetorical strategies impact social fabric and democratic resilience using the 
+  Cohesive Flourishing Framework v7.3 to analyze two paradigmatic examples of American political communication.
 
 hypothesis: |
-  Character dimensions will show measurable differences between conservative 
-  and progressive speakers, validating the framework's ability to detect 
-  ideological character signatures through enhanced v7.1 analysis with metadata scores. 
-  The enhanced gasket architecture will successfully extract, process, and synthesize 
-  character coherence patterns with salience and confidence metadata across different political approaches.
+  McCain's institutional concession discourse will demonstrate higher social cohesion indices 
+  (dignity, hope, amity, cohesive goals) while Sanders' populist critique will show higher 
+  fragmentative elements (tribal dominance, enmity) but with strategic contradictions reflecting 
+  sophisticated rhetorical positioning. The analysis will reveal distinct social cohesion signatures 
+  between institutional democratic norms and populist democratic renewal approaches.
 
-framework: "../../frameworks/reference/core/caf_v7.3.md"
+framework: "../../frameworks/reference/flagship/cff_v7.3.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
 runs_per_model: 3
 analysis_variant: "default"
 
-# 🆕 V7.1 ENHANCED GASKET ARCHITECTURE CONFIGURATION
+# 🆕 V7.3 SOCIAL COHESION ANALYSIS CONFIGURATION
 gasket_workflow:
   enhanced_metadata_extraction: true
   intelligent_extractor_enabled: true
   advanced_pattern_matching: true
   metadata_scores_required: true
 
-# Enhanced v7.0 Analysis Configuration  
+# Social Cohesion Analysis Configuration  
 analysis:
   statistical_confidence: 0.95
   variance_threshold: 0.20
+  focus_dimensions: ["identity_axis", "emotional_climate_axis", "relational_climate_axis"]
 
-# Simplified Statistical Validation  
+# Social Cohesion Validation  
 validation:
-  required_tests: ["character_correlation_matrix", "mc_sci_reliability", "ideological_comparison"]
+  required_tests: ["cohesion_correlation_matrix", "strategic_contradiction_analysis", "democratic_impact_assessment"]
   reliability_threshold: 0.60
   effect_size_reporting: true
 
@@ -44,20 +44,20 @@ reporting:
   format: "academic"
   structure:
     - "executive_summary"
-    - "character_comparison_analysis"
-    - "ideological_signatures"
-    - "mc_sci_patterns"
-    - "synthesis_validation_results"
+    - "social_cohesion_comparative_analysis"
+    - "democratic_discourse_patterns"
+    - "strategic_contradiction_analysis"
+    - "democratic_resilience_implications"
     - "statistical_methodology"
-    - "limitations"
+    - "limitations_and_future_research"
   show_statistical_work: true
   include_confidence_metrics: true
 
-# Focused Hypothesis Framework
+# Research Hypotheses Framework
 hypotheses:
-  H1_Ideological: "Character dimensions will show significant differences between conservative (McCain) and progressive (Sanders) speakers"
-  H2_Coherence: "MC-SCI scores will successfully differentiate between gracious institutional discourse and passionate populist critique"
-  H3_Architecture: "The v7.1 gasket architecture will successfully process 2-document character analysis with Raw Analysis Log processing"
+  H1_Institutional_Cohesion: "McCain's institutional concession will demonstrate higher overall cohesion indices (dignity, hope, amity, cohesive goals) reflecting democratic norms of gracious transition"
+  H2_Populist_Fragmentation: "Sanders' populist critique will show higher fragmentative elements (tribal dominance, enmity) but with strategic contradictions indicating sophisticated rhetorical positioning"
+  H3_Democratic_Patterns: "The two discourse types will exhibit distinct social cohesion signatures corresponding to institutional versus populist democratic approaches"
 
 # Required Workflow Steps
 workflow:
@@ -79,41 +79,48 @@ workflow:
       - statistical_results.json
 ---
 
-# Simple Character Validation Test
+# Democratic Discourse and Social Cohesion: A Comparative Study
 
 ## Overview
 
-This experiment serves as a minimal validation test for the Discernus v7.1 architecture, specifically testing synthesis coordination and JSON-first processing using the Character Assessment Framework v7.1.
+This study examines how different approaches to democratic discourse impact social cohesion and democratic resilience. By analyzing two paradigmatic examples of American political communication—McCain's 2008 gracious concession and Sanders' 2025 anti-oligarchy critique—we investigate the social cohesion signatures of institutional versus populist democratic discourse.
 
 ## Research Questions
 
-1. Can the synthesis pipeline successfully coordinate character analysis across ideologically contrasting speakers?
-2. Do the v7.1 JSON structures flow correctly through the analysis → synthesis pathway?
-3. Can the MC-SCI calculations differentiate between institutional vs populist discourse styles?
+1. How do institutional democratic norms (gracious concession) compare to populist democratic critique in terms of social cohesion patterns?
+2. What strategic contradictions emerge in populist discourse, and how do they differ from institutional discourse coherence?
+3. Do these contrasting discourse types exhibit measurably different impacts on democratic resilience and social fabric?
 
 ## Methodology
 
 ### Framework
-**Character Assessment Framework v7.1** provides:
-- 10-dimensional character analysis (5 virtues vs 5 vices)
-- Moral Character Strategic Contradiction Index (MC-SCI)
-- JSON-first architecture validation
-- Character tension mathematics testing
+**Cohesive Flourishing Framework (CFF) v7.3** provides:
+- 5-axis social cohesion analysis (Identity, Emotional Climate, Success Orientation, Relational Climate, Goal Orientation)
+- Strategic Contradiction Index measuring rhetorical tension deployment
+- Salience-weighted social cohesion calculations
+- Democratic resilience impact assessment
 
-### Minimal Corpus Design
-2 political speeches providing ideological contrast:
+### Corpus Design
+Two paradigmatic examples of American democratic discourse:
 
-**Conservative/Institutional**: John McCain 2008 concession speech
-**Progressive/Populist**: Bernie Sanders 2025 oligarchy speech
+**Institutional Democratic Norms**: John McCain's 2008 concession speech
+- Exemplifies gracious democratic transition
+- Tests institutional cohesion patterns (dignity, hope, amity)
+- Represents established democratic procedural norms
+
+**Populist Democratic Critique**: Bernie Sanders' 2025 anti-oligarchy speech  
+- Exemplifies populist democratic renewal rhetoric
+- Tests fragmentative elements with strategic contradictions
+- Represents outsider challenge to established power
 
 ### Expected Outcomes
-1. **Character Differentiation**: Measurable differences in virtue/vice patterns between speakers
-2. **MC-SCI Validation**: Coherence metrics reflecting discourse styles (institutional grace vs populist intensity)
-3. **Architecture Testing**: Successful v7.1 JSON synthesis without coordination failures
-4. **Debugging Support**: Clear identification of any synthesis pipeline issues
+1. **Cohesion Differentiation**: McCain will show higher overall cohesion indices reflecting institutional democratic values
+2. **Strategic Contradiction Patterns**: Sanders will exhibit sophisticated rhetorical tensions balancing populist critique with democratic ideals
+3. **Democratic Signature Analysis**: Distinct social cohesion profiles corresponding to institutional vs. populist approaches
+4. **Resilience Implications**: Insights into how different discourse types impact democratic fabric
 
 ## Significance
 
-This experiment validates the core v7.1 architecture components in a controlled, minimal environment. Success confirms the synthesis coordination fixes and provides a reliable baseline for more complex factorial experiments.
+This comparative analysis addresses a critical gap in political communication research: understanding how different democratic discourse styles impact social cohesion and democratic resilience. The study provides empirical measurement of theoretical distinctions between institutional and populist democratic approaches.
 
-The 2-document design enables rapid iteration and debugging while maintaining analytical meaningfulness through ideological character contrasts.
+The contrasting discourse types enable precise measurement of social cohesion dimensions while maintaining high analytical validity through paradigmatic case selection. Results inform broader questions about democratic communication strategies and their societal impacts.
