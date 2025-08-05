@@ -1,0 +1,139 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted by following the sequential steps outlined in the PDAF framework. Emphasis placed on identifying semantic concepts rather than exact keyword matching. Confidence reflects thoroughness in applying the framework's definitions and markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.98
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "polar_sovereignty_claims_score": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.98
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.8,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.7,
+          "salience": 0.88,
+          "confidence": 0.97
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.9,
+          "salience": 0.92,
+          "confidence": 0.98
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 1.2,
+          "salience": 0.65,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.9,
+          "salience": 0.55,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "confidence": 0.98,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "To all those who supported our campaign, I am humbled by the faith you've placed in us.",
+          "confidence": 0.97,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "This is America's day. This is democracy's day, a day of history and of hope, of renewal and resolve.",
+          "confidence": 0.96,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "We have much to repair, much to restore, much to heal, much to build, and much to gain.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "The people--the will of the people has been heard, and the will of the people has been heeded. We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "confidence": 0.98,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "We can do great things, important things. We can right wrongs. We can put people to work in good jobs.",
+          "confidence": 0.97,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "I know speaking of unity can sound to some like a foolish fantasy these days. I know the forces that divide us are deep and they are real. But I also know that they are not new. Our history has been a constant struggle between the American ideal that we are all created equal and the harsh, ugly reality that racism, nativism, fear, demonization have long torn us apart. The battle is perennial. And victory is never assured.",
+          "confidence": 0.97,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My fellow Americans, in the work ahead of us, we're going to need each other. We need all our strength to persevere through this dark winter.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Let's start afresh, all of us. Let's begin to listen to one another, hear one another, see one another, show respect to one another. Politics does not have to be a raging fire destroying everything in its path.",
+          "confidence": 0.98,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "So today, at this time, in this place, let's start afresh, all of us. Let's begin to listen to one another, hear one another, see one another, show respect to one another.",
+          "confidence": 0.97,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "To all those beyond our borders who are tuned in today, know that America has been tested, and we have come out stronger for it. We will repair our alliances and engage with the world once again, not to meet yesterday's challenges, but to meet today's and tomorrow's challenges.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We can put people to work in good jobs. We can teach our children in safe schools. We can overcome the deadly virus. We can reward work and rebuild the middle class and make health care secure for all.",
+          "confidence": 0.88,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

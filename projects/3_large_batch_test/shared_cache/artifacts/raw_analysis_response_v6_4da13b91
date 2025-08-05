@@ -1,0 +1,175 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis followed a sequential approach, evaluating core anchors, then mechanism anchors, and finally boundary anchors. Emphasis was placed on identifying semantic concepts and their textual evidence. Confidence levels reflect the clarity and directness of the textual evidence supporting the dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.5,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.6,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.3,
+          "salience": 0.65,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.9,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.1,
+          "salience": 0.55,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "To lift the standards of our public schools, we achieved historic education reform, which must now be carried out in every school and in every classroom so that every child in America can read and learn and succeed in life.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our first goal is clear: We must have an economy that grows fast enough to employ every man and woman who seeks a job.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "After recession, terroristic attacks, corporate scandals, and stock market declines, our economy is recovering.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "To bring our economy out of recession, we delivered the largest tax relief in a generation.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "I ask that you join me in the next bold steps to serve our fellow citizens.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "I am proposing that all the income-tax reductions set for 2004 and 2006 be made permanent and effective this year.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "We must also strengthen the economy by treating investors equally in our tax laws. It's fair to tax a company's profits. It is not fair to again tax shareholder on the same profits.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "We must also strengthen the economy by treating investors equally in our tax laws. It's fair to tax a company's profits. It is not fair to again tax shareholder on the same profits.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "I'm asking you to pass these measures, for the good of both our environment and our economy. Even more, I ask you to take a crucial step and protect our environment in ways that generations before us could not have imagined.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "I have sent you a comprehensive energy plan to promote energy efficiency and conservation, to develop cleaner technology, and to produce more energy at home.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My budget will commit an additional $400 billion over the next decade to reform and strengthen Medicare. Leaders of both political parties have talked for years about strengthening Medicare. I urge the Members of this new Congress to act this year.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "You, the Congress, have already passed all these reductions and promised them for future years. If this tax relief is good for Americans 3 or 5 or 7 years from now, it is even better for Americans today.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We must work together to fund only our most important priorities. I will send you a budget that increases discretionary spending by 4 percent next year, about as much as the average family's income is expected to grow.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "Americans are a resolute people who have risen to every test of our time. Adversity has revealed the character of our country, to the world and to ourselves. America is a strong nation and honorable in the use of our strength.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "In Afghanistan, we helped to liberate an oppressed people. And we will continue helping them secure their country, rebuild their society, and educate all their children, boys and girls.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "In all these efforts, however, America's purpose is more than to follow a process; it is to achieve a result, the end of terrible threats to the civilized world.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Jobs are created when the economy grows. The economy grows when Americans have more money to spend and invest, and the best and fairest way to make sure Americans have that money is not to tax it away in the first place.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Lower taxes and greater investment will help this economy expand. More jobs mean more taxpayers and higher revenues to our Government. The best way to address the deficit and move towards a balanced budget is to encourage economic growth and to show some spending discipline in Washington, D.C.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

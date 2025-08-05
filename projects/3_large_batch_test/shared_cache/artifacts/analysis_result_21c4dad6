@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_4c829d391bcf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF) v7.3\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted following the sequential, layered approach outlined in the PDAF framework. Emphasis placed on identifying core populist anchors, then mechanisms, and finally boundary distinctions. All scores are raw and reflect the intensity within the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1994.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.60,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.20,\n          \"salience\": 0.60,\n          \"confidence\": 0.85\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.40,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.30,\n          \"confidence\": 0.70\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.40,\n          \"confidence\": 0.75\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.90,\n          \"salience\": 0.50,\n          \"confidence\": 0.80\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.30,\n          \"salience\": 0.75,\n          \"confidence\": 0.90\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.35,\n          \"confidence\": 0.70\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.45,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We have much to be thankful for. With 4 years of growth, we have won back the basic strength of our economy. With crime and welfare rolls declining, we are winning back our optimism, the enduring faith that we can master any difficulty.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But no one can walk out of this Chamber with a clear conscience unless you are prepared to finish the job. And we must join together to do something else, too, something both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortune strikes immigrants who came to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We face no imminent threat, but we do have an enemy. The enemy of our time is inaction.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"First, we must move quickly to complete the unfinished business of our country, to balance the budget, renew our democracy, and finish the job of welfare reform.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all our oars, and they told us to row.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Let us work together to meet these three goals: Every 8-year-old must be able to read; every 12-year-old must be able to log on to the Internet; every 18-year-old must be able to go to college; and every adult American must be able to keep on learning for a lifetime.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create the conditions in which all families can flourish and to create jobs through investment by business and loans by banks.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:37:44.498962+00:00",
+    "end_time": "2025-08-05T20:37:49.402323+00:00",
+    "duration_seconds": 4.903361,
+    "llm_interaction_hash": "3b4f23c63f604ffa"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

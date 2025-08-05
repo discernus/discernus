@@ -192,7 +192,7 @@ class IntelligentExtractorAgent:
                 
                 # Parse extracted scores (now returns list of documents)
                 document_analyses = self._parse_extraction_response(
-                    response, gasket_schema['target_keys']
+                    response, gasket_schema['target_keys'], gasket_schema
                 )
                 
                 # Calculate metrics
@@ -334,7 +334,8 @@ class IntelligentExtractorAgent:
     def _parse_extraction_response(
         self, 
         response: str, 
-        target_keys: List[str]
+        target_keys: List[str],
+        gasket_schema: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
         Parse LLM extraction response into per-document structured scores.
@@ -379,11 +380,19 @@ class IntelligentExtractorAgent:
                     if key in doc_data:
                         value = doc_data[key]
                         if value is not None:
-                            # Validate score range
-                            if isinstance(value, (int, float)) and 0.0 <= value <= 1.0:
-                                extracted_scores[key] = float(value)
+                            # Validate score range using framework specification
+                            if isinstance(value, (int, float)):
+                                # Get score range from gasket schema (framework-driven validation)
+                                score_ranges = gasket_schema.get('validation_rules', {}).get('score_ranges', {})
+                                min_score = score_ranges.get('min', 0.0)
+                                max_score = score_ranges.get('max', 1.0)  # Default to 1.0 for backward compatibility
+                                
+                                if min_score <= value <= max_score:
+                                    extracted_scores[key] = float(value)
+                                else:
+                                    self.logger.warning(f"Invalid score for {key} in {document_name}: {value} (must be {min_score}-{max_score} per framework spec)")
                             else:
-                                self.logger.warning(f"Invalid score for {key} in {document_name}: {value} (must be 0.0-1.0)")
+                                self.logger.warning(f"Invalid score type for {key} in {document_name}: {value} (must be numeric)")
                 
                 document_analyses.append({
                     'document_name': document_name,

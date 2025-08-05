@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d92c3812bc38",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted following PDAF v7.3, focusing on sequential dimensional analysis. Document exhibits strong populist elements, particularly in the core 'people-elite' framing and appeals to national sovereignty. Confidence in scores is high due to clear linguistic markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"233ca2aa895c...\",\n      \"document_name\": \"Republican_Platform_2000.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.1,\n          \"salience\": 0.7,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.75,\n          \"confidence\": 0.7\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.7,\n          \"confidence\": 0.75\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 1.0,\n          \"salience\": 0.6,\n          \"confidence\": 0.65\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.5,\n          \"confidence\": 0.55\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We seek to be faithful to the best traditions of our party. We are the party that ended slavery, granted homesteads, built land grant colleges, and moved control of government out of Washington, back into the hands of the people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Our vision is one of clear direction, new ideas, civility in public life, and leadership with honor and distinction.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The people's will as ultimate political authority, bypassing representative institutions and intermediary bodies.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"conceptual\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"To all Americans, particularly immigrants and minorities, we send a clear message: this is the party of freedom and progress, and it is your home.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Our country, after an era of drift, must now set itself to important tasks and higher goals. The Republican Party has the vision and leadership to address these issues.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Our platform is uplifting and visionary. It reflects the views of countless Americans all across this country who believe in prosperity with a purpose \u2013 who believe in Renewing America's Purpose. Together.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"The twenty-fifth man to receive our party's nomination is equal to the challenges facing our country. After a period of bitter division in national politics, our nominee is a leader who brings people together.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"In a time of fierce partisanship, he calls all citizens to common goals. To long-understanding problems, he brings a fresh outlook and innovative ideas and a record of results.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:41:09.040000+00:00",
+    "end_time": "2025-08-05T20:41:15.644924+00:00",
+    "duration_seconds": 6.604924,
+    "llm_interaction_hash": "92a20bf23864e6f0"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "233ca2aa895c18d0ec09c39a0c08cda75a118477cb100c9f6615034f1d452a62"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

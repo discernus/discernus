@@ -1,12 +1,11 @@
 # THIN Architecture Rules - Cursor AI must follow these STRICTLY
 
-## 🚨 CRITICAL: ENVIRONMENT MANAGEMENT RULES
-- **ALWAYS use `source venv/bin/activate` before ANY Python command**
-- **NEVER run `pip install` without venv activated**  
-- **NEVER run `python` - ALWAYS use `python3`**
-- **NEVER modify venv directly - only through pip install/uninstall**
-- **If imports fail, install missing packages, do NOT recreate venv**
-- **Check `which python3` shows venv path before running code**
+## 🚨 CRITICAL: ENVIRONMENT MANAGEMENT RULES (Updated August 2025)
+- **ENVIRONMENT IS STABLE**: No venv needed, uses system Python 3.13.5
+- **USE `discernus` command directly** - it's installed as an entry point
+- **NEVER recreate environments** - system is stable and working
+- **If imports fail, run `make install`** to fix dependencies
+- **Use `make check` to verify environment health**
 
 ## 🚨 CRITICAL: GIT COMMAND RULES  
 - **ALWAYS use SHORT commit messages (under 50 characters)**
@@ -46,24 +45,25 @@ with lots of details
 """ # Can cause hanging
 ```
 
-## ✅ REQUIRED ENVIRONMENT PATTERNS:
+## ✅ REQUIRED ENVIRONMENT PATTERNS (Updated August 2025):
 ```bash
-# ALWAYS start Python commands this way:
-source venv/bin/activate && python3 your_script.py
+# ALWAYS use these simple, reliable commands:
+discernus list                                   # List experiments
+discernus run projects/simple_test              # Run experiment
+make check                                       # Verify environment
 
-# ALWAYS install packages this way:
-source venv/bin/activate && pip install package_name
+# FAST TESTING (recommended):
+discernus run projects/simple_test --skip-validation  # ~47 seconds, $0.014
 
-# ALWAYS check environment this way:
-which python3  # Should show: /path/to/project/venv/bin/python3
+# LOCAL CONFIG (from experiment directory):
+cd projects/simple_test && discernus run .      # Uses local Flash Lite config
 ```
 
-## 🚫 FORBIDDEN ENVIRONMENT PATTERNS:
-- python (use python3)
-- pip install without activating venv
-- Recreating venv unless explicitly requested
-- Running system python for project code
-- Modifying venv files directly
+## 🚫 FORBIDDEN ENVIRONMENT PATTERNS (Updated August 2025):
+- Creating/recreating venv (system is stable)
+- Complex Python module paths (use simple `discernus` command)
+- Manual framework.md symlinks (canonical paths work automatically)
+- Ignoring existing .discernus.yaml configs
 
 ## 🚨 FORBIDDEN PATTERNS - NEVER write these:
 - import re, regex, bs4, xml.etree (use LLM for parsing instead)

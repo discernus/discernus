@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_af56b7594a11",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Framework applied as per v7.3 specifications. Analysis followed the sequential steps outlined in the framework's default variant, focusing on core anchors, then mechanisms, and finally boundary distinctions. Salience and confidence were assigned based on the rhetorical prominence and clarity of evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"0e7342da7ee6...\",\n      \"document_name\": \"Republican_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"core_anchors\": {\n          \"manichaean_people_elite_framing_score\": {\n            \"raw_score\": 0.7,\n            \"salience\": 0.8,\n            \"confidence\": 0.9\n          },\n          \"crisis_restoration_narrative_score\": {\n            \"raw_score\": 0.6,\n            \"salience\": 0.7,\n            \"confidence\": 0.8\n          },\n          \"popular_sovereignty_claims_score\": {\n            \"raw_score\": 0.8,\n            \"salience\": 0.85,\n            \"confidence\": 0.9\n          },\n          \"anti_pluralist_exclusion_score\": {\n            \"raw_score\": 0.5,\n            \"salience\": 0.6,\n            \"confidence\": 0.7\n          }\n        },\n        \"mechanism_anchors\": {\n          \"elite_conspiracy_systemic_corruption_score\": {\n            \"raw_score\": 0.65,\n            \"salience\": 0.75,\n            \"confidence\": 0.85\n          },\n          \"authenticity_vs_political_class_score\": {\n            \"raw_score\": 0.9,\n            \"salience\": 0.9,\n            \"confidence\": 0.95\n          },\n          \"homogeneous_people_construction_score\": {\n            \"raw_score\": 0.7,\n            \"salience\": 0.75,\n            \"confidence\": 0.8\n          }\n        },\n        \"boundary_anchors\": {\n          \"nationalist_exclusion_score\": {\n            \"raw_score\": 0.75,\n            \"salience\": 0.8,\n            \"confidence\": 0.85\n          },\n          \"economic_populist_appeals_score\": {\n            \"raw_score\": 0.7,\n            \"salience\": 0.75,\n            \"confidence\": 0.8\n          }\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"We believe American exceptionalism. We believe the United States of America is unlike any other nation on earth. We believe America is exceptional because of our historic role, first as refuge, then as defender, and now as exemplar of liberty for the world to see.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims_score\",\n          \"quote_text\": \"We believe the Constitution was written not as a flexible document, but as our enduring covenant.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion_score\",\n          \"quote_text\": \"We believe our constitutional system, limited government, separation of powers, federalism, and the rights of the people must be preserved uncompromised for future generations.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption_score\",\n          \"quote_text\": \"The current Administration is trying to seize control of our schools, farms, businesses, and even our religious institutions. They have nearly doubled the size of the national debt.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"The American people are optimistic. The optimism of the American people is not artificial. It is the consequence of the American Dream.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"We are the party of a growing economy that in 1980, business closures have exceeded business growth gives everyone a chance in life, an opportunity to startups throughout the Obama Presidency.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion_score\",\n          \"quote_text\": \"We will secure our borders, enforce our immigration laws, and properly screen refugees and other immigrants entering from any country.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explicit\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"Our foreign policy has been designed to benefit our economic interests, and our national security interests by preserving peace through strength.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"explicit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:41:34.948153+00:00",
+    "end_time": "2025-08-05T20:41:41.755507+00:00",
+    "duration_seconds": 6.807354,
+    "llm_interaction_hash": "3f1bca8ce1de1e68"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "0e7342da7ee614d58d7d414bab087621c93299e774592d8b09a88f6f6c171734"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

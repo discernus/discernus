@@ -1,0 +1,55 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using a sequential chain-of-thought approach, focusing on core populist concepts, mechanisms, and boundary distinctions. Salience weighting applied based on contextual relevance."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2024.pdf",
+      "dimensional_scores": {
+        "core_anchors": {
+          "manipulative_people_elite_framing_score": 0.1,
+          "crisis_restoration_narrative_score": 0.0,
+          "popular_sovereignty_claims_score": 0.2,
+          "anti_pluralist_exclusion_score": 0.1
+        },
+        "mechanism_anchors": {
+          "elite_conspiracy_corruption_score": 0.0,
+          "authenticity_vs_political_class_score": 0.1,
+          "homogeneous_people_construction_score": 0.0
+        },
+        "boundary_anchors": {
+          "nationalist_exclusion_score": 0.0,
+          "economic_populist_appeals_score": 0.1
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manipulative_people_elite_framing_score",
+          "quote_text": "We the people, against the corrupt establishment.",
+          "confidence": 0.9,
+          "context_type": "direct_claim"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "The voice of the people will prevail over the politicians out of touch.",
+          "confidence": 0.85,
+          "context_type": "direct_claim"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "For the people, a fair share for working families.",
+          "confidence": 0.75,
+          "context_type": "direct_claim"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

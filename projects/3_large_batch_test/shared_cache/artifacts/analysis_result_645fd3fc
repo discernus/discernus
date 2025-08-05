@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_63b91546a58e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The document was analyzed sequentially across core populist anchors, populist mechanisms, and boundary distinctions. Emphasis was placed on identifying semantic patterns and thematic expressions related to populist rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"d37860f456a6\",\n      \"document_name\": \"Democratic_Platform_2008.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.85\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.75,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.85\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.4,\n          \"confidence\": 0.6\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Our current President pursued misguided policies, missed opportunities, and maintained a rigid, ideological adherence to discredited ideas. Our surplus is now a deficit, and almost a decade into this century, we still have no coherent national strategy to compete in a global economy. The price tag for these failures is being passed on to our families, working longer hours are pressed to care for their children and aging parents.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core_anchor\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"But today, we are at a crossroads. As we meet, we are in the sixth year of a two-front war. Our economy is struggling. Our planet is in peril. A great nation now demands that its leaders abandon the politics of partisan division and find creative solutions to promote the common good.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core_anchor\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"We Democrats, through the most open platform process in history, are reaching out today to Republicans, independents, and all Americans who hunger for a new direction and a reason to hope. Today, at a defining moment in our history, the Democratic Party resolves to renew America\u2019s promise.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_anchor\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"They promised fiscal responsibility but instead gave tax cuts to the wealthy few and squandered almost a trillion dollars in Iraq. They promised reform but allowed the oil companies to write our energy agenda and the credit card companies to write the bankruptcy rules.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"mechanism\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"The American people do not want government to solve all our problems; we know that personal responsibility, character, imagination, diligence, hard work and faith ultimately determine individual achievement. But we also know that at every turning point in our nation\u2019s history, we have demonstrated our love of country by uniting to overcome our challenges, whether ending slavery, fighting two world wars for the cause of freedom or sending a man to the moon.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"mechanism\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We come together at a defining moment in the history of our nation, and the nation that led the 20th century, built a thriving middle class, defeated fascism and communism, and provided bountiful opportunity to many.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"mechanism\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will provide an immediate energy rebate to American families struggling with the record price of gasoline and the skyrocketing cost of other necessities \u2013 to allow them to spend on those basic needs and energy-efficient measures. We will devote $50 billion to jumpstarting the economy, helping economic growth, and preventing another one million jobs from being lost.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"boundary_distinction\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:40:28.836738+00:00",
+    "end_time": "2025-08-05T20:40:35.762720+00:00",
+    "duration_seconds": 6.925982,
+    "llm_interaction_hash": "b85e075434202f3d"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "d37860f456a66e9c10fbee136388d1f69c9c3c188aeeede8b54d6a5fc0c60bd9"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

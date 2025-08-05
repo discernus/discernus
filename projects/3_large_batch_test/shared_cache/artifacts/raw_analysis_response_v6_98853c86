@@ -1,0 +1,175 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed by an expert populist discourse analyst following the PDSF v7.3 framework. The analysis focuses on identifying and scoring specific populist themes, mechanisms, and boundary distinctions as defined in the framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "polar_sovereignty_claims_score": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.8,
+          "salience": 0.88,
+          "confidence": 0.92
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.75,
+          "salience": 0.87,
+          "confidence": 0.93
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.55,
+          "salience": 0.78,
+          "confidence": 0.88
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "Our enemies believe America was weak and materialistic, that we would splinter in fear and self-ishness. They were as wrong as they are evil.",
+          "confidence": 0.98,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "The American people have responded magnificently, with courage and compassion, strength and resolve. As I have met the heroes, hugged the families, and looked into the tired faces of rescuers, I have stood in awe of the American people.",
+          "confidence": 0.97,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "The last time we met in this Chamber, the mothers and daughters of Afghanistan were captives in their own homes, forbidden from working or going to school. Today, women are free and are part of Afghanistan's new Government.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Our cause is just, and it continues. Our discoveries in Afghanistan confirm our worst fears and showed us the true scope of the task ahead.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "America will lead by defending liberty and justice because they are right and true and unchanging for all people everywhere.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "My call tonight is for every American to commit at least 2, 4,000 hours over the rest of your lifetime, to the service of your neighbors and your Nation.",
+          "confidence": 0.88,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "Our enemies send other people's children on missions of suicide and murder. They embrace tyranny and death as a cause and a creed. We stand for a different choice, made long ago on the day of our founding.",
+          "confidence": 0.92,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion_score",
+          "quote_text": "If any doubt this, let them look to Afghanistan, where the Islamic \"street\" greeted the fall of tyranny with song and celebration. Let the skeptics look to Islam's own rich history, with its centuries of learning and tolerance and progress.",
+          "confidence": 0.87,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "We have found diagrams of American nuclear power plants and public water facilities, detailed instructions for making chemical weapons, surveillance maps of American cities, and through descriptions of landmarks in America and throughout the world.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "A terrorist underworld, including groups like Hamas, Hizballah, Islamic Jihad, Jaish-e-Mohammed, operates in remote jungles and deserts and hides in the centers of large cities.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My budget supports three great goals for America: We will win this war; we will protect our homeland; and we will revitalize our economy.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kenndy.",
+          "confidence": 0.82,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "My hope is that all nations will heed our call and eliminate the terrorist parasites who threaten their countries and our own.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "We are a nation that serves goals larger than self. We've been offered a unique opportunity, and we must seize this moment to change our culture.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "North Korea is a regime arming with missiles and weapons of mass destruction, while starving its citizens.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion_score",
+          "quote_text": "Iran aggressively pursues these weapons and exports terror, while an unelected few represent the Iranian people's hope for freedom.",
+          "confidence": 0.88,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "For the sake of American workers, let's pass a stimulus package.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Good jobs begin with good schools, and here we've made a fine start.",
+          "confidence": 0.65,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

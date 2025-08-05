@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c4d7a4555682",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Initial analysis complete. Confidence is high due to clear populist rhetoric and direct mapping to framework dimensions. Further refinement can be done by focusing on nuances of specific claims.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2025.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing_score\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"polar_sovereignty_claims_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion_score\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.8,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption_score\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.88\n        },\n        \"authenticity_vs_political_class_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction_score\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.88,\n          \"confidence\": 0.82\n        },\n        \"economic_populist_appeals_score\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"For just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let us work together and let us truly make America great again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Populist Appeal\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative_score\",\n          \"quote_text\": \"America is back. Six weeks ago, I stood beneath the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Restoration Claim\"\n        },\n        {\n          \"dimension\": \"polar_sovereignty_claims_score\",\n          \"quote_text\": \"The American Dream is unstoppable, and our country is on the verge of a comeback the likes of which the world has never witnessed, and perhaps will never witness again.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Sovereignty Claim\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion_score\",\n          \"quote_text\": \"So, Democrats sitting before me, why not join us in celebrating so many incredible wins for America, for the good of our nation?\",\n          \"confidence\": 0.75,\n          \"context_type\": \"Exclusionary Rhetoric\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption_score\",\n          \"quote_text\": \"The Deep State, the FBI, and the DOJ. Kash, wherever you may be. Good luck, good luck. So important. Going to do a great job. Kash. Thank you, thank you, thank you, Kash.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"Conspiratorial Claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it's our presidency, is the most successful in the history of our nation. By many.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Authenticity Claim\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"We have a healthy country than I thought, Bobby. So important. Going to do a great job. Kash. Thank you, thank you, thank you, Kash.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Homogenization Claim\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion_score\",\n          \"quote_text\": \"We need Greenland for national security and even international security. And we're working with everybody involved to try and get it. But we need it really for international world security. And I think we're going to get it. One way or the other, we're going to get it.\",\n          \"confidence\": 0.82,\n          \"context_type\": \"Nationalist Appeal\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"To further combat inflation, we will be ending the flagrant waste of taxpayer dollars. We're going to do that. And to that end, I have created the brand new Department of Government Efficiency. DOGE!\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Economic Appeal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:39:56.602483+00:00",
+    "end_time": "2025-08-05T20:40:01.945593+00:00",
+    "duration_seconds": 5.34311,
+    "llm_interaction_hash": "59b12889b2e86a93"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

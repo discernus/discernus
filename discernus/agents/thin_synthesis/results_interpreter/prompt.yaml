@@ -30,7 +30,7 @@ template: |
   PROFESSIONAL FORMATTING REQUIREMENTS:
   - **Enhanced Markdown Headers**: Use clean Markdown with status indicators and emojis for visual hierarchy
   - **Professional Tables**: Use standard Markdown tables with proper alignment and significance indicators
-  - **Unicode Visualizations**: Use Unicode block characters (█▓▒░) for simple bar charts and distributions
+  - **Simple Text Visualizations**: Use simple text-based representations (e.g., score ranges, percentages) instead of ASCII art
   - **Mermaid Diagrams**: Use Mermaid syntax for complex relationships and flowcharts when beneficial
   - **Statistical Presentation**: Clean tables with significance indicators (⭐, ✅, ❌) and formatting
   - **Responsive Design**: Ensure formatting works across different Markdown renderers
@@ -77,11 +77,11 @@ template: |
 
   6. **DETAILED STATISTICAL ANALYSIS**:
      - **Score Table**: Clean Markdown table with framework dimensions and calculated metrics as columns, corpus files as rows (truncated to 25 rows maximum)
-     - **Distribution Analysis**: Unicode bar charts for key metric distributions using █▓▒░ characters
+     - **Distribution Analysis**: Simple text summaries with score ranges and percentages (e.g., "McCain: 0.8 dignity (high), Sanders: 0.7 dignity (moderate-high)")
      - **Correlation Matrix**: Markdown tables showing top associations, optionally with Mermaid diagrams for complex relationships
      - **Statistical Tables**: Clean ANOVA results with effect sizes and confidence intervals
      - **Reliability Analysis**: Cronbach's α tables with 95% confidence intervals where applicable
-     - **Framework Performance Analysis**: Unicode bar charts showing dimensional performance summaries (if provided in statistical results)
+     - **Framework Performance Analysis**: Text-based summaries of dimensional performance (avoid ASCII graphics)
 
   7. **EVIDENCE INTEGRATION**:
      - Weave curated evidence throughout the analysis using numbered footnotes [1], [2], etc.
@@ -123,17 +123,27 @@ template: |
   - Connect all findings to the experimental design and research questions
   - Aim for 1000-2000 words total
   - CRITICAL: Never create fictional evidence - only use evidence with assigned footnote numbers
-  - Use professional Markdown formatting with Unicode visualizations, clean tables, and optional Mermaid diagrams
+  - Use professional Markdown formatting with clear text-based summaries, clean tables, and optional Mermaid diagrams
 
   VISUALIZATION EXAMPLES:
   
-  **Unicode Bar Chart Format:**
+  **Text-Based Distribution Format:**
   ```
   ### Framework Reliability Distribution
-  Excellent (α≥0.80)  ████████████████████████████████████████  5 dims (38.5%)
-  Acceptable (α≥0.70) ███████████████████████████████           4 dims (30.8%)
-  Marginal (α≥0.60)   ████████████████                          2 dims (15.4%)
-  Poor (α<0.60)       ████████████████                          2 dims (15.4%)
+  - **Excellent (α≥0.80)**: 5 dimensions (38.5%) - Dignity, Truth, Justice, Hope, Pragmatism
+  - **Acceptable (α≥0.70)**: 4 dimensions (30.8%) - Tribalism, Manipulation, Fear, Fantasy
+  - **Marginal (α≥0.60)**: 2 dimensions (15.4%) - Resentment, Mixed Coherence
+  - **Poor (α<0.60)**: 2 dimensions (15.4%) - Contextual Factors
+  ```
+  
+  **Score Comparison Format:**
+  ```
+  ### Key Dimensional Differences
+  | Dimension | McCain | Sanders | Difference | Interpretation |
+  |-----------|--------|---------|------------|----------------|
+  | Dignity | 0.8 (high) | 0.7 (moderate-high) | +0.1 | McCain slightly higher |
+  | Tribalism | 0.2 (low) | 0.6 (moderate-high) | -0.4 | Sanders notably higher |
+  | Justice | 0.4 (moderate) | 0.8 (high) | -0.4 | Sanders notably higher |
   ```
   
   **Professional Status Headers:**

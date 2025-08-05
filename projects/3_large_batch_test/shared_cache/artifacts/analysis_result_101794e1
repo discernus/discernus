@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_69a46233195d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using a sequential chain-of-thought approach, focusing on core populist concepts, mechanisms, and boundary distinctions. Salience weighting applied based on contextual relevance.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2024.pdf\",\n      \"dimensional_scores\": {\n        \"core_anchors\": {\n          \"manipulative_people_elite_framing_score\": 0.1,\n          \"crisis_restoration_narrative_score\": 0.0,\n          \"popular_sovereignty_claims_score\": 0.2,\n          \"anti_pluralist_exclusion_score\": 0.1\n        },\n        \"mechanism_anchors\": {\n          \"elite_conspiracy_corruption_score\": 0.0,\n          \"authenticity_vs_political_class_score\": 0.1,\n          \"homogeneous_people_construction_score\": 0.0\n        },\n        \"boundary_anchors\": {\n          \"nationalist_exclusion_score\": 0.0,\n          \"economic_populist_appeals_score\": 0.1\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manipulative_people_elite_framing_score\",\n          \"quote_text\": \"We the people, against the corrupt establishment.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_claim\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims_score\",\n          \"quote_text\": \"The voice of the people will prevail over the politicians out of touch.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_claim\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"For the people, a fair share for working families.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"direct_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:42:31.922677+00:00",
+    "end_time": "2025-08-05T20:42:47.397732+00:00",
+    "duration_seconds": 15.475055,
+    "llm_interaction_hash": "13a143ac0b5eb9c2"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "83689ef6daaa798c417484a0d276d45fb0f5a86f1923ec335410b8a31da0535a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

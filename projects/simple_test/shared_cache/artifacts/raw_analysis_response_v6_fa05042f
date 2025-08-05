@@ -1,0 +1,131 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the sequential chain-of-thought method, focusing on each dimension axis independently before overall assessment. The text, being a concession speech, inherently leans towards unifying and positive civic virtues."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.15,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too. But we both recognize that though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.9,
+          "context_type": "universal_opportunity_and_acknowledgment_of_past_injustice"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.9,
+          "context_type": "inclusive_identity_framing"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Tonight -- tonight more than any night -- I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama.",
+          "confidence": 0.85,
+          "context_type": "rejection_of_division"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+          "confidence": 0.9,
+          "context_type": "factual_acknowledgment"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+          "confidence": 0.85,
+          "context_type": "intellectual_humility_and_self-reflection"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight. ... There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+          "confidence": 0.9,
+          "context_type": "recognition_of_historical_justice"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.9,
+          "context_type": "constructive_vision_and_unity"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I call on all Americans, as I have often in this campaign, to not despair of our present difficulties, but to believe always in the promise and greatness of America. Because nothing is inevitable here.",
+          "confidence": 0.9,
+          "context_type": "inspirational_call_to_optimism"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment_of_constraints_and_commitment_to_cooperation"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again. We fought -- we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+          "confidence": 0.85,
+          "context_type": "realistic_outlook_and_personal_responsibility"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

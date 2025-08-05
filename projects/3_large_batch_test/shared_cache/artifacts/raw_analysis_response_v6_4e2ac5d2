@@ -1,0 +1,103 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis followed a sequential approach, examining core anchors, then mechanisms, and finally boundary distinctions. Confidence levels reflect the clarity of evidence and the analyst's certainty in applying the framework's definitions. The extended 0.0-2.0 scale was utilized where appropriate for populist rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "polar_sovereignty_claims_score": {
+          "raw_score": 1.0,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.9,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 1.3,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.7,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 1.1,
+          "salience": 0.55,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is adding jobs, but too many people still can't find full-time employment. Corporate profits have skyrocketed to all-time highs, but for more than a decade, wages and incomes have barely budged.",
+          "confidence": 0.95,
+          "context_type": "Manichaean People-Elite Framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.",
+          "confidence": 0.85,
+          "context_type": "Crisis-Restoration Narrative"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.",
+          "confidence": 0.8,
+          "context_type": "Polar Sovereignty Claims"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.",
+          "confidence": 0.9,
+          "context_type": "Authenticity vs. Political Class"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "It is our unfinished task to make sure that this Government works on behalf of the many, and not just the few; that it encourages free enterprise, rewards individual initiative, and opens the doors of opportunity to every child across this great Nation.",
+          "confidence": 0.9,
+          "context_type": "Homogeneous People Construction"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "Let's set party interests aside and work to pass a budget that replaces reckless cuts with smart savings and wise investments in our future. And let's do it without the brinkmanship that stresses consumers and scares off investors.",
+          "confidence": 0.85,
+          "context_type": "Economic Populist Appeals"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,139 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on identifying populist discourse patterns across core anchors, mechanisms, and boundary distinctions. Confidence levels reflect the clarity and directness of evidence supporting dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "polar_sovereignty_claims_score": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.65
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "My fellow Americans, the state of our Union is the strongest it has ever been.",
+          "confidence": 0.8,
+          "context_type": "general_statement"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "All of us, will be judged by the dreams and deeds we pass on to our children.",
+          "confidence": 0.75,
+          "context_type": "moral_framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "In 1992, we just had a roadmap. Today, we have results.",
+          "confidence": 0.65,
+          "context_type": "progress_narrative"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "Even more important, America again has the confidence to dream big dreams.",
+          "confidence": 0.6,
+          "context_type": "confidence_restoration"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "All of us, will be judged by the dreams and deeds we pass on to our children.",
+          "confidence": 0.5,
+          "context_type": "people_will"
+        },
+        {
+          "dimension": "polar_sovereignty_claims_score",
+          "quote_text": "For to make our communities more livable.",
+          "confidence": 0.45,
+          "context_type": "popular_wellbeing"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "My fellow Americans, the state of our Union is the strongest it has ever been.",
+          "confidence": 0.75,
+          "context_type": "direct_address_authenticity"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "As always, the real credit belongs to the American people.",
+          "confidence": 0.8,
+          "context_type": "people_as_source_of_strength"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "My fellow Americans, we have crossed the bridge we built to the 21st century.",
+          "confidence": 0.55,
+          "context_type": "inclusive_we"
+        },
+        {
+          "dimension": "homogeneous_people_construction_score",
+          "quote_text": "And on that score, we will be held to a high standard, indeed, because our chance to do good is so great.",
+          "confidence": 0.45,
+          "context_type": "shared_responsibility"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "We have built a new economy. And our economic revolution has been matched by a revival of the American spirit: crime down by 20 percent, to its lowest level in 25 years; teen births down 7 years in a row; adoptions up by 30 percent; welfare rolls cut in half, to their lowest levels in 30 years.",
+          "confidence": 0.85,
+          "context_type": "economic_progress_statistics"
+        },
+        {
+          "dimension": "economic_populist_appeals_score",
+          "quote_text": "I propose to give every parent the tools they need to solve their own problems.",
+          "confidence": 0.75,
+          "context_type": "empowerment_for_economic_wellbeing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

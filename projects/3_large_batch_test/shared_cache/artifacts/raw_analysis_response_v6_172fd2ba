@@ -1,0 +1,91 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Populist Discourse Analysis Framework (PDAF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential approach outlined in the PDAF v7.3 framework, focusing on core populist anchors, then mechanisms, and finally boundary distinctions. Emphasis placed on identifying nuanced semantic expressions rather than literal keyword matching. Confidence is high due to clear populist rhetoric and consistent thematic alignment with the framework's dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "341e811f3a27",
+      "document_name": "Democratic_Platform_2016.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 1.3,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach. As working people struggle, the top one percent accrues more wealth and more power. Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It's no wonder that so many feel like the deck is stacked against them.",
+          "confidence": 0.95,
+          "context_type": "direct_contrast"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Democrats believe we are stronger together. Democrats believe we have an economy that works for everyone—an economy that grows incomes for working people, creates good-paying jobs, and puts a middle class life within reach for more Americans. Democrats believe we can spur more sustainable economic growth, which will create good-paying jobs and raise wages. And we can have more economic fairness, so the rewards are shared broadly, not just with those at the top.",
+          "confidence": 0.95,
+          "context_type": "policy_promise"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "But in 2016, the stakes can be measured in human lives—in the number of immigrants who would be torn from their homes; in the number of faithful and peaceful Muslims who would be barred from even visiting our shores; in the number of allies alienated and dictators courted; in the number of Americans who would lose access to health care and see their rights ripped away. This election is about more than Democrats and Republicans. It is about who we are as a nation, and who we will be in the future.",
+          "confidence": 0.9,
+          "context_type": "framing_urgency"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Our economy is running on fumes. We need to invest in our people, create jobs, and ensure that everyone has a fair shot at success. We will make sure that corporations pay their fair share of taxes, and that the wealthiest Americans pay their fair share.",
+          "confidence": 0.85,
+          "context_type": "policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
