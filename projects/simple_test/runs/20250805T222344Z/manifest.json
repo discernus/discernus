@@ -1,0 +1,213 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-08-05T22:24:31.767087+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/simple_test/runs/20250805T222344Z/logs",
+    "session_id": "20250805T222344Z_fffe2262",
+    "start_time": "2025-08-05T22:23:44.906580+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/simple_test/shared_cache/artifacts",
+      "total_artifacts": 236,
+      "total_bytes": 3286444,
+      "total_mb": 3.13
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.0
+  },
+  "created_at": "2025-08-05T22:23:44.907906+00:00",
+  "execution_timeline": [
+    {
+      "agent_name": "BatchPlannerAgent",
+      "duration_seconds": 9.1e-05,
+      "end_time": "2025-08-05T22:23:44.915761+00:00",
+      "metadata": {
+        "context_window_limit": 0,
+        "total_batches": 0,
+        "total_estimated_cost": 0.0,
+        "total_estimated_tokens": 0
+      },
+      "stage_name": "batch_planning",
+      "start_time": "2025-08-05T22:23:44.915670+00:00",
+      "status": "completed"
+    },
+    {
+      "agent_name": "ProductionThinSynthesisPipeline",
+      "duration_seconds": 43.338219,
+      "end_time": "2025-08-05T22:24:31.757917+00:00",
+      "metadata": {
+        "duration_seconds": 43.266660928726196,
+        "result_hash": "f247869b316e6f7bfc7ad47f34a147cc21402e465f782e4bd8762574eac28c4e",
+        "synthesis_confidence": 0.95,
+        "thin_pipeline_data": {
+          "generated_artifacts": {
+            "analysis_plan": "4ebac5cadd04ed0cf8b649748b37f85b35f7598071556047b2000b9b24defa51",
+            "curated_evidence": "67eae1472b0e1b3812bbe2b46c204b6337d36d242895e53bd6699c665b9a0868",
+            "statistical_results": "a9c66b8906c999dd67be881664baf8d3db336c6d208669b7a78abb938be9aaa8"
+          },
+          "pipeline_version": "production_v1.0",
+          "stage_success": {
+            "analysis_execution": true,
+            "analysis_planning": true,
+            "evidence_curation": true,
+            "results_interpretation": true
+          },
+          "stage_timings": {
+            "analysis_execution": 0.028985023498535156,
+            "analysis_planning": 11.201602220535278,
+            "evidence_curation": 11.810117721557617,
+            "results_interpretation": 20.21103811264038
+          },
+          "word_count": 1790
+        }
+      },
+      "stage_name": "synthesis",
+      "start_time": "2025-08-05T22:23:48.419698+00:00",
+      "status": "completed"
+    }
+  ],
+  "experiment_config": {
+    "analysis": {
+      "statistical_confidence": 0.95,
+      "variance_threshold": 0.2
+    },
+    "analysis_variant": "default",
+    "corpus_path": "corpus/",
+    "description": "A minimal test experiment for validating the Discernus v7.1 enhanced gasket architecture using \nthe Character Assessment Framework v7.1. This experiment tests enhanced framework compatibility\nwith metadata scores (salience, confidence) and advanced extraction patterns with \na 2-document ideological contrast design (Conservative vs Progressive speakers). \nDesigned as a comprehensive smoke test for validating v7.1 gasket architecture implementation.\n",
+    "framework": "../../frameworks/reference/core/caf_v7.3.md",
+    "gasket_workflow": {
+      "advanced_pattern_matching": true,
+      "enhanced_metadata_extraction": true,
+      "intelligent_extractor_enabled": true,
+      "metadata_scores_required": true
+    },
+    "hypotheses": {
+      "H1_Ideological": "Character dimensions will show significant differences between conservative (McCain) and progressive (Sanders) speakers",
+      "H2_Coherence": "MC-SCI scores will successfully differentiate between gracious institutional discourse and passionate populist critique",
+      "H3_Architecture": "The v7.1 gasket architecture will successfully process 2-document character analysis with Raw Analysis Log processing"
+    },
+    "hypothesis": "Character dimensions will show measurable differences between conservative \nand progressive speakers, validating the framework's ability to detect \nideological character signatures through enhanced v7.1 analysis with metadata scores. \nThe enhanced gasket architecture will successfully extract, process, and synthesize \ncharacter coherence patterns with salience and confidence metadata across different political approaches.\n",
+    "models": [
+      "vertex_ai/gemini-2.5-pro"
+    ],
+    "name": "simple_character_validation_v7",
+    "reporting": {
+      "format": "academic",
+      "include_confidence_metrics": true,
+      "show_statistical_work": true,
+      "structure": [
+        "executive_summary",
+        "character_comparison_analysis",
+        "ideological_signatures",
+        "mc_sci_patterns",
+        "synthesis_validation_results",
+        "statistical_methodology",
+        "limitations"
+      ]
+    },
+    "runs_per_model": 3,
+    "validation": {
+      "effect_size_reporting": true,
+      "reliability_threshold": 0.6,
+      "required_tests": [
+        "character_correlation_matrix",
+        "mc_sci_reliability",
+        "ideological_comparison"
+      ]
+    },
+    "workflow": [
+      {
+        "agent": "EnhancedAnalysisAgent",
+        "inputs": [
+          "experiment",
+          "framework",
+          "corpus"
+        ],
+        "outputs": [
+          "analysis_results"
+        ]
+      },
+      {
+        "agent": "ProductionThinSynthesisPipeline",
+        "inputs": [
+          "analysis_results",
+          "experiment",
+          "framework"
+        ],
+        "outputs": [
+          "final_report.md",
+          "statistical_results.json"
+        ]
+      }
+    ]
+  },
+  "finalized_at": "2025-08-05T22:24:31.767065+00:00",
+  "input_artifacts": {
+    "corpus_documents": [
+      {
+        "document_index": 1,
+        "hash": "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d",
+        "metadata": {
+          "filename": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "size_bytes": 4698
+        },
+        "registered_at": "2025-08-05T22:23:44.913516+00:00"
+      },
+      {
+        "document_index": 2,
+        "hash": "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d",
+        "metadata": {
+          "filename": "john_mccain_2008_concession.txt",
+          "size_bytes": 6509
+        },
+        "registered_at": "2025-08-05T22:23:44.913730+00:00"
+      }
+    ],
+    "framework": {
+      "hash": "95c64426cf7f421077d09605020b1558762fde856acfb921bc133417004f5e7e",
+      "metadata": {
+        "filename": "../../frameworks/reference/core/caf_v7.3.md",
+        "size_bytes": 25768
+      },
+      "registered_at": "2025-08-05T22:23:44.911801+00:00"
+    }
+  },
+  "llm_interactions": [],
+  "manifest_version": "2.0",
+  "performance_metrics": {
+    "total_execution_time": {
+      "end_time": "2025-08-05T22:24:31.757917+00:00",
+      "start_time": "2025-08-05T22:23:44.915670+00:00",
+      "unit": "seconds",
+      "value": 46.842247
+    }
+  },
+  "quality_assurance": {},
+  "run_metadata": {
+    "audit_session_id": "20250805T222344Z_fffe2262",
+    "created_at": "2025-08-05T22:23:44.907906+00:00",
+    "discernus_version": "thin_v2.0_alpha",
+    "experiment_name": "simple_character_validation_v7",
+    "experiment_path": "/Volumes/code/discernus/projects/simple_test",
+    "run_id": "20250805T222344Z",
+    "security_boundary": {
+      "boundary_type": "filesystem",
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "security_level": "experiment_scoped"
+    }
+  }
+}
