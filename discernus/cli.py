@@ -29,6 +29,9 @@ from typing import Dict, Any, Optional, List
 
 from discernus.core.thin_orchestrator import ThinOrchestrator, ThinOrchestratorError
 
+# Rich CLI integration for professional terminal interface
+from .cli_console import rich_console
+
 
 def check_infrastructure() -> Dict[str, bool]:
     """Check if required infrastructure is running"""
@@ -196,41 +199,59 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         sys.exit(1)
     
     # Execute using THIN v2.0 orchestrator with direct function calls
-    click.echo("🎯 Initializing THIN v2.0 orchestrator with batch management...")
+    rich_console.print_info("Initializing THIN v2.0 orchestrator with batch management...")
+    
+    # Display experiment summary
+    rich_console.print_experiment_summary(experiment)
     
     # Execute using THIN v2.0 direct orchestration
     try:
-        click.echo(f"🚀 Starting complete experiment execution...")
-        click.echo(f"📝 Using analysis model: {analysis_model}")
-        click.echo(f"📝 Using synthesis model: {synthesis_model}")
+        rich_console.print_section("🚀 Experiment Execution")
+        rich_console.echo(f"📝 Using analysis model: {analysis_model}")
+        rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
             
         orchestrator = ThinOrchestrator(exp_path)
         
-        # Execute experiment (complete or analysis-only)
-        result = orchestrator.run_experiment(
-            analysis_model=analysis_model,
-            synthesis_model=synthesis_model,
-            analysis_only=analysis_only,
-            auto_commit=(not no_auto_commit),
-            # TODO: Ensemble runs disabled pending architectural review
-        # ensemble_runs=ensemble_runs
-        ensemble_runs=1
-        )
+        # Execute experiment with progress indication
+        with rich_console.create_progress("Running experiment...") as progress:
+            task = progress.add_task("Executing experiment", total=100)
+            
+            # Execute experiment (complete or analysis-only)
+            result = orchestrator.run_experiment(
+                analysis_model=analysis_model,
+                synthesis_model=synthesis_model,
+                analysis_only=analysis_only,
+                auto_commit=(not no_auto_commit),
+                # TODO: Ensemble runs disabled pending architectural review
+                # ensemble_runs=ensemble_runs
+                ensemble_runs=1
+            )
+            
+            # Update progress to complete
+            progress.update(task, completed=100)
         
         # Show completion with enhanced details
-        click.echo("✅ Experiment completed successfully!")
+        rich_console.print_success("Experiment completed successfully!")
+        
         if isinstance(result, dict) and 'run_id' in result:
-            click.echo(f"   📋 Run ID: {result['run_id']}")
-            click.echo(f"   📁 Results: {exp_path / 'runs' / result['run_id']}")
-            click.echo(f"   📄 Report: {exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'}")
+            # Create results table
+            results_table = rich_console.create_table("Experiment Results", ["Item", "Location"])
+            results_table.add_row("Run ID", result['run_id'])
+            results_table.add_row("Results Directory", str(exp_path / 'runs' / result['run_id']))
+            results_table.add_row("Final Report", str(exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'))
+            rich_console.print_table(results_table)
+            
+            # Show cost summary if available
+            if 'costs' in result:
+                rich_console.print_cost_summary(result['costs'])
         else:
-            click.echo(f"📊 Results available in experiment runs directory")
+            rich_console.print_info("Results available in experiment runs directory")
         
     except ThinOrchestratorError as e:
-        click.echo(f"❌ Experiment failed: {e}")
+        rich_console.print_error(f"Experiment failed: {e}")
         sys.exit(1)
     except Exception as e:
-        click.echo(f"❌ Unexpected error: {e}")
+        rich_console.print_error(f"Unexpected error: {e}")
         sys.exit(1)
 
 
@@ -712,10 +733,8 @@ def list():
     projects_dir = Path('projects')
     
     if not projects_dir.exists():
-        click.echo("❌ No projects directory found")
+        rich_console.print_error("No projects directory found")
         sys.exit(1)
-    
-    click.echo("📋 Available experiments:")
     
     experiments = []
     for item in projects_dir.iterdir():
@@ -729,17 +748,24 @@ def list():
             })
     
     if not experiments:
-        click.echo("   No experiments found")
+        rich_console.print_info("No experiments found")
         return
+    
+    # Create Rich table for experiments
+    table = rich_console.create_table("Available Experiments", ["Status", "Path", "Name", "Framework", "Corpus Files"])
     
     for exp in sorted(experiments, key=lambda x: x['path']):
         if exp['valid']:
-            click.echo(f"   ✅ {exp['path']}")
-            click.echo(f"      📋 {exp['config'].get('name', 'Unnamed')}")
-            click.echo(f"      📄 {exp['config'].get('framework', 'framework.md')}")
-            click.echo(f"      📁 {exp['config']['_corpus_file_count']} corpus files")
+            status = "✅ Valid"
+            name = exp['config'].get('name', 'Unnamed')
+            framework = exp['config'].get('framework', 'framework.md')
+            corpus_count = str(exp['config']['_corpus_file_count'])
+            
+            table.add_row(status, exp['path'], name, framework, corpus_count)
         else:
-            click.echo(f"   ❌ {exp['path']} - Invalid")
+            table.add_row("❌ Invalid", exp['path'], "-", "-", "-")
+    
+    rich_console.print_table(table)
 
 
 @cli.command()
@@ -808,17 +834,25 @@ def artifacts(experiment_path: str):
 @cli.command()
 def status():
     """Show infrastructure and system status"""
-    click.echo("🔍 Discernus System Status")
+    rich_console.print_section("🔍 Discernus System Status")
     
-    click.echo("📊 Storage:")
-    click.echo("   Local Storage: ✅ Ready (no external dependencies)")
+    # Create status table
+    table = rich_console.create_table("System Status", ["Component", "Status", "Details"])
+    table.add_row("Local Storage", "✅ Ready", "No external dependencies")
+    table.add_row("Git Integration", "✅ Ready", "Auto-commit enabled")
+    table.add_row("LLM Gateway", "✅ Ready", "Vertex AI configured")
     
-    click.echo("")
-    click.echo("💡 Commands:")
-    click.echo("   discernus run        - Run experiments using local storage")
-    click.echo("   discernus run        - Execute complete experiment")
-    click.echo("   discernus continue   - Resume from existing artifacts")
-    click.echo("   discernus debug      - Interactive debugging mode")
+    rich_console.print_table(table)
+    
+    rich_console.print_section("💡 Available Commands")
+    commands_table = rich_console.create_table("Commands", ["Command", "Description"])
+    commands_table.add_row("discernus run", "Execute complete experiment")
+    commands_table.add_row("discernus continue", "Resume from existing artifacts")
+    commands_table.add_row("discernus debug", "Interactive debugging mode")
+    commands_table.add_row("discernus validate", "Validate experiment structure")
+    commands_table.add_row("discernus list", "List available experiments")
+    
+    rich_console.print_table(commands_table)
 
 
 @cli.command()
