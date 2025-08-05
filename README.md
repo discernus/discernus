@@ -4,9 +4,12 @@
 
 ## 📚 Documentation
 
+- **CLI Quick Start**: See `docs/developer/CLI_QUICK_REFERENCE.md`
+- **CLI Complete Guide**: See `docs/developer/CLI_COMMAND_REFERENCE.md`
+- **Configuration**: See `docs/developer/CLI_CONFIGURATION_GUIDE.md`
+- **Best Practices**: See `docs/developer/CLI_BEST_PRACTICES.md`
 - **Architecture**: See `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
-- **Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
-- **CLI Guide**: See `CLAUDE.md` for development commands
+- **Agent Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
 - **Frameworks**: See `frameworks/` directory for analytical frameworks
 - **Specifications**: See `docs/specifications/` for technical specs
 
@@ -19,9 +22,15 @@ make install
 # 2. Verify setup
 make check
 
-# 3. Run a simple experiment
-make run EXPERIMENT=projects/simple_test
+# 3. Navigate to experiment and run
+cd projects/simple_test
+discernus run
+
+# Or run from anywhere
+discernus run projects/simple_test
 ```
+
+**New to Discernus?** Start with the [CLI Quick Reference](docs/developer/CLI_QUICK_REFERENCE.md) for essential commands.
 
 ## 🏗️ THIN Architecture Principles
 
@@ -46,10 +55,13 @@ make run EXPERIMENT=projects/simple_test
 ## 📋 Commands
 
 ```bash
-# Core commands
-make run EXPERIMENT=<path>      # Run complete experiment
-make continue EXPERIMENT=<path> # Resume from artifacts
-make debug EXPERIMENT=<path>    # Interactive debugging
+# Modern CLI (recommended)
+discernus run [path]           # Run complete experiment
+discernus continue [path]      # Resume from cached analysis  
+discernus list                 # List available experiments
+discernus status               # Show system status
+discernus config show          # Show configuration
+discernus --help               # Full command reference
 
 # Development
 make check                     # Verify environment
@@ -57,18 +69,22 @@ make test                      # Run test suite
 make deps                      # Update dependencies
 make clean                     # Clean temporary files
 
-# Infrastructure
-make start-infra              # Start MinIO and Redis
-make stop-infra               # Stop infrastructure services
+# Legacy make commands (still supported)
+make run EXPERIMENT=<path>     # Run complete experiment
+make continue EXPERIMENT=<path> # Resume from artifacts
+make debug EXPERIMENT=<path>   # Interactive debugging
 ```
+
+**Tip**: Use `discernus --verbose` for detailed output or `discernus --quiet` for minimal output.
 
 ## 🛠️ Development Tools
 
 - **Environment**: Python 3.13.5 with virtual environment
 - **Testing**: pytest with comprehensive test suite
 - **Code Quality**: black, isort, flake8
-- **Infrastructure**: MinIO for artifact storage, Redis for coordination
+- **Storage**: Local filesystem with content-addressable artifacts
 - **LLM Gateway**: LiteLLM for multi-provider access
+- **CLI Interface**: Rich library for professional terminal experience
 
 ## 🔗 Key Resources
 
