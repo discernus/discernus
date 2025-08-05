@@ -1,0 +1,174 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted sequentially following the framework's outlined steps, focusing on identifying semantic concepts and rhetorical patterns related to social cohesion and fragmentation."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "individual_dignity": {
+          "raw_score": 0.60,
+          "salience": 0.55,
+          "confidence": 0.80
+        },
+        "fear": {
+          "raw_score": 0.30,
+          "salience": 0.40,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.70,
+          "salience": 0.65,
+          "confidence": 0.90
+        },
+        "envy": {
+          "raw_score": 0.20,
+          "salience": 0.30,
+          "confidence": 0.70
+        },
+        "empathy": {
+          "raw_score": 0.50,
+          "salience": 0.45,
+          "confidence": 0.75
+        },
+        "enmity": {
+          "raw_score": 0.35,
+          "salience": 0.40,
+          "confidence": 0.70
+        },
+        "amity": {
+          "raw_score": 0.45,
+          "salience": 0.40,
+          "confidence": 0.75
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.75
+        },
+        "cohesive_goals": {
+          "raw_score": 0.55,
+          "salience": 0.50,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "We've been financing and building one global project after another, but ignored the fate of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "confidence": 0.80,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled.",
+          "confidence": 0.80,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present.",
+          "confidence": 0.70,
+          "context_type": "universal_worth"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "We have placed a hiring freeze on nonessential Federal workers. And we're imposing a new rule which mandates that for every one new regulation, two old regulations must be eliminated.",
+          "confidence": 0.75,
+          "context_type": "individual_agency"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.90,
+          "context_type": "progress_language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "When we have all of this, we will have made America greater than ever before—for all Americans. This is our vision. This is our mission.",
+          "confidence": 0.90,
+          "context_type": "optimistic_vision"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Our trade deficit in goods with the world last year was nearly $800 billion dollars.",
+          "confidence": 0.65,
+          "context_type": "resentment_language"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "To protect our citizens, I have directed the Department of Justice to form a task force on reducing violent crime.",
+          "confidence": 0.70,
+          "context_type": "cooperative_language"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "We want all Americans to succeed, but that can't happen in an environment of lawless chaos. We must restore integrity and the rule of law at our borders.",
+          "confidence": 0.70,
+          "context_type": "cooperative_language"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We will also be saving billions more on contracts all across our Government. We have placed a hiring freeze on nonessential Federal workers.",
+          "confidence": 0.60,
+          "context_type": "hostility_language"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We have withdrawn the United States from the job-killing Trans-Pacific Partnership.",
+          "confidence": 0.65,
+          "context_type": "antagonistic_framing"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Our foreign policy calls for a direct, robust, and meaningful engagement with the world. It is American leadership based on vital security interests that we share with our allies all across the globe.",
+          "confidence": 0.70,
+          "context_type": "friendship_appeals"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We want peace, wherever peace can be found.",
+          "confidence": 0.70,
+          "context_type": "shared_interest_recognition"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "The murder rate in 2015 experienced its largest single-year increase in nearly half a century.",
+          "confidence": 0.70,
+          "context_type": "divisive_objectives"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We must also break the cycle of violence. The murder rate in 2015 experienced its largest single-year increase in nearly half a century.",
+          "confidence": 0.70,
+          "context_type": "divisive_objectives"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "My administration wants to work with members of both parties to make childcare accessible and affordable; to help ensure new parents that they have paid family leave; to invest in women's health; and to promote clean air and clean water; and to rebuild our military and our infrastructure.",
+          "confidence": 0.80,
+          "context_type": "integrative_objectives"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "We want all children to be able to break the cycle of poverty just like Denisha.",
+          "confidence": 0.75,
+          "context_type": "cooperative_aims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,641 @@
+{
+  "evidence_metadata": {
+    "total_documents": 6,
+    "total_evidence_pieces": 70,
+    "extraction_method": "pre_extraction_v1.0",
+    "extraction_time": "2025-08-05T18:47:52.176915+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of government while the people have borne the cost. Washington flourished, but the people did not share in its wealth.",
+      "confidence": 0.95,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "What truly matters is not which party controls our Government, but whether our Government is controlled by the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.",
+      "confidence": 0.95,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "You came by the tens of millions to become part of a historic movement like which the world has never seen before. At the center of this movement is a crucial conviction: that a nation exists to serve its citizens.",
+      "confidence": 0.95,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their successes will be our success.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+      "confidence": 0.85,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "From this day forward, a new vision will govern our land. From this day forward, it's going to be only America first. America first.",
+      "confidence": 0.85,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+      "confidence": 0.8,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We will get our people off of welfare and back to work, rebuilding our country with American hands and American labor.",
+      "confidence": 0.7,
+      "context_type": "direct",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at an unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "America must put its own citizens first. Because only then can we truly make America great again.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "My obligation is to serve, protect, and defend the citizens of the United States. We are also taking strong measures to protect our Nation from radical Islamic terrorism.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "To those who prey on our citizens, and prey on our very innocent citizens. Jamiel's 17-year-old son was viciously murdered by an illegal immigrant gang member who had just been released from prison.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Should have never been in our country. Sitting with Susan is her daughter, Jenna. Jenna, I want you to know that your father was a hero, and that tonight you have the love of an entire country supporting you and praying for you.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Our current, out-dated system depresses wages for our poorest workers and puts great pressure on taxpayers. Nations around the world like Canada, Australia, and many other nations, have a merit-based immigration system. It's a basic principle that those seeking to enter a country ought to be able to support themselves financially.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My economic team is developing historic tax reform that will reduce the tax rate on our companies so they can compete and thrive anywhere and with anyone. It will be a big, big cut.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "As I spoke tonight, we are removing gang members, drug dealers, and criminals that threaten our communities and prey on our very innocent citizens. Bad ones are going out as I speak, and as I've promised throughout the campaign.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We all salute the same great American flag. And we're all made by the same God.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We need the courage to share the dreams that fill our hearts, the bravery to express the hopes that stir our souls, and the confidence to turn those hopes and those dreams into action.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We must learn from the mistakes of the past. We have seen the war and destruction that have ravaged and raged throughout the world\u2014all across the world. The only long-term solution for these humanitarian disasters, in many cases, is to create the conditions where displaced persons can safely return home and begin the long, long process of rebuilding.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We want peace, wherever peace can be found. America is friends with today with former enemies. Some of our closest allies, decades ago, fought on the opposite side of these terrible, terrible wars.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "My goal is not to represent the world. My job is to represent the United States of America.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We want our country to be great again. My economic team is developing historic tax reform that will reduce the tax rate on our companies so they can compete and thrive anywhere and with anyone. It will be a big, big cut.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "My duty, and the sacred duty of every elected official in this Chamber, is to defend Americans, to protect them, and to always be worthy of them. Our task is to respect them, to listen to them, to serve them, and to always be worthy of them. Because Americans are dreamers too.",
+      "confidence": 0.95,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Over the last year, we have made incredible progress and achieved extraordinary success. We have faced challenges we expected and others we could never have imagined. We have shared in the heights of victory and the pains of hardship. We have endured floods and fires and storms. But through it all, we have seen the beauty of America's soul and the steel in America's spine.",
+      "confidence": 0.93,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "So to every citizen watching at home tonight, no matter where you've been or where you've come from, this is your time. If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.",
+      "confidence": 0.94,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We must also address the fundamental flaws in the terrible Iran nuclear deal. My administration has also imposed tough sanctions on the communist and socialist dictatorships in Cuba and Venezuela.",
+      "confidence": 0.92,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "But it is not enough to come together only in times of tragedy. Tonight I am calling upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+      "confidence": 0.93,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "All Americans deserve accountability and respect, and that's what we are giving to our wonderful heroes, our veterans. They work in every trade. They sacrifice to raise a family. They care for our children at home. They defend our flag abroad. And they are strong moms and brave kids. They are firefighters and police officers and border agents, medics and mariners. But above all else, they are Americans. And this Capitol, this city, this Nation, belongs entirely to them. Our task is to respect them, to listen to them, to serve them, and to always be worthy of them.",
+      "confidence": 0.91,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "When possible, we have no choice but to annihilate them. When captured overseas, they should be treated like the terrorists they are.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We slashed the business tax rate from 35 percent all the way down to 21 percent, so American companies can compete and win against anyone else anywhere in the world. These changes alone are estimated to increase average family income by more than $4,000, a lot of money. Small businesses have also received a massive tax cut and can now deduct 20 percent of their business income.",
+      "confidence": 0.88,
+      "context_type": "direct_quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We must be united at home to defeat our adversaries abroad. This new era of cooperation can start with finally confirming the more than 300 highly qualified nominees who are still stuck in the Senate, in some cases, years and years waiting. Not right. The Senate has failed to act on these nominations, which is unfair to the nominees and very unfair to our country. Now is the time for bipartisan action.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "For decades, politicians promised to build a wall, but they were all talk and no action. I did it. We are now preparing for this tremendous onslaught. This is a moral issue. The lawless state of our southern border is a threat to the safety, security, and financial well-being of all Americans. We have a moral duty to create an immigration system that protects the lives and jobs of our citizens.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The decision is ours to make. We must choose between greatness or gridlock, results or resistance, vision or vengeance, incredible progress or pointless destruction. Tonight I ask you to choose greatness.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We must break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future. This is our future, our fate, and our choice to make. I am asking you to choose greatness.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "In the last 2 years, my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My administration has cut more regulations in a short period of time than any other administration during its entire tenure. Companies are coming back to our country in large numbers thanks to our historic reductions in taxes and regulations. And we have unleashed a revolution in American energy. The United States is now the number-one producer of oil and natural gas anywhere in the world. And now, for the first time in 65 years, we are a net exporter of energy.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "All Americans can be proud that we have more women in the workforce than ever before. And exactly one century after Congress passed the constitutional amendment giving women the right to vote, we also have more women serving in Congress than at any time before.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We are also joined tonight by Matthew Charles from Tennessee. In 1996, at the age of 30, Matthew was sentenced to 35 years for selling drugs and related offenses. Over the next two decades, he completed more than 30 Bible studies, became a law clerk, and mentored many of his fellow inmates. Now Matthew is the very first person to be released from prison under the First Step Act. Matthew, please. Thank you, Matthew. Welcome home.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We passed a massive tax cut for working families and doubled the child tax credit. We virtually ended the estate tax for the very unpopulard Obama individual mandate penalty. And to give critically ill patients access to life-saving cures, we passed, very importantly, the right to try.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "So, Democrats sitting in front of me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let\u2019s work together and let\u2019s truly make America great again. Every day my administration is fighting to deliver the change America needs to bring a future America deserves and we\u2019re doing it. This is a time for big dreams and bold action.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "My administration is also working on a gigantic natural gas pipeline in Alaska, among the largest in the world, where Japan, South Korea and other nations want to be our partner with investments of trillions of dollars each. It's never been anything like that one. It will be truly spectacular. It's all set to go. The permitting has gotten and later this week, I will also take historic action to dramatically expand production of critical minerals and rare earths here in the USA.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "America is back. Six weeks ago, I stood beneath the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+      "confidence": 0.85,
+      "context_type": "metaphorical_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We have accomplished more in 43 days than most administrations accomplished in 4 years, 8 years and we are just getting started. I return to this chamber tonight to report that America's momentum is back. Our spirit is back. Our pride is back. And the American Dream is surging bigger and better than ever before.",
+      "confidence": 0.8,
+      "context_type": "comparison_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it\u2019s our presidency, is the most successful in the history of our nation. By many.",
+      "confidence": 0.9,
+      "context_type": "direct_claim",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Now, for the first time in modern history, more Americans believe that our country is headed in the right direction than the wrong direction and in fact it's an astonishing record, 27-point swing and the most ever. Likewise, small business optimism saw its single largest one-month gain ever recorded, a 41-point jump.",
+      "confidence": 0.85,
+      "context_type": "statistical_claim",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "The Democrats in front of me, and I realize there is absolutely nothing I can say to make them happy or to make them stand or smile or applaud, nothing I can do.",
+      "confidence": 0.7,
+      "context_type": "adversarial_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation?",
+      "confidence": 0.6,
+      "context_type": "adversarial_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The president election of November 5th was a mandate like has not been seen in many decades. We won all seven swing states, giving us an Electoral College victory of 312 votes. We won the popular vote by big numbers and won counties in our country 2,700 to 525 on a map that reads almost completely red for Republican.",
+      "confidence": 0.8,
+      "context_type": "accusation_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The system is not fair to the United States and never was. And so on April 2nd, I wanted to make an April 1st, but I didn\u2019t want to be accused of April Fool\u2019s Day. That\u2019s what one day would cost us, a lot of money, but we\u2019re going to do it in April. I\u2019m a very superstitious person. April 2nd reciprocal tariffs kick in and whatever they tariff us, other countries, we will tariff them. That\u2019s reciprocal back and forth. Whatsoever they tax us, we will tax them.",
+      "confidence": 0.8,
+      "context_type": "retaliatory_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "The people elected me to do the job, and I am doing it. In fact, it has been stated by many that the first month of our presidency, it\u2019s our presidency, is the most successful in the history of our nation. By many.",
+      "confidence": 0.95,
+      "context_type": "self_proclamation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My administration is a working on a gigantic natural gas pipeline in Alaska, among the largest in the world, where Japan, South Korea and other nations want to be our partner with investments of trillions of dollars each. It's never been anything like that one. It will be truly spectacular. It's all set to go. The permitting has gotten and later this week, I will also take historic action to dramatically expand production of critical minerals and rare earths here in the USA.",
+      "confidence": 0.9,
+      "context_type": "action_oriented_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Our spirit is back. Our pride is back. And the American Dream is surging bigger and better than ever before.",
+      "confidence": 0.9,
+      "context_type": "collective_identity_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "And that's why, on my first day in office, I imposed an immediate freeze on all federal hiring, a freeze on all new federal regulations, and a freeze on all foreign aid. I terminated the ridiculous green new scam. I withdrew from the unfair Paris Climate Accord, which was costing us trillions of dollars that other countries were not paying. I withdrew from the corrupt World Health Organization, and I also withdrew from the anti-American U.N. Human Rights Council. We ended all of Biden's environmental restrictions that were making our country far less safe and totally unaffordable. And importantly, we ended the last administration's insane electric vehicle mandate, saving our auto workers and companies from economic destruction. To unshackle our economy, I have directed that for every one new regulation, 10 old regulations must be eliminated, just like I did in my very successful first term.",
+      "confidence": 0.85,
+      "context_type": "policy_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "And I also want to make interest payments on car loans tax deductible, but only if the car is made in America. Oh, and by the way, we're going to have growth in the auto industry like nobody's ever seen. Plants are opening up all over the place. Deals are being made like never seen. That's a combination of the election win and our economic policies that people love. SoftBank, one of the most brilliant anywhere in the world, announced a $200 billion investment. OpenAI and Oracle, Larry Ellison, announced $500 billion investment, which they wouldn't have done if Kamala had won. Apple announced $500 billion investment. Tim Cook called me, said, I cannot spend it fast enough, it's got to be much higher than that. I believe they'll be building their plants here instead of in China. And just yesterday, Taiwan Semiconductor, the biggest in the world's most powerful in the world, has a tremendous amount of a 97% of the market, announced a $165 billion investment to build the most powerful chips on Earth right here in the U.S.A. And we're not giving them any money.",
+      "confidence": 0.6,
+      "context_type": "economic_protectionism",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America is on once again standing strong against the forces of radical Islamic terrorism. Three and a half years ago, ISIS terrorists killed 13 American service members and countless others in the Abbey Gate bombing during the disastrous and incompetent withdrawal from Afghanistan. Not that they were withdrawing. It was the way they withdrew. Perhaps the most embarrassing moment in the history of our country. Tonight, I am pleased to announce that we have just apprehended the top terrorist responsible for that atrocity. And he is right now on his way here to face the swift sword of American justice.",
+      "confidence": 0.7,
+      "context_type": "nationalist_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "To boost our defense industrial base, we are also going to resurrect the American shipbuilding industry, including commercial shipbuilding and military shipbuilding. And for that purpose, I am announcing tonight that we will create a new office of shipbuilding in the White House and offer special tax incentives to bring this industry home to America, where it belongs.",
+      "confidence": 0.7,
+      "context_type": "economic_policy_promise",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "And we've also imposed a 25% tariff on foreign aluminum, copper, lumber and steel because if we don't have, as an example, steel and lots of other things, we don't have a military and frankly we just won't have a country very long. Here today is a proud American steelworker, fantastic person from Decatur, Alabama. Jeff Denard has been working at the same steel plant for 27 years in a job that has allowed him to serve as the captain of his local volunteer fire department, raised seven children with his beautiful wife, Nicole, and over the years provided a loving home for more than 40 foster children.",
+      "confidence": 0.75,
+      "context_type": "economic_appeal",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our current immigration system costs American taxpayers many billions of dollars a year. Switching away from this current system of lower skilled immigration, and instead adopting a merit-based system, we will have so many benefits. It will save countless dollars, raise workers' wages, and help struggling families, including immigrant families, enter the middle class.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We cannot allow a breach of terrorism to form inside America. We cannot allow our Nation to become a sanctuary for extremists.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled.",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Our current, outdated system depresses wages for our poorest workers and puts great pressure on taxpayers. Nations around the world like Canada, Australia, and many other nations, have a merit-based immigration system. It's a basic principle that those seeking to enter a country ought to be able to support themselves financially.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present. That torch is now in our hands, and we will use it to light up the world.",
+      "confidence": 0.95,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We have withdrawn from the job-killing Trans-Pacific Partnership. And with the help of Prime Minister Justin Trudeau, we have formed a council with our neighbors in Canada to help ensure that women enterpreneurs have access to the networks, markets, and capital they need to start a businesses and live out their financial dreams.",
+      "confidence": 0.75,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We're going to stop the drugs from pouring into our country and poisoning our youth, and we will expand treatment for those who have become so badly addicted.",
+      "confidence": 0.85,
+      "context_type": "quote",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    }
+  ]
+}

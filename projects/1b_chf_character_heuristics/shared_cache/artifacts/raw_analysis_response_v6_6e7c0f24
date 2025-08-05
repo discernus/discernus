@@ -1,0 +1,76 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Constitutional Health Framework (CHF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on each dimensional axis independently before integration. Evidence extraction prioritized direct quotes supporting the identified dimensional concepts."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.2,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "institutional_subversion": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "systemic_continuity": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "systemic_replacement": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest!",
+          "confidence": 0.9,
+          "context_type": "procedural_rejection"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "What these guys are busy doing right now is going after Medicaid, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+          "confidence": 0.8,
+          "context_type": "institutional_subversion"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 0.9,
+          "context_type": "systemic_replacement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses. It's a serious problem in my state.",
+          "confidence": 0.7,
+          "context_type": "procedural_legitimacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

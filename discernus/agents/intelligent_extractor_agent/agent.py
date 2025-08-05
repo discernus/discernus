@@ -147,8 +147,9 @@ class IntelligentExtractorAgent:
                 error_message="Invalid gasket_schema: missing target_keys (v7.1 format required)"
             )
         
-        # Ensure v7.1 format (no backward compatibility)
-        if gasket_schema.get('version') != '7.1':
+        # Support v7.1 and v7.3 formats (v7.3 is backward compatible with v7.1 gasket structure)
+        supported_versions = ['7.1', '7.3']
+        if gasket_schema.get('version') not in supported_versions:
             return ExtractionResult(
                 success=False,
                 extracted_scores={},
@@ -156,7 +157,7 @@ class IntelligentExtractorAgent:
                 tokens_used=0,
                 cost_usd=0.0,
                 attempts=0,
-                error_message=f"Unsupported gasket_schema version: {gasket_schema.get('version')}. Only v7.1 is supported."
+                error_message=f"Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}"
             )
         
         # Log extraction start

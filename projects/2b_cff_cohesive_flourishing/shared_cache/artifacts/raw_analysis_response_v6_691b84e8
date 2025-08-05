@@ -1,0 +1,192 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Emphasis placed on identifying semantic concepts related to the defined dimensions. Evidence extraction focused on direct quotes representing these concepts."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "trump_sotu_2017.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.60,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "fear": {
+          "raw_score": 0.45,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.70,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.55,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "compersion": {
+          "raw_score": 0.65,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "enmity": {
+          "raw_score": 0.30,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "amity": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.35,
+          "salience": 0.45,
+          "confidence": 0.75
+        },
+        "cohesive_goals": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.85,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "Our allies will find that America is once again ready to lead. All the nations of the world—friend or foe—will find that America is strong, America is proud, and America is free.",
+          "confidence": 0.8,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "I am here tonight to deliver a message of unity and strength, and it is a message deeply delivered from my heart. A new chapter of American greatness is now beginning.",
+          "confidence": 0.9,
+          "context_type": "universal_worth"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Every American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present. That torch is now in our hands, and we will use it to light up the world.",
+          "confidence": 0.85,
+          "context_type": "universal_worth"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We have seen the attacks in France, in Belgium, in Germany, and all over the world. It is not compassionate, but reckless to allow uncontrolled entry from places where proper vetting cannot occur.",
+          "confidence": 0.7,
+          "context_type": "crisis_language"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Our terrible drug epidemic will slow down and, ultimately, stop. And our neglected inner cities will see a rebirth of hope, safety, and opportunity.",
+          "confidence": 0.65,
+          "context_type": "threat_emphasis"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.9,
+          "context_type": "progress_language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I believe that real and positive immigration reform is possible, as long as we focus on the following goals: to improve jobs and wages for Americans, to strengthen our Nation's security, and to restore respect for our laws.",
+          "confidence": 0.85,
+          "context_type": "opportunity_emphasis"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Their saying that in the case of another country, they taxed their motorcycles at 100 percent. They weren't even asking for a change. But I am.",
+          "confidence": 0.7,
+          "context_type": "resentment_language"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Why not join forces and finally get the job done, and get it done right?",
+          "confidence": 0.6,
+          "context_type": "zero_sum_framing"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "It's been a long time since we had fair trade. The first Republican President, Abraham Lincoln, warned that the \"abandonment of the protective policy by the American Government will produce want and ruin among our people.\"",
+          "confidence": 0.8,
+          "context_type": "celebration_language"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "Join us tonight in the gallery is a remarkable woman, Denishia Merriweather. As a young girl, Denishia struggled in school and failed third grade twice. But then, she was able to enroll in a private center for learning with the help of a tax credit and a scholarship program.",
+          "confidence": 0.75,
+          "context_type": "supportive_framing"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We must also break the cycle of violence. The murder rate in 2015 experienced its largest single-year increase in nearly half a century. In Chicago, more than 4,000 people were shot last year alone, and the murder rate so far this year has been even higher.",
+          "confidence": 0.7,
+          "context_type": "hostility_language"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We are removing gang members, drug dealers, and criminals that threaten our communities and prey on our innocent citizens.",
+          "confidence": 0.6,
+          "context_type": "demoniation_patterns"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Today is Rare Disease Day, and joining us in the gallery is a rare disease survivor, Megan Crowley.",
+          "confidence": 0.9,
+          "context_type": "cooperative_language"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "For as the Bible teaches us, there is no greater act of love than to lay down one's life for one's friends. Ryan laid down his life for his friends, for his country, and for our freedom.",
+          "confidence": 0.85,
+          "context_type": "friendship_appeals"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We have seen the war and the destruction that have ravaged and raged throughout the world. The only long-term solution for these humanitarian disasters, in many cases, is to create the conditions where displaced persons can safely return home and begin the long, long process of rebuilding.",
+          "confidence": 0.7,
+          "context_type": "divisive_objectives"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "And to the members of Congress who do not believe we should enforce our laws, I would ask you this one question: What would you say to the American family that loses their jobs, their income, or their loved one because America refuses to uphold its laws and defend its borders?",
+          "confidence": 0.65,
+          "context_type": "zero_sum_competition"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "My administration wants to work with members of both parties to make childcare accessible and affordable; to help ensure new parents that they have family leave; to invest in women's health; and to promote clean air and clean water; and to rebuild our military and our infrastructure.",
+          "confidence": 0.9,
+          "context_type": "integrative_objectives"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "True love for our people requires us to find common ground, to advance the common good, and to cooperate on behalf of every American child who deserves a much brighter future.",
+          "confidence": 0.85,
+          "context_type": "collaborative_aims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

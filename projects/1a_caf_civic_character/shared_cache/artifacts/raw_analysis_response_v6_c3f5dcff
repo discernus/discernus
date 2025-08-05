@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Sequential analysis applied across all dimensions as per framework. Focus maintained on semantic concepts and evidence extraction."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.3,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "truth": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "justice": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "resentment": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "fantasy": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "But my Tory friends, I have to say, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.6,
+          "context_type": "appeal_to_civic_duty"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.8,
+          "context_type": "group_identification"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I think actualy every single NatCon, I, I know Bridge spoke earlier, or I was going to speak, Bridge, you're out there somewhere.",
+          "confidence": 0.5,
+          "context_type": "acknowledgment_of_complexity"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "And my wife and I got, when I proposed to her, you know, we were in law school. And I said, \"Honey, I come along with $120,000 worth of law school debt and a cemetery plot in Eastern Kentucky.\"",
+          "confidence": 0.6,
+          "context_type": "emotional_trigger"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "And that's why it has stood the test of time. But America is not just an idea. Though we were founded on great ideas, America is a nation.",
+          "confidence": 0.5,
+          "context_type": "systemic_thinking"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "They're the people, they're the people, by the way, who are not allowed to have an opinion about what's going on in their country because they will be silenced.",
+          "confidence": 0.7,
+          "context_type": "blame_attribution"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.7,
+          "context_type": "positive_vision"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "And one of the big dangers in the, in the world, of course, is nuclear proliferation, though of course the Biden administration doesn't care about it.",
+          "confidence": 0.6,
+          "context_type": "threat_language"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We should also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base overseas.",
+          "confidence": 0.7,
+          "context_type": "problem_solving_focus"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "And the argument is that, yeah, maybe immigrants take up some more demand for housing, but they, they build all the houses.",
+          "confidence": 0.7,
+          "context_type": "unrealistic_promises"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

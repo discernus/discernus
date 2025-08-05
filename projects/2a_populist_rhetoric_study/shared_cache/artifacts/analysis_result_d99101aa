@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_999433bae3b8",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "populist_discourse_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed by applying the POPULIST DISCOURSE ANALYSIS FRAMEWORK (PDAF) v7.3. The analysis followed a step-by-step approach focusing on core anchors, then mechanisms, and finally boundary distinctions. Emphasis was placed on identifying the underlying concepts and semantic nuances within the text rather than literal keyword matching.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_Inaugural_2017.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.0,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"For too long, a small group in our Nation's Capital has reaped the rewards of government while the people have borne the cost. Washington flourished, but the people did not share in its wealth.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"What truly matters is not which party controls our Government, but whether our Government is controlled by the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"You came by the tens of millions to become part of a historic movement like which the world has never seen before. At the center of this movement is a crucial conviction: that a nation exists to serve its citizens.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their successes will be our success.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"From this day forward, a new vision will govern our land. From this day forward, it's going to be only America first. America first.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will get our people off of welfare and back to work, rebuilding our country with American hands and American labor.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"direct\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T18:46:58.596887+00:00",
+    "end_time": "2025-08-05T18:47:04.570007+00:00",
+    "duration_seconds": 5.97312,
+    "llm_interaction_hash": "501c24aa1bde964f"
+  },
+  "input_artifacts": {
+    "framework_hash": "59b8d233f4fabfb826317e8cbf4b9679eb7ac7c023270d87ed06fb428926fe04",
+    "document_hashes": [
+      "333679e75571dc2d511bdbeacd50d4b5d0c7ce1fab628e05377ccd12de9a2a4d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2a_populist_rhetoric_study",
+      "experiment_root": "/Volumes/code/discernus/projects/2a_populist_rhetoric_study",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T184658Z_d9d6e35d"
+  }
+}

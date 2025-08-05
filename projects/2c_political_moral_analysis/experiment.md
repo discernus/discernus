@@ -15,7 +15,7 @@ hypothesis: |
   capabilities will reveal different patterns of moral rhetorical coherence through the Moral 
   Strategic Contradiction Index (MSCI), validating the framework's capacity to detect and 
   quantify moral reasoning patterns in political discourse with statistical confidence.
-framework: "../../frameworks/seed/political/moral_foundations_theory_v7.1.md"
+framework: "../../frameworks/seed/political/moral_foundations_theory_v7.3.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"

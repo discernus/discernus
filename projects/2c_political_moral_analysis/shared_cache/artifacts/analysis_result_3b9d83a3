@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b3879b3bee42",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "political_moral_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Moral Foundations Theory Framework\",\n    \"framework_version\": \"7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed using a sequential chain-of-thought approach, focusing on identifying semantic concepts related to moral foundations as defined in the framework. Evidence extraction prioritized direct quotes that clearly illustrate the identified moral concepts.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"care\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"harm\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.30,\n          \"confidence\": 0.70\n        },\n        \"fairness\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        },\n        \"cheating\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.25,\n          \"confidence\": 0.75\n        },\n        \"loyalty\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"betrayal\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.10,\n          \"confidence\": 0.70\n        },\n        \"authority\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.60,\n          \"confidence\": 0.75\n        },\n        \"subversion\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.15,\n          \"confidence\": 0.70\n        },\n        \"sanctity\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.65,\n          \"confidence\": 0.80\n        },\n        \"degradation\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.35,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"care\",\n          \"quote_text\": \"I'm especially grateful to my wife Cindy, my children, my dear mother, and to the many old and dear friends who have stood by my side through the many ups and downs of this long campaign. I have always been a fortunate man, and never more so for the love and encouragement you have given me.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"support_family_and_friends\"\n        },\n        {\n          \"dimension\": \"fairness\",\n          \"quote_text\": \"America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"justice_language\"\n        },\n        {\n          \"dimension\": \"loyalty\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"group_solidarity\"\n        },\n        {\n          \"dimension\": \"authority\",\n          \"quote_text\": \"I have always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"leadership_deference\"\n        },\n        {\n          \"dimension\": \"sanctity\",\n          \"quote_text\": \"I would not be an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"sacred_principles\"\n        },\n        {\n          \"dimension\": \"degradation\",\n          \"quote_text\": \"Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"moral_decay\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T19:01:17.178410+00:00",
+    "end_time": "2025-08-05T19:01:20.350974+00:00",
+    "duration_seconds": 3.172564,
+    "llm_interaction_hash": "4800afa79289375c"
+  },
+  "input_artifacts": {
+    "framework_hash": "7a5f8f243d8414ebcb423170aaa44965fdcdd3e9bd9f47a48a894b332cdfd1b9",
+    "document_hashes": [
+      "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2c_political_moral_analysis",
+      "experiment_root": "/Volumes/code/discernus/projects/2c_political_moral_analysis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T190053Z_84e3de6e"
+  }
+}

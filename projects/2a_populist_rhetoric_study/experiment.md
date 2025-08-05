@@ -17,7 +17,7 @@ hypothesis: |
   if significant relationships exist between experimental factors and Populist 
   Strategic Contradiction Index scores.
 
-framework: "../../frameworks/reference/flagship/pdaf_v7.1.md"
+framework: "../../frameworks/reference/flagship/pdaf_v7.3.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"

@@ -1,0 +1,121 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis focused on identifying and scoring populist discourse elements across three core dimensions: Core Anchors, Mechanism Anchors, and Boundary Anchors. Evidence was extracted for each scoring dimension, with confidence levels reflecting the clarity and directness of the textual support. A comprehensive review of the text was performed to identify semantic concepts aligned with the framework's markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.6,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.5,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.4,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.5,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "nationalist_exclusion": {
+          "raw_score": 1.3,
+          "salience": 0.65,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "We must be united at home to defeat our adversaries abroad. This new era of cooperation can start with finally confirming the more than 300 highly qualified nominees who are still stuck in the Senate, in some cases, years and years waiting. Not right. The Senate has failed to act on these nominations, which is unfair to the nominees and very unfair to our country. Now is the time for bipartisan action.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "For decades, politicians promised to build a wall, but they were all talk and no action. I did it. We are now preparing for this tremendous onslaught. This is a moral issue. The lawless state of our southern border is a threat to the safety, security, and financial well-being of all Americans. We have a moral duty to create an immigration system that protects the lives and jobs of our citizens.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The decision is ours to make. We must choose between greatness or gridlock, results or resistance, vision or vengeance, incredible progress or pointless destruction. Tonight I ask you to choose greatness.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "We must break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future. This is our future, our fate, and our choice to make. I am asking you to choose greatness.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "In the last 2 years, my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "My administration has cut more regulations in a short period of time than any other administration during its entire tenure. Companies are coming back to our country in large numbers thanks to our historic reductions in taxes and regulations. And we have unleashed a revolution in American energy. The United States is now the number-one producer of oil and natural gas anywhere in the world. And now, for the first time in 65 years, we are a net exporter of energy.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "All Americans can be proud that we have more women in the workforce than ever before. And exactly one century after Congress passed the constitutional amendment giving women the right to vote, we also have more women serving in Congress than at any time before.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We are also joined tonight by Matthew Charles from Tennessee. In 1996, at the age of 30, Matthew was sentenced to 35 years for selling drugs and related offenses. Over the next two decades, he completed more than 30 Bible studies, became a law clerk, and mentored many of his fellow inmates. Now Matthew is the very first person to be released from prison under the First Step Act. Matthew, please. Thank you, Matthew. Welcome home.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We passed a massive tax cut for working families and doubled the child tax credit. We virtually ended the estate tax for the very unpopulard Obama individual mandate penalty. And to give critically ill patients access to life-saving cures, we passed, very importantly, the right to try.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

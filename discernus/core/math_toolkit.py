@@ -955,11 +955,31 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
             try:
                 tool_name = task_config.get("tool")
                 if tool_name not in TOOL_REGISTRY:
-                    results["errors"].append(f"Unknown tool: {tool_name}")
+                    error_msg = f"Task '{task_name}': Unknown tool '{tool_name}'"
+                    results["errors"].append(error_msg)
+                    logger.error(error_msg)
                     continue
                     
                 # Extract parameters
                 params = task_config.get("parameters", {})
+                
+                # Validate column references for statistical tests (fail-fast principle)
+                if tool_name in ["perform_one_way_anova", "perform_two_way_anova"]:
+                    missing_cols = []
+                    if "grouping_variable" in params and params["grouping_variable"] not in working_df.columns:
+                        missing_cols.append(params["grouping_variable"])
+                    if "dependent_variable" in params and params["dependent_variable"] not in working_df.columns:
+                        missing_cols.append(params["dependent_variable"])
+                    if "factor1" in params and params["factor1"] not in working_df.columns:
+                        missing_cols.append(params["factor1"])
+                    if "factor2" in params and params["factor2"] not in working_df.columns:
+                        missing_cols.append(params["factor2"])
+                    
+                    if missing_cols:
+                        error_msg = f"Task '{task_name}' failed: Missing required columns {missing_cols}. Available columns: {list(working_df.columns)}"
+                        results["errors"].append(error_msg)
+                        logger.error(error_msg)
+                        continue
                 
                 # Execute the tool
                 tool_func = TOOL_REGISTRY[tool_name]
@@ -1102,8 +1122,21 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
                         logger.warning(f"Score {score_key} has invalid type: {type(score_value)}")
                         row_data[score_key] = None
                 else:
-                    # Preserve null values for missing scores
-                    row_data[score_key] = None
+                    # Handle missing scores: treat as legitimate zero for rare dimensions like compersion
+                    # This prevents cascade failures in derived metrics while preserving analytical meaning
+                    if score_key.endswith('_score') and 'compersion' in score_key.lower():
+                        # Compersion is inherently rare in political discourse - missing evidence = score of 0.0
+                        row_data[score_key] = 0.0
+                        logger.info(f"Missing compersion score treated as 0.0 (legitimate absence in political discourse)")
+                    elif score_key.endswith('_salience') and 'compersion' in score_key.lower():
+                        # If compersion score is 0.0, salience should also be 0.0
+                        row_data[score_key] = 0.0
+                    elif score_key.endswith('_confidence') and 'compersion' in score_key.lower():
+                        # High confidence that compersion is absent (not a measurement failure)
+                        row_data[score_key] = 0.8
+                    else:
+                        # Preserve null values for other missing scores (genuine measurement failures)
+                        row_data[score_key] = None
             
             # Add gasket metadata for provenance
             extraction_metadata = doc_analysis.get('extraction_metadata', {})

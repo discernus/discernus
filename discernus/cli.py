@@ -100,8 +100,8 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
         with open(framework_file, 'r') as f:
             framework_content = f.read()
         framework_size = len(framework_content)
-        if framework_size > 30000:
-            return False, f"❌ Framework exceeds 30KB limit: {framework_size:,} characters (limit: 30,000). See Framework Specification v7.0 for reduction strategies.", {}
+        if framework_size > 50000:
+            return False, f"❌ Framework exceeds 50KB limit: {framework_size:,} characters (limit: 50,000). See Framework Specification v7.3 for reduction strategies.", {}
     except Exception as e:
         return False, f"❌ Error reading framework file: {e}", {}
     

@@ -492,6 +492,14 @@ class ProductionThinSynthesisPipeline:
             df = _json_scores_to_dataframe_thin(analysis_result)
             
             # Create column summary for LLM discovery
+            available_columns = list(df.columns)
+            metadata_columns = [col for col in available_columns if col not in 
+                              [c for c in available_columns if c.endswith(('_score', '_salience', '_confidence'))] 
+                              and col != 'aid']
+            score_columns = [col for col in available_columns if col.endswith('_score')]
+            salience_columns = [col for col in available_columns if col.endswith('_salience')]
+            confidence_columns = [col for col in available_columns if col.endswith('_confidence')]
+            
             column_summary = f"""
 Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
@@ -499,16 +507,17 @@ Raw Analysis Data:
 - Source: Analysis artifact {request.scores_artifact_hash[:12]}...
 - DataFrame shape: {df.shape[0]} rows, {df.shape[1]} columns
 
-Available Columns (discover these from the raw data):
-{list(df.columns)}
+Available Columns (COMPLETE LIST - use ONLY these):
+{available_columns}
 
-Column Categories:
-- Document identifiers: {[col for col in df.columns if col in ['aid', 'speaker', 'era', 'ideology', 'political_party', 'leadership_type', 'date', 'context']]}
-- Dimensional scores: {[col for col in df.columns if col.endswith('_score')]}
-- Salience weights: {[col for col in df.columns if col.endswith('_salience')]}
-- Confidence ratings: {[col for col in df.columns if col.endswith('_confidence')]}
+Column Categories (discovered from actual data):
+- Document identifier: ['aid']
+- Metadata/Grouping variables: {metadata_columns}
+- Dimensional scores: {score_columns}
+- Salience weights: {salience_columns}
+- Confidence ratings: {confidence_columns}
 
-Note: Use ONLY the column names listed above. Do NOT assume any other column names exist.
+CRITICAL: Use ONLY the exact column names listed above. Any column not in this list does NOT exist in the data.
 """
         except Exception as e:
             # Fallback to simple summary if parsing fails
