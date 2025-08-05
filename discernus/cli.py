@@ -28,6 +28,11 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 
 from discernus.core.thin_orchestrator import ThinOrchestrator, ThinOrchestratorError
+from discernus.core.config import get_config, get_config_file_path
+from discernus.core.exit_codes import (
+    ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
+    exit_validation_failed, exit_infrastructure_error, exit_file_error, exit_config_error
+)
 
 # Rich CLI integration for professional terminal interface
 from .cli_console import rich_console
@@ -120,31 +125,89 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
 
 @click.group()
 @click.version_option(version='0.2.0', prog_name='Discernus')
-def cli():
+@click.option('--verbose', '-v', is_flag=True, envvar='DISCERNUS_VERBOSE', help='Enable verbose output')
+@click.option('--quiet', '-q', is_flag=True, envvar='DISCERNUS_QUIET', help='Enable quiet output (minimal)')
+@click.option('--no-color', is_flag=True, envvar='DISCERNUS_NO_COLOR', help='Disable colored output')
+@click.option('--config', type=click.Path(exists=True), help='Path to config file')
+@click.pass_context
+def cli(ctx, verbose, quiet, no_color, config):
     """Discernus - Computational Social Science Research Platform (THIN v2.0)"""
-    pass
+    # Ensure context object exists
+    ctx.ensure_object(dict)
+    
+    # Store global options in context
+    ctx.obj['verbose'] = verbose
+    ctx.obj['quiet'] = quiet
+    ctx.obj['no_color'] = no_color
+    ctx.obj['config_path'] = config
+    
+    # Load configuration
+    if config:
+        from pathlib import Path
+        ctx.obj['config'] = get_config()  # Will use the specified config path
+    else:
+        ctx.obj['config'] = get_config()  # Will auto-discover config files
+    
+    # Configure Rich console based on global options
+    if no_color:
+        rich_console.console._color_system = None
+    
+    # Set verbosity level
+    if quiet and verbose:
+        rich_console.print_warning("Both --quiet and --verbose specified, using verbose")
+    
+    ctx.obj['verbosity'] = 'verbose' if verbose else ('quiet' if quiet else 'normal')
 
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
-@click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
-@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
-@click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation')
-@click.option('--analysis-only', is_flag=True, help='Run analysis and CSV export only, skip synthesis')
-@click.option('--ensemble-runs', default=1, help='Number of ensemble runs for self-consistency (default: 1, recommended: 3-5)')
-@click.option('--no-auto-commit', is_flag=True, help='Disable automatic Git commit after successful run completion')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool, ensemble_runs: int = 1, no_auto_commit: bool = False):
+@click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', help='Show what would be done without executing')
+@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', help='LLM model to use for analysis')
+@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', help='LLM model to use for synthesis')
+@click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
+@click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
+@click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
+@click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', help='Disable automatic Git commit after successful run completion')
+@click.pass_context
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path)
     
-    click.echo(f"🎯 Discernus v2.0 - Running experiment: {experiment_path}")
+    # Get configuration and apply defaults
+    config = ctx.obj['config']
+    verbosity = ctx.obj['verbosity']
+    
+    # Apply config defaults for None values
+    if analysis_model is None:
+        analysis_model = config.analysis_model
+    if synthesis_model is None:
+        synthesis_model = config.synthesis_model
+    if ensemble_runs is None:
+        ensemble_runs = config.ensemble_runs
+    
+    # Override config booleans if CLI flags are set
+    if not dry_run:
+        dry_run = config.dry_run
+    if not skip_validation:
+        skip_validation = config.skip_validation
+    if not no_auto_commit:
+        no_auto_commit = not config.auto_commit
+    
+    if verbosity == 'verbose':
+        rich_console.print_info(f"Using config file: {get_config_file_path() or 'None (using defaults)'}")
+        rich_console.print_info(f"Analysis model: {analysis_model}")
+        rich_console.print_info(f"Synthesis model: {synthesis_model}")
+    
+    if verbosity != 'quiet':
+        rich_console.echo(f"🎯 Discernus v2.0 - Running experiment: {experiment_path}")
+    else:
+        rich_console.echo(f"🎯 Running: {experiment_path}")
     
     # Validate experiment structure
     valid, message, experiment = validate_experiment_structure(exp_path)
     if not valid:
-        click.echo(message)
-        sys.exit(1)
+        rich_console.print_error(message.replace("❌ ", ""))
+        exit_validation_failed("Experiment structure validation failed")
     
     click.echo(message)
     
@@ -249,10 +312,10 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         
     except ThinOrchestratorError as e:
         rich_console.print_error(f"Experiment failed: {e}")
-        sys.exit(1)
+        exit_general_error(f"Experiment execution failed: {e}")
     except Exception as e:
         rich_console.print_error(f"Unexpected error: {e}")
-        sys.exit(1)
+        exit_general_error(f"Unexpected error: {e}")
 
 
 @cli.command(name='continue')
@@ -853,6 +916,113 @@ def status():
     commands_table.add_row("discernus list", "List available experiments")
     
     rich_console.print_table(commands_table)
+
+
+@cli.group()
+def config():
+    """Manage Discernus configuration"""
+    pass
+
+
+@config.command('show')
+@click.pass_context
+def config_show(ctx):
+    """Show current configuration values"""
+    config = ctx.obj['config']
+    config_file = get_config_file_path()
+    
+    rich_console.print_section("🔧 Current Configuration")
+    
+    # Configuration source
+    source_table = rich_console.create_table("Configuration Source", ["Setting", "Value"])
+    source_table.add_row("Config File", str(config_file) if config_file else "None (using defaults)")
+    source_table.add_row("Environment Variables", "DISCERNUS_* variables loaded")
+    rich_console.print_table(source_table)
+    
+    # Configuration values
+    config_table = rich_console.create_table("Configuration Values", ["Setting", "Value", "Source"])
+    
+    # Model configuration
+    config_table.add_row("analysis_model", config.analysis_model, "Config/Env/Default")
+    config_table.add_row("synthesis_model", config.synthesis_model, "Config/Env/Default")
+    
+    # Execution options
+    config_table.add_row("auto_commit", str(config.auto_commit), "Config/Env/Default")
+    config_table.add_row("skip_validation", str(config.skip_validation), "Config/Env/Default")
+    config_table.add_row("ensemble_runs", str(config.ensemble_runs), "Config/Env/Default")
+    
+    # Output options
+    config_table.add_row("verbose", str(config.verbose), "Config/Env/Default")
+    config_table.add_row("quiet", str(config.quiet), "Config/Env/Default")
+    config_table.add_row("no_color", str(config.no_color), "Config/Env/Default")
+    config_table.add_row("progress", str(config.progress), "Config/Env/Default")
+    
+    rich_console.print_table(config_table)
+
+
+@config.command('init')
+@click.option('--force', is_flag=True, help='Overwrite existing config file')
+@click.argument('config_path', required=False)
+def config_init(force, config_path):
+    """Create a default configuration file"""
+    from discernus.core.config import ConfigManager
+    
+    if config_path:
+        config_file = Path(config_path)
+    else:
+        config_file = Path('.discernus.yaml')
+    
+    if config_file.exists() and not force:
+        rich_console.print_error(f"Config file already exists: {config_file}")
+        rich_console.echo("Use --force to overwrite, or specify a different path")
+        exit_file_error(f"Config file already exists: {config_file}")
+    
+    manager = ConfigManager()
+    manager.create_default_config(config_file)
+    
+    rich_console.print_success(f"Created config file: {config_file}")
+    rich_console.echo("Edit this file to customize your default settings")
+
+
+@config.command('validate')
+@click.argument('config_path', required=False)
+def config_validate(config_path):
+    """Validate a configuration file"""
+    from discernus.core.config import ConfigManager
+    
+    try:
+        if config_path:
+            config_file = Path(config_path)
+            if not config_file.exists():
+                rich_console.print_error(f"Config file not found: {config_file}")
+                exit_file_error(f"Config file not found: {config_file}")
+        else:
+            config_file = get_config_file_path()
+            if not config_file:
+                rich_console.print_error("No config file found")
+                exit_config_error("No config file found")
+        
+        # Try to load the config
+        manager = ConfigManager()
+        config_data = manager._load_yaml_config(config_file)
+        
+        # Validate by creating a config object
+        from discernus.core.config import DiscernusConfig
+        config = DiscernusConfig(**config_data)
+        
+        rich_console.print_success(f"Config file is valid: {config_file}")
+        
+        # Show any unknown keys
+        valid_keys = set(DiscernusConfig.model_fields.keys())
+        config_keys = set(config_data.keys())
+        unknown_keys = config_keys - valid_keys
+        
+        if unknown_keys:
+            rich_console.print_warning(f"Unknown configuration keys (will be ignored): {', '.join(unknown_keys)}")
+        
+    except Exception as e:
+        rich_console.print_error(f"Config validation failed: {e}")
+        exit_config_error(f"Config validation failed: {e}")
 
 
 @cli.command()
