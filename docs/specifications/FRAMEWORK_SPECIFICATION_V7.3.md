@@ -77,8 +77,13 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
   },
   "calculation_spec": {
     "explanation": "Brief description of the calculations. Can be empty if the framework is purely descriptive.",
+    "execution_order": [
+      "identity_tension",
+      "strategic_contradiction_index"
+    ],
     "formulas": {
-      "identity_tension": "min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)"
+      "identity_tension": "min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)",
+      "strategic_contradiction_index": "(identity_tension + emotional_tension) / 2"
     },
     "pattern_classifications": {
       "identity_tension": {
@@ -124,6 +129,42 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
 - **`pattern_classifications`**: Define rubrics to translate a calculated metric into a qualitative category.
 - **`reporting_metadata`**: Provide concise summaries from the narrative for direct inclusion in the final report.
 - **`output_contract`**: Provide a template to guide the structure of the LLM's text output, improving reliability.
+
+### 5. THIN Calculation Architecture (v7.3)
+
+**Core Principle**: The framework's `calculation_spec` is the **single source of truth** for all mathematical operations. This eliminates LLM formula generation and ensures mathematical consistency.
+
+#### **5.1 Execution Order (REQUIRED for dependent calculations)**
+```json
+"execution_order": [
+  "base_metric_1",
+  "base_metric_2", 
+  "derived_metric_using_base_metrics"
+]
+```
+- **Purpose**: Specifies the exact sequence for calculating dependent formulas
+- **THIN Benefit**: Eliminates complex dependency resolution algorithms in infrastructure
+- **Validation**: Coherence agent validates that execution_order respects formula dependencies
+
+#### **5.2 Column Name Consistency (REQUIRED)**
+All formula variables MUST match the actual DataFrame column structure:
+- **Dimension scores**: Use `dimension_name_score` (e.g., `fear_score`, `hope_score`)
+- **Salience values**: Use `dimension_name_salience` (e.g., `fear_salience`, `hope_salience`) 
+- **Confidence values**: Use `dimension_name_confidence` (e.g., `fear_confidence`, `hope_confidence`)
+
+**Example**:
+```json
+"formulas": {
+  "emotional_tension": "min(fear_score, hope_score) * abs(fear_salience - hope_salience)"
+}
+```
+
+#### **5.3 Mathematical Validation**
+The coherence agent validates:
+- **Syntax**: All formulas are syntactically valid Python expressions
+- **Dependencies**: execution_order correctly sequences dependent calculations  
+- **Completeness**: All referenced variables exist in expected DataFrame columns
+- **Consistency**: Column names follow v7.3 naming conventions
 
 ---
 

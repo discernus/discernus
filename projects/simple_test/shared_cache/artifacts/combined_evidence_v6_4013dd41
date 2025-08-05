@@ -1,0 +1,164 @@
+{
+  "evidence_metadata": {
+    "total_documents": 2,
+    "total_evidence_pieces": 17,
+    "extraction_method": "pre_extraction_v1.0",
+    "extraction_time": "2025-08-05T23:49:04.683943+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society.\"",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And what these guys are busy doing right now is going after Medicaid, going after Social Security, going after nutrition.",
+      "confidence": 0.85,
+      "context_type": "accusation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction.",
+      "confidence": 0.7,
+      "context_type": "problem_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.75,
+      "context_type": "aspirational_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "But that is exactly what they are doing right now. They are prepared to destroy Social Security, Medicaid, the Veterans Administration in order to make themselves even richer.",
+      "confidence": 0.8,
+      "context_type": "resentment_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "competition",
+      "quote_text": "The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.7,
+      "context_type": "zero_sum_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "enmity",
+      "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across...",
+      "confidence": 0.85,
+      "context_type": "hostility_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They own mansions all over the world. They go on vacations to their own private islands. When they want to go someplace, they don't go into their car. They go into the planes or the helicopters that they own.",
+      "confidence": 0.9,
+      "context_type": "wealth_disparity_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.5,
+      "context_type": "shared_aspirations",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.8,
+      "context_type": "group_supremacy",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+      "confidence": 0.9,
+      "context_type": "universal_worth",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "America offers opportunities to all who have the industry and will to seize it.",
+      "confidence": 0.95,
+      "context_type": "opportunity_emphasis",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+      "confidence": 0.9,
+      "context_type": "optimistic_vision",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "empathy",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.",
+      "confidence": 0.8,
+      "context_type": "relationship_acknowledgement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.85,
+      "context_type": "cooperative_language",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.9,
+      "context_type": "integrated_objectives",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "What we have learned together, what we have fought for, what we have won, what we have lost, we shall win again.",
+      "confidence": 0.75,
+      "context_type": "mutual_benefit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    }
+  ]
+}

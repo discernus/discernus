@@ -593,19 +593,36 @@ def _interpret_eta_squared(eta_squared: float) -> str:
         return "large"
 
 
-def calculate_derived_metrics(dataframe: pd.DataFrame, metric_formulas: Dict[str, str], input_columns: List[str]) -> Dict[str, Any]:
+def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str], framework_calculation_spec: Optional[Dict[str, Any]] = None, metric_formulas: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
     """
-    Calculate derived metrics from raw data using provided formulas.
+    Calculate derived metrics from raw data using framework's calculation_spec (THIN approach).
     
     Args:
         dataframe: Input DataFrame with raw data
-        metric_formulas: Dictionary mapping metric names to calculation formulas
         input_columns: List of input column names used in formulas
+        framework_calculation_spec: Framework's calculation_spec containing authoritative formulas (THIN)
+        metric_formulas: Legacy LLM-generated formulas (deprecated, for backward compatibility)
         
     Returns:
         Dictionary containing calculated metrics and metadata
     """
     try:
+        # THIN: Use framework calculation_spec as single source of truth
+        if framework_calculation_spec and "formulas" in framework_calculation_spec:
+            metric_formulas = framework_calculation_spec["formulas"]
+            calculation_source = "framework_calculation_spec"
+        elif metric_formulas:
+            calculation_source = "llm_generated_formulas_deprecated"
+        else:
+            return {
+                "type": "derived_metrics_calculation",
+                "success": False,
+                "error": "No calculation formulas provided. Need either framework_calculation_spec or metric_formulas",
+                "available_columns": list(dataframe.columns),
+                "calculated_metrics": {},
+                "formulas_used": []
+            }
+        
         # Framework-agnostic validation: check for required columns
         missing_columns = [col for col in input_columns if col not in dataframe.columns]
         if missing_columns:
@@ -615,7 +632,8 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, metric_formulas: Dict[str
                 "error": f"Missing required columns: {missing_columns}",
                 "available_columns": list(dataframe.columns),
                 "calculated_metrics": {},
-                "formulas_used": list(metric_formulas.keys())
+                "formulas_used": list(metric_formulas.keys()),
+                "calculation_source": calculation_source
             }
         
         # Create a comprehensive mathematical evaluation context
@@ -654,9 +672,16 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, metric_formulas: Dict[str
         successful_calculations = []
         failed_calculations = []
         
-        # Calculate each metric (with dependency resolution)
-        # Sort formulas to handle dependencies - simpler metrics first
-        sorted_formulas = sorted(metric_formulas.items(), key=lambda x: len(x[1]))
+        # Calculate each metric using framework-specified execution order (THIN)
+        if framework_calculation_spec and "execution_order" in framework_calculation_spec:
+            # THIN: Use framework's authoritative execution order
+            execution_order = framework_calculation_spec["execution_order"]
+            sorted_formulas = [(name, metric_formulas[name]) for name in execution_order if name in metric_formulas]
+            logger.info(f"THIN: Using framework execution order for {len(sorted_formulas)} metrics")
+        else:
+            # Fallback: Sort by formula length (legacy approach)
+            sorted_formulas = sorted(metric_formulas.items(), key=lambda x: len(x[1]))
+            logger.warning("THIN: No execution_order in framework - using fallback length-based sorting")
         
         for metric_name, formula in sorted_formulas:
             try:
@@ -695,7 +720,8 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, metric_formulas: Dict[str
             "formulas_used": list(metric_formulas.keys()),
             "input_columns": input_columns,
             "total_metrics": len(metric_formulas),
-            "success_rate": len(successful_calculations) / len(metric_formulas) if metric_formulas else 0
+            "success_rate": len(successful_calculations) / len(metric_formulas) if metric_formulas else 0,
+            "calculation_source": calculation_source
         }
         
     except Exception as e:
@@ -993,13 +1019,14 @@ TOOL_REGISTRY = {
 }
 
 
-def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]) -> Dict[str, Any]:
+def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any], framework_calculation_spec: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
     Execute a complete analysis plan using the MathToolkit.
     
     Args:
         dataframe: Input DataFrame
         analysis_plan: Dictionary containing the analysis plan from AnalysisPlanner
+        framework_calculation_spec: Framework's calculation_spec for THIN formula usage
         
     Returns:
         Dictionary containing all analysis results
@@ -1047,7 +1074,12 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
                 
                 # Execute the tool
                 tool_func = TOOL_REGISTRY[tool_name]
-                task_result = tool_func(working_df, **params)
+                
+                # THIN: Pass framework calculation_spec to calculate_derived_metrics
+                if tool_name == "calculate_derived_metrics" and framework_calculation_spec:
+                    task_result = tool_func(working_df, framework_calculation_spec=framework_calculation_spec, **params)
+                else:
+                    task_result = tool_func(working_df, **params)
                 
                 results["results"][task_name] = task_result
                 
@@ -1071,7 +1103,7 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
         raise MathToolkitError(f"Analysis plan execution failed: {str(e)}")
 
 
-def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corpus_manifest: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corpus_manifest: Optional[Dict[str, Any]] = None, framework_calculation_spec: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
     THIN version: Execute analysis plan optimized for v7.0 Gasket Architecture.
     
@@ -1081,6 +1113,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         raw_analysis_data: Clean JSON string from Intelligent Extractor gasket
         analysis_plan_input: Either Dict (legacy) or str (THIN raw LLM response)
         corpus_manifest: Optional corpus metadata for DataFrame enrichment
+        framework_calculation_spec: Framework's calculation_spec for THIN formula usage
         
     Returns:
         Dictionary containing all analysis results
@@ -1129,7 +1162,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         logger.info(f"V7.0 Gasket MathToolkit: Processed DataFrame {scores_df.shape}")
         
         # Use existing execute_analysis_plan with parsed DataFrame
-        return execute_analysis_plan(scores_df, analysis_plan)
+        return execute_analysis_plan(scores_df, analysis_plan, framework_calculation_spec)
         
     except Exception as e:
         logger.error(f"V7.0 Gasket analysis plan execution failed: {str(e)}")

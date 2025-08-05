@@ -26,12 +26,12 @@ analysis:
   variant: "default"
   # List of LiteLLM-compatible model identifiers for analysis
   models:
-    - "vertex_ai/gemini-2.5-pro"
+    - "vertex_ai/gemini-2.5-flash-lite"
 
 # OPTIONAL: Configuration for the synthesis process
 synthesis:
   # Model to use for the final report synthesis
-  model: "vertex_ai/gemini-2.5-pro"
+  model: "vertex_ai/gemini-2.5-flash-lite"
 
 # Expected outcomes and success criteria for the experiment
 expected_outcomes:

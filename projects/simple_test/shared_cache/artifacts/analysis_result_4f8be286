@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_230ec02e5afe",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "democratic_discourse_cohesion_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted adhering to the sequential step-by-step guidance provided by the framework. Focus maintained on identifying semantic concepts and evidence for each dimension as defined.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.80\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"fear\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.20,\n          \"confidence\": 0.75\n        },\n        \"hope\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"envy\": {\n          \"raw_score\": 0.10,\n          \"salience\": 0.25,\n          \"confidence\": 0.70\n        },\n        \"empathy\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"enmity\": {\n          \"raw_score\": 0.00,\n          \"salience\": 0.10,\n          \"confidence\": 0.70\n        },\n        \"amity\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.70,\n          \"confidence\": 0.80\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.30,\n          \"confidence\": 0.75\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"group_supremacy\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"universal_worth\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"America offers opportunities to all who have the industry and will to seize it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opportunity_emphasis\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"optimistic_vision\"\n        },\n        {\n          \"dimension\": \"empathy\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"relationship_acknowledgement\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"cooperative_language\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"integrated_objectives\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"What we have learned together, what we have fought for, what we have won, what we have lost, we shall win again.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"mutual_benefit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T23:48:57.898106+00:00",
+    "end_time": "2025-08-05T23:49:01.871561+00:00",
+    "duration_seconds": 3.973455,
+    "llm_interaction_hash": "e75f4a11c440cff8"
+  },
+  "input_artifacts": {
+    "framework_hash": "56e0625b040a3fa45ce1332da841366115c6ffe334bdf2197cb71e1061b3e0c5",
+    "document_hashes": [
+      "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T234852Z_37560f04"
+  }
+}
