@@ -90,13 +90,39 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
                         continue
                     series = group_df[column].dropna()
                     if len(series) > 0:
-                        group_stats[column] = {
-                            "count": int(len(series)),
-                            "mean": float(series.mean()),
-                            "std": float(series.std()),
-                            "min": float(series.min()),
-                            "max": float(series.max())
-                        }
+                        # Check if column is numeric or categorical
+                        try:
+                            numeric_series = pd.to_numeric(series, errors='coerce')
+                            if numeric_series.notna().any():  # Has numeric values
+                                numeric_series = numeric_series.dropna()
+                                group_stats[column] = {
+                                    "count": int(len(numeric_series)),
+                                    "mean": float(numeric_series.mean()),
+                                    "std": float(numeric_series.std()),
+                                    "min": float(numeric_series.min()),
+                                    "max": float(numeric_series.max()),
+                                    "data_type": "numerical"
+                                }
+                            else:
+                                # Categorical data
+                                value_counts = series.value_counts()
+                                group_stats[column] = {
+                                    "count": int(len(series)),
+                                    "unique_values": int(series.nunique()),
+                                    "mode": str(series.mode().iloc[0]) if not series.mode().empty else "N/A",
+                                    "frequency_distribution": value_counts.head(3).to_dict(),
+                                    "data_type": "categorical"
+                                }
+                        except Exception:
+                            # Fallback: categorical
+                            value_counts = series.value_counts()
+                            group_stats[column] = {
+                                "count": int(len(series)),
+                                "unique_values": int(series.nunique()),
+                                "mode": str(series.mode().iloc[0]) if not series.mode().empty else "N/A",
+                                "frequency_distribution": value_counts.head(3).to_dict(),
+                                "data_type": "categorical"
+                            }
                 grouped_results[str(group_name)] = group_stats
             
             return {
@@ -118,18 +144,48 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
                 }
                 continue
             
-            stats_dict = {
-                "count": int(len(series)),
-                "mean": float(series.mean()),
-                "std": float(series.std()),
-                "min": float(series.min()),
-                "max": float(series.max()),
-                "median": float(series.median()),
-                "q25": float(series.quantile(0.25)),
-                "q75": float(series.quantile(0.75)),
-                "skewness": float(series.skew()),
-                "kurtosis": float(series.kurtosis())
-            }
+            # Check if column is numeric or categorical
+            try:
+                # Try to convert to numeric - if it works, it's numerical data
+                numeric_series = pd.to_numeric(series, errors='coerce')
+                if numeric_series.notna().any():  # Has at least some numeric values
+                    # Numerical statistics
+                    numeric_series = numeric_series.dropna()  # Remove conversion failures
+                    stats_dict = {
+                        "count": int(len(numeric_series)),
+                        "mean": float(numeric_series.mean()),
+                        "std": float(numeric_series.std()),
+                        "min": float(numeric_series.min()),
+                        "max": float(numeric_series.max()),
+                        "median": float(numeric_series.median()),
+                        "q25": float(numeric_series.quantile(0.25)),
+                        "q75": float(numeric_series.quantile(0.75)),
+                        "skewness": float(numeric_series.skew()),
+                        "kurtosis": float(numeric_series.kurtosis()),
+                        "data_type": "numerical"
+                    }
+                else:
+                    # Categorical statistics
+                    value_counts = series.value_counts()
+                    stats_dict = {
+                        "count": int(len(series)),
+                        "unique_values": int(series.nunique()),
+                        "mode": str(series.mode().iloc[0]) if not series.mode().empty else "N/A",
+                        "most_frequent": str(value_counts.index[0]) if len(value_counts) > 0 else "N/A",
+                        "frequency_distribution": value_counts.head(5).to_dict(),
+                        "data_type": "categorical"
+                    }
+            except Exception:
+                # Fallback: treat as categorical
+                value_counts = series.value_counts()
+                stats_dict = {
+                    "count": int(len(series)),
+                    "unique_values": int(series.nunique()),
+                    "mode": str(series.mode().iloc[0]) if not series.mode().empty else "N/A",
+                    "most_frequent": str(value_counts.index[0]) if len(value_counts) > 0 else "N/A",
+                    "frequency_distribution": value_counts.head(5).to_dict(),
+                    "data_type": "categorical"
+                }
             
             results[column] = stats_dict
             
@@ -714,7 +770,7 @@ def perform_statistical_tests(dataframe: pd.DataFrame, test_types: List[str], gr
         raise MathToolkitError(f"Statistical tests failed: {str(e)}")
 
 
-def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], correlation_method: str = "pearson") -> Dict[str, Any]:
+def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], correlation_method: str = "pearson", **kwargs) -> Dict[str, Any]:
     """
     Generate correlation matrix for specified dimensions.
     
@@ -722,11 +778,19 @@ def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], 
         dataframe: Input DataFrame
         dimensions: List of dimensions to correlate
         correlation_method: Correlation method (pearson, spearman)
+        **kwargs: Additional parameters (ignored for compatibility)
         
     Returns:
         Dictionary containing correlation matrix
     """
     try:
+        # DEFENSIVE PARAMETER HANDLING: Ignore unsupported parameters like grouping_variable
+        if 'grouping_variable' in kwargs:
+            logger.warning(f"generate_correlation_matrix: ignoring unsupported parameter 'grouping_variable'")
+        
+        # Handle case where dimensions is passed as different parameter names
+        if 'columns' in kwargs and not dimensions:
+            dimensions = kwargs['columns']
         # Filter to only include dimensions that exist in the dataframe
         available_dimensions = [dim for dim in dimensions if dim in dataframe.columns]
         
