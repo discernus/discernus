@@ -8,10 +8,10 @@ This directory contains a fully transparent, integrity-checked record of a compu
 
 - **Run ID**: 20250805T004900Z
 - **Experiment**: simple_character_validation_v7
-- **Framework**: ../../frameworks/reference/core/caf_v7.1.md
+- **Framework**: caf_v7.1.md
 - **Model**: vertex_ai/gemini-2.5-flash-lite
 - **Total Cost**: $0.0000 USD
-- **Duration**: 0.0 seconds
+- **Duration**: 228.5 seconds
 - **Status**: ✅ Completed successfully
 
 ## 🎯 Start Here: Key Deliverables

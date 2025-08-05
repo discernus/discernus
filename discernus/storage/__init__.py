@@ -3,8 +3,9 @@ Discernus Storage Module
 ========================
 
 Content-addressable artifact storage for research provenance.
+Note: MinIO client removed - system now uses LocalArtifactStorage exclusively.
 """
 
-from .minio_client import DiscernusArtifactClient, get_artifact, put_artifact, ArtifactStorageError
+# MinIO imports removed - LocalArtifactStorage is used directly by orchestrator
 
-__all__ = ['DiscernusArtifactClient', 'get_artifact', 'put_artifact', 'ArtifactStorageError'] 
+__all__ = [] 

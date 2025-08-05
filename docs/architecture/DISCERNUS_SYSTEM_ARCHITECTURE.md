@@ -212,9 +212,9 @@ This section describes the implemented architecture and operational capabilities
 ## Current Technology Stack
 
 **Infrastructure**:
-- MinIO content-addressable storage for artifact management
+- LocalArtifactStorage content-addressable storage for artifact management
 - Git-based provenance and version control (no centralized databases required)
-- Local filesystem or S3-compatible storage backends
+- Local filesystem storage (no external dependencies)
 - Direct function calls over distributed coordination
 - Optional local embedded databases (SQLite) for performance optimization
 

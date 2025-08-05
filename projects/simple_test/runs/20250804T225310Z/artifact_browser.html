@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artifact Browser - 20250804T225310Z</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .artifact-list { margin: 20px 0; }
+        .artifact-item { 
+            border: 1px solid #ddd; 
+            margin: 10px 0; 
+            padding: 15px; 
+            border-radius: 5px;
+            background: white;
+        }
+        .artifact-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .artifact-name { font-weight: bold; color: #333; }
+        .artifact-type { 
+            background: #e9ecef; 
+            padding: 4px 8px; 
+            border-radius: 3px; 
+            font-size: 12px;
+        }
+        .artifact-meta { 
+            font-size: 12px; 
+            color: #666; 
+            margin: 5px 0;
+        }
+        .search-box { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            margin: 10px 0;
+        }
+        .filter-buttons { margin: 10px 0; }
+        .filter-btn { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            margin: 2px; 
+            border-radius: 3px; 
+            cursor: pointer;
+        }
+        .filter-btn:hover { background: #0056b3; }
+        .filter-btn.active { background: #28a745; }
+        .preview { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 3px; 
+            font-family: monospace; 
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .relationships { margin-top: 10px; }
+        .relationship-list { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Artifact Browser</h1>
+        <p><strong>Experiment:</strong> 20250804T225310Z</p>
+        <p><strong>Total Artifacts:</strong> 1</p>
+        <p><strong>Generated:</strong> 2025-08-04T18:56:20.003034</p>
+    </div>
+    
+    <div>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search artifacts by name or type...">
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByType('all')">All</button>
+            <button class="filter-btn" onclick="filterByType('analysis_json_v6')">Analysis</button>
+            <button class="filter-btn" onclick="filterByType('statistical_analysis')">Statistics</button>
+            <button class="filter-btn" onclick="filterByType('combined_evidence_v6')">Evidence</button>
+            <button class="filter-btn" onclick="filterByType('final_report')">Reports</button>
+            <button class="filter-btn" onclick="filterByType('corpus_document')">Documents</button>
+        </div>
+    </div>
+    
+    <div class="artifact-list" id="artifactList">
+
+        <div class="artifact-item" data-type="analysis_json_v6">
+            <div class="artifact-header">
+                <span class="artifact-name">Analysis Results [74be86ee]</span>
+                <span class="artifact-type">analysis_json_v6</span>
+            </div>
+            <div class="artifact-meta">
+                <strong>ID:</strong> 74be86ee | 
+                <strong>Created:</strong> unknown | 
+                <strong>Size:</strong> 10634 bytes | 
+                <strong>Dependencies:</strong> 0
+            </div>
+            <button onclick="showDetails('Analysis Results [74be86ee]')" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">View Details</button>
+            <div id="details-Analysis Results [74be86ee]" style="display: none; margin-top: 10px;">
+                <div class="preview" id="preview-Analysis Results [74be86ee]">❌ Unable to load artifact content</div>
+                <div class="relationships" id="relationships-Analysis Results [74be86ee]">📋 <strong>Dependency Relationships:</strong><br><br>🔽 <strong>Dependencies:</strong> None<br><br>🔼 <strong>Dependents:</strong> None</div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const items = document.querySelectorAll('.artifact-item');
+            
+            items.forEach(item => {
+                const name = item.querySelector('.artifact-name').textContent.toLowerCase();
+                const type = item.querySelector('.artifact-type').textContent.toLowerCase();
+                
+                if (name.includes(query) || type.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Filter functionality
+        function filterByType(type) {
+            const items = document.querySelectorAll('.artifact-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (type === 'all' || item.dataset.type === type) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Show details functionality
+        function showDetails(humanName) {
+            const detailsDiv = document.getElementById('details-' + humanName);
+            
+            if (detailsDiv.style.display === 'none') {
+                detailsDiv.style.display = 'block';
+                // Content is already embedded in the HTML
+            } else {
+                detailsDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

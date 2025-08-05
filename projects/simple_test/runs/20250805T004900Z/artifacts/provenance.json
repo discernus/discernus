@@ -2,10 +2,10 @@
   "run_metadata": {
     "experiment_name": "simple_character_validation_v7",
     "run_timestamp": "20250805T004900Z",
-    "framework_version": "../../frameworks/reference/core/caf_v7.1.md",
+    "framework_version": "caf_v7.1.md",
     "model_used": "vertex_ai/gemini-2.5-flash-lite",
-    "total_artifacts": 9,
-    "organized_artifacts": 7
+    "total_artifacts": 12,
+    "organized_artifacts": 10
   },
   "directory_structure": {
     "data/": "CSV files for external statistical analysis",
@@ -18,13 +18,13 @@
     "technical/": "System logs and model interaction records"
   },
   "pipeline_stages": {
+    "inputs_and_system": {
+      "artifacts": 7,
+      "total_size_mb": 0.06000804901123047
+    },
     "evidence_curation": {
       "artifacts": 1,
       "total_size_mb": 0.015465736389160156
-    },
-    "inputs_and_system": {
-      "artifacts": 4,
-      "total_size_mb": 0.038318634033203125
     },
     "statistical_computation": {
       "artifacts": 1,
@@ -40,8 +40,11 @@
     }
   },
   "artifact_descriptions": {
+    "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d": "Source document from research corpus",
+    "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d": "Source document from research corpus",
     "curated_evidence_0a822fa1.json": "Highest-confidence evidence supporting findings",
     "statistical_results_54d9c49e.json": "Statistical computations and significance tests",
+    "793e16e57e669a3b7fa9850d7f3a230f0ecdd6486f397fe27b7b3bd48d6cbd2d": "Analytical framework used for evaluation",
     "synthesis_report_2025-08-05_872ec5be.md": "Synthesis report combining multiple analyses",
     "analysis_response_a2de4aeb.json": "Artifact of type analysis_json_v6",
     "analysis_response_ea22525d.json": "Artifact of type analysis_json_v6",

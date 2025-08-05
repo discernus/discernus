@@ -67,64 +67,194 @@ class ArtifactBrowser:
         Returns:
             Dictionary mapping human-readable names to artifact information
         """
-        # Look for artifacts in the correct manifest location
-        cache_analysis = self.manifest_data.get('cache_analysis', {})
-        artifact_storage = cache_analysis.get('artifact_storage', {})
-        
-        # For now, create a basic index from the shared cache artifacts
-        # since the manifest doesn't contain detailed artifact metadata
         index = {}
         
-        # Get artifacts from shared cache directory
+        # First, try to load artifact registry for rich metadata
         shared_cache_dir = self.run_directory.parent.parent / "shared_cache" / "artifacts"
-        if shared_cache_dir.exists():
+        registry_path = shared_cache_dir / "artifact_registry.json"
+        
+        artifact_registry = {}
+        if registry_path.exists():
+            try:
+                with open(registry_path) as f:
+                    artifact_registry = json.load(f)
+            except Exception as e:
+                print(f"Warning: Could not load artifact registry: {e}")
+        
+        # Also load provenance data for run-specific artifact descriptions
+        provenance_descriptions = self.provenance_data.get('artifact_descriptions', {})
+        
+        # Check for organized artifacts in the run directory first (symlinks)
+        artifacts_dir = self.run_directory / "artifacts"
+        if artifacts_dir.exists():
+            for category_dir in artifacts_dir.iterdir():
+                if category_dir.is_dir():
+                    for artifact_file in category_dir.iterdir():
+                        if artifact_file.is_file():
+                            # Extract hash from filename (format: name_hash.ext)
+                            filename = artifact_file.name
+                            artifact_id = self._extract_hash_from_filename(filename)
+                            
+                            if artifact_id:
+                                # Get metadata from registry
+                                registry_data = artifact_registry.get(artifact_id, {})
+                                metadata = registry_data.get('metadata', {})
+                                
+                                # Get artifact type from metadata or provenance
+                                artifact_type = (
+                                    metadata.get('artifact_type') or 
+                                    provenance_descriptions.get(filename, '').replace('Artifact of type ', '') or
+                                    self._infer_type_from_category(category_dir.name) or
+                                    'unknown'
+                                )
+                                
+                                # Create human-readable name
+                                human_name = self._create_human_name_from_metadata(
+                                    artifact_type, filename, metadata, artifact_id
+                                )
+                                
+                                # Build comprehensive artifact info
+                                artifact_data = {
+                                    'id': artifact_id,
+                                    'type': artifact_type,
+                                    'created_time': registry_data.get('created_at', 'unknown'),
+                                    'size_bytes': artifact_file.stat().st_size,
+                                    'dependencies': metadata.get('dependencies', []),
+                                    'metadata': metadata,
+                                    'human_name': human_name,
+                                    'short_id': artifact_id[:8],
+                                    'filename': filename,
+                                    'category': category_dir.name,
+                                    'original_filename': metadata.get('original_filename', filename)
+                                }
+                                
+                                index[human_name] = artifact_data
+        
+        # If no organized artifacts found, fall back to shared cache scanning
+        if not index and shared_cache_dir.exists():
             for artifact_file in shared_cache_dir.glob('*'):
                 if artifact_file.is_file() and len(artifact_file.name) == 64:  # SHA-256 hash
                     artifact_id = artifact_file.name
+                    registry_data = artifact_registry.get(artifact_id, {})
+                    metadata = registry_data.get('metadata', {})
                     
-                    # Create basic artifact info
-                    artifact_type = self._infer_artifact_type(artifact_id)
-                    created_time = datetime.fromtimestamp(artifact_file.stat().st_mtime).isoformat()
+                    artifact_type = metadata.get('artifact_type', 'unknown')
+                    created_time = registry_data.get('created_at', 
+                                    datetime.fromtimestamp(artifact_file.stat().st_mtime).isoformat())
                     
-                    # Create human-readable name
-                    human_name = self._create_human_name(artifact_type, artifact_id, created_time)
+                    human_name = self._create_human_name_from_metadata(
+                        artifact_type, artifact_id, metadata, artifact_id
+                    )
                     
-                    # Build artifact info
                     artifact_data = {
                         'id': artifact_id,
                         'type': artifact_type,
                         'created_time': created_time,
                         'size_bytes': artifact_file.stat().st_size,
-                        'dependencies': [],  # Would need to be extracted from artifact content
-                        'metadata': {},
+                        'dependencies': metadata.get('dependencies', []),
+                        'metadata': metadata,
                         'human_name': human_name,
-                        'short_id': artifact_id[:8]
+                        'short_id': artifact_id[:8],
+                        'filename': artifact_id,
+                        'category': 'uncategorized'
                     }
                     
                     index[human_name] = artifact_data
         
         return index
     
-    def _infer_artifact_type(self, artifact_id: str) -> str:
+    def _extract_hash_from_filename(self, filename: str) -> Optional[str]:
         """
-        Infer artifact type based on content or naming patterns.
+        Extract hash from filename (format: name_hash.ext or just hash).
         
         Args:
-            artifact_id: Full artifact hash
+            filename: Filename to extract hash from
+            
+        Returns:
+            Extracted hash or None
+        """
+        # Handle direct hash files (64 char SHA-256)
+        if len(filename) == 64 and all(c in '0123456789abcdef' for c in filename):
+            return filename
+            
+        # Handle hash-suffixed files (name_hash.ext)
+        import re
+        hash_pattern = r'([a-f0-9]{8,64})'
+        matches = re.findall(hash_pattern, filename)
+        if matches:
+            # Return the longest hash found (most likely to be SHA-256)
+            return max(matches, key=len)
+            
+        return None
+    
+    def _infer_type_from_category(self, category_name: str) -> str:
+        """
+        Infer artifact type from directory category.
+        
+        Args:
+            category_name: Directory name (e.g., 'analysis_results')
             
         Returns:
             Inferred artifact type
         """
-        # This is a simplified inference - in a real implementation,
-        # we would examine the artifact content or use metadata
-        if artifact_id.startswith(('04d1', '320c', '3ff1', '75ce', 'ac22', 'c919')):
-            return 'analysis_results'
-        elif artifact_id.startswith(('007d', '696a', '3a44')):
-            return 'statistical_results'
-        elif artifact_id.startswith(('8a1f', 'e8c4')):
-            return 'evidence'
-        else:
-            return 'unknown'
+        category_mapping = {
+            'analysis_results': 'analysis_json_v6',
+            'statistical_results': 'statistical_analysis',
+            'evidence': 'combined_evidence_v6',
+            'analysis_plans': 'analysis_plan',
+            'reports': 'final_report',
+            'inputs': 'input_artifact'
+        }
+        return category_mapping.get(category_name, 'unknown')
+    
+    def _create_human_name_from_metadata(self, artifact_type: str, filename: str, 
+                                       metadata: Dict[str, Any], artifact_id: str) -> str:
+        """
+        Create human-readable name using metadata.
+        
+        Args:
+            artifact_type: Type of artifact
+            filename: Original filename
+            metadata: Artifact metadata
+            artifact_id: Full artifact hash
+            
+        Returns:
+            Human-readable artifact name
+        """
+        short_id = artifact_id[:8]
+        
+        # Use original filename if available
+        if 'original_filename' in metadata:
+            base_name = metadata['original_filename'].replace('.txt', '').replace('.md', '')
+            return f"{base_name} ({artifact_type}) [{short_id}]"
+        
+        # Create descriptive names based on artifact type
+        type_names = {
+            'analysis_json_v6': 'Analysis Results',
+            'combined_evidence_v6': 'Evidence Collection', 
+            'statistical_analysis': 'Statistical Analysis',
+            'final_report': 'Final Report',
+            'corpus_document': 'Source Document',
+            'framework': 'Analysis Framework',
+            'analysis_plan': 'Analysis Plan',
+            'raw_analysis_response_v6': 'Raw Analysis Response'
+        }
+        
+        display_name = type_names.get(artifact_type, artifact_type.replace('_', ' ').title())
+        
+        # Add document count for evidence collections
+        if artifact_type == 'combined_evidence_v6' and 'total_documents' in metadata:
+            doc_count = metadata['total_documents']
+            evidence_count = metadata.get('total_evidence_pieces', 0)
+            return f"{display_name} ({doc_count} docs, {evidence_count} pieces) [{short_id}]"
+        
+        return f"{display_name} [{short_id}]"
+    
+    def _infer_artifact_type(self, artifact_id: str) -> str:
+        """
+        Deprecated: Use metadata-based type inference instead.
+        """
+        return 'unknown'
     
     def _create_human_name(self, artifact_type: str, artifact_id: str, created_time: str) -> str:
         """
@@ -506,10 +636,11 @@ class ArtifactBrowser:
         
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterByType('all')">All</button>
-            <button class="filter-btn" onclick="filterByType('analysis_results')">Analysis</button>
-            <button class="filter-btn" onclick="filterByType('statistical_results')">Statistics</button>
-            <button class="filter-btn" onclick="filterByType('evidence')">Evidence</button>
-            <button class="filter-btn" onclick="filterByType('reports')">Reports</button>
+            <button class="filter-btn" onclick="filterByType('analysis_json_v6')">Analysis</button>
+            <button class="filter-btn" onclick="filterByType('statistical_analysis')">Statistics</button>
+            <button class="filter-btn" onclick="filterByType('combined_evidence_v6')">Evidence</button>
+            <button class="filter-btn" onclick="filterByType('final_report')">Reports</button>
+            <button class="filter-btn" onclick="filterByType('corpus_document')">Documents</button>
         </div>
     </div>
     

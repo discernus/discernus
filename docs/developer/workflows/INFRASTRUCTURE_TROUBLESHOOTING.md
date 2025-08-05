@@ -132,14 +132,14 @@ make run-direct EXPERIMENT=projects/your_experiment
 
 | Service | Port | Required | Purpose |
 |---------|------|----------|---------|
-| **MinIO** | 9000 | ✅ Always | Artifact storage & provenance |
-| **MinIO Console** | 9001 | ℹ️ Optional | Web UI for storage management |
-| **Redis** | 6379 | ⚠️ Legacy CLI only | Deprecated orchestration |
+| **Local Storage** | N/A | ✅ Always | Artifact storage & provenance (no external dependencies) |
+| **MinIO** | 9000 | ❌ Removed | Legacy artifact storage (no longer used) |
+| **Redis** | 6379 | ❌ Removed | Legacy orchestration (no longer used) |
 
 ### **Storage Architecture**
 
 ```
-Experiment Files → MinIO (localhost:9000) → Content-addressable hashes
+Experiment Files → LocalArtifactStorage (shared_cache/) → Content-addressable hashes
                                           ↓
                   Provenance & Audit Trails → Run folders
 ```
