@@ -116,13 +116,14 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
 
 
 @click.group()
+@click.version_option(version='0.2.0', prog_name='Discernus')
 def cli():
     """Discernus - Computational Social Science Research Platform (THIN v2.0)"""
     pass
 
 
 @cli.command()
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
 @click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
@@ -131,7 +132,7 @@ def cli():
 @click.option('--ensemble-runs', default=1, help='Number of ensemble runs for self-consistency (default: 1, recommended: 3-5)')
 @click.option('--no-auto-commit', is_flag=True, help='Disable automatic Git commit after successful run completion')
 def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool, ensemble_runs: int = 1, no_auto_commit: bool = False):
-    """Execute complete experiment (analysis + synthesis)"""
+    """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🎯 Discernus v2.0 - Running experiment: {experiment_path}")
@@ -234,10 +235,10 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
 
 
 @cli.command(name='continue')
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 def continue_experiment(experiment_path: str, synthesis_model: str):
-    """Intelligently resume experiment from existing artifacts"""
+    """Intelligently resume experiment from existing artifacts. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🔄 Continuing experiment: {experiment_path}")
@@ -306,13 +307,13 @@ def continue_experiment(experiment_path: str, synthesis_model: str):
 
 
 @cli.command()
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'evidence-curator', 'results-interpreter']), 
               help='Focus debugging on specific agent')
 @click.option('--verbose', is_flag=True, help='Enable verbose debug output')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str):
-    """Interactive debugging mode with detailed agent tracing"""
+    """Interactive debugging mode with detailed agent tracing. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🐛 Debug mode: {experiment_path}")
@@ -380,9 +381,9 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
 
 
 @cli.command()
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 def validate(experiment_path: str):
-    """Validate experiment structure and configuration"""
+    """Validate experiment structure and configuration. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🔍 Validating experiment: {experiment_path}")
@@ -399,12 +400,12 @@ def validate(experiment_path: str):
 
 
 @cli.command()
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, help='Show what would be promoted without executing')
 @click.option('--cleanup', is_flag=True, help='Clean up leftover development files after promotion')
 @click.option('--force', is_flag=True, help='Skip cleanup confirmation prompts')
 def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
-    """Promote workbench files to operational status"""
+    """Promote workbench files to operational status. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🔄 Discernus Workbench - Promoting: {experiment_path}")
@@ -742,9 +743,9 @@ def list():
 
 
 @cli.command()
-@click.argument('experiment_path')
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 def artifacts(experiment_path: str):
-    """Show experiment artifacts and available resumption points"""
+    """Show experiment artifacts and available resumption points. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🔍 Experiment Artifacts: {experiment_path}")
