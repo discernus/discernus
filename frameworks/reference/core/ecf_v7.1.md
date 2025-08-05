@@ -106,7 +106,11 @@ The analysis agent outputs a raw analysis log containing:
   },
   "calculation_spec": {
     "emotional_polarity": "(hope + amity + compersion) - (fear + enmity + envy)",
-    "climate_intensity": "(fear + hope + enmity + amity + envy + compersion) / 6"
+    "climate_intensity": "(fear + hope + enmity + amity + envy + compersion) / 6",
+    "salience_weighted_emotional_polarity": "((hope * hope_salience + amity * amity_salience + compersion * compersion_salience) - (fear * fear_salience + enmity * enmity_salience + envy * envy_salience)) / ((hope_salience + amity_salience + compersion_salience + fear_salience + enmity_salience + envy_salience) / 6)",
+    "salience_weighted_climate_intensity": "(fear * fear_salience + hope * hope_salience + enmity * enmity_salience + amity * amity_salience + envy * envy_salience + compersion * compersion_salience) / (fear_salience + hope_salience + enmity_salience + amity_salience + envy_salience + compersion_salience)",
+    "salience_weighted_positive_emotional_index": "(hope * hope_salience + amity * amity_salience + compersion * compersion_salience) / (hope_salience + amity_salience + compersion_salience)",
+    "salience_weighted_negative_emotional_index": "(fear * fear_salience + enmity * enmity_salience + envy * envy_salience) / (fear_salience + enmity_salience + envy_salience)"
   },
   "reliability_rubric": {
     "cronbachs_alpha": {

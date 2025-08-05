@@ -110,7 +110,10 @@ The analysis agent outputs a raw analysis log containing:
     "procedural_health_score": "(procedural_legitimacy - procedural_rejection)",
     "institutional_health_score": "(institutional_respect - institutional_subversion)", 
     "systemic_health_score": "(systemic_continuity - systemic_replacement)",
-    "constitutional_direction_index": "(procedural_health_score + institutional_health_score + systemic_health_score) / 3"
+    "constitutional_direction_index": "(procedural_health_score + institutional_health_score + systemic_health_score) / 3",
+    "salience_weighted_constitutional_direction_index": "(procedural_health_score * procedural_legitimacy_salience + institutional_health_score * institutional_respect_salience + systemic_health_score * systemic_continuity_salience) / (procedural_legitimacy_salience + institutional_respect_salience + systemic_continuity_salience)",
+    "salience_weighted_legitimacy_index": "(procedural_legitimacy * procedural_legitimacy_salience + institutional_respect * institutional_respect_salience + systemic_continuity * systemic_continuity_salience) / (procedural_legitimacy_salience + institutional_respect_salience + systemic_continuity_salience)",
+    "salience_weighted_pathology_index": "(procedural_rejection * procedural_rejection_salience + institutional_subversion * institutional_subversion_salience + systemic_replacement * systemic_replacement_salience) / (procedural_rejection_salience + institutional_subversion_salience + systemic_replacement_salience)"
   },
   "reliability_rubric": {
     "cronbachs_alpha": {
