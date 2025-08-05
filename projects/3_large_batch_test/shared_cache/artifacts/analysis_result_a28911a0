@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_07166e1d73dc",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis was performed by sequentially evaluating each dimension group and then integrating findings for a comprehensive assessment.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2002.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.45,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.90,\n          \"salience\": 0.60,\n          \"confidence\": 0.80\n        },\n        \"polar_sovereignty_claims\": {\n          \"raw_score\": 1.05,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.30,\n          \"confidence\": 0.60\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.15,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.30,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.40,\n          \"confidence\": 0.70\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.50,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Our nation is confident and strong. Our generation has been blessed by the expansion of opportunity, by advances in medicine, by the security purchased by our parents' sacrifice. Now, as we see a little gray in the mirror\u2014or a lot of gray\u2014and we watch our children moving into adulthood, we ask the question: What will be the state of their Union? Members of Congress, the choices we make together will answer that question.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Two weeks ago, I stood on the steps of this Capitol and renewed the commitment of our Nation to the guiding ideal of liberty for all. This evening I will set forth policies to advance that ideal at home and around the world.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"narrative\"\n        },\n        {\n          \"dimension\": \"polar_sovereignty_claims\",\n          \"quote_text\": \"Direct people's will, what the people want, majority rule, voice of the people\",\n          \"confidence\": 0.80,\n          \"context_type\": \"rhetoric\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"We should not be content with laws that punish hard-working people who want only to provide for their families and deny businesses willing workers and invite chaos at our border.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"rhetoric\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"My advice to the senators in this chamber is, you all have a duty to faithfully interpret the law, not legislate from the bench. As President, I have a constitutional responsibility to nominate men and women who understand the role of courts in our democracy and are well-qualified to serve on the bench, and I have done so.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We will support faith-based and community groups that bring hope to harsh places, and through their efforts, the highest rates of new cases, African American men and women. Because one of the main sources of our nation's unity is our belief in equal justice, we need to make sure Americans of all races and backgrounds have confidence in the system that provides justice.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Our nation is the world's best hope, but also the world's greatest threat. We will not waver in our determination to defeat the terrorists, and to help create the conditions for peace and freedom to prevail.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"rhetoric\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"To make our economy stronger and more competitive, America must reward, not punish, the efforts and dreams of entrepreneurs. Small business is the path of advancement, especially for women and minorities, so we must free small businesses from needless regulation and protect honest job-creators from junk lawsuits.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"policy_proposal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:36:47.993703+00:00",
+    "end_time": "2025-08-05T20:36:52.889880+00:00",
+    "duration_seconds": 4.896177,
+    "llm_interaction_hash": "8f4e718a760e7472"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

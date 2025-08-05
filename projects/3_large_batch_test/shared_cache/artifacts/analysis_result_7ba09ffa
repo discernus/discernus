@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_19917ad72780",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted following the sequential approach outlined in the PDAF v7.3 framework, focusing on core populist anchors, then mechanisms, and finally boundary distinctions. Emphasis placed on identifying nuanced semantic expressions rather than literal keyword matching. Confidence is high due to clear populist rhetoric and consistent thematic alignment with the framework's dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"341e811f3a27\",\n      \"document_name\": \"Democratic_Platform_2016.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.65,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the dream of homeownership is out of reach. As working people struggle, the top one percent accrues more wealth and more power. Republicans in Congress have chosen gridlock and dysfunction over trying to find solutions to the real challenges we face. It's no wonder that so many feel like the deck is stacked against them.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_contrast\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Democrats believe we are stronger together. Democrats believe we have an economy that works for everyone\u2014an economy that grows incomes for working people, creates good-paying jobs, and puts a middle class life within reach for more Americans. Democrats believe we can spur more sustainable economic growth, which will create good-paying jobs and raise wages. And we can have more economic fairness, so the rewards are shared broadly, not just with those at the top.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"policy_promise\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"But in 2016, the stakes can be measured in human lives\u2014in the number of immigrants who would be torn from their homes; in the number of faithful and peaceful Muslims who would be barred from even visiting our shores; in the number of allies alienated and dictators courted; in the number of Americans who would lose access to health care and see their rights ripped away. This election is about more than Democrats and Republicans. It is about who we are as a nation, and who we will be in the future.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"framing_urgency\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Our economy is running on fumes. We need to invest in our people, create jobs, and ensure that everyone has a fair shot at success. We will make sure that corporations pay their fair share of taxes, and that the wealthiest Americans pay their fair share.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"policy_proposal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:40:40.425309+00:00",
+    "end_time": "2025-08-05T20:40:45.741279+00:00",
+    "duration_seconds": 5.31597,
+    "llm_interaction_hash": "962e47d0100889bd"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "341e811f3a2704147f0b21aebc89096315cea92214afe35b045681f863b32222"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

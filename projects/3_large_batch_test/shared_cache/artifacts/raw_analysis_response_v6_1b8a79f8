@@ -1,0 +1,109 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis followed a sequential approach, first assessing core populist anchors, then populist mechanisms, and finally boundary distinctions. Evidence extraction focused on direct quotes supporting the dimensional scores. Confidence levels reflect the clarity and directness of the evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.3,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.1,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.5,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.4,
+          "salience": 0.75,
+          "confidence": 0.88
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.65,
+          "confidence": 0.78
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "One would have warning signs: increasing layoffs, rising energy prices, too many failing schools, persistent poverty, the stubborn vestiges of racism. Another picture would be full of blessings: a balanced budget, big surpluses, a military that is second to none, a country at peace with its neighbors, technology that is revolutionizing the world, and our greatest strength, concerned citizens who care for our country and care for each other.",
+          "confidence": 0.95,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "And tonight I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+          "confidence": 0.98,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Year after year in Washington, budget debates seem to come down to an old, tired argument: on one side, those who want more Government, regardless of the cost; on the other, those who want less Government, regardless of the need. We should leave those arguments to the last century and chart a different course.",
+          "confidence": 0.85,
+          "context_type": "problem_framing"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Our Government should not tax and, thereby, discourage marriage, so we reduced the marriage penalty. I want to help families rear and support their children, so we doubled the child credit to $1,000 per child.",
+          "confidence": 0.9,
+          "context_type": "policy_proposal"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Many of you have talked about the need to pay down our national debt. I listened, and I agree.",
+          "confidence": 0.75,
+          "context_type": "acknowledgement"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We all came here for a reason. We all have things we want to accomplish and promises to keep. Juneteenth poem--together we can.",
+          "confidence": 0.88,
+          "context_type": "unity_appeal"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "A tax rate of 15 percent is too high for those who earn low wages, so we lower the rate to 10 percent. No one should pay more than a third of the money they earn in Federal income taxes, so we lowered the top rate to 33 percent.",
+          "confidence": 0.92,
+          "context_type": "economic_policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

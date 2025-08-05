@@ -90,12 +90,37 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     except Exception as e:
         return False, f"❌ Error parsing experiment.md: {e}", {}
     
-    # Check framework file exists
-    framework_file = experiment_path / config.get('framework', 'framework.md')
-    if not framework_file.exists():
-        return False, f"❌ Framework file not found: {framework_file}", {}
+    # Check framework file exists (handle both canonical and local paths)
+    framework_filename = config.get('framework', 'framework.md')
     
-    # Check framework character limit (30KB maximum)
+    if framework_filename.startswith("../../frameworks/"):
+        # Canonical framework - resolve relative to project root
+        # Find project root by looking for discernus directory
+        current_path = experiment_path
+        project_root = None
+        
+        # Walk up the directory tree to find project root
+        while current_path != current_path.parent:  # Stop at filesystem root
+            if (current_path / "discernus").exists() and (current_path / "frameworks").exists():
+                project_root = current_path
+                break
+            current_path = current_path.parent
+        
+        if not project_root:
+            return False, f"❌ Cannot find project root for canonical framework: {framework_filename}", {}
+        
+        canonical_path = framework_filename.lstrip("../../")
+        framework_file = project_root / canonical_path
+        
+        if not framework_file.exists():
+            return False, f"❌ Canonical framework not found: {framework_filename}", {}
+    else:
+        # Local framework - resolve relative to experiment directory
+        framework_file = experiment_path / framework_filename
+        if not framework_file.exists():
+            return False, f"❌ Framework file not found: {framework_file}", {}
+    
+    # Check framework character limit (50KB maximum)
     try:
         with open(framework_file, 'r') as f:
             framework_content = f.read()
@@ -160,7 +185,7 @@ def cli(ctx, verbose, quiet, no_color, config):
 
 
 @cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', help='Show what would be done without executing')
 @click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', help='LLM model to use for analysis')
 @click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', help='LLM model to use for synthesis')
@@ -171,7 +196,16 @@ def cli(ctx, verbose, quiet, no_color, config):
 @click.pass_context
 def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
-    exp_path = Path(experiment_path)
+    exp_path = Path(experiment_path).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
     
     # Get configuration and apply defaults
     config = ctx.obj['config']
@@ -319,11 +353,20 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
 
 
 @cli.command(name='continue')
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 def continue_experiment(experiment_path: str, synthesis_model: str):
     """Intelligently resume experiment from existing artifacts. Defaults to current directory."""
-    exp_path = Path(experiment_path)
+    exp_path = Path(experiment_path).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
     
     click.echo(f"🔄 Continuing experiment: {experiment_path}")
     
@@ -391,14 +434,23 @@ def continue_experiment(experiment_path: str, synthesis_model: str):
 
 
 @cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'evidence-curator', 'results-interpreter']), 
               help='Focus debugging on specific agent')
 @click.option('--verbose', is_flag=True, help='Enable verbose debug output')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str):
     """Interactive debugging mode with detailed agent tracing. Defaults to current directory."""
-    exp_path = Path(experiment_path)
+    exp_path = Path(experiment_path).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
     
     click.echo(f"🐛 Debug mode: {experiment_path}")
     if agent:
@@ -465,10 +517,19 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
 
 
 @cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 def validate(experiment_path: str):
     """Validate experiment structure and configuration. Defaults to current directory."""
-    exp_path = Path(experiment_path)
+    exp_path = Path(experiment_path).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
     
     click.echo(f"🔍 Validating experiment: {experiment_path}")
     

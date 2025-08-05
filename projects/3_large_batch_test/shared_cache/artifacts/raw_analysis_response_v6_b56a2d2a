@@ -1,0 +1,91 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of Clinton's 1997 Inaugural Address using the Populist Discourse Analysis Framework v7.3. The document exhibits characteristics of a 'Moderate Populist Appeals' profile due to a balanced approach across several dimensions, rather than extreme emphasis on any single one. The analysis considered the semantic nuances of the framework's defined markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+          "confidence": 0.8,
+          "context_type": "Framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Our Founders understood that, well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.",
+          "confidence": 0.9,
+          "context_type": "Claims"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Our streets will echo again with the laughter of our children, because no one will try to shoot them or sell them drugs anymore. Everyone who can work, will work, with today's permanent under class of tomorrow's growing middle class.",
+          "confidence": 0.8,
+          "context_type": "Authenticity"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Let us build our bridge, a bridge wide enough and strong enough for everyone American to cross over to a blessed land of new promise.",
+          "confidence": 0.9,
+          "context_type": "Construction"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

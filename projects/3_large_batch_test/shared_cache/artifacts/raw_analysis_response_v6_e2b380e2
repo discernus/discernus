@@ -1,0 +1,139 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis completed following the sequential steps outlined in the framework. Focus was placed on identifying core populist anchors, mechanisms, and boundary distinctions using provided linguistic markers and semantic concepts."
+  },
+  "document_analyses": [
+    {
+      "document_id": "bcd15012ae42",
+      "document_name": "Democratic_Platform_2020.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.4,
+          "salience": 0.85,
+          "confidence": 0.92
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.5,
+          "salience": 0.9,
+          "confidence": 0.93
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.2,
+          "salience": 0.75,
+          "confidence": 0.88
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.1,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.3,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.0,
+          "salience": 0.65,
+          "confidence": 0.82
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.6,
+          "confidence": 0.78
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.0,
+          "salience": 0.65,
+          "confidence": 0.82
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The proposed platform was considered by the 2020 Platform Committee at its meeting on July 27, 2020, and is recommended for approval by the delegates.",
+          "confidence": 0.8,
+          "context_type": "Introduction"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Protection Protecting Americans and Recovering From the COVID-19 Pandemic",
+          "confidence": 0.9,
+          "context_type": "Document Section Header"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "When we do not have competent, experienced, compassionat leaders in government, the American people suffer. That is the case with the novel corona virus. President Trump and his Administration missed multiple opportunities to protect the American people from this deadly pathogen. Instead of recognizing the danger and confronting it head-on, President Trump lied to the American people about the disease’s severity, its transmissibility, and the threat it posed to lives and livelihoods.",
+          "confidence": 0.95,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We must save lives by using every available tool to beat back this pandemic, which continues to sicken and kill hundreds of Americans per day, and lead a global effort to prevent, detect, and respond to future pandemic threats.",
+          "confidence": 0.9,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We must start by making COVID-19 testing widely available, convenient, and free to everyone.",
+          "confidence": 0.9,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "The Republican Party under President Trump has made America small when we are a people called to do the greatest things. The challenges before us+the worst public health crisis in a century, the worst economic downturn since the Great Depression, the worst period of global upheaval in a generation, the urgent global crisis posed by climate change, the intolerable racial injustice that still stains the fabric of our nation will test America’s character like never before.",
+          "confidence": 0.85,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "The bill has come due on the Trump Administration’s hollowing out of our public institutions: the sidelining of experts, the rejection of science, the underinvestment in research, and the gross corruption and abuses of power. President Trump’s dereliction of duty has caused the deaths of tens of thousands of Americans, the loss of tens of millions of American jobs, and lasting harm to our children’s education and future.",
+          "confidence": 0.92,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Democrats will fight to repair the soul of this nation. To unite and to heal our country. To turn this crisis into a crucible, from which we will forge a stronger, brighter, and more equitable future.",
+          "confidence": 0.88,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We must once again stop another Republican recession from becoming a second Great Depression. President Trump inherited the longest economic expansion in American history from the Obama-Biden Administration, and he squandered it.",
+          "confidence": 0.88,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We must lead with diplomacy, our allies and partners to meet common challenges that no country can face on its own. The world today looks very different from the post-WWII period that gave birth to our alliance system. But these changes make our alliances more not less crucial to our success.",
+          "confidence": 0.75,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "As Democrats, we believe that when it comes to dealing with national security threats, we must ensure that our alliances and partners have the capacity to meet the threats of the future from cyber to space, and artificial intelligence to synthetic biology. We will promote international efforts to responsibly and ethically manage research in areas like gene editing, and cooperate from our partners to build capacity and implement appropriate safety standards for any work that involves dangerous pathogens, and we will protect our national ecosystems.",
+          "confidence": 0.7,
+          "context_type": "Document Section Content"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "The American economy is not working for the American people. In a matter of weeks, the abject failure of President Trump and his Administration to competently respond to the COVID-19 pandemic erased all the job gains made since the Great Depression, decimating the American heartland.",
+          "confidence": 0.8,
+          "context_type": "Document Section Content"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

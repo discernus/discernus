@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7059afdd38d4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis followed a sequential approach, first assessing core populist anchors, then populist mechanisms, and finally boundary distinctions. Evidence extraction focused on direct quotes supporting the dimensional scores. Confidence levels reflect the clarity and directness of the evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2006.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.1,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.85,\n          \"confidence\": 0.92\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.75,\n          \"confidence\": 0.88\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.65,\n          \"confidence\": 0.78\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"One would have warning signs: increasing layoffs, rising energy prices, too many failing schools, persistent poverty, the stubborn vestiges of racism. Another picture would be full of blessings: a balanced budget, big surpluses, a military that is second to none, a country at peace with its neighbors, technology that is revolutionizing the world, and our greatest strength, concerned citizens who care for our country and care for each other.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"contrast\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"And tonight I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Year after year in Washington, budget debates seem to come down to an old, tired argument: on one side, those who want more Government, regardless of the cost; on the other, those who want less Government, regardless of the need. We should leave those arguments to the last century and chart a different course.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"problem_framing\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Our Government should not tax and, thereby, discourage marriage, so we reduced the marriage penalty. I want to help families rear and support their children, so we doubled the child credit to $1,000 per child.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy_proposal\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Many of you have talked about the need to pay down our national debt. I listened, and I agree.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"acknowledgement\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We all came here for a reason. We all have things we want to accomplish and promises to keep. Juneteenth poem--together we can.\",\n          \"confidence\": 0.88,\n          \"context_type\": \"unity_appeal\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"A tax rate of 15 percent is too high for those who earn low wages, so we lower the rate to 10 percent. No one should pay more than a third of the money they earn in Federal income taxes, so we lowered the top rate to 33 percent.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"economic_policy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:37:10.172389+00:00",
+    "end_time": "2025-08-05T20:37:14.383383+00:00",
+    "duration_seconds": 4.210994,
+    "llm_interaction_hash": "403c97f8fd4bf8ac"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

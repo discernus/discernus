@@ -1,0 +1,109 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Populist Discourse Analysis Framework (PDAF) v7.3",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted by following the sequential steps outlined in the PDAF framework, focusing on core populist anchors, populist mechanisms, and boundary distinction anchors. Evidence extraction prioritizes direct textual support for dimensional scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2004.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.6,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.0,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.55,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.7,
+          "salience": 0.4,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The only answer is that the corrupt establishment must be purged. The people demand it. We are not like them, the elites, who have sold out our country.",
+          "confidence": 0.98,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "We stand at a precipice. The nation is in peril, brought low by the greed and incompetence of those in power. We must restore our former glory.",
+          "confidence": 0.9,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The will of the people is the ultimate law. No institution, no politician, can stand against what the people have decided.",
+          "confidence": 0.95,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "A shadow government, a deep state, works in concert to keep the people suppressed. They are all in on it, the bankers, the lobbyists, the entrenched politicians.",
+          "confidence": 0.98,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I am one of you. I understand your struggles because I have lived them. Unlike the out-of-touch, career politicians who only care about themselves.",
+          "confidence": 0.98,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We are a united people, with shared values and a common destiny. The division you see is manufactured by those who wish to weaken us.",
+          "confidence": 0.85,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Our nation must come first. Those who do not belong here, who threaten our way of life, must be removed.",
+          "confidence": 0.8,
+          "context_type": "direct_quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

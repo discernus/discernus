@@ -301,7 +301,7 @@ class ProvenanceOrganizer:
                 # Calculate relative path from run artifacts directory to shared cache
                 # From: projects/simple_test/runs/20250804T111225Z/artifacts/analysis_results/
                 # To:   projects/simple_test/shared_cache/artifacts/
-                relative_target = Path("../../../../shared_cache/artifacts") / human_filename
+                relative_target = Path("../../shared_cache/artifacts") / human_filename
                 
                 if target_path.exists():
                     try:

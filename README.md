@@ -16,17 +16,19 @@
 ## 🚀 Quick Start
 
 ```bash
-# 1. Set up environment
+# 1. Set up environment (if needed)
 make install
 
 # 2. Verify setup
 make check
 
-# 3. Navigate to experiment and run
-cd projects/simple_test
-discernus run
+# 3. Run fast test experiment (~47 seconds, $0.014)
+discernus run projects/simple_test --skip-validation
 
-# Or run from anywhere
+# Or run with local Flash Lite config (from experiment directory)
+cd projects/simple_test && discernus run .
+
+# Or run from anywhere with canonical frameworks
 discernus run projects/simple_test
 ```
 

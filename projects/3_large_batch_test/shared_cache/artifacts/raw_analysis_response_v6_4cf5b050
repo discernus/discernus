@@ -1,0 +1,103 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis applied using sequential dimensional scoring, focusing on core populist anchors first, followed by mechanisms and boundary distinctions. Confidence is high due to clear thematic expressions aligning with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2008.pdf",
+      "dimensional_scores": {
+        "core_anchors": {
+          "manichaean_people_elite_framing": {
+            "raw_score": 0.75,
+            "salience": 0.85,
+            "confidence": 0.9
+          },
+          "crisis_restoration_temporal_narrative": {
+            "raw_score": 0.55,
+            "salience": 0.6,
+            "confidence": 0.8
+          },
+          "popular_sovereignty_claims": {
+            "raw_score": 0.65,
+            "salience": 0.7,
+            "confidence": 0.85
+          },
+          "anti_pluralist_exclusion": {
+            "raw_score": 0.40,
+            "salience": 0.5,
+            "confidence": 0.75
+          }
+        },
+        "mechanism_anchors": {
+          "elite_conspiracy_systemic_corruption": {
+            "raw_score": 0.45,
+            "salience": 0.55,
+            "confidence": 0.8
+          },
+          "authenticity_vs_political_class": {
+            "raw_score": 0.70,
+            "salience": 0.75,
+            "confidence": 0.9
+          },
+          "homogeneous_people_construction": {
+            "raw_score": 0.50,
+            "salience": 0.6,
+            "confidence": 0.8
+          }
+        },
+        "boundary_distinction_anchors": {
+          "nationalist_exclusion": {
+            "raw_score": 0.50,
+            "salience": 0.55,
+            "confidence": 0.8
+          },
+          "economic_populist_appeals": {
+            "raw_score": 0.30,
+            "salience": 0.4,
+            "confidence": 0.7
+          }
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The people, by contrast, are often portrayed as virtuous, honest, and hardworking, representing the true spirit of the nation, while the elite are depicted as corrupt, self-serving, and out of touch.",
+          "confidence": 0.95,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "This narrative frames political discourse as a moral struggle between the 'pure' people and the 'corrupt' elite, simplifying complex issues into a battle of good versus evil.",
+          "confidence": 0.9,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Populist leaders often claim to represent the 'true will of the people,' bypassing established institutions and intermediaries to connect directly with their base.",
+          "confidence": 0.9,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Populists emphasize their authenticity and connection to 'ordinary people,' contrasting themselves with a perceived 'political class' or 'establishment' that is out of touch and self-interested.",
+          "confidence": 0.95,
+          "context_type": "direct_quote"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "This construction of 'the people' often relies on a notion of shared culture, ethnicity, or values, leading to the exclusion or demonization of minority groups or external 'others' who are seen as threats to national unity.",
+          "confidence": 0.85,
+          "context_type": "direct_quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1007c7107ba1",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis applied using sequential dimensional scoring, focusing on core populist anchors first, followed by mechanisms and boundary distinctions. Confidence is high due to clear thematic expressions aligning with framework definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2008.pdf\",\n      \"dimensional_scores\": {\n        \"core_anchors\": {\n          \"manichaean_people_elite_framing\": {\n            \"raw_score\": 0.75,\n            \"salience\": 0.85,\n            \"confidence\": 0.9\n          },\n          \"crisis_restoration_temporal_narrative\": {\n            \"raw_score\": 0.55,\n            \"salience\": 0.6,\n            \"confidence\": 0.8\n          },\n          \"popular_sovereignty_claims\": {\n            \"raw_score\": 0.65,\n            \"salience\": 0.7,\n            \"confidence\": 0.85\n          },\n          \"anti_pluralist_exclusion\": {\n            \"raw_score\": 0.40,\n            \"salience\": 0.5,\n            \"confidence\": 0.75\n          }\n        },\n        \"mechanism_anchors\": {\n          \"elite_conspiracy_systemic_corruption\": {\n            \"raw_score\": 0.45,\n            \"salience\": 0.55,\n            \"confidence\": 0.8\n          },\n          \"authenticity_vs_political_class\": {\n            \"raw_score\": 0.70,\n            \"salience\": 0.75,\n            \"confidence\": 0.9\n          },\n          \"homogeneous_people_construction\": {\n            \"raw_score\": 0.50,\n            \"salience\": 0.6,\n            \"confidence\": 0.8\n          }\n        },\n        \"boundary_distinction_anchors\": {\n          \"nationalist_exclusion\": {\n            \"raw_score\": 0.50,\n            \"salience\": 0.55,\n            \"confidence\": 0.8\n          },\n          \"economic_populist_appeals\": {\n            \"raw_score\": 0.30,\n            \"salience\": 0.4,\n            \"confidence\": 0.7\n          }\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"The people, by contrast, are often portrayed as virtuous, honest, and hardworking, representing the true spirit of the nation, while the elite are depicted as corrupt, self-serving, and out of touch.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"This narrative frames political discourse as a moral struggle between the 'pure' people and the 'corrupt' elite, simplifying complex issues into a battle of good versus evil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Populist leaders often claim to represent the 'true will of the people,' bypassing established institutions and intermediaries to connect directly with their base.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Populists emphasize their authenticity and connection to 'ordinary people,' contrasting themselves with a perceived 'political class' or 'establishment' that is out of touch and self-interested.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"This construction of 'the people' often relies on a notion of shared culture, ethnicity, or values, leading to the exclusion or demonization of minority groups or external 'others' who are seen as threats to national unity.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:42:53.342392+00:00",
+    "end_time": "2025-08-05T20:43:08.849244+00:00",
+    "duration_seconds": 15.506852,
+    "llm_interaction_hash": "9ea8427f7d1bcd93"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "b34ee65a1168419036cf032f32629f981a919e8c458167e5eea462ef3305f807"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

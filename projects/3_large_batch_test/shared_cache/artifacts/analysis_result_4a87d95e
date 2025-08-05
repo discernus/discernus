@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e2dcaad0e44c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted following the PDAF v7.3 framework, focusing on sequential assessment of core populist anchors, populist mechanisms, and boundary distinctions. Confidence is high due to clear linguistic markers and consistent themes across dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"a9bd0c1f6436\",\n      \"document_name\": \"Democratic_Platform_2024.txt\",\n      \"dimensional_scores\": {\n        \"Maniachaean_People_Elite_Framing\": {\n          \"raw_score\": 1.4,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Crisis_Restoration_Narrative\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Popular_Sovereignty_Claims\": {\n          \"raw_score\": 1.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Anti_Pluralist_Exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"Elite_Conspiracy_Systemic_Corruption\": {\n          \"raw_score\": 1.7,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Authenticity_Vs_Political_Class\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Homogeneous_People_Construction\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Nationalist_Exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"Economic_Populist_Appeals\": {\n          \"raw_score\": 1.8,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Maniachaean_People_Elite_Framing\",\n          \"quote_text\": \"Donaldo Trump has a very different vision; a one focused not on opportunity and optimism, but on revenge and retribution; not on the American people, but on himself. He and his extreme MAGA allies are ripping away our bedrock personal freedoms, dictating what healthcare decisions women can make, banning books, and telling people who they can love.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Elite corruption\"\n        },\n        {\n          \"dimension\": \"Crisis_Restoration_Narrative\",\n          \"quote_text\": \"Our nation is at an inflection point. What kind of America will we be? A land of more freedom, or less freedom? More rights or fewer? An economy rigged for the rich and powerful, or where everyone has a fair shot at getting ahead? Will we lower the temperature in our politics and come together, or treat each other as enemies instead? The stakes in this election are enormously high.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Crisis narrative\"\n        },\n        {\n          \"dimension\": \"Popular_Sovereignty_Claims\",\n          \"quote_text\": \"Democrats continue to support tribes as they advocate for the United States to uphold treaty and trust responsibilities. We applaud that in 2024, under the Biden-Harris Administration, the Praire Band of Potawatomi Nation became the first federally recognized Tribal Nation in Illinois in 175 years, when the U.S. Department of the Interior placed 130 acres of the Shab-eh-nay reservation in nearby DeKalb County into trust.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Direct popular will\"\n        },\n        {\n          \"dimension\": \"Elite_Conspiracy_Systemic_Corruption\",\n          \"quote_text\": \"Theirs are rigging our economy for their rich friends and billionaire donors, who like him, are only in it for themselves. As president, Trump doubled down on the trickle-down policies of the past, cutting investment in infrastructure and education, and rewarding big corporations that ship jobs and profits overseas.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Elite coordination\"\n        },\n        {\n          \"dimension\": \"Authenticity_Vs_Political_Class\",\n          \"quote_text\": \"President Biden and Vice President Harris turned a setback into a great American comeback for working families. We\u2019ve created nearly 16 million jobs, a record number of small businesses are being started, and factories are coming home.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Authenticity claims\"\n        },\n        {\n          \"dimension\": \"Homogeneous_People_Construction\",\n          \"quote_text\": \"We acknowledge that the many other tribes who consider this area their traditional homeland, including the Miaamia, Ho-Chunk, Menominee, Sac and Fox, Peoria, Kashkaskia, Wea, Kickapoo, and Mascouten.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Collective identity\"\n        },\n        {\n          \"dimension\": \"Economic_Populist_Appeals\",\n          \"quote_text\": \"Democrats know that when unions win, all workers benefit; and as we rebuild our economy for the future, every worker needs a voice and a fair shot. Democrats know that winning the race for the future will be decided by who is going to get out there and do the work, not who\u2019s going to be able to afford it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Economic grievance\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:40:54.371110+00:00",
+    "end_time": "2025-08-05T20:41:02.580114+00:00",
+    "duration_seconds": 8.209004,
+    "llm_interaction_hash": "3a07c5cc527f4388"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "a9bd0c1f6436d2ff12867dd5cefc1aab27eed4c2ab548136ded13e248c974bc0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

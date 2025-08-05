@@ -1,0 +1,109 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The document was analyzed sequentially across core populist anchors, populist mechanisms, and boundary distinctions. Emphasis was placed on identifying semantic patterns and thematic expressions related to populist rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d37860f456a6",
+      "document_name": "Democratic_Platform_2008.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.2,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.85
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Our current President pursued misguided policies, missed opportunities, and maintained a rigid, ideological adherence to discredited ideas. Our surplus is now a deficit, and almost a decade into this century, we still have no coherent national strategy to compete in a global economy. The price tag for these failures is being passed on to our families, working longer hours are pressed to care for their children and aging parents.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "But today, we are at a crossroads. As we meet, we are in the sixth year of a two-front war. Our economy is struggling. Our planet is in peril. A great nation now demands that its leaders abandon the politics of partisan division and find creative solutions to promote the common good.",
+          "confidence": 0.9,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "We Democrats, through the most open platform process in history, are reaching out today to Republicans, independents, and all Americans who hunger for a new direction and a reason to hope. Today, at a defining moment in our history, the Democratic Party resolves to renew America’s promise.",
+          "confidence": 0.95,
+          "context_type": "core_anchor"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "They promised fiscal responsibility but instead gave tax cuts to the wealthy few and squandered almost a trillion dollars in Iraq. They promised reform but allowed the oil companies to write our energy agenda and the credit card companies to write the bankruptcy rules.",
+          "confidence": 0.85,
+          "context_type": "mechanism"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "The American people do not want government to solve all our problems; we know that personal responsibility, character, imagination, diligence, hard work and faith ultimately determine individual achievement. But we also know that at every turning point in our nation’s history, we have demonstrated our love of country by uniting to overcome our challenges, whether ending slavery, fighting two world wars for the cause of freedom or sending a man to the moon.",
+          "confidence": 0.85,
+          "context_type": "mechanism"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We come together at a defining moment in the history of our nation, and the nation that led the 20th century, built a thriving middle class, defeated fascism and communism, and provided bountiful opportunity to many.",
+          "confidence": 0.85,
+          "context_type": "mechanism"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We will provide an immediate energy rebate to American families struggling with the record price of gasoline and the skyrocketing cost of other necessities – to allow them to spend on those basic needs and energy-efficient measures. We will devote $50 billion to jumpstarting the economy, helping economic growth, and preventing another one million jobs from being lost.",
+          "confidence": 0.75,
+          "context_type": "boundary_distinction"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

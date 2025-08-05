@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b42bea4f5eca",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis completed by applying the Populist Discourse Analysis Framework (PDAF) v7.3. The assessment focused on identifying and scoring core populist anchors, mechanisms, and boundary distinctions. Evidence extraction prioritized clear textual support for identified dimensions. Confidence levels reflect the clarity and directness of the evidence found in relation to the framework's definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1993.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.60,\n          \"confidence\": 0.75\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.70,\n          \"confidence\": 0.80\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.40,\n          \"confidence\": 0.60\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.50,\n          \"confidence\": 0.65\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.70\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We face no imminent threat, but we do have an enemy. The enemy of our time is inaction.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We have much to be thankful for. With 4 years of growth, we have won back the basic strength of our economy. With crime and welfare rolls declining, we are winning back our optimism, the enduring faith that we can master any difficulty.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"narrative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all our oars, and they told us to row.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"So tonight I issue a call to action: action by this Congress, action by our States, by our people, to prepare America for the 21st century; action to keep our economy and our democracy strong and working for all our people\",\n          \"confidence\": 0.85,\n          \"context_type\": \"rhetoric\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We must be committed to the pursuit of opportunity for all Americans, responsibility from all Americans, in a community of all Americans.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"construction\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create jobs through investment by business and loans by banks.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"appeal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:37:39.987909+00:00",
+    "end_time": "2025-08-05T20:37:44.493327+00:00",
+    "duration_seconds": 4.505418,
+    "llm_interaction_hash": "b06fa9169fe6e8ac"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

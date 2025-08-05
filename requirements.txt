@@ -32,3 +32,7 @@ textblob>=0.15.3
 # Google Cloud Platform (Vertex AI)
 google-cloud-aiplatform>=1.104.0
 google-auth>=2.40.0
+
+# YouTube transcript extraction (for APDES corpus collection)
+youtube-transcript-api>=0.6.2
+yt-dlp>=2025.6.9

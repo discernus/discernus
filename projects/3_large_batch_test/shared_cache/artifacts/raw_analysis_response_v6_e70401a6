@@ -1,0 +1,175 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Each dimension was assessed for raw score, salience, and confidence, with supporting evidence extracted. The framework's focus on cross-ideological analysis and the extended 0.0-2.0 scale for intensity was maintained."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 1.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.5,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 1.3,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.4,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.7,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 1.2,
+          "salience": 0.65,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 1.5,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.0,
+          "salience": 0.5,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "We will choose to act confidently in pursuing the enemies of freedom, or retreat from our duties in the hope of an easier life.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Dictatorships shelter terrorists, and feed resentment and radicalism, and seek weapons of mass destruction.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "In a time of testing, we cannot find security by abandoning our commitments and retreating within our borders. If we were to leave these vicious attackers alone, they would not leave us alone.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "The only way to protect our people, the only way to secure the peace, the only way to control our destiny is by our leadership.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "So the United States will continue to lead.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Democracies replace resentment with hope, respect the rights of their citizens and their neighbors, and join the fight against terror.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "To overcome dangers in our world, we must also take the offensive by encouraging economic progress and fighting disease and spreading hope in hopeless lands.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "Isolationalism would not only tie our hands in fighting enemies, it would keep us from helping our friends in desperate need.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "They seek to impose a heartless system of totalitarian control throughout the Middle East and arm themselves with weapons of mass murder.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "The Iranian Government is defying the world with its nuclear ambitions, and the nations of the world must not permit the Iranian regime to gain nuclear weapons.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "My fellow citizens, we've been called to leadership in a period of consequence. We've entered a great ideological conflict we did not invite.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I ask members of Congress to serve the interests of America by showing the compassion of America.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We have protected and served all of you. I have faced death with the secure knowledge that you would not have to. Never falter.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Don't hesitate to honor and support those of us who have the honor of protecting that which is worth protecting.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Every step toward freedom in the world makes our country safer, so we will act boldly in freedom's cause.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Our nation needs orderly and secure borders. To meet this goal, we must have stronger immigration enforcement and border protection.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Keeping America competitive requires affordable energy.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Keeping America competitive requires us to open more markets for all that Americans make and grow.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

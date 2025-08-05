@@ -58,7 +58,7 @@ harness-file:  ## Test prompt from file (requires MODEL and FILE vars)
 run:  ## Run experiment (requires EXPERIMENT var, e.g. make run EXPERIMENT=projects/simple_test)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make run EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🚀 Running experiment: $(EXPERIMENT)"
-	@python3 -m discernus.cli run $(EXPERIMENT)
+	@discernus run $(EXPERIMENT)
 
 run-safe:  ## Run experiment with safe Python wrapper (recommended for agents)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make run-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
@@ -68,7 +68,7 @@ run-safe:  ## Run experiment with safe Python wrapper (recommended for agents)
 continue:  ## Continue experiment from artifacts (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🔄 Continuing experiment: $(EXPERIMENT)"
-	@python3 -m discernus.cli continue $(EXPERIMENT)
+	@discernus continue $(EXPERIMENT)
 
 continue-safe:  ## Continue experiment with safe Python wrapper
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
@@ -78,7 +78,7 @@ continue-safe:  ## Continue experiment with safe Python wrapper
 debug:  ## Debug experiment (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🐛 Debugging experiment: $(EXPERIMENT)"
-	@python3 -m discernus.cli debug $(EXPERIMENT) --verbose
+	@discernus debug $(EXPERIMENT) --verbose
 
 debug-safe:  ## Debug experiment with safe Python wrapper
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
@@ -87,7 +87,7 @@ debug-safe:  ## Debug experiment with safe Python wrapper
 
 list:  ## List available experiments
 	@echo "📋 Listing experiments..."
-	@python3 -m discernus.cli list
+	@discernus list
 
 list-safe:  ## List experiments with safe Python wrapper
 	@echo "🛡️  Listing experiments with safe wrapper..."

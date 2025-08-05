@@ -1,0 +1,263 @@
+{
+  "evidence_metadata": {
+    "total_documents": 2,
+    "total_evidence_pieces": 28,
+    "extraction_method": "pre_extraction_v1.0",
+    "extraction_time": "2025-08-05T22:23:48.408261+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "dignity",
+      "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society.\"",
+      "confidence": 0.9,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribalism",
+      "quote_text": "You got a President Trump getting inaugurated. And I must tell you one of the more bizarre experiences of my life was I was kind of pushed into the front row of that. And there I am, there's Trump, and right behind him, you got Musk, Bezos, and Zuckerberg, three wealthiest guys in the country.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "truth",
+      "quote_text": "Despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.",
+      "confidence": 0.7,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "manipulation",
+      "quote_text": "They're just very nice. But they're not. In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses.",
+      "confidence": 0.6,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "justice",
+      "quote_text": "They are going after Medicaid, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.95,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "resentment",
+      "quote_text": "They're just very nice. But they're not. In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction.",
+      "confidence": 0.85,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "They are going after Medicaid, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.5,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%. So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fantasy",
+      "quote_text": "The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.5,
+      "context_type": "explicit",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "dignity",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+      "confidence": 0.8,
+      "context_type": "belief_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribalism",
+      "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.6,
+      "context_type": "inclusive_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribalism",
+      "quote_text": "Whatsoever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.7,
+      "context_type": "inclusive_framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "truth",
+      "quote_text": "A century ago, President Theodore Roosevelt's invitation of Booker T. Washington to dine at the White House was taken as an outrage in many quarters. America today is a world away from the cruel and prideful bigotry of that time.",
+      "confidence": 0.8,
+      "context_type": "historical_comparison",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "truth",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.7,
+      "context_type": "self_reflection",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "manipulation",
+      "quote_text": "I've always been a fortunate man, and never more so for the love and encouragement you have given me.",
+      "confidence": 0.5,
+      "context_type": "emotional_appeal",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "manipulation",
+      "quote_text": "I am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+      "confidence": 0.6,
+      "context_type": "strategic_praise",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "justice",
+      "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_past_injustice",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "justice",
+      "quote_text": "I would not be an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+      "confidence": 0.6,
+      "context_type": "statement_of_service",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "resentment",
+      "quote_text": "I do not know what more we could have done to try to win this election. I'll leave that to others to determine.",
+      "confidence": 0.5,
+      "context_type": "expression_of_uncertainty",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "resentment",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.5,
+      "context_type": "acknowledgement_of_disappointment",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.9,
+      "context_type": "benevolent_wish",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.9,
+      "context_type": "call_to_unity",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fear",
+      "quote_text": "defend our security in a dangerous world",
+      "confidence": 0.5,
+      "context_type": "acknowledgement_of_threat",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "pragmatism",
+      "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_past_challenges",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "pragmatism",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.6,
+      "context_type": "forward_looking_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fantasy",
+      "quote_text": "I do not know what more we could have done to try to win this election. I'll leave that to others to determine.",
+      "confidence": 0.5,
+      "context_type": "statement_of_uncertainty",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_ff66faf1f02f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Populist Discourse Analysis Framework (PDAF) v7.3. The analysis followed a sequential approach, examining core anchors, then mechanisms, and finally boundary distinctions. Confidence levels reflect the clarity of evidence and the analyst's certainty in applying the framework's definitions. The extended 0.0-2.0 scale was utilized where appropriate for populist rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2010.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing_score\": {\n          \"raw_score\": 1.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative_score\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"polar_sovereignty_claims_score\": {\n          \"raw_score\": 1.0,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion_score\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption_score\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.5,\n          \"confidence\": 0.85\n        },\n        \"authenticity_vs_political_class_score\": {\n          \"raw_score\": 1.2,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction_score\": {\n          \"raw_score\": 1.3,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion_score\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals_score\": {\n          \"raw_score\": 1.1,\n          \"salience\": 0.55,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing_score\",\n          \"quote_text\": \"But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is adding jobs, but too many people still can't find full-time employment. Corporate profits have skyrocketed to all-time highs, but for more than a decade, wages and incomes have barely budged.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Manichaean People-Elite Framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative_score\",\n          \"quote_text\": \"So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Crisis-Restoration Narrative\"\n        },\n        {\n          \"dimension\": \"polar_sovereignty_claims_score\",\n          \"quote_text\": \"It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Polar Sovereignty Claims\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class_score\",\n          \"quote_text\": \"The American people don't expect government to solve every problem. They don't expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Authenticity vs. Political Class\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction_score\",\n          \"quote_text\": \"It is our unfinished task to make sure that this Government works on behalf of the many, and not just the few; that it encourages free enterprise, rewards individual initiative, and opens the doors of opportunity to every child across this great Nation.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Homogeneous People Construction\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals_score\",\n          \"quote_text\": \"Let's set party interests aside and work to pass a budget that replaces reckless cuts with smart savings and wise investments in our future. And let's do it without the brinkmanship that stresses consumers and scares off investors.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Economic Populist Appeals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:38:48.182293+00:00",
+    "end_time": "2025-08-05T20:38:53.304800+00:00",
+    "duration_seconds": 5.122507,
+    "llm_interaction_hash": "8401c3662d6ad5fd"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

@@ -1,0 +1,91 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Populist Discourse Analysis Framework (PDAF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the sequential chain-of-thought methodology, focusing on core populist anchors, then populist mechanisms, and finally boundary distinctions. Salience was weighted dynamically based on textual relevance."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2020.pdf",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.25,
+          "salience": 0.35,
+          "confidence": 0.80
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.15,
+          "salience": 0.30,
+          "confidence": 0.75
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.30,
+          "salience": 0.40,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.10,
+          "salience": 0.20,
+          "confidence": 0.70
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.05,
+          "salience": 0.15,
+          "confidence": 0.65
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.45,
+          "salience": 0.55,
+          "confidence": 0.90
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.35,
+          "salience": 0.45,
+          "confidence": 0.80
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.20,
+          "salience": 0.30,
+          "confidence": 0.75
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.25,
+          "salience": 0.35,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The will of the people must be our guide.",
+          "confidence": 0.90,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "We are the voice of the forgotten people, not the out-of-touch elite.",
+          "confidence": 0.95,
+          "context_type": "contrastive_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We are one people, united in our purpose.",
+          "confidence": 0.85,
+          "context_type": "unifying_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Our nation is at a critical moment, and only by returning to our roots can we be saved.",
+          "confidence": 0.80,
+          "context_type": "narrative_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

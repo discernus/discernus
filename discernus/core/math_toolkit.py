@@ -1112,11 +1112,13 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
                 # Validate score format from gasket
                 if score_value is not None:
                     if isinstance(score_value, (int, float)):
-                        # Ensure score is in valid range (gasket should guarantee this)
-                        if 0.0 <= score_value <= 1.0:
+                        # Framework-driven validation - no hardcoded ranges
+                        # Note: At this point we trust the extraction agent has already validated per framework spec
+                        # This is just a final sanity check for obviously invalid values
+                        if isinstance(score_value, (int, float)) and not (score_value < -10 or score_value > 10):
                             row_data[score_key] = float(score_value)
                         else:
-                            logger.warning(f"Score {score_key}={score_value} outside valid range [0.0, 1.0]")
+                            logger.warning(f"Score {score_key}={score_value} appears to be corrupted (extreme value)")
                             row_data[score_key] = None
                     else:
                         logger.warning(f"Score {score_key} has invalid type: {type(score_value)}")

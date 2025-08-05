@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_07b0a29a2733",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted following the sequential, layered approach outlined in the PDAF v7.3 framework. Focus maintained on identifying core populist anchors, mechanisms, and boundary distinctions. Salience and confidence scores reflect the prominence and certainty of these elements within the document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2024.pdf\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 1.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 1.50,\n          \"salience\": 0.75,\n          \"confidence\": 0.90\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 1.20,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.50,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 1.30,\n          \"salience\": 0.70,\n          \"confidence\": 0.88\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 1.10,\n          \"salience\": 0.60,\n          \"confidence\": 0.80\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.90,\n          \"salience\": 0.55,\n          \"confidence\": 0.78\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 1.00,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.40,\n          \"confidence\": 0.70\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We are fighting for the forgotten men and women of America who have been ignored by the Washington elite.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"explicit_contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"The American Dream is slipping away, but we will fight to restore it for every family.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"problem_solution\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The power of government should always reside with the people, not special interests.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"principle_statement\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"A corrupt establishment has rigged the system against the working class.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"accusation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"We are the voice of real Americans, unlike the out-of-touch politicians.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"self_identification_other_identification\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We are united by our shared values and our love for this country.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"assertion_of_unity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"America First means putting our citizens ahead of foreign interests and global agendas.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"policy_principle\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:43:08.853985+00:00",
+    "end_time": "2025-08-05T20:43:13.403211+00:00",
+    "duration_seconds": 4.549226,
+    "llm_interaction_hash": "78fe54453eb06fc8"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "e6b1b6593d519cca2bc32613f726974ac7d3ba3fc6a4824888aec20cf25cce67"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

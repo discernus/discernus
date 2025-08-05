@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e06ffe37450a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of Clinton's 1997 Inaugural Address using the Populist Discourse Analysis Framework v7.3. The document exhibits characteristics of a 'Moderate Populist Appeals' profile due to a balanced approach across several dimensions, rather than extreme emphasis on any single one. The analysis considered the semantic nuances of the framework's defined markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_Inaugural_1997.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Our Founders understood that, well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Claims\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Our streets will echo again with the laughter of our children, because no one will try to shoot them or sell them drugs anymore. Everyone who can work, will work, with today's permanent under class of tomorrow's growing middle class.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Authenticity\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Let us build our bridge, a bridge wide enough and strong enough for everyone American to cross over to a blessed land of new promise.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Construction\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:37:36.721370+00:00",
+    "end_time": "2025-08-05T20:37:39.982256+00:00",
+    "duration_seconds": 3.260886,
+    "llm_interaction_hash": "307311db42f5fcbd"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}

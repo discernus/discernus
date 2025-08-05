@@ -1,0 +1,97 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on core anchors, mechanisms, and boundary distinctions. Confidence is high due to clear linguistic markers and contextual relevance."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Resolution_on_Platform_2020.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing_score": {
+          "raw_score": 1.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative_score": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "popular_sovereignty_claims_score": {
+          "raw_score": 1.2,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion_score": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.75
+        },
+        "elite_conspiracy_systemic_corruption_score": {
+          "raw_score": 1.0,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class_score": {
+          "raw_score": 0.9,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction_score": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals_score": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing_score",
+          "quote_text": "WHILE, The media has outrageously misrepresented the implications of the RNC not adopting a new platform in 2020 and continues to engage in misleading advocacy for the failed policies of the Obama-Biden Administration, rather than providing the public with unbiased reporting of facts",
+          "confidence": 0.9,
+          "context_type": "contrast"
+        },
+        {
+          "dimension": "popular_sovereignty_claims_score",
+          "quote_text": "RESOVLED, That the Republican Party has and will continue to enthusiastically support the President's America-first agenda",
+          "confidence": 0.9,
+          "context_type": "endorsement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption_score",
+          "quote_text": "WHILE, The RNC, had the Platform Committee been able to convene in 2020, would have undoubtedly unanimously agreed to reassert the Party's strong support for President Donald Trump and his Administration",
+          "confidence": 0.85,
+          "context_type": "speculation"
+        },
+        {
+          "dimension": "crisis_restoration_narrative_score",
+          "quote_text": "WHILE, The RNC has significantly scaled back the size and scope of the 2020 Republican National Convention in Charlotte due to strict restrictions on gatherings and meetings, and out of concern for the safety of convention attendees and our hosts;",
+          "confidence": 0.8,
+          "context_type": "situation"
+        },
+        {
+          "dimension": "authenticity_vs_political_class_score",
+          "quote_text": "RESOVLED, That the 2020 Republican National Convention calls on the media to engage in accurate and unbiased reporting, especially as it relates to the strong support of the RNC for President Trump and his Administration",
+          "confidence": 0.8,
+          "context_type": "demand"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

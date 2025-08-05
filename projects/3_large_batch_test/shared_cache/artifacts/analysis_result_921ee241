@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c20ed6005059",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study_enhanced",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populist Discourse Analysis Framework (PDAF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis based on sequential application of the PDAF framework across core anchors, mechanisms, and boundary dimensions. High confidence in core populist themes, moderate in specific mechanisms and boundary articulations.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2016.pdf\",\n      \"dimensional_scores\": {\n        \"core_anchors\": {\n          \"manichaean_people_elite_framing\": {\n            \"raw_score\": 1.8,\n            \"salience\": 0.95,\n            \"confidence\": 0.9\n          },\n          \"crisis_restoration_temporal_narrative\": {\n            \"raw_score\": 1.7,\n            \"salience\": 0.9,\n            \"confidence\": 0.85\n          },\n          \"popular_sovereignty_claims\": {\n            \"raw_score\": 1.9,\n            \"salience\": 0.95,\n            \"confidence\": 0.9\n          },\n          \"anti_pluralist_exclusion\": {\n            \"raw_score\": 1.6,\n            \"salience\": 0.85,\n            \"confidence\": 0.8\n          }\n        },\n        \"mechanism_anchors\": {\n          \"elite_conspiracy_systemic_corruption\": {\n            \"raw_score\": 1.5,\n            \"salience\": 0.8,\n            \"confidence\": 0.75\n          },\n          \"authenticity_vs_political_class\": {\n            \"raw_score\": 1.9,\n            \"salience\": 0.95,\n            \"confidence\": 0.9\n          },\n          \"homogeneous_people_construction\": {\n            \"raw_score\": 1.7,\n            \"salience\": 0.85,\n            \"confidence\": 0.8\n          }\n        },\n        \"boundary_anchors\": {\n          \"nationalist_exclusion\": {\n            \"raw_score\": 1.6,\n            \"salience\": 0.85,\n            \"confidence\": 0.85\n          },\n          \"economic_populist_appeals\": {\n            \"raw_score\": 1.8,\n            \"salience\": 0.9,\n            \"confidence\": 0.85\n          }\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We must fight against the corrupt establishment that has failed the American people.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit_contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"Our country is in a state of crisis, but we will restore it to its former glory.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"temporal_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The will of the people must be the ultimate authority, not the special interests.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"will_of_the_people\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"We are the real people, and they are the enemies of our nation.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"us_vs_them\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"The system is rigged against the working class by a hidden agenda.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"conspiracy_implication\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I am one of you, unlike the out-of-touch politicians in Washington.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"authenticity_claim\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"We are all united by a common destiny, beyond the divisions of the past.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"unity_appeal\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Our people and our values are under attack from foreign influences.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"othering\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will take back our jobs and ensure a fair share for every worker.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic_redistribution\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-05T20:42:13.508044+00:00",
+    "end_time": "2025-08-05T20:42:24.255765+00:00",
+    "duration_seconds": 10.747721,
+    "llm_interaction_hash": "b9f90899d36901e2"
+  },
+  "input_artifacts": {
+    "framework_hash": "68ac8695ece3d78b5f585c6a0a42588110b7e7c08fcfbe0fecd1c6a84398c319",
+    "document_hashes": [
+      "81e77038355ca1522d070debededd047457336fc67f669f2e1637b1b7ec6a0f3"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250805T203602Z_baaf187e"
+  }
+}
