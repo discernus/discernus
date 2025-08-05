@@ -1,0 +1,68 @@
+{
+  "run_metadata": {
+    "experiment_name": "simple_character_validation_v7",
+    "run_timestamp": "20250805T004155Z",
+    "framework_version": "../../frameworks/reference/core/caf_v7.1.md",
+    "model_used": "vertex_ai/gemini-2.5-flash-lite",
+    "total_artifacts": 9,
+    "organized_artifacts": 0
+  },
+  "directory_structure": {
+    "data/": "CSV files for external statistical analysis",
+    "artifacts/analysis_plans/": "What the LLM planned to analyze",
+    "artifacts/analysis_results/": "Raw analysis outputs from LLM",
+    "artifacts/statistical_results/": "Mathematical computations and metrics",
+    "artifacts/evidence/": "Curated quotes and supporting data",
+    "artifacts/reports/": "Final synthesis outputs and reports",
+    "artifacts/inputs/": "Framework, corpus, and experiment configuration",
+    "technical/": "System logs and model interaction records"
+  },
+  "pipeline_stages": {
+    "analysis": {
+      "artifacts": 1,
+      "total_size_mb": 0.010750770568847656
+    },
+    "synthesis": {
+      "artifacts": 2,
+      "total_size_mb": 0.031230926513671875
+    },
+    "inputs_and_system": {
+      "artifacts": 4,
+      "total_size_mb": 0.038318634033203125
+    },
+    "evidence_curation": {
+      "artifacts": 1,
+      "total_size_mb": 0.011331558227539062
+    },
+    "statistical_computation": {
+      "artifacts": 1,
+      "total_size_mb": 0.031586647033691406
+    }
+  },
+  "artifact_descriptions": {},
+  "navigation_guide": {
+    "primary_researcher": [
+      "FINAL_REPORT.md",
+      "data/scores.csv",
+      "data/evidence.csv"
+    ],
+    "internal_reviewer": [
+      "METHODOLOGY_SUMMARY.md",
+      "STATISTICAL_SUMMARY.md"
+    ],
+    "replication_researcher": [
+      "artifacts/",
+      "technical/manifest.json",
+      "README.md"
+    ],
+    "fraud_auditor": [
+      "technical/manifest.json",
+      "technical/logs/",
+      "provenance.json"
+    ],
+    "llm_skeptic": [
+      "technical/model_interactions/",
+      "data/reliability_metrics.csv"
+    ]
+  }
+}
