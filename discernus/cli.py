@@ -145,6 +145,7 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
         return False, f"❌ No .txt or .pdf files found in corpus directory: {corpus_path}", {}
     
     config['_corpus_file_count'] = len(corpus_files)
+    config['corpus_path'] = str(corpus_path)
     return True, f"✅ Valid experiment with {len(corpus_files)} corpus files", config
 
 
