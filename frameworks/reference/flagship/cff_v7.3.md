@@ -333,7 +333,7 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "tribal_dominance_score", "individual_dignity_score", "tribal_dominance_salience", "individual_dignity_salience", "tribal_dominance_confidence", "individual_dignity_confidence",

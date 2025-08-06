@@ -195,6 +195,16 @@ Assessment of likely emotional responses and psychological states generated
     "compersion": 0.15
   },
   "calculation_spec": {
+    "execution_order": [
+      "threat_opportunity_balance",
+      "social_relations_balance",
+      "resource_attitudes_balance",
+      "positive_emotional_index",
+      "negative_emotional_index",
+      "climate_intensity",
+      "emotional_polarity",
+      "salience_weighted_emotional_polarity"
+    ],
     "formulas": {
       "emotional_polarity": "(hope + amity + compersion) - (fear + enmity + envy)",
       "threat_opportunity_balance": "hope - fear",
@@ -247,7 +257,7 @@ Assessment of likely emotional responses and psychological states generated
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "fear_score", "hope_score", "fear_salience", "hope_salience", "fear_confidence", "hope_confidence",

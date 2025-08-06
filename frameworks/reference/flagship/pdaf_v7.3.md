@@ -261,6 +261,17 @@ Evaluation of populist discourse's implications for democratic institutions and 
     "economic_populist_appeals": 0.09
   },
   "calculation_spec": {
+    "execution_order": [
+      "democratic_authoritarian_tension",
+      "internal_external_focus_tension",
+      "crisis_elite_attribution_tension",
+      "core_populism_index",
+      "populist_mechanisms_index",
+      "boundary_distinctions_index",
+      "overall_populism_index",
+      "populist_strategic_contradiction_index",
+      "salience_weighted_overall_populism_index"
+    ],
     "formulas": {
       "democratic_authoritarian_tension": "min(popular_sovereignty_claims, anti_pluralist_exclusion) * abs(popular_sovereignty_claims_salience - anti_pluralist_exclusion_salience)",
       "internal_external_focus_tension": "min(homogeneous_people_construction, nationalist_exclusion) * abs(homogeneous_people_construction_salience - nationalist_exclusion_salience)",
@@ -314,7 +325,7 @@ Evaluation of populist discourse's implications for democratic institutions and 
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "manichaean_people_elite_framing_score", "crisis_restoration_narrative_score", "popular_sovereignty_claims_score", "anti_pluralist_exclusion_score",
