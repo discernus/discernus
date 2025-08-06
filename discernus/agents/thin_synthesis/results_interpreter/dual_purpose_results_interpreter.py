@@ -340,17 +340,29 @@ Focus on the most significant findings with the strongest evidence support.
             return "Detailed findings with integrated evidence available in the full analysis."
     
     def _format_cost_breakdown(self, cost_data: Dict[str, Any]) -> str:
-        """Format cost breakdown for transparency."""
+        """Format cost breakdown for transparency using real audit logger data."""
         if not cost_data:
             return "Cost data not available"
         
         breakdown = []
-        for operation, data in cost_data.items():
+        
+        # Format operations breakdown (from audit logger)
+        operations = cost_data.get('operations', {})
+        for operation, data in operations.items():
             if isinstance(data, dict):
-                cost = data.get('cost', 0)
+                cost = data.get('cost_usd', 0.0)
                 tokens = data.get('tokens', 0)
                 calls = data.get('calls', 0)
-                breakdown.append(f"- **{operation}**: ${cost:.4f} USD ({tokens:,} tokens, {calls} calls)")
+                breakdown.append(f"- **{operation}**: ${cost:.6f} USD ({tokens:,} tokens, {calls} calls)")
+        
+        # Format models breakdown (from audit logger)
+        models = cost_data.get('models', {})
+        for model, data in models.items():
+            if isinstance(data, dict):
+                cost = data.get('cost_usd', 0.0)
+                tokens = data.get('tokens', 0)
+                calls = data.get('calls', 0)
+                breakdown.append(f"- **{model}**: ${cost:.6f} USD ({tokens:,} tokens, {calls} calls)")
         
         return "\n".join(breakdown) if breakdown else "Cost breakdown not available"
     
@@ -406,8 +418,8 @@ Focus on the most significant findings with the strongest evidence support.
                 corpus_description=f"{request.document_count} documents of {request.corpus_type}",
                 analysis_method_description="Systematic pattern extraction and scoring",
                 validation_summary="Comprehensive statistical validation completed",
-                total_cost=request.cost_data.get('total_cost', '0.0000'),
-                total_tokens=request.cost_data.get('total_tokens', '0'),
+                total_cost=request.cost_data.get('total_cost_usd', 0.0),
+                total_tokens=request.cost_data.get('total_tokens', 0),
                 run_timestamp=request.run_id,
                 cost_breakdown=cost_breakdown
             )
