@@ -1352,7 +1352,7 @@ Respond with only the JSON object."""
                                 gasket_schema = framework_config.get('gasket_schema')
                                 if gasket_schema:
                                     # Support v7.1 and v7.3 formats (v7.3 is backward compatible)
-                                    supported_versions = ['7.1', '7.3']
+                                    supported_versions = ['7.1', '7.3', 'v7.1', 'v7.3']
                                     if gasket_schema.get('version') in supported_versions and 'target_keys' in gasket_schema:
                                         return gasket_schema
                                     else:

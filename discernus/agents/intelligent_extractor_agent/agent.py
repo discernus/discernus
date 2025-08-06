@@ -148,7 +148,7 @@ class IntelligentExtractorAgent:
             )
         
         # Support v7.1 and v7.3 formats (v7.3 is backward compatible with v7.1 gasket structure)
-        supported_versions = ['7.1', '7.3']
+        supported_versions = ['7.1', '7.3', 'v7.1', 'v7.3']
         if gasket_schema.get('version') not in supported_versions:
             return ExtractionResult(
                 success=False,
