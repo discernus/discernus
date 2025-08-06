@@ -1,10 +1,10 @@
 ---
-version: "7.0"
+version: "7.3"
 name: presidential_populism_emergence_study_enhanced
 description: |
   Enhanced longitudinal analysis of American political discourse (1992-2025) using
-  the Political Discourse Analysis Framework v7.1 with explicit schema mapping and enhanced gasket
-  architecture. This experiment validates the v7.1 framework's ability to detect
+  the Political Discourse Analysis Framework v7.3 with explicit schema mapping and enhanced gasket
+  architecture. This experiment validates the v7.3 framework's ability to detect
   precise temporal shifts, partisan asymmetries, and institutional vs. individual
   rhetorical differences through quantifiable hypotheses.
   
@@ -48,12 +48,21 @@ success_criteria:
   - "Complete full analysis pipeline in <10 minutes"
   - "Generate publication-ready statistical results with confidence intervals"
 
-model:
-  analysis: "vertex_ai/gemini-2.5-flash-lite"
-  synthesis: "vertex_ai/gemini-2.5-flash-lite"
-
 framework: "../../frameworks/reference/flagship/pdaf_v7.3.md"
 corpus_path: "corpus/"
+
+# REQUIRED: Configuration for the analysis process
+analysis:
+  # The specific analysis variant to use from the framework file
+  variant: "default"
+  # List of LiteLLM-compatible model identifiers for analysis
+  models:
+    - "vertex_ai/gemini-2.5-flash-lite"
+
+# OPTIONAL: Configuration for the synthesis process
+synthesis:
+  # Model to use for the final report synthesis
+  model: "vertex_ai/gemini-2.5-flash-lite"
 
 document_processing_standards:
   max_file_size: "500KB"
@@ -94,6 +103,32 @@ corpus_validation:
     missing_metadata: "warn_with_defaults"
     encoding_issues: "auto_convert_to_utf8"
     empty_content: "reject_with_explanation"
+
+# Canonical workflow configuration (v7.3 compliant)
+workflow:
+  - agent: EnhancedAnalysisAgent
+    inputs:
+      - experiment
+      - framework
+      - corpus
+    outputs:
+      - raw_analysis_log
+
+  - agent: IntelligentExtractorAgent
+    inputs:
+      - raw_analysis_log
+      - framework
+    outputs:
+      - structured_data
+
+  - agent: ProductionThinSynthesisPipeline
+    inputs:
+      - structured_data
+      - experiment
+      - framework
+    outputs:
+      - final_report.md
+      - statistical_results.json
 
 expected_outcomes:
   statistical_analysis:
