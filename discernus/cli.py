@@ -1131,6 +1131,25 @@ def stop():
 
 
 @cli.command()
+@click.argument('experiment_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('document_name', type=str)
+@click.argument('score_name', type=str)
+@click.option('--score-value', type=float, required=True, help='Numerical score value to validate')
+@click.option('--confidence', type=float, default=0.8, help='Confidence level (0.0-1.0)')
+@click.option('--framework', type=str, help='Framework name (auto-detected if not specified)')
+@click.option('--output', type=click.Path(), help='Output file for validation report')
+@click.option('--model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model for validation')
+def validate_score(experiment_path: str, document_name: str, score_name: str, 
+                  score_value: float, confidence: float, framework: Optional[str], 
+                  output: Optional[str], model: str):
+    """Validate a numerical score using THIN academic validation pipeline (<5 minutes)."""
+    from discernus.interfaces.academic_validation_interface import validate_score_impl
+    import sys
+    sys.exit(validate_score_impl(experiment_path, document_name, score_name, 
+                                score_value, confidence, framework, output, model))
+
+
+@cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 def visualize_provenance(run_directory):
     """
