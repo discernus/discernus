@@ -44,6 +44,7 @@ from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlann
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
+from ...score_grounding.grounding_evidence_generator import GroundingEvidenceGenerator, GroundingEvidenceRequest
 
 # Import MathToolkit for reliable mathematical operations
 from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_plan_thin
@@ -77,6 +78,7 @@ class ProductionPipelineResponse:
     analysis_plan_hash: str
     statistical_results_hash: str
     curated_evidence_hash: str
+    grounding_evidence_hash: str
     
     # Pipeline metadata
     success: bool
@@ -127,6 +129,7 @@ class ProductionThinSynthesisPipeline:
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
         self.results_interpreter = ResultsInterpreter(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
+        self.grounding_evidence_generator = GroundingEvidenceGenerator(model=model, audit_logger=audit_logger)
         
         # Set up logging
         self.logger = logging.getLogger(__name__)
@@ -345,12 +348,30 @@ class ProductionThinSynthesisPipeline:
                     time.time() - start_time
                 )
             
-            # Stage 4: Interpret Results
-            self.logger.info("📖 Stage 4: Interpreting results...")
+            # Stage 4: Generate Grounding Evidence
+            self.logger.info("🔗 Stage 4: Generating grounding evidence...")
             stage_start = time.time()
             
-            stage_response = self._stage_4_interpret_results(
-                exec_response, curation_response, request
+            grounding_response = self._stage_4_generate_grounding_evidence(exec_response, request)
+            
+            stage_timings['grounding_evidence_generation'] = time.time() - stage_start
+            stage_success['grounding_evidence_generation'] = grounding_response.success
+            
+            if not grounding_response.success:
+                return self._create_error_response(
+                    "Grounding evidence generation failed",
+                    grounding_response.error_message,
+                    stage_timings,
+                    stage_success,
+                    time.time() - start_time
+                )
+            
+            # Stage 5: Interpret Results
+            self.logger.info("📖 Stage 5: Interpreting results...")
+            stage_start = time.time()
+            
+            stage_response = self._stage_5_interpret_results(
+                exec_response, curation_response, grounding_response, request
             )
             
             stage_timings['results_interpretation'] = time.time() - stage_start
@@ -402,6 +423,14 @@ class ProductionThinSynthesisPipeline:
                 dependencies=[results_hash, request.scores_artifact_hash]
             )
             
+            # Store grounding evidence artifact
+            grounding_hash = self._store_artifact_with_metadata(
+                content=json.dumps(grounding_response.to_json_serializable()),
+                artifact_type="grounding_evidence",
+                stage="grounding_evidence_generation",
+                dependencies=[results_hash, request.evidence_artifact_hash]
+            )
+            
             # Success! Create complete response
             total_time = time.time() - start_time
             
@@ -431,6 +460,7 @@ class ProductionThinSynthesisPipeline:
                 analysis_plan_hash=plan_hash,
                 statistical_results_hash=results_hash,
                 curated_evidence_hash=evidence_hash,
+                grounding_evidence_hash=grounding_hash,
                 
                 # Pipeline metadata
                 success=True,
@@ -805,8 +835,52 @@ Raw Analysis Data:
         
         return curation_response
 
-    def _stage_4_interpret_results(self, exec_response, curation_response, request: ProductionPipelineRequest):
-        """Stage 4: Generate final narrative interpretation."""
+    def _stage_4_generate_grounding_evidence(self, exec_response, request: ProductionPipelineRequest):
+        """Stage 4: Generate grounding evidence for every numerical score."""
+        
+        # Retrieve evidence data for grounding generation
+        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        self.logger.info(f"Generating grounding evidence using evidence artifact: {request.evidence_artifact_hash[:12]}...")
+        
+        # Extract analysis scores from the execution response
+        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+        analysis_scores = stage_2_results.get('results', {})
+        
+        # Extract document name from experiment context or use default
+        document_name = "unknown_document"
+        if request.experiment_context:
+            # Try to extract document name from experiment context
+            import re
+            doc_match = re.search(r'document[:\s]+([^\s,]+)', request.experiment_context, re.IGNORECASE)
+            if doc_match:
+                document_name = doc_match.group(1)
+        
+        # Create grounding evidence request
+        grounding_request = GroundingEvidenceRequest(
+            analysis_scores=analysis_scores,
+            evidence_data=evidence_data,
+            framework_spec=request.framework_spec,
+            document_name=document_name,
+            min_confidence_threshold=request.min_confidence_threshold
+        )
+        
+        # Log grounding evidence generation start
+        self.audit_logger.log_agent_event(
+            "GroundingEvidenceGenerator",
+            "grounding_generation_start",
+            {
+                "document_name": document_name,
+                "analysis_scores_keys": list(analysis_scores.keys()) if isinstance(analysis_scores, dict) else "non_dict_scores",
+                "evidence_artifact": request.evidence_artifact_hash[:12] + "...",
+                "framework_spec_length": len(request.framework_spec)
+            }
+        )
+        
+        # Generate grounding evidence for all scores
+        return self.grounding_evidence_generator.generate_grounding_evidence(grounding_request)
+
+    def _stage_5_interpret_results(self, exec_response, curation_response, grounding_response, request: ProductionPipelineRequest):
+        """Stage 5: Generate final narrative interpretation with grounding evidence."""
         
         # Extract results from the two-stage structure
         # Use derived metrics results (Stage 2) for interpretation
