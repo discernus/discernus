@@ -116,8 +116,8 @@ Document: {document_name}
 Score: {score_name} = {score_value} (confidence: {confidence})
 Framework: {framework_name}
 
-ANALYSIS CONTEXT:
-{analysis_context}
+RAW LLM CURATION:
+{raw_llm_curation}
 
 VALIDATION TASK:
 Provide comprehensive academic validation for this score in <5 minutes:
@@ -184,14 +184,14 @@ Be specific and actionable. Focus on academic standards and research credibility
             # Load analysis context from artifact
             analysis_context = self._load_analysis_context(request.analysis_artifact_path)
             
-            # Create validation prompt
+            # THIN: Create validation prompt using raw LLM curation
             validation_prompt = self.prompt_template.format(
                 document_name=request.document_name,
                 score_name=request.score_name,
                 score_value=request.score_value,
                 confidence=request.confidence,
                 framework_name=request.framework_name,
-                analysis_context=analysis_context
+                raw_llm_curation=analysis_context  # THIN: Use raw LLM output directly
             )
             
             # Delegate validation to LLM (THIN approach)
@@ -254,7 +254,7 @@ Be specific and actionable. Focus on academic standards and research credibility
             )
     
     def _load_analysis_context(self, analysis_artifact_path: str) -> str:
-        """Load analysis context from artifact file."""
+        """THIN: Load raw LLM curation from artifact file."""
         try:
             # Convert symlink path to actual shared_cache path
             artifact_path = Path(analysis_artifact_path)
@@ -268,7 +268,18 @@ Be specific and actionable. Focus on academic standards and research credibility
             with open(analysis_artifact_path, 'r') as f:
                 analysis_data = json.load(f)
             
-            # Extract relevant analysis context for multi-document format
+            # THIN: Prioritize raw_llm_curation over structured parsing
+            if 'raw_llm_curation' in analysis_data:
+                # Use raw LLM output directly (THIN approach)
+                return analysis_data['raw_llm_curation']
+            
+            # THIN: Look for raw_llm_curation in document_analyses
+            if 'document_analyses' in analysis_data:
+                for doc_analysis in analysis_data['document_analyses']:
+                    if 'raw_llm_curation' in doc_analysis:
+                        return doc_analysis['raw_llm_curation']
+            
+            # Fallback: Extract relevant analysis context for multi-document format
             if 'document_analyses' in analysis_data:
                 # Find the specific document analysis
                 for doc_analysis in analysis_data['document_analyses']:

@@ -520,61 +520,16 @@ Return only valid JSON.
                 "curation_timestamp": "now"
             }
             
-            # For backward compatibility, provide minimal fallback structure
-            # But the real intelligence flows through the raw_llm_curation
-            fallback_evidence = self._fallback_evidence_selection(evidence_df)
-            
-            # Add the raw LLM curation to the fallback for downstream access
-            if "statistical_findings" in fallback_evidence:
-                # Add metadata about the raw LLM curation
-                for evidence in fallback_evidence["statistical_findings"]:
-                    evidence.reasoning = f"LLM curation available: {len(response_content)} chars of intelligent analysis"
-            
+            # THIN: Return empty curated evidence - all intelligence flows through raw_llm_curation
             self.logger.info("THIN evidence curation: LLM intelligence preserved for downstream components")
-            return fallback_evidence
+            return {}
             
         except Exception as e:
             self.logger.error(f"THIN evidence curation failed: {str(e)}")
-            self.logger.warning("Falling back to algorithmic evidence selection")
-            return self._fallback_evidence_selection(evidence_df)
-    
-    def _fallback_evidence_selection(self, evidence_df: pd.DataFrame) -> Dict[str, List[CuratedEvidence]]:
-        """Fallback method when LLM curation fails - select top evidence by confidence."""
-        try:
-            curated_evidence = {"statistical_findings": []}
-            
-            if len(evidence_df) > 0:
-                # Take the top evidence pieces by confidence
-                top_evidence = evidence_df.nlargest(min(6, len(evidence_df)), 'confidence')
-                
-                for _, row in top_evidence.iterrows():
-                    artifact_id = row['artifact_id']
-                    dimension = row['dimension']
-                    evidence_text = row['evidence_text']
-                    
-                    # Assign footnote number and create hash
-                    footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                    evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                    
-                    curated_evidence["statistical_findings"].append(CuratedEvidence(
-                        artifact_id=artifact_id,
-                        dimension=dimension,
-                        evidence_text=evidence_text,
-                        context=row['context'],
-                        confidence=row['confidence'],
-                        reasoning=row['reasoning'],
-                        relevance_score=0.8,
-                        statistical_connection="Selected by confidence score (fallback)",
-                        footnote_number=footnote_number,
-                        evidence_hash=evidence_hash
-                    ))
-            
-            self.logger.info(f"Fallback selection: {len(curated_evidence['statistical_findings'])} pieces of evidence selected by confidence")
-            return curated_evidence
-            
-        except Exception as e:
-            self.logger.error(f"Fallback evidence selection failed: {str(e)}")
+            # THIN: No fallback - return empty result
             return {}
+    
+
     
     def _load_evidence_data(self, evidence_data: bytes) -> Optional[pd.DataFrame]:
         """Load and validate evidence JSON data."""
@@ -725,282 +680,26 @@ Return only valid JSON.
     def _curate_descriptive_evidence(self, descriptive_stats: Dict[str, Any], 
                                    evidence_df: pd.DataFrame,
                                    request: EvidenceCurationRequest) -> List[CuratedEvidence]:
-        """Curate evidence for descriptive statistics findings."""
-        
-        curated = []
-        
-        # Defensive check: ensure descriptive_stats is not None
-        if descriptive_stats is None:
-            self.logger.warning("descriptive_stats is None, returning empty curated evidence")
-            return curated
-        
-        # Find dimensions with extreme values (high/low means)
-        dimension_scores = {}
-        for dim, stats in descriptive_stats.items():
-            if isinstance(stats, dict) and 'mean' in stats:
-                dimension_scores[dim] = stats['mean']
-        
-        if not dimension_scores:
-            return curated
-        
-        # Sort dimensions by mean score to find extremes
-        sorted_dims = sorted(dimension_scores.items(), key=lambda x: x[1])
-        
-        # Get evidence for highest and lowest scoring dimensions
-        extreme_dims = [sorted_dims[0][0], sorted_dims[-1][0]]  # Lowest and highest
-        
-        for dim in extreme_dims:
-            # Find the dimension name without '_score' suffix for evidence matching
-            dim_name = dim.replace('_score', '')
-            
-            # Debug logging
-            self.logger.info(f"Looking for evidence for dimension '{dim_name}' (from '{dim}')")
-            self.logger.info(f"Available dimensions in evidence: {evidence_df['dimension'].unique().tolist()}")
-            
-            # Get evidence for this dimension
-            dim_evidence = evidence_df[evidence_df['dimension'] == dim_name]
-            
-            self.logger.info(f"Found {len(dim_evidence)} pieces of evidence for dimension '{dim_name}'")
-            
-            if len(dim_evidence) > 0:
-                # Select top evidence by confidence
-                top_evidence = dim_evidence.nlargest(
-                    min(request.max_evidence_per_finding, len(dim_evidence)), 
-                    'confidence'
-                )
-                
-                for _, row in top_evidence.iterrows():
-                    artifact_id = row['artifact_id']
-                    dimension = row['dimension']
-                    evidence_text = row['evidence_text']
-                    
-                    # Assign footnote number and create hash
-                    footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                    evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                    
-                    curated.append(CuratedEvidence(
-                        artifact_id=artifact_id,
-                        dimension=dimension,
-                        evidence_text=evidence_text,
-                        context=row['context'],
-                        confidence=row['confidence'],
-                        reasoning=row['reasoning'],
-                        relevance_score=0.8,
-                        statistical_connection=f"Supports {dim} mean score of {dimension_scores[dim]:.3f}",
-                        footnote_number=footnote_number,
-                        evidence_hash=evidence_hash
-                    ))
-        
-        return curated
+        """THIN: Legacy method deprecated - all curation handled by LLM."""
+        return []
     
     def _curate_hypothesis_evidence(self, hypothesis_tests: Dict[str, Any],
                                   evidence_df: pd.DataFrame,
                                   request: EvidenceCurationRequest) -> List[CuratedEvidence]:
-        """Curate evidence for hypothesis test findings."""
-        
-        curated = []
-        
-        # Defensive check: ensure hypothesis_tests is not None
-        if hypothesis_tests is None:
-            self.logger.warning("hypothesis_tests is None, returning empty curated evidence")
-            return curated
-        
-        for hypothesis, results in hypothesis_tests.items():
-            if not isinstance(results, dict):
-                continue
-                
-            # Look for significant results
-            is_significant = results.get('is_significant_alpha_05', False)
-            p_value = results.get('p_value')
-            
-            if is_significant and p_value is not None:
-                # This is a significant finding - find supporting evidence
-                
-                # Determine which dimensions are relevant to this hypothesis  
-                relevant_dimensions = self._get_relevant_dimensions_for_hypothesis(hypothesis)
-                
-                for dim in relevant_dimensions:
-                    dim_evidence = evidence_df[evidence_df['dimension'] == dim]
-                    
-                    if len(dim_evidence) > 0:
-                        # Select best evidence for this significant finding
-                        top_evidence = dim_evidence.nlargest(
-                            min(2, len(dim_evidence)),  # Fewer pieces for hypothesis evidence
-                            'confidence'
-                        )
-                        
-                        for _, row in top_evidence.iterrows():
-                            artifact_id = row['artifact_id']
-                            dimension = row['dimension']
-                            evidence_text = row['evidence_text']
-                            
-                            # Assign footnote number and create hash
-                            footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                            evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                            
-                            curated.append(CuratedEvidence(
-                                artifact_id=artifact_id,
-                                dimension=dimension,
-                                evidence_text=evidence_text,
-                                context=row['context'],
-                                confidence=row['confidence'],
-                                reasoning=row['reasoning'],
-                                relevance_score=0.9,
-                                statistical_connection=f"Supports {hypothesis} (p={p_value:.4f})",
-                                footnote_number=footnote_number,
-                                evidence_hash=evidence_hash
-                            ))
-        
-        return curated
+        """THIN: Legacy method deprecated - all curation handled by LLM."""
+        return []
     
     def _curate_correlation_evidence(self, correlations: Dict[str, Any],
                                    evidence_df: pd.DataFrame,
                                    request: EvidenceCurationRequest) -> List[CuratedEvidence]:
-        """Curate evidence for correlation findings."""
-        
-        curated = []
-        
-        # Defensive check: ensure correlations is not None
-        if correlations is None:
-            self.logger.warning("correlations is None, returning empty curated evidence")
-            return curated
-        
-        # Look for strong correlations in the correlation matrices
-        if 'all_dimensions_matrix' in correlations:
-            matrix = correlations['all_dimensions_matrix']
-            
-            # Find strongest correlations
-            strong_correlations = []
-            
-            for dim1, correlations_dict in matrix.items():
-                if isinstance(correlations_dict, dict):
-                    for dim2, corr_value in correlations_dict.items():
-                        if dim1 != dim2 and isinstance(corr_value, (int, float)):
-                            if abs(corr_value) > 0.7:  # Strong correlation threshold
-                                strong_correlations.append((dim1, dim2, corr_value))
-            
-            # Get evidence for dimensions involved in strong correlations
-            for dim1, dim2, corr_value in strong_correlations[:3]:  # Top 3 strongest
-                for dim in [dim1, dim2]:
-                    dim_name = dim.replace('_score', '')
-                    dim_evidence = evidence_df[evidence_df['dimension'] == dim_name]
-                    
-                    if len(dim_evidence) > 0:
-                        # Select one piece of evidence per dimension
-                        top_evidence = dim_evidence.nlargest(1, 'confidence')
-                        
-                        for _, row in top_evidence.iterrows():
-                            artifact_id = row['artifact_id']
-                            dimension = row['dimension']
-                            evidence_text = row['evidence_text']
-                            
-                            # Assign footnote number and create hash
-                            footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                            evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                            
-                            curated.append(CuratedEvidence(
-                                artifact_id=artifact_id,
-                                dimension=dimension,
-                                evidence_text=evidence_text,
-                                context=row['context'],
-                                confidence=row['confidence'],
-                                reasoning=row['reasoning'],
-                                relevance_score=0.7,
-                                statistical_connection=f"Part of strong correlation: {dim1} ↔ {dim2} (r={corr_value:.3f})",
-                                footnote_number=footnote_number,
-                                evidence_hash=evidence_hash
-                            ))
-        
-        return curated
+        """THIN: Legacy method deprecated - all curation handled by LLM."""
+        return []
     
     def _curate_reliability_evidence(self, reliability_metrics: Dict[str, Any],
                                     evidence_df: pd.DataFrame,
                                     request: EvidenceCurationRequest) -> List[CuratedEvidence]:
-        """Curate evidence for reliability findings."""
-        
-        curated = []
-        
-        # Defensive check: ensure reliability_metrics is not None
-        if reliability_metrics is None:
-            self.logger.warning("reliability_metrics is None, returning empty curated evidence")
-            return curated
-        
-        # Look for reliability issues or high reliability
-        for cluster_name, metrics in reliability_metrics.items():
-            if isinstance(metrics, dict):
-                alpha = metrics.get('alpha')
-                
-                if alpha is not None:
-                    # Find evidence for high or low reliability
-                    if alpha < 0.6:  # Poor reliability
-                        # Look for inconsistent evidence from any available dimensions (framework-agnostic)
-                        available_dimensions = evidence_df['dimension'].unique()
-                        
-                        # Select up to 3 dimensions to illustrate reliability concerns
-                        dimensions_to_check = available_dimensions[:3] if len(available_dimensions) > 3 else available_dimensions
-                        
-                        for dim in dimensions_to_check:
-                            dim_evidence = evidence_df[evidence_df['dimension'] == dim]
-                            if len(dim_evidence) > 0:
-                                # Select evidence with varying confidence scores
-                                varied_evidence = dim_evidence.sample(
-                                    min(request.max_evidence_per_finding, len(dim_evidence))
-                                )
-                                
-                                for _, row in varied_evidence.iterrows():
-                                    artifact_id = row['artifact_id']
-                                    dimension = row['dimension']
-                                    evidence_text = row['evidence_text']
-                                    
-                                    # Assign footnote number and create hash
-                                    footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                                    evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                                    
-                                    curated.append(CuratedEvidence(
-                                        artifact_id=artifact_id,
-                                        dimension=dimension,
-                                        evidence_text=evidence_text,
-                                        context=row['context'],
-                                        confidence=row['confidence'],
-                                        reasoning=row['reasoning'],
-                                        relevance_score=0.6,
-                                        statistical_connection=f"Illustrates {cluster_name} reliability concerns (α={alpha:.3f})",
-                                        footnote_number=footnote_number,
-                                        evidence_hash=evidence_hash
-                                    ))
-                                break  # Only need one dimension for reliability illustration
-                    
-                    elif alpha > 0.8:  # High reliability
-                        # Look for consistent high-confidence evidence
-                        high_conf_evidence = evidence_df[evidence_df['confidence'] > 0.8]
-                        if len(high_conf_evidence) > 0:
-                            selected = high_conf_evidence.sample(
-                                min(request.max_evidence_per_finding, len(high_conf_evidence))
-                            )
-                            
-                            for _, row in selected.iterrows():
-                                artifact_id = row['artifact_id']
-                                dimension = row['dimension']
-                                evidence_text = row['evidence_text']
-                                
-                                # Assign footnote number and create hash
-                                footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
-                                evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
-                                
-                                curated.append(CuratedEvidence(
-                                    artifact_id=artifact_id,
-                                    dimension=dimension,
-                                    evidence_text=evidence_text,
-                                    context=row['context'],
-                                    confidence=row['confidence'],
-                                    reasoning=row['reasoning'],
-                                    relevance_score=0.9,
-                                    statistical_connection=f"Demonstrates {cluster_name} high reliability (α={alpha:.3f})",
-                                    footnote_number=footnote_number,
-                                    evidence_hash=evidence_hash
-                                ))
-        
-        return curated
+        """THIN: Legacy method deprecated - all curation handled by LLM."""
+        return []
     
     def _get_relevant_dimensions_for_hypothesis(self, hypothesis: str) -> List[str]:
         """Determine which dimensions are relevant to a hypothesis."""
