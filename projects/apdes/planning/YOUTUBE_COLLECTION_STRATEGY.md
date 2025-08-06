@@ -86,11 +86,81 @@ Systematic video speech collection to fill Era 2.5-4 gaps (2017-2024) using the 
 
 ## Collection Methodology
 
+### Academic Verification Protocols
+
+#### Full-Length Speech Identification
+**Critical Requirement**: Only complete, unedited speeches acceptable for academic analysis
+
+1. **Duration Verification Process**:
+   - Cross-reference video duration with official event records
+   - Verify against news reports of actual speech length  
+   - Check C-SPAN archives for authoritative timing when available
+   - Flag any video under expected duration for manual review
+   - Document expected vs actual duration discrepancies
+
+2. **Content Completeness Validation**:
+   - Verify opening and closing remarks are present and complete
+   - Check for continuous speech flow without obvious jump cuts
+   - Identify editing artifacts, missing segments, or audio gaps
+   - Ensure introduction/conclusion match known speech structure from news reports
+   - Flag videos with suspicious transitions or incomplete content
+
+3. **Source Authentication Strategy**:
+   - **Tier 1 (Preferred)**: Official government channels (White House, Senate, House, Governor offices)
+   - **Tier 2 (Reliable)**: C-SPAN, major established news networks (CNN, Fox, MSNBC, ABC, NBC, CBS)  
+   - **Tier 3 (Acceptable)**: Verified political organization channels, campaign accounts
+   - **Tier 4 (Avoid)**: User uploads, unverified channels, compilation videos
+   - Cross-check multiple sources when official versions unavailable
+   - Document source tier and verification confidence
+
+#### Metadata Validation Requirements
+
+**Speaker Authentication**:
+- Verify primary speaker identity through visual confirmation in video
+- Cross-reference speaker attribution with official event records
+- Check speaker name against known aliases or common misspellings
+- Flag any uncertainty in speaker identification for manual review
+- Document secondary speakers, introducers, or moderators
+
+**Date and Event Accuracy**:
+- Confirm video upload date correlates with actual event date (±1 day acceptable for news uploads)
+- Verify event date against contemporaneous news coverage
+- Cross-reference location and venue details with historical records
+- Document timezone considerations for live events
+- Flag any temporal discrepancies requiring further investigation
+
+**Contextual Verification**:
+- Confirm event type classification (rally, press conference, formal address, debate, interview)
+- Verify audience type and size (campaign crowd, congressional session, media briefing)
+- Document occasion or trigger for speech (crisis response, routine event, campaign stop)
+- Record venue name and geographic location with precision
+- Note any special circumstances (emergency address, breaking news context)
+
 ### Video Identification Process
-1. **Search Strategy**: Use combination of official channels, major news networks, verified political accounts
-2. **Date Verification**: Cross-reference with historical records and news coverage
-3. **Content Validation**: Ensure speeches are complete, not edited clips or commentary
-4. **Quality Check**: Verify captions/transcripts are available before extraction
+1. **Primary Source Search**: 
+   - Official government/campaign channels first
+   - C-SPAN archive searches for formal events
+   - Major news network verified uploads
+   
+2. **Cross-Reference Validation**: 
+   - Compare multiple sources for same event
+   - Verify consistent duration across sources  
+   - Check metadata alignment between sources
+   
+3. **Historical Verification**: 
+   - Cross-check against newspaper archives (NYT, WaPo, WSJ)
+   - Verify against academic databases when available
+   - Confirm against presidential libraries/official records
+   
+4. **Duration Authentication**: 
+   - Compare video length with reported speech duration
+   - Account for introduction/conclusion time
+   - Flag unusual brevity or length for investigation
+   
+5. **Academic Quality Assessment**: 
+   - Ensure transcript quality meets research standards
+   - Verify complete content suitable for framework analysis
+   - Document confidence level in source reliability
 
 ### Extraction Workflow
 ```bash
@@ -111,17 +181,152 @@ python3 scripts/youtube_transcript_extractor.py "GOV_URL" -o projects/apdes/corp
 ```
 
 ### Quality Control Standards
-- **Minimum length**: 500 characters (exclude brief clips)
-- **Speaker verification**: Confirm primary speaker attribution
-- **Date accuracy**: Validate upload date matches event date  
-- **Content completeness**: Ensure full speeches, not excerpts
-- **Transcript quality**: Prefer manual captions over auto-generated when available
+
+#### Length and Completeness Requirements
+- **Full-length speeches only**: No clips, excerpts, or highlight reels
+- **Minimum duration threshold**: 
+  - Formal addresses: 10+ minutes expected
+  - Rally speeches: 30+ minutes expected  
+  - Press conferences: 15+ minutes expected
+  - Campaign speeches: 20+ minutes expected
+- **Content integrity**: Complete opening/closing, no obvious edits or cuts
+- **Transcript length validation**: Cross-check character count with expected speech length
+
+#### Source Quality Verification
+- **Speaker verification**: Visual confirmation of primary speaker throughout video
+- **Date accuracy**: Upload date within 48 hours of actual event date
+- **Source credibility**: Tier 1-3 sources only (see Authentication Strategy above)
+- **Multiple source confirmation**: When possible, verify against 2+ independent uploads
+
+#### Academic Research Standards  
+- **Metadata completeness**: Speaker, date, location, event type, duration all documented
+- **Contextual accuracy**: Event circumstances and significance verified
+- **Transcript quality**: Manual captions preferred; high-confidence auto-captions acceptable
+- **Cross-reference capability**: Event linkable to contemporaneous news coverage
+- **Replication documentation**: Sufficient detail for other researchers to locate same content
+
+#### Pre-Extraction Validation Checklist
+- [ ] Video duration matches reported event length (±10%)
+- [ ] Complete speech from opening to closing remarks
+- [ ] Primary speaker clearly identifiable and verified
+- [ ] Event date confirmed through news sources
+- [ ] Source meets Tier 1-3 authentication standards
+- [ ] No obvious editing artifacts or missing content
+- [ ] Transcript/captions available and legible
+- [ ] Event context and significance documented
+
+#### Post-Extraction Quality Review
+- [ ] Transcript captures complete speech content
+- [ ] Speaker attribution accurate throughout
+- [ ] No missing segments or garbled text
+- [ ] Metadata fields complete and verified
+- [ ] File properly organized in era/category structure
+- [ ] Cross-reference documentation complete
+
+### Academic Verification Workflow
+
+#### Phase 1: Target Event Research (Before YouTube Search)
+1. **Historical Event Documentation**:
+   - Identify specific event from news archives, presidential libraries, official records
+   - Document expected speech length from contemporaneous reporting
+   - Note key themes, quotes, or moments that should appear in complete version
+   - Record official venue, date, time, and attendance figures
+
+2. **Multi-Source Cross-Reference**:
+   - Check multiple news sources for event coverage and duration
+   - Verify against C-SPAN archives when available  
+   - Cross-reference with academic databases or government records
+   - Document expected speech structure and key content markers
+
+#### Phase 2: YouTube Source Identification  
+1. **Systematic Search Strategy**:
+   - Search official government/campaign channels first
+   - Query major news networks with verified accounts
+   - Use specific date ranges and location filters
+   - Document all potential sources found
+
+2. **Source Evaluation Matrix**:
+   - Rate each source using Tier 1-4 authentication system
+   - Compare video durations across sources
+   - Check upload dates against event dates  
+   - Note any discrepancies or red flags
+
+#### Phase 3: Pre-Extraction Validation
+1. **Content Verification**:
+   - Watch opening 2-3 minutes to confirm complete speech start
+   - Skip to ending to verify complete conclusion present
+   - Sample middle sections for continuous flow
+   - Check for obvious edits, cuts, or missing segments
+
+2. **Metadata Documentation**:
+   - Complete verification checklist for chosen source
+   - Document confidence level and any concerns
+   - Record alternative sources as backups
+   - Note any limitations or caveats
+
+#### Academic Documentation Template
+
+For each collected speech, maintain research record:
+
+```markdown
+# [Speaker] [Event Type] - [Date] - [Location]
+
+## Source Information
+- **YouTube URL**: [link]
+- **Channel**: [channel name]
+- **Upload Date**: [date]
+- **Source Tier**: [1-4]
+- **Alternative Sources**: [list other versions found]
+
+## Event Verification
+- **Reported Duration**: [from news sources]
+- **Video Duration**: [actual video length]
+- **Duration Match**: [Y/N with % variance]
+- **News Sources**: [NYT, WaPo, etc. coverage links]
+- **Official Records**: [government/library documentation]
+
+## Content Validation
+- **Complete Opening**: [Y/N]
+- **Complete Conclusion**: [Y/N]  
+- **Continuous Flow**: [Y/N]
+- **Editing Artifacts**: [None/List any found]
+- **Key Moments Present**: [Verify expected quotes/themes]
+
+## Metadata Accuracy
+- **Speaker Verified**: [Y/N]
+- **Date Verified**: [Y/N]
+- **Location Verified**: [Y/N]
+- **Event Context**: [Description]
+- **APDES Classification**: [Era, category, significance]
+
+## Quality Assessment
+- **Academic Suitability**: [High/Medium/Low]
+- **Research Confidence**: [0-100%]
+- **Extraction Recommend**: [Y/N]
+- **Special Notes**: [Any concerns or limitations]
+```
 
 ### Success Metrics
+
+#### Academic Verification Success Rates
+- **Source Authentication**: 100% of extracted speeches from Tier 1-3 sources
+- **Duration Verification**: 90%+ of speeches match expected length within ±15%
+- **Content Completeness**: 95%+ contain complete opening and closing remarks
+- **Metadata Accuracy**: 100% accuracy in speaker, date, location verification
+- **Cross-Reference Success**: 90%+ independently confirmed through multiple sources
+
+#### Coverage Quality Standards  
 - **Coverage completeness**: All major populist speakers and crisis events represented
-- **Temporal accuracy**: Events properly sequenced within eras  
+- **Temporal accuracy**: Events properly sequenced within eras with verified dates
 - **Ideological balance**: Multiple perspectives on each crisis/event captured
-- **Quality threshold**: 90%+ of extractions produce usable research content
+- **Full-length requirement**: 100% complete speeches, zero clips or excerpts
+- **Research utility**: 95%+ of extractions suitable for academic framework analysis
+
+#### Documentation and Reproducibility
+- **Academic documentation**: Complete verification record for each speech
+- **Source transparency**: All YouTube URLs and alternative sources documented  
+- **Methodology replication**: Sufficient detail for independent researcher validation
+- **Quality assurance**: Pre and post-extraction checklists completed for all content
 
 ## Integration with APDES Corpus
 
