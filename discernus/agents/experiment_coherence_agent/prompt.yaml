@@ -29,7 +29,7 @@ template: |
   **FRAMEWORK v7.3 COMPLIANCE (WHY) - REQUIRED:**
   4. **Enhanced Gasket Schema**: Framework MUST include gasket_schema v7.3 with target_keys, extraction_patterns, and validation_rules for Intelligent Extractor
   5. **Metadata Scores**: Framework MUST support salience and confidence metadata scores (0.0-1.0) for all dimensions
-  6. **Advanced Extraction Patterns**: Framework MUST include regex extraction patterns with {0,20} flexibility for robust parsing
+  6. **Advanced Extraction Patterns**: Framework MUST include regex extraction patterns with {{0,20}} flexibility for robust parsing
   7. **Raw Analysis Log**: Framework MUST specify raw_analysis_log output format (not complex JSON)
   8. **Analysis Liberation**: Framework prompts focus on intellectual analysis, not data formatting
   9. **THIN Calculation Architecture**: Framework calculation_spec MUST be single source of truth with execution_order for dependent calculations
