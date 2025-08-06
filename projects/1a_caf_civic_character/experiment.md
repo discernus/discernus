@@ -1,5 +1,5 @@
 ---
-version: "7.0"
+version: "7.3"
 name: "speaker_character_pattern_analysis"
 description: |
   This experiment tests the Character Assessment Framework's ability to detect 
@@ -16,10 +16,19 @@ hypothesis: |
 
 framework: "../../frameworks/reference/core/caf_v7.3.md"
 corpus_path: "corpus/"
-models:
-  - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 1
-analysis_variant: "default"
+
+# REQUIRED: Configuration for the analysis process
+analysis:
+  # The specific analysis variant to use from the framework file
+  variant: "default"
+  # List of LiteLLM-compatible model identifiers for analysis
+  models:
+    - "vertex_ai/gemini-2.5-flash-lite"
+
+# OPTIONAL: Configuration for the synthesis process
+synthesis:
+  # Model to use for the final report synthesis
+  model: "vertex_ai/gemini-2.5-flash-lite"
 
 # Analysis Configuration
 analysis:
@@ -52,7 +61,7 @@ hypotheses:
   H2_Character_Signatures: "Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices"
   H3_MC_SCI_Patterns: "MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence"
 
-# Required Workflow Steps (v7.0 Gasket Architecture)
+# Canonical workflow configuration (v7.3 compliant)
 workflow:
   - agent: EnhancedAnalysisAgent
     inputs:
