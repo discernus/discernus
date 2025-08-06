@@ -1,9 +1,9 @@
 ---
-version: "7.0"
+version: "7.3"
 name: "populist_discourse_factorial_analysis"
 description: |
   This experiment analyzes discourse patterns in presidential speeches using the 
-  Populist Discourse Analysis Framework (PDAF) v7.1. The corpus employs a 
+  Populist Discourse Analysis Framework (PDAF) v7.3. The corpus employs a 
   temporal design examining presidential speeches across multiple contexts 
   spanning 2017-2025. The analysis will measure populist discourse dimensions 
   to identify any statistical patterns, relationships, or temporal trends 
@@ -19,10 +19,19 @@ hypothesis: |
 
 framework: "../../frameworks/reference/flagship/pdaf_v7.3.md"
 corpus_path: "corpus/"
-models:
-  - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 3
-analysis_variant: "default"
+
+# REQUIRED: Configuration for the analysis process
+analysis:
+  # The specific analysis variant to use from the framework file
+  variant: "default"
+  # List of LiteLLM-compatible model identifiers for analysis
+  models:
+    - "vertex_ai/gemini-2.5-flash-lite"
+
+# OPTIONAL: Configuration for the synthesis process
+synthesis:
+  # Model to use for the final report synthesis
+  model: "vertex_ai/gemini-2.5-flash-lite"
 
 # Enhanced v3.0 Analysis Configuration
 analysis:
@@ -62,7 +71,7 @@ hypotheses:
   H5_Index_Patterns: "Test whether PSCI scores show systematic patterns across temporal factors"
   H6_Platform_Validation: "Test whether the JSON synthesis architecture successfully processes populist discourse factorial design with 9-dimensional analysis"
 
-# Required Workflow Steps
+# Canonical workflow configuration (v7.3 compliant)
 workflow:
   - agent: EnhancedAnalysisAgent
     inputs:
