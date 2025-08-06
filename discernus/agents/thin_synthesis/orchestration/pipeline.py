@@ -1105,26 +1105,29 @@ Raw Analysis Data:
             # Extract real cost data from audit logger
             cost_data = self.audit_logger.get_session_costs()
             
-            # Create dual-purpose report request
+            # Create dual-purpose report request with configurable options
             dual_purpose_request = DualPurposeReportRequest(
-                experiment_name=experiment_name,
-                experiment_subtitle=experiment_subtitle,
-                run_id=run_id,
-                execution_time_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
-                execution_time_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                analysis_model=self.analysis_model or "unknown",
-                synthesis_model=self.model,
-                framework_name=framework_name,
-                framework_version=framework_version,
-                document_count=document_count,
-                corpus_type=corpus_type,
-                corpus_composition=corpus_composition,
-                statistical_results=statistical_results,
-                evidence_data=evidence_data,
-                scores_data=scores_data,
-                run_directory=f"runs/{run_id}",
-                cost_data=cost_data
-            )
+                        experiment_name=experiment_name,
+                        experiment_subtitle=experiment_subtitle,
+                        run_id=run_id,
+                        execution_time_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
+                        execution_time_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                        analysis_model=self.analysis_model or "unknown",
+                        synthesis_model=self.model,
+                        framework_name=framework_name,
+                        framework_version=framework_version,
+                        document_count=document_count,
+                        corpus_type=corpus_type,
+                        corpus_composition=corpus_composition,
+                        statistical_results=statistical_results,
+                        evidence_data=evidence_data,
+                        scores_data=scores_data,
+                        run_directory=f"runs/{run_id}",
+                        cost_data=cost_data,
+                        # Configurable options for flexibility
+                        template_path=None,  # Use default discovery
+                        section_markers=None  # Use default markers
+                    )
             
             # Generate dual-purpose report
             dual_purpose_response = self.dual_purpose_interpreter.generate_dual_purpose_report(dual_purpose_request)

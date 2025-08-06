@@ -5,10 +5,10 @@ Generates reports that serve both primary researchers (scannable) and
 academic collaborators (credible) with integrated evidence and transparency.
 """
 
+import os
 import yaml
 import json
-import os
-from datetime import datetime
+import re
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 
@@ -37,6 +37,9 @@ class DualPurposeReportRequest:
     scores_data: Dict[str, Any]
     run_directory: str
     cost_data: Dict[str, Any]
+    # Configuration options for flexibility
+    template_path: Optional[str] = None
+    section_markers: Optional[Dict[str, str]] = None
 
 
 @dataclass
@@ -52,11 +55,13 @@ class DualPurposeReportResponse:
 
 class DualPurposeResultsInterpreter:
     """
-    Enhanced results interpreter that generates dual-purpose reports.
+    Generates dual-purpose reports for academic collaboration.
     
-    Creates reports suitable for both:
-    - Primary researchers (scannable access to key findings)
-    - Academic collaborators (credibility assessment with transparency)
+    Features:
+    - Configurable template discovery
+    - Flexible section parsing
+    - LLM-powered content generation
+    - Academic transparency focus
     """
     
     def __init__(self, model: str, audit_logger: AuditLogger):
@@ -64,20 +69,52 @@ class DualPurposeResultsInterpreter:
         self.audit_logger = audit_logger
         self.model_registry = ModelRegistry()
         self.client = LLMGateway(self.model_registry)
-        self.template_path = os.path.join(
-            os.path.dirname(__file__), 
-            "dual_purpose_report_template.yaml"
-        )
+        
+        # Default template discovery paths (configurable)
+        self.default_template_paths = [
+            os.path.join(os.path.dirname(__file__), "dual_purpose_report_template.yaml"),
+            os.path.join(os.path.dirname(__file__), "templates", "dual_purpose_report_template.yaml"),
+            os.path.join(os.path.dirname(__file__), "..", "..", "..", "templates", "dual_purpose_report_template.yaml")
+        ]
+        
+        # Default section markers (configurable)
+        self.default_section_markers = {
+            'scanner_end': ['## 🔬 CONCISE METHODOLOGY', '## CONCISE METHODOLOGY', '## METHODOLOGY'],
+            'collaborator_end': ['## 🛠️ TRANSPARENCY APPENDIX', '## TRANSPARENCY APPENDIX', '## APPENDIX']
+        }
     
-    def _load_template(self) -> str:
-        """Load the dual-purpose report template."""
-        try:
-            with open(self.template_path, 'r') as f:
-                template_data = yaml.safe_load(f)
-                return template_data.get('template', '')
-        except Exception as e:
-            self.audit_logger.warning(f"Failed to load template: {e}")
-            return self._create_default_template()
+    def _discover_template(self, custom_path: Optional[str] = None) -> str:
+        """Discover template using configurable paths."""
+        # Try custom path first
+        if custom_path and os.path.exists(custom_path):
+            return custom_path
+        
+        # Try default paths in order
+        for path in self.default_template_paths:
+            if os.path.exists(path):
+                return path
+        
+        # Fallback to default template
+        return None
+    
+    def _load_template(self, custom_path: Optional[str] = None) -> str:
+        """Load the dual-purpose report template with configurable discovery."""
+        template_path = self._discover_template(custom_path)
+        
+        if template_path:
+            try:
+                with open(template_path, 'r') as f:
+                    template_data = yaml.safe_load(f)
+                    return template_data.get('template', '')
+            except Exception as e:
+                self.audit_logger.log_agent_event(
+                    "DualPurposeResultsInterpreter",
+                    "warning",
+                    {"error": f"Failed to load template from {template_path}: {e}"}
+                )
+        
+        # Fallback to default template
+        return self._create_default_template()
     
     def _create_default_template(self) -> str:
         """Create a default template if loading fails."""
@@ -366,6 +403,43 @@ Focus on the most significant findings with the strongest evidence support.
         
         return "\n".join(breakdown) if breakdown else "Cost breakdown not available"
     
+    def _parse_sections_flexibly(self, report_content: str, custom_markers: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+        """Parse report sections using flexible marker detection."""
+        lines = report_content.split('\n')
+        
+        # Use custom markers or defaults
+        markers = custom_markers or self.default_section_markers
+        
+        # Find section boundaries using flexible matching
+        section_boundaries = {}
+        
+        for i, line in enumerate(lines):
+            line_stripped = line.strip()
+            
+            # Check for scanner end markers
+            if not section_boundaries.get('scanner_end'):
+                for marker in markers['scanner_end']:
+                    if marker in line_stripped:
+                        section_boundaries['scanner_end'] = i
+                        break
+            
+            # Check for collaborator end markers
+            if not section_boundaries.get('collaborator_end'):
+                for marker in markers['collaborator_end']:
+                    if marker in line_stripped:
+                        section_boundaries['collaborator_end'] = i
+                        break
+        
+        # Extract sections with fallbacks
+        scanner_end = section_boundaries.get('scanner_end', len(lines) // 3)  # Default to 1/3
+        collaborator_end = section_boundaries.get('collaborator_end', len(lines) * 2 // 3)  # Default to 2/3
+        
+        return {
+            'scanner_section': '\n'.join(lines[:scanner_end]),
+            'collaborator_section': '\n'.join(lines[scanner_end:collaborator_end]),
+            'transparency_section': '\n'.join(lines[collaborator_end:])
+        }
+    
     def generate_dual_purpose_report(self, request: DualPurposeReportRequest) -> DualPurposeReportResponse:
         """Generate a dual-purpose report for academic collaboration."""
         try:
@@ -390,7 +464,7 @@ Focus on the most significant findings with the strongest evidence support.
             cost_breakdown = self._format_cost_breakdown(request.cost_data)
             
             # Load and populate template
-            template = self._load_template()
+            template = self._load_template(request.template_path)
             report_content = template.format(
                 experiment_name=request.experiment_name,
                 experiment_subtitle=request.experiment_subtitle,
@@ -424,20 +498,8 @@ Focus on the most significant findings with the strongest evidence support.
                 cost_breakdown=cost_breakdown
             )
             
-            # Extract sections for response
-            lines = report_content.split('\n')
-            scanner_end = 0
-            collaborator_end = 0
-            
-            for i, line in enumerate(lines):
-                if '## 🔬 CONCISE METHODOLOGY' in line:
-                    scanner_end = i
-                elif '## 🛠️ TRANSPARENCY APPENDIX' in line:
-                    collaborator_end = i
-            
-            scanner_section = '\n'.join(lines[:scanner_end])
-            collaborator_section = '\n'.join(lines[scanner_end:collaborator_end])
-            transparency_section = '\n'.join(lines[collaborator_end:])
+            # Extract sections for response using flexible parsing
+            sections = self._parse_sections_flexibly(report_content, request.section_markers)
             
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -447,9 +509,9 @@ Focus on the most significant findings with the strongest evidence support.
             
             return DualPurposeReportResponse(
                 report_content=report_content,
-                scanner_section=scanner_section,
-                collaborator_section=collaborator_section,
-                transparency_section=transparency_section,
+                scanner_section=sections['scanner_section'],
+                collaborator_section=sections['collaborator_section'],
+                transparency_section=sections['transparency_section'],
                 success=True
             )
             
