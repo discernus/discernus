@@ -33,13 +33,14 @@ class DualPurposeReportRequest:
     corpus_type: str
     corpus_composition: str
     statistical_results: Dict[str, Any]
-    evidence_data: Dict[str, Any]
+    evidence_data: Dict[str, Any]  # Legacy field for backward compatibility
     scores_data: Dict[str, Any]
     run_directory: str
     cost_data: Dict[str, Any]
     # Configuration options for flexibility
     template_path: Optional[str] = None
     section_markers: Optional[Dict[str, str]] = None
+    raw_llm_curation: Optional[str] = None  # THIN: Raw LLM output from evidence curator
 
 
 @dataclass
@@ -342,13 +343,17 @@ Example format: "To measure [concept], the analysis agent identified [specific p
             )
             return f"Analysis conducted using {framework_name} {framework_version} with systematic pattern extraction and scoring."
     
-    def _generate_detailed_findings_with_evidence(self, statistical_results: Dict[str, Any], evidence_data: Dict[str, Any]) -> str:
-        """Generate detailed findings with integrated evidence."""
+    def _generate_detailed_findings_with_evidence(self, statistical_results: Dict[str, Any], evidence_data: Dict[str, Any], raw_llm_curation: Optional[str] = None) -> str:
+        """Generate detailed findings with integrated evidence (THIN approach)."""
+        
+        # THIN: Use raw_llm_curation if available, otherwise fall back to structured evidence_data
+        evidence_source = raw_llm_curation if raw_llm_curation else json.dumps(evidence_data, indent=2)
+        
         prompt = f"""
 Generate detailed findings that integrate statistical results with supporting evidence quotes.
 
 Statistical Results: {json.dumps(statistical_results, indent=2)}
-Evidence Data: {json.dumps(evidence_data, indent=2)}
+Evidence Source: {evidence_source}
 
 Structure as:
 1. Statistical finding
@@ -454,7 +459,11 @@ Focus on the most significant findings with the strongest evidence support.
             hypothesis_table = self._generate_hypothesis_table(request.statistical_results)
             core_findings = self._generate_core_statistical_findings(request.statistical_results)
             methodology = self._generate_operational_methodology(request.framework_name, request.framework_version)
-            detailed_findings = self._generate_detailed_findings_with_evidence(request.statistical_results, request.evidence_data)
+            detailed_findings = self._generate_detailed_findings_with_evidence(
+                request.statistical_results, 
+                request.evidence_data, 
+                request.raw_llm_curation
+            )
             
             # Calculate evidence and score counts
             evidence_count = len(request.evidence_data.get('evidence', []))

@@ -40,8 +40,7 @@ class GroundingEvidence:
 @dataclass
 class GroundingEvidenceRequest:
     """Request for grounding evidence generation."""
-    analysis_scores: Dict[str, Any]  # Raw analysis scores from Intelligent Extractor
-    evidence_data: bytes  # Evidence data from analysis
+    raw_llm_curation: str  # Raw LLM output from Evidence Curator
     framework_spec: str
     document_name: str
     min_confidence_threshold: float = 0.6
@@ -130,12 +129,10 @@ class GroundingEvidenceGenerator:
         default_prompt = {
             'template': '''
 You are generating grounding evidence for numerical scores from computational social science research.
+You will be given the raw output from a previous AI agent (the Evidence Curator). This output contains both statistical results and curated evidence.
 
-ANALYSIS SCORES:
-{analysis_scores}
-
-EVIDENCE DATA:
-{evidence_data}
+RAW CURATION OUTPUT:
+{raw_llm_curation}
 
 FRAMEWORK SPECIFICATION:
 {framework_spec}
@@ -143,7 +140,7 @@ FRAMEWORK SPECIFICATION:
 DOCUMENT: {document_name}
 
 TASK:
-Generate grounding evidence for every numerical score. Each score must have:
+From the RAW CURATION OUTPUT, identify every numerical score and its associated evidence. For each score, generate grounding evidence. Each score must have:
 1. **Primary Evidence**: Key supporting text from the document
 2. **Context**: Broader context around the evidence
 3. **Reasoning**: Clear explanation of how evidence supports the score
@@ -182,20 +179,9 @@ Be specific and actionable. Focus on academic standards and research credibility
         start_time = time.time()
         
         try:
-            # Parse analysis scores to extract numerical scores
-            numerical_scores = self._extract_numerical_scores(request.analysis_scores)
-            
-            if not numerical_scores:
-                return GroundingEvidenceResponse(
-                    grounding_evidence=[],
-                    generation_summary={"warning": "No numerical scores found"},
-                    success=True
-                )
-            
             # Create grounding prompt
             grounding_prompt = self.prompt_template.format(
-                analysis_scores=json.dumps(numerical_scores, indent=2),
-                evidence_data=str(request.evidence_data)[:2000],  # Limit context size
+                raw_llm_curation=request.raw_llm_curation,
                 framework_spec=request.framework_spec,
                 document_name=request.document_name
             )
@@ -232,8 +218,7 @@ Be specific and actionable. Focus on academic standards and research credibility
             
             # Generate summary
             generation_summary = self._generate_grounding_summary(
-                grounding_evidence_list, 
-                len(numerical_scores),
+                grounding_evidence_list,
                 generation_time
             )
             
@@ -263,23 +248,6 @@ Be specific and actionable. Focus on academic standards and research credibility
                 success=False,
                 error_message=str(e)
             )
-    
-    def _extract_numerical_scores(self, analysis_scores: Dict[str, Any]) -> Dict[str, float]:
-        """Extract numerical scores from analysis results."""
-        numerical_scores = {}
-        
-        # Handle different analysis score structures
-        if isinstance(analysis_scores, dict):
-            for key, value in analysis_scores.items():
-                if isinstance(value, (int, float)):
-                    numerical_scores[key] = float(value)
-                elif isinstance(value, dict):
-                    # Handle nested score structures
-                    for sub_key, sub_value in value.items():
-                        if isinstance(sub_value, (int, float)):
-                            numerical_scores[f"{key}_{sub_key}"] = float(sub_value)
-        
-        return numerical_scores
     
     def _parse_grounding_response(self, response_content: str, document_name: str) -> List[GroundingEvidence]:
         """Parse LLM grounding response into structured grounding evidence."""
@@ -362,19 +330,18 @@ Be specific and actionable. Focus on academic standards and research credibility
         return calibrated_evidence
     
     def _generate_grounding_summary(self, grounding_evidence: List[GroundingEvidence], 
-                                   total_scores: int, generation_time: float) -> Dict[str, Any]:
+                                   generation_time: float) -> Dict[str, Any]:
         """Generate summary of grounding evidence generation."""
+        grounded_scores = len(grounding_evidence)
         return {
-            "total_scores": total_scores,
-            "grounded_scores": len(grounding_evidence),
-            "coverage_percentage": (len(grounding_evidence) / total_scores * 100) if total_scores > 0 else 0,
+            "grounded_scores": grounded_scores,
             "generation_time_seconds": generation_time,
             "average_evidence_confidence": sum(
                 evidence.grounding_evidence.get('evidence_confidence', 0.0) 
                 for evidence in grounding_evidence
-            ) / len(grounding_evidence) if grounding_evidence else 0.0,
+            ) / grounded_scores if grounded_scores > 0 else 0.0,
             "high_confidence_evidence": sum(
                 1 for evidence in grounding_evidence 
                 if evidence.grounding_evidence.get('evidence_confidence', 0.0) >= 0.8
             )
-        } 
+        }
