@@ -69,7 +69,7 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
     }
   },
   "dimension_groups": {
-    "identity_axis": ["tribal_dominance", "individual_dignity"]
+    "example_axis": ["dimension_a", "dimension_b"]
   },
   "static_weights": {
     "primary_dimension": 1.0,
@@ -78,18 +78,18 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
   "calculation_spec": {
     "explanation": "Brief description of the calculations. Can be empty if the framework is purely descriptive.",
     "execution_order": [
-      "identity_tension",
-      "strategic_contradiction_index"
+      "dimension_tension",
+      "composite_index"
     ],
     "formulas": {
-      "identity_tension": "min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)",
-      "strategic_contradiction_index": "(identity_tension + emotional_tension) / 2"
+      "dimension_tension": "min(dimension_a_score, dimension_b_score) * abs(dimension_a_salience - dimension_b_salience)",
+      "composite_index": "(dimension_tension + other_metric) / 2"
     },
     "pattern_classifications": {
-      "identity_tension": {
-        "Harmony": [0.0, 0.10],
-        "Strategic Tension": [0.11, 0.30],
-        "Contradiction": [0.31, 999]
+      "dimension_tension": {
+        "Low": [0.0, 0.10],
+        "Moderate": [0.11, 0.30],
+        "High": [0.31, 999]
       }
     }
   },
@@ -101,17 +101,17 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
   },
   "output_contract": {
     "raw_analysis_log_structure": [
-      "## Axis 1: Identity",
-      "**Tribal Dominance Score**: [score]",
+      "## Dimension Group 1: Example Analysis",
+      "**Dimension A Score**: [score]",
       "**Evidence**: [quotes]"
     ],
     "instructions": "Your response must be a single, human-readable text block following the specified structure."
   },
   "gasket_schema": {
     "version": "v7.3",
-    "target_keys": ["dimension1_score", "categorical_dimension"],
+    "target_keys": ["dimension_a_score", "categorical_dimension"],
     "extraction_patterns": {
-      "dimension1_score": ["dimension1.{0,20}score"],
+      "dimension_a_score": ["dimension_a.{0,20}score"],
       "categorical_dimension": ["category:.{0,20}(value1|value2)"]
     },
     "validation_rules": {
@@ -148,14 +148,14 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
 
 #### **5.2 Column Name Consistency (REQUIRED)**
 All formula variables MUST match the actual DataFrame column structure:
-- **Dimension scores**: Use `dimension_name_score` (e.g., `fear_score`, `hope_score`)
-- **Salience values**: Use `dimension_name_salience` (e.g., `fear_salience`, `hope_salience`) 
-- **Confidence values**: Use `dimension_name_confidence` (e.g., `fear_confidence`, `hope_confidence`)
+- **Dimension scores**: Use `dimension_name_score` (e.g., `dimension_a_score`, `dimension_b_score`)
+- **Salience values**: Use `dimension_name_salience` (e.g., `dimension_a_salience`, `dimension_b_salience`) 
+- **Confidence values**: Use `dimension_name_confidence` (e.g., `dimension_a_confidence`, `dimension_b_confidence`)
 
 **Example**:
 ```json
 "formulas": {
-  "emotional_tension": "min(fear_score, hope_score) * abs(fear_salience - hope_salience)"
+  "dimension_tension": "min(dimension_a_score, dimension_b_score) * abs(dimension_a_salience - dimension_b_salience)"
 }
 ```
 
