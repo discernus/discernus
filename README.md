@@ -8,6 +8,7 @@
 - **CLI Complete Guide**: See `docs/developer/CLI_COMMAND_REFERENCE.md`
 - **Configuration**: See `docs/developer/CLI_CONFIGURATION_GUIDE.md`
 - **Best Practices**: See `docs/developer/CLI_BEST_PRACTICES.md`
+- **Score Validation**: See `docs/developer/workflows/SCORE_VALIDATION_GUIDE.md`
 - **Architecture**: See `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
 - **Agent Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
 - **Frameworks**: See `frameworks/` directory for analytical frameworks
@@ -24,6 +25,9 @@ make check
 
 # 3. Run fast test experiment (~47 seconds, $0.014)
 discernus run projects/simple_test --skip-validation
+
+# 4. Validate any score (<5 minutes)
+discernus validate-score projects/simple_test "john_mccain_2008_concession.txt" "dignity_score" --score-value 0.65
 
 # Or run with local Flash Lite config (from experiment directory)
 cd projects/simple_test && discernus run .
@@ -60,10 +64,12 @@ discernus run projects/simple_test
 # Modern CLI (recommended)
 discernus run [path]           # Run complete experiment
 discernus continue [path]      # Resume from cached analysis  
+discernus validate-score [path] [doc] [score] --score-value [value]  # Academic validation
 discernus list                 # List available experiments
 discernus status               # Show system status
 discernus config show          # Show configuration
 discernus --help               # Full command reference
+```
 
 # Development
 make check                     # Verify environment
