@@ -48,7 +48,7 @@ class ExperimentCoherenceAgent:
     """
     
     def __init__(self, 
-                 model: str = "vertex_ai/gemini-2.5-flash",
+                 model: str = "vertex_ai/gemini-2.5-flash-lite",
                  audit_logger: Optional[AuditLogger] = None):
         self.model = model
         self.agent_name = "ExperimentCoherenceAgent"
