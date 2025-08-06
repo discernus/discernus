@@ -6,6 +6,9 @@ description: |
   how different rhetorical strategies impact social fabric and democratic resilience using the 
   Cohesive Flourishing Framework v7.3 to analyze two paradigmatic examples of American political communication.
 
+# Framework version compliance (v7.3)
+framework_version: "v7.3"
+
 
 
 # Falsifiable hypotheses to be tested
