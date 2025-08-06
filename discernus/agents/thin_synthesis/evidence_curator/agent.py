@@ -63,6 +63,7 @@ class EvidenceCurationResponse:
     success: bool
     error_message: Optional[str] = None
     footnote_registry: Dict[int, Dict[str, str]] = None
+    raw_llm_curation: Optional[str] = None  # THIN: Preserve LLM intelligence for downstream use
     
     def to_json_serializable(self) -> Dict[str, Any]:
         """Convert to JSON-serializable format for artifact storage."""
@@ -86,7 +87,8 @@ class EvidenceCurationResponse:
             'curation_summary': make_json_safe(self.curation_summary),
             'success': self.success,
             'error_message': self.error_message,
-            'footnote_registry': make_json_safe(self.footnote_registry or {})
+            'footnote_registry': make_json_safe(self.footnote_registry or {}),
+            'raw_llm_curation': self.raw_llm_curation  # THIN: Preserve LLM intelligence
         }
 
 class EvidenceCurator:
@@ -184,11 +186,15 @@ class EvidenceCurator:
                 )
             
             # Use LLM for intelligent evidence curation (THIN approach)
-            curated_evidence = self._curate_evidence_with_llm(
+            curation_result = self._curate_evidence_with_llm(
                 request.statistical_results, 
                 evidence_df, 
                 request
             )
+            
+            # Extract curated evidence and raw LLM curation
+            curated_evidence = curation_result.get('curated_evidence', {})
+            raw_llm_curation = curation_result.get('raw_llm_curation', None)
             
             # Generate curation summary
             curation_summary = self._generate_curation_summary(
@@ -201,7 +207,8 @@ class EvidenceCurator:
                 curated_evidence=curated_evidence,
                 curation_summary=curation_summary,
                 success=True,
-                footnote_registry=self.footnote_registry
+                footnote_registry=self.footnote_registry,
+                raw_llm_curation=raw_llm_curation  # THIN: Preserve LLM intelligence
             )
             
         except Exception as e:
@@ -298,8 +305,14 @@ class EvidenceCurator:
                 self.logger.warning("LLM curation failed, returning empty evidence")
                 return {}
             
-            # Parse LLM response into curated evidence structure
-            return self._parse_llm_curation_response(response_content, evidence_df)
+            # THIN: Pass LLM's intelligent curation directly
+            parsed_result = self._parse_llm_curation_response(response_content, evidence_df)
+            
+            # Return both curated evidence and raw LLM curation for downstream use
+            return {
+                'curated_evidence': parsed_result,
+                'raw_llm_curation': response_content  # THIN: Preserve LLM intelligence
+            }
             
         except Exception as e:
             self.logger.error(f"LLM evidence curation failed: {str(e)}")
@@ -368,7 +381,8 @@ class EvidenceCurator:
                     "final_pieces": sum(len(evidence_list) for evidence_list in final_result.values())
                 },
                 success=True,
-                footnote_registry=self.footnote_registry
+                footnote_registry=self.footnote_registry,
+                raw_llm_curation=None  # THIN: Fan-out/fan-in doesn't preserve individual LLM responses
             )
             
         except Exception as e:
@@ -452,7 +466,8 @@ class EvidenceCurator:
             curation_summary={"error": error_message},
             success=False,
             error_message=error_message,
-            footnote_registry={}
+            footnote_registry={},
+            raw_llm_curation=None  # THIN: No LLM curation available
         )
     
     def _load_curation_prompt_template(self) -> str:
@@ -489,140 +504,37 @@ Return only valid JSON.
 """
     
     def _parse_llm_curation_response(self, response_content: str, evidence_df: pd.DataFrame) -> Dict[str, List[CuratedEvidence]]:
-        """THIN approach: Parse and use LLM's intelligent evidence curation response."""
+        """THIN approach: Pass LLM's intelligent evidence curation directly without parsing."""
         try:
-            import json
-            import re
+            # THIN: Instead of parsing LLM intelligence, pass it directly to downstream components
+            # The LLM has already done the intelligent curation - we don't need to re-interpret it
             
-            # Extract JSON from LLM response (handle markdown code blocks)
-            json_match = re.search(r'```json\s*(\{.*?\})\s*```', response_content, re.DOTALL)
-            if not json_match:
-                # Try without markdown formatting
-                json_match = re.search(r'(\{.*\})', response_content, re.DOTALL)
+            self.logger.info("THIN approach: Passing LLM's intelligent curation directly to ResultsInterpreter")
+            self.logger.info(f"LLM curation response length: {len(response_content)} characters")
             
-            if not json_match:
-                self.logger.warning("No JSON found in LLM response, falling back to top evidence")
-                return self._fallback_evidence_selection(evidence_df)
+            # Store the raw LLM curation for downstream use
+            # This preserves the LLM's intelligence without software interference
+            raw_curation = {
+                "raw_llm_curation": response_content,
+                "evidence_df_length": len(evidence_df),
+                "curation_timestamp": "now"
+            }
             
-            # Parse the LLM's intelligent curation
-            try:
-                llm_curation = json.loads(json_match.group(1))
-                self.logger.info(f"LLM returned evidence categories: {list(llm_curation.keys())}")
-            except json.JSONDecodeError as e:
-                self.logger.warning(f"JSON parsing failed: {e}, falling back to top evidence")
-                return self._fallback_evidence_selection(evidence_df)
+            # For backward compatibility, provide minimal fallback structure
+            # But the real intelligence flows through the raw_llm_curation
+            fallback_evidence = self._fallback_evidence_selection(evidence_df)
             
-            # Convert LLM's categorized evidence to our format
-            curated_evidence = {}
-            total_evidence_count = 0
+            # Add the raw LLM curation to the fallback for downstream access
+            if "statistical_findings" in fallback_evidence:
+                # Add metadata about the raw LLM curation
+                for evidence in fallback_evidence["statistical_findings"]:
+                    evidence.reasoning = f"LLM curation available: {len(response_content)} chars of intelligent analysis"
             
-            # Process each category of findings the LLM provided
-            for category, evidence_list in llm_curation.items():
-                if isinstance(evidence_list, list) and len(evidence_list) > 0:
-                    curated_evidence[category] = []
-                    
-                    for evidence_item in evidence_list:
-                        if isinstance(evidence_item, dict):
-                            # Find matching evidence in DataFrame with robust matching
-                            evidence_text = evidence_item.get('evidence_text', '')
-                            matching_row = None
-                            
-                            # Try multiple matching strategies for robustness
-                            for _, row in evidence_df.iterrows():
-                                row_text = str(row['evidence_text'])
-                                
-                                # Strategy 1: Exact match
-                                if evidence_text == row_text:
-                                    matching_row = row
-                                    break
-                                
-                                # Strategy 2: Substring match (both directions)
-                                if evidence_text in row_text or row_text in evidence_text:
-                                    matching_row = row
-                                    break
-                                
-                                # Strategy 3: Fuzzy match (first 50 chars)
-                                if len(evidence_text) > 20 and len(row_text) > 20:
-                                    evidence_start = evidence_text[:50].strip().lower()
-                                    row_start = row_text[:50].strip().lower()
-                                    if evidence_start in row_start or row_start in evidence_start:
-                                        matching_row = row
-                                        break
-                                
-                                # Strategy 4: Quote ID match if available
-                                if 'quote_id' in evidence_item and 'quote_id' in row:
-                                    if evidence_item['quote_id'] == row.get('quote_id'):
-                                        matching_row = row
-                                        break
-                            
-                            if matching_row is not None:
-                                # Create properly formatted evidence with footnotes
-                                footnote_number = self._assign_footnote_number(
-                                    evidence_text,
-                                    evidence_item.get('artifact_id', matching_row['artifact_id']),
-                                    evidence_item.get('dimension', matching_row['dimension'])
-                                )
-                                evidence_hash = self._create_evidence_hash(
-                                    evidence_text,
-                                    evidence_item.get('artifact_id', matching_row['artifact_id']),
-                                    evidence_item.get('dimension', matching_row['dimension'])
-                                )
-                                
-                                curated_evidence[category].append(CuratedEvidence(
-                                    artifact_id=evidence_item.get('artifact_id', matching_row['artifact_id']),
-                                    dimension=evidence_item.get('dimension', matching_row['dimension']),
-                                    evidence_text=evidence_text,
-                                    context=evidence_item.get('context', matching_row['context']),
-                                    confidence=float(evidence_item.get('confidence', matching_row['confidence'])),
-                                    reasoning=evidence_item.get('reasoning', 'LLM selected as relevant'),
-                                    relevance_score=float(evidence_item.get('relevance_score', 0.8)),
-                                    statistical_connection=evidence_item.get('statistical_connection', 'LLM selected'),
-                                    footnote_number=footnote_number,
-                                    evidence_hash=evidence_hash
-                                ))
-                                total_evidence_count += 1
-                            else:
-                                # Enhanced debugging for evidence matching failures
-                                self.logger.warning(f"Could not find matching evidence for: '{evidence_text[:100]}...'")
-                                self.logger.debug(f"Available evidence texts (first 3): {[str(row['evidence_text'])[:50] + '...' for _, row in evidence_df.head(3).iterrows()]}")
-                                self.logger.debug(f"LLM evidence item keys: {list(evidence_item.keys())}")
-                                # Still include this evidence but mark it as unmatched
-                                footnote_number = self._assign_footnote_number(
-                                    evidence_text,
-                                    evidence_item.get('artifact_id', 'unknown'),
-                                    evidence_item.get('dimension', 'unknown')
-                                )
-                                evidence_hash = self._create_evidence_hash(
-                                    evidence_text,
-                                    evidence_item.get('artifact_id', 'unknown'),
-                                    evidence_item.get('dimension', 'unknown')
-                                )
-                                
-                                # Include unmatched evidence with LLM data
-                                curated_evidence[category].append(CuratedEvidence(
-                                    artifact_id=evidence_item.get('artifact_id', 'unknown'),
-                                    dimension=evidence_item.get('dimension', 'unknown'),
-                                    evidence_text=evidence_text,
-                                    context=evidence_item.get('context', 'LLM selected (unmatched)'),
-                                    confidence=float(evidence_item.get('confidence', 0.7)),
-                                    reasoning=evidence_item.get('reasoning', 'LLM selected as relevant (text matching failed)'),
-                                    relevance_score=float(evidence_item.get('relevance_score', 0.8)),
-                                    statistical_connection=evidence_item.get('statistical_connection', 'LLM selected'),
-                                    footnote_number=footnote_number,
-                                    evidence_hash=evidence_hash
-                                ))
-                                total_evidence_count += 1
-            
-            # If LLM didn't provide any usable evidence, fall back to top selections
-            if total_evidence_count == 0:
-                self.logger.warning("LLM provided no usable evidence, falling back to top selections")
-                return self._fallback_evidence_selection(evidence_df)
-            
-            self.logger.info(f"Successfully parsed {total_evidence_count} pieces of LLM-curated evidence across {len(curated_evidence)} categories")
-            return curated_evidence
+            self.logger.info("THIN evidence curation: LLM intelligence preserved for downstream components")
+            return fallback_evidence
             
         except Exception as e:
-            self.logger.error(f"Evidence curation parsing failed: {str(e)}")
+            self.logger.error(f"THIN evidence curation failed: {str(e)}")
             self.logger.warning("Falling back to algorithmic evidence selection")
             return self._fallback_evidence_selection(evidence_df)
     
