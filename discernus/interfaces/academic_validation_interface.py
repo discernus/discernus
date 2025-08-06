@@ -43,6 +43,11 @@ def validate_score_impl(experiment_path: str, document_name: str, score_name: st
         click.echo(f"❌ Corpus manifest not found: {corpus_manifest_path}")
         return 1
     
+    # Auto-detect model from analysis artifact
+    analysis_model = _detect_analysis_model(analysis_artifact_path)
+    if not analysis_model:
+        analysis_model = model  # Fallback to specified model
+    
     # Create validation request
     request = ScoreValidationRequest(
         document_name=document_name,
@@ -57,9 +62,10 @@ def validate_score_impl(experiment_path: str, document_name: str, score_name: st
     # Run validation
     click.echo(f"🔍 Validating score: {score_name} = {score_value} from {document_name}")
     click.echo(f"📄 Framework: {framework}")
+    click.echo(f"🤖 Model: {analysis_model or model}")
     click.echo(f"⏱️  Target: <5 minutes")
     
-    orchestrator = ScoreValidationOrchestrator(model=model)
+    orchestrator = ScoreValidationOrchestrator(model=analysis_model or model)
     result = orchestrator.validate_score(request)
     
     if result.success:
@@ -177,6 +183,37 @@ def _find_analysis_artifact(experiment_path: Path, document_name: str) -> Option
                 continue
     
     return None
+
+
+def _detect_analysis_model(analysis_artifact_path: Path) -> Optional[str]:
+    """Auto-detect the model used in the analysis."""
+    try:
+        # Extract filename and use direct shared_cache path
+        filename = analysis_artifact_path.name
+        experiment_path = analysis_artifact_path.parent.parent.parent.parent
+        actual_file = experiment_path / "shared_cache" / "artifacts" / filename
+        
+        if not actual_file.exists():
+            return None
+        
+        with open(actual_file, 'r') as f:
+            data = json.load(f)
+        
+        # Extract model from analysis metadata
+        if 'analysis_metadata' in data:
+            return data['analysis_metadata'].get('model_used')
+        
+        # Check document analyses for model info
+        if 'document_analyses' in data:
+            for doc_analysis in data['document_analyses']:
+                if 'extraction_metadata' in doc_analysis:
+                    return doc_analysis['extraction_metadata'].get('model_used')
+        
+        return None
+        
+    except Exception as e:
+        print(f"Warning: Could not detect analysis model: {e}")
+        return None
 
 
 if __name__ == "__main__":
