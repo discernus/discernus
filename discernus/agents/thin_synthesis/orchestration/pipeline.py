@@ -1062,8 +1062,13 @@ Raw Analysis Data:
         try:
             # Extract data from previous stages
             statistical_results = interpretation_response.statistical_results if hasattr(interpretation_response, 'statistical_results') else {}
-            evidence_data = curation_response.curated_evidence if curation_response.success else {}
             scores_data = {}  # Will be populated from artifact if needed
+            
+            # Convert evidence data to JSON-serializable format
+            if curation_response.success and hasattr(curation_response, 'to_json_serializable'):
+                evidence_data = curation_response.to_json_serializable()
+            else:
+                evidence_data = {}
             
             # Extract experiment context for report metadata
             experiment_context = {}
@@ -1097,15 +1102,8 @@ Raw Analysis Data:
             run_hash = hash(f"{request.scores_artifact_hash}_{execution_time_utc.isoformat()}")
             run_id = f"{execution_time_utc.strftime('%Y%m%dT%H%M%SZ')}_{abs(run_hash)%100000:05d}"
             
-            # Extract cost data (placeholder for now)
-            cost_data = {
-                'total_cost': '0.0160',
-                'total_tokens': '108932',
-                'raw_data_analysis_planning': {'cost': 0.0027, 'tokens': 17954, 'calls': 1},
-                'derived_metrics_analysis_planning': {'cost': 0.0035, 'tokens': 21195, 'calls': 1},
-                'evidence_curation': {'cost': 0.0043, 'tokens': 30012, 'calls': 1},
-                'results_interpretation': {'cost': 0.0055, 'tokens': 39771, 'calls': 1}
-            }
+            # Extract real cost data from audit logger
+            cost_data = self.audit_logger.get_session_costs()
             
             # Create dual-purpose report request
             dual_purpose_request = DualPurposeReportRequest(
