@@ -193,6 +193,15 @@ Assessment of discourse's contribution to constitutional health and democratic s
     "systemic_replacement": 0.15
   },
   "calculation_spec": {
+    "execution_order": [
+      "procedural_health_score",
+      "institutional_health_score", 
+      "systemic_health_score",
+      "legitimacy_index",
+      "pathology_index",
+      "constitutional_direction_index",
+      "salience_weighted_constitutional_direction_index"
+    ],
     "formulas": {
       "procedural_health_score": "(procedural_legitimacy - procedural_rejection)",
       "institutional_health_score": "(institutional_respect - institutional_subversion)", 
@@ -243,7 +252,7 @@ Assessment of discourse's contribution to constitutional health and democratic s
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "procedural_legitimacy_score", "procedural_rejection_score", "procedural_legitimacy_salience", "procedural_rejection_salience", "procedural_legitimacy_confidence", "procedural_rejection_confidence",

@@ -241,6 +241,17 @@ Evaluation of discourse's contribution to democratic health and civic culture
     "fantasy": 0.15
   },
   "calculation_spec": {
+    "execution_order": [
+      "dignity_tribalism_tension",
+      "truth_manipulation_tension", 
+      "justice_resentment_tension",
+      "hope_fear_tension",
+      "pragmatism_fantasy_tension",
+      "virtue_index",
+      "pathology_index",
+      "civic_character_index",
+      "salience_weighted_civic_character_index"
+    ],
     "formulas": {
       "dignity_tribalism_tension": "(dignity_score + (1 - tribalism_score)) / 2",
       "truth_manipulation_tension": "(truth_score + (1 - manipulation_score)) / 2",
@@ -286,7 +297,7 @@ Evaluation of discourse's contribution to democratic health and civic culture
     "instructions": "Follow the sequential analysis format exactly. Each step must include specific textual evidence, numerical scores (0.0-1.0), salience assessment, and confidence rating. Final integration must calculate all tension scores and apply pattern classifications."
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "dignity_score", "tribalism_score", "dignity_salience", "tribalism_salience", "dignity_confidence", "tribalism_confidence",

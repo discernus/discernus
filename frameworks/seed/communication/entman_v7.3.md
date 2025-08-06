@@ -1,6 +1,6 @@
-# Entman Framing Functions Framework v7.1
+# Entman Framing Functions Framework v7.3
 
-**Version**: 7.1  
+**Version**: 7.3  
 **Status**: Active  
 **Major Change**: Enhanced Gasket Schema with Metadata Scores and Advanced Extraction Patterns
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-The Entman Framing Functions Framework v7.1 implements Robert Entman's systematic communication analysis through four independent framing functions with enhanced metadata scoring. This framework tests whether Problem Definition, Causal Attribution, Moral Evaluation, and Treatment Recommendation operate independently as predicted by communication theory, representing systematic message construction in political discourse.
+The Entman Framing Functions Framework v7.3 implements Robert Entman's systematic communication analysis through four independent framing functions with enhanced metadata scoring. This framework tests whether Problem Definition, Causal Attribution, Moral Evaluation, and Treatment Recommendation operate independently as predicted by communication theory, representing systematic message construction in political discourse.
 
 **Purpose**: Analyzes strategic communication through four independent framing functions with enhanced extraction patterns and validation rules for comprehensive message analysis.
 
@@ -78,7 +78,7 @@ The analysis agent outputs a raw analysis log containing:
 ```json
 {
   "name": "entman_v7_1",
-  "version": "v7.1",
+  "version": "v7.3",
   "display_name": "Entman Framing Functions Framework v7.1",
   "analysis_variants": {
     "default": {
@@ -90,10 +90,18 @@ The analysis agent outputs a raw analysis log containing:
     "framing_functions": ["problem_definition", "causal_attribution", "moral_evaluation", "treatment_recommendation"]
   },
   "calculation_spec": {
-    "message_completeness_score": "(problem_definition_score + causal_attribution_score + moral_evaluation_score + treatment_recommendation_score) / 4",
+    "execution_order": [
+      "message_completeness_score",
+      "framing_coherence_index",
+      "salience_weighted_message_completeness_score",
+      "salience_weighted_framing_coherence_index"
+    ],
+    "formulas": {
+      "message_completeness_score": "(problem_definition_score + causal_attribution_score + moral_evaluation_score + treatment_recommendation_score) / 4",
     "framing_coherence_index": "sqrt(problem_definition_score * causal_attribution_score * moral_evaluation_score * treatment_recommendation_score)",
     "salience_weighted_message_completeness_score": "(problem_definition_score * problem_definition_salience + causal_attribution_score * causal_attribution_salience + moral_evaluation_score * moral_evaluation_salience + treatment_recommendation_score * treatment_recommendation_salience) / (problem_definition_salience + causal_attribution_salience + moral_evaluation_salience + treatment_recommendation_salience)",
-    "salience_weighted_framing_coherence_index": "pow((problem_definition_score * problem_definition_salience) * (causal_attribution_score * causal_attribution_salience) * (moral_evaluation_score * moral_evaluation_salience) * (treatment_recommendation_score * treatment_recommendation_salience), 1/4) / pow(problem_definition_salience * causal_attribution_salience * moral_evaluation_salience * treatment_recommendation_salience, 1/4)"
+      "salience_weighted_framing_coherence_index": "pow((problem_definition_score * problem_definition_salience) * (causal_attribution_score * causal_attribution_salience) * (moral_evaluation_score * moral_evaluation_salience) * (treatment_recommendation_score * treatment_recommendation_salience), 1/4) / pow(problem_definition_salience * causal_attribution_salience * moral_evaluation_salience * treatment_recommendation_salience, 1/4)"
+    }
   },
   "reliability_rubric": {
     "cronbachs_alpha": {
@@ -105,7 +113,7 @@ The analysis agent outputs a raw analysis log containing:
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "gasket_schema": {
-    "version": "7.1",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
       "problem_definition_score",
