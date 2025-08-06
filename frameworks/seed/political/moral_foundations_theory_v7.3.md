@@ -213,6 +213,12 @@ Complements Civic Analysis Framework (CAF) for comprehensive moral-civic assessm
     "degradation": 1.0
   },
   "calculation_spec": {
+    "execution_order": [
+      "individualizing_tension",
+      "binding_tension", 
+      "foundation_tension",
+      "moral_strategic_contradiction_index"
+    ],
     "formulas": {
       "individualizing_tension": "min(care_score, harm_score) * abs(care_salience - harm_salience) + min(fairness_score, cheating_score) * abs(fairness_salience - cheating_salience)",
       "binding_tension": "min(loyalty_score, betrayal_score) * abs(loyalty_salience - betrayal_salience) + min(authority_score, subversion_score) * abs(authority_salience - subversion_salience) + min(sanctity_score, degradation_score) * abs(sanctity_salience - degradation_salience)",
@@ -240,7 +246,7 @@ Complements Civic Analysis Framework (CAF) for comprehensive moral-civic assessm
     "instructions": "Provide structured analysis following sequential chain-of-thought methodology with embedded CSV output using standard Discernus delimiters"
   },
   "gasket_schema": {
-    "version": "7.3",
+    "version": "v7.3",
     "target_keys": [
       "care_score", "care_salience", "care_confidence",
       "harm_score", "harm_salience", "harm_confidence", 
