@@ -22,6 +22,7 @@ from pathlib import Path
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
+from discernus.core.evidence_confidence_calibrator import EvidenceConfidenceCalibrator, ConfidenceCalibrationRequest
 
 
 @dataclass
@@ -84,6 +85,9 @@ class GroundingEvidenceGenerator:
         
         # Load externalized YAML prompt template
         self.prompt_template = self._load_prompt_template()
+        
+        # Initialize confidence calibrator
+        self.confidence_calibrator = EvidenceConfidenceCalibrator(model=model, audit_logger=audit_logger)
         
         if self.audit_logger:
             self.audit_logger.log_agent_event(
@@ -206,6 +210,11 @@ Be specific and actionable. Focus on academic standards and research credibility
             # Parse LLM grounding response
             grounding_evidence_list = self._parse_grounding_response(response_content, request.document_name)
             
+            # Apply confidence calibration to grounding evidence
+            calibrated_evidence_list = self._calibrate_grounding_confidence(
+                grounding_evidence_list, request
+            )
+            
             generation_time = time.time() - start_time
             
             # Log grounding generation
@@ -229,7 +238,7 @@ Be specific and actionable. Focus on academic standards and research credibility
             )
             
             return GroundingEvidenceResponse(
-                grounding_evidence=grounding_evidence_list,
+                grounding_evidence=calibrated_evidence_list,
                 generation_summary=generation_summary,
                 success=True
             )
@@ -320,6 +329,37 @@ Be specific and actionable. Focus on academic standards and research credibility
         import hashlib
         content = f"{document_name}:{dimension}:{evidence_text}"
         return hashlib.sha256(content.encode('utf-8')).hexdigest()[:12]
+    
+    def _calibrate_grounding_confidence(self, grounding_evidence_list: List[GroundingEvidence], 
+                                       request: GroundingEvidenceRequest) -> List[GroundingEvidence]:
+        """Apply confidence calibration to grounding evidence."""
+        calibrated_evidence = []
+        
+        for evidence in grounding_evidence_list:
+            # Create confidence calibration request
+            calibration_request = ConfidenceCalibrationRequest(
+                evidence_text=evidence.grounding_evidence.get('primary_quote', ''),
+                context=evidence.grounding_evidence.get('context', ''),
+                dimension=evidence.dimension,
+                score=evidence.score,
+                original_confidence=evidence.grounding_evidence.get('evidence_confidence', 0.5),
+                framework_spec=request.framework_spec,
+                document_name=request.document_name
+            )
+            
+            # Calibrate confidence
+            calibration_response = self.confidence_calibrator.assess_confidence(calibration_request)
+            
+            if calibration_response.success:
+                # Update grounding evidence with calibrated confidence
+                evidence.grounding_evidence['evidence_confidence'] = calibration_response.assessment.confidence
+                evidence.grounding_evidence['confidence_reasoning'] = calibration_response.assessment.reasoning
+                evidence.grounding_evidence['quality_indicators'] = calibration_response.assessment.quality_indicators
+                evidence.grounding_evidence['academic_validation'] = calibration_response.assessment.academic_validation
+            
+            calibrated_evidence.append(evidence)
+        
+        return calibrated_evidence
     
     def _generate_grounding_summary(self, grounding_evidence: List[GroundingEvidence], 
                                    total_scores: int, generation_time: float) -> Dict[str, Any]:
