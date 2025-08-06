@@ -136,72 +136,46 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     if not corpus_path.exists():
         return False, f"❌ Corpus directory not found: {corpus_path}", {}
     
-    # MANIFEST-DRIVEN VALIDATION: Use corpus manifest as authoritative source
-    corpus_manifest_file = corpus_path / "corpus.md"
-    if not corpus_manifest_file.exists():
-        return False, f"❌ Corpus manifest not found: {corpus_manifest_file}", {}
+    # THIN: Delegate validation to ExperimentCoherenceAgent
+    from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
     
-    # Load and validate corpus manifest
     try:
+        # Use ExperimentCoherenceAgent for comprehensive validation
+        coherence_agent = ExperimentCoherenceAgent()
+        validation_result = coherence_agent.validate_experiment(experiment_path)
+        
+        if not validation_result.success:
+            # Return first issue as error message
+            if validation_result.issues:
+                issue = validation_result.issues[0]
+                return False, f"❌ {issue.description}", {}
+            else:
+                return False, "❌ Experiment validation failed", {}
+        
+        # Validation passed - extract basic info for CLI
+        corpus_path = experiment_path / config.get('corpus_path', 'corpus')
+        corpus_manifest_file = corpus_path / "corpus.md"
+        
+        # Quick file count for CLI display
         with open(corpus_manifest_file, 'r') as f:
             content = f.read()
         
-        # Extract JSON manifest
         if '```json' in content:
             json_start = content.find('```json') + 7
             json_end = content.find('```', json_start)
             if json_end != -1:
                 json_content = content[json_start:json_end].strip()
                 manifest_data = json.loads(json_content)
+                file_count = len(manifest_data.get('file_manifest', []))
                 
-                # Validate manifest structure
-                if 'file_manifest' not in manifest_data:
-                    return False, f"❌ Corpus manifest missing 'file_manifest' section", {}
-                
-                file_manifest = manifest_data['file_manifest']
-                # Use built-in list type explicitly to avoid Click's list command shadowing
-                if not isinstance(file_manifest, __builtins__['list']):
-                    return False, f"❌ Corpus manifest 'file_manifest' must be an array", {}
-                
-                # Validate each file in manifest exists
-                missing_files = []
-                existing_files = []
-                for doc in file_manifest:
-                    if 'name' not in doc:
-                        return False, f"❌ Corpus manifest entry missing 'name' field", {}
-                    
-                    file_path = corpus_path / doc['name']
-                    if not file_path.exists():
-                        missing_files.append(doc['name'])
-                    else:
-                        existing_files.append(file_path)
-                
-                if missing_files:
-                    return False, f"❌ Corpus manifest references missing files: {missing_files}", {}
-                
-                # Validate field naming consistency if specified
-                if 'field_naming_standards' in manifest_data:
-                    field_standards = manifest_data['field_naming_standards']
-                    if 'required_consistency' in field_standards:
-                        required_fields = field_standards['required_consistency']
-                        for doc in file_manifest:
-                            for field in required_fields:
-                                if field not in doc:
-                                    return False, f"❌ Document '{doc.get('name', 'unknown')}' missing required field '{field}'", {}
-                
-                config['_corpus_file_count'] = len(existing_files)
+                config['_corpus_file_count'] = file_count
                 config['corpus_path'] = str(corpus_path)
-                config['_corpus_manifest_files'] = [doc['name'] for doc in file_manifest]
-                return True, f"✅ Valid experiment with {len(existing_files)} corpus files (manifest-driven)", config
-            else:
-                return False, f"❌ Corpus manifest has malformed JSON block", {}
-        else:
-            return False, f"❌ Corpus manifest missing JSON block", {}
-            
-    except json.JSONDecodeError as e:
-        return False, f"❌ Corpus manifest has invalid JSON: {e}", {}
+                return True, f"✅ Valid experiment with {file_count} corpus files (THIN validation)", config
+        
+        return True, "✅ Valid experiment (THIN validation)", config
+        
     except Exception as e:
-        return False, f"❌ Error reading corpus manifest: {e}", {}
+        return False, f"❌ Validation error: {e}", {}
 
 
 @click.group()
