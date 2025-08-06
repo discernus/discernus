@@ -1,0 +1,1 @@
+{"grounding_evidence": [], "generation_summary": {"total_scores": 11, "grounded_scores": 0, "coverage_percentage": 0.0, "generation_time_seconds": 4.912915945053101, "average_evidence_confidence": 0.0, "high_confidence_evidence": 0}, "success": true, "error_message": null}
