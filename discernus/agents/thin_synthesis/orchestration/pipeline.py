@@ -354,7 +354,7 @@ class ProductionThinSynthesisPipeline:
             self.logger.info("🔗 Stage 4: Generating grounding evidence...")
             stage_start = time.time()
             
-            grounding_response = self._stage_4_generate_grounding_evidence(exec_response, request)
+            grounding_response = self._stage_4_generate_grounding_evidence(exec_response, curation_response, request)
             
             stage_timings['grounding_evidence_generation'] = time.time() - stage_start
             stage_success['grounding_evidence_generation'] = grounding_response.success
@@ -846,16 +846,11 @@ Raw Analysis Data:
         
         return curation_response
 
-    def _stage_4_generate_grounding_evidence(self, exec_response, request: ProductionPipelineRequest):
-        """Stage 4: Generate grounding evidence for every numerical score."""
+    def _stage_4_generate_grounding_evidence(self, exec_response, curation_response, request: ProductionPipelineRequest):
+        """Stage 4: Generate grounding evidence using raw LLM curation (THIN approach)."""
         
-        # Retrieve evidence data for grounding generation
-        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-        self.logger.info(f"Generating grounding evidence using evidence artifact: {request.evidence_artifact_hash[:12]}...")
-        
-        # Extract analysis scores from the execution response
-        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
-        analysis_scores = stage_2_results.get('results', {})
+        # THIN: Use raw_llm_curation from EvidenceCurationResponse instead of parsing analysis_scores
+        # This preserves full LLM intelligence and eliminates redundant parsing
         
         # Extract document name from experiment context or use default
         document_name = "unknown_document"
@@ -866,23 +861,23 @@ Raw Analysis Data:
             if doc_match:
                 document_name = doc_match.group(1)
         
-        # Create grounding evidence request
+        # THIN: Create grounding evidence request using raw_llm_curation
+        # This delegates all intelligence to the LLM instead of software parsing
         grounding_request = GroundingEvidenceRequest(
-            analysis_scores=analysis_scores,
-            evidence_data=evidence_data,
+            raw_llm_curation=curation_response.raw_llm_curation,  # THIN: Use raw LLM output
             framework_spec=request.framework_spec,
             document_name=document_name,
             min_confidence_threshold=request.min_confidence_threshold
         )
         
-        # Log grounding evidence generation start
+        # Log grounding evidence generation start (THIN approach)
         self.audit_logger.log_agent_event(
             "GroundingEvidenceGenerator",
             "grounding_generation_start",
             {
                 "document_name": document_name,
-                "analysis_scores_keys": list(analysis_scores.keys()) if isinstance(analysis_scores, dict) else "non_dict_scores",
-                "evidence_artifact": request.evidence_artifact_hash[:12] + "...",
+                "raw_llm_curation_length": len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0,
+                "approach": "thin_raw_llm_curation",
                 "framework_spec_length": len(request.framework_spec)
             }
         )
@@ -1070,6 +1065,9 @@ Raw Analysis Data:
             else:
                 evidence_data = {}
             
+            # THIN: Extract raw_llm_curation for pure LLM intelligence flow
+            raw_llm_curation = curation_response.raw_llm_curation if curation_response.success else None
+            
             # Extract experiment context for report metadata
             experiment_context = {}
             if request.experiment_context:
@@ -1121,6 +1119,7 @@ Raw Analysis Data:
                         corpus_composition=corpus_composition,
                         statistical_results=statistical_results,
                         evidence_data=evidence_data,
+                        raw_llm_curation=raw_llm_curation,  # THIN: Pass raw LLM intelligence
                         scores_data=scores_data,
                         run_directory=f"runs/{run_id}",
                         cost_data=cost_data,
