@@ -42,10 +42,12 @@ from discernus.core.audit_logger import AuditLogger
 from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAnalysisPlanRequest
 from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
+from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 from ..results_interpreter.dual_purpose_results_interpreter import DualPurposeResultsInterpreter, DualPurposeReportRequest, DualPurposeReportResponse
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
 from ...score_grounding.grounding_evidence_generator import GroundingEvidenceGenerator, GroundingEvidenceRequest
+from ...evidence_indexer_agent.agent import EvidenceIndexerAgent, IndexingRequest, IndexingResponse
 
 # Import MathToolkit for reliable mathematical operations
 from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_plan_thin
@@ -80,6 +82,7 @@ class ProductionPipelineResponse:
     statistical_results_hash: str
     curated_evidence_hash: str
     grounding_evidence_hash: str
+    dual_purpose_report_hash: str
     
     # Pipeline metadata
     success: bool
@@ -127,7 +130,9 @@ class ProductionThinSynthesisPipeline:
         # Initialize agents with infrastructure
         self.raw_data_planner = RawDataAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
+        self.evidence_indexer = EvidenceIndexerAgent(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
+        self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)
         self.results_interpreter = ResultsInterpreter(model=model, audit_logger=audit_logger)
         self.dual_purpose_interpreter = DualPurposeResultsInterpreter(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
@@ -317,6 +322,24 @@ class ProductionThinSynthesisPipeline:
                     time.time() - start_time
                 )
             
+            # Stage 2.5: Generate Intelligent Evidence Index
+            self.logger.info("📇 Stage 2.5: Generating intelligent evidence index...")
+            stage_start = time.time()
+            
+            index_response = self._stage_2_5_generate_evidence_index(request)
+            
+            stage_timings['evidence_indexing'] = time.time() - stage_start
+            stage_success['evidence_indexing'] = index_response.success
+            
+            if not index_response.success:
+                return self._create_error_response(
+                    "Evidence indexing failed",
+                    index_response.error_message,
+                    stage_timings,
+                    stage_success,
+                    time.time() - start_time
+                )
+            
             # Stage 3: Curate Evidence
             self.logger.info("🔍 Stage 3: Curating evidence...")
             
@@ -336,7 +359,7 @@ class ProductionThinSynthesisPipeline:
             
             stage_start = time.time()
             
-            curation_response = self._stage_3_curate_evidence(exec_response, request)
+            curation_response = self._stage_3_txtai_curate_evidence(exec_response, request)
             
             stage_timings['evidence_curation'] = time.time() - stage_start
             stage_success['evidence_curation'] = curation_response.success
@@ -482,7 +505,8 @@ class ProductionThinSynthesisPipeline:
                 # Quality metrics
                 word_count=interpretation_response.word_count,
                 evidence_integration_summary=interpretation_response.evidence_integration_summary,
-                statistical_summary=interpretation_response.statistical_summary
+                statistical_summary=interpretation_response.statistical_summary,
+                dual_purpose_report_hash=dual_purpose_hash
             )
             
         except Exception as e:
@@ -514,26 +538,21 @@ class ProductionThinSynthesisPipeline:
         
         # THIN approach: Pass raw analysis data directly to both planners
         # Let LLMs handle all data interpretation and structure understanding
-        combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
+        scores_data_bytes = self.artifact_client.get_artifact(request.scores_artifact_hash)
         
-        # Convert raw bytes to string for LLM processing (THIN principle)
-        raw_analysis_data = combined_data.decode('utf-8')
+        # Ground the planner by providing the actual available columns.
+        from discernus.core.math_toolkit import _json_scores_to_dataframe_thin
+        scores_df = _json_scores_to_dataframe_thin(json.loads(scores_data_bytes.decode('utf-8')))
+        available_columns = scores_df.columns.tolist()
+
+        raw_analysis_data = scores_data_bytes.decode('utf-8')
         
         self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to two-stage planners")
         
         # Create enhanced data summary with column discovery (THIN principle)
         # Parse the raw data to discover available columns for the LLM
         try:
-            import json
-            import pandas as pd
-            from discernus.core.math_toolkit import _json_scores_to_dataframe_thin
-            
-            # Parse the raw analysis data to get column information
-            analysis_result = json.loads(raw_analysis_data)
-            df = _json_scores_to_dataframe_thin(analysis_result)
-            
             # Create column summary for LLM discovery
-            available_columns = list(df.columns)
             metadata_columns = [col for col in available_columns if col not in 
                               [c for c in available_columns if c.endswith(('_score', '_salience', '_confidence'))] 
                               and col != 'aid']
@@ -546,7 +565,7 @@ Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
 - Data type: JSON analysis results
 - Source: Analysis artifact {request.scores_artifact_hash[:12]}...
-- DataFrame shape: {df.shape[0]} rows, {df.shape[1]} columns
+- DataFrame shape: {scores_df.shape[0]} rows, {scores_df.shape[1]} columns
 
 Available Columns (COMPLETE LIST - use ONLY these):
 {available_columns}
@@ -582,7 +601,8 @@ Raw Analysis Data:
                 experiment_context=request.experiment_context or "",
                 framework_spec=request.framework_spec,
                 corpus_manifest="",  # Will be populated from experiment context
-                research_questions=research_questions
+                research_questions=research_questions,
+                available_columns=available_columns
             )
             
             # Log raw data planning start
@@ -800,7 +820,50 @@ Raw Analysis Data:
             self.logger.error(f"Two-stage analysis execution failed: {str(e)}")
             raise
 
-    def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
+    def _stage_2_5_generate_evidence_index(self, request: ProductionPipelineRequest) -> IndexingResponse:
+        """Stage 2.5: Generate intelligent evidence index for RAG-based retrieval."""
+        try:
+            # Retrieve evidence data
+            evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+            
+            # Create indexing request
+            indexing_request = IndexingRequest(
+                evidence_data=evidence_data,
+                model=self.model
+            )
+            
+            # Generate the intelligent index
+            self.logger.info(f"📇 Generating intelligent evidence index from {len(evidence_data)} bytes of evidence data")
+            index_response = self.evidence_indexer.generate_index(indexing_request)
+            
+            if index_response.success:
+                # Store the intelligent index as an artifact
+                index_hash = self._store_artifact_with_metadata(
+                    index_response.intelligent_index.decode('utf-8'),
+                    "intelligent_evidence_index",
+                    {
+                        "original_evidence_hash": request.evidence_artifact_hash,
+                        "index_size_bytes": len(index_response.intelligent_index),
+                        "compression_ratio": len(index_response.intelligent_index) / len(evidence_data)
+                    }
+                )
+                
+                self.logger.info(f"📇 Intelligent evidence index generated successfully: {index_hash[:12]}...")
+                
+                # Add the index hash to the response for downstream stages
+                index_response.index_artifact_hash = index_hash
+                
+            return index_response
+            
+        except Exception as e:
+            self.logger.error(f"Evidence indexing failed: {str(e)}")
+            return IndexingResponse(
+                intelligent_index=b"",
+                success=False,
+                error_message=str(e)
+            )
+
+    def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest, index_response: IndexingResponse = None):
         """Stage 3: Curate evidence based on statistical results."""
         
         # Retrieve evidence data for curation using THIN pre-extracted evidence artifact
@@ -811,16 +874,19 @@ Raw Analysis Data:
         # Extract results from the two-stage structure
         # Use derived metrics results (Stage 2) for evidence curation
         stage_2_results = exec_response.get('stage_2_derived_metrics', {})
-        statistical_results = stage_2_results.get('results', {})
         
-        # Create curation request with raw data - let LLM handle parsing
+        # Create curation request. Note that scores_data is now passed from the request.
         curation_request = EvidenceCurationRequest(
-            statistical_results=statistical_results,
+            statistical_results=stage_2_results,  # Pass the full stage_2_results with results key
             evidence_data=combined_data,
             framework_spec=request.framework_spec,
-            max_evidence_per_finding=request.max_evidence_per_finding,
-            min_confidence_threshold=request.min_confidence_threshold
+            scores_data=self.artifact_client.get_artifact(request.scores_artifact_hash)
         )
+        
+        # Get intelligent index data for RAG-based curation
+        intelligent_index_data = None
+        if index_response and index_response.success and index_response.index_artifact_hash:
+            intelligent_index_data = self.artifact_client.get_artifact(index_response.index_artifact_hash)
         
         # Log evidence curation start
         self.audit_logger.log_agent_event(
@@ -828,23 +894,69 @@ Raw Analysis Data:
             "evidence_curation_start",
             {
                 "available_evidence_count": 57,  # Known from JSON structure
-                "statistical_results_keys": list(statistical_results.keys()) if isinstance(statistical_results, dict) else "non_dict_results",
+                "statistical_results_keys": list(stage_2_results.get('results', {}).keys()) if stage_2_results.get('results') else "no_results",
                 "max_evidence_per_finding": request.max_evidence_per_finding,
-                "stage_2_results_used": True
+                "stage_2_results_used": True,
+                "intelligent_index_available": intelligent_index_data is not None
             }
         )
         
-        curation_response = self.evidence_curator.curate_evidence(curation_request)
+        curation_response = self.evidence_curator.curate_evidence(curation_request, intelligent_index_data)
         
         # Debug logging for evidence curation
         if self.debug_agent == "evidence-curator" and self.debug_level in ["debug", "verbose"]:
             self.logger.info(f"Evidence curation success: {curation_response.success}")
             self.logger.info(f"Evidence curation error: {curation_response.error_message or 'None'}")
-            self.logger.info(f"Curated evidence count: {len(curation_response.curated_evidence) if curation_response.curated_evidence else 0}")
-            if curation_response.curated_evidence:
-                self.logger.info(f"Curated evidence types: {[evidence.evidence_type for evidence in curation_response.curated_evidence]}")
+            self.logger.info(f"Raw LLM curation length: {len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0}")
+            if curation_response.raw_llm_curation:
+                self.logger.info(f"Raw LLM curation preview: {curation_response.raw_llm_curation[:200]}...")
         
         return curation_response
+    
+    def _stage_3_txtai_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
+        """Stage 3: txtai-based evidence curation for scalable evidence retrieval."""
+        
+        # Retrieve evidence data for txtai indexing
+        combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        self.logger.info(f"Using pre-extracted evidence artifact for txtai: {request.evidence_artifact_hash[:12]}...")
+        
+        # Combine both stage results for comprehensive evidence curation
+        combined_statistical_results = {
+            "stage_1_raw_data": exec_response.get('stage_1_raw_data', {}),
+            "stage_2_derived_metrics": exec_response.get('stage_2_derived_metrics', {})
+        }
+        
+        # Create txtai curation request
+        txtai_request = TxtaiCurationRequest(
+            statistical_results=combined_statistical_results,
+            evidence_data=combined_data,
+            framework_spec=request.framework_spec,
+            model=self.model
+        )
+        
+        # Log txtai curation start
+        self.audit_logger.log_agent_event(
+            "TxtaiEvidenceCurator",
+            "txtai_curation_start",
+            {
+                "evidence_artifact_hash": request.evidence_artifact_hash,
+                "statistical_results_stages": list(combined_statistical_results.keys()),
+                "curation_method": "txtai_semantic_search"
+            }
+        )
+        
+        # Execute txtai-based evidence curation
+        txtai_response = self.txtai_curator.curate_evidence(txtai_request)
+        
+        # Debug logging for txtai curation
+        if self.debug_agent == "txtai-curator" and self.debug_level in ["debug", "verbose"]:
+            self.logger.info(f"txtai curation success: {txtai_response.success}")
+            self.logger.info(f"txtai curation error: {txtai_response.error_message or 'None'}")
+            self.logger.info(f"Raw LLM curation length: {len(txtai_response.raw_llm_curation) if txtai_response.raw_llm_curation else 0}")
+            if txtai_response.raw_llm_curation:
+                self.logger.info(f"Raw LLM curation preview: {txtai_response.raw_llm_curation[:200]}...")
+        
+        return txtai_response
 
     def _stage_4_generate_grounding_evidence(self, exec_response, curation_response, request: ProductionPipelineRequest):
         """Stage 4: Generate grounding evidence using raw LLM curation (THIN approach)."""
@@ -862,9 +974,8 @@ Raw Analysis Data:
                 document_name = doc_match.group(1)
         
         # THIN: Create grounding evidence request using raw_llm_curation
-        # This delegates all intelligence to the LLM instead of software parsing
         grounding_request = GroundingEvidenceRequest(
-            raw_llm_curation=curation_response.raw_llm_curation,  # THIN: Use raw LLM output
+            raw_llm_curation=curation_response.raw_llm_curation,
             framework_spec=request.framework_spec,
             document_name=document_name,
             min_confidence_threshold=request.min_confidence_threshold
@@ -897,8 +1008,8 @@ Raw Analysis Data:
         if self.debug_agent in ['results-interpreter', None] and self.debug_level in ['debug', 'verbose']:
             self.logger.info(f"📖 DEBUG: Results interpreter input:")
             self.logger.info(f"   - Statistical results keys: {list(statistical_results.keys()) if statistical_results else 'NO DATA'}")
-            self.logger.info(f"   - Curated evidence keys: {list(curation_response.curated_evidence.keys()) if curation_response.curated_evidence else 'NO DATA'}")
-            self.logger.info(f"   - Total evidence pieces: {sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0}")
+            self.logger.info(f"   - Raw LLM curation length: {len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0}")
+            self.logger.info(f"   - Grounding evidence count: {len(grounding_response.grounding_evidence) if grounding_response.grounding_evidence else 0}")
             if statistical_results:
                 for key, value in statistical_results.items():
                     if isinstance(value, dict):
@@ -966,12 +1077,10 @@ Raw Analysis Data:
         # Check for evidence curation issues
         if not curation_response.success:
             notable_errors.append(f"Evidence curation failed: {curation_response.error_message}")
-        elif curation_response.curated_evidence and len(curation_response.curated_evidence) == 0:
+        elif not curation_response.raw_llm_curation or len(curation_response.raw_llm_curation.strip()) == 0:
             warnings.append("No evidence was curated - this may indicate data quality issues")
-        elif curation_response.curated_evidence:
-            total_evidence = sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values())
-            if total_evidence < 5:
-                warnings.append(f"Limited evidence base (only {total_evidence} pieces of evidence curated for synthesis)")
+        elif len(curation_response.raw_llm_curation) < 500:
+            warnings.append(f"Limited evidence base (only {len(curation_response.raw_llm_curation)} chars of curated evidence)")
         
         # Check statistical results for issues
         stage_2_results = exec_response.get('stage_2_derived_metrics', {})
@@ -994,10 +1103,10 @@ Raw Analysis Data:
         
         interpretation_request = InterpretationRequest(
             statistical_results=statistical_results,
-            curated_evidence=curation_response.curated_evidence,
+            curated_evidence={"raw_llm_curation": [curation_response.raw_llm_curation]},  # Adapt to expected format
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context,
-            footnote_registry=curation_response.footnote_registry,
+            footnote_registry=None,  # Not available in new architecture
             
             # Provenance metadata
             run_id=run_id,
@@ -1025,7 +1134,7 @@ Raw Analysis Data:
             "ResultsInterpreter",
             "interpretation_start",
             {
-                "curated_evidence_count": len(curation_response.curated_evidence),
+                "raw_llm_curation_length": len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0,
                 "interpretation_focus": request.interpretation_focus,
                 "stage_2_results_used": True
             }
@@ -1176,6 +1285,8 @@ Raw Analysis Data:
             analysis_plan_hash="",
             statistical_results_hash="",
             curated_evidence_hash="",
+            grounding_evidence_hash="",
+            dual_purpose_report_hash="",
             success=False,
             total_execution_time=total_time,
             stage_timings=stage_timings,
