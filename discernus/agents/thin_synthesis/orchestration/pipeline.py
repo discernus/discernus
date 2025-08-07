@@ -11,8 +11,8 @@ Integrates with Discernus infrastructure:
 4-Agent Architecture:
 1. AnalysisPlanner: LLM generates JSON analysis plans
 2. MathToolkit: Pre-built, tested mathematical functions
-3. EvidenceCurator: LLM selects evidence based on actual results
-4. ResultsInterpreter: LLM synthesizes final narrative
+3. EvidenceCurator: txtai-based RAG for scalable evidence retrieval
+4. RAGEnhancedInterpreter: Single intelligent interpreter with multi-audience sections
 
 Key Innovation: Declarative mathematical specification eliminates code generation errors.
 """
@@ -43,8 +43,7 @@ from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAna
 from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
-from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
-from ..results_interpreter.dual_purpose_results_interpreter import DualPurposeResultsInterpreter, DualPurposeReportRequest, DualPurposeReportResponse
+from ..results_interpreter.rag_enhanced_interpreter import RAGEnhancedResultsInterpreter, RAGInterpretationRequest
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
 from ...score_grounding.grounding_evidence_generator import GroundingEvidenceGenerator, GroundingEvidenceRequest
 from ...evidence_indexer_agent.agent import EvidenceIndexerAgent, IndexingRequest, IndexingResponse
@@ -133,8 +132,7 @@ class ProductionThinSynthesisPipeline:
         self.evidence_indexer = EvidenceIndexerAgent(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
         self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)
-        self.results_interpreter = ResultsInterpreter(model=model, audit_logger=audit_logger)
-        self.dual_purpose_interpreter = DualPurposeResultsInterpreter(model=model, audit_logger=audit_logger)
+        self.rag_interpreter = RAGEnhancedResultsInterpreter(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
         self.grounding_evidence_generator = GroundingEvidenceGenerator(model=model, audit_logger=audit_logger)
         
@@ -961,6 +959,18 @@ Raw Analysis Data:
     def _stage_4_generate_grounding_evidence(self, exec_response, curation_response, request: ProductionPipelineRequest):
         """Stage 4: Generate grounding evidence using raw LLM curation (THIN approach)."""
         
+        # Skip grounding evidence generation if no evidence was curated (Epic 280 selective filtering)
+        if not curation_response.raw_llm_curation or curation_response.raw_llm_curation.strip() == "":
+            self.logger.info("⏭️  Skipping grounding evidence generation - no evidence was curated (Epic 280 selective filtering)")
+            
+            # Return empty grounding response
+            from ...score_grounding.grounding_evidence_generator import GroundingEvidenceResponse
+            return GroundingEvidenceResponse(
+                grounding_evidence=[],
+                generation_summary={"skipped": True, "reason": "no_evidence_curated"},
+                success=True
+            )
+        
         # THIN: Use raw_llm_curation from EvidenceCurationResponse instead of parsing analysis_scores
         # This preserves full LLM intelligence and eliminates redundant parsing
         
@@ -1101,52 +1111,76 @@ Raw Analysis Data:
             # Fallback to empty metadata if parsing fails
             reporting_metadata = {}
         
-        interpretation_request = InterpretationRequest(
+        # Open the synthesis aperture: Use rich analysis evidence instead of empty statistical curation
+        analysis_evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        
+        # Ensure txtai curator is initialized with evidence for RAG-enhanced synthesis
+        if not self.txtai_curator.index_built:
+            self.logger.info("🔍 Initializing txtai curator for RAG-enhanced synthesis...")
+            if self.txtai_curator._build_evidence_index(analysis_evidence_data):
+                self.logger.info("✅ txtai index built successfully for synthesis")
+            else:
+                self.logger.warning("⚠️  txtai index build failed - falling back to traditional synthesis")
+        
+        # Log interpretation start
+        self.audit_logger.log_agent_event(
+            "RAGEnhancedResultsInterpreter",
+            "interpretation_start",
+            {
+                "statistical_results_count": len(statistical_results),
+                "txtai_available": getattr(self.txtai_curator, 'index_built', False),
+                "framework_name": framework_name,
+                "run_id": run_id
+            }
+        )
+        
+        # Use RAG-enhanced interpreter instead of two-stage approach
+        rag_request = RAGInterpretationRequest(
             statistical_results=statistical_results,
-            curated_evidence={"raw_llm_curation": [curation_response.raw_llm_curation]},  # Adapt to expected format
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context,
-            footnote_registry=None,  # Not available in new architecture
+            txtai_curator=self.txtai_curator if getattr(self.txtai_curator, 'index_built', False) else None,
             
             # Provenance metadata
             run_id=run_id,
             models_used={
                 "synthesis": self.model,
-                "analysis": self.analysis_model if self.analysis_model else "unknown"
+                "analysis": self.analysis_model or "unknown"
             },
             execution_timestamp_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
             execution_timestamp_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
             framework_name=framework_name,
             framework_version=framework_version,
-            corpus_info=self._extract_corpus_info(request.experiment_context),
-            
-            # Error and warning tracking
-            notable_errors=notable_errors if notable_errors else None,
-            warnings=warnings if warnings else None,
-            quality_alerts=quality_alerts if quality_alerts else None,
-            
-            # v7.3: Framework reporting metadata
-            reporting_metadata=reporting_metadata
+            corpus_info=self._safe_extract_corpus_info(request.experiment_context),
+            cost_data=self._safe_get_cost_data()
         )
         
-        # Log interpretation start
-        self.audit_logger.log_agent_event(
-            "ResultsInterpreter",
-            "interpretation_start",
-            {
-                "raw_llm_curation_length": len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0,
-                "interpretation_focus": request.interpretation_focus,
-                "stage_2_results_used": True
-            }
-        )
+        # Generate RAG-enhanced interpretation (replaces both stage 5 and 6)
+        rag_response = self.rag_interpreter.interpret_results(rag_request)
         
-        # Store the interpretation response for use in the main method
-        interpretation_response = self.results_interpreter.interpret_results(interpretation_request)
+        # Create compatibility response for the pipeline
+        class CompatibilityResponse:
+            def __init__(self, rag_response):
+                self.success = rag_response.success
+                self.narrative_report = rag_response.full_report
+                self.executive_summary = rag_response.scanner_section
+                self.error_message = rag_response.error_message or ""
+                # Dual purpose sections
+                self.scanner_section = rag_response.scanner_section
+                self.collaborator_section = rag_response.collaborator_section
+                self.transparency_section = rag_response.transparency_section
+                # Missing attributes expected by pipeline
+                self.word_count = rag_response.word_count
+                self.evidence_queries_used = rag_response.evidence_queries_used
+                # Legacy compatibility
+                self.statistical_results = {}  # Not needed for RAG approach
+                self.report_content = rag_response.full_report
+                self.key_findings = []  # Legacy attribute expected by pipeline
+                self.evidence_integration_summary = {}  # Legacy attribute expected by pipeline
+                self.statistical_summary = {}  # Legacy attribute expected by pipeline
         
-        # Generate dual-purpose report for academic collaboration
-        dual_purpose_response = self._stage_6_generate_dual_purpose_report(
-            interpretation_response, curation_response, grounding_response, request
-        )
+        interpretation_response = CompatibilityResponse(rag_response)
+        dual_purpose_response = interpretation_response  # Same object, different interface
         
         # Return a success response object so the main method can continue with artifact creation
         class StageResponse:
@@ -1158,113 +1192,48 @@ Raw Analysis Data:
         
         return StageResponse(True, interpretation_response, dual_purpose_response)
 
-    def _stage_6_generate_dual_purpose_report(self, interpretation_response, curation_response, grounding_response, request: ProductionPipelineRequest):
-        """Stage 6: Generate dual-purpose report for academic collaboration."""
-        
-        self.logger.info("📝 Stage 6: Generating dual-purpose report for academic collaboration...")
-        
+    # Stage 6 removed - RAG-enhanced interpreter now handles all report generation in stage 5
+    
+    def _safe_get_cost_data(self):
+        """Safely get cost data that can be JSON serialized."""
         try:
-            # Extract data from previous stages
-            statistical_results = interpretation_response.statistical_results if hasattr(interpretation_response, 'statistical_results') else {}
-            scores_data = {}  # Will be populated from artifact if needed
-            
-            # Convert evidence data to JSON-serializable format
-            if curation_response.success and hasattr(curation_response, 'to_json_serializable'):
-                evidence_data = curation_response.to_json_serializable()
-            else:
-                evidence_data = {}
-            
-            # THIN: Extract raw_llm_curation for pure LLM intelligence flow
-            raw_llm_curation = curation_response.raw_llm_curation if curation_response.success else None
-            
-            # Extract experiment context for report metadata
-            experiment_context = {}
-            if request.experiment_context:
-                try:
-                    experiment_context = json.loads(request.experiment_context)
-                except (json.JSONDecodeError, AttributeError):
-                    experiment_context = {}
-            
-            # Extract experiment name and subtitle
-            experiment_name = experiment_context.get('name', 'Computational Analysis')
-            experiment_subtitle = experiment_context.get('description', 'Analysis using computational framework')
-            if isinstance(experiment_subtitle, str) and len(experiment_subtitle) > 100:
-                experiment_subtitle = experiment_subtitle[:97] + "..."
-            
-            # Extract corpus information
-            corpus_info = self._extract_corpus_info(request.experiment_context)
-            document_count = corpus_info.get('document_count', 0)
-            corpus_type = corpus_info.get('corpus_type', 'Text Corpus')
-            corpus_composition = corpus_info.get('corpus_composition', 'Unknown')
-            
-            # Generate timestamps
-            execution_time_utc = datetime.now(timezone.utc)
-            execution_time_local = datetime.now()
-            
-            # Extract framework information
-            framework_name = request.framework_name or "Unknown Framework"
-            framework_version = "v7.3"  # Default for current architecture
-            
-            # Generate run ID
-            run_hash = hash(f"{request.scores_artifact_hash}_{execution_time_utc.isoformat()}")
-            run_id = f"{execution_time_utc.strftime('%Y%m%dT%H%M%SZ')}_{abs(run_hash)%100000:05d}"
-            
-            # Extract real cost data from audit logger
-            cost_data = self.audit_logger.get_session_costs()
-            
-            # Create dual-purpose report request with configurable options
-            dual_purpose_request = DualPurposeReportRequest(
-                        experiment_name=experiment_name,
-                        experiment_subtitle=experiment_subtitle,
-                        run_id=run_id,
-                        execution_time_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
-                        execution_time_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                        analysis_model=self.analysis_model or "unknown",
-                        synthesis_model=self.model,
-                        framework_name=framework_name,
-                        framework_version=framework_version,
-                        document_count=document_count,
-                        corpus_type=corpus_type,
-                        corpus_composition=corpus_composition,
-                        statistical_results=statistical_results,
-                        evidence_data=evidence_data,
-                        raw_llm_curation=raw_llm_curation,  # THIN: Pass raw LLM intelligence
-                        scores_data=scores_data,
-                        run_directory=f"runs/{run_id}",
-                        cost_data=cost_data,
-                        # Configurable options for flexibility
-                        template_path=None,  # Use default discovery
-                        section_markers=None  # Use default markers
-                    )
-            
-            # Generate dual-purpose report
-            dual_purpose_response = self.dual_purpose_interpreter.generate_dual_purpose_report(dual_purpose_request)
-            
-            if dual_purpose_response.success:
-                self.logger.info("✅ Dual-purpose report generated successfully")
-                return dual_purpose_response
-            else:
-                self.logger.warning(f"⚠️ Dual-purpose report generation failed: {dual_purpose_response.error_message}")
-                # Return a fallback response
-                return DualPurposeReportResponse(
-                    report_content="Dual-purpose report generation failed. Standard report available.",
-                    scanner_section="",
-                    collaborator_section="",
-                    transparency_section="",
-                    success=False,
-                    error_message=dual_purpose_response.error_message
-                )
-                
+            if self.audit_logger and hasattr(self.audit_logger, 'get_session_costs'):
+                cost_data = self.audit_logger.get_session_costs()
+                # Ensure all values are JSON serializable
+                if isinstance(cost_data, dict):
+                    safe_cost_data = {}
+                    for key, value in cost_data.items():
+                        try:
+                            import json
+                            json.dumps(value)  # Test if serializable
+                            safe_cost_data[key] = value
+                        except (TypeError, ValueError):
+                            safe_cost_data[key] = str(value)  # Convert to string if not serializable
+                    return safe_cost_data
+            return {}
         except Exception as e:
-            self.logger.error(f"❌ Failed to generate dual-purpose report: {e}")
-            return DualPurposeReportResponse(
-                report_content="",
-                scanner_section="",
-                collaborator_section="",
-                transparency_section="",
-                success=False,
-                error_message=str(e)
-            )
+            self.logger.warning(f"Failed to get cost data: {e}")
+            return {}
+    
+    def _safe_extract_corpus_info(self, experiment_context):
+        """Safely extract corpus info that can be JSON serialized."""
+        try:
+            corpus_info = self._extract_corpus_info(experiment_context)
+            # Ensure all values are JSON serializable
+            if isinstance(corpus_info, dict):
+                safe_corpus_info = {}
+                for key, value in corpus_info.items():
+                    try:
+                        import json
+                        json.dumps(value)  # Test if serializable
+                        safe_corpus_info[key] = value
+                    except (TypeError, ValueError):
+                        safe_corpus_info[key] = str(value)  # Convert to string if not serializable
+                return safe_corpus_info
+            return corpus_info or {}
+        except Exception as e:
+            self.logger.warning(f"Failed to extract corpus info: {e}")
+            return {}
 
     # THIN REFACTORING: Removed ~150 lines of THICK DataFrame parsing logic
     # All data parsing is now handled by individual agents (AnalysisPlanner, MathToolkit, etc.)

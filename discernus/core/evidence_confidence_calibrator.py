@@ -164,8 +164,7 @@ ACADEMIC VALIDATION CRITERIA:
             # Delegate calibration to LLM (THIN approach)
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
-                prompt=calibration_prompt,
-                max_tokens=2000  # Allow comprehensive calibration
+                prompt=calibration_prompt
             )
             
             # Parse LLM calibration response

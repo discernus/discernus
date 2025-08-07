@@ -201,10 +201,44 @@ class ResultsInterpreter:
         
         # Convert data to strings - let LLM handle interpretation
         stats_str = str(request.statistical_results)
-        evidence_str = str(request.curated_evidence)
         
-        # Count total evidence pieces
-        total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
+        # Enhanced evidence processing: Use analysis evidence if available
+        evidence_str = ""
+        total_evidence = 0
+        
+        if request.curated_evidence:
+            # Check if we have rich analysis evidence
+            if "analysis_evidence" in request.curated_evidence:
+                analysis_evidence = request.curated_evidence["analysis_evidence"]
+                if isinstance(analysis_evidence, bytes):
+                    analysis_evidence = json.loads(analysis_evidence.decode('utf-8'))
+                
+                # Format analysis evidence for better LLM consumption
+                if isinstance(analysis_evidence, list):
+                    evidence_str = "DIMENSIONAL EVIDENCE FROM ANALYSIS:\n"
+                    for i, evidence in enumerate(analysis_evidence, 1):
+                        if isinstance(evidence, dict):
+                            quote = evidence.get('quote_text', '')
+                            dimension = evidence.get('dimension', 'unknown')
+                            document = evidence.get('document_id', 'unknown')
+                            score = evidence.get('score', 'unknown')
+                            evidence_str += f"[{i}] {document} - {dimension} (score: {score}): \"{quote}\"\n"
+                    total_evidence = len(analysis_evidence)
+                else:
+                    evidence_str = f"Analysis evidence: {str(analysis_evidence)}"
+                    total_evidence = 1
+            
+            # Add statistical curation if available
+            raw_curation = request.curated_evidence.get("raw_llm_curation", "")
+            if raw_curation:
+                evidence_str += f"\n\nSTATISTICAL TASK EVIDENCE:\n{raw_curation}"
+            
+            # Fallback to original format if needed
+            if not evidence_str:
+                evidence_str = str(request.curated_evidence)
+                total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values() if isinstance(evidence_list, list))
+        else:
+            evidence_str = "No evidence available"
         
         # Build footnote instructions if available
         footnote_instructions = ""

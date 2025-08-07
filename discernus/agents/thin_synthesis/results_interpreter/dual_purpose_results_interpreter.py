@@ -41,6 +41,7 @@ class DualPurposeReportRequest:
     template_path: Optional[str] = None
     section_markers: Optional[Dict[str, str]] = None
     raw_llm_curation: Optional[str] = None  # THIN: Raw LLM output from evidence curator
+    txtai_curator: Optional[Any] = None  # RAG-Enhanced: txtai curator for dynamic evidence queries
 
 
 @dataclass
@@ -233,12 +234,11 @@ Write in clear, academic language suitable for both researchers and collaborator
 """
         
         try:
-            response = self.client.chat.completions.create(
+            response_content, metadata = self.client.execute_call(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3
+                prompt=prompt
             )
-            return response.choices[0].message.content.strip()
+            return response_content.strip()
         except Exception as e:
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -264,12 +264,11 @@ Focus on the most important hypotheses from the analysis.
 """
         
         try:
-            response = self.client.chat.completions.create(
+            response_content, metadata = self.client.execute_call(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3
+                prompt=prompt
             )
-            return response.choices[0].message.content.strip()
+            return response_content.strip()
         except Exception as e:
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -295,12 +294,11 @@ Focus on findings that would be most important for a researcher scanning the rep
 """
         
         try:
-            response = self.client.chat.completions.create(
+            response_content, metadata = self.client.execute_call(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3
+                prompt=prompt
             )
-            return response.choices[0].message.content.strip()
+            return response_content.strip()
         except Exception as e:
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -325,12 +323,11 @@ Example format: "To measure [concept], the analysis agent identified [specific p
 """
         
         try:
-            response = self.client.chat.completions.create(
+            response_content, metadata = self.client.execute_call(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3
+                prompt=prompt
             )
-            return response.choices[0].message.content.strip()
+            return response_content.strip()
         except Exception as e:
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -339,10 +336,14 @@ Example format: "To measure [concept], the analysis agent identified [specific p
             )
             return f"Analysis conducted using {framework_name} {framework_version} with systematic pattern extraction and scoring."
     
-    def _generate_detailed_findings_with_evidence(self, statistical_results: Dict[str, Any], evidence_data: Dict[str, Any], raw_llm_curation: Optional[str] = None) -> str:
-        """Generate detailed findings with integrated evidence (THIN approach)."""
+    def _generate_detailed_findings_with_evidence(self, statistical_results: Dict[str, Any], evidence_data: Dict[str, Any], raw_llm_curation: Optional[str] = None, txtai_curator=None) -> str:
+        """Generate detailed findings with RAG-enhanced evidence integration."""
         
-        # THIN: Use raw_llm_curation if available, otherwise fall back to structured evidence_data
+        # RAG-Enhanced Synthesis: Query evidence dynamically for each statistical finding
+        if txtai_curator and hasattr(txtai_curator, 'query_evidence'):
+            return self._generate_rag_enhanced_findings(statistical_results, txtai_curator)
+        
+        # Fallback to traditional approach
         evidence_source = raw_llm_curation if raw_llm_curation else json.dumps(evidence_data, indent=2)
         
         prompt = f"""
@@ -362,12 +363,11 @@ Focus on the most significant findings with the strongest evidence support.
 """
         
         try:
-            response = self.client.chat.completions.create(
+            response_content, metadata = self.client.execute_call(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3
+                prompt=prompt
             )
-            return response.choices[0].message.content.strip()
+            return response_content.strip()
         except Exception as e:
             self.audit_logger.log_agent_event(
                 "DualPurposeResultsInterpreter",
@@ -375,6 +375,94 @@ Focus on the most significant findings with the strongest evidence support.
                 {"error": f"Failed to generate detailed findings: {e}"}
             )
             return "Detailed findings with integrated evidence available in the full analysis."
+    
+    def _generate_rag_enhanced_findings(self, statistical_results: Dict[str, Any], txtai_curator) -> str:
+        """Generate findings using RAG to dynamically query evidence for each statistical result."""
+        
+        findings_sections = []
+        
+        # Process each statistical result with targeted evidence queries
+        for result_key, result_data in statistical_results.items():
+            if not isinstance(result_data, dict) or 'provenance' not in result_data:
+                continue
+                
+            # Extract key terms for evidence query
+            provenance = result_data.get('provenance', {})
+            input_columns = provenance.get('input_columns', [])
+            
+            # Build targeted query for this specific finding
+            query_terms = []
+            if 'dignity' in result_key.lower():
+                query_terms.extend(['dignity', 'respect', 'honor', 'civility'])
+            if 'oligarchy' in result_key.lower():
+                query_terms.extend(['oligarchy', 'elite', 'wealthy', 'power'])
+            if 'populist' in result_key.lower():
+                query_terms.extend(['populist', 'people', 'establishment', 'elites'])
+                
+            # Add dimension-specific terms
+            for col in input_columns:
+                if isinstance(col, str):
+                    query_terms.append(col.replace('_', ' '))
+            
+            # Query txtai for relevant evidence
+            if query_terms:
+                query = ' OR '.join(query_terms[:5])  # Limit query complexity
+                try:
+                    evidence_results = txtai_curator._query_evidence(query, limit=3)
+                    
+                    if evidence_results:
+                        # Generate finding with targeted evidence
+                        finding_text = self._synthesize_finding_with_evidence(
+                            result_key, result_data, evidence_results
+                        )
+                        findings_sections.append(finding_text)
+                        
+                except Exception as e:
+                    self.audit_logger.log_agent_event(
+                        "DualPurposeResultsInterpreter",
+                        "warning", 
+                        {"error": f"RAG query failed for {result_key}: {e}"}
+                    )
+        
+        return "\n\n".join(findings_sections) if findings_sections else "Statistical findings available in full analysis."
+    
+    def _synthesize_finding_with_evidence(self, result_key: str, result_data: Dict[str, Any], evidence_results: List[Dict]) -> str:
+        """Synthesize a single finding with its targeted evidence."""
+        
+        # Format evidence for LLM consumption
+        evidence_text = ""
+        for i, evidence in enumerate(evidence_results, 1):
+            quote = evidence.get('quote_text', '')
+            document = evidence.get('document_id', 'unknown')
+            dimension = evidence.get('dimension', 'unknown')
+            evidence_text += f"[{i}] {document} ({dimension}): \"{quote}\"\n"
+        
+        prompt = f"""
+Generate a detailed finding that integrates this statistical result with the targeted evidence.
+
+STATISTICAL RESULT: {result_key}
+Data: {json.dumps(result_data, indent=2)}
+
+TARGETED EVIDENCE (retrieved via semantic search):
+{evidence_text}
+
+Structure as:
+1. Clear statement of the statistical finding
+2. Direct supporting quote from the evidence  
+3. Interpretation explaining the connection
+
+Write 2-3 paragraphs that demonstrate how the evidence supports and explains the statistical result.
+Use direct quotes and maintain academic rigor.
+"""
+        
+        try:
+            response_content, metadata = self.client.execute_call(
+                model=self.model,
+                prompt=prompt
+            )
+            return response_content.strip()
+        except Exception as e:
+            return f"Finding: {result_key} - Evidence integration failed: {e}"
     
     def _format_cost_breakdown(self, cost_data: Dict[str, Any]) -> str:
         """Format cost breakdown for transparency using real audit logger data."""
@@ -457,7 +545,8 @@ Focus on the most significant findings with the strongest evidence support.
             detailed_findings = self._generate_detailed_findings_with_evidence(
                 request.statistical_results, 
                 request.evidence_data, 
-                request.raw_llm_curation
+                request.raw_llm_curation,
+                txtai_curator=request.txtai_curator  # RAG-Enhanced: Use txtai for dynamic evidence queries
             )
             
             # Calculate evidence and score counts

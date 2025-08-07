@@ -127,9 +127,7 @@ class TxtaiEvidenceCurator:
                 if not success:
                     return self._create_error_response("Failed to build evidence index")
             
-            # Process statistical results and generate evidence-based narratives
-            narratives = []
-            
+            # Process statistical results and generate evidence-based narratives using batch processing
             # Process both raw data and derived metrics results
             all_results = {}
             if "stage_1_raw_data" in request.statistical_results:
@@ -137,26 +135,30 @@ class TxtaiEvidenceCurator:
             if "stage_2_derived_metrics" in request.statistical_results:
                 all_results.update(request.statistical_results["stage_2_derived_metrics"].get("results", {}))
             
+            # Filter tasks that need evidence linking according to Epic 280 design
+            valid_tasks = {}
             for task_name, task_result in all_results.items():
                 if "provenance" not in task_result:
                     self.logger.warning(f"Skipping task '{task_name}' - no provenance information")
                     continue
                 
-                narrative = self._generate_evidence_narrative(
-                    task_name, task_result, request.framework_spec
-                )
-                
-                if narrative:
-                    narratives.append(narrative)
+                # Apply Epic 280 selective evidence linking criteria
+                if self._task_needs_evidence_linking(task_name, task_result):
+                    valid_tasks[task_name] = task_result
+                else:
+                    self.logger.debug(f"Skipping task '{task_name}' - mathematical operation, needs transparency not evidence")
             
-            final_curation = "\n\n".join(narratives)
+            self.logger.info(f"Evidence linking applied to {len(valid_tasks)}/{len(all_results)} tasks (Epic 280 selective criteria)")
+            
+            # Use batch processing to generate all narratives in a single LLM call
+            final_curation = self._batch_generate_evidence_narratives(valid_tasks, request.framework_spec)
             
             return TxtaiCurationResponse(
                 raw_llm_curation=final_curation,
                 curation_summary={
-                    "findings_synthesized": len(narratives),
-                    "evidence_queries_executed": len(narratives),
-                    "indexing_method": "txtai_semantic_search"
+                    "findings_synthesized": len(valid_tasks),
+                    "evidence_queries_executed": len(valid_tasks),
+                    "indexing_method": "txtai_semantic_search_batch"
                 },
                 success=True
             )
@@ -165,6 +167,68 @@ class TxtaiEvidenceCurator:
             self.logger.error(f"txtai evidence curation failed: {str(e)}")
             return self._create_error_response(str(e))
     
+    def _task_needs_evidence_linking(self, task_name: str, task_result: Dict[str, Any]) -> bool:
+        """
+        Determine if a statistical task needs evidence linking according to Epic 280 design.
+        
+        Epic 280 Criteria:
+        ✅ Dimensional scores (dignity_score = 0.0) → Need evidence justification
+        ✅ Axis calculations (dignity-tribalism tension) → Need component evidence  
+        ❌ Correlations (r=0.912) → Mathematical relationship, no evidence needed
+        ❌ Composite indices → Transparent formula + component evidence sufficient
+        ❌ Data validation → Technical operations
+        ❌ Statistical tests → Mathematical operations
+        """
+        task_type = task_result.get("type", "unknown")
+        
+        # Tasks that need evidence linking (Epic 280)
+        evidence_needed_patterns = [
+            # Dimensional score calculations and validations
+            "dimensional_score",
+            "dimension_score", 
+            "axis_calculation",
+            "tension_calculation",
+            # Individual metric calculations that represent analytical judgments
+            "individual_metric"
+        ]
+        
+        # Tasks that do NOT need evidence linking (Epic 280)
+        mathematical_only_patterns = [
+            # Statistical operations
+            "one_way_anova",
+            "correlation", 
+            "t_test",
+            "chi_square",
+            "regression",
+            # Data validation and technical operations
+            "metric_validation",
+            "missing_data_check",
+            "range_check",
+            "data_quality",
+            # Composite calculations (formula transparency sufficient)
+            "derived_metrics_calculation",
+            "summary_statistics",
+            "descriptive_stats",
+            # Aggregation operations
+            "group_by",
+            "aggregation"
+        ]
+        
+        # Check if task type indicates mathematical-only operation
+        for pattern in mathematical_only_patterns:
+            if pattern in task_type.lower() or pattern in task_name.lower():
+                return False
+        
+        # Check if task type indicates evidence-needed operation
+        for pattern in evidence_needed_patterns:
+            if pattern in task_type.lower() or pattern in task_name.lower():
+                return True
+        
+        # Default: Conservative approach - include evidence for unclear cases
+        # This ensures we don't miss important analytical judgments
+        self.logger.debug(f"Task '{task_name}' (type: {task_type}) defaulting to evidence linking")
+        return True
+
     def _build_evidence_index(self, evidence_data: bytes) -> bool:
         """
         Build txtai index from evidence data.
@@ -225,6 +289,144 @@ class TxtaiEvidenceCurator:
             self.logger.error(f"Failed to build evidence index: {str(e)}")
             return False
     
+    def _batch_generate_evidence_narratives(self, valid_tasks: Dict[str, Dict[str, Any]], framework_spec: str) -> str:
+        """
+        Generate evidence-based narratives for all statistical tasks in a single LLM call.
+        
+        Args:
+            valid_tasks: Dictionary of task_name -> task_result for all valid tasks
+            framework_spec: Framework specification for context
+            
+        Returns:
+            Combined evidence narratives for all tasks
+        """
+        if not valid_tasks:
+            return ""
+        
+        try:
+            # Collect evidence for all tasks
+            all_task_evidence = {}
+            
+            for task_name, task_result in valid_tasks.items():
+                # Extract provenance information
+                provenance = task_result.get("provenance", {})
+                input_document_ids = provenance.get("input_document_ids", [])
+                input_columns = provenance.get("input_columns", [])
+                
+                # Determine relevant dimension(s) from input columns
+                relevant_dimensions = []
+                for col in input_columns:
+                    if col.endswith("_score"):
+                        dimension = col.replace("_score", "")
+                        relevant_dimensions.append(dimension)
+                
+                if not relevant_dimensions:
+                    self.logger.debug(f"No dimensional scores found for task '{task_name}'")
+                    continue
+                
+                # Query for evidence from contributing documents and dimensions
+                evidence_pieces = []
+                for document_id in input_document_ids[:4]:  # Limit to top 4 contributing documents
+                    for dimension in relevant_dimensions[:2]:  # Limit to top 2 dimensions
+                        query = EvidenceQuery(
+                            document_name=document_id,
+                            dimension=dimension,
+                            limit=2
+                        )
+                        results = self._query_evidence(query)
+                        evidence_pieces.extend(results)
+                
+                # Store evidence for this task
+                all_task_evidence[task_name] = {
+                    "task_result": task_result,
+                    "evidence_pieces": evidence_pieces
+                }
+            
+            # Create batch synthesis prompt
+            batch_prompt = self._create_batch_synthesis_prompt(all_task_evidence, framework_spec)
+            
+            # Execute batch synthesis
+            response_content, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=batch_prompt
+            )
+            
+            if response_content:
+                self.logger.info(f"Batch evidence synthesis successful: processed {len(valid_tasks)} tasks in 1 LLM call")
+                return response_content.strip()
+            else:
+                reason = metadata.get('finish_reason', 'Unknown reason') if metadata else 'No metadata available'
+                self.logger.warning(f"Batch synthesis failed: {reason}. Using fallback individual processing.")
+                return self._fallback_individual_synthesis(valid_tasks, framework_spec)
+                
+        except Exception as e:
+            self.logger.error(f"Batch evidence synthesis failed: {str(e)}. Using fallback individual processing.")
+            return self._fallback_individual_synthesis(valid_tasks, framework_spec)
+    
+    def _create_batch_synthesis_prompt(self, all_task_evidence: Dict[str, Dict], framework_spec: str) -> str:
+        """Create a comprehensive prompt for batch evidence synthesis."""
+        
+        task_sections = []
+        for task_name, task_data in all_task_evidence.items():
+            task_result = task_data["task_result"]
+            evidence_pieces = task_data["evidence_pieces"]
+            
+            if not evidence_pieces:
+                continue
+                
+            # Prepare evidence text for this task
+            evidence_text = "\n".join([
+                f"  - Document: {ev.document_name}, Dimension: {ev.dimension}, Quote: \"{ev.quote_text}\", Confidence: {ev.confidence}"
+                for ev in evidence_pieces
+            ])
+            
+            # Prepare statistical finding summary
+            finding_type = task_result.get("type", "unknown")
+            finding_summary = f"Type: {finding_type}, Results: {json.dumps(task_result.get('results', {}), indent=2)}"
+            
+            task_section = f"""
+TASK: {task_name}
+STATISTICAL FINDING:
+{finding_summary}
+
+RETRIEVED EVIDENCE:
+{evidence_text}
+"""
+            task_sections.append(task_section)
+        
+        batch_prompt = f"""You are a research assistant synthesizing evidence for a computational social science report. Your task is to create evidence-based narratives for multiple statistical findings simultaneously.
+
+FRAMEWORK CONTEXT:
+{framework_spec[:1000]}
+
+STATISTICAL FINDINGS AND EVIDENCE:
+{''.join(task_sections)}
+
+TASK: For each statistical finding above, write a 2-3 paragraph narrative that establishes the connection between the evidence and the statistical result. Each narrative should:
+
+1. Connect the evidence to the statistical finding
+2. Use direct quotes from the evidence  
+3. Reference the framework's theoretical foundation
+4. Maintain academic tone and precision
+
+Format your response as separate sections for each task, clearly labeled with the task name as a header.
+
+EVIDENCE NARRATIVES:
+"""
+        return batch_prompt
+    
+    def _fallback_individual_synthesis(self, valid_tasks: Dict[str, Dict[str, Any]], framework_spec: str) -> str:
+        """Fallback to individual synthesis if batch processing fails."""
+        self.logger.warning("Using fallback individual synthesis - this will make multiple LLM calls")
+        
+        narratives = []
+        for task_name, task_result in valid_tasks.items():
+            narrative = self._generate_evidence_narrative(task_name, task_result, framework_spec)
+            if narrative:
+                narratives.append(narrative)
+        
+        return "\n\n".join(narratives)
+
     def _generate_evidence_narrative(self, task_name: str, task_result: Dict[str, Any], framework_spec: str) -> str:
         """
         Generate evidence-based narrative for a statistical finding.
