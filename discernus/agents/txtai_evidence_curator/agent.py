@@ -213,6 +213,12 @@ class TxtaiEvidenceCurator:
             self.index_built = True
             
             self.logger.info(f"Built txtai index with {len(documents)} evidence pieces")
+            
+            # Debug: Log sample of indexed documents
+            sample_docs = documents[:3] if len(documents) >= 3 else documents
+            for i, doc in enumerate(sample_docs):
+                self.logger.info(f"Sample doc {i}: {doc.get('document_name', 'N/A')} - {doc.get('dimension', 'N/A')} - {doc.get('quote_text', '')[:50]}...")
+            
             return True
             
         except Exception as e:
@@ -261,7 +267,9 @@ class TxtaiEvidenceCurator:
                     evidence_pieces.extend(results)
             
             if not evidence_pieces:
-                self.logger.debug(f"No evidence found for task '{task_name}'")
+                self.logger.warning(f"No evidence found for task '{task_name}' - checked {len(input_document_ids)} docs x {len(relevant_dimensions)} dimensions")
+                self.logger.warning(f"Documents: {input_document_ids}")
+                self.logger.warning(f"Dimensions: {relevant_dimensions}")
                 return ""
             
             # Synthesize narrative using retrieved evidence
@@ -407,7 +415,7 @@ NARRATIVE:
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                max_tokens=1000
+                max_tokens=4000  # Match grounding evidence generator for comprehensive synthesis
             )
             
             if response_content:
