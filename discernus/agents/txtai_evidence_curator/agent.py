@@ -72,6 +72,15 @@ class TxtaiCurationResponse:
     curation_summary: Dict[str, Any]
     success: bool
     error_message: Optional[str] = None
+    
+    def to_json_serializable(self) -> Dict[str, Any]:
+        """Convert response to JSON-serializable format for compatibility."""
+        return {
+            "raw_llm_curation": self.raw_llm_curation,
+            "curation_summary": self.curation_summary,
+            "success": self.success,
+            "error_message": self.error_message
+        }
 
 
 class TxtaiEvidenceCurator:
