@@ -19,6 +19,11 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
+# Ensure the correct path for imports
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../..'))
+
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
@@ -78,6 +83,7 @@ class GroundingEvidenceGenerator:
         self.model = model
         self.agent_name = "GroundingEvidenceGenerator"
         self.audit_logger = audit_logger
+        self.logger = logging.getLogger(__name__)  # Add missing logger
         
         model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(model_registry)
@@ -193,6 +199,11 @@ Be specific and actionable. Focus on academic standards and research credibility
                 max_tokens=4000  # Allow comprehensive grounding generation
             )
             
+            if not response_content:
+                reason = metadata.get('finish_reason', 'Unknown reason') if metadata else 'No metadata available'
+                self.logger.error(f"LLM returned empty response for grounding evidence. Reason: {reason}")
+                raise ValueError(f"LLM returned empty response. Reason: {reason}")
+
             # Parse LLM grounding response
             grounding_evidence_list = self._parse_grounding_response(response_content, request.document_name)
             
@@ -266,25 +277,26 @@ Be specific and actionable. Focus on academic standards and research credibility
             
             # Convert to GroundingEvidence objects
             grounding_evidence_list = []
-            for item in grounding_data:
-                # Create evidence hash
-                evidence_hash = self._create_evidence_hash(
-                    item.get('grounding_evidence', {}).get('primary_quote', ''),
-                    document_name,
-                    item.get('dimension', '')
-                )
-                
-                grounding_evidence = GroundingEvidence(
-                    document_id=item.get('document_id', document_name),
-                    dimension=item.get('dimension', ''),
-                    score=float(item.get('score', 0.0)),
-                    score_confidence=float(item.get('score_confidence', 0.0)),
-                    grounding_evidence=item.get('grounding_evidence', {}),
-                    evidence_hash=evidence_hash,
-                    generation_timestamp=time.strftime('%Y-%m-%dT%H:%M:%SZ')
-                )
-                
-                grounding_evidence_list.append(grounding_evidence)
+            if isinstance(grounding_data, list):
+                for item in grounding_data:
+                    # Create evidence hash
+                    evidence_hash = self._create_evidence_hash(
+                        item.get('grounding_evidence', {}).get('primary_quote', ''),
+                        document_name,
+                        item.get('dimension', '')
+                    )
+                    
+                    grounding_evidence = GroundingEvidence(
+                        document_id=item.get('document_id', document_name),
+                        dimension=item.get('dimension', ''),
+                        score=float(item.get('score', 0.0)),
+                        score_confidence=float(item.get('score_confidence', 0.0)),
+                        grounding_evidence=item.get('grounding_evidence', {}),
+                        evidence_hash=evidence_hash,
+                        generation_timestamp=time.strftime('%Y-%m-%dT%H:%M:%SZ')
+                    )
+                    
+                    grounding_evidence_list.append(grounding_evidence)
             
             return grounding_evidence_list
             
