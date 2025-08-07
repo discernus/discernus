@@ -25,6 +25,9 @@ class RawDataAnalysisPlanRequest:
     framework_spec: str
     corpus_manifest: str
     research_questions: List[str]
+    available_columns: List[str]
+    available_columns: List[str]
+    available_columns: List[str]
 
 
 @dataclass
@@ -75,7 +78,8 @@ class RawDataAnalysisPlanner:
                 experiment_context=request.experiment_context,
                 framework_spec=request.framework_spec,
                 corpus_manifest=request.corpus_manifest,
-                research_questions="\n".join(f"- {q}" for q in request.research_questions)
+                research_questions="\n".join(f"- {q}" for q in request.research_questions),
+                available_columns=", ".join(request.available_columns)
             )
             
             # Generate plan using LLM

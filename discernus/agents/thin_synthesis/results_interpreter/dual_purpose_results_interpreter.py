@@ -236,7 +236,6 @@ Write in clear, academic language suitable for both researchers and collaborator
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=500,
                 temperature=0.3
             )
             return response.choices[0].message.content.strip()
@@ -268,7 +267,6 @@ Focus on the most important hypotheses from the analysis.
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=800,
                 temperature=0.3
             )
             return response.choices[0].message.content.strip()
@@ -300,7 +298,6 @@ Focus on findings that would be most important for a researcher scanning the rep
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=600,
                 temperature=0.3
             )
             return response.choices[0].message.content.strip()
@@ -331,7 +328,6 @@ Example format: "To measure [concept], the analysis agent identified [specific p
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=400,
                 temperature=0.3
             )
             return response.choices[0].message.content.strip()
@@ -369,7 +365,6 @@ Focus on the most significant findings with the strongest evidence support.
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=1200,
                 temperature=0.3
             )
             return response.choices[0].message.content.strip()

@@ -9,50 +9,30 @@ description: |
 # Framework version compliance (v7.3)
 framework_version: "v7.3"
 
-
-
 # Falsifiable hypotheses to be tested
 hypotheses:
   H1_Institutional_Cohesion: "McCain's institutional concession will demonstrate higher overall cohesion indices (dignity, hope, amity, cohesive goals) reflecting democratic norms of gracious transition"
   H2_Populist_Fragmentation: "Sanders' populist critique will show higher fragmentative elements (tribal dominance, enmity) but with strategic contradictions indicating sophisticated rhetorical positioning"
   H3_Democratic_Patterns: "The two discourse types will exhibit distinct social cohesion signatures corresponding to institutional versus populist democratic approaches"
 
-# Success criteria for validation
-success_criteria:
-  technical_success:
-    - "Complete pipeline execution without errors through all workflow agents"
-    - "Both corpus documents analyzed successfully with CFF v7.3 framework"
-    - "Generation of final_report.md and statistical_results.json artifacts"
-    - "Valid JSON output conforming to CFF v7.3 schema"
-  
-  analytical_success:
-    - "Clear differentiation between institutional vs populist cohesion signatures"
-    - "Strategic contradiction analysis reveals sophisticated rhetorical patterns"
-    - "Framework score extraction success rate > 95%"
-    - "Evidence quality meets academic standards with direct textual support"
-  
-  research_success:
-    - "Hypotheses H1-H3 receive clear empirical support or refutation"
-    - "Democratic resilience implications clearly articulated"
-    - "Comparative analysis provides actionable insights for political communication"
-
 # Path to the Framework v7.3 specification file
 framework: "../../frameworks/reference/flagship/cff_v7.3.md"
 
-# Path to the Corpus v7.1 directory
+# Path to the Corpus v7.3 directory
 corpus_path: "corpus/"
 
 # REQUIRED: Configuration for the analysis process
 analysis:
-  # The specific analysis variant to use from the framework file
+  version: "v7.3"
+  gasket_version: "v7.3"
   variant: "default"
-  # List of LiteLLM-compatible model identifiers for analysis
   models:
     - "vertex_ai/gemini-2.5-flash-lite"
 
 # OPTIONAL: Configuration for the synthesis process
 synthesis:
-  # Model to use for the final report synthesis
+  version: "v7.3"
+  gasket_version: "v7.3"
   model: "vertex_ai/gemini-2.5-flash-lite"
 
 # Canonical workflow configuration (v7.3 compliant)
@@ -64,14 +44,12 @@ workflow:
       - corpus
     outputs:
       - raw_analysis_log
-
   - agent: IntelligentExtractorAgent
     inputs:
       - raw_analysis_log
       - framework
     outputs:
       - structured_data
-
   - agent: ProductionThinSynthesisPipeline
     inputs:
       - structured_data
@@ -80,17 +58,6 @@ workflow:
     outputs:
       - final_report.md
       - statistical_results.json
-
-# Validation requirements for academic rigor
-validation:
-  required_tests:
-    - "speaker_differentiation_analysis"
-    - "cohesion_signature_comparison" 
-    - "strategic_contradiction_analysis"
-    - "democratic_resilience_assessment"
-  reliability_threshold: 0.80
-  effect_size_reporting: true
-  confidence_intervals: true
 
 # Expected outcomes and success criteria for the experiment
 expected_outcomes:

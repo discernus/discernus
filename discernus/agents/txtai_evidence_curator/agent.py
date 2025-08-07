@@ -414,8 +414,7 @@ NARRATIVE:
             # Generate synthesis
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
-                prompt=prompt,
-                max_tokens=4000  # Match grounding evidence generator for comprehensive synthesis
+                prompt=prompt
             )
             
             if response_content:
