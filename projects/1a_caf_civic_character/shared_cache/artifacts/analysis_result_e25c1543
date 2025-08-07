@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f3169c351537",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"civic_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted by following the sequential steps outlined in the Civic Analysis Framework (CAF) v7.3. Focus was placed on identifying semantic concepts and rhetorical patterns indicative of the defined civic virtues and their opposites. Confidence levels reflect the clarity and directness of the language used in supporting the dimensional scores. Evidence extraction prioritizes quotes that most strongly exemplify the assessed dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"jd_vance_2022_natcon_conference.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"truth\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.65,\n          \"confidence\": 0.60\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.50,\n          \"confidence\": 0.55\n        },\n        \"justice\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.60,\n          \"confidence\": 0.65\n        },\n        \"resentment\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.55,\n          \"confidence\": 0.60\n        },\n        \"hope\": {\n          \"raw_score\": 0.50,\n          \"salience\": 0.60,\n          \"confidence\": 0.70\n        },\n        \"fear\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.40,\n          \"confidence\": 0.50\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.35,\n          \"confidence\": 0.45\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first, of our own citizens first.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"rhetorical_appeal\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"group_identification\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I think actualy every speech I've given in that NatCon, I, I know Bridge spoke earlier, or I was going to speak, Bridge, you're out there somewhere.\",\n          \"confidence\": 0.60,\n          \"context_type\": \"statement_of_fact\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"And that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.\",\n          \"confidence\": 0.55,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"our elites don't seem to care about it. And why don't our elites seem to care about it? Well, number one, they really benefit from the cheap labor.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"grievance_expression\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"It's not just that, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"blame_attribution\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"And I think that's what the movement is going to be about, and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor who's desperate for cheap labor and it's not some random person who claims to speak for this or that constituency.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"positive_vision\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"One of the big dangers in the, in the world, of course, is nuclear proliferation, though of course the Biden administration doesn't care about it.\",\n          \"confidence\": 0.50,\n          \"context_type\": \"threat_articulation\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"We should, we should, in my view, not fight a war with China if we can avoid it. We should also not let the Chineses make all of our stuff.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"realistic_assessment\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"It does not make any sense. It's sort of the perfect encapsulation of the dumbest way to govern our country.\",\n          \"confidence\": 0.50,\n          \"context_type\": \"unrealistic_promise\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-06T18:06:12.629272+00:00",
+    "end_time": "2025-08-06T18:06:17.129708+00:00",
+    "duration_seconds": 4.500436,
+    "llm_interaction_hash": "53909b8260577f81"
+  },
+  "input_artifacts": {
+    "framework_hash": "39bab6b914987f0e1032933191868df5aedd75026555434171acdda9ba6862b8",
+    "document_hashes": [
+      "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250806T180557Z_e42ce93b"
+  }
+}

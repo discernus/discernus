@@ -1,0 +1,126 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis performed by adhering strictly to the sequential steps outlined in the analysis_prompt. Emphasis placed on identifying textual evidence for each dimension and assigning raw scores, salience, and confidence levels. No calculations or derived metrics were performed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.25,
+          "salience": 0.30,
+          "confidence": 0.80
+        },
+        "individual_dignity": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.90
+        },
+        "fear": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.75
+        },
+        "hope": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.30,
+          "salience": 0.25,
+          "confidence": 0.70
+        },
+        "companionship": {
+          "raw_score": 0.60,
+          "salience": 0.55,
+          "confidence": 0.85
+        },
+        "enmity": {
+          "raw_score": 0.05,
+          "salience": 0.10,
+          "confidence": 0.70
+        },
+        "amity": {
+          "raw_score": 0.50,
+          "salience": 0.45,
+          "confidence": 0.80
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.15,
+          "salience": 0.20,
+          "confidence": 0.75
+        },
+        "cohesive_goals": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "I want to offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+          "confidence": 0.90,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But to tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "confidence": 0.95,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.90,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "companionship",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "His success alone commands my respect for his ability and perseverance.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "I don't know what more we could have done to try to win this election. I'll leave that to others to determine.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

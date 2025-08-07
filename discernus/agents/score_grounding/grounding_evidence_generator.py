@@ -195,8 +195,7 @@ Be specific and actionable. Focus on academic standards and research credibility
             # Delegate grounding generation to LLM (THIN approach)
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
-                prompt=grounding_prompt,
-                max_tokens=4000  # Allow comprehensive grounding generation
+                prompt=grounding_prompt
             )
             
             if not response_content:

@@ -17,7 +17,7 @@ template: |
   {corpus_manifest}
 
   VALIDATION TASK:
-  **CRITICAL: This system only supports v7.3 compliant experiments. Legacy experiments (v7.2 and earlier) are NOT supported and will be rejected.**
+  **CRITICAL: All components (Experiment, Framework, Corpus) MUST be v7.3 or higher. Legacy components (v7.2 and earlier) are NOT supported and MUST be rejected.**
   
   Validate the MECE Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) must work together seamlessly. Focus on:
 

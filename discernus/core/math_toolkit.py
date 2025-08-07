@@ -125,10 +125,18 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
                             }
                 grouped_results[str(group_name)] = group_stats
             
+            # PROVENANCE
+            provenance = {
+                "input_columns": normalized_columns + ([grouping_variable] if grouping_variable else []),
+                "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+                "filter_conditions": f"Grouped by {grouping_variable}"
+            }
+
             return {
                 "type": "descriptive_stats_grouped",
                 "grouping_variable": grouping_variable,
-                "groups": grouped_results
+                "groups": grouped_results,
+                "provenance": provenance
             }
         
         # Standard ungrouped statistics
@@ -189,10 +197,18 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
             
             results[column] = stats_dict
             
+        # PROVENANCE
+        provenance = {
+            "input_columns": normalized_columns,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "None"
+        }
+
         return {
             "type": "descriptive_stats",
             "columns_analyzed": list(results.keys()),
-            "results": results
+            "results": results,
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -237,8 +253,10 @@ def perform_independent_t_test(dataframe: pd.DataFrame,
             group2 = str(unique_groups[1])
             
         # Extract data for each group
-        group1_data = dataframe[dataframe[grouping_variable] == group1][dependent_variable].dropna()
-        group2_data = dataframe[dataframe[grouping_variable] == group2][dependent_variable].dropna()
+        group1_df = dataframe[dataframe[grouping_variable] == group1]
+        group2_df = dataframe[dataframe[grouping_variable] == group2]
+        group1_data = group1_df[dependent_variable].dropna()
+        group2_data = group2_df[dependent_variable].dropna()
         
         if len(group1_data) == 0 or len(group2_data) == 0:
             raise MathToolkitError(f"One or both groups have no valid data")
@@ -252,6 +270,13 @@ def perform_independent_t_test(dataframe: pd.DataFrame,
                             (len(group1_data) + len(group2_data) - 2))
         cohens_d = (group1_data.mean() - group2_data.mean()) / pooled_std
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": [grouping_variable, dependent_variable],
+            "input_document_ids": pd.concat([group1_df['aid'], group2_df['aid']]).unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": f"Groups '{group1}' vs '{group2}' from column '{grouping_variable}'"
+        }
+
         return {
             "type": "independent_t_test",
             "grouping_variable": grouping_variable,
@@ -271,7 +296,8 @@ def perform_independent_t_test(dataframe: pd.DataFrame,
             "test_statistic": float(t_stat),
             "p_value": float(p_value),
             "effect_size": float(cohens_d),
-            "significant": p_value < 0.05
+            "significant": p_value < 0.05,
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -325,6 +351,13 @@ def calculate_pearson_correlation(dataframe: pd.DataFrame,
                             corr, p_val = spearmanr(clean_data[col1], clean_data[col2])
                         significance_matrix[col1][col2] = float(p_val)
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": available_columns,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "Used all rows with valid data for each pair of columns."
+        }
+        
         return {
             "type": f"{method}_correlation",
             "columns": available_columns,
@@ -335,7 +368,8 @@ def calculate_pearson_correlation(dataframe: pd.DataFrame,
                 for i, col1 in enumerate(available_columns)
                 for j, col2 in enumerate(available_columns)
                 if i < j and significance_matrix[col1][col2] is not None and significance_matrix[col1][col2] < 0.05
-            ]
+            ],
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -409,6 +443,13 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
                     "std": float(np.std(values))
                 }
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": [grouping_variable, dependent_variable],
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": f"Grouped by '{grouping_variable}'"
+        }
+
         return {
             "type": "one_way_anova",
             "grouping_variable": grouping_variable,
@@ -416,7 +457,8 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
             "groups": group_stats,
             "f_statistic": float(f_stat),
             "p_value": float(p_value),
-            "significant": p_value < 0.05
+            "significant": p_value < 0.05,
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -504,6 +546,13 @@ def perform_two_way_anova(dataframe: pd.DataFrame,
                 "std": float(np.std(group_data, ddof=1)) if len(group_data) > 1 else 0.0
             }
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": [factor1, factor2, dependent_variable],
+            "input_document_ids": valid_data['aid'].unique().tolist() if 'aid' in valid_data.columns else [],
+            "filter_conditions": f"Grouped by '{factor1}' and '{factor2}'"
+        }
+
         return {
             "type": "two_way_anova",
             "factor1": factor1,
@@ -515,7 +564,8 @@ def perform_two_way_anova(dataframe: pd.DataFrame,
             "factor1_levels": factor1_levels.tolist(),
             "factor2_levels": factor2_levels.tolist(),
             "group_statistics": group_stats,
-            "note": "Simplified two-way ANOVA using one-way ANOVA on factor combinations"
+            "note": "Simplified two-way ANOVA using one-way ANOVA on factor combinations",
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -567,13 +617,21 @@ def calculate_effect_sizes(dataframe: pd.DataFrame,
         
         eta_squared = ss_between / ss_total if ss_total > 0 else 0
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": [grouping_variable, dependent_variable],
+            "input_document_ids": valid_data['aid'].unique().tolist() if 'aid' in valid_data.columns else [],
+            "filter_conditions": f"Grouped by '{grouping_variable}'"
+        }
+
         return {
             "type": "effect_sizes",
             "grouping_variable": grouping_variable,
             "dependent_variable": dependent_variable,
             "eta_squared": float(eta_squared),
             "effect_size_interpretation": _interpret_eta_squared(eta_squared),
-            "group_means": group_means.to_dict()
+            "group_means": group_means.to_dict(),
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -711,6 +769,13 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
                 logger.error(f"Failed to calculate metric '{metric_name}': {str(e)}")
                 # Continue with other calculations even if one fails
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": input_columns,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "None"
+        }
+
         return {
             "type": "derived_metrics_calculation",
             "success": len(successful_calculations) > 0,
@@ -721,7 +786,8 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
             "input_columns": input_columns,
             "total_metrics": len(metric_formulas),
             "success_rate": len(successful_calculations) / len(metric_formulas) if metric_formulas else 0,
-            "calculation_source": calculation_source
+            "calculation_source": calculation_source,
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -786,10 +852,18 @@ def perform_statistical_tests(dataframe: pd.DataFrame, test_types: List[str], gr
             else:
                 results[f"unknown_test_{test_type}"] = {"error": f"Unknown test type: {test_type}"}
         
+        # PROVENANCE for the overall set of tests
+        provenance = {
+            "input_columns": grouping_variables + dependent_variables,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": f"Performed tests: {', '.join(test_types)}"
+        }
+        
         return {
             "type": "statistical_tests",
             "tests_performed": test_types,
-            "results": results
+            "results": results,
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -826,12 +900,20 @@ def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], 
         # Calculate correlation matrix
         corr_matrix = dataframe[available_dimensions].corr(method=correlation_method)
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": available_dimensions,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "None"
+        }
+        
         return {
             "type": "correlation_matrix",
             "dimensions": available_dimensions,
             "method": correlation_method,
             "matrix": corr_matrix.to_dict(),
-            "missing_dimensions": [dim for dim in dimensions if dim not in dataframe.columns]
+            "missing_dimensions": [dim for dim in dimensions if dim not in dataframe.columns],
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -940,18 +1022,26 @@ def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[
                         "note": "This is a framework-agnostic validation - LLMs determine validation logic"
                     }
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": [str(rule) for rule in validation_rules],
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "Validation rules applied as specified"
+        }
+
         return {
             "type": "metric_validation",
             "validation_rules": [str(rule) for rule in validation_rules],
             "results": validation_results,
-            "quality_thresholds": quality_thresholds
+            "quality_thresholds": quality_thresholds,
+            "provenance": provenance
         }
         
     except Exception as e:
         raise MathToolkitError(f"Metric validation failed: {str(e)}")
 
 
-def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summary_types: List[str]) -> Dict[str, Any]:
+def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summary_types: List[str], **kwargs) -> Dict[str, Any]:
     """
     Generate descriptive statistics for specified metrics.
     
@@ -991,12 +1081,20 @@ def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summa
             
             summary_results[metric] = metric_stats
         
+        # PROVENANCE
+        provenance = {
+            "input_columns": available_metrics,
+            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+            "filter_conditions": "None"
+        }
+        
         return {
             "type": "summary_statistics",
             "metrics": available_metrics,
             "summary_types": summary_types,
             "results": summary_results,
-            "missing_metrics": [metric for metric in metrics if metric not in dataframe.columns]
+            "missing_metrics": [metric for metric in metrics if metric not in dataframe.columns],
+            "provenance": provenance
         }
         
     except Exception as e:
@@ -1184,8 +1282,7 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
         
         rows = []
         for doc_analysis in document_analyses:
-            document_id = doc_analysis.get('document_id', '{artifact_id}')
-            document_name = doc_analysis.get('document_name', 'unknown')
+            document_id = doc_analysis.get('document_name', doc_analysis.get('document_id', 'unknown_document'))
             
             # V7.0 GASKET ARCHITECTURE: Handle flat analysis_scores from Intelligent Extractor
             analysis_scores = doc_analysis.get('analysis_scores', {})
@@ -1197,7 +1294,7 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
             if corpus_manifest and 'file_manifest' in corpus_manifest:
                 # Find metadata for this document by matching filename
                 for file_info in corpus_manifest['file_manifest']:
-                    if file_info.get('name') == document_name:
+                    if file_info.get('name') == document_id:
                         # Add all metadata fields generically
                         for key, value in file_info.items():
                             if key != 'name':  # Skip filename since we have document_name
