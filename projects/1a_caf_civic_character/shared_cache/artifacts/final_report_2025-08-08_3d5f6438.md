@@ -1,0 +1,147 @@
+# **Experiment Report: speaker_character_pattern_analysis**
+
+| | |
+|---|---|
+| **Framework:** | Civic Analysis Framework (CAF) v7.3 |
+| **Experiment Version:** | 7.3 |
+| **Run ID:** | `[Not Available]` |
+| **Run Date:** | `[Not Available]` |
+
+---
+
+### **Executive Summary**
+
+This report details the statistical analysis of eight political texts using the Civic Analysis Framework (CAF) v7.3. The objective was to assess the framework's capacity to differentiate speakers based on rhetorical patterns. Key findings from the correlation analysis support the framework's internal structure, revealing a strong negative correlation between dignity and tribalism appeals (r = -0.79) and strong positive correlations among conceptually related virtue and pathology dimensions. Descriptive statistics show notable variance across most dimensions, particularly `tribalism_score` (σ = 0.405) and the `Civic_Character_Index` (σ = 0.270), suggesting the framework can capture differences between speakers. An emergent, strong positive correlation between `dignity_score` and `pragmatism_score` (r = 0.945) was also identified, warranting further investigation. Limitations include a small sample size (n=8), which precludes formal hypothesis testing (e.g., ANOVA) for speaker differentiation at this stage.
+
+### **Collaborator Analysis**
+
+This section examines specific claims and hypotheses based on the statistical outputs.
+
+---
+
+**Claim 1: Framework Bipolar Axis Validation**
+*   **Hypothesis:** Exploratory. This claim tests the framework's theoretical assumption of a bipolar, inverse relationship between dignity and tribalism appeals.
+*   **Statistical Result:** A strong negative Pearson correlation was observed between `dignity_score` and `tribalism_score` (r = -0.789) [1].
+*   **Evidence Snippets:**
+    *   "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own." [1]
+    *   "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"" [2]
+
+---
+
+**Claim 2: Coherence of the Pathology Construct**
+*   **Hypothesis:** Exploratory. This claim tests the theoretical coherence of the 'pathology' construct by examining inter-correlations among vice dimensions.
+*   **Statistical Result:** Strong positive correlations were found between key pathological dimensions. The correlation between `tribalism_score` and `manipulation_score` was r = 0.944. The correlation between `tribalism_score` and `resentment_score` was r = 0.942 [2].
+*   **Evidence Snippets:**
+    *   "They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves. But we're smarter than that Greeley." [3]
+    *   "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others." [4]
+
+---
+
+**Claim 3: Coherence of the Virtue Construct**
+*   **Hypothesis:** Exploratory. This claim tests the theoretical coherence of the 'virtue' construct by examining inter-correlations among virtue dimensions.
+*   **Statistical Result:** Strong positive correlations were observed among key virtue dimensions. The correlation between `dignity_score` and `pragmatism_score` was r = 0.945, while the correlation between `dignity_score` and `justice_score` was r = 0.811 [3].
+*   **Evidence Snippets:**
+    *   "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside." [5]
+    *   "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"" [6]
+
+---
+
+**Claim 4: Speaker Differentiation via Tribalism**
+*   **Hypothesis (H1):** The 10 CAF dimensions will show statistically significant differences between speakers. This claim is not fully testable with the current data, but variance can be examined.
+*   **Statistical Result:** The `tribalism_score` exhibited high variance across the sample, with a standard deviation of 0.405. Scores ranged from a minimum of 0.05 to a maximum of 0.90 [4].
+*   **Evidence Snippets:**
+    *   "But my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country." [7]
+    *   "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that." [8]
+
+---
+
+**Claim 5: Potential for Unique Character Signatures**
+*   **Hypothesis (H2):** Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices. This claim is not fully testable, but the necessary condition of variance can be assessed.
+*   **Statistical Result:** The composite indices showed notable variance. The `virtue_index` had a standard deviation of 0.241, and the `pathology_index` had a standard deviation of 0.334, indicating differing balances of virtue and pathology across the sample [5].
+*   **Evidence Snippets:**
+    *   "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"" [9]
+    *   "But we will march with the spirit of love and with the spirit of dignity that we have shown here today." [10]
+
+---
+
+**Claim 6: Variance in Character Coherence**
+*   **Hypothesis (H3):** MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence. This claim is not fully testable, but variance can be examined.
+*   **Statistical Result:** The `civic_character_index` (an unweighted measure of character coherence) showed a standard deviation of 0.270, with values ranging from 0.23 to 0.89. The `salience_weighted_civic_character_index` showed a similar standard deviation of 0.266 [6].
+*   **Evidence Snippets:**
+    *   "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that." [11]
+    *   "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win." [12]
+
+---
+
+**Claim 7: Emergent Dignity-Pragmatism Link**
+*   **Hypothesis:** Exploratory. This claim investigates an unexpectedly strong correlation that may reveal a specific rhetorical strategy.
+*   **Statistical Result:** A Pearson correlation of r = 0.945 was found between `dignity_score` and `pragmatism_score`, the strongest positive correlation observed between any two primary dimensions [7].
+*   **Evidence Snippets:**
+    *   "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"" [13]
+    *   "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside." [14]
+
+---
+
+**Claim 8: Manipulation as a Keystone Pathology**
+*   **Hypothesis:** Exploratory. This claim examines the role of manipulation as a potential keystone pathological dimension.
+*   **Statistical Result:** `manipulation_score` demonstrated strong positive correlations with other pathological dimensions: `fear_score` (r = 0.927), `tribalism_score` (r = 0.944), and `resentment_score` (r = 0.931) [8].
+*   **Evidence Snippets:**
+    *   "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others." [15]
+    *   "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced." [16]
+
+### **Evidence References**
+
+1.  *Document:* `cory_booker_2018_first_step_act.txt`, *Dimension:* Dignity, *Confidence:* 0.9
+2.  *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+3.  *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Tribalism, *Confidence:* 0.9
+4.  *Document:* `cory_booker_2018_first_step_act.txt`, *Dimension:* Tribalism, *Confidence:* 0.8
+5.  *Document:* `mitt_romney_2020_impeachment.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+6.  *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+7.  *Document:* `jd_vance_2022_natcon_conference.txt`, *Dimension:* Tribalism, *Confidence:* 1.0
+8.  *Document:* `john_mccain_2008_concession.txt`, *Dimension:* dignity, *Confidence:* 0.95
+9.  *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+10. *Document:* `john_lewis_1963_march_on_washington.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+11. *Document:* `john_mccain_2008_concession.txt`, *Dimension:* dignity, *Confidence:* 0.95
+12. *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Hope, *Confidence:* 0.9
+13. *Document:* `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+14. *Document:* `mitt_romney_2020_impeachment.txt`, *Dimension:* Dignity, *Confidence:* 0.95
+15. *Document:* `cory_booker_2018_first_step_act.txt`, *Dimension:* Tribalism, *Confidence:* 0.8
+16. *Document:* `mitt_romney_2020_impeachment.txt`, *Dimension:* Tribalism, *Confidence:* 0.95
+
+### **Technical Transparency**
+
+*   **Limitations:**
+    *   The sample size (n=8 documents, one per speaker) is insufficient for inferential statistical tests of speaker differences, such as ANOVA. The reported variances and correlations are descriptive for this sample only.
+    *   The analysis is based on a single evaluation per document.
+*   **Models Used:**
+    *   Analysis Model: `vertex_ai/gemini-2.5-pro`
+    *   Synthesis Model: `vertex_ai/gemini-2.5-pro`
+*   **Cost Summary:**
+    *   Cost data was not available in the provided statistical results.
+
+---
+
+## Research Transparency: Computational Cost Analysis
+
+### Cost Summary
+**Total Cost**: $0.1156 USD  
+**Total Tokens**: 39,593  
+**Run Timestamp**: 20250808T173053Z  
+
+### Cost Breakdown by Operation
+- **Raw Data Analysis Planning**: $0.0503 USD (18,348 tokens, 1 calls, $0.0503 avg/call)
+- **Derived Metrics Analysis Planning**: $0.0653 USD (21,245 tokens, 1 calls, $0.0653 avg/call)
+
+### Cost Breakdown by Model
+- **vertex_ai/gemini-2.5-pro**: $0.1156 USD (39,593 tokens, 2 calls)
+
+### Cost Breakdown by Agent
+- **RawDataAnalysisPlanner**: $0.0503 USD (18,348 tokens, 1 calls)
+- **DerivedMetricsAnalysisPlanner**: $0.0653 USD (21,245 tokens, 1 calls)
+
+### Methodology Note
+This research was conducted using the Discernus computational research platform, ensuring complete transparency in computational costs. All LLM interactions are logged with exact token counts and costs for reproducibility and academic integrity.
+
+**Cost Calculation**: Based on provider pricing at time of execution  
+**Token Counting**: Exact tokens reported by LLM providers  
+**Audit Trail**: Complete logs available in experiment run directory  

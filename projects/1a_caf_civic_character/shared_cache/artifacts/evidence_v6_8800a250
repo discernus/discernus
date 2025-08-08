@@ -1,0 +1,111 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-08T17:25:57.770092+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally. Secure our borders. Restore their respect for the rule of law. Save these lives.",
+      "confidence": 0.9,
+      "context_type": "concluding_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770082+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Tribalism",
+      "quote_text": "It\u2019s another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement officers in the past, one whom I believe ICE declined, uh, to pick up and place into removal proceedings.",
+      "confidence": 0.95,
+      "context_type": "in-group_vs_out-group_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770083+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Truth",
+      "quote_text": "When here in our Constitution, Mr. Speaker, Article one of our Constitution says, \"All legislative power, power, all legislative, all legislative powers herein granted shall be vested in a Congress of the United States.\" That's here. The House and the Senate.",
+      "confidence": 0.9,
+      "context_type": "textual_evidence_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770084+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Manipulation",
+      "quote_text": "And you\u2019d lay your head down on the pillow at night having trouble to sleep, thinking, \"What am I going to do tomorrow? I couldn\u2019t react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution,\"",
+      "confidence": 0.95,
+      "context_type": "emotional_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770085+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Justice",
+      "quote_text": "But if a court wants to manufacture a new right, let alone a new command, that\u2019s wrong. And this Congress ought to speak up and we need a president that will appoint justices to the Supreme Court that will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+      "confidence": 0.95,
+      "context_type": "rule_of_law_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770086+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Resentment",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 0.95,
+      "context_type": "grievance_and_blame_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770087+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fear",
+      "quote_text": "That\u2019s 135 dead Americans that would be alive today if the President didn\u2019t have the policy of releasing criminal, criminal aliens onto the streets. That\u2019s, that\u2019s the ones we know of.",
+      "confidence": 0.95,
+      "context_type": "threat_and_danger_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770088+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fear",
+      "quote_text": "he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+      "confidence": 0.95,
+      "context_type": "anxiety-inducing_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770089+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Pragmatism",
+      "quote_text": "The Senate determines what advice is and the Senate determines that which is consent. And no nomination to the federal court can move forward without the Senate's advice and consent. It's the Senate's job then to evaluate the nominations of the President.",
+      "confidence": 0.9,
+      "context_type": "procedural_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770090+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fantasy",
+      "quote_text": "And every American that dies at their hands is a life that could be saved if we just followed our laws. That\u2019s what\u2019s at stake here.",
+      "confidence": 0.9,
+      "context_type": "oversimplified_solution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T17:25:57.770091+00:00"
+    }
+  ]
+}
