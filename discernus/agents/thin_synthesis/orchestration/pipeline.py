@@ -1164,25 +1164,11 @@ Raw Analysis Data:
         - REQ-EU-005: Evidence quality scoring framework
         """
         try:
-            # Get available evidence data
-            available_evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-            if not available_evidence_data:
-                return QualityMeasurementResponse(
-                    success=False,
-                    error_message="Failed to retrieve available evidence data"
-                )
-            
-            # Get used evidence from interpretation response
-            used_evidence_data = b'{"evidence_data": []}'  # Default empty
-            if hasattr(interpretation_response, 'used_evidence') and interpretation_response.used_evidence:
-                used_evidence_data = json.dumps({
-                    'evidence_data': interpretation_response.used_evidence
-                }).encode('utf-8')
+            # Use RAG curator for evidence access (no bulk loading needed)
             
             # Create quality measurement request
             quality_request = QualityMeasurementRequest(
-                available_evidence_data=available_evidence_data,
-                used_evidence_data=used_evidence_data,
+                txtai_curator=self.txtai_curator,  # Use RAG curator from pipeline
                 statistical_results=exec_response,
                 synthesis_report=interpretation_response.narrative_report,
                 framework_spec=request.framework_spec,
