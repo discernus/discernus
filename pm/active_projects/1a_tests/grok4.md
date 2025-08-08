@@ -1,0 +1,17 @@
+# Civic Character Assessment in Political Discourse: A Framework Validation Study
+
+## Executive Summary
+
+This report evaluates the Civic Analysis Framework (CAF) v7.3 through an analysis of eight political speeches, testing its ability to differentiate speakers, identify unique character signatures, and assess character coherence. The framework demonstrates strong utility in capturing civic virtue tensions, with statistical evidence supporting speaker differentiation and meaningful variation in coherence scores. Quantitative metrics indicate the framework explains approximately 64% of variance in civic character indices across the corpus, suggesting a good fit for analyzing political discourse. Key findings include high civic character in concession and reform-oriented speeches, contrasted with lower coherence in grievance-focused rhetoric, supported by specific textual evidence from the analyzed speeches.
+
+## Framework Description and Purpose
+
+The Civic Analysis Framework (CAF) v7.3 is a systematic methodology for assessing the civic character of political discourse, grounded in classical civic republican theory, virtue ethics, political communication theory, and tension mathematics. It evaluates discourse across five bipolar axes: Dignity vs. Tribalism, Truth vs. Manipulation, Justice vs. Resentment, Hope vs. Fear, and Pragmatism vs. Fantasy. Each axis measures appeals to civic virtues (e.g., dignity as universal human worth) against pathological counterparts (e.g., tribalism as us-vs-them framing), using scores from 0.0 to 1.0 based on linguistic markers interpreted as semantic concepts rather than literal keywords.[1]
+
+The framework's purpose is to quantify strategic tensions in democratic communication, where speakers balance competing virtues to influence audiences. It calculates tension scores (e.g., Dignity-Tribalism Tension = (dignity_score + (1 - tribalism_score)) / 2), composite indices like the Civic Character Index (average of tension scores), and a Salience-Weighted Civic Character Index that adjusts for dimension centrality. Pattern classifications categorize discourse as High Civic Character (≥0.75) or Pathological ( 0.7) and classifications matching discourse types (e.g., McCain as High Civic Character ≥0.75). It adapts to corpus diversity via salience weighting, though Western bias may limit generalizability. Limitations include reliance on semantic interpretation, potential ideological skew in marker application, and the corpus's U.S.-centric focus, which may not test cross-cultural validity. Future expansions could incorporate larger samples for stronger ANOVA results.[1][2][3][5]
+
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/7692671/54639658-e0ea-4589-b901-f6e617459399/caf_v7.3.md
+[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/7692671/002dd203-81d4-4605-aef6-1da59ab3a1a1/experiment.md
+[3] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/7692671/153c99d3-a71a-4a5e-ba52-19904dd3bd30/statistical_results.csv
+[4] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/7692671/6d586a6d-4d4d-4d95-ba13-ec0500f4fde8/evidence.csv
+[5] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/7692671/92b2bb7b-b44d-4191-8d26-d00dae9ae854/scores.csv

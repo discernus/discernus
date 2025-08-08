@@ -1,4 +1,4 @@
-document_id,evidence_hash,dimension,score,quote_text,reasoning
+edocument_id,evidence_hash,dimension,score,quote_text,reasoning
 alexandria_ocasio_cortez_2025_fighting_oligarchy.txt,3114790f30df7a37,dignity,0.95,Our lives deserve dignity and our work deserves respect.,"Confidence: 0.95, Context: direct_statement"
 alexandria_ocasio_cortez_2025_fighting_oligarchy.txt,3114790f30df7a37,tribalism,0.85,"They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.","Confidence: 0.85, Context: description_of_behavior"
 alexandria_ocasio_cortez_2025_fighting_oligarchy.txt,3114790f30df7a37,justice,0.95,"We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.","Confidence: 0.95, Context: call_to_action"

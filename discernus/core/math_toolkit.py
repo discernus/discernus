@@ -697,38 +697,43 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
         # Create a comprehensive mathematical evaluation context
         # Default to array-aware numpy operations for data column compatibility
         import math
+        import ast
         safe_dict = {
             # Array-aware mathematical functions (numpy defaults for data compatibility)
-            'min': np.minimum, 'max': np.maximum, 'abs': np.abs, 
+            'min': np.minimum, 'max': np.maximum, 'abs': np.abs,
             'sum': np.sum, 'round': np.round,
-            
+
             # Python built-ins for scalar operations
             'len': len, 'pow': pow, 'divmod': divmod, 'float': float, 'int': int, 'bool': bool,
-            
+
             # Math module functions (scalar operations)
             'math': math, 'sqrt': math.sqrt, 'log': math.log, 'log10': math.log10,
             'exp': math.exp, 'sin': math.sin, 'cos': math.cos, 'tan': math.tan,
             'asin': math.asin, 'acos': math.acos, 'atan': math.atan, 'atan2': math.atan2,
             'ceil': math.ceil, 'floor': math.floor, 'pi': math.pi, 'e': math.e,
-            
+
             # NumPy for comprehensive array operations
             'np': np, 'numpy': np,
-            
+
             # Explicit array operations
             'minimum': np.minimum, 'maximum': np.maximum,
-            
+
             # Statistical functions
             'mean': np.mean, 'median': np.median, 'std': np.std, 'var': np.var,
-            
-            # Data columns will be added below
         }
-        for col in input_columns:
-            if col in dataframe.columns:
+
+        # THIN, framework-agnostic: expose all available DataFrame columns by default
+        for col in dataframe.columns:
+            try:
                 safe_dict[col] = dataframe[col].values
-        
+            except Exception:
+                # Non-numeric or problematic columns are still made available; eval will handle if used
+                safe_dict[col] = dataframe[col].values if col in dataframe.columns else None
+
         calculated_metrics = {}
         successful_calculations = []
         failed_calculations = []
+        skipped_formulas = []
         
         # Calculate each metric using framework-specified execution order (THIN)
         if framework_calculation_spec and "execution_order" in framework_calculation_spec:
@@ -741,25 +746,62 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
             sorted_formulas = sorted(metric_formulas.items(), key=lambda x: len(x[1]))
             logger.warning("THIN: No execution_order in framework - using fallback length-based sorting")
         
+        # Helper: determine variable names used by a formula
+        def _extract_variable_names(expr: str) -> List[str]:
+            try:
+                tree = ast.parse(expr, mode='eval')
+            except Exception:
+                return []
+            names = set()
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Name):
+                    names.add(node.id)
+            return list(names)
+
+        # Known environment symbols that are not data columns
+        non_data_symbols = set(safe_dict.keys())
+
         for metric_name, formula in sorted_formulas:
+            # Gate by available symbols to avoid NameError on missing inputs
+            vars_in_formula = _extract_variable_names(formula)
+            # variables that look like data but are missing from context
+            missing_vars = [v for v in vars_in_formula if v not in safe_dict]
+            if missing_vars:
+                skipped_formulas.append({
+                    "metric": metric_name,
+                    "formula": formula,
+                    "reason": "missing_inputs",
+                    "missing_variables": missing_vars
+                })
+                logger.warning(f"Skipping metric '{metric_name}' due to missing inputs: {missing_vars}")
+                continue
+
             try:
                 # Evaluate the formula safely
                 result = eval(formula, {"__builtins__": {}}, safe_dict)
-                
+
+                # Division-by-zero and invalid numeric guards
+                if isinstance(result, (float, int)) and (np.isinf(result) or (isinstance(result, float) and np.isnan(result))):
+                    logger.warning(f"Metric '{metric_name}' resulted in non-finite value; coercing to NaN")
+                    result = np.nan
+
                 # Handle different result types
                 if isinstance(result, np.ndarray):
                     calculated_metrics[metric_name] = result.tolist()
-                    # Add numpy array to safe_dict for subsequent calculations
                     safe_dict[metric_name] = result
                 else:
                     calculated_metrics[metric_name] = result
-                    # Add scalar/list to safe_dict for subsequent calculations
                     safe_dict[metric_name] = result
-                
+
                 successful_calculations.append(metric_name)
-                
                 logger.info(f"Successfully calculated metric '{metric_name}' with formula: {formula}")
-                
+
+            except ZeroDivisionError:
+                # Graceful handling: record NaN and continue
+                logger.warning(f"Division by zero in metric '{metric_name}'; setting result to NaN")
+                calculated_metrics[metric_name] = np.nan
+                safe_dict[metric_name] = np.nan
+                successful_calculations.append(metric_name)
             except Exception as e:
                 failed_calculations.append({
                     "metric": metric_name,
@@ -782,6 +824,7 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
             "calculated_metrics": calculated_metrics,
             "successful_calculations": successful_calculations,
             "failed_calculations": failed_calculations,
+            "skipped_due_to_missing_inputs": skipped_formulas,
             "formulas_used": list(metric_formulas.keys()),
             "input_columns": input_columns,
             "total_metrics": len(metric_formulas),

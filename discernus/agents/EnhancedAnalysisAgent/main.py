@@ -101,10 +101,13 @@ class EnhancedAnalysisAgent:
                               current_scores_hash: Optional[str], 
                               current_evidence_hash: Optional[str]) -> Tuple[str, str]:
         """
-        Fully THIN approach: Store complete raw LLM response as artifact.
-        Let downstream synthesis pipeline handle ALL parsing and interpretation.
+        THIN approach: Extract evidence during analysis time, not post-processing.
+        This eliminates the need for LLM calls during evidence extraction.
         """
-        # Store the complete raw LLM response as artifact (fully THIN principle)
+        import re
+        import json
+        
+        # Store the complete raw LLM response as artifact (THIN principle)
         raw_response_hash = self.storage.put_artifact(
             result_content.encode('utf-8'),
             {
@@ -115,15 +118,84 @@ class EnhancedAnalysisAgent:
             }
         )
         
-        self.audit.log_agent_event(self.agent_name, "raw_response_stored", {
+        # THIN EVIDENCE EXTRACTION: Extract evidence during analysis time
+        evidence_list = self._extract_evidence_from_analysis_response(result_content)
+        
+        # Store evidence artifact for RAG indexing
+        evidence_artifact = {
+            "evidence_metadata": {
+                "document_hash": document_hash,
+                "total_evidence_pieces": len(evidence_list),
+                "extraction_method": "analysis_time_extraction_v1.0",
+                "extraction_time": datetime.now(timezone.utc).isoformat(),
+                "framework_version": "v6.0"
+            },
+            "evidence_data": evidence_list
+        }
+        
+        evidence_hash = self.storage.put_artifact(
+            json.dumps(evidence_artifact, indent=2).encode('utf-8'),
+            {
+                "artifact_type": "evidence_v6",
+                "document_hash": document_hash,
+                "extraction_method": "analysis_time_extraction"
+            }
+        )
+        
+        self.audit.log_agent_event(self.agent_name, "evidence_extracted", {
             "document_hash": document_hash,
-            "response_artifact_hash": raw_response_hash,
-            "response_length": len(result_content),
-            "approach": "fully_thin_raw_storage"
+            "evidence_pieces": len(evidence_list),
+            "evidence_hash": evidence_hash,
+            "approach": "thin_analysis_time_extraction"
         })
         
-        # Return raw response hash as both scores and evidence for v6.0 pipeline
-        return raw_response_hash, raw_response_hash
+        # Return both raw response hash and evidence hash
+        return raw_response_hash, evidence_hash
+    
+    def _extract_evidence_from_analysis_response(self, result_content: str) -> List[Dict[str, Any]]:
+        """
+        Extract evidence from analysis response without LLM calls.
+        This is deterministic text processing, not LLM interpretation.
+        """
+        import re
+        import json
+        
+        # Extract JSON from delimited format
+        json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+        json_match = re.search(json_pattern, result_content, re.DOTALL)
+        
+        if not json_match:
+            return []
+        
+        try:
+            analysis_data = json.loads(json_match.group(1).strip())
+            document_analyses = analysis_data.get('document_analyses', [])
+            
+            evidence_list = []
+            for doc_analysis in document_analyses:
+                doc_name = doc_analysis.get('document_name', 'unknown')
+                evidence_items = doc_analysis.get('evidence', [])
+                
+                for evidence in evidence_items:
+                    evidence_list.append({
+                        "document_name": doc_name,
+                        "dimension": evidence.get('dimension'),
+                        "quote_text": evidence.get('quote_text'),
+                        "confidence": evidence.get('confidence'),
+                        "context_type": evidence.get('context_type'),
+                        # Add metadata for provenance
+                        "extraction_method": "analysis_time_extraction_v1.0",
+                        "source_type": "analysis_response",
+                        "extraction_timestamp": datetime.now(timezone.utc).isoformat()
+                    })
+            
+            return evidence_list
+        except json.JSONDecodeError as e:
+            self.audit.log_agent_event(self.agent_name, "evidence_extraction_failed", {
+                "error": str(e),
+                "response_length": len(result_content)
+            })
+            return []
 
 
 
@@ -438,6 +510,7 @@ class EnhancedAnalysisAgent:
                 "experiment_name": experiment_config.get("name", "unknown"),
                 "model_used": model,
                 "raw_analysis_response": analysis_data,  # Raw LLM response - no parsing
+                "evidence_hash": new_evidence_hash,
                 "mathematical_validation": {
                     "enabled": True,
                     "verification_required": True,

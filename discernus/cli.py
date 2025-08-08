@@ -145,10 +145,12 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
         validation_result = coherence_agent.validate_experiment(experiment_path)
         
         if not validation_result.success:
-            # Return first issue as error message
+            # Return detailed validation failure information
             if validation_result.issues:
+                # For CLI display, we'll still return the first issue as the main message
+                # but the validate command will show full details
                 issue = validation_result.issues[0]
-                return False, f"❌ {issue.description}", {}
+                return False, f"❌ {issue.description}", {"validation_result": validation_result}
             else:
                 return False, "❌ Experiment validation failed", {}
         
@@ -570,6 +572,24 @@ def validate(experiment_path: str):
         click.echo(f"   📋 Name: {experiment['name']}")
         click.echo(f"   📄 Framework: {experiment['framework']}")
         click.echo(f"   📁 Corpus: {experiment['corpus_path']} ({experiment['_corpus_file_count']} files)")
+    else:
+        # Show detailed validation issues if available (same format as run command)
+        if 'validation_result' in experiment:
+            validation_result = experiment['validation_result']
+            click.echo("❌ Validation failed:")
+            for issue in validation_result.issues:
+                click.echo(f"\n  • {issue.description}")
+                click.echo(f"    Impact: {issue.impact}")
+                click.echo(f"    Fix: {issue.fix}")
+                if issue.affected_files:
+                    click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
+            
+            if validation_result.suggestions:
+                click.echo(f"\n💡 Suggestions:")
+                for suggestion in validation_result.suggestions:
+                    click.echo(f"  • {suggestion}")
+            
+            click.echo(f"\n💡 To skip validation when running, use: --skip-validation")
     
     sys.exit(0 if valid else 1)
 
