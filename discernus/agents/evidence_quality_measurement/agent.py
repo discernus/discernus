@@ -226,16 +226,26 @@ output_format:
         
         for query in synthesis_queries[:10]:  # Limit queries for efficiency
             try:
-                evidence = txtai_curator._query_evidence(query)
+                # Create proper EvidenceQuery object
+                from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                evidence_query = EvidenceQuery(semantic_query=query, limit=5)
+                evidence = txtai_curator._query_evidence(evidence_query)
+                evidence = self._validate_evidence_results(evidence)
                 if evidence:
                     total_evidence_found += len(evidence)
                     
                     # Track by dimension and document
                     for ev in evidence:
-                        dimension = ev.get('dimension', 'unknown')
-                        by_dimension[dimension] = by_dimension.get(dimension, 0) + 1
+                        # Handle EvidenceResult objects (not dictionaries)
+                        if hasattr(ev, 'dimension'):
+                            dimension = ev.dimension
+                            document = ev.document_name
+                        else:
+                            # Fallback for dictionary format
+                            dimension = ev.get('dimension', 'unknown')
+                            document = ev.get('document_name', 'unknown')
                         
-                        document = ev.get('document_name', 'unknown')
+                        by_dimension[dimension] = by_dimension.get(dimension, 0) + 1
                         by_document[document] = by_document.get(document, 0) + 1
             except Exception as e:
                 self.logger.debug(f"Query failed for '{query}': {e}")
@@ -302,8 +312,19 @@ output_format:
                     
                     # Query for evidence relevant to this claim
                     try:
-                        evidence = txtai_curator._query_evidence(claim_query)
-                        claim_evidence = [ev.get('quote_text', '') for ev in evidence] if evidence else []
+                        # Create proper EvidenceQuery object
+                        from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                        evidence_query = EvidenceQuery(semantic_query=claim_query, limit=5)
+                        evidence = txtai_curator._query_evidence(evidence_query)
+                        evidence = self._validate_evidence_results(evidence)
+                        # Handle EvidenceResult objects (not dictionaries)
+                        claim_evidence = []
+                        if evidence:
+                            for ev in evidence:
+                                if hasattr(ev, 'quote_text'):
+                                    claim_evidence.append(ev.quote_text)
+                                else:
+                                    claim_evidence.append(ev.get('quote_text', ''))
                         claim_mapping[result_key] = claim_evidence
                     except Exception as e:
                         self.logger.debug(f"Claim query failed for '{result_key}': {e}")
@@ -315,8 +336,19 @@ output_format:
         
         for claim in synthesis_claims:
             try:
-                evidence = txtai_curator._query_evidence(claim)
-                claim_evidence = [ev.get('quote_text', '') for ev in evidence] if evidence else []
+                # Create proper EvidenceQuery object
+                from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                evidence_query = EvidenceQuery(semantic_query=claim, limit=5)
+                evidence = txtai_curator._query_evidence(evidence_query)
+                evidence = self._validate_evidence_results(evidence)
+                # Handle EvidenceResult objects (not dictionaries)
+                claim_evidence = []
+                if evidence:
+                    for ev in evidence:
+                        if hasattr(ev, 'quote_text'):
+                            claim_evidence.append(ev.quote_text)
+                        else:
+                            claim_evidence.append(ev.get('quote_text', ''))
                 claim_mapping[claim] = claim_evidence
             except Exception as e:
                 self.logger.debug(f"Synthesis claim query failed for '{claim}': {e}")
@@ -435,12 +467,24 @@ output_format:
         
         for query in synthesis_queries[:10]:  # Limit queries for efficiency
             try:
-                evidence = txtai_curator._query_evidence(query)
+                # Create proper EvidenceQuery object
+                from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                evidence_query = EvidenceQuery(semantic_query=query, limit=5)
+                evidence = txtai_curator._query_evidence(evidence_query)
+                evidence = self._validate_evidence_results(evidence)
                 if evidence:
                     total_evidence_checked += len(evidence)
                     
                     for ev in evidence:
-                        quote = ev.get('quote_text', '')
+                        # Handle EvidenceResult objects (not dictionaries)
+                        if hasattr(ev, 'quote_text'):
+                            quote = ev.quote_text
+                            doc = ev.document_name
+                        else:
+                            # Fallback for dictionary format
+                            quote = ev.get('quote_text', '')
+                            doc = ev.get('document_name', '')
+                        
                         if quote:
                             # Use LLM to assess alignment
                             alignment_score = self._assess_evidence_alignment_with_llm(quote, synthesis_report)
@@ -452,7 +496,6 @@ output_format:
                             relevance_scores.append(0.0)
                         
                         # Track document diversity
-                        doc = ev.get('document_name', '')
                         if doc:
                             unique_documents.add(doc)
             except Exception as e:
@@ -482,12 +525,25 @@ output_format:
         
         for query in dimension_queries[:5]:  # Limit queries for efficiency
             try:
-                evidence = txtai_curator._query_evidence(query)
+                # Create proper EvidenceQuery object
+                from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                evidence_query = EvidenceQuery(semantic_query=query, limit=5)
+                evidence = txtai_curator._query_evidence(evidence_query)
+                evidence = self._validate_evidence_results(evidence)
                 if evidence:
                     for ev in evidence:
-                        quote = ev.get('quote_text', '')
-                        dimension = ev.get('dimension', '')
-                        confidence = ev.get('confidence', 0.0)
+                        # Handle EvidenceResult objects (not dictionaries)
+                        if hasattr(ev, 'quote_text'):
+                            quote = ev.quote_text
+                            dimension = ev.dimension
+                            confidence = ev.confidence
+                            doc_name = ev.document_name
+                        else:
+                            # Fallback for dictionary format
+                            quote = ev.get('quote_text', '')
+                            dimension = ev.get('dimension', '')
+                            confidence = ev.get('confidence', 0.0)
+                            doc_name = ev.get('document_name', '')
                         
                         # Calculate relevance based on multiple factors
                         relevance_score = 0.0
@@ -507,7 +563,6 @@ output_format:
                             relevance_score += 0.1
                         
                         # Factor 4: Document quality (prefer named documents)
-                        doc_name = ev.get('document_name', '')
                         if doc_name and not doc_name.startswith('unknown'):
                             relevance_score += 0.1
                         
@@ -551,17 +606,28 @@ output_format:
         
         for query in synthesis_queries[:10]:  # Limit queries for efficiency
             try:
-                evidence = txtai_curator._query_evidence(query)
+                # Create proper EvidenceQuery object
+                from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+                evidence_query = EvidenceQuery(semantic_query=query, limit=5)
+                evidence = txtai_curator._query_evidence(evidence_query)
+                evidence = self._validate_evidence_results(evidence)
                 if evidence:
                     total_evidence_checked += len(evidence)
                     
                     for ev in evidence:
+                        # Handle EvidenceResult objects (not dictionaries)
+                        if hasattr(ev, 'confidence'):
+                            confidence = ev.confidence
+                            doc_name = ev.document_name
+                        else:
+                            # Fallback for dictionary format
+                            confidence = ev.get('confidence', 0.0)
+                            doc_name = ev.get('document_name', '')
+                        
                         # Track confidence scores
-                        confidence = ev.get('confidence', 0.0)
                         confidence_scores.append(confidence)
                         
                         # Track context preservation
-                        doc_name = ev.get('document_name', '')
                         if doc_name and not doc_name.startswith('unknown'):
                             context_preserved += 1
             except Exception as e:
@@ -607,6 +673,38 @@ output_format:
         
         return False
     
+    def _validate_evidence_results(self, evidence: Any) -> List[Any]:
+        """
+        Validate and normalize evidence results from txtai curator.
+        
+        Args:
+            evidence: Raw evidence results from txtai curator
+            
+        Returns:
+            List of valid evidence objects (EvidenceResult or dict)
+        """
+        if not evidence:
+            return []
+        
+        # Ensure evidence is a list
+        if not isinstance(evidence, list):
+            self.logger.debug(f"Evidence is not a list: {type(evidence)}")
+            return []
+        
+        # Validate each evidence object
+        valid_evidence = []
+        for i, ev in enumerate(evidence):
+            if hasattr(ev, 'quote_text'):
+                # Valid EvidenceResult object
+                valid_evidence.append(ev)
+            elif isinstance(ev, dict) and 'quote_text' in ev:
+                # Valid dictionary with quote_text
+                valid_evidence.append(ev)
+            else:
+                self.logger.debug(f"Invalid evidence object {i}: {type(ev)}")
+        
+        return valid_evidence
+
     def _generate_quality_recommendations(self, metrics: EvidenceQualityMetrics) -> List[str]:
         """Generate quality improvement recommendations based on metrics."""
         recommendations = []
