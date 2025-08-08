@@ -1,0 +1,150 @@
+# **Experiment Report: speaker_character_pattern_analysis**
+**Framework:** Civic Analysis Framework (CAF) v7.3
+**Run Metadata:**
+- **Run ID:** `[Placeholder]`
+- **Date:** `[Placeholder]`
+- **Corpus:** `speaker_character_corpus_v1`
+
+***
+
+### **Executive Summary**
+
+This report details the quantitative analysis of eight political texts using the Civic Analysis Framework (CAF) v7.3 [1]. The analysis aimed to test the framework's ability to differentiate between speakers based on dimensions of civic character.
+
+Key findings from the statistical analysis indicate strong internal coherence within the framework's constructs. Virtue dimensions (e.g., Dignity, Truth, Pragmatism) demonstrated strong positive inter-correlations, with Dignity and Pragmatism showing a Pearson correlation of *r* = 0.94. Similarly, pathology dimensions (e.g., Tribalism, Manipulation, Resentment) were highly correlated, with Tribalism and Manipulation at *r* = 0.94. These results support the theoretical validity of the composite Virtue and Pathology indices [2]. The oppositional nature of the framework's axes was also validated, with strong negative correlations observed between corresponding virtues and vices, such as Pragmatism and Fantasy (*r* = -0.87) [2].
+
+Descriptive statistics reveal that the dimensions of Resentment (σ = 0.42) and Tribalism (σ = 0.40) exhibited the highest variance across the corpus, suggesting they are primary axes of differentiation between the speakers analyzed [2]. The Civic Character Index (CCI) also showed sufficient variation (σ = 0.27) to enable comparative analysis of character coherence patterns [2].
+
+A notable nuance emerged in the Justice-Resentment axis, which showed a weaker negative correlation (*r* = -0.45) compared to other axes, indicating a greater tendency for speakers in this corpus to blend appeals to both justice and grievance [2].
+
+A primary limitation of this study is the single evaluation performed per document (*n*=1). This sample size precludes inferential statistical tests such as ANOVA, meaning that while we can observe variation, we cannot determine its statistical significance in differentiating between speakers.
+
+### **Collaborator Section: Interpretation of Claims**
+
+#### **Virtue Construct Coherence**
+- **Hypothesis:** Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices.
+- **Testability:** This claim is testable. The coherence of the virtue construct is a prerequisite for identifying meaningful character signatures.
+- **Statistical Findings:** A Pearson correlation matrix of the five virtue dimensions reveals strong positive relationships, supporting the existence of a unified virtue construct. The correlation between Dignity and Pragmatism was exceptionally high (*r* = 0.94), as was the correlation between Dignity and Justice (*r* = 0.81) [2].
+- **Supporting Evidence:**
+    - "But we will march with the spirit of love and with the spirit of dignity that we have shown here today." [3]
+    - "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside." [4]
+    - "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'" [5]
+
+#### **Pathology Construct Coherence**
+- **Hypothesis:** Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices.
+- **Testability:** This claim is testable. The coherence of the pathology construct is a prerequisite for analyzing the vice component of character signatures.
+- **Statistical Findings:** The five pathology dimensions demonstrate very strong positive inter-correlations, validating a coherent pathology construct. The correlation between Tribalism and Manipulation was *r* = 0.94, and the correlation between Tribalism and Resentment was *r* = 0.94 [2].
+- **Supporting Evidence:**
+    - "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced." [6]
+    - "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others." [7]
+    - "They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves. But we're smarter than that Greeley." [8]
+
+#### **Framework Axis Validation**
+- **Hypothesis:** Exploratory.
+- **Testability:** This claim is testable and serves to validate the core theoretical structure of the CAF.
+- **Statistical Findings:** The analysis confirms the oppositional nature of the framework's axes. Strong negative correlations were observed between theorized virtue-vice pairs. For example, the correlation between Truth and Manipulation was *r* = -0.86, and the correlation between Pragmatism and Fantasy was *r* = -0.87 [2].
+- **Supporting Evidence:**
+    - "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values." [9]
+    - "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face." [10]
+
+#### **Speaker Differentiation via Resentment Score**
+- **Hypothesis:** The 10 CAF dimensions will show statistically significant differences between speakers.
+- **Testability:** The hypothesis is not statistically testable with the current data (*n*=1 per speaker). However, the descriptive statistics can indicate which dimensions show the most promise for differentiation in future studies.
+- **Statistical Findings:** The Resentment score exhibited the highest standard deviation (σ = 0.42) of all ten primary dimensions, indicating it was the dimension with the greatest variation across the analyzed texts [2].
+- **Supporting Evidence:**
+    - "though we have come a long way from the old injustices that once stained our nation’s reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound." [11]
+    - "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that." [12]
+
+#### **Speaker Differentiation via Tribalism Score**
+- **Hypothesis:** The 10 CAF dimensions will show statistically significant differences between speakers.
+- **Testability:** The hypothesis is not statistically testable with the current data (*n*=1 per speaker). The descriptive statistics can identify dimensions with high variability.
+- **Statistical Findings:** The Tribalism score showed the second-highest standard deviation (σ = 0.40) among all primary dimensions, suggesting it is a key axis of differentiation in this corpus [2].
+- **Supporting Evidence:**
+    - "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that." [13]
+    - "They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves. But we're smarter than that Greeley." [14]
+    - "But my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country." [15]
+
+#### **CCI Variation for Coherence Analysis**
+- **Hypothesis:** MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence.
+- **Testability:** The hypothesis is not statistically testable with the current data (*n*=1 per speaker). The analysis can confirm if sufficient variation exists for future testing. (Note: The Civic Character Index (CCI) is used as a proxy for the MC-SCI mentioned in the hypothesis).
+- **Statistical Findings:** The Civic Character Index (CCI) demonstrated a standard deviation of 0.27 across the eight documents. The scores ranged from a minimum of 0.23 to a maximum of 0.89, indicating sufficient variation for comparative analysis [2].
+- **Supporting Evidence:**
+    - "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him... on being elected the next president of the country that we both love." [16]
+    - "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that." [17]
+
+#### **Justice-Resentment Axis Tension**
+- **Hypothesis:** Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices.
+- **Testability:** This claim is testable as an exploration of the nuances within character signatures.
+- **Statistical Findings:** The Pearson correlation between Justice and Resentment was *r* = -0.45. While negative, as theorized by the framework's axis structure, this correlation is weaker than those of other axes (e.g., Truth-Manipulation, *r* = -0.86), suggesting a greater potential for speakers to blend these two appeals simultaneously [2].
+- **Supporting Evidence:**
+    - "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'" [5]
+    - "We have a system that - over a century, we in a nation have overcome slavery, decades of Jim Crow - but as one author, Michelle Alexander, calls our criminal justice system, she calls it the new Jim Crow because of its disproportionate impact on people of color." [18]
+
+#### **Impact of Salience Weighting on CCI**
+- **Hypothesis:** MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence.
+- **Testability:** This is an exploratory analysis providing context for H3.
+- **Statistical Findings:** The mean for the unweighted Civic Character Index (CCI) was 0.56, while the mean for the Salience-Weighted Civic Character Index (SW-CCI) was 0.58. The close alignment of these means suggests that, for this corpus, weighting the tension scores by their salience did not substantially alter the overall character assessment on average [2].
+- **Supporting Evidence:**
+    - "His success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving." [19]
+    - "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us. This bill is a recognition of the fact that we are bound together as a people by the most precious ideals in humanity" [20]
+    - "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'" [5]
+
+***
+
+### **Evidence References**
+
+[1] Civic Analysis Framework (CAF) v7.3. (Framework Specification)
+[2] statistical_results.json. (Statistical Results)
+[3] john_lewis_1963_march_on_washington.txt (Dimension: Dignity, Confidence: 0.95)
+[4] mitt_romney_2020_impeachment.txt (Dimension: Dignity, Confidence: 0.95)
+[5] alexandria_ocasio_cortez_2025_fighting_oligarchy.txt (Dimension: Dignity, Confidence: 0.95)
+[6] mitt_romney_2020_impeachment.txt (Dimension: Tribalism, Confidence: 0.95)
+[7] cory_booker_2018_first_step_act.txt (Dimension: Tribalism, Confidence: 0.8)
+[8] alexandria_ocasio_cortez_2025_fighting_oligarchy.txt (Dimension: Tribalism, Confidence: 0.9)
+[9] cory_booker_2018_first_step_act.txt (Dimension: Justice, Confidence: 0.95)
+[10] john_mccain_2008_concession.txt (Dimension: pragmatism, Confidence: 0.95)
+[11] john_mccain_2008_concession.txt (Dimension: justice, Confidence: 0.95)
+[12] john_mccain_2008_concession.txt (Dimension: dignity, Confidence: 0.95)
+[13] john_mccain_2008_concession.txt (Dimension: dignity, Confidence: 0.95)
+[14] alexandria_ocasio_cortez_2025_fighting_oligarchy.txt (Dimension: Tribalism, Confidence: 0.9)
+[15] jd_vance_2022_natcon_conference.txt (Dimension: Tribalism, Confidence: 1.0)
+[16] john_mccain_2008_concession.txt (Dimension: truth, Confidence: 1.0)
+[17] john_mccain_2008_concession.txt (Dimension: dignity, Confidence: 0.95)
+[18] cory_booker_2018_first_step_act.txt (Dimension: Justice, Confidence: 0.9)
+[19] john_mccain_2008_concession.txt (Dimension: dignity, Confidence: 0.95)
+[20] cory_booker_2018_first_step_act.txt (Dimension: Hope, Confidence: 0.9)
+
+### **Technical Transparency**
+
+- **Known Limitations:** The experiment was configured with one evaluation per document (*n*=1). This sample size is insufficient for inferential statistical tests (e.g., ANOVA) to determine if observed variations between speakers are statistically significant. The findings are therefore descriptive and exploratory.
+- **Models Used:**
+    - **Analysis:** `vertex_ai/gemini-2.5-pro`
+    - **Synthesis:** `vertex_ai/gemini-2.5-pro`
+- **Cost Summary:** `[Placeholder]`
+
+---
+
+## Research Transparency: Computational Cost Analysis
+
+### Cost Summary
+**Total Cost**: $0.1068 USD  
+**Total Tokens**: 39,610  
+**Run Timestamp**: 20250808T171716Z  
+
+### Cost Breakdown by Operation
+- **Raw Data Analysis Planning**: $0.0468 USD (18,442 tokens, 1 calls, $0.0468 avg/call)
+- **Derived Metrics Analysis Planning**: $0.0600 USD (21,168 tokens, 1 calls, $0.0600 avg/call)
+
+### Cost Breakdown by Model
+- **vertex_ai/gemini-2.5-pro**: $0.1068 USD (39,610 tokens, 2 calls)
+
+### Cost Breakdown by Agent
+- **RawDataAnalysisPlanner**: $0.0468 USD (18,442 tokens, 1 calls)
+- **DerivedMetricsAnalysisPlanner**: $0.0600 USD (21,168 tokens, 1 calls)
+
+### Methodology Note
+This research was conducted using the Discernus computational research platform, ensuring complete transparency in computational costs. All LLM interactions are logged with exact token counts and costs for reproducibility and academic integrity.
+
+**Cost Calculation**: Based on provider pricing at time of execution  
+**Token Counting**: Exact tokens reported by LLM providers  
+**Audit Trail**: Complete logs available in experiment run directory  
