@@ -59,6 +59,7 @@ class RAGInterpretationResponse:
     success: bool
     word_count: int
     evidence_queries_used: int
+    used_evidence: Optional[List[Dict[str, Any]]] = None  # For quality measurement
     error_message: Optional[str] = None
 
 
@@ -116,7 +117,8 @@ class RAGEnhancedResultsInterpreter:
                 transparency_section=transparency_section,
                 success=True,
                 word_count=len(full_report.split()),
-                evidence_queries_used=self.evidence_queries_count
+                evidence_queries_used=self.evidence_queries_count,
+                used_evidence=self._used_evidence  # Add used evidence for quality measurement
             )
             
         except Exception as e:
@@ -129,6 +131,7 @@ class RAGEnhancedResultsInterpreter:
                 success=False,
                 word_count=0,
                 evidence_queries_used=0,
+                used_evidence=[],
                 error_message=str(e)
             )
     

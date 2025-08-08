@@ -14,7 +14,7 @@ hypothesis: |
   for each speaker across virtues and vices, and demonstrate meaningful variation 
   in MC-SCI character coherence patterns.
 
-framework: "../../frameworks/reference/core/caf_v7.3.md"
+framework: "framework.md"
 corpus_path: "corpus/"
 
 # REQUIRED: Configuration for the analysis process

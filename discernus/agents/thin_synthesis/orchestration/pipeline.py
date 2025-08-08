@@ -48,6 +48,7 @@ from ..results_interpreter.thin_interpreter import ThinResultsInterpreterAgent
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
 # GroundingEvidenceGenerator removed - functionality integrated into RAG interpreter per Epic #280
 from ...evidence_indexer_agent.agent import EvidenceIndexerAgent, IndexingRequest, IndexingResponse
+from ...evidence_quality_measurement.agent import EvidenceQualityMeasurementAgent, QualityMeasurementRequest, QualityMeasurementResponse
 
 # Import MathToolkit for reliable mathematical operations
 from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_plan_thin
@@ -136,6 +137,7 @@ class ProductionThinSynthesisPipeline:
         self.rag_interpreter = RAGEnhancedResultsInterpreter(model=model, audit_logger=audit_logger)
         self.thin_interpreter = ThinResultsInterpreterAgent(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
+        self.quality_measurement_agent = EvidenceQualityMeasurementAgent(model=model, audit_logger=audit_logger)
         # grounding_evidence_generator removed - functionality integrated into RAG interpreter
         
         # Set up logging
@@ -364,6 +366,21 @@ class ProductionThinSynthesisPipeline:
             # Extract the actual interpretation response and dual-purpose response
             interpretation_response = stage_response.response
             dual_purpose_response = stage_response.dual_purpose_response
+            
+            # Stage 6: Evidence Quality Measurement (Epic #354)
+            self.logger.info("📊 Stage 6: Evidence quality measurement...")
+            stage_start = time.time()
+            
+            quality_response = self._stage_6_measure_evidence_quality(
+                request, exec_response, interpretation_response
+            )
+            
+            stage_timings['quality_measurement'] = time.time() - stage_start
+            stage_success['quality_measurement'] = quality_response.success
+            
+            if not quality_response.success:
+                self.logger.warning(f"Quality measurement failed: {quality_response.error_message}")
+                # Continue with synthesis even if quality measurement fails
             
             # Store intermediate artifacts with comprehensive metadata
             plan_hash = self._store_artifact_with_metadata(
@@ -1134,6 +1151,70 @@ Raw Analysis Data:
             statistical_summary="",
             error_message=f"{error_type}: {error_message}"
         )
+    
+    def _stage_6_measure_evidence_quality(self, request: ProductionPipelineRequest, exec_response: Dict[str, Any], interpretation_response) -> QualityMeasurementResponse:
+        """
+        Stage 6: Evidence Quality Measurement (Epic #354)
+        
+        Implements comprehensive quality measurement:
+        - REQ-EU-001: Evidence utilization rate measurement
+        - REQ-EU-002: Interpretive claim coverage tracking
+        - REQ-EU-003: Evidence-claim alignment scoring
+        - REQ-EU-004: Evidence relevance ranking
+        - REQ-EU-005: Evidence quality scoring framework
+        """
+        try:
+            # Get available evidence data
+            available_evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+            if not available_evidence_data:
+                return QualityMeasurementResponse(
+                    success=False,
+                    error_message="Failed to retrieve available evidence data"
+                )
+            
+            # Get used evidence from interpretation response
+            used_evidence_data = b'{"evidence_data": []}'  # Default empty
+            if hasattr(interpretation_response, 'used_evidence') and interpretation_response.used_evidence:
+                used_evidence_data = json.dumps({
+                    'evidence_data': interpretation_response.used_evidence
+                }).encode('utf-8')
+            
+            # Create quality measurement request
+            quality_request = QualityMeasurementRequest(
+                available_evidence_data=available_evidence_data,
+                used_evidence_data=used_evidence_data,
+                statistical_results=exec_response,
+                synthesis_report=interpretation_response.narrative_report,
+                framework_spec=request.framework_spec,
+                experiment_context=request.experiment_context
+            )
+            
+            # Execute quality measurement
+            quality_response = self.quality_measurement_agent.measure_evidence_quality(quality_request)
+            
+            # Log quality metrics
+            if quality_response.success and quality_response.metrics:
+                metrics = quality_response.metrics
+                self.logger.info(f"📊 Evidence Quality Metrics:")
+                self.logger.info(f"   - Utilization Rate: {metrics.evidence_utilization_rate:.1%}")
+                self.logger.info(f"   - Claim Coverage: {metrics.interpretive_claim_coverage:.1%}")
+                self.logger.info(f"   - Alignment Score: {metrics.evidence_claim_alignment_score:.1%}")
+                self.logger.info(f"   - Overall Quality: {metrics.overall_quality_score:.1%}")
+                
+                # Log recommendations
+                if quality_response.recommendations:
+                    self.logger.info(f"📋 Quality Recommendations:")
+                    for rec in quality_response.recommendations:
+                        self.logger.info(f"   - {rec}")
+            
+            return quality_response
+            
+        except Exception as e:
+            self.logger.error(f"Quality measurement failed: {str(e)}")
+            return QualityMeasurementResponse(
+                success=False,
+                error_message=str(e)
+            )
     
     def _extract_corpus_info(self, experiment_context: Optional[str]) -> Dict[str, Any]:
         """Extract corpus information from experiment context in a framework-agnostic way."""
