@@ -1,0 +1,36 @@
+{
+  "batch_id": "batch_c96da41379aa",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "anthropic/claude-3-5-sonnet-20241022",
+  "raw_analysis_response": "I'll analyze the document using the Civic Analysis Framework (CAF) v7.3. Let me process this systematically and provide the structured JSON output.\n\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": \"0.87\",\n    \"analysis_notes\": \"Floor speech analyzed across all civic character dimensions with strong textual evidence\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": \"0.35\",\n          \"salience\": \"0.65\", \n          \"confidence\": \"0.85\"\n        },\n        \"tribalism\": {\n          \"raw_score\": \"0.75\",\n          \"salience\": \"0.80\",\n          \"confidence\": \"0.90\"\n        },\n        \"truth\": {\n          \"raw_score\": \"0.45\",\n          \"salience\": \"0.60\",\n          \"confidence\": \"0.85\"\n        },\n        \"manipulation\": {\n          \"raw_score\": \"0.70\",\n          \"salience\": \"0.75\",\n          \"confidence\": \"0.85\"\n        },\n        \"justice\": {\n          \"raw_score\": \"0.40\",\n          \"salience\": \"0.80\",\n          \"confidence\": \"0.90\"\n        },\n        \"resentment\": {\n          \"raw_score\": \"0.85\",\n          \"salience\": \"0.90\",\n          \"confidence\": \"0.95\"\n        },\n        \"hope\": {\n          \"raw_score\": \"0.20\",\n          \"salience\": \"0.40\",\n          \"confidence\": \"0.85\"\n        },\n        \"fear\": {\n          \"raw_score\": \"0.80\",\n          \"salience\": \"0.85\",\n          \"confidence\": \"0.90\"\n        },\n        \"pragmatism\": {\n          \"raw_score\": \"0.30\",\n          \"salience\": \"0.50\",\n          \"confidence\": \"0.80\"\n        },\n        \"fantasy\": {\n          \"raw_score\": \"0.60\",\n          \"salience\": \"0.65\",\n          \"confidence\": \"0.80\"\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"That being one of God's children is good enough to be protected by the law, but everybody treated equally\",\n          \"confidence\": \"0.85\",\n          \"context_type\": \"principle_statement\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization\",\n          \"confidence\": \"0.90\",\n          \"context_type\": \"group_exclusion\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I can read this Constitution and understand what it means. And I can read the precedent cases along the way that have flowed from Marberry on down to today\",\n          \"confidence\": \"0.85\",\n          \"context_type\": \"evidence_claim\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"And every American that dies at their hands is a life that could be saved if we just followed our laws\",\n          \"confidence\": \"0.85\",\n          \"context_type\": \"emotional_appeal\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"The law never said and never, never enabled the federal government to establish exchanges in the states\",\n          \"confidence\": \"0.90\",\n          \"context_type\": \"legal_argument\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America\",\n          \"confidence\": \"0.95\",\n          \"context_type\": \"grievance_statement\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally\",\n          \"confidence\": \"0.85\",\n          \"context_type\": \"solution_proposal\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets\",\n          \"confidence\": \"0.90\",\n          \"context_type\": \"threat_emphasis\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"The Senate determines what advice is and the Senate determines that which is consent\",\n          \"confidence\": \"0.80\",\n          \"context_type\": \"process_description\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"I don't want to see any more bail to criminal aliens. I want to see law enforcement\",\n          \"confidence\": \"0.80\",\n          \"context_type\": \"oversimplification\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "ff98579edc3e013a3c4c64209e6e3ab8a213bfd6833239f2ec9160ed69251b0e",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-08T03:01:48.425917+00:00",
+    "end_time": "2025-08-08T03:02:17.618210+00:00",
+    "duration_seconds": 29.192293,
+    "llm_interaction_hash": "cc92382aa815c7a6"
+  },
+  "input_artifacts": {
+    "framework_hash": "4617455e4c67632249ff8f41d8a7633186d729b3067a0e854b3587e2e45a36c7",
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250808T030048Z_4ef84eb7"
+  }
+}

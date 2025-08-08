@@ -1,0 +1,102 @@
+I'll analyze the document using the Civic Analysis Framework and provide structured JSON output focusing only on raw dimensional scores, salience, confidence levels, and supporting evidence.
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis based on political speech with clear positions on national identity, immigration, and foreign policy"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "tribalism": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "resentment": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "fantasy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "our leaders have to protect the interests of the citizens of this country...my interest is not in protecting the good people of another country",
+          "confidence": 0.9,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more",
+          "confidence": 0.9,
+          "context_type": "grievance_expression"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "our elites don't seem to care about it...they really benefit from the cheap labor...they actually don't really like the people who make up the domestic populations of their own country",
+          "confidence": 0.85,
+          "context_type": "emotional_trigger"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced",
+          "confidence": 0.85,
+          "context_type": "threat_language"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "America is a nation. It is a group of people with a common history and a common future",
+          "confidence": 0.8,
+          "context_type": "collective_identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

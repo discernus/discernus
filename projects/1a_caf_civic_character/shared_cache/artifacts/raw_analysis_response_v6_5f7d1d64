@@ -1,0 +1,148 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a classic political concession speech. The analysis reflects its strong emphasis on national unity, respect for the democratic process, and graciousness in defeat. Consequently, scores are high for positive civic dimensions like Dignity, Justice, and Hope, and extremely low for pathological dimensions like Tribalism, Resentment, and Manipulation. The rhetoric is clear and direct, making evidence extraction straightforward."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.05,
+          "salience": 0.2,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "justice": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_shared_identity"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "His success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "confidence": 0.95,
+          "context_type": "acknowledgement_of_opponent"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...",
+          "confidence": 0.9,
+          "context_type": "rejection_of_in-group_hostility"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him... on being elected the next president of the country that we both love.",
+          "confidence": 1.0,
+          "context_type": "acknowledgement_of_fact"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "though we fell short, the failure is mine, not yours.",
+          "confidence": 0.95,
+          "context_type": "acceptance_of_responsibility"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation’s reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.95,
+          "context_type": "acknowledgement_of_systemic_issues"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+          "confidence": 1.0,
+          "context_type": "affirmation_of_progress"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "But I won't spend a moment of the future regretting what might have been.",
+          "confidence": 0.95,
+          "context_type": "rejection_of_grievance"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I call on all Americans, as I have often in this campaign, to not despair of our present difficulties, but to believe always in the promise and greatness of America, because nothing is inevitable here.",
+          "confidence": 0.9,
+          "context_type": "aspirational_vision"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We never quit. We never surrender. We never hide from history. We make history.",
+          "confidence": 0.9,
+          "context_type": "empowerment_rhetoric"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "defend our security in a dangerous world",
+          "confidence": 0.85,
+          "context_type": "acknowledgement_of_threat"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.95,
+          "context_type": "problem-solving_focus"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "to find the necessary compromises to bridge our differences and help restore our prosperity",
+          "confidence": 0.9,
+          "context_type": "acknowledgement_of_constraints"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

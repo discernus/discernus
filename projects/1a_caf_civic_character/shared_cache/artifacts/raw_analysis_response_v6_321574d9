@@ -1,0 +1,144 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF) v7.3",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The speaker employs a highly populist and nationalist rhetorical style. The analysis focuses on the clear and repeated use of in-group/out-group framing (Tribalism), grievance-based arguments (Resentment), and threat-focused language (Fear), which are the dominant dimensions. Virtuous dimensions like Dignity and Justice are largely absent or subordinated to the nationalist frame."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.2,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Tribalism": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Truth": {
+          "raw_score": 0.1,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "Manipulation": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "Justice": {
+          "raw_score": 0.1,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "Resentment": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.5,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Fear": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Pragmatism": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "Fantasy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Dignity",
+          "quote_text": "And you don't have to believe, of course, that the 20,000 or at least most of the 20,000 newcomers are bad people. In fact, I imagine that many of them are very good people.",
+          "confidence": 0.85,
+          "context_type": "brief_acknowledgement_of_other"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "But my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+          "confidence": 1.0,
+          "context_type": "explicit_prioritization_of_in_group"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "The only illegal people in this country are the people whose grandparents were born here, according to the Biden administration. They're the people. They're the people, by the way, who are not allowed to have an opinion about what's going on in their country because they will be silenced.",
+          "confidence": 0.95,
+          "context_type": "in_group_victimization_narrative"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "We actually did build homes in the United States of America before our elites flooded the zone with non-stop cheap labor. And by the way, we can still do it. Those people can still do it. They just want to get proper wages in the process.",
+          "confidence": 0.9,
+          "context_type": "simplistic_causal_argument"
+        },
+        {
+          "dimension": "Manipulation",
+          "quote_text": "It would be, you, the, the equivalent of allowing the Nazi Germans in 1942 to make all of our ships and missiles.",
+          "confidence": 0.95,
+          "context_type": "emotionally_charged_historical_analogy"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "We're doing that and the very, very basic and simple principle that American leaders should look out for Americans.",
+          "confidence": 0.8,
+          "context_type": "reframing_of_justice_as_in_group_preference"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "confidence": 1.0,
+          "context_type": "grievance_narrative"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "A third, I heard this yesterday, a third of the local County Health budget is now tied up in giving free benefits to illegal immigrants.",
+          "confidence": 0.9,
+          "context_type": "blame_focused_resource_competition_claim"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "But by and large, the national conservative movement is winning the debate and we're changing the conversation. We're doing that...",
+          "confidence": 0.95,
+          "context_type": "empowerment_rhetoric"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Now, the issue where I think we've made the most progress... is the recognition that the real threat to American democracy, it's not certainly not Donald Trump, it's not even some foreign dictator who doesn't like America or our values.",
+          "confidence": 0.9,
+          "context_type": "threat_identification_and_redirection"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "...we have sent hundreds of billions of dollars of weaponry with no obvious end in sight and no obvious conclusion or even objective that we're close to getting, uh, getting accomplished there.",
+          "confidence": 0.9,
+          "context_type": "critique_of_policy_effectiveness"
+        },
+        {
+          "dimension": "Fantasy",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.9,
+          "context_type": "oversimplified_solution_to_complex_problems"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

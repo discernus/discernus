@@ -1,0 +1,36 @@
+{
+  "batch_id": "batch_04bfd68b083d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework (CAF) v7.3\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis was conducted following the framework's sequential, axis-by-axis methodology. The text is a highly charged political speech from the Civil Rights era, characterized by strong demands for justice and a pragmatic critique of insufficient legislative proposals. The scoring reflects the intense and explicit nature of the rhetoric across multiple dimensions, especially Justice and Resentment.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"Truth\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"Justice\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"Hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"Fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"policy_demand\"\n        },\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"To those who have said, \\\"Be patient and wait,\\\" we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!\",\n          \"confidence\": 1.0,\n          \"context_type\": \"grievance_expression\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"As it stands now, the voting section of this bill will not help the thousands of black people who want to vote. It will not help the citizens of Mississippi, of Alabama, and Georgia, who are qualified to vote but lack a sixth-grade education.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"legislative_critique\"\n        },\n        {\n          \"dimension\": \"Fear\",\n          \"quote_text\": \"Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"threat_description\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state. It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"legislative_critique\"\n        },\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"But we will march with the spirit of love and with the spirit of dignity that we have shown here today.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"statement_of_principle\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy. We must say: Wake up America! Wake up!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"aspirational_vision\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"Where is our party? Where is the political party that will make it unnecessary to march on Washington?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"group_identity_formation\"\n        },\n        {\n          \"dimension\": \"Manipulation\",\n          \"quote_text\": \"We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"emotional_appeal\"\n        },\n        {\n          \"dimension\": \"Fantasy\",\n          \"quote_text\": \"We will march through the South, through the streets of Jackson, through the streets of Danville, through the streets of Cambridge, through the streets of Birmingham. But we will march with the spirit of love and with the spirit of dignity that we have shown here today.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"aspirational_vision\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "ba3bd9b4e883a5c26efa18ba14d7594e11e6879b28dd54f2ebb6eb704321b70c",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-08T02:42:11.565687+00:00",
+    "end_time": "2025-08-08T02:43:04.046595+00:00",
+    "duration_seconds": 52.480908,
+    "llm_interaction_hash": "322665b97e8293a4"
+  },
+  "input_artifacts": {
+    "framework_hash": "4617455e4c67632249ff8f41d8a7633186d729b3067a0e854b3587e2e45a36c7",
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250808T023910Z_8c8af488"
+  }
+}

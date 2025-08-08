@@ -1,0 +1,36 @@
+{
+  "batch_id": "batch_9b8acbb42512",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "anthropic/claude-3-5-sonnet-20241022",
+  "raw_analysis_response": "I'll analyze the document using the Civic Analysis Framework, focusing only on raw dimensional scores, salience, confidence, and evidence extraction.\n\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Civic Analysis Framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.92,\n    \"analysis_notes\": \"High-quality legislative speech with clear civic reasoning patterns\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.89,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.32,\n          \"salience\": 0.75,\n          \"confidence\": 0.90\n        },\n        \"truth\": {\n          \"raw_score\": 0.87,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.65,\n          \"confidence\": 0.85\n        },\n        \"justice\": {\n          \"raw_score\": 0.92,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"resentment\": {\n          \"raw_score\": 0.28,\n          \"salience\": 0.60,\n          \"confidence\": 0.85\n        },\n        \"hope\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.55,\n          \"confidence\": 0.80\n        },\n        \"fear\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.50,\n          \"confidence\": 0.75\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.80,\n          \"confidence\": 0.90\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.45,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"I hope we respect each other's good faith... I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"principled_reasoning\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The House managers presented evidence supporting their case... I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt\",\n          \"confidence\": 0.90,\n          \"context_type\": \"evidence_based_reasoning\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"As a senator-juror, I swore an oath before God to exercise impartial justice. My promise before God to apply impartial justice required that I put my personal feelings and political biases aside.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"moral_principle\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"realistic_assessment\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "3a11a2e33a1694f206a82e2a5f45079d2adace2582463bec96b6b77b0e57a9bd",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-08T03:01:27.834025+00:00",
+    "end_time": "2025-08-08T03:01:48.422400+00:00",
+    "duration_seconds": 20.588375,
+    "llm_interaction_hash": "8d3c3e5d8ab96dbc"
+  },
+  "input_artifacts": {
+    "framework_hash": "4617455e4c67632249ff8f41d8a7633186d729b3067a0e854b3587e2e45a36c7",
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250808T030048Z_4ef84eb7"
+  }
+}

@@ -1,0 +1,120 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a formal, deliberative speech explaining a high-stakes political decision. The speaker's reasoning is explicitly structured around constitutional duty, personal conscience, and an oath, making the evidence for dimensions like Justice, Dignity, and Truth particularly clear. The analysis follows the sequential axis-by-axis methodology prescribed by the framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Truth": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "Manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "Justice": {
+          "raw_score": 0.95,
+          "salience": 1.0,
+          "confidence": 0.95
+        },
+        "Resentment": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.85
+        },
+        "Fear": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "Pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "Fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Justice",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 1.0,
+          "context_type": "central_argument"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.95,
+          "context_type": "concluding_statement"
+        },
+        {
+          "dimension": "Dignity",
+          "quote_text": "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+          "confidence": 0.95,
+          "context_type": "statement_of_principle"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+          "confidence": 0.95,
+          "context_type": "rejection_of_group_loyalty"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "The historic meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal from office.",
+          "confidence": 0.9,
+          "context_type": "evidence_based_reasoning"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.85,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.8,
+          "context_type": "statement_of_personal_consequence"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.",
+          "confidence": 0.95,
+          "context_type": "acknowledgment_of_constraints"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
