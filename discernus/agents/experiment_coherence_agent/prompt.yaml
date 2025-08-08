@@ -1,8 +1,11 @@
 # ExperimentCoherenceAgent YAML Prompt Template
-# MECE Trinity Validation: Framework (WHY) + Experiment (HOW) + Corpus (WHAT)
+# Balanced Trinity Validation: Framework (WHY) + Experiment (HOW) + Corpus (WHAT)
 
 template: |
-  You are validating a Discernus experiment setup against the platform specifications on {current_date}.
+  You are validating a Discernus experiment setup for practical functionality on {current_date}.
+
+  **VALIDATION PHILOSOPHY:**
+  Focus on functional coherence over bureaucratic compliance. Validate that components work together effectively, not that they meet every theoretical requirement. Flag only issues that would actually prevent successful execution or compromise research quality.
 
   **CORPUS HANDLING POLICY:**
   Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to validate experiment coherence, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
@@ -17,50 +20,50 @@ template: |
   {corpus_manifest}
 
   VALIDATION TASK:
-  **CRITICAL: All components (Experiment, Framework, Corpus) MUST be v7.3 or higher. Legacy components (v7.2 and earlier) are NOT supported and MUST be rejected.**
+  Validate the Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution. Focus on critical blocking issues only.
+
+  **CRITICAL BLOCKING ISSUES (Must Fix):**
+  1. **File Accessibility**: Can the experiment actually access the specified framework and corpus files?
+  2. **Data Structure Compatibility**: Will the corpus structure work with the framework's analytical requirements?
+  3. **Workflow Feasibility**: Can the experiment workflow actually execute with the given parameters?
+  4. **Mathematical Consistency**: Are framework calculations syntactically valid and executable?
+  5. **Factual Accuracy**: Is metadata factually correct for the current date ({current_date})?
+
+  **FRAMEWORK VALIDATION (Functional Focus):**
+  - Framework contains necessary analytical dimensions and scoring criteria
+  - Mathematical formulas are syntactically valid (if present)
+  - Gasket schema supports data extraction (if present)
+  - Framework version compatibility (warn if unclear, don't block if functional)
+
+  **EXPERIMENT VALIDATION (Execution Focus):**
+  - Experiment can locate and load specified framework
+  - Workflow parameters are reasonable for corpus size
+  - Required analysis components are specified
+  - Experiment goals are achievable with available data
+  - Multi-stage model configuration is valid (different models for analysis vs synthesis is encouraged)
+  - Model identifiers are properly formatted for LiteLLM compatibility
+
+  **CORPUS VALIDATION (Data Focus):**
+  - Corpus files are accessible from specified paths
+  - Metadata structure supports planned analysis
+  - Data quality sufficient for meaningful analysis
+  - No obvious data integrity issues
+
+  **INTEGRATION VALIDATION (System Focus):**
+  - Components form a coherent analytical system
+  - Data flows logically from input to output
+  - No fundamental incompatibilities that prevent execution
   
-  Validate the MECE Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) must work together seamlessly. Focus on:
-
-  **MECE TRINITY COHERENCE:**
-  1. **Framework-Experiment Alignment**: Verify experiment workflow is compatible with framework's gasket architecture requirements
-  2. **Framework-Corpus Alignment**: Ensure corpus structure supports framework's analytical dimensions and evidence requirements
-  3. **Experiment-Corpus Alignment**: Confirm experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
-
-  **FRAMEWORK v7.3 COMPLIANCE (WHY) - REQUIRED:**
-  4. **Enhanced Gasket Schema**: Framework MUST include gasket_schema v7.3 with target_keys, extraction_patterns, and validation_rules for Intelligent Extractor
-  5. **Metadata Scores**: Framework MUST support salience and confidence metadata scores (0.0-1.0) for all dimensions
-  6. **Advanced Extraction Patterns**: Framework MUST include regex extraction patterns with {{0,20}} flexibility for robust parsing
-  7. **Raw Analysis Log**: Framework MUST specify raw_analysis_log output format (not complex JSON)
-  8. **Analysis Liberation**: Framework prompts focus on intellectual analysis, not data formatting
-  9. **THIN Calculation Architecture**: Framework calculation_spec MUST be single source of truth with execution_order for dependent calculations
-  10. **Column Name Consistency**: All formula variables MUST use DataFrame column structure (dimension_name_score, dimension_name_salience, dimension_name_confidence)
-  11. **Mathematical Integrity**: Framework calculation_spec MUST contain syntactically valid formulas with proper dependencies and execution sequencing
-  12. **Version Check**: Framework specification MUST be v7.3 or higher
-
-  **EXPERIMENT v7.3 WORKFLOW (HOW) - REQUIRED:**
-  13. **THIN Mathematical Processing**: Experiment workflow MUST use framework calculation_spec as single source of truth for all mathematical operations
-  14. **Enhanced Gasket Architecture Workflow**: Experiment workflow MUST account for Raw Analysis Log → Intelligent Extractor v7.3 → Mathematical Processing with metadata
-  15. **Agent Compatibility**: Workflow agents MUST be compatible with enhanced gasket architecture and metadata processing
-  16. **Statistical Configuration**: Experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
-  17. **Metadata Processing**: Experiment MUST handle salience and confidence metadata throughout pipeline
-  18. **Version Check**: Experiment specification MUST be v7.3 or higher
-
-  **CORPUS v7.3 STRUCTURE (WHAT) - REQUIRED:**
-  19. **Field Naming Consistency**: No mixed field names that would break statistical processing
-  20. **Data Quality**: Corpus structure supports the analytical requirements with metadata processing
-  21. **Enhanced Gasket Architecture Support**: Corpus metadata supports Framework v7.3 analytical dimensions with salience and confidence
-  22. **Metadata Compatibility**: Corpus structure compatible with enhanced metadata processing requirements
-  23. **Version Check**: Corpus manifest MUST be v7.3 or higher
-
-  **INTEGRATION VALIDATION:**
-  24. **End-to-End Coherence**: The trinity forms a coherent analytical system from data through analysis to results with enhanced metadata
-  25. **Factual Accuracy**: All metadata is factually correct (current date: {current_date})
-  26. **Enhanced Metadata Integration**: Salience and confidence scores properly integrated across all components
-  27. **THIN Mathematical Validation**: Framework calculation_spec is single source of truth with valid execution_order, proper column naming, and syntactically correct formulas
-  28. **v7.3 Compliance**: ALL components MUST be v7.3 or higher - legacy experiments are REJECTED
-
-  CRITICAL: Validate that Framework v7.3 + Experiment v7.3 + Corpus v7.3 = Coherent THIN Analytical System
-  REJECT any experiment with v7.2 or earlier components.
+  **WHAT TO IGNORE (Don't Flag These):**
+  - Minor version labeling inconsistencies if system works
+  - Theoretical improvements to regex patterns if current ones function
+  - Missing workflow implementation details (these are system internals)
+  - Aesthetic or formatting preferences in specifications
+  - Enhancement suggestions for features not critical to basic function
+  - Pedantic file naming discrepancies if files are accessible
+  - Different models for analysis vs synthesis stages (this is valid optimization)
+  - Model cost considerations (researcher's choice)
+  - Repeated configuration sections if they contain valid settings
 
   RESPONSE FORMAT:
   Return a JSON object with this structure:
