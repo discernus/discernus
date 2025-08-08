@@ -44,8 +44,9 @@ from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlann
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
 from ..results_interpreter.rag_enhanced_interpreter import RAGEnhancedResultsInterpreter, RAGInterpretationRequest
+from ..results_interpreter.thin_interpreter import ThinResultsInterpreterAgent
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
-from ...score_grounding.grounding_evidence_generator import GroundingEvidenceGenerator, GroundingEvidenceRequest
+# GroundingEvidenceGenerator removed - functionality integrated into RAG interpreter per Epic #280
 from ...evidence_indexer_agent.agent import EvidenceIndexerAgent, IndexingRequest, IndexingResponse
 
 # Import MathToolkit for reliable mathematical operations
@@ -126,15 +127,16 @@ class ProductionThinSynthesisPipeline:
         self.debug_agent = debug_agent
         self.debug_level = debug_level
         
-        # Initialize agents with infrastructure
+        # Initialize agents with infrastructure (THIN architecture)
         self.raw_data_planner = RawDataAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.evidence_indexer = EvidenceIndexerAgent(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
-        self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)
+        self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)  # Used by RAG interpreter
         self.rag_interpreter = RAGEnhancedResultsInterpreter(model=model, audit_logger=audit_logger)
+        self.thin_interpreter = ThinResultsInterpreterAgent(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
-        self.grounding_evidence_generator = GroundingEvidenceGenerator(model=model, audit_logger=audit_logger)
+        # grounding_evidence_generator removed - functionality integrated into RAG interpreter
         
         # Set up logging
         self.logger = logging.getLogger(__name__)
@@ -338,64 +340,14 @@ class ProductionThinSynthesisPipeline:
                     time.time() - start_time
                 )
             
-            # Stage 3: Curate Evidence
-            self.logger.info("🔍 Stage 3: Curating evidence...")
+            # Stage 3 & 4 REMOVED: Redundant evidence processing eliminated per Epic #280 Milestone 1.1
+            # Evidence processing now handled directly by Stage 5 RAG interpreter for THIN architecture
             
-            # Debug output for evidence curator
-            if self.debug_agent in ['evidence-curator', None] and self.debug_level in ['debug', 'verbose']:
-                self.logger.info(f"🔍 DEBUG: Evidence curation input:")
-                stage_2_results = exec_response.get('stage_2_derived_metrics', {})
-                statistical_results = stage_2_results.get('results', {})
-                self.logger.info(f"   - Statistical results keys: {list(statistical_results.keys()) if statistical_results else 'NO DATA'}")
-                self.logger.info(f"   - Evidence artifact hash: {request.evidence_artifact_hash}")
-                if statistical_results:
-                    for key, value in statistical_results.items():
-                        if isinstance(value, dict):
-                            self.logger.info(f"   - {key}: {list(value.keys()) if value else 'EMPTY'}")
-                        else:
-                            self.logger.info(f"   - {key}: {type(value).__name__}")
-            
+            # Stage 5: Evidence-Enhanced Results Interpretation (THIN Architecture)
+            self.logger.info("📖 Stage 5: Evidence-enhanced results interpretation...")
             stage_start = time.time()
             
-            curation_response = self._stage_3_txtai_curate_evidence(exec_response, request)
-            
-            stage_timings['evidence_curation'] = time.time() - stage_start
-            stage_success['evidence_curation'] = curation_response.success
-            
-            if not curation_response.success:
-                return self._create_error_response(
-                    "Evidence curation failed",
-                    curation_response.error_message,
-                    stage_timings,
-                    stage_success,
-                    time.time() - start_time
-                )
-            
-            # Stage 4: Generate Grounding Evidence
-            self.logger.info("🔗 Stage 4: Generating grounding evidence...")
-            stage_start = time.time()
-            
-            grounding_response = self._stage_4_generate_grounding_evidence(exec_response, curation_response, request)
-            
-            stage_timings['grounding_evidence_generation'] = time.time() - stage_start
-            stage_success['grounding_evidence_generation'] = grounding_response.success
-            
-            if not grounding_response.success:
-                return self._create_error_response(
-                    "Grounding evidence generation failed",
-                    grounding_response.error_message,
-                    stage_timings,
-                    stage_success,
-                    time.time() - start_time
-                )
-            
-            # Stage 5: Interpret Results
-            self.logger.info("📖 Stage 5: Interpreting results...")
-            stage_start = time.time()
-            
-            stage_response = self._stage_5_interpret_results(
-                exec_response, curation_response, grounding_response, request
-            )
+            stage_response = self._stage_5_interpret_results(exec_response, request)
             
             stage_timings['results_interpretation'] = time.time() - stage_start
             stage_success['results_interpretation'] = stage_response.success
@@ -440,20 +392,10 @@ class ProductionThinSynthesisPipeline:
                 stage="mathematical_analysis",
                 dependencies=[plan_hash, request.scores_artifact_hash]
             )
-            evidence_hash = self._store_artifact_with_metadata(
-                content=json.dumps(curation_response.to_json_serializable()),
-                artifact_type="curated_evidence",
-                stage="evidence_curation",
-                dependencies=[results_hash, request.scores_artifact_hash]
-            )
-            
-            # Store grounding evidence artifact
-            grounding_hash = self._store_artifact_with_metadata(
-                content=json.dumps(grounding_response.to_json_serializable()),
-                artifact_type="grounding_evidence",
-                stage="grounding_evidence_generation",
-                dependencies=[results_hash, request.evidence_artifact_hash]
-            )
+            # Evidence artifact storage removed per Epic #280 Milestone 1.1
+            # Evidence processing unified in Stage 5 RAG interpreter for THIN architecture
+            evidence_hash = ""  # No longer needed - evidence handled directly by RAG interpreter
+            grounding_hash = ""  # Stage 4 eliminated
             
             # Success! Create complete response
             total_time = time.time() - start_time
@@ -911,102 +853,10 @@ Raw Analysis Data:
         
         return curation_response
     
-    def _stage_3_txtai_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
-        """Stage 3: txtai-based evidence curation for scalable evidence retrieval."""
-        
-        # Retrieve evidence data for txtai indexing
-        combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-        self.logger.info(f"Using pre-extracted evidence artifact for txtai: {request.evidence_artifact_hash[:12]}...")
-        
-        # Combine both stage results for comprehensive evidence curation
-        combined_statistical_results = {
-            "stage_1_raw_data": exec_response.get('stage_1_raw_data', {}),
-            "stage_2_derived_metrics": exec_response.get('stage_2_derived_metrics', {})
-        }
-        
-        # Create txtai curation request
-        txtai_request = TxtaiCurationRequest(
-            statistical_results=combined_statistical_results,
-            evidence_data=combined_data,
-            framework_spec=request.framework_spec,
-            model=self.model
-        )
-        
-        # Log txtai curation start
-        self.audit_logger.log_agent_event(
-            "TxtaiEvidenceCurator",
-            "txtai_curation_start",
-            {
-                "evidence_artifact_hash": request.evidence_artifact_hash,
-                "statistical_results_stages": list(combined_statistical_results.keys()),
-                "curation_method": "txtai_semantic_search"
-            }
-        )
-        
-        # Execute txtai-based evidence curation
-        txtai_response = self.txtai_curator.curate_evidence(txtai_request)
-        
-        # Debug logging for txtai curation
-        if self.debug_agent == "txtai-curator" and self.debug_level in ["debug", "verbose"]:
-            self.logger.info(f"txtai curation success: {txtai_response.success}")
-            self.logger.info(f"txtai curation error: {txtai_response.error_message or 'None'}")
-            self.logger.info(f"Raw LLM curation length: {len(txtai_response.raw_llm_curation) if txtai_response.raw_llm_curation else 0}")
-            if txtai_response.raw_llm_curation:
-                self.logger.info(f"Raw LLM curation preview: {txtai_response.raw_llm_curation[:200]}...")
-        
-        return txtai_response
+    # Stage 3 & 4 methods removed per Epic #280 Milestone 1.1
+    # Evidence processing unified in Stage 5 RAG interpreter for THIN architecture
 
-    def _stage_4_generate_grounding_evidence(self, exec_response, curation_response, request: ProductionPipelineRequest):
-        """Stage 4: Generate grounding evidence using raw LLM curation (THIN approach)."""
-        
-        # Skip grounding evidence generation if no evidence was curated (Epic 280 selective filtering)
-        if not curation_response.raw_llm_curation or curation_response.raw_llm_curation.strip() == "":
-            self.logger.info("⏭️  Skipping grounding evidence generation - no evidence was curated (Epic 280 selective filtering)")
-            
-            # Return empty grounding response
-            from ...score_grounding.grounding_evidence_generator import GroundingEvidenceResponse
-            return GroundingEvidenceResponse(
-                grounding_evidence=[],
-                generation_summary={"skipped": True, "reason": "no_evidence_curated"},
-                success=True
-            )
-        
-        # THIN: Use raw_llm_curation from EvidenceCurationResponse instead of parsing analysis_scores
-        # This preserves full LLM intelligence and eliminates redundant parsing
-        
-        # Extract document name from experiment context or use default
-        document_name = "unknown_document"
-        if request.experiment_context:
-            # Try to extract document name from experiment context
-            import re
-            doc_match = re.search(r'document[:\s]+([^\s,]+)', request.experiment_context, re.IGNORECASE)
-            if doc_match:
-                document_name = doc_match.group(1)
-        
-        # THIN: Create grounding evidence request using raw_llm_curation
-        grounding_request = GroundingEvidenceRequest(
-            raw_llm_curation=curation_response.raw_llm_curation,
-            framework_spec=request.framework_spec,
-            document_name=document_name,
-            min_confidence_threshold=request.min_confidence_threshold
-        )
-        
-        # Log grounding evidence generation start (THIN approach)
-        self.audit_logger.log_agent_event(
-            "GroundingEvidenceGenerator",
-            "grounding_generation_start",
-            {
-                "document_name": document_name,
-                "raw_llm_curation_length": len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0,
-                "approach": "thin_raw_llm_curation",
-                "framework_spec_length": len(request.framework_spec)
-            }
-        )
-        
-        # Generate grounding evidence for all scores
-        return self.grounding_evidence_generator.generate_grounding_evidence(grounding_request)
-
-    def _stage_5_interpret_results(self, exec_response, curation_response, grounding_response, request: ProductionPipelineRequest):
+    def _stage_5_interpret_results(self, exec_response, request: ProductionPipelineRequest):
         """Stage 5: Generate final narrative interpretation with grounding evidence."""
         
         # Extract results from the two-stage structure
@@ -1014,12 +864,11 @@ Raw Analysis Data:
         stage_2_results = exec_response.get('stage_2_derived_metrics', {})
         statistical_results = stage_2_results.get('results', {})
         
-        # Debug logging for results interpreter
+        # Debug logging for results interpreter (THIN architecture)
         if self.debug_agent in ['results-interpreter', None] and self.debug_level in ['debug', 'verbose']:
-            self.logger.info(f"📖 DEBUG: Results interpreter input:")
+            self.logger.info(f"📖 DEBUG: Evidence-enhanced results interpreter input:")
             self.logger.info(f"   - Statistical results keys: {list(statistical_results.keys()) if statistical_results else 'NO DATA'}")
-            self.logger.info(f"   - Raw LLM curation length: {len(curation_response.raw_llm_curation) if curation_response.raw_llm_curation else 0}")
-            self.logger.info(f"   - Grounding evidence count: {len(grounding_response.grounding_evidence) if grounding_response.grounding_evidence else 0}")
+            self.logger.info(f"   - Evidence artifact hash: {request.evidence_artifact_hash}")
             if statistical_results:
                 for key, value in statistical_results.items():
                     if isinstance(value, dict):
@@ -1084,13 +933,8 @@ Raw Analysis Data:
                     elif task_result.get('success_rate', 1.0) < 1.0:
                         warnings.append(f"Partial derived metrics success: {task_result.get('success_rate', 0):.1%} of calculations succeeded")
         
-        # Check for evidence curation issues
-        if not curation_response.success:
-            notable_errors.append(f"Evidence curation failed: {curation_response.error_message}")
-        elif not curation_response.raw_llm_curation or len(curation_response.raw_llm_curation.strip()) == 0:
-            warnings.append("No evidence was curated - this may indicate data quality issues")
-        elif len(curation_response.raw_llm_curation) < 500:
-            warnings.append(f"Limited evidence base (only {len(curation_response.raw_llm_curation)} chars of curated evidence)")
+        # Evidence curation status will be checked by RAG interpreter during synthesis
+        # No pre-checking needed in THIN architecture - let LLM handle evidence intelligently
         
         # Check statistical results for issues
         stage_2_results = exec_response.get('stage_2_derived_metrics', {})
@@ -1134,7 +978,7 @@ Raw Analysis Data:
             }
         )
         
-        # Use RAG-enhanced interpreter instead of two-stage approach
+        # Build request for current interpreter(s)
         rag_request = RAGInterpretationRequest(
             statistical_results=statistical_results,
             framework_spec=request.framework_spec,
@@ -1155,31 +999,56 @@ Raw Analysis Data:
             cost_data=self._safe_get_cost_data()
         )
         
-        # Generate RAG-enhanced interpretation (replaces both stage 5 and 6)
-        rag_response = self.rag_interpreter.interpret_results(rag_request)
-        
-        # Create compatibility response for the pipeline
-        class CompatibilityResponse:
-            def __init__(self, rag_response):
-                self.success = rag_response.success
-                self.narrative_report = rag_response.full_report
-                self.executive_summary = rag_response.scanner_section
-                self.error_message = rag_response.error_message or ""
-                # Dual purpose sections
-                self.scanner_section = rag_response.scanner_section
-                self.collaborator_section = rag_response.collaborator_section
-                self.transparency_section = rag_response.transparency_section
-                # Missing attributes expected by pipeline
-                self.word_count = rag_response.word_count
-                self.evidence_queries_used = rag_response.evidence_queries_used
-                # Legacy compatibility
-                self.statistical_results = {}  # Not needed for RAG approach
-                self.report_content = rag_response.full_report
-                self.key_findings = []  # Legacy attribute expected by pipeline
-                self.evidence_integration_summary = {}  # Legacy attribute expected by pipeline
-                self.statistical_summary = {}  # Legacy attribute expected by pipeline
-        
-        interpretation_response = CompatibilityResponse(rag_response)
+        # Feature flag to switch to THIN interpreter
+        # Default to THIN interpreter; allow opting out
+        use_thin = os.environ.get("DISCERNUS_USE_THIN_INTERPRETER", "true").lower() in ("1", "true", "yes")
+        if use_thin:
+            # Adapt request to thin agent (statistical_results, framework_spec, experiment_context, txtai_curator)
+            class ThinReq:
+                def __init__(self, rr):
+                    self.statistical_results = rr.statistical_results
+                    self.framework_spec = rr.framework_spec
+                    self.experiment_context = rr.experiment_context
+                    self.txtai_curator = rr.txtai_curator
+            thin_req = ThinReq(rag_request)
+            thin_resp = self.thin_interpreter.interpret_results(thin_req)
+            class ThinCompat:
+                def __init__(self, r):
+                    self.success = r.success
+                    self.narrative_report = r.full_report
+                    self.executive_summary = r.scanner_section
+                    self.error_message = r.error_message
+                    self.scanner_section = r.scanner_section
+                    self.collaborator_section = r.collaborator_section
+                    self.transparency_section = r.transparency_section
+                    self.word_count = r.word_count
+                    self.evidence_queries_used = r.evidence_queries_used
+                    self.statistical_results = {}
+                    self.report_content = r.full_report
+                    self.key_findings = []
+                    self.evidence_integration_summary = {}
+                    self.statistical_summary = {}
+            interpretation_response = ThinCompat(thin_resp)
+        else:
+            # Generate RAG-enhanced interpretation (replaces both stage 5 and 6)
+            rag_response = self.rag_interpreter.interpret_results(rag_request)
+            class CompatibilityResponse:
+                def __init__(self, rag_response):
+                    self.success = rag_response.success
+                    self.narrative_report = rag_response.full_report
+                    self.executive_summary = rag_response.scanner_section
+                    self.error_message = rag_response.error_message or ""
+                    self.scanner_section = rag_response.scanner_section
+                    self.collaborator_section = rag_response.collaborator_section
+                    self.transparency_section = rag_response.transparency_section
+                    self.word_count = rag_response.word_count
+                    self.evidence_queries_used = rag_response.evidence_queries_used
+                    self.statistical_results = {}
+                    self.report_content = rag_response.full_report
+                    self.key_findings = []
+                    self.evidence_integration_summary = {}
+                    self.statistical_summary = {}
+            interpretation_response = CompatibilityResponse(rag_response)
         dual_purpose_response = interpretation_response  # Same object, different interface
         
         # Return a success response object so the main method can continue with artifact creation

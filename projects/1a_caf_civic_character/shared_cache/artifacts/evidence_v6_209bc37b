@@ -1,0 +1,131 @@
+{
+  "evidence_metadata": {
+    "document_hash": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-07T22:34:32.272987+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "dignity",
+      "quote_text": "And that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272974+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "dignity",
+      "quote_text": "And that's a good thing, that's progress. Even though we didn't win the debate, we're starting to win the debate within, within our own party.",
+      "confidence": 0.75,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272976+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "But in the last four years, thanks to Joe Biden's open border policies, the City of Springfield, Ohio, has gone from 55,000 residents to 75,000 residents.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272977+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "But my Tory friends, I have to say, you guys have got to get, you got to get a handle on this.",
+      "confidence": 0.6,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272978+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "I think actualy every speech I've given in that NatCon, I, I know Bridge spoke earlier, or I was going to speak, Bridge, you're out there somewhere.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272979+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.6,
+      "context_type": "assertion_of_fact",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272980+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "But the thing on immigration is that no one can avoid that it has made our societies poorer, lesser safe, lesser prosperous, and lesser advanced.",
+      "confidence": 0.5,
+      "context_type": "cause_and_effect_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272981+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "The places in our communities, in our own, you know, states that have the highest immigration rates are the places with the highest home prices.",
+      "confidence": 0.4,
+      "context_type": "correlation_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272982+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "And I think that that's our great achievement and a great amount of progress that we've made.",
+      "confidence": 0.85,
+      "context_type": "statement_of_progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272983+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "And I think that the leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+      "confidence": 0.8,
+      "context_type": "statement_of_intent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272984+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We should also not let the Chineses make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years saying we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base over overseas.",
+      "confidence": 0.6,
+      "context_type": "policy_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272985+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page. I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page.",
+      "confidence": 0.4,
+      "context_type": "statement_of_habit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T22:34:32.272986+00:00"
+    }
+  ]
+}

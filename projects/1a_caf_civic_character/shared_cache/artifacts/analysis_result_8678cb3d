@@ -1,0 +1,36 @@
+{
+  "batch_id": "batch_ac68651dcdf5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"civic_analysis_framework\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis followed the sequential steps outlined in the Civic Analysis Framework. Focus was maintained on identifying semantic markers for each dimension before proceeding to the next. Confidence levels reflect the clarity and directness of the language used in relation to the framework's definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"truth\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.8,\n          \"confidence\": 0.3\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"justice\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.6\n        },\n        \"resentment\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.7\n        },\n        \"hope\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        },\n        \"fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.6\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.4\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"And so our obligation then is to say, \\\"Mr. President, you're lame duck.\\\" Let's stick with the tradition.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"direct_reference\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"And so I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean...\",\n          \"confidence\": 0.8,\n          \"context_type\": \"framing\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The question is, does the President have prosecutorial authority, prosecutorial discretion? That, well, the precedent along prosecutorial discretion.\",\n          \"confidence\": 0.4,\n          \"context_type\": \"assertion_of_fact\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisions might mean to them, decides that they can write words into the law. A Supreme Court writing law.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"interpretive_framing\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"And now this court has twisted it into a command that there's not a difference between a man and a woman when it comes to joining them together in matrimony.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"value_statement\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"And so I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"grievance_expression\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"This is an infuriating topic that America needs to know a lot more about. And I'd ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"anxiety_induction\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "da92760eb6e2c1177a66b21ad9cdd76767d423487920f90acfb47e7723dcd10b",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-07T21:22:17.417170+00:00",
+    "end_time": "2025-08-07T21:22:21.103410+00:00",
+    "duration_seconds": 3.68624,
+    "llm_interaction_hash": "af9cb320fe30c1f7"
+  },
+  "input_artifacts": {
+    "framework_hash": "4617455e4c67632249ff8f41d8a7633186d729b3067a0e854b3587e2e45a36c7",
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250807T212147Z_bb0c1392"
+  }
+}

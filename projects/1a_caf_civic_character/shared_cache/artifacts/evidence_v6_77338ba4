@@ -1,0 +1,81 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 7,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-07T23:43:52.025363+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "dignity",
+      "quote_text": "And so our obligation then is to say, \"Mr. President, you're lame duck.\" Let's stick with the tradition.",
+      "confidence": 0.7,
+      "context_type": "direct_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025351+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribalism",
+      "quote_text": "And so I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean...",
+      "confidence": 0.8,
+      "context_type": "framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025352+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "truth",
+      "quote_text": "The question is, does the President have prosecutorial authority, prosecutorial discretion? That, well, the precedent along prosecutorial discretion.",
+      "confidence": 0.4,
+      "context_type": "assertion_of_fact",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025353+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "manipulation",
+      "quote_text": "But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisions might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+      "confidence": 0.9,
+      "context_type": "interpretive_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025354+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "justice",
+      "quote_text": "And now this court has twisted it into a command that there's not a difference between a man and a woman when it comes to joining them together in matrimony.",
+      "confidence": 0.6,
+      "context_type": "value_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025359+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "resentment",
+      "quote_text": "And so I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.",
+      "confidence": 0.7,
+      "context_type": "grievance_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025360+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "This is an infuriating topic that America needs to know a lot more about. And I'd ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest.",
+      "confidence": 0.6,
+      "context_type": "anxiety_induction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:43:52.025361+00:00"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+    "total_evidence_pieces": 7,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-07T23:47:41.446249+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "justice",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+      "confidence": 0.9,
+      "context_type": "policy_advocacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446240+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "justice",
+      "quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+      "confidence": 0.85,
+      "context_type": "policy_advocacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446242+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "dignity",
+      "quote_text": "We must have legislation that will protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+      "confidence": 0.75,
+      "context_type": "protection_of_individuals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446243+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "hope",
+      "quote_text": "We want our freedom and we want it now!",
+      "confidence": 0.8,
+      "context_type": "aspirational_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446244+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen.",
+      "confidence": 0.75,
+      "context_type": "grievance_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446245+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "tribalism",
+      "quote_text": "Where is our party? Where is the political party that will make it unnecessary to march on Washington?",
+      "confidence": 0.65,
+      "context_type": "group_identification_question",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446247+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "truth",
+      "quote_text": "It is true that we support the administration's civil rights bill. We support it with great reservations, however.",
+      "confidence": 0.7,
+      "context_type": "statement_of_fact_with_qualification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-07T23:47:41.446248+00:00"
+    }
+  ]
+}

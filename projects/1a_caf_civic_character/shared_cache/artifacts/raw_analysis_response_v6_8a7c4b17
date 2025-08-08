@@ -1,0 +1,144 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the Civic Analysis Framework (v7.3), focusing on dimensional scoring, salience, and evidence extraction for each document. Confidence levels reflect the clarity and strength of the linguistic markers identified."
+  },
+  "document_analyses": [
+    {
+      "document_id": "516a3c9c1240",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "tribalism": {
+          "raw_score": 0.50,
+          "salience": 0.60,
+          "confidence": 0.75
+        },
+        "truth": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.70
+        },
+        "manipulation": {
+          "raw_score": 0.30,
+          "salience": 0.40,
+          "confidence": 0.60
+        },
+        "justice": {
+          "raw_score": 0.20,
+          "salience": 0.30,
+          "confidence": 0.50
+        },
+        "resentment": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.40
+        },
+        "hope": {
+          "raw_score": 0.70,
+          "salience": 0.80,
+          "confidence": 0.85
+        },
+        "fear": {
+          "raw_score": 0.15,
+          "salience": 0.20,
+          "confidence": 0.45
+        },
+        "pragmatism": {
+          "raw_score": 0.40,
+          "salience": 0.50,
+          "confidence": 0.65
+        },
+        "fantasy": {
+          "raw_score": 0.10,
+          "salience": 0.10,
+          "confidence": 0.40
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "And that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "And that's a good thing, that's progress. Even though we didn't win the debate, we're starting to win the debate within, within our own party.",
+          "confidence": 0.75,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "But in the last four years, thanks to Joe Biden's open border policies, the City of Springfield, Ohio, has gone from 55,000 residents to 75,000 residents.",
+          "confidence": 0.70,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "But my Tory friends, I have to say, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.60,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I think actualy every speech I've given in that NatCon, I, I know Bridge spoke earlier, or I was going to speak, Bridge, you're out there somewhere.",
+          "confidence": 0.70,
+          "context_type": "acknowledgement_of_context"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+          "confidence": 0.60,
+          "context_type": "assertion_of_fact"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "But the thing on immigration is that no one can avoid that it has made our societies poorer, lesser safe, lesser prosperous, and lesser advanced.",
+          "confidence": 0.50,
+          "context_type": "cause_and_effect_claim"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The places in our communities, in our own, you know, states that have the highest immigration rates are the places with the highest home prices.",
+          "confidence": 0.40,
+          "context_type": "correlation_claim"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that that's our great achievement and a great amount of progress that we've made.",
+          "confidence": 0.85,
+          "context_type": "statement_of_progress"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that the leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.80,
+          "context_type": "statement_of_intent"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We should also not let the Chineses make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years saying we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base over overseas.",
+          "confidence": 0.60,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page. I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page.",
+          "confidence": 0.40,
+          "context_type": "statement_of_habit"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

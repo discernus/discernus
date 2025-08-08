@@ -1178,25 +1178,20 @@ Respond with only the JSON object."""
 
     def _combine_analysis_results(self, analysis_results: List[Dict[str, Any]], storage) -> tuple[Dict[str, Any], str]:
         """
-        Combines multiple individual analysis results into a single combined result
-        AND extracts evidence into a separate pre-extracted artifact.
+        Combine analysis results from multiple documents into a single result.
         
-        This implements THIN evidence pre-extraction to avoid registry scanning
-        and multi-artifact loading during synthesis.
-        
-        Args:
-            analysis_results: List of individual analysis results
-            storage: LocalArtifactStorage instance for storing evidence artifact
-            
-        Returns:
-            tuple: (combined_scores_data, evidence_artifact_hash)
+        THIN approach: Combine evidence artifacts from individual analyses
+        instead of extracting evidence from raw responses.
         """
+        import json
+        from datetime import datetime, timezone
+        
         combined_document_analyses = []
-        all_evidence = []  # NEW: Collect evidence during combination
+        all_evidence = []  # Collect evidence from individual evidence artifacts
         
         for i, result in enumerate(analysis_results):
-            if "error" in result:
-                # Skip failed analyses
+            if not result or "error" in result:
+                print(f"Warning: Skipping failed analysis result {i}")
                 continue
                 
             # Extract the actual analysis data from the nested structure
@@ -1208,20 +1203,30 @@ Respond with only the JSON object."""
                 if "raw_analysis_response" in cached_result:
                     raw_response = cached_result["raw_analysis_response"]
                     
-                    # NEW: Extract evidence from raw response for pre-extraction
-                    document_evidence = self._extract_evidence_from_delimited(raw_response)
-                    all_evidence.extend(document_evidence)
+                    # Evidence already extracted during analysis time - load from evidence artifact
+                    # (THIN principle: analysis agent produces evidence format needed for RAG)
+                    if "evidence_hash" in cached_result:
+                        evidence_hash = cached_result["evidence_hash"]
+                        try:
+                            evidence_artifact_data = storage.get_artifact(evidence_hash)
+                            if evidence_artifact_data:
+                                evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
+                                evidence_list = evidence_artifact.get("evidence_data", [])
+                                all_evidence.extend(evidence_list)
+                                print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
+                        except Exception as e:
+                            print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
                     
                     # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                     # We need framework content for gasket schema extraction
                     framework_content = getattr(self, '_current_framework_content', None)
                     if framework_content:
-                                            extracted_data = self._extract_and_map_with_gasket(
-                        raw_response, 
-                        framework_content, 
-                        getattr(self, '_current_audit_logger', None),
-                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
-                    )
+                        extracted_data = self._extract_and_map_with_gasket(
+                            raw_response, 
+                            framework_content, 
+                            getattr(self, '_current_audit_logger', None),
+                            getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                        )
                     else:
                         # Fallback to legacy parsing if framework content not available
                         extracted_data = self._legacy_json_parsing(raw_response)
@@ -1238,9 +1243,8 @@ Respond with only the JSON object."""
                 # Direct raw_analysis_response (fallback)
                 raw_response = result["raw_analysis_response"]
                 
-                # NEW: Extract evidence from raw response for pre-extraction
-                document_evidence = self._extract_evidence_from_delimited(raw_response)
-                all_evidence.extend(document_evidence)
+                # Evidence already extracted during analysis time - no post-processing needed
+                # (THIN principle: analysis agent produces evidence format needed for RAG)
                 
                 # Extract JSON from the delimited response
                 import re
@@ -1284,31 +1288,30 @@ Respond with only the JSON object."""
             "document_analyses": combined_document_analyses
         }
         
-        # NEW: Create and store evidence artifact separately
-        from datetime import datetime, timezone
+        # Create combined evidence artifact from individual evidence artifacts
         evidence_artifact = {
             "evidence_metadata": {
                 "total_documents": len(combined_document_analyses),
                 "total_evidence_pieces": len(all_evidence),
-                "extraction_method": "pre_extraction_v1.0",
+                "extraction_method": "analysis_time_combination_v1.0",
                 "extraction_time": datetime.now(timezone.utc).isoformat(),
                 "framework_version": "v6.0"
             },
             "evidence_data": all_evidence
         }
         
-        # Store evidence artifact
+        # Store combined evidence artifact
         evidence_hash = storage.put_artifact(
             json.dumps(evidence_artifact, indent=2).encode('utf-8'),
             {
                 "artifact_type": "combined_evidence_v6",
-                "extraction_method": "pre_extraction_v1.0",
+                "extraction_method": "analysis_time_combination",
                 "total_evidence_pieces": len(all_evidence),
                 "total_documents": len(combined_document_analyses)
             }
         )
         
-        print(f"📋 Evidence pre-extraction: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
+        print(f"📋 Evidence combination: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
         
         return combined_result, evidence_hash
 

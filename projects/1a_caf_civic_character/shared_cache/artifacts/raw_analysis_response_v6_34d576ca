@@ -1,0 +1,144 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of John McCain's 2008 concession speech. The speech emphasizes themes of unity, respect for the opponent, and a commitment to the nation's future, aligning with civic virtues. The language is largely aspirational and forward-looking, with limited use of divisive rhetoric. Confidence is high due to clear language and direct expression of sentiments."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.80,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.15,
+          "salience": 0.30,
+          "confidence": 0.90
+        },
+        "truth": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.90
+        },
+        "manipulation": {
+          "raw_score": 0.20,
+          "salience": 0.35,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.90
+        },
+        "resentment": {
+          "raw_score": 0.10,
+          "salience": 0.25,
+          "confidence": 0.90
+        },
+        "hope": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.90
+        },
+        "pragmatism": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.95
+        },
+        "fantasy": {
+          "raw_score": 0.10,
+          "salience": 0.20,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly.",
+          "confidence": 0.98,
+          "context_type": "statement_of_fact"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "I have always believed that America offers opportunities to all who have the industry and will to seize it.",
+          "confidence": 0.95,
+          "context_type": "statement_of_belief"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Whatsoever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.90,
+          "context_type": "statement_of_unity"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day...",
+          "confidence": 0.92,
+          "context_type": "acknowledgement_of_opponent"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "I made my share of mistakes... But I won't spend a moment of the future regretting what might have been.",
+          "confidence": 0.85,
+          "context_type": "acknowledgement_of_error"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+          "confidence": 0.88,
+          "context_type": "familial_support"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "I wish the outcome had been different, my friends. The road was a difficult one from the outset, but your support and friendship never wavered.",
+          "confidence": 0.85,
+          "context_type": "expression_of_disappointment"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "confidence": 0.98,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We fought - we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+          "confidence": 0.95,
+          "context_type": "acknowledgement_of_effort"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We face difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.80,
+          "context_type": "acknowledgement_of_challenges"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.97,
+          "context_type": "call_to_unity"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "You know, campaigns are often harder on a candidate's family than on the candidate, and that's been true in this campaign.",
+          "confidence": 0.80,
+          "context_type": "statement_of_personal_experience"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

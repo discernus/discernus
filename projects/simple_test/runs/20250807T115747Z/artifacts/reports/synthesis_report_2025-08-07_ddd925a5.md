@@ -1,1 +1,0 @@
-../../shared_cache/artifacts/synthesis_report_2025-08-07_ddd925a5.md
