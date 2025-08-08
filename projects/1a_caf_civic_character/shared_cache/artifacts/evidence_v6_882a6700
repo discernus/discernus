@@ -1,0 +1,61 @@
+{
+  "evidence_metadata": {
+    "document_hash": "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65",
+    "total_evidence_pieces": 5,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-08T03:00:48.644285+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "dignity",
+      "quote_text": "You cannot deny justice to any American without it affecting us all. You cannot keep injustice for some without it cheapening the justice of us all.",
+      "confidence": 0.95,
+      "context_type": "universal human worth",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:00:48.644278+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "justice",
+      "quote_text": "We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+      "confidence": 0.95,
+      "context_type": "systemic reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:00:48.644280+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "truth",
+      "quote_text": "We know there is no deeper proclivity to commit crimes among people of color, but there is a much deeper bias in the way that our drug laws have been and are being applied",
+      "confidence": 0.9,
+      "context_type": "evidence-based reasoning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:00:48.644281+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is a product of compromise. This legislation is just one step in the right direction",
+      "confidence": 0.9,
+      "context_type": "incremental progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:00:48.644282+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "hope",
+      "quote_text": "Like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve.",
+      "confidence": 0.9,
+      "context_type": "constructive vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:00:48.644283+00:00"
+    }
+  ]
+}

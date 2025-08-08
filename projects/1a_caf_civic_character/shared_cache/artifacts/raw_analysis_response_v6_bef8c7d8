@@ -1,0 +1,132 @@
+I'll analyze the document using the Civic Analysis Framework (CAF) v7.3 and provide structured JSON output focusing only on raw dimensional scores, salience, confidence levels, and supporting evidence.
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Sequential analysis of political speech examining civic virtue patterns across five axes"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "tribalism": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "truth": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "manipulation": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.80
+        },
+        "justice": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "resentment": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.55,
+          "salience": 0.50,
+          "confidence": 0.80
+        },
+        "fear": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.60,
+          "salience": 0.55,
+          "confidence": 0.75
+        },
+        "fantasy": {
+          "raw_score": 0.45,
+          "salience": 0.40,
+          "confidence": 0.70
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "everybody wants to do well in life. Everybody wants to make money",
+          "confidence": 0.85,
+          "context_type": "universal human aspiration"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "government of the billionaires, by the billionaires, and for the billionaires",
+          "confidence": 0.90,
+          "context_type": "us-vs-them framing"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "real inflation accounted for wages today are lower than they were 52 years ago... $75 trillion transfer of wealth from the bottom 90% to the top 1%",
+          "confidence": 0.85,
+          "context_type": "factual evidence"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys",
+          "confidence": 0.80,
+          "context_type": "emotional trigger"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We will not accept an oligarchic form of society",
+          "confidence": 0.90,
+          "context_type": "systemic reform"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "The rich want to get richer and they don't care who they step on",
+          "confidence": 0.95,
+          "context_type": "grievance expression"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism",
+          "confidence": 0.80,
+          "context_type": "possibility language"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "they are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration",
+          "confidence": 0.85,
+          "context_type": "threat language"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%",
+          "confidence": 0.75,
+          "context_type": "practical assessment"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "They live in another planet. They own mansions all over the world",
+          "confidence": 0.70,
+          "context_type": "unrealistic characterization"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

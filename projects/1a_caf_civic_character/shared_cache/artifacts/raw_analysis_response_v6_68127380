@@ -1,0 +1,102 @@
+I'll analyze the speech using the Civic Analysis Framework and provide structured JSON output with raw dimensional scores, salience, confidence levels, and supporting evidence.
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.92,
+    "analysis_notes": "Speech provides extensive material for analysis across all dimensions with clear rhetorical patterns and explicit value statements"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.25,
+          "salience": 0.40,
+          "confidence": 0.90
+        },
+        "truth": {
+          "raw_score": 0.80,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "manipulation": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.90,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.85
+        },
+        "hope": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.90
+        },
+        "fear": {
+          "raw_score": 0.35,
+          "salience": 0.40,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.80,
+          "salience": 0.75,
+          "confidence": 0.90
+        },
+        "fantasy": {
+          "raw_score": 0.20,
+          "salience": 0.25,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "You cannot deny justice to any American without it affecting us all. You cannot keep injustice for some without it cheapening the justice of us all.",
+          "confidence": 0.95,
+          "context_type": "universal human worth"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+          "confidence": 0.95,
+          "context_type": "systemic reform"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "We know there is no deeper proclivity to commit crimes among people of color, but there is a much deeper bias in the way that our drug laws have been and are being applied",
+          "confidence": 0.90,
+          "context_type": "evidence-based reasoning"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "This legislation is a product of compromise. This legislation is just one step in the right direction",
+          "confidence": 0.90,
+          "context_type": "incremental progress"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve.",
+          "confidence": 0.90,
+          "context_type": "constructive vision"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

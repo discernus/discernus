@@ -1,0 +1,61 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+    "total_evidence_pieces": 5,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-08T03:01:08.165689+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "dignity",
+      "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today",
+      "confidence": 0.92,
+      "context_type": "explicit_value_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:01:08.165655+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "justice",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote",
+      "confidence": 0.95,
+      "context_type": "policy_demand",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:01:08.165676+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "truth",
+      "quote_text": "It is true that we support the administration's civil rights bill. We support it with great reservations, however.",
+      "confidence": 0.9,
+      "context_type": "nuanced_assessment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:01:08.165679+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "hope",
+      "quote_text": "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete",
+      "confidence": 0.85,
+      "context_type": "vision_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:01:08.165682+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week",
+      "confidence": 0.85,
+      "context_type": "specific_policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T03:01:08.165684+00:00"
+    }
+  ]
+}

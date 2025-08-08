@@ -125,6 +125,14 @@ class LLMGateway(BaseGateway):
                 time.sleep(2)
                 continue
 
+            except litellm.exceptions.RateLimitError as e:
+                print(f"⚠️ RateLimitError with {current_model}: {e}. Implementing exponential backoff...")
+                # Exponential backoff: 2^attempt seconds, max 60 seconds
+                backoff_delay = min(2 ** attempts, 60)
+                print(f"⏳ Waiting {backoff_delay} seconds before retry...")
+                time.sleep(backoff_delay)
+                continue
+
             except Exception as e:
                 print(f"❌ Unhandled exception with {current_model}: {e}. Attempting fallback.")
                 fallback_model = self.model_registry.get_fallback_model(current_model)

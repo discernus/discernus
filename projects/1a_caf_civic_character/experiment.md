@@ -22,17 +22,27 @@ analysis:
   # The specific analysis variant to use from the framework file
   variant: "default"
   # List of LiteLLM-compatible model identifiers for analysis
+  # Use Pro for analysis (better quality)
   models:
-    - "vertex_ai/gemini-2.5-flash-lite"
+    - "vertex_ai/gemini-2.5-pro"
 
 # OPTIONAL: Configuration for the synthesis process
 synthesis:
   # Model to use for the final report synthesis
-  model: "vertex_ai/gemini-2.5-flash-lite"
+  # Use Pro for synthesis (better report quality)
+  model: "vertex_ai/gemini-2.5-pro"
 
 # Analysis Configuration
 analysis:
   evaluations_per_document: 1
+  # Use Pro for analysis (better quality)
+  models:
+    - "vertex_ai/gemini-2.5-pro"
+
+# Synthesis Configuration  
+synthesis:
+  # Use Pro for synthesis (better report quality)
+  model: "vertex_ai/gemini-2.5-pro"
 
 # Statistical Validation  
 validation:
