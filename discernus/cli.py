@@ -188,7 +188,17 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
 @click.option('--config', type=click.Path(exists=True), help='Path to config file')
 @click.pass_context
 def cli(ctx, verbose, quiet, no_color, config):
-    """Discernus - Computational Social Science Research Platform (THIN v2.0)"""
+    """Discernus - Computational Social Science Research Platform (THIN v2.0)
+    
+    \b
+    Common Examples:
+      python3 -m discernus.cli run                          # Run experiment in current directory
+      python3 -m discernus.cli run --dry-run                # Preview what would be executed
+      python3 -m discernus.cli validate                     # Validate current experiment
+      python3 -m discernus.cli validate --dry-run           # Preview validation checks
+      python3 -m discernus.cli continue --synthesis-model vertex_ai/gemini-2.5-pro
+      python3 -m discernus.cli artifacts                    # Show available cache artifacts
+    """
     # Ensure context object exists
     ctx.ensure_object(dict)
     
@@ -219,8 +229,10 @@ def cli(ctx, verbose, quiet, no_color, config):
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', help='Show what would be done without executing')
-@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', help='LLM model to use for analysis')
-@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', help='LLM model to use for synthesis')
+@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', 
+              help='LLM model for analysis (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
+@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', 
+              help='LLM model for synthesis (e.g., vertex_ai/gemini-2.5-flash-lite, openai/gpt-4o-mini)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
@@ -386,7 +398,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
 
 @cli.command(name='continue')
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
+@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', 
+              help='LLM model for synthesis [default: vertex_ai/gemini-2.5-pro] (e.g., vertex_ai/gemini-2.5-flash-lite)')
 def continue_experiment(experiment_path: str, synthesis_model: str):
     """Intelligently resume experiment from existing artifacts. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
@@ -470,7 +483,8 @@ def continue_experiment(experiment_path: str, synthesis_model: str):
 @click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'evidence-curator', 'results-interpreter']), 
               help='Focus debugging on specific agent')
 @click.option('--verbose', is_flag=True, help='Enable verbose debug output')
-@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
+@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', 
+              help='LLM model for synthesis [default: vertex_ai/gemini-2.5-pro] (e.g., vertex_ai/gemini-2.5-flash-lite)')
 def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str):
     """Interactive debugging mode with detailed agent tracing. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
@@ -550,7 +564,8 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-def validate(experiment_path: str):
+@click.option('--dry-run', is_flag=True, help='Preview validation without executing coherence validation')
+def validate(experiment_path: str, dry_run: bool):
     """Validate experiment structure and configuration. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -563,7 +578,10 @@ def validate(experiment_path: str):
         click.echo(f"❌ Experiment path is not a directory: {exp_path}")
         sys.exit(1)
     
-    click.echo(f"🔍 Validating experiment: {experiment_path}")
+    if dry_run:
+        click.echo(f"🔍 [DRY RUN] Would validate experiment: {experiment_path}")
+    else:
+        click.echo(f"🔍 Validating experiment: {experiment_path}")
     
     valid, message, experiment = validate_experiment_structure(exp_path)
     click.echo(message)
@@ -572,6 +590,10 @@ def validate(experiment_path: str):
         click.echo(f"   📋 Name: {experiment['name']}")
         click.echo(f"   📄 Framework: {experiment['framework']}")
         click.echo(f"   📁 Corpus: {experiment['corpus_path']} ({experiment['_corpus_file_count']} files)")
+        
+        if dry_run:
+            click.echo(f"   ✅ [DRY RUN] Basic structure valid. Would run coherence validation.")
+        
     else:
         # Show detailed validation issues if available (same format as run command)
         if 'validation_result' in experiment:
@@ -945,7 +967,7 @@ def list():
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 def artifacts(experiment_path: str):
-    """Show experiment artifacts and available resumption points. Defaults to current directory."""
+    """Show experiment artifacts and available cache status for resumption. Defaults to current directory."""
     exp_path = Path(experiment_path)
     
     click.echo(f"🔍 Experiment Artifacts: {experiment_path}")
