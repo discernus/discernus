@@ -1,155 +1,168 @@
 # Discernus Glossary
 
+*Updated August 2025 - Reflects current THIN synthesis pipeline with comprehensive RAG architecture*
+
 ## Core Architecture Concepts
 
 ### **THIN Architecture**
-Software design philosophy where minimal code enables LLM conversations rather than managing them. Software provides orchestration infrastructure; LLMs provide intelligence and analysis.
+Software design philosophy where minimal code enables LLM intelligence rather than constraining it. Software provides orchestration, caching, and deterministic operations; LLMs handle reasoning, interpretation, and domain knowledge. Components limited to <150 lines to prevent intelligence creep.
 
-### **Expert Agent**
-Specialized LLM with domain expertise (e.g., `discernuslibrarian_agent`, `corpus_detective_agent`) that can be spawned by the moderator to provide specific analysis.
+### **Comprehensive RAG (Retrieval-Augmented Generation)**
+Modern synthesis paradigm that indexes all experiment data types (corpus, framework, scores, statistics, evidence, metadata) in a unified knowledge graph, enabling cross-domain reasoning and intelligent evidence retrieval.
 
-### **Agent Spawning Instruction Set**
-The system prompt and configuration that defines an expert agent's capabilities, stored in `agent_roles.py`.
+### **Cross-Domain Reasoning**
+Ability to investigate connections between statistical patterns and textual evidence through natural language queries that span multiple data types (e.g., "What evidence supports the correlation between dignity and cohesion scores?").
 
-### **Moderator Agent/LLM**
-The orchestrating LLM (`moderator_llm`) responsible for coordinating expert agents and managing the overall research workflow.
+### **Knowledge Graph**
+Unified semantic index of all experiment data types using txtai embeddings, enabling fast (<2s) cross-domain queries with full provenance preservation.
 
-## Research Workflow Components
+### **Intelligent Retrieval**
+LLM-powered adaptive query generation with targeted evidence retrieval based on statistical findings, eliminating context window limitations of massive evidence pools.
 
-### **Corpus Detective**
-An expert agent that inspects user-provided corpus at ingestion time to identify document types, quality issues, and metadata gaps. Backed by CorpusInspector infrastructure for robust file reading from messy real-world directories.
+## Current Processing Pipeline
 
-### **Research Session**
-A complete analytical workflow from research question through final analysis, stored in `research_sessions/session_id/`.
+### **4-Stage THIN Synthesis Architecture**
+Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance.
 
-### **Design LLM**
-The LLM responsible for proposing research methodology based on the research question and corpus.
+### **Analysis Stage**
+Enhanced analysis agents with framework-specific prompts and dimensional scoring, producing raw scores and evidence with computational verification.
 
-### **Conversation Orchestration**
-The process of coordinating multiple expert LLMs to build progressive analysis toward answering a research question.
+### **Knowledge Indexing Stage**
+Comprehensive knowledge graph construction from all 6 experiment data types with persistent hash-based caching for enterprise scalability.
 
-## Data and Content
+### **Intelligent Synthesis Stage**
+Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval.
 
-### **Corpus**
-Collection of texts provided by the user for analysis. Can be messy, real-world data requiring inspection and cleaning.
+### **Reporting Stage**
+Statistical analysis and academic-quality output with full cross-domain provenance, computational verification, and peer review readiness.
 
-### **Source Texts**
-The actual text content being analyzed, passed to expert agents as context.
+## Research Framework Components
 
-### **Framework Interrogation**
-Process of validating novel analytical frameworks against academic literature (performed by discernuslibrarian_agent).
+### **Framework Specification**
+Natural language analytical approach expressed in markdown with dimensional definitions, evaluation criteria, and academic grounding. Enables any analytical approach expressible in natural language.
 
-### **Literature Discovery**
-Automated search and validation of academic papers relevant to research questions (performed by discernuslibrarian_agent).
+### **Experiment Specification**
+Research design document defining hypotheses, corpus requirements, analytical methodology, and success criteria. Supports multi-model research designs and comparative evaluation.
+
+### **Corpus Specification**
+Text collection manifest with metadata, processing requirements, and quality standards. Handles document collections from dozens to thousands with hash-based anonymization.
+
+### **Dimensional Scores**
+Individual analytical judgments (e.g., dignity_score = 0.8) that require textual evidence grounding. Foundation for all statistical analysis and evidence linking.
+
+## Data Types and Artifacts
+
+### **Six Data Type Integration**
+Comprehensive knowledge architecture indexes: (1) Corpus Documents - full text with speaker attribution, (2) Framework Specification - analytical methodology, (3) Raw Scores - dimension scores with provenance, (4) Statistical Results - verified mathematical findings, (5) Evidence Quotes - supporting textual evidence, (6) Experiment Metadata - research context and hypotheses.
+
+### **Content-Addressable Storage**
+SHA256-based artifact management through LocalArtifactStorage, eliminating redundant computation on identical inputs with immutable, hashed artifacts.
+
+### **Provenance Chain**
+Complete audit trail from statistical findings back to source texts through deterministic semantic search and metadata preservation, ensuring peer review readiness.
+
+### **Evidence Linking Scope**
+Evidence linking required only for dimensional scores and direct mathematical derivatives. Complex statistical relationships require mathematical transparency rather than evidence linking.
 
 ## Technical Infrastructure
 
-### **LiteLLM Client**
-Unified interface for accessing multiple LLM providers (OpenAI, Anthropic, Vertex AI) with rate limiting and cost optimization.
+### **txtai Knowledge Index**
+Comprehensive research knowledge index serving all experiment data types with deterministic, reproducible retrieval across heterogeneous research data types and full provenance preservation.
 
-### **Conversation Logger**
-System that records all LLM interactions with timestamps and metadata for complete transparency.
+### **MathToolkit**
+Pre-built mathematical functions with provenance metadata for reliable statistical calculations. All operations executed through secure code execution with complete transparency.
 
-### **Corpus Chunking**
-Process of dividing large corpora into manageable pieces for API rate limit management.
+### **LocalArtifactStorage**
+Content-addressable storage system for artifact management with Git-based provenance and version control, no centralized databases required.
 
-### **Session Manager**
-Component responsible for creating, tracking, and managing research sessions.
+### **LLM Gateway**
+Multi-model architecture with Gemini 2.5 series as development defaults, supporting cross-model compatibility validation for ensemble testing and targeted use cases.
 
-## Agent Types and Roles
+### **Security Boundary**
+Orchestrator trust boundary model distinguishing between trusted infrastructure (orchestrators) and untrusted workloads (agents) with ExperimentSecurityBoundary constraining agent file access.
 
-### **Production Agents**
-Expert agents used in the main research pipeline:
-- `corpus_detective_agent`: Corpus inspection and quality assessment
-- `discernuslibrarian_agent`: Academic literature discovery and framework validation  
-- `computational_rhetoric_expert`: Rhetorical analysis and persuasive discourse
-- `data_science_expert`: Statistical analysis and quantitative methods
+## Agent Architecture
 
-### **Development Tools**
-Utilities for development and testing:
-- `dev_test_runner.py`: Automated testing framework
-- `setup_vertex_ai.py`: Vertex AI configuration utility
-- `analyze_conversation_timing.py`: Performance analysis tool
-- `natural_corpus_demo.py`: Complete workflow demonstration with transparency logging
+### **Enhanced Analysis Agents**
+Framework-specific agents that apply analytical approaches at scale with dimensional scoring, evidence extraction, and computational verification.
 
-### **Core Infrastructure Services**
-Production infrastructure that expert agents depend on:
-- `UltraThinDiscernusLibrarian` (in `discernuslibrarian.py`): Academic literature discovery APIs
-- `CorpusInspector` (in `corpus_inspector.py`): File reading and corpus inspection infrastructure
-- `SecureCodeExecutor` (in `secure_code_executor.py`): Sandboxed computation with data science libraries
-- `NotebookManager` (in `notebook_manager.py`): Automatic research notebook generation
+### **ComprehensiveKnowledgeCurator**
+Agent that creates unified knowledge graphs indexing all experiment data types for cross-domain reasoning and intelligent synthesis.
 
-### **Computational Rhetoric & Traditional NLP**
-**Academic Value Assessment**: Recent research (2024-2025) shows traditional NLP tools maintain academic value alongside LLMs:
+### **RAGEnhancedResultsInterpreter**
+Intelligent synthesis agent using comprehensive knowledge retrieval for evidence-grounded narrative construction with full provenance.
 
-**🎯 THIN Recommendation**: Provide computational_rhetoric_expert with **lightweight NLP toolkit** rather than heavy infrastructure:
-- **Core tools**: TextStat (readability), VADER sentiment, basic syntactic parsers
-- **Rationale**: LLMs excel at interpretation but struggle with fine-grained linguistic annotation
-- **Academic Use Cases**: Linguistic feature extraction that LLMs miss (clause detection, syntactic complexity)
-- **Research Evidence**: "Linguistic Blind Spots of Large Language Models" (2025) shows LLMs fail at precise syntactic tasks
+### **Agent Specialization**
+Task-specific agents with clear input/output contracts, natural language communication between stages, and cross-domain knowledge integration.
 
-**🚫 Skip**: Heavy NLP infrastructure (spaCy pipelines, custom parsers) unless specific research demands it
-
-### **Simulated Researcher**
-LLM profiles that simulate human researcher feedback during development mode testing.
-
-## File Organization
-
-### **Package Structure**
-- `discernus/core/`: Core production services
-- `discernus/gateway/`: LLM API management
-- `discernus/orchestration/`: Multi-agent coordination
-- `discernus/web/`: Web interface
-- `discernus/tests/`: Test suite
-- `discernus/dev_tools/`: Development utilities
-- `discernus/demo/`: Usage examples
+### **Current Package Structure**
+- `discernus/core/`: Core production services (MathToolkit, LocalArtifactStorage)
+- `discernus/gateway/`: LLM API management and model registry
+- `discernus/agents/`: Specialized analysis and synthesis agents
+- `discernus/agents/thin_synthesis/`: 4-stage THIN synthesis pipeline
+- `discernus/agents/comprehensive_knowledge_curator/`: RAG knowledge indexing
+- `discernus/tests/`: Comprehensive test suite with integration testing
+- `docs/architecture/`: System architecture and provenance documentation
 
 ### **Research Artifacts**
-- `research_sessions/`: All completed research sessions
+- `projects/`: Individual experiments with project/experiment/run structure
+- `frameworks/`: Framework specifications (reference, seed, community)
+- `corpus/`: Text collections and corpus manifests
 - `pm/`: Product management and specification documents
-- `data/`: Research corpora and datasets
-- `docs/`: Documentation and guides
-
-## Workflow Terminology
-
-### **Moderator Spawning**
-The process where the moderator_llm determines which expert agents to activate based on research needs.
-
-### **Expert Request**
-Specific analytical task requested from an expert agent: `"REQUEST TO [Expert_Name]: [Specific analytical request]"`
-
-### **Progressive Analysis**
-Building knowledge systematically by using outputs from one expert to inform requests to subsequent experts.
-
-### **Research Question**
-The central question driving the entire analytical workflow, provided by the user.
-
-### **Approved Design**
-Research methodology that has been proposed by the design LLM and approved by the user/simulated researcher.
 
 ## Quality and Validation
 
+### **Computational Verification**
+All mathematical calculations executed through secure code with complete transparency. No hallucinated statistics - all numbers computed and logged with provenance.
+
+### **Academic Provenance**
+Every decision, artifact, and transformation logged with complete context. Git-based version control and tamper-evident chains of analytical custody.
+
+### **Evidence-Grounded Synthesis**
+Zero hallucination synthesis through deterministic evidence retrieval and computational verification, maintaining causal chains between statistical findings and textual evidence.
+
+### **Variance-Aware Processing**
+Statistical methods to measure LLM response variance, adaptive sampling with confidence intervals, and multi-run validation for reliability assessment.
+
+### **Cross-Model Validation**
+Multi-model architecture supporting ensemble testing and targeted use cases while maintaining Gemini 2.5 series as development defaults.
+
+## Modern AI Systems Patterns
+
+### **RAG-First Design**
+Retrieval-Augmented Generation as primary synthesis paradigm, moving beyond simple evidence-only approaches to comprehensive knowledge retrieval.
+
+### **LLM Query Intelligence**
+Language models generate and refine queries adaptively based on statistical context and research hypotheses, enabling sophisticated cross-domain investigation.
+
+### **Semantic Search Integration**
+Vector embeddings and semantic search as core infrastructure for research artifact discovery, with hash-based persistent caching.
+
+### **Adaptive Query Refinement**
+LLM-powered query optimization improving retrieval quality iteratively based on result relevance and completeness.
+
+## Development and Extension
+
 ### **THIN Compliance**
-Adherence to THIN architecture principles - minimal code, maximum LLM intelligence, no complex parsing.
+Adherence to THIN architecture principles: minimal code, maximum LLM intelligence, externalized prompts in YAML files, no complex parsing.
 
-### **Evidence-Based Confidence**
-Systematic approach to assigning confidence levels to research claims based on available evidence quality and quantity.
+### **Framework Agnostic**
+System adapts to any analytical approach expressible in natural language through specification-driven design and externalized intelligence.
 
-### **Red Team Critique**
-Adversarial quality control where specialized models challenge research findings to identify weaknesses.
+### **Empirical Technology Choices**
+Decisions based on actual testing rather than theoretical optimization, with model selection validated through complexity testing.
 
-### **Corpus Quality Assessment**
-Systematic evaluation of corpus characteristics including source diversity, temporal coverage, and potential biases.
+### **Day-1 Extensibility**
+Create unlimited frameworks, experiments, and corpora within specifications without programming, enabling immediate research productivity.
 
 ---
 
-*This glossary helps maintain consistent terminology across the Discernus project and reduces confusion during development and usage.*
+*This glossary maintains consistent terminology across the Discernus project and reflects the current THIN synthesis architecture with comprehensive RAG capabilities.*
 
 ## Related Documentation
 
-- **`../AGENT_QUICK_START.md`** - 5-minute orientation for new Cursor agents
-- `DEV_MODE_GUIDE.md` - Development mode and testing workflows
-- `EXTENSION_GUIDE.md` - How to extend Discernus without forking
-- `DEPLOYMENT_COLLABORATION_GUIDE.md` - Complete deployment and collaboration scenarios
-- `../README.md` - Project overview and THIN architecture guide
-- Core architecture documentation in `../pm/` directory 
+- **`CURSOR_AGENT_QUICK_START.md`** - 30-second orientation for new Cursor agents
+- **`architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`** - Complete technical architecture specification
+- **`architecture/PROVENANCE_SYSTEM.md`** - Academic provenance and audit trail documentation
+- **`developer/CLI_COMMAND_REFERENCE.md`** - Complete CLI usage guide
+- **`specifications/`** - Framework, Experiment, and Corpus specification documentation 
