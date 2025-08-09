@@ -10,7 +10,7 @@ of model capabilities, costs, or fallback logic.
 
 import litellm
 from litellm.cost_calculator import completion_cost
-from typing import Dict, Any, Tuple, List, Optional
+from typing import Dict, Any, Tuple, List, Optional, Callable
 from .model_registry import ModelRegistry
 from .provider_parameter_manager import ProviderParameterManager
 import time
@@ -20,6 +20,9 @@ from .base_gateway import BaseGateway
 
 # Add moderation import
 from litellm import moderation
+
+# Add rate limiting import
+from ratelimit import limits, RateLimitException
 
 # LLMArchiveManager was removed during cleanup - functionality moved to agents
 # from discernus.core.llm_archive_manager import LLMArchiveManager
@@ -34,6 +37,38 @@ class LLMGateway(BaseGateway):
         self.model_registry = model_registry
         self.parameter_manager = ProviderParameterManager()
         self.archive_manager = archive_manager
+        
+        # Create rate-limited completion functions per provider
+        self._rate_limited_completions = self._create_rate_limiters()
+
+    def _create_rate_limiters(self) -> Dict[str, Callable]:
+        """
+        Create rate-limited completion functions per provider using the ratelimit library.
+        Uses rate limits from models.yaml provider_defaults or individual model specifications.
+        """
+        limiters = {}
+        
+        for provider, config in self.parameter_manager.provider_defaults.items():
+            # Get RPM limit from provider defaults or use conservative default
+            rpm_limit = config.get('default_rpm_limit', 60)
+            
+            # Create a rate-limited completion function for this provider
+            @limits(calls=rpm_limit, period=60)  # RPM limit over 60 seconds
+            def rate_limited_completion(model: str, messages: List[Dict], **kwargs):
+                return litellm.completion(model=model, messages=messages, **kwargs)
+            
+            limiters[provider] = rate_limited_completion
+            print(f"🚦 Rate limiting configured for {provider}: {rpm_limit} RPM")
+        
+        return limiters
+
+    def _get_rate_limited_completion(self, model: str) -> Callable:
+        """
+        Get the appropriate rate-limited completion function for a model.
+        Falls back to unrestricted litellm.completion if no rate limiter is configured.
+        """
+        provider = self.parameter_manager.get_provider_from_model(model)
+        return self._rate_limited_completions.get(provider, litellm.completion)
 
     def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
@@ -82,7 +117,9 @@ class LLMGateway(BaseGateway):
                 # Clean parameters based on provider requirements
                 clean_params = self.parameter_manager.get_clean_parameters(current_model, kwargs)
                 
-                response = litellm.completion(model=current_model, messages=messages, stream=False, **clean_params)
+                # Use rate-limited completion function for this provider
+                completion_func = self._get_rate_limited_completion(current_model)
+                response = completion_func(model=current_model, messages=messages, stream=False, **clean_params)
                 
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
                 usage_obj = getattr(response, 'usage', None)
@@ -131,6 +168,12 @@ class LLMGateway(BaseGateway):
                 backoff_delay = min(2 ** attempts, 60)
                 print(f"⏳ Waiting {backoff_delay} seconds before retry...")
                 time.sleep(backoff_delay)
+                continue
+
+            except RateLimitException as e:
+                print(f"⚠️ Proactive rate limit reached for {current_model}: {e}. Waiting...")
+                # Simple 1-second wait for proactive rate limiting
+                time.sleep(1)
                 continue
 
             except Exception as e:
@@ -182,12 +225,17 @@ class LLMGateway(BaseGateway):
             # and potentially a more complex prompt.
             messages = [{"role": "user", "content": "Hello, model!"}]
             clean_params = self.parameter_manager.get_clean_parameters(model_name, {}) # Assuming no specific parameters needed for this basic check
-            litellm.completion(model=model_name, messages=messages, stream=False, **clean_params)
+            
+            # Use rate-limited completion function for health checks too
+            completion_func = self._get_rate_limited_completion(model_name)
+            completion_func(model=model_name, messages=messages, stream=False, **clean_params)
             
             # If the call completes without an exception, we consider it healthy.
             return {'is_healthy': True, 'message': 'Model is responsive.'}
         except litellm.exceptions.APIConnectionError as e:
             return {'is_healthy': False, 'message': f'APIConnectionError: {e}'}
+        except RateLimitException as e:
+            return {'is_healthy': False, 'message': f'Rate limit reached during health check: {e}'}
         except Exception as e:
             # Fallback for any other unexpected errors
             print(f"ERROR: An unexpected error occurred during health check for {model_name}: {e}")
