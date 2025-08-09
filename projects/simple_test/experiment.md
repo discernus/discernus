@@ -27,13 +27,13 @@ analysis:
   gasket_version: "v7.3"
   variant: "default"
   models:
-    - "vertex_ai/gemini-2.5-flash-lite"
+    - "vertex_ai/gemini-2.5-flash"
 
 # OPTIONAL: Configuration for the synthesis process
 synthesis:
   version: "v7.3"
   gasket_version: "v7.3"
-  model: "vertex_ai/gemini-2.5-flash-lite"
+  model: "vertex_ai/gemini-2.5-pro"
 
 # Canonical workflow configuration (v7.3 compliant)
 workflow:
