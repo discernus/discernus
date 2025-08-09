@@ -71,9 +71,13 @@ class SequentialSynthesisAgent:
             framework_fit_assessment = self._synthesize_step(request, "framework_fit_assessment")
 
             # Step 5: Final Integration
+            # Aggregate all retrieved evidence for the final report
+            aggregated_evidence = {**hypothesis_evidence, **anomaly_evidence, **pattern_evidence}
+
             final_report = self._synthesize_step(
                 request,
                 "final_integration",
+                retrieved_evidence=aggregated_evidence,
                 previous_findings={
                     "hypothesis_findings": hypothesis_findings,
                     "anomaly_findings": anomaly_findings,
