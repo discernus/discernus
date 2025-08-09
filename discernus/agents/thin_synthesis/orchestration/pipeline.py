@@ -60,6 +60,7 @@ class ProductionPipelineRequest:
     framework_spec: str
     scores_artifact_hash: str  # LocalArtifactStorage hash for scores CSV
     evidence_artifact_hash: str  # LocalArtifactStorage hash for evidence CSV
+    corpus_artifact_hash: Optional[str] = None  # LocalArtifactStorage hash for combined corpus
     experiment_context: Optional[str] = None
     max_evidence_per_finding: int = 3
     min_confidence_threshold: float = 0.7
@@ -1386,69 +1387,32 @@ Raw Analysis Data:
         try:
             processed_stats = {}
             
-            # DEBUG: Log the structure we're receiving
-            self.logger.info(f"🔍 DEBUG: MathToolkit exec_response keys: {list(exec_response.keys())}")
-            if 'stage_2_derived_metrics' in exec_response:
-                stage_2 = exec_response['stage_2_derived_metrics']
-                self.logger.info(f"🔍 DEBUG: stage_2_derived_metrics keys: {list(stage_2.keys())}")
-                if 'results' in stage_2:
-                    results = stage_2['results']
-                    self.logger.info(f"🔍 DEBUG: stage_2 results keys: {list(results.keys())}")
-                    for task_name in list(results.keys())[:3]:  # Log first 3 task names
-                        task_result = results[task_name]
-                        self.logger.info(f"🔍 DEBUG: Task '{task_name}' structure: {list(task_result.keys()) if isinstance(task_result, dict) else type(task_result)}")
-            
-            # Extract Stage 1 (raw data) results
-            if 'stage_1_raw_data' in exec_response:
-                stage_1 = exec_response['stage_1_raw_data'].get('results', {})
-                for task_name, task_result in stage_1.items():
-                    if isinstance(task_result, dict) and 'result_value' in task_result:
-                        processed_stats[f"stage_1_{task_name}"] = task_result['result_value']
-            
-            # Extract Stage 2 (derived metrics) results - this is where the rich statistics are
-            if 'stage_2_derived_metrics' in exec_response:
-                stage_2 = exec_response['stage_2_derived_metrics'].get('results', {})
-                for task_name, task_result in stage_2.items():
-                    if isinstance(task_result, dict):
-                        # Task results are direct dictionaries, not nested under 'result_value'
-                        result_data = task_result
-                        
-                        # Extract meaningful metrics based on task type and content
-                        if 'calculate_derived_metrics' in task_name or 'calculated_metrics' in result_data:
-                            # Extract calculated metrics like cohesive_index, identity_tension, etc.
-                            if 'calculated_metrics' in result_data:
-                                metrics = result_data['calculated_metrics']
-                                processed_stats['derived_metrics'] = metrics
-                                processed_stats['derived_metrics_success_rate'] = result_data.get('success_rate', 0)
-                                processed_stats['derived_metrics_formulas'] = result_data.get('formulas_used', [])
-                                self.logger.info(f"📊 Extracted derived metrics: {len(metrics)} calculated metrics")
-                        
-                        elif 'descriptive_statistics' in task_name or 'groups' in result_data:
-                            # Extract descriptive statistics
-                            processed_stats[f"descriptive_stats_{task_name}"] = result_data
-                            self.logger.info(f"📊 Extracted descriptive statistics: {task_name}")
-                        
-                        elif ('test_H' in task_name or 'comparison' in task_name) and 'f_statistic' in result_data:
-                            # Extract ANOVA/statistical test results
-                            processed_stats[f"hypothesis_test_{task_name}"] = {
-                                'test_type': result_data.get('type', 'unknown'),
-                                'f_statistic': result_data.get('f_statistic'),
-                                'p_value': result_data.get('p_value'),
-                                'significant': result_data.get('significant'),
-                                'dependent_variable': result_data.get('dependent_variable'),
-                                'grouping_variable': result_data.get('grouping_variable')
-                            }
-                            self.logger.info(f"📊 Extracted hypothesis test: {task_name}")
-                        
-                        elif 'validation' in task_name:
-                            # Extract validation results
-                            processed_stats['metric_validation'] = result_data
-                            self.logger.info(f"📊 Extracted validation results: {task_name}")
-                        
-                        else:
-                            # Generic statistical result
-                            processed_stats[task_name] = result_data
-                            self.logger.info(f"📊 Extracted generic result: {task_name}")
+            # Helper to recursively find and extract statistical results
+            def find_stats(data):
+                if isinstance(data, dict):
+                    # Check for known statistical result patterns
+                    if 'f_statistic' in data and 'p_value' in data:
+                        return data
+                    if 'mean' in data and 'std' in data and 'count' in data:
+                        return data
+                    if 'correlation_matrix' in data:
+                        return data
+                    if 'calculated_metrics' in data:
+                        return data.get('calculated_metrics')
+                    
+                    # Recurse into nested dictionaries
+                    for key, value in data.items():
+                        result = find_stats(value)
+                        if result:
+                            # Use descriptive key to avoid overwrites
+                            processed_stats[f"{key}_{list(result.keys())[0] if result else ''}"] = result
+
+                elif isinstance(data, list):
+                    for item in data:
+                        find_stats(item)
+
+            # Start recursive search from the root of the execution response
+            find_stats(exec_response)
             
             # Add summary metadata
             processed_stats['processing_metadata'] = {

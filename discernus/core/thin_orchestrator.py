@@ -247,6 +247,7 @@ Respond with only the JSON object."""
             framework_spec=framework_content,
             scores_artifact_hash=scores_hash,
             evidence_artifact_hash=evidence_hash,
+            corpus_artifact_hash=corpus_hash,  # Pass corpus hash for comprehensive RAG
             experiment_context=experiment_context,
             max_evidence_per_finding=3,
             min_confidence_threshold=0.7,
@@ -714,7 +715,7 @@ Respond with only the JSON object."""
                 
                 print(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
                 
-                synthesis_result = self._run_thin_synthesis(
+                synthesis_results = self._run_thin_synthesis(
                     scores_hash=scores_hash,
                     evidence_hash=evidence_hash,
                     framework_content=framework_content,
@@ -722,13 +723,13 @@ Respond with only the JSON object."""
                     model=synthesis_model,
                     audit_logger=audit,
                     storage=storage,
-                    # Add provenance context (Issue #208 fix)
                     framework_hash=framework_hash,
                     corpus_hash=corpus_hash,
-                    corpus_manifest=corpus_manifest,  # THIN approach: pass raw corpus content
-                    debug_agent=debug_agent,
-                    debug_level=debug_level
+                    corpus_manifest=corpus_manifest,
+                    analysis_model=analysis_model
                 )
+                
+                synthesis_end_time = datetime.now(timezone.utc).isoformat()
                 
                 # Display synthesis-only cost
                 synthesis_costs = audit.get_session_costs()
@@ -736,14 +737,14 @@ Respond with only the JSON object."""
                 print(f"   💰 Synthesis cost: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
                 print(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
                 
-                if not synthesis_result or not isinstance(synthesis_result, dict):
-                    raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_result)}")
+                if not synthesis_results or not isinstance(synthesis_results, dict):
+                    raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_results)}")
                 
-                if "synthesis_report_markdown" not in synthesis_result:
+                if "synthesis_report_markdown" not in synthesis_results:
                     raise ThinOrchestratorError("Missing synthesis_report_markdown in result")
                 
                 # Generate final report with cost transparency
-                base_report = synthesis_result["synthesis_report_markdown"]
+                base_report = synthesis_results["synthesis_report_markdown"]
                 session_costs = audit.get_session_costs()
                 
                 # Add cost summary section to report
@@ -760,15 +761,15 @@ Respond with only the JSON object."""
                 curated_evidence_hash = ""
                 
                 # Check if synthesis metadata contains artifact references
-                if "statistical_results_hash" in synthesis_result:
-                    statistical_results_hash = synthesis_result["statistical_results_hash"]
-                if "curated_evidence_hash" in synthesis_result:
-                    curated_evidence_hash = synthesis_result["curated_evidence_hash"]
+                if "statistical_results_hash" in synthesis_results:
+                    statistical_results_hash = synthesis_results["statistical_results_hash"]
+                if "curated_evidence_hash" in synthesis_results:
+                    curated_evidence_hash = synthesis_results["curated_evidence_hash"]
                 
                 final_csv_export_result = self._export_final_synthesis_csv_files(
                     scores_hash, evidence_hash, statistical_results_hash,
                     curated_evidence_hash, framework_content, 
-                    experiment_config, corpus_manifest, synthesis_result, results_dir, audit
+                    experiment_config, corpus_manifest, synthesis_results, results_dir, audit
                 )
                 
                 # Create provenance-first artifact organization (Issue #297)
@@ -902,7 +903,7 @@ Respond with only the JSON object."""
             
             print(f"🔬 Starting synthesis phase with {synthesis_model}...")
             
-            synthesis_result = self._run_thin_synthesis(
+            synthesis_results = self._run_thin_synthesis(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
                 framework_content=framework_content,
@@ -910,14 +911,13 @@ Respond with only the JSON object."""
                 model=synthesis_model,
                 audit_logger=audit,
                 storage=storage,
-                # Add provenance context (Issue #208 fix)
                 framework_hash=framework_hash,
                 corpus_hash=corpus_hash,
-                corpus_manifest=corpus_manifest,  # THIN approach: pass raw corpus content
-                analysis_model=analysis_model,
-                debug_agent=debug_agent,
-                debug_level=debug_level
+                corpus_manifest=corpus_manifest,
+                analysis_model=analysis_model
             )
+            
+            synthesis_end_time = datetime.now(timezone.utc).isoformat()
             
             # Display synthesis cost update
             synthesis_costs = audit.get_session_costs()
@@ -925,19 +925,17 @@ Respond with only the JSON object."""
             print(f"   💰 Total cost so far: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
             print(f"   🔢 Total tokens: {synthesis_costs.get('total_tokens', 0):,}")
             
-            synthesis_end_time = datetime.now(timezone.utc).isoformat()
-            
             # Record synthesis stage
             agent_name = "ProductionThinSynthesisPipeline"
             stage_metadata = {
-                "result_hash": synthesis_result["result_hash"],
-                "duration_seconds": synthesis_result["duration_seconds"],
-                "synthesis_confidence": synthesis_result["synthesis_confidence"]
+                "result_hash": synthesis_results["result_hash"],
+                "duration_seconds": synthesis_results["duration_seconds"],
+                "synthesis_confidence": synthesis_results["synthesis_confidence"]
             }
             
             # Add THIN-specific metadata if available
-            if "thin_metadata" in synthesis_result:
-                stage_metadata["thin_pipeline_data"] = synthesis_result["thin_metadata"]
+            if "thin_metadata" in synthesis_results:
+                stage_metadata["thin_pipeline_data"] = synthesis_results["thin_metadata"]
             
             manifest.add_execution_stage("synthesis", agent_name,
                                        synthesis_start_time, synthesis_end_time, "completed", stage_metadata)
@@ -948,7 +946,7 @@ Respond with only the JSON object."""
             analysis_summary = self._combine_batch_results(all_analysis_results)
 
             # Generate final report with cost transparency
-            base_report_content = synthesis_result.get("synthesis_report_markdown", "Synthesis failed.")
+            base_report_content = synthesis_results.get("synthesis_report_markdown", "Synthesis failed.")
             session_costs = audit.get_session_costs()
             
             # Add cost summary section to report
@@ -998,10 +996,10 @@ Respond with only the JSON object."""
             curated_evidence_hash = ""
             
             # Check if synthesis metadata contains artifact references
-            if "statistical_results_hash" in synthesis_result:
-                statistical_results_hash = synthesis_result["statistical_results_hash"]
-            if "curated_evidence_hash" in synthesis_result:
-                curated_evidence_hash = synthesis_result["curated_evidence_hash"]
+            if "statistical_results_hash" in synthesis_results:
+                statistical_results_hash = synthesis_results["statistical_results_hash"]
+            if "curated_evidence_hash" in synthesis_results:
+                curated_evidence_hash = synthesis_results["curated_evidence_hash"]
                 
             # TODO: For now, we'll look for the most recent synthesis artifacts in the cache
             # This is a temporary solution until the synthesis pipeline returns proper hashes
@@ -1009,7 +1007,7 @@ Respond with only the JSON object."""
             final_csv_export_result = self._export_final_synthesis_csv_files(
                 scores_hash, evidence_hash, statistical_results_hash,
                 curated_evidence_hash, framework_content, 
-                experiment_config, corpus_manifest, synthesis_result, results_dir, audit
+                experiment_config, corpus_manifest, synthesis_results, results_dir, audit
             )
             
             # Finalize manifest and audit
@@ -1024,7 +1022,7 @@ Respond with only the JSON object."""
             audit.log_orchestrator_event("experiment_complete", {
                 "total_duration_seconds": total_duration,
                 "analysis_duration": analysis_summary["total_duration_seconds"],
-                "synthesis_duration": synthesis_result.get("execution_metadata", {}).get("duration_seconds", 0),
+                "synthesis_duration": synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
                 "final_report_hash": report_hash,
                 "manifest_file": str(manifest_file),
                 "mathematical_validation": "completed"
@@ -1068,7 +1066,7 @@ Respond with only the JSON object."""
                 "manifest_file": str(manifest_file),
                 "total_duration_seconds": total_duration,
                 "analysis_result": analysis_summary,
-                "synthesis_result": synthesis_result,
+                "synthesis_result": synthesis_results,
                 "costs": session_costs,
                 "mathematical_validation": True,
                 "architecture": "thin_v2.0_direct_calls",
