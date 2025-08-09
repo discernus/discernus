@@ -94,21 +94,23 @@ class ComprehensiveIndexResponse:
 
 class ComprehensiveKnowledgeCurator:
     """
-    Comprehensive Knowledge Curator for unified experiment data indexing.
+    Evidence-Only Knowledge Curator for analytically grounded RAG lookup (Alpha Architecture).
     
-    This agent creates a unified knowledge graph that indexes all experiment data types:
-    1. Corpus Documents: Full text with speaker attribution and context
-    2. Framework Specification: Analytical methodology and dimension definitions  
-    3. Raw Scores: Individual dimension scores with calculation provenance
-    4. Statistical Results: Verified mathematical findings and computations
-    5. Evidence Quotes: Supporting textual evidence with confidence scores
-    6. Experiment Metadata: Research context, hypotheses, and configuration
+    Creates a focused RAG index containing only analytically validated data:
+    1. Evidence Quotes: Score-linked textual evidence with dimensional provenance
+    2. Raw Scores: Individual dimension scores with confidence and salience
+    3. Calculated Metrics: Derived statistical indices and computed values
+    
+    EXCLUDED from RAG Index (provided as direct LLM context instead):
+    - Framework definitions (prevents framework pollution)
+    - Raw corpus text (eliminates unanalyzed content)
+    - Experiment metadata (provided directly for pan-synthesis context)
     
     Technical Architecture:
-    - txtai embeddings for semantic search across all data types
+    - txtai embeddings for semantic search across evidence-only data
+    - Content-type filtering for targeted retrieval
     - Hash-based persistent caching for enterprise scalability
-    - Cross-domain query interface for intelligent synthesis
-    - Full provenance preservation for academic integrity
+    - Academic integrity through analytical provenance
     """
     
     def __init__(self, model: str, artifact_storage: LocalArtifactStorage, audit_logger=None):
@@ -133,10 +135,13 @@ class ComprehensiveKnowledgeCurator:
         self.index_built = False
         self.index_hash = None  # For persistent caching
         
-        # Data type processors for RAG lookup index (v2.0 Architecture)
+        # Data type processors for RAG lookup index (v2.0 Architecture - Evidence Only)
+        # ALPHA FOCUS: Evidence-only RAG for analytical grounding
+        # Framework, experiment, and corpus manifest provided as direct context
         self.data_processors = {
-            'corpus': self._process_corpus_data,
             'evidence': self._process_evidence_data,
+            'scores': self._process_scores_data,
+            'calculated_metrics': self._process_calculated_metrics_data,
         }
     
     def build_comprehensive_index(self, request: ComprehensiveIndexRequest) -> ComprehensiveIndexResponse:
@@ -315,47 +320,7 @@ class ComprehensiveKnowledgeCurator:
             self.logger.error(f"Knowledge query failed: {str(e)}")
             return []
     
-    def _process_corpus_data(self, corpus_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
-        """Process corpus documents for comprehensive indexing."""
-        try:
-            # Parse corpus data (could be JSON with multiple documents)
-            if corpus_data.startswith(b'{'):
-                corpus_json = json.loads(corpus_data.decode('utf-8'))
-                documents = corpus_json.get('documents', [corpus_json])  # Handle single doc or collection
-            else:
-                # Handle plain text corpus
-                text_content = corpus_data.decode('utf-8')
-                documents = [{'content': text_content, 'name': 'corpus_document'}]
-            
-            processed_items = []
-            for i, doc in enumerate(documents):
-                content = doc.get('content', doc.get('text', ''))
-                doc_name = doc.get('name', doc.get('document_name', f'document_{i}'))
-                speaker = doc.get('speaker', 'Unknown')
-                
-                # Create searchable text with metadata context
-                searchable_text = f"Corpus document {doc_name}: {content}"
-                
-                item = {
-                    'content': content,
-                    'searchable_text': searchable_text,
-                    'content_type': 'corpus_text',
-                    'source_artifact': 'corpus_data',  # Could be made more specific
-                    'metadata': {
-                        'document_name': doc_name,
-                        'document_index': i,
-                        'content_length': len(content),
-                        'speaker': speaker
-                    }
-                }
-                processed_items.append(item)
-            
-            return processed_items
-            
-        except Exception as e:
-            self.logger.error(f"Failed to process corpus data: {e}")
-            return []
-    
+
     def _process_evidence_data(self, evidence_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
         """Process evidence quotes for comprehensive indexing."""
         try:
@@ -391,6 +356,86 @@ class ComprehensiveKnowledgeCurator:
             
         except Exception as e:
             self.logger.error(f"Failed to process evidence data: {e}")
+            return []
+    
+    def _process_scores_data(self, scores_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
+        """Process raw dimension scores for RAG lookup."""
+        try:
+            scores_json = json.loads(scores_data.decode('utf-8'))
+            processed_items = []
+            
+            # Handle different score data formats
+            if isinstance(scores_json, list):
+                score_records = scores_json
+            else:
+                score_records = scores_json.get('scores', [])
+            
+            for record in score_records:
+                document_name = record.get('document_name', '')
+                speaker = record.get('speaker', 'Unknown')
+                
+                # Create searchable entries for each dimensional score
+                for key, value in record.items():
+                    if key.endswith('_score') and isinstance(value, (int, float)):
+                        dimension = key.replace('_score', '')
+                        searchable_text = f"Score for {dimension} in {document_name} by {speaker}: {value}"
+                        
+                        item = {
+                            'content': f"{dimension}: {value}",
+                            'searchable_text': searchable_text,
+                            'content_type': 'raw_scores',
+                            'source_artifact': 'scores_data',
+                            'metadata': {
+                                'document_name': document_name,
+                                'speaker': speaker,
+                                'dimension': dimension,
+                                'score_value': value,
+                                'confidence': record.get(f'{dimension}_confidence', 1.0),
+                                'salience': record.get(f'{dimension}_salience', 1.0)
+                            }
+                        }
+                        processed_items.append(item)
+            
+            return processed_items
+            
+        except Exception as e:
+            self.logger.error(f"Failed to process scores data: {e}")
+            return []
+    
+    def _process_calculated_metrics_data(self, metrics_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
+        """Process calculated metrics and indices for RAG lookup."""
+        try:
+            metrics_json = json.loads(metrics_data.decode('utf-8'))
+            processed_items = []
+            
+            # Handle statistical results format
+            results = metrics_json.get('results', {})
+            
+            for metric_name, metric_data in results.items():
+                if isinstance(metric_data, dict) and 'value' in metric_data:
+                    value = metric_data['value']
+                    description = metric_data.get('description', f'Calculated metric: {metric_name}')
+                    
+                    searchable_text = f"Calculated metric {metric_name}: {description} = {value}"
+                    
+                    item = {
+                        'content': f"{metric_name}: {value}",
+                        'searchable_text': searchable_text,
+                        'content_type': 'calculated_metrics',
+                        'source_artifact': 'statistical_results',
+                        'metadata': {
+                            'metric_name': metric_name,
+                            'metric_value': value,
+                            'description': description,
+                            'calculation_method': metric_data.get('method', 'unknown')
+                        }
+                    }
+                    processed_items.append(item)
+            
+            return processed_items
+            
+        except Exception as e:
+            self.logger.error(f"Failed to process calculated metrics data: {e}")
             return []
     
     def _generate_index_hash(self, request: ComprehensiveIndexRequest) -> str:
