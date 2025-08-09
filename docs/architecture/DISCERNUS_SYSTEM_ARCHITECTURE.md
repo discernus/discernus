@@ -358,6 +358,237 @@ LLM integration and knowledge management:
 - **Enterprise Scalability**: Hash-based persistent caching enables <2 second query performance at 500+ document scale while maintaining research-grade consistency and reproducibility
 - **Provenance Preservation**: Every query result includes complete metadata linking back to original analysis artifacts, ensuring perfect traceability across all data types
 
+## Agent Architecture Implementation
+
+**Discernus implements a sophisticated 17+ agent ecosystem** that realizes the THIN architectural principles through specialized, orchestrated components. Each agent maintains focused responsibilities while contributing to the unified research synthesis pipeline.
+
+### Agent Ecosystem Overview
+
+The agent architecture follows a **6-layer classification framework** that mirrors the natural research workflow:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           PIPELINE ORCHESTRATION                            │
+│                      ProductionThinSynthesisPipeline                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                       │
+         ┌─────────────────────────────┼─────────────────────────────┐
+         ▼                             ▼                             ▼
+┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
+│ CORE ANALYSIS   │         │ KNOWLEDGE &     │         │ SYNTHESIS &     │
+│ & PROCESSING    │         │ EVIDENCE MGMT   │         │ INTERPRETATION  │
+│                 │         │                 │         │                 │
+│ • Enhanced      │         │ • Comprehensive │         │ • RAGEnhanced   │
+│   Analysis      │         │   Knowledge     │         │   Results       │
+│ • Intelligent   │         │   Curator       │         │   Interpreter   │
+│   Extractor     │         │ • Evidence      │         │ • Investigative │
+│ • Classification│         │   Quality       │         │   Synthesis     │
+└─────────────────┘         │   Measurement   │         │ • Results       │
+         │                  │ • Evidence      │         │   Interpreter   │
+         │                  │   Indexer       │         └─────────────────┘
+         │                  └─────────────────┘                   │
+         │                           │                             │
+         └─────────────────────────────────────────────────────────┘
+                                     │
+         ┌─────────────────────────────┼─────────────────────────────┐
+         ▼                             ▼                             ▼
+┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
+│ PLANNING &      │         │ VALIDATION &    │         │ INFRASTRUCTURE  │
+│ MATHEMATICAL    │         │ QUALITY         │         │ COMPONENTS      │
+│                 │         │                 │         │                 │
+│ • Raw Data      │         │ • Experiment    │         │ • LLM Gateway   │
+│   Analysis      │         │   Coherence     │         │ • Model         │
+│   Planner       │         │ • CSV Export    │         │   Registry      │
+│ • Derived       │         │                 │         │ • Audit Logger  │
+│   Metrics       │         │                 │         │ • Local Artifact│
+│   Planner       │         │                 │         │   Storage       │
+│ • Grounding     │         │                 │         │                 │
+│   Evidence      │         │                 │         │                 │
+│   Generator     │         │                 │         │                 │
+└─────────────────┘         └─────────────────┘         └─────────────────┘
+```
+
+### Core Agent Classifications
+
+#### 1. Core Analysis & Processing Agents
+
+**EnhancedAnalysisAgent** - *Primary Analysis Engine*
+- **Function**: Framework-based document analysis with mathematical validation
+- **THIN Compliance**: ✅ Externalized YAML prompts, computational verification
+- **Key Capabilities**: Mathematical "show your work", self-assessment, security boundary enforcement
+- **Model Assignment**: Configurable (default: vertex_ai/gemini-2.5-flash)
+
+**IntelligentExtractorAgent** - *LLM-to-Math Boundary*
+- **Function**: Converts LLM analysis to structured mathematical input (Gasket #2)
+- **THIN Compliance**: ✅ Semantic extraction replaces brittle parsing
+- **Key Capabilities**: Framework-agnostic JSON extraction, hierarchical-to-flat mapping
+- **Model Assignment**: vertex_ai/gemini-2.5-flash (optimized for speed)
+
+**ClassificationAgent** - *Document Classification*
+- **Function**: Document categorization and classification
+- **THIN Compliance**: ❌ Requires YAML externalization
+- **Status**: Active but needs compliance cleanup
+
+#### 2. Knowledge & Evidence Management Agents
+
+**ComprehensiveKnowledgeCurator** - *Unified Knowledge Graph*
+- **Function**: Cross-domain reasoning across 6 experiment data types
+- **THIN Compliance**: ❌ Inline prompts need externalization
+- **Key Capabilities**:
+  - Unified indexing: Corpus, Framework, Scores, Statistics, Evidence, Metadata
+  - Cross-domain semantic search with txtai embeddings
+  - Hash-based persistent caching for enterprise scalability
+  - <2 second query performance at 500+ document scale
+- **Architecture Role**: Primary implementation of Principles #22, #24, #25, #26
+
+**EvidenceQualityMeasurementAgent** - *Quality Assurance*
+- **Function**: Evidence quality assessment for peer-review standards
+- **THIN Compliance**: ❌ Inline prompts, excessive parsing
+- **Key Capabilities**: Evidence utilization tracking, claim coverage metrics, relevance scoring
+- **Model Assignment**: vertex_ai/gemini-2.5-flash
+
+**Legacy Evidence Agents** - *Scheduled for Deprecation*
+- **TxtaiEvidenceCurator**: Evidence-only RAG (replaced by ComprehensiveKnowledgeCurator)
+- **EvidenceCurator**: Two-stage evidence curation (redundant)
+- **EvidenceIndexerAgent**: Evidence indexing (redundant with comprehensive curator)
+
+#### 3. Synthesis & Interpretation Agents
+
+**RAGEnhancedResultsInterpreter** - *Intelligent Synthesis*
+- **Function**: RAG-powered synthesis with multi-audience sections
+- **THIN Compliance**: ❌ Complex parsing logic requires cleanup
+- **Key Capabilities**: Evidence-grounded narrative generation, interpretive claim validation
+- **Architecture Role**: Implements Stage 3 of 4-stage THIN synthesis pipeline
+
+**InvestigativeSynthesisAgent** - *Active Evidence Discovery*
+- **Function**: Active RAG interrogation for evidence discovery ("Parisian Saucier")
+- **THIN Compliance**: ❌ Experiment hardcoding, single-call optimization
+- **Status**: 🔄 Being replaced by Sequential Synthesis Agent (v2.0 architecture)
+- **Key Philosophy**: Evidence-backed statistical findings, LLM-powered insights
+
+**ResultsInterpreter** - *Basic Narrative Synthesis*
+- **Function**: Narrative synthesis combining quantitative and qualitative insights
+- **THIN Compliance**: ✅ Externalized YAML prompts
+- **Status**: Part of synthesis consolidation strategy
+
+#### 4. Planning & Mathematical Agents
+
+**RawDataAnalysisPlanner** - *Statistical Analysis Planning*
+- **Function**: LLM generates JSON analysis plans for statistical processing
+- **THIN Compliance**: ✅ Externalized YAML prompts
+- **Key Capabilities**: Variance-aware statistical planning, MathToolkit integration
+- **Architecture Role**: Implements declarative mathematical specification
+
+**DerivedMetricsAnalysisPlanner** - *Advanced Metrics Planning*
+- **Function**: Plans derived metrics and advanced statistical analysis
+- **THIN Compliance**: ✅ Externalized YAML prompts
+- **Key Capabilities**: Complex statistical analysis planning, uncertainty quantification
+
+**GroundingEvidenceGenerator** - *Score-Evidence Linking*
+- **Function**: Links statistical scores to supporting textual evidence
+- **THIN Compliance**: ✅ Externalized YAML prompts
+- **Key Capabilities**: Statistical-evidence provenance, grounding validation
+- **Model Assignment**: vertex_ai/gemini-2.5-flash-lite (lightweight processing)
+
+#### 5. Validation & Quality Agents
+
+**ExperimentCoherenceAgent** - *Specification Validation*
+- **Function**: Validates experiment artifacts against Discernus specifications
+- **THIN Compliance**: ✅ Externalized YAML prompts, minimal parsing
+- **Key Capabilities**: Framework/experiment/corpus validation, coherence checking
+- **Model Assignment**: vertex_ai/gemini-2.5-pro (complex reasoning required)
+- **Architecture Role**: Ensures Day-1 Extensibility (Principle #1)
+
+**CsvExportAgent** - *Data Export*
+- **Function**: CSV export capabilities for analysis results
+- **THIN Compliance**: ❌ Missing YAML externalization
+- **Status**: Utility agent requiring cleanup
+
+#### 6. Pipeline Orchestration
+
+**ProductionThinSynthesisPipeline** - *Main Orchestrator*
+- **Function**: Orchestrates complete THIN synthesis pipeline
+- **THIN Compliance**: ⚠️ Contains complex parsing logic requiring cleanup
+- **Key Capabilities**:
+  - 4-stage architecture: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
+  - Multi-agent coordination with minimal software intelligence
+  - Complete audit trail and provenance preservation
+  - Comprehensive error handling and resilience
+- **Orchestrated Agents**: All synthesis agents, planning agents, evidence management
+- **Architecture Role**: Primary implementation of 4-Stage THIN Synthesis (Principle #18)
+
+### THIN Compliance Status
+
+#### ✅ **Compliant Agents (5/17)**
+- ExperimentCoherenceAgent, EnhancedAnalysisAgent, IntelligentExtractorAgent
+- ResultsInterpreter, GroundingEvidenceGenerator
+- **Characteristics**: Externalized YAML prompts, minimal parsing, focused responsibilities
+
+#### ❌ **Non-Compliant Agents Requiring Cleanup (12+)**
+- **Missing YAML Externalization**: ComprehensiveKnowledgeCurator, TxtaiEvidenceCurator, EvidenceQualityMeasurementAgent, ClassificationAgent, EvidenceIndexerAgent, CsvExportAgent
+- **Excessive Parsing**: RAGEnhancedResultsInterpreter, InvestigativeSynthesisAgent, ProductionThinSynthesisPipeline
+- **Redundant/Obsolete**: TxtaiEvidenceCurator, EvidenceCurator, ThinResultsInterpreter
+
+#### 🔄 **Cleanup Priority (Issue #372)**
+1. **Phase 1**: YAML externalization for 12+ agents
+2. **Phase 2**: Eliminate excessive LLM output parsing
+3. **Phase 3**: Deprecate redundant agents
+4. **Phase 4**: Consolidate synthesis agents
+
+### Agent Extension Patterns
+
+#### **THIN-Compliant Agent Template**
+```python
+class NewThinAgent:
+    """THIN-compliant agent following architectural patterns."""
+    
+    def __init__(self, model: str, audit_logger: AuditLogger):
+        self.model = model
+        self.llm_gateway = LLMGateway(ModelRegistry())
+        self.audit_logger = audit_logger
+        
+        # ✅ THIN Principle #15: Externalized Intelligence
+        self.prompt_template = self._load_yaml_prompt()
+    
+    def _load_yaml_prompt(self) -> str:
+        """Load externalized YAML prompt template."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        with open(prompt_path, 'r') as f:
+            return yaml.safe_load(f)['template']
+    
+    def process(self, request) -> response:
+        """Main processing with THIN principles."""
+        # ✅ Minimal coordination, maximum LLM intelligence
+        # ✅ No complex parsing - trust LLM output
+        # ✅ Complete audit logging for provenance
+        pass
+```
+
+#### **Agent Development Guidelines**
+1. **<150 Lines Maximum**: Prevent intelligence creep in coordination code
+2. **Externalized YAML Prompts**: All prompts in separate .yaml files
+3. **Minimal Parsing**: Trust LLM intelligence, avoid complex output processing
+4. **Universal Infrastructure**: LLMGateway, ModelRegistry, AuditLogger integration
+5. **Clear Responsibilities**: Single-purpose agents with focused capabilities
+6. **Provenance Integration**: Complete audit trails for academic integrity
+
+### Architectural Impact
+
+**The agent ecosystem successfully implements the THIN architectural vision**:
+- **Intelligence Externalization**: LLMs handle reasoning, agents provide coordination
+- **Academic Integrity**: Mathematical verification and provenance across all agents
+- **Scalability**: Comprehensive RAG enables thousands-document processing
+- **Extensibility**: Framework-agnostic design supports any analytical approach
+- **Quality Assurance**: Multi-layer validation ensures peer-review readiness
+
+**Critical Success Factors**:
+1. **THIN Compliance Cleanup**: Issue #372 addresses 70% non-compliance rate
+2. **Agent Consolidation**: Eliminate redundancy in evidence and synthesis systems
+3. **Sequential Synthesis**: v2.0 architecture replaces experiment-specific hardcoding
+4. **Comprehensive RAG**: Unified knowledge architecture across all data types
+
+The agent architecture represents a mature, production-ready implementation of computational research synthesis that maintains academic rigor while scaling to enterprise research requirements.
+
 ---
 
 # Evolution Roadmap (Future Vision)

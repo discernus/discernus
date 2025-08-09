@@ -710,7 +710,7 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
             'len': len, 'pow': pow, 'divmod': divmod, 'float': float, 'int': int, 'bool': bool,
 
             # Math module functions (scalar operations)
-            'math': math, 'sqrt': math.sqrt, 'log': math.log, 'log10': math.log10,
+            'math': math, 'sqrt': np.sqrt, 'log': math.log, 'log10': math.log10,
             'exp': math.exp, 'sin': math.sin, 'cos': math.cos, 'tan': math.tan,
             'asin': math.asin, 'acos': math.acos, 'atan': math.atan, 'atan2': math.atan2,
             'ceil': math.ceil, 'floor': math.floor, 'pi': math.pi, 'e': math.e,
@@ -780,8 +780,10 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
                 continue
 
             try:
+                # Normalize caret exponent operator to Python '**' to avoid XOR
+                normalized_formula = formula.replace('^', '**') if isinstance(formula, str) else formula
                 # Evaluate the formula safely
-                result = eval(formula, {"__builtins__": {}}, safe_dict)
+                result = eval(normalized_formula, {"__builtins__": {}}, safe_dict)
 
                 # Division-by-zero and invalid numeric guards
                 if isinstance(result, (float, int)) and (np.isinf(result) or (isinstance(result, float) and np.isnan(result))):
@@ -797,7 +799,7 @@ def calculate_derived_metrics(dataframe: pd.DataFrame, input_columns: List[str],
                     safe_dict[metric_name] = result
 
                 successful_calculations.append(metric_name)
-                logger.info(f"Successfully calculated metric '{metric_name}' with formula: {formula}")
+                logger.info(f"Successfully calculated metric '{metric_name}' with formula: {normalized_formula}")
 
             except ZeroDivisionError:
                 # Graceful handling: record NaN and continue
@@ -1302,19 +1304,18 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         raw_output = execute_analysis_plan(scores_df, analysis_plan, framework_calculation_spec)
         
         # New: produce LLM-optimized statistical tables
-        formatter = StatisticalResultsFormatter()
-        formatted = formatter.format_for_synthesis(raw_output)
-        
-        # Return both raw and formatted for backward compatibility
-        return {
-            "analysis_plan": raw_output.get("analysis_plan", analysis_plan),
-            "results": raw_output.get("results", {}),
-            "errors": raw_output.get("errors", []),
-            "formatted_statistics": formatted
-        }
+        # Formatter is now external to the MathToolkit
+        # formatter = StatisticalResultsFormatter()
+        # formatted = formatter.format_for_synthesis(raw_output)
+
+        # Add a summary of warnings if any were generated
+        if warnings:
+            raw_output['warnings'] = warnings
+
+        return raw_output
         
     except Exception as e:
-        logger.error(f"V7.0 Gasket analysis plan execution failed: {str(e)}")
+        logger.error(f"V7.0 Gasket analysis plan execution failed: {str(e)}", exc_info=True)
         raise MathToolkitError(f"V7.0 Gasket analysis plan execution failed: {str(e)}")
 
 
