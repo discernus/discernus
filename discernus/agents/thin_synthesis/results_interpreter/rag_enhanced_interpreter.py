@@ -184,7 +184,7 @@ class RAGEnhancedResultsInterpreter:
         for result_key, result_data in statistical_results.items():
             if not isinstance(result_data, dict):
                 continue
-            
+                
             # Enhanced interpretive claim detection per Epic #280 requirements
             evidence_needed = self._requires_evidence_backing(result_key, result_data)
             
@@ -195,14 +195,14 @@ class RAGEnhancedResultsInterpreter:
             elif evidence_needed and not evidence_available:
                 self.logger.debug(f"Evidence needed for '{result_key}' but not available - proceeding with statistical interpretation only")
             
-            interpretive_claims.append({
-                'result_key': result_key,
-                'result_data': result_data,
+                interpretive_claims.append({
+                    'result_key': result_key,
+                    'result_data': result_data,
                 'evidence_needed': evidence_needed,
                 'evidence_available': evidence_available,
                 'query_terms': query_terms,
                 'claim_type': self._classify_claim_type(result_key, result_data)
-            })
+                })
         
         return interpretive_claims
     
@@ -804,7 +804,7 @@ Structure as academic prose, not bullet points. Make evidence integration feel n
         framework_line = f"**Framework**: {request.framework_name or 'Unknown'}"
         if request.framework_version:
             framework_line += f" ({request.framework_version})"
-
+        
         report_sections = [
             "---",
             f"# {experiment_name}",

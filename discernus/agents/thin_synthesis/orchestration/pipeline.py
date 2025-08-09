@@ -530,7 +530,7 @@ class ProductionThinSynthesisPipeline:
 Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
 - Data type: JSON analysis results
-- Source: Analysis artifact {request.scores_artifact_hash[:12]}...
+- Source: Analysis artifact {request.scores_artifact_hash[:12] if request.scores_artifact_hash else 'MISSING'}...
 - DataFrame shape: {scores_df.shape[0]} rows, {scores_df.shape[1]} columns
 
 Available Columns (COMPLETE LIST - use ONLY these):
@@ -551,7 +551,7 @@ CRITICAL: Use ONLY the exact column names listed above. Any column not in this l
 Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
 - Data type: JSON analysis results
-- Source: Analysis artifact {request.scores_artifact_hash[:12]}...
+- Source: Analysis artifact {request.scores_artifact_hash[:12] if request.scores_artifact_hash else 'MISSING'}...
 - Note: LLM will interpret structure and content directly
 - Warning: Column discovery failed - use raw data to identify available columns
 """
@@ -814,7 +814,7 @@ Raw Analysis Data:
                     }
                 )
                 
-                self.logger.info(f"📇 Intelligent evidence index generated successfully: {index_hash[:12]}...")
+                self.logger.info(f"📇 Intelligent evidence index generated successfully: {index_hash[:12] if index_hash else 'MISSING'}...")
                 
                 # Add the index hash to the response for downstream stages
                 index_response.index_artifact_hash = index_hash
@@ -835,7 +835,7 @@ Raw Analysis Data:
         # Retrieve evidence data for curation using THIN pre-extracted evidence artifact
         # This replaces the old registry scanning approach with direct artifact access
         combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-        self.logger.info(f"Using pre-extracted evidence artifact: {request.evidence_artifact_hash[:12]}...")
+        self.logger.info(f"Using pre-extracted evidence artifact: {request.evidence_artifact_hash[:12] if request.evidence_artifact_hash else 'MISSING'}...")
         
         # Extract results from the two-stage structure
         # Use derived metrics results (Stage 2) for evidence curation
