@@ -223,6 +223,7 @@ Respond with only the JSON object."""
                            storage: LocalArtifactStorage,
                            framework_hash: str,
                            corpus_hash: str,
+                           corpus_manifest_hash: str,
                            corpus_manifest: Optional[Dict[str, Any]] = None,
                            analysis_model: Optional[str] = None,
                            debug_agent: Optional[str] = None,
@@ -247,14 +248,14 @@ Respond with only the JSON object."""
             framework_spec=framework_content,
             scores_artifact_hash=scores_hash,
             evidence_artifact_hash=evidence_hash,
-            corpus_artifact_hash=corpus_hash,  # Pass corpus hash for comprehensive RAG
+            corpus_artifact_hash=corpus_hash,  # Pass corpus content hash for comprehensive RAG
             experiment_context=experiment_context,
             max_evidence_per_finding=3,
             min_confidence_threshold=0.7,
             interpretation_focus="comprehensive",
             # Add provenance context (Issue #208 fix)
             framework_hash=framework_hash,
-            corpus_hash=corpus_hash,
+            corpus_hash=corpus_manifest_hash, # Use manifest hash for provenance
             framework_name=experiment_config.get('framework', 'Unknown framework'),
             corpus_manifest=corpus_manifest
         )
@@ -414,12 +415,13 @@ Respond with only the JSON object."""
                 print(f"📊 Analysis-only mode: Processing {len(corpus_documents)} documents...")
                 
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
-                all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
+                all_analysis_results, scores_hash, evidence_hash, corpus_hash = self._execute_analysis_sequentially(
                     analysis_agent,
                     corpus_documents,
                     framework_content,
                     experiment_config,
-                    analysis_model
+                    analysis_model,
+                    ensemble_runs
                 )
                 
                 # Display analysis-only cost
@@ -442,6 +444,7 @@ Respond with only the JSON object."""
                     "mode": "analysis_only",
                     "scores_hash": scores_hash,
                     "evidence_hash": evidence_hash,
+                    "corpus_hash": corpus_hash,
                     "analysis_results_count": len(successful_analyses),
                     "available_for_synthesis": True
                 }
@@ -525,6 +528,7 @@ Respond with only the JSON object."""
                     "status": "analysis_completed",
                     "scores_hash": scores_hash,
                     "evidence_hash": evidence_hash,
+                    "corpus_hash": corpus_hash,
                     "duration": self._calculate_duration(start_time, end_time),
                     "costs": session_costs,
                     "auto_commit_success": auto_commit and commit_success if auto_commit else None
@@ -725,6 +729,7 @@ Respond with only the JSON object."""
                     storage=storage,
                     framework_hash=framework_hash,
                     corpus_hash=corpus_hash,
+                    corpus_manifest_hash=corpus_manifest_hash,
                     corpus_manifest=corpus_manifest,
                     analysis_model=analysis_model
                 )
@@ -861,7 +866,7 @@ Respond with only the JSON object."""
             # Execute analysis (in chunks)
             print(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
             
-            all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
+            all_analysis_results, scores_hash, evidence_hash, corpus_artifact_hash = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
                 framework_content,
@@ -897,22 +902,20 @@ Respond with only the JSON object."""
             # Calculate framework hash for provenance
             framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
             
-            # Calculate corpus hash for complete provenance context
-            corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
-            corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
-            
-            print(f"🔬 Starting synthesis phase with {synthesis_model}...")
+            # This is the manifest hash, not the content hash.
+            corpus_manifest_hash = corpus_documents[0]['hash'] if corpus_documents else ""
             
             synthesis_results = self._run_thin_synthesis(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
+                corpus_hash=corpus_artifact_hash,  # Use the content hash from analysis
                 framework_content=framework_content,
                 experiment_config=experiment_config,
                 model=synthesis_model,
                 audit_logger=audit,
                 storage=storage,
                 framework_hash=framework_hash,
-                corpus_hash=corpus_hash,
+                corpus_manifest_hash=corpus_manifest_hash,
                 corpus_manifest=corpus_manifest,
                 analysis_model=analysis_model
             )
@@ -1093,22 +1096,18 @@ Respond with only the JSON object."""
                                        framework_content: str,
                                        experiment_config: Dict[str, Any],
                                        model: str,
-                                       ensemble_runs: int = 1) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
+                                       ensemble_runs: int = 1) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str], Optional[str]]:
         """
         Executes the analysis agent for each document with optional ensemble runs for self-consistency.
+        Returns all analysis results, scores_hash, evidence_hash, and corpus_hash.
         """
-        all_analysis_results = []
-        total_docs = len(corpus_documents)
         
-        # TODO: Ensemble runs disabled pending architectural review
-        # if ensemble_runs > 1:
-        #     print(f"\n🚀 Starting ensemble analysis of {total_docs} documents with {ensemble_runs} runs per document...")
-        # else:
-        #     print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
-        print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
-
+        all_analysis_results = []
+        
+        print(f"\n🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
+        
         for i, doc in enumerate(corpus_documents):
-            print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
+            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc.get('filename')} ---")
             
             # TODO: Ensemble runs disabled pending architectural review
             # if ensemble_runs > 1:
@@ -1153,28 +1152,19 @@ Respond with only the JSON object."""
                 print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
 
-        # Combine all analysis results into a single artifact AND extract evidence
-        combined_result, evidence_hash = self._combine_analysis_results(all_analysis_results, analysis_agent.storage)
+        # Combine all analysis results into a single JSON artifact for synthesis
+        scores_hash, evidence_hash = self._combine_analysis_artifacts(all_analysis_results, analysis_agent.storage)
         
-        # Calculate framework hash for provenance tracking
-        import hashlib
-        framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
-        
-        # Store the combined scores result and return its hash
-        # Note: We need to access storage through the analysis agent's storage
-        scores_hash = analysis_agent.storage.put_artifact(
-            json.dumps(combined_result).encode('utf-8'),
-            {
-                "artifact_type": "analysis_json_v6", 
-                "framework_version": "v6.0", 
-                "combined": True,
-                "framework_hash": framework_hash
-            }
+        # Store combined corpus as a single artifact for comprehensive RAG
+        corpus_content = "\n\n---\n\n".join([doc.get('content', '') for doc in corpus_documents])
+        corpus_hash = analysis_agent.storage.put_artifact(
+            corpus_content.encode('utf-8'),
+            {"artifact_type": "combined_corpus_text"}
         )
         
-        return all_analysis_results, scores_hash, evidence_hash
+        return all_analysis_results, scores_hash, evidence_hash, corpus_hash
 
-    def _combine_analysis_results(self, analysis_results: List[Dict[str, Any]], storage) -> tuple[Dict[str, Any], str]:
+    def _combine_analysis_artifacts(self, analysis_results: List[Dict[str, Any]], storage) -> tuple[str, str]:
         """
         Combine analysis results from multiple documents into a single result.
         
@@ -1598,16 +1588,16 @@ Respond with only the JSON object."""
             print(f"Warning: Failed to extract evidence from delimited format: {e}")
             return []
 
-    def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _combine_batch_results(self, all_analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Combines results from multiple analysis batches into a single summary.
         """
-        if not batch_results:
+        if not all_analysis_results:
             return {"total_duration_seconds": 0, "num_batches": 0, "successful_batches": 0}
 
-        total_duration = sum(r.get('analysis_result', {}).get('duration_seconds', 0) for r in batch_results)
-        num_batches = len(batch_results)
-        successful_batches = sum(1 for r in batch_results if r.get('analysis_result', {}).get('result_hash'))
+        total_duration = sum(r.get('analysis_result', {}).get('duration_seconds', 0) for r in all_analysis_results)
+        num_batches = len(all_analysis_results)
+        successful_batches = sum(1 for r in all_analysis_results if r.get('analysis_result', {}).get('result_hash'))
 
         return {
             "total_duration_seconds": total_duration,
@@ -1619,7 +1609,7 @@ Respond with only the JSON object."""
                     "batch_id": r.get("analysis_result", {}).get("batch_id"),
                     "result_hash": r.get("analysis_result", {}).get("result_hash"),
                     "duration": r.get("analysis_result", {}).get("duration_seconds")
-                } for r in batch_results
+                } for r in all_analysis_results
             ]
         }
 
