@@ -301,7 +301,7 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
         "coherent_cohesive_strategy": {"condition": "cohesive_index > 0.7 AND strategic_contradiction_index < 0.3", "description": "Consistent social bonding approach"},
         "coherent_fragmentative_strategy": {"condition": "fragmentative_index > 0.7 AND strategic_contradiction_index < 0.3", "description": "Consistent divisive approach"},
         "strategic_contradiction": {"condition": "strategic_contradiction_index > 0.5", "description": "Deliberate deployment of opposing appeals for complex rhetorical effects"},
-        "rhetorical_incoherence": {"condition": "dimension_variance > 0.4 AND strategic_contradiction_index > 0.5", "description": "Inconsistent messaging across dimensions"}
+        "rhetorical_incoherence": {"condition": "dimension_variance >= 0.22 AND strategic_contradiction_index > 0.5", "description": "Inconsistent messaging across dimensions"}
       }
     }
   },

@@ -295,7 +295,7 @@ Evaluation of populist discourse's implications for democratic institutions and 
         "strategic_populist_contradiction": {"condition": "populist_strategic_contradiction_index > 0.5", "description": "Deliberate deployment of contradictory populist appeals"},
         "left_wing_populism": {"condition": "economic_populist_appeals > 1.0 AND nationalist_exclusion < 0.5", "description": "Redistributive populist focus"},
         "right_wing_populism": {"condition": "nationalist_exclusion > 1.0 AND economic_populist_appeals < nationalist_exclusion", "description": "Cultural populist focus"},
-        "populist_strategic_overreach": {"condition": "dimension_variance > 0.5 AND populist_strategic_contradiction_index > 0.5", "description": "Inconsistent populist messaging with contradictory appeals"}
+        "populist_strategic_overreach": {"condition": "dimension_variance >= 0.22 AND populist_strategic_contradiction_index > 0.5", "description": "Inconsistent populist messaging with contradictory appeals"}
       }
     }
   },

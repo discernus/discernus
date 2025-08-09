@@ -267,8 +267,18 @@ class ComprehensiveKnowledgeCurator:
             # Convert to KnowledgeResult objects with cross-domain context
             knowledge_results = []
             for result in search_results:
-                doc_id = result['id']
-                score = result['score']
+                # Handle different txtai result formats
+                if isinstance(result, dict):
+                    doc_id = result.get('id', result.get('doc_id', 0))
+                    score = result.get('score', result.get('similarity', 0.0))
+                elif isinstance(result, tuple) and len(result) >= 2:
+                    # Handle tuple format: (doc_id, score) or (doc_id, score, metadata)
+                    doc_id = result[0]
+                    score = result[1] if len(result) > 1 else 0.0
+                else:
+                    # Fallback for unexpected formats
+                    self.logger.warning(f"Unexpected search result format: {type(result)}")
+                    continue
                 
                 if doc_id in self.knowledge_index:
                     knowledge_item = self.knowledge_index[doc_id]

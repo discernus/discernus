@@ -207,7 +207,7 @@ Assessment of discourse's contribution to constitutional health and democratic s
       "institutional_health_score": "(institutional_respect - institutional_subversion)", 
       "systemic_health_score": "(systemic_continuity - systemic_replacement)",
       "constitutional_direction_index": "(procedural_health_score + institutional_health_score + systemic_health_score) / 3",
-      "salience_weighted_constitutional_direction_index": "(procedural_health_score * procedural_legitimacy_salience + institutional_health_score * institutional_respect_salience + systemic_health_score * systemic_continuity_salience) / (procedural_legitimacy_salience + institutional_respect_salience + systemic_continuity_salience)",
+      "salience_weighted_constitutional_direction_index": "(procedural_health_score * procedural_legitimacy_salience + institutional_health_score * institutional_respect_salience + systemic_health_score * systemic_continuity_salience) / (procedural_legitimacy_salience + institutional_respect_salience + systemic_continuity_salience + 1e-9)",
       "legitimacy_index": "(procedural_legitimacy + institutional_respect + systemic_continuity) / 3",
       "pathology_index": "(procedural_rejection + institutional_subversion + systemic_replacement) / 3"
     },
@@ -222,7 +222,7 @@ Assessment of discourse's contribution to constitutional health and democratic s
         "procedural_legitimacy_focus": {"condition": "procedural_legitimacy > 0.7 AND procedural_legitimacy_salience > 0.6", "description": "Emphasis on proper constitutional processes"},
         "institutional_capture": {"condition": "institutional_subversion > 0.7 AND institutional_subversion_salience > 0.6", "description": "Deliberate institutional delegitimization"},
         "revolutionary_rhetoric": {"condition": "systemic_replacement > 0.7 AND systemic_replacement_salience > 0.6", "description": "Calls for fundamental system change"},
-        "constitutional_ambivalence": {"condition": "dimension_variance > 0.3", "description": "Inconsistent institutional messaging"}
+        "constitutional_ambivalence": {"condition": "dimension_variance >= 0.22", "description": "Inconsistent institutional messaging"}
       }
     }
   },
