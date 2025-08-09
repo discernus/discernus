@@ -1299,9 +1299,20 @@ Respond with only the JSON object."""
             }
         )
         
-        print(f"📋 Evidence combination: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
+        # Store combined scores result as an artifact
+        combined_result_hash = storage.put_artifact(
+            json.dumps(combined_result, indent=2).encode('utf-8'),
+            {
+                "artifact_type": "combined_analysis_v6",
+                "total_documents": len(combined_document_analyses),
+                "framework_version": "v6.0"
+            }
+        )
         
-        return combined_result, evidence_hash
+        print(f"📋 Evidence combination: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
+        print(f"📊 Analysis combination: {len(combined_document_analyses)} documents → {combined_result_hash[:12]}...")
+        
+        return combined_result_hash, evidence_hash
 
     def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, Any]]:
         """
