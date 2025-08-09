@@ -170,10 +170,10 @@ Rhetorical tension quantification using formula: **Tension Score = min(Dimension
 ## Pattern Classifications
 
 ### Social Cohesion Profiles
-- **Highly Cohesive Discourse** (≥0.75): Strong social bonding with minimal fragmentative elements
-- **Mixed Cohesion Impact** (0.50-0.74): Balance of cohesive and fragmentative elements with strategic tensions
-- **Fragmentative Discourse** (0.25-0.49): Predominantly divisive with limited cohesive elements
-- **Highly Fragmentative Discourse** (<0.25): Systematic social division with minimal bonding elements
+- **Highly Cohesive Discourse** (≥0.5): Strong social bonding with minimal fragmentative elements
+- **Mixed Cohesion Impact** (0.1-0.49): Balance of cohesive and fragmentative elements with strategic tensions
+- **Fragmentative Discourse** (-0.5-0.1): Predominantly divisive with limited cohesive elements
+- **Highly Fragmentative Discourse** (≤-0.5): Systematic social division with minimal bonding elements
 
 ### Strategic Patterns
 - **Coherent Cohesive Strategy** (High cohesive scores, low SCI): Consistent social bonding approach
@@ -251,18 +251,7 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
     "relational_climate_axis": ["enmity", "amity"],
     "goal_orientation_axis": ["fragmentative_goals", "cohesive_goals"]
   },
-  "static_weights": {
-    "tribal_dominance": 0.15,
-    "individual_dignity": 0.15,
-    "fear": 0.15,
-    "hope": 0.15,
-    "envy": 0.10,
-    "compersion": 0.10,
-    "enmity": 0.10,
-    "amity": 0.10,
-    "fragmentative_goals": 0.10,
-    "cohesive_goals": 0.10
-  },
+
   "calculation_spec": {
     "execution_order": [
       "identity_tension",
@@ -286,22 +275,25 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
       "strategic_contradiction_index": "(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5",
       "cohesive_index": "(individual_dignity_score + hope_score + compersion_score + amity_score + cohesive_goals_score) / 5",
       "fragmentative_index": "(tribal_dominance_score + fear_score + envy_score + enmity_score + fragmentative_goals_score) / 5",
-      "overall_cohesion_index": "cohesive_index - fragmentative_index",
-      "salience_weighted_cohesive_index": "(individual_dignity_score * individual_dignity_salience + hope_score * hope_salience + compersion_score * compersion_salience + amity_score * amity_salience + cohesive_goals_score * cohesive_goals_salience) / (individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience)",
-      "salience_weighted_fragmentative_index": "(tribal_dominance_score * tribal_dominance_salience + fear_score * fear_salience + envy_score * envy_salience + enmity_score * enmity_salience + fragmentative_goals_score * fragmentative_goals_salience) / (tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience)"
+      "overall_dimension_mean": "(tribal_dominance_score + individual_dignity_score + fear_score + hope_score + envy_score + compersion_score + enmity_score + amity_score + fragmentative_goals_score + cohesive_goals_score) / 10",
+      "dimension_standard_deviation": "sqrt(((tribal_dominance_score - overall_dimension_mean)^2 + (individual_dignity_score - overall_dimension_mean)^2 + (fear_score - overall_dimension_mean)^2 + (hope_score - overall_dimension_mean)^2 + (envy_score - overall_dimension_mean)^2 + (compersion_score - overall_dimension_mean)^2 + (enmity_score - overall_dimension_mean)^2 + (amity_score - overall_dimension_mean)^2 + (fragmentative_goals_score - overall_dimension_mean)^2 + (cohesive_goals_score - overall_dimension_mean)^2) / 10)",
+      "overall_cohesion_index": "salience_weighted_cohesive_index - salience_weighted_fragmentative_index",
+      "salience_weighted_cohesive_index": "(individual_dignity_score * individual_dignity_salience + hope_score * hope_salience + compersion_score * compersion_salience + amity_score * amity_salience + cohesive_goals_score * cohesive_goals_salience) / max(0.0001, (individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience))",
+      "salience_weighted_fragmentative_index": "(tribal_dominance_score * tribal_dominance_salience + fear_score * fear_salience + envy_score * envy_salience + enmity_score * enmity_salience + fragmentative_goals_score * fragmentative_goals_salience) / max(0.0001, (tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience))"
     },
     "pattern_classifications": {
       "social_cohesion_profile": {
-        "highly_cohesive_discourse": {"threshold": ">=0.75", "description": "Strong social bonding with minimal fragmentative elements"},
-        "mixed_cohesion_impact": {"threshold": "0.50-0.74", "description": "Balance of cohesive and fragmentative elements with strategic tensions"},
-        "fragmentative_discourse": {"threshold": "0.25-0.49", "description": "Predominantly divisive with limited cohesive elements"},
-        "highly_fragmentative_discourse": {"threshold": "<0.25", "description": "Systematic social division with minimal bonding elements"}
+        "metric": "overall_cohesion_index",
+        "highly_cohesive_discourse": {"threshold": ">=0.5", "description": "Strong social bonding with minimal fragmentative elements"},
+        "mixed_cohesion_impact": {"threshold": ">0.1 AND <0.5", "description": "Balance of cohesive and fragmentative elements with strategic tensions"},
+        "fragmentative_discourse": {"threshold": ">-0.5 AND <=0.1", "description": "Predominantly divisive with limited cohesive elements"},
+        "highly_fragmentative_discourse": {"threshold": "<=-0.5", "description": "Systematic social division with minimal bonding elements"}
       },
       "strategic_patterns": {
         "coherent_cohesive_strategy": {"condition": "cohesive_index > 0.7 AND strategic_contradiction_index < 0.3", "description": "Consistent social bonding approach"},
         "coherent_fragmentative_strategy": {"condition": "fragmentative_index > 0.7 AND strategic_contradiction_index < 0.3", "description": "Consistent divisive approach"},
         "strategic_contradiction": {"condition": "strategic_contradiction_index > 0.5", "description": "Deliberate deployment of opposing appeals for complex rhetorical effects"},
-        "rhetorical_incoherence": {"condition": "dimension_variance >= 0.22 AND strategic_contradiction_index > 0.5", "description": "Inconsistent messaging across dimensions"}
+        "rhetorical_incoherence": {"condition": "dimension_standard_deviation >= 0.22 AND strategic_contradiction_index > 0.5", "description": "Inconsistent messaging across dimensions"}
       }
     }
   },
@@ -343,15 +335,15 @@ Evaluation of discourse's contribution to social fabric and democratic resilienc
       "fragmentative_goals_score", "cohesive_goals_score", "fragmentative_goals_salience", "cohesive_goals_salience", "fragmentative_goals_confidence", "cohesive_goals_confidence"
     ],
     "extraction_patterns": {
-      "tribal_dominance_score": ["tribal.{0,20}dominance.{0,20}score.{0,20}([0-9]\\.[0-9])", "tribal.{0,20}dominance.{0,20}([0-9]\\.[0-9])", "dominance\\s*:\\s*([0-9]\\.[0-9])"],
-      "individual_dignity_score": ["individual.{0,20}dignity.{0,20}score.{0,20}([0-9]\\.[0-9])", "individual.{0,20}dignity.{0,20}([0-9]\\.[0-9])", "dignity\\s*:\\s*([0-9]\\.[0-9])"],
-      "fear_score": ["fear.{0,20}score.{0,20}([0-9]\\.[0-9])", "fear.{0,20}([0-9]\\.[0-9])", "fear\\s*:\\s*([0-9]\\.[0-9])"],
-      "hope_score": ["hope.{0,20}score.{0,20}([0-9]\\.[0-9])", "hope.{0,20}([0-9]\\.[0-9])", "hope\\s*:\\s*([0-9]\\.[0-9])"],
-      "envy_score": ["envy.{0,20}score.{0,20}([0-9]\\.[0-9])", "envy.{0,20}([0-9]\\.[0-9])", "envy\\s*:\\s*([0-9]\\.[0-9])"],
-      "compersion_score": ["compersion.{0,20}score.{0,20}([0-9]\\.[0-9])", "compersion.{0,20}([0-9]\\.[0-9])", "compersion\\s*:\\s*([0-9]\\.[0-9])"],
-      "enmity_score": ["enmity.{0,20}score.{0,20}([0-9]\\.[0-9])", "enmity.{0,20}([0-9]\\.[0-9])", "enmity\\s*:\\s*([0-9]\\.[0-9])"],
-      "amity_score": ["amity.{0,20}score.{0,20}([0-9]\\.[0-9])", "amity.{0,20}([0-9]\\.[0-9])", "amity\\s*:\\s*([0-9]\\.[0-9])"],
-      "fragmentative_goals_score": ["fragmentative.{0,20}goals.{0,20}score.{0,20}([0-9]\\.[0-9])", "fragmentative.{0,20}goals.{0,20}([0-9]\\.[0-9])", "fragmentative_goals\\s*:\\s*([0-9]\\.[0-9])"],
+      "tribal_dominance_score": ["tribal.{0,20}dominance.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "tribal.{0,20}dominance.{0,20}([0-9]\\.[0-9]+)", "dominance\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "individual_dignity_score": ["individual.{0,20}dignity.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "individual.{0,20}dignity.{0,20}([0-9]\\.[0-9]+)", "dignity\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "fear_score": ["fear.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "fear.{0,20}([0-9]\\.[0-9]+)", "fear\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "hope_score": ["hope.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "hope.{0,20}([0-9]\\.[0-9]+)", "hope\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "envy_score": ["envy.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "envy.{0,20}([0-9]\\.[0-9]+)", "envy\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "compersion_score": ["compersion.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "compersion.{0,20}([0-9]\\.[0-9]+)", "compersion\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "enmity_score": ["enmity.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "enmity.{0,20}([0-9]\\.[0-9]+)", "enmity\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "amity_score": ["amity.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "amity.{0,20}([0-9]\\.[0-9]+)", "amity\\s*:\\s*([0-9]\\.[0-9]+)"],
+      "fragmentative_goals_score": ["fragmentative.{0,20}goals.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "fragmentative.{0,20}goals.{0,20}([0-9]\\.[0-9]+)", "fragmentative_goals\\s*:\\s*([0-9]\\.[0-9]+)"],
       "cohesive_goals_score": ["cohesive.{0,20}goals.{0,20}score.{0,20}([0-9]\\.[0-9]+)", "cohesive.{0,20}goals.{0,20}([0-9]\\.[0-9]+)", "cohesive_goals\\s*:\\s*([0-9]\\.[0-9]+)"],
       "tribal_dominance_salience": ["tribal.{0,20}dominance.{0,20}salience.{0,20}([0-9]\\.[0-9]+)"],
       "individual_dignity_salience": ["individual.{0,20}dignity.{0,20}salience.{0,20}([0-9]\\.[0-9]+)"],
