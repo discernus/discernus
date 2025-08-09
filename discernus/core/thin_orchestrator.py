@@ -903,7 +903,7 @@ Respond with only the JSON object."""
             framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
             
             # This is the manifest hash, not the content hash.
-            corpus_manifest_hash = corpus_documents[0]['hash'] if corpus_documents else ""
+            corpus_manifest_hash = hashlib.sha256(json.dumps(corpus_manifest).encode('utf-8')).hexdigest() if corpus_manifest else ""
             
             synthesis_results = self._run_thin_synthesis(
                 scores_hash=scores_hash,
