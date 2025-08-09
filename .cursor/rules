@@ -7,6 +7,16 @@
 - **If imports fail, run `make install`** to fix dependencies
 - **Use `make check` to verify environment health**
 
+## 🚨 CRITICAL: ARCHITECTURAL COMPLIANCE RULES (86 VIOLATIONS DETECTED!)
+- **MANDATORY PRE-COMMIT**: Run `python3 scripts/thin_compliance_check.py` before any changes
+- **THIN FIRST**: Components must be <150 lines, LLMs handle intelligence, code handles orchestration
+- **YAML EXTERNALIZATION**: All prompts in .yaml files, never inline in Python code
+- **NO COMPLEX PARSING**: Trust LLM output, use envelope extraction over parsing
+- **ACADEMIC INTEGRITY**: All statistics via code execution, complete provenance chains
+- **FRAMEWORK AGNOSTIC**: No hardcoded framework assumptions in orchestration
+- **REFERENCE**: See docs/developer/CURSOR_AGENT_DISCIPLINE_GUIDE.md for full checklist
+- **VIOLATION POLICY**: Any new code that increases violation count will be rejected
+
 ## 🚨 CRITICAL: GIT COMMAND RULES  
 - **ALWAYS use SHORT commit messages (under 50 characters)**
 - **NEVER write long multi-line commit messages**
