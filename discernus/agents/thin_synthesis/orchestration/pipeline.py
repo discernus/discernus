@@ -1212,6 +1212,30 @@ Raw Analysis Data:
                 error_message=str(e)
             )
     
+    def _json_serializer(self, obj):
+        """Custom JSON serializer for pandas/numpy data types."""
+        import numpy as np
+        import pandas as pd
+        
+        # Handle numpy data types
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, (np.integer, np.int64, np.int32)):
+            return int(obj)
+        elif isinstance(obj, (np.floating, np.float64, np.float32)):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, pd.Series):
+            return obj.tolist()
+        elif isinstance(obj, pd.DataFrame):
+            return obj.to_dict('records')
+        elif hasattr(obj, 'item'):  # Handle other numpy scalars
+            return obj.item()
+        
+        # For unhandled types, return string representation
+        return str(obj)
+    
     def _extract_corpus_info(self, experiment_context: Optional[str]) -> Dict[str, Any]:
         """Extract corpus information from experiment context in a framework-agnostic way."""
         default_corpus_info = {
@@ -1273,7 +1297,7 @@ Raw Analysis Data:
             experiment_artifacts = {
                 'evidence': self.artifact_client.get_artifact(request.evidence_artifact_hash),
                 'scores': self.artifact_client.get_artifact(request.scores_artifact_hash),
-                'statistics': json.dumps(exec_response).encode('utf-8'),  # Statistical results from MathToolkit
+                'statistics': json.dumps(exec_response, default=self._json_serializer).encode('utf-8'),  # Statistical results from MathToolkit
                 'framework': request.framework_spec.encode('utf-8'),
                 'metadata': (request.experiment_context or "{}").encode('utf-8')
             }
