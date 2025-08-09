@@ -48,11 +48,23 @@ class EvidenceQualityMetrics:
     evidence_strength_validation: float  # 0.0-1.0
     evidence_context_preservation: float  # 0.0-1.0
     
-    # Detailed breakdowns
+    # Detailed breakdowns (required fields)
     evidence_by_dimension: Dict[str, int]
     evidence_by_document: Dict[str, int]
     claim_evidence_mapping: Dict[str, List[str]]
     relevance_scores: Dict[str, float]
+    
+    # Academic rigor metrics (REQ-AR-001 through REQ-AR-005) - with defaults
+    systematic_selection_quality: float = 0.0  # REQ-AR-001
+    evidence_diversity_temporal: float = 0.0  # REQ-AR-002
+    statistical_significance_score: float = 0.0  # REQ-AR-003
+    peer_review_compliance_score: float = 0.0  # REQ-AR-004
+    academic_citation_format_score: float = 0.0  # REQ-AR-005
+    
+    # Academic rigor detailed metrics - with defaults
+    statistical_significance_details: Optional[Dict[str, float]] = None
+    peer_review_compliance_details: Optional[Dict[str, float]] = None
+    citation_format_details: Optional[Dict[str, float]] = None
 
 
 @dataclass
@@ -118,7 +130,7 @@ class EvidenceQualityMeasurementAgent:
             utilization_metrics = self._calculate_utilization_metrics_rag(txtai_curator, request.synthesis_report)
             
             # Calculate coverage metrics using RAG queries (REQ-EU-002)
-            coverage_metrics = self._calculate_coverage_metrics_rag(txtai_curator, request.statistical_results)
+            coverage_metrics = self._calculate_coverage_metrics_rag(txtai_curator, request.statistical_results, request.synthesis_report)
             
             # Calculate alignment metrics using RAG queries (REQ-EU-003)
             alignment_metrics = self._calculate_alignment_metrics_rag(txtai_curator, request.synthesis_report)
@@ -128,6 +140,19 @@ class EvidenceQualityMeasurementAgent:
             
             # Calculate quality metrics using RAG queries (REQ-EU-005)
             quality_metrics = self._calculate_quality_metrics_rag(txtai_curator, request.synthesis_report)
+            
+            # REQ-AR-003: Statistical significance testing for evidence patterns
+            statistical_significance = self._test_evidence_statistical_significance(
+                evidence_results=[], txtai_curator=txtai_curator
+            )
+            
+            # REQ-AR-004: Peer-review compliance validation
+            peer_review_compliance = self._validate_peer_review_compliance(
+                request.synthesis_report, evidence_results=[]
+            )
+            
+            # REQ-AR-005: Academic citation format validation
+            citation_format_validation = self._validate_academic_citation_format(request.synthesis_report)
             
             # Combine all metrics
             combined_metrics = EvidenceQualityMetrics(
@@ -152,11 +177,23 @@ class EvidenceQualityMeasurementAgent:
                 evidence_strength_validation=quality_metrics['strength_validation'],
                 evidence_context_preservation=quality_metrics['context_preservation'],
                 
+                # Academic rigor metrics
+                systematic_selection_quality=quality_metrics.get('systematic_selection_quality', 0.0),
+                evidence_diversity_temporal=alignment_metrics['diversity_score'],  # Reuse diversity score for now
+                statistical_significance_score=statistical_significance['overall_statistical_significance'],
+                peer_review_compliance_score=peer_review_compliance['overall_peer_review_compliance'],
+                academic_citation_format_score=citation_format_validation['overall_academic_citation_score'],
+                
                 # Detailed breakdowns
                 evidence_by_dimension=utilization_metrics['by_dimension'],
                 evidence_by_document=utilization_metrics['by_document'],
                 claim_evidence_mapping=coverage_metrics['claim_mapping'],
-                relevance_scores=relevance_metrics['relevance_scores']
+                relevance_scores=relevance_metrics['relevance_scores'],
+                
+                # Academic rigor detailed metrics
+                statistical_significance_details=statistical_significance,
+                peer_review_compliance_details=peer_review_compliance,
+                citation_format_details=citation_format_validation
             )
             
             # Generate recommendations
@@ -257,7 +294,10 @@ output_format:
         total_available = 0
         try:
             # Query for all evidence to get total count
-            all_evidence = txtai_curator._query_evidence("evidence")
+            from discernus.agents.txtai_evidence_curator.agent import EvidenceQuery
+            all_evidence_query = EvidenceQuery(semantic_query="evidence", limit=200)
+            all_evidence = txtai_curator._query_evidence(all_evidence_query)
+            all_evidence = self._validate_evidence_results(all_evidence)
             if all_evidence:
                 total_available = len(all_evidence)
         except Exception as e:
@@ -282,7 +322,7 @@ output_format:
         matches = re.findall(ref_pattern, synthesis_report)
         return list(set(matches))  # Remove duplicates
     
-    def _calculate_coverage_metrics_rag(self, txtai_curator, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+    def _calculate_coverage_metrics_rag(self, txtai_curator, statistical_results: Dict[str, Any], synthesis_report: str) -> Dict[str, Any]:
         """
         REQ-EU-002: Calculate interpretive claim coverage using RAG queries.
         
@@ -705,6 +745,134 @@ output_format:
         
         return valid_evidence
 
+    def _select_diverse_evidence(self, evidence_results: List[Any], target_count: int = 5) -> List[Any]:
+        """
+        REQ-AR-001: Systematic evidence selection algorithms with diversity scoring.
+        
+        Selects diverse, high-quality evidence using systematic algorithms:
+        - Confidence threshold filtering
+        - Document diversity maximization
+        - Dimension coverage optimization
+        - Temporal diversity (if available)
+        """
+        if not evidence_results or target_count <= 0:
+            return []
+        
+        # Sort by confidence (descending)
+        sorted_evidence = sorted(evidence_results, 
+                               key=lambda x: getattr(x, 'confidence', x.get('confidence', 0.0)) if hasattr(x, 'confidence') else x.get('confidence', 0.0), 
+                               reverse=True)
+        
+        selected = []
+        used_documents = set()
+        used_dimensions = set()
+        
+        # First pass: Select highest confidence evidence from unique documents/dimensions
+        for ev in sorted_evidence:
+            if len(selected) >= target_count:
+                break
+                
+            # Get evidence attributes
+            if hasattr(ev, 'document_name'):
+                doc_name = ev.document_name
+                dimension = ev.dimension
+                confidence = ev.confidence
+            else:
+                doc_name = ev.get('document_name', '')
+                dimension = ev.get('dimension', '')
+                confidence = ev.get('confidence', 0.0)
+            
+            # Prioritize evidence from new documents and dimensions
+            is_new_doc = doc_name not in used_documents
+            is_new_dimension = dimension not in used_dimensions
+            
+            # Selection criteria: high confidence + diversity
+            if confidence >= 0.6 and (is_new_doc or is_new_dimension):
+                selected.append(ev)
+                used_documents.add(doc_name)
+                used_dimensions.add(dimension)
+        
+        # Second pass: Fill remaining slots with highest confidence evidence
+        for ev in sorted_evidence:
+            if len(selected) >= target_count:
+                break
+            if ev not in selected:
+                confidence = getattr(ev, 'confidence', ev.get('confidence', 0.0)) if hasattr(ev, 'confidence') else ev.get('confidence', 0.0)
+                if confidence >= 0.5:  # Lower threshold for remaining slots
+                    selected.append(ev)
+        
+        return selected[:target_count]
+    
+    def _calculate_evidence_diversity(self, evidence_results: List[Any]) -> float:
+        """
+        REQ-AR-002: Calculate evidence diversity metrics.
+        
+        Measures diversity across:
+        - Source documents (document diversity)
+        - Framework dimensions (dimension diversity)
+        - Evidence types/contexts (temporal diversity if available)
+        """
+        if not evidence_results:
+            return 0.0
+        
+        unique_documents = set()
+        unique_dimensions = set()
+        unique_contexts = set()
+        
+        for ev in evidence_results:
+            # Get evidence attributes
+            if hasattr(ev, 'document_name'):
+                doc_name = ev.document_name
+                dimension = ev.dimension
+                metadata = getattr(ev, 'metadata', {})
+            else:
+                doc_name = ev.get('document_name', '')
+                dimension = ev.get('dimension', '')
+                metadata = ev.get('metadata', {})
+            
+            if doc_name:
+                unique_documents.add(doc_name)
+            if dimension:
+                unique_dimensions.add(dimension)
+            
+            # Context diversity from metadata
+            context_type = metadata.get('context_type', '') if metadata else ''
+            if context_type:
+                unique_contexts.add(context_type)
+        
+        # Calculate diversity scores
+        total_evidence = len(evidence_results)
+        doc_diversity = len(unique_documents) / total_evidence if total_evidence > 0 else 0.0
+        dim_diversity = len(unique_dimensions) / min(total_evidence, 10) if total_evidence > 0 else 0.0  # Normalize by expected dimensions
+        context_diversity = len(unique_contexts) / total_evidence if total_evidence > 0 else 0.0
+        
+        # Weighted diversity score
+        diversity_score = (doc_diversity * 0.5) + (dim_diversity * 0.3) + (context_diversity * 0.2)
+        
+        return min(diversity_score, 1.0)
+    
+    def _assess_systematic_selection_quality(self, diversity_scores: List[float]) -> float:
+        """
+        REQ-AR-001: Assess quality of systematic evidence selection.
+        
+        Evaluates how well the systematic selection algorithms perform
+        across multiple queries and evidence sets.
+        """
+        if not diversity_scores:
+            return 0.0
+        
+        # Calculate consistency of diversity across queries
+        avg_diversity = sum(diversity_scores) / len(diversity_scores)
+        
+        # Calculate variance (lower variance = more systematic)
+        variance = sum((score - avg_diversity) ** 2 for score in diversity_scores) / len(diversity_scores)
+        consistency_score = max(0.0, 1.0 - variance)  # Higher consistency = better systematic selection
+        
+        # Combined systematic selection quality
+        systematic_quality = (avg_diversity * 0.7) + (consistency_score * 0.3)
+        
+        return min(systematic_quality, 1.0)
+
     def _generate_quality_recommendations(self, metrics: EvidenceQualityMetrics) -> List[str]:
         """Generate quality improvement recommendations based on metrics."""
         recommendations = []
@@ -729,4 +897,204 @@ output_format:
         if metrics.evidence_diversity_score < 0.6:
             recommendations.append("Increase evidence diversity (currently {:.1%}) to >60%".format(metrics.evidence_diversity_score))
         
+        # REQ-AR-001: Systematic selection recommendations
+        if hasattr(metrics, 'systematic_selection_quality') and metrics.systematic_selection_quality < 0.7:
+            recommendations.append("Improve systematic evidence selection consistency (currently {:.1%}) to >70%".format(metrics.systematic_selection_quality))
+        
+        # REQ-AR-003: Statistical significance recommendations
+        if hasattr(metrics, 'statistical_significance_score') and metrics.statistical_significance_score < 0.7:
+            recommendations.append("Enhance statistical significance of evidence patterns (currently {:.1%}) to >70%".format(metrics.statistical_significance_score))
+        
+        # REQ-AR-004: Peer-review compliance recommendations
+        if hasattr(metrics, 'peer_review_compliance_score') and metrics.peer_review_compliance_score < 0.8:
+            recommendations.append("Improve peer-review compliance standards (currently {:.1%}) to >80%".format(metrics.peer_review_compliance_score))
+        
+        # REQ-AR-005: Academic citation format recommendations
+        if hasattr(metrics, 'academic_citation_format_score') and metrics.academic_citation_format_score < 0.8:
+            recommendations.append("Enhance academic citation format compliance (currently {:.1%}) to >80%".format(metrics.academic_citation_format_score))
+        
         return recommendations
+    
+    def _test_evidence_statistical_significance(self, evidence_results: List[Any], txtai_curator) -> Dict[str, float]:
+        """
+        REQ-AR-003: Statistical significance testing for evidence patterns.
+        
+        Tests for statistically significant patterns in evidence:
+        - Distribution across dimensions
+        - Confidence score distributions
+        - Document representation patterns
+        """
+        if not evidence_results or len(evidence_results) < 3:
+            return {
+                'dimension_distribution_significance': 0.0,
+                'confidence_distribution_significance': 0.0,
+                'document_representation_significance': 0.0,
+                'overall_statistical_significance': 0.0
+            }
+        
+        # Collect evidence attributes for statistical testing
+        dimensions = []
+        confidences = []
+        documents = []
+        
+        for ev in evidence_results:
+            if hasattr(ev, 'dimension'):
+                dimensions.append(ev.dimension)
+                confidences.append(ev.confidence)
+                documents.append(ev.document_name)
+            else:
+                dimensions.append(ev.get('dimension', ''))
+                confidences.append(ev.get('confidence', 0.0))
+                documents.append(ev.get('document_name', ''))
+        
+        # Test 1: Dimension distribution uniformity
+        dimension_counts = {}
+        for dim in dimensions:
+            if dim:
+                dimension_counts[dim] = dimension_counts.get(dim, 0) + 1
+        
+        # Chi-square test for uniform distribution (simplified)
+        expected_per_dim = len(dimensions) / len(dimension_counts) if dimension_counts else 0
+        chi_square = 0.0
+        for count in dimension_counts.values():
+            chi_square += (count - expected_per_dim) ** 2 / expected_per_dim if expected_per_dim > 0 else 0
+        
+        # Normalize chi-square to 0-1 scale (lower = more uniform = better)
+        dimension_significance = max(0.0, 1.0 - (chi_square / len(dimension_counts)) if dimension_counts else 0.0)
+        
+        # Test 2: Confidence score distribution
+        if confidences:
+            avg_confidence = sum(confidences) / len(confidences)
+            confidence_variance = sum((c - avg_confidence) ** 2 for c in confidences) / len(confidences)
+            # Lower variance in high-confidence evidence = better
+            confidence_significance = max(0.0, avg_confidence - (confidence_variance * 0.5))
+        else:
+            confidence_significance = 0.0
+        
+        # Test 3: Document representation balance
+        doc_counts = {}
+        for doc in documents:
+            if doc:
+                doc_counts[doc] = doc_counts.get(doc, 0) + 1
+        
+        # Calculate document representation balance
+        if doc_counts:
+            max_doc_count = max(doc_counts.values())
+            min_doc_count = min(doc_counts.values())
+            doc_balance = min_doc_count / max_doc_count if max_doc_count > 0 else 0.0
+        else:
+            doc_balance = 0.0
+        
+        # Overall statistical significance
+        overall_significance = (dimension_significance * 0.4) + (confidence_significance * 0.4) + (doc_balance * 0.2)
+        
+        return {
+            'dimension_distribution_significance': dimension_significance,
+            'confidence_distribution_significance': confidence_significance,
+            'document_representation_significance': doc_balance,
+            'overall_statistical_significance': min(overall_significance, 1.0)
+        }
+    
+    def _validate_peer_review_compliance(self, synthesis_report: str, evidence_results: List[Any]) -> Dict[str, float]:
+        """
+        REQ-AR-004: Peer-review compliance validation.
+        
+        Validates academic standards for peer-review readiness:
+        - Evidence citation format compliance
+        - Statistical rigor validation
+        - Methodological transparency
+        - Reproducibility indicators
+        """
+        compliance_scores = {}
+        
+        # Test 1: Evidence citation format compliance
+        citation_pattern = r'\[\d+\]'  # Look for [1], [2], etc.
+        citations = re.findall(citation_pattern, synthesis_report)
+        evidence_section_pattern = r'## Evidence References'
+        has_evidence_section = bool(re.search(evidence_section_pattern, synthesis_report))
+        
+        citation_compliance = 0.0
+        if citations and has_evidence_section:
+            citation_compliance = min(len(citations) / 10.0, 1.0)  # Normalize by expected citation count
+        
+        compliance_scores['citation_format_compliance'] = citation_compliance
+        
+        # Test 2: Statistical rigor validation
+        statistical_keywords = ['ANOVA', 'correlation', 'significance', 'p-value', 'confidence interval', 'standard deviation']
+        statistical_mentions = sum(1 for keyword in statistical_keywords if keyword.lower() in synthesis_report.lower())
+        statistical_rigor = min(statistical_mentions / len(statistical_keywords), 1.0)
+        
+        compliance_scores['statistical_rigor'] = statistical_rigor
+        
+        # Test 3: Methodological transparency
+        methodology_keywords = ['method', 'approach', 'analysis', 'framework', 'procedure']
+        methodology_mentions = sum(1 for keyword in methodology_keywords if keyword.lower() in synthesis_report.lower())
+        methodological_transparency = min(methodology_mentions / len(methodology_keywords), 1.0)
+        
+        compliance_scores['methodological_transparency'] = methodological_transparency
+        
+        # Test 4: Reproducibility indicators
+        reproducibility_keywords = ['data', 'corpus', 'framework', 'experiment', 'results']
+        reproducibility_mentions = sum(1 for keyword in reproducibility_keywords if keyword.lower() in synthesis_report.lower())
+        reproducibility_score = min(reproducibility_mentions / len(reproducibility_keywords), 1.0)
+        
+        compliance_scores['reproducibility_indicators'] = reproducibility_score
+        
+        # Overall peer-review compliance
+        overall_compliance = sum(compliance_scores.values()) / len(compliance_scores)
+        compliance_scores['overall_peer_review_compliance'] = overall_compliance
+        
+        return compliance_scores
+    
+    def _validate_academic_citation_format(self, synthesis_report: str) -> Dict[str, float]:
+        """
+        REQ-AR-005: Academic citation format requirements validation.
+        
+        Validates proper academic citation formatting:
+        - Inline citation presence and format
+        - Reference section completeness
+        - Citation-reference mapping consistency
+        - Provenance link integrity
+        """
+        citation_metrics = {}
+        
+        # Extract inline citations
+        inline_citations = re.findall(r'\[(\d+)\]', synthesis_report)
+        unique_citations = set(inline_citations)
+        
+        # Check for Evidence References section
+        evidence_section_match = re.search(r'## Evidence References\s*\n(.*?)(?=\n##|\Z)', synthesis_report, re.DOTALL)
+        has_evidence_section = bool(evidence_section_match)
+        
+        # Count references in Evidence References section
+        reference_count = 0
+        if evidence_section_match:
+            evidence_section = evidence_section_match.group(1)
+            # Count numbered references like [1], [2], etc.
+            references = re.findall(r'\[(\d+)\]', evidence_section)
+            reference_count = len(set(references))
+        
+        # Citation format compliance
+        citation_format_score = 0.0
+        if inline_citations and has_evidence_section:
+            # Check if all inline citations have corresponding references
+            citation_coverage = min(reference_count / len(unique_citations), 1.0) if unique_citations else 0.0
+            citation_format_score = citation_coverage
+        
+        citation_metrics['citation_format_compliance'] = citation_format_score
+        citation_metrics['inline_citation_count'] = len(inline_citations)
+        citation_metrics['unique_citation_count'] = len(unique_citations)
+        citation_metrics['reference_section_present'] = 1.0 if has_evidence_section else 0.0
+        citation_metrics['reference_count'] = reference_count
+        citation_metrics['citation_reference_consistency'] = citation_format_score
+        
+        # Overall academic citation format score
+        overall_citation_score = (
+            citation_format_score * 0.4 +
+            (1.0 if has_evidence_section else 0.0) * 0.3 +
+            min(len(unique_citations) / 5.0, 1.0) * 0.3  # Normalize by expected citation count
+        )
+        
+        citation_metrics['overall_academic_citation_score'] = overall_citation_score
+        
+        return citation_metrics

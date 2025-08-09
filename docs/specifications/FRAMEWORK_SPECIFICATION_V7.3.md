@@ -61,7 +61,7 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
   "analysis_variants": {
     "default": {
       "description": "The primary analysis method for this framework.",
-      "analysis_prompt": "You are an expert analyst specializing in [your domain]. Analyze this text through focused sequential steps, examining each dimension group independently before integration.\n\nSTEP 1 - [DIMENSION_GROUP_1] ANALYSIS\nFocus ONLY on [group description] patterns (ignore other dimensions for now):\n- Look for [dimension_1] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Look for [dimension_2] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience (0.0-1.0): How central are these patterns to the overall message?\n- State confidence (0.0-1.0): How certain are you in this assessment?\nShow your analytical work and evidence before proceeding.\n\nSTEP 2 - [DIMENSION_GROUP_2] ANALYSIS\nNow focus ONLY on [group description] patterns:\n- Look for [dimension_3] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Look for [dimension_4] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience (0.0-1.0): How central are these patterns to the message?\n- State confidence (0.0-1.0): How certain are you in this assessment?\nShow your analytical work and evidence before proceeding.\n\n[Continue pattern for each dimension group...]\n\nFINAL STEP - INTEGRATION AND VALIDATION\nReview your step-by-step analysis:\n- Check for scoring consistency across all dimension groups\n- Validate that evidence quality meets academic standards\n- Identify any cross-dimensional patterns or relationships\n- Confirm confidence levels are appropriately calibrated\n- Calculate any derived metrics specified in the framework\n- Apply pattern classifications if defined\n\nProvide your final structured analysis following the output_contract format."
+      "analysis_prompt": "You are an expert analyst specializing in [your domain]. Analyze this text through focused sequential steps, examining each dimension group independently before integration.\n\nSTEP 1 - [DIMENSION_GROUP_1] ANALYSIS\nFocus ONLY on [group description] patterns (ignore other dimensions for now):\n- Look for [dimension_1] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Look for [dimension_2] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience for each dimension (0.0-1.0): How central is each specific dimension to the overall message?\n- State confidence for each dimension (0.0-1.0): How certain are you about each score?\nShow your analytical work and evidence before proceeding.\n\nSTEP 2 - [DIMENSION_GROUP_2] ANALYSIS\nNow focus ONLY on [group description] patterns:\n- Look for [dimension_3] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Look for [dimension_4] patterns: [specific linguistic examples] (Note: These are semantic concepts - look for the underlying meaning, not just these exact words)\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience for each dimension (0.0-1.0): How central is each specific dimension to the overall message?\n- State confidence for each dimension (0.0-1.0): How certain are you about each score?\nShow your analytical work and evidence before proceeding.\n\n[Continue pattern for each dimension group...]\n\nFINAL STEP - INTEGRATION AND VALIDATION\nReview your step-by-step analysis:\n- Check for scoring consistency across all dimension groups\n- Validate that evidence quality meets academic standards\n- Identify any cross-dimensional patterns or relationships\n- Confirm confidence levels are appropriately calibrated\n- Calculate any derived metrics specified in the framework\n- Apply pattern classifications if defined\n\nProvide your final structured analysis following the output_contract format."
     },
     "longitudinal_analysis": {
       "description": "A variant for analyzing texts as part of a time series.",
@@ -159,12 +159,37 @@ All formula variables MUST match the actual DataFrame column structure:
 }
 ```
 
-#### **5.3 Mathematical Validation**
+#### **5.3 Mathematical Best Practices**
+**Range-Aware Thresholds**: When creating pattern classifications, ensure thresholds are mathematically achievable:
+```json
+// WRONG: Impossible for 0.0-1.0 scores (max variance ≈ 0.25)
+"incoherent_messaging": {"condition": "dimension_variance > 0.3"}
+
+// CORRECT: Achievable threshold
+"incoherent_messaging": {"condition": "dimension_variance >= 0.22"}
+```
+
+**Division Safety**: Protect against zero denominators using epsilon values:
+```json
+// WRONG: Risk of division by zero
+"weighted_index": "numerator / (sum_of_weights)"
+
+// CORRECT: Protected from zero division
+"weighted_index": "numerator / (sum_of_weights + 1e-9)"
+```
+
+**Confidence Granularity Alignment**: Ensure analysis prompts and extraction schemas agree:
+- Analysis prompt: `"State justice confidence (0.0-1.0) and resentment confidence (0.0-1.0)"`
+- Extraction schema: `["justice_confidence", "resentment_confidence"]`
+
+#### **5.4 Mathematical Validation**
 The coherence agent validates:
 - **Syntax**: All formulas are syntactically valid Python expressions
 - **Dependencies**: execution_order correctly sequences dependent calculations  
 - **Completeness**: All referenced variables exist in expected DataFrame columns
 - **Consistency**: Column names follow v7.3 naming conventions
+- **Mathematical Soundness**: Thresholds and conditions are achievable given input ranges
+- **Division Safety**: Formulas avoid divide-by-zero errors (add small epsilon values when needed)
 
 ---
 
@@ -178,6 +203,9 @@ The coherence agent validates:
 - **The "Over-Engineered Framework" Trap**: Including too many dimensions, leading to a noisy analysis.
 - **The "Unjustified Metric" Trap**: Creating formulas without theoretical justification.
 - **The "Black Box Calculation" Trap**: Hiding math inside the prompt.
+- **The "Impossible Threshold" Trap**: Setting pattern classification thresholds outside the mathematically possible range (e.g., variance > 0.25 for 0.0-1.0 scores).
+- **The "Division by Zero" Trap**: Creating formulas that divide by variables that could be zero (use epsilon values like `+ 1e-9` in denominators).
+- **The "Confidence Mismatch" Trap**: Analysis prompts requesting different confidence granularity than extraction schema expects.
 
 ---
 

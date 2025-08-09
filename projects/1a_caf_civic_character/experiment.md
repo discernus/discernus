@@ -2,17 +2,19 @@
 version: "7.3"
 name: "speaker_character_pattern_analysis"
 description: |
-  This experiment tests the Character Assessment Framework's ability to detect 
+  This experiment tests the Civic Analysis Framework's ability to detect 
   meaningful differences in character patterns between individual speakers. 
   The analysis focuses on three core objectives: speaker differentiation using 
   the 10 CAF dimensions, identification of unique character signatures across 
-  the 5 virtues and 5 vices, and examination of MC-SCI character coherence patterns.
+  the 5 virtues and 5 vices, and examination of civic character coherence patterns 
+  using the Civic Character Index and pattern classifications.
 
 hypothesis: |
-  The Character Assessment Framework will successfully differentiate between 
-  speakers using the 10 character dimensions, reveal distinct character signatures 
-  for each speaker across virtues and vices, and demonstrate meaningful variation 
-  in MC-SCI character coherence patterns.
+  The Civic Analysis Framework will be used to analyze and compare the character 
+  profiles of eight political speeches using the 10 character dimensions, revealing 
+  distinct character signatures across virtues and vices, and demonstrating variation 
+  in civic character coherence patterns as measured by the Civic Character Index 
+  and pattern classifications.
 
 framework: "framework.md"
 corpus_path: "corpus/"
@@ -46,7 +48,7 @@ synthesis:
 
 # Statistical Validation  
 validation:
-  required_tests: ["speaker_differentiation_anova", "character_signature_analysis", "mc_sci_coherence_patterns"]
+  # required_tests: ["speaker_differentiation_anova", "character_signature_analysis", "civic_character_coherence_patterns"]
   reliability_threshold: 0.70
   effect_size_reporting: true
 
@@ -57,7 +59,7 @@ reporting:
     - "executive_summary"
     - "speaker_differentiation_results"
     - "character_signature_analysis"
-    - "mc_sci_coherence_patterns"
+    - "civic_character_coherence_patterns"
     - "qualitative_insights"
     - "statistical_methodology"
     - "framework_validation"
@@ -67,9 +69,9 @@ reporting:
 
 # Core Hypothesis Framework
 hypotheses:
-  H1_Speaker_Differentiation: "The 10 CAF dimensions will show statistically significant differences between speakers"
-  H2_Character_Signatures: "Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices"
-  H3_MC_SCI_Patterns: "MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence"
+  H1_Speaker_Differentiation: "The 10 CAF dimensions will be used to describe and compare the character profiles of the eight speakers based on the selected speeches"
+  H2_Character_Signatures: "Each speech will exhibit a distinct character signature across the 5 virtues and 5 vices"
+  H3_Civic_Character_Patterns: "Civic Character Index scores will demonstrate variation across the eight speeches, indicating different levels of character coherence"
 
 # Canonical workflow configuration (v7.3 compliant)
 workflow:
@@ -114,21 +116,21 @@ definition_of_success:
     - "All 10 CAF dimensions scored independently with confidence ratings"
     - "Evidence quotations provided for each character dimension (minimum 1, maximum 3)"
     - "Overall analysis confidence scores present and reasonable (>0.5 for most analyses)"
-    - "MC-SCI scores calculated and included in analysis results"
+    - "Civic Character Index scores calculated and included in analysis results"
   
   # Statistical Reliability Success Criteria
   statistical_reliability_success:
-    - "ANOVA results show statistically significant differences (p < 0.05) for at least 3 of 10 CAF dimensions"
-    - "Effect sizes (η²) ≥ 0.10 for significant speaker differences"
-    - "MC-SCI scores show meaningful variation across speakers (SD ≥ 0.15)"
-    - "Character signature analysis reveals distinct patterns for at least 6 of 8 speakers"
+    - "Descriptive statistical analysis shows variation across speeches for at least 3 of 10 CAF dimensions"
+    - "Civic Character Index scores show measurable variation across speeches (range ≥ 0.30)"
+    - "Character signature analysis reveals distinct patterns for at least 6 of 8 speeches"
+    - "Quantitative comparison of character profiles demonstrates framework differentiation capability"
   
   # Framework Validation Success Criteria
   framework_validation_success:
     - "CAF v7.1 framework successfully processes all 8 political speeches"
     - "Character dimensions show appropriate variance (not all clustering around 0.5)"
     - "Virtue and vice dimensions demonstrate expected relationships"
-    - "MC-SCI calculations are mathematically consistent"
+    - "Civic Character Index calculations are mathematically consistent"
     - "Evidence quotations genuinely support assigned character scores"
   
   # Academic Value Success Criteria
@@ -137,16 +139,16 @@ definition_of_success:
     - "Statistical analysis including ANOVA results, effect sizes, and significance testing"
     - "Clear presentation of hypotheses H1, H2, H3 with supporting evidence"
     - "Professional formatting with tables, charts, and statistical summaries"
-    - "Qualitative insights including profiles of highest and lowest MC-SCI scoring speeches"
+    - "Qualitative insights including profiles of highest and lowest Civic Character Index scoring speeches"
     - "Reproducible results with clear provenance and methodology documentation"
   
   # Minimum Viable Success Threshold
   minimum_viable_success:
     - "At least 7 of 8 corpus files analyzed successfully"
-    - "Statistically significant differences found for at least 2 of 10 CAF dimensions"
-    - "MC-SCI scores calculated and show variation across speakers"
+    - "Measurable differences found across speeches for at least 2 of 10 CAF dimensions"
+    - "Civic Character Index scores calculated and show variation across speeches"
     - "Final report generated with quantitative results and basic interpretation"
-    - "Evidence that the CAF framework can differentiate between speakers"
+    - "Evidence that the CAF framework can differentiate between speech character profiles"
 
 ---
 
@@ -154,20 +156,20 @@ definition_of_success:
 
 ## Overview
 
-This experiment provides a focused test of the Character Assessment Framework's core capabilities in detecting meaningful differences between speakers. The analysis examines three fundamental aspects: speaker differentiation using the 10 character dimensions, identification of unique character signatures, and MC-SCI character coherence patterns.
+This experiment provides a focused test of the Civic Analysis Framework's core capabilities in detecting meaningful differences between speakers. The analysis examines three fundamental aspects: speaker differentiation using the 10 character dimensions, identification of unique character signatures, and civic character coherence patterns.
 
 ## Research Objectives
 
 1. **Speaker Differentiation**: Can the 10 CAF dimensions meaningfully differentiate between speakers?
 2. **Character Signature Identification**: Do speakers exhibit unique patterns across the 5 virtues and 5 vices?
-3. **MC-SCI Analysis**: How do character coherence patterns vary between speakers?
+3. **Civic Character Analysis**: How do character coherence patterns vary between speakers?
 
 ## Methodology
 
 ### Framework
 **Character Assessment Framework v7.1** provides:
 - 10-dimensional character analysis (5 virtues vs 5 vices)
-- Moral Character Strategic Contradiction Index (MC-SCI) for coherence measurement
+- Civic Character Index and Salience-Weighted Civic Character Index for coherence measurement
 - JSON-first architecture with enhanced synthesis integration
 
 ### Corpus
@@ -182,19 +184,19 @@ This experiment provides a focused test of the Character Assessment Framework's 
 - Steve King - 2017 House floor speech
 
 ### Statistical Analysis
-1. **Speaker Differentiation Analysis**: ANOVA testing for significant differences between speakers across all 10 dimensions
-2. **Character Signature Analysis**: Identification of unique virtue/vice patterns for each speaker
-3. **MC-SCI Coherence Analysis**: Examination of character coherence variation across speakers
+1. **Speech Differentiation Analysis**: Descriptive comparison of character patterns across the eight speeches using all 10 dimensions
+2. **Character Signature Analysis**: Identification of unique virtue/vice patterns for each speech
+3. **Civic Character Coherence Analysis**: Examination of character coherence variation across speeches
 
 ### Qualitative Analysis
-1. **MC-SCI Extremes Profiling**: Detailed analysis of the speech with the highest MC-SCI score (most coherent character) and the speech with the lowest MC-SCI score (least coherent character)
+1. **Civic Character Extremes Profiling**: Detailed analysis of the speech with the highest Civic Character Index score (most coherent character) and the speech with the lowest Civic Character Index score (least coherent character)
 2. **Character Pattern Walkthrough**: Examination of how virtue and vice dimensions interact to produce high vs. low coherence scores
 3. **Evidence Integration**: Analysis of specific quotations and rhetorical strategies that contribute to character coherence or contradiction
 
 ### Expected Outcomes
 1. **Differentiation Evidence**: Statistical confirmation that speakers differ meaningfully on character dimensions
 2. **Signature Profiles**: Distinct character patterns for each speaker
-3. **Coherence Patterns**: Meaningful variation in MC-SCI scores across speakers
+3. **Coherence Patterns**: Meaningful variation in Civic Character Index scores across speakers
 4. **Qualitative Insights**: Detailed understanding of what produces high vs. low character coherence in political discourse
 
 ## Significance

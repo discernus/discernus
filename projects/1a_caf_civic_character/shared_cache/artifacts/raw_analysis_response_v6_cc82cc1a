@@ -1,0 +1,161 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Sequential analysis applied for each dimension group, focusing on explicit and implicit messaging."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.05,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.1,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.05,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "pragmatism": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "fantasy": {
+          "raw_score": 0.05,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.95,
+          "context_type": "inclusive framing"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "tonight more than any night - I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama.",
+          "confidence": 0.95,
+          "context_type": "universal perspective"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "confidence": 0.95,
+          "context_type": "rejection of group division"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "confidence": 0.95,
+          "context_type": "factual acceptance"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+          "confidence": 0.9,
+          "context_type": "intellectual humility/self-acknowledgment"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.95,
+          "context_type": "absence of emotional exploitation"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.85,
+          "context_type": "acknowledgment of historical injustice"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+          "confidence": 0.8,
+          "context_type": "fair recognition of opponent's achievement"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We fought - we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+          "confidence": 0.95,
+          "context_type": "rejection of blame attribution"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I urge all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "confidence": 0.95,
+          "context_type": "positive vision/empowerment"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Americans never quit. We never surrender. We never hide from history. We make history.",
+          "confidence": 0.95,
+          "context_type": "empowerment rhetoric"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of challenges without fear-mongering"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.95,
+          "context_type": "practical solutions/compromise"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I don't know what more we could have done to try to win this election. I'll leave that to others to determine.",
+          "confidence": 0.9,
+          "context_type": "constraint acknowledgment"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "The road was a difficult one from the outset, but your support and friendship never wavered.",
+          "confidence": 0.9,
+          "context_type": "absence of magical thinking/unrealistic promises"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
