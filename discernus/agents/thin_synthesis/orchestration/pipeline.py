@@ -405,6 +405,6 @@ class ProductionThinSynthesisPipeline:
         
         # For unhandled types, return string representation as a fallback
         try:
-            return str(obj)
+                    return str(obj)
         except Exception:
             return f"<unserializable: {type(obj).__name__}>" 
