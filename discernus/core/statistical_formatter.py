@@ -8,25 +8,26 @@ sequential synthesis. Ensures JSON-serializable native types and compact tables.
 THIN: This module performs deterministic formatting only. No computation.
 """
 from typing import Dict, Any, List, Optional
+import pandas as pd
 
 
 class StatisticalResultsFormatter:
-    """
-    Convert heterogeneous MathToolkit outputs into compact, LLM-friendly tables.
-    """
+    """Formats raw statistical results from MathToolkit into LLM-optimized JSON tables."""
 
-    def format_for_synthesis(self, analysis_output: Dict[str, Any]) -> Dict[str, Any]:
+    def __init__(self, statistical_results: Dict[str, Any]):
         """
-        Transform execute_analysis_plan(_thin) output to standardized tables.
+        Initializes the formatter with the raw statistical results.
 
-        Expects a structure like:
-        {
-          'analysis_plan': {...},
-          'results': { task_name: task_result, ... },
-          'errors': [...]
-        }
+        Args:
+            statistical_results: The raw output from MathToolkit's execute_analysis_plan_thin.
         """
-        if not analysis_output or 'results' not in analysis_output:
+        self.results = statistical_results.get("results", {})
+        self.errors = statistical_results.get("errors", [])
+        self.warnings = statistical_results.get("warnings", [])
+
+    def format_all(self) -> Dict[str, Any]:
+        """Formats all available statistical results into a structured dictionary."""
+        if not self.results or 'results' not in self.results:
             return {
                 "anova_summary": None,
                 "correlation_summary": None,
@@ -34,7 +35,7 @@ class StatisticalResultsFormatter:
                 "notes": "No results provided"
             }
 
-        results = analysis_output.get('results', {})
+        results = self.results
 
         anova_rows: List[List[Any]] = []
         correlation_top: List[Dict[str, Any]] = []

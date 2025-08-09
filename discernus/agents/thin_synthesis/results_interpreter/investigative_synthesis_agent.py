@@ -166,8 +166,8 @@ class InvestigativeSynthesisAgent:
                 try:
                     knowledge_query = KnowledgeQuery(
                         semantic_query=query_info['query'],
-                        limit=5,  # Reasonable limit per query
-                        cross_domain=True
+                        content_types=["corpus_text", "evidence_quotes"],
+                        limit=5  # Reasonable limit per query
                     )
                     
                     knowledge_results = knowledge_curator.query_knowledge(knowledge_query)
@@ -445,8 +445,8 @@ SYNTHESIS REPORT:
             # Create comprehensive knowledge query with cross-domain reasoning
             knowledge_query = KnowledgeQuery(
                 semantic_query=query,
-                limit=8,  # More results for comprehensive analysis
-                cross_domain=cross_domain  # Enable cross-domain reasoning by default
+                content_types=["corpus_text", "evidence_quotes"],
+                limit=8  # More results for comprehensive analysis
             )
             
             # Interrogate the comprehensive knowledge graph
@@ -472,7 +472,6 @@ SYNTHESIS REPORT:
                 'query': query,
                 'knowledge_count': len(knowledge_results),
                 'data_types_found': list(set(r.data_type for r in knowledge_results)),
-                'cross_domain_enabled': cross_domain,
                 'timestamp': 'investigation_time'
             })
             

@@ -183,16 +183,24 @@ class ComprehensiveKnowledgeCurator:
                     processed_items = processor(artifact_data, request)
                     
                     for item in processed_items:
-                        # Create unified document for txtai indexing
+                        # Create unified document for txtai indexing with filterable fields
                         doc = {
                             "id": doc_id,
                             "text": item['searchable_text'],
-                            "data_type": data_type,
+                            # prefer item-provided content_type; fallback to normalized data_type
+                            "content_type": item.get('content_type', 'corpus_text' if data_type == 'corpus' else 'evidence_quotes'),
                             "source_artifact": item['source_artifact'],
+                            # promote common filters to top level for WHERE clause
+                            "speaker": item.get('metadata', {}).get('speaker'),
+                            "document_id": item.get('metadata', {}).get('document_name'),
                             "metadata": item['metadata']
                         }
                         documents.append(doc)
-                        knowledge_items[doc_id] = item
+                        
+                        # Persist content_type in knowledge_index for retrieval
+                        item_to_store = item.copy()
+                        item_to_store['content_type'] = doc['content_type']
+                        knowledge_items[doc_id] = item_to_store
                         doc_id += 1
             
             if not documents:
@@ -271,15 +279,28 @@ class ComprehensiveKnowledgeCurator:
             # Convert to KnowledgeResult objects with full provenance
             knowledge_results = []
             for result in search_results:
-                doc_id = result.get('id')
-                score = result.get('score', 0.0)
+                # txtai may return dicts or tuples depending on backend/version
+                doc_id = None
+                score = 0.0
+                if isinstance(result, dict):
+                    doc_id = result.get('id')
+                    score = result.get('score', 0.0)
+                elif isinstance(result, tuple):
+                    # Common formats: (id, score) or (id, score, metadata)
+                    if len(result) >= 1:
+                        doc_id = result[0]
+                    if len(result) >= 2 and isinstance(result[1], (int, float)):
+                        score = float(result[1])
+                
+                if doc_id is None:
+                    continue
 
                 if doc_id in self.knowledge_index:
                     knowledge_item = self.knowledge_index[doc_id]
                     
                     result_obj = KnowledgeResult(
                         content=knowledge_item['content'],
-                        data_type=knowledge_item['data_type'],
+                        data_type=knowledge_item.get('content_type', 'unknown'),
                         source_artifact=knowledge_item['source_artifact'],
                         relevance_score=score,
                         metadata=knowledge_item['metadata'],
@@ -310,6 +331,7 @@ class ComprehensiveKnowledgeCurator:
             for i, doc in enumerate(documents):
                 content = doc.get('content', doc.get('text', ''))
                 doc_name = doc.get('name', doc.get('document_name', f'document_{i}'))
+                speaker = doc.get('speaker', 'Unknown')
                 
                 # Create searchable text with metadata context
                 searchable_text = f"Corpus document {doc_name}: {content}"
@@ -317,13 +339,13 @@ class ComprehensiveKnowledgeCurator:
                 item = {
                     'content': content,
                     'searchable_text': searchable_text,
-                    'data_type': 'corpus',
+                    'content_type': 'corpus_text',
                     'source_artifact': 'corpus_data',  # Could be made more specific
                     'metadata': {
                         'document_name': doc_name,
                         'document_index': i,
                         'content_length': len(content),
-                        'speaker': doc.get('speaker', 'Unknown')
+                        'speaker': speaker
                     }
                 }
                 processed_items.append(item)
@@ -345,20 +367,22 @@ class ComprehensiveKnowledgeCurator:
                 quote_text = evidence.get('quote_text', '')
                 doc_name = evidence.get('document_name', '')
                 dimension = evidence.get('dimension', '')
+                speaker = evidence.get('speaker', None)
                 
                 searchable_text = f"Evidence from {doc_name} for {dimension}: {quote_text}"
                 
                 item = {
                     'content': quote_text,
                     'searchable_text': searchable_text,
-                    'data_type': 'evidence',
+                    'content_type': 'evidence_quotes',
                     'source_artifact': 'evidence_data',
                     'metadata': {
                         'document_name': doc_name,
                         'dimension': dimension,
                         'confidence': evidence.get('confidence', 0.0),
                         'context_type': evidence.get('context_type', ''),
-                        'extraction_method': evidence.get('extraction_method', '')
+                        'extraction_method': evidence.get('extraction_method', ''),
+                        'speaker': speaker
                     }
                 }
                 processed_items.append(item)
