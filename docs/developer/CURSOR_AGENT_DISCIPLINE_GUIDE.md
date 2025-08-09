@@ -6,7 +6,7 @@
 Before any code changes, agents must verify:
 
 #### **🎯 THIN Architecture Compliance**
-- [ ] **Component Size**: New components <150 lines (prevent intelligence creep)
+- [ ] **Component Size**: Follow tiered limits - Simple agents <200 lines, Core agents <400 lines, Complex agents <600 lines, Orchestration <800 lines
 - [ ] **YAML Externalization**: All prompts in separate .yaml files (not inline)
 - [ ] **Minimal Parsing**: Trust LLM output, avoid complex JSON/text parsing
 - [ ] **Intelligence Externalization**: LLMs handle reasoning, code handles orchestration
