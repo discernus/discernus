@@ -1,0 +1,10 @@
+{
+  "evidence_metadata": {
+    "total_documents": 0,
+    "total_evidence_pieces": 0,
+    "extraction_method": "analysis_time_combination_v1.0",
+    "extraction_time": "2025-08-09T12:15:35.094772+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": []
+}
