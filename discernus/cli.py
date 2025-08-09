@@ -144,15 +144,15 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
         coherence_agent = ExperimentCoherenceAgent()
         validation_result = coherence_agent.validate_experiment(experiment_path)
         
-        if not validation_result.success:
-            # Return detailed validation failure information
-            if validation_result.issues:
-                # For CLI display, we'll still return the first issue as the main message
-                # but the validate command will show full details
-                issue = validation_result.issues[0]
+        # Helen 2.0: Only blocking issues cause validation failure
+        if validation_result.has_blocking_issues():
+            # Return detailed validation failure information for blocking issues
+            blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
+            if blocking_issues:
+                issue = blocking_issues[0]
                 return False, f"❌ {issue.description}", {"validation_result": validation_result}
             else:
-                return False, "❌ Experiment validation failed", {}
+                return False, "❌ Experiment has blocking validation issues", {}
         
         # Validation passed - extract basic info for CLI
         corpus_path = experiment_path / config.get('corpus_path', 'corpus')
@@ -314,24 +314,49 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             validator = ExperimentCoherenceAgent(model=analysis_model)
             validation_result = validator.validate_experiment(exp_path)
             
-            if not validation_result.success:
-                click.echo("❌ Validation failed:")
-                for issue in validation_result.issues:
+            # Helen 2.0: Display issues by priority, smart exit codes
+            blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
+            quality_issues = validation_result.get_issues_by_priority("QUALITY")
+            suggestions = validation_result.get_issues_by_priority("SUGGESTION")
+            
+            if blocking_issues:
+                click.echo("🚫 BLOCKING Issues (must fix):")
+                for issue in blocking_issues:
                     click.echo(f"\n  • {issue.description}")
                     click.echo(f"    Impact: {issue.impact}")
                     click.echo(f"    Fix: {issue.fix}")
                     if issue.affected_files:
                         click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
-                
-                if validation_result.suggestions:
-                    click.echo(f"\n💡 Suggestions:")
-                    for suggestion in validation_result.suggestions:
-                        click.echo(f"  • {suggestion}")
-                
-                click.echo(f"\n💡 To skip validation, use: --skip-validation")
+            
+            if quality_issues:
+                click.echo(f"\n⚠️ QUALITY Issues (should fix):")
+                for issue in quality_issues:
+                    click.echo(f"\n  • {issue.description}")
+                    click.echo(f"    Impact: {issue.impact}")
+                    click.echo(f"    Fix: {issue.fix}")
+                    if issue.affected_files:
+                        click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
+            
+            if suggestions:
+                click.echo(f"\n💡 SUGGESTIONS (nice to have):")
+                for issue in suggestions:
+                    click.echo(f"\n  • {issue.description}")
+                    click.echo(f"    Fix: {issue.fix}")
+            
+            if validation_result.suggestions:
+                click.echo(f"\n💡 General Suggestions:")
+                for suggestion in validation_result.suggestions:
+                    click.echo(f"  • {suggestion}")
+            
+            # Helen 2.0: Only blocking issues cause exit 1
+            if blocking_issues:
+                click.echo(f"\n💡 To skip validation when running, use: --skip-validation")
                 sys.exit(1)
             else:
-                click.echo("✅ Experiment coherence validation passed")
+                if quality_issues or suggestions:
+                    click.echo("✅ Validation passed with recommendations")
+                else:
+                    click.echo("✅ Experiment coherence validation passed")
         except Exception as e:
             click.echo(f"⚠️  Validation failed with error: {e}")
             click.echo("💡 Continuing without validation...")
