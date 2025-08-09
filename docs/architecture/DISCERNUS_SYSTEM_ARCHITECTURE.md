@@ -8,6 +8,38 @@ title: Discernus System Architecture - Technical Specification
 
 ---
 
+## Architecture at a Glance
+
+**Discernus** implements a 4-stage THIN synthesis pipeline with comprehensive RAG (Retrieval-Augmented Generation) for academic research at scale:
+
+```
+Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
+   ↓              ↓                    ↓               ↓
+Raw Scores   Knowledge Graph    Cross-Domain      Statistical
+Evidence     All Data Types     Evidence          Analysis
+Metadata     txtai Index        Retrieval         Reports
+```
+
+### **Core Design Philosophy**
+- **THIN Architecture**: LLMs handle intelligence; software provides minimal orchestration (<150 lines per component)
+- **Comprehensive RAG**: Unified knowledge graph indexes all 6 experiment data types for cross-domain reasoning
+- **Academic Integrity**: Computational verification, complete provenance, zero hallucinated statistics
+- **Multi-Model Support**: Gemini 2.5 defaults with cross-model compatibility for ensemble validation
+
+### **Key Capabilities**
+- **Framework Agnostic**: Any analytical approach expressible in natural language
+- **Enterprise Scale**: Hash-based caching, content-addressable storage, persistent knowledge graphs
+- **Research Quality**: Peer review readiness with full audit trails and statistical transparency
+- **Day-1 Productivity**: No programming required - researchers focus on methodology, not implementation
+
+### **Technology Stack**
+- **Knowledge Indexing**: txtai semantic search with comprehensive data type integration
+- **Mathematical Operations**: MathToolkit with provenance metadata and secure code execution
+- **Storage**: LocalArtifactStorage with Git-based version control (no databases)
+- **LLM Integration**: Multi-provider gateway supporting Gemini, Claude, OpenAI with rate limiting
+
+---
+
 ## About Discernus
 
 **Discernus** is a computational research platform that amplifies researcher expertise through systematic, reproducible analysis of text corpora. Rather than replacing human judgment, Discernus enables researchers to apply their analytical frameworks at scale while maintaining transparency and academic integrity.
@@ -126,10 +158,10 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 
 **11. Specialized Agent Processing Over Monolithic Analysis**
 - Task-specific agents outperform single-LLM approaches (empirically validated)
-- Streamlined pipeline: BatchAnalysis → Synthesis → Report with comprehensive provenance
+- Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance
 - Natural language communication between stages (no complex JSON parsing)
 - Agent specialization: focused analysis agents with clear input/output contracts
-- Comprehensive reporting with proper provenance asset management
+- Cross-domain knowledge integration through comprehensive RAG architecture
 
 **12. Empirical Model Selection Based on Performance Requirements**
 - Context window requirements determined by analysis complexity
@@ -178,9 +210,9 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Cost optimization secondary to reliability validation
 
 **18. Linear Progression with Caching**
-- Streamlined 3-stage pipeline with deterministic progression
-- Cache hits eliminate redundant computation
-- Predictable resource usage and timing
+- Enhanced 4-stage pipeline with deterministic progression: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
+- Cache hits eliminate redundant computation on identical inputs and knowledge graphs
+- Predictable resource usage and timing with comprehensive RAG integration
 
 **19. Artifact-Oriented State Management**
 - All data flows through immutable, hashed artifacts in content-addressable storage
@@ -219,10 +251,11 @@ This section describes the implemented architecture and operational capabilities
 - Optional local embedded databases (SQLite) for performance optimization
 
 **LLM Integration**:
-- Inherently multi-model architecture with defaults to current Gemini series models during development
-- Multi-provider gateway supporting various LLM providers
+- Multi-model architecture with Gemini 2.5 series as development defaults
+- Cross-model compatibility validation for ensemble testing and targeted use cases
+- Comprehensive RAG integration with LLM-powered query intelligence
+- Adaptive query generation and refinement capabilities
 - Cost-performance optimization through empirical model selection
-- Specialized model usage for different analytical tasks
 
 **Specification System**:
 - Framework specifications enable natural language analytical approaches
@@ -231,12 +264,62 @@ This section describes the implemented architecture and operational capabilities
 
 ## Current Processing Pipeline
 
-**Streamlined 3-Stage Architecture**:
-1. **Analysis Stage**: Enhanced analysis agents with framework-specific prompts
-2. **Synthesis Stage**: Batch processing with mathematical verification
-3. **Reporting Stage**: Statistical analysis and academic-quality output
+### **Visual Architecture Overview**
+
+```mermaid
+graph TD
+    A["🔍 Analysis Stage<br/>Enhanced Analysis Agents"] --> B["📊 Knowledge Indexing<br/>ComprehensiveKnowledgeCurator"]
+    B --> C["🧠 Intelligent Synthesis<br/>RAGEnhancedResultsInterpreter"]
+    C --> D["📋 Reporting Stage<br/>Statistical Analysis & Output"]
+    
+    A1["Raw Scores<br/>Evidence Quotes<br/>Metadata"] --> A
+    A2["Framework<br/>Specification"] --> A
+    A3["Corpus<br/>Documents"] --> A
+    
+    A --> B1["txtai Knowledge Graph<br/>All 6 Data Types<br/>Semantic Index"]
+    B1 --> B
+    
+    B --> C1["Cross-Domain Queries<br/>Intelligent Retrieval<br/>Evidence Grounding"]
+    C1 --> C
+    
+    C --> D1["MathToolkit<br/>Statistical Verification<br/>Provenance Chain"]
+    D1 --> D
+    
+    D --> E["📄 Academic Reports<br/>Peer Review Ready<br/>Full Audit Trail"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+```
+
+### **Enhanced 4-Stage Architecture with Comprehensive RAG**
+
+**🔍 Analysis Stage**: Enhanced analysis agents with framework-specific prompts and dimensional scoring, producing raw scores and evidence with computational verification
+
+**📊 Knowledge Indexing Stage**: Comprehensive knowledge graph construction from all 6 experiment data types with persistent hash-based caching for enterprise scalability
+
+**🧠 Intelligent Synthesis Stage**: Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval
+
+**📋 Reporting Stage**: Statistical analysis and academic-quality output with full cross-domain provenance, computational verification, and peer review readiness
+
+### **Data Flow Architecture**
+
+**Input Data Types** (6 comprehensive categories):
+1. **Corpus Documents**: Full text with speaker attribution and context
+2. **Framework Specification**: Analytical methodology and dimension definitions  
+3. **Raw Scores**: Individual dimension scores with calculation provenance
+4. **Statistical Results**: Verified mathematical findings and computations
+5. **Evidence Quotes**: Supporting textual evidence with confidence scores
+6. **Experiment Metadata**: Research context, hypotheses, and configuration
 
 **Content-Addressable Caching**: SHA256-based storage eliminates redundant computation on identical inputs
+
+**Comprehensive Knowledge RAG**: 
+- Unified indexing of corpus documents, framework specifications, raw scores, statistical results, evidence quotes, and experiment metadata
+- Cross-domain semantic search enabling queries across all data types
+- Hash-based persistent caching for enterprise scalability (<2s query performance)
+- LLM-powered adaptive query generation and refinement
 
 **Security Model**: 
 - Orchestrator trust boundary with agent restrictions
@@ -262,6 +345,11 @@ This section outlines planned enhancements organized by development timeline. Fe
 - Complete externalization of all agent prompts to YAML files
 - Version-controlled prompt templates and systematic testing
 - Framework-agnostic prompt libraries
+
+**Cross-Domain Query Optimization**:
+- Advanced semantic search patterns for complex research questions spanning multiple data types
+- Intelligent evidence gap detection for statistical findings lacking sufficient textual support
+- Multi-perspective reasoning with structured validation and contradiction detection workflows
 
 **Enhanced Transparency Infrastructure**:
 - Structured reasoning trace capture and visualization
@@ -299,6 +387,11 @@ This section outlines planned enhancements organized by development timeline. Fe
 - Red team / blue team validation workflows
 - Consensus mechanisms for complex reasoning tasks
 
+**Adaptive Knowledge Graph Construction**:
+- Dynamic optimization of indexing strategies based on experiment characteristics and query patterns
+- Advanced cross-domain analytics with statistical pattern recognition across textual evidence
+- Collaborative knowledge graphs with shared semantic indexes and privacy-preserving protocols
+
 **Advanced Caching Strategies**:
 - Semantic similarity caching using local vector embeddings (embedded SQLite with vector extensions)
 - Prompt optimization through retrieval-augmented generation
@@ -322,6 +415,74 @@ This section outlines planned enhancements organized by development timeline. Fe
 - Citation networks and research lineage tracking
 - Collaborative framework development tools
 
+## Risk Assessment & Mitigation Strategies
+
+### **Technical Risks**
+
+**🔴 High Priority Risks:**
+
+**LLM Model Deprecation/Changes**: 
+- *Risk*: Provider model updates breaking existing prompts and workflows
+- *Mitigation*: Multi-model architecture with cross-model validation; externalized prompts in version-controlled YAML; systematic prompt testing harness
+
+**Knowledge Graph Consistency**: 
+- *Risk*: txtai index corruption or inconsistent semantic search results  
+- *Mitigation*: Content-addressable storage with SHA256 verification; immutable artifact chains; automated consistency checking
+
+**Statistical Computation Errors**: 
+- *Risk*: MathToolkit producing incorrect calculations affecting research validity
+- *Mitigation*: Secure code execution with complete transparency; all calculations logged with provenance; computational verification required
+
+**🟡 Medium Priority Risks:**
+
+**Evidence Retrieval Quality**: 
+- *Risk*: RAG system returning irrelevant or biased evidence selections
+- *Mitigation*: Variance-aware processing with confidence intervals; multi-run validation; human oversight integration points
+
+**Scale Performance Degradation**: 
+- *Risk*: Knowledge graph queries becoming too slow at enterprise scale (>1000 documents)
+- *Mitigation*: Hash-based persistent caching; performance monitoring; adaptive indexing strategies
+
+### **Academic Integrity Risks**
+
+**🔴 Critical Academic Risks:**
+
+**Provenance Chain Breaks**: 
+- *Risk*: Loss of audit trail from conclusions back to source texts
+- *Mitigation*: Git-based version control; immutable artifact storage; comprehensive logging; peer review integration
+
+**Statistical Hallucination**: 
+- *Risk*: LLMs fabricating statistical results instead of computing them
+- *Mitigation*: Computational verification requirement; secure code execution; zero-hallucination synthesis protocols
+
+**Evidence Misattribution**: 
+- *Risk*: Evidence quotes linked to wrong sources or contexts
+- *Mitigation*: Deterministic semantic search with metadata preservation; cross-validation workflows; transparent retrieval logging
+
+### **Operational Risks**
+
+**🟡 Medium Priority Operational Risks:**
+
+**Dependency Management**: 
+- *Risk*: Critical dependencies (txtai, LLM providers) becoming unavailable
+- *Mitigation*: Local-first architecture; no required centralized infrastructure; fallback provider chains
+
+**Cost Escalation**: 
+- *Risk*: LLM API costs becoming prohibitive for research budgets
+- *Mitigation*: Intelligent model routing; cost-performance optimization; local model fallbacks where feasible
+
+**User Experience Complexity**: 
+- *Risk*: THIN architecture becoming too complex for researchers to adopt
+- *Mitigation*: Day-1 extensibility focus; natural language specifications; comprehensive documentation
+
+### **Mitigation Success Metrics**
+
+- **Provenance Completeness**: 100% traceability from all statistical findings to source texts
+- **Computational Accuracy**: Zero hallucinated statistics (all numbers computed and verified)
+- **Cross-Model Consistency**: <10% variance across different LLM providers for identical tasks
+- **Performance Standards**: <2 second query response time at 500+ document scale
+- **Academic Adoption**: Framework specifications expressible in natural language without programming
+
 ---
 
 ### The THIN vs THICK Philosophy
@@ -342,13 +503,14 @@ This section outlines planned enhancements organized by development timeline. Fe
 
 ---
 
-*Last updated 2025‑01‑31 - Cleaned up version numbers, specific claims, and marketing language while maintaining clear architectural guidance*
-**22. Epistemic Trust through Textual Grounding**
-- **Core Mandate**: The platform must build and maintain epistemic trust by ensuring every analytical conclusion is transparently and verifiably linked to the source texts. There must be no "black box" operations where the connection between a finding and its evidence is obscured.
-- **Unbroken Chain of Evidence**: A researcher or auditor tracing any finding—from a high-level summary in a final report back through the analytical pipeline—must encounter an increasingly rich and detailed trail of textual evidence. Provenance traces must lead to an expanding, not diminishing, evidence base.
-- **Causality over Inference**: The connection between a statistical result and its supporting evidence must be causal, not inferential. The system must use deterministic logic to identify the specific source data that produced a given calculation. It must not rely on a subsequent LLM call to "re-discover" a connection that was already present.
-- **Intelligent Retrieval over Fuzzy Curation**: The synthesis pipeline must operate on a principle of "Intelligent Retrieval." It should use statistical findings to execute targeted, programmatic retrieval of the specific evidence that drove those findings. This small, highly-relevant evidence set can then be passed to an LLM for nuanced summarization and narrative construction. This avoids the context-window limitations and unreliability of asking an LLM to curate from a massive, undifferentiated evidence pool.
-- **No Orphaned Findings**: Every number, chart, and conclusion in a final report must be accompanied by, or directly linked to, the textual evidence that justifies it.
+*Last updated 2025‑08‑09 - Added Modern RAG Synthesis Architecture with comprehensive knowledge indexing, cross-domain reasoning, and intelligent retrieval capabilities*
+**22. Epistemic Trust through Intelligent Cross-Domain Retrieval**
+- **Core Mandate**: The platform must build and maintain epistemic trust by ensuring every analytical conclusion is transparently and verifiably linked to source texts through intelligent, cross-domain retrieval mechanisms
+- **Comprehensive Knowledge Foundation**: Statistical findings, evidence quotes, framework dimensions, and corpus content are indexed in a unified knowledge graph enabling cross-domain reasoning and targeted evidence discovery
+- **Intelligent Retrieval over Fuzzy Curation**: The synthesis pipeline operates on "Intelligent Retrieval" principles - using statistical findings to execute targeted, programmatic queries across the comprehensive knowledge graph. This retrieval identifies specific evidence that supports findings, which is then passed to LLMs for nuanced summarization and narrative construction
+- **Cross-Domain Reasoning**: Researchers can investigate connections between statistical patterns and textual evidence through natural language queries that span multiple data types (e.g., "What evidence supports the correlation between dignity and cohesion scores?")
+- **Causality over Inference**: The connection between statistical results and supporting evidence is established through deterministic semantic search and provenance tracking, not through subsequent LLM inference that might lose the causal chain
+- **Scalable Academic Validation**: The comprehensive knowledge architecture enables evidence linking at institutional scale while maintaining perfect academic accountability and peer review standards
 
 **23. Evidence Linking Scope Theory**
 - **Dimensional Score Validation**: Evidence linking is required only for dimensional scores (dignity_score = 0.0) and their direct mathematical derivatives (tension scores, indices calculated from dimensional components). These scores represent the foundational analytical judgments that require textual justification.
@@ -356,9 +518,141 @@ This section outlines planned enhancements organized by development timeline. Fe
 - **Two-Layer Validation Model**: (1) Dimensional scores must be grounded in specific textual evidence with clear causal links, (2) All mathematical operations on those scores must be transparent and reproducible. This separation allows scalable academic validation without requiring evidence for every statistical relationship.
 - **Academic Integrity Preservation**: By constraining evidence linking to the foundational layer (dimensional assessment), we maintain perfect academic accountability while avoiding the impossible task of providing textual justification for mathematical relationships between variables.
 
-**24. txtai as Research Artifact Index (Not Database)**
-- **Research Context Distinction**: txtai serves as a research artifact index for immutable evidence generated during analysis, not as an operational database with business logic or mutable state. This is analogous to using a card catalog system for a research library.
-- **Academic Standards Alignment**: Vector search and semantic indexing are established methodologies in computational linguistics and digital humanities research. txtai provides deterministic, reproducible retrieval of research artifacts with full provenance preservation.
-- **Immutable Research Data**: Evidence pieces are generated once per experiment during analysis and never modified. txtai provides fast, consistent retrieval of these static research artifacts without introducing database dependencies or complex operational concerns.
-- **Provenance Preservation**: Every txtai query result includes complete metadata (document_name, dimension, confidence, original_id) ensuring perfect traceability to original analysis. The indexing process preserves rather than transforms the academic provenance chain.
-- **Deterministic Replication**: Identical queries return identical results, supporting the reproducibility requirements of academic research. The system provides research-grade consistency without the complexity of traditional database management.
+**24. txtai as Comprehensive Research Knowledge Index**
+- **Comprehensive Knowledge Graph**: txtai serves as a unified index for all experiment data types (corpus, framework, scores, statistics, evidence, metadata), enabling cross-domain reasoning and intelligent synthesis
+- **Academic Standards Alignment**: Vector search and semantic indexing provide deterministic, reproducible retrieval across heterogeneous research data types with full provenance preservation
+- **Cross-Domain Query Capability**: Semantic search enables natural language queries that span multiple data types, supporting research questions like "What statistical patterns correlate with specific textual evidence?"
+- **Immutable Research Data**: All indexed content represents immutable research artifacts generated during analysis, with txtai providing fast, consistent retrieval without introducing database dependencies
+- **Enterprise Scalability**: Hash-based persistent caching enables <2 second query performance at 500+ document scale while maintaining research-grade consistency and reproducibility
+- **Provenance Preservation**: Every query result includes complete metadata linking back to original analysis artifacts, ensuring perfect traceability across all data types
+
+**25. Comprehensive Knowledge Architecture for Cross-Domain Reasoning**
+- **Unified Data Indexing**: All experiment data types indexed in unified knowledge graph for cross-domain reasoning and intelligent synthesis (extends Principles #22, #24)
+- **Six Data Type Integration**: (1) Corpus Documents - full text with speaker attribution, (2) Framework Specification - analytical methodology and dimensions, (3) Raw Scores - individual dimension scores with provenance, (4) Statistical Results - verified mathematical findings, (5) Evidence Quotes - supporting textual evidence with confidence, (6) Experiment Metadata - research context and hypotheses
+- **Cross-Domain Query Capability**: Enable queries like "What evidence supports this F-statistic?" and "How does McCain demonstrate civic virtue in the framework?" through semantic search across all data types
+- **Intelligent Retrieval Architecture**: LLM-powered adaptive query generation with targeted evidence retrieval based on statistical findings, eliminating context window limitations of massive evidence pools (implements Principle #26 patterns)
+- **Academic Provenance Preservation**: Full traceability from cross-domain queries to source artifacts with complete metadata preservation (maintains Principle #5 standards)
+- **Enterprise Scalability**: Hash-based persistent caching with <2 second query performance at 500+ document scale (supports Principle #10 cost management)
+
+**26. Modern AI Systems Architecture Patterns**
+- **RAG-First Design**: Retrieval-Augmented Generation as the primary synthesis paradigm, moving beyond simple evidence-only approaches to comprehensive knowledge retrieval (operationalizes Principle #25)
+- **LLM Query Intelligence**: Language models generate and refine queries adaptively based on statistical context and research hypotheses, enabling sophisticated cross-domain investigation (maintains Principle #15 intelligence externalization)
+- **Semantic Search Integration**: Vector embeddings and semantic search as core infrastructure for research artifact discovery, not auxiliary features (extends Principle #24 txtai usage)
+- **Knowledge Graph Reasoning**: Enable reasoning across heterogeneous data types (statistical, textual, methodological) through unified semantic indexing (supports Principle #22 epistemic trust)
+- **Adaptive Query Refinement**: LLM-powered query optimization that improves retrieval quality iteratively based on result relevance and completeness (aligns with Principle #8 variance-aware processing)
+- **Multi-Perspective Investigation**: Support validation, contradiction detection, and explanatory reasoning through structured cross-domain queries (enhances Principle #4 transparency requirements)
+
+---
+
+## Developer Contribution Guidelines
+
+### **Architecture Contribution Principles**
+
+**🎯 THIN-First Development**: 
+- All components must remain under 150 lines to prevent intelligence creep
+- LLMs handle reasoning and domain knowledge; code provides minimal orchestration
+- Externalize prompts to YAML files rather than embedding in code
+- Question any parsing logic - prefer passing raw data to LLMs
+
+**📋 Specification-Driven Changes**:
+- Framework, Experiment, and Corpus specifications are user-controlled contracts
+- Changes to specifications require community discussion and backward compatibility analysis
+- New capabilities should extend specifications rather than hardcode assumptions
+- Test with multiple real-world frameworks to ensure agnostic design
+
+**🔍 Academic Integrity Validation**:
+- Every statistical calculation must be computationally verified (no LLM hallucination)
+- Provenance chains must remain intact from source texts to final conclusions
+- New features require evidence linking validation and audit trail preservation
+- Cross-model consistency testing required for synthesis pipeline changes
+
+### **Code Quality Standards**
+
+**Testing Requirements**:
+- Integration tests required for pipeline modifications
+- Cross-model validation for any LLM-dependent functionality  
+- Performance benchmarks for knowledge graph and caching changes
+- Academic integrity tests ensuring zero statistical hallucination
+
+**Documentation Standards**:
+- Architecture decision records for principle changes
+- Specification updates for user-facing capability changes
+- Performance impact analysis for scaling modifications
+- Academic validation documentation for research quality changes
+
+### **Review Process**
+
+**Technical Review Criteria**:
+- THIN compliance verification (component size, intelligence externalization)
+- Multi-model compatibility validation
+- Performance impact assessment
+- Academic provenance preservation
+
+**Academic Review Requirements**:
+- Statistical computation verification
+- Evidence linking validation
+- Peer review readiness confirmation
+- Cross-domain reasoning capability preservation
+
+### **Extension Development**
+
+**Preferred Extension Patterns**:
+- New analytical frameworks through specification files (no coding required)
+- Custom agents through YAML prompt externalization
+- Enhanced knowledge curation through txtai index extensions
+- Statistical analysis extensions through MathToolkit additions
+
+**Discouraged Patterns**:
+- Framework-specific hardcoded logic in orchestration
+- LLM output parsing (prefer LLM envelope extraction)
+- Database dependencies (maintain local-first architecture)
+- Intelligence embedded in coordination code
+
+---
+
+## Architectural Versioning Policy
+
+### **Versioning Philosophy**
+
+**Immutable Principles vs Evolving Implementation**: Universal Principles (Part I) represent constitutional bedrock that changes only through community consensus. Current Implementation (Part II) and Evolution Roadmap (Part III) evolve with technological capabilities and research needs.
+
+### **Change Classification**
+
+**🔴 Breaking Changes** (Major Version):
+- Universal Principle modifications
+- Specification contract changes affecting existing frameworks/experiments
+- Core pipeline architecture restructuring
+- LLM integration pattern changes requiring prompt rewrites
+
+**🟡 Feature Additions** (Minor Version):
+- New agent capabilities maintaining backward compatibility
+- Enhanced knowledge graph features
+- Additional statistical analysis capabilities
+- Extended multi-model support
+
+**🟢 Improvements** (Patch Version):
+- Performance optimizations
+- Bug fixes maintaining existing behavior
+- Documentation enhancements
+- Prompt refinements within existing patterns
+
+### **Compatibility Commitments**
+
+**Specification Stability**: Framework, Experiment, and Corpus specifications maintain backward compatibility within major versions. Researchers' existing work remains functional across minor and patch updates.
+
+**Academic Provenance**: Audit trails and provenance chains remain accessible across all version updates. Research conducted on previous versions maintains peer review validity.
+
+**Multi-Model Support**: LLM provider changes do not constitute breaking changes if they maintain cross-model compatibility through the gateway architecture.
+
+### **Version Communication**
+
+**Release Documentation**: Each version includes academic impact analysis, performance benchmarks, and migration guidance for breaking changes.
+
+**Community Process**: Major version changes require RFC (Request for Comments) process with academic community input and peer review validation.
+
+**Deprecation Policy**: Breaking changes require 6-month deprecation notice with clear migration paths and compatibility bridges where feasible.
+
+---
+
+*Last updated: 2025-08-09*
+*Document Version: 2.1 - Enhanced RAG Architecture*
