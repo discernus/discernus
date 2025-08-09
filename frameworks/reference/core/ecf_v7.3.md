@@ -213,7 +213,7 @@ Assessment of likely emotional responses and psychological states generated
       "climate_intensity": "(fear + hope + enmity + amity + envy + compersion) / 6",
       "positive_emotional_index": "(hope + amity + compersion) / 3",
       "negative_emotional_index": "(fear + enmity + envy) / 3",
-      "salience_weighted_emotional_polarity": "((hope * hope_salience + amity * amity_salience + compersion * compersion_salience) - (fear * fear_salience + enmity * enmity_salience + envy * envy_salience)) / ((hope_salience + amity_salience + compersion_salience + fear_salience + enmity_salience + envy_salience) / 6)"
+      "salience_weighted_emotional_polarity": "((hope * hope_salience + amity * amity_salience + compersion * compersion_salience) - (fear * fear_salience + enmity * enmity_salience + envy * envy_salience)) / ((hope_salience + amity_salience + compersion_salience + fear_salience + enmity_salience + envy_salience + 1e-9) / 6)"
     },
     "pattern_classifications": {
       "emotional_climate_profile": {
@@ -227,7 +227,7 @@ Assessment of likely emotional responses and psychological states generated
         "fear_based_appeals": {"condition": "fear > 0.7 AND fear_salience > 0.6", "description": "Strategic deployment of anxiety-inducing rhetoric"},
         "unity_building": {"condition": "amity > 0.7 AND amity_salience > 0.6", "description": "Emphasis on collaborative and inclusive emotional states"},
         "divisive_rhetoric": {"condition": "enmity > 0.7 AND enmity_salience > 0.6", "description": "Deliberate creation of adversarial emotional climate"},
-        "emotional_volatility": {"condition": "dimension_variance > 0.3", "description": "Inconsistent emotional messaging across dimensions"}
+        "emotional_volatility": {"condition": "dimension_variance >= 0.22", "description": "Inconsistent emotional messaging across dimensions"}
       }
     }
   },
