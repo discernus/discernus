@@ -28,6 +28,7 @@ class ValidationIssue:
     description: str
     impact: str
     fix: str
+    priority: str = "BLOCKING"  # BLOCKING, QUALITY, SUGGESTION
     affected_files: Optional[List[str]] = None
 
 
@@ -37,6 +38,14 @@ class ValidationResult:
     success: bool
     issues: List[ValidationIssue]
     suggestions: List[str]
+    
+    def has_blocking_issues(self) -> bool:
+        """Check if any issues are blocking."""
+        return any(issue.priority == "BLOCKING" for issue in self.issues)
+    
+    def get_issues_by_priority(self, priority: str) -> List[ValidationIssue]:
+        """Get issues filtered by priority level."""
+        return [issue for issue in self.issues if issue.priority == priority]
 
 
 class ExperimentCoherenceAgent:
@@ -287,6 +296,7 @@ class ExperimentCoherenceAgent:
                     description=issue_data.get('description', 'Unknown issue'),
                     impact=issue_data.get('impact', 'Unknown impact'),
                     fix=issue_data.get('fix', 'No fix provided'),
+                    priority=issue_data.get('priority', 'BLOCKING'),
                     affected_files=issue_data.get('affected_files', [])
                 ))
             
