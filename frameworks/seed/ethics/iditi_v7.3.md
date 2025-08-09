@@ -80,8 +80,8 @@ The analysis agent outputs a raw analysis log containing:
   "calculation_spec": {
     "identity_axis_score": "(dignity_score - tribalism_score + 1) / 2",
     "dignity_tribalism_index": "(dignity_score + tribalism_score) / 2",
-    "salience_weighted_identity_axis_score": "((dignity_score * dignity_salience) - (tribalism_score * tribalism_salience) + (dignity_salience + tribalism_salience) / 2) / (dignity_salience + tribalism_salience)",
-    "salience_weighted_dignity_tribalism_index": "(dignity_score * dignity_salience + tribalism_score * tribalism_salience) / (dignity_salience + tribalism_salience)"
+    "salience_weighted_identity_axis_score": "((dignity_score * dignity_salience) - (tribalism_score * tribalism_salience) + (dignity_salience + tribalism_salience + 1e-9) / 2) / (dignity_salience + tribalism_salience + 1e-9)",
+    "salience_weighted_dignity_tribalism_index": "(dignity_score * dignity_salience + tribalism_score * tribalism_salience) / (dignity_salience + tribalism_salience + 1e-9)"
   },
   "reliability_rubric": {
     "cronbachs_alpha": {

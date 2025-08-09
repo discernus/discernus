@@ -99,8 +99,8 @@ The analysis agent outputs a raw analysis log containing:
     "formulas": {
       "message_completeness_score": "(problem_definition_score + causal_attribution_score + moral_evaluation_score + treatment_recommendation_score) / 4",
     "framing_coherence_index": "sqrt(problem_definition_score * causal_attribution_score * moral_evaluation_score * treatment_recommendation_score)",
-    "salience_weighted_message_completeness_score": "(problem_definition_score * problem_definition_salience + causal_attribution_score * causal_attribution_salience + moral_evaluation_score * moral_evaluation_salience + treatment_recommendation_score * treatment_recommendation_salience) / (problem_definition_salience + causal_attribution_salience + moral_evaluation_salience + treatment_recommendation_salience)",
-      "salience_weighted_framing_coherence_index": "pow((problem_definition_score * problem_definition_salience) * (causal_attribution_score * causal_attribution_salience) * (moral_evaluation_score * moral_evaluation_salience) * (treatment_recommendation_score * treatment_recommendation_salience), 1/4) / pow(problem_definition_salience * causal_attribution_salience * moral_evaluation_salience * treatment_recommendation_salience, 1/4)"
+    "salience_weighted_message_completeness_score": "(problem_definition_score * problem_definition_salience + causal_attribution_score * causal_attribution_salience + moral_evaluation_score * moral_evaluation_salience + treatment_recommendation_score * treatment_recommendation_salience) / (problem_definition_salience + causal_attribution_salience + moral_evaluation_salience + treatment_recommendation_salience + 1e-9)",
+      "salience_weighted_framing_coherence_index": "pow((problem_definition_score * problem_definition_salience) * (causal_attribution_score * causal_attribution_salience) * (moral_evaluation_score * moral_evaluation_salience) * (treatment_recommendation_score * treatment_recommendation_salience), 1/4) / pow(problem_definition_salience * causal_attribution_salience * moral_evaluation_salience * treatment_recommendation_salience + 1e-9, 1/4)"
     }
   },
   "reliability_rubric": {

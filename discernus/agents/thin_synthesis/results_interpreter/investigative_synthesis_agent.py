@@ -270,22 +270,22 @@ class InvestigativeSynthesisAgent:
         """Find statistical results relevant to the hypothesis."""
         
         hypothesis_key = hypothesis.get('key', '').lower()
+        hypothesis_text = hypothesis.get('hypothesis', '').lower()
         relevant_stats = {}
         
-        # Extract relevant statistical findings based on hypothesis type
+        # Extract ALL statistical findings - let the LLM decide relevance
+        # Previous pattern matching was too restrictive and hypothesis-specific
         for result_key, result_data in statistical_results.items():
             if not isinstance(result_data, dict):
                 continue
                 
-            if 'speaker_differentiation' in hypothesis_key:
-                if 'descriptive_stats' in result_key or 'variance' in result_key.lower():
-                    relevant_stats[result_key] = result_data
-            elif 'character_signatures' in hypothesis_key:
-                if 'correlation' in result_key.lower() or 'derived_metrics' in result_key:
-                    relevant_stats[result_key] = result_data
-            elif 'coherence' in hypothesis_key:
-                if 'civic_character_index' in str(result_data) or 'coherence' in result_key.lower():
-                    relevant_stats[result_key] = result_data
+            # Skip metadata only
+            if result_key == 'processing_metadata':
+                continue
+                
+            # Include all statistical results - descriptive stats, correlations, derived metrics, etc.
+            # The investigative LLM can determine what's relevant for each hypothesis
+            relevant_stats[result_key] = result_data
         
         return relevant_stats
     
