@@ -281,10 +281,10 @@ class ProductionThinSynthesisPipeline:
         # Log provenance context for debugging
         if request.framework_hash and request.corpus_hash:
             self.logger.info(f"🔍 Synthesis provenance validated:")
-            self.logger.info(f"   - Framework: {request.framework_name} ({request.framework_hash[:12]}...)")
-            self.logger.info(f"   - Corpus: {request.corpus_hash[:12]}...")
-            self.logger.info(f"   - Scores artifact: {request.scores_artifact_hash[:12]}...")
-            self.logger.info(f"   - Evidence artifact: {request.evidence_artifact_hash[:12]}...")
+            self.logger.info(f"   - Framework: {request.framework_name} ({request.framework_hash[:12] if request.framework_hash else '...'}...)")
+            self.logger.info(f"   - Corpus: {request.corpus_hash[:12] if request.corpus_hash else '...'}...")
+            self.logger.info(f"   - Scores artifact: {request.scores_artifact_hash[:12] if request.scores_artifact_hash else '...'}...")
+            self.logger.info(f"   - Evidence artifact: {request.evidence_artifact_hash[:12] if request.evidence_artifact_hash else '...'}...")
         else:
             self.logger.warning("⚠️  Missing provenance context - synthesis agents operating blind!")
         
