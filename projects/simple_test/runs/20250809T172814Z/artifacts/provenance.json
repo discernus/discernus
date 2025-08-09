@@ -1,0 +1,59 @@
+{
+  "run_metadata": {
+    "experiment_name": "democratic_discourse_cohesion_study",
+    "run_timestamp": "20250809T172814Z",
+    "framework_version": "../../frameworks/reference/flagship/cff_v7.3.md",
+    "model_used": "vertex_ai/gemini-2.5-flash",
+    "total_artifacts": 6,
+    "organized_artifacts": 2
+  },
+  "directory_structure": {
+    "data/": "CSV files for external statistical analysis",
+    "artifacts/analysis_plans/": "What the LLM planned to analyze",
+    "artifacts/analysis_results/": "Raw analysis outputs from LLM",
+    "artifacts/statistical_results/": "Mathematical computations and metrics",
+    "artifacts/evidence/": "Curated quotes and supporting data",
+    "artifacts/reports/": "Final synthesis outputs and reports",
+    "artifacts/inputs/": "Framework, corpus, and experiment configuration",
+    "technical/": "System logs and model interaction records"
+  },
+  "pipeline_stages": {
+    "inputs_and_system": {
+      "artifacts": 4,
+      "total_size_mb": 0.0545196533203125
+    },
+    "synthesis": {
+      "artifacts": 2,
+      "total_size_mb": 0.014303207397460938
+    }
+  },
+  "artifact_descriptions": {
+    "synthesis_report_2025-08-09_a40570a0.md": "Synthesis report combining multiple analyses",
+    "final_report_2025-08-09_d6b18d9f.md": "Final research report with findings and implications"
+  },
+  "navigation_guide": {
+    "primary_researcher": [
+      "FINAL_REPORT.md",
+      "data/scores.csv",
+      "data/evidence.csv"
+    ],
+    "internal_reviewer": [
+      "METHODOLOGY_SUMMARY.md",
+      "STATISTICAL_SUMMARY.md"
+    ],
+    "replication_researcher": [
+      "artifacts/",
+      "technical/manifest.json",
+      "README.md"
+    ],
+    "fraud_auditor": [
+      "technical/manifest.json",
+      "technical/logs/",
+      "provenance.json"
+    ],
+    "llm_skeptic": [
+      "technical/model_interactions/",
+      "data/reliability_metrics.csv"
+    ]
+  }
+}
