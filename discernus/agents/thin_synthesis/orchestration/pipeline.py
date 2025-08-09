@@ -271,8 +271,8 @@ class ProductionThinSynthesisPipeline:
                 "evidence_artifact": request.evidence_artifact_hash,
                 "experiment_context": request.experiment_context,
                 # Add provenance context logging (Issue #208 fix)
-                "framework_hash": request.framework_hash[:12] + "..." if request.framework_hash else "MISSING",
-                "corpus_hash": request.corpus_hash[:12] + "..." if request.corpus_hash else "MISSING",
+                "framework_hash": (request.framework_hash[:12] + "..." if request.framework_hash else "MISSING"),
+                "corpus_hash": (request.corpus_hash[:12] + "..." if request.corpus_hash else "MISSING"),
                 "framework_name": request.framework_name,
                 "provenance_validated": bool(request.framework_hash and request.corpus_hash)
             }
