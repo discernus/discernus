@@ -40,44 +40,28 @@ Metadata     txtai Index        Retrieval         Reports
 
 ---
 
-## About Discernus
+## Research Context & Value Proposition
 
-**Discernus** is a computational research platform that amplifies researcher expertise through systematic, reproducible analysis of text corpora. Rather than replacing human judgment, Discernus enables researchers to apply their analytical frameworks at scale while maintaining transparency and academic integrity.
+**Research Problem**: Traditional text analysis approaches face scalability constraints - manual coding limits corpus size, individual analysis introduces inconsistency, and subjective aggregation reduces replicability.
 
-### What Discernus Does
+**Discernus Solution**: Computational amplification of researcher expertise through systematic, reproducible analysis at institutional scale while preserving scholarly control and academic integrity.
 
-Discernus transforms research capacity without compromising scholarly control:
+**Transformation Model**:
+- **Input**: Researcher-designed analytical framework + text corpus
+- **Process**: Automated consistent application with LLM-powered synthesis and computational verification  
+- **Output**: Transparent, statistically validated results with complete audit trails
 
-**Traditional Approach**: 
-- Researcher manually codes documents → Individual analysis → Manual synthesis → Subjective aggregation
-- Limited scale, inconsistent application, difficult replication
-
-**Discernus Approach**: 
-- Researcher designs framework once → Automated consistent application across corpus → LLM-powered synthesis with computational verification → Transparent, statistically validated results
-- Institutional scale, improved consistency, enhanced auditability
-
-### Foundational Philosophy
-
-**Human Amplification, Not Replacement**: Researchers retain complete control over analytical approach, interpretation, and synthesis. Discernus provides computational scale and methodological consistency while preserving human expertise and judgment.
-
-**Day-1 Extensibility**: Create unlimited frameworks, experiments, and corpora within specifications. No programming required - analytical approaches expressed in natural language enable immediate research productivity.
-
-**Academic Integrity by Design**: Calculations verified through code execution, decisions logged for audit, provenance maintained for peer review. Statistical results computed rather than hallucinated.
-
-**LLM Consistency Approach**: LLMs can provide more consistent evaluation than human panels in many contexts, representing averaged human perception patterns while reducing fatigue and bias effects.
-
-### Core Capabilities
-- **Flexible Analytical Frameworks**: Approaches expressible in natural language (political analysis, discourse analysis, content analysis, literary criticism, etc.)
-- **Scalable Text Processing**: Handles document collections from dozens to thousands with hash-based anonymization for sensitive materials
-- **Computational Verification**: Statistics computed and verified through code execution
-- **Process Transparency**: Audit trails, variance reporting, confidence intervals, methodological constraints
-- **Git-based Collaboration**: Framework and experiment sharing enables academic community building
+**Academic Integration**: Maintains researcher control over methodology, interpretation, and synthesis while providing computational scale and enhanced auditability for peer review and replication.
 
 ---
 
 # Part I: Universal Principles (Immutable)
 
-These foundational principles are the "constitutional" bedrock of Discernus - they remain constant regardless of implementation maturity or technology evolution:
+These foundational principles are the "constitutional" bedrock of Discernus - they remain constant regardless of implementation maturity or technology evolution.
+
+## THIN Architecture Foundation
+
+Core design philosophy that everything else builds on:
 
 **1. Day-1 Extensibility Through Specifications**
 - Researchers can create unlimited frameworks, experiments, and corpora within specifications
@@ -127,117 +111,9 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Provenance systems detect content tampering and ensure analysis integrity
 - Academic integrity through transparent, auditable computational processes
 
-**7. LLM Consistency Superiority Over Human Evaluation Panels**
-- **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
-- LLMs represent global-scale averaging of human perception patterns across training data
-- Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
-- LLM evaluation provides speed and precision impossible with human panels at institutional scale
-- Consistency enables reliable cross-document, cross-time, and cross-researcher comparisons
-- Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
-- This assumption justifies computational methodology over traditional human coding approaches
-
-**8. Variance-Aware Adaptive Processing with Transparency**
-- Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
-- Use statistical methods to measure variance and determine optimal sample sizes
-- Adaptive sampling stops when confidence intervals meet requirements
-- Balance statistical confidence with budget through empirical stopping rules
-- Always report uncertainty, confidence intervals, and methodological constraints
-- Employ multi-run statistical validation for reliability assessment
-
-**9. Reliability Over Flexibility**
-- Single, predictable pipeline over infinite customization options
-- Boring, bulletproof behavior over theoretical capability
-- "It works every time" trumps "it can do anything"
-- **Direct function calls over distributed coordination** - proven through prototype experience
-
-**10. Resource-Conscious Cost Management**
-- Empirical cost-performance optimization through model selection and batching
-- Variance-driven adaptive sampling reduces unnecessary LLM calls
-- Caching eliminates redundant computation on re-runs
-- Transparent cost reporting enables institutional budget planning
-
-**11. Specialized Agent Processing Over Monolithic Analysis**
-- Task-specific agents outperform single-LLM approaches (empirically validated)
-- Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance
-- Natural language communication between stages (no complex JSON parsing)
-- Agent specialization: focused analysis agents with clear input/output contracts
-- Cross-domain knowledge integration through comprehensive RAG architecture
-
-**12. Empirical Model Selection Based on Performance Requirements**
-- Context window requirements determined by analysis complexity
-- Rate limiting needs based on institutional processing scale
-- Accuracy demands: Consistent performance across full context window
-- Empirical validation: Models chosen through actual complexity testing
-- Cost-performance optimization through systematic evaluation
-- Provider reliability considerations for predictable academic pricing
-
-**13. Security and Privacy by Design**
-- Corpus anonymization and hash-based identity protection as standard practice
-- Process isolation and sandboxing for secure agent execution (implemented upfront)
-- Comprehensive audit logging for academic integrity and compliance (implemented upfront)
-- API key management and rate limiting to prevent abuse
-- Git-based provenance provides tamper-evident audit trails
-- **Academic Data Sensitivity**: Text corpora often contain sensitive political, corporate, or personal content requiring proper security controls from day one
-
-**13a. Orchestrator Trust Boundary Model**
-- **Trust Layering**: Security architecture distinguishes between trusted infrastructure (orchestrators) and untrusted workloads (agents)
-- **Orchestrator Privileges**: Can resolve canonical framework references (`../../frameworks/`) as trusted infrastructure operations
-- **Agent Restrictions**: All agent file access constrained to experiment directory via `ExperimentSecurityBoundary`
-- **Pre-Injection Security**: Orchestrators pre-resolve external dependencies before agent execution, eliminating agent access to system files
-- **Canonical Framework Support**: Enables single-source-of-truth frameworks while maintaining strict agent isolation
-- **Audit Compliance**: All framework access (canonical and local) logged with security context for complete provenance
-
-**14. Graceful Degradation and Error Recovery**
-- Fail-fast validation prevents expensive downstream failures
-- Partial artifact preservation on timeout or interruption
-- Clear error messages with actionable remediation steps
-- System continues processing remaining batches when individual items fail
-
-**15. Intelligence in Prompts, Not Software**
-- LLMs handle reasoning, interpretation, and domain knowledge
-- Software provides coordination, storage, and deterministic operations only
-- Components limited to <150 lines to prevent intelligence creep
-
-**16. Externalized Intelligence, Internalized Coordination**
-- Agent prompts live in external YAML files (intelligence belongs outside code)
-- Agent discovery via file-based scanning (THIN principle: simple filesystem patterns over hardcoded logic)
-- Researchers modify prompts, not coordination logic
-- Balances THIN principles with Radical Simplification reliability
-
-**17. Empirical Technology Choices**
-- Decisions based on actual testing, not theoretical optimization
-- Model selection validated through complexity testing
-- Cost optimization secondary to reliability validation
-
-**18. Linear Progression with Caching**
-- Enhanced 4-stage pipeline with deterministic progression: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
-- Cache hits eliminate redundant computation on identical inputs and knowledge graphs
-- Predictable resource usage and timing with comprehensive RAG integration
-
-**19. Artifact-Oriented State Management**
-- All data flows through immutable, hashed artifacts in content-addressable storage
-- No mutable state in agents or orchestrator
-- Reproducibility through artifact chains
-
-**20. Fail-Fast Input Validation**
-- Strict contracts enforced at system boundaries
-- Clear error messages over expensive debugging cycles
-- "Garbage in, clear error out"
-
-**21. Decentralized Architecture Policy - Independence Over Infrastructure**
-- **No Required Centralized Infrastructure**: Researchers work independently on their own machines without requiring shared servers or databases
-- **Academic Transparency**: All research data stored as flat files (CSV/JSON) that are transparent to auditors and replication researchers
-- **Distributed Collaboration**: Git-based collaboration without centralized infrastructure dependencies
-- **Project Isolation**: Individual experiments remain self-contained and portable
-- **Replication Ready**: Complete research packages as Git repositories with flat file data
-- **Tool Agnostic**: CSV/JSON outputs work with any analysis tool (Excel, R, Python, etc.)
-- **Optional Local Databases**: Embedded databases (SQLite, vector stores) permitted for performance optimization if they don't require centralized infrastructure
-- **Hash Cross Referenced CSV**: When relational data is needed, use CSV files with shared artifact keys
-- GitHub serves as the collaboration layer - no proprietary formats or database dumps
-
 ---
 
-# Part II: Current Implementation 
+# Current System Implementation 
 
 This section describes the implemented architecture and operational capabilities.
 
@@ -298,6 +174,177 @@ graph TD
 **🔍 Analysis Stage**: Enhanced analysis agents with framework-specific prompts and dimensional scoring, producing raw scores and evidence with computational verification
 
 **📊 Knowledge Indexing Stage**: Comprehensive knowledge graph construction from all 6 experiment data types with persistent hash-based caching for enterprise scalability
+
+**🧠 Intelligent Synthesis Stage**: Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval
+
+**📋 Reporting Stage**: Statistical analysis and academic-quality output with full cross-domain provenance, computational verification, and peer review readiness
+
+### **Data Flow Architecture**
+
+**Input Data Types** (6 comprehensive categories):
+1. **Corpus Documents**: Full text with speaker attribution and context
+2. **Framework Specification**: Analytical methodology and dimension definitions  
+3. **Raw Scores**: Individual dimension scores with calculation provenance
+4. **Statistical Results**: Verified mathematical findings and computations
+5. **Evidence Quotes**: Supporting textual evidence with confidence scores
+6. **Experiment Metadata**: Research context, hypotheses, and configuration
+
+**Content-Addressable Caching**: SHA256-based storage eliminates redundant computation on identical inputs
+
+**Comprehensive Knowledge RAG**: 
+- Unified indexing of corpus documents, framework specifications, raw scores, statistical results, evidence quotes, and experiment metadata
+- Cross-domain semantic search enabling queries across all data types
+- Hash-based persistent caching for enterprise scalability (<2s query performance)
+- LLM-powered intelligent retrieval with adaptive query generation and refinement
+- Evidence grounding through deterministic semantic search with complete provenance preservation
+
+---
+
+## Academic Quality & Validation
+
+Research quality and reliability standards:
+
+**7. LLM Consistency Superiority Over Human Evaluation Panels**
+- **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
+- LLMs represent global-scale averaging of human perception patterns across training data
+- Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
+- LLM evaluation provides speed and precision impossible with human panels at institutional scale
+- Consistency enables reliable cross-document, cross-time, and cross-researcher comparisons
+- Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
+- This assumption justifies computational methodology over traditional human coding approaches
+
+**8. Variance-Aware Adaptive Processing with Transparency**
+- Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
+- Use statistical methods to measure variance and determine optimal sample sizes
+- Adaptive sampling stops when confidence intervals meet requirements
+- Balance statistical confidence with budget through empirical stopping rules
+- Always report uncertainty, confidence intervals, and methodological constraints
+- Employ multi-run statistical validation for reliability assessment
+
+**9. Reliability Over Flexibility**
+- Single, predictable pipeline over infinite customization options
+- Boring, bulletproof behavior over theoretical capability
+- "It works every time" trumps "it can do anything"
+- **Direct function calls over distributed coordination** - proven through prototype experience
+
+**10. Resource-Conscious Cost Management**
+- Empirical cost-performance optimization through model selection and batching
+- Variance-driven adaptive sampling reduces unnecessary LLM calls
+- Caching eliminates redundant computation on re-runs
+- Transparent cost reporting enables institutional budget planning
+
+**11. Specialized Agent Processing Over Monolithic Analysis**
+- Task-specific agents outperform single-LLM approaches (empirically validated)
+- Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance
+- Natural language communication between stages (no complex JSON parsing)
+- Agent specialization: focused analysis agents with clear input/output contracts
+- Cross-domain knowledge integration through comprehensive RAG architecture
+
+**12. Empirical Model Selection Based on Performance Requirements**
+- Context window requirements determined by analysis complexity
+- Rate limiting needs based on institutional processing scale
+- Accuracy demands: Consistent performance across full context window
+- Empirical validation: Models chosen through actual complexity testing
+- Cost-performance optimization through systematic evaluation
+- Provider reliability considerations for predictable academic pricing
+
+## Technical Infrastructure
+
+Core technical implementation patterns:
+
+**13. Security and Privacy by Design**
+- Corpus anonymization and hash-based identity protection as standard practice
+- Process isolation and sandboxing for secure agent execution (implemented upfront)
+- Comprehensive audit logging for academic integrity and compliance (implemented upfront)
+- API key management and rate limiting to prevent abuse
+- Git-based provenance provides tamper-evident audit trails
+- **Academic Data Sensitivity**: Text corpora often contain sensitive political, corporate, or personal content requiring proper security controls from day one
+
+**13a. Orchestrator Trust Boundary Model**
+- **Trust Layering**: Security architecture distinguishes between trusted infrastructure (orchestrators) and untrusted workloads (agents)
+- **Orchestrator Privileges**: Can resolve canonical framework references (`../../frameworks/`) as trusted infrastructure operations
+- **Agent Restrictions**: All agent file access constrained to experiment directory via `ExperimentSecurityBoundary`
+- **Pre-Injection Security**: Orchestrators pre-resolve external dependencies before agent execution, eliminating agent access to system files
+- **Canonical Framework Support**: Enables single-source-of-truth frameworks while maintaining strict agent isolation
+- **Audit Compliance**: All framework access (canonical and local) logged with security context for complete provenance
+
+**14. Graceful Degradation and Error Recovery**
+- Fail-fast validation prevents expensive downstream failures
+- Partial artifact preservation on timeout or interruption
+- Clear error messages with actionable remediation steps
+- System continues processing remaining batches when individual items fail
+
+**15. Intelligence in Prompts, Not Software**
+- LLMs handle reasoning, interpretation, and domain knowledge
+- Software provides coordination, storage, and deterministic operations only
+- Components limited to <150 lines to prevent intelligence creep
+
+**16. Externalized Intelligence, Internalized Coordination**
+- Agent prompts live in external YAML files (intelligence belongs outside code)
+- Agent discovery via file-based scanning (THIN principle: simple filesystem patterns over hardcoded logic)
+- Researchers modify prompts, not coordination logic
+- Balances THIN principles with Radical Simplification reliability
+
+**17. Empirical Technology Choices**
+- Decisions based on actual testing, not theoretical optimization
+- Model selection validated through complexity testing
+- Cost optimization secondary to reliability validation
+
+**18. Linear Progression with Caching**
+- Enhanced 4-stage pipeline with deterministic progression: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
+- Cache hits eliminate redundant computation on identical inputs and knowledge graphs
+- Predictable resource usage and timing with comprehensive RAG integration
+
+## AI Systems Integration
+
+LLM integration and knowledge management:
+
+**19. Artifact-Oriented State Management**
+- All data flows through immutable, hashed artifacts in content-addressable storage
+- No mutable state in agents or orchestrator
+- Reproducibility through artifact chains
+
+**20. Fail-Fast Input Validation**
+- Strict contracts enforced at system boundaries
+- Clear error messages over expensive debugging cycles
+- "Garbage in, clear error out"
+
+**21. Decentralized Architecture Policy - Independence Over Infrastructure**
+- **No Required Centralized Infrastructure**: Researchers work independently on their own machines without requiring shared servers or databases
+- **Academic Transparency**: All research data stored as flat files (CSV/JSON) that are transparent to auditors and replication researchers
+- **Distributed Collaboration**: Git-based collaboration without centralized infrastructure dependencies
+- **Project Isolation**: Individual experiments remain self-contained and portable
+- **Replication Ready**: Complete research packages as Git repositories with flat file data
+- **Tool Agnostic**: CSV/JSON outputs work with any analysis tool (Excel, R, Python, etc.)
+- **Optional Local Databases**: Embedded databases (SQLite, vector stores) permitted for performance optimization if they don't require centralized infrastructure
+- **Hash Cross Referenced CSV**: When relational data is needed, use CSV files with shared artifact keys
+- GitHub serves as the collaboration layer - no proprietary formats or database dumps
+
+---
+
+# Evolution Roadmap (Future Vision)
+
+This section outlines planned enhancements organized by development timeline. Features here are aspirational and may require architectural changes.
+
+## Near-Term: Foundational Reliability (Next 6 Months)
+
+**Enhanced Prompt Management**:
+- Complete externalization of all agent prompts to YAML files
+- Version-controlled prompt templates and systematic testing
+- Framework-agnostic prompt libraries
+
+**Cross-Domain Query Optimization**:
+- Advanced semantic search patterns for complex research questions spanning multiple data types
+- Intelligent evidence gap detection for statistical findings lacking sufficient textual support
+- Multi-perspective reasoning with structured validation and contradiction detection workflows
+
+**Enhanced Transparency Infrastructure**:
+- Structured reasoning trace capture and visualization
+- Interactive transparency browsers for process exploration
+- Framework interpretation workflow documentation
+- Decision audit trails with searchable metadata
+
+**Researcher-Centric Information Architecture**:
 
 **🧠 Intelligent Synthesis Stage**: Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval
 
@@ -525,6 +572,10 @@ This section outlines planned enhancements organized by development timeline. Fe
 - **Immutable Research Data**: All indexed content represents immutable research artifacts generated during analysis, with txtai providing fast, consistent retrieval without introducing database dependencies
 - **Enterprise Scalability**: Hash-based persistent caching enables <2 second query performance at 500+ document scale while maintaining research-grade consistency and reproducibility
 - **Provenance Preservation**: Every query result includes complete metadata linking back to original analysis artifacts, ensuring perfect traceability across all data types
+
+## Advanced Capabilities
+
+Cutting-edge synthesis and RAG capabilities:
 
 **25. Comprehensive Knowledge Architecture for Cross-Domain Reasoning**
 - **Unified Data Indexing**: All experiment data types indexed in unified knowledge graph for cross-domain reasoning and intelligent synthesis (extends Principles #22, #24)
