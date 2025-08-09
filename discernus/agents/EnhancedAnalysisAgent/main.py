@@ -63,8 +63,8 @@ class EnhancedAnalysisAgent:
         self.storage = artifact_storage
         self.agent_name = "EnhancedAnalysisAgent"
         
-        # Load enhanced prompt template
-        self.prompt_template = self._load_enhanced_prompt_template()
+        # Load prompt template
+        self.prompt_template = self._load_prompt_template()
         
         print(f"🧠 {self.agent_name} initialized with mathematical validation")
         
@@ -73,22 +73,11 @@ class EnhancedAnalysisAgent:
             "capabilities": ["mathematical_validation", "self_assessment", "direct_calls"]
         })
     
-    def _load_enhanced_prompt_template(self) -> str:
-        """Load enhanced prompt template with mathematical requirements from YAML file."""
+    def _load_prompt_template(self) -> str:
+        """Load prompt template with dimensional completeness requirements."""
         prompt_path = Path(__file__).parent / "prompt.yaml"
         if not prompt_path.exists():
             raise FileNotFoundError("Could not find prompt.yaml for EnhancedAnalysisAgent")
-        
-        with open(prompt_path, 'r') as f:
-            prompt_config = yaml.safe_load(f)
-        
-        return prompt_config['template']
-    
-    def _load_json_prompt_template(self) -> str:
-        """Load v6.0 JSON prompt template for frameworks with separation of concerns."""
-        prompt_path = Path(__file__).parent / "prompt_v6.yaml"
-        if not prompt_path.exists():
-            raise FileNotFoundError("Could not find prompt_v6.yaml for EnhancedAnalysisAgent")
         
         with open(prompt_path, 'r') as f:
             prompt_config = yaml.safe_load(f)
@@ -353,14 +342,14 @@ class EnhancedAnalysisAgent:
                 })
                 document_hashes.append(doc_hash)
             
-            # THIN approach: Always use JSON prompt template, no framework version detection
+            # THIN approach: Use canonical prompt template with dimensional completeness enforcement
             framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
             
-            # Load JSON prompt template (only v6.0+ supported)
-            json_prompt_template = self._load_json_prompt_template()
+            # Load canonical prompt template
+            prompt_template = self._load_prompt_template()
             
             # Format prompt with framework and documents
-            prompt_text = json_prompt_template.format(
+            prompt_text = prompt_template.format(
                 batch_id=batch_id,
                 frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
                 documents=self._format_documents_for_prompt(documents),
