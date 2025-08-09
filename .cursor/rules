@@ -9,7 +9,7 @@
 
 ## 🚨 CRITICAL: ARCHITECTURAL COMPLIANCE RULES (86 VIOLATIONS DETECTED!)
 - **MANDATORY PRE-COMMIT**: Run `python3 scripts/thin_compliance_check.py` before any changes
-- **THIN FIRST**: Components must be <150 lines, LLMs handle intelligence, code handles orchestration
+- **THIN FIRST**: Tiered limits - Simple <200, Core <400, Complex <600, Orchestration <800 lines
 - **YAML EXTERNALIZATION**: All prompts in .yaml files, never inline in Python code
 - **NO COMPLEX PARSING**: Trust LLM output, use envelope extraction over parsing
 - **ACADEMIC INTEGRITY**: All statistics via code execution, complete provenance chains

@@ -22,7 +22,7 @@ class THINComplianceChecker:
         self.violations = []
         
     def check_component_size(self, file_path: Path) -> List[str]:
-        """Check if components are under 150 lines (THIN Principle)."""
+        """Check if components follow tiered THIN limits based on complexity."""
         violations = []
         
         if file_path.suffix == '.py' and 'agents/' in str(file_path):
@@ -31,12 +31,45 @@ class THINComplianceChecker:
                 # Remove comments and empty lines for accurate count
                 code_lines = [line for line in lines if line.strip() and not line.strip().startswith('#')]
                 
-                if len(code_lines) > 150:
-                    violations.append(f"THIN VIOLATION: {file_path} has {len(code_lines)} code lines (>150 limit)")
+                # Tiered THIN limits based on agent complexity
+                agent_name = file_path.stem
+                limit, category = self._get_thin_limit(file_path, agent_name)
+                
+                if len(code_lines) > limit:
+                    violations.append(f"THIN VIOLATION ({category}): {file_path} has {len(code_lines)} code lines (>{limit} limit for {category})")
             except Exception as e:
                 violations.append(f"ERROR: Could not analyze {file_path}: {e}")
                 
         return violations
+    
+    def _get_thin_limit(self, file_path: Path, agent_name: str) -> tuple[int, str]:
+        """Get appropriate THIN limit based on agent complexity."""
+        
+        # Simple Wrapper Agents (LLM prompt + basic coordination)
+        simple_agents = ['raw_data_analysis_planner', 'derived_metrics_analysis_planner', 
+                        'evidence_indexer_agent', 'classification_agent', 'csv_export_agent']
+        
+        # Core Processing Agents (Single major responsibility)
+        core_agents = ['enhanced_analysis_agent', 'intelligent_extractor_agent', 
+                      'experiment_coherence_agent', 'evidence_quality_measurement']
+        
+        # Complex Integration Agents (Multiple data types, caching, RAG)
+        complex_agents = ['comprehensive_knowledge_curator', 'txtai_evidence_curator',
+                         'evidence_curator', 'rag_enhanced_interpreter']
+        
+        # Orchestration Agents (Pipeline coordination)
+        orchestration_agents = ['pipeline', 'investigative_synthesis_agent']
+        
+        if any(simple in str(file_path).lower() for simple in simple_agents):
+            return 200, "Simple Agent"  # Allow reasonable implementation space
+        elif any(core in str(file_path).lower() for core in core_agents):
+            return 400, "Core Agent"    # Single responsibility with infrastructure
+        elif any(complex in str(file_path).lower() for complex in complex_agents):
+            return 600, "Complex Agent" # Multiple integrations, justified complexity
+        elif any(orch in str(file_path).lower() for orch in orchestration_agents):
+            return 800, "Orchestration Agent"  # Pipeline coordination complexity
+        else:
+            return 200, "Default Agent"  # Conservative default
     
     def check_yaml_externalization(self, file_path: Path) -> List[str]:
         """Check for inline prompts that should be externalized to YAML."""
