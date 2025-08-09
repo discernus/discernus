@@ -227,7 +227,7 @@ class InvestigativeSynthesisAgent:
         
         # Create comprehensive synthesis prompt
         comprehensive_prompt = f"""
-You are conducting a comprehensive computational discourse analysis synthesis.
+You are conducting a computational discourse analysis synthesis.
 
 EXPERIMENT CONTEXT:
 {experiment_context[:1000]}
@@ -244,31 +244,31 @@ COMPLETE STATISTICAL EVIDENCE:
 COMPREHENSIVE EVIDENCE BASE:
 {evidence_text}
 
-TASK: Generate a complete synthesis report with two main sections:
+TASK: Generate a factual synthesis report with two main sections:
 
-## SECTION 1: EVIDENCE-BACKED HYPOTHESIS TESTING
+## SECTION 1: HYPOTHESIS TESTING RESULTS
 For each hypothesis:
 1. State whether it's SUPPORTED, NOT SUPPORTED, or INCONCLUSIVE
 2. Cite specific statistical findings with exact numbers
-3. Integrate supporting textual evidence with speaker attribution
-4. Explain reasoning clearly with cross-hypothesis insights
-5. Acknowledge limitations (sample size, etc.)
+3. Reference relevant textual evidence with speaker attribution
+4. Present reasoning based on available data
+5. Note data limitations (sample size, scope, etc.)
 
-## SECTION 2: COMPUTATIONAL INSIGHTS BEYOND HYPOTHESES
-Discover 2-3 genuinely interesting insights that emerge from:
-1. Cross-hypothesis patterns not obvious from individual tests
-2. Statistical anomalies with clear textual explanations
-3. Unexpected correlations or temporal patterns
-4. Speaker authenticity indicators from salience patterns
+## SECTION 2: ADDITIONAL PATTERNS IN THE DATA
+Report 2-3 notable patterns that emerge from the data:
+1. Cross-hypothesis statistical relationships
+2. Statistical findings with clear textual correlates
+3. Unexpected numerical patterns or distributions
+4. Consistent patterns across multiple data dimensions
 
 Requirements:
-- Use specific statistical numbers and speaker quotes
-- Enable cross-hypothesis reasoning (what patterns emerge across all findings?)
-- Ground every claim in actual evidence
-- Maintain academic rigor while being genuinely insightful
-- Format as clear sections with descriptive headers
+- Report findings factually without interpretative overreach
+- Use specific numbers and direct quotes from the evidence
+- Let readers draw their own broader implications
+- Present data patterns clearly and neutrally
+- Avoid grandiose language or sweeping conclusions
 
-COMPREHENSIVE SYNTHESIS REPORT:
+SYNTHESIS REPORT:
 """
 
         try:
@@ -276,9 +276,9 @@ COMPREHENSIVE SYNTHESIS REPORT:
             
             content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
-                system_prompt="You are a world-class computational discourse analyst performing comprehensive evidence-backed synthesis. Your analysis will be peer-reviewed, so maintain the highest academic standards while discovering genuine insights.",
+                system_prompt="You are a computational researcher reporting analysis results. Present findings factually and let readers draw interpretations. Avoid overstating implications or using grandiose language.",
                 prompt=comprehensive_prompt,
-                temperature=0.15  # Low but not zero - allow some creativity for insights
+                temperature=0.2  # Slightly higher for natural but measured language
             )
             
             if not content:
@@ -287,8 +287,8 @@ COMPREHENSIVE SYNTHESIS REPORT:
             # Parse the structured response
             sections = content.split("## SECTION 2:")
             if len(sections) >= 2:
-                hypothesis_section = "## Evidence-Backed Hypothesis Testing\n" + sections[0].replace("## SECTION 1: EVIDENCE-BACKED HYPOTHESIS TESTING", "").strip()
-                insight_section = "## Beyond the Hypotheses: Computational Insights\n" + sections[1].strip()
+                hypothesis_section = "## Hypothesis Testing Results\n" + sections[0].replace("## SECTION 1: HYPOTHESIS TESTING RESULTS", "").strip()
+                insight_section = "## Additional Patterns in the Data\n" + sections[1].strip()
             else:
                 # Fallback if parsing fails
                 hypothesis_section = content[:len(content)//2]
