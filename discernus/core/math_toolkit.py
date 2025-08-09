@@ -16,6 +16,9 @@ from scipy import stats
 from scipy.stats import pearsonr, spearmanr
 import warnings
 
+# New: LLM-optimized statistical formatter
+from discernus.core.statistical_formatter import StatisticalResultsFormatter
+
 # Suppress warnings for cleaner output
 warnings.filterwarnings('ignore')
 
@@ -1250,14 +1253,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
     
     Updated for v7.0: Removes defensive parsing code and optimizes for clean JSON from Intelligent Extractor.
     
-    Args:
-        raw_analysis_data: Clean JSON string from Intelligent Extractor gasket
-        analysis_plan_input: Either Dict (legacy) or str (THIN raw LLM response)
-        corpus_manifest: Optional corpus metadata for DataFrame enrichment
-        framework_calculation_spec: Framework's calculation_spec for THIN formula usage
-        
-    Returns:
-        Dictionary containing all analysis results
+    Returns both raw results and LLM-optimized formatted tables under 'formatted_statistics'.
     """
     try:
         import json
@@ -1277,7 +1273,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
                 logger.info(f"THIN MathToolkit: Parsed raw LLM analysis plan ({len(analysis_plan_input)} chars)")
             except json.JSONDecodeError as e:
                 logger.error(f"THIN MathToolkit: Failed to parse LLM analysis plan: {e}")
-                return {"analysis_plan": {}, "results": {}, "errors": [f"Failed to parse LLM analysis plan: {str(e)}"]}
+                return {"analysis_plan": {}, "results": {}, "errors": [f"Failed to parse LLM analysis plan: {str(e)}"], "formatted_statistics": None}
         else:
             # Legacy: Already parsed dictionary
             analysis_plan = analysis_plan_input
@@ -1289,7 +1285,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         except json.JSONDecodeError as e:
             # Fallback: Try legacy delimiter extraction for backward compatibility
             logger.warning(f"Clean JSON parsing failed, trying legacy delimiter extraction: {e}")
-            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*(\{.*?\})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
             json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
             if json_match:
                 json_str = json_match.group(1).strip()
@@ -1303,7 +1299,19 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         logger.info(f"V7.0 Gasket MathToolkit: Processed DataFrame {scores_df.shape}")
         
         # Use existing execute_analysis_plan with parsed DataFrame
-        return execute_analysis_plan(scores_df, analysis_plan, framework_calculation_spec)
+        raw_output = execute_analysis_plan(scores_df, analysis_plan, framework_calculation_spec)
+        
+        # New: produce LLM-optimized statistical tables
+        formatter = StatisticalResultsFormatter()
+        formatted = formatter.format_for_synthesis(raw_output)
+        
+        # Return both raw and formatted for backward compatibility
+        return {
+            "analysis_plan": raw_output.get("analysis_plan", analysis_plan),
+            "results": raw_output.get("results", {}),
+            "errors": raw_output.get("errors", []),
+            "formatted_statistics": formatted
+        }
         
     except Exception as e:
         logger.error(f"V7.0 Gasket analysis plan execution failed: {str(e)}")

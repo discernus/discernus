@@ -44,20 +44,15 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 @dataclass
 class KnowledgeQuery:
     """
-    Structured query for comprehensive knowledge graph.
+    Structured query for the RAG lookup index (v2.0 Architecture).
     
-    Supports cross-domain queries like:
-    - "What evidence supports F-statistic 29.0?"
-    - "How does McCain demonstrate civic virtue in the framework?"
-    - "What statistical patterns emerge in dignity scores?"
+    Supports targeted retrieval of evidence and corpus content with content-type filtering.
     """
     semantic_query: str
-    data_types: Optional[List[str]] = None  # Filter by: corpus, framework, scores, stats, evidence, metadata
-    document_filter: Optional[str] = None
-    statistical_filter: Optional[str] = None
-    framework_dimension: Optional[str] = None
+    content_types: Optional[List[str]] = None  # Filter by: corpus_text, evidence_quotes, raw_scores, calculated_metrics
     limit: int = 10
-    cross_domain: bool = True  # Enable cross-domain reasoning
+    speaker_filter: Optional[str] = None
+    document_filter: Optional[str] = None
 
 
 @dataclass
@@ -138,14 +133,10 @@ class ComprehensiveKnowledgeCurator:
         self.index_built = False
         self.index_hash = None  # For persistent caching
         
-        # Data type processors for comprehensive indexing
+        # Data type processors for RAG lookup index (v2.0 Architecture)
         self.data_processors = {
             'corpus': self._process_corpus_data,
-            'framework': self._process_framework_data,
-            'scores': self._process_scores_data,
-            'statistics': self._process_statistics_data,
             'evidence': self._process_evidence_data,
-            'metadata': self._process_metadata_data
         }
     
     def build_comprehensive_index(self, request: ComprehensiveIndexRequest) -> ComprehensiveIndexResponse:
@@ -261,34 +252,30 @@ class ComprehensiveKnowledgeCurator:
             return []
         
         try:
-            # Perform semantic search using txtai
-            search_results = self.embeddings.search(query.semantic_query, query.limit * 2)  # Get extra for filtering
+            # Build WHERE clause for efficient, pre-query filtering
+            where_clauses = []
+            if query.content_types:
+                # Correctly format for SQL 'IN' clause
+                types_str = ", ".join(f"'{t}'" for t in query.content_types)
+                where_clauses.append(f"content_type IN ({types_str})")
+            if query.speaker_filter:
+                where_clauses.append(f"speaker = '{query.speaker_filter}'")
+            if query.document_filter:
+                where_clauses.append(f"document_id = '{query.document_filter}'")
             
-            # Convert to KnowledgeResult objects with cross-domain context
+            where_sql = " AND ".join(where_clauses) if where_clauses else "1=1"
+
+            # Perform semantic search using txtai with WHERE clause
+            search_results = self.embeddings.search(f"select id, text, score, content_type, source_artifact, speaker, document_id from txtai where {where_sql} similar to '{query.semantic_query}' limit {query.limit}")
+
+            # Convert to KnowledgeResult objects with full provenance
             knowledge_results = []
             for result in search_results:
-                # Handle different txtai result formats
-                if isinstance(result, dict):
-                    doc_id = result.get('id', result.get('doc_id', 0))
-                    score = result.get('score', result.get('similarity', 0.0))
-                elif isinstance(result, tuple) and len(result) >= 2:
-                    # Handle tuple format: (doc_id, score) or (doc_id, score, metadata)
-                    doc_id = result[0]
-                    score = result[1] if len(result) > 1 else 0.0
-                else:
-                    # Fallback for unexpected formats
-                    self.logger.warning(f"Unexpected search result format: {type(result)}")
-                    continue
-                
+                doc_id = result.get('id')
+                score = result.get('score', 0.0)
+
                 if doc_id in self.knowledge_index:
                     knowledge_item = self.knowledge_index[doc_id]
-                    
-                    # Apply data type filtering if specified
-                    if query.data_types and knowledge_item['data_type'] not in query.data_types:
-                        continue
-                    
-                    # Find cross-references for cross-domain reasoning
-                    cross_refs = self._find_cross_references(knowledge_item, query)
                     
                     result_obj = KnowledgeResult(
                         content=knowledge_item['content'],
@@ -296,14 +283,11 @@ class ComprehensiveKnowledgeCurator:
                         source_artifact=knowledge_item['source_artifact'],
                         relevance_score=score,
                         metadata=knowledge_item['metadata'],
-                        cross_references=cross_refs if query.cross_domain else []
+                        cross_references=[]  # Cross-domain reasoning is now handled by the synthesis agent
                     )
                     knowledge_results.append(result_obj)
-                    
-                    if len(knowledge_results) >= query.limit:
-                        break
             
-            self.logger.info(f"🔍 Knowledge query '{query.semantic_query}' → {len(knowledge_results)} results")
+            self.logger.info(f"🔍 Knowledge query '{query.semantic_query}' with filter '{where_sql}' → {len(knowledge_results)} results")
             return knowledge_results
             
         except Exception as e:
@@ -350,103 +334,6 @@ class ComprehensiveKnowledgeCurator:
             self.logger.error(f"Failed to process corpus data: {e}")
             return []
     
-    def _process_framework_data(self, framework_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
-        """Process framework specification for comprehensive indexing."""
-        try:
-            framework_text = framework_data.decode('utf-8')
-            
-            # Split framework into logical sections for better granular search
-            sections = self._split_framework_sections(framework_text)
-            
-            processed_items = []
-            for i, section in enumerate(sections):
-                searchable_text = f"Framework specification section {i+1}: {section['content']}"
-                
-                item = {
-                    'content': section['content'],
-                    'searchable_text': searchable_text,
-                    'data_type': 'framework',
-                    'source_artifact': 'framework_spec',
-                    'metadata': {
-                        'section_title': section['title'],
-                        'section_index': i,
-                        'content_length': len(section['content'])
-                    }
-                }
-                processed_items.append(item)
-            
-            return processed_items
-            
-        except Exception as e:
-            self.logger.error(f"Failed to process framework data: {e}")
-            return []
-    
-    def _process_scores_data(self, scores_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
-        """Process raw scores for comprehensive indexing."""
-        try:
-            scores_json = json.loads(scores_data.decode('utf-8'))
-            
-            processed_items = []
-            # Process individual score entries for granular search
-            for doc_name, doc_scores in scores_json.items():
-                if isinstance(doc_scores, dict):
-                    for dimension, score_value in doc_scores.items():
-                        searchable_text = f"Score for {doc_name} dimension {dimension}: {score_value}"
-                        
-                        item = {
-                            'content': f"{dimension}: {score_value}",
-                            'searchable_text': searchable_text,
-                            'data_type': 'scores',
-                            'source_artifact': 'scores_data',
-                            'metadata': {
-                                'document_name': doc_name,
-                                'dimension': dimension,
-                                'score_value': score_value,
-                                'score_type': 'raw_dimension_score'
-                            }
-                        }
-                        processed_items.append(item)
-            
-            return processed_items
-            
-        except Exception as e:
-            self.logger.error(f"Failed to process scores data: {e}")
-            return []
-    
-    def _process_statistics_data(self, stats_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
-        """Process statistical results for comprehensive indexing."""
-        try:
-            stats_json = json.loads(stats_data.decode('utf-8'))
-            
-            processed_items = []
-            # Process statistical findings for cross-domain linking
-            for test_name, test_results in stats_json.items():
-                if isinstance(test_results, dict):
-                    # Create comprehensive description of statistical finding
-                    stats_description = self._format_statistical_finding(test_name, test_results)
-                    searchable_text = f"Statistical result {test_name}: {stats_description}"
-                    
-                    item = {
-                        'content': stats_description,
-                        'searchable_text': searchable_text,
-                        'data_type': 'statistics',
-                        'source_artifact': 'statistical_results',
-                        'metadata': {
-                            'test_name': test_name,
-                            'test_results': test_results,
-                            'f_statistic': test_results.get('f_statistic'),
-                            'p_value': test_results.get('p_value'),
-                            'statistical_significance': test_results.get('significant', False)
-                        }
-                    }
-                    processed_items.append(item)
-            
-            return processed_items
-            
-        except Exception as e:
-            self.logger.error(f"Failed to process statistics data: {e}")
-            return []
-    
     def _process_evidence_data(self, evidence_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
         """Process evidence quotes for comprehensive indexing."""
         try:
@@ -481,106 +368,6 @@ class ComprehensiveKnowledgeCurator:
         except Exception as e:
             self.logger.error(f"Failed to process evidence data: {e}")
             return []
-    
-    def _process_metadata_data(self, metadata_data: bytes, request: ComprehensiveIndexRequest) -> List[Dict[str, Any]]:
-        """Process experiment metadata for comprehensive indexing."""
-        try:
-            # Parse experiment context for hypotheses and research questions
-            experiment_context = json.loads(request.experiment_context)
-            
-            processed_items = []
-            
-            # Index hypotheses for hypothesis-driven investigation
-            hypotheses = experiment_context.get('hypotheses', [])
-            for i, hypothesis in enumerate(hypotheses):
-                searchable_text = f"Experiment hypothesis {i+1}: {hypothesis}"
-                
-                item = {
-                    'content': hypothesis,
-                    'searchable_text': searchable_text,
-                    'data_type': 'metadata',
-                    'source_artifact': 'experiment_context',
-                    'metadata': {
-                        'type': 'hypothesis',
-                        'hypothesis_index': i,
-                        'hypothesis_id': f"H{i+1}"
-                    }
-                }
-                processed_items.append(item)
-            
-            # Index research questions and experiment configuration
-            research_questions = experiment_context.get('research_questions', [])
-            for i, question in enumerate(research_questions):
-                searchable_text = f"Research question {i+1}: {question}"
-                
-                item = {
-                    'content': question,
-                    'searchable_text': searchable_text,
-                    'data_type': 'metadata',
-                    'source_artifact': 'experiment_context',
-                    'metadata': {
-                        'type': 'research_question',
-                        'question_index': i
-                    }
-                }
-                processed_items.append(item)
-            
-            return processed_items
-            
-        except Exception as e:
-            self.logger.error(f"Failed to process metadata: {e}")
-            return []
-    
-    def _split_framework_sections(self, framework_text: str) -> List[Dict[str, str]]:
-        """Split framework into logical sections for granular indexing."""
-        # Simple section splitting based on headers
-        sections = []
-        current_section = {'title': 'Introduction', 'content': ''}
-        
-        lines = framework_text.split('\n')
-        for line in lines:
-            if line.startswith('#') and len(line.strip()) > 1:
-                # Save previous section
-                if current_section['content'].strip():
-                    sections.append(current_section)
-                # Start new section
-                current_section = {'title': line.strip('# '), 'content': ''}
-            else:
-                current_section['content'] += line + '\n'
-        
-        # Add final section
-        if current_section['content'].strip():
-            sections.append(current_section)
-        
-        return sections
-    
-    def _format_statistical_finding(self, test_name: str, test_results: Dict[str, Any]) -> str:
-        """Format statistical finding for comprehensive search."""
-        description = f"{test_name}: "
-        
-        if 'f_statistic' in test_results:
-            description += f"F-statistic={test_results['f_statistic']}, "
-        if 'p_value' in test_results:
-            description += f"p-value={test_results['p_value']}, "
-        if 'significant' in test_results:
-            description += f"significant={test_results['significant']}, "
-        
-        # Add any other relevant statistical details
-        for key, value in test_results.items():
-            if key not in ['f_statistic', 'p_value', 'significant']:
-                description += f"{key}={value}, "
-        
-        return description.rstrip(', ')
-    
-    def _find_cross_references(self, knowledge_item: Dict[str, Any], query: KnowledgeQuery) -> List[Dict[str, Any]]:
-        """Find cross-references across data types for comprehensive reasoning."""
-        cross_refs = []
-        
-        # This is where cross-domain intelligence happens
-        # For now, implement basic cross-referencing
-        # TODO: Implement more sophisticated cross-domain reasoning
-        
-        return cross_refs
     
     def _generate_index_hash(self, request: ComprehensiveIndexRequest) -> str:
         """Generate hash for index caching based on input data."""

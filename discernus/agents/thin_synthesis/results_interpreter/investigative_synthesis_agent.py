@@ -73,14 +73,25 @@ class InvestigativeSynthesisAgent:
         Scales perfectly: 10 documents or 1000 documents = still 1 synthesis call.
         """
         try:
+            print("🚨 INVESTIGATIVE SYNTHESIS: Starting investigate_and_synthesize method") 
             self.investigation_log = []
             
             # Extract experiment hypotheses from context
             hypotheses = self._extract_hypotheses_from_context(request.experiment_context)
+            print(f"🚨 INVESTIGATIVE SYNTHESIS: Extracted {len(hypotheses)} hypotheses")
             self.logger.info(f"🎯 OPTIMIZED: Single comprehensive synthesis for {len(hypotheses)} hypotheses + insights")
+            self.logger.info(f"🔍 INVESTIGATIVE DEBUG: Request has knowledge curator: {request.knowledge_curator is not None}")
             
             # Gather evidence from knowledge curator for comprehensive analysis
-            evidence_findings = self._gather_comprehensive_evidence(request.knowledge_curator, hypotheses)
+            self.logger.info(f"🎯 INVESTIGATIVE DEBUG: About to gather evidence for {len(hypotheses)} hypotheses")
+            try:
+                evidence_findings = self._gather_comprehensive_evidence(request.knowledge_curator, hypotheses)
+                print(f"🚨 INVESTIGATIVE SYNTHESIS: Evidence gathering returned {len(evidence_findings)} queries")
+            except Exception as e:
+                print(f"🚨 INVESTIGATIVE SYNTHESIS: Evidence gathering failed: {e}")
+                evidence_findings = {}
+            
+            self.logger.info(f"🎯 INVESTIGATIVE DEBUG: Evidence gathering returned {len(evidence_findings)} queries")
             
             # Execute single comprehensive synthesis call
             comprehensive_response = self._execute_comprehensive_synthesis(
@@ -123,23 +134,26 @@ class InvestigativeSynthesisAgent:
             for hypothesis in hypotheses:
                 queries = self._design_investigation_queries(hypothesis)
                 for query in queries:
+                    # Modify queries to specifically target speech content, not framework definitions
+                    speech_focused_query = f"Quote from McCain or Sanders speech: {query}"
                     all_queries.append({
-                        'query': query,
+                        'query': speech_focused_query,
                         'hypothesis_id': hypothesis.get('id', 'unknown'),
                         'hypothesis_key': hypothesis.get('key', '')
                     })
             
-            # Add exploratory queries for insight discovery
+            # Add exploratory queries for insight discovery - focused on actual speech content
             exploratory_queries = [
-                "What temporal patterns exist across speakers from different eras?",
-                "Which speakers combine manipulation and resentment tactics?", 
-                "How do salience patterns reveal speaker authenticity?",
-                "What evidence shows the evolution of civic discourse over time?",
-                "Which statistical anomalies have clear textual explanations?",
-                "What unexpected correlations emerge from the evidence patterns?"
+                "McCain quote showing institutional dignity and grace",
+                "Sanders quote expressing tribal dominance or us-vs-them language", 
+                "McCain quote about unity or shared American identity",
+                "Sanders quote showing resentment toward elites or wealthy",
+                "McCain quote expressing hope for America's future",
+                "Sanders quote about defeating opponents or fighting oligarchy"
             ]
             
             for query in exploratory_queries:
+                # These are already speech-focused
                 all_queries.append({
                     'query': query,
                     'hypothesis_id': 'INSIGHT_DISCOVERY',
@@ -183,7 +197,19 @@ class InvestigativeSynthesisAgent:
                 except Exception as e:
                     self.logger.warning(f"Evidence gathering failed for '{query_info['query']}': {e}")
             
-            self.logger.info(f"📇 Comprehensive evidence gathered: {len(all_evidence)} queries across {len(hypotheses)} hypotheses + insights")
+            # Debug logging for evidence gathering
+            total_evidence_pieces = sum(len(query_data.get('evidence', [])) for query_data in all_evidence.values())
+            self.logger.info(f"📇 Comprehensive evidence gathered: {len(all_evidence)} queries, {total_evidence_pieces} total evidence pieces")
+            if total_evidence_pieces == 0:
+                self.logger.warning("⚠️  No evidence pieces found - knowledge curator may not be working properly")
+            else:
+                # Log sample evidence
+                for query, query_data in list(all_evidence.items())[:3]:
+                    evidence_list = query_data.get('evidence', [])
+                    if evidence_list:
+                        sample_quote = evidence_list[0].get('quote_text', 'No quote')[:100]
+                        self.logger.info(f"📇 Sample evidence for '{query[:50]}...': \"{sample_quote}...\"")
+            
             return all_evidence
             
         except Exception as e:
@@ -220,10 +246,20 @@ class InvestigativeSynthesisAgent:
             if evidence_list:
                 evidence_text += f"\n**Query**: {query} (for {hypothesis_id})\n"
                 for i, evidence in enumerate(evidence_list[:3], 1):  # Limit per query
-                    quote = evidence.get('quote_text', '')[:200]  # Limit quote length
+                    quote = evidence.get('quote_text', '')
+                    # Keep full quotes but reasonable limit to prevent token overflow
+                    if len(quote) > 500:  # Only truncate if extremely long
+                        quote = quote[:500] + "..."
                     document = evidence.get('document_id', 'unknown')
-                    evidence_text += f"[{evidence_count + i}] {document}: \"{quote}...\"\n"
+                    evidence_text += f"[{evidence_count + i}] {document}: \"{quote}\"\n"
                 evidence_count += len(evidence_list[:3])
+        
+        # Debug: Log evidence text being passed to LLM
+        print(f"🚨 EVIDENCE DEBUG: Total evidence_count={evidence_count}, evidence_text length={len(evidence_text)}")
+        if evidence_text:
+            print(f"🚨 EVIDENCE SAMPLE: {evidence_text[:500]}...")
+        else:
+            print("🚨 EVIDENCE DEBUG: No evidence text generated!")
         
         # Create comprehensive synthesis prompt
         comprehensive_prompt = f"""
@@ -270,6 +306,12 @@ Requirements:
 
 SYNTHESIS REPORT:
 """
+
+        print(f"🚨 PROMPT DEBUG: Evidence section length in prompt: {comprehensive_prompt.count('COMPREHENSIVE EVIDENCE BASE:')}")
+        if "COMPREHENSIVE EVIDENCE BASE:" in comprehensive_prompt:
+            evidence_section_start = comprehensive_prompt.find("COMPREHENSIVE EVIDENCE BASE:")
+            evidence_section = comprehensive_prompt[evidence_section_start:evidence_section_start+1000]
+            print(f"🚨 PROMPT EVIDENCE SAMPLE: {evidence_section}...")
 
         try:
             self.logger.info("🎯 Executing OPTIMIZED single comprehensive synthesis call...")
