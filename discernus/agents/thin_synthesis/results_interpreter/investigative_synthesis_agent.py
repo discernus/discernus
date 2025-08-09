@@ -204,7 +204,7 @@ class InvestigativeSynthesisAgent:
             hypotheses_text += f"Statement: {hypothesis.get('statement', 'Unknown')}\n\n"
         
         # Format statistical results (limit to prevent token overflow)
-        stats_summary = json.dumps(statistical_results, indent=2)[:8000]  # Reasonable limit
+        stats_summary = json.dumps(statistical_results, default=self._json_serializer, indent=2)[:8000]  # Reasonable limit
         
         # Format evidence findings efficiently  
         evidence_text = ""
@@ -308,6 +308,30 @@ SYNTHESIS REPORT:
         except Exception as e:
             self.logger.error(f"Comprehensive synthesis call failed: {e}")
             return {'success': False, 'error': str(e)}
+    
+    def _json_serializer(self, obj):
+        """Custom JSON serializer for pandas/numpy data types."""
+        import numpy as np
+        import pandas as pd
+        
+        # Handle numpy data types
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, (np.integer, np.int64, np.int32)):
+            return int(obj)
+        elif isinstance(obj, (np.floating, np.float64, np.float32)):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, pd.Series):
+            return obj.tolist()
+        elif isinstance(obj, pd.DataFrame):
+            return obj.to_dict('records')
+        elif hasattr(obj, 'item'):  # Handle other numpy scalars
+            return obj.item()
+        
+        # For unhandled types, return string representation
+        return str(obj)
     
     def _extract_hypotheses_from_context(self, experiment_context: str) -> List[Dict[str, str]]:
         """Extract H1, H2, H3 hypotheses from experiment context."""
