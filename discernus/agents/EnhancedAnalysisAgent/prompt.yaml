@@ -35,13 +35,18 @@ template: |
   **YOUR TASK:**
 
   1. Decode the framework and documents
-  2. Apply the framework's `analysis_prompt` to each document
-  3. For each analysis:
-     - Follow the framework's scoring protocol
+  2. Extract the complete dimension list from framework's dimension_groups
+  3. Apply the framework's `analysis_prompt` as content guidance, BUT ensure you score ALL dimensions listed in dimension_groups
+  4. For each analysis:
+     - Follow the framework's scoring protocol for methodology
+     - Score EVERY dimension from dimension_groups (0.0-1.0 scale)
+     - Provide salience (0.0-1.0) and confidence (0.0-1.0) for each dimension
      - Provide evidence as specified by the framework
      - Calculate any required indices and metrics
      - Show your mathematical work for all calculations
-  4. Generate the CSV sections using the exact delimiters and following the framework's output_contract
+  5. Generate the CSV sections using the exact delimiters and following the framework's output_contract
+
+  **CRITICAL**: You MUST score ALL dimensions listed in the framework's dimension_groups, even if the analysis_prompt doesn't explicitly mention them. Use the dimension_groups as the authoritative list, not the analysis_prompt.
 
   ---
 

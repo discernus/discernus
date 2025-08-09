@@ -1305,6 +1305,10 @@ Raw Analysis Data:
             # Extract statistical results for investigative agent (process MathToolkit results)
             statistical_results = self._process_mathtoolkit_results(exec_response)
             
+            # Debug: Log what statistical results are being passed
+            self.logger.info(f"🔍 Statistical results for investigative agent: {len(statistical_results)} items")
+            self.logger.info(f"🔍 Statistical result keys: {list(statistical_results.keys())[:5]}")
+            
             # Now run our investigative synthesis agent
             from ..results_interpreter.investigative_synthesis_agent import InvestigativeSynthesisAgent, InvestigativeRequest
             
@@ -1387,48 +1391,81 @@ Raw Analysis Data:
         try:
             processed_stats = {}
             
-            # Helper to recursively find and extract statistical results
-            def find_stats(data):
-                if isinstance(data, dict):
-                    # Check for known statistical result patterns
-                    if 'f_statistic' in data and 'p_value' in data:
-                        return data
-                    if 'mean' in data and 'std' in data and 'count' in data:
-                        return data
-                    if 'correlation_matrix' in data:
-                        return data
-                    if 'calculated_metrics' in data:
-                        return data.get('calculated_metrics')
-                    
-                    # Recurse into nested dictionaries
-                    for key, value in data.items():
-                        result = find_stats(value)
-                        if result:
-                            # Use descriptive key to avoid overwrites
-                            processed_stats[f"{key}_{list(result.keys())[0] if result else ''}"] = result
-
-                elif isinstance(data, list):
-                    for item in data:
-                        find_stats(item)
-
-            # Start recursive search from the root of the execution response
-            find_stats(exec_response)
+            # Extract results from both stages
+            stage_1_results = exec_response.get('stage_1_raw_data', {}).get('results', {})
+            stage_2_results = exec_response.get('stage_2_derived_metrics', {}).get('results', {})
             
-            # Add summary metadata
+            # Process each task result with more comprehensive extraction
+            all_results = {**stage_1_results, **stage_2_results}
+            
+            for task_name, result in all_results.items():
+                if not isinstance(result, dict):
+                    continue
+                    
+                # Extract statistical patterns from successful MathToolkit results
+                if result.get('type') == 'descriptive_stats_grouped' and 'groups' in result:
+                    # Descriptive statistics by document/group
+                    processed_stats[f"{task_name}_descriptive_stats"] = result['groups']
+                    
+                elif result.get('type') == 'correlation_matrix' and 'matrix' in result:
+                    # Correlation matrices
+                    processed_stats[f"{task_name}_correlations"] = result['matrix']
+                    
+                elif result.get('type') == 'derived_metrics_calculation' and result.get('calculated_metrics'):
+                    # Derived metrics (tension scores, indices)
+                    processed_stats[f"{task_name}_derived_metrics"] = result['calculated_metrics']
+                    
+                elif result.get('type') == 'metric_validation' and 'results' in result:
+                    # Data validation results with ranges and distributions
+                    validation_results = result['results']
+                    if 'range_check' in validation_results and 'ranges' in validation_results['range_check']:
+                        processed_stats[f"{task_name}_ranges"] = validation_results['range_check']['ranges']
+                        
+                elif 'f_statistic' in result and 'p_value' in result:
+                    # ANOVA results
+                    processed_stats[f"{task_name}_anova"] = result
+                    
+                elif 'mean' in result and 'std' in result:
+                    # Basic descriptive statistics
+                    processed_stats[f"{task_name}_stats"] = result
+                    
+                elif 'provenance' in result:
+                    # Any result with provenance - capture key metrics
+                    if isinstance(result.get('provenance'), dict):
+                        input_columns = result['provenance'].get('input_columns', [])
+                        if input_columns:
+                            processed_stats[f"{task_name}_analysis"] = {
+                                'type': result.get('type', 'unknown'),
+                                'input_columns': input_columns,
+                                'key_metrics': [k for k in result.keys() if k not in ['type', 'provenance']]
+                            }
+            
+            # Add comprehensive metadata
             processed_stats['processing_metadata'] = {
                 'source': 'mathtoolkit_two_stage_execution',
-                'stage_1_tasks': len(exec_response.get('stage_1_raw_data', {}).get('results', {})),
-                'stage_2_tasks': len(exec_response.get('stage_2_derived_metrics', {}).get('results', {})),
+                'stage_1_tasks': len(stage_1_results),
+                'stage_2_tasks': len(stage_2_results),
+                'successful_tasks': len([r for r in all_results.values() if isinstance(r, dict) and r.get('success') != False]),
                 'total_errors': len(exec_response.get('errors', [])),
-                'processing_timestamp': time.time()
+                'processing_timestamp': time.time(),
+                'available_result_types': list(set(r.get('type') for r in all_results.values() if isinstance(r, dict) and r.get('type')))
             }
             
-            self.logger.info(f"📊 Processed MathToolkit results: {len(processed_stats)} statistical findings")
+            self.logger.info(f"📊 Processed MathToolkit results: {len(processed_stats)-1} statistical findings from {len(all_results)} tasks")
+            self.logger.info(f"📊 Available statistical patterns: {list(processed_stats.keys())[:5]}")
+            
             return processed_stats
             
         except Exception as e:
             self.logger.error(f"Failed to process MathToolkit results: {e}")
             return {
                 'processing_error': str(e),
-                'raw_exec_response_keys': list(exec_response.keys()) if isinstance(exec_response, dict) else str(type(exec_response))
+                'raw_exec_response_keys': list(exec_response.keys()) if isinstance(exec_response, dict) else str(type(exec_response)),
+                'processing_metadata': {
+                    'source': 'error_fallback',
+                    'stage_1_tasks': 0,
+                    'stage_2_tasks': 0,
+                    'total_errors': 1,
+                    'processing_timestamp': time.time()
+                }
             } 
