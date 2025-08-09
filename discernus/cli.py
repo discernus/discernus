@@ -281,13 +281,30 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     else:
         rich_console.echo(f"🎯 Running: {experiment_path}")
     
-    # Validate experiment structure
-    valid, message, experiment = validate_experiment_structure(exp_path)
-    if not valid:
-        rich_console.print_error(message.replace("❌ ", ""))
-        exit_validation_failed("Experiment structure validation failed")
-    
-    click.echo(message)
+    # Validate experiment structure (unless skipped)
+    if not skip_validation:
+        valid, message, experiment = validate_experiment_structure(exp_path)
+        if not valid:
+            rich_console.print_error(message.replace("❌ ", ""))
+            exit_validation_failed("Experiment structure validation failed")
+        
+        click.echo(message)
+    else:
+        # Skip structure validation - just load basic experiment info
+        click.echo("⚠️  Skipping experiment structure validation")
+        try:
+            import yaml
+            with open(exp_path / "experiment.md", 'r') as f:
+                content = f.read()
+                # Extract YAML front matter
+                if content.startswith('---'):
+                    _, yaml_content, _ = content.split('---', 2)
+                    experiment = yaml.safe_load(yaml_content)
+                    experiment['_corpus_file_count'] = len(list((exp_path / experiment.get('corpus_path', 'corpus')).glob('*')))
+                else:
+                    experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
+        except Exception as e:
+            experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
     
     # Validate experiment coherence (unless skipped)
     if not skip_validation:

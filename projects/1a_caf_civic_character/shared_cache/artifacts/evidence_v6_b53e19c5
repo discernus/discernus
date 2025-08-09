@@ -1,0 +1,181 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 17,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-09T01:15:14.766405+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.8,
+      "context_type": "conditional_universalism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766353+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribalism",
+      "quote_text": "This is another life loss to an, an illegal criminal alien who was unlawfully present in America... who was beaten mercilessly and bludgeoned and finally murdered and had and then the perpetrator, an illegal alien whom the law enforcement had encountered and released onto the streets of America... who had no business being in America in the first place...",
+      "confidence": 0.95,
+      "context_type": "us_vs_them_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766381+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribalism",
+      "quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+      "confidence": 0.95,
+      "context_type": "in_group_victimization_blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766384+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "truth",
+      "quote_text": "I can read this Constitution and understand what it means. And I can read the precedent cases along the way that have flowed from Marberry on down to today. But it's no longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws.",
+      "confidence": 0.8,
+      "context_type": "selective_appeal_to_fact",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766385+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "truth",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend... what the Constitution says and what was understood to mean at the time of its ratification, he's demonstrated that in the past with his appointments to the court.",
+      "confidence": 0.8,
+      "context_type": "dogmatic_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766386+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "manipulation",
+      "quote_text": "This is another life loss to an, an illegal criminal alien who was unlawfully present in America... who had no business to be here, one who had been encountered by law enforcement officers in the past, one whom I believe ICE declined, uh, to pick up and place into removal proceedings.",
+      "confidence": 0.95,
+      "context_type": "emotional_trigger_anecdote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766387+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "manipulation",
+      "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+      "confidence": 0.9,
+      "context_type": "strategic_distortion_of_opponents",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766389+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "justice",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally. Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison.",
+      "confidence": 0.75,
+      "context_type": "punitive_justice_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766391+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "justice",
+      "quote_text": "If the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 0.75,
+      "context_type": "narrow_rule_of_law_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766392+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "resentment",
+      "quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+      "confidence": 0.95,
+      "context_type": "blame_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766394+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "resentment",
+      "quote_text": "And all through the rest of her life and her family's life, they will carry this hole, this ache in their heart that didn't need to be.",
+      "confidence": 0.95,
+      "context_type": "victimization_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766395+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+      "confidence": 0.8,
+      "context_type": "restorative_call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766396+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "It's costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+      "confidence": 0.95,
+      "context_type": "catastrophic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766397+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+      "confidence": 0.95,
+      "context_type": "threat_response_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766398+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I want to see law enforcement. And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+      "confidence": 0.7,
+      "context_type": "problem_solving_focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766399+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fantasy",
+      "quote_text": "There's no right in the Constitution for a same-sex marriage. There's no reference in there at all. There's not one single Founding Father that would have ever accepted an idea that they had, they had founded a nation and embodied within our declaration or our ratified Constitution or the subsequent amendments that there was some right, let alone a command, same-sex marriage.",
+      "confidence": 0.9,
+      "context_type": "constraint_denial",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766400+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fantasy",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 0.85,
+      "context_type": "unrealistic_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-09T01:15:14.766401+00:00"
+    }
+  ]
+}

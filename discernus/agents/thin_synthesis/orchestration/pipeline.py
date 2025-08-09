@@ -43,6 +43,7 @@ from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAna
 from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
+from ...comprehensive_knowledge_curator.agent import ComprehensiveKnowledgeCurator, ComprehensiveIndexRequest
 from ..results_interpreter.rag_enhanced_interpreter import RAGEnhancedResultsInterpreter, RAGInterpretationRequest
 from ..results_interpreter.thin_interpreter import ThinResultsInterpreterAgent
 from ...classification_agent.agent import ClassificationAgent, ClassificationRequest, ClassificationResponse
@@ -133,7 +134,8 @@ class ProductionThinSynthesisPipeline:
         self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.evidence_indexer = EvidenceIndexerAgent(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
-        self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)  # Used by RAG interpreter
+        self.txtai_curator = TxtaiEvidenceCurator(model=model, audit_logger=audit_logger)  # Legacy evidence-only RAG
+        self.comprehensive_curator = ComprehensiveKnowledgeCurator(model=model, artifact_storage=artifact_client, audit_logger=audit_logger)  # Technical co-founder showcase
         self.rag_interpreter = RAGEnhancedResultsInterpreter(model=model, audit_logger=audit_logger)
         self.thin_interpreter = ThinResultsInterpreterAgent(model=model, audit_logger=audit_logger)
         self.classification_agent = ClassificationAgent()
@@ -284,6 +286,12 @@ class ProductionThinSynthesisPipeline:
             self.logger.info(f"   - Evidence artifact: {request.evidence_artifact_hash[:12]}...")
         else:
             self.logger.warning("⚠️  Missing provenance context - synthesis agents operating blind!")
+        
+        # 🍷 INVESTIGATIVE SYNTHESIS MODE - Early return from main method
+        use_investigative = os.environ.get("DISCERNUS_USE_INVESTIGATIVE_SYNTHESIS", "true").lower() in ("1", "true", "yes")
+        if use_investigative:
+            self.logger.info("🔍 Activating Investigative Synthesis Agent - Parisian Saucier Mode!")
+            return self._run_investigative_synthesis(request, start_time)
         
         try:
             self.logger.info("🚀 Starting Production THIN Synthesis Pipeline")
@@ -1019,6 +1027,7 @@ Raw Analysis Data:
         # Feature flag to switch to THIN interpreter
         # Default to THIN interpreter; allow opting out
         use_thin = os.environ.get("DISCERNUS_USE_THIN_INTERPRETER", "true").lower() in ("1", "true", "yes")
+        
         if use_thin:
             # Adapt request to thin agent (statistical_results, framework_spec, experiment_context, txtai_curator)
             class ThinReq:
@@ -1226,4 +1235,236 @@ Raw Analysis Data:
             return extracted_info
             
         except (json.JSONDecodeError, AttributeError):
-            return default_corpus_info 
+            return default_corpus_info
+    
+    def _run_investigative_synthesis(self, request: ProductionPipelineRequest, start_time: float) -> ProductionPipelineResponse:
+        """
+        🍷 Parisian Saucier Mode: Complete investigative synthesis with active RAG interrogation.
+        
+        This method completely bypasses the standard pipeline and runs our investigative
+        synthesis agent that actively interrogates evidence and discovers insights.
+        """
+        try:
+            # First, we need to run the standard pipeline up to statistical results
+            self.logger.info("📊 Running statistical analysis for investigative synthesis...")
+            
+            # Stage 1: Generate Analysis Plan (needed for statistical results)
+            plan_response = self._stage_1_generate_analysis_plan(request)
+            if not plan_response.success:
+                raise Exception(f"Analysis planning failed: {plan_response.error_message}")
+            
+            # Stage 2: Execute Analysis Plan (needed for statistical results)
+            exec_response = self._stage_2_execute_analysis_plan(plan_response, request)
+            if not exec_response or len(exec_response.get('errors', [])) > 0:
+                errors = exec_response.get('errors', ['Unknown execution error']) if exec_response else ['Analysis execution returned None']
+                raise Exception(f"Analysis execution failed: {'; '.join(errors)}")
+            
+            # Stage 2.5: Generate intelligent evidence index (needed for RAG)
+            self.logger.info("📇 Building evidence index for investigative synthesis...")
+            evidence_index_response = self._stage_2_5_generate_evidence_index(request)
+            if not evidence_index_response.success:
+                raise Exception(f"Evidence indexing failed: {evidence_index_response.error_message}")
+            
+            # Initialize comprehensive knowledge curator for cross-domain reasoning
+            self.logger.info("🏗️  Building comprehensive knowledge graph for investigative synthesis...")
+            
+            # Gather all experiment artifacts for comprehensive indexing
+            experiment_artifacts = {
+                'evidence': self.artifact_client.get_artifact(request.evidence_artifact_hash),
+                'scores': self.artifact_client.get_artifact(request.scores_artifact_hash),
+                'statistics': json.dumps(exec_response).encode('utf-8'),  # Statistical results from MathToolkit
+                'framework': request.framework_spec.encode('utf-8'),
+                'metadata': (request.experiment_context or "{}").encode('utf-8')
+            }
+            
+            # Add corpus data if available in the request
+            if hasattr(request, 'corpus_artifact_hash') and request.corpus_artifact_hash:
+                experiment_artifacts['corpus'] = self.artifact_client.get_artifact(request.corpus_artifact_hash)
+            
+            # Build comprehensive knowledge index
+            comprehensive_request = ComprehensiveIndexRequest(
+                experiment_artifacts=experiment_artifacts,
+                experiment_context=request.experiment_context or "{}",
+                framework_spec=request.framework_spec,
+                run_id=f"investigative_{int(time.time())}"
+            )
+            
+            index_response = self.comprehensive_curator.build_comprehensive_index(comprehensive_request)
+            if not index_response.success:
+                self.logger.warning(f"⚠️  Comprehensive indexing failed: {index_response.error_message}")
+                # Fallback to legacy txtai curator
+                self.logger.info("🔍 Falling back to legacy txtai curator...")
+                evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+                self.txtai_curator._build_evidence_index(evidence_data)
+                knowledge_curator = self.txtai_curator
+            else:
+                self.logger.info(f"✅ Comprehensive knowledge graph built: {index_response.indexed_items} items across {len(index_response.data_types_indexed)} data types")
+                knowledge_curator = self.comprehensive_curator
+            
+            # Extract statistical results for investigative agent (process MathToolkit results)
+            statistical_results = self._process_mathtoolkit_results(exec_response)
+            
+            # Now run our investigative synthesis agent
+            from ..results_interpreter.investigative_synthesis_agent import InvestigativeSynthesisAgent, InvestigativeRequest
+            
+            investigative_agent = InvestigativeSynthesisAgent(self.model, self.audit_logger)
+            
+            investigative_request = InvestigativeRequest(
+                statistical_results=statistical_results,
+                framework_spec=request.framework_spec,
+                experiment_context=request.experiment_context or "{}",
+                knowledge_curator=knowledge_curator,  # Use comprehensive knowledge curator or fallback txtai
+                experiment_hypotheses=[]  # Will be extracted from context
+            )
+            
+            investigative_response = investigative_agent.investigate_and_synthesize(investigative_request)
+            
+            self.logger.info(f"🔍 Investigative response: success={investigative_response.success}, error={investigative_response.error_message}")
+            
+            if investigative_response.success:
+                # Combine investigative sections into full report
+                full_report = f"""# Experiment Report
+
+{investigative_response.hypothesis_testing_section}
+
+{investigative_response.insight_discovery_section}
+
+## Technical Transparency
+**Investigation Log**: {investigative_response.total_evidence_queries} evidence queries performed
+**Models Used**: Synthesis: {self.model}
+**Evidence Interrogation**: Active RAG-powered investigation
+"""
+                
+                total_time = time.time() - start_time
+                
+                return ProductionPipelineResponse(
+                    success=True,
+                    narrative_report=full_report,
+                    executive_summary="Investigative synthesis with active RAG interrogation",
+                    key_findings=["Evidence-backed hypothesis testing", "LLM-powered insight discovery"],
+                    analysis_plan_hash="investigative_mode",
+                    statistical_results_hash="investigative_mode", 
+                    curated_evidence_hash="investigative_mode",
+                    grounding_evidence_hash="investigative_mode",
+                    dual_purpose_report_hash="investigative_mode",
+                    total_execution_time=total_time,
+                    stage_timings={"investigation": total_time},
+                    stage_success={"investigation": True},
+                    word_count=len(full_report.split()),
+                    evidence_integration_summary=f"Active RAG interrogation: {investigative_response.total_evidence_queries} queries",
+                    statistical_summary="Evidence-backed statistical analysis"
+                )
+            else:
+                self.logger.warning(f"🔥 Investigative synthesis failed: {investigative_response.error_message}")
+                raise Exception(f"Investigative synthesis failed: {investigative_response.error_message}")
+                
+        except Exception as e:
+            self.logger.error(f"🔥 Investigative synthesis pipeline failed: {e}")
+            total_time = time.time() - start_time
+            
+            return ProductionPipelineResponse(
+                success=False,
+                narrative_report="",
+                executive_summary=f"Investigative synthesis failed: {str(e)}",
+                key_findings=[],
+                analysis_plan_hash="failed",
+                statistical_results_hash="failed", 
+                curated_evidence_hash="failed",
+                grounding_evidence_hash="failed",
+                dual_purpose_report_hash="failed",
+                total_execution_time=total_time,
+                stage_timings={"investigation": total_time},
+                stage_success={"investigation": False},
+                word_count=0,
+                evidence_integration_summary="Investigative synthesis failed",
+                statistical_summary="Failed to generate statistical results"
+            )
+
+    def _process_mathtoolkit_results(self, exec_response: Dict[str, Any]) -> Dict[str, Any]:
+        """Process raw MathToolkit results into structured statistical findings for investigative agent."""
+        
+        try:
+            processed_stats = {}
+            
+            # DEBUG: Log the structure we're receiving
+            self.logger.info(f"🔍 DEBUG: MathToolkit exec_response keys: {list(exec_response.keys())}")
+            if 'stage_2_derived_metrics' in exec_response:
+                stage_2 = exec_response['stage_2_derived_metrics']
+                self.logger.info(f"🔍 DEBUG: stage_2_derived_metrics keys: {list(stage_2.keys())}")
+                if 'results' in stage_2:
+                    results = stage_2['results']
+                    self.logger.info(f"🔍 DEBUG: stage_2 results keys: {list(results.keys())}")
+                    for task_name in list(results.keys())[:3]:  # Log first 3 task names
+                        task_result = results[task_name]
+                        self.logger.info(f"🔍 DEBUG: Task '{task_name}' structure: {list(task_result.keys()) if isinstance(task_result, dict) else type(task_result)}")
+            
+            # Extract Stage 1 (raw data) results
+            if 'stage_1_raw_data' in exec_response:
+                stage_1 = exec_response['stage_1_raw_data'].get('results', {})
+                for task_name, task_result in stage_1.items():
+                    if isinstance(task_result, dict) and 'result_value' in task_result:
+                        processed_stats[f"stage_1_{task_name}"] = task_result['result_value']
+            
+            # Extract Stage 2 (derived metrics) results - this is where the rich statistics are
+            if 'stage_2_derived_metrics' in exec_response:
+                stage_2 = exec_response['stage_2_derived_metrics'].get('results', {})
+                for task_name, task_result in stage_2.items():
+                    if isinstance(task_result, dict):
+                        # Task results are direct dictionaries, not nested under 'result_value'
+                        result_data = task_result
+                        
+                        # Extract meaningful metrics based on task type and content
+                        if 'calculate_derived_metrics' in task_name or 'calculated_metrics' in result_data:
+                            # Extract calculated metrics like cohesive_index, identity_tension, etc.
+                            if 'calculated_metrics' in result_data:
+                                metrics = result_data['calculated_metrics']
+                                processed_stats['derived_metrics'] = metrics
+                                processed_stats['derived_metrics_success_rate'] = result_data.get('success_rate', 0)
+                                processed_stats['derived_metrics_formulas'] = result_data.get('formulas_used', [])
+                                self.logger.info(f"📊 Extracted derived metrics: {len(metrics)} calculated metrics")
+                        
+                        elif 'descriptive_statistics' in task_name or 'groups' in result_data:
+                            # Extract descriptive statistics
+                            processed_stats[f"descriptive_stats_{task_name}"] = result_data
+                            self.logger.info(f"📊 Extracted descriptive statistics: {task_name}")
+                        
+                        elif ('test_H' in task_name or 'comparison' in task_name) and 'f_statistic' in result_data:
+                            # Extract ANOVA/statistical test results
+                            processed_stats[f"hypothesis_test_{task_name}"] = {
+                                'test_type': result_data.get('type', 'unknown'),
+                                'f_statistic': result_data.get('f_statistic'),
+                                'p_value': result_data.get('p_value'),
+                                'significant': result_data.get('significant'),
+                                'dependent_variable': result_data.get('dependent_variable'),
+                                'grouping_variable': result_data.get('grouping_variable')
+                            }
+                            self.logger.info(f"📊 Extracted hypothesis test: {task_name}")
+                        
+                        elif 'validation' in task_name:
+                            # Extract validation results
+                            processed_stats['metric_validation'] = result_data
+                            self.logger.info(f"📊 Extracted validation results: {task_name}")
+                        
+                        else:
+                            # Generic statistical result
+                            processed_stats[task_name] = result_data
+                            self.logger.info(f"📊 Extracted generic result: {task_name}")
+            
+            # Add summary metadata
+            processed_stats['processing_metadata'] = {
+                'source': 'mathtoolkit_two_stage_execution',
+                'stage_1_tasks': len(exec_response.get('stage_1_raw_data', {}).get('results', {})),
+                'stage_2_tasks': len(exec_response.get('stage_2_derived_metrics', {}).get('results', {})),
+                'total_errors': len(exec_response.get('errors', [])),
+                'processing_timestamp': time.time()
+            }
+            
+            self.logger.info(f"📊 Processed MathToolkit results: {len(processed_stats)} statistical findings")
+            return processed_stats
+            
+        except Exception as e:
+            self.logger.error(f"Failed to process MathToolkit results: {e}")
+            return {
+                'processing_error': str(e),
+                'raw_exec_response_keys': list(exec_response.keys()) if isinstance(exec_response, dict) else str(type(exec_response))
+            } 

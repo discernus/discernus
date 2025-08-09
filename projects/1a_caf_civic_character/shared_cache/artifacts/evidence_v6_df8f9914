@@ -1,0 +1,211 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+    "total_evidence_pieces": 20,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-08T23:11:58.150950+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "dignity",
+      "quote_text": "We shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy. We must say: Wake up America! Wake up!",
+      "confidence": 0.9,
+      "context_type": "universal_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150909+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "dignity",
+      "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+      "confidence": 0.85,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150914+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "tribalism",
+      "quote_text": "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?",
+      "confidence": 0.8,
+      "context_type": "us_vs_them_oppression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150917+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "tribalism",
+      "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+      "confidence": 0.75,
+      "context_type": "named_adversaries",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150919+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "truth",
+      "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+      "confidence": 0.7,
+      "context_type": "factual_assertion_of_deficiency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150920+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "truth",
+      "quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead?",
+      "confidence": 0.7,
+      "context_type": "factual_questioning_of_inaction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150922+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "manipulation",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, 'Be patient.' How long can we be patient? We want our freedom and we want it now!",
+      "confidence": 0.85,
+      "context_type": "emotional_appeal_and_urgency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150923+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "manipulation",
+      "quote_text": "For the party of Kennedy is also the party of Eastland. The party of Javits is also the party of Goldwater.",
+      "confidence": 0.8,
+      "context_type": "false_equivalence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150925+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "justice",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+      "confidence": 0.9,
+      "context_type": "demand_for_equal_protection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150927+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "justice",
+      "quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year. We must have a good FEPC bill.",
+      "confidence": 0.9,
+      "context_type": "demand_for_systemic_equity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150929+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+      "confidence": 0.85,
+      "context_type": "grievance_articulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150931+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "resentment",
+      "quote_text": "To those who have said, 'Be patient and wait,' we must say that we cannot be patient.",
+      "confidence": 0.8,
+      "context_type": "blame_and_rejection_of_inaction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150933+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "hope",
+      "quote_text": "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.",
+      "confidence": 0.8,
+      "context_type": "positive_future_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150935+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "hope",
+      "quote_text": "We shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.8,
+      "context_type": "empowerment_and_transformation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150936+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "fear",
+      "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+      "confidence": 0.85,
+      "context_type": "threat_of_oppression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150938+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "fear",
+      "quote_text": "What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+      "confidence": 0.8,
+      "context_type": "catastrophic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150939+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+      "confidence": 0.7,
+      "context_type": "specific_policy_demand",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150940+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "pragmatism",
+      "quote_text": "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South...",
+      "confidence": 0.65,
+      "context_type": "practical_strategy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150942+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "fantasy",
+      "quote_text": "We want our freedom and we want it now!",
+      "confidence": 0.75,
+      "context_type": "unrealistic_timeframe",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150944+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimension": "fantasy",
+      "quote_text": "We shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.7,
+      "context_type": "oversimplified_transformation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:11:58.150945+00:00"
+    }
+  ]
+}

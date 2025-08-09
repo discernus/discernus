@@ -1,0 +1,161 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+    "total_evidence_pieces": 15,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-08T23:18:36.103750+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "dignity",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.95,
+      "context_type": "inclusive framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103736+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "dignity",
+      "quote_text": "tonight more than any night - I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama.",
+      "confidence": 0.95,
+      "context_type": "universal perspective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103737+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribalism",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+      "confidence": 0.95,
+      "context_type": "rejection of group division",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103738+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "truth",
+      "quote_text": "The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.95,
+      "context_type": "factual acceptance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103739+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "truth",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.9,
+      "context_type": "intellectual humility/self-acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103740+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "manipulation",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.95,
+      "context_type": "absence of emotional exploitation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103741+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "justice",
+      "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment of historical injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103741+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "justice",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.8,
+      "context_type": "fair recognition of opponent's achievement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103742+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "resentment",
+      "quote_text": "We fought - we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+      "confidence": 0.95,
+      "context_type": "rejection of blame attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103743+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "I urge all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+      "confidence": 0.95,
+      "context_type": "positive vision/empowerment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103744+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "Americans never quit. We never surrender. We never hide from history. We make history.",
+      "confidence": 0.95,
+      "context_type": "empowerment rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103745+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fear",
+      "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment of challenges without fear-mongering",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103746+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "pragmatism",
+      "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.95,
+      "context_type": "practical solutions/compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103747+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I don't know what more we could have done to try to win this election. I'll leave that to others to determine.",
+      "confidence": 0.9,
+      "context_type": "constraint acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103748+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fantasy",
+      "quote_text": "The road was a difficult one from the outset, but your support and friendship never wavered.",
+      "confidence": 0.9,
+      "context_type": "absence of magical thinking/unrealistic promises",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-08T23:18:36.103748+00:00"
+    }
+  ]
+}
