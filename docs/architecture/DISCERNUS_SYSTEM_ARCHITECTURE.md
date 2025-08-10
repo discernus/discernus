@@ -10,14 +10,15 @@ title: Discernus System Architecture - Technical Specification
 
 ## Architecture at a Glance
 
-**Discernus** implements a 4-stage THIN synthesis pipeline with comprehensive RAG (Retrieval-Augmented Generation) for academic research at scale:
+**Discernus** implements a unified 3-stage THIN synthesis pipeline with comprehensive RAG (Retrieval-Augmented Generation) for academic research at scale:
 
 ```
-Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
-   ↓              ↓                    ↓               ↓
-Raw Scores   Knowledge Graph    Cross-Domain      Statistical
-Evidence     All Data Types     Evidence          Analysis
-Metadata     txtai Index        Retrieval         Reports
+Analysis → Synthesis → Finalization
+   ↓           ↓           ↓
+Raw Scores  Statistical   Academic
+Evidence    Analysis      Reports
+Metadata    Knowledge     Full Audit
+           Integration    Trail
 ```
 
 ### **Core Design Philosophy**
@@ -239,7 +240,7 @@ Research quality and reliability standards:
 
 **11. Specialized Agent Processing Over Monolithic Analysis**
 - Task-specific agents outperform single-LLM approaches (empirically validated)
-- Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance
+- Enhanced pipeline: Analysis → Synthesis → Finalization with comprehensive cross-domain provenance
 - Natural language communication between stages (no complex JSON parsing)
 - Agent specialization: focused analysis agents with clear input/output contracts
 - Cross-domain knowledge integration through comprehensive RAG architecture
