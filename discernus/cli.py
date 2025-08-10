@@ -30,6 +30,7 @@ from typing import Dict, Any, Optional, List
 
 from discernus.core.thin_orchestrator import ThinOrchestrator, ThinOrchestratorError
 from discernus.core.config import get_config, get_config_file_path
+from discernus.core.infrastructure_telemetry import InfrastructureTelemetry
 from discernus.core.exit_codes import (
     ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
     exit_validation_failed, exit_infrastructure_error, exit_file_error, exit_config_error
@@ -1099,6 +1100,128 @@ def status():
     commands_table.add_row("discernus list", "List available experiments")
     
     rich_console.print_table(commands_table)
+
+
+@cli.command()
+@click.argument('project_path', default='.')
+def telemetry(project_path: str):
+    """Show infrastructure reliability telemetry for a project"""
+    project_path = Path(project_path).resolve()
+    
+    # Find project directory (look for runs/ subdirectory)
+    if not (project_path / "runs").exists():
+        # Try looking in projects/ subdirectory if we're in root
+        if (project_path / "projects").exists():
+            rich_console.print_error("❌ Please specify a specific project path (e.g., projects/simple_test)")
+            exit_invalid_usage()
+        else:
+            rich_console.print_error(f"❌ No runs directory found in {project_path}")
+            exit_file_error()
+    
+    try:
+        telemetry_system = InfrastructureTelemetry(project_path.parent)
+        
+        rich_console.print_section(f"📊 Infrastructure Telemetry: {project_path.name}")
+        
+        # Get component metrics
+        metrics = telemetry_system.collect_metrics_from_project(project_path)
+        health = telemetry_system.assess_pipeline_health(project_path)
+        
+        # Overall health summary
+        health_table = rich_console.create_table("Overall Health", ["Metric", "Value", "Status"])
+        
+        # Health status indicator
+        if health.overall_success_rate >= 0.9:
+            health_status = "✅ Excellent"
+        elif health.overall_success_rate >= 0.8:
+            health_status = "🟡 Good"
+        elif health.overall_success_rate >= 0.5:
+            health_status = "⚠️ Needs Attention"
+        else:
+            health_status = "🚨 Critical"
+        
+        health_table.add_row("Overall Success Rate", f"{health.overall_success_rate:.1%}", health_status)
+        health_table.add_row("Total Experiments", str(health.total_experiments), "")
+        health_table.add_row("Total Failures", str(health.total_failures), "")
+        health_table.add_row("Reliability Trend", health.reliability_trend.title(), "")
+        
+        rich_console.print_table(health_table)
+        
+        # Component health breakdown
+        if metrics:
+            component_table = rich_console.create_table("Component Health", ["Component", "Success Rate", "Executions", "Status"])
+            
+            # Sort components by success rate (worst first)
+            sorted_components = sorted(metrics.items(), key=lambda x: x[1].success_rate)
+            
+            for component_name, m in sorted_components:
+                if m.success_rate < 0.5:
+                    status = "🚨 Critical"
+                elif m.success_rate < 0.8:
+                    status = "⚠️ Warning"
+                else:
+                    status = "✅ Healthy"
+                
+                component_table.add_row(
+                    component_name,
+                    f"{m.success_rate:.1%}",
+                    f"{m.successful_executions}/{m.total_executions}",
+                    status
+                )
+            
+            rich_console.print_table(component_table)
+        
+        # Alerts
+        alerts = telemetry_system.get_component_alerts(project_path)
+        if alerts:
+            rich_console.print_section("🚨 Alerts")
+            for alert in alerts:
+                if "CRITICAL" in alert:
+                    rich_console.print_error(alert)
+                else:
+                    rich_console.print_warning(alert)
+        
+        # Common failure patterns
+        if health.common_failure_patterns:
+            rich_console.print_section("🔍 Common Failure Patterns")
+            patterns_table = rich_console.create_table("Failure Patterns", ["Pattern", "Count"])
+            for pattern, count in health.common_failure_patterns[:5]:  # Top 5
+                patterns_table.add_row(pattern[:80] + "..." if len(pattern) > 80 else pattern, str(count))
+            rich_console.print_table(patterns_table)
+        
+        rich_console.print_info(f"\n💡 Use 'discernus telemetry-report {project_path}' for detailed analysis")
+        
+    except Exception as e:
+        rich_console.print_error(f"❌ Failed to generate telemetry: {str(e)}")
+        exit_general_error()
+
+
+@cli.command('telemetry-report')
+@click.argument('project_path', default='.')
+@click.option('--output', '-o', help='Save report to file instead of displaying')
+def telemetry_report(project_path: str, output: Optional[str]):
+    """Generate comprehensive infrastructure reliability report"""
+    project_path = Path(project_path).resolve()
+    
+    if not (project_path / "runs").exists():
+        rich_console.print_error(f"❌ No runs directory found in {project_path}")
+        exit_file_error()
+    
+    try:
+        telemetry_system = InfrastructureTelemetry(project_path.parent)
+        report = telemetry_system.generate_reliability_report(project_path)
+        
+        if output:
+            output_path = Path(output)
+            output_path.write_text(report)
+            rich_console.print_success(f"✅ Reliability report saved to {output_path}")
+        else:
+            # Print the markdown report as plain text
+            print(report)
+            
+    except Exception as e:
+        rich_console.print_error(f"❌ Failed to generate report: {str(e)}")
+        exit_general_error("Telemetry report generation failed")
 
 
 @cli.group()
