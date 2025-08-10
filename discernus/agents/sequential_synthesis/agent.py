@@ -15,6 +15,7 @@ import yaml
 
 from ...gateway.llm_gateway import LLMGateway
 from ...gateway.model_registry import ModelRegistry
+from ...core.audit_logger import AuditLogger
 from ..comprehensive_knowledge_curator.agent import ComprehensiveKnowledgeCurator, KnowledgeQuery, KnowledgeResult
 
 @dataclass

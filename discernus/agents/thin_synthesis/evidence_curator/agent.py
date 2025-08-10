@@ -17,6 +17,9 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../..'))
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
+from discernus.core.audit_logger import AuditLogger
+from discernus.core.parsing_utils import parse_llm_json_response
+
 
 @dataclass
 class EvidenceCurationRequest:
@@ -54,6 +57,10 @@ class EvidenceCurator:
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
         self.audit_logger = audit_logger
+        self.agent_name = "EvidenceCurator"
+
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "initialization", {"model": self.model})
 
     def curate_evidence(self, request: EvidenceCurationRequest, intelligent_index_data: bytes = None) -> EvidenceCurationResponse:
         """
@@ -62,6 +69,8 @@ class EvidenceCurator:
         Stage 1: Use intelligent index to identify candidate evidence IDs
         Stage 2: Use full evidence text to synthesize narrative
         """
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "curation_start", {"model": self.model})
         try:
             if intelligent_index_data is None:
                 return self._create_error_response("Intelligent index data is required for RAG-based curation")
@@ -103,6 +112,8 @@ class EvidenceCurator:
 
             final_curation = "\n\n".join(synthesized_narratives)
             
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "curation_success", {"narratives_synthesized": len(synthesized_narratives)})
             return EvidenceCurationResponse(
                 raw_llm_curation=final_curation,
                 curation_summary={"findings_summarized": len(synthesized_narratives)},
@@ -111,27 +122,15 @@ class EvidenceCurator:
             
         except Exception as e:
             self.logger.error(f"Evidence curation failed: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("curation_failed", str(e), {"agent": self.agent_name})
             return self._create_error_response(str(e))
     
     def _load_evidence_data(self, evidence_data: bytes) -> Optional[pd.DataFrame]:
         """Load and validate evidence JSON data."""
         try:
             json_str = evidence_data.decode('utf-8')
-            
-            if '"evidence_metadata"' in json_str and '"evidence_data"' in json_str:
-                evidence_artifact = self._parse_json_robust(json_str)
-                evidence_list = evidence_artifact.get('evidence_data', [])
-                analysis_result = {"evidence_data": evidence_list}
-            elif '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in json_str:
-                json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-                json_match = re.search(json_pattern, json_str, re.DOTALL)
-                if json_match:
-                    json_content = json_match.group(1).strip()
-                    analysis_result = self._parse_json_robust(json_content)
-                else:
-                    raise ValueError("Could not extract JSON from delimited format")
-            else:
-                analysis_result = self._parse_json_robust(json_str)
+            analysis_result = self._parse_json_robust(json_str)
 
             rows = []
             if 'evidence_data' in analysis_result:
@@ -157,9 +156,9 @@ class EvidenceCurator:
                             })
             if not rows:
                 return pd.DataFrame()
-            
+
             return pd.DataFrame(rows)
-            
+
         except Exception as e:
             self.logger.error(f"Failed to load evidence data: {str(e)}")
             return None
@@ -226,6 +225,11 @@ Respond with a JSON array of evidence IDs only:
                 json_mode=True
             )
             
+            if self.audit_logger:
+                self.audit_logger.log_llm_interaction(
+                    model=self.model, prompt=prompt, response=response_content,
+                    agent_name=self.agent_name, metadata={"operation": "stage_1_retrieval"}
+                )
             candidate_ids = json.loads(response_content)
             if isinstance(candidate_ids, list):
                 return candidate_ids[:5]  # Limit to top 5
@@ -234,6 +238,8 @@ Respond with a JSON array of evidence IDs only:
                 
         except Exception as e:
             self.logger.error(f"Stage 1 retrieval failed for task '{task_name}': {e}")
+            if self.audit_logger:
+                self.audit_logger.log_error("stage_1_retrieval_failed", str(e), {"agent": self.agent_name})
             return []
 
     def _retrieve_for_descriptive_stats(self, provenance: Dict[str, Any], evidence_df: pd.DataFrame, scores_df: pd.DataFrame) -> pd.DataFrame:
@@ -327,6 +333,11 @@ NARRATIVE:
                 model=self.model,
                 prompt=prompt
             )
+            if self.audit_logger:
+                self.audit_logger.log_llm_interaction(
+                    model=self.model, prompt=prompt, response=response_content,
+                    agent_name=self.agent_name, metadata={"operation": "stage_2_synthesis"}
+                )
             if response_content:
                 return response_content
             else:
@@ -335,6 +346,8 @@ NARRATIVE:
                 return f"// No synthesis could be generated for {task_name}. Reason: {reason}"
         except Exception as e:
             self.logger.error(f"Stage 2 synthesis failed for task '{task_name}': {e}")
+            if self.audit_logger:
+                self.audit_logger.log_error("stage_2_synthesis_failed", str(e), {"agent": self.agent_name})
             return f"// Error during synthesis for {task_name}: {e}"
 
     def _create_error_response(self, error_message: str) -> EvidenceCurationResponse:
@@ -344,74 +357,18 @@ NARRATIVE:
             success=False,
             error_message=error_message
         )
-    
+
     def _parse_json_robust(self, json_str: str) -> Dict[str, Any]:
         """
         BUG #326 THIN FIX: Use LLM intelligence to handle malformed JSON instead of complex parsing.
-        
-        THIN Approach: Trust LLM intelligence rather than brittle regex cleaning.
-        When JSON is malformed, ask the LLM to reformat it properly.
-        
-        Args:
-            json_str: JSON string to parse
-            
-        Returns:
-            Parsed JSON dictionary
         """
-        import json
-        
         try:
-            # THIN: Simple JSON parsing, trust LLM intelligence
-            return json.loads(json_str)
-        except json.JSONDecodeError as e:
-            # THIN Fallback: Ask LLM to reformat instead of complex parsing
-            self.logger.warning(f"JSON parsing failed, requesting LLM reformatting: {str(e)}")
-            return self._request_llm_json_reformat(json_str)
-    
-    def _request_llm_json_reformat(self, malformed_json: str) -> Dict[str, Any]:
-        """
-        THIN Approach: Use LLM intelligence to reformat malformed JSON.
-        
-        This demonstrates THIN principles: when parsing fails, ask the LLM to fix it
-        rather than writing complex extraction logic.
-        """
-        reformat_prompt = f"""
-        The following response contains evidence data but is not properly formatted JSON.
-        Please reformat it as clean JSON matching this structure:
-        
-        {{
-            "evidence_data": [
-                {{
-                    "document_name": "document name",
-                    "dimension": "dimension name",
-                    "quote_text": "evidence quote",
-                    "confidence": 0.8,
-                    "context_type": "context type",
-                    "extraction_method": "method"
-                }}
-            ]
-        }}
-        
-        Original response to reformat:
-        {malformed_json}
-        
-        Return only clean JSON, no markdown formatting or extra text.
-        """
-        
-        try:
-            # Use LLM to reformat the malformed JSON
-            if hasattr(self, 'llm_gateway') and self.llm_gateway:
-                response, _ = self.llm_gateway.execute_call(
-                    model=getattr(self, 'model', 'vertex_ai/gemini-2.5-flash'),
-                    prompt=reformat_prompt,
-                    temperature=0.1  # Low temperature for consistent formatting
-                )
-                return json.loads(response)
-            else:
-                # Fallback if no LLM available
-                self.logger.warning("No LLM gateway available for JSON reformatting, returning empty structure")
-                return {"evidence_data": []}
-        except Exception as reformat_error:
-            # Final fallback: return empty structure to prevent total failure
-            self.logger.warning(f"LLM JSON reformatting failed, returning empty evidence structure: {str(reformat_error)}")
-            return {"evidence_data": []}
+            return parse_llm_json_response(
+                response=json_str,
+                llm_gateway=self.llm_gateway,
+                model=self.model,
+                audit_logger=self.audit_logger
+            )
+        except (json.JSONDecodeError, ValueError) as e:
+            self.logger.error(f"Robust JSON parsing failed after all fallbacks: {e}")
+            return {}

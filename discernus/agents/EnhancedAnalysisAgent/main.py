@@ -3,30 +3,27 @@
 Enhanced Analysis Agent for Discernus THIN v2.0
 ===============================================
 
-Enhanced version of AnalyseBatchAgent with:
-- Mathematical "show your work" requirements for computational validation
-- Direct function call interface (bypasses Redis coordination)
-- Integration with security boundary and audit logging
-- Self-assessment and quality validation capabilities
-
-Based on THIN v2.0 principles: LLM intelligence + minimal software coordination
+Orchestrates the analysis process using modular components for caching,
+prompt building, and response parsing.
 """
 
 import json
 import base64
 import hashlib
-import re
-
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional
+
 from litellm import completion
 from litellm.cost_calculator import completion_cost
 
-from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
+from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
+from .cache import AnalysisCache
+from .prompt_builder import create_analysis_prompt
+from .response_parser import process_json_response
 
 
 class EnhancedAnalysisAgentError(Exception):
@@ -35,562 +32,158 @@ class EnhancedAnalysisAgentError(Exception):
 
 
 class EnhancedAnalysisAgent:
-    """
-    Enhanced analysis agent with mathematical validation and direct call interface.
-    
-    Key enhancements over original AnalyseBatchAgent:
-    - Mathematical "show your work" requirements in prompts
-    - Self-assessment and confidence reporting
-    - Direct function call interface (no Redis)
-    - Security boundary enforcement
-    - Comprehensive audit logging
-    """
-    
-    def __init__(self, 
+    """Orchestrates analysis using modular components."""
+
+    def __init__(self,
                  security_boundary: ExperimentSecurityBoundary,
                  audit_logger: AuditLogger,
                  artifact_storage: LocalArtifactStorage):
-        """
-        Initialize enhanced analysis agent.
-        
-        Args:
-            security_boundary: Security boundary for file access
-            audit_logger: Audit logger for comprehensive logging
-            artifact_storage: Local artifact storage for caching
-        """
         self.security = security_boundary
         self.audit = audit_logger
         self.storage = artifact_storage
         self.agent_name = "EnhancedAnalysisAgent"
-        
-        # Load prompt template
         self.prompt_template = self._load_prompt_template()
-        
-        print(f"🧠 {self.agent_name} initialized with mathematical validation")
-        
+        self.cache = AnalysisCache(self.storage, self.audit, self.agent_name)
+
         self.audit.log_agent_event(self.agent_name, "initialization", {
             "security_boundary": self.security.get_boundary_info(),
             "capabilities": ["mathematical_validation", "self_assessment", "direct_calls"]
         })
-    
+
     def _load_prompt_template(self) -> str:
-        """Load prompt template with dimensional completeness requirements."""
+        """Load prompt template."""
         prompt_path = Path(__file__).parent / "prompt.yaml"
         if not prompt_path.exists():
             raise FileNotFoundError("Could not find prompt.yaml for EnhancedAnalysisAgent")
-        
         with open(prompt_path, 'r') as f:
-            prompt_config = yaml.safe_load(f)
-        
-        return prompt_config['template']
-    
+            return yaml.safe_load(f)['template']
 
-    
-    def _process_json_response(self, result_content: str, document_hash: str, 
-                              current_scores_hash: Optional[str], 
-                              current_evidence_hash: Optional[str]) -> Tuple[str, str]:
-        """
-        THIN approach: Extract evidence during analysis time, not post-processing.
-        This eliminates the need for LLM calls during evidence extraction.
-        """
-        import re
-        import json
-        
-        # Store the complete raw LLM response as artifact (THIN principle)
-        raw_response_hash = self.storage.put_artifact(
-            result_content.encode('utf-8'),
-            {
-                "artifact_type": "raw_analysis_response_v6",
-                "document_hash": document_hash,
-                "framework_version": "v6.0",
-                "framework_hash": self.analysis_provenance.get("framework_hash", "unknown")
-            }
-        )
-        
-        # THIN EVIDENCE EXTRACTION: Extract evidence during analysis time
-        evidence_list = self._extract_evidence_from_analysis_response(result_content)
-        
-        # Store evidence artifact for RAG indexing
-        evidence_artifact = {
-            "evidence_metadata": {
-                "document_hash": document_hash,
-                "total_evidence_pieces": len(evidence_list),
-                "extraction_method": "analysis_time_extraction_v1.0",
-                "extraction_time": datetime.now(timezone.utc).isoformat(),
-                "framework_version": "v6.0"
-            },
-            "evidence_data": evidence_list
-        }
-        
-        evidence_hash = self.storage.put_artifact(
-            json.dumps(evidence_artifact, indent=2).encode('utf-8'),
-            {
-                "artifact_type": "evidence_v6",
-                "document_hash": document_hash,
-                "extraction_method": "analysis_time_extraction"
-            }
-        )
-        
-        self.audit.log_agent_event(self.agent_name, "evidence_extracted", {
-            "document_hash": document_hash,
-            "evidence_pieces": len(evidence_list),
-            "evidence_hash": evidence_hash,
-            "approach": "thin_analysis_time_extraction"
-        })
-        
-        # Return both raw response hash and evidence hash
-        return raw_response_hash, evidence_hash
-    
-    def _extract_evidence_from_analysis_response(self, result_content: str) -> List[Dict[str, Any]]:
-        """
-        Extract evidence from analysis response without LLM calls.
-        This is deterministic text processing, not LLM interpretation.
-        """
-        import re
-        import json
-        
-        # Extract JSON from delimited format
-        json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-        json_match = re.search(json_pattern, result_content, re.DOTALL)
-        
-        if not json_match:
-            return []
-        
-        try:
-            analysis_data = json.loads(json_match.group(1).strip())
-            document_analyses = analysis_data.get('document_analyses', [])
-            
-            evidence_list = []
-            for doc_analysis in document_analyses:
-                doc_name = doc_analysis.get('document_name', 'unknown')
-                evidence_items = doc_analysis.get('evidence', [])
-                
-                for evidence in evidence_items:
-                    evidence_list.append({
-                        "document_name": doc_name,
-                        "dimension": evidence.get('dimension'),
-                        "quote_text": evidence.get('quote_text'),
-                        "confidence": evidence.get('confidence'),
-                        "context_type": evidence.get('context_type'),
-                        # Add metadata for provenance
-                        "extraction_method": "analysis_time_extraction_v1.0",
-                        "source_type": "analysis_response",
-                        "extraction_timestamp": datetime.now(timezone.utc).isoformat()
-                    })
-            
-            return evidence_list
-        except json.JSONDecodeError as e:
-            self.audit.log_agent_event(self.agent_name, "evidence_extraction_failed", {
-                "error": str(e),
-                "response_length": len(result_content)
-            })
-            return []
-
-
-
-    def analyze_batch(self, 
+    def analyze_batch(self,
                      framework_content: str,
-                     corpus_documents: List[Dict[str, Any]], 
+                     corpus_documents: List[Dict[str, Any]],
                      experiment_config: Dict[str, Any],
                      model: str = "vertex_ai/gemini-2.5-flash",
                      current_scores_hash: Optional[str] = None,
-                     current_evidence_hash: Optional[str] = None,
-                     ensemble_run: Optional[int] = None,
-                     total_ensemble_runs: Optional[int] = None) -> Dict[str, Any]:
-        """
-        Perform enhanced batch analysis of documents using framework.
-        
-        Args:
-            framework_content: Raw framework content (markdown with JSON appendix)
-            corpus_documents: List of document dictionaries with content and metadata
-            experiment_config: Experiment configuration
-            model: LLM model to use
-            current_scores_hash: Hash of the current scores.csv artifact
-            current_evidence_hash: Hash of the current evidence.csv artifact
-            ensemble_run: Current ensemble run number (for session-based caching)
-            total_ensemble_runs: Total number of ensemble runs
-            
-        Returns:
-            Analysis results with mathematical validation and updated CSV artifact hashes
-        """
+                     current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
+        """Performs enhanced batch analysis of documents."""
         start_time = datetime.now(timezone.utc).isoformat()
-        
-        # Calculate framework hash for provenance tracking (Issue #208)
         framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
-        
-        # Calculate corpus hash for complete provenance
         corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
-        corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
-        
-        # Store provenance context for artifact metadata
-        self.analysis_provenance = {
-            "framework_hash": framework_hash,
-            "corpus_hash": corpus_hash,
-            "analysis_model": model,
-            "analysis_timestamp": start_time,
-            "agent_name": self.agent_name
-        }
-        
-        # Create deterministic batch_id for perfect caching (THIN principle)
-        # Hash based on framework + document contents + model, not timestamp
         doc_content_hash = hashlib.sha256(corpus_content.encode()).hexdigest()[:16]
-        
-        # TODO: Ensemble runs disabled pending architectural review
-        # Create a consistent session ID for all ensemble runs on the same content
-        # session_base_content = f'{framework_content}{doc_content_hash}{model}'
-        # session_id = f"ensemble_session_{hashlib.sha256(session_base_content.encode()).hexdigest()[:12]}"
-        
-        # Batch ID must be unique for each run to store separate artifacts
-        # if ensemble_run is not None and total_ensemble_runs is not None:
-        #     batch_id = f"batch_{hashlib.sha256(f'{session_base_content}{ensemble_run}'.encode()).hexdigest()[:12]}"
-        # else:
-        #     batch_id = f"batch_{hashlib.sha256(session_base_content.encode()).hexdigest()[:12]}"
-        
-        # Simplified batch_id for single runs only
         batch_id = f"batch_{hashlib.sha256(f'{framework_content}{doc_content_hash}{model}'.encode()).hexdigest()[:12]}"
-        
+
         self.audit.log_agent_event(self.agent_name, "batch_analysis_start", {
-            "batch_id": batch_id,
-            "num_documents": len(corpus_documents),
-            "model": model,
-            "experiment": experiment_config.get("name", "unknown")
+            "batch_id": batch_id, "num_documents": len(corpus_documents), "model": model
         })
-        
-        try:
-            # THIN approach: No framework parsing - let LLM handle framework interpretation
-            # Framework content will be passed directly to LLM via YAML prompt
-            
-            # Check if analysis result is already cached (THIN perfect caching)
-            # Create the same result structure we would store to check if it exists
-            analysis_cache_key = f"analysis_{batch_id}"
-            
-            # Try to find existing analysis result in artifact registry
-            for artifact_hash, artifact_info in self.storage.registry.items():
-                if (artifact_info.get("metadata", {}).get("artifact_type") == "analysis_result" and
-                    artifact_info.get("metadata", {}).get("batch_id") == batch_id):
-                    
-                    # Cache hit! Return the cached analysis result
-                    print(f"💾 Cache hit for analysis: {batch_id}")
-                    cached_content = self.storage.get_artifact(artifact_hash)
-                    cached_result = json.loads(cached_content.decode('utf-8'))
-                    
-                    self.audit.log_agent_event(self.agent_name, "cache_hit", {
-                        "batch_id": batch_id,
-                        "cached_artifact_hash": artifact_hash
-                    })
 
-                    # THIN approach: Process cached result without framework parsing
-                    document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
-                    
-                    # Process cached response (THIN approach - no framework version detection)
-                    new_scores_hash, new_evidence_hash = self._process_json_response(
-                        cached_result['raw_analysis_response'], 
-                        document_hashes[0] if document_hashes else "unknown_artifact",
-                        current_scores_hash, 
-                        current_evidence_hash
-                    )
-                    
-                    return {
-                        "analysis_result": {
-                            "batch_id": batch_id,
-                            "result_hash": artifact_hash,
-                            "result_content": cached_result,
-                            "duration_seconds": 0.0,  # Instant cache hit
-                            "mathematical_validation": True,
-                            "cached": True
-                        },
-                        "scores_hash": new_scores_hash,
-                        "evidence_hash": new_evidence_hash
-                    }
-            
-            # No cache hit - proceed with analysis
-            print(f"🔍 No cache hit for {batch_id} - performing analysis...")
-            
-            # Store input artifacts
-            framework_hash = self.storage.put_artifact(
-                framework_content.encode('utf-8'),
-                {"artifact_type": "framework", "batch_id": batch_id}
+        cached_result = self.cache.check_cache(batch_id)
+        if cached_result:
+            document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
+            new_scores_hash, new_evidence_hash = process_json_response(
+                cached_result['raw_analysis_response'],
+                document_hashes[0] if document_hashes else "unknown_artifact",
+                self.storage, self.audit, self.agent_name, {}
             )
-            
-            # Prepare documents for analysis
-            documents = []
-            document_hashes = []
-            
-            for i, doc in enumerate(corpus_documents):
-                # Get document content (handle both string and bytes)
-                if isinstance(doc.get('content'), bytes):
-                    doc_content = base64.b64encode(doc['content']).decode('utf-8')
-                    doc_hash = self.storage.put_artifact(doc['content'], {
-                        "artifact_type": "corpus_document",
-                        "original_filename": doc.get('filename', f'doc_{i+1}'),
-                        "batch_id": batch_id
-                    })
-                else:
-                    content_bytes = doc['content'].encode('utf-8')
-                    doc_content = base64.b64encode(content_bytes).decode('utf-8')
-                    doc_hash = self.storage.put_artifact(content_bytes, {
-                        "artifact_type": "corpus_document",
-                        "original_filename": doc.get('filename', f'doc_{i+1}'),
-                        "batch_id": batch_id
-                    })
-                
-                documents.append({
-                    'index': i + 1,
-                    'hash': doc_hash,
-                    'content': doc_content,
-                    'filename': doc.get('filename', f'doc_{i+1}')
-                })
-                document_hashes.append(doc_hash)
-            
-            # THIN approach: Use canonical prompt template with dimensional completeness enforcement
-            framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
-            
-            # Load canonical prompt template
-            prompt_template = self._load_prompt_template()
-            
-            # Format prompt with framework and documents
-            prompt_text = prompt_template.format(
-                batch_id=batch_id,
-                frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-                documents=self._format_documents_for_prompt(documents),
-                num_frameworks=1,
-                num_documents=len(documents)
-            )
-            
-            self.audit.log_agent_event(self.agent_name, "prompt_prepared", {
-                "prompt_length": len(prompt_text),
-                "approach": "thin_no_parsing"
-            })
-            
-            # Log LLM interaction start
-            self.audit.log_agent_event(self.agent_name, "llm_call_start", {
-                "batch_id": batch_id,
-                "model": model,
-                "prompt_length": len(prompt_text),
-                "mathematical_validation": True
-            })
-            
-            # Call LLM with enhanced mathematical validation prompt
-            # Removed temperature setting per Issue #211 debugging - let LLM use default
-            
-            # Prepare completion parameters based on model provider
-            completion_params = {
-                "model": model,
-                "messages": [{"role": "user", "content": prompt_text}]
-            }
-            
-            # TODO: Ensemble runs disabled pending architectural review
-            # Add session-based caching for ensemble runs with Vertex AI
-            # if model.startswith("vertex_ai/") and ensemble_run is not None and total_ensemble_runs is not None:
-            #     completion_params["vertex_ai_cache_id"] = session_id
-            #     completion_params["vertex_ai_cache_ttl"] = 3600  # 1 hour TTL
-            #     print(f"    🔄 Using session-based caching: {session_id} (run {ensemble_run}/{total_ensemble_runs})")
-            
-            # Add safety settings only for Vertex AI models (not supported by Anthropic)
-            if model.startswith("vertex_ai/"):
-                completion_params["safety_settings"] = [
-                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
-                ]
-            
-            response = completion(**completion_params)
-            
-            # TODO: Ensemble runs disabled pending architectural review
-            # Monitor cached tokens for Vertex AI (if available)
-            # if model.startswith("vertex_ai/"):
-            #     try:
-            #         usage_metadata = getattr(response, 'usage_metadata', None)
-            #         if usage_metadata:
-            #             cached_tokens = getattr(usage_metadata, 'cached_content_token_count', 0)
-            #             if cached_tokens > 0:
-            #             print(f"    💾 Vertex AI cache hit: {cached_tokens} tokens reused")
-            #             # Log cache hit to audit trail
-            #             self.audit.log_agent_event(self.agent_name, "vertex_cache_hit", {
-            #             "session_id": session_id,
-            #             "cached_tokens": cached_tokens
-            #             })
-            #     except Exception as e:
-            #         # Silently continue if cached token monitoring fails
-            #         pass
-            
-            # Extract and validate response
-            if not response or not response.choices:
-                raise EnhancedAnalysisAgentError("LLM returned empty response")
-            
-            result_content = response.choices[0].message.content
-            if not result_content or result_content.strip() == "":
-                raise EnhancedAnalysisAgentError("LLM returned empty content")
-            
-            # Extract cost and usage information from LLM response
-            try:
-                # Get usage data from response
-                usage_obj = getattr(response, 'usage', None)
-                prompt_tokens = getattr(usage_obj, 'prompt_tokens', 0) if usage_obj else 0
-                completion_tokens = getattr(usage_obj, 'completion_tokens', 0) if usage_obj else 0
-                total_tokens = getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0
-                
-                # Calculate cost using LiteLLM's cost calculator
-                response_cost = 0.0
-                try:
-                    response_cost = completion_cost(completion_response=response)
-                except Exception as cost_err:
-                    print(f"⚠️ Could not calculate cost: {cost_err}")
-                    response_cost = 0.0
-                
-                # Log cost information to audit system
-                self.audit.log_cost(
-                    operation="individual_document_analysis",
-                    model=model,
-                    tokens_used=total_tokens,
-                    cost_usd=response_cost,
-                    agent_name=self.agent_name,
-                    metadata={
-                        "document_hash": document_hashes[0] if document_hashes else "unknown",
-                        "batch_id": batch_id,
-                        "prompt_tokens": prompt_tokens,
-                        "completion_tokens": completion_tokens
-                    }
-                )
-                
-                print(f"💰 Document analysis cost: ${response_cost:.6f} ({total_tokens:,} tokens)")
-                
-            except Exception as e:
-                print(f"⚠️ Error extracting cost information: {e}")
-                # Continue processing even if cost extraction fails
-            
-            # THIN approach: Always process as raw response (no framework version detection)
-            self.audit.log_agent_event(self.agent_name, "processing_raw_response", {
-                "response_length": len(result_content),
-                "approach": "thin_raw_storage"
-            })
-            
-            # Process raw LLM response (THIN approach)
-            new_scores_hash, new_evidence_hash = self._process_json_response(
-                result_content, document_hashes[0], current_scores_hash, current_evidence_hash
-            )
-
-            # Store raw LLM response - let synthesis agent handle any format (THIN principle)
-            analysis_data = result_content
-
-            # Log LLM interaction
-            interaction_hash = self.audit.log_llm_interaction(
-                model=model,
-                prompt=prompt_text,
-                response=result_content,
-                agent_name=self.agent_name,
-                metadata={
-                    "batch_id": batch_id,
-                    "mathematical_validation": True,
-                    "tokens_input": len(prompt_text.split()),
-                    "tokens_output": len(result_content.split())
-                }
-            )
-            
-            # Create enhanced result artifact
-            end_time = datetime.now(timezone.utc).isoformat() 
-            duration = self._calculate_duration(start_time, end_time)
-            
-            enhanced_result = {
-                "batch_id": batch_id,
-                "agent_name": self.agent_name,
-                "agent_version": "enhanced_v2.1_raw_output",
-                "experiment_name": experiment_config.get("name", "unknown"),
-                "model_used": model,
-                "raw_analysis_response": analysis_data,  # Raw LLM response - no parsing
-                "evidence_hash": new_evidence_hash,
-                "mathematical_validation": {
-                    "enabled": True,
-                    "verification_required": True,
-                    "confidence_reporting": True
-                },
-                "execution_metadata": {
-                    "start_time": start_time,
-                    "end_time": end_time,
-                    "duration_seconds": duration,
-                    "llm_interaction_hash": interaction_hash
-                },
-                "input_artifacts": {
-                    "framework_hash": framework_hash,
-                    "document_hashes": document_hashes,
-                    "num_documents": len(documents)
-                },
-                "provenance": {
-                    "security_boundary": self.security.get_boundary_info(),
-                    "audit_session_id": self.audit.session_id
-                }
-            }
-            
-            # Store result artifact
-            result_hash = self.storage.put_artifact(
-                json.dumps(enhanced_result, indent=2).encode('utf-8'),
-                {"artifact_type": "analysis_result", "batch_id": batch_id}
-            )
-            
-            # Log artifact transformation
-            self.audit.log_artifact_chain(
-                stage="enhanced_analysis",
-                input_hashes=[framework_hash] + document_hashes,
-                output_hash=result_hash,
-                agent_name=self.agent_name,
-                llm_interaction_hash=interaction_hash
-            )
-            
-            # Log completion
-            self.audit.log_agent_event(self.agent_name, "batch_analysis_complete", {
-                "batch_id": batch_id,
-                "result_hash": result_hash,
-                "duration_seconds": duration,
-                "mathematical_validation": "completed"
-            })
-            
-            print(f"✅ Enhanced analysis complete: {batch_id} ({duration:.1f}s)")
-            
             return {
-                "analysis_result": {
-                    "batch_id": batch_id,
-                    "result_hash": result_hash,
-                    "result_content": enhanced_result,
-                    "duration_seconds": duration,
-                    "mathematical_validation": True
-                },
-                "scores_hash": new_scores_hash,
-                "evidence_hash": new_evidence_hash
+                "analysis_result": {"batch_id": batch_id, "result_content": cached_result, "cached": True},
+                "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
             }
-            
-        except Exception as e:
-            # Log error
-            self.audit.log_error("enhanced_analysis_error", str(e), {
-                "batch_id": batch_id,
-                "agent_name": self.agent_name
+
+        documents, document_hashes = self._prepare_documents(corpus_documents, batch_id)
+        prompt_text = create_analysis_prompt(self.prompt_template, batch_id, framework_content, documents)
+        self.audit.log_agent_event(self.agent_name, "prompt_prepared", {"prompt_length": len(prompt_text)})
+
+        response = self._execute_llm_call(model, prompt_text, batch_id)
+        result_content = response.choices[0].message.content
+
+        analysis_provenance = {"framework_hash": framework_hash}
+        new_scores_hash, new_evidence_hash = process_json_response(
+            result_content, document_hashes[0], self.storage, self.audit, self.agent_name, analysis_provenance
+        )
+
+        duration = self._calculate_duration(start_time, datetime.now(timezone.utc).isoformat())
+        enhanced_result = self._create_enhanced_result(
+            batch_id, model, result_content, new_evidence_hash, start_time, duration,
+            framework_hash, document_hashes, experiment_config
+        )
+        result_hash = self.storage.put_artifact(
+            json.dumps(enhanced_result, indent=2).encode('utf-8'),
+            {"artifact_type": "analysis_result", "batch_id": batch_id}
+        )
+
+        return {
+            "analysis_result": {"batch_id": batch_id, "result_hash": result_hash, "duration_seconds": duration},
+            "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
+        }
+
+    def _prepare_documents(self, corpus_documents: List[Dict[str, Any]], batch_id: str) -> tuple[List[Dict[str, Any]], List[str]]:
+        """Prepares documents for analysis and returns them along with their hashes."""
+        documents, document_hashes = [], []
+        for i, doc in enumerate(corpus_documents):
+            content_bytes = doc['content'] if isinstance(doc.get('content'), bytes) else str(doc.get('content', '')).encode('utf-8')
+            doc_hash = self.storage.put_artifact(content_bytes, {
+                "artifact_type": "corpus_document", "original_filename": doc.get('filename', f'doc_{i+1}'), "batch_id": batch_id
             })
-            
-            raise EnhancedAnalysisAgentError(f"Enhanced analysis failed: {e}")
+            documents.append({
+                'index': i + 1, 'hash': doc_hash, 'content': base64.b64encode(content_bytes).decode('utf-8'),
+                'filename': doc.get('filename', f'doc_{i+1}')
+            })
+            document_hashes.append(doc_hash)
+        return documents, document_hashes
 
+    def _execute_llm_call(self, model: str, prompt_text: str, batch_id: str) -> Any:
+        """Executes the LLM call and handles the response."""
+        self.audit.log_agent_event(self.agent_name, "llm_call_start", {"batch_id": batch_id, "model": model})
+        completion_params = {"model": model, "messages": [{"role": "user", "content": prompt_text}]}
+        if model.startswith("vertex_ai/"):
+            completion_params["safety_settings"] = [
+                {"category": f"HARM_CATEGORY_{cat}", "threshold": "BLOCK_NONE"}
+                for cat in ["HARASSMENT", "HATE_SPEECH", "SEXUALLY_EXPLICIT", "DANGEROUS_CONTENT"]
+            ]
+        response = completion(**completion_params)
+        if not response or not response.choices or not response.choices[0].message.content:
+            raise EnhancedAnalysisAgentError("LLM returned empty response")
+        self._log_llm_cost(response, model, batch_id)
+        return response
 
+    def _log_llm_cost(self, response: Any, model: str, batch_id: str):
+        """Logs the cost of the LLM call."""
+        try:
+            cost = completion_cost(completion_response=response)
+            usage = getattr(response, 'usage', None)
+            total_tokens = getattr(usage, 'total_tokens', 0) if usage else 0
+            self.audit.log_cost("individual_document_analysis", model, total_tokens, cost, self.agent_name, {"batch_id": batch_id})
+        except Exception as e:
+            self.audit.log_error("cost_calculation_error", str(e), {"agent": self.agent_name})
 
-
-
-
-
-
-
-    def _format_documents_for_prompt(self, documents: List[Dict]) -> str:
-        """Format documents for LLM prompt with enhanced metadata."""
-        formatted = []
-        for document in documents:
-            formatted.append(
-                f"=== DOCUMENT {document['index']} (base64 encoded) ===\n"
-                f"Filename: {document.get('filename', 'unknown')}\n"
-                f"Hash: {document['hash'][:12]}...\n"
-                f"{document['content']}\n"
-            )
-        return "\n".join(formatted)
-    
+    def _create_enhanced_result(self, batch_id, model, analysis_data, evidence_hash, start_time, duration, framework_hash, document_hashes, experiment_config):
+        """Creates the final enhanced result dictionary."""
+        return {
+            "batch_id": batch_id,
+            "agent_name": self.agent_name,
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": experiment_config.get("name", "unknown"),
+            "model_used": model,
+            "raw_analysis_response": analysis_data,
+            "evidence_hash": evidence_hash,
+            "execution_metadata": {
+                "start_time": start_time,
+                "end_time": datetime.now(timezone.utc).isoformat(),
+                "duration_seconds": duration,
+            },
+            "input_artifacts": {
+                "framework_hash": framework_hash,
+                "document_hashes": document_hashes,
+                "num_documents": len(document_hashes)
+            },
+            "provenance": {
+                "security_boundary": self.security.get_boundary_info(),
+                "audit_session_id": self.audit.session_id
+            }
+        }
 
     def _calculate_duration(self, start: str, end: str) -> float:
-        """Calculate duration between timestamps in seconds."""
+        """Calculates duration in seconds."""
         try:
             start_dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
             end_dt = datetime.fromisoformat(end.replace('Z', '+00:00'))

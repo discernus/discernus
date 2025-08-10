@@ -11,12 +11,12 @@ Discernus supports **20+ LLM models** across **5 providers** with sophisticated 
 
 ### Quick Reference - Recommended Defaults
 
-| **Task Category** | **Primary Model** | **Fallback** | **Cost/1M Tokens** | **Use Case** |
-|-------------------|-------------------|--------------|---------------------|--------------|
-| **Fast Analysis** | `vertex_ai/gemini-2.5-flash` | `vertex_ai/gemini-2.5-flash-lite` | $0.30/$2.50 | Document analysis, extraction |
-| **Complex Reasoning** | `vertex_ai/gemini-2.5-pro` | `anthropic/claude-3-5-sonnet-20240620` | $1.25/$10.00 | Synthesis, validation, coherence |
-| **High-Volume Tasks** | `vertex_ai/gemini-2.5-flash-lite` | `vertex_ai/gemini-2.5-flash` | $0.10/$0.40 | Batch processing, validation |
-| **Cross-Model Validation** | `anthropic/claude-3-5-sonnet-20240620` | `openai/gpt-4o` | $3.00/$15.00 | Academic quality assurance |
+| **Task Category** | **Primary Model** | **Fallback** | **Cost/1M Tokens** | **Rate Limits** | **Use Case** |
+|-------------------|-------------------|--------------|---------------------|-----------------|--------------|
+| **Document Analysis** | `vertex_ai/gemini-2.5-flash` | `vertex_ai/gemini-2.5-flash-lite` | $0.30/$2.50 | DSQ (unlimited) | Framework analysis, evidence extraction |
+| **Academic Synthesis** | `vertex_ai/gemini-2.5-pro` | `anthropic/claude-4-sonnet` | $1.25/$10.00 | DSQ (unlimited) | Research reports, complex reasoning |
+| **High-Volume Processing** | `vertex_ai/gemini-2.5-flash-lite` | `vertex_ai/gemini-2.5-flash` | $0.10/$0.40 | DSQ (unlimited) | Batch analysis, validation |
+| **Quality Validation** | `anthropic/claude-4-sonnet` | `anthropic/claude-3-5-sonnet` | $3.00/$15.00 | 1000 RPM, 450k TPM | Academic peer review, cross-validation |
 
 ---
 
@@ -24,32 +24,33 @@ Discernus supports **20+ LLM models** across **5 providers** with sophisticated 
 
 ### Current Model Infrastructure
 
-**Discernus Model Registry** (`discernus/gateway/models.yaml`) currently supports:
+**Discernus follows a Gemini-first architecture** optimized for cost-effectiveness and research scalability:
 
-#### **Tier 1: Production Models (Utility Tier 1-6)**
-- **vertex_ai/gemini-2.5-pro** - Top-tier reasoning, 2M context
-- **vertex_ai/gemini-2.5-flash** - Cost-effective analysis, 1M context  
-- **vertex_ai/gemini-2.5-flash-lite** - High-throughput tasks, 1M context
-- **anthropic/claude-3-5-sonnet-20240620** - Cross-model validation
-- **openai/gpt-4o** - Code interpretation, synthesis backup
+#### **Primary Production Stack (Vertex AI - Dynamic Shared Quota)**
+- **vertex_ai/gemini-2.5-pro** - Academic synthesis and complex reasoning, 2M context, DSQ scaling
+- **vertex_ai/gemini-2.5-flash** - Document analysis and standard processing, 1M context, DSQ scaling  
+- **vertex_ai/gemini-2.5-flash-lite** - High-volume batch processing, 1M context, DSQ scaling
 
-#### **Tier 2: Specialized Models (Utility Tier 7-10)**
-- **anthropic/claude-3-haiku-20240307** - Lightweight validation
-- **openai/gpt-4o-mini** - Cost-effective OpenAI option
-- **Auto-discovered models** - Vertex AI Claude variants
+#### **Premium Validation Models (Fixed Quotas)**
+- **anthropic/claude-4-sonnet** - Academic quality validation, 200K context, Tier 2 limits
+- **anthropic/claude-4-opus** - Complex reasoning validation, 200K context, Tier 2 limits
+- **openai/gpt-5** - Alternative synthesis approach, 400K context, Tier 2 limits
+- **anthropic/claude-3-5-sonnet** - Legacy validation, 200K context, Tier 2 limits
 
-#### **Tier 3: Experimental/Fallback (Utility Tier 98+)**
+#### **Specialized/Fallback Models**
+- **openai/gpt-5-mini** - Cost-effective reasoning alternative, 400K context
+- **anthropic/claude-3-haiku** - Lightweight validation tasks
 - **mistral/mistral-large-latest** - Local fallback option
-- **OpenRouter models** - Research and testing
 
 ### Architecture Capabilities
 
-**Multi-Model Infrastructure:**
-- **ModelRegistry**: Centralized model capability and cost tracking
-- **LLMGateway**: Unified execution with provider-specific parameter optimization
-- **ProviderParameterManager**: Automatic parameter mapping and safety settings
-- **Fallback Chains**: Automatic model switching on failure
-- **Cost Tracking**: Real-time cost monitoring and optimization
+**Gemini-First Architecture Advantages:**
+- **Cost Leadership**: 3-10x cheaper than Claude/GPT equivalents for comparable quality
+- **Dynamic Shared Quota**: No fixed rate limits, unlimited scaling during normal capacity
+- **Context Advantage**: Up to 2M token context windows for large documents
+- **Academic Safety**: Pre-configured for political/sensitive research content
+- **Reliability**: DSQ provides unpredictable but generally high capacity
+- **Fallback Redundancy**: Premium models available for validation and quality assurance
 
 ---
 
@@ -153,39 +154,53 @@ Discernus supports **20+ LLM models** across **5 providers** with sophisticated 
 
 ### Vertex AI (Google Cloud) - Primary Provider
 
-**Advantages:**
-- **Cost Leadership**: Most cost-effective models in portfolio
-- **Massive Context**: Gemini 2.5 Pro offers 2M token context
-- **High Throughput**: Best TPM/RPM ratios for production use
-- **Safety Integration**: Built-in safety settings for content moderation
-
-**Limitations:**
-- **Provider Lock-in**: Requires Google Cloud infrastructure
-- **Regional Availability**: Some models limited to specific regions
-- **Parameter Constraints**: Uses `max_output_tokens` vs. `max_tokens`
-
-**Recommended For:**
-- **Production Workloads**: Primary choice for cost-effective operations
-- **High-Volume Processing**: Best throughput characteristics
-- **Academic Research**: Excellent cost/quality ratio for research projects
-
-### Anthropic (Claude) - Quality & Safety Leader
+**Dynamic Shared Quota (DSQ) System:**
+- **No Fixed Limits**: Unlike traditional quotas, DSQ provides dynamic capacity allocation
+- **Unpredictable Availability**: May encounter 429 errors during peak demand periods
+- **Cost Advantage**: Significantly cheaper than fixed-quota providers (3-10x cost reduction)
+- **Academic-Friendly**: Optimized safety settings for research content
 
 **Advantages:**
-- **Academic Quality**: Excellent for scholarly writing and analysis
-- **Safety & Alignment**: Strong safety characteristics for sensitive content
-- **Cross-Model Validation**: Different training approach provides diverse perspectives
-- **Reliability**: Consistent performance across tasks
+- **Cost Leadership**: Most cost-effective models for academic research workflows
+- **Massive Context**: Gemini 2.5 Pro offers 2M token context (10x larger than Claude)
+- **No Rate Limits**: DSQ provides unlimited capacity during normal periods
+- **Safety Configuration**: Pre-configured for political/sensitive research analysis
 
 **Limitations:**
-- **Higher Costs**: 2-10x more expensive than Gemini equivalents
-- **Lower Throughput**: More restrictive rate limits
-- **Context Limitations**: 200K tokens vs. Gemini's 1-2M
+- **DSQ Unpredictability**: Capacity may fluctuate during peak usage periods
+- **Provider Dependency**: Requires Google Cloud infrastructure and authentication
+- **Parameter Differences**: Uses `max_output_tokens` vs. standard `max_tokens`
 
 **Recommended For:**
-- **Academic Validation**: Quality assurance and peer review preparation
-- **Sensitive Content**: Political analysis, ethical considerations
-- **Ensemble Validation**: Alternative perspectives for critical decisions
+- **Primary Production**: Default choice for all Discernus workflows
+- **Cost-Sensitive Research**: Academic projects with budget constraints
+- **High-Volume Analysis**: Large corpus processing without rate limit concerns
+- **Long Document Processing**: 2M context handles comprehensive documents
+
+### Anthropic (Claude) - Premium Validation Provider
+
+**Fixed Quota System (Tier 2):**
+- **Predictable Limits**: 1000 RPM, 450k input TPM, 90k output TPM for Claude 4
+- **Reliable Capacity**: No DSQ unpredictability, consistent availability
+- **Premium Pricing**: Higher costs justified for validation and quality assurance tasks
+- **Academic Excellence**: Industry-leading performance for scholarly writing
+
+**Advantages:**
+- **Academic Quality**: Best-in-class for research report generation and analysis
+- **Reliability**: Consistent performance without DSQ capacity fluctuations
+- **Cross-Model Validation**: Different training approach provides alternative perspectives
+- **Latest Models**: Access to Claude 4 series with enhanced reasoning capabilities
+
+**Limitations:**
+- **Cost Premium**: 3-10x more expensive than Gemini equivalents
+- **Fixed Rate Limits**: 1000 RPM vs. DSQ unlimited scaling
+- **Context Constraints**: 200K tokens vs. Gemini's 1-2M capacity
+
+**Recommended For:**
+- **Quality Validation**: Academic peer review and cross-model verification
+- **Final Reports**: Premium synthesis for publication-ready documents
+- **Complex Reasoning**: Tasks requiring highest-tier analytical capabilities
+- **Budget-Unlimited Projects**: When cost is secondary to quality
 
 ### OpenAI (GPT) - Specialized Capabilities
 

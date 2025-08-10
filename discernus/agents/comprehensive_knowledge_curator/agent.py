@@ -27,6 +27,7 @@ import hashlib
 from typing import Dict, Any, List, Optional, Union
 from dataclasses import dataclass
 from pathlib import Path
+import yaml
 
 # Import txtai for comprehensive knowledge indexing
 try:
@@ -39,6 +40,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.local_artifact_storage import LocalArtifactStorage
+from discernus.core.audit_logger import AuditLogger
 
 
 @dataclass
@@ -128,6 +130,8 @@ class ComprehensiveKnowledgeCurator:
         self.artifact_storage = artifact_storage
         self.logger = logging.getLogger(__name__)
         self.audit_logger = audit_logger
+        self.agent_name = "ComprehensiveKnowledgeCurator"
+        self.prompt_template = self._load_prompt_template()
         
         # txtai embeddings instance (initialized when needed)
         self.embeddings = None
@@ -135,6 +139,8 @@ class ComprehensiveKnowledgeCurator:
         self.index_built = False
         self.index_hash = None  # For persistent caching
         
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "initialization", {"model": self.model})
         # Data type processors for RAG lookup index (v2.0 Architecture - Evidence Only)
         # ALPHA FOCUS: Evidence-only RAG for analytical grounding
         # Framework, experiment, and corpus manifest provided as direct context
@@ -144,6 +150,14 @@ class ComprehensiveKnowledgeCurator:
             'calculated_metrics': self._process_calculated_metrics_data,
         }
     
+    def _load_prompt_template(self) -> str:
+        """Load the prompt template from YAML file."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        if not prompt_path.exists():
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        with open(prompt_path, 'r') as f:
+            return yaml.safe_load(f)['template']
+
     def build_comprehensive_index(self, request: ComprehensiveIndexRequest) -> ComprehensiveIndexResponse:
         """
         Build comprehensive knowledge graph from all experiment data types.
@@ -151,6 +165,8 @@ class ComprehensiveKnowledgeCurator:
         This is the core method that creates the unified knowledge architecture
         showcasing modern AI systems thinking for technical co-founder recruitment.
         """
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "index_build_start", {"run_id": request.run_id})
         try:
             # Generate index hash for persistent caching
             index_hash = self._generate_index_hash(request)
@@ -164,6 +180,10 @@ class ComprehensiveKnowledgeCurator:
                 self.index_hash = index_hash
                 
                 self.logger.info(f"📚 Loaded cached comprehensive knowledge index: {index_hash[:12]}...")
+                if self.audit_logger:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name, "index_cache_hit", {"index_hash": index_hash}
+                    )
                 return ComprehensiveIndexResponse(
                     success=True,
                     indexed_items=len(self.knowledge_index),
@@ -231,7 +251,11 @@ class ComprehensiveKnowledgeCurator:
             })
             
             self.logger.info(f"✅ Built comprehensive knowledge graph: {len(documents)} items across {len(request.experiment_artifacts)} data types")
-            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name, "index_build_success", {"indexed_items": len(documents), "index_hash": index_hash}
+                )
+
             return ComprehensiveIndexResponse(
                 success=True,
                 indexed_items=len(documents),
@@ -242,6 +266,8 @@ class ComprehensiveKnowledgeCurator:
             
         except Exception as e:
             self.logger.error(f"Comprehensive indexing failed: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("index_build_failed", str(e), {"agent": self.agent_name})
             return ComprehensiveIndexResponse(
                 success=False,
                 indexed_items=0,
@@ -263,7 +289,9 @@ class ComprehensiveKnowledgeCurator:
         if not self.index_built:
             self.logger.warning("Knowledge index not built - call build_comprehensive_index first")
             return []
-        
+
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "query_start", {"query": query.semantic_query})
         try:
             # Build WHERE clause for efficient, pre-query filtering
             where_clauses = []
@@ -314,10 +342,16 @@ class ComprehensiveKnowledgeCurator:
                     knowledge_results.append(result_obj)
             
             self.logger.info(f"🔍 Knowledge query '{query.semantic_query}' with filter '{where_sql}' → {len(knowledge_results)} results")
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name, "query_success", {"results_count": len(knowledge_results)}
+                )
             return knowledge_results
             
         except Exception as e:
             self.logger.error(f"Knowledge query failed: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("query_failed", str(e), {"agent": self.agent_name})
             return []
     
 

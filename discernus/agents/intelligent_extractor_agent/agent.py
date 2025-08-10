@@ -30,6 +30,7 @@ from datetime import datetime
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
+from discernus.core.parsing_utils import parse_llm_json_response
 
 
 @dataclass
@@ -103,6 +104,15 @@ class IntelligentExtractorAgent:
                 }
             )
     
+    def _reformat_and_parse_with_llm(self, response: str) -> Dict[str, Any]:
+        """Fallback to ask an LLM to reformat the JSON."""
+        return parse_llm_json_response(
+            response=response,
+            llm_gateway=self.llm_gateway,
+            model=self.model,
+            audit_logger=self.audit_logger,
+        )
+
     def extract_scores_from_raw_analysis(
         self, 
         raw_analysis_text: str, 
@@ -348,21 +358,18 @@ class IntelligentExtractorAgent:
             List of dictionaries, one per document with document_name and scores
         """
         try:
-            # Clean response - remove any markdown formatting
-            cleaned_response = response.strip()
-            if cleaned_response.startswith('```json'):
-                cleaned_response = cleaned_response[7:]
-            if cleaned_response.endswith('```'):
-                cleaned_response = cleaned_response[:-3]
-            cleaned_response = cleaned_response.strip()
-            
-            # Parse JSON array
-            parsed_data = json.loads(cleaned_response)
-            
+            # Use the robust, centralized parsing utility
+            parsed_data = self._reformat_and_parse_with_llm(response)
+
             # Ensure it's a list
             if not isinstance(parsed_data, list):
-                raise ValueError("Expected JSON array of documents")
-            
+                # Attempt to handle case where a single dict is returned instead of a list
+                if isinstance(parsed_data, dict) and 'document_name' in parsed_data:
+                     self.logger.warning("LLM returned a single document dict, wrapping in a list.")
+                     parsed_data = [parsed_data]
+                else:
+                    raise ValueError("Expected JSON array of documents, but got a different type.")
+
             # Process each document
             document_analyses = []
             for doc_data in parsed_data:
@@ -390,7 +397,10 @@ class IntelligentExtractorAgent:
                                 if min_score <= value <= max_score:
                                     extracted_scores[key] = float(value)
                                 else:
-                                    self.logger.warning(f"Invalid score for {key} in {document_name}: {value} (must be {min_score}-{max_score} per framework spec)")
+                                    # BUG #327 FIX: Clamp invalid scores instead of rejecting them
+                                    clamped_value = max(min_score, min(max_score, float(value)))
+                                    extracted_scores[key] = clamped_value
+                                    self.logger.warning(f"Score clamped for {key} in {document_name}: {value} → {clamped_value} (range: {min_score}-{max_score})")
                             else:
                                 self.logger.warning(f"Invalid score type for {key} in {document_name}: {value} (must be numeric)")
                 
@@ -401,13 +411,9 @@ class IntelligentExtractorAgent:
             
             return document_analyses
             
-        except json.JSONDecodeError as e:
-            self.logger.error(f"Failed to parse extraction response as JSON: {e}")
-            self.logger.error(f"Response was: {response[:200]}...")
-            raise IntelligentExtractorError(f"Invalid JSON response from LLM: {e}")
-        
-        except Exception as e:
-            self.logger.error(f"Unexpected error parsing extraction response: {e}")
+        except (json.JSONDecodeError, ValueError) as e:
+            self.logger.error(f"Failed to parse extraction response: {e}")
+            self.logger.error(f"Response snippet: {response[:200]}...")
             raise IntelligentExtractorError(f"Failed to parse extraction response: {e}")
     
     def get_extraction_stats(self) -> Dict[str, Any]:
