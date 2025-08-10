@@ -37,7 +37,24 @@ make check                    # Environment compliance
 python3 scripts/thin_compliance_check.py  # THIN pattern validation (MANDATORY)
 python3 -m pytest tests/     # Test suite passes
 
-# CURRENT STATUS: 86 VIOLATIONS DETECTED - DO NOT INCREASE THIS COUNT
+# CURRENT STATUS: 90 VIOLATIONS DETECTED - DO NOT INCREASE THIS COUNT
+# TARGET: Reduce violations, never increase them
+```
+
+#### **Step 1.5: THIN Pre-Check (NEW - MANDATORY)**
+Before writing ANY parsing, validation, or "smart" logic:
+```bash
+# Run the THIN discipline checkpoint:
+python3 scripts/thin_precheck.py
+
+# This will ask the critical questions that prevent THICK patterns:
+# 1. Could an LLM do this better than regex/parsing logic?
+# 2. Do we have a pattern for this in ExperimentCoherenceAgent?  
+# 3. Am I writing >10 lines of transformation/cleaning code?
+# 4. Is this parsing/validating/reformatting LLM output?
+# 5. Am I creating multi-strategy fallback systems?
+
+# RULE: If ANY answer is YES -> Use LLM intelligence, not software logic
 ```
 
 #### **Step 2: Specification Validation**
@@ -63,6 +80,21 @@ python3 -m discernus.core.math_toolkit verify_provenance
 4. **Framework Hardcoding**: Specific framework assumptions in orchestration
 5. **LLM Math**: Mathematical calculations performed by language models
 6. **Database Dependencies**: Centralized storage requirements
+
+#### **🚨 ANTI-PATTERNS WE KEEP REPEATING (HIGH ALERT)**
+**Pattern**: Problem → Complex Software Solution → Realize THIN Violation → Revert to LLM
+
+**Examples of What NOT to Do:**
+- ❌ **Multi-Strategy JSON Parsing**: `try regex → try escape fixing → try markdown extraction → try brace counting`
+- ❌ **Complex Validation Logic**: Writing parsers to validate LLM output instead of asking LLM to reformat
+- ❌ **Brittle Text Processing**: Regex-based cleaning of LLM responses
+- ❌ **Fallback Chains**: Multiple parsing strategies with complex error handling
+
+**What to Do Instead:**
+- ✅ **Simple Parse + LLM Reformat**: `json.loads()` → if fails, ask LLM to fix it
+- ✅ **Follow ExperimentCoherenceAgent Pattern**: `_request_llm_reformat()` method
+- ✅ **Trust LLM Intelligence**: LLMs understand JSON/text structure better than regex
+- ✅ **Single Responsibility**: One parsing attempt, delegate complexity to LLM
 
 #### **✅ Encouraged Patterns (Auto-Approve)**
 1. **YAML Externalization**: Prompts in separate configuration files
@@ -107,12 +139,40 @@ Agents should request human review for:
 - **Performance Impact**: Changes affecting scalability or cost characteristics
 - **Academic Standards**: Modifications to statistical verification or provenance systems
 
+### **Quick Reference: THIN Patterns**
+
+#### **JSON Parsing (THIN Way)**
+```python
+# ✅ THIN-Compliant Pattern (from ExperimentCoherenceAgent)
+def _parse_response_thin(self, response: str) -> Dict[str, Any]:
+    try:
+        return json.loads(response)  # Simple attempt first
+    except json.JSONDecodeError:
+        # Ask LLM to fix instead of complex parsing
+        return self._request_llm_reformat(response)
+
+def _request_llm_reformat(self, malformed: str) -> Dict[str, Any]:
+    prompt = f"Fix this JSON: {malformed}"
+    fixed_response, _ = self.llm_gateway.execute_call(model, prompt)
+    return json.loads(fixed_response)
+```
+
+#### **Validation (THIN Way)**
+```python
+# ✅ THIN-Compliant: Let LLM validate instead of writing rules
+def validate_thin(self, data: str) -> ValidationResult:
+    prompt = f"Validate this data against schema: {data}"
+    result, _ = self.llm_gateway.execute_call(model, prompt)
+    return self._parse_response_thin(result)
+```
+
 ### **Quick Reference: Architecture Document Sections**
 
 - **Universal Principles**: Lines 58-765 in `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
 - **Agent Architecture**: Lines 361-591 (comprehensive agent catalog and compliance status)
 - **Developer Guidelines**: Lines 768-831 (contribution principles and standards)
 - **THIN Compliance Template**: Lines 540-565 (reference implementation pattern)
+- **ExperimentCoherenceAgent**: Reference implementation for LLM-based parsing/validation
 
 ### **Emergency Contacts**
 
