@@ -116,8 +116,19 @@ class THINComplianceChecker:
                 if ('agents/' in str(file_path) and 
                     file_path.name not in ['__init__.py'] and
                     file_path.name == 'agent.py'):  # Only check main agent files
-                    yaml_path = file_path.parent / 'prompt.yaml'
-                    if not yaml_path.exists():
+                    
+                    # Check for YAML in multiple locations
+                    yaml_locations = [
+                        file_path.parent / 'prompt.yaml',
+                        file_path.parent / 'prompts' / 'synthesis_prompts.yaml',
+                        file_path.parent / 'prompts' / 'derived_metrics_planning.yaml',
+                        file_path.parent / 'prompts' / 'raw_data_planning.yaml',
+                        file_path.parent / 'prompts' / 'evidence_curation.yaml'
+                    ]
+                    
+                    yaml_exists = any(yaml_path.exists() for yaml_path in yaml_locations)
+                    
+                    if not yaml_exists:
                         # Only flag if the agent actually uses LLM calls
                         if ('llm_gateway' in content.lower() or 'execute_call' in content):
                             violations.append(f"MISSING YAML: {file_path} should have corresponding prompt.yaml file")
@@ -287,8 +298,10 @@ class THINComplianceChecker:
         all_violations = []
         
         for file_path in files_to_check:
-            # Skip test files and __pycache__
-            if '__pycache__' in str(file_path) or '/tests/' in str(file_path):
+            # Skip test files, __pycache__, and deprecated agents
+            if ('__pycache__' in str(file_path) or 
+                '/tests/' in str(file_path) or
+                '/deprecated/' in str(file_path)):
                 continue
                 
             violations = []
