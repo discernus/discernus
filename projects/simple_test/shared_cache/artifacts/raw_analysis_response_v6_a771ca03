@@ -1,0 +1,114 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted by a computational agent following the sequential steps outlined in the CFF v7.3 framework, focusing on dimensional scoring, salience assessment, confidence levels, and evidence extraction."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.15,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.6
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "competition": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "enmity": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "And so I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actual was understood to mean at the time of its ratification.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "So I would back up to the King versus Burwell decision, Mr. Speaker, and add this, uh, for the benefit of those folks that are listening in, and maybe there is some staff of the Supreme Court that are listening. If you discover a law, if it's a law like Obama Care that comes before the Supreme Court and you read the text of that and it doesn't include \"or federal government,\" and you believe that Congress wanted the federal government to be able to establish the changes or intended to write that into the law, you don't get to just write it in and say that's what they really meant.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "We have a Constitution to preserve, protect, defend, and defend. And so our obligation then is to say, \"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "This is a time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says, and what was understood to mean at the time of its ratification.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "And so I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country. And every American that dies at their hands is a life that could be saved if we just followed our laws.",
+          "confidence": 0.85,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "And that's what's at stake here. But we're going to have to personalize it because people over on this side of the aisle have their fingers in their ears on data. But when they see the faces, when they hear the anguish and the voices, especially of the mothers, or the voice. And I'll conclude with this, Mr. Speaker, or the voice of the father, Scott Root, who said when they arrested this perpetrator that killed his daughter, he was out before they could bury his daughter.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

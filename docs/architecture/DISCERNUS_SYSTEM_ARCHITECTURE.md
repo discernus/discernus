@@ -160,40 +160,28 @@ This section describes the implemented architecture and operational capabilities
 
 ```mermaid
 graph TD
-    A["🔍 Analysis Stage<br/>Enhanced Analysis Agents"] --> B["📊 Knowledge Indexing<br/>ComprehensiveKnowledgeCurator"]
-    B --> C["🧠 Intelligent Synthesis<br/>RAGEnhancedResultsInterpreter"]
-    C --> D["📋 Reporting Stage<br/>Statistical Analysis & Output"]
+    subgraph "Orchestration Layer (ThinOrchestrator)"
+        A["🔍 Analysis Stage<br/>Enhanced Analysis Agents"] --> B["🧠 Synthesis Stage<br/>ProductionThinSynthesisPipeline"]
+        B --> C["📋 Finalization Stage<br/>CSV Export & Provenance"]
+    end
     
-    A1["Raw Scores<br/>Evidence Quotes<br/>Metadata"] --> A
-    A2["Framework<br/>Specification"] --> A
-    A3["Corpus<br/>Documents"] --> A
+    A1["Framework<br/>Specification"] --> A
+    A2["Corpus<br/>Documents"] --> A
     
-    A --> B1["txtai Knowledge Graph<br/>All 6 Data Types<br/>Semantic Index"]
-    B1 --> B
-    
-    B --> C1["Cross-Domain Queries<br/>Intelligent Retrieval<br/>Evidence Grounding"]
-    C1 --> C
-    
-    C --> D1["MathToolkit<br/>Statistical Verification<br/>Provenance Chain"]
-    D1 --> D
-    
-    D --> E["📄 Academic Reports<br/>Peer Review Ready<br/>Full Audit Trail"]
+    C --> E["📄 Academic Reports<br/>Peer Review Ready<br/>Full Audit Trail"]
     
     style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
 ```
 
-### **Enhanced 4-Stage Architecture with Comprehensive RAG**
+### **Unified 3-Stage Architecture**
 
-**🔍 Analysis Stage**: Enhanced analysis agents with framework-specific prompts and dimensional scoring, producing raw scores and evidence with computational verification
+**🔍 Analysis Stage**: The `EnhancedAnalysisAgent` performs framework-based dimensional scoring, producing raw scores and evidence artifacts with full computational verification.
 
-**📊 Knowledge Indexing Stage**: Comprehensive knowledge graph construction from all 6 experiment data types with persistent hash-based caching for enterprise scalability
+**🧠 Synthesis Stage**: The `ProductionThinSynthesisPipeline` is invoked as a modular component. It performs statistical analysis, builds a knowledge index, and generates a comprehensive narrative report.
 
-**🧠 Intelligent Synthesis Stage**: Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval
-
-**📋 Reporting Stage**: Statistical analysis and academic-quality output with full cross-domain provenance, computational verification, and peer review readiness
+**📋 Finalization Stage**: The `ThinOrchestrator` completes the process by exporting all final CSVs (scores, evidence, statistical results), organizing all artifacts for provenance, and committing the run to Git.
 
 ### **Data Flow Architecture**
 
@@ -307,7 +295,7 @@ Core technical implementation patterns:
 - Cost optimization secondary to reliability validation
 
 **18. Linear Progression with Caching**
-- Enhanced 4-stage pipeline with deterministic progression: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
+- Unified 3-stage pipeline with deterministic progression: Analysis → Synthesis → Finalization
 - Cache hits eliminate redundant computation on identical inputs and knowledge graphs
 - Predictable resource usage and timing with comprehensive RAG integration
 
@@ -355,7 +343,7 @@ LLM integration and knowledge management:
 - **Academic Standards Alignment**: Vector search and semantic indexing provide deterministic, reproducible retrieval across heterogeneous research data types with full provenance preservation
 - **Cross-Domain Query Capability**: Semantic search enables natural language queries that span multiple data types, supporting research questions like "What statistical patterns correlate with specific textual evidence?"
 - **Immutable Research Data**: All indexed content represents immutable research artifacts generated during analysis, with txtai providing fast, consistent retrieval without introducing database dependencies
-- **Enterprise Scalability**: Hash-based persistent caching enables <2 second query performance at 500+ document scale while maintaining research-grade consistency and reproducibility
+- **Enterprise Scalability**: Hash-based persistent caching with <2 second query performance at 500+ document scale while maintaining research-grade consistency and reproducibility
 - **Provenance Preservation**: Every query result includes complete metadata linking back to original analysis artifacts, ensuring perfect traceability across all data types
 
 ## Agent Architecture Implementation
@@ -506,16 +494,15 @@ The agent architecture follows a **6-layer classification framework** that mirro
 
 #### 6. Pipeline Orchestration
 
-**ProductionThinSynthesisPipeline** - *Main Orchestrator*
-- **Function**: Orchestrates complete THIN synthesis pipeline
-- **THIN Compliance**: ⚠️ Contains complex parsing logic requiring cleanup
+**ThinOrchestrator** - *Primary Orchestrator*
+- **Function**: Orchestrates the complete, linear 3-stage experiment pipeline.
+- **THIN Compliance**: ✅ Implements direct function calls, minimal coordination logic.
 - **Key Capabilities**:
-  - 4-stage architecture: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting
-  - Multi-agent coordination with minimal software intelligence
-  - Complete audit trail and provenance preservation
-  - Comprehensive error handling and resilience
-- **Orchestrated Agents**: All synthesis agents, planning agents, evidence management
-- **Architecture Role**: Primary implementation of 4-Stage THIN Synthesis (Principle #18)
+  - Unified entrypoint for all experiment runs.
+  - Manages the full lifecycle: setup, analysis, synthesis, finalization.
+  - Ensures complete audit trail and provenance preservation.
+  - Calls modular components like `ProductionThinSynthesisPipeline`.
+- **Architecture Role**: Enforces the unified, linear pipeline (Principle #18).
 
 ### THIN Compliance Status
 

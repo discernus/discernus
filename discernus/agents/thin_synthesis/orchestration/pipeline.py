@@ -49,6 +49,8 @@ from ...sequential_synthesis.agent import SequentialSynthesisAgent, SynthesisReq
 from ...reliability_analysis_agent import ReliabilityAnalysisAgent
 from ....core.math_toolkit import execute_analysis_plan_thin
 from ....core.statistical_formatter import StatisticalResultsFormatter
+from ....gateway.llm_gateway import LLMGateway
+from ....gateway.model_registry import ModelRegistry
 
 
 @dataclass
@@ -129,6 +131,7 @@ class ProductionThinSynthesisPipeline:
         # V2.0 architecture: Use SequentialSynthesisAgent and ComprehensiveKnowledgeCurator
         self.sequential_synthesis_agent = SequentialSynthesisAgent(model=model, audit_logger=audit_logger)
         self.knowledge_curator = ComprehensiveKnowledgeCurator(model=model, artifact_storage=self.artifact_client, audit_logger=audit_logger)
+        self.llm_gateway = LLMGateway(ModelRegistry())
 
         # Debug configuration
         self.debug_agent = os.environ.get("DISCERNUS_DEBUG_AGENT")
@@ -322,7 +325,14 @@ class ProductionThinSynthesisPipeline:
         except Exception:
             self.logger.warning("Could not parse framework_calculation_spec from framework. Proceeding without it.")
 
-        return execute_analysis_plan_thin(raw_analysis_data, analysis_plan, request.corpus_manifest, framework_calculation_spec)
+        return execute_analysis_plan_thin(
+            raw_analysis_data=raw_analysis_data,
+            analysis_plan_input=analysis_plan,
+            llm_gateway=self.llm_gateway,
+            model=self.analysis_model or self.synthesis_model,
+            corpus_manifest=request.corpus_manifest,
+            framework_calculation_spec=framework_calculation_spec,
+        )
     
     def _extract_framework_score_columns(self, framework_spec: str) -> List[str]:
         """

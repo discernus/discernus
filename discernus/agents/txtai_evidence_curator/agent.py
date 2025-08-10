@@ -33,6 +33,7 @@ except ImportError:
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
+from discernus.core.audit_logger import AuditLogger
 
 
 @dataclass
@@ -105,12 +106,16 @@ class TxtaiEvidenceCurator:
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
         self.audit_logger = audit_logger
-        
+        self.agent_name = "TxtaiEvidenceCurator"
+
         # txtai embeddings instance (initialized when needed)
         self.embeddings = None
         self.index_built = False
         self.documents = []  # Store documents for retrieval
-    
+
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "initialization", {"model": self.model})
+
     def curate_evidence(self, request: TxtaiCurationRequest) -> TxtaiCurationResponse:
         """
         Main entry point for txtai-based evidence curation.
@@ -120,6 +125,8 @@ class TxtaiEvidenceCurator:
         2. For each statistical finding, query for relevant evidence
         3. Synthesize narrative using retrieved evidence
         """
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "curation_start", {"model": self.model})
         try:
             # Load and index evidence
             if not self.index_built:
@@ -153,6 +160,8 @@ class TxtaiEvidenceCurator:
             # Use batch processing to generate all narratives in a single LLM call
             final_curation = self._batch_generate_evidence_narratives(valid_tasks, request.framework_spec)
             
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "curation_success", {"tasks_processed": len(valid_tasks)})
             return TxtaiCurationResponse(
                 raw_llm_curation=final_curation,
                 curation_summary={
@@ -165,6 +174,8 @@ class TxtaiEvidenceCurator:
             
         except Exception as e:
             self.logger.error(f"txtai evidence curation failed: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("curation_failed", str(e), {"agent": self.agent_name})
             return self._create_error_response(str(e))
     
     def _task_needs_evidence_linking(self, task_name: str, task_result: Dict[str, Any]) -> bool:
@@ -239,6 +250,8 @@ class TxtaiEvidenceCurator:
         Returns:
             True if indexing succeeded, False otherwise
         """
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(self.agent_name, "indexing_start", {"evidence_count": len(json.loads(evidence_data.decode('utf-8')).get('evidence_data', []))})
         try:
             # Parse evidence data
             evidence_json = json.loads(evidence_data.decode('utf-8'))
@@ -277,7 +290,9 @@ class TxtaiEvidenceCurator:
             self.index_built = True
             
             self.logger.info(f"Built txtai index with {len(documents)} evidence pieces")
-            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "indexing_complete", {"indexed_docs": len(documents)})
+
             # Debug: Log sample of indexed documents
             sample_docs = documents[:3] if len(documents) >= 3 else documents
             for i, doc in enumerate(sample_docs):
@@ -287,6 +302,8 @@ class TxtaiEvidenceCurator:
             
         except Exception as e:
             self.logger.error(f"Failed to build evidence index: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("indexing_failed", str(e), {"agent": self.agent_name})
             return False
     
     def _batch_generate_evidence_narratives(self, valid_tasks: Dict[str, Dict[str, Any]], framework_spec: str) -> str:
@@ -306,7 +323,9 @@ class TxtaiEvidenceCurator:
         try:
             # Collect evidence for all tasks
             all_task_evidence = {}
-            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "batch_synthesis_start", {"task_count": len(valid_tasks)})
+
             for task_name, task_result in valid_tasks.items():
                 # Extract provenance information
                 provenance = task_result.get("provenance", {})
@@ -350,7 +369,13 @@ class TxtaiEvidenceCurator:
                 model=self.model,
                 prompt=batch_prompt
             )
-            
+
+            if self.audit_logger:
+                self.audit_logger.log_llm_interaction(
+                    model=self.model, prompt=batch_prompt, response=response_content,
+                    agent_name=self.agent_name, metadata={"operation": "batch_synthesis"}
+                )
+
             if response_content:
                 self.logger.info(f"Batch evidence synthesis successful: processed {len(valid_tasks)} tasks in 1 LLM call")
                 return response_content.strip()
@@ -361,6 +386,8 @@ class TxtaiEvidenceCurator:
                 
         except Exception as e:
             self.logger.error(f"Batch evidence synthesis failed: {str(e)}. Using fallback individual processing.")
+            if self.audit_logger:
+                self.audit_logger.log_error("batch_synthesis_failed", str(e), {"agent": self.agent_name})
             return self._fallback_individual_synthesis(valid_tasks, framework_spec)
     
     def _create_batch_synthesis_prompt(self, all_task_evidence: Dict[str, Dict], framework_spec: str) -> str:
@@ -619,6 +646,12 @@ NARRATIVE:
                 prompt=prompt
             )
             
+            if self.audit_logger:
+                self.audit_logger.log_llm_interaction(
+                    model=self.model, prompt=prompt, response=response_content,
+                    agent_name=self.agent_name, metadata={"operation": "synthesis"}
+                )
+
             if response_content:
                 return response_content.strip()
             else:

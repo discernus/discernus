@@ -41,6 +41,8 @@ from ..agents.thin_synthesis.orchestration.pipeline import (
     ProductionPipelineResponse
 )
 
+from .parsing_utils import parse_llm_json_response
+
 
 class ThinOrchestratorError(Exception):
     """THIN orchestrator specific exceptions"""
@@ -156,16 +158,20 @@ Respond with only the JSON object."""
                     "reuse_recommendation": "NONE"
                 }
             
-            # Parse LLM JSON response
-            import json
-            import re
-            json_match = re.search(r'\{.*\}', response_content, re.DOTALL)
-            if json_match:
-                compatibility_result = json.loads(json_match.group())
+            # Parse LLM JSON response using THIN utility
+            try:
+                compatibility_result = parse_llm_json_response(
+                    response=response_content,
+                    llm_gateway=self.llm_gateway,
+                    model=self.model,
+                    audit_logger=self.audit_logger
+                )
                 # Validate required fields
                 required_fields = ["compatibility", "confidence", "reasoning", "reuse_recommendation"]
                 if all(field in compatibility_result for field in required_fields):
                     return compatibility_result
+            except (ValueError, json.JSONDecodeError) as e:
+                self.audit_logger.log_error("framework_compatibility_parsing_failed", f"Failed to parse compatibility response: {e}", {"agent": "ThinOrchestrator"})
             
             # Fallback if parsing fails
             return {
@@ -1234,19 +1240,19 @@ Respond with only the JSON object."""
                 # Evidence already extracted during analysis time - no post-processing needed
                 # (THIN principle: analysis agent produces evidence format needed for RAG)
                 
-                # Extract JSON from the delimited response
-                import re
-                json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-                json_match = re.search(json_pattern, raw_response, re.DOTALL)
-                
-                if json_match:
-                    try:
-                        analysis_data = json.loads(json_match.group(1))
-                        if "document_analyses" in analysis_data:
-                            combined_document_analyses.extend(analysis_data["document_analyses"])
-                    except json.JSONDecodeError as e:
-                        print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
-                        continue
+                # Extract JSON using THIN utility
+                try:
+                    analysis_data = parse_llm_json_response(
+                        response=raw_response,
+                        llm_gateway=self.llm_gateway,
+                        model=self.model,
+                        audit_logger=self.audit_logger
+                    )
+                    if "document_analyses" in analysis_data:
+                        combined_document_analyses.extend(analysis_data["document_analyses"])
+                except (ValueError, json.JSONDecodeError) as e:
+                    print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
+                    continue
                 else:
                     print(f"Warning: No JSON found in raw_analysis_response for result {i}")
                     continue
@@ -1533,21 +1539,17 @@ Respond with only the JSON object."""
         
         This is the old brittle parsing logic, kept as fallback for non-v7.0 frameworks.
         """
-        import re
-        
-        # Extract JSON from the delimited response
-        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-        json_match = re.search(json_pattern, raw_analysis_response, re.DOTALL)
-        
-        if json_match:
-            try:
-                analysis_data = json.loads(json_match.group(1))
-                return analysis_data
-            except json.JSONDecodeError as e:
-                print(f"Warning: Failed to parse JSON from legacy format: {e}")
-                return None
-        else:
-            print("Warning: No JSON found in legacy format")
+        # Extract JSON using THIN utility
+        try:
+            analysis_data = parse_llm_json_response(
+                response=raw_analysis_response,
+                llm_gateway=self.llm_gateway,
+                model=self.model,
+                audit_logger=self.audit_logger
+            )
+            return analysis_data
+        except (ValueError, json.JSONDecodeError) as e:
+            print(f"Warning: Failed to parse JSON from legacy format: {e}")
             return None
 
     def _extract_evidence_from_delimited(self, raw_response: str) -> List[Dict[str, Any]]:
@@ -1567,14 +1569,13 @@ Respond with only the JSON object."""
         import json
         
         # Extract JSON from delimited format
-        json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-        json_match = re.search(json_pattern, raw_response, re.DOTALL)
-        
-        if not json_match:
-            return []
-        
         try:
-            analysis_data = json.loads(json_match.group(1).strip())
+            analysis_data = parse_llm_json_response(
+                response=raw_response,
+                llm_gateway=self.llm_gateway,
+                model=self.model,
+                audit_logger=self.audit_logger
+            )
             document_analyses = analysis_data.get('document_analyses', [])
             
             evidence_list = []
@@ -2573,12 +2574,21 @@ This research was conducted using the Discernus computational research platform,
     def _parse_framework_config(self, framework_content: str) -> Dict[str, Any]:
         """Parse framework configuration from framework content."""
         try:
-            # Extract JSON appendix from framework markdown
+            # Extract JSON appendix using THIN utility
             import re
             json_match = re.search(r'<details><summary>Machine-Readable Configuration</summary>\s*```json\s*\n(.*?)\n\s*```\s*</details>', framework_content, re.DOTALL)
             if json_match:
                 config_str = json_match.group(1)
-                config = json.loads(config_str)
+                try:
+                    config = parse_llm_json_response(
+                        response=config_str,
+                        llm_gateway=self.llm_gateway,
+                        model=self.model,
+                        audit_logger=self.audit_logger
+                    )
+                except (ValueError, json.JSONDecodeError) as e:
+                    self.audit_logger.log_error("framework_config_parsing_failed", f"Failed to parse framework config: {e}", {"agent": "ThinOrchestrator"})
+                    config = {}
                 
                 # v7.3: Ensure static_weights is present, defaulting to empty dict if not
                 if 'static_weights' not in config:

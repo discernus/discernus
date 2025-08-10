@@ -16,6 +16,9 @@ from scipy import stats
 from scipy.stats import pearsonr, spearmanr
 import warnings
 
+from discernus.gateway.llm_gateway import LLMGateway
+from discernus.core.parsing_utils import parse_llm_json_response
+
 # New: LLM-optimized statistical formatter
 from discernus.core.statistical_formatter import StatisticalResultsFormatter
 
@@ -1089,7 +1092,7 @@ def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[
         raise MathToolkitError(f"Metric validation failed: {str(e)}")
 
 
-def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summary_types: List[str], **kwargs) -> Dict[str, Any]:
+def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summary_types: List[str], grouping_variable: Optional[str] = None, **kwargs) -> Dict[str, Any]:
     """
     Generate descriptive statistics for specified metrics.
     
@@ -1097,53 +1100,152 @@ def create_summary_statistics(dataframe: pd.DataFrame, metrics: List[str], summa
         dataframe: Input DataFrame
         metrics: List of metrics to summarize
         summary_types: List of summary types (mean, std, min, max, etc.)
+        grouping_variable: Optional grouping variable for grouped statistics (Bug #325 fix)
         
     Returns:
         Dictionary containing summary statistics
     """
     try:
+        # BUG #325 FIX: Handle grouping_variable parameter compatibility
+        if 'grouping_variables' in kwargs and grouping_variable is None:
+            grouping_variable = kwargs['grouping_variables']
+        
+        # Handle case where grouping_variable is passed as a list
+        if isinstance(grouping_variable, list):
+            grouping_variable = grouping_variable[0] if grouping_variable else None
+        
         # Filter to only include metrics that exist in the dataframe
         available_metrics = [metric for metric in metrics if metric in dataframe.columns]
         
         if not available_metrics:
             raise MathToolkitError(f"No valid metrics found. Available columns: {list(dataframe.columns)}")
         
-        summary_results = {}
-        
-        for metric in available_metrics:
-            metric_stats = {}
-            series = dataframe[metric].dropna()
+        # Handle grouping variable (Bug #325 fix)
+        if grouping_variable and grouping_variable in dataframe.columns:
+            # Group by the specified variable and calculate stats for each group
+            grouped_results = {}
+            for group_name, group_df in dataframe.groupby(grouping_variable):
+                group_stats = {}
+                for metric in available_metrics:
+                    if metric not in group_df.columns:
+                        continue
+                    series = group_df[metric].dropna()
+                    if len(series) > 0:
+                        # BUG #324 FIX: Handle string columns gracefully
+                        try:
+                            # Try to convert to numeric first
+                            numeric_series = pd.to_numeric(series, errors='coerce')
+                            if numeric_series.notna().any():  # Has numeric values
+                                numeric_series = numeric_series.dropna()
+                                metric_stats = {}
+                                if "mean" in summary_types:
+                                    metric_stats["mean"] = float(numeric_series.mean())
+                                if "std" in summary_types:
+                                    metric_stats["std"] = float(numeric_series.std())
+                                if "min" in summary_types:
+                                    metric_stats["min"] = float(numeric_series.min())
+                                if "max" in summary_types:
+                                    metric_stats["max"] = float(numeric_series.max())
+                                if "median" in summary_types:
+                                    metric_stats["median"] = float(numeric_series.median())
+                                if "count" in summary_types:
+                                    metric_stats["count"] = int(len(numeric_series))
+                            else:
+                                # Non-numeric data - provide categorical stats
+                                metric_stats = {}
+                                if "count" in summary_types:
+                                    metric_stats["count"] = int(len(series))
+                                # Add basic categorical info
+                                metric_stats["data_type"] = "categorical"
+                                metric_stats["unique_values"] = int(series.nunique())
+                        except Exception:
+                            # Fallback for any conversion errors
+                            metric_stats = {}
+                            if "count" in summary_types:
+                                metric_stats["count"] = int(len(series))
+                            metric_stats["data_type"] = "error_in_conversion"
+                        
+                        group_stats[metric] = metric_stats
+                
+                grouped_results[str(group_name)] = group_stats
             
-            if "mean" in summary_types:
-                metric_stats["mean"] = float(series.mean())
-            if "std" in summary_types:
-                metric_stats["std"] = float(series.std())
-            if "min" in summary_types:
-                metric_stats["min"] = float(series.min())
-            if "max" in summary_types:
-                metric_stats["max"] = float(series.max())
-            if "median" in summary_types:
-                metric_stats["median"] = float(series.median())
-            if "count" in summary_types:
-                metric_stats["count"] = int(len(series))
+            # PROVENANCE for grouped results
+            provenance = {
+                "input_columns": available_metrics,
+                "grouping_variable": grouping_variable,
+                "groups": list(grouped_results.keys()),
+                "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+                "filter_conditions": f"grouped_by_{grouping_variable}"
+            }
             
-            summary_results[metric] = metric_stats
+            return {
+                "type": "summary_statistics_grouped",
+                "metrics": available_metrics,
+                "summary_types": summary_types,
+                "grouping_variable": grouping_variable,
+                "results": grouped_results,
+                "missing_metrics": [metric for metric in metrics if metric not in dataframe.columns],
+                "provenance": provenance
+            }
         
-        # PROVENANCE
-        provenance = {
-            "input_columns": available_metrics,
-            "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
-            "filter_conditions": "None"
-        }
-        
-        return {
-            "type": "summary_statistics",
-            "metrics": available_metrics,
-            "summary_types": summary_types,
-            "results": summary_results,
-            "missing_metrics": [metric for metric in metrics if metric not in dataframe.columns],
-            "provenance": provenance
-        }
+        else:
+            # Original ungrouped logic
+            summary_results = {}
+            
+            for metric in available_metrics:
+                series = dataframe[metric].dropna()
+                
+                # BUG #324 FIX: Handle string columns gracefully (ungrouped path)
+                try:
+                    # Try to convert to numeric first
+                    numeric_series = pd.to_numeric(series, errors='coerce')
+                    if numeric_series.notna().any():  # Has numeric values
+                        numeric_series = numeric_series.dropna()
+                        metric_stats = {}
+                        if "mean" in summary_types:
+                            metric_stats["mean"] = float(numeric_series.mean())
+                        if "std" in summary_types:
+                            metric_stats["std"] = float(numeric_series.std())
+                        if "min" in summary_types:
+                            metric_stats["min"] = float(numeric_series.min())
+                        if "max" in summary_types:
+                            metric_stats["max"] = float(numeric_series.max())
+                        if "median" in summary_types:
+                            metric_stats["median"] = float(numeric_series.median())
+                        if "count" in summary_types:
+                            metric_stats["count"] = int(len(numeric_series))
+                    else:
+                        # Non-numeric data - provide categorical stats
+                        metric_stats = {}
+                        if "count" in summary_types:
+                            metric_stats["count"] = int(len(series))
+                        # Add basic categorical info
+                        metric_stats["data_type"] = "categorical"
+                        metric_stats["unique_values"] = int(series.nunique())
+                except Exception:
+                    # Fallback for any conversion errors
+                    metric_stats = {}
+                    if "count" in summary_types:
+                        metric_stats["count"] = int(len(series))
+                    metric_stats["data_type"] = "error_in_conversion"
+                
+                summary_results[metric] = metric_stats
+            
+            # PROVENANCE for ungrouped results
+            provenance = {
+                "input_columns": available_metrics,
+                "input_document_ids": dataframe['aid'].unique().tolist() if 'aid' in dataframe.columns else [],
+                "filter_conditions": "None"
+            }
+            
+            return {
+                "type": "summary_statistics",
+                "metrics": available_metrics,
+                "summary_types": summary_types,
+                "results": summary_results,
+                "missing_metrics": [metric for metric in metrics if metric not in dataframe.columns],
+                "provenance": provenance
+            }
         
     except Exception as e:
         raise MathToolkitError(f"Summary statistics generation failed: {str(e)}")
@@ -1249,7 +1351,14 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
         raise MathToolkitError(f"Analysis plan execution failed: {str(e)}")
 
 
-def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corpus_manifest: Optional[Dict[str, Any]] = None, framework_calculation_spec: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def execute_analysis_plan_thin(
+    raw_analysis_data: str,
+    analysis_plan_input: Union[str, Dict[str, Any]],
+    llm_gateway: LLMGateway,
+    model: str,
+    corpus_manifest: Optional[Dict[str, Any]] = None,
+    framework_calculation_spec: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
     """
     THIN version: Execute analysis plan optimized for v7.0 Gasket Architecture.
     
@@ -1263,17 +1372,15 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         
         # THIN: Handle raw LLM analysis plan responses
         if isinstance(analysis_plan_input, str):
-            # Parse raw LLM analysis plan response
             try:
-                # Try to extract JSON from markdown code blocks
-                json_match = re.search(r'```json\s*(\{.*?\})\s*```', analysis_plan_input, re.DOTALL)
-                if json_match:
-                    analysis_plan = json.loads(json_match.group(1))
-                else:
-                    # Try direct JSON parsing
-                    analysis_plan = json.loads(analysis_plan_input)
+                # Use the robust, centralized parsing utility
+                analysis_plan = parse_llm_json_response(
+                    response=analysis_plan_input,
+                    llm_gateway=llm_gateway,
+                    model=model,
+                )
                 logger.info(f"THIN MathToolkit: Parsed raw LLM analysis plan ({len(analysis_plan_input)} chars)")
-            except json.JSONDecodeError as e:
+            except (json.JSONDecodeError, ValueError) as e:
                 logger.error(f"THIN MathToolkit: Failed to parse LLM analysis plan: {e}")
                 return {"analysis_plan": {}, "results": {}, "errors": [f"Failed to parse LLM analysis plan: {str(e)}"], "formatted_statistics": None}
         else:
@@ -1285,16 +1392,17 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
         try:
             analysis_result = json.loads(raw_analysis_data)
         except json.JSONDecodeError as e:
-            # Fallback: Try legacy delimiter extraction for backward compatibility
-            logger.warning(f"Clean JSON parsing failed, trying legacy delimiter extraction: {e}")
-            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*(\{.*?\})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-            json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
-            if json_match:
-                json_str = json_match.group(1).strip()
-                analysis_result = json.loads(json_str)
-            else:
-                raise MathToolkitError(f"Failed to parse analysis data as JSON: {e}")
-        
+            # Fallback: Use the robust parser for the raw data as well
+            logger.warning(f"Clean JSON parsing of raw_analysis_data failed, trying LLM-based reformat: {e}")
+            try:
+                analysis_result = parse_llm_json_response(
+                    response=raw_analysis_data,
+                    llm_gateway=llm_gateway,
+                    model=model,
+                )
+            except (json.JSONDecodeError, ValueError) as inner_e:
+                 raise MathToolkitError(f"Failed to parse analysis data with all fallbacks: {inner_e}")
+
         # Convert to DataFrame using optimized gasket helper
         scores_df = _json_scores_to_dataframe_thin(analysis_result, corpus_manifest)
         

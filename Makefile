@@ -95,7 +95,14 @@ list-safe:  ## List experiments with safe Python wrapper
 
 clean:  ## Clean up temporary files
 	@echo "🧹 Cleaning temporary files..."
-	@find . -type f -name "*.pyc" -delete
-	@find . -type d -name "__pycache__" -exec rm -rf {} +
+	@./scripts/cleanup_python_cache.sh
 	@find . -name ".DS_Store" -delete
+	@echo "✅ Cleanup complete!"
+
+clean-all:  ## Comprehensive cleanup (cache, artifacts, logs)
+	@echo "🧹 Comprehensive cleanup..."
+	@./scripts/cleanup_python_cache.sh
+	@find . -name ".DS_Store" -delete
+	@find . -name "*.log" -path "*/deprecated/*" -delete
+	@echo "✅ Comprehensive cleanup complete!"
 	@echo "✅ Cleanup complete!" 

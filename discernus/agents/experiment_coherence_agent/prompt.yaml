@@ -103,7 +103,7 @@ template: |
   - Speaker biographical details, dates, titles, or historical accuracy of metadata fields
 
   RESPONSE FORMAT:
-  Return a JSON object with this structure:
+  Return ONLY clean JSON (no markdown formatting, no extra text) with this structure:
   {{
       "success": true/false,
       "issues": [

@@ -353,9 +353,91 @@ class ExperimentCoherenceAgent:
                     fix="Ensure framework file is readable and well-formed",
                     priority="SUGGESTION",
                     affected_files=[str(framework_path)]
-                ))
+                                ))
+            
+            return issues
+    
+    def _request_llm_reformat(self, malformed_response: str) -> ValidationResult:
+        """
+        THIN Approach: Use LLM intelligence to reformat malformed JSON instead of complex parsing.
         
-        return issues
+        This demonstrates THIN principles: when parsing fails, ask the LLM to fix it
+        rather than writing complex extraction logic.
+        """
+        reformat_prompt = f"""
+        The following response contains validation results but is not properly formatted JSON.
+        Please reformat it as clean JSON matching this structure:
+        
+        {{
+            "success": true/false,
+            "issues": [
+                {{
+                    "category": "category_name",
+                    "description": "issue description", 
+                    "impact": "impact description",
+                    "fix": "fix description",
+                    "priority": "BLOCKING|QUALITY|SUGGESTION",
+                    "affected_files": ["file1", "file2"]
+                }}
+            ],
+            "suggestions": ["suggestion1", "suggestion2"]
+        }}
+        
+        Original response to reformat:
+        {malformed_response}
+        
+        Return only clean JSON, no markdown formatting or extra text.
+        """
+        
+        try:
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "llm_reformat_request",
+                    {"reason": "malformed_json", "original_length": len(malformed_response)}
+                )
+            
+            reformatted_response, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=reformat_prompt,
+                system_prompt="You are a JSON formatting assistant. Return only clean JSON."
+            )
+            
+            # Try parsing the reformatted response
+            data = json.loads(reformatted_response)
+            
+            # Convert to ValidationResult
+            issues = []
+            for issue_data in data.get('issues', []):
+                issues.append(ValidationIssue(
+                    category=issue_data.get('category', 'unknown'),
+                    description=issue_data.get('description', 'Reformatted validation issue'),
+                    impact=issue_data.get('impact', 'Unknown impact'),
+                    fix=issue_data.get('fix', 'No fix provided'),
+                    priority=issue_data.get('priority', 'SUGGESTION'),
+                    affected_files=issue_data.get('affected_files', [])
+                ))
+            
+            return ValidationResult(
+                success=data.get('success', False),
+                issues=issues,
+                suggestions=data.get('suggestions', [])
+            )
+            
+        except Exception as reformat_error:
+            # Final fallback: return a validation failure
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="llm_response_error",
+                    description=f"Could not parse or reformat LLM response: {str(reformat_error)}",
+                    impact="Validation cannot be completed",
+                    fix="Check LLM response format and prompt clarity",
+                    priority="BLOCKING",
+                    affected_files=[]
+                )],
+                suggestions=["Review prompt template for JSON format requirements"]
+            )
 
     def _create_validation_prompt(self, experiment_spec: Dict, framework_spec: str, corpus_manifest: Dict) -> str:
         """Create validation prompt using externalized YAML template."""
@@ -369,21 +451,17 @@ class ExperimentCoherenceAgent:
         )
     
     def _parse_validation_response(self, response: str) -> ValidationResult:
-        """Parse LLM validation response into structured result."""
+        """
+        Parse LLM validation response using THIN principles.
+        
+        THIN Approach: Trust LLM intelligence with simple parsing and graceful fallbacks.
+        Avoid complex JSON extraction - let the LLM return clean JSON.
+        """
         try:
-            # Extract JSON from response
-            if '```json' in response:
-                json_start = response.find('```json') + 7
-                json_end = response.find('```', json_start)
-                if json_end != -1:
-                    json_content = response[json_start:json_end].strip()
-                    data = json.loads(json_content)
-                else:
-                    data = json.loads(response)
-            else:
-                data = json.loads(response)
+            # THIN: Simple JSON parsing, trust LLM intelligence
+            data = json.loads(response)
             
-            # Convert to ValidationResult
+            # Convert to ValidationResult with LLM intelligence
             issues = []
             for issue_data in data.get('issues', []):
                 issues.append(ValidationIssue(
@@ -401,6 +479,21 @@ class ExperimentCoherenceAgent:
                 suggestions=data.get('suggestions', [])
             )
             
+        except json.JSONDecodeError as json_error:
+            # Debug: Log the problematic response
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "json_parse_error",
+                    {
+                        "error": str(json_error),
+                        "response_preview": response[:200] if response else "EMPTY_RESPONSE",
+                        "response_length": len(response) if response else 0
+                    }
+                )
+            
+            # THIN Fallback: Ask LLM to reformat instead of complex parsing
+            return self._request_llm_reformat(response)
         except Exception as e:
             # Return validation failure for parsing errors
             return ValidationResult(

@@ -31,7 +31,6 @@ Execute complete experiment (analysis + synthesis).
 | `--analysis-model MODEL` | `DISCERNUS_ANALYSIS_MODEL` | `vertex_ai/gemini-2.5-flash-lite` | LLM model for analysis |
 | `--synthesis-model MODEL` | `DISCERNUS_SYNTHESIS_MODEL` | `vertex_ai/gemini-2.5-pro` | LLM model for synthesis |
 | `--skip-validation` | `DISCERNUS_SKIP_VALIDATION` | `false` | Skip experiment validation |
-| `--analysis-only` | `DISCERNUS_ANALYSIS_ONLY` | `false` | Run analysis only, skip synthesis |
 | `--ensemble-runs N` | `DISCERNUS_ENSEMBLE_RUNS` | `1` | Number of ensemble runs |
 | `--no-auto-commit` | `DISCERNUS_NO_AUTO_COMMIT` | `false` | Disable automatic Git commit |
 
@@ -46,9 +45,6 @@ discernus run --analysis-model vertex_ai/gemini-2.5-pro
 # Test run without execution
 discernus run --dry-run
 
-# Analysis only for faster iteration
-discernus run --analysis-only
-
 # Run from different directory
 discernus run /path/to/experiment
 
@@ -61,30 +57,6 @@ discernus --verbose run --dry-run
 - `1`: General error
 - `3`: Validation failed
 - `4`: Infrastructure error
-
----
-
-### `discernus continue [EXPERIMENT_PATH]`
-
-Intelligently resume experiment from existing artifacts.
-
-**Arguments:**
-- `EXPERIMENT_PATH`: Path to experiment directory (default: current directory)
-
-**Options:**
-| Option | Environment Variable | Default | Description |
-|--------|---------------------|---------|-------------|
-| `--synthesis-model MODEL` | `DISCERNUS_SYNTHESIS_MODEL` | `vertex_ai/gemini-2.5-pro` | LLM model for synthesis |
-| `--no-auto-commit` | `DISCERNUS_NO_AUTO_COMMIT` | `false` | Disable automatic Git commit |
-
-**Examples:**
-```bash
-# Resume from cached analysis
-discernus continue
-
-# Resume with different synthesis model
-discernus continue --synthesis-model vertex_ai/gemini-2.5-flash-lite
-```
 
 ---
 
@@ -160,30 +132,6 @@ discernus validate --skip-coherence
 **Exit Codes:**
 - `0`: Valid experiment
 - `3`: Validation failed
-
----
-
-### `discernus debug [EXPERIMENT_PATH]`
-
-Interactive debugging mode with detailed agent tracing.
-
-**Arguments:**
-- `EXPERIMENT_PATH`: Path to experiment directory (default: current directory)
-
-**Options:**
-| Option | Description |
-|--------|-------------|
-| `--analysis-model MODEL` | LLM model for analysis |
-| `--step-by-step` | Enable step-by-step execution |
-
-**Examples:**
-```bash
-# Interactive debugging
-discernus debug
-
-# Debug with specific model
-discernus debug --analysis-model vertex_ai/gemini-2.5-pro
-```
 
 ---
 
