@@ -298,9 +298,22 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
                 content = f.read()
                 # Extract YAML front matter
                 if content.startswith('---'):
-                    _, yaml_content, _ = content.split('---', 2)
-                    experiment = yaml.safe_load(yaml_content)
-                    experiment['_corpus_file_count'] = len(list((exp_path / experiment.get('corpus_path', 'corpus')).glob('*')))
+                    parts = content.split('---', 2)
+                    if len(parts) >= 3:
+                        yaml_content = parts[1]
+                        experiment = yaml.safe_load(yaml_content)
+                        if experiment is None:
+                            experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
+                        else:
+                            # Count corpus files
+                            corpus_path = exp_path / experiment.get('corpus_path', 'corpus')
+                            if corpus_path.exists():
+                                corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
+                                experiment['_corpus_file_count'] = len(corpus_files)
+                            else:
+                                experiment['_corpus_file_count'] = 0
+                    else:
+                        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
                 else:
                     experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
         except Exception as e:
@@ -399,14 +412,11 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         with rich_console.create_progress("Running experiment...") as progress:
             task = progress.add_task("Executing experiment", total=100)
             
-            # Execute experiment (complete or analysis-only)
+            # Execute experiment (unified pipeline)
             result = orchestrator.run_experiment(
                 analysis_model=analysis_model,
                 synthesis_model=synthesis_model,
-                analysis_only=analysis_only,
                 auto_commit=(not no_auto_commit),
-                # TODO: Ensemble runs disabled pending architectural review
-                # ensemble_runs=ensemble_runs
                 ensemble_runs=1
             )
             
@@ -483,10 +493,9 @@ def continue_experiment(experiment_path: str, synthesis_model: str):
             
         orchestrator = ThinOrchestrator(exp_path)
         
-        # Execute with synthesis-only mode (intelligent resume)
+        # Execute with unified pipeline (intelligent resume via caching)
         result = orchestrator.run_experiment(
-            synthesis_model=synthesis_model,
-            synthesis_only=True
+            synthesis_model=synthesis_model
         )
         
         # Show completion
@@ -569,7 +578,6 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
         # Execute with debug parameters
         result = orchestrator.run_experiment(
             synthesis_model=synthesis_model,
-            synthesis_only=True,  # Debug mode typically works with existing artifacts
             debug_agent=agent,
             debug_level='verbose' if verbose else 'debug'
         )
