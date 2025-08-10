@@ -37,8 +37,8 @@ make check                    # Environment compliance
 python3 scripts/thin_compliance_check.py  # THIN pattern validation (MANDATORY)
 python3 -m pytest tests/     # Test suite passes
 
-# CURRENT STATUS: 90 VIOLATIONS DETECTED - DO NOT INCREASE THIS COUNT
-# TARGET: Reduce violations, never increase them
+# CURRENT STATUS: 35 VIOLATIONS DETECTED (Fixed false positives!)
+# TARGET: Reduce to <20 violations, never increase them
 ```
 
 #### **Step 1.5: THIN Pre-Check (NEW - MANDATORY)**

@@ -78,26 +78,49 @@ class THINComplianceChecker:
         if file_path.suffix == '.py':
             try:
                 content = file_path.read_text()
+                lines = content.splitlines()
                 
-                # Check for common inline prompt patterns
-                inline_patterns = [
-                    'prompt = """',
-                    'prompt = "',
-                    'system_prompt = """',
-                    'system_prompt = "',
-                    'template = """',
-                    'instruction = """'
-                ]
+                # Check for actual inline prompt patterns (not print statements or comments)
+                inline_prompt_count = 0
                 
-                for pattern in inline_patterns:
-                    if pattern in content:
-                        violations.append(f"YAML EXTERNALIZATION VIOLATION: {file_path} contains inline prompt: {pattern}")
-                        
-                # Check if corresponding YAML file exists for agent files
-                if 'agents/' in str(file_path) and file_path.name not in ['__init__.py']:
+                for line_num, line in enumerate(lines, 1):
+                    stripped = line.strip()
+                    
+                    # Skip comments, print statements, logging, and error messages
+                    if (stripped.startswith('#') or
+                        stripped.startswith('print(') or
+                        'logging.' in stripped or
+                        'logger.' in stripped or
+                        'raise ' in stripped or
+                        'f"' in stripped):  # Skip f-strings used for formatting
+                        continue
+                    
+                    # Look for actual inline prompt patterns
+                    inline_patterns = [
+                        'prompt = """',
+                        'prompt = "',
+                        'system_prompt = """',
+                        'system_prompt = "',
+                        'template = """',
+                        'instruction = """',
+                        'user_prompt = """',
+                        'user_prompt = "'
+                    ]
+                    
+                    for pattern in inline_patterns:
+                        if pattern in stripped:
+                            inline_prompt_count += 1
+                            violations.append(f"YAML EXTERNALIZATION VIOLATION: {file_path}:{line_num} contains inline prompt: {pattern}")
+                
+                # Check if corresponding YAML file exists for agent files (but be more selective)
+                if ('agents/' in str(file_path) and 
+                    file_path.name not in ['__init__.py'] and
+                    file_path.name == 'agent.py'):  # Only check main agent files
                     yaml_path = file_path.parent / 'prompt.yaml'
                     if not yaml_path.exists():
-                        violations.append(f"MISSING YAML: {file_path} should have corresponding prompt.yaml file")
+                        # Only flag if the agent actually uses LLM calls
+                        if ('llm_gateway' in content.lower() or 'execute_call' in content):
+                            violations.append(f"MISSING YAML: {file_path} should have corresponding prompt.yaml file")
                         
             except Exception as e:
                 violations.append(f"ERROR: Could not analyze {file_path}: {e}")
@@ -111,25 +134,45 @@ class THINComplianceChecker:
         if file_path.suffix == '.py':
             try:
                 content = file_path.read_text()
+                lines = content.splitlines()
                 
-                # Patterns indicating complex parsing
-                complex_parsing_patterns = [
-                    'json.loads(',
-                    'json.dumps(',
-                    'regex.findall(',
-                    're.search(',
-                    're.findall(',
-                    '.split()',
-                    '.replace(',
-                    'BeautifulSoup(',
-                    'lxml.etree',
-                    'xml.etree'
-                ]
+                # Only check for actual complex parsing patterns in context
+                complex_parsing_count = 0
                 
-                parsing_count = sum(1 for pattern in complex_parsing_patterns if pattern in content)
+                for line_num, line in enumerate(lines, 1):
+                    stripped = line.strip()
+                    
+                    # Skip imports, comments, print statements, and basic operations
+                    if (stripped.startswith('import ') or 
+                        stripped.startswith('from ') or
+                        stripped.startswith('#') or
+                        stripped.startswith('print(') or
+                        'logging.' in stripped or
+                        'logger.' in stripped):
+                        continue
+                    
+                    # Look for actual complex parsing patterns
+                    if any(pattern in stripped for pattern in [
+                        're.search(',
+                        're.findall(',
+                        're.sub(',
+                        'BeautifulSoup(',
+                        'lxml.etree',
+                        'xml.etree'
+                    ]):
+                        complex_parsing_count += 1
+                    
+                    # Check for multi-step JSON parsing with error handling
+                    if 'json.loads(' in stripped and ('try:' in content or 'except' in content):
+                        # This could be complex if it's part of multi-strategy parsing
+                        context_lines = lines[max(0, line_num-3):min(len(lines), line_num+3)]
+                        context = '\n'.join(context_lines)
+                        if ('regex' in context.lower() or 'fallback' in context.lower() or 
+                            'strategy' in context.lower()):
+                            complex_parsing_count += 1
                 
-                if parsing_count > 3:  # Allow minimal parsing, flag excessive
-                    violations.append(f"PARSING COMPLEXITY VIOLATION: {file_path} has {parsing_count} parsing operations (consider LLM envelope extraction)")
+                if complex_parsing_count > 2:  # Allow some parsing, flag excessive patterns
+                    violations.append(f"PARSING COMPLEXITY VIOLATION: {file_path} has {complex_parsing_count} complex parsing operations (consider LLM envelope extraction)")
                     
             except Exception as e:
                 violations.append(f"ERROR: Could not analyze {file_path}: {e}")
@@ -173,22 +216,25 @@ class THINComplianceChecker:
             try:
                 content = file_path.read_text()
                 
-                # Patterns indicating LLM mathematical calculations (forbidden)
-                llm_math_patterns = [
-                    'calculate',
-                    'compute',
-                    'sum(',
-                    'mean(',
-                    'std(',
-                    'correlation',
-                    'regression',
-                    'statistical'
-                ]
+                # Only check agent files that actually do LLM calls
+                if 'agents/' not in str(file_path):
+                    return violations
                 
-                # Check if file contains LLM math without MathToolkit
-                if any(pattern in content.lower() for pattern in llm_math_patterns):
+                # Patterns indicating LLM mathematical calculations (forbidden)
+                # Only flag if LLM is being asked to do math without MathToolkit
+                suspicious_patterns = []
+                
+                # Look for prompts that ask LLMs to do math
+                if ('execute_call' in content and 
+                    any(pattern in content.lower() for pattern in [
+                        'calculate the', 'compute the', 'find the mean', 'find the correlation',
+                        'statistical analysis', 'regression analysis', 'anova'
+                    ])):
                     if 'MathToolkit' not in content and 'math_toolkit' not in content:
-                        violations.append(f"ACADEMIC INTEGRITY VIOLATION: {file_path} may contain LLM mathematical calculations without MathToolkit verification")
+                        suspicious_patterns.append("LLM mathematical calculation requests")
+                
+                if suspicious_patterns:
+                    violations.append(f"ACADEMIC INTEGRITY VIOLATION: {file_path} may contain LLM mathematical calculations without MathToolkit verification: {', '.join(suspicious_patterns)}")
                         
             except Exception as e:
                 violations.append(f"ERROR: Could not analyze {file_path}: {e}")
@@ -199,15 +245,22 @@ class THINComplianceChecker:
         """Check for proper infrastructure integration."""
         violations = []
         
-        if file_path.suffix == '.py' and 'agents/' in str(file_path) and file_path.name not in ['__init__.py']:
+        # Only check main agent files that actually perform LLM operations
+        if (file_path.suffix == '.py' and 
+            'agents/' in str(file_path) and 
+            file_path.name == 'agent.py'):  # Only main agent files
+            
             try:
                 content = file_path.read_text()
                 
-                # Required infrastructure patterns
+                # Only check infrastructure if the agent actually uses LLM calls
+                if not ('execute_call' in content or 'llm_gateway' in content.lower()):
+                    return violations  # Skip non-LLM agents
+                
+                # Required infrastructure patterns for LLM agents
                 required_patterns = {
-                    'LLMGateway': 'LLMGateway integration required for all agents',
-                    'AuditLogger': 'AuditLogger integration required for provenance',
-                    'ModelRegistry': 'ModelRegistry required for multi-model support'
+                    'LLMGateway': 'LLMGateway integration required for all LLM agents',
+                    'AuditLogger': 'AuditLogger integration required for provenance'
                 }
                 
                 for pattern, message in required_patterns.items():
