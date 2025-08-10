@@ -91,11 +91,8 @@ gh issue view 68  # HANGS
 gh issue view 68 | cat  # WORKS
 ```
 
-### Deprecated Components (Don't Use These)
+### Current CLI Usage
 ```bash
-# ❌ DON'T use deprecated CLI - it's been moved to deprecated/
-python3 discernus/cli_legacy_redis.py run projects/simple_test  # DEPRECATED
-
 # ✅ DO use current CLI
 python3 -m discernus.cli run projects/simple_test  # CURRENT
 ./scripts/safe_python.sh -m discernus.cli run projects/simple_test  # SAFEST
