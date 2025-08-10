@@ -39,6 +39,9 @@ python3 -m pytest tests/     # Test suite passes
 
 # CURRENT STATUS: 35 VIOLATIONS DETECTED (Fixed false positives!)
 # TARGET: Reduce to <20 violations, never increase them
+
+# AUTOMATED ENFORCEMENT: Install pre-commit hook to prevent violations
+scripts/install_git_hooks.sh  # One-time setup for automatic THIN checking
 ```
 
 #### **Step 1.5: THIN Pre-Check (NEW - MANDATORY)**
