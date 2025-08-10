@@ -38,7 +38,7 @@ runs/20250804T000659Z/
 ├── FINAL_REPORT.md              # Main deliverable
 ├── METHODOLOGY_SUMMARY.md       # Framework + corpus + model decisions
 ├── STATISTICAL_SUMMARY.md       # Reliability metrics + confidence intervals
-├── data/
+├── artifacts/statistical_results/
 │   ├── scores.csv               # Quantitative results  
 │   ├── evidence.csv             # Supporting quotes
 │   └── reliability_metrics.csv  # Multi-run consistency data
@@ -90,7 +90,7 @@ shared_cache/artifacts/          # PERFORMANCE LAYER (unchanged)
 - **Replication Materials**: `artifacts/`, `technical/manifest.json`
 
 ### By Stakeholder Need
-- **Primary Researcher**: `FINAL_REPORT.md`, `data/` directory
+- **Primary Researcher**: `FINAL_REPORT.md`, `artifacts/statistical_results/` directory
 - **Internal Reviewer**: `METHODOLOGY_SUMMARY.md`, `STATISTICAL_SUMMARY.md`
 - **Replication Researcher**: `artifacts/`, `technical/`, `README.md`
 - **Fraud Auditor**: `technical/manifest.json`, `logs/`, `provenance.json`
