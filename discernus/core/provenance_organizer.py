@@ -56,7 +56,7 @@ class ProvenanceOrganizer:
         # Final Outputs
         "final_report": "reports",
         "synthesis_report": "reports",
-        "csv_export": "statistical_results",
+        "csv_export": "results",
         
         # Input Materials
         "framework": "inputs",
