@@ -752,9 +752,9 @@ Respond with only the JSON object."""
                 base_report = synthesis_results["synthesis_report_markdown"]
                 session_costs = audit.get_session_costs()
                 
-                # Add cost summary section to report
-                cost_section = self._generate_cost_summary_section(session_costs, run_timestamp)
-                final_report = base_report + "\n\n" + cost_section
+                # Note: Cost section now integrated into three-part report structure
+                # Legacy cost section disabled to prevent duplication
+                final_report = base_report
                 
                 # Save final report
                 with open(results_dir / "final_report.md", "w") as f:

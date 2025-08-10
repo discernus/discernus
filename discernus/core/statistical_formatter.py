@@ -27,7 +27,7 @@ class StatisticalResultsFormatter:
 
     def format_all(self) -> Dict[str, Any]:
         """Formats all available statistical results into a structured dictionary."""
-        if not self.results or 'results' not in self.results:
+        if not self.results:
             return {
                 "anova_summary": None,
                 "correlation_summary": None,
@@ -35,6 +35,7 @@ class StatisticalResultsFormatter:
                 "notes": "No results provided"
             }
 
+        # self.results already contains the results section from MathToolkit
         results = self.results
 
         anova_rows: List[List[Any]] = []
@@ -57,25 +58,43 @@ class StatisticalResultsFormatter:
 
             # Correlation matrices (pearson/spearman)
             elif rtype in ('pearson_correlation', 'spearman_correlation', 'correlation_matrix'):
-                # Prefer significant_pairs if available
-                sig_pairs = task_result.get('significant_pairs', [])
-                for entry in sig_pairs:
-                    # entry can be a tuple (col1, col2, corr, pval)
-                    try:
-                        col1, col2, corr, pval = entry
-                    except Exception:
-                        # Or dict shape
-                        col1 = entry.get('col1')
-                        col2 = entry.get('col2')
-                        corr = entry.get('correlation')
-                        pval = entry.get('p_value')
-                    if col1 is None or col2 is None:
+                # Handle correlation_matrix format from MathToolkit
+                corr_matrix = task_result.get('correlation_matrix', {})
+                for row_var, row_data in corr_matrix.items():
+                    if not isinstance(row_data, dict):
                         continue
-                    correlation_top.append({
-                        "dimensions": f"{col1}↔{col2}",
-                        "correlation": float(corr) if corr is not None else None,
-                        "p_value": float(pval) if pval is not None else None
-                    })
+                    for col_var, corr_value in row_data.items():
+                        # Skip self-correlations and NaN values
+                        if row_var == col_var or corr_value != corr_value:  # NaN check
+                            continue
+                        # Only include upper triangle to avoid duplicates
+                        if row_var < col_var:
+                            correlation_top.append({
+                                "dimensions": f"{row_var}↔{col_var}",
+                                "correlation": float(corr_value) if corr_value is not None else None,
+                                "p_value": None  # P-values not available in current MathToolkit output
+                            })
+                
+                # Fallback: try significant_pairs if available
+                sig_pairs = task_result.get('significant_pairs', [])
+                if not correlation_top and sig_pairs:
+                    for entry in sig_pairs:
+                        # entry can be a tuple (col1, col2, corr, pval)
+                        try:
+                            col1, col2, corr, pval = entry
+                        except Exception:
+                            # Or dict shape
+                            col1 = entry.get('col1')
+                            col2 = entry.get('col2')
+                            corr = entry.get('correlation')
+                            pval = entry.get('p_value')
+                        if col1 is None or col2 is None:
+                            continue
+                        correlation_top.append({
+                            "dimensions": f"{col1}↔{col2}",
+                            "correlation": float(corr) if corr is not None else None,
+                            "p_value": float(pval) if pval is not None else None
+                        })
 
             # Descriptive statistics (ungrouped)
             elif rtype == 'descriptive_stats':
