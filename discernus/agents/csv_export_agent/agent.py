@@ -500,15 +500,21 @@ class CSVExportAgent:
             # Create export directory
             os.makedirs(export_path, exist_ok=True)
             
+            # OPTIMIZATION: Use raw data passed from pipeline if available
+            scores_data_raw = synthesis_metadata.get("scores_data_raw")
+            statistical_results_raw = synthesis_metadata.get("statistical_results_raw")
+            
             # Load all artifact data
-            analysis_data = self._load_artifact_data(scores_hash)
+            analysis_data = scores_data_raw if scores_data_raw else self._load_artifact_data(scores_hash)
             evidence_data = self._load_artifact_data(evidence_hash) if evidence_hash != scores_hash else analysis_data
             
             # Load synthesis artifacts if available (they may not exist if synthesis failed)
             statistical_results = {}
             curated_evidence = {}
             
-            if statistical_results_hash and statistical_results_hash.strip():
+            if statistical_results_raw:
+                statistical_results = statistical_results_raw
+            elif statistical_results_hash and statistical_results_hash.strip():
                 try:
                     statistical_results = self._load_artifact_data(statistical_results_hash)
                 except Exception as e:

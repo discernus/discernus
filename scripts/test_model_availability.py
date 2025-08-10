@@ -68,23 +68,19 @@ class ModelAvailabilityTester:
         try:
             print(f"   Testing {model_id}...", end=" ")
             
-            # Configure safety settings for Vertex AI models
-            extra_params = {}
-            if model_info.get('provider') == 'vertex_ai':
-                extra_params['safety_settings'] = [
-                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
-                ]
+            # Use the same parameter management as LLMGateway
+            from discernus.gateway.provider_parameter_manager import ProviderParameterManager
+            param_manager = ProviderParameterManager()
             
-            # Make test call
+            # Get clean parameters using the same logic as LLMGateway
+            base_params = {"max_tokens": 50}
+            clean_params = param_manager.get_clean_parameters(model_id, base_params)
+            
+            # Make test call with cleaned parameters
             response = litellm.completion(
                 model=model_id,
                 messages=[{"role": "user", "content": test_message}],
-                max_tokens=10,
-                timeout=30,
-                **extra_params
+                **clean_params
             )
             
             # Extract response text safely
