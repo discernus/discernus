@@ -1,7 +1,7 @@
 # Democratic Discourse Corpus v7.1
 
 ## Overview
-A comparative corpus examining social cohesion patterns in contrasting approaches to democratic discourse. This research-grade corpus contains two paradigmatic examples of American political communication: institutional gracious concession versus populist anti-establishment critique.
+A comparative corpus examining social cohesion patterns in contrasting approaches to democratic discourse. This research-grade corpus contains four paradigmatic examples of American political communication: institutional gracious concession, populist anti-establishment critique, populist conservative rhetoric, and populist progressive advocacy.
 
 ## Collection Methodology
 Documents were selected from public domain sources representing distinct democratic discourse styles. Selection criteria prioritized rhetorical authenticity, temporal significance, and analytical contrast potential for social cohesion research.
@@ -10,7 +10,7 @@ Documents were selected from public domain sources representing distinct democra
 All documents are public domain political speeches with no privacy concerns. Content represents legitimate democratic discourse and is used for academic research purposes examining social cohesion patterns.
 
 ## Corpus Description
-This corpus contains two documents spanning institutional and populist approaches to American democratic discourse, selected to enable comparative analysis of social cohesion signatures across different rhetorical strategies.
+This corpus contains four documents spanning institutional, populist, and integrity-focused approaches to American democratic discourse, selected to enable comparative analysis of social cohesion signatures across different rhetorical strategies and political contexts.
 
 ## Support for Analytical Goals
 The corpus structure supports comparative analysis through consistent metadata fields enabling statistical grouping by speaker, party, ideology, and temporal variables. Document selection ensures sufficient contrast for meaningful social cohesion pattern differentiation.
@@ -19,7 +19,7 @@ The corpus structure supports comparative analysis through consistent metadata f
 
 ```json
 {
-  "corpus_version": "v7.3",
+  "corpus_version": "v7.4",
   "file_manifest": [
     {
       "name": "john_mccain_2008_concession.txt",
@@ -46,6 +46,32 @@ The corpus structure supports comparative analysis through consistent metadata f
       "event": "Senate Floor Speech on Economic Inequality",
       "word_count": 892,
       "source": "Public Domain"
+    },
+    {
+      "name": "steve_king_2017_house_floor.txt",
+      "document_type": "house_floor_speech",
+      "party": "Republican",
+      "year": 2017,
+      "temporal_sequence": 3,
+      "speaker": "Steve King",
+      "ideology": "conservative",
+      "discourse_style": "populist_conservative",
+      "event": "House Floor Speech on Immigration and Cultural Identity",
+      "word_count": 5200,
+      "source": "Public Domain"
+    },
+    {
+      "name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "document_type": "house_floor_speech",
+      "party": "Democratic",
+      "year": 2025,
+      "temporal_sequence": 4,
+      "speaker": "Alexandria Ocasio-Cortez",
+      "ideology": "progressive",
+      "discourse_style": "populist_progressive",
+      "event": "House Floor Speech on Oligarchy and Economic Inequality",
+      "word_count": 1250,
+      "source": "Public Domain"
     }
   ],
   "field_naming_standards": {
@@ -67,9 +93,9 @@ The corpus structure supports comparative analysis through consistent metadata f
 
 This corpus enables comparative analysis of social cohesion patterns in democratic discourse, featuring:
 
-1. **Democratic Discourse Contrast**: Institutional (McCain) vs Populist (Sanders) approaches
+1. **Democratic Discourse Contrast**: Institutional (McCain) vs Populist (Sanders, King, AOC) approaches
 2. **Temporal Span**: 2008-2025, capturing different eras of American political communication
-3. **Rhetorical Diversity**: Gracious concession vs systemic critique discourse styles
+3. **Rhetorical Diversity**: Gracious concession, systemic critique, populist conservative rhetoric, and populist progressive advocacy discourse styles
 4. **Social Cohesion Analysis**: Optimized for CFF v7.3 framework dimensions
 5. **Statistical Reliability**: Consistent field naming enables robust comparative analysis
 
@@ -77,6 +103,8 @@ This corpus enables comparative analysis of social cohesion patterns in democrat
 
 **McCain (Institutional)**: Higher cohesion indices (dignity, hope, amity, cohesive goals)
 **Sanders (Populist)**: Higher fragmentative elements (tribal dominance, enmity) with strategic contradictions
+**King (Populist Conservative)**: Lower cohesion with divisive rhetoric and cultural identity focus
+**AOC (Populist Progressive)**: Moderate cohesion with systemic critique and economic justice focus
 
 ## Analytical Capabilities
 

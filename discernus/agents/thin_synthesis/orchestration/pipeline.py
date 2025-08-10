@@ -46,6 +46,7 @@ from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
 from ...comprehensive_knowledge_curator.agent import ComprehensiveKnowledgeCurator, ComprehensiveIndexRequest, KnowledgeQuery
 from ...sequential_synthesis.agent import SequentialSynthesisAgent, SynthesisRequest, SynthesisResponse
+from ...reliability_analysis_agent import ReliabilityAnalysisAgent
 from ....core.math_toolkit import execute_analysis_plan_thin
 from ....core.statistical_formatter import StatisticalResultsFormatter
 
@@ -173,6 +174,10 @@ class ProductionThinSynthesisPipeline:
             self.logger.info("📊 Running statistical analysis...")
             statistical_results_raw = self._run_statistical_analysis(request)
             
+            # Step 1.5: Validate statistical health
+            self.logger.info("🔍 Validating statistical health...")
+            self._validate_statistical_health(statistical_results_raw)
+            
             statistical_results_hash = self._store_artifact_with_metadata(
                 json.dumps(statistical_results_raw, default=self._json_serializer), 
                 "statistical_results",
@@ -183,9 +188,6 @@ class ProductionThinSynthesisPipeline:
             # Use the new formatter to prepare stats for the LLM
             formatter = StatisticalResultsFormatter(statistical_results_raw)
             statistical_results_formatted = formatter.format_all()
-
-            # Step 1.5: Export final CSVs with all statistical results
-            self._export_final_csvs(request, statistical_results_hash, statistical_results_raw)
 
             # Step 2: Build the RAG index
             self.logger.info("📚 Building RAG lookup index...")
@@ -290,67 +292,6 @@ class ProductionThinSynthesisPipeline:
                 error_message=str(e)
             )
 
-    def _export_final_csvs(self, request: ProductionPipelineRequest, statistical_results_hash: str, statistical_results_raw: Dict[str, Any]):
-        """Helper to export final CSVs including derived metrics."""
-        try:
-            from discernus.agents.csv_export_agent import CSVExportAgent, ExportOptions
-            self.logger.info("📊 Exporting final CSV results...")
-
-            csv_agent = CSVExportAgent(audit_logger=self.audit_logger)
-            # The CSV agent's _load_artifact_data method is robust enough to handle
-            # the artifact_client from the pipeline directly.
-            csv_agent.artifact_storage = self.artifact_client
-
-            export_options = ExportOptions(
-                include_calculated_metrics=True,
-                include_metadata=True,
-                export_format="standard"
-            )
-
-            # The CSV agent writes to a directory, so we create a temporary one.
-            # The artifacts are stored in the content-addressable storage, not kept on disk.
-            with tempfile.TemporaryDirectory() as temp_dir:
-                # The CSV agent needs the raw *scores* data, not just the hash.
-                # It re-loads artifacts internally, so we pass hashes.
-                scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
-                
-                # The agent's `export_final_synthesis_data` expects artifact hashes
-                # and loads them itself. We pass the hashes it needs.
-                csv_result = csv_agent.export_final_synthesis_data(
-                    scores_hash=request.scores_artifact_hash,
-                    evidence_hash=request.evidence_artifact_hash,
-                    # We pass the raw results directly to avoid re-loading the artifact we just created.
-                    # The CSV agent is designed to handle this.
-                    statistical_results_hash=statistical_results_hash,
-                    curated_evidence_hash="",  # Not generated in this pipeline
-                    framework_config={"name": self._extract_framework_name(request.framework_spec), "version": "v7.3"},
-                    corpus_manifest=request.corpus_manifest or {},
-                    synthesis_metadata={
-                        "pipeline_version": "v2.0",
-                        # Pass the raw results directly to the export agent
-                        "statistical_results_raw": statistical_results_raw,
-                        "scores_data_raw": json.loads(scores_data.decode('utf-8'))
-                    },
-                    export_path=temp_dir,
-                    export_options=export_options
-                )
-
-                if csv_result.success:
-                    self.logger.info(f"✅ CSV export successful: {len(csv_result.files_created)} files created in temp dir.")
-                    for filename in csv_result.files_created:
-                        filepath = os.path.join(temp_dir, filename)
-                        with open(filepath, 'r', encoding='utf-8') as f:
-                            csv_content = f.read()
-                            csv_hash = self._store_artifact_with_metadata(
-                                csv_content, f"csv_export_{filename}", "export", [statistical_results_hash]
-                            )
-                            self.logger.info(f"-> Stored CSV artifact: {filename} ({len(csv_content)} bytes) -> {csv_hash}")
-                else:
-                    self.logger.warning(f"⚠️ CSV export failed: {csv_result.error_message}")
-
-        except Exception as e:
-            self.logger.error(f"❌ Unhandled error during CSV export: {str(e)}", exc_info=True)
-
     def _run_statistical_analysis(self, request: ProductionPipelineRequest) -> Dict[str, Any]:
         """Helper to run the statistical analysis using MathToolkit."""
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
@@ -384,6 +325,88 @@ class ProductionThinSynthesisPipeline:
             self.logger.warning("Could not parse framework_calculation_spec from framework. Proceeding without it.")
 
         return execute_analysis_plan_thin(raw_analysis_data, analysis_plan, request.corpus_manifest, framework_calculation_spec)
+    
+    def _validate_statistical_health(self, statistical_results: Dict[str, Any]) -> None:
+        """
+        Validate statistical calculation health to detect data quality issues.
+        
+        Checks for:
+        - High calculation failure rates (>50% failure rate fails experiment)
+        - Perfect correlations indicating insufficient data
+        - Statistical impossibilities or extreme values
+        
+        Args:
+            statistical_results: Raw statistical results from MathToolkit
+            
+        Raises:
+            Exception: If statistical health validation fails
+        """
+        try:
+            # Initialize reliability analysis agent
+            reliability_agent = ReliabilityAnalysisAgent(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                audit_logger=self.audit_logger
+            )
+            
+            # Convert statistical results to JSON string for LLM analysis
+            statistical_json = json.dumps(statistical_results, indent=2, default=self._json_serializer)
+            
+            # Validate statistical health
+            health_result = reliability_agent.validate_statistical_health(
+                statistical_results=statistical_json
+            )
+            
+            # Log validation results
+            self.audit_logger.log_agent_event(
+                "ProductionThinSynthesisPipeline",
+                "statistical_health_validation",
+                {
+                    "validation_passed": health_result.validation_passed,
+                    "calculation_failures_count": len(health_result.calculation_failures),
+                    "perfect_correlations_count": len(health_result.perfect_correlations),
+                    "sample_size_assessment": health_result.sample_size_assessment,
+                    "recommended_action": health_result.recommended_action
+                }
+            )
+            
+            # Handle validation results based on recommended action
+            if health_result.recommended_action == "FAIL_EXPERIMENT":
+                error_msg = (
+                    f"Statistical health validation failed: {health_result.error_message or 'Critical statistical issues detected'}\n"
+                    f"Calculation failures: {', '.join(health_result.calculation_failures) if health_result.calculation_failures else 'None'}\n"
+                    f"Perfect correlations: {', '.join(health_result.perfect_correlations) if health_result.perfect_correlations else 'None'}\n"
+                    f"Sample size: {health_result.sample_size_assessment}\n"
+                    f"Statistical warnings: {'; '.join(health_result.statistical_warnings) if health_result.statistical_warnings else 'None'}"
+                )
+                self.logger.error(f"❌ {error_msg}")
+                raise Exception(error_msg)
+            
+            elif health_result.recommended_action == "WARN_RESEARCHER":
+                warning_msg = "Statistical health concerns detected but proceeding"
+                if health_result.calculation_failures:
+                    self.logger.warning(f"⚠️ Calculation failures: {', '.join(health_result.calculation_failures)}")
+                if health_result.perfect_correlations:
+                    self.logger.warning(f"⚠️ Perfect correlations detected: {', '.join(health_result.perfect_correlations)}")
+                if health_result.statistical_warnings:
+                    self.logger.warning(f"⚠️ Statistical warnings: {'; '.join(health_result.statistical_warnings)}")
+                self.logger.warning(f"⚠️ Sample size assessment: {health_result.sample_size_assessment}")
+                self.logger.info("✅ Statistical health validation passed with warnings")
+            
+            elif health_result.recommended_action == "PROCEED":
+                self.logger.info("✅ Statistical health validation passed")
+                if health_result.statistical_warnings:
+                    self.logger.info(f"ℹ️ Minor statistical notes: {'; '.join(health_result.statistical_warnings)}")
+            
+        except Exception as e:
+            if "Statistical health validation failed" in str(e):
+                # Re-raise validation failures
+                raise
+            else:
+                # Log unexpected validation errors but don't fail the experiment
+                error_msg = f"Statistical health validation system error: {str(e)}"
+                self.logger.warning(f"⚠️ {error_msg}")
+                self.audit_logger.log_error("statistical_health_validation_error", error_msg, {"stage": "synthesis_pipeline"})
+                self.logger.warning("⚠️ Proceeding without statistical health validation due to system error")
         
     def _extract_framework_name(self, framework_spec: str) -> str:
         """Extract framework name from framework specification."""

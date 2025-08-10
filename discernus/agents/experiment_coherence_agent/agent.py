@@ -158,9 +158,17 @@ class ExperimentCoherenceAgent:
             if self.audit_logger:
                 self.audit_logger.log_agent_event(
                     self.agent_name,
+                    "llm_validation_prompt",
+                    {"prompt": validation_prompt}
+                )
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
                     "llm_validation_start",
                     {"model": self.model}
                 )
+            
+            # Add statistical prerequisite validation
+            statistical_issues = self._validate_statistical_prerequisites(experiment_path, experiment_spec, corpus_manifest)
             
             # Get LLM validation
             response, metadata = self.llm_gateway.execute_call(
@@ -169,8 +177,24 @@ class ExperimentCoherenceAgent:
                 system_prompt="You are a validation expert for the Discernus research platform."
             )
             
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "llm_validation_response",
+                    {"response": response}
+                )
+            
             # Parse validation result
             result = self._parse_validation_response(response)
+            
+            # Combine LLM validation issues with statistical prerequisite issues
+            all_issues = statistical_issues + result.issues
+            blocking_statistical_issues = [issue for issue in statistical_issues if issue.priority == "BLOCKING"]
+            combined_result = ValidationResult(
+                success=result.success and len(blocking_statistical_issues) == 0,
+                issues=all_issues,
+                suggestions=result.suggestions
+            )
             
             # Log validation completion
             if self.audit_logger:
@@ -178,13 +202,14 @@ class ExperimentCoherenceAgent:
                     self.agent_name,
                     "validation_complete",
                     {
-                        "success": result.success,
-                        "issues_count": len(result.issues),
-                        "suggestions_count": len(result.suggestions)
+                        "success": combined_result.success,
+                        "issues_count": len(combined_result.issues),
+                        "statistical_issues_count": len(statistical_issues),
+                        "blocking_statistical_issues": len(blocking_statistical_issues)
                     }
                 )
             
-            return result
+            return combined_result
             
         except Exception as e:
             # Log validation error
@@ -262,6 +287,76 @@ class ExperimentCoherenceAgent:
         else:
             raise ValueError("corpus.md missing JSON manifest")
     
+    def _validate_statistical_prerequisites(self, experiment_path: Path, experiment_spec: Dict, corpus_manifest: Dict) -> List[ValidationIssue]:
+        """
+        Validate statistical prerequisites for academically valid results.
+        
+        Args:
+            experiment_path: Path to experiment directory
+            experiment_spec: Experiment specification
+            corpus_manifest: Corpus manifest data
+            
+        Returns:
+            List of validation issues related to statistical prerequisites
+        """
+        issues = []
+        
+        # Sample size validation
+        file_manifest = corpus_manifest.get('file_manifest', [])
+        corpus_size = len(file_manifest)
+        
+        if corpus_size < 3:
+            issues.append(ValidationIssue(
+                category="statistical_validity",
+                description=f"Insufficient corpus size: {corpus_size} documents",
+                impact="Will produce perfect correlations and invalid statistical analysis",
+                fix=f"Add {3 - corpus_size} more documents to corpus directory",
+                priority="BLOCKING",
+                affected_files=[str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
+            ))
+        elif corpus_size < 5:
+            issues.append(ValidationIssue(
+                category="statistical_validity",
+                description=f"Minimal corpus size: {corpus_size} documents",
+                impact="Statistical power will be limited, results may be unstable",
+                fix="Consider adding more documents for robust statistical analysis",
+                priority="QUALITY",
+                affected_files=[str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
+            ))
+        
+        # Framework complexity validation
+        framework_path = experiment_path / experiment_spec.get('framework', 'framework.md')
+        if framework_path.exists():
+            try:
+                with open(framework_path, 'r') as f:
+                    framework_content = f.read()
+                
+                # Count expected dimensions (rough heuristic)
+                dimension_indicators = ['score', 'dimension', 'axis', 'index']
+                dimension_count = sum(framework_content.lower().count(indicator) for indicator in dimension_indicators)
+                
+                # If we have many expected dimensions but small corpus, warn about coverage
+                if dimension_count > 10 and corpus_size < 10:
+                    issues.append(ValidationIssue(
+                        category="framework_coverage",
+                        description=f"Complex framework ({dimension_count} dimension indicators) with small corpus ({corpus_size} documents)",
+                        impact="Many framework dimensions may not be detectable, leading to calculation failures",
+                        fix="Either simplify framework or expand corpus to ensure dimension coverage",
+                        priority="QUALITY",
+                        affected_files=[str(framework_path), str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
+                    ))
+            except Exception as e:
+                issues.append(ValidationIssue(
+                    category="framework_analysis",
+                    description=f"Could not analyze framework complexity: {str(e)}",
+                    impact="Cannot predict framework dimension coverage",
+                    fix="Ensure framework file is readable and well-formed",
+                    priority="SUGGESTION",
+                    affected_files=[str(framework_path)]
+                ))
+        
+        return issues
+
     def _create_validation_prompt(self, experiment_spec: Dict, framework_spec: str, corpus_manifest: Dict) -> str:
         """Create validation prompt using externalized YAML template."""
         current_date = datetime.now().strftime("%Y-%m-%d")
