@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "discernus"
-version = "0.2.0"
-description = "Discernus Computational Social Science Research Platform"
+version = "2.0.0"
+description = "Discernus THIN v2.0 Research Platform"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.13"
 license = {text = "MIT"}
 authors = [
     {name = "Discernus Team"},
@@ -31,25 +31,25 @@ dependencies = [
     # Core dependencies
     "python-dotenv>=0.19.0",
     "gitpython>=3.1.0",
-    "litellm>=1.0.0",
+    "litellm>=1.7",
     "anthropic>=0.7.0",
     "requests>=2.28.0",
-    "click>=8.0.0",
-    "rich>=13.0.0",
+    "click>=8.0",
+    "rich>=13.0",
     "redis>=6.2.0",
     "minio>=7.1.0",
     
     # Data processing and analysis
-    "pandas>=1.5.0",
-    "numpy>=1.24.0",
-    "scipy>=1.10.0",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scipy>=1.13",
     
     # Jupyter and notebook support
     "jupyter>=1.0.0",
     "nbformat>=5.7.0",
     
     # Configuration and serialization
-    "PyYAML==6.0.1",
+    "PyYAML>=6.0",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
     
@@ -64,6 +64,10 @@ dependencies = [
     # YouTube transcript extraction (for APDES corpus collection)
     "youtube-transcript-api>=0.6.2",
     "yt-dlp>=2025.6.9",
+    "loguru>=0.7",
+    "ratelimit>=2.2",
+    "pingouin>=0.5",
+    "statsmodels>=0.14",
 ]
 
 [project.optional-dependencies]
