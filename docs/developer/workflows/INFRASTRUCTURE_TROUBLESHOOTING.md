@@ -133,8 +133,6 @@ make run-direct EXPERIMENT=projects/your_experiment
 | Service | Port | Required | Purpose |
 |---------|------|----------|---------|
 | **Local Storage** | N/A | ✅ Always | Artifact storage & provenance (no external dependencies) |
-| **MinIO** | 9000 | ❌ Removed | Legacy artifact storage (no longer used) |
-| **Redis** | 6379 | ❌ Removed | Legacy orchestration (no longer used) |
 
 ### **Storage Architecture**
 
@@ -155,17 +153,16 @@ python3 --version            # Should be 3.13.5
 
 ### **2. Infrastructure Check**
 ```bash
-make start-infra             # Start all services
-lsof -i :9000               # MinIO running?
-curl -s http://localhost:9000/minio/health/live  # MinIO responding?
+# No external services required - system uses local storage only
+ls -la projects/simple_test/shared_cache/  # Check artifact cache
 ```
 
 ### **3. Test Connection**
 ```bash
 python3 -c "
-from discernus.storage.minio_client import get_default_client
-client = get_default_client()
-print('✅ MinIO connection successful!')
+from discernus.core.local_artifact_storage import LocalArtifactStorage
+storage = LocalArtifactStorage('projects/simple_test')
+print('✅ Local storage connection successful!')
 "
 ```
 
@@ -190,17 +187,9 @@ make run-direct EXPERIMENT=projects/simple_test
 
 ### **Complete Infrastructure Reset**
 ```bash
-# Stop everything
-make stop-infra
-
-# Clean up
-rm -rf ~/minio-data
-pkill -f minio
-pkill redis-server
-
-# Restart
-make start-infra
-make check
+# No external services to reset - system uses local storage only
+make clean-all  # Clean up temporary files and cache
+make check      # Verify environment
 ```
 
 ### **Test Infrastructure**
@@ -211,11 +200,11 @@ make run-direct EXPERIMENT=projects/simple_test
 
 ## **Key Lessons Learned**
 
-1. **MinIO is required** - never try to bypass it
-2. **CLI is deprecated** - use direct orchestration
+1. **Local storage is sufficient** - no external dependencies required
+2. **CLI is current** - use `discernus` command for all operations
 3. **Context limits ≠ rate limits** - different problems, different solutions
 4. **LiteLLM retries work** - no custom batching needed for 429 errors
-5. **Infrastructure automation prevents debugging cycles** - always use scripts
+5. **Simple architecture prevents debugging cycles** - direct function calls work reliably
 
 ## **References**
 
