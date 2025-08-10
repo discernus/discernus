@@ -83,6 +83,76 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
     
+    def _validate_framework_dimensions(self, framework_content: str, audit_logger: AuditLogger) -> None:
+        """
+        Validate framework dimensions using ReliabilityAnalysisAgent.
+        
+        This early validation helps catch framework issues before analysis begins,
+        improving overall experiment reliability.
+        """
+        try:
+            from ..agents.reliability_analysis_agent import ReliabilityAnalysisAgent
+            
+            # Initialize reliability analysis agent
+            reliability_agent = ReliabilityAnalysisAgent(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                audit_logger=audit_logger
+            )
+            
+            # For dimension validation, we need some analysis results to compare against
+            # Since we don't have analysis results yet, we'll do a basic framework structure validation
+            # by creating a mock analysis result with expected dimensions
+            mock_analysis_results = "Framework structure validation - checking for required dimension specifications"
+            
+            # Validate framework dimensions
+            validation_result = reliability_agent.validate_framework_dimensions(
+                framework_content=framework_content,
+                analysis_results=mock_analysis_results
+            )
+            
+            # Log the validation event for telemetry tracking
+            audit_logger.log_orchestrator_event(
+                "framework_dimension_validation",
+                {
+                    "validation_passed": validation_result.validation_passed,
+                    "missing_required_count": len(validation_result.missing_required_dimensions),
+                    "missing_optional_count": len(validation_result.missing_optional_dimensions),
+                    "present_dimensions_count": len(validation_result.present_dimensions),
+                    "recommended_action": validation_result.recommended_action,
+                    "impact_assessment": validation_result.impact_assessment
+                }
+            )
+            
+            # Handle validation results
+            if validation_result.recommended_action == "FAIL_EXPERIMENT":
+                error_msg = f"Framework dimension validation failed: {validation_result.error_message}"
+                print(f"❌ {error_msg}")
+                raise ThinOrchestratorError(error_msg)
+            elif validation_result.recommended_action == "RETRY_ANALYSIS":
+                print(f"⚠️ Framework dimension concerns: {validation_result.impact_assessment}")
+                print("⚠️ Proceeding with caution - may need framework adjustments")
+            else:
+                print("✅ Framework dimension validation passed")
+                
+        except Exception as e:
+            # Log validation failure for telemetry
+            audit_logger.log_orchestrator_event(
+                "framework_dimension_validation",
+                {
+                    "validation_passed": False,
+                    "missing_required_count": 0,
+                    "missing_optional_count": 0,
+                    "present_dimensions_count": 0,
+                    "recommended_action": "SYSTEM_ERROR",
+                    "impact_assessment": "Validation system error",
+                    "error_message": str(e)
+                }
+            )
+            
+            # Don't fail the experiment for validation system errors, just warn
+            print(f"⚠️ Framework dimension validation system error: {str(e)}")
+            print("⚠️ Proceeding without dimension validation")
+    
     def _check_framework_compatibility_with_llm(self, current_framework: str, cached_framework: str, cached_artifact_id: str, audit_logger: Optional[AuditLogger] = None) -> Dict[str, Any]:
         """
         THIN-compliant framework compatibility check using LLM intelligence.
@@ -388,6 +458,10 @@ Respond with only the JSON object."""
                 "filename": experiment_config["framework"],
                 "size_bytes": len(framework_content)
             })
+            
+            # Validate framework dimensions for early failure detection
+            print("🔍 Validating framework dimensions...")
+            self._validate_framework_dimensions(framework_content, audit)
             
             # Load corpus documents and manifest
             corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])

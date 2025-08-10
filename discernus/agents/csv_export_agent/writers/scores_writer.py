@@ -10,7 +10,7 @@ import os
 import logging
 from typing import Dict, Any, List
 
-from ..agent import ExportOptions, CSVExportError
+from ..types import ExportOptions, CSVExportError
 
 logger = logging.getLogger(__name__)
 

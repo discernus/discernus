@@ -6,7 +6,7 @@ Statistical Health Validator for the Reliability Analysis Agent.
 from typing import Dict, Any
 from datetime import datetime
 
-from ..agent import StatisticalHealthResult
+from ..types import StatisticalHealthResult
 
 
 def validate_statistical_health(

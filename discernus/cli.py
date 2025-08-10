@@ -1116,7 +1116,7 @@ def telemetry(project_path: str):
             exit_invalid_usage()
         else:
             rich_console.print_error(f"❌ No runs directory found in {project_path}")
-            exit_file_error()
+            exit_file_error(f"No runs directory found in {project_path}")
     
     try:
         telemetry_system = InfrastructureTelemetry(project_path.parent)
