@@ -67,7 +67,7 @@ class SequentialSynthesisAgent:
             pattern_evidence = self._query_rag(request.rag_curator, pattern_queries, ["calculated_metrics", "evidence_quotes"])
             pattern_findings = self._synthesize_step(request, "pattern_discovery", pattern_evidence)
 
-            # Step 4: Statistical Framework Fit Assessment
+            # Step 4: Statistical Framework Fit Assessment (with enhanced statistical data)
             framework_fit_assessment = self._synthesize_step(request, "framework_fit_assessment")
 
             # Step 5: Final Integration
@@ -124,11 +124,24 @@ class SequentialSynthesisAgent:
         """Execute a single synthesis step using the LLM."""
         step_config = self.prompts['step_definitions'][step_name]
         
-        # Evidence Budgeting (simplified for now)
+        # Evidence Budgeting with rich metadata for proper citation
         budgeted_evidence_str = ""
         if retrieved_evidence:
-            # Implement token budget and MMR here in a future iteration
-            budgeted_evidence_str = json.dumps({q: [r.content for r in res[:3]] for q, res in retrieved_evidence.items()}, indent=2)
+            # Include rich evidence data for proper academic citation
+            evidence_with_metadata = {}
+            for query, results in retrieved_evidence.items():
+                evidence_items = []
+                for r in results[:3]:  # Top 3 results per query
+                    evidence_item = {
+                        "content": r.content,
+                        "source_document": r.metadata.get('document_name', 'Unknown'),
+                        "speaker": r.metadata.get('speaker', 'Unknown Speaker'),
+                        "data_type": r.data_type,
+                        "relevance_score": r.relevance_score
+                    }
+                    evidence_items.append(evidence_item)
+                evidence_with_metadata[query] = evidence_items
+            budgeted_evidence_str = json.dumps(evidence_with_metadata, indent=2)
 
         prompt = self._render_prompt("synthesis_step_template", {
             "direct_context": json.dumps(request.direct_context, indent=2),
