@@ -18,36 +18,11 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from discernus.core.audit_logger import AuditLogger
+from .types import ExportResult, ExportOptions, CSVExportError
 from .writers.scores_writer import generate_scores_csv
 from .writers.evidence_writer import generate_evidence_csv
 from .writers.metadata_writer import generate_metadata_csv, generate_final_metadata_csv
 from .writers.stats_writer import generate_statistical_results_csv
-
-
-@dataclass
-class ExportResult:
-    """Result of CSV export operation with metadata."""
-    success: bool
-    export_path: str
-    files_created: List[str]
-    total_records: int
-    export_time_seconds: float
-    error_message: Optional[str] = None
-
-
-@dataclass
-class ExportOptions:
-    """Configuration options for CSV export."""
-    include_calculated_metrics: bool = True
-    evidence_detail_level: str = "hashes_only"  # "hashes_only", "quotes", "full"
-    export_format: str = "standard"  # "standard", "r_friendly", "spss_friendly"
-    custom_column_names: Optional[Dict[str, str]] = None
-    include_metadata: bool = True
-
-
-class CSVExportError(Exception):
-    """CSV Export Agent specific exceptions."""
-    pass
 
 
 class CSVExportAgent:

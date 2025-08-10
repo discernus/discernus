@@ -16,44 +16,10 @@ from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.parsing_utils import parse_llm_json_response
+from .types import DimensionValidationResult, StatisticalHealthResult, PipelineHealthResult
 from .validators.dimension_validator import validate_framework_dimensions
 from .validators.statistical_validator import validate_statistical_health
 from .validators.pipeline_validator import assess_pipeline_health
-
-
-@dataclass
-class DimensionValidationResult:
-    """Result of framework dimension validation."""
-    validation_passed: bool
-    missing_required_dimensions: List[str]
-    missing_optional_dimensions: List[str]
-    present_dimensions: List[str]
-    impact_assessment: str
-    recommended_action: str
-    error_message: Optional[str] = None
-
-
-@dataclass
-class StatisticalHealthResult:
-    """Result of statistical health validation."""
-    validation_passed: bool
-    calculation_failures: List[str]
-    perfect_correlations: List[str]
-    statistical_warnings: List[str]
-    sample_size_assessment: str
-    recommended_action: str
-    error_message: Optional[str] = None
-
-
-@dataclass
-class PipelineHealthResult:
-    """Result of pipeline health assessment."""
-    health_status: str
-    error_patterns: List[str]
-    performance_issues: List[str]
-    reliability_metrics: Dict[str, Any]
-    recommended_actions: List[str]
-    alert_level: str
 
 
 class ReliabilityAnalysisAgent:

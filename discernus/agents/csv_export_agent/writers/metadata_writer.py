@@ -11,7 +11,7 @@ import logging
 from typing import Dict, Any
 from datetime import datetime
 
-from ..agent import ExportOptions
+from ..types import ExportOptions
 
 logger = logging.getLogger(__name__)
 

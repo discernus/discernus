@@ -473,6 +473,20 @@ class ProductionThinSynthesisPipeline:
                     self.logger.info(f"ℹ️ Minor statistical notes: {'; '.join(health_result.statistical_warnings)}")
             
         except Exception as e:
+            # Always log the telemetry event for failures so telemetry system can track them
+            self.audit_logger.log_agent_event(
+                "ProductionThinSynthesisPipeline",
+                "statistical_health_validation",
+                {
+                    "validation_passed": False,
+                    "calculation_failures_count": 0,
+                    "perfect_correlations_count": 0,
+                    "sample_size_assessment": "unknown",
+                    "recommended_action": "SYSTEM_ERROR",
+                    "error_message": str(e)
+                }
+            )
+            
             if "Statistical health validation failed" in str(e):
                 # Re-raise validation failures
                 raise
