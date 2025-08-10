@@ -236,8 +236,34 @@ This research was conducted using the **Discernus Computational Research Platfor
 
     def _render_cost_breakdown(self) -> str:
         """Render cost breakdown by model/agent."""
-        # Placeholder - would need actual cost tracking data
-        return "*Detailed cost breakdown not available in current implementation.*"
+        models = self.cost_metadata.get('models', {})
+        agents = self.cost_metadata.get('agents', {})
+        
+        if not models and not agents:
+            return "*Detailed cost breakdown not available in current implementation.*"
+        
+        breakdown = ""
+        
+        # Model breakdown
+        if models:
+            breakdown += "#### By Model\n"
+            for model, model_costs in models.items():
+                cost_usd = model_costs.get('cost_usd', 0.0)
+                tokens = model_costs.get('tokens', 0)
+                calls = model_costs.get('calls', 0)
+                breakdown += f"- **{model}**: ${cost_usd:.4f} USD ({tokens:,} tokens, {calls} calls)\n"
+            breakdown += "\n"
+        
+        # Agent breakdown
+        if agents:
+            breakdown += "#### By Agent\n"
+            for agent, agent_costs in agents.items():
+                cost_usd = agent_costs.get('cost_usd', 0.0)
+                tokens = agent_costs.get('tokens', 0)
+                calls = agent_costs.get('calls', 0)
+                breakdown += f"- **{agent}**: ${cost_usd:.4f} USD ({tokens:,} tokens, {calls} calls)\n"
+        
+        return breakdown
 
     def _format_timestamp(self, timestamp: str) -> str:
         """Format run timestamp for display."""

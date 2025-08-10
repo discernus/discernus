@@ -223,14 +223,17 @@ class ProductionThinSynthesisPipeline:
                 'scores_hash': request.scores_artifact_hash
             }
             
+            # Get real cost data from audit logger
+            session_costs = self.audit_logger.get_session_costs() if self.audit_logger else {}
             cost_metadata = {
-                'total_cost': 0.0,  # TODO: Implement actual cost tracking
-                'total_tokens': 0   # TODO: Implement actual token tracking
+                'total_cost': session_costs.get('total_cost_usd', 0.0),
+                'total_tokens': session_costs.get('total_tokens', 0),
+                'models': session_costs.get('models', {}),
+                'agents': session_costs.get('agents', {})
             }
             
-            # Extract experiment name - use simple_test name for now
-            # TODO: Fix upstream experiment context passing
-            experiment_name = 'Democratic Discourse Cohesion Study'
+            # Extract experiment name from framework or use fallback
+            experiment_name = self._extract_experiment_name(request)
             
             report_generator = ThreePartReportGenerator(
                 experiment_name=experiment_name,
@@ -297,13 +300,8 @@ class ProductionThinSynthesisPipeline:
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         raw_analysis_data = combined_data.decode('utf-8')
 
-        # This will be replaced by an AnalysisPlanner agent in the future.
-        # For now, we use a default plan with CFF dimensional score columns.
-        score_columns = [
-            "tribal_dominance_score", "individual_dignity_score", "fear_score", "hope_score",
-            "envy_score", "compersion_score", "enmity_score", "amity_score", 
-            "fragmentative_goals_score", "cohesive_goals_score"
-        ]
+        # Framework-agnostic: Dynamically discover score columns from framework
+        score_columns = self._extract_framework_score_columns(request.framework_spec)
         
         analysis_plan = {
             "tasks": {
@@ -325,6 +323,73 @@ class ProductionThinSynthesisPipeline:
             self.logger.warning("Could not parse framework_calculation_spec from framework. Proceeding without it.")
 
         return execute_analysis_plan_thin(raw_analysis_data, analysis_plan, request.corpus_manifest, framework_calculation_spec)
+    
+    def _extract_framework_score_columns(self, framework_spec: str) -> List[str]:
+        """
+        Extract score column names from framework specification.
+        
+        THIN Approach: Parse framework JSON appendix to discover dimensions,
+        then generate expected column names (dimension_name_score, dimension_name_salience).
+        
+        Args:
+            framework_spec: Framework specification content
+            
+        Returns:
+            List of expected score column names for this framework
+        """
+        try:
+            # Extract JSON appendix from framework
+            json_pattern = r"```json\s*(.*?)\s*```"
+            json_match = re.search(json_pattern, framework_spec, re.DOTALL)
+            if not json_match:
+                self.logger.warning("No JSON appendix found in framework, using fallback columns")
+                return self._get_fallback_score_columns()
+            
+            framework_config = json.loads(json_match.group(1))
+            
+            # Extract dimensions from dimension_groups (v7.3 format)
+            dimension_groups = framework_config.get("dimension_groups", {})
+            all_dimensions = []
+            
+            for group_name, dimensions in dimension_groups.items():
+                if isinstance(dimensions, list):
+                    all_dimensions.extend(dimensions)
+                else:
+                    self.logger.warning(f"Dimension group '{group_name}' is not a list, skipping")
+            
+            if not all_dimensions:
+                self.logger.warning("No dimensions found in framework dimension_groups, using fallback")
+                return self._get_fallback_score_columns()
+            
+            # Generate expected column names: dimension_name_score, dimension_name_salience
+            score_columns = []
+            for dimension in all_dimensions:
+                score_columns.append(f"{dimension}_score")
+                score_columns.append(f"{dimension}_salience")
+                # Also include confidence columns if framework uses them
+                score_columns.append(f"{dimension}_confidence")
+            
+            self.logger.info(f"Discovered {len(score_columns)} score columns from framework: {len(all_dimensions)} dimensions")
+            return score_columns
+            
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to parse framework JSON: {e}")
+            return self._get_fallback_score_columns()
+        except Exception as e:
+            self.logger.error(f"Failed to extract framework score columns: {e}")
+            return self._get_fallback_score_columns()
+    
+    def _get_fallback_score_columns(self) -> List[str]:
+        """
+        Fallback score columns for legacy frameworks or parsing failures.
+        
+        Returns basic CFF columns as a safety net.
+        """
+        return [
+            "tribal_dominance_score", "individual_dignity_score", "fear_score", "hope_score",
+            "envy_score", "compersion_score", "enmity_score", "amity_score", 
+            "fragmentative_goals_score", "cohesive_goals_score"
+        ]
     
     def _validate_statistical_health(self, statistical_results: Dict[str, Any]) -> None:
         """
@@ -427,6 +492,24 @@ class ProductionThinSynthesisPipeline:
         except:
             pass
         return 'Unknown Framework'
+    
+    def _extract_experiment_name(self, request: ProductionPipelineRequest) -> str:
+        """Extract experiment name from request context or framework."""
+        try:
+            # Try to get from framework specification first
+            lines = request.framework_spec.split('\n')
+            for line in lines:
+                if 'experiment' in line.lower() and ('title' in line.lower() or 'name' in line.lower()):
+                    # Extract after colon or similar
+                    if ':' in line:
+                        return line.split(':', 1)[1].strip()
+            
+            # Fallback: use a descriptive name based on framework
+            framework_name = self._extract_framework_name(request.framework_spec)
+            return f"{framework_name} Analysis Study"
+        except:
+            pass
+        return 'Computational Discourse Analysis Study'
         
     def _build_rag_index(self, request: ProductionPipelineRequest):
         """Helper to build the RAG index with required artifacts for the ComprehensiveKnowledgeCurator."""
