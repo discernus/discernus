@@ -16,15 +16,7 @@ safe-python:  ## Use safe Python wrapper (recommended for agents)
 	@echo "🛡️  Using safe Python wrapper..."
 	@./scripts/safe_python.sh
 
-start-infra:  ## Start all infrastructure services (MinIO, Redis)
-	@echo "🚀 Starting infrastructure services..."
-	@./scripts/start_infrastructure.sh
 
-stop-infra:  ## Stop all infrastructure services
-	@echo "🛑 Stopping infrastructure services..."
-	@pkill -f "minio server" || true
-	@pkill redis-server || true
-	@echo "✅ Infrastructure stopped"
 
 test:  ## Run the test suite
 	@echo "🧪 Running tests..."
