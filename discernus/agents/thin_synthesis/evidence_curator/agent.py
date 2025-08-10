@@ -119,7 +119,7 @@ class EvidenceCurator:
             json_str = evidence_data.decode('utf-8')
             
             if '"evidence_metadata"' in json_str and '"evidence_data"' in json_str:
-                evidence_artifact = json.loads(json_str)
+                evidence_artifact = self._parse_json_robust(json_str)
                 evidence_list = evidence_artifact.get('evidence_data', [])
                 analysis_result = {"evidence_data": evidence_list}
             elif '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in json_str:
@@ -127,11 +127,11 @@ class EvidenceCurator:
                 json_match = re.search(json_pattern, json_str, re.DOTALL)
                 if json_match:
                     json_content = json_match.group(1).strip()
-                    analysis_result = json.loads(json_content)
+                    analysis_result = self._parse_json_robust(json_content)
                 else:
                     raise ValueError("Could not extract JSON from delimited format")
             else:
-                analysis_result = json.loads(json_str)
+                analysis_result = self._parse_json_robust(json_str)
 
             rows = []
             if 'evidence_data' in analysis_result:
@@ -344,3 +344,74 @@ NARRATIVE:
             success=False,
             error_message=error_message
         )
+    
+    def _parse_json_robust(self, json_str: str) -> Dict[str, Any]:
+        """
+        BUG #326 THIN FIX: Use LLM intelligence to handle malformed JSON instead of complex parsing.
+        
+        THIN Approach: Trust LLM intelligence rather than brittle regex cleaning.
+        When JSON is malformed, ask the LLM to reformat it properly.
+        
+        Args:
+            json_str: JSON string to parse
+            
+        Returns:
+            Parsed JSON dictionary
+        """
+        import json
+        
+        try:
+            # THIN: Simple JSON parsing, trust LLM intelligence
+            return json.loads(json_str)
+        except json.JSONDecodeError as e:
+            # THIN Fallback: Ask LLM to reformat instead of complex parsing
+            self.logger.warning(f"JSON parsing failed, requesting LLM reformatting: {str(e)}")
+            return self._request_llm_json_reformat(json_str)
+    
+    def _request_llm_json_reformat(self, malformed_json: str) -> Dict[str, Any]:
+        """
+        THIN Approach: Use LLM intelligence to reformat malformed JSON.
+        
+        This demonstrates THIN principles: when parsing fails, ask the LLM to fix it
+        rather than writing complex extraction logic.
+        """
+        reformat_prompt = f"""
+        The following response contains evidence data but is not properly formatted JSON.
+        Please reformat it as clean JSON matching this structure:
+        
+        {{
+            "evidence_data": [
+                {{
+                    "document_name": "document name",
+                    "dimension": "dimension name",
+                    "quote_text": "evidence quote",
+                    "confidence": 0.8,
+                    "context_type": "context type",
+                    "extraction_method": "method"
+                }}
+            ]
+        }}
+        
+        Original response to reformat:
+        {malformed_json}
+        
+        Return only clean JSON, no markdown formatting or extra text.
+        """
+        
+        try:
+            # Use LLM to reformat the malformed JSON
+            if hasattr(self, 'llm_gateway') and self.llm_gateway:
+                response, _ = self.llm_gateway.execute_call(
+                    model=getattr(self, 'model', 'vertex_ai/gemini-2.5-flash'),
+                    prompt=reformat_prompt,
+                    temperature=0.1  # Low temperature for consistent formatting
+                )
+                return json.loads(response)
+            else:
+                # Fallback if no LLM available
+                self.logger.warning("No LLM gateway available for JSON reformatting, returning empty structure")
+                return {"evidence_data": []}
+        except Exception as reformat_error:
+            # Final fallback: return empty structure to prevent total failure
+            self.logger.warning(f"LLM JSON reformatting failed, returning empty evidence structure: {str(reformat_error)}")
+            return {"evidence_data": []}
