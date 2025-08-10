@@ -21,20 +21,17 @@ LLM-powered adaptive query generation with targeted evidence retrieval based on 
 
 ## Current Processing Pipeline
 
-### **4-Stage THIN Synthesis Architecture**
-Enhanced pipeline: Analysis → Knowledge Indexing → Intelligent Synthesis → Reporting with comprehensive cross-domain provenance.
+### **3-Stage THIN Synthesis Architecture**
+Unified pipeline: Analysis → Synthesis → Finalization with comprehensive cross-domain provenance.
 
 ### **Analysis Stage**
 Enhanced analysis agents with framework-specific prompts and dimensional scoring, producing raw scores and evidence with computational verification.
 
-### **Knowledge Indexing Stage**
-Comprehensive knowledge graph construction from all 6 experiment data types with persistent hash-based caching for enterprise scalability.
+### **Synthesis Stage**
+Statistical analysis and knowledge integration with LLM-powered synthesis, cross-domain reasoning, and evidence retrieval for comprehensive narrative construction.
 
-### **Intelligent Synthesis Stage**
-Cross-domain reasoning and evidence retrieval with LLM-powered query optimization, replacing evidence-only curation with comprehensive knowledge retrieval.
-
-### **Reporting Stage**
-Statistical analysis and academic-quality output with full cross-domain provenance, computational verification, and peer review readiness.
+### **Finalization Stage**
+Academic-quality output generation with full cross-domain provenance, computational verification, peer review readiness, and complete artifact organization.
 
 ## Research Framework Components
 
@@ -99,7 +96,7 @@ Task-specific agents with clear input/output contracts, natural language communi
 - `discernus/core/`: Core production services (MathToolkit, LocalArtifactStorage)
 - `discernus/gateway/`: LLM API management and model registry
 - `discernus/agents/`: Specialized analysis and synthesis agents
-- `discernus/agents/thin_synthesis/`: 4-stage THIN synthesis pipeline
+- `discernus/agents/thin_synthesis/`: 3-stage THIN synthesis pipeline
 - `discernus/agents/comprehensive_knowledge_curator/`: RAG knowledge indexing
 - `discernus/tests/`: Comprehensive test suite with integration testing
 - `docs/architecture/`: System architecture and provenance documentation
