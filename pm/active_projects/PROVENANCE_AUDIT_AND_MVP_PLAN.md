@@ -156,7 +156,7 @@ projects/experiment_name/runs/YYYY-MM-DD_human_readable_name/
 ├── FINAL_REPORT.md              # Main deliverable
 ├── METHODOLOGY_SUMMARY.md       # Framework + corpus + model decisions
 ├── STATISTICAL_SUMMARY.md       # Reliability metrics + confidence intervals
-├── data/
+├── artifacts/statistical_results/
 │   ├── scores.csv               # Quantitative results
 │   ├── evidence.csv             # Supporting quotes
 │   └── reliability_metrics.csv  # Multi-run consistency data

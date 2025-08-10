@@ -22,7 +22,7 @@ runs/[timestamp]/
 │   ├── evidence/                # Curated quotes and supporting data
 │   ├── reports/                 # Final synthesis outputs
 │   └── provenance.json          # Human-readable artifact map
-├── data/                        # CSV files for external analysis
+├── artifacts/statistical_results/  # CSV files and statistical outputs
 ├── technical/                   # System logs and execution records
 └── results/                     # Final deliverables
 ```

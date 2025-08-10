@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 from collections import defaultdict
 from datetime import datetime, timezone
+import os
 
 from .security_boundary import ExperimentSecurityBoundary
 from .audit_logger import AuditLogger
@@ -55,7 +56,7 @@ class ProvenanceOrganizer:
         # Final Outputs
         "final_report": "reports",
         "synthesis_report": "reports",
-        "csv_export": "data",
+        "csv_export": "statistical_results",
         
         # Input Materials
         "framework": "inputs",
@@ -250,7 +251,6 @@ class ProvenanceOrganizer:
     def _create_directory_structure(self, run_dir: Path) -> None:
         """Create academic-standard directory structure"""
         directories = [
-            "data",                    # CSV files for external analysis
             "artifacts/analysis_plans", # What the LLM planned to analyze
             "artifacts/analysis_results", # Raw analysis outputs
             "artifacts/statistical_results", # Mathematical computations
@@ -297,19 +297,21 @@ class ProvenanceOrganizer:
                 
                 # Create symlink to shared cache artifact using human-readable name
                 symlink_path = type_dir / human_filename
-                target_path = shared_cache_dir / "artifacts" / human_filename  # Target uses human-readable name
-                # Calculate relative path from run artifacts directory to shared cache
-                # From: projects/simple_test/runs/20250804T111225Z/artifacts/analysis_results/
-                # To:   projects/simple_test/shared_cache/artifacts/
-                relative_target = Path("../../shared_cache/artifacts") / human_filename
+                target_path = shared_cache_dir / "artifacts" / human_filename
                 
+                # Correctly calculate the relative path from the symlink's parent directory to the target.
+                # The target is in `.../shared_cache/artifacts`, and the symlink is in `.../runs/.../artifacts/<type>`.
+                # We need to go up from <type> -> artifacts -> <run_id> -> runs -> <project> to then go down to shared_cache.
+                # This can be simplified by using absolute paths and letting os.path.relpath handle it.
+                relative_target = Path(os.path.relpath(target_path.resolve(), symlink_path.parent.resolve()))
+
                 if target_path.exists():
                     try:
                         # Remove existing symlink if present
                         if symlink_path.exists() or symlink_path.is_symlink():
                             symlink_path.unlink()
                         
-                        # Create new symlink with relative path
+                        # Create new symlink with the dynamically calculated relative path
                         symlink_path.symlink_to(relative_target)
                         artifact_map[human_filename] = hash_id
                         
@@ -319,9 +321,12 @@ class ProvenanceOrganizer:
                             source_run_path = run_dir.parent / source_run
                             if source_run_path.exists():
                                 source_symlink_path = type_dir / f"source_{human_filename}"
-                                # Use relative path to source run
-                                relative_source_target = Path("../../../") / source_run / "artifacts" / target_dir / human_filename
-                                if (source_run_path / "artifacts" / target_dir / human_filename).exists():
+                                source_artifact_path = source_run_path / "artifacts" / target_dir / human_filename
+
+                                if source_artifact_path.exists() and source_artifact_path.is_symlink():
+                                    source_target_real_path = source_artifact_path.resolve()
+                                    relative_source_target = Path(os.path.relpath(source_target_real_path, source_symlink_path.parent.resolve()))
+
                                     try:
                                         if source_symlink_path.exists() or source_symlink_path.is_symlink():
                                             source_symlink_path.unlink()
@@ -386,7 +391,6 @@ class ProvenanceOrganizer:
                 "organized_artifacts": len(artifact_map)
             },
             "directory_structure": {
-                "data/": "CSV files for external statistical analysis",
                 "artifacts/analysis_plans/": "What the LLM planned to analyze",
                 "artifacts/analysis_results/": "Raw analysis outputs from LLM",
                 "artifacts/statistical_results/": "Mathematical computations and metrics",
@@ -398,11 +402,11 @@ class ProvenanceOrganizer:
             "pipeline_stages": pipeline_stats,
             "artifact_descriptions": self._generate_artifact_descriptions(artifact_map, artifact_registry),
             "navigation_guide": {
-                "primary_researcher": ["FINAL_REPORT.md", "data/scores.csv", "data/evidence.csv"],
+                "primary_researcher": ["FINAL_REPORT.md", "artifacts/statistical_results/", "artifacts/evidence/"],
                 "internal_reviewer": ["METHODOLOGY_SUMMARY.md", "STATISTICAL_SUMMARY.md"],
                 "replication_researcher": ["artifacts/", "technical/manifest.json", "README.md"],
                 "fraud_auditor": ["technical/manifest.json", "technical/logs/", "provenance.json"],
-                "llm_skeptic": ["technical/model_interactions/", "data/reliability_metrics.csv"]
+                "llm_skeptic": ["technical/model_interactions/", "artifacts/statistical_results/"]
             }
         }
     
@@ -589,8 +593,6 @@ All artifacts are cryptographically hashed and linked. The complete dependency c
 │   ├── agents.jsonl            # Agent execution details
 │   ├── costs.jsonl             # API cost tracking
 │   └── artifacts.jsonl         # Artifact creation log
-│
-└── data/                        # Legacy CSV location (deprecated)
 ```
 
 ## 🚦 Audit Workflow Recommendations
