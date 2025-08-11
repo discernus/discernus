@@ -113,12 +113,21 @@ class StatisticalResultsFormatter:
                 for col, stats in results_map.items():
                     # Only include numerical columns to keep compact
                     if isinstance(stats, dict) and stats.get('data_type') == 'numerical':
+                        mean_val = stats.get('mean', None)
+                        std_val = stats.get('std', None)
+                        cv_val = None
+                        try:
+                            if mean_val is not None and std_val is not None and float(mean_val) != 0:
+                                cv_val = float(std_val) / abs(float(mean_val))
+                        except Exception:
+                            cv_val = None
                         descriptive_rows.append([
                             col,
-                            float(stats.get('mean', 0.0)) if stats.get('mean') is not None else None,
-                            float(stats.get('std', 0.0)) if stats.get('std') is not None else None,
+                            float(mean_val) if mean_val is not None else None,
+                            float(std_val) if std_val is not None else None,
                             float(stats.get('min', 0.0)) if stats.get('min') is not None else None,
-                            float(stats.get('max', 0.0)) if stats.get('max') is not None else None
+                            float(stats.get('max', 0.0)) if stats.get('max') is not None else None,
+                            cv_val
                         ])
             
             # Reliability analysis (Cronbach's alpha)
@@ -172,7 +181,7 @@ class StatisticalResultsFormatter:
         if descriptive_rows:
             descriptive_summary = {
                 "table_format": "Descriptive Statistics",
-                "headers": ["Dimension", "Mean", "Std Dev", "Min", "Max"],
+                "headers": ["Dimension", "Mean", "Std Dev", "Min", "Max", "CV"],
                 "rows": descriptive_rows
             }
 
@@ -184,11 +193,72 @@ class StatisticalResultsFormatter:
                 "rows": reliability_rows
             }
 
+        # Deterministic fit diagnostics to avoid LLM arithmetic
+        fit_diagnostics = None
+        if anova_summary or reliability_summary:
+            alpha_threshold = 0.70
+            significance_alpha = 0.05
+            significant_dims = []
+            if anova_summary and anova_summary.get("rows"):
+                for row in anova_summary["rows"]:
+                    # row: [dimension, f, p, significant, (optional df, df, eta2)]
+                    dim = row[0]
+                    is_sig = bool(row[3])
+                    pval = row[2]
+                    # Trust provided significant flag; fallback to p-value if needed
+                    if is_sig or (pval is not None and pval < significance_alpha):
+                        significant_dims.append(dim)
+            reliability_ok_dims = []
+            reliability_poor_dims = []
+            if reliability_summary and reliability_summary.get("rows"):
+                for row in reliability_summary["rows"]:
+                    dim = row[0]
+                    alpha_val = row[1]
+                    if alpha_val is not None and float(alpha_val) >= alpha_threshold:
+                        reliability_ok_dims.append(dim)
+                    else:
+                        reliability_poor_dims.append(dim)
+            combined_fit_dims = sorted(list(set(significant_dims).intersection(set(reliability_ok_dims))))
+            # Diagnostics lists for refinement
+            failed_significance = sorted([d for d in reliability_ok_dims if d not in significant_dims])
+            failed_reliability = sorted([d for d in significant_dims if d not in reliability_ok_dims])
+            total_dims = 0
+            # Prefer ANOVA row count as denominator; else reliability
+            if anova_summary and anova_summary.get("rows"):
+                total_dims = len({r[0] for r in anova_summary["rows"]})
+            elif reliability_summary and reliability_summary.get("rows"):
+                total_dims = len({r[0] for r in reliability_summary["rows"]})
+            fit_percent = (len(combined_fit_dims) / total_dims) if total_dims > 0 else None
+            fit_diagnostics = {
+                "thresholds": {
+                    "significance_alpha": significance_alpha,
+                    "reliability_alpha_threshold": alpha_threshold
+                },
+                "counts": {
+                    "total_dimensions": total_dims,
+                    "significant_dimensions": len(significant_dims),
+                    "acceptable_reliability_dimensions": len(reliability_ok_dims),
+                    "combined_fit_dimensions": len(combined_fit_dims)
+                },
+                "percentages": {
+                    "combined_fit_percentage": fit_percent
+                },
+                "dimensions": {
+                    "significant": sorted(list(set(significant_dims))),
+                    "acceptable_reliability": sorted(list(set(reliability_ok_dims))),
+                    "combined_fit": combined_fit_dims,
+                    "failed_significance": failed_significance,
+                    "failed_reliability": failed_reliability,
+                    "poor_reliability": sorted(list(set(reliability_poor_dims)))
+                }
+            }
+
         return {
             "anova_summary": anova_summary,
             "correlation_summary": correlation_summary,
             "descriptive_summary": descriptive_summary,
             "reliability_summary": reliability_summary,
+            "fit_diagnostics": fit_diagnostics,
         }
 
     def _interpret_reliability(self, alpha: float) -> str:
