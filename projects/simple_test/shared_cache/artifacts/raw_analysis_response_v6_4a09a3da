@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis completed following the sequential steps outlined in the framework. Focus was maintained on identifying linguistic markers corresponding to each dimension's conceptual definition. Evidence extraction prioritized direct quotes that clearly exemplified the dimensional concept."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "individual_dignity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "empathy": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "envy_s": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "empathy_s": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "cohesive_goals": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+          "confidence": 0.5,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+          "confidence": 0.4,
+          "context_type": "group_supremacy"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 0.8,
+          "context_type": "universal_worth"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+          "confidence": 0.8,
+          "context_type": "universal_worth"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "confidence": 0.8,
+          "context_type": "optimistic_vision"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "So tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.7,
+          "context_type": "progress_language"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.7,
+          "context_type": "cooperative_language"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "You know, campaigns are often harder on a candidate's family than on the candidate, and that's been true in this campaign.",
+          "confidence": 0.6,
+          "context_type": "shared_interes"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.9,
+          "context_type": "integrative_objectives"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.8,
+          "context_type": "collaborative_aims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

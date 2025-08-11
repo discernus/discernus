@@ -1,0 +1,441 @@
+{
+  "evidence_metadata": {
+    "total_documents": 4,
+    "total_evidence_pieces": 43,
+    "extraction_method": "analysis_time_combination_v1.0",
+    "extraction_time": "2025-08-11T02:02:52.918177+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090500+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.9,
+      "context_type": "metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090516+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Our lives deserve dignity and our work deserves respect.",
+      "confidence": 0.8,
+      "context_type": "declarative_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090520+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+      "confidence": 0.7,
+      "context_type": "statement_of_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090523+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but but about class solidarity.",
+      "confidence": 0.9,
+      "context_type": "expression_of_hope",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090525+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "I don't want us to live like this anymore, Greeley.",
+      "confidence": 0.85,
+      "context_type": "statement_of_desire_for_change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090527+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+      "confidence": 0.7,
+      "context_type": "accusation_of_theft",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090530+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "The last thing they want us to realize is that the division that is actually hurting our country the most is how endlesly greed is costing the lives of everyone else.",
+      "confidence": 0.65,
+      "context_type": "linking_greed_to_harm",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090533+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "competition",
+      "quote_text": "Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+      "confidence": 0.7,
+      "context_type": "characterization_of_opposing_philosophy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090535+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "enmity",
+      "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+      "confidence": 0.75,
+      "context_type": "exclusionary_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090537+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "So to all of those who came here today to stand together, you do. You do.",
+      "confidence": 0.95,
+      "context_type": "call_to_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090539+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+      "confidence": 0.9,
+      "context_type": "inclusive_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090542+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+      "confidence": 0.85,
+      "context_type": "description_of_divisive_tactics",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090544+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaires friends.",
+      "confidence": 0.8,
+      "context_type": "accusation_of_resource_diversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090546+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So we stand together, we know that, that it's our only choice because we know that with\u00adout ex\u00adcep\u00adtion, if we stand to\u00adgeth\u00ader, it is the on\u00adly way that we can win.",
+      "confidence": 0.95,
+      "context_type": "statement_of_collective_victory",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090548+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but but about class solidarity.",
+      "confidence": 0.9,
+      "context_type": "emphasis_on_solidarity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:36.090550+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674193+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Today you have three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholder in 95% of American corporations.",
+      "confidence": 0.9,
+      "context_type": "factual_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674200+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_comparison",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674203+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "Why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.",
+      "confidence": 0.85,
+      "context_type": "statement_of_grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674205+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat \"Trumpism\", but we can create the kind of nation that we deserve.",
+      "confidence": 0.8,
+      "context_type": "aspirational_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674207+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.75,
+      "context_type": "accusatory_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674208+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "empathy",
+      "quote_text": "And my father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+      "confidence": 0.6,
+      "context_type": "personal_anecdote_with_analogy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674210+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They are going after Medicaid, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.8,
+      "context_type": "description_of_divisive_actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674213+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat \"Trumpism\", but we can create the kind of nation that we deserve.",
+      "confidence": 0.5,
+      "context_type": "vision_of_unity_and_improvement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:39.674214+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+      "confidence": 0.5,
+      "context_type": "group_supremacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493088+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+      "confidence": 0.4,
+      "context_type": "group_supremacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493104+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.8,
+      "context_type": "universal_worth",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493107+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+      "confidence": 0.8,
+      "context_type": "universal_worth",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493110+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+      "confidence": 0.8,
+      "context_type": "optimistic_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493113+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "So tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "progress_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493116+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "empathy",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.7,
+      "context_type": "cooperative_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493119+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "empathy",
+      "quote_text": "You know, campaigns are often harder on a candidate's family than on the candidate, and that's been true in this campaign.",
+      "confidence": 0.6,
+      "context_type": "shared_interes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493122+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.9,
+      "context_type": "integrative_objectives",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493124+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.8,
+      "context_type": "collaborative_aims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:43.493127+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "It's my privilege to have the opportunity to address you here on the floor of the United States House of Representatives. I have listened to a lot of discussion here with which I disagree, of course, and uh, but I keep hearing this term, \"do your job, do your job.\"",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845925+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And uh, the argument is that one of the arguments is that the President of the United States has a constitutional right to nominate to the Supreme Court. Well, he does, that's pretty clear in the Constitution.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845933+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "And so I would ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845936+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "I can't react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845939+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845942+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "And so therefore, if Congress wants the law to say something different, we have to amend it here in the House and the Senate and get a presidential signature on it. That is the constitutional structure of this government that we have, Mr. Speaker, and it's, it's a bit um, frustrating for me to listen to the dialogue otherwise that the Senate's not doing their job because they withhold a confirmation, uh, that of a presidential appointment when we have a president that has proven that he's not going to put up an appointment that will protect our Constitution.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845944+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "And the question is, does the President have prosecutorial authority, prosecutorial discretion? That, well, the precedence along prosecutorial discretion. And I don't know. The Supreme Court has ever heard and ruled on a case of prosecutorial discretion. I believe they have not.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845946+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "But if a court wants to manufacture a new right, let alone a new command, that's wrong. And this Congress ought to speak up and we need a president that will appoint justices to the Supreme Court who will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845949+00:00"
+    }
+  ]
+}

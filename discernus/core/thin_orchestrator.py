@@ -146,8 +146,11 @@ class ThinOrchestrator:
             else:
                 print("✅ Framework dimension validation passed")
                 
+        except ThinOrchestratorError:
+            # Re-raise validation failures - these should block the experiment
+            raise
         except Exception as e:
-            # Log validation failure for telemetry
+            # Log only genuine system errors for telemetry  
             audit_logger.log_orchestrator_event(
                 "framework_dimension_validation",
                 {
@@ -161,7 +164,7 @@ class ThinOrchestrator:
                 }
             )
             
-            # Don't fail the experiment for validation system errors, just warn
+            # Don't fail the experiment for genuine system errors, just warn
             print(f"⚠️ Framework dimension validation system error: {str(e)}")
             print("⚠️ Proceeding without dimension validation")
     
