@@ -58,49 +58,20 @@ step_definitions:
   framework_fit_assessment:
     query_generation_task: null # This step does not require RAG queries
     synthesis_task: |
-      Analyze the framework's performance using the raw statistical results provided in the context. Create a "Framework Fit Assessment" section based on the following tiered methodology and rules.
+      Analyze the framework's performance using the raw statistical results provided in the context. Do not use conceptual tier labels (e.g., Gold/Silver/Bronze) in the report. Use scientifically accurate descriptions only.
 
-      **1. Determine Assessment Tier:**
-      - If 'anova_summary' and 'reliability_summary' are present, use the "Gold Standard".
-      - If only 'reliability_summary' is present, use the "Silver Standard".
-      - If only 'descriptive_summary' is present, use the "Bronze Standard".
-      - If none are present, state that the assessment could not be performed due to insufficient data.
+      Guidance:
+      - Determine which statistical sources are available (ANOVA, reliability, descriptive). Do not mention any tier names; simply proceed with the strongest available analysis.
+      - When ANOVA is available: use p-values, F-statistics, degrees of freedom, and effect sizes (eta-squared when present) to characterize whether group differences are statistically significant and substantively meaningful.
+      - When reliability is available: categorize Cronbach's alpha by commonly accepted thresholds (≥0.9 excellent, ≥0.8 good, ≥0.7 acceptable, ≥0.6 questionable, <0.6 poor). Use these terms directly.
+      - When only descriptive statistics are available: use coefficient of variation (CV = std/mean) as a proxy for discriminative power (≥0.30 strong dispersion, 0.20–0.29 moderate, <0.20 low). State this clearly as a descriptive assessment without inferential claims.
 
-      **2. Gold Standard Assessment (ANOVA + Reliability):**
-      - For each dimension in 'reliability_summary', categorize its reliability based on Cronbach's Alpha:
-        - "Excellent": alpha >= 0.9
-        - "Good": alpha >= 0.8
-        - "Acceptable": alpha >= 0.7
-        - "Questionable": alpha >= 0.6
-        - "Poor": alpha < 0.6
-      - For each dimension in 'anova_summary', note if it is statistically significant (p < 0.05).
-      - Create a table categorizing each dimension's fit:
-        - "Excellent Fit": 'Excellent' or 'Good' reliability AND statistically significant.
-        - "Good Fit": 'Acceptable' reliability AND statistically significant.
-        - "Marginal Fit": 'Questionable' reliability OR not statistically significant.
-        - "Poor Fit": 'Poor' reliability.
-      - Calculate the percentage of dimensions with "Good Fit" or better.
-      - Write a summary of the framework's strengths (dimensions with excellent fit) and limitations (dimensions with poor or marginal fit).
-
-      **3. Silver Standard Assessment (Reliability Only):**
-      - Categorize each dimension's reliability as in the Gold Standard.
-      - Create a summary of the reliability distribution (e.g., "5 dimensions have Excellent reliability, 3 have Good...").
-      - Write a conclusion about the framework's internal consistency. Note the limitation that statistical significance was not assessed.
-
-      **4. Bronze Standard Assessment (Descriptive Stats Only):**
-      - For each dimension in 'descriptive_summary', calculate the Coefficient of Variation (CV) = (Std Dev / Mean).
-      - Categorize the dimension's score variance:
-        - "Good Variance": CV >= 0.3
-        - "Moderate Variance": CV >= 0.2
-        - "Low Variance": CV < 0.2
-      - Write a summary of the variance distribution.
-      - State that this is a preliminary assessment and that the framework appears to discriminate between texts but requires more rigorous testing.
-
-      **5. Final Output Generation:**
-      - Create a markdown section titled "Framework Fit Assessment".
-      - Clearly state the assessment tier used.
-      - Present the analysis, tables, and summaries as described in the rules above.
-      - Conclude with a clear statement about the framework's overall fit for the corpus and any recommendations for future validation.
+      Required Output (no tier labels):
+      1. Precise statement of the statistical basis used (e.g., "Inference with ANOVA and internal consistency" or "Descriptive variance analysis only").
+      2. Per-dimension summary table mapping significance and measurement quality where applicable. Avoid tier names; use statistical terms.
+      3. Overall proportion of dimensions meeting acceptable thresholds (e.g., significant at α=0.05 and alpha ≥0.70), expressed as a percentage.
+      4. Concise interpretation of strengths and limitations grounded in the presented statistics (e.g., high effect sizes on identity-related dimensions; low reliability on compersion).
+      5. Recommendations for future data collection or framework calibration where indicated by the metrics.
 
   final_integration:
     query_generation_task: null # This step does not require RAG queries

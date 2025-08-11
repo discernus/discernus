@@ -438,6 +438,22 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
         # Perform ANOVA
         f_stat, p_value = stats.f_oneway(*clean_groups)
         
+        # Degrees of freedom
+        k = len(clean_groups)
+        n_total = sum(len(g) for g in clean_groups)
+        df_between = k - 1
+        df_within = max(n_total - k, 0)
+
+        # Effect size (eta-squared)
+        try:
+            all_values = np.concatenate([np.array(g, dtype=float) for g in clean_groups])
+            overall_mean = float(np.mean(all_values)) if len(all_values) > 0 else 0.0
+            ss_between = float(sum(len(g) * (np.mean(g) - overall_mean) ** 2 for g in clean_groups))
+            ss_total = float(sum((x - overall_mean) ** 2 for x in all_values)) if len(all_values) > 0 else 0.0
+            eta_squared = float(ss_between / ss_total) if ss_total > 0 else 0.0
+        except Exception:
+            eta_squared = None
+
         # Calculate group statistics
         group_stats = {}
         for label, values in groups.items():
@@ -463,6 +479,9 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
             "groups": group_stats,
             "f_statistic": float(f_stat),
             "p_value": float(p_value),
+            "df_between": int(df_between),
+            "df_within": int(df_within),
+            "effect_size": eta_squared,
             "significant": p_value < 0.05,
             "provenance": provenance
         }

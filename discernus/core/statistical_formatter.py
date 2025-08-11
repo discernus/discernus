@@ -56,7 +56,16 @@ class StatisticalResultsFormatter:
                 f_stat = float(task_result.get('f_statistic', 0.0)) if task_result.get('f_statistic') is not None else None
                 p_value = float(task_result.get('p_value', 1.0)) if task_result.get('p_value') is not None else None
                 significant = bool(task_result.get('significant', False))
-                anova_rows.append([dimension, f_stat, p_value, significant])
+                df_between = task_result.get('df_between')
+                df_within = task_result.get('df_within')
+                effect_size = task_result.get('effect_size')
+                row = [dimension, f_stat, p_value, significant]
+                # Append optional fields if available
+                if df_between is not None and df_within is not None:
+                    row.extend([int(df_between), int(df_within)])
+                if effect_size is not None:
+                    row.append(float(effect_size))
+                anova_rows.append(row)
 
             # Correlation matrices (pearson/spearman)
             elif rtype in ('pearson_correlation', 'spearman_correlation', 'correlation_matrix'):
@@ -129,13 +138,21 @@ class StatisticalResultsFormatter:
         # Assemble tables
         anova_summary = None
         if anova_rows:
+            # Determine headers dynamically based on presence of optional fields
+            has_df = any(len(r) >= 6 for r in anova_rows)
+            has_effect = any((len(r) == 7) or (len(r) >= 7) for r in anova_rows)
+            headers = ["Dimension", "F-Statistic", "P-Value", "Significant"]
+            if has_df:
+                headers.extend(["DF Between", "DF Within"])
+            if has_effect:
+                headers.append("Eta Squared")
             anova_rows_sorted = sorted(
                 anova_rows,
                 key=lambda row: (0.0 if row[1] is None else -row[1])  # sort by F desc, None last
             )
             anova_summary = {
                 "table_format": "ANOVA Results Table",
-                "headers": ["Dimension", "F-Statistic", "P-Value", "Significant"],
+                "headers": headers,
                 "rows": anova_rows_sorted
             }
 
