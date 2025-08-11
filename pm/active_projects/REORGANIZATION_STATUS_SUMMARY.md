@@ -11,10 +11,11 @@
 - **1 Security Critical**: #137 (ProjectSecurityBoundary - marked Ready)
 - **1 Performance Blocker**: #291 (Default Ensemble Validation)
 
-#### **Alpha Comprehensive (Academic Gold Standard)** - *43 issues* *(Target: Academic quality)*
+#### **Alpha Comprehensive (Academic Gold Standard)** - *46+ issues* *(Target: Academic quality)*
 - **Evidence Architecture**: #280-284 (Epic + Sprint issues)
 - **Final Report Quality**: #300-302 (already assigned)
 - **Framework v7.1**: #285-290 (Epic + migration issues)
+- **Epic #240**: Incremental Ensemble Enhancement (3 issues - #241, #242, #243)
 - **Security & Compliance**: #190, #144, #138-143 (Security epic + implementation)
 - **Architecture Quality**: #259, #191, #183-184 (Gasket + UX + compliance)
 - **THIN Violations**: #252-253 (ResultsInterpreter + Evidence Curator)
@@ -35,11 +36,14 @@
 
 ### **Clear Development Path**
 1. **Week 1**: Execute Alpha Foundation (9 critical issues) - *~0.5 Cursor days*
-2. **Weeks 2-4**: Execute Alpha Comprehensive (43 quality issues) - *~3.5 Cursor days*
-3. **September 1**: Ship academic gold standard alpha
+2. **Weeks 2-4**: Execute Alpha Comprehensive (46+ quality issues) - *~4.1 Cursor days*
+   - Includes Epic #240: Incremental Ensemble Enhancement for reliability improvements
+3. **September 1**: Ship academic gold standard alpha with ensemble capabilities
 
 ### **Academic Focus Maintained**
 - **Provenance Crisis**: Immediate fixes ready for execution
+- **Research Reliability**: Epic #240 delivers 40-60% variance reduction through ensemble methods
+- **Publication Readiness**: Systematic ensemble optimization supports academic credibility
 - **Evidence Architecture**: Epic #280 + provenance improvements integrated
 - **Final Report Quality**: Comprehensive improvements aligned with personas document
 - **Methodology Transparency**: Academic collaboration readiness prioritized

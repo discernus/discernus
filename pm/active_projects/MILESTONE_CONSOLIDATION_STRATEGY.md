@@ -37,6 +37,7 @@ Alpha Comprehensive (Academic Gold Standard) (7 issues) [NEW]
 - Evidence architecture and provenance UX
 - Final report quality improvements
 - Framework v7.1 migration
+- **Epic #240**: Incremental Ensemble Enhancement (~0.6 Cursor days)
 - Selected high-value items from old milestones
 
 #### **Research & Future Work** - *10 issues* *(UNCHANGED)*

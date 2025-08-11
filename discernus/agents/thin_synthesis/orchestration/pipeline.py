@@ -175,11 +175,11 @@ class ProductionThinSynthesisPipeline:
         try:
             # Step 1: Run MathToolkit to get statistical results
             self.logger.info("📊 Running statistical analysis...")
-            statistical_results_raw = self._run_statistical_analysis(request)
+            statistical_results_raw, sample_size = self._run_statistical_analysis(request)
             
             # Step 1.5: Validate statistical health
             self.logger.info("🔍 Validating statistical health...")
-            self._validate_statistical_health(statistical_results_raw)
+            self._validate_statistical_health(statistical_results_raw, sample_size)
             
             statistical_results_hash = self._store_artifact_with_metadata(
                 json.dumps(statistical_results_raw, default=self._json_serializer), 
@@ -298,7 +298,7 @@ class ProductionThinSynthesisPipeline:
                 error_message=str(e)
             )
 
-    def _run_statistical_analysis(self, request: ProductionPipelineRequest) -> Dict[str, Any]:
+    def _run_statistical_analysis(self, request: ProductionPipelineRequest) -> tuple[Dict[str, Any], int]:
         """Helper to run the statistical analysis using MathToolkit."""
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         raw_analysis_data = combined_data.decode('utf-8')
@@ -306,13 +306,47 @@ class ProductionThinSynthesisPipeline:
         # Framework-agnostic: Dynamically discover score columns from framework
         score_columns = self._extract_framework_score_columns(request.framework_spec)
         
-        analysis_plan = {
-            "tasks": {
-                "descriptives": {"tool": "calculate_descriptive_stats", "parameters": {"columns": score_columns}},
-                "correlations": {"tool": "calculate_pearson_correlation", "parameters": {"columns": score_columns, "min_columns": 2}},
-                "derived_metrics": {"tool": "calculate_derived_metrics", "parameters": {"input_columns": score_columns}}
-            }
+        # Sample-size aware statistical planning - check the data structure first
+        try:
+            # Try to determine sample size from the raw data
+            raw_text = combined_data.decode('utf-8')
+            if raw_text.startswith('[') or raw_text.startswith('{'):
+                # JSON format - count top-level objects
+                import json
+                data_obj = json.loads(raw_text)
+                if isinstance(data_obj, list):
+                    sample_size = len(data_obj)
+                elif isinstance(data_obj, dict) and 'documents' in data_obj:
+                    sample_size = len(data_obj['documents'])
+                else:
+                    sample_size = 1  # Single document object
+            else:
+                # Try CSV format
+                df_preview = pd.read_csv(BytesIO(combined_data))
+                sample_size = len(df_preview)
+        except Exception as e:
+            self.logger.warning(f"Could not determine sample size, defaulting to 4: {e}")
+            sample_size = 4  # Conservative fallback
+        
+        self.logger.info(f"📊 Sample size detected: N={sample_size}, adapting statistical analysis plan...")
+        
+        # Intelligent statistical planning based on sample size constraints
+        analysis_tasks = {
+            "descriptives": {"tool": "calculate_descriptive_stats", "parameters": {"columns": score_columns}}
         }
+        
+        if sample_size >= 10:
+            # Sufficient for correlation analysis
+            analysis_tasks["correlations"] = {"tool": "calculate_pearson_correlation", "parameters": {"columns": score_columns, "min_columns": 2}}
+            self.logger.info("✅ Sample size adequate for correlation analysis")
+        else:
+            self.logger.info(f"⚠️ Sample size N={sample_size} insufficient for reliable correlation analysis (N≥10 recommended)")
+            
+        if sample_size >= 4:
+            # Can calculate derived metrics for case studies
+            analysis_tasks["derived_metrics"] = {"tool": "calculate_derived_metrics", "parameters": {"input_columns": score_columns}}
+            
+        analysis_plan = {"tasks": analysis_tasks}
         
         framework_calculation_spec = None
         try:
@@ -325,7 +359,7 @@ class ProductionThinSynthesisPipeline:
         except Exception:
             self.logger.warning("Could not parse framework_calculation_spec from framework. Proceeding without it.")
 
-        return execute_analysis_plan_thin(
+        statistical_results = execute_analysis_plan_thin(
             raw_analysis_data=raw_analysis_data,
             analysis_plan_input=analysis_plan,
             llm_gateway=self.llm_gateway,
@@ -333,6 +367,8 @@ class ProductionThinSynthesisPipeline:
             corpus_manifest=request.corpus_manifest,
             framework_calculation_spec=framework_calculation_spec,
         )
+        
+        return statistical_results, sample_size
     
     def _extract_framework_score_columns(self, framework_spec: str) -> List[str]:
         """
@@ -401,7 +437,7 @@ class ProductionThinSynthesisPipeline:
             "fragmentative_goals_score", "cohesive_goals_score"
         ]
     
-    def _validate_statistical_health(self, statistical_results: Dict[str, Any]) -> None:
+    def _validate_statistical_health(self, statistical_results: Dict[str, Any], sample_size: int) -> None:
         """
         Validate statistical calculation health to detect data quality issues.
         
@@ -412,6 +448,7 @@ class ProductionThinSynthesisPipeline:
         
         Args:
             statistical_results: Raw statistical results from MathToolkit
+            sample_size: Number of documents in the analysis for context-aware validation
             
         Raises:
             Exception: If statistical health validation fails
@@ -428,9 +465,11 @@ class ProductionThinSynthesisPipeline:
             # Convert statistical results to JSON string for LLM analysis
             statistical_json = json.dumps(statistical_results, indent=2, default=self._json_serializer)
             
-            # Validate statistical health
+            # Validate statistical health with sample size context
             health_result = reliability_agent.validate_statistical_health(
-                statistical_results=statistical_json
+                statistical_results=statistical_json,
+                sample_size=sample_size,  # Pass sample size for context-aware validation
+                analysis_type="case_study" if sample_size < 10 else "statistical"
             )
             
             # Log validation results

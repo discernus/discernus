@@ -9,7 +9,7 @@ Provides zero-breaking-change wrapper around existing Click output.
 
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn
+
 from rich.panel import Panel
 from rich.text import Text
 from rich.markup import escape
@@ -30,7 +30,6 @@ class DiscernusConsole:
     
     def __init__(self):
         self.console = Console()
-        self._progress = None
     
     def echo(self, message: str, **kwargs):
         """
@@ -78,17 +77,7 @@ class DiscernusConsole:
         """Print a Rich table."""
         self.console.print(table)
     
-    def create_progress(self, description: str = "Processing...") -> Progress:
-        """Create a Rich progress bar for long operations."""
-        progress = Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            BarColumn(),
-            TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-            TimeElapsedColumn(),
-            console=self.console
-        )
-        return progress
+
     
     def print_experiment_summary(self, experiment: Dict[str, Any]):
         """Print experiment summary in a professional format."""
