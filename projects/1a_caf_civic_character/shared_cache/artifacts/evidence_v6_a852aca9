@@ -1,0 +1,201 @@
+{
+  "evidence_metadata": {
+    "document_hash": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+    "total_evidence_pieces": 19,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-11T13:43:04.138118+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "dignity",
+      "quote_text": "Go to Breathitt County, Kentucky, and tell me that these are privileged people. They are very hard-working people and they're very good people.",
+      "confidence": 0.8,
+      "context_type": "acknowledgment_of_group_dignity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138038+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "dignity",
+      "quote_text": "One of the parts of that commonality as a people is that we do allow newcomers to this country, but we allow them on our terms, on the terms of the American citizens.",
+      "confidence": 0.7,
+      "context_type": "conditional_inclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138061+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China.",
+      "confidence": 0.9,
+      "context_type": "us_vs_them_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138065+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "But my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+      "confidence": 0.9,
+      "context_type": "explicit_in_group_preference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138068+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "if you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+      "confidence": 0.8,
+      "context_type": "data_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138071+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "The 20,000 resident Delta is almost all recent Haitian immigrants. Okay? In a town, a small town of Ohio, 20,000 people.",
+      "confidence": 0.8,
+      "context_type": "factual_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138075+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China.",
+      "confidence": 0.9,
+      "context_type": "false_dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138078+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "The real threat to American democracy...it's that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "redefinition_of_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138081+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "justice",
+      "quote_text": "Those people can still do it. They just want to get proper wages in the process.",
+      "confidence": 0.7,
+      "context_type": "limited_economic_justice_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138083+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "resentment",
+      "quote_text": "The real threat to American democracy...it's that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "grievance_against_politicians",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138086+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "resentment",
+      "quote_text": "Housing is through the roof. People, middle-class people in Springfield who've lived there sometimes for generations cannot afford a place to live. A third, I heard this yesterday, a third of the local County Health budget is now tied up in giving free benefits to illegal immigrants.",
+      "confidence": 0.9,
+      "context_type": "victimization_narrative_and_blame_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138089+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "But I will say on the good news, the majority of the Republican house and the majority of the Republican Senate... said no more to this, no more, right? That's a good thing, that's progress.",
+      "confidence": 0.8,
+      "context_type": "optimistic_political_outlook",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138091+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "the reason I'm most optimistic about the future of this movement and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party actually plans to put American citizens first, and that's Donald Trump.",
+      "confidence": 0.8,
+      "context_type": "vision_for_future_through_leadership",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138095+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fear",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "threat_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138097+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fear",
+      "quote_text": "no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+      "confidence": 0.9,
+      "context_type": "catastrophic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138100+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "we should, we should, in my view, not fight a war with China if we can avoid it. We should also not let the Chinese make all of our stuff.",
+      "confidence": 0.7,
+      "context_type": "realistic_policy_stance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138103+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "People, middle-class people in Springfield who've lived there sometimes for generations cannot afford a place to live.",
+      "confidence": 0.7,
+      "context_type": "acknowledgment_of_constraints",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138106+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fantasy",
+      "quote_text": "the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China.",
+      "confidence": 0.8,
+      "context_type": "oversimplified_solution_caricature",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138109+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fantasy",
+      "quote_text": "The only illegal people in this country are the people whose grandparents were born here, according to the Biden administration.",
+      "confidence": 0.8,
+      "context_type": "denial_of_reality_for_ideological_point",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:43:04.138112+00:00"
+    }
+  ]
+}

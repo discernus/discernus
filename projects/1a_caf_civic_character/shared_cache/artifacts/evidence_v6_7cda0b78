@@ -1,0 +1,151 @@
+{
+  "evidence_metadata": {
+    "document_hash": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+    "total_evidence_pieces": 14,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-11T13:23:18.561066+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "dignity",
+      "quote_text": "I am married to the daughter of South Asian immigrants to this country. Incredible people, people who genuinely have enriched, uh, the country and in so many ways.",
+      "confidence": 0.8,
+      "context_type": "personal_anecdote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561034+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+      "confidence": 0.98,
+      "context_type": "central_thesis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561040+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "they seem to really not like their own fellow citizens, even though the wars that they want are going to be, of course, fought by the people in the heartland and not by the people who are walking down the streets of Washington D.C.",
+      "confidence": 0.98,
+      "context_type": "in_group_vs_out_group_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561042+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "And of course the argument is that, yeah, maybe immigrants take up some more demand for housing, but they, they build all the houses. That's not true, by the way. Go to Pennsylvania in Ohio, you'll see a lot of very native born citizens who still build houses.",
+      "confidence": 0.9,
+      "context_type": "dismissal_of_counterargument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561044+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "It would be, you, the, the equivalent of allowing the Nazi Germans in 1942 to make all of our ships and missiles. People recognize that that era has come to a close.",
+      "confidence": 0.95,
+      "context_type": "emotionally_charged_analogy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561046+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "the only illegal people in this country are the people whose grandparents were born here, according to the Biden administration.",
+      "confidence": 0.95,
+      "context_type": "hyperbolic_distortion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561048+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "justice",
+      "quote_text": "And of course the left will fact check and say, 'Well, they're not illegal immigrants because through the abuse of asylum laws and through Joe Biden's massive paroles, they are now no longer technically illegal aliens...'",
+      "confidence": 0.9,
+      "context_type": "absence_of_dimension_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561050+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "resentment",
+      "quote_text": "they actually don't really like the people who make up the domestic populations of their own country.",
+      "confidence": 0.98,
+      "context_type": "grievance_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561052+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "resentment",
+      "quote_text": "A third, I heard this yesterday, a third of the local County Health budget is now tied up in giving free benefits to illegal immigrants.",
+      "confidence": 0.95,
+      "context_type": "blame_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561054+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "But by and large, the national conservative movement is winning the debate and we're changing the conversation.",
+      "confidence": 0.9,
+      "context_type": "empowerment_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561056+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump. And that, and that, and I remember in 2019... I think that's over now. And I think that the fact that it's over is a huge, huge win for you guys.",
+      "confidence": 0.9,
+      "context_type": "aspirational_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561057+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fear",
+      "quote_text": "no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+      "confidence": 0.9,
+      "context_type": "threat_focused_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561059+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We should, we should, in my view, not fight a war with China if we can avoid it. We should also not let the Chinese make all of our stuff.",
+      "confidence": 0.85,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561060+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fantasy",
+      "quote_text": "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight. That's the Wall Street Journal editorial page approach.",
+      "confidence": 0.9,
+      "context_type": "oversimplified_strawman",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:23:18.561062+00:00"
+    }
+  ]
+}
