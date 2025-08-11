@@ -2887,43 +2887,50 @@ This research was conducted using the Discernus computational research platform,
             return None
     
     def _parse_framework_config(self, framework_content: str) -> Dict[str, Any]:
-        """Parse framework configuration from framework content."""
+        """Parse framework configuration from markdown content."""
         try:
-            # Extract JSON appendix using THIN utility
-            import re
+            # Primary regex for new format
             json_match = re.search(r'<details><summary>Machine-Readable Configuration</summary>\s*```json\s*\n(.*?)\n\s*```\s*</details>', framework_content, re.DOTALL)
             if json_match:
                 config_str = json_match.group(1)
+                # Try parsing with parse_llm_json_response
                 try:
-                    config = parse_llm_json_response(
-                        response=config_str,
-                        llm_gateway=self.llm_gateway,
-                        model=self.model,
-                        audit_logger=self.audit_logger
-                    )
-                except (ValueError, json.JSONDecodeError) as e:
-                    self.audit_logger.log_error("framework_config_parsing_failed", f"Failed to parse framework config: {e}", {"agent": "ThinOrchestrator"})
-                    config = {}
+                    config = parse_llm_json_response(config_str)
+                    if config:
+                        return config
+                except Exception as e:
+                    print(f"Warning: parse_llm_json_response failed: {e}")
                 
-                # v7.3: Ensure static_weights is present, defaulting to empty dict if not
-                if 'static_weights' not in config:
-                    config['static_weights'] = {}
-                
-                # v7.3: Ensure pattern_classifications is present, defaulting to empty dict if not
-                if 'pattern_classifications' not in config:
-                    config['pattern_classifications'] = {}
-                
-                # v7.3: Ensure reporting_metadata is present, defaulting to empty dict if not
-                if 'reporting_metadata' not in config:
-                    config['reporting_metadata'] = {}
-                    
-                return config
-            else:
-                # Fallback for older formats or malformed files
-                json_match_fallback = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
-                if json_match_fallback:
+                # Fallback to direct JSON parsing
+                try:
+                    return json.loads(config_str)
+                except json.JSONDecodeError as e:
+                    print(f"Warning: Direct JSON parsing failed: {e}")
+            
+            # Fallback regex for older formats
+            json_match_fallback = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
+            if json_match_fallback:
+                try:
                     return json.loads(json_match_fallback.group(1))
-                return {"name": "unknown", "version": "unknown", "static_weights": {}}
+                except json.JSONDecodeError as e:
+                    print(f"Warning: Fallback JSON parsing failed: {e}")
+            
+            # If all parsing fails, return minimal config
+            print("Warning: No valid framework configuration found, using minimal config")
+            return {
+                "name": "unknown",
+                "version": "unknown",
+                "static_weights": {},
+                "pattern_classifications": {},
+                "reporting_metadata": {}
+            }
+            
         except Exception as e:
             print(f"⚠️  Framework parsing error: {e}. Defaulting to empty config.")
-            return {"name": "unknown", "version": "unknown", "static_weights": {}} 
+            return {
+                "name": "unknown",
+                "version": "unknown",
+                "static_weights": {},
+                "pattern_classifications": {},
+                "reporting_metadata": {}
+            }
