@@ -1,0 +1,110 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis followed the sequential steps outlined in the framework, focusing on identifying specific linguistic markers for each dimension. Confidence is high due to clear language and strong thematic elements aligning with the framework's dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.6,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "empathy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+          "confidence": 0.8,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "confidence": 0.9,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "And now that Trump is back in power, we see it clear as day. He's handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback.",
+          "confidence": 0.7,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do.",
+          "confidence": 0.8,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.7,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "empathy",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.9,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "They want us to think that our lives are suffering because of the L G B T kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves.",
+          "confidence": 0.6,
+          "context_type": "linguistic_marker"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "So we stand together, we know that, that it's our only choice because we know that with exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "linguistic_marker"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

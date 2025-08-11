@@ -43,6 +43,34 @@ def assess_pipeline_health(
             system_prompt="You are a pipeline reliability expert for the Discernus research platform."
         )
 
+        # Check if the LLM call was successful
+        if not metadata.get("success", False):
+            error_msg = metadata.get("error", "Unknown LLM call failure")
+            if agent.audit_logger:
+                agent.audit_logger.log_error("pipeline_health_assessment_llm_failure", error_msg, {"agent": agent.agent_name})
+            return PipelineHealthResult(
+                health_status="critical",
+                error_patterns=[f"LLM validation failed: {error_msg}"],
+                performance_issues=[],
+                reliability_metrics={},
+                recommended_actions=["Fix LLM gateway issues"],
+                alert_level="critical"
+            )
+
+        # Check if response is empty
+        if not response or not response.strip():
+            error_msg = "LLM returned empty response"
+            if agent.audit_logger:
+                agent.audit_logger.log_error("pipeline_health_assessment_empty_response", error_msg, {"agent": agent.agent_name})
+            return PipelineHealthResult(
+                health_status="critical",
+                error_patterns=[f"LLM validation failed: {error_msg}"],
+                performance_issues=[],
+                reliability_metrics={},
+                recommended_actions=["Fix LLM gateway issues"],
+                alert_level="critical"
+            )
+
         if agent.audit_logger:
             agent.audit_logger.log_agent_event(
                 agent.agent_name, "pipeline_health_assessment_response",

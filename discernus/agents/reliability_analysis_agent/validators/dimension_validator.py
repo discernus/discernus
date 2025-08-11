@@ -42,6 +42,36 @@ def validate_framework_dimensions(
             system_prompt="You are a reliability analysis expert for the Discernus research platform."
         )
 
+        # Check if the LLM call was successful
+        if not metadata.get("success", False):
+            error_msg = metadata.get("error", "Unknown LLM call failure")
+            if agent.audit_logger:
+                agent.audit_logger.log_error("framework_dimension_validation_llm_failure", error_msg, {"agent": agent.agent_name})
+            return DimensionValidationResult(
+                validation_passed=False,
+                missing_required_dimensions=[],
+                missing_optional_dimensions=[],
+                present_dimensions=[],
+                impact_assessment="LLM call failed during validation",
+                recommended_action="FAIL_EXPERIMENT",
+                error_message=f"LLM validation failed: {error_msg}"
+            )
+
+        # Check if response is empty
+        if not response or not response.strip():
+            error_msg = "LLM returned empty response"
+            if agent.audit_logger:
+                agent.audit_logger.log_error("framework_dimension_validation_empty_response", error_msg, {"agent": agent.agent_name})
+            return DimensionValidationResult(
+                validation_passed=False,
+                missing_required_dimensions=[],
+                missing_optional_dimensions=[],
+                present_dimensions=[],
+                impact_assessment="LLM returned empty response during validation",
+                recommended_action="FAIL_EXPERIMENT",
+                error_message=f"LLM validation failed: {error_msg}"
+            )
+
         if agent.audit_logger:
             agent.audit_logger.log_agent_event(
                 agent.agent_name, "framework_dimension_validation_response",

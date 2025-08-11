@@ -212,6 +212,52 @@ def log_stage_transition(from_stage: str, to_stage: str, duration_seconds: float
         **kwargs
     })
 
+def log_analysis_phase_start(experiment_name: str, run_id: str, document_count: int, **kwargs) -> None:
+    """Log analysis phase start with document count and context."""
+    logger.info("Analysis phase started", extra={
+        "event": "analysis_phase_start",
+        "experiment_name": experiment_name,
+        "run_id": run_id,
+        "document_count": document_count,
+        "stage": "analysis",
+        **kwargs
+    })
+
+def log_analysis_phase_complete(experiment_name: str, run_id: str, duration_seconds: float, documents_processed: int, **kwargs) -> None:
+    """Log analysis phase completion with timing and results."""
+    logger.info("Analysis phase completed", extra={
+        "event": "analysis_phase_complete",
+        "experiment_name": experiment_name,
+        "run_id": run_id,
+        "duration_seconds": duration_seconds,
+        "documents_processed": documents_processed,
+        "stage": "analysis",
+        **kwargs
+    })
+
+def log_synthesis_phase_start(experiment_name: str, run_id: str, analysis_artifacts_count: int, **kwargs) -> None:
+    """Log synthesis phase start with artifact count and context."""
+    logger.info("Synthesis phase started", extra={
+        "event": "synthesis_phase_start",
+        "experiment_name": experiment_name,
+        "run_id": run_id,
+        "analysis_artifacts_count": analysis_artifacts_count,
+        "stage": "synthesis",
+        **kwargs
+    })
+
+def log_synthesis_phase_complete(experiment_name: str, run_id: str, duration_seconds: float, synthesis_artifacts_count: int, **kwargs) -> None:
+    """Log synthesis phase completion with timing and results."""
+    logger.info("Synthesis phase completed", extra={
+        "event": "synthesis_phase_complete",
+        "experiment_name": experiment_name,
+        "run_id": run_id,
+        "duration_seconds": duration_seconds,
+        "synthesis_artifacts_count": synthesis_artifacts_count,
+        "stage": "synthesis",
+        **kwargs
+    })
+
 def log_error_with_context(error: Exception, context: Dict[str, Any], **kwargs) -> None:
     """Log error with full context for debugging."""
     logger.error(f"Error occurred: {str(error)}", extra={

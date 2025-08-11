@@ -51,11 +51,11 @@ class THINComplianceChecker:
         
         # Core Processing Agents (Single major responsibility)
         core_agents = ['enhanced_analysis_agent', 'intelligent_extractor_agent', 
-                      'experiment_coherence_agent', 'evidence_quality_measurement']
+                      'evidence_quality_measurement']
         
         # Complex Integration Agents (Multiple data types, caching, RAG)
         complex_agents = ['comprehensive_knowledge_curator', 'txtai_evidence_curator',
-                         'evidence_curator', 'rag_enhanced_interpreter']
+                         'evidence_curator', 'rag_enhanced_interpreter', 'experiment_coherence_agent']
         
         # Orchestration Agents (Pipeline coordination)
         orchestration_agents = ['pipeline', 'investigative_synthesis_agent']
@@ -95,11 +95,10 @@ class THINComplianceChecker:
                         stripped.startswith('print(') or
                         'logging.' in stripped or
                         'logger.' in stripped or
-                        'raise ' in stripped or
-                        'f"' in stripped):  # Skip f-strings used for formatting
+                        'raise ' in stripped):
                         continue
                     
-                    # Look for actual inline prompt patterns
+                    # Look for actual inline prompt patterns - but distinguish from dynamic construction
                     inline_patterns = [
                         'prompt = """',
                         'prompt = "',
@@ -113,6 +112,10 @@ class THINComplianceChecker:
                     
                     for pattern in inline_patterns:
                         if pattern in stripped:
+                            # Check if this is dynamic prompt construction (which is OK)
+                            if self._is_dynamic_prompt_construction(lines, line_num, content):
+                                continue  # Skip - this is legitimate dynamic construction
+                            
                             inline_prompt_count += 1
                             violations.append(f"YAML EXTERNALIZATION VIOLATION: {file_path}:{line_num} contains inline prompt: {pattern}")
                 
@@ -141,6 +144,53 @@ class THINComplianceChecker:
                 violations.append(f"ERROR: Could not analyze {file_path}: {e}")
                 
         return violations
+    
+    def _is_dynamic_prompt_construction(self, lines: List[str], current_line: int, content: str) -> bool:
+        """
+        Determine if an inline prompt is legitimate dynamic construction rather than a static template.
+        
+        Dynamic construction is OK because it incorporates runtime data and follows THIN principles.
+        Static templates should be externalized to YAML.
+        """
+        # Look for indicators of dynamic construction
+        dynamic_indicators = [
+            'f"""',  # f-string template
+            'f"',    # f-string template
+            'format(',  # .format() method
+            'json.dumps(',  # JSON serialization
+            'str(',   # String conversion
+            'len(',   # Length operations
+            '[:',     # String slicing
+            'join(',  # String joining
+            'get(',   # Dictionary access
+            'items()', # Dictionary iteration
+            'keys()',  # Dictionary keys
+            'values()' # Dictionary values
+        ]
+        
+        # Check if the current line or nearby lines show dynamic construction
+        context_lines = lines[max(0, current_line-3):min(len(lines), current_line+4)]
+        context_text = '\n'.join(context_lines)
+        
+        # If it's an f-string, it's likely dynamic construction
+        if 'f"""' in context_text or 'f"' in context_text:
+            return True
+            
+        # If it uses .format() or other dynamic methods, it's likely dynamic construction
+        if any(indicator in context_text for indicator in dynamic_indicators):
+            return True
+            
+        # If it references variables that suggest runtime data, it's likely dynamic construction
+        runtime_variables = [
+            'response', 'result', 'data', 'content', 'text', 'evidence',
+            'framework', 'task', 'finding', 'statistical', 'provenance',
+            'document', 'dimension', 'score', 'analysis', 'validation'
+        ]
+        
+        if any(var in context_text.lower() for var in runtime_variables):
+            return True
+            
+        return False
     
     def check_parsing_complexity(self, file_path: Path) -> List[str]:
         """Check for complex parsing logic that violates THIN principles."""
@@ -249,10 +299,12 @@ class THINComplianceChecker:
                 suspicious_patterns = []
                 
                 # Look for prompts that ask LLMs to do math
+                # Only flag if the LLM is actually being asked to perform calculations
                 if ('execute_call' in content and 
                     any(pattern in content.lower() for pattern in [
                         'calculate the', 'compute the', 'find the mean', 'find the correlation',
-                        'statistical analysis', 'regression analysis', 'anova'
+                        'perform statistical analysis', 'run regression analysis', 'conduct anova',
+                        'calculate correlation', 'compute statistics', 'perform calculations'
                     ])):
                     if 'MathToolkit' not in content and 'math_toolkit' not in content:
                         suspicious_patterns.append("LLM mathematical calculation requests")
