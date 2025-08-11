@@ -21,12 +21,16 @@ Management Commands:
 import click
 import datetime
 import json
+import os
 import shutil
 import subprocess
 import sys
 import time
 from pathlib import Path
 from typing import Dict, Any, Optional, List
+
+# Disable huggingface tokenizers parallelism warning
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from discernus.core.thin_orchestrator import ThinOrchestrator, ThinOrchestratorError
 from discernus.core.config import get_config, get_config_file_path
@@ -413,21 +417,18 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             
         orchestrator = ThinOrchestrator(exp_path)
         
-        # Execute experiment with progress indication
-        with rich_console.create_progress("Running experiment...") as progress:
-            task = progress.add_task("Executing experiment", total=100)
-            
-            # Execute experiment (unified pipeline)
-            result = orchestrator.run_experiment(
-                analysis_model=analysis_model,
-                synthesis_model=synthesis_model,
-                validation_model=validation_model,
-                auto_commit=(not no_auto_commit),
-                ensemble_runs=1
-            )
-            
-            # Update progress to complete
-            progress.update(task, completed=100)
+        # Execute experiment with status indication
+        rich_console.print_info("Experiment execution started - this may take several minutes...")
+        rich_console.echo("⏳ Processing corpus documents and generating analysis...")
+        
+        # Execute experiment (unified pipeline)
+        result = orchestrator.run_experiment(
+            analysis_model=analysis_model,
+            synthesis_model=synthesis_model,
+            validation_model=validation_model,
+            auto_commit=(not no_auto_commit),
+            ensemble_runs=1
+        )
         
         # Show completion with enhanced details
         rich_console.print_success("Experiment completed successfully!")

@@ -130,16 +130,29 @@ class LLMGateway(BaseGateway):
                 
                 # Extract cost data from LiteLLM response
                 response_cost = 0.0
+                cost_debug_info = {}
                 try:
                     # LiteLLM provides cost in response._hidden_params["response_cost"]
                     hidden_params = getattr(response, '_hidden_params', {})
                     response_cost = hidden_params.get('response_cost', 0.0)
-                except:
+                    cost_debug_info['hidden_params_cost'] = response_cost
+                    if response_cost > 0:
+                        print(f"💰 Cost from hidden params: ${response_cost:.6f}")
+                except Exception as e:
+                    cost_debug_info['hidden_params_error'] = str(e)
                     # Fallback: calculate cost using LiteLLM's completion_cost function
                     try:
                         response_cost = completion_cost(completion_response=response)
-                    except:
+                        cost_debug_info['completion_cost'] = response_cost
+                        if response_cost > 0:
+                            print(f"💰 Cost from completion_cost: ${response_cost:.6f}")
+                    except Exception as e2:
+                        cost_debug_info['completion_cost_error'] = str(e2)
                         response_cost = 0.0
+                        print(f"⚠️ Cost calculation failed for {current_model}: hidden_params={e}, completion_cost={e2}")
+                
+                if response_cost == 0.0 and usage_obj:
+                    print(f"⚠️ Zero cost detected for {current_model} with tokens: {getattr(usage_obj, 'total_tokens', 0)}")
                 
                 usage_data = {
                     "prompt_tokens": getattr(usage_obj, 'prompt_tokens', 0) if usage_obj else 0,
