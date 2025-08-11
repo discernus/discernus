@@ -1,0 +1,104 @@
+# 
+# Sequential Synthesis Prompts (v2.0)
+#
+
+system_prompts:
+  query_generator: |
+    You are an expert computational social scientist. Your task is to generate a precise list of semantic queries to be executed against a RAG index.
+    - Respond ONLY with a valid, RFC 8259 compliant JSON list of strings.
+    - Do not add any commentary or explanatory text outside of the JSON structure.
+    - The queries should be specific, targeted, and designed to retrieve evidence to complete the analytical task.
+
+  synthesis_researcher: |
+    You are a computational social scientist conducting a discourse analysis synthesis. Adhere to the following constraints:
+    1.  **Evidence-First**: Every claim must be supported by citing both statistical results and textual evidence.
+    2.  **No-LM-Math**: You must not perform calculations. Reason about the provided statistical tables as definitive facts.
+    3.  **Adaptive Analysis**: Use the strongest analytical approach available for your data. Don't default to "inconclusive" - maximize insights from descriptive statistics, variance patterns, and textual evidence when inferential statistics aren't available.
+    4.  **Transparency**: Always state your analytical approach clearly (descriptive vs. inferential analysis) and acknowledge limitations while still drawing the strongest possible evidence-based conclusions.
+    5.  **Brevity and Clarity**: Be concise and direct in your analysis.
+
+prompt_templates:
+  query_generation_template: |
+    Based on the provided context and the specific task, generate a JSON list of semantic RAG queries.
+
+    CONTEXT:
+    {direct_context}
+
+    TASK:
+    {task_description}
+
+  synthesis_step_template: |
+    Given the context and retrieved evidence, perform the following analytical task.
+
+    CONTEXT:
+    {direct_context}
+
+    RETRIEVED EVIDENCE:
+    {retrieved_evidence}
+
+    PREVIOUS FINDINGS (for integration steps):
+    {previous_findings}
+
+    TASK:
+    {task_description}
+
+step_definitions:
+  hypothesis_analysis:
+    query_generation_task: "Generate 3-5 specific RAG queries to find textual evidence that would either support or contradict the key patterns in the statistical data. Focus on the most meaningful descriptive patterns, correlations, or group differences."
+    synthesis_task: "Evaluate each experiment hypothesis using the strongest available evidence. Determine if hypotheses are SUPPORTED, CONTRADICTED, or have INSUFFICIENT EVIDENCE. Use all available analytical tools: descriptive statistics, correlations (when available), group comparisons, variance patterns, and textual evidence. Be transparent about your analytical approach - if using descriptive analysis due to sample size, state this clearly while still drawing the strongest possible evidence-based conclusions."
+
+  anomaly_investigation:
+    query_generation_task: "Generate 2-4 specific RAG queries to investigate any surprising or anomalous patterns in the statistical results. Look for outliers, unexpected correlations, or dimensions with unusually high or low variance."
+    synthesis_task: "Report on the findings from the anomaly investigation. Describe each anomaly, present the evidence that helps explain it, and provide a brief interpretation of why this pattern might have occurred."
+
+  pattern_discovery:
+    query_generation_task: "Generate 2-4 RAG queries to explore cross-dimensional relationships and patterns in the data. Focus on the most interesting statistical patterns, whether from correlations, variance analysis, or descriptive comparisons."
+    synthesis_task: "Identify and describe the most significant cross-dimensional patterns in the data. Use whatever statistical indicators are available - correlations, variance patterns, group differences, or descriptive relationships. Support each pattern with textual evidence that demonstrates why this relationship exists in the corpus. Be clear about which type of analysis you're using."
+
+  framework_fit_assessment:
+    query_generation_task: null # This step does not require RAG queries
+    synthesis_task: |
+      Analyze the framework's performance using the framework_fit_assessment data provided in the statistical results.
+
+      **Primary Task:** 
+      - Review the "framework_fit_assessment" section in the statistical data
+      - Report the assessment tier (Gold/Silver/Bronze) and framework fit conclusion
+      - Explain what statistical evidence supports this assessment
+      - If Gold Standard: Discuss both ANOVA significance and reliability measures
+      - If Silver Standard: Focus on measurement reliability and consistency  
+      - If Bronze Standard: Analyze descriptive variance patterns as fit proxies
+
+      **Output Format:**
+      Create a "Framework Fit Assessment" section that includes:
+      1. Assessment Tier and overall conclusion
+      2. Supporting statistical evidence with specific metrics
+      3. Interpretation of what this means for the framework's validity
+      4. Any limitations or caveats based on available data
+
+  final_integration:
+    query_generation_task: null # This step does not require RAG queries
+    synthesis_task: |
+      Synthesize the findings from all previous steps into a single, coherent academic report. 
+
+      **Required Report Structure:**
+      1. **Executive Summary** (2-3 paragraphs)
+      2. **Methodology** (brief framework and analysis description)
+      3. **Results** (detailed findings integration with evidence)
+      4. **Framework Fit Assessment** (from previous step)
+      5. **Conclusion** (key takeaways and implications)
+
+      **CRITICAL EVIDENCE REQUIREMENTS - MUST BE FOLLOWED:**
+      - Every major claim MUST be supported by direct quotes from RETRIEVED EVIDENCE
+      - Use explicit attribution: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
+      - Include speaker and source document identification for ALL quotes
+      - Quotes must be substantial (full sentences, not fragments)
+      - Reference the strongest available statistical evidence (descriptive statistics, correlations, variance patterns, group differences)
+      - Integrate textual evidence with statistical findings to support conclusions
+      - Be transparent about analytical approach: clearly state when using descriptive vs. inferential methods
+
+      **Evidence Integration Examples:**
+      - "Descriptive analysis shows McCain's high amity scores (Max: 0.9) vs populist high enmity (Mean: 0.675), supported by McCain's statement: '[full quote]' (Source: Document.pdf)"  
+      - "The universal absence of compersion (Mean: 0.0, Std: 0.0) is evident across all speakers, as confirmed by Speaker B: '[substantial quote]' (Source: Document2.pdf)"
+      - "When correlations are available: The strong correlation (r=0.73) between X and Y is demonstrated by Speaker A's approach: '[quote]' (Source: Document.pdf)"
+
+      **Quality Check:** Ensure every paragraph in the Results section contains at least one direct quote with proper attribution.

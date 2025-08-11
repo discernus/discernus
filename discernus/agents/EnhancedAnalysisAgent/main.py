@@ -15,8 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-from litellm import completion
-from litellm.cost_calculator import completion_cost
+# LLM calls now handled through LLMGateway for proper cost tracking
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
@@ -139,27 +138,63 @@ class EnhancedAnalysisAgent:
     def _execute_llm_call(self, model: str, prompt_text: str, batch_id: str) -> Any:
         """Executes the LLM call and handles the response."""
         self.audit.log_agent_event(self.agent_name, "llm_call_start", {"batch_id": batch_id, "model": model})
-        completion_params = {"model": model, "messages": [{"role": "user", "content": prompt_text}]}
-        if model.startswith("vertex_ai/"):
-            completion_params["safety_settings"] = [
-                {"category": f"HARM_CATEGORY_{cat}", "threshold": "BLOCK_NONE"}
-                for cat in ["HARASSMENT", "HATE_SPEECH", "SEXUALLY_EXPLICIT", "DANGEROUS_CONTENT"]
-            ]
-        response = completion(**completion_params)
-        if not response or not response.choices or not response.choices[0].message.content:
-            raise EnhancedAnalysisAgentError("LLM returned empty response")
-        self._log_llm_cost(response, model, batch_id)
-        return response
-
-    def _log_llm_cost(self, response: Any, model: str, batch_id: str):
-        """Logs the cost of the LLM call."""
+        
+        # Use LLMGateway for proper cost tracking instead of calling litellm directly
+        from ...gateway.llm_gateway import LLMGateway
+        from ...gateway.model_registry import ModelRegistry
+        
+        gateway = LLMGateway(ModelRegistry())
+        system_prompt = "You are an expert discourse analyst. Follow the provided framework instructions precisely."
+        
         try:
-            cost = completion_cost(completion_response=response)
-            usage = getattr(response, 'usage', None)
-            total_tokens = getattr(usage, 'total_tokens', 0) if usage else 0
-            self.audit.log_cost("individual_document_analysis", model, total_tokens, cost, self.agent_name, {"batch_id": batch_id})
+            response_content, metadata = gateway.execute_call(
+                model=model, 
+                prompt=prompt_text, 
+                system_prompt=system_prompt
+            )
+            
+            if not response_content or not response_content.strip():
+                raise EnhancedAnalysisAgentError("LLM returned empty response")
+            
+            # Log cost information from gateway metadata
+            if metadata.get('success') and 'usage' in metadata:
+                usage = metadata['usage']
+                self.audit.log_cost(
+                    operation="individual_document_analysis",
+                    model=model,
+                    tokens_used=usage.get('total_tokens', 0),
+                    cost_usd=usage.get('response_cost_usd', 0.0),
+                    agent_name=self.agent_name,
+                    metadata={"batch_id": batch_id}
+                )
+            
+            # Create a response-like object for compatibility with existing code
+            class MockResponse:
+                def __init__(self, content, usage_data):
+                    self.choices = [MockChoice(content)]
+                    self.usage = MockUsage(usage_data)
+                    
+            class MockChoice:
+                def __init__(self, content):
+                    self.message = MockMessage(content)
+                    
+            class MockMessage:
+                def __init__(self, content):
+                    self.content = content
+                    
+            class MockUsage:
+                def __init__(self, usage_data):
+                    self.total_tokens = usage_data.get('total_tokens', 0)
+                    self.prompt_tokens = usage_data.get('prompt_tokens', 0)
+                    self.completion_tokens = usage_data.get('completion_tokens', 0)
+                    
+            usage_data = metadata.get('usage', {})
+            return MockResponse(response_content, usage_data)
+            
         except Exception as e:
-            self.audit.log_error("cost_calculation_error", str(e), {"agent": self.agent_name})
+            raise EnhancedAnalysisAgentError(f"LLM call failed: {e}")
+
+
 
     def _create_enhanced_result(self, batch_id, model, analysis_data, evidence_hash, start_time, duration, framework_hash, document_hashes, experiment_config):
         """Creates the final enhanced result dictionary."""

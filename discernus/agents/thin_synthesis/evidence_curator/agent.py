@@ -317,13 +317,13 @@ RETRIEVED EVIDENCE (programmatically identified as most relevant):
 FRAMEWORK CONTEXT:
 {framework_spec[:1000]}
 
-TASK: Write a 2-3 paragraph narrative that establishes the CAUSAL LINK between this evidence and the statistical finding. Explain WHY this evidence led to the statistical result, using direct quotes and specific references to the framework's analytical dimensions.
+TASK: Write a 2-3 paragraph narrative that connects this evidence to the statistical pattern. Explain HOW this evidence relates to and supports the statistical result, using direct quotes and specific references to the framework's analytical dimensions.
 
 Your narrative should:
-1. Explicitly connect the evidence to the statistical finding
+1. Clearly link the evidence to the statistical pattern (whether descriptive, correlational, or comparative)
 2. Use direct quotes from the evidence
 3. Reference the framework's theoretical foundation
-4. Explain the causal mechanism behind the result
+4. Explain the relationship between the textual patterns and the quantitative results
 
 NARRATIVE:
 """
