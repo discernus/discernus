@@ -136,16 +136,13 @@ class LLMGateway(BaseGateway):
                     hidden_params = getattr(response, '_hidden_params', {})
                     response_cost = hidden_params.get('response_cost', 0.0)
                     cost_debug_info['hidden_params_cost'] = response_cost
-                    if response_cost > 0:
-                        print(f"💰 Cost from hidden params: ${response_cost:.6f}")
+                    # Success case - no need to print, cost tracking working
                 except Exception as e:
                     cost_debug_info['hidden_params_error'] = str(e)
                     # Fallback: calculate cost using LiteLLM's completion_cost function
                     try:
                         response_cost = completion_cost(completion_response=response)
                         cost_debug_info['completion_cost'] = response_cost
-                        if response_cost > 0:
-                            print(f"💰 Cost from completion_cost: ${response_cost:.6f}")
                     except Exception as e2:
                         cost_debug_info['completion_cost_error'] = str(e2)
                         response_cost = 0.0
