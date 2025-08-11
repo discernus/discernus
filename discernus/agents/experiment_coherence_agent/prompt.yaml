@@ -37,6 +37,8 @@ template: |
   - Prose/machine-readable mismatches in specifications
   - Minor mathematical improvements (e.g., division-by-zero protection)
   - Model compatibility concerns that don't block execution
+  - Statistical limitations due to sample size (N<10: limited correlation analysis; N<20: reduced statistical power)
+  - Complex frameworks with minimal corpora (may limit dimension coverage but still produce valuable insights)
   
   💡 **SUGGESTIONS** (priority: "SUGGESTION", exit 0 with suggestions):
   - Performance optimizations
@@ -61,6 +63,11 @@ template: |
   - Multi-stage model configuration is valid (different models for analysis vs synthesis is encouraged)
   - Model identifiers are properly formatted for LiteLLM compatibility
   - Statistical analysis requirements are feasible with generated data (don't require explicit framework implementation)
+  - **Statistical Expectations:** Assess sample size constraints and set clear expectations:
+    * N≥20: Full statistical analysis including correlations, significance testing
+    * N=10-19: Limited statistical analysis, descriptive focus
+    * N=4-9: Case study analysis, qualitative patterns, individual document insights
+    * N<4: Single case or comparative case analysis only
 
   **CORPUS VALIDATION (Data Focus):**
   - Corpus files are accessible from specified paths

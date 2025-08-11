@@ -23,6 +23,22 @@ The `pm/active_projects/` directory has been cleaned, reorganized, and consolida
 
 ## Current Active Documents
 
+### New Epic: Incremental Ensemble Enhancement (January 31, 2025)
+
+**Epic #240: Incremental Ensemble Enhancement**  
+- **File**: `epic_240_incremental_ensemble_enhancement.md`
+- **Milestone**: Alpha Comprehensive (Academic Gold Standard)
+- **Timeline**: September 1, 2025 (~0.6 Cursor days)
+- **Status**: Just created - pragmatic alternative to archived Epic #218
+- **Scope**: 3 focused issues over 4 weeks (vs 12 issues over 13+ weeks in archived version)
+- **Approach**: Build incrementally on proven Gemini foundation rather than comprehensive research
+- **Issues Planned**:
+  - Issue #241: Enable Self-Consistency Ensemble (1 week)
+  - Issue #242: Temperature Optimization Framework (1 week) 
+  - Issue #243: Strategic Model Validation Pipeline (2 weeks)
+- **Strategic Value**: Immediate reliability improvements (40-60% variance reduction) with minimal architectural complexity
+- **Academic Impact**: Supports research credibility and publication readiness through systematic ensemble optimization
+
 ### Core Gasket Architecture Documents (New)
 
 1. **`gasket_architecture_philosophy.md`**

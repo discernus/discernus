@@ -98,12 +98,8 @@ class ThinOrchestrator:
         try:
             from ..agents.reliability_analysis_agent import ReliabilityAnalysisAgent
             
-            # Check framework content length to prevent LLM call failures
-            max_framework_length = 8000  # Conservative limit for LLM calls
-            if len(framework_content) > max_framework_length:
-                print(f"⚠️ Framework content too long ({len(framework_content)} chars) for validation")
-                print("⚠️ Truncating to first {max_framework_length} characters for validation")
-                framework_content = framework_content[:max_framework_length] + "\n\n[Content truncated for validation...]"
+            # Modern LLMs (especially Gemini Pro) can easily handle full framework content
+            # Framework validation requires the complete gasket_schema section at the end
             
             # Initialize reliability analysis agent with configured validation model
             # Note: Validation requires higher intelligence than Flash Lite can provide
@@ -314,7 +310,6 @@ Respond with only the JSON object."""
                            audit_logger: AuditLogger,
                            storage: LocalArtifactStorage,
                            framework_hash: str,
-                           corpus_hash: str,
                            corpus_manifest_hash: str,
                            corpus_manifest: Optional[Dict[str, Any]] = None,
                            analysis_model: Optional[str] = None,
@@ -329,18 +324,15 @@ Respond with only the JSON object."""
         # Create THIN synthesis pipeline
         pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level, analysis_model)
         
-        # Parse the framework config to access static_weights and other metadata
-        framework_config = self._parse_framework_config(framework_content)
-
         # Build THIN-compliant experiment context - raw data for LLM intelligence
-        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_config, corpus_manifest)
+        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
         
         # Create pipeline request
         request = ProductionPipelineRequest(
             framework_spec=framework_content,
             scores_artifact_hash=scores_hash,
             evidence_artifact_hash=evidence_hash,
-            corpus_artifact_hash=corpus_hash,  # Pass corpus content hash for comprehensive RAG
+            corpus_artifact_hash=None,  # THIN: Evidence-only RAG doesn't need combined corpus
             experiment_context=experiment_context,
             max_evidence_per_finding=3,
             min_confidence_threshold=0.7,
@@ -506,10 +498,9 @@ Respond with only the JSON object."""
                 "size_bytes": len(framework_content)
             })
             
-            # Validate framework dimensions for early failure detection
-            self.logger.info("Validating framework dimensions")
-            print("🔍 Validating framework dimensions...")
-            self._validate_framework_dimensions(framework_content, audit, validation_model)
+            # Framework validation is handled by ExperimentCoherenceAgent during experiment setup
+            # Post-analysis dimension validation will occur during synthesis to verify analysis results
+            self.logger.info("Framework loaded successfully")
             
             # Load corpus documents and manifest
             self.logger.info(f"Loading corpus from: {experiment_config['corpus_path']}")
@@ -551,7 +542,7 @@ Respond with only the JSON object."""
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
                 self.logger.info(f"Initialized EnhancedAnalysisAgent with model: {analysis_model}")
                 
-                all_analysis_results, scores_hash, evidence_hash, corpus_hash = self._execute_analysis_sequentially(
+                all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
                     analysis_agent,
                     corpus_documents,
                     framework_content,
@@ -567,8 +558,7 @@ Respond with only the JSON object."""
                     "successful_analyses": successful_count,
                     "failed_analyses": len(corpus_documents) - successful_count,
                     "scores_hash": scores_hash,
-                    "evidence_hash": evidence_hash,
-                    "corpus_hash": corpus_hash
+                    "evidence_hash": evidence_hash
                 })
                 
                 # Display analysis-only cost
@@ -701,12 +691,12 @@ Respond with only the JSON object."""
 
             if synthesis_only:
                 # Log synthesis-only mode start
-                log_synthesis_only_start(
-                    run_id=run_timestamp,
-                    synthesis_model=synthesis_model,
-                    cache_directory=str(self.experiment_path / "shared_cache" / "artifacts"),
-                    architecture="thin_v2.0_synthesis_only"
-                )
+                self.logger.info("Synthesis-only mode starting", extra={
+                    "run_id": run_timestamp,
+                    "synthesis_model": synthesis_model,
+                    "cache_directory": str(self.experiment_path / "shared_cache" / "artifacts"),
+                    "architecture": "thin_v2.0_synthesis_only"
+                })
                 
                 # Find latest run with complete analysis
                 shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
@@ -882,13 +872,12 @@ Respond with only the JSON object."""
                 print(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
                 
                 # Log synthesis phase start for synthesis-only mode
-                log_synthesis_phase_start(
-                    synthesis_model=synthesis_model,
-                    scores_hash=scores_hash,
-                    evidence_hash=evidence_hash,
-                    corpus_hash=corpus_artifact_hash,
-                    framework_hash=framework_hash
-                )
+                self.logger.info("Synthesis phase starting for synthesis-only mode", extra={
+                    "synthesis_model": synthesis_model,
+                    "scores_hash": scores_hash,
+                    "evidence_hash": evidence_hash,
+                    "framework_hash": framework_hash
+                })
                 
                 synthesis_results = self._run_thin_synthesis(
                     scores_hash=scores_hash,
@@ -899,7 +888,6 @@ Respond with only the JSON object."""
                     audit_logger=audit,
                     storage=storage,
                     framework_hash=framework_hash,
-                    corpus_hash=corpus_hash,
                     corpus_manifest_hash=corpus_manifest_hash,
                     corpus_manifest=corpus_manifest,
                     analysis_model=analysis_model
@@ -908,14 +896,11 @@ Respond with only the JSON object."""
                 synthesis_end_time = datetime.now(timezone.utc).isoformat()
                 
                 # Log synthesis phase completion for synthesis-only mode
-                log_synthesis_phase_complete(
-                    synthesis_model=synthesis_model,
-                    result_hash=synthesis_results.get("result_hash") if synthesis_results else None,
-                    duration_seconds=0,  # Will be calculated below
-                    synthesis_confidence=synthesis_results.get("synthesis_confidence") if synthesis_results else None,
-                    total_cost_usd=0,  # Will be calculated below
-                    total_tokens=0  # Will be calculated below
-                )
+                self.logger.info("Synthesis phase completed for synthesis-only mode", extra={
+                    "synthesis_model": synthesis_model,
+                    "result_hash": synthesis_results.get("result_hash") if synthesis_results else None,
+                    "synthesis_confidence": synthesis_results.get("synthesis_confidence") if synthesis_results else None
+                })
                 
                 # Display synthesis-only cost
                 synthesis_costs = audit.get_session_costs()
@@ -924,13 +909,13 @@ Respond with only the JSON object."""
                 print(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
                 
                 # Log synthesis-only completion
-                log_synthesis_only_complete(
-                    run_id=run_timestamp,
-                    synthesis_model=synthesis_model,
-                    total_cost_usd=synthesis_costs.get('total_cost_usd', 0.0),
-                    total_tokens=synthesis_costs.get('total_tokens', 0),
-                    architecture="thin_v2.0_synthesis_only"
-                )
+                self.logger.info("Synthesis-only mode completed", extra={
+                    "run_id": run_timestamp,
+                    "synthesis_model": synthesis_model,
+                    "total_cost_usd": synthesis_costs.get('total_cost_usd', 0.0),
+                    "total_tokens": synthesis_costs.get('total_tokens', 0),
+                    "architecture": "thin_v2.0_synthesis_only"
+                })
                 
                 if not synthesis_results or not isinstance(synthesis_results, dict):
                     raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_results)}")
@@ -1065,7 +1050,7 @@ Respond with only the JSON object."""
             self.logger.info(f"Starting analysis of {len(corpus_documents)} documents with model: {analysis_model}")
             print(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
             
-            all_analysis_results, scores_hash, evidence_hash, corpus_artifact_hash = self._execute_analysis_sequentially(
+            all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
                 framework_content,
@@ -1084,17 +1069,15 @@ Respond with only the JSON object."""
                 "failed_analyses": len(corpus_documents) - successful_count,
                 "scores_hash": scores_hash,
                 "evidence_hash": evidence_hash,
-                "corpus_artifact_hash": corpus_artifact_hash,
                 "ensemble_runs": ensemble_runs
             })
             
             # Log analysis phase completion
-            log_analysis_phase_complete(
-                experiment_name=experiment_config.get("name", "Unknown"),
-                run_id=run_timestamp,
-                duration_seconds=0.0,  # TODO: Calculate actual duration
-                documents_processed=successful_count
-            )
+            self.logger.info("Analysis phase completed", extra={
+                "experiment_name": experiment_config.get("name", "Unknown"),
+                "run_id": run_timestamp,
+                "documents_processed": successful_count
+            })
             
             # Display analysis progress and cost
             analysis_costs = audit.get_session_costs()
@@ -1125,8 +1108,7 @@ Respond with only the JSON object."""
             self.logger.info("Using Discernus Advanced Synthesis Pipeline", extra={
                 "synthesis_model": synthesis_model,
                 "scores_hash": scores_hash,
-                "evidence_hash": evidence_hash,
-                "corpus_artifact_hash": corpus_artifact_hash
+                "evidence_hash": evidence_hash
             })
             print("🏭 Using Discernus Advanced Synthesis Pipeline...")
             print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
@@ -1147,7 +1129,6 @@ Respond with only the JSON object."""
             synthesis_results = self._run_thin_synthesis(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
-                corpus_hash=corpus_artifact_hash,  # Use the content hash from analysis
                 framework_content=framework_content,
                 experiment_config=experiment_config,
                 model=synthesis_model,
@@ -1169,18 +1150,20 @@ Respond with only the JSON object."""
                 "synthesis_confidence": synthesis_results.get("synthesis_confidence")
             })
             
+            # Get synthesis costs for logging and display
+            synthesis_costs = audit.get_session_costs()
+            
             # Log synthesis phase completion
-            log_synthesis_phase_complete(
-                synthesis_model=synthesis_model,
-                result_hash=synthesis_results.get("result_hash"),
-                duration_seconds=synthesis_results.get("duration_seconds"),
-                synthesis_confidence=synthesis_results.get("synthesis_confidence"),
-                total_cost_usd=synthesis_costs.get('total_cost_usd', 0.0),
-                total_tokens=synthesis_costs.get('total_tokens', 0)
-            )
+            self.logger.info("Synthesis phase completed", extra={
+                "synthesis_model": synthesis_model,
+                "result_hash": synthesis_results.get("result_hash"),
+                "duration_seconds": synthesis_results.get("duration_seconds"),
+                "synthesis_confidence": synthesis_results.get("synthesis_confidence"),
+                "total_cost_usd": synthesis_costs.get('total_cost_usd', 0.0),
+                "total_tokens": synthesis_costs.get('total_tokens', 0)
+            })
             
             # Display synthesis cost update
-            synthesis_costs = audit.get_session_costs()
             print(f"✅ Synthesis phase complete!")
             print(f"   💰 Total cost so far: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
             print(f"   🔢 Total tokens: {synthesis_costs.get('total_tokens', 0):,}")
@@ -1318,8 +1301,9 @@ Respond with only the JSON object."""
             
             # Log experiment completion
             log_experiment_complete(
+                experiment_name=experiment_config.get("name", "Unknown"),
                 run_id=run_timestamp,
-                total_duration_seconds=total_duration,
+                duration_seconds=total_duration,
                 analysis_duration=analysis_summary["total_duration_seconds"],
                 synthesis_duration=synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
                 final_report_hash=report_hash,
@@ -1486,23 +1470,18 @@ Respond with only the JSON object."""
         self.logger.info("Combining analysis artifacts for synthesis")
         scores_hash, evidence_hash = self._combine_analysis_artifacts(all_analysis_results, analysis_agent.storage)
         
-        # Store combined corpus as a single artifact for comprehensive RAG
-        corpus_content = "\n\n---\n\n".join([doc.get('content', '') for doc in corpus_documents])
-        corpus_hash = analysis_agent.storage.put_artifact(
-            corpus_content.encode('utf-8'),
-            {"artifact_type": "combined_corpus_text"}
-        )
+        # THIN: Evidence-only RAG architecture doesn't need combined corpus text
+        # Raw corpus is provided directly as context to synthesis agents
         
         self.logger.info("Analysis artifacts combined successfully", extra={
             "scores_hash": scores_hash,
             "evidence_hash": evidence_hash,
-            "corpus_hash": corpus_hash,
             "total_documents": len(corpus_documents),
             "successful_analyses": len([r for r in all_analysis_results if 'error' not in r]),
             "failed_analyses": len([r for r in all_analysis_results if 'error' in r])
         })
         
-        return all_analysis_results, scores_hash, evidence_hash, corpus_hash
+        return all_analysis_results, scores_hash, evidence_hash, None  # No corpus_hash needed
 
     def _combine_analysis_artifacts(self, analysis_results: List[Dict[str, Any]], storage) -> tuple[str, str]:
         """
@@ -2370,7 +2349,7 @@ Respond with only the JSON object."""
         
         return config
     
-    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_config: Dict[str, Any], corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
+    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_content: str, corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
         """
         THIN-compliant experiment context building.
         
@@ -2383,14 +2362,15 @@ Respond with only the JSON object."""
         important and how to format it, rather than hardcoding assumptions.
         """
         
-        # v7.3: Build a structured JSON context for the synthesis pipeline
+        # Pure THIN: Pass raw framework content directly to LLMs
+        # No parsing, no assumptions - let LLM intelligence handle interpretation
         context = {
             "experiment_config": experiment_config,
-            "framework_config": framework_config,
+            "framework_content": framework_content,
             "corpus_manifest": corpus_manifest
         }
         
-        # We now pass a structured JSON context string instead of a free-form string.
+        # Pass structured JSON context with raw framework content
         return json.dumps(context, indent=2)
     
     def _load_framework(self, framework_filename: str) -> str:
@@ -2974,8 +2954,9 @@ This research was conducted using the Discernus computational research platform,
             
             csv_agent.artifact_storage = storage
             
-            # Parse framework configuration
-            framework_config = self._parse_framework_config(framework_content)
+            # THIN: Let CSV export use fallbacks instead of parsing
+            # CSV export already has built-in fallbacks for framework metadata
+            framework_config = {}  # Empty - let CSV export use its fallback logic
             
             # Export CSV files
             export_result = csv_agent.export_mid_point_data(
@@ -3003,51 +2984,3 @@ This research was conducted using the Discernus computational research platform,
             })
             return None
     
-    def _parse_framework_config(self, framework_content: str) -> Dict[str, Any]:
-        """Parse framework configuration from markdown content."""
-        try:
-            # Primary regex for new format
-            json_match = re.search(r'<details><summary>Machine-Readable Configuration</summary>\s*```json\s*\n(.*?)\n\s*```\s*</details>', framework_content, re.DOTALL)
-            if json_match:
-                config_str = json_match.group(1)
-                # Try parsing with parse_llm_json_response
-                try:
-                    config = parse_llm_json_response(config_str)
-                    if config:
-                        return config
-                except Exception as e:
-                    print(f"Warning: parse_llm_json_response failed: {e}")
-                
-                # Fallback to direct JSON parsing
-                try:
-                    return json.loads(config_str)
-                except json.JSONDecodeError as e:
-                    print(f"Warning: Direct JSON parsing failed: {e}")
-            
-            # Fallback regex for older formats
-            json_match_fallback = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
-            if json_match_fallback:
-                try:
-                    return json.loads(json_match_fallback.group(1))
-                except json.JSONDecodeError as e:
-                    print(f"Warning: Fallback JSON parsing failed: {e}")
-            
-            # If all parsing fails, return minimal config
-            print("Warning: No valid framework configuration found, using minimal config")
-            return {
-                "name": "unknown",
-                "version": "unknown",
-                "static_weights": {},
-                "pattern_classifications": {},
-                "reporting_metadata": {}
-            }
-            
-        except Exception as e:
-            print(f"⚠️  Framework parsing error: {e}. Defaulting to empty config.")
-            return {
-                "name": "unknown",
-                "version": "unknown",
-                "static_weights": {},
-                "pattern_classifications": {},
-                "reporting_metadata": {}
-            }
