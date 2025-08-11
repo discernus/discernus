@@ -238,32 +238,32 @@ class StatisticalResultsFormatter:
                              reliability_summary: Optional[Dict],
                              descriptive_summary: Optional[Dict]) -> Dict[str, Any]:
         """
-        Assess framework fit based on available statistical data using tiered approach.
+        Assess framework fit based on available statistical data using descriptive approach.
         
-        Gold Standard: ANOVA + Reliability
-        Silver Standard: Reliability only  
-        Bronze Standard: Descriptive statistics only
+        Comprehensive validation: ANOVA + Reliability data
+        Internal consistency validation: Reliability data only
+        Descriptive pattern analysis: Descriptive statistics only
         """
-        # Determine tier based on available data
+        # Determine validation approach based on available data
         has_anova = anova_summary is not None
         has_reliability = reliability_summary is not None
         has_descriptive = descriptive_summary is not None
         
         if has_anova and has_reliability:
-            tier = "Gold"
-            assessment = self._gold_standard_assessment(anova_summary, reliability_summary)
+            quality_level = "Comprehensive statistical validation"
+            assessment = self._comprehensive_fit_assessment(anova_summary, reliability_summary)
         elif has_reliability:
-            tier = "Silver" 
-            assessment = self._silver_standard_assessment(reliability_summary)
+            quality_level = "Internal consistency validation"
+            assessment = self._reliability_fit_assessment(reliability_summary)
         elif has_descriptive:
-            tier = "Bronze"
-            assessment = self._bronze_standard_assessment(descriptive_summary)
+            quality_level = "Descriptive pattern analysis"
+            assessment = self._descriptive_fit_assessment(descriptive_summary)
         else:
-            tier = "None"
+            quality_level = "Limited validation"
             assessment = "Insufficient statistical data for framework fit assessment."
         
         return {
-            "assessment_tier": tier,
+            "quality_level": quality_level,
             "framework_fit_conclusion": assessment,
             "data_available": {
                 "anova": has_anova,
@@ -272,8 +272,8 @@ class StatisticalResultsFormatter:
             }
         }
 
-    def _gold_standard_assessment(self, anova_summary: Dict, reliability_summary: Dict) -> str:
-        """Gold Standard: ANOVA + Reliability assessment."""
+    def _comprehensive_fit_assessment(self, anova_summary: Dict, reliability_summary: Dict) -> str:
+        """Comprehensive assessment: ANOVA + Reliability data available."""
         anova_interp = anova_summary.get('interpretation', '')
         reliability_interp = reliability_summary.get('interpretation', '')
         
@@ -292,8 +292,8 @@ class StatisticalResultsFormatter:
         else:
             return f"Weak framework fit: {significant_dimensions}/{total_dimensions} dimensions show significant variation with {reliable_dimensions}/{len(reliability_rows)} reliable measurements."
 
-    def _silver_standard_assessment(self, reliability_summary: Dict) -> str:
-        """Silver Standard: Reliability-only assessment."""
+    def _reliability_fit_assessment(self, reliability_summary: Dict) -> str:
+        """Reliability assessment: Internal consistency data available."""
         reliability_rows = reliability_summary.get('rows', [])
         reliable_dimensions = sum(1 for r in reliability_rows if r[3] in ["Excellent", "Good", "Acceptable"])
         total = len(reliability_rows)
@@ -305,8 +305,8 @@ class StatisticalResultsFormatter:
         else:
             return f"Poor measurement quality: {reliable_dimensions}/{total} dimensions show acceptable reliability."
 
-    def _bronze_standard_assessment(self, descriptive_summary: Dict) -> str:
-        """Bronze Standard: Descriptive statistics proxy assessment."""
+    def _descriptive_fit_assessment(self, descriptive_summary: Dict) -> str:
+        """Descriptive assessment: Pattern analysis using variance indicators."""
         desc_rows = descriptive_summary.get('rows', [])
         if not desc_rows:
             return "No descriptive statistics available for framework fit assessment."

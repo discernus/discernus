@@ -309,10 +309,10 @@ This research was conducted using the **Discernus Computational Research Platfor
         framework_fit = formatted.get('framework_fit_assessment', {})
         
         if framework_fit:
-            tier = framework_fit.get('assessment_tier', 'Unknown')
-            conclusion = framework_fit.get('fit_conclusion', 'Framework assessment not available')
+            quality_level = framework_fit.get('quality_level', 'Unknown validation level')
+            conclusion = framework_fit.get('framework_fit_conclusion', 'Framework assessment not available')
             
-            return f"""The {self.framework_name} provides a systematic approach to discourse analysis across multiple dimensions. This analysis achieved a **{tier} Standard** assessment with the following framework fit conclusion: {conclusion}
+            return f"""The {self.framework_name} provides a systematic approach to discourse analysis across multiple dimensions. This analysis employed **{quality_level.lower()}** with the following assessment: {conclusion}
 
 The framework's dimensions measure key aspects of social cohesion and discourse quality, enabling quantitative analysis of rhetorical patterns and their potential impacts on democratic discourse."""
         
@@ -349,9 +349,9 @@ The framework's dimensions measure key aspects of social cohesion and discourse 
         framework_fit = formatted.get('framework_fit_assessment', {})
         
         if framework_fit:
-            tier = framework_fit.get('assessment_tier', 'Unknown')
-            conclusion = framework_fit.get('fit_conclusion', 'Assessment not available')
-            return f"**Assessment Tier**: {tier}\n\n**Framework Fit Conclusion**: {conclusion}"
+            quality_level = framework_fit.get('quality_level', 'Unknown validation level')
+            conclusion = framework_fit.get('framework_fit_conclusion', 'Assessment not available')
+            return f"**Validation Approach**: {quality_level}\n\n**Framework Assessment**: {conclusion}"
         
         return "Framework fit assessment not available in current analysis."
     
