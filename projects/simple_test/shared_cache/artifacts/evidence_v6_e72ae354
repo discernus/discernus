@@ -1,0 +1,91 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 8,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-11T02:02:47.845954+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "It's my privilege to have the opportunity to address you here on the floor of the United States House of Representatives. I have listened to a lot of discussion here with which I disagree, of course, and uh, but I keep hearing this term, \"do your job, do your job.\"",
+      "confidence": 0.9,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845925+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And uh, the argument is that one of the arguments is that the President of the United States has a constitutional right to nominate to the Supreme Court. Well, he does, that's pretty clear in the Constitution.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845933+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "And so I would ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845936+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "I can't react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845939+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845942+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "And so therefore, if Congress wants the law to say something different, we have to amend it here in the House and the Senate and get a presidential signature on it. That is the constitutional structure of this government that we have, Mr. Speaker, and it's, it's a bit um, frustrating for me to listen to the dialogue otherwise that the Senate's not doing their job because they withhold a confirmation, uh, that of a presidential appointment when we have a president that has proven that he's not going to put up an appointment that will protect our Constitution.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845944+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "And the question is, does the President have prosecutorial authority, prosecutorial discretion? That, well, the precedence along prosecutorial discretion. And I don't know. The Supreme Court has ever heard and ruled on a case of prosecutorial discretion. I believe they have not.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845946+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "But if a court wants to manufacture a new right, let alone a new command, that's wrong. And this Congress ought to speak up and we need a president that will appoint justices to the Supreme Court who will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T02:02:47.845949+00:00"
+    }
+  ]
+}
