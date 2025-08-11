@@ -46,6 +46,9 @@ class ProvenanceOrganizer:
         "analysis_json_v6": "analysis_results",  # Combined analysis results
         "analysis_scores": "analysis_results",
         "evidence_extracts": "evidence",
+        "evidence_v6": "evidence",  # Current evidence format
+        "combined_analysis_v6": "analysis_results",  # Combined analysis format
+        "combined_evidence_v6": "evidence",  # Combined evidence format
         
         # Synthesis Pipeline Artifacts  
         "statistical_results": "statistical_results",
