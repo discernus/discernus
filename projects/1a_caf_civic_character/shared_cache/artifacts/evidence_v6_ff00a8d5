@@ -1,0 +1,191 @@
+{
+  "evidence_metadata": {
+    "document_hash": "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65",
+    "total_evidence_pieces": 18,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-11T17:08:55.094325+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "dignity",
+      "quote_text": "when you affect the lives of some Americans on issues of justice, you affect the lives of all Americans, because we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+      "confidence": 0.95,
+      "context_type": "core argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094304+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "dignity",
+      "quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible. None of us should ever be judged by the least of what we've done, but instead by our ability and our capacity to find redemption.",
+      "confidence": 0.95,
+      "context_type": "core value statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094306+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "tribalism",
+      "quote_text": "I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum.",
+      "confidence": 0.9,
+      "context_type": "explicit counter-tribalism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094307+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "tribalism",
+      "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+      "confidence": 0.9,
+      "context_type": "explicit rejection of othering",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094308+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "truth",
+      "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent \u2013 an 800 percent increase in our prison population.",
+      "confidence": 0.9,
+      "context_type": "statistical evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094309+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "truth",
+      "quote_text": "we know the data is clear \u2013 there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+      "confidence": 0.9,
+      "context_type": "data-driven argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094310+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "manipulation",
+      "quote_text": "I don't want to thank my colleagues for their incredible work and leadership, and especially recognize the chairman of the Judiciary Committee, Senator Chuck Grassley. I want to thank Senator Dick Durbin, who has been a hero of mine on issues of criminal justice reform, as well as Mike Lee, who's been a champion.",
+      "confidence": 0.85,
+      "context_type": "absence of manipulative language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094311+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "justice",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess \u2013 we actually swear an oath to the flag \u2013 that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+      "confidence": 0.95,
+      "context_type": "critique of systemic injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094312+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "justice",
+      "quote_text": "Making this fix in this bill alone will mean that thousands of Americans who have more than served their time will become eligible for release, and it addresses some of the racial disparities in our system because 90% of the people that will benefit from that are African-American; 96% are black and Latina.",
+      "confidence": 0.95,
+      "context_type": "remedy for systemic injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094313+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "resentment",
+      "quote_text": "It is a system that inflicts poverty by concentrating its attacks on low-income neighborhoods.",
+      "confidence": 0.8,
+      "context_type": "identification of grievances",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094315+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "resentment",
+      "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture \u2013 juvenile solitary confinement.",
+      "confidence": 0.8,
+      "context_type": "identification of grievances",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094316+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "hope",
+      "quote_text": "But after decades of failed federal policies, and after decades of growing in the wrong direction, we now have an opportunity to reverse course in a significant way.",
+      "confidence": 0.9,
+      "context_type": "vision for positive change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094317+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "hope",
+      "quote_text": "This bill is a step \u2013 a step towards healing. Mr. President, it's been perhaps one of the greatest honors of my life, easily one of the greatest honors as a senator, to work in a bipartisan coalition over the last five years to get to this point.",
+      "confidence": 0.9,
+      "context_type": "optimistic outlook on collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094317+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "fear",
+      "quote_text": "to begin to deliver some reform to our savagely broken criminal justice system.",
+      "confidence": 0.85,
+      "context_type": "description of dire situation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094319+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "fear",
+      "quote_text": "this system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+      "confidence": 0.85,
+      "context_type": "catastrophic framing of problem",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094320+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I'm proud that this is a bipartisan compromise bill with leadership \u2013 extraordinary leadership on both sides of the aisle \u2013 saying, hey, there are things we need to begin to correct in this system.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment of constraints/compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094321+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+      "confidence": 0.9,
+      "context_type": "incremental progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094322+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "fantasy",
+      "quote_text": "I want to see more than the bill we have today, and I know we can do more than just this bill we have today. But this is a first step. It is a necessary step for the sake of thousands of Americans whose lives will be directly affected.",
+      "confidence": 0.9,
+      "context_type": "explicit rejection of quick fixes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T17:08:55.094323+00:00"
+    }
+  ]
+}

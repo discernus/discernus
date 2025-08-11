@@ -1,0 +1,166 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on identifying the speaker's emphasis on universal values, factual claims, calls for fairness, optimistic outlook on reform, and pragmatic approach to legislative change. Explicit rejection of tribalism and acknowledgment of systemic issues rather than targeted blame were key to scoring."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+          "confidence": 0.9,
+          "context_type": "universal_human_worth"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "This is a system in our country that feeds upon certain communities and not others.",
+          "confidence": 0.8,
+          "context_type": "critique_of_dignity_violation"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "I'm the only United States Senator that lives in a majority black and brown community. It is low income, but I tell you right now, my community does not mistake wealth with worth.",
+          "confidence": 0.6,
+          "context_type": "group_identity_statement_but_countered_by_universalism"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent - an 800 percent increase in our prison population.",
+          "confidence": 0.9,
+          "context_type": "factual_statistic"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "We know the data is clear - there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "confidence": 0.9,
+          "context_type": "evidence_based_reasoning"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "We stand poised today to pass this bill, to begin to deliver some reform to our savagely broken criminal justice system.",
+          "confidence": 0.7,
+          "context_type": "emotional_trigger_severity"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+          "confidence": 0.9,
+          "context_type": "appeal_to_fairness_and_rights"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "Making this fix in this bill alone will mean that thousands of Americans who have more than served their time will become eligible for release, and it addresses some of the racial disparities in our system because 90% of the people that will benefit from that are African-American; 96% are black and Latina.",
+          "confidence": 0.9,
+          "context_type": "systemic_equity_consideration"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "This is a system that hurts people, and it hurts people that are often already struggling, often already hurt.",
+          "confidence": 0.6,
+          "context_type": "grievance_highlighted_but_not_blame-focused"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We now have an opportunity to reverse course in a significant way.",
+          "confidence": 0.8,
+          "context_type": "positive_vision_for_future"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+          "confidence": 0.8,
+          "context_type": "empowerment_rhetoric"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We are using our resources to compound hurt and harm that people have already endured, to incarcerate more Americans than ever before in our history, and ultimately makes our neighborhoods and communities - ones like mine - less safe, not more.",
+          "confidence": 0.7,
+          "context_type": "threat_focused_language"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound.",
+          "confidence": 0.7,
+          "context_type": "catastrophic_framing"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+          "confidence": 0.9,
+          "context_type": "incremental_progress_acknowledgement"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "There's ways to make this system more fair. There's ways to make the system better reflect our collective values and ideals.",
+          "confidence": 0.8,
+          "context_type": "realistic_problem_solving"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "Can we do more? Yes. I know we can do more than just this bill we have today.",
+          "confidence": 0.6,
+          "context_type": "aspiration_not_unrealistic_promise"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -60,7 +60,7 @@ class IntelligentExtractorAgent:
     """
     
     def __init__(self, 
-                 model: str = "vertex_ai/gemini-2.5-flash",
+                 model: str = "vertex_ai/gemini-2.5-pro",
                  audit_logger: Optional[AuditLogger] = None,
                  max_retries: int = 3,
                  timeout_seconds: int = 30):
@@ -68,7 +68,7 @@ class IntelligentExtractorAgent:
         Initialize Intelligent Extractor Agent.
         
         Args:
-            model: LLM model for extraction (fast model recommended)
+            model: LLM model for extraction (Pro model recommended for semantic mapping)
             audit_logger: Optional audit logger for provenance
             max_retries: Maximum retry attempts for failed extractions
             timeout_seconds: Timeout for individual extraction calls

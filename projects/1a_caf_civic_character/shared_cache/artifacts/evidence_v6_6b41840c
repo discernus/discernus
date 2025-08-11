@@ -1,0 +1,181 @@
+{
+  "evidence_metadata": {
+    "document_hash": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+    "total_evidence_pieces": 17,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-11T13:41:40.577982+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "dignity",
+      "quote_text": "Now everybody wants to do well in life. Everybody wants to make money.",
+      "confidence": 0.8,
+      "context_type": "universal aspiration as contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577918+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribalism",
+      "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+      "confidence": 0.9,
+      "context_type": "us-vs-them framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577935+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribalism",
+      "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys.",
+      "confidence": 0.9,
+      "context_type": "explicit denigration of other group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577939+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "truth",
+      "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country in sector after sector...",
+      "confidence": 0.9,
+      "context_type": "factual claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577942+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "truth",
+      "quote_text": "a $75 trillion transfer of wealth from the bottom 90% to the top 1%.",
+      "confidence": 0.9,
+      "context_type": "economic statistic",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577944+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "manipulation",
+      "quote_text": "The American people are outraged at what's going on...",
+      "confidence": 0.9,
+      "context_type": "emotional trigger",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577947+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "manipulation",
+      "quote_text": "in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+      "confidence": 0.9,
+      "context_type": "hyperbole and demonization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577949+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "justice",
+      "quote_text": "We will not accept an oligarchic form of society.",
+      "confidence": 0.8,
+      "context_type": "call for equitable societal structure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577952+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "justice",
+      "quote_text": "That is what a rigged economy is about, and that is what we are going to change.",
+      "confidence": 0.8,
+      "context_type": "critique of systemic unfairness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577955+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "resentment",
+      "quote_text": "...all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+      "confidence": 0.9,
+      "context_type": "blame attribution and grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577958+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "resentment",
+      "quote_text": "The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.9,
+      "context_type": "blame-focused rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577961+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.8,
+      "context_type": "positive future vision (concluding thought)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577963+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "...making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education...",
+      "confidence": 0.9,
+      "context_type": "threat-focused language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577965+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+      "confidence": 0.9,
+      "context_type": "catastrophic framing of actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577968+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "pragmatism",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.7,
+      "context_type": "conditional action with implied strategy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577970+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fantasy",
+      "quote_text": "I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.",
+      "confidence": 0.7,
+      "context_type": "implied naive belief in fairness/reason",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577973+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fantasy",
+      "quote_text": "but we can create the kind of nation that we deserve.",
+      "confidence": 0.7,
+      "context_type": "unrealistic promise without detailed path",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-11T13:41:40.577975+00:00"
+    }
+  ]
+}

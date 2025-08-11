@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The analysis was conducted following the sequential, axis-by-axis methodology outlined in the framework. The document exhibits strong rhetoric across multiple axes, often blending virtuous and pathological appeals simultaneously (e.g., framing a tribal conflict of 'class vs. oligarchs' as a fight for universal dignity). This results in high scores on opposing dimensions within the same axis, reflecting a complex and intentionally layered rhetorical strategy."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "tribalism": {
+          "raw_score": 0.85,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_universal_solidarity"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.95,
+          "context_type": "in-group_out-group_framing"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "They voted on a budget that cuts $880 billion from the committee that’s in charge of Medicaid. And so now they’re trying to play a game and say, “We didn’t do that,” because they did by proxy. So let’s set the record straight.",
+          "confidence": 0.9,
+          "context_type": "assertion_of_fact"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who’s just trying to make a better life for themselves. But we’re smarter than that Greeley. We know better than that.",
+          "confidence": 0.9,
+          "context_type": "emotional_framing_and_dichotomy"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans’ benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_fairness"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "Now it’s this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren’t earned really. They aren’t working for these billions. They’re stealing them. They’re stealing them. They’re stealing them from you and you and me.",
+          "confidence": 0.95,
+          "context_type": "grievance_narrative"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it’s our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "empowerment_rhetoric"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 0.9,
+          "context_type": "threat-focused_language"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.9,
+          "context_type": "problem-solving_focus"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another...",
+          "confidence": 0.9,
+          "context_type": "oversimplified_causality"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

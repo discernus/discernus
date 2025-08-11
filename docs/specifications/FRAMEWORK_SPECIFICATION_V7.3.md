@@ -119,6 +119,87 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
     }
   }
 }
+
+### 6. Gasket Schema Requirements (v7.3)
+
+**Core Principle**: The gasket schema enables automated data extraction and synthesis by providing a structured contract between framework analysis and system infrastructure.
+
+#### **6.1 Proprietary Markers (REQUIRED)**
+All gasket schema content MUST be wrapped in proprietary markers to ensure reliable extraction:
+
+```markdown
+<GASKET_SCHEMA_START>
+{
+  "version": "v7.3",
+  "target_keys": [...],
+  "extraction_patterns": {...},
+  "validation_rules": {...}
+}
+<GASKET_SCHEMA_END>
+```
+
+**Benefits**:
+- **Eliminates parsing ambiguity** - markers are impossible to miss
+- **Maintains THIN principles** - simple extraction, LLM intelligence
+- **Framework author control** - exact placement of gasket content
+- **Future-proof** - easy to extend with new marker types
+
+#### **6.2 Namespace Protection (REQUIRED)**
+**Critical**: The terms "gasket_schema", "target_keys", "extraction_patterns", and "validation_rules" MUST NOT appear anywhere in the framework narrative or documentation outside the marked section.
+
+**Prohibited in Narrative**:
+- ❌ "This framework uses a gasket schema for data extraction"
+- ❌ "The target_keys define what we extract"
+- ❌ "Extraction patterns guide the analysis"
+
+**Allowed in Narrative**:
+- ✅ "This framework analyzes political discourse patterns"
+- ✅ "Dimensions include dignity, truth, and justice"
+- ✅ "Analysis follows sequential methodology"
+
+**Namespace Protection Benefits**:
+- **Prevents parser confusion** - no false positives
+- **Maintains clean separation** - narrative vs. execution
+- **Ensures reliable extraction** - markers are unambiguous
+
+#### **6.3 Gasket Schema Structure (REQUIRED)**
+```json
+{
+  "version": "v7.3",
+  "extraction_method": "intelligent_extractor",
+  "target_keys": [
+    "dimension_a_score", "dimension_a_salience", "dimension_a_confidence",
+    "dimension_b_score", "dimension_b_salience", "dimension_b_confidence"
+  ],
+  "extraction_patterns": {
+    "dimension_a_score": ["dimension_a.{0,20}score", "dimension_a.{0,20}[0-9]\\.[0-9]"],
+    "dimension_a_salience": ["dimension_a.{0,20}salience", "dimension_a.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
+    "dimension_a_confidence": ["dimension_a.{0,20}confidence", "dimension_a.{0,20}confidence.{0,20}[0-9]\\.[0-9]"]
+  },
+  "validation_rules": {
+    "required_fields": ["dimension_a_score", "dimension_a_salience", "dimension_a_confidence"],
+    "score_ranges": {"min": 0.0, "max": 1.0},
+    "metadata_ranges": {
+      "salience": {"min": 0.0, "max": 1.0},
+      "confidence": {"min": 0.0, "max": 1.0}
+    },
+    "fallback_strategy": "use_default_values"
+  }
+}
+```
+
+#### **6.4 Validation Requirements**
+The coherence agent validates:
+- **Marker Presence**: `<GASKET_SCHEMA_START>` and `<GASKET_SCHEMA_END>` are present
+- **Namespace Cleanliness**: No gasket keywords in narrative sections
+- **Schema Completeness**: All required fields are present
+- **Pattern Validity**: Extraction patterns are valid regex
+- **Version Compliance**: Version is "v7.3" or "7.3"
+
+**Failure Modes**:
+- **Missing Markers**: Framework rejected as non-compliant
+- **Namespace Violation**: Warning issued, extraction may fail
+- **Schema Incomplete**: Framework rejected until fixed
 ```
 
 ### 4. Advanced Schema Features

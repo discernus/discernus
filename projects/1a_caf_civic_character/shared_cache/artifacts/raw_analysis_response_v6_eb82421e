@@ -1,0 +1,162 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis was conducted by applying the Civic Analysis Framework's dimensional definitions sequentially to the document. The text is a clear example of policy advocacy rhetoric, which maps well onto the framework's axes. Confidence is high due to the explicit and repeated use of language corresponding to dimensions like Justice, Dignity, Hope, and Pragmatism."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.15,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.2,
+          "salience": 0.25,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "resentment": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.85,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "We are all bound together as a people by the most precious ideals in humanity - the ideals that were put forth by our founders and that have been aspired to in every generation and have been worked on in every generation, making us a more perfect union.",
+          "confidence": 0.95,
+          "context_type": "argument_framing"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "None of us should ever be judged by the least of what we've done, but instead by our ability and our capacity to find redemption.",
+          "confidence": 0.95,
+          "context_type": "philosophical_statement"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us. This bill is a recognition of the fact that we are bound together as a people...",
+          "confidence": 0.9,
+          "context_type": "counter_evidence"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "And even though we only have 5% of the world's population, one in four of the incarcerated people on the planet Earth are here in the United States of America. One in three of all the incarcerated women on the planet Earth are here in the United States of America.",
+          "confidence": 0.95,
+          "context_type": "statistical_evidence"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "In fact, the American Bar Association points to 40,000 collateral consequences that come with a criminal conviction in this country - 40,000 collateral consequences that follow you for life for a criminal conviction.",
+          "confidence": 0.9,
+          "context_type": "expert_citation"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound. This bill is a step - a step towards healing.",
+          "confidence": 0.8,
+          "context_type": "emotional_language"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The scales of justice in America are not balanced.",
+          "confidence": 1.0,
+          "context_type": "central_thesis"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "You cannot deny justice to any American without it affecting us all. You cannot keep injustice for some without it cheapening the justice of us all.",
+          "confidence": 1.0,
+          "context_type": "moral_argument"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "This is a system in our country that feeds upon certain communities and not others. The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "confidence": 0.8,
+          "context_type": "grievance_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But today we have an opportunity to do something about addressing the ills of this system. And that's why I'm proud that this is a bipartisan compromise bill with leadership - extraordinary leadership on both sides of the aisle - saying, hey, there are things we need to begin to correct in this system.",
+          "confidence": 0.95,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve. Like people, we have demonstrated as a nation the capacity to redeem ourselves.",
+          "confidence": 0.95,
+          "context_type": "inspirational_statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "confidence": 0.7,
+          "context_type": "problem_description"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction...",
+          "confidence": 1.0,
+          "context_type": "acknowledgement_of_constraints"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "But this is a first step. It is a necessary step for the sake of thousands of Americans whose lives will be directly affected.",
+          "confidence": 0.95,
+          "context_type": "incrementalism"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "I want to see more than the bill we have today, and I know we can do more than just this bill we have today. But this is a first step.",
+          "confidence": 1.0,
+          "context_type": "counter_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

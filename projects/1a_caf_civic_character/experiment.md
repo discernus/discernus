@@ -16,7 +16,7 @@ hypothesis: |
   in civic character coherence patterns as measured by the Civic Character Index 
   and pattern classifications.
 
-framework: "framework.md"
+framework: "../../frameworks/reference/core/caf_v7.3.md"
 corpus_path: "corpus/"
 
 # REQUIRED: Configuration for the analysis process

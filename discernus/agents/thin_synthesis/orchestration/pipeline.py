@@ -175,7 +175,8 @@ class ProductionThinSynthesisPipeline:
         try:
             # Step 1: Run MathToolkit to get statistical results
             self.logger.info("📊 Running statistical analysis...")
-            statistical_results_raw, sample_size = self._run_statistical_analysis(request)
+            gasket_schema = self._extract_gasket_schema(request.framework_spec)
+            statistical_results_raw, sample_size = self._run_statistical_analysis(request, gasket_schema)
             
             # Step 1.5: Validate statistical health
             self.logger.info("🔍 Validating statistical health...")
@@ -298,13 +299,74 @@ class ProductionThinSynthesisPipeline:
                 error_message=str(e)
             )
 
-    def _run_statistical_analysis(self, request: ProductionPipelineRequest) -> tuple[Dict[str, Any], int]:
+    def _extract_gasket_schema(self, framework_spec: str) -> Dict[str, Any]:
+        """
+        Extracts the gasket_schema from the framework specification using proprietary markers.
+        
+        Args:
+            framework_spec: The framework specification content.
+            
+        Returns:
+            The gasket_schema dictionary.
+            
+        Raises:
+            ValueError: If the gasket_schema is not found or is invalid.
+        """
+        try:
+            start_marker = "<GASKET_SCHEMA_START>"
+            end_marker = "<GASKET_SCHEMA_END>"
+            
+            start_pos = framework_spec.find(start_marker)
+            if start_pos == -1:
+                raise ValueError("Gasket schema start marker not found in framework.")
+                
+            end_pos = framework_spec.find(end_marker, start_pos)
+            if end_pos == -1:
+                raise ValueError("Gasket schema end marker not found in framework.")
+                
+            # Extract content between markers and parse as JSON
+            gasket_content = framework_spec[start_pos + len(start_marker):end_pos].strip()
+            gasket_data = json.loads(gasket_content)
+            
+            # The gasket_schema is the top-level object
+            if "gasket_schema" in gasket_data:
+                return gasket_data["gasket_schema"]
+            else:
+                raise ValueError("gasket_schema key not found in the extracted content.")
+
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to parse gasket_schema JSON: {e}")
+            raise ValueError(f"Invalid gasket_schema JSON: {e}")
+        except Exception as e:
+            self.logger.error(f"Failed to extract gasket_schema: {e}")
+            raise ValueError(f"Could not extract gasket_schema: {e}")
+
+    def _extract_dimensions_from_gasket_schema(self, gasket_schema: Dict[str, Any]) -> List[str]:
+        """
+        Extracts the list of target keys from the gasket schema.
+        
+        Args:
+            gasket_schema: The framework's gasket_schema.
+            
+        Returns:
+            A list of score columns.
+            
+        Raises:
+            ValueError: If the gasket_schema is invalid.
+        """
+        if not gasket_schema or 'target_keys' not in gasket_schema:
+            raise ValueError("Invalid or missing gasket_schema with target_keys")
+        
+        self.logger.info(f"✅ Extracted {len(gasket_schema['target_keys'])} target keys from gasket_schema")
+        return gasket_schema['target_keys']
+
+    def _run_statistical_analysis(self, request: ProductionPipelineRequest, gasket_schema: Dict[str, Any]) -> tuple[Dict[str, Any], int]:
         """Helper to run the statistical analysis using MathToolkit."""
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         raw_analysis_data = combined_data.decode('utf-8')
 
-        # Framework-agnostic: Dynamically discover score columns from framework
-        score_columns = self._extract_framework_score_columns(request.framework_spec)
+        # THIN Principle: Dynamically discover score columns from the gasket_schema contract
+        score_columns = self._extract_dimensions_from_gasket_schema(gasket_schema)
         
         # Sample-size aware statistical planning - check the data structure first
         try:
@@ -369,73 +431,6 @@ class ProductionThinSynthesisPipeline:
         )
         
         return statistical_results, sample_size
-    
-    def _extract_framework_score_columns(self, framework_spec: str) -> List[str]:
-        """
-        Extract score column names from framework specification.
-        
-        THIN Approach: Parse framework JSON appendix to discover dimensions,
-        then generate expected column names (dimension_name_score, dimension_name_salience).
-        
-        Args:
-            framework_spec: Framework specification content
-            
-        Returns:
-            List of expected score column names for this framework
-        """
-        try:
-            # Extract JSON appendix from framework
-            json_pattern = r"```json\s*(.*?)\s*```"
-            json_match = re.search(json_pattern, framework_spec, re.DOTALL)
-            if not json_match:
-                self.logger.warning("No JSON appendix found in framework, using fallback columns")
-                return self._get_fallback_score_columns()
-            
-            framework_config = json.loads(json_match.group(1))
-            
-            # Extract dimensions from dimension_groups (v7.3 format)
-            dimension_groups = framework_config.get("dimension_groups", {})
-            all_dimensions = []
-            
-            for group_name, dimensions in dimension_groups.items():
-                if isinstance(dimensions, list):
-                    all_dimensions.extend(dimensions)
-                else:
-                    self.logger.warning(f"Dimension group '{group_name}' is not a list, skipping")
-            
-            if not all_dimensions:
-                self.logger.warning("No dimensions found in framework dimension_groups, using fallback")
-                return self._get_fallback_score_columns()
-            
-            # Generate expected column names: dimension_name_score, dimension_name_salience
-            score_columns = []
-            for dimension in all_dimensions:
-                score_columns.append(f"{dimension}_score")
-                score_columns.append(f"{dimension}_salience")
-                # Also include confidence columns if framework uses them
-                score_columns.append(f"{dimension}_confidence")
-            
-            self.logger.info(f"Discovered {len(score_columns)} score columns from framework: {len(all_dimensions)} dimensions")
-            return score_columns
-            
-        except json.JSONDecodeError as e:
-            self.logger.error(f"Failed to parse framework JSON: {e}")
-            return self._get_fallback_score_columns()
-        except Exception as e:
-            self.logger.error(f"Failed to extract framework score columns: {e}")
-            return self._get_fallback_score_columns()
-    
-    def _get_fallback_score_columns(self) -> List[str]:
-        """
-        Fallback score columns for legacy frameworks or parsing failures.
-        
-        Returns basic CFF columns as a safety net.
-        """
-        return [
-            "tribal_dominance_score", "individual_dignity_score", "fear_score", "hope_score",
-            "envy_score", "compersion_score", "enmity_score", "amity_score", 
-            "fragmentative_goals_score", "cohesive_goals_score"
-        ]
     
     def _validate_statistical_health(self, statistical_results: Dict[str, Any], sample_size: int) -> None:
         """

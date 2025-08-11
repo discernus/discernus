@@ -20,8 +20,9 @@ import time
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 import hashlib # Added for framework hash calculation
+import re
 
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
@@ -245,15 +246,23 @@ Respond with only the JSON object."""
                 compatibility_result = parse_llm_json_response(
                     response=response_content,
                     llm_gateway=self.llm_gateway,
-                    model=self.model,
-                    audit_logger=self.audit_logger
+                    model=self.synthesis_model, # Use a capable model for this task
+                    audit_logger=self.audit_logger,
                 )
-                # Validate required fields
-                required_fields = ["compatibility", "confidence", "reasoning", "reuse_recommendation"]
+
+                # Check for required fields in the parsed JSON
+                required_fields = ["compatibility", "confidence", "reasoning", "differences_found", "reuse_recommendation"]
                 if all(field in compatibility_result for field in required_fields):
                     return compatibility_result
+                else:
+                    raise ThinOrchestratorError("Framework compatibility response is missing required fields.")
+
             except (ValueError, json.JSONDecodeError) as e:
                 self.audit_logger.log_error("framework_compatibility_parsing_failed", f"Failed to parse compatibility response: {e}", {"agent": "ThinOrchestrator"})
+                raise ThinOrchestratorError(f"Failed to parse LLM compatibility response: {e}")
+            
+            except Exception as e:
+                raise ThinOrchestratorError(f"Framework compatibility check failed: {str(e)}")
             
             # Fallback if parsing fails
             return {
@@ -380,10 +389,8 @@ Respond with only the JSON object."""
                 }
             }
         else:
-            # DEVELOPMENT: Fail fast instead of expensive fallbacks during debugging
             error_msg = f"THIN synthesis failed: {response.error_message}"
-            print(f"❌ {error_msg}")
-            print("🛑 Stopping execution to allow debugging (no expensive fallback)")
+            self.logger.error(f"❌ {error_msg}")
             raise ThinOrchestratorError(error_msg)
 
     def run_experiment(self, 
@@ -489,6 +496,7 @@ Respond with only the JSON object."""
             self._current_framework_content = framework_content
             self._current_audit_logger = audit
             self._current_analysis_model = analysis_model
+            self._current_synthesis_model = None  # Will be set during synthesis phase
             framework_hash = storage.put_artifact(
                 framework_content.encode('utf-8'),
                 {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
@@ -684,10 +692,8 @@ Respond with only the JSON object."""
                 if not shared_cache_dir.exists():
                     raise ThinOrchestratorError(f"No shared cache found for resume mode. Run analysis first.")
                 
-                # TODO: Add stage-specific artifact validation and resumption logic
-                # For now, fall back to synthesis_only behavior for stages
-                print(f"⚠️  Stage-specific resumption not yet implemented. Using full synthesis...")
-                synthesis_only = True  # Temporary fallback
+                # Stage-specific resumption not implemented - fail fast
+                raise ThinOrchestratorError(f"Stage-specific resumption for '{self.resume_from_stage}' is not implemented. Use 'synthesis' or 'analysis' only.")
 
             if synthesis_only:
                 # Log synthesis-only mode start
@@ -780,27 +786,9 @@ Respond with only the JSON object."""
                                     print(f"   ✅ LLM determined semantic compatibility: {artifact_id[:8]}...")
                                     break
                     
-                    # Fallback to legacy compatibility for artifacts without framework content
+                    # No compatible artifact found, proceed with full run
                     if not json_artifact_hash:
-                        print("   📎 No semantically compatible artifacts found. Checking legacy artifacts...")
-                        for artifact_id, info in registry.items():
-                            metadata = info.get("metadata", {})
-                            artifact_type = metadata.get("artifact_type")
-                            artifact_framework_hash = metadata.get("framework_hash")
-                            
-                            # Allow artifacts without framework hash (legacy compatibility)
-                            if artifact_type == "analysis_json_v6" and not artifact_framework_hash:
-                                timestamp = info["created_at"]
-                                if not latest_json_time or timestamp > latest_json_time:
-                                    latest_json_time = timestamp
-                                    json_artifact_hash = artifact_id
-                                    compatibility_info = {
-                                        "method": "legacy_compatibility",
-                                        "compatibility": "ASSUMED_COMPATIBLE",
-                                        "confidence": 0.5,
-                                        "reasoning": "Legacy artifact without framework hash - assumed compatible for backward compatibility"
-                                    }
-                                    print(f"   📎 Found legacy artifact without framework hash: {artifact_id[:8]}...")
+                        print("   📎 No semantically compatible artifacts found. Proceeding with full analysis.")
                 
                 if json_artifact_hash:
                     # Use compatible artifact for both scores and evidence
@@ -1104,6 +1092,9 @@ Respond with only the JSON object."""
             self.logger.info("Starting synthesis phase")
             print("\n🔬 Synthesizing results...")
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
+            
+            # Set synthesis model for extraction operations during synthesis
+            self._current_synthesis_model = synthesis_model
             
             self.logger.info("Using Discernus Advanced Synthesis Pipeline", extra={
                 "synthesis_model": synthesis_model,
@@ -1530,15 +1521,19 @@ Respond with only the JSON object."""
                         # We need framework content for gasket schema extraction
                         framework_content = getattr(self, '_current_framework_content', None)
                         if framework_content:
+                            # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
+                            extraction_model = (getattr(self, '_current_synthesis_model', None) or 
+                                               getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
+                            print(f"🔍 DEBUG: Using extraction model: {extraction_model}")
                             extracted_data = self._extract_and_map_with_gasket(
                                 raw_response, 
                                 framework_content, 
                                 getattr(self, '_current_audit_logger', None),
-                                getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                                extraction_model
                             )
                         else:
-                            # Fallback to legacy parsing if framework content not available
-                            extracted_data = self._legacy_json_parsing(raw_response)
+                            # No framework content available - cannot extract data
+                            raise ThinOrchestratorError(f"Cannot extract data from analysis result {i}: framework content not available for intelligent extraction")
                         
                         if extracted_data and "document_analyses" in extracted_data:
                             combined_document_analyses.extend(extracted_data["document_analyses"])
@@ -1576,15 +1571,18 @@ Respond with only the JSON object."""
                                 # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                                 framework_content = getattr(self, '_current_framework_content', None)
                                 if framework_content:
+                                    # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
+                                    extraction_model = (getattr(self, '_current_synthesis_model', None) or 
+                                                       getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
                                     extracted_data = self._extract_and_map_with_gasket(
                                         raw_response, 
                                         framework_content, 
                                         getattr(self, '_current_audit_logger', None),
-                                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                                        extraction_model
                                     )
                                 else:
-                                    # Fallback to legacy parsing if framework content not available
-                                    extracted_data = self._legacy_json_parsing(raw_response)
+                                    # No framework content available - cannot extract data
+                                    raise ThinOrchestratorError(f"Cannot extract data from analysis result {i}: framework content not available for intelligent extraction")
                                 
                                 if extracted_data and "document_analyses" in extracted_data:
                                     combined_document_analyses.extend(extracted_data["document_analyses"])
@@ -1604,28 +1602,8 @@ Respond with only the JSON object."""
                     print(f"Warning: No result_content or result_hash found in analysis_result {i}")
                     continue
             elif "raw_analysis_response" in result:
-                # Direct raw_analysis_response (fallback)
-                raw_response = result["raw_analysis_response"]
-                
-                # Evidence already extracted during analysis time - no post-processing needed
-                # (THIN principle: analysis agent produces evidence format needed for RAG)
-                
-                # Extract JSON using THIN utility
-                try:
-                    analysis_data = parse_llm_json_response(
-                        response=raw_response,
-                        llm_gateway=self.llm_gateway,
-                        model=self.model,
-                        audit_logger=self.audit_logger
-                    )
-                    if "document_analyses" in analysis_data:
-                        combined_document_analyses.extend(analysis_data["document_analyses"])
-                except (ValueError, json.JSONDecodeError) as e:
-                    print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
-                    continue
-                else:
-                    print(f"Warning: No JSON found in raw_analysis_response for result {i}")
-                    continue
+                # Direct raw_analysis_response fallback is no longer supported
+                raise ThinOrchestratorError("Direct 'raw_analysis_response' fallback is no longer supported. Use intelligent extraction with framework content.")
             elif "document_analyses" in result:
                 # Direct document_analyses (shouldn't happen with current structure)
                 combined_document_analyses.extend(result["document_analyses"])
@@ -1692,58 +1670,69 @@ Respond with only the JSON object."""
 
     def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, Any]]:
         """
-        Extract gasket_schema from framework v7.1 JSON appendix.
-        Only supports v7.1 enhanced format - no backward compatibility.
+        Extract gasket_schema from framework using proprietary markers.
+        Supports v7.3 format with fallback to intelligent extraction.
         
         Args:
             framework_content: Raw framework markdown content
             
         Returns:
-            gasket_schema dict (v7.1 format) or None if not found/invalid
+            gasket_schema dict (v7.3 format) or None if not found/invalid
         """
         try:
-            # Look for gasket_schema specifically in framework
-            # Search for "gasket_schema" keyword first, then find the containing JSON block
-            if 'gasket_schema' in framework_content:
-                gasket_pos = framework_content.find('gasket_schema')
+            # THIN approach: Use proprietary markers for reliable extraction
+            start_marker = "<GASKET_SCHEMA_START>"
+            end_marker = "<GASKET_SCHEMA_END>"
+            
+            start_pos = framework_content.find(start_marker)
+            if start_pos == -1:
+                print("❌ No GASKET_SCHEMA_START marker found in framework")
+                return None
                 
-                # Find the JSON block that contains gasket_schema
-                json_blocks = []
-                start_pos = 0
-                while True:
-                    json_start_marker = framework_content.find('```json', start_pos)
-                    if json_start_marker == -1:
-                        break
-                    
-                    json_start = json_start_marker + 7
-                    json_end = framework_content.find('```', json_start)
-                    
-                    if json_end != -1:
-                        json_content = framework_content[json_start:json_end].strip()
-                        
-                        # Check if this JSON block contains gasket_schema
-                        if json_start <= gasket_pos <= json_end:
-                            try:
-                                framework_config = json.loads(json_content)
-                                
-                                # Extract gasket_schema if present
-                                gasket_schema = framework_config.get('gasket_schema')
-                                if gasket_schema:
-                                    # Support v7.1 and v7.3 formats (v7.3 is backward compatible)
-                                    supported_versions = ['7.1', '7.3', 'v7.1', 'v7.3']
-                                    if gasket_schema.get('version') in supported_versions and 'target_keys' in gasket_schema:
-                                        return gasket_schema
-                                    else:
-                                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}")
-                                        return None
-                            except json.JSONDecodeError:
-                                pass  # Try next JSON block
-                    
-                    start_pos = json_end + 3 if json_end != -1 else json_start_marker + 7
+            end_pos = framework_content.find(end_marker, start_pos)
+            if end_pos == -1:
+                print("❌ No GASKET_SCHEMA_END marker found in framework")
+                return None
             
-            return None
+            # Extract content between markers
+            marker_content = framework_content[start_pos + len(start_marker):end_pos].strip()
             
-        except (json.JSONDecodeError, KeyError) as e:
+            # Find the JSON block within the marked content
+            json_start = marker_content.find('{')
+            if json_start == -1:
+                print("❌ No JSON content found between gasket schema markers")
+                return None
+                
+            json_end = marker_content.rfind('}') + 1
+            if json_end == 0:
+                print("❌ Malformed JSON between gasket schema markers")
+                return None
+            
+            json_content = marker_content[json_start:json_end]
+            
+            try:
+                framework_config = json.loads(json_content)
+                
+                # Extract gasket_schema if present
+                gasket_schema = framework_config.get('gasket_schema')
+                if gasket_schema:
+                    # Support v7.3 format
+                    supported_versions = ['7.3', 'v7.3']
+                    if gasket_schema.get('version') in supported_versions and 'target_keys' in gasket_schema:
+                        print(f"✅ Successfully extracted gasket schema with {len(gasket_schema.get('target_keys', []))} target keys")
+                        return gasket_schema
+                    else:
+                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}")
+                        return None
+                else:
+                    print("❌ No gasket_schema found in marked JSON content")
+                    return None
+                    
+            except json.JSONDecodeError as e:
+                print(f"❌ Failed to parse JSON between gasket schema markers: {e}")
+                return None
+            
+        except Exception as e:
             print(f"Warning: Failed to extract gasket_schema from framework: {e}")
             return None
 
@@ -1797,7 +1786,7 @@ Respond with only the JSON object."""
         raw_analysis_response: str,
         framework_content: str,
         audit_logger: AuditLogger,
-        model: str = "vertex_ai/gemini-2.5-flash-lite"
+        model: str = "vertex_ai/gemini-2.5-pro"
     ) -> Optional[Dict[str, Any]]:
         """
         Extract scores using Intelligent Extractor gasket (Gasket #2).
@@ -2033,11 +2022,14 @@ Respond with only the JSON object."""
                 # Extract scores using gasket or legacy parsing
                 framework_content = getattr(self, '_current_framework_content', None)
                 if framework_content:
+                    # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
+                    extraction_model = (getattr(self, '_current_synthesis_model', None) or 
+                                       getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
                     extracted_data = self._extract_and_map_with_gasket(
                         raw_response, 
                         framework_content, 
                         getattr(self, '_current_audit_logger', None),
-                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                        extraction_model
                     )
                 else:
                     extracted_data = self._legacy_json_parsing(raw_response)

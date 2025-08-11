@@ -1,0 +1,351 @@
+<ctrl94>thought
+The user wants me to act as an enhanced computational research analysis agent.
+I need to analyze the provided document using the given framework.
+The output must be in a structured JSON format, adhering to the specified `CRITICAL SEPARATION OF CONCERNS` and `CRITICAL DIMENSIONAL COMPLETENESS REQUIREMENT`.
+
+Here's my plan:
+1.  **Decode the Framework:**
+    *   `framework_name`: "civic_analysis_framework"
+    *   `framework_version`: "v7.3"
+    *   `dimension_groups`:
+        *   `identity_axis`: ["dignity", "tribalism"]
+        *   `truth_axis`: ["truth", "manipulation"]
+        *   `justice_axis`: ["justice", "resentment"]
+        *   `emotional_axis`: ["hope", "fear"]
+        *   `reality_axis`: ["pragmatism", "fantasy"]
+    *   `analysis_prompt`: Provides detailed instructions for scoring each dimension and extracting evidence, emphasizing semantic concepts over literal keywords.
+
+2.  **Decode the Document:**
+    *   Document 1: `mitt_romney_2020_impeachment.txt`
+
+3.  **Process Each Document against the Framework (Sequentially by Axis as per prompt):**
+
+    **Document 1: `mitt_romney_2020_impeachment.txt`**
+
+    *   **Context**: Legislative speech from 2020 by Senator Mitt Romney regarding an impeachment.
+
+    **STEP 1 - IDENTITY AXIS ANALYSIS (Dignity vs. Tribalism)**
+
+    *   **Dignity**:
+        *   `Appeals to universal human worth, respect for individuals regardless of group membership, shared humanity, individual moral agency.`
+        *   Mentions "our Republic's success," "our responsibilities," "impartial justice," "my faith is at the heart of who I am," "my oath before God," "our fundamental values," "one's oath of office," "my character to history's rebuke and the censure of my own conscience," "duty to the best of my ability," "country expected it of me," "our country," "our Constitution was inspired by Providence," "freedom itself is dependent on the strength and vitality of our national character."
+        *   Strong emphasis on individual moral agency, duty, conscience, universal values (Constitution, freedom), and impartial justice.
+        *   Quote: "My faith is at the heart of who I am. I take an oath before God as enormously consequential." (individual moral agency, universal principles)
+        *   Quote: "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience." (duty, conscience, constitutional principles)
+        *   **Raw Score**: High.
+        *   **Salience**: Very prominent throughout the speech. The core argument is based on individual duty and constitutional principles over partisan loyalty.
+        *   **Confidence**: High.
+
+    *   **Tribalism**:
+        *   `Appeals to group identity, us-vs-them framing, group loyalty over universal principles, exclusionary rhetoric.`
+        *   "stand with the team," "my own party," "numerous calls and texts... many demanded, in their words, that I 'stand with the team.'", "my vote will likely be in the minority in the Senate."
+        *   Acknowledges external pressure for tribal loyalty, but explicitly *rejects* it in favor of individual conscience and duty. The text describes tribalism as something to *overcome*, not something to embrace.
+        *   **Raw Score**: Low, as it's being *resisted* rather than *promoted*. The mention serves to highlight the *contrast* with dignity.
+        *   **Salience**: Present as a counter-point or an external pressure, but not as the speaker's adopted stance. It's discussed, but not central to the speaker's own message.
+        *   **Confidence**: High.
+
+    **STEP 2 - TRUTH AXIS ANALYSIS (Truth vs. Manipulation)**
+
+    *   **Truth**:
+        *   `Commitment to factual accuracy, acknowledgment of complexity, intellectual honesty, evidence-based reasoning.`
+        *   "The allegations made in the articles of impeachment are very serious."
+        *   "I swore an oath before God to exercise impartial justice."
+        *   "The House managers presented evidence supporting their case, and the White House counsel disputed that case."
+        *   "Given that in neither case of the father nor the son was any evidence presented by the president's counsel that a crime had been committed, the president's insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit." (evidence-based reasoning, critical assessment of claims)
+        *   "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end..." (acknowledges evidence, commitment to facts)
+        *   "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment." (desire for truth, willingness to consider contradictory evidence)
+        *   The speech is framed around evaluating evidence and constitutional demands.
+        *   **Raw Score**: High.
+        *   **Salience**: High, the entire speech is built on the speaker's commitment to "impartial justice" and evaluating evidence, even when it's politically difficult.
+        *   **Confidence**: High.
+
+    *   **Manipulation**:
+        *   `Strategic distortion of information, emotional manipulation, misleading framing, exploitation of cognitive biases.`
+        *   The speech explicitly *condemns* manipulation, particularly the President's actions: "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so." "The president's purpose was personal and political." "What he did was not perfect. No, it was a flagrant assult on our electoral rights, our national security, and our fundamental values."
+        *   Describes actions that *are* manipulative and abusive of public trust, but the speaker is *exposing* them, not engaging in them.
+        *   **Raw Score**: Low, as it is being described as a negative action *by others*, not employed by the speaker.
+        *   **Salience**: Moderate, discussed as the negative behavior of the President which prompted the impeachment process, providing context for the speaker's ethical stance.
+        *   **Confidence**: High.
+
+    **STEP 3 - JUSTICE AXIS ANALYSIS (Justice vs. Resentment)**
+
+    *   **Justice**:
+        *   `Concern for fair outcomes, procedural fairness, protection of rights, systemic equity considerations.`
+        *   "exercise impartial justice." (core theme)
+        *   "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it."
+        *   "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor."
+        *   "It was a flagrant assult on our electoral rights, our national security, and our fundamental values." (implying a violation of fundamental justice)
+        *   The speech centers on the concept of fulfilling a duty to the Constitution and impartial justice, protecting electoral rights and national security, which are aspects of justice.
+        *   **Raw Score**: High.
+        *   **Salience**: Very high. Justice and constitutional duty are the central pillars of the senator's argument for his vote.
+        *   **Confidence**: High.
+
+    *   **Resentment**:
+        *   `Exploitation of grievances, blame-focused rhetoric, zero-sum framing, victimization narratives.`
+        *   The speech explicitly rejects the idea of a "partisan end" and personal feelings guiding the decision.
+        *   While it notes the President's actions as "egregious" and an "assault," it frames these within a context of constitutional violation and breach of public trust, rather than focusing on grievance or blame for its own sake. The speaker takes responsibility for his own actions/vote, not casting blame on others beyond stating facts of the President's actions.
+        *   **Raw Score**: Low. The speech actively counters blame-focused rhetoric by emphasizing duty and conscience.
+        *   **Salience**: Low. While the context is an impeachment, the speaker avoids fueling resentment and instead focuses on principled decision-making.
+        *   **Confidence**: High.
+
+    **STEP 4 - EMOTIONAL AXIS ANALYSIS (Hope vs. Fear)**
+
+    *   **Hope**:
+        *   `Constructive optimism, positive vision for the future, empowerment rhetoric, possibility-focused language.`
+        *   "I hope we respect each other's good faith."
+        *   "I believe that our Constitution was inspired by Providence."
+        *   "freedom itself is dependent on the strength and vitality of our national character." (implies a positive potential if character is maintained)
+        *   The overall tone is somber but ultimately hopeful in the enduring strength of the Constitution and national character.
+        *   **Raw Score**: Moderate. While not overtly optimistic, it expresses belief in foundational principles and future generations.
+        *   **Salience**: Moderate. It's not a rally cry, but a quiet, foundational hope for the system and the nation.
+        *   **Confidence**: High.
+
+    *   **Fear**:
+        *   `Anxiety-inducing rhetoric, threat-focused language, catastrophic framing, security-based appeals.`
+        *   "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values." (These are threats, but framed as reasons for action, not to incite panic)
+        *   "expose my character to history's rebuke and the censure of my own conscience." (Personal fear of moral failure, but framed as a reason to uphold principles, not to instill general fear).
+        *   The speech acknowledges serious threats ("assault on our national security") but does not dwell on them catastrophically or use them to manipulate. The speaker's personal "fear" is of moral compromise, which drives him towards principled action.
+        *   **Raw Score**: Moderate, acknowledging threats as justification for action but not using fear as the primary rhetorical tool.
+        *   **Salience**: Moderate. The threats are present, but the focus is on the principled response rather than the fear itself.
+        *   **Confidence**: High.
+
+    **STEP 5 - REALITY AXIS ANALYSIS (Pragmatism vs. Fantasy)**
+
+    *   **Pragmatism**:
+        *   `Realistic problem-solving, acknowledgment of constraints, practical solutions, incremental progress.`
+        *   "We have labored to faithfully execute our responsibilities to it." (acknowledges hard work, effort)
+        *   "I acknowledge that my verdict will not remove the president from office." (realistic outcome)
+        *   "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me." (practical adherence to duty)
+        *   The speech acknowledges the difficult reality of the situation and the likely political outcome, but emphasizes adherence to duty and principle within those constraints.
+        *   **Raw Score**: High.
+        *   **Salience**: High. The speech is very grounded in the constitutional process and the real-world implications of the vote.
+        *   **Confidence**: High.
+
+    *   **Fantasy**:
+        *   `Unrealistic promises, magical thinking, oversimplified solutions, denial of constraints.`
+        *   The speech does not engage in unrealistic promises or oversimplified solutions. It acknowledges the complexity and difficulty of the situation. The speaker is realistic about his vote's impact.
+        *   The defense's argument "that the Senate should leave the impeachment decision to the voters" is labeled as "inconsistent with the Constitution's requirement that the Senate, not the voters, try the president." This points to a rejection of an unrealistic (or unconstitutional) approach.
+        *   **Raw Score**: Low.
+        *   **Salience**: Low. Fantasy is explicitly rejected by appealing to constitutional reality.
+        *   **Confidence**: High.
+
+4.  **Final JSON Structure:** Compile all the scores, salience, confidence levels, and extracted evidence into the required JSON format.
+    *   Remember *not* to calculate any derived metrics or indices.
+    *   Set `analyst_confidence` for the overall analysis.
+    *   Add `analysis_notes`.
+
+Confidence check on scores:
+- Dignity: High (0.9) - Central to his personal and civic duty argument.
+- Tribalism: Low (0.1) - Acknowledged as a pressure, but strongly resisted.
+- Truth: High (0.85) - Focus on evidence, impartiality, and exposing distortion.
+- Manipulation: Low (0.15) - Describes it as a problem committed by others, not using it.
+- Justice: High (0.9) - Constitutional duty, fairness, rights protection are paramount.
+- Resentment: Low (0.1) - Focus on principle over grievance.
+- Hope: Moderate (0.6) - Underlying belief in system and national character, despite difficulty.
+- Fear: Moderate (0.4) - Acknowledges threats but frames them as calls to action for principle, not panic. Personal fear is moral, not external.
+- Pragmatism: High (0.8) - Realistic about situation and outcome, but committed to process.
+- Fantasy: Low (0.1) - Actively rejects unrealistic or unconstitutional solutions.
+
+Salience check:
+- Dignity: 0.9 (central)
+- Tribalism: 0.2 (as a contrast/rejected pressure)
+- Truth: 0.8 (core to his reasoning process)
+- Manipulation: 0.3 (describes actions of others, not his own rhetoric)
+- Justice: 0.9 (central to constitutional role)
+- Resentment: 0.1 (minimal, actively avoided)
+- Hope: 0.5 (underlying theme)
+- Fear: 0.4 (motivates action against threats, but not primary emotion appealed to)
+- Pragmatism: 0.7 (very realistic, process-oriented)
+- Fantasy: 0.1 (rejected concept)
+
+Confidence in scoring: High for most, the nuances of Hope/Fear/Pragmatism require careful consideration of the *type* of emotion or realism, so slightly lower but still high.<ctrl95>```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential chain-of-thought methodology outlined in the framework's analysis prompt, focusing on semantic concepts rather than literal keyword matching. Scores reflect the intensity and rhetorical prominence of each dimension within the document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.15,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "fear": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "My faith is at the heart of who I am. I take an oath before God as enormously consequential. ... Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.95,
+          "context_type": "core argument"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.95,
+          "context_type": "personal commitment"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Many demanded, in their words, that I 'stand with the team.' I can assure you that that thought has been very much in my mind.",
+          "confidence": 0.95,
+          "context_type": "external pressure"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Were I to ignore the evidence... for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.9,
+          "context_type": "rejection of tribalism"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. ... Given that in neither case of the father nor the son was any evidence presented by the president's counsel that a crime had been committed, the president's insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+          "confidence": 0.95,
+          "context_type": "evidence-based reasoning"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+          "confidence": 0.9,
+          "context_type": "intellectual honesty"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so. ... The president's purpose was personal and political.",
+          "confidence": 0.9,
+          "context_type": "description of unethical actions"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "confidence": 0.85,
+          "context_type": "condemnation of manipulative behavior"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it. ... The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor.",
+          "confidence": 0.95,
+          "context_type": "constitutional duty and fairness"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.95,
+          "context_type": "protection of fundamental rights"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "The president's counsel also notes that Vice President Biden appeared to have a conflict of interest when he undertook an effort to remove the Ukrainian prosecutor general. ... While ignoring a conflict of interest is not a crime, it is surely very wrong.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement without grievance"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "Were I to ignore the evidence... for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.9,
+          "context_type": "rejection of blame-focused rhetoric"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.85,
+          "context_type": "optimistic vision"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.8,
+          "context_type": "future-oriented hope"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement of threats"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Were I to ignore the evidence... it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.85,
+          "context_type": "personal fear of moral compromise"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.",
+          "confidence": 0.9,
+          "context_type": "realistic assessment of outcome"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.9,
+          "context_type": "commitment to practical duty"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+          "confidence": 0.9,
+          "context_type": "rejection of unrealistic solution"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "To maintain that the lack of a codified and comprehensive list of all the outrageous acts that a president might conceivably commit renders Congress powerless to remove such a president defies reason.",
+          "confidence": 0.85,
+          "context_type": "rejection of illogical claims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
