@@ -33,8 +33,9 @@ class DiscernusConfig(BaseSettings):
     """
     
     # Model configuration
-    analysis_model: str = Field(default="vertex_ai/gemini-2.5-flash-lite", description="Default LLM model for analysis")
+    analysis_model: str = Field(default="vertex_ai/gemini-2.5-flash", description="Default LLM model for analysis")
     synthesis_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for synthesis")
+    validation_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for validation (requires higher intelligence)")
     
     # Execution options
     auto_commit: bool = Field(default=True, description="Automatically commit successful runs to Git")
@@ -168,8 +169,9 @@ class ConfigManager:
             '# or CLI arguments': None,
             '': None,
             '# Model Configuration': None,
-            'analysis_model': 'vertex_ai/gemini-2.5-flash-lite',
-            'synthesis_model': 'vertex_ai/gemini-2.5-pro',
+            'analysis_model': 'vertex_ai/gemini-2.5-flash',
+            'synthesis_model': 'vertex_ai/gemini-2.5-pro', 
+            'validation_model': 'vertex_ai/gemini-2.5-pro',
             '': None,
             '# Execution Options': None, 
             'auto_commit': True,
