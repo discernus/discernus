@@ -25,7 +25,7 @@ from .validators.pipeline_validator import assess_pipeline_health
 class ReliabilityAnalysisAgent:
     """Orchestrates reliability analysis using modular validators."""
 
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-flash-lite", audit_logger: Optional[AuditLogger] = None):
+    def __init__(self, model: str = "vertex_ai/gemini-2.5-pro", audit_logger: Optional[AuditLogger] = None):
         self.agent_name = "ReliabilityAnalysisAgent"
         self.model = model
         self.audit_logger = audit_logger
