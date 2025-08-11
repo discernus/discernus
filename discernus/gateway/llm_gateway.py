@@ -56,7 +56,6 @@ class LLMGateway(BaseGateway):
             if rpm_limit is None:
                 # No rate limiting for providers with None limits (Dynamic Shared Quota)
                 limiters[provider] = litellm.completion
-                print(f"🚦 No rate limiting configured for {provider}: Dynamic Shared Quota (DSQ)")
             else:
                 # Create a rate-limited completion function for this provider
                 @limits(calls=rpm_limit, period=60)  # RPM limit over 60 seconds
@@ -64,7 +63,6 @@ class LLMGateway(BaseGateway):
                     return litellm.completion(model=model, messages=messages, **kwargs)
                 
                 limiters[provider] = rate_limited_completion
-                print(f"🚦 Rate limiting configured for {provider}: {rpm_limit} RPM")
         
         return limiters
 
