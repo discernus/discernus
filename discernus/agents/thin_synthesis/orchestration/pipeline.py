@@ -417,9 +417,10 @@ class ProductionThinSynthesisPipeline:
             Exception: If statistical health validation fails
         """
         try:
-            # Initialize reliability analysis agent
+            # Initialize reliability analysis agent with Pro model for validation
+            # Note: Statistical health validation requires higher intelligence than Flash Lite
             reliability_agent = ReliabilityAnalysisAgent(
-                model="vertex_ai/gemini-2.5-flash-lite",
+                model="vertex_ai/gemini-2.5-pro",  
                 audit_logger=self.audit_logger
             )
             

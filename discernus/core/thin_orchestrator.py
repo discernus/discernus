@@ -105,9 +105,10 @@ class ThinOrchestrator:
                 print("⚠️ Truncating to first {max_framework_length} characters for validation")
                 framework_content = framework_content[:max_framework_length] + "\n\n[Content truncated for validation...]"
             
-            # Initialize reliability analysis agent
+            # Initialize reliability analysis agent with Pro model for validation
+            # Note: Validation requires higher intelligence than Flash Lite can provide
             reliability_agent = ReliabilityAnalysisAgent(
-                model="vertex_ai/gemini-2.5-flash-lite",
+                model="vertex_ai/gemini-2.5-pro",
                 audit_logger=audit_logger
             )
             
