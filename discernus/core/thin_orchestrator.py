@@ -88,7 +88,7 @@ class ThinOrchestrator:
         self.logger.info(f"THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
     
-    def _validate_framework_dimensions(self, framework_content: str, audit_logger: AuditLogger) -> None:
+    def _validate_framework_dimensions(self, framework_content: str, audit_logger: AuditLogger, validation_model: str = "vertex_ai/gemini-2.5-pro") -> None:
         """
         Validate framework dimensions using ReliabilityAnalysisAgent.
         
@@ -105,10 +105,10 @@ class ThinOrchestrator:
                 print("⚠️ Truncating to first {max_framework_length} characters for validation")
                 framework_content = framework_content[:max_framework_length] + "\n\n[Content truncated for validation...]"
             
-            # Initialize reliability analysis agent with Pro model for validation
+            # Initialize reliability analysis agent with configured validation model
             # Note: Validation requires higher intelligence than Flash Lite can provide
             reliability_agent = ReliabilityAnalysisAgent(
-                model="vertex_ai/gemini-2.5-pro",
+                model=validation_model,
                 audit_logger=audit_logger
             )
             
@@ -395,8 +395,9 @@ Respond with only the JSON object."""
             raise ThinOrchestratorError(error_msg)
 
     def run_experiment(self, 
-                      analysis_model: str = "vertex_ai/gemini-2.5-flash-lite",
+                      analysis_model: str = "vertex_ai/gemini-2.5-flash",
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
+                      validation_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
                       ensemble_runs: int = 1,
@@ -410,6 +411,7 @@ Respond with only the JSON object."""
         Args:
             analysis_model: LLM model to use for analysis
             synthesis_model: LLM model to use for synthesis
+            validation_model: LLM model to use for validation (requires higher intelligence)
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             analysis_only: If True, run only analysis phase and save artifacts
             ensemble_runs: Number of ensemble runs for self-consistency (1 = single run, 3-5 recommended)
@@ -507,7 +509,7 @@ Respond with only the JSON object."""
             # Validate framework dimensions for early failure detection
             self.logger.info("Validating framework dimensions")
             print("🔍 Validating framework dimensions...")
-            self._validate_framework_dimensions(framework_content, audit)
+            self._validate_framework_dimensions(framework_content, audit, validation_model)
             
             # Load corpus documents and manifest
             self.logger.info(f"Loading corpus from: {experiment_config['corpus_path']}")
