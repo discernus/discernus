@@ -61,9 +61,8 @@ The existing agent is unsuitable for production due to four critical anti-patter
     -   `corpus`: Document list, speakers, high-level metadata.
     -   `statistics`: The complete, final set of verified statistical tables from MathToolkit (e.g., ANOVA, correlation matrices, reliability scores).
 
--   **RAG Index (For Lookup):** A specialized index containing the high-volume data to be queried on demand.
-    -   `evidence_quotes`: Textual evidence snippets.
-    -   `corpus_text`: Chunked paragraphs from the full source documents.
+-   **RAG Index (For Lookup):** A specialized index containing high-volume lookup data. As of v2.0, the index excludes raw corpus text; the corpus manifest is provided via direct context and textual evidence is indexed instead.
+    -   `evidence_quotes`: Textual evidence snippets with provenance.
     -   `raw_scores`: The full table of dimension scores.
     -   `calculated_metrics`: The full table of derived metrics (e.g., cohesion indices).
 
@@ -72,16 +71,15 @@ The existing agent is unsuitable for production due to four critical anti-patter
 To be effective, the RAG index must be built with a clear strategy.
 
 -   **Chunking Strategy:**
-    -   `corpus_text`: Chunked into overlapping paragraphs (e.g., 500 characters with a 100-character overlap) to ensure semantic continuity is preserved.
     -   `evidence_quotes`: Stored as exact character spans with a surrounding 1-2 sentence window for context.
 
 -   **Index Schema:** Each item in the `txtai` index must include this metadata for filtering:
     -   `id`: Unique identifier for the chunk.
-    -   `text`: The chunked content.
-    -   `content_type`: One of `['evidence_quotes', 'corpus_text', 'raw_scores', 'calculated_metrics']`.
+    -   `text`: The content.
+    -   `content_type`: One of `['evidence_quotes', 'raw_scores', 'calculated_metrics']`.
     -   `source_artifact`: The hash of the artifact it originated from.
-    -   `document_id`: The name or ID of the source document.
-    -   `speaker`: The speaker associated with the document.
+    -   `document_id`: The name or ID of the source document (if applicable).
+    -   `speaker`: The speaker associated with the document (if applicable).
 
 -   **Filtering & Hybrid Search:**
     -   All RAG queries *must* use `txtai`'s `where` clause to filter by `content_type` (e.g., `where="content_type = 'evidence_quotes'"`). This is the primary mechanism for solving the "framework pollution" problem.
