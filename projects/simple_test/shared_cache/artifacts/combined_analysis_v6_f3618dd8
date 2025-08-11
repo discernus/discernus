@@ -224,7 +224,7 @@
         }
       ],
       "extraction_metadata": {
-        "extraction_time_seconds": 7.136510848999023,
+        "extraction_time_seconds": 19.50291895866394,
         "tokens_used": 0,
         "cost_usd": 0.0,
         "attempts": 1,
@@ -405,7 +405,7 @@
         }
       ],
       "extraction_metadata": {
-        "extraction_time_seconds": 22.57539391517639,
+        "extraction_time_seconds": 15.130625009536743,
         "tokens_used": 0,
         "cost_usd": 0.0,
         "attempts": 1,
@@ -577,7 +577,7 @@
         }
       ],
       "extraction_metadata": {
-        "extraction_time_seconds": 22.785099983215332,
+        "extraction_time_seconds": 17.81055188179016,
         "tokens_used": 0,
         "cost_usd": 0.0,
         "attempts": 1,
@@ -758,7 +758,7 @@
         }
       ],
       "extraction_metadata": {
-        "extraction_time_seconds": 13.215728044509888,
+        "extraction_time_seconds": 17.373677015304565,
         "tokens_used": 0,
         "cost_usd": 0.0,
         "attempts": 1,
