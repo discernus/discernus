@@ -63,7 +63,7 @@ def ensure_infrastructure() -> bool:
     return True
 
 
-def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dict[str, Any]]:
+def validate_experiment_structure(experiment_path: Path, model: str = "vertex_ai/gemini-2.5-flash-lite") -> tuple[bool, str, Dict[str, Any]]:
     """Validate experiment directory structure and configuration"""
     if not experiment_path.exists():
         return False, f"❌ Experiment path does not exist: {experiment_path}", {}
@@ -141,8 +141,8 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
     
     try:
-        # Use ExperimentCoherenceAgent for comprehensive validation
-        coherence_agent = ExperimentCoherenceAgent()
+        # Use ExperimentCoherenceAgent for comprehensive validation with the specified model
+        coherence_agent = ExperimentCoherenceAgent(model=model)
         validation_result = coherence_agent.validate_experiment(experiment_path)
         
         # Helen 2.0: Only blocking issues cause validation failure
@@ -284,7 +284,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     
     # Validate experiment structure (unless skipped)
     if not skip_validation:
-        valid, message, experiment = validate_experiment_structure(exp_path)
+        valid, message, experiment = validate_experiment_structure(exp_path, analysis_model)
         if not valid:
             rich_console.print_error(message.replace("❌ ", ""))
             exit_validation_failed("Experiment structure validation failed")

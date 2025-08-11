@@ -84,8 +84,13 @@ class EnhancedAnalysisAgent:
                 document_hashes[0] if document_hashes else "unknown_artifact",
                 self.storage, self.audit, self.agent_name, {}
             )
+            # BUGFIX: Include result_hash for cache hits to match counting logic expectations
+            result_hash = self.storage.put_artifact(
+                json.dumps(cached_result, indent=2).encode('utf-8'),
+                {"artifact_type": "analysis_result", "batch_id": batch_id, "cached": True}
+            )
             return {
-                "analysis_result": {"batch_id": batch_id, "result_content": cached_result, "cached": True},
+                "analysis_result": {"batch_id": batch_id, "result_hash": result_hash, "result_content": cached_result, "cached": True},
                 "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
             }
 

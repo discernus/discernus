@@ -37,8 +37,38 @@ def validate_statistical_health(
         response, metadata = agent.llm_gateway.execute_call(
             model=agent.model,
             prompt=validation_prompt,
-            system_prompt="You are a statistical analysis expert for the Discernus research platform."
+            system_prompt="You are a reliability analysis expert for the Discernus research platform."
         )
+
+        # Check if the LLM call was successful
+        if not metadata.get("success", False):
+            error_msg = metadata.get("error", "Unknown LLM call failure")
+            if agent.audit_logger:
+                agent.audit_logger.log_error("statistical_health_validation_llm_failure", error_msg, {"agent": agent.agent_name})
+            return StatisticalHealthResult(
+                validation_passed=False,
+                calculation_failures=[],
+                perfect_correlations=[],
+                statistical_warnings=[],
+                sample_size_assessment="unknown",
+                recommended_action="FAIL_EXPERIMENT",
+                error_message=f"LLM validation failed: {error_msg}"
+            )
+
+        # Check if response is empty
+        if not response or not response.strip():
+            error_msg = "LLM returned empty response"
+            if agent.audit_logger:
+                agent.audit_logger.log_error("statistical_health_validation_empty_response", error_msg, {"agent": agent.agent_name})
+            return StatisticalHealthResult(
+                validation_passed=False,
+                calculation_failures=[],
+                perfect_correlations=[],
+                statistical_warnings=[],
+                sample_size_assessment="unknown",
+                recommended_action="FAIL_EXPERIMENT",
+                error_message=f"LLM validation failed: {error_msg}"
+            )
 
         if agent.audit_logger:
             agent.audit_logger.log_agent_event(

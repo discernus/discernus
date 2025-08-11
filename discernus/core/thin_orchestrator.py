@@ -28,7 +28,7 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from .provenance_organizer import ProvenanceOrganizer
-from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context
+from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context, log_analysis_phase_start, log_analysis_phase_complete, log_synthesis_phase_start, log_synthesis_phase_complete
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
@@ -97,6 +97,13 @@ class ThinOrchestrator:
         """
         try:
             from ..agents.reliability_analysis_agent import ReliabilityAnalysisAgent
+            
+            # Check framework content length to prevent LLM call failures
+            max_framework_length = 8000  # Conservative limit for LLM calls
+            if len(framework_content) > max_framework_length:
+                print(f"⚠️ Framework content too long ({len(framework_content)} chars) for validation")
+                print("⚠️ Truncating to first {max_framework_length} characters for validation")
+                framework_content = framework_content[:max_framework_length] + "\n\n[Content truncated for validation...]"
             
             # Initialize reliability analysis agent
             reliability_agent = ReliabilityAnalysisAgent(
@@ -1043,10 +1050,9 @@ Respond with only the JSON object."""
             
             # Log analysis phase start
             log_analysis_phase_start(
-                total_documents=len(corpus_documents),
-                model=analysis_model,
-                ensemble_runs=ensemble_runs,
-                framework_hash=hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+                experiment_name=experiment_config.get("name", "Unknown"),
+                run_id=run_timestamp,
+                document_count=len(corpus_documents)
             )
             
             # Execute analysis (in chunks)
@@ -1062,8 +1068,10 @@ Respond with only the JSON object."""
                 ensemble_runs
             )
             
+            # Calculate success count BEFORE combining artifacts (which modifies the list)
+            successful_count = len([res for res in all_analysis_results if 'error' not in res and res.get('analysis_result', {}).get('result_hash')])
+            
             # Log analysis results
-            successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
             self.logger.info(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully", extra={
                 "total_documents": len(corpus_documents),
                 "successful_analyses": successful_count,
@@ -1076,15 +1084,10 @@ Respond with only the JSON object."""
             
             # Log analysis phase completion
             log_analysis_phase_complete(
-                total_documents=len(corpus_documents),
-                successful_analyses=successful_count,
-                failed_analyses=len(corpus_documents) - successful_count,
-                scores_hash=scores_hash,
-                evidence_hash=evidence_hash,
-                corpus_artifact_hash=corpus_artifact_hash,
-                ensemble_runs=ensemble_runs,
-                total_cost_usd=analysis_costs.get('total_cost_usd', 0.0),
-                total_tokens=analysis_costs.get('total_tokens', 0)
+                experiment_name=experiment_config.get("name", "Unknown"),
+                run_id=run_timestamp,
+                duration_seconds=0.0,  # TODO: Calculate actual duration
+                documents_processed=successful_count
             )
             
             # Display analysis progress and cost
@@ -1099,8 +1102,7 @@ Respond with only the JSON object."""
             #     self._report_ensemble_summary(all_analysis_results, ensemble_runs)
 
             # Check if any analysis tasks succeeded
-            successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
-            if not successful_analyses:
+            if not successful_count:
                 self.logger.error("Analysis phase failed - no successful analyses", extra={
                     "total_documents": len(corpus_documents),
                     "successful_analyses": 0,
@@ -1131,11 +1133,9 @@ Respond with only the JSON object."""
             
             # Log synthesis phase start
             log_synthesis_phase_start(
-                synthesis_model=synthesis_model,
-                scores_hash=scores_hash,
-                evidence_hash=evidence_hash,
-                corpus_hash=corpus_artifact_hash,
-                framework_hash=framework_hash
+                experiment_name=experiment_config.get("name", "Unknown"),
+                run_id=run_timestamp,
+                analysis_artifacts_count=2  # scores_hash + evidence_hash
             )
             
             synthesis_results = self._run_thin_synthesis(
@@ -1271,6 +1271,19 @@ Respond with only the JSON object."""
             # Calculate total execution time
             end_time = datetime.now(timezone.utc).isoformat()
             total_duration = self._calculate_duration(start_time, end_time)
+            
+            # CRITICAL: Validate required deliverables before claiming success
+            validation_errors = self._validate_experiment_deliverables(results_dir, run_folder)
+            if validation_errors:
+                error_msg = f"Experiment failed - missing required deliverables: {', '.join(validation_errors)}"
+                audit.log_error("deliverables_validation_failed", error_msg, {"missing_deliverables": validation_errors})
+                log_experiment_failure(
+                    run_id=run_timestamp,
+                    error_message=error_msg,
+                    error_type="missing_deliverables",
+                    architecture="thin_v2.0_direct_calls"
+                )
+                raise ThinOrchestratorError(error_msg)
             
             # Final orchestrator event
             audit.log_orchestrator_event("experiment_complete", {
@@ -1504,49 +1517,106 @@ Respond with only the JSON object."""
                 continue
                 
             # Extract the actual analysis data from the nested structure
-            if "analysis_result" in result and "result_content" in result["analysis_result"]:
-                # Get the cached result content
-                cached_result = result["analysis_result"]["result_content"]
-                
-                # Extract the actual analysis data from the raw_analysis_response
-                if "raw_analysis_response" in cached_result:
-                    raw_response = cached_result["raw_analysis_response"]
+            if "analysis_result" in result:
+                # Handle both cached results (result_content) and fresh results (result_hash)
+                if "result_content" in result["analysis_result"]:
+                    # Get the cached result content
+                    cached_result = result["analysis_result"]["result_content"]
                     
-                    # Evidence already extracted during analysis time - load from evidence artifact
-                    # (THIN principle: analysis agent produces evidence format needed for RAG)
-                    if "evidence_hash" in cached_result:
-                        evidence_hash = cached_result["evidence_hash"]
-                        try:
-                            evidence_artifact_data = storage.get_artifact(evidence_hash)
-                            if evidence_artifact_data:
-                                evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
-                                evidence_list = evidence_artifact.get("evidence_data", [])
-                                all_evidence.extend(evidence_list)
-                                print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
-                        except Exception as e:
-                            print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
-                    
-                    # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
-                    # We need framework content for gasket schema extraction
-                    framework_content = getattr(self, '_current_framework_content', None)
-                    if framework_content:
-                        extracted_data = self._extract_and_map_with_gasket(
-                            raw_response, 
-                            framework_content, 
-                            getattr(self, '_current_audit_logger', None),
-                            getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
-                        )
+                    # Extract the actual analysis data from the raw_analysis_response
+                    if "raw_analysis_response" in cached_result:
+                        raw_response = cached_result["raw_analysis_response"]
+                        
+                        # Evidence already extracted during analysis time - load from evidence artifact
+                        # (THIN principle: analysis agent produces evidence format needed for RAG)
+                        if "evidence_hash" in cached_result:
+                            evidence_hash = cached_result["evidence_hash"]
+                            try:
+                                evidence_artifact_data = storage.get_artifact(evidence_hash)
+                                if evidence_artifact_data:
+                                    evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
+                                    evidence_list = evidence_artifact.get("evidence_data", [])
+                                    all_evidence.extend(evidence_list)
+                                    print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
+                            except Exception as e:
+                                print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
+                        
+                        # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
+                        # We need framework content for gasket schema extraction
+                        framework_content = getattr(self, '_current_framework_content', None)
+                        if framework_content:
+                            extracted_data = self._extract_and_map_with_gasket(
+                                raw_response, 
+                                framework_content, 
+                                getattr(self, '_current_audit_logger', None),
+                                getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                            )
+                        else:
+                            # Fallback to legacy parsing if framework content not available
+                            extracted_data = self._legacy_json_parsing(raw_response)
+                        
+                        if extracted_data and "document_analyses" in extracted_data:
+                            combined_document_analyses.extend(extracted_data["document_analyses"])
+                        else:
+                            print(f"Warning: Failed to extract analysis data from result {i}")
+                            continue
                     else:
-                        # Fallback to legacy parsing if framework content not available
-                        extracted_data = self._legacy_json_parsing(raw_response)
-                    
-                    if extracted_data and "document_analyses" in extracted_data:
-                        combined_document_analyses.extend(extracted_data["document_analyses"])
-                    else:
-                        print(f"Warning: Failed to extract analysis data from result {i}")
+                        print(f"Warning: No raw_analysis_response found in cached result {i}")
+                        continue
+                elif "result_hash" in result["analysis_result"]:
+                    # Fresh analysis result - load the actual result content from storage
+                    result_hash = result["analysis_result"]["result_hash"]
+                    try:
+                        result_artifact_data = storage.get_artifact(result_hash)
+                        if result_artifact_data:
+                            result_artifact = json.loads(result_artifact_data.decode('utf-8'))
+                            
+                            # Extract evidence from the result artifact
+                            if "evidence_hash" in result:
+                                evidence_hash = result["evidence_hash"]
+                                try:
+                                    evidence_artifact_data = storage.get_artifact(evidence_hash)
+                                    if evidence_artifact_data:
+                                        evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
+                                        evidence_list = evidence_artifact.get("evidence_data", [])
+                                        all_evidence.extend(evidence_list)
+                                        print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
+                                except Exception as e:
+                                    print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
+                            
+                            # Extract analysis data from the result artifact
+                            if "raw_analysis_response" in result_artifact:
+                                raw_response = result_artifact["raw_analysis_response"]
+                                
+                                # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
+                                framework_content = getattr(self, '_current_framework_content', None)
+                                if framework_content:
+                                    extracted_data = self._extract_and_map_with_gasket(
+                                        raw_response, 
+                                        framework_content, 
+                                        getattr(self, '_current_audit_logger', None),
+                                        getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-flash-lite')
+                                    )
+                                else:
+                                    # Fallback to legacy parsing if framework content not available
+                                    extracted_data = self._legacy_json_parsing(raw_response)
+                                
+                                if extracted_data and "document_analyses" in extracted_data:
+                                    combined_document_analyses.extend(extracted_data["document_analyses"])
+                                else:
+                                    print(f"Warning: Failed to extract analysis data from result {i}")
+                                    continue
+                            else:
+                                print(f"Warning: No raw_analysis_response found in result artifact {i}")
+                                continue
+                        else:
+                            print(f"Warning: Failed to load result artifact for analysis {i}")
+                            continue
+                    except Exception as e:
+                        print(f"Warning: Failed to load result artifact for analysis {i}: {e}")
                         continue
                 else:
-                    print(f"Warning: No raw_analysis_response found in cached result {i}")
+                    print(f"Warning: No result_content or result_hash found in analysis_result {i}")
                     continue
             elif "raw_analysis_response" in result:
                 # Direct raw_analysis_response (fallback)
@@ -2517,6 +2587,47 @@ This report presents the results of computational research analysis using the Di
 """
         
         return report
+    
+    def _validate_experiment_deliverables(self, results_dir: Path, run_folder: Path) -> List[str]:
+        """
+        Validate that all required experiment deliverables were created.
+        
+        Args:
+            results_dir: Path to results directory
+            run_folder: Path to experiment run folder
+            
+        Returns:
+            List of missing deliverables (empty list if all present)
+        """
+        missing = []
+        
+        # Check results directory exists
+        if not results_dir.exists():
+            missing.append("results directory")
+            return missing  # If no results dir, everything else will be missing
+        
+        # Check final report exists and has content
+        final_report = results_dir / "final_report.md"
+        if not final_report.exists():
+            missing.append("final_report.md")
+        elif final_report.stat().st_size < 100:  # Less than 100 bytes is suspicious
+            missing.append("final_report.md (file too small, likely empty)")
+        
+        # Check for CSV exports (these should be created by the export process)
+        expected_csvs = ["scores.csv", "evidence.csv", "statistical_results.csv", "metadata.csv"]
+        for csv_file in expected_csvs:
+            csv_path = results_dir / csv_file
+            if not csv_path.exists():
+                # Note: CSV files may legitimately be missing if synthesis failed, 
+                # so we don't require them, but we log their absence
+                self.logger.warning(f"Optional deliverable missing: {csv_file}")
+        
+        # Check manifest exists (critical for academic integrity)
+        manifest_file = run_folder / "manifest.json"
+        if not manifest_file.exists():
+            missing.append("manifest.json")
+        
+        return missing
     
     def _calculate_duration(self, start: str, end: str) -> float:
         """Calculate duration between timestamps in seconds."""

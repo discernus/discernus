@@ -19,6 +19,7 @@ from datetime import datetime
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
+from discernus.core.parsing_utils import parse_llm_json_response
 
 
 @dataclass
@@ -176,7 +177,43 @@ class ExperimentCoherenceAgent:
                 prompt=validation_prompt,
                 system_prompt="You are a validation expert for the Discernus research platform."
             )
-            
+
+            # Check if the LLM call was successful
+            if not metadata.get("success", False):
+                error_msg = metadata.get("error", "Unknown LLM call failure")
+                if self.audit_logger:
+                    self.audit_logger.log_error("llm_validation_failure", error_msg, {"agent": self.agent_name})
+                return ValidationResult(
+                    success=False,
+                    issues=[ValidationIssue(
+                        category="llm_call_failure",
+                        description=f"LLM validation call failed: {error_msg}",
+                        impact="Validation cannot be completed",
+                        fix="Check LLM gateway configuration and model availability",
+                        priority="BLOCKING",
+                        affected_files=[]
+                    )],
+                    suggestions=["Verify LLM model availability and authentication"]
+                )
+
+            # Check if response is empty
+            if not response or not response.strip():
+                error_msg = "LLM returned empty response"
+                if self.audit_logger:
+                    self.audit_logger.log_error("llm_validation_empty_response", error_msg, {"agent": self.agent_name})
+                return ValidationResult(
+                    success=False,
+                    issues=[ValidationIssue(
+                        category="llm_empty_response",
+                        description=f"LLM validation returned empty response: {error_msg}",
+                        impact="Validation cannot be completed",
+                        fix="Check LLM prompt and model configuration",
+                        priority="BLOCKING",
+                        affected_files=[]
+                    )],
+                    suggestions=["Review validation prompt template and model settings"]
+                )
+
             if self.audit_logger:
                 self.audit_logger.log_agent_event(
                     self.agent_name,
@@ -402,6 +439,21 @@ class ExperimentCoherenceAgent:
                 prompt=reformat_prompt,
                 system_prompt="You are a JSON formatting assistant. Return only clean JSON."
             )
+
+            # Check if the LLM call was successful
+            if not metadata.get("success", False):
+                raise ValueError(f"LLM reformatting call failed: {metadata.get('error', 'Unknown error')}")
+
+            # Check if response is empty
+            if not reformatted_response or not reformatted_response.strip():
+                raise ValueError("LLM returned empty response during reformatting")
+
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "llm_reformat_response_received",
+                    {"response_preview": reformatted_response[:200], "model": self.model}
+                )
             
             # Try parsing the reformatted response
             data = json.loads(reformatted_response)
@@ -458,8 +510,13 @@ class ExperimentCoherenceAgent:
         Avoid complex JSON extraction - let the LLM return clean JSON.
         """
         try:
-            # THIN: Simple JSON parsing, trust LLM intelligence
-            data = json.loads(response)
+            # THIN: Robust JSON parsing with markdown fallbacks
+            data = parse_llm_json_response(
+                response=response,
+                llm_gateway=self.llm_gateway,
+                model=self.model,
+                audit_logger=self.audit_logger
+            )
             
             # Convert to ValidationResult with LLM intelligence
             issues = []
@@ -479,21 +536,33 @@ class ExperimentCoherenceAgent:
                 suggestions=data.get('suggestions', [])
             )
             
-        except json.JSONDecodeError as json_error:
-            # Debug: Log the problematic response
+        except ValueError as parse_error:
+            # The robust parser already tried all fallbacks including LLM reformatting
             if self.audit_logger:
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "json_parse_error",
+                self.audit_logger.log_error(
+                    "parsing_failed_all_fallbacks",
+                    str(parse_error),
                     {
-                        "error": str(json_error),
-                        "response_preview": response[:200] if response else "EMPTY_RESPONSE",
-                        "response_length": len(response) if response else 0
+                        "agent": self.agent_name,
+                        "response_preview": response[:500] if response else "EMPTY_RESPONSE",
+                        "response_length": len(response) if response else 0,
+                        "details": "Failed to parse response even after LLM reformatting fallbacks."
                     }
                 )
             
-            # THIN Fallback: Ask LLM to reformat instead of complex parsing
-            return self._request_llm_reformat(response)
+            # Final fallback: return parsing error
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="llm_response_error",
+                    description=f"Could not parse or reformat LLM response: {str(parse_error)}",
+                    impact="Validation cannot be completed",
+                    fix="Check LLM response format and prompt clarity",
+                    priority="BLOCKING",
+                    affected_files=[]
+                )],
+                suggestions=["Review prompt template for JSON format requirements"]
+            )
         except Exception as e:
             # Return validation failure for parsing errors
             return ValidationResult(

@@ -1,2 +1,0 @@
-test_name,test_type,statistic_name,statistic_value,p_value,effect_size,degrees_of_freedom,sample_size,dependent_variable,grouping_variable,significance_level,interpretation,notes
-descriptives,descriptive_stats,result_value,"{'type': 'descriptive_stats', 'columns_analyzed': [], 'results': {}, 'provenance': {'input_columns': [], 'input_document_ids': ['bernie_sanders_2025_fighting_oligarchy.txt', 'john_mccain_2008_concession.txt'], 'filter_conditions': 'None'}}",,,,,,,,Generic descriptive_stats result,
