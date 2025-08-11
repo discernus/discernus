@@ -447,7 +447,7 @@ The agent architecture follows a **6-layer classification framework** that mirro
 - **Function**: RAG-powered synthesis with multi-audience sections
 - **THIN Compliance**: ❌ Complex parsing logic requires cleanup
 - **Key Capabilities**: Evidence-grounded narrative generation, interpretive claim validation
-- **Architecture Role**: Implements Stage 3 of 4-stage THIN synthesis pipeline
+- **Architecture Role**: Implements Stage 2 of 3-stage THIN synthesis pipeline
 
 **InvestigativeSynthesisAgent** - *Active Evidence Discovery*
 - **Function**: Active RAG interrogation for evidence discovery ("Parisian Saucier")

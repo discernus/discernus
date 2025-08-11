@@ -137,7 +137,7 @@ Agents should request human review for:
 
 - **Architectural Principle Changes**: Any modification to the 26 universal principles
 - **Specification Contract Changes**: Breaking changes to Framework/Experiment/Corpus specs
-- **Core Pipeline Modifications**: Changes to the 4-stage synthesis architecture
+- **Core Pipeline Modifications**: Changes to the 3-stage synthesis architecture
 - **New Agent Creation**: Addition of specialized agents to the ecosystem
 - **Performance Impact**: Changes affecting scalability or cost characteristics
 - **Academic Standards**: Modifications to statistical verification or provenance systems

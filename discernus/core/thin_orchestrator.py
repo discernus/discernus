@@ -28,6 +28,7 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from .provenance_organizer import ProvenanceOrganizer
+from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
@@ -81,6 +82,10 @@ class ThinOrchestrator:
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         
+        # Initialize logger for this orchestrator instance
+        self.logger = get_logger("orchestrator")
+        
+        self.logger.info(f"THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
     
     def _validate_framework_dimensions(self, framework_content: str, audit_logger: AuditLogger) -> None:
@@ -405,6 +410,11 @@ Respond with only the JSON object."""
         """
         start_time = datetime.now(timezone.utc).isoformat()
         
+        # Store model parameters for use throughout the experiment
+        self.model = analysis_model
+        self.analysis_model = analysis_model
+        self.synthesis_model = synthesis_model
+        
         # Create timestamped run folder
         run_timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         run_folder = self.experiment_path / "runs" / run_timestamp
@@ -415,6 +425,17 @@ Respond with only the JSON object."""
             
             # Initialize audit logging
             audit = AuditLogger(self.security, run_folder)
+            self.audit_logger = audit
+            
+            # Initialize comprehensive logging system
+            setup_logging(
+                experiment_path=self.experiment_path,
+                run_folder=run_folder,
+                log_level="INFO",
+                console_output=True,
+                file_output=True,
+                structured=True
+            )
             
             # Initialize experiment-level shared cache for perfect THIN caching
             shared_cache_dir = self.experiment_path / "shared_cache"
@@ -424,16 +445,6 @@ Respond with only the JSON object."""
             # Initialize enhanced manifest
             manifest = EnhancedManifest(self.security, run_folder, audit, storage)
             
-            audit.log_orchestrator_event("experiment_start", {
-                "experiment_path": str(self.experiment_path),
-                "run_folder": str(run_folder),
-                "model": analysis_model,
-                "synthesis_only": synthesis_only,
-                "architecture": "thin_v2.0_direct_calls"
-            })
-            
-            print(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
-            
             # Load and validate experiment configuration
             experiment_config = self._load_experiment_config()
             manifest.set_run_metadata(
@@ -442,6 +453,29 @@ Respond with only the JSON object."""
                 "thin_v2.0_alpha"
             )
             manifest.set_experiment_config(experiment_config)
+            
+            # Log experiment start with comprehensive context
+            log_experiment_start(
+                experiment_name=experiment_config.get("name", "Unknown"),
+                run_id=run_timestamp,
+                experiment_path=str(self.experiment_path),
+                run_folder=str(run_folder),
+                analysis_model=analysis_model,
+                synthesis_model=synthesis_model,
+                synthesis_only=synthesis_only,
+                architecture="thin_v2.0_direct_calls"
+            )
+            
+            audit.log_orchestrator_event("experiment_start", {
+                "experiment_path": str(self.experiment_path),
+                "run_folder": str(run_folder),
+                "model": analysis_model,
+                "synthesis_only": synthesis_only,
+                "architecture": "thin_v2.0_direct_calls"
+            })
+            
+            self.logger.info(f"Starting THIN v2.0 experiment: {run_timestamp}")
+            print(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
             
             # Load framework
             framework_content = self._load_framework(experiment_config["framework"])
@@ -460,11 +494,15 @@ Respond with only the JSON object."""
             })
             
             # Validate framework dimensions for early failure detection
+            self.logger.info("Validating framework dimensions")
             print("🔍 Validating framework dimensions...")
             self._validate_framework_dimensions(framework_content, audit)
             
             # Load corpus documents and manifest
+            self.logger.info(f"Loading corpus from: {experiment_config['corpus_path']}")
             corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
+            self.logger.info(f"Loaded {len(corpus_documents)} corpus documents")
+            
             corpus_hashes = []
             corpus_metadata = []
             
@@ -481,6 +519,8 @@ Respond with only the JSON object."""
             
             manifest.add_corpus_artifacts(corpus_hashes, corpus_metadata)
             
+            self.logger.info(f"Stored {len(corpus_hashes)} corpus artifacts")
+            
             audit.log_orchestrator_event("inputs_loaded", {
                 "framework_hash": framework_hash,
                 "corpus_documents": len(corpus_documents),
@@ -492,9 +532,12 @@ Respond with only the JSON object."""
                 print("🔍 Analysis-only mode: Running analysis and saving artifacts for later synthesis...")
                 
                 # Execute analysis phase
+                self.logger.info(f"Starting analysis phase for {len(corpus_documents)} documents")
                 print(f"📊 Analysis-only mode: Processing {len(corpus_documents)} documents...")
                 
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
+                self.logger.info(f"Initialized EnhancedAnalysisAgent with model: {analysis_model}")
+                
                 all_analysis_results, scores_hash, evidence_hash, corpus_hash = self._execute_analysis_sequentially(
                     analysis_agent,
                     corpus_documents,
@@ -504,9 +547,19 @@ Respond with only the JSON object."""
                     ensemble_runs
                 )
                 
+                # Log analysis results
+                successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
+                self.logger.info(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully", extra={
+                    "total_documents": len(corpus_documents),
+                    "successful_analyses": successful_count,
+                    "failed_analyses": len(corpus_documents) - successful_count,
+                    "scores_hash": scores_hash,
+                    "evidence_hash": evidence_hash,
+                    "corpus_hash": corpus_hash
+                })
+                
                 # Display analysis-only cost
                 analysis_costs = audit.get_session_costs()
-                successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
                 print(f"✅ Analysis complete: {successful_count}/{len(corpus_documents)} documents processed")
                 print(f"   💰 Total cost: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
                 print(f"   🔢 Total tokens: {analysis_costs.get('total_tokens', 0):,}")
@@ -514,6 +567,11 @@ Respond with only the JSON object."""
                 # Check if analysis succeeded
                 successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
                 if not successful_analyses:
+                    self.logger.error("Analysis phase failed - no successful analyses", extra={
+                        "total_documents": len(corpus_documents),
+                        "successful_analyses": 0,
+                        "failed_analyses": len(corpus_documents)
+                    })
                     raise ThinOrchestratorError("Analysis failed. No artifacts saved.")
                 
                 # Create results directory and save artifact references
@@ -629,6 +687,14 @@ Respond with only the JSON object."""
                 synthesis_only = True  # Temporary fallback
 
             if synthesis_only:
+                # Log synthesis-only mode start
+                log_synthesis_only_start(
+                    run_id=run_timestamp,
+                    synthesis_model=synthesis_model,
+                    cache_directory=str(self.experiment_path / "shared_cache" / "artifacts"),
+                    architecture="thin_v2.0_synthesis_only"
+                )
+                
                 # Find latest run with complete analysis
                 shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
                 if not shared_cache_dir.exists():
@@ -797,7 +863,19 @@ Respond with only the JSON object."""
                 corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
                 corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
                 
+                # Calculate corpus manifest hash for provenance
+                corpus_manifest_hash = hashlib.sha256(json.dumps(corpus_manifest).encode('utf-8')).hexdigest() if corpus_manifest else ""
+                
                 print(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
+                
+                # Log synthesis phase start for synthesis-only mode
+                log_synthesis_phase_start(
+                    synthesis_model=synthesis_model,
+                    scores_hash=scores_hash,
+                    evidence_hash=evidence_hash,
+                    corpus_hash=corpus_artifact_hash,
+                    framework_hash=framework_hash
+                )
                 
                 synthesis_results = self._run_thin_synthesis(
                     scores_hash=scores_hash,
@@ -816,11 +894,30 @@ Respond with only the JSON object."""
                 
                 synthesis_end_time = datetime.now(timezone.utc).isoformat()
                 
+                # Log synthesis phase completion for synthesis-only mode
+                log_synthesis_phase_complete(
+                    synthesis_model=synthesis_model,
+                    result_hash=synthesis_results.get("result_hash") if synthesis_results else None,
+                    duration_seconds=0,  # Will be calculated below
+                    synthesis_confidence=synthesis_results.get("synthesis_confidence") if synthesis_results else None,
+                    total_cost_usd=0,  # Will be calculated below
+                    total_tokens=0  # Will be calculated below
+                )
+                
                 # Display synthesis-only cost
                 synthesis_costs = audit.get_session_costs()
                 print(f"✅ Synthesis complete using cached analysis!")
                 print(f"   💰 Synthesis cost: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
                 print(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
+                
+                # Log synthesis-only completion
+                log_synthesis_only_complete(
+                    run_id=run_timestamp,
+                    synthesis_model=synthesis_model,
+                    total_cost_usd=synthesis_costs.get('total_cost_usd', 0.0),
+                    total_tokens=synthesis_costs.get('total_tokens', 0),
+                    architecture="thin_v2.0_synthesis_only"
+                )
                 
                 if not synthesis_results or not isinstance(synthesis_results, dict):
                     raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_results)}")
@@ -941,9 +1038,19 @@ Respond with only the JSON object."""
             print(f"📊 Processing: {len(corpus_documents)} documents individually")
             
             # Initialize analysis and synthesis agents
+            self.logger.info(f"Initializing EnhancedAnalysisAgent for {len(corpus_documents)} documents")
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
+            # Log analysis phase start
+            log_analysis_phase_start(
+                total_documents=len(corpus_documents),
+                model=analysis_model,
+                ensemble_runs=ensemble_runs,
+                framework_hash=hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+            )
+            
             # Execute analysis (in chunks)
+            self.logger.info(f"Starting analysis of {len(corpus_documents)} documents with model: {analysis_model}")
             print(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
             
             all_analysis_results, scores_hash, evidence_hash, corpus_artifact_hash = self._execute_analysis_sequentially(
@@ -955,9 +1062,33 @@ Respond with only the JSON object."""
                 ensemble_runs
             )
             
+            # Log analysis results
+            successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
+            self.logger.info(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully", extra={
+                "total_documents": len(corpus_documents),
+                "successful_analyses": successful_count,
+                "failed_analyses": len(corpus_documents) - successful_count,
+                "scores_hash": scores_hash,
+                "evidence_hash": evidence_hash,
+                "corpus_artifact_hash": corpus_artifact_hash,
+                "ensemble_runs": ensemble_runs
+            })
+            
+            # Log analysis phase completion
+            log_analysis_phase_complete(
+                total_documents=len(corpus_documents),
+                successful_analyses=successful_count,
+                failed_analyses=len(corpus_documents) - successful_count,
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                corpus_artifact_hash=corpus_artifact_hash,
+                ensemble_runs=ensemble_runs,
+                total_cost_usd=analysis_costs.get('total_cost_usd', 0.0),
+                total_tokens=analysis_costs.get('total_tokens', 0)
+            )
+            
             # Display analysis progress and cost
             analysis_costs = audit.get_session_costs()
-            successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
             print(f"✅ Analysis phase complete: {successful_count}/{len(corpus_documents)} documents processed")
             print(f"   💰 Analysis cost so far: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
             print(f"   🔢 Tokens used: {analysis_costs.get('total_tokens', 0):,}")
@@ -970,12 +1101,25 @@ Respond with only the JSON object."""
             # Check if any analysis tasks succeeded
             successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
             if not successful_analyses:
+                self.logger.error("Analysis phase failed - no successful analyses", extra={
+                    "total_documents": len(corpus_documents),
+                    "successful_analyses": 0,
+                    "failed_analyses": len(corpus_documents),
+                    "analysis_results": all_analysis_results
+                })
                 raise ThinOrchestratorError("All analysis batches failed. Halting experiment.")
 
             # Execute synthesis
+            self.logger.info("Starting synthesis phase")
             print("\n🔬 Synthesizing results...")
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
+            self.logger.info("Using Discernus Advanced Synthesis Pipeline", extra={
+                "synthesis_model": synthesis_model,
+                "scores_hash": scores_hash,
+                "evidence_hash": evidence_hash,
+                "corpus_artifact_hash": corpus_artifact_hash
+            })
             print("🏭 Using Discernus Advanced Synthesis Pipeline...")
             print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
             
@@ -984,6 +1128,15 @@ Respond with only the JSON object."""
             
             # This is the manifest hash, not the content hash.
             corpus_manifest_hash = hashlib.sha256(json.dumps(corpus_manifest).encode('utf-8')).hexdigest() if corpus_manifest else ""
+            
+            # Log synthesis phase start
+            log_synthesis_phase_start(
+                synthesis_model=synthesis_model,
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                corpus_hash=corpus_artifact_hash,
+                framework_hash=framework_hash
+            )
             
             synthesis_results = self._run_thin_synthesis(
                 scores_hash=scores_hash,
@@ -1001,6 +1154,24 @@ Respond with only the JSON object."""
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
+            
+            # Log synthesis completion
+            self.logger.info("Synthesis phase completed successfully", extra={
+                "synthesis_model": synthesis_model,
+                "result_hash": synthesis_results.get("result_hash"),
+                "duration_seconds": synthesis_results.get("duration_seconds"),
+                "synthesis_confidence": synthesis_results.get("synthesis_confidence")
+            })
+            
+            # Log synthesis phase completion
+            log_synthesis_phase_complete(
+                synthesis_model=synthesis_model,
+                result_hash=synthesis_results.get("result_hash"),
+                duration_seconds=synthesis_results.get("duration_seconds"),
+                synthesis_confidence=synthesis_results.get("synthesis_confidence"),
+                total_cost_usd=synthesis_costs.get('total_cost_usd', 0.0),
+                total_tokens=synthesis_costs.get('total_tokens', 0)
+            )
             
             # Display synthesis cost update
             synthesis_costs = audit.get_session_costs()
@@ -1114,7 +1285,32 @@ Respond with only the JSON object."""
             # Get session cost summary for research transparency
             session_costs = audit.get_session_costs()
             
-            print(f"\n✅ THIN v2.0 experiment complete: {run_timestamp} ({total_duration:.1f}s)")
+            # Log experiment completion
+            self.logger.info("THIN v2.0 experiment completed successfully", extra={
+                "run_id": run_timestamp,
+                "total_duration_seconds": total_duration,
+                "analysis_duration": analysis_summary["total_duration_seconds"],
+                "synthesis_duration": synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
+                "final_report_hash": report_hash,
+                "manifest_file": str(manifest_file),
+                "total_cost_usd": session_costs.get('total_cost_usd', 0.0),
+                "total_tokens": session_costs.get('total_tokens', 0)
+            })
+            
+            # Log experiment completion
+            log_experiment_complete(
+                run_id=run_timestamp,
+                total_duration_seconds=total_duration,
+                analysis_duration=analysis_summary["total_duration_seconds"],
+                synthesis_duration=synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
+                final_report_hash=report_hash,
+                manifest_file=str(manifest_file),
+                total_cost_usd=session_costs.get('total_cost_usd', 0.0),
+                total_tokens=session_costs.get('total_tokens', 0),
+                architecture="thin_v2.0_direct_calls"
+            )
+            
+            print(f"\n✅ THIN v2.0 experiment completed: {run_timestamp} ({total_duration:.1f}s)")
             print(f"📋 Results: {results_dir}")
             print(f"📊 Report: {report_file}")
             print(f"\n💰 Final Cost Summary:")
@@ -1157,6 +1353,19 @@ Respond with only the JSON object."""
             }
             
         except Exception as e:
+            # Log error with comprehensive context
+            self.logger.error("Experiment execution failed", extra={
+                "experiment_path": str(self.experiment_path),
+                "run_folder": str(run_folder) if 'run_folder' in locals() else None,
+                "error_type": type(e).__name__,
+                "error_message": str(e),
+                "analysis_model": analysis_model,
+                "synthesis_model": synthesis_model,
+                "ensemble_runs": ensemble_runs,
+                "auto_commit": auto_commit,
+                "resume_stage": resume_stage
+            })
+            
             # Log error and cleanup
             try:
                 audit.log_error("orchestrator_error", str(e), {
@@ -1184,10 +1393,17 @@ Respond with only the JSON object."""
         
         all_analysis_results = []
         
+        self.logger.info(f"Starting sequential analysis of {len(corpus_documents)} documents", extra={
+            "total_documents": len(corpus_documents),
+            "model": model,
+            "ensemble_runs": ensemble_runs
+        })
         print(f"\n🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
         
         for i, doc in enumerate(corpus_documents):
-            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc.get('filename')} ---")
+            doc_filename = doc.get('filename', 'unknown')
+            self.logger.info(f"Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename}")
+            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename} ---")
             
             # TODO: Ensemble runs disabled pending architectural review
             # if ensemble_runs > 1:
@@ -1226,13 +1442,29 @@ Respond with only the JSON object."""
                     current_evidence_hash=None
                 )
                 
+                # Log successful analysis
+                self.logger.info(f"Document {doc_filename} analyzed successfully", extra={
+                    "document_index": i+1,
+                    "total_documents": len(corpus_documents),
+                    "result_hash": result.get('analysis_result', {}).get('result_hash'),
+                    "has_scores": bool(result.get('analysis_result', {}).get('scores')),
+                    "has_evidence": bool(result.get('analysis_result', {}).get('evidence'))
+                })
+                
                 # Append the analysis result to the list
                 all_analysis_results.append(result)
             except Exception as e:
-                print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
-                all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
+                self.logger.error(f"Analysis failed for document {doc_filename}", extra={
+                    "document_index": i+1,
+                    "total_documents": len(corpus_documents),
+                    "error_type": type(e).__name__,
+                    "error_message": str(e)
+                })
+                print(f"❌ Analysis failed for document {doc_filename}: {e}")
+                all_analysis_results.append({"error": str(e), "document": doc_filename})
 
         # Combine all analysis results into a single JSON artifact for synthesis
+        self.logger.info("Combining analysis artifacts for synthesis")
         scores_hash, evidence_hash = self._combine_analysis_artifacts(all_analysis_results, analysis_agent.storage)
         
         # Store combined corpus as a single artifact for comprehensive RAG
@@ -1241,6 +1473,15 @@ Respond with only the JSON object."""
             corpus_content.encode('utf-8'),
             {"artifact_type": "combined_corpus_text"}
         )
+        
+        self.logger.info("Analysis artifacts combined successfully", extra={
+            "scores_hash": scores_hash,
+            "evidence_hash": evidence_hash,
+            "corpus_hash": corpus_hash,
+            "total_documents": len(corpus_documents),
+            "successful_analyses": len([r for r in all_analysis_results if 'error' not in r]),
+            "failed_analyses": len([r for r in all_analysis_results if 'error' in r])
+        })
         
         return all_analysis_results, scores_hash, evidence_hash, corpus_hash
 
