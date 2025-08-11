@@ -60,18 +60,19 @@ step_definitions:
     synthesis_task: |
       Analyze the framework's performance using the raw statistical results provided in the context. Do not use conceptual tier labels (e.g., Gold/Silver/Bronze) in the report. Use scientifically accurate descriptions only.
 
-      Guidance:
-      - Determine which statistical sources are available (ANOVA, reliability, descriptive). Do not mention any tier names; simply proceed with the strongest available analysis.
-      - When ANOVA is available: use p-values, F-statistics, degrees of freedom, and effect sizes (eta-squared when present) to characterize whether group differences are statistically significant and substantively meaningful.
-      - When reliability is available: categorize Cronbach's alpha by commonly accepted thresholds (≥0.9 excellent, ≥0.8 good, ≥0.7 acceptable, ≥0.6 questionable, <0.6 poor). Use these terms directly.
-      - When only descriptive statistics are available: use coefficient of variation (CV = std/mean) as a proxy for discriminative power (≥0.30 strong dispersion, 0.20–0.29 moderate, <0.20 low). State this clearly as a descriptive assessment without inferential claims.
+      Use the following data if present:
+      - anova_summary: F, p, df, eta-squared
+      - reliability_summary: Cronbach's alpha per dimension
+      - descriptive_summary: mean, std, CV as dispersion proxy
+      - fit_diagnostics: precomputed counts, percentages, and dimension lists combining significance and reliability thresholds (no need to recompute)
+      - confidence_summary (if provided): per-dimension mean confidence as a clarity/applicability proxy
 
       Required Output (no tier labels):
       1. Precise statement of the statistical basis used (e.g., "Inference with ANOVA and internal consistency" or "Descriptive variance analysis only").
-      2. Per-dimension summary table mapping significance and measurement quality where applicable. Avoid tier names; use statistical terms.
-      3. Overall proportion of dimensions meeting acceptable thresholds (e.g., significant at α=0.05 and alpha ≥0.70), expressed as a percentage.
-      4. Concise interpretation of strengths and limitations grounded in the presented statistics (e.g., high effect sizes on identity-related dimensions; low reliability on compersion).
-      5. Recommendations for future data collection or framework calibration where indicated by the metrics.
+      2. Per-dimension summary mapping significance, reliability categories, and dispersion (CV) where applicable.
+      3. Report the precomputed combined_fit_percentage from fit_diagnostics when available, and explicitly list dimensions failing significance vs. failing reliability.
+      4. Integrate confidence_summary, noting dimensions with notably low confidence as reduced clarity/applicability, without overstating conclusiveness.
+      5. Provide recommendations tied to observed failure modes (e.g., collect more samples for low power; refine item wording for low alpha).
 
   final_integration:
     query_generation_task: null # This step does not require RAG queries
