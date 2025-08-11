@@ -575,15 +575,13 @@ class ProductionThinSynthesisPipeline:
         """Helper to build the RAG index with required artifacts for the ComprehensiveKnowledgeCurator."""
         
         # Artifacts to be indexed by the curator.
-        # Note: We only index lookup-oriented data (evidence, corpus), not context data.
+        # Note: Index evidence-only data for lookup; context (framework, corpus, stats) is passed directly.
         artifacts_to_index = {}
-        if request.corpus_artifact_hash:
-            artifacts_to_index['corpus'] = self.artifact_client.get_artifact(request.corpus_artifact_hash)
         if request.evidence_artifact_hash:
             artifacts_to_index['evidence'] = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
         if not artifacts_to_index:
-            self.logger.warning("No corpus or evidence artifacts provided to build RAG index. Synthesis may be impaired.")
+            self.logger.warning("No evidence artifacts provided to build RAG index. Synthesis may be impaired.")
             return
 
         index_request = ComprehensiveIndexRequest(
