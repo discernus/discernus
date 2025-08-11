@@ -86,8 +86,51 @@ class ThinOrchestrator:
         # Initialize logger for this orchestrator instance
         self.logger = get_logger("orchestrator")
         
+        # Stage-aware architecture for Epic 401 alignment
+        self.current_stage = None
+        self.stage_models = {}
+        self.analysis_model = None
+        self.synthesis_model = None
+        
         self.logger.info(f"THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
+    
+    def _set_stage(self, stage_name: str, analysis_model: str, synthesis_model: str) -> None:
+        """
+        Set the current orchestration stage and configure stage-appropriate models.
+        
+        Epic 401 Architecture:
+        - analysis: Individual document processing (Flash model)
+        - statistical_prep: Cross-document extraction and preparation (Pro model) 
+        - synthesis: Report generation and narrative synthesis (Pro model)
+        
+        Args:
+            stage_name: Current orchestration stage
+            analysis_model: Model for individual document analysis
+            synthesis_model: Model for synthesis-level operations
+        """
+        self.current_stage = stage_name
+        self.stage_models = {
+            "analysis": analysis_model,
+            "statistical_prep": synthesis_model,  # Statistical prep is synthesis-level work
+            "synthesis": synthesis_model
+        }
+        
+        self.logger.info(f"Stage set to '{stage_name}' with model: {self._get_stage_model()}")
+        print(f"🎯 Stage: {stage_name} → Model: {self._get_stage_model()}")
+    
+    def _get_stage_model(self) -> str:
+        """
+        Get the appropriate model for the current stage.
+        
+        Returns:
+            Model string for current stage, defaults to synthesis model for safety
+        """
+        if self.current_stage and self.current_stage in self.stage_models:
+            return self.stage_models[self.current_stage]
+        
+        # Safe default: use synthesis model for unknown stages (higher intelligence)
+        return self.stage_models.get("synthesis", "vertex_ai/gemini-2.5-pro")
     
     def _validate_framework_dimensions(self, framework_content: str, audit_logger: AuditLogger, validation_model: str = "vertex_ai/gemini-2.5-pro") -> None:
         """
@@ -492,11 +535,9 @@ Respond with only the JSON object."""
             # Load framework
             framework_content = self._load_framework(experiment_config["framework"])
             
-            # Store framework content, audit logger, and analysis model for gasket integration
+            # Store framework content and audit logger for gasket integration
             self._current_framework_content = framework_content
             self._current_audit_logger = audit
-            self._current_analysis_model = analysis_model
-            self._current_synthesis_model = None  # Will be set during synthesis phase
             framework_hash = storage.put_artifact(
                 framework_content.encode('utf-8'),
                 {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
@@ -1027,6 +1068,9 @@ Respond with only the JSON object."""
             self.logger.info(f"Initializing EnhancedAnalysisAgent for {len(corpus_documents)} documents")
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
+            # Set stage for individual document analysis
+            self._set_stage("analysis", self.analysis_model, self.synthesis_model)
+            
             # Log analysis phase start
             log_analysis_phase_start(
                 experiment_name=experiment_config.get("name", "Unknown"),
@@ -1093,8 +1137,8 @@ Respond with only the JSON object."""
             print("\n🔬 Synthesizing results...")
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
-            # Set synthesis model for extraction operations during synthesis
-            self._current_synthesis_model = synthesis_model
+            # Set stage for synthesis operations
+            self._set_stage("synthesis", self.analysis_model, self.synthesis_model)
             
             self.logger.info("Using Discernus Advanced Synthesis Pipeline", extra={
                 "synthesis_model": synthesis_model,
@@ -1458,6 +1502,9 @@ Respond with only the JSON object."""
                 all_analysis_results.append({"error": str(e), "document": doc_filename})
 
         # Combine all analysis results into a single JSON artifact for synthesis
+        # This is statistical preparation work - cross-document extraction and combination
+        self._set_stage("statistical_prep", self.analysis_model, self.synthesis_model)
+        
         self.logger.info("Combining analysis artifacts for synthesis")
         scores_hash, evidence_hash = self._combine_analysis_artifacts(all_analysis_results, analysis_agent.storage)
         
@@ -1521,10 +1568,8 @@ Respond with only the JSON object."""
                         # We need framework content for gasket schema extraction
                         framework_content = getattr(self, '_current_framework_content', None)
                         if framework_content:
-                            # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
-                            extraction_model = (getattr(self, '_current_synthesis_model', None) or 
-                                               getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
-                            print(f"🔍 DEBUG: Using extraction model: {extraction_model}")
+                            # Use stage-appropriate model for extraction (Epic 401 architecture)
+                            extraction_model = self._get_stage_model()
                             extracted_data = self._extract_and_map_with_gasket(
                                 raw_response, 
                                 framework_content, 
@@ -1571,9 +1616,8 @@ Respond with only the JSON object."""
                                 # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                                 framework_content = getattr(self, '_current_framework_content', None)
                                 if framework_content:
-                                    # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
-                                    extraction_model = (getattr(self, '_current_synthesis_model', None) or 
-                                                       getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
+                                    # Use stage-appropriate model for extraction (Epic 401 architecture)
+                                    extraction_model = self._get_stage_model()
                                     extracted_data = self._extract_and_map_with_gasket(
                                         raw_response, 
                                         framework_content, 
@@ -2022,9 +2066,8 @@ Respond with only the JSON object."""
                 # Extract scores using gasket or legacy parsing
                 framework_content = getattr(self, '_current_framework_content', None)
                 if framework_content:
-                    # Use synthesis model for extraction during synthesis phase, analysis model during analysis phase
-                    extraction_model = (getattr(self, '_current_synthesis_model', None) or 
-                                       getattr(self, '_current_analysis_model', 'vertex_ai/gemini-2.5-pro'))
+                    # Use stage-appropriate model for extraction (Epic 401 architecture)
+                    extraction_model = self._get_stage_model()
                     extracted_data = self._extract_and_map_with_gasket(
                         raw_response, 
                         framework_content, 
