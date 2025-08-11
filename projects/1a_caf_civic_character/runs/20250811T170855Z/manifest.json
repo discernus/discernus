@@ -1,0 +1,262 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-08-11T17:14:15.064901+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/1a_caf_civic_character/runs/20250811T170855Z/logs",
+    "session_id": "20250811T170855Z_c977f808",
+    "start_time": "2025-08-11T17:08:55.058039+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/1a_caf_civic_character/shared_cache/artifacts",
+      "total_artifacts": 591,
+      "total_bytes": 8735110,
+      "total_mb": 8.33
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.0
+  },
+  "created_at": "2025-08-11T17:08:55.076305+00:00",
+  "execution_timeline": [
+    {
+      "agent_name": "BatchPlannerAgent",
+      "duration_seconds": 0.000361,
+      "end_time": "2025-08-11T17:08:55.085110+00:00",
+      "metadata": {
+        "context_window_limit": 0,
+        "total_batches": 0,
+        "total_estimated_cost": 0.0,
+        "total_estimated_tokens": 0
+      },
+      "stage_name": "batch_planning",
+      "start_time": "2025-08-11T17:08:55.084749+00:00",
+      "status": "completed"
+    },
+    {
+      "agent_name": "ProductionThinSynthesisPipeline",
+      "duration_seconds": 264.102481,
+      "end_time": "2025-08-11T17:14:15.045184+00:00",
+      "metadata": {
+        "duration_seconds": 264.0143139362335,
+        "result_hash": "644a196de1d0dc0336ca1967dc93678f1f2d69fab6c23d693c553e39514b7fae",
+        "synthesis_confidence": 0.95,
+        "thin_pipeline_data": {
+          "generated_artifacts": {
+            "analysis_plan": "",
+            "curated_evidence": "",
+            "statistical_results": "b1ab580bad55a9b4f7a744527b458fa4fcec96d0d14b8cab54f578713a88571c"
+          },
+          "pipeline_version": "production_v1.0",
+          "stage_success": {
+            "synthesis": true
+          },
+          "stage_timings": {
+            "synthesis": 264.0139510631561
+          },
+          "word_count": 2499
+        }
+      },
+      "stage_name": "synthesis",
+      "start_time": "2025-08-11T17:09:50.942703+00:00",
+      "status": "completed"
+    }
+  ],
+  "experiment_config": {
+    "analysis": {
+      "evaluations_per_document": 1,
+      "models": [
+        "vertex_ai/gemini-2.5-pro"
+      ]
+    },
+    "corpus_path": "corpus/",
+    "description": "This experiment tests the Civic Analysis Framework's ability to detect \nmeaningful differences in character patterns between individual speakers. \nThe analysis focuses on three core objectives: speaker differentiation using \nthe 10 CAF dimensions, identification of unique character signatures across \nthe 5 virtues and 5 vices, and examination of civic character coherence patterns \nusing the Civic Character Index and pattern classifications.\n",
+    "framework": "../../frameworks/reference/core/caf_v7.3.md",
+    "hypotheses": {
+      "H1_Speaker_Differentiation": "The 10 CAF dimensions will be used to describe and compare the character profiles of the eight speakers based on the selected speeches",
+      "H2_Character_Signatures": "Each speech will exhibit a distinct character signature across the 5 virtues and 5 vices",
+      "H3_Civic_Character_Patterns": "Civic Character Index scores will demonstrate variation across the eight speeches, indicating different levels of character coherence"
+    },
+    "hypothesis": "The Civic Analysis Framework will be used to analyze and compare the character \nprofiles of eight political speeches using the 10 character dimensions, revealing \ndistinct character signatures across virtues and vices, and demonstrating variation \nin civic character coherence patterns as measured by the Civic Character Index \nand pattern classifications.\n",
+    "name": "speaker_character_pattern_analysis",
+    "reporting": {
+      "format": "academic",
+      "include_confidence_metrics": true,
+      "show_statistical_work": true,
+      "structure": [
+        "executive_summary",
+        "speaker_differentiation_results",
+        "character_signature_analysis",
+        "civic_character_coherence_patterns",
+        "qualitative_insights",
+        "statistical_methodology",
+        "framework_validation",
+        "limitations"
+      ]
+    },
+    "synthesis": {
+      "model": "vertex_ai/gemini-2.5-pro"
+    },
+    "validation": {
+      "effect_size_reporting": true,
+      "reliability_threshold": 0.7
+    },
+    "version": "7.3",
+    "workflow": [
+      {
+        "agent": "EnhancedAnalysisAgent",
+        "inputs": [
+          "experiment",
+          "framework",
+          "corpus"
+        ],
+        "outputs": [
+          "raw_analysis_log"
+        ]
+      },
+      {
+        "agent": "IntelligentExtractorAgent",
+        "inputs": [
+          "raw_analysis_log",
+          "framework"
+        ],
+        "outputs": [
+          "structured_data"
+        ]
+      },
+      {
+        "agent": "ProductionThinSynthesisPipeline",
+        "inputs": [
+          "structured_data",
+          "experiment",
+          "framework"
+        ],
+        "outputs": [
+          "final_report.md",
+          "statistical_results.json"
+        ]
+      }
+    ]
+  },
+  "finalized_at": "2025-08-11T17:14:15.064891+00:00",
+  "input_artifacts": {
+    "corpus_documents": [
+      {
+        "document_index": 1,
+        "hash": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+        "metadata": {
+          "filename": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "size_bytes": 6411
+        },
+        "registered_at": "2025-08-11T17:08:55.081533+00:00"
+      },
+      {
+        "document_index": 2,
+        "hash": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+        "metadata": {
+          "filename": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "size_bytes": 4789
+        },
+        "registered_at": "2025-08-11T17:08:55.081618+00:00"
+      },
+      {
+        "document_index": 3,
+        "hash": "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65",
+        "metadata": {
+          "filename": "cory_booker_2018_first_step_act.txt",
+          "size_bytes": 20572
+        },
+        "registered_at": "2025-08-11T17:08:55.081760+00:00"
+      },
+      {
+        "document_index": 4,
+        "hash": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+        "metadata": {
+          "filename": "jd_vance_2022_natcon_conference.txt",
+          "size_bytes": 17026
+        },
+        "registered_at": "2025-08-11T17:08:55.081842+00:00"
+      },
+      {
+        "document_index": 5,
+        "hash": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+        "metadata": {
+          "filename": "john_lewis_1963_march_on_washington.txt",
+          "size_bytes": 4659
+        },
+        "registered_at": "2025-08-11T17:08:55.081939+00:00"
+      },
+      {
+        "document_index": 6,
+        "hash": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+        "metadata": {
+          "filename": "john_mccain_2008_concession.txt",
+          "size_bytes": 6604
+        },
+        "registered_at": "2025-08-11T17:08:55.082018+00:00"
+      },
+      {
+        "document_index": 7,
+        "hash": "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d",
+        "metadata": {
+          "filename": "mitt_romney_2020_impeachment.txt",
+          "size_bytes": 6998
+        },
+        "registered_at": "2025-08-11T17:08:55.082100+00:00"
+      },
+      {
+        "document_index": 8,
+        "hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+        "metadata": {
+          "filename": "steve_king_2017_house_floor.txt",
+          "size_bytes": 26196
+        },
+        "registered_at": "2025-08-11T17:08:55.082182+00:00"
+      }
+    ],
+    "framework": {
+      "hash": "be33ee3ab064324ba5aad6610767e9ba0e38e598f16eec4259a7752c0d1df7b6",
+      "metadata": {
+        "filename": "../../frameworks/reference/core/caf_v7.3.md",
+        "size_bytes": 31082
+      },
+      "registered_at": "2025-08-11T17:08:55.078966+00:00"
+    }
+  },
+  "llm_interactions": [],
+  "manifest_version": "2.0",
+  "performance_metrics": {
+    "total_execution_time": {
+      "end_time": "2025-08-11T17:14:15.045184+00:00",
+      "start_time": "2025-08-11T17:08:55.084749+00:00",
+      "unit": "seconds",
+      "value": 319.960435
+    }
+  },
+  "quality_assurance": {},
+  "run_metadata": {
+    "audit_session_id": "20250811T170855Z_c977f808",
+    "created_at": "2025-08-11T17:08:55.076305+00:00",
+    "discernus_version": "thin_v2.0_alpha",
+    "experiment_name": "speaker_character_pattern_analysis",
+    "experiment_path": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+    "run_id": "20250811T170855Z",
+    "security_boundary": {
+      "boundary_type": "filesystem",
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "security_level": "experiment_scoped"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+2025-08-11 13:08:55.073 | INFO     | discernus.core.logging_config:setup_logging:120 | Logging system initialized
+2025-08-11 13:08:55.078 | INFO     | discernus.core.logging_config:log_experiment_start:143 | Experiment started
+2025-08-11 13:08:55.078 | INFO     | discernus.core.thin_orchestrator:run_experiment:482 | Starting THIN v2.0 experiment: 20250811T170855Z
+2025-08-11 13:08:55.079 | INFO     | discernus.core.thin_orchestrator:run_experiment:503 | Framework loaded successfully
+2025-08-11 13:08:55.079 | INFO     | discernus.core.thin_orchestrator:run_experiment:506 | Loading corpus from: corpus/
+2025-08-11 13:08:55.081 | INFO     | discernus.core.thin_orchestrator:run_experiment:508 | Loaded 8 corpus documents
+2025-08-11 13:08:55.082 | INFO     | discernus.core.thin_orchestrator:run_experiment:526 | Stored 8 corpus artifacts
+2025-08-11 13:08:55.085 | INFO     | discernus.core.thin_orchestrator:run_experiment:1039 | Initializing EnhancedAnalysisAgent for 8 documents
+2025-08-11 13:08:55.086 | INFO     | discernus.core.logging_config:log_analysis_phase_start:217 | Analysis phase started
+2025-08-11 13:08:55.086 | INFO     | discernus.core.thin_orchestrator:run_experiment:1050 | Starting analysis of 8 documents with model: vertex_ai/gemini-2.5-flash
+2025-08-11 13:08:55.086 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1399 | Starting sequential analysis of 8 documents
+2025-08-11 13:08:55.087 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 1/8: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
+2025-08-11 13:08:55.091 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document alexandria_ocasio_cortez_2025_fighting_oligarchy.txt analyzed successfully
+2025-08-11 13:08:55.091 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 2/8: bernie_sanders_2025_fighting_oligarchy.txt
+2025-08-11 13:08:55.093 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document bernie_sanders_2025_fighting_oligarchy.txt analyzed successfully
+2025-08-11 13:08:55.093 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 3/8: cory_booker_2018_first_step_act.txt
+2025-08-11 13:08:55.095 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document cory_booker_2018_first_step_act.txt analyzed successfully
+2025-08-11 13:08:55.095 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 4/8: jd_vance_2022_natcon_conference.txt
+2025-08-11 13:08:55.098 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document jd_vance_2022_natcon_conference.txt analyzed successfully
+2025-08-11 13:08:55.098 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 5/8: john_lewis_1963_march_on_washington.txt
+2025-08-11 13:08:55.100 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document john_lewis_1963_march_on_washington.txt analyzed successfully
+2025-08-11 13:08:55.100 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 6/8: john_mccain_2008_concession.txt
+2025-08-11 13:08:55.103 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document john_mccain_2008_concession.txt analyzed successfully
+2025-08-11 13:08:55.103 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 7/8: mitt_romney_2020_impeachment.txt
+2025-08-11 13:08:55.107 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document mitt_romney_2020_impeachment.txt analyzed successfully
+2025-08-11 13:08:55.107 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1408 | Analyzing document 8/8: steve_king_2017_house_floor.txt
+2025-08-11 13:08:55.110 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1449 | Document steve_king_2017_house_floor.txt analyzed successfully
+2025-08-11 13:08:55.110 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1470 | Combining analysis artifacts for synthesis
+2025-08-11 13:09:50.942 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1476 | Analysis artifacts combined successfully
+2025-08-11 13:09:50.942 | INFO     | discernus.core.thin_orchestrator:run_experiment:1066 | Analysis phase completed: 8/8 documents processed successfully
+2025-08-11 13:09:50.942 | INFO     | discernus.core.thin_orchestrator:run_experiment:1076 | Analysis phase completed
+2025-08-11 13:09:50.942 | INFO     | discernus.core.thin_orchestrator:run_experiment:1104 | Starting synthesis phase
+2025-08-11 13:09:50.942 | INFO     | discernus.core.thin_orchestrator:run_experiment:1108 | Using Discernus Advanced Synthesis Pipeline
+2025-08-11 13:09:50.942 | INFO     | discernus.core.logging_config:log_synthesis_phase_start:240 | Synthesis phase started
+2025-08-11 13:14:15.045 | INFO     | discernus.core.thin_orchestrator:run_experiment:1146 | Synthesis phase completed successfully
+2025-08-11 13:14:15.045 | INFO     | discernus.core.thin_orchestrator:run_experiment:1157 | Synthesis phase completed
+2025-08-11 13:14:15.066 | INFO     | discernus.core.thin_orchestrator:run_experiment:1291 | THIN v2.0 experiment completed successfully
+2025-08-11 13:14:15.066 | INFO     | discernus.core.logging_config:log_experiment_complete:152 | Experiment completed
