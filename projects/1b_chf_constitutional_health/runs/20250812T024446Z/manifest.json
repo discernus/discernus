@@ -1,0 +1,663 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-08-12T02:52:34.655049+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/1b_chf_constitutional_health/runs/20250812T024446Z/logs",
+    "session_id": "20250812T024446Z_388c1679",
+    "start_time": "2025-08-12T02:44:46.111870+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/1b_chf_constitutional_health/shared_cache/artifacts",
+      "total_artifacts": 263,
+      "total_bytes": 4081488,
+      "total_mb": 3.89
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.0
+  },
+  "created_at": "2025-08-12T02:44:46.129285+00:00",
+  "execution_timeline": [
+    {
+      "agent_name": "BatchPlannerAgent",
+      "duration_seconds": 0.000227,
+      "end_time": "2025-08-12T02:44:46.187963+00:00",
+      "metadata": {
+        "context_window_limit": 0,
+        "total_batches": 0,
+        "total_estimated_cost": 0.0,
+        "total_estimated_tokens": 0
+      },
+      "stage_name": "batch_planning",
+      "start_time": "2025-08-12T02:44:46.187736+00:00",
+      "status": "completed"
+    },
+    {
+      "agent_name": "ProductionThinSynthesisPipeline",
+      "duration_seconds": 51.911831,
+      "end_time": "2025-08-12T02:52:34.598827+00:00",
+      "metadata": {
+        "duration_seconds": 51.80634903907776,
+        "result_hash": "6069b6611fccb5d18a2753d73a8144527e25d140960b3d6f138d9a29d5d726d9",
+        "synthesis_confidence": 0.95,
+        "thin_pipeline_data": {
+          "generated_artifacts": {
+            "analysis_plan": "",
+            "curated_evidence": "",
+            "statistical_results": "04595ef16bb9ddb04c0d0ae7b1b6529d81475a1b06c07e2808980e65b8d16943"
+          },
+          "pipeline_version": "production_v1.0",
+          "stage_success": {
+            "synthesis": true
+          },
+          "stage_timings": {
+            "synthesis": 51.806020736694336
+          },
+          "word_count": 2446
+        }
+      },
+      "stage_name": "synthesis",
+      "start_time": "2025-08-12T02:51:42.686996+00:00",
+      "status": "completed"
+    }
+  ],
+  "experiment_config": {
+    "analysis": {
+      "evaluations_per_document": 3,
+      "statistical_confidence": 0.95,
+      "variance_threshold": 0.15
+    },
+    "analysis_variant": "default",
+    "corpus_path": "./corpus/",
+    "description": "This experiment tests whether the Salience-Weighted Constitutional Direction Index \nof presidential State of the Union rhetoric has declined significantly since 1992. \nUsing the Constitutional Health Framework v7.3, we analyze 37+ SOTU addresses \nfrom Clinton (1993-2000) through Biden (2021-2024) to determine if there is a \nstatistically significant downward trend in constitutional health scores over time.\n",
+    "framework": "../../frameworks/reference/core/chf_v7.3.md",
+    "framework_version": "v7.3",
+    "hypotheses": {
+      "H1_Temporal_Decline": "Test whether the Salience-Weighted Constitutional Direction Index has declined significantly since 1992",
+      "H2_Trend_Significance": "Test whether any observed decline is statistically significant (p < 0.05)",
+      "H3_Effect_Size": "Test the magnitude of any decline (R\u00b2 for time explaining variance in scores)",
+      "H4_Dimensional_Contributors": "Test which constitutional health dimensions contribute most to any observed decline",
+      "H5_Platform_Validation": "Test whether the JSON synthesis architecture successfully processes time series analysis with constitutional health metrics"
+    },
+    "hypothesis": "The Salience-Weighted Constitutional Direction Index of presidential State of \nthe Union addresses has declined significantly since 1992, indicating a \nsystematic decrease in constitutional health rhetoric over the past three decades.\n",
+    "models": [
+      "vertex_ai/gemini-2.5-pro"
+    ],
+    "name": "presidential_sotu_constitutional_health_trends",
+    "reporting": {
+      "format": "academic",
+      "include_confidence_metrics": true,
+      "show_statistical_work": true,
+      "structure": [
+        "executive_summary",
+        "temporal_trend_analysis",
+        "constitutional_health_patterns",
+        "procedural_dimension_analysis",
+        "institutional_dimension_analysis",
+        "systemic_dimension_analysis",
+        "dimensional_relationship_analysis",
+        "statistical_significance_testing",
+        "effect_size_analysis",
+        "findings_discussion",
+        "limitations"
+      ]
+    },
+    "runs_per_model": 1,
+    "statistical_analyses": [
+      {
+        "dependent_variable": "Salience_Weighted_Constitutional_Direction_Index",
+        "independent_variables": [
+          "year"
+        ],
+        "type": "linear_regression"
+      },
+      {
+        "columns": [
+          "Salience_Weighted_Constitutional_Direction_Index",
+          "year"
+        ],
+        "type": "descriptive_stats"
+      },
+      {
+        "columns": [
+          "Procedural_Health_Score",
+          "Institutional_Health_Score",
+          "Systemic_Health_Score",
+          "Procedural_Pathology_Score",
+          "Institutional_Pathology_Score",
+          "Systemic_Pathology_Score"
+        ],
+        "type": "correlation_matrix"
+      }
+    ],
+    "validation": {
+      "effect_size_reporting": true,
+      "reliability_threshold": 0.7,
+      "required_tests": [
+        "temporal_trend_analysis",
+        "constitutional_health_correlation_matrix",
+        "cdi_reliability",
+        "dimensional_relationship_analysis"
+      ],
+      "statistical_requirements": "Corpus contains 37+ SOTU addresses spanning 1993-2024, providing sufficient data for robust time series analysis and regression testing."
+    },
+    "version": "7.0",
+    "workflow": [
+      {
+        "agent": "EnhancedAnalysisAgent",
+        "inputs": [
+          "experiment",
+          "framework",
+          "corpus"
+        ],
+        "outputs": [
+          "raw_analysis_log"
+        ]
+      },
+      {
+        "agent": "IntelligentExtractorAgent",
+        "inputs": [
+          "raw_analysis_log",
+          "framework"
+        ],
+        "outputs": [
+          "structured_data"
+        ]
+      },
+      {
+        "agent": "ProductionThinSynthesisPipeline",
+        "inputs": [
+          "structured_data",
+          "experiment",
+          "framework"
+        ],
+        "outputs": [
+          "final_report.md",
+          "statistical_results.json"
+        ]
+      }
+    ]
+  },
+  "finalized_at": "2025-08-12T02:52:34.655045+00:00",
+  "input_artifacts": {
+    "corpus_documents": [
+      {
+        "document_index": 1,
+        "hash": "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c",
+        "metadata": {
+          "filename": "Biden_Inaugural_2021.txt",
+          "size_bytes": 14382
+        },
+        "registered_at": "2025-08-12T02:44:46.175495+00:00"
+      },
+      {
+        "document_index": 2,
+        "hash": "4b12c5c25e4ef88d2598f26b6bcd751ba59734e3659ebf280c61e383d2a68a6f",
+        "metadata": {
+          "filename": "Biden_SOTU_2021.txt",
+          "size_bytes": 45893
+        },
+        "registered_at": "2025-08-12T02:44:46.175634+00:00"
+      },
+      {
+        "document_index": 3,
+        "hash": "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565",
+        "metadata": {
+          "filename": "Biden_SOTU_2022.txt",
+          "size_bytes": 46855
+        },
+        "registered_at": "2025-08-12T02:44:46.175713+00:00"
+      },
+      {
+        "document_index": 4,
+        "hash": "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547",
+        "metadata": {
+          "filename": "Biden_SOTU_2023.txt",
+          "size_bytes": 45901
+        },
+        "registered_at": "2025-08-12T02:44:46.175784+00:00"
+      },
+      {
+        "document_index": 5,
+        "hash": "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857",
+        "metadata": {
+          "filename": "Biden_SOTU_2024.txt",
+          "size_bytes": 53967
+        },
+        "registered_at": "2025-08-12T02:44:46.175872+00:00"
+      },
+      {
+        "document_index": 6,
+        "hash": "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672",
+        "metadata": {
+          "filename": "Biden_SOTU_2025.txt",
+          "size_bytes": 50182
+        },
+        "registered_at": "2025-08-12T02:44:46.175951+00:00"
+      },
+      {
+        "document_index": 7,
+        "hash": "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f",
+        "metadata": {
+          "filename": "Bush_Inaugural_2001.txt",
+          "size_bytes": 9454
+        },
+        "registered_at": "2025-08-12T02:44:46.176039+00:00"
+      },
+      {
+        "document_index": 8,
+        "hash": "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c",
+        "metadata": {
+          "filename": "Bush_Inaugural_2005.txt",
+          "size_bytes": 12489
+        },
+        "registered_at": "2025-08-12T02:44:46.176146+00:00"
+      },
+      {
+        "document_index": 9,
+        "hash": "c6180b374b00b3998905b59f303355b600deae8264390ed2821fe43364e59485",
+        "metadata": {
+          "filename": "Bush_SOTU_2001.txt",
+          "size_bytes": 30334
+        },
+        "registered_at": "2025-08-12T02:44:46.176225+00:00"
+      },
+      {
+        "document_index": 10,
+        "hash": "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270",
+        "metadata": {
+          "filename": "Bush_SOTU_2002.txt",
+          "size_bytes": 30377
+        },
+        "registered_at": "2025-08-12T02:44:46.176295+00:00"
+      },
+      {
+        "document_index": 11,
+        "hash": "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1",
+        "metadata": {
+          "filename": "Bush_SOTU_2003.txt",
+          "size_bytes": 31800
+        },
+        "registered_at": "2025-08-12T02:44:46.176375+00:00"
+      },
+      {
+        "document_index": 12,
+        "hash": "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839",
+        "metadata": {
+          "filename": "Bush_SOTU_2004.txt",
+          "size_bytes": 32211
+        },
+        "registered_at": "2025-08-12T02:44:46.176459+00:00"
+      },
+      {
+        "document_index": 13,
+        "hash": "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361",
+        "metadata": {
+          "filename": "Bush_SOTU_2005.txt",
+          "size_bytes": 34421
+        },
+        "registered_at": "2025-08-12T02:44:46.176562+00:00"
+      },
+      {
+        "document_index": 14,
+        "hash": "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0",
+        "metadata": {
+          "filename": "Bush_SOTU_2006.txt",
+          "size_bytes": 24336
+        },
+        "registered_at": "2025-08-12T02:44:46.176667+00:00"
+      },
+      {
+        "document_index": 15,
+        "hash": "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d",
+        "metadata": {
+          "filename": "Bush_SOTU_2007.txt",
+          "size_bytes": 22367
+        },
+        "registered_at": "2025-08-12T02:44:46.176800+00:00"
+      },
+      {
+        "document_index": 16,
+        "hash": "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338",
+        "metadata": {
+          "filename": "Bush_SOTU_2008.txt",
+          "size_bytes": 31190
+        },
+        "registered_at": "2025-08-12T02:44:46.176928+00:00"
+      },
+      {
+        "document_index": 17,
+        "hash": "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757",
+        "metadata": {
+          "filename": "Bush_SOTU_2009.txt",
+          "size_bytes": 30413
+        },
+        "registered_at": "2025-08-12T02:44:46.177021+00:00"
+      },
+      {
+        "document_index": 18,
+        "hash": "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648",
+        "metadata": {
+          "filename": "Clinton_Inaugural_1993.txt",
+          "size_bytes": 9518
+        },
+        "registered_at": "2025-08-12T02:44:46.177135+00:00"
+      },
+      {
+        "document_index": 19,
+        "hash": "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5",
+        "metadata": {
+          "filename": "Clinton_Inaugural_1997.txt",
+          "size_bytes": 12874
+        },
+        "registered_at": "2025-08-12T02:44:46.177272+00:00"
+      },
+      {
+        "document_index": 20,
+        "hash": "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7",
+        "metadata": {
+          "filename": "Clinton_SOTU_1993.txt",
+          "size_bytes": 39081
+        },
+        "registered_at": "2025-08-12T02:44:46.177372+00:00"
+      },
+      {
+        "document_index": 21,
+        "hash": "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44",
+        "metadata": {
+          "filename": "Clinton_SOTU_1994.txt",
+          "size_bytes": 39121
+        },
+        "registered_at": "2025-08-12T02:44:46.177469+00:00"
+      },
+      {
+        "document_index": 22,
+        "hash": "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2",
+        "metadata": {
+          "filename": "Clinton_SOTU_1995.txt",
+          "size_bytes": 42323
+        },
+        "registered_at": "2025-08-12T02:44:46.177608+00:00"
+      },
+      {
+        "document_index": 23,
+        "hash": "5b94e74c506174c0d896282c89875b3ab5c530f0d83ec86f93852c71985241c3",
+        "metadata": {
+          "filename": "Clinton_SOTU_1996.txt",
+          "size_bytes": 44188
+        },
+        "registered_at": "2025-08-12T02:44:46.177714+00:00"
+      },
+      {
+        "document_index": 24,
+        "hash": "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4",
+        "metadata": {
+          "filename": "Clinton_SOTU_1997.txt",
+          "size_bytes": 52518
+        },
+        "registered_at": "2025-08-12T02:44:46.177850+00:00"
+      },
+      {
+        "document_index": 25,
+        "hash": "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d",
+        "metadata": {
+          "filename": "Clinton_SOTU_1998.txt",
+          "size_bytes": 39351
+        },
+        "registered_at": "2025-08-12T02:44:46.178016+00:00"
+      },
+      {
+        "document_index": 26,
+        "hash": "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b",
+        "metadata": {
+          "filename": "Clinton_SOTU_1999.txt",
+          "size_bytes": 42171
+        },
+        "registered_at": "2025-08-12T02:44:46.178106+00:00"
+      },
+      {
+        "document_index": 27,
+        "hash": "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c",
+        "metadata": {
+          "filename": "Clinton_SOTU_2000.txt",
+          "size_bytes": 51270
+        },
+        "registered_at": "2025-08-12T02:44:46.178310+00:00"
+      },
+      {
+        "document_index": 28,
+        "hash": "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566",
+        "metadata": {
+          "filename": "Clinton_SOTU_2001.txt",
+          "size_bytes": 36829
+        },
+        "registered_at": "2025-08-12T02:44:46.178434+00:00"
+      },
+      {
+        "document_index": 29,
+        "hash": "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4",
+        "metadata": {
+          "filename": "Obama_Inaugural_2009.txt",
+          "size_bytes": 13860
+        },
+        "registered_at": "2025-08-12T02:44:46.178572+00:00"
+      },
+      {
+        "document_index": 30,
+        "hash": "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5",
+        "metadata": {
+          "filename": "Obama_Inaugural_2013.txt",
+          "size_bytes": 12336
+        },
+        "registered_at": "2025-08-12T02:44:46.178666+00:00"
+      },
+      {
+        "document_index": 31,
+        "hash": "88257ffe3d95f6abf22d9b4d3453784595248cbcea18dc16d04b795cd7fa4e17",
+        "metadata": {
+          "filename": "Obama_SOTU_2009.txt",
+          "size_bytes": 40699
+        },
+        "registered_at": "2025-08-12T02:44:46.178807+00:00"
+      },
+      {
+        "document_index": 32,
+        "hash": "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919",
+        "metadata": {
+          "filename": "Obama_SOTU_2010.txt",
+          "size_bytes": 40666
+        },
+        "registered_at": "2025-08-12T02:44:46.178909+00:00"
+      },
+      {
+        "document_index": 33,
+        "hash": "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f",
+        "metadata": {
+          "filename": "Obama_SOTU_2011.txt",
+          "size_bytes": 41602
+        },
+        "registered_at": "2025-08-12T02:44:46.179057+00:00"
+      },
+      {
+        "document_index": 34,
+        "hash": "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731",
+        "metadata": {
+          "filename": "Obama_SOTU_2012.txt",
+          "size_bytes": 39224
+        },
+        "registered_at": "2025-08-12T02:44:46.179176+00:00"
+      },
+      {
+        "document_index": 35,
+        "hash": "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f",
+        "metadata": {
+          "filename": "Obama_SOTU_2013.txt",
+          "size_bytes": 34972
+        },
+        "registered_at": "2025-08-12T02:44:46.179322+00:00"
+      },
+      {
+        "document_index": 36,
+        "hash": "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced",
+        "metadata": {
+          "filename": "Obama_SOTU_2014.txt",
+          "size_bytes": 34787
+        },
+        "registered_at": "2025-08-12T02:44:46.179413+00:00"
+      },
+      {
+        "document_index": 37,
+        "hash": "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd",
+        "metadata": {
+          "filename": "Obama_SOTU_2015.txt",
+          "size_bytes": 41999
+        },
+        "registered_at": "2025-08-12T02:44:46.179540+00:00"
+      },
+      {
+        "document_index": 38,
+        "hash": "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a",
+        "metadata": {
+          "filename": "Obama_SOTU_2016.txt",
+          "size_bytes": 39945
+        },
+        "registered_at": "2025-08-12T02:44:46.179663+00:00"
+      },
+      {
+        "document_index": 39,
+        "hash": "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21",
+        "metadata": {
+          "filename": "Obama_SOTU_2017.txt",
+          "size_bytes": 41271
+        },
+        "registered_at": "2025-08-12T02:44:46.179803+00:00"
+      },
+      {
+        "document_index": 40,
+        "hash": "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f",
+        "metadata": {
+          "filename": "Trump_Inaugural_2017.txt",
+          "size_bytes": 8950
+        },
+        "registered_at": "2025-08-12T02:44:46.179910+00:00"
+      },
+      {
+        "document_index": 41,
+        "hash": "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb",
+        "metadata": {
+          "filename": "Trump_Inaugural_2025.txt",
+          "size_bytes": 17387
+        },
+        "registered_at": "2025-08-12T02:44:46.180049+00:00"
+      },
+      {
+        "document_index": 42,
+        "hash": "96a69873e43931aea80f29f1477db78c7281a03638c33201ec4e9ad6007f3593",
+        "metadata": {
+          "filename": "Trump_SOTU_2017.txt",
+          "size_bytes": 30134
+        },
+        "registered_at": "2025-08-12T02:44:46.180157+00:00"
+      },
+      {
+        "document_index": 43,
+        "hash": "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15",
+        "metadata": {
+          "filename": "Trump_SOTU_2018.txt",
+          "size_bytes": 29182
+        },
+        "registered_at": "2025-08-12T02:44:46.180295+00:00"
+      },
+      {
+        "document_index": 44,
+        "hash": "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a",
+        "metadata": {
+          "filename": "Trump_SOTU_2019.txt",
+          "size_bytes": 34682
+        },
+        "registered_at": "2025-08-12T02:44:46.180412+00:00"
+      },
+      {
+        "document_index": 45,
+        "hash": "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936",
+        "metadata": {
+          "filename": "Trump_SOTU_2020.txt",
+          "size_bytes": 35104
+        },
+        "registered_at": "2025-08-12T02:44:46.180546+00:00"
+      },
+      {
+        "document_index": 46,
+        "hash": "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18",
+        "metadata": {
+          "filename": "Trump_SOTU_2025.txt",
+          "size_bytes": 55653
+        },
+        "registered_at": "2025-08-12T02:44:46.180649+00:00"
+      },
+      {
+        "document_index": 47,
+        "hash": "278848191d01241a5179551a9c413764ad2755be1439650df8a8cd7c9f9e3018",
+        "metadata": {
+          "filename": "lincoln_1865_second_inaugural.txt",
+          "size_bytes": 3995
+        },
+        "registered_at": "2025-08-12T02:44:46.180793+00:00"
+      },
+      {
+        "document_index": 48,
+        "hash": "ab9ede8ce5264eaa7ff9bbca629b888adff21ed74a24670642114c61b6865000",
+        "metadata": {
+          "filename": "washington_1789_first_inaugural.txt",
+          "size_bytes": 8703
+        },
+        "registered_at": "2025-08-12T02:44:46.180890+00:00"
+      }
+    ],
+    "framework": {
+      "hash": "d269774072d864c981929fc81952d9fbecd4f7b7bb49e8d5d89ecd3bc498ec6b",
+      "metadata": {
+        "filename": "../../frameworks/reference/core/chf_v7.3.md",
+        "size_bytes": 26113
+      },
+      "registered_at": "2025-08-12T02:44:46.132920+00:00"
+    }
+  },
+  "llm_interactions": [],
+  "manifest_version": "2.0",
+  "performance_metrics": {
+    "total_execution_time": {
+      "end_time": "2025-08-12T02:52:34.598827+00:00",
+      "start_time": "2025-08-12T02:44:46.187736+00:00",
+      "unit": "seconds",
+      "value": 468.411091
+    }
+  },
+  "quality_assurance": {},
+  "run_metadata": {
+    "audit_session_id": "20250812T024446Z_388c1679",
+    "created_at": "2025-08-12T02:44:46.129285+00:00",
+    "discernus_version": "thin_v2.0_alpha",
+    "experiment_name": "presidential_sotu_constitutional_health_trends",
+    "experiment_path": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+    "run_id": "20250812T024446Z",
+    "security_boundary": {
+      "boundary_type": "filesystem",
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "security_level": "experiment_scoped"
+    }
+  }
+}

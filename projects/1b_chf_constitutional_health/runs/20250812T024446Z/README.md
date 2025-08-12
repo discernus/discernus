@@ -17,7 +17,7 @@ This directory contains a fully transparent, integrity-checked record of a compu
 ## 🎯 Start Here: Key Deliverables
 
 ### Primary Research Output
-- **`results/final_report.md`** - Complete research findings
+- **`results/final_report.md`** - Complete research findings (19KB, 155 lines)
   - Executive summary of experimental results
   - Statistical findings with confidence intervals
   - Academic-grade methodology documentation
