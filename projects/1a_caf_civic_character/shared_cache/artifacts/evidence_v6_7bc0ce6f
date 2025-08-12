@@ -1,0 +1,111 @@
+{
+  "evidence_metadata": {
+    "document_hash": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T01:12:14.706736+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+      "confidence": 0.9,
+      "context_type": "group_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706717+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "tribalism",
+      "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+      "confidence": 0.9,
+      "context_type": "group_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706721+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "resentment",
+      "quote_text": "But, but my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+      "confidence": 0.8,
+      "context_type": "blame_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706723+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "manipulation",
+      "quote_text": "It's so sort of the perfect encapsulation of the dumbest way to govern our country.",
+      "confidence": 0.7,
+      "context_type": "cognitive_bias_exploitation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706725+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "truth",
+      "quote_text": "I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page.",
+      "confidence": 0.6,
+      "context_type": "evidence_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706726+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "hope",
+      "quote_text": "And I think that that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+      "confidence": 0.7,
+      "context_type": "possibility_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706727+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "pragmatism",
+      "quote_text": "And so, I, I want to come back to something that I, I started with here, which is that we've made a lot of progress.",
+      "confidence": 0.6,
+      "context_type": "problem_solving_focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706729+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "diginity",
+      "quote_text": "We need people who put the interests of their own citizens first, of our own citizens first.",
+      "confidence": 0.5,
+      "context_type": "individual_agency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706730+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "justice",
+      "quote_text": "And by the way, I know for the Brits here, UK leaders should look out for citizens of the UK, or subjects, or whatever you guys call yourselves, and so on and on and on for others, other citizens of other countries.",
+      "confidence": 0.6,
+      "context_type": "fairness_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706731+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fantasy",
+      "quote_text": "What is the first truly Islamist country that will get a new nuclear weapon?",
+      "confidence": 0.5,
+      "context_type": "unrealistic_promises",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:12:14.706733+00:00"
+    }
+  ]
+}

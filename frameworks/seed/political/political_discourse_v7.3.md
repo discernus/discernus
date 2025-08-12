@@ -112,49 +112,29 @@ The analysis agent outputs a raw analysis log containing:
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
-    "version": "7.1",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
-      "vertical_axis_score",
-      "horizontal_axis_score",
-      "populism_score",
-      "pluralism_score",
-      "nationalism_score",
-      "patriotism_score",
-      "vertical_axis_salience",
-      "horizontal_axis_salience",
-      "populism_salience",
-      "pluralism_salience",
-      "nationalism_salience",
-      "patriotism_salience",
-      "vertical_axis_confidence",
-      "horizontal_axis_confidence",
-      "populism_confidence",
-      "pluralism_confidence",
-      "nationalism_confidence",
-      "patriotism_confidence"
+      "vertical_axis_score", "horizontal_axis_score", "populism_score", "pluralism_score", "nationalism_score", "patriotism_score",
+      "vertical_axis_salience", "horizontal_axis_salience", "populism_salience", "pluralism_salience", "nationalism_salience", "patriotism_salience",
+      "vertical_axis_confidence", "horizontal_axis_confidence", "populism_confidence", "pluralism_confidence", "nationalism_confidence", "patriotism_confidence"
     ],
     "extraction_patterns": {
-      "vertical_axis_score": ["vertical.{0,20}axis.{0,20}score", "vertical.{0,20}axis.{0,20}rating", "vertical\\s*axis\\s*:\\s*[0-9]"],
-      "horizontal_axis_score": ["horizontal.{0,20}axis.{0,20}score", "horizontal.{0,20}axis.{0,20}rating", "horizontal\\s*axis\\s*:\\s*[0-9]"],
-      "populism_score": ["populism.{0,20}score", "populism.{0,20}rating", "populism\\s*:\\s*[0-9]"],
-      "pluralism_score": ["pluralism.{0,20}score", "pluralism.{0,20}rating", "pluralism\\s*:\\s*[0-9]"],
-      "nationalism_score": ["nationalism.{0,20}score", "nationalism.{0,20}rating", "nationalism\\s*:\\s*[0-9]"],
-      "patriotism_score": ["patriotism.{0,20}score", "patriotism.{0,20}rating", "patriotism\\s*:\\s*[0-9]"],
-      "vertical_axis_salience": ["vertical.{0,20}axis.{0,20}salience", "vertical.{0,20}axis.{0,20}importance", "populism.{0,20}pluralism.{0,20}centrality"],
-      "horizontal_axis_salience": ["horizontal.{0,20}axis.{0,20}salience", "horizontal.{0,20}axis.{0,20}importance", "nationalism.{0,20}patriotism.{0,20}centrality"],
-      "populism_salience": ["populism.{0,20}salience", "populism.{0,20}importance", "populism.{0,20}centrality"],
-      "pluralism_salience": ["pluralism.{0,20}salience", "pluralism.{0,20}importance", "pluralism.{0,20}centrality"],
-      "nationalism_salience": ["nationalism.{0,20}salience", "nationalism.{0,20}importance", "nationalism.{0,20}centrality"],
-      "patriotism_salience": ["patriotism.{0,20}salience", "patriotism.{0,20}importance", "patriotism.{0,20}centrality"],
-      "vertical_axis_confidence": ["vertical.{0,20}axis.{0,20}confidence", "vertical.{0,20}axis.{0,20}certainty", "populism.{0,20}pluralism.{0,20}sure"],
-      "horizontal_axis_confidence": ["horizontal.{0,20}axis.{0,20}confidence", "horizontal.{0,20}axis.{0,20}certainty", "nationalism.{0,20}patriotism.{0,20}sure"],
-      "populism_confidence": ["populism.{0,20}confidence", "populism.{0,20}certainty", "populism.{0,20}sure"],
-      "pluralism_confidence": ["pluralism.{0,20}confidence", "pluralism.{0,20}certainty", "pluralism.{0,20}sure"],
-      "nationalism_confidence": ["nationalism.{0,20}confidence", "nationalism.{0,20}certainty", "nationalism.{0,20}sure"],
-      "patriotism_confidence": ["patriotism.{0,20}confidence", "patriotism.{0,20}certainty", "patriotism.{0,20}sure"]
+      "vertical_axis_score": ["vertical.*?axis.*?score.*?([0-9]\\.[0-9])", "vertical.*?axis.*?([0-9]\\.[0-9])", "vertical\\s*axis\\s*:\\s*([0-9]\\.[0-9])"],
+      "horizontal_axis_score": ["horizontal.*?axis.*?score.*?([0-9]\\.[0-9])", "horizontal.*?axis.*?([0-9]\\.[0-9])", "horizontal\\s*axis\\s*:\\s*([0-9]\\.[0-9])"],
+      "populism_score": ["populism.*?score.*?([0-9]\\.[0-9])", "populism.*?([0-9]\\.[0-9])", "populism\\s*:\\s*([0-9]\\.[0-9])"],
+      "pluralism_score": ["pluralism.*?score.*?([0-9]\\.[0-9])", "pluralism.*?([0-9]\\.[0-9])", "pluralism\\s*:\\s*([0-9]\\.[0-9])"],
+      "nationalism_score": ["nationalism.*?score.*?([0-9]\\.[0-9])", "nationalism.*?([0-9]\\.[0-9])", "nationalism\\s*:\\s*([0-9]\\.[0-9])"],
+      "patriotism_score": ["patriotism.*?score.*?([0-9]\\.[0-9])", "patriotism.*?([0-9]\\.[0-9])", "patriotism\\s*:\\s*([0-9]\\.[0-9])"]
     },
     "validation_rules": {
       "required_fields": [
@@ -169,6 +149,4 @@ The analysis agent outputs a raw analysis log containing:
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

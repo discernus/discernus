@@ -237,39 +237,16 @@ Complements Civic Analysis Framework (CAF) for comprehensive moral-civic assessm
     "methodological_approach": "Sequential chain-of-thought analysis with semantic space guidance for robust moral foundation assessment"
   },
   "reliability_rubric": {
-    "inter_rater_reliability": 0.80,
-    "confidence_threshold": 0.70,
-    "evidence_quality_standard": "Academic rigor with specific textual citations"
+    "cronbachs_alpha": {
+      "excellent": [0.80, 1.0],
+      "good": [0.70, 0.79],
+      "acceptable": [0.60, 0.69],
+      "poor": [0.0, 0.59]
+    },
+    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "output_contract": {
     "raw_analysis_log_structure": "Sequential moral foundation analysis with evidence citations and confidence scores",
     "instructions": "Provide structured analysis following sequential chain-of-thought methodology with embedded CSV output using standard Discernus delimiters"
-  },
-  "gasket_schema": {
-    "version": "v7.3",
-    "target_keys": [
-      "care_score", "care_salience", "care_confidence",
-      "harm_score", "harm_salience", "harm_confidence", 
-      "fairness_score", "fairness_salience", "fairness_confidence",
-      "cheating_score", "cheating_salience", "cheating_confidence",
-      "loyalty_score", "loyalty_salience", "loyalty_confidence",
-      "betrayal_score", "betrayal_salience", "betrayal_confidence",
-      "authority_score", "authority_salience", "authority_confidence", 
-      "subversion_score", "subversion_salience", "subversion_confidence",
-      "sanctity_score", "sanctity_salience", "sanctity_confidence",
-      "degradation_score", "degradation_salience", "degradation_confidence"
-    ],
-    "extraction_patterns": {
-      "score_pattern": "([a-z_]+)_score[\"']?\\s*[:=]\\s*([0-9]*\\.?[0-9]+)",
-      "salience_pattern": "([a-z_]+)_salience[\"']?\\s*[:=]\\s*([0-9]*\\.?[0-9]+)", 
-      "confidence_pattern": "([a-z_]+)_confidence[\"']?\\s*[:=]\\s*([0-9]*\\.?[0-9]+)"
-    },
-    "validation_rules": {
-      "score_range": [0.0, 1.0],
-      "salience_range": [0.0, 1.0],
-      "confidence_range": [0.0, 1.0],
-      "required_foundations": ["care", "harm", "fairness", "cheating", "loyalty", "betrayal", "authority", "subversion", "sanctity", "degradation"]
-    }
   }
 }
-```

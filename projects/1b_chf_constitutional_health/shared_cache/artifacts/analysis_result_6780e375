@@ -1,0 +1,30 @@
+{
+  "batch_id": "batch_444b4d28ec72",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Constitutional Health Framework (CHF)\",\n    \"framework_version\": \"v7.3\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted following the sequential steps outlined in the framework, focusing on identifying relevant linguistic markers for each dimension within the provided document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2025.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.5\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"My message to President Putin, whom I've known for a long time, is simple: We will not walk away. We will not bow down. I will not bow down.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"statement_of_intent\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Let's restore trust in our institutions, and make clear political violence has absolutely no place in America. Zero place.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement_of_principle\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"We welcomed Finland to the alliance last year. And just this morning Sweden officially joined, and their Minister is here tonight. Come here, stand up. Welcome, welcome, welcome.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"acknowledgment_of_alliance\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I believe that given the opportunity for for a majority in the House and Senate would endorse the bill as well\",\n          \"confidence\": 0.6,\n          \"context_type\": \"opinion_on_legislation\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"My predecessor and some of you here seek to bury the truth about January 6. I will not do that. This is a moment to speak the truth and to bury the lies.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"accusation_of_deception\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"My predecessor came to office determined to see Roe v. Wade overturned. He's the reason it was overturned, and he brags about it. Look at the chaos that has resulted.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"criticism_of_predecessor_action\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have to stand up to Putin. Send me a bipartisan national security bill. History is literally watching. History is watching.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"I want to protect fundamental rights. Pass the Equality Act. And my message to transgender Americans is, I have your back.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement_of_support\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "0cc73b6ee866ecd617a8f96e96c524efae68645fb48ebf6f99b6b64b6d18c16f",
+  "execution_metadata": {
+    "start_time": "2025-08-12T02:45:10.560164+00:00",
+    "end_time": "2025-08-12T02:45:14.256225+00:00",
+    "duration_seconds": 3.696049
+  },
+  "input_artifacts": {
+    "framework_hash": "d269774072d864c981929fc81952d9fbecd4f7b7bb49e8d5d89ecd3bc498ec6b",
+    "document_hashes": [
+      "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250812T024446Z_388c1679"
+  }
+}

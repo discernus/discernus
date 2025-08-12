@@ -63,67 +63,6 @@ The analysis agent outputs a raw analysis log containing:
 ```json
 {
   "gasket_schema": {
-    "target_keys": [
-      "people_vs_elite_framing_score",
-      "authentic_representation_claims_score",
-      "anti_system_mobilization_score",
-      "direct_democracy_appeals_score",
-      "common_sense_vs_expertise_score",
-      "cultural_authenticity_claims_score",
-      "people_vs_elite_framing_salience",
-      "authentic_representation_claims_salience",
-      "anti_system_mobilization_salience",
-      "direct_democracy_appeals_salience",
-      "common_sense_vs_expertise_salience",
-      "cultural_authenticity_claims_salience",
-      "people_vs_elite_framing_confidence",
-      "authentic_representation_claims_confidence",
-      "anti_system_mobilization_confidence",
-      "direct_democracy_appeals_confidence",
-      "common_sense_vs_expertise_confidence",
-      "cultural_authenticity_claims_confidence"
-    ]
-  }
-}
-```
-
----
-
-<details><summary>Machine-Readable Configuration</summary>
-
-```json
-{
-  "name": "prm_v7_1",
-  "version": "v7.3",
-  "display_name": "Populist Rhetoric Module (PRM) v7.3",
-  "analysis_variants": {
-    "default": {
-      "description": "Sequential contemporary populist assessment with chain-of-thought methodology",
-      "analysis_prompt": "You are an expert analyst specializing in contemporary populist political communication and democratic mobilization strategies across diverse contexts. Analyze this text through focused sequential steps, examining each populist dimension group independently before integration.\n\nSTEP 1 - CORE POPULIST APPEALS ANALYSIS\nFocus ONLY on core populist appeals (ignore mobilization strategies for now):\n- Look for people vs elite framing patterns: ordinary people emphasis ('ordinary people,' 'hardworking families,' 'common folk'), elite opposition ('privileged elite,' 'establishment,' 'corrupt elite'), conflict framing ('us versus them,' 'people versus elite,' 'class warfare') - Note: These are semantic concepts, look for politics as conflict between ordinary people and privileged elite, not just these exact phrases\n- Look for authentic representation patterns: genuine will claims ('represent genuine will,' 'voice of the people,' 'true representation'), popular mandate ('popular mandate,' 'people chose me,' 'speaking for people'), authenticity assertions ('authentic leader,' 'real representative,' 'genuine voice') - Note: These are semantic concepts, look for assertions about representing genuine popular will, not just these exact claims\n- Look for anti-system mobilization patterns: system opposition ('against the system,' 'corrupt system,' 'broken system'), institutional critique ('failed institutions,' 'rigged game,' 'system failure'), mobilization calls ('fight the system,' 'change the system,' 'tear it down') - Note: These are semantic concepts, look for mobilization against existing political systems, not just these exact terms\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience (0.0-1.0): How central are core populist appeals to the overall message?\n- State confidence (0.0-1.0): How certain are you in this assessment?\nShow your analytical work and evidence before proceeding.\n\nSTEP 2 - POPULIST MOBILIZATION STRATEGIES ANALYSIS\nNow focus ONLY on populist mobilization strategies:\n- Look for direct democracy patterns: popular sovereignty ('people decide,' 'popular vote,' 'democratic mandate'), institutional bypass ('will of people,' 'bypass Congress,' 'direct to people'), direct participation ('people's choice,' 'direct democracy,' 'popular referendum') - Note: These are semantic concepts, look for direct popular sovereignty emphasis, not just these exact approaches\n- Look for common sense vs expertise patterns: popular wisdom ('common sense,' 'practical wisdom,' 'street smarts'), expert critique ('out-of-touch experts,' 'ivory tower,' 'expert failure'), folk knowledge ('what everyone knows,' 'obvious truth,' 'simple wisdom') - Note: These are semantic concepts, look for popular wisdom over professional expertise, not just these exact contrasts\n- Look for cultural authenticity patterns: traditional values ('traditional values,' 'cultural heritage,' 'authentic culture'), cultural threat ('cultural displacement,' 'foreign influence,' 'cultural invasion'), authenticity claims ('real culture,' 'authentic values,' 'true heritage') - Note: These are semantic concepts, look for authentic cultural values versus cosmopolitan alternatives, not just these exact values\n- Score each dimension (0.0-1.0) with specific textual evidence\n- Assess salience (0.0-1.0): How central are mobilization strategies to the message?\n- State confidence (0.0-1.0): How certain are you in this assessment?\nShow your analytical work and evidence before proceeding.\n\nFINAL STEP - INTEGRATION AND VALIDATION\nReview your step-by-step analysis:\n- Check for scoring consistency across all populist dimensions\n- Validate that evidence quality meets academic standards\n- Assess contemporary populist communication patterns and strategic priorities\n- Confirm confidence levels are appropriately calibrated\n- Calculate populist rhetoric indices and salience-weighted scores\n- Apply pattern classifications based on overall populist profile\n\nProvide your final structured analysis following this format:\n\n**POPULIST RHETORIC ASSESSMENT**\n\n**Core Populist Appeals**: People vs Elite [score], Authentic Representation [score], Anti-System Mobilization [score] (salience: [score], confidence: [score])\n**Mobilization Strategies**: Direct Democracy [score], Common Sense vs Expertise [score], Cultural Authenticity [score] (salience: [score], confidence: [score])\n\n**Calculated Metrics**:\n- Core Populist Appeal Score: [calculated score]\n- Populist Mobilization Score: [calculated score]\n- Populist Rhetoric Index: [calculated score]\n- Salience-Weighted Index: [calculated score]\n\n**Key Insights**: [Summary of contemporary populist communication patterns, strategic priorities, and mobilization approach]"
-    }
-  },
-  "dimension_groups": {
-    "core_populist_appeals": ["people_vs_elite_framing", "authentic_representation_claims", "anti_system_mobilization"],
-    "populist_mobilization_strategies": ["direct_democracy_appeals", "common_sense_vs_expertise", "cultural_authenticity_claims"]
-  },
-  "calculation_spec": {
-    "core_populist_appeal_score": "(people_vs_elite_framing_score + authentic_representation_claims_score + anti_system_mobilization_score) / 3",
-    "populist_mobilization_score": "(direct_democracy_appeals_score + common_sense_vs_expertise_score + cultural_authenticity_claims_score) / 3", 
-    "populist_rhetoric_index": "(core_populist_appeal_score + populist_mobilization_score) / 2",
-    "salience_weighted_core_populist_appeal_score": "(people_vs_elite_framing_score * people_vs_elite_framing_salience + authentic_representation_claims_score * authentic_representation_claims_salience + anti_system_mobilization_score * anti_system_mobilization_salience) / (people_vs_elite_framing_salience + authentic_representation_claims_salience + anti_system_mobilization_salience + 1e-9)",
-    "salience_weighted_populist_mobilization_score": "(direct_democracy_appeals_score * direct_democracy_appeals_salience + common_sense_vs_expertise_score * common_sense_vs_expertise_salience + cultural_authenticity_claims_score * cultural_authenticity_claims_salience) / (direct_democracy_appeals_salience + common_sense_vs_expertise_salience + cultural_authenticity_claims_salience + 1e-9)",
-    "salience_weighted_populist_rhetoric_index": "(salience_weighted_core_populist_appeal_score * ((people_vs_elite_framing_salience + authentic_representation_claims_salience + anti_system_mobilization_salience + 1e-9) / 3) + salience_weighted_populist_mobilization_score * ((direct_democracy_appeals_salience + common_sense_vs_expertise_salience + cultural_authenticity_claims_salience + 1e-9) / 3)) / (((people_vs_elite_framing_salience + authentic_representation_claims_salience + anti_system_mobilization_salience + 1e-9) / 3) + ((direct_democracy_appeals_salience + common_sense_vs_expertise_salience + cultural_authenticity_claims_salience + 1e-9) / 3))"
-  },
-  "reliability_rubric": {
-    "cronbachs_alpha": {
-      "excellent": [0.80, 1.0],
-      "good": [0.70, 0.79],
-      "acceptable": [0.60, 0.69],
-      "poor": [0.0, 0.59]
-    },
-    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
-  "gasket_schema": {
     "version": "7.1",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
@@ -183,3 +122,40 @@ The analysis agent outputs a raw analysis log containing:
 ```
 
 </details>
+
+<GASKET_SCHEMA_START>
+{
+  "gasket_schema": {
+    "version": "v7.3",
+    "extraction_method": "intelligent_extractor",
+    "target_keys": [
+      "people_vs_elite_framing_score", "authentic_representation_claims_score", "anti_system_mobilization_score",
+      "direct_democracy_appeals_score", "common_sense_vs_expertise_score", "cultural_authenticity_claims_score",
+      "people_vs_elite_framing_salience", "authentic_representation_claims_salience", "anti_system_mobilization_salience",
+      "direct_democracy_appeals_salience", "common_sense_vs_expertise_salience", "cultural_authenticity_claims_salience",
+      "people_vs_elite_framing_confidence", "authentic_representation_claims_confidence", "anti_system_mobilization_confidence",
+      "direct_democracy_appeals_confidence", "common_sense_vs_expertise_confidence", "cultural_authenticity_claims_confidence"
+    ],
+    "extraction_patterns": {
+      "people_vs_elite_framing_score": ["people.*?vs.*?elite.*?framing.*?score.*?([0-9]\\.[0-9])", "people.*?elite.*?framing.*?([0-9]\\.[0-9])", "elite\\s*framing\\s*:\\s*([0-9]\\.[0-9])"],
+      "authentic_representation_claims_score": ["authentic.*?representation.*?claims.*?score.*?([0-9]\\.[0-9])", "authentic.*?representation.*?([0-9]\\.[0-9])", "authentic\\s*representation\\s*:\\s*([0-9]\\.[0-9])"],
+      "anti_system_mobilization_score": ["anti.*?system.*?mobilization.*?score.*?([0-9]\\.[0-9])", "anti.*?system.*?([0-9]\\.[0-9])", "anti\\s*system\\s*:\\s*([0-9]\\.[0-9])"],
+      "direct_democracy_appeals_score": ["direct.*?democracy.*?appeals.*?score.*?([0-9]\\.[0-9])", "direct.*?democracy.*?([0-9]\\.[0-9])", "direct\\s*democracy\\s*:\\s*([0-9]\\.[0-9])"],
+      "common_sense_vs_expertise_score": ["common.*?sense.*?vs.*?expertise.*?score.*?([0-9]\\.[0-9])", "common.*?sense.*?([0-9]\\.[0-9])", "common\\s*sense\\s*:\\s*([0-9]\\.[0-9])"],
+      "cultural_authenticity_claims_score": ["cultural.*?authenticity.*?claims.*?score.*?([0-9]\\.[0-9])", "cultural.*?authenticity.*?([0-9]\\.[0-9])", "cultural\\s*authenticity\\s*:\\s*([0-9]\\.[0-9])"]
+    },
+    "validation_rules": {
+      "required_fields": [
+        "people_vs_elite_framing_score", "authentic_representation_claims_score", "anti_system_mobilization_score",
+        "direct_democracy_appeals_score", "common_sense_vs_expertise_score", "cultural_authenticity_claims_score"
+      ],
+      "score_ranges": {"min": 0.0, "max": 1.0},
+      "metadata_ranges": {
+        "salience": {"min": 0.0, "max": 1.0},
+        "confidence": {"min": 0.0, "max": 1.0}
+      },
+      "fallback_strategy": "use_default_values"
+    }
+  }
+}
+<GASKET_SCHEMA_END>

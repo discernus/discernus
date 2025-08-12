@@ -63,29 +63,27 @@ Institutional mediation, minority rights, and procedural democracy emphasis
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
-    "version": "7.1",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
-      "populist_authority_score",
-      "pluralist_authority_score",
-      "populist_authority_salience",
-      "pluralist_authority_salience",
-      "populist_authority_confidence",
-      "pluralist_authority_confidence"
+      "populism_score", "pluralism_score", "populism_salience", "pluralism_salience", "populism_confidence", "pluralism_confidence"
     ],
     "extraction_patterns": {
-      "populist_authority_score": ["populist.{0,20}authority.{0,20}score", "populist.{0,20}authority.{0,20}rating", "populist\\s*authority\\s*:\\s*[0-9]"],
-      "pluralist_authority_score": ["pluralist.{0,20}authority.{0,20}score", "pluralist.{0,20}authority.{0,20}rating", "pluralist\\s*authority\\s*:\\s*[0-9]"],
-      "populist_authority_salience": ["populist.{0,20}authority.{0,20}salience", "populist.{0,20}authority.{0,20}importance", "populist.{0,20}centrality"],
-      "pluralist_authority_salience": ["pluralist.{0,20}authority.{0,20}salience", "pluralist.{0,20}authority.{0,20}importance", "pluralist.{0,20}centrality"],
-      "populist_authority_confidence": ["populist.{0,20}authority.{0,20}confidence", "populist.{0,20}authority.{0,20}certainty", "populist.{0,20}sure"],
-      "pluralist_authority_confidence": ["pluralist.{0,20}authority.{0,20}confidence", "pluralist.{0,20}authority.{0,20}certainty", "pluralist.{0,20}sure"]
+      "populism_score": ["populism.*?score.*?([0-9]\\.[0-9])", "populism.*?([0-9]\\.[0-9])", "populism\\s*:\\s*([0-9]\\.[0-9])"],
+      "pluralism_score": ["pluralism.*?score.*?([0-9]\\.[0-9])", "pluralism.*?([0-9]\\.[0-9])", "pluralism\\s*:\\s*([0-9]\\.[0-9])"]
     },
     "validation_rules": {
       "required_fields": [
-        "populist_authority_score", "pluralist_authority_score"
+        "populism_score", "pluralism_score"
       ],
       "score_ranges": {"min": 0.0, "max": 1.0},
       "metadata_ranges": {
@@ -96,6 +94,4 @@ Institutional mediation, minority rights, and procedural democracy emphasis
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

@@ -255,7 +255,14 @@ Assessment of likely emotional responses and psychological states generated
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
     "version": "v7.3",
     "extraction_method": "intelligent_extractor",
@@ -285,6 +292,4 @@ Assessment of likely emotional responses and psychological states generated
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

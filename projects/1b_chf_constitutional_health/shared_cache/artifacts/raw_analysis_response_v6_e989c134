@@ -1,0 +1,118 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Attention was paid to identifying specific linguistic markers for each dimension. Confidence levels reflect the clarity and directness of the evidence found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.15,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "institutional_respect": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.15,
+          "confidence": 0.4
+        },
+        "systemic_continuity": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.3
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "First, we must balance the Federal budget. We can do so without raising taxes. What we need is spending discipline in Washington, D.C. We set a goal of cutting the deficit in half by 2009 and met that goal 3 years ahead of schedule. Now let us take the next step. In the coming weeks, I will submit a budget that eliminates the Federal deficit within the next 5 years. I ask you to make the same commitment.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Next, there is the matter of earmarks. These special interest items are often slipped into bills at the last hour, when not even C-SPAN is watching. Last year alone, the number of earmarks grew to over 13,000 and totaled nearly $18 billion. Even worse, over 90 percent of the earmarks never make it to the floor of the House and Senate. They are dropped into committee reports that are not even part of the bill that arrives on my desk.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "And finally, to keep this economy strong, we must take on the challenge of entitlements. Social Security and Medicare and Medicaid are commitments of conscience, and so it is our duty to keep them permanently sound. Yet we're failing in that duty. And this failure will one day leave our children with three bad options: huge tax increases, huge deficits, or huge and immediate cuts in benefits. Everyone in this Chamber knows this to be true, yet somehow we have not found it in ourselves to act. So let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madam Speaker, Vice President Cheney, Members of Congress, distinguished guests, and fellow citizens: The rite of custom brings us together at a defining hour when decisions are hard and courage is needed. We enter the year 2007 with large endeavors underway and others that are ours to begin. In all of this, much is asked of us. We must have the will to face difficult challenges and determined enemies and the wisdom to face them together.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Some in this Chamber are new to the House and the Senate, and I congratulate the Democrat majority. Congress has changed, but not our responsibilities. Each of us is guided by our own convictions, and to these we must stay faithful. Yet we're all held to the same standards and called to serve the same good purposes: to extend this Nation's prosperity, to spend the people's money wisely, to solve problems, not leave them to future generations, to guard America against all evil, and to keep faith with those we have sent forth to defend us.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Our job is to make life better for our fellow Americans and to help them build a future of hope and opportunity, and this is the business before us tonight.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Extending hope and opportunity in our country requires an immigration system worthy of America, with laws that are fair and borders that are secure. When laws and borders are routinely violated, this harms the interests of our country. To secure our border, we're doubling the size of the Border Patrol and funding new infrastructure and technology.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "You didn't vote them into law, I didn't sign them into law, yet they're treated as if they have the force of law. The time has come to end this practice. So let us work together to reform the budget process, expose every earmark to the light of day and to a vote in Congress, and cut the number and cost of earmarks at least in half by the end of this session.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "To protect our oil supply, I ask Congress to double the current capacity of the Strategic Petroleum Reserve.",
+          "confidence": 0.4,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Our enemies are quite explicit about their intentions. They want to overthrow moderate governments and establish safe havens from which to plan and carry out new attacks on our country. By killing and terrorizing Americans, they want to force our country to retreat from the world and abandon the cause of liberty. They would then be free to impose their totalitarian ideology. Listen to this warning from the late terrorist Zarqawi: \"We will sacrifice our blood and bodies to put an end to your dreams, and what is coming is even worse.\"",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "We need to uphold the great tradition of the melting pot that welcomes and assimilates new arrivals. We need to resolve the status of the illegal immigrants who are already in our country without amnesty and without amens ty. Convictions run deep in this Capitol when it comes to immigration. Let us have a serious, civil, and conclusive debate, so that you can pass and I can sign comprehensive immigration reform into law.",
+          "confidence": 0.5,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

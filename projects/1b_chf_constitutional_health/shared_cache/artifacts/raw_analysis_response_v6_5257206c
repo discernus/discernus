@@ -1,0 +1,100 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Constitutional Health Framework (CHF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on identifying relevant linguistic markers for each dimension within the provided document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "institutional_respect": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "systemic_continuity": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My message to President Putin, whom I've known for a long time, is simple: We will not walk away. We will not bow down. I will not bow down.",
+          "confidence": 0.8,
+          "context_type": "statement_of_intent"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Let's restore trust in our institutions, and make clear political violence has absolutely no place in America. Zero place.",
+          "confidence": 0.7,
+          "context_type": "statement_of_principle"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We welcomed Finland to the alliance last year. And just this morning Sweden officially joined, and their Minister is here tonight. Come here, stand up. Welcome, welcome, welcome.",
+          "confidence": 0.8,
+          "context_type": "acknowledgment_of_alliance"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I believe that given the opportunity for for a majority in the House and Senate would endorse the bill as well",
+          "confidence": 0.6,
+          "context_type": "opinion_on_legislation"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "My predecessor and some of you here seek to bury the truth about January 6. I will not do that. This is a moment to speak the truth and to bury the lies.",
+          "confidence": 0.7,
+          "context_type": "accusation_of_deception"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "My predecessor came to office determined to see Roe v. Wade overturned. He's the reason it was overturned, and he brags about it. Look at the chaos that has resulted.",
+          "confidence": 0.7,
+          "context_type": "criticism_of_predecessor_action"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We have to stand up to Putin. Send me a bipartisan national security bill. History is literally watching. History is watching.",
+          "confidence": 0.8,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "I want to protect fundamental rights. Pass the Equality Act. And my message to transgender Americans is, I have your back.",
+          "confidence": 0.7,
+          "context_type": "statement_of_support"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

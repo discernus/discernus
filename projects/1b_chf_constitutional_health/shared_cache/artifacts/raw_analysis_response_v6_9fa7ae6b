@@ -1,0 +1,118 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Constitutional Health Framework (CHF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis performed by following the sequential steps outlined in the CHF v7.3 for each document. Emphasis was placed on identifying linguistic markers and assessing salience for each dimension within the three axes. Confidence levels reflect the clarity and strength of evidence found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.75
+        },
+        "procedural_rejection": {
+          "raw_score": 0.15,
+          "salience": 0.10,
+          "confidence": 0.60
+        },
+        "institutional_respect": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.70
+        },
+        "institutional_subversion": {
+          "raw_score": 0.10,
+          "salience": 0.05,
+          "confidence": 0.55
+        },
+        "systemic_continuity": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.65
+        },
+        "systemic_replacement": {
+          "raw_score": 0.20,
+          "salience": 0.25,
+          "confidence": 0.60
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I want to congratulate the new leader of the House Democrats, the first African American minority leader in history, Hakeem Jeffries.",
+          "confidence": 0.7,
+          "context_type": "acknowledgement_of_elected_officials"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "But over the past 2 years, we've proved the cynics and naysayers wrong. Yes, we disagreed plenty. And yet, there were times when Democrats went alone. But time and again, Democrats and Republicans came together. Came together to defend a stronger and safer Europe.",
+          "confidence": 0.7,
+          "context_type": "description_of_bipartisan_cooperation"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We passed the law making it easier for doctors to prescribe effective treatments for opioid addiction. We passed the gun safety law, making historic investments in mental health.",
+          "confidence": 0.7,
+          "context_type": "mention_of_legislative_achievements"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And if Congress does not act, I will veto it.",
+          "confidence": 0.5,
+          "context_type": "threat_of_veto"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Thank you. You can smile. It's okay. Thank you, thank you, thank you. Please.",
+          "confidence": 0.6,
+          "context_type": "acknowledgement_of_audience"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Madam Vice President, our First Lady and Second Gentleman — good to see you guys up there.",
+          "confidence": 0.6,
+          "context_type": "addressing_dignitaries"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But my plan to restore the dignity of work means making education an affordable ticket to the middle class.",
+          "confidence": 0.4,
+          "context_type": "redefining_societal_values"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "For decades, the middle class has been hollowed out in more than and not in one administration, but for a long time.",
+          "confidence": 0.5,
+          "context_type": "historical_assessment_of_economic_trends"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We've been spending more than $1.7 trillion, the largest investment in infrastructure since President Eisenhower's Interstate Highway System.",
+          "confidence": 0.5,
+          "context_type": "reference_to_past_major_initiatives"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "We need to build back America and make a real difference in your lives at home.",
+          "confidence": 0.6,
+          "context_type": "call_for_national_rebuilding"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "Let's finish the job and ban those assault weapons now. Ban them now. Once and for all.",
+          "confidence": 0.6,
+          "context_type": "advocacy_for_fundamental_policy_change"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

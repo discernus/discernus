@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted by following the sequential steps outlined in the framework. Each dimension was assessed for raw score, salience, and confidence, with supporting evidence extracted. The focus was on identifying semantic concepts rather than literal keyword matching."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "tribalism": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "truth": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "manipulation": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "resentment": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "\"The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%'.\"",
+          "confidence": 0.95,
+          "context_type": "core_argument"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "\"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\"",
+          "confidence": 0.7,
+          "context_type": "framing"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "\"In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses.\"",
+          "confidence": 0.6,
+          "context_type": "statement_of_fact"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "\"But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.\"",
+          "confidence": 0.8,
+          "context_type": "rhetorical_device"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "\"The rich want to get richer and they don't care who they step on. They are prepared to destroy Social Security, Medicaid, Medicair, the Veterans Administration in order to make themselves even richer.\"",
+          "confidence": 0.85,
+          "context_type": "critique_of_inequality"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "\"You know why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.\"",
+          "confidence": 0.7,
+          "context_type": "economic_grievance"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "\"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\"",
+          "confidence": 0.8,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "\"And there I am, there's Trump, and right behind him, you got Musk, Bezos, and Zuckerberg, three wealthiest guys in the country. And then behind them, you got 13 other billionaires who Trump nominated to head up various government agencies.\"",
+          "confidence": 0.5,
+          "context_type": "highlighting_threat"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\"",
+          "confidence": 0.7,
+          "context_type": "appeal_to_reason"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "\"The richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%\"",
+          "confidence": 0.5,
+          "context_type": "exaggeration_claim"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

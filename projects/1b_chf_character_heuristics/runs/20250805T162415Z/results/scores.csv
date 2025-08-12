@@ -1,9 +1,0 @@
-document_id,filename,institutional_respect_confidence,institutional_respect_salience,institutional_respect_score,institutional_subversion_confidence,institutional_subversion_salience,institutional_subversion_score,procedural_legitimacy_confidence,procedural_legitimacy_salience,procedural_legitimacy_score,procedural_rejection_confidence,procedural_rejection_salience,procedural_rejection_score,systemic_continuity_confidence,systemic_continuity_salience,systemic_continuity_score,systemic_replacement_confidence,systemic_replacement_salience,systemic_replacement_score,evidence_hash
-extracted_via_gasket,alexandria_ocasio_cortez_2025_fighting_oligarchy.txt,0.7,0.7,0.4,0.8,0.8,0.6,0.7,0.7,0.3,0.8,0.8,0.6,0.5,0.4,0.3,0.7,0.6,0.7,6cf54aeedbb59c60
-extracted_via_gasket,bernie_sanders_2025_fighting_oligarchy.txt,0.6,0.5,0.3,0.7,0.6,0.6,0.7,0.7,0.2,0.8,0.8,0.7,0.5,0.3,0.1,0.8,0.7,0.8,80cb36cbc028667b
-extracted_via_gasket,cory_booker_2018_first_step_act.txt,0.7,0.5,0.4,0.6,0.3,0.2,0.8,0.7,0.6,0.7,0.4,0.3,0.6,0.3,0.3,0.5,0.2,0.1,3665cf154f4a20d9
-extracted_via_gasket,jd_vance_2022_natcon_conference.txt,0.75,0.7,0.35,0.8,0.75,0.45,0.7,0.6,0.25,0.85,0.8,0.55,0.7,0.5,0.3,0.75,0.6,0.4,6f9f7fb62ea892e7
-extracted_via_gasket,john_lewis_1963_march_on_washington.txt,0.6,0.5,0.3,0.75,0.7,0.6,0.7,0.4,0.2,0.85,0.8,0.7,0.5,0.2,0.1,0.8,0.7,0.8,51a09f5f15286775
-extracted_via_gasket,john_mccain_2008_concession.txt,0.9,0.85,0.75,0.95,0.1,0.05,0.9,0.7,0.8,0.95,0.1,0.0,0.85,0.6,0.6,0.9,0.2,0.1,8de0b4eefd8fbb0b
-extracted_via_gasket,mitt_romney_2020_impeachment.txt,0.65,0.5,0.4,0.7,0.5,0.5,0.7,0.6,0.3,0.75,0.7,0.5,0.5,0.3,0.2,0.5,0.3,0.3,5200b1307844575a
-extracted_via_gasket,steve_king_2017_house_floor.txt,0.65,0.4,0.3,0.75,0.7,0.7,0.7,0.6,0.45,0.8,0.75,0.65,0.6,0.3,0.2,0.85,0.85,0.8,f7fd26e7debdc1c7

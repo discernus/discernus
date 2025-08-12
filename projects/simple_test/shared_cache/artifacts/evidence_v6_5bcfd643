@@ -1,0 +1,91 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 8,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T01:16:14.231736+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance_score",
+      "quote_text": "And so I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it was understood to mean at the time of its ratification.",
+      "confidence": 0.8,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231726+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance_score",
+      "quote_text": "And then, uh, the argument is that one of the arguments is that the President of the United States has a constitutional right to nominate to the Supreme Court.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231728+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity_score",
+      "quote_text": "And so our obligation then is to say, \"Mr. President, you're lame duck.\" Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231729+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear_score",
+      "quote_text": "This is a type of hearing that I have listened to too many times, one of the hardest hearings that I have sat through in my time here in this Congress, Mr. Speaker.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231730+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "comparison_score",
+      "quote_text": "It's the Senate's job then to evaluate the nominations of the President. And they can do so with or without hearings, with or without interviews.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231730+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity_score",
+      "quote_text": "And I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.",
+      "confidence": 0.7,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231731+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals_score",
+      "quote_text": "And the question is, does the President have prosecutorial authority, prosecutorial discretion? That, well, the precedence along prosecutorial discretion.",
+      "confidence": 0.6,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231732+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "cohesive_goals_score",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \"Mr. President, you're lame duck.\"",
+      "confidence": 0.5,
+      "context_type": "quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T01:16:14.231734+00:00"
+    }
+  ]
+}

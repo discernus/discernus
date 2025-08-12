@@ -1,0 +1,136 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Emphasis placed on identifying linguistic markers for each dimension and assessing their intensity, salience, and confidence. Confidence levels reflect the clarity and directness of the evidence found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "procedural_legitimacy_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "procedural_rejection_confidence": {
+          "raw_score": 0.3,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "institutional_respect_score": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "institutional_subversion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "institutional_respect_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "institutional_subversion_confidence": {
+          "raw_score": 0.3,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "systemic_continuity_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "systemic_replacement_score": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "systemic_continuity_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "systemic_replacement_confidence": {
+          "raw_score": 0.4,
+          "salience": 0.2,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Today we celebrate the triumph not of a candidate, but of a cause, the cause of democracy. The people’s will of the people has been heard, and the will of the people has been heeded. We’ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "So now, on this hallowed ground where just a few days ago violence sought to shake the Capitol’s very foundation, we come together as one Nation under God, indivisible, to carry out the peaceful transfer of power as we have for more than two centuries.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "I have just taken the sacred oath that each of these patriots have taken, the oath first sworn by George Washington. But the American story depends not on any one of us, but on all of us, on 'We the People,' who seek a more perfect Union.",
+          "confidence": 0.7,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "I know the resilience of our Constitution and the strength, the strength of our Nation, as does President Carter, who I spoke with last night, who cannot be with us today, but who we salute for his lifetime of service.",
+          "confidence": 0.7,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "Our history has been a constant struggle between the American ideal that we are all created equal and the harsh, ugly reality that racism, nativism, fear, demonization have long torn us apart. The battle is perennial. And victory is never assured.",
+          "confidence": 0.6,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "My fellow Americans, in the work ahead of us, we’re going to need each other. We need all our strength to persevere through this dark winter.",
+          "confidence": 0.5,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "We face an attack on our democracy and on truth, a raging virus, growing inequity, the sting of systemic racism, a climate in crisis, America’s role in the world. Any one of these would be enough to challenge us in profound ways. But the fact is, we face them all at once, presenting this Nation with one of the gravest of responsibilities we’ve had.",
+          "confidence": 0.5,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "to overcome these challenges we require so much more than words. It requires the most elusive of all things in a democracy: unity.",
+          "confidence": 0.5,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "My fellow Americans, in the work ahead of us, we’re going to need each other. We need all our strength to persevere through this dark winter. We’re entering what may be the toughest and deadliest period of the virus.",
+          "confidence": 0.5,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

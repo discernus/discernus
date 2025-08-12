@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:44:50.694828+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Today we celebrate the triumph not of a candidate, but of a cause, the cause of democracy. The people\u2019s will of the people has been heard, and the will of the people has been heeded. We\u2019ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694813+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So now, on this hallowed ground where just a few days ago violence sought to shake the Capitol\u2019s very foundation, we come together as one Nation under God, indivisible, to carry out the peaceful transfer of power as we have for more than two centuries.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694817+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "I have just taken the sacred oath that each of these patriots have taken, the oath first sworn by George Washington. But the American story depends not on any one of us, but on all of us, on 'We the People,' who seek a more perfect Union.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694819+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "I know the resilience of our Constitution and the strength, the strength of our Nation, as does President Carter, who I spoke with last night, who cannot be with us today, but who we salute for his lifetime of service.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694820+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "Our history has been a constant struggle between the American ideal that we are all created equal and the harsh, ugly reality that racism, nativism, fear, demonization have long torn us apart. The battle is perennial. And victory is never assured.",
+      "confidence": 0.6,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694821+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "My fellow Americans, in the work ahead of us, we\u2019re going to need each other. We need all our strength to persevere through this dark winter.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694823+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We face an attack on our democracy and on truth, a raging virus, growing inequity, the sting of systemic racism, a climate in crisis, America\u2019s role in the world. Any one of these would be enough to challenge us in profound ways. But the fact is, we face them all at once, presenting this Nation with one of the gravest of responsibilities we\u2019ve had.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694824+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "to overcome these challenges we require so much more than words. It requires the most elusive of all things in a democracy: unity.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694825+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "My fellow Americans, in the work ahead of us, we\u2019re going to need each other. We need all our strength to persevere through this dark winter. We\u2019re entering what may be the toughest and deadliest period of the virus.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:44:50.694826+00:00"
+    }
+  ]
+}

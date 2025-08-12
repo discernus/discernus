@@ -103,7 +103,7 @@ python3 -m discernus.cli run projects/simple_test  # CURRENT
 ### Recommended Test Experiments:
 1. **`projects/simple_test/`** - Fast, cost-effective validation (Flash Lite models, ~$0.014/run)
 2. **`projects/1a_caf_civic_character/`** - CAF framework validation
-3. **`projects/1b_chf_character_heuristics/`** - CHF framework validation  
+3. **`projects/1b_chf_constitutional_health/`** - CHF framework validation  
 4. **`projects/1c_ecf_emotional_climate/`** - ECF framework validation
 
 ### Key Features Working:

@@ -1,0 +1,162 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted sequentially across dimensions as per framework instructions. Focus maintained on identifying semantic concepts related to civic virtues and their strategic deployment, avoiding simple keyword matching. Evidence extraction prioritized direct textual support for scored dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "truth": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "resentment": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "pragmatism": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.4
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "We must have legislation that will protect the homeless and starving people of this nation.",
+          "confidence": 0.8,
+          "context_type": "direct_appeal"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "We must have a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+          "confidence": 0.7,
+          "context_type": "example_of_inequality"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "My party is the party of principles. For the party of Kennedy is also the party of Eastland. The party of Javits is also the party of Goldwater.",
+          "confidence": 0.6,
+          "context_type": "political_grouping"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Where is our party? Where is the political party that will make it unnecessary to march on Washington? Where is the political party that will make it unnecessary to march in the streets of Birmingham?",
+          "confidence": 0.5,
+          "context_type": "rhetorical_question_on_party_action"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 0.7,
+          "context_type": "statement_of_fact_and_consequence"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "It is true that we support the administration's civil rights bill. We support it with great reservations, however.",
+          "confidence": 0.6,
+          "context_type": "qualified_support"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?",
+          "confidence": 0.4,
+          "context_type": "highlighting_disproportionate_punishment"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 0.8,
+          "context_type": "expression_of_grievance"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We want our freedom and we want it now!",
+          "confidence": 0.7,
+          "context_type": "demand_for_immediate_justice"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "To those who have said, 'Be patient and wait,' we must say that we cannot be patient.",
+          "confidence": 0.6,
+          "context_type": "acknowledgment_of_frustration"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 0.7,
+          "context_type": "statement_of_future_action"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Wake up America! Wake up! For we cannot stop, and we will not and cannot be patient!",
+          "confidence": 0.6,
+          "context_type": "call_to_action_with_urgency"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 0.6,
+          "context_type": "critique_of_bill_efficacy"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We must have legislation that will protect the citizens of Mississippi, of Alabama, and Georgia, who are qualified to vote but lack a sixth-grade education.",
+          "confidence": 0.4,
+          "context_type": "specific_legislative_needs"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "For in the Delta of Mississippi, in southwest Georgia, in the Black Belt of Alabama, in Harlem, in Chicago, Detroit, Philadelphia, and all over this nation, the black masses are on the march for jobs and freedom.",
+          "confidence": 0.2,
+          "context_type": "generalized_assertion"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:45:06.028943+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+      "confidence": 0.9,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028905+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our democracy has faced profound challenges over the last two years. The pandemic has been punishing. And so many families are living paycheck to paycheck, struggling to keep up with the rising cost of food, gas, housing, and so much more.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028918+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "A Russian dictator invading a foreign country has costs around the world. And I'm taking robust action to make sure the pain of our sanctions is targeted at Russian economy and that we use every tool at our disposal to protect American businesses and consumers.",
+      "confidence": 0.6,
+      "context_type": "implicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028921+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The President has a solemn obligation to nominate someone to the United States Supreme Court. As I did four days ago, I've nominated a Circuit Court of Appeals judge, Ketanji Brown Jackson. One of our Nation's top legal minds who will continue in Justice Breyer's legacy of excellence.",
+      "confidence": 0.95,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028924+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "My plan to fight inflation will lower your costs and lower the deficit. Seventeen Nobel laureates in economics said my plan will ease long-term inflationary pressures. Top business leaders, and I believe, most Americans support the plan.",
+      "confidence": 0.9,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028927+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "State after state, new laws have been passed not only to suppress the vote but to subvert the entire election. We can't let this happen. Tonight I call on the Senate to pass the Freedom to Vote Act.",
+      "confidence": 0.7,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028929+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "When the middle class grows, the poor go way up, and the wealthy do very well. America used to have the best roads, bridges, and airports on Earth. And now our infrastructure is ranked 13th in the world. We won't be able to compete for the jobs of the 21st century if we do not fix it.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028932+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We are building a nation that works for everyone. For working families, for small businesses and farmers and ranchers. I need not tell some of my Republican friends from those states guess what? You've got four basic meatpacking facilities. That's it. You play with them or you don't get to play at all. And you pay a hell of a lot more.",
+      "confidence": 0.75,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028935+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "This is our moment to meet and overcome the challenges of our time. And we will, as one people, one America: the United States of America.",
+      "confidence": 0.6,
+      "context_type": "implicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:06.028937+00:00"
+    }
+  ]
+}

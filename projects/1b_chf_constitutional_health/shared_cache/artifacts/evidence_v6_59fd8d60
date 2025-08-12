@@ -1,0 +1,81 @@
+{
+  "evidence_metadata": {
+    "document_hash": "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7",
+    "total_evidence_pieces": 7,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:47:07.988757+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "First, we must move quickly to complete the unfinished business of our country, to balance the budget, renew our democracy, and finish the job of welfare reform.",
+      "confidence": 0.8,
+      "context_type": "Explicit statement of adherence to established processes.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988730+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My balanced budget makes an unprecedented commitment to these goals, $51 billion next year.",
+      "confidence": 0.7,
+      "context_type": "Focus on budgetary balance and commitment to policy goals, implying procedural adherence.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988739+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We must also make the 13th and 14th year of education, at least 2 years of college, just as universal in America by the 21st century as a high school education is today, and we must open the doors of college to all Americans.",
+      "confidence": 0.8,
+      "context_type": "Emphasis on expanding educational access, framed within existing institutional structures (college, education system).",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988742+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution.",
+      "confidence": 0.8,
+      "context_type": "Direct statement advocating for process-based solutions without constitutional amendment.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988745+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must continue, step by step, to give more families access to affordable, quality health care.",
+      "confidence": 0.7,
+      "context_type": "Advocacy for gradual improvement within existing systems (health care access).",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988747+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create jobs through investment by business and loans by banks.",
+      "confidence": 0.6,
+      "context_type": "Focus on strengthening existing economic structures and systems.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988750+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "To prepare America for the 21st century, we must master the forces of change in the world and keep American leadership strong and sure for an uncharted time.",
+      "confidence": 0.3,
+      "context_type": "General call to adapt to change, with some implication of systemic evolution rather than radical replacement.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:07.988752+00:00"
+    }
+  ]
+}

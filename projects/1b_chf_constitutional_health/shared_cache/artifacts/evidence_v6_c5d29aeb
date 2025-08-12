@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:46:55.723031+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+      "confidence": 0.8,
+      "context_type": "foundational_principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.722987+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We must provide for our Nation the way a family provides for its children.",
+      "confidence": 0.7,
+      "context_type": "governance_analogy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723005+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I salute my predecessor, President Bush, for his half-century of service to America.",
+      "confidence": 0.8,
+      "context_type": "acknowledgment_of_predecessor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723008+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Thomas Jefferson believed that to preserve the very foundations of our Nation, we would need dramatic change from time to time.",
+      "confidence": 0.7,
+      "context_type": "historical_precedent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723011+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our democracy must be not only the envy of the world but the engine of our own renewal.",
+      "confidence": 0.6,
+      "context_type": "renewal_metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723014+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "There is nothing wrong with America that cannot be cured by what is right with America.",
+      "confidence": 0.7,
+      "context_type": "optimistic_outlook",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723017+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And so today we pledge an end to the era of deadlock and drift, and a new season of American renewal has begun.",
+      "confidence": 0.5,
+      "context_type": "contrast_with_past",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723020+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "It will require sacrifice, but it can be done and done fairly, not choosing sacrifice for its own sake but for our own sake.",
+      "confidence": 0.5,
+      "context_type": "call_for_sacrifice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723023+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "To renew America, we must revitalize our democracy.",
+      "confidence": 0.6,
+      "context_type": "call_for_revitalization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:55.723026+00:00"
+    }
+  ]
+}

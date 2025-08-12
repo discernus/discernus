@@ -61,9 +61,10 @@ class ThreePartReportGenerator:
     def _generate_deterministic_foundation(self) -> str:
         """Generate Part 1: Deterministic computational foundation (no LLM)."""
         
-        # Format timestamp
+        # Format timestamp and execution time
         timestamp = self.provenance_metadata.get('run_id', 'unknown')
-        formatted_time = self._format_timestamp(timestamp)
+        execution_time = self.provenance_metadata.get('execution_time', 0.0)
+        formatted_time = f"{execution_time:.2f} seconds" if execution_time > 0 else "unknown"
         
         report = f"""# Research Report: {self.experiment_name}
 
@@ -131,6 +132,11 @@ class ThreePartReportGenerator:
         
         total_cost = self.cost_metadata.get('total_cost', 0.0)
         total_tokens = self.cost_metadata.get('total_tokens', 0)
+        
+        # Debug logging
+        print(f"🔍 Report Generator Debug: total_cost = {total_cost} (type: {type(total_cost)})")
+        print(f"🔍 Report Generator Debug: total_tokens = {total_tokens} (type: {type(total_tokens)})")
+        print(f"🔍 Report Generator Debug: cost_metadata = {self.cost_metadata}")
         
         return f"""## Part III: Research Transparency
 
