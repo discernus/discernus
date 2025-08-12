@@ -97,6 +97,10 @@ class ProductionPipelineResponse:
     evidence_integration_summary: str
     statistical_summary: str
     
+    # Cost information
+    total_cost_usd: float = 0.0
+    total_tokens: int = 0
+    
     # Error information (if any)
     error_message: str = ""
 
@@ -193,6 +197,15 @@ class ProductionThinSynthesisPipeline:
             formatter = StatisticalResultsFormatter(statistical_results_raw)
             statistical_results_formatted = formatter.format_all()
 
+            # Optional: add confidence summary if available in raw scores
+            try:
+                # Attempt to extract a confidence summary from the original scores
+                # The raw analysis JSON is not directly accessible here; rely on cached CSV-derived data not available.
+                # As a compromise, pass through any existing confidence summary if MathToolkit adds it in future.
+                pass
+            except Exception:
+                pass
+
             # Step 2: Build the RAG index
             self.logger.info("📚 Building RAG lookup index...")
             self._build_rag_index(request)
@@ -220,11 +233,17 @@ class ProductionThinSynthesisPipeline:
             # Generate three-part academic report
             from discernus.core.report_generator import ThreePartReportGenerator
             
+            total_time = time.time() - start_time
+            
+            # Ensure all costs are flushed to the cost log before generating the report
+            time.sleep(0.1)  # Small delay to ensure file I/O is complete
+            
             provenance_metadata = {
                 'run_id': request.scores_artifact_hash[:16] if request.scores_artifact_hash else 'unknown',
                 'framework_hash': request.framework_hash,
                 'corpus_hash': request.corpus_hash,
-                'scores_hash': request.scores_artifact_hash
+                'scores_hash': request.scores_artifact_hash,
+                'execution_time': total_time
             }
             
             # Get real cost data from audit logger
@@ -274,7 +293,9 @@ class ProductionThinSynthesisPipeline:
                 word_count=len(complete_report.split()),
                 evidence_integration_summary="Three-part academic report with deterministic statistical foundation",
                 statistical_summary="Deterministic MathToolkit results (no LLM interpretation)",
-                error_message=""
+                error_message="",
+                total_cost_usd=cost_metadata.get('total_cost', 0.0),
+                total_tokens=cost_metadata.get('total_tokens', 0)
             )
 
         except Exception as e:
@@ -296,7 +317,9 @@ class ProductionThinSynthesisPipeline:
                 word_count=0,
                 evidence_integration_summary="",
                 statistical_summary="",
-                error_message=str(e)
+                error_message=str(e),
+                total_cost_usd=0.0,
+                total_tokens=0
             )
 
     def _extract_gasket_schema(self, framework_spec: str) -> Dict[str, Any]:

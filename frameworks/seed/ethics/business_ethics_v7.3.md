@@ -133,7 +133,14 @@ The analysis agent outputs a raw analysis log containing:
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
     "version": "v7.3",
     "extraction_method": "intelligent_extractor",
@@ -149,36 +156,16 @@ The analysis agent outputs a raw analysis log containing:
       "sustainable_purpose_confidence", "short_term_extraction_confidence"
     ],
     "extraction_patterns": {
-      "customer_service_score": ["customer.{0,20}service.{0,20}score", "customer.{0,20}service.{0,20}rating", "customer\\s*service\\s*:\\s*[0-9]"],
-      "customer_exploitation_score": ["customer.{0,20}exploitation.{0,20}score", "customer.{0,20}exploitation.{0,20}rating", "customer\\s*exploitation\\s*:\\s*[0-9]"],
-      "employee_development_score": ["employee.{0,20}development.{0,20}score", "employee.{0,20}development.{0,20}rating", "employee\\s*development\\s*:\\s*[0-9]"],
-      "employee_exploitation_score": ["employee.{0,20}exploitation.{0,20}score", "employee.{0,20}exploitation.{0,20}rating", "employee\\s*exploitation\\s*:\\s*[0-9]"],
-      "accountability_score": ["accountability.{0,20}score", "accountability.{0,20}rating", "accountability\\s*:\\s*[0-9]"],
-      "opacity_score": ["opacity.{0,20}score", "opacity.{0,20}rating", "opacity\\s*:\\s*[0-9]"],
-      "financial_responsibility_score": ["financial.{0,20}responsibility.{0,20}score", "financial.{0,20}responsibility.{0,20}rating", "financial\\s*responsibility\\s*:\\s*[0-9]"],
-      "financial_manipulation_score": ["financial.{0,20}manipulation.{0,20}score", "financial.{0,20}manipulation.{0,20}rating", "financial\\s*manipulation\\s*:\\s*[0-9]"],
-      "sustainable_purpose_score": ["sustainable.{0,20}purpose.{0,20}score", "sustainable.{0,20}purpose.{0,20}rating", "sustainable\\s*purpose\\s*:\\s*[0-9]"],
-      "short_term_extraction_score": ["short.{0,20}term.{0,20}extraction.{0,20}score", "short.{0,20}term.{0,20}extraction.{0,20}rating", "short\\s*term\\s*extraction\\s*:\\s*[0-9]"],
-      "customer_service_salience": ["customer.{0,20}service.{0,20}salience", "customer.{0,20}service.{0,20}importance", "customer.{0,20}service.{0,20}centrality"],
-      "customer_exploitation_salience": ["customer.{0,20}exploitation.{0,20}salience", "customer.{0,20}exploitation.{0,20}importance", "customer.{0,20}exploitation.{0,20}centrality"],
-      "employee_development_salience": ["employee.{0,20}development.{0,20}salience", "employee.{0,20}development.{0,20}importance", "employee.{0,20}development.{0,20}centrality"],
-      "employee_exploitation_salience": ["employee.{0,20}exploitation.{0,20}salience", "employee.{0,20}exploitation.{0,20}importance", "employee.{0,20}exploitation.{0,20}centrality"],
-      "accountability_salience": ["accountability.{0,20}salience", "accountability.{0,20}importance", "accountability.{0,20}centrality"],
-      "opacity_salience": ["opacity.{0,20}salience", "opacity.{0,20}importance", "opacity.{0,20}centrality"],
-      "financial_responsibility_salience": ["financial.{0,20}responsibility.{0,20}salience", "financial.{0,20}responsibility.{0,20}importance", "financial.{0,20}responsibility.{0,20}centrality"],
-      "financial_manipulation_salience": ["financial.{0,20}manipulation.{0,20}salience", "financial.{0,20}manipulation.{0,20}importance", "financial.{0,20}manipulation.{0,20}centrality"],
-      "sustainable_purpose_salience": ["sustainable.{0,20}purpose.{0,20}salience", "sustainable.{0,20}purpose.{0,20}importance", "sustainable.{0,20}purpose.{0,20}centrality"],
-      "short_term_extraction_salience": ["short.{0,20}term.{0,20}extraction.{0,20}salience", "short.{0,20}term.{0,20}extraction.{0,20}importance", "short.{0,20}term.{0,20}extraction.{0,20}centrality"],
-      "customer_service_confidence": ["customer.{0,20}service.{0,20}confidence", "customer.{0,20}service.{0,20}certainty", "customer.{0,20}service.{0,20}sure"],
-      "customer_exploitation_confidence": ["customer.{0,20}exploitation.{0,20}confidence", "customer.{0,20}exploitation.{0,20}certainty", "customer.{0,20}exploitation.{0,20}sure"],
-      "employee_development_confidence": ["employee.{0,20}development.{0,20}confidence", "employee.{0,20}development.{0,20}certainty", "employee.{0,20}development.{0,20}sure"],
-      "employee_exploitation_confidence": ["employee.{0,20}exploitation.{0,20}confidence", "employee.{0,20}exploitation.{0,20}certainty", "employee.{0,20}exploitation.{0,20}sure"],
-      "accountability_confidence": ["accountability.{0,20}confidence", "accountability.{0,20}certainty", "accountability.{0,20}sure"],
-      "opacity_confidence": ["opacity.{0,20}confidence", "opacity.{0,20}certainty", "opacity.{0,20}sure"],
-      "financial_responsibility_confidence": ["financial.{0,20}responsibility.{0,20}confidence", "financial.{0,20}responsibility.{0,20}certainty", "financial.{0,20}responsibility.{0,20}sure"],
-      "financial_manipulation_confidence": ["financial.{0,20}manipulation.{0,20}confidence", "financial.{0,20}manipulation.{0,20}certainty", "financial.{0,20}manipulation.{0,20}sure"],
-      "sustainable_purpose_confidence": ["sustainable.{0,20}purpose.{0,20}confidence", "sustainable.{0,20}purpose.{0,20}certainty", "sustainable.{0,20}purpose.{0,20}sure"],
-      "short_term_extraction_confidence": ["short.{0,20}term.{0,20}extraction.{0,20}confidence", "short.{0,20}term.{0,20}extraction.{0,20}certainty", "short.{0,20}term.{0,20}extraction.{0,20}sure"]
+      "customer_service_score": ["customer.*?service.*?score.*?([0-9]\\.[0-9])", "customer.*?service.*?([0-9]\\.[0-9])", "customer\\s*service\\s*:\\s*([0-9]\\.[0-9])"],
+      "customer_exploitation_score": ["customer.*?exploitation.*?score.*?([0-9]\\.[0-9])", "customer.*?exploitation.*?([0-9]\\.[0-9])", "customer\\s*exploitation\\s*:\\s*([0-9]\\.[0-9])"],
+      "employee_development_score": ["employee.*?development.*?score.*?([0-9]\\.[0-9])", "employee.*?development.*?([0-9]\\.[0-9])", "employee\\s*development\\s*:\\s*([0-9]\\.[0-9])"],
+      "employee_exploitation_score": ["employee.*?exploitation.*?score.*?([0-9]\\.[0-9])", "employee.*?exploitation.*?([0-9]\\.[0-9])", "employee\\s*exploitation\\s*:\\s*([0-9]\\.[0-9])"],
+      "accountability_score": ["accountability.*?score.*?([0-9]\\.[0-9])", "accountability.*?([0-9]\\.[0-9])", "accountability\\s*:\\s*([0-9]\\.[0-9])"],
+      "opacity_score": ["opacity.*?score.*?([0-9]\\.[0-9])", "opacity.*?([0-9]\\.[0-9])", "opacity\\s*:\\s*([0-9]\\.[0-9])"],
+      "financial_responsibility_score": ["financial.*?responsibility.*?score.*?([0-9]\\.[0-9])", "financial.*?responsibility.*?([0-9]\\.[0-9])", "financial\\s*responsibility\\s*:\\s*([0-9]\\.[0-9])"],
+      "financial_manipulation_score": ["financial.*?manipulation.*?score.*?([0-9]\\.[0-9])", "financial.*?manipulation.*?([0-9]\\.[0-9])", "financial\\s*manipulation\\s*:\\s*([0-9]\\.[0-9])"],
+      "sustainable_purpose_score": ["sustainable.*?purpose.*?score.*?([0-9]\\.[0-9])", "sustainable.*?purpose.*?([0-9]\\.[0-9])", "sustainable\\s*purpose\\s*:\\s*([0-9]\\.[0-9])"],
+      "short_term_extraction_score": ["short.*?term.*?extraction.*?score.*?([0-9]\\.[0-9])", "short.*?term.*?extraction.*?([0-9]\\.[0-9])", "short\\s*term\\s*extraction\\s*:\\s*([0-9]\\.[0-9])"]
     },
     "validation_rules": {
       "required_fields": [
@@ -195,6 +182,4 @@ The analysis agent outputs a raw analysis log containing:
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

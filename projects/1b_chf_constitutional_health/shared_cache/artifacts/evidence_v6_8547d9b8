@@ -1,0 +1,111 @@
+{
+  "evidence_metadata": {
+    "document_hash": "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44",
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:47:17.988431+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "First, we must move quickly to complete the unfinished business of our country, to balance the budget, renew our democracy, and finish the job of welfare reform.",
+      "confidence": 0.8,
+      "context_type": "Procedural Language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988404+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My balanced budget makes an unprecedented commitment to these goals, $51 billion next year. But far more than money is required. I have a plan, a call to action for American education, based on these 10 principles: First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them.",
+      "confidence": 0.8,
+      "context_type": "Procedural Language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988410+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We do not need a constitutional amendment; we need action.",
+      "confidence": 0.7,
+      "context_type": "Procedural Rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988413+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "We must do something else, too, something both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortunate strikes immigrants who came to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.",
+      "confidence": 0.75,
+      "context_type": "Institutional Support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988415+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_respect_score",
+      "quote_text": "And let me say something that's not in my script tonight. I know this is not going to be easy. But another reason I was elected is to take the tough decisions in the next 4 years that will carry our country through the next 50 years. I know it is easier for me than for you to say or do.",
+      "confidence": 0.7,
+      "context_type": "Institutional Role Assumption",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988417+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_subversion_score",
+      "quote_text": "My balanced budget makes an unprecedented commitment to these goals, $51 billion next year. But far more than money is required. I have a plan, a call to action for American education, based on these 10 principles: First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them.",
+      "confidence": 0.6,
+      "context_type": "Policy Proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988419+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create jobs through investment by businesses and loans by banks. We should double the number of empowerment zones.",
+      "confidence": 0.6,
+      "context_type": "Systemic Improvement Focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988421+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_continuity_score",
+      "quote_text": "We must also protect our global environment, working to ban the worst toxic chemicals and to reduce the greenhouse gases that challenge our health even as they change our climate.",
+      "confidence": 0.5,
+      "context_type": "Environmental Policy Continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988423+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "Let's work together to meet these three goals: Every 8-year-old must be able to read; every 12-year-old must be able to log on to the Internet; every 18-year-old must be able to go to college; and every adult American must be able to keep on learning for a lifetime.",
+      "confidence": 0.55,
+      "context_type": "Systemic Goal Setting",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988425+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_replacement_score",
+      "quote_text": "We must also make the 13th and 14th years of education, at least 2 years of college, just as universal in America by the 21st century as a high school education is today, and we must open the doors of college to all Americans.",
+      "confidence": 0.6,
+      "context_type": "Systemic Goal Setting",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:47:17.988427+00:00"
+    }
+  ]
+}

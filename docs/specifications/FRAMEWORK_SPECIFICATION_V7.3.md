@@ -109,6 +109,7 @@ The appendix MUST begin with `<details><summary>Machine-Readable Configuration</
   },
   "gasket_schema": {
     "version": "v7.3",
+    "extraction_method": "intelligent_extractor",
     "target_keys": ["dimension_a_score", "categorical_dimension"],
     "extraction_patterns": {
       "dimension_a_score": ["dimension_a.{0,20}score"],
@@ -130,10 +131,13 @@ All gasket schema content MUST be wrapped in proprietary markers to ensure relia
 ```markdown
 <GASKET_SCHEMA_START>
 {
-  "version": "v7.3",
-  "target_keys": [...],
-  "extraction_patterns": {...},
-  "validation_rules": {...}
+  "gasket_schema": {
+    "version": "v7.3",
+    "extraction_method": "intelligent_extractor",
+    "target_keys": [...],
+    "extraction_patterns": {...},
+    "validation_rules": {...}
+  }
 }
 <GASKET_SCHEMA_END>
 ```
@@ -143,6 +147,7 @@ All gasket schema content MUST be wrapped in proprietary markers to ensure relia
 - **Maintains THIN principles** - simple extraction, LLM intelligence
 - **Framework author control** - exact placement of gasket content
 - **Future-proof** - easy to extend with new marker types
+- **Consistent structure** - the `"gasket_schema"` wrapper provides a uniform interface for extraction tools
 
 #### **6.2 Namespace Protection (REQUIRED)**
 **Critical**: The terms "gasket_schema", "target_keys", "extraction_patterns", and "validation_rules" MUST NOT appear anywhere in the framework narrative or documentation outside the marked section.
@@ -165,25 +170,27 @@ All gasket schema content MUST be wrapped in proprietary markers to ensure relia
 #### **6.3 Gasket Schema Structure (REQUIRED)**
 ```json
 {
-  "version": "v7.3",
-  "extraction_method": "intelligent_extractor",
-  "target_keys": [
-    "dimension_a_score", "dimension_a_salience", "dimension_a_confidence",
-    "dimension_b_score", "dimension_b_salience", "dimension_b_confidence"
-  ],
-  "extraction_patterns": {
-    "dimension_a_score": ["dimension_a.{0,20}score", "dimension_a.{0,20}[0-9]\\.[0-9]"],
-    "dimension_a_salience": ["dimension_a.{0,20}salience", "dimension_a.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-    "dimension_a_confidence": ["dimension_a.{0,20}confidence", "dimension_a.{0,20}confidence.{0,20}[0-9]\\.[0-9]"]
-  },
-  "validation_rules": {
-    "required_fields": ["dimension_a_score", "dimension_a_salience", "dimension_a_confidence"],
-    "score_ranges": {"min": 0.0, "max": 1.0},
-    "metadata_ranges": {
-      "salience": {"min": 0.0, "max": 1.0},
-      "confidence": {"min": 0.0, "max": 1.0}
+  "gasket_schema": {
+    "version": "v7.3",
+    "extraction_method": "intelligent_extractor",
+    "target_keys": [
+      "dimension_a_score", "dimension_a_salience", "dimension_a_confidence",
+      "dimension_b_score", "dimension_b_salience", "dimension_b_confidence"
+    ],
+    "extraction_patterns": {
+      "dimension_a_score": ["dimension_a.{0,20}score", "dimension_a.{0,20}[0-9]\\.[0-9]"],
+      "dimension_a_salience": ["dimension_a.{0,20}salience", "dimension_a.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
+      "dimension_a_confidence": ["dimension_a.{0,20}confidence", "dimension_a.{0,20}confidence.{0,20}[0-9]\\.[0-9]"]
     },
-    "fallback_strategy": "use_default_values"
+    "validation_rules": {
+      "required_fields": ["dimension_a_score", "dimension_a_salience", "dimension_a_confidence"],
+      "score_ranges": {"min": 0.0, "max": 1.0},
+      "metadata_ranges": {
+        "salience": {"min": 0.0, "max": 1.0},
+      "confidence": {"min": 0.0, "max": 1.0}
+      },
+      "fallback_strategy": "use_default_values"
+    }
   }
 }
 ```

@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework, focusing on identifying semantic concepts related to civic virtues and their strategic deployment in political discourse. Evidence extraction prioritized direct quotes illustrating these concepts."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "diginity": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.3,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "resentment": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.9,
+          "context_type": "group_identification"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.9,
+          "context_type": "group_identification"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "But, but my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.8,
+          "context_type": "blame_attribution"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "It's so sort of the perfect encapsulation of the dumbest way to govern our country.",
+          "confidence": 0.7,
+          "context_type": "cognitive_bias_exploitation"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I think actualy every speech I've given in that NatCon, at the Wall Street Journal editorial page.",
+          "confidence": 0.6,
+          "context_type": "evidence_language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.7,
+          "context_type": "possibility_language"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "And so, I, I want to come back to something that I, I started with here, which is that we've made a lot of progress.",
+          "confidence": 0.6,
+          "context_type": "problem_solving_focus"
+        },
+        {
+          "dimension": "diginity",
+          "quote_text": "We need people who put the interests of their own citizens first, of our own citizens first.",
+          "confidence": 0.5,
+          "context_type": "individual_agency"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "And by the way, I know for the Brits here, UK leaders should look out for citizens of the UK, or subjects, or whatever you guys call yourselves, and so on and on and on for others, other citizens of other countries.",
+          "confidence": 0.6,
+          "context_type": "fairness_language"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "What is the first truly Islamist country that will get a new nuclear weapon?",
+          "confidence": 0.5,
+          "context_type": "unrealistic_promises"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

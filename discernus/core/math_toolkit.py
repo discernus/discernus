@@ -491,6 +491,89 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
         raise MathToolkitError(f"ANOVA failed: {str(e)}")
 
 
+def perform_linear_regression(dataframe: pd.DataFrame,
+                             dependent_variable: str,
+                             independent_variables: List[str],
+                             **kwargs) -> Dict[str, Any]:
+    """
+    Perform linear regression analysis using numpy.
+
+    Args:
+        dataframe: Input DataFrame.
+        dependent_variable: Name of the dependent variable column.
+        independent_variables: List of independent variable column names.
+
+    Returns:
+        Dictionary containing regression results.
+    """
+    try:
+        # Validate inputs
+        required_cols = [dependent_variable] + independent_variables
+        missing_cols = [col for col in required_cols if col not in dataframe.columns]
+        if missing_cols:
+            raise MathToolkitError(f"Missing required columns for regression: {missing_cols}")
+
+        # Prepare data, dropping rows with any missing values in the relevant columns
+        clean_df = dataframe[required_cols].dropna()
+        if len(clean_df) < len(independent_variables) + 2:
+            raise MathToolkitError(f"Insufficient data for regression (n={len(clean_df)})")
+
+        y = clean_df[dependent_variable].values
+        X_df = clean_df[independent_variables]
+        X = np.column_stack([np.ones(len(X_df))] + [X_df[col].values for col in X_df.columns])
+
+        # Fit the model using numpy's least squares
+        coefficients, residuals, rank, singular_values = np.linalg.lstsq(X, y, rcond=None)
+
+        # Calculate R-squared
+        y_mean = np.mean(y)
+        ss_total = np.sum((y - y_mean)**2)
+        ss_residual = np.sum(residuals**2) if residuals.size > 0 else 0
+        r_squared = 1 - (ss_residual / ss_total) if ss_total > 0 else 0
+        
+        # Degrees of freedom
+        n_obs = len(y)
+        df_model = X.shape[1] - 1
+        df_residual = n_obs - (df_model + 1)
+
+        # Calculate F-statistic and its p-value
+        if df_residual > 0:
+            ms_model = np.sum((np.dot(X, coefficients) - y_mean)**2) / df_model if df_model > 0 else 0
+            ms_residual = ss_residual / df_residual
+            f_statistic = ms_model / ms_residual if ms_residual > 0 else 0
+            f_p_value = 1 - stats.f.cdf(f_statistic, df_model, df_residual) if f_statistic > 0 else 1.0
+        else:
+            f_statistic = None
+            f_p_value = None
+            
+        # Extract results
+        coeff_names = ['intercept'] + independent_variables
+        results = {
+            "type": "linear_regression_numpy",
+            "dependent_variable": dependent_variable,
+            "independent_variables": independent_variables,
+            "n_observations": int(n_obs),
+            "r_squared": float(r_squared),
+            "f_statistic": float(f_statistic) if f_statistic is not None else None,
+            "f_p_value": float(f_p_value) if f_p_value is not None else None,
+            "coefficients": {name: float(coef) for name, coef in zip(coeff_names, coefficients)},
+        }
+        
+        # PROVENANCE
+        provenance = {
+            "input_columns": required_cols,
+            "input_document_ids": clean_df.index.tolist() if 'aid' not in clean_df.columns else clean_df['aid'].unique().tolist(),
+            "filter_conditions": "Used all rows with valid data for specified variables."
+        }
+        results["provenance"] = provenance
+
+        return results
+
+    except Exception as e:
+        logger.error(f"Error performing linear regression: {str(e)}")
+        raise MathToolkitError(f"Linear regression failed: {str(e)}")
+
+
 def perform_two_way_anova(dataframe: pd.DataFrame,
                          factor1: str,
                          factor2: str,
@@ -1277,6 +1360,7 @@ TOOL_REGISTRY = {
     "calculate_pearson_correlation": lambda df, **kwargs: calculate_pearson_correlation(df, kwargs.get('columns', []), "pearson"),
     "perform_one_way_anova": perform_one_way_anova,
     "perform_two_way_anova": perform_two_way_anova,
+    "perform_linear_regression": perform_linear_regression,
     "calculate_effect_sizes": calculate_effect_sizes,
     "calculate_derived_metrics": calculate_derived_metrics,
     "perform_statistical_tests": perform_statistical_tests,

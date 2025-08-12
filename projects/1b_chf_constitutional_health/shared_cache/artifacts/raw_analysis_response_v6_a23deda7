@@ -1,0 +1,178 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Focus was placed on identifying textual markers for each dimension. Confidence levels reflect the clarity and salience of these markers within the provided text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "procedural_legitimacy_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "procedural_rejection_salience": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "procedural_legitimacy_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "procedural_rejection_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "institutional_respect_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "institutional_subversion_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "institutional_respect_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "institutional_subversion_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "institutional_respect_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "institutional_subversion_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "systemic_continuity_score": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "systemic_replacement_score": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "systemic_continuity_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "systemic_replacement_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "systemic_continuity_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "systemic_replacement_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We have faced serious challenges together, and now we face a choice: We can go forward with confidence and resolve, or we can turn back to the dangerous illusion that terrorists are not plotting and outlaw regimes are not threat to us. We can press on with economic growth and reforms in education and Medicare, or we can turn back to old policies and old divisions.",
+          "confidence": 0.8,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our greatest responsibility is the active defense of the American people.",
+          "confidence": 0.7,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman. America acts in this cause with friends and allies at our side, yet we understand our special calling: This great Republic will lead the cause of freedom.",
+          "confidence": 0.7,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "The terrorist threat will not expire on that schedule. Our law enforcement needs this vital legislation to track terrorists, to disrupt their cells, and to seize their assets.",
+          "confidence": 0.6,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "If these methods are good for hunting criminals, they are even more important for hunting terrorists.",
+          "confidence": 0.5,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "My administration is promoting free and fair trade to open up new markets for American entrepreneurs and manufacturers and farmers, to create jobs for American workers.",
+          "confidence": 0.6,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "Congress has some unfinished business on the issue of taxes. The tax reductions you passed are set to expire. Unless you act, the unfair tax on marriage will go back up. Unless you act, millions of families will be charged $300 more in Federal taxes for every child.",
+          "confidence": 0.6,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "Activist judges have begun redefining marriage by court order, without regard for the will of the people and their elected representatives. On an issue of such great consequence, the people's voice must be heard. If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process. Our Nation must defend the sanctity of marriage.",
+          "confidence": 0.6,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "America's growing economy is also a changing economy. As technology transforms the way almost every job is done, America becomes more productive and workers need new skills. Much of our job growth will be found in high-skilled fields like health care and biotechnology.",
+          "confidence": 0.7,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "Our Nation's health care system, like our economy, is also in a time of change. Amazing medical technologies are improving and saving lives. This dramatic progress has brought its own challenge, in the rising costs of medical care and health insurance.",
+          "confidence": 0.7,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "A Government-run health care system is the wrong prescription. By keeping costs under control, expanding access, and helping more Americans afford coverage, we will preserve the system of private medicine that makes America's health care the best in the world.",
+          "confidence": 0.5,
+          "context_type": "explicit_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

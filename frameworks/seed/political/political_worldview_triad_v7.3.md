@@ -99,35 +99,28 @@ The analysis agent outputs a raw analysis log containing:
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
-    "version": "7.1",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
-      "immutable_identity_politics_score",
-      "tribal_domination_score",
-      "pluralist_individual_dignity_score",
-      "immutable_identity_politics_salience",
-      "tribal_domination_salience",
-      "pluralist_individual_dignity_salience",
-      "immutable_identity_politics_confidence",
-      "tribal_domination_confidence",
-      "pluralist_individual_dignity_confidence"
+      "liberal_score", "conservative_score", "populist_score", "liberal_salience", "conservative_salience", "populist_salience", "liberal_confidence", "conservative_confidence", "populist_confidence"
     ],
     "extraction_patterns": {
-      "immutable_identity_politics_score": ["immutable.{0,20}identity.{0,20}politics.{0,20}score", "identity.{0,20}politics.{0,20}rating", "identity\\s*politics\\s*:\\s*[0-9]"],
-      "tribal_domination_score": ["tribal.{0,20}domination.{0,20}score", "tribal.{0,20}domination.{0,20}rating", "tribal\\s*domination\\s*:\\s*[0-9]"],
-      "pluralist_individual_dignity_score": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}score", "individual.{0,20}dignity.{0,20}rating", "individual\\s*dignity\\s*:\\s*[0-9]"],
-      "immutable_identity_politics_salience": ["immutable.{0,20}identity.{0,20}politics.{0,20}salience", "identity.{0,20}politics.{0,20}importance", "identity.{0,20}politics.{0,20}centrality"],
-      "tribal_domination_salience": ["tribal.{0,20}domination.{0,20}salience", "tribal.{0,20}domination.{0,20}importance", "domination.{0,20}centrality"],
-      "pluralist_individual_dignity_salience": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}salience", "individual.{0,20}dignity.{0,20}importance", "individual.{0,20}dignity.{0,20}centrality"],
-      "immutable_identity_politics_confidence": ["immutable.{0,20}identity.{0,20}politics.{0,20}confidence", "identity.{0,20}politics.{0,20}certainty", "identity.{0,20}politics.{0,20}sure"],
-      "tribal_domination_confidence": ["tribal.{0,20}domination.{0,20}confidence", "tribal.{0,20}domination.{0,20}certainty", "domination.{0,20}sure"],
-      "pluralist_individual_dignity_confidence": ["pluralist.{0,20}individual.{0,20}dignity.{0,20}confidence", "individual.{0,20}dignity.{0,20}certainty", "individual.{0,20}dignity.{0,20}sure"]
+      "liberal_score": ["liberal.*?score.*?([0-9]\\.[0-9])", "liberal.*?([0-9]\\.[0-9])", "liberal\\s*:\\s*([0-9]\\.[0-9])"],
+      "conservative_score": ["conservative.*?score.*?([0-9]\\.[0-9])", "conservative.*?([0-9]\\.[0-9])", "conservative\\s*:\\s*([0-9]\\.[0-9])"],
+      "populist_score": ["populist.*?score.*?([0-9]\\.[0-9])", "populist.*?([0-9]\\.[0-9])", "populist\\s*:\\s*([0-9]\\.[0-9])"]
     },
     "validation_rules": {
       "required_fields": [
-        "immutable_identity_politics_score", "tribal_domination_score", "pluralist_individual_dignity_score"
+        "liberal_score", "conservative_score", "populist_score"
       ],
       "score_ranges": {"min": 0.0, "max": 1.0},
       "metadata_ranges": {
@@ -138,6 +131,4 @@ The analysis agent outputs a raw analysis log containing:
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

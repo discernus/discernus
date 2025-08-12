@@ -53,6 +53,16 @@ analysis:
   models:
     - "vertex_ai/gemini-2.5-pro"
 
+# OPTIONAL: Declarative statistical analyses to be performed by the MathToolkit.
+statistical_analyses:
+  - type: "descriptive_stats"
+    columns: ["column1", "column2"]
+  - type: "correlation_matrix"
+    columns: ["column1", "column2", "column3"]
+  - type: "linear_regression"
+    dependent_variable: "dependent_column"
+    independent_variables: ["independent_col1", "independent_col2"]
+
 # OPTIONAL: Configuration for the synthesis process.
 synthesis:
   # Model to use for the final report synthesis.

@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:45:35.031569+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My budget also provides strong funding for leading-edge technology, from hydrogen-fueled cars to clean coal to renewable sources such as ethanol. Four years of debate is enough. I urge Congress to pass legislation that makes America more secure and less dependent on foreign energy.",
+      "confidence": 0.95,
+      "context_type": "example",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031551+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "To make our economy stronger and more productive, America must reward, not punish, the efforts and dreams of entrepreneurs. Small business is the path of advancement, especially for women and minorities, so we must free small businesses from needless regulation and protect honest job-creators from junk lawsuits.",
+      "confidence": 0.9,
+      "context_type": "example",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031556+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Justice is distorted and our economy is held back by irresponsible class actions and frivolous asbestos claims, and I urge Congress to pass legal reforms this year.",
+      "confidence": 0.7,
+      "context_type": "example",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031557+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Two weeks ago, I stood on the steps of this Capitol and renewed the commitment of our Nation to the guiding ideal of liberty for all. This evening I will set forth policies to advance that ideal at home and around the world.",
+      "confidence": 0.9,
+      "context_type": "statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031559+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As Members of Congress, the choices we make together will answer that question. Over the next several months, on issue after issue, let us do what Americans have always done and build a better world for our children and our grandchildren.",
+      "confidence": 0.85,
+      "context_type": "statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031560+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "My administration has a clear vision to preserve the environment and to improve the health of our citizens. And my budget also provides strong funding for leading-edge technology, from hydrogen-fueled cars to clean coal to renewable sources such as ethanol.",
+      "confidence": 0.6,
+      "context_type": "statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031562+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Social Security was created decades ago for a very different era. In those days, people did not live as long. Benefits were much lower than they are today. And a half century ago, about 16 workers paid into the system for each person drawing benefits. Our society has changed in ways the founders of Social Security could not have foreseen.",
+      "confidence": 0.8,
+      "context_type": "description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031563+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Fixing Social Security permanently will require an open, candid review of the options. Some have suggested limiting benefits for wealthy retirees. Former Congressmen Tim Penny has raised the possibility of indexing benefits to prices rather than wages. During the 1990s, my predecessor, President Clinton, spoke of increasing the retirement age.",
+      "confidence": 0.75,
+      "context_type": "proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031565+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "For young workers, the Social Security system has serious problems that will grow worse with time. Social Security was created decades ago for a very different era. [...] And in today's world, people are living longer and, therefore, drawing benefits longer.",
+      "confidence": 0.7,
+      "context_type": "description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:35.031566+00:00"
+    }
+  ]
+}

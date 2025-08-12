@@ -323,7 +323,14 @@ Evaluation of populist discourse's implications for democratic institutions and 
       "poor": [0.0, 0.59]
     },
     "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  },
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
     "version": "v7.3",
     "extraction_method": "intelligent_extractor",
@@ -359,6 +366,4 @@ Evaluation of populist discourse's implications for democratic institutions and 
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

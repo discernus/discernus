@@ -305,6 +305,22 @@ Evaluation of discourse's contribution to democratic health and civic culture
     },
     "instructions": "Follow the sequential analysis format exactly. Each step must include specific textual evidence, numerical scores (0.0-1.0), salience assessment, and confidence rating. Final integration must calculate all tension scores and apply pattern classifications."
   },
+  "reliability_rubric": {
+    "cronbachs_alpha": {
+      "excellent": [0.80, 1.0],
+      "good": [0.70, 0.79],
+      "acceptable": [0.60, 0.69],
+      "poor": [0.0, 0.59]
+    },
+    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
     "version": "v7.3",
     "extraction_method": "intelligent_extractor",
@@ -362,6 +378,4 @@ Evaluation of discourse's contribution to democratic health and civic culture
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

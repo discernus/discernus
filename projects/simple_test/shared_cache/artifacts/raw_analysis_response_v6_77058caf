@@ -1,0 +1,250 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the framework. Emphasis placed on identifying specific linguistic markers and their conceptual underpinnings for each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "individual_dignity_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "fear_score": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "hope_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "envy_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "conversion_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "enity_score": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "amity_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fragmentative_goals_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "cohesive_goals_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "tribal_dominance_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "individual_dignity_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "fear_salience": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "hope_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "envy_salience": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "conversion_salience": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "enity_salience": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.5
+        },
+        "amity_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fragmentative_goals_salience": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "cohesive_goals_salience": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "tribal_dominance_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "individual_dignity_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.7
+        },
+        "fear_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.0,
+          "confidence": 0.6
+        },
+        "hope_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "envy_confidence": {
+          "raw_score": 0.6,
+          "salience": 0.0,
+          "confidence": 0.6
+        },
+        "conversion_confidence": {
+          "raw_score": 0.7,
+          "salience": 0.0,
+          "confidence": 0.7
+        },
+        "enity_confidence": {
+          "raw_score": 0.5,
+          "salience": 0.0,
+          "confidence": 0.5
+        },
+        "amity_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "fragmentative_goals_confidence": {
+          "raw_score": 0.8,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "cohesive_goals_confidence": {
+          "raw_score": 0.9,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "The same billionaire parties are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "They will throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endlesly greed is costing the lives of everyone else.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "So to all of those who came here today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "envy_score",
+          "quote_text": "But we're smarter than that. We know better than that.",
+          "confidence": 0.6,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "conversion_score",
+          "quote_text": "We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "They scratch his back and he scratches theirs. And all of us are left behind.",
+          "confidence": 0.7,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"",
+          "confidence": 0.9,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.8,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

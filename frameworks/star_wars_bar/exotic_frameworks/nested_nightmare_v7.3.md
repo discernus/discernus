@@ -120,11 +120,46 @@ The analysis agent outputs a comprehensive contextual analysis containing nested
       "description": "Sequential nested contextual analysis with chain-of-thought methodology",
       "analysis_prompt": "You are an expert analyst of nested discourse contexts with deep understanding of hierarchical meaning structures across diverse analytical contexts. Analyze this text through focused sequential steps, examining each contextual layer independently before hierarchical integration.\\n\\nSTEP 1 - PRIMARY CONTEXTUAL LAYERS ANALYSIS\\nFocus ONLY on primary contextual dimensions (ignore coherence analysis for now):\\n- Look for surface context patterns: immediate rhetorical content, explicit statements, direct appeals, rhetorical devices - Note: These are semantic concepts, look for what is explicitly stated and immediately apparent, not just surface-level words\\n- Look for social context patterns: community implications, cultural assumptions, social positioning, group dynamics - Note: These are semantic concepts, look for how discourse positions speaker within social hierarchies and invokes community values, not just social references\\n- Look for historical context patterns: temporal references, precedents, historical connections, past events - Note: These are semantic concepts, look for how discourse connects to historical precedents and temporal factors, not just historical mentions\\n- Look for systemic context patterns: institutional elements, structural factors, power dynamics, system interactions - Note: These are semantic concepts, look for how discourse interacts with existing power structures and institutional assumptions, not just system references\\n- Look for meta context patterns: self-referential elements, discourse about discourse, recursive patterns, ecosystem positioning - Note: These are semantic concepts, look for how discourse comments on its own nature and positions itself within broader discourse ecosystem, not just meta-language\\n- Score each contextual dimension (0.0-1.0) with specific textual evidence\\n- Assess salience (0.0-1.0): How central are primary contextual layers to the overall message?\\n- State confidence (0.0-1.0): How certain are you in this assessment?\\nShow your analytical work and evidence before proceeding.\\n\\nSTEP 2 - HIERARCHICAL COHERENCE ANALYSIS\\nNow focus ONLY on coherence dimensions:\\n- Look for vertical coherence patterns: alignment across context levels, hierarchical consistency, level-to-level connections - Note: These are semantic concepts, look for how different contextual layers align and support each other vertically\\n- Look for horizontal coherence patterns: consistency within context levels, intra-level alignment, same-level harmony - Note: These are semantic concepts, look for consistency and alignment within individual contextual layers\\n- Look for recursive coherence patterns: self-referential consistency, circular logic, meta-level alignment - Note: These are semantic concepts, look for how discourse maintains consistency in its self-referential and recursive elements\\n- Score each coherence dimension (0.0-1.0) with specific textual evidence\\n- Assess salience (0.0-1.0): How central is hierarchical coherence to the message?\\n- State confidence (0.0-1.0): How certain are you in this assessment?\\nShow your analytical work and evidence before proceeding.\\n\\nFINAL STEP - NESTED INTEGRATION AND VALIDATION\\nReview your step-by-step analysis:\\n- Check for scoring consistency across all contextual layers and coherence dimensions\\n- Validate that evidence quality meets academic standards for nested analysis\\n- Assess how meaning operates across multiple hierarchical layers\\n- Confirm confidence levels are appropriately calibrated for complex nested structures\\n- Calculate contextual depth and hierarchical coherence indices\\n- Apply pattern classifications based on nested complexity profile\\n\\nProvide your final structured analysis following this format:\\n\\n**NESTED CONTEXTUAL ASSESSMENT**\\n\\n**Primary Contexts**: Surface [score], Social [score], Historical [score], Systemic [score], Meta [score] (salience: [score], confidence: [score])\\n**Hierarchical Coherence**: Vertical [score], Horizontal [score], Recursive [score] (salience: [score], confidence: [score])\\n\\n**Calculated Metrics**:\\n- Contextual Depth Index: [calculated score]\\n- Hierarchical Coherence Index: [calculated score]\\n- Nested Complexity Score: [calculated score]\\n\\n**Key Insights**: [Summary of nested complexity patterns, hierarchical meaning structures, and discourse ecosystem positioning]"
     }
+  },
+  "reliability_rubric": {
+    "cronbachs_alpha": {
+      "excellent": [0.80, 1.0],
+      "good": [0.70, 0.79],
+      "acceptable": [0.60, 0.69],
+      "poor": [0.0, 0.59]
+    },
+    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   }
 }
 ```
 
 </details>
+
+<GASKET_SCHEMA_START>
+{
+  "gasket_schema": {
+    "version": "v7.3",
+    "extraction_method": "intelligent_extractor",
+    "target_keys": [
+      "nested_complexity_score", "nested_complexity_salience", "nested_complexity_confidence"
+    ],
+    "extraction_patterns": {
+      "nested_complexity_score": ["nested.*?complexity.*?score.*?([0-9]\\.[0-9])", "nested.*?complexity.*?([0-9]\\.[0-9])", "nested\\s*complexity\\s*:\\s*([0-9]\\.[0-9])"]
+    },
+    "validation_rules": {
+      "required_fields": [
+        "nested_complexity_score"
+      ],
+      "score_ranges": {"min": 0.0, "max": 1.0},
+      "metadata_ranges": {
+        "salience": {"min": 0.0, "max": 1.0},
+        "confidence": {"min": 0.0, "max": 1.0}
+      },
+      "fallback_strategy": "use_default_values"
+    }
+  }
+}
+<GASKET_SCHEMA_END>
 
 You are an expert analyst of nested discourse contexts. Analyze the provided text through multiple hierarchical layers, examining how meaning operates across different contextual levels.
 

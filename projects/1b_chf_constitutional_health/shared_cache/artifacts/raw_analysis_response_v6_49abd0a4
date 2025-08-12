@@ -1,0 +1,172 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Constitutional Health Framework (CHF)",
+    "framework_version": "v7.3",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the sequential steps outlined in the CHF v7.3 framework. Attention paid to specific linguistic markers for each dimension. Confidence is high due to clear articulation of concepts within the speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.70,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "procedural_rejection": {
+          "raw_score": 0.10,
+          "salience": 0.15,
+          "confidence": 0.70
+        },
+        "procedural_legitimacy_salience": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "procedural_rejection_salience": {
+          "raw_score": 0.15,
+          "salience": 0.15,
+          "confidence": 0.70
+        },
+        "procedural_legitimacy_confidence": {
+          "raw_score": 0.80,
+          "salience": 0.75,
+          "confidence": 0.80
+        },
+        "procedural_rejection_confidence": {
+          "raw_score": 0.70,
+          "salience": 0.15,
+          "confidence": 0.70
+        },
+        "institutional_respect_score": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "institutional_subversion_score": {
+          "raw_score": 0.20,
+          "salience": 0.25,
+          "confidence": 0.65
+        },
+        "institutional_respect_salience": {
+          "raw_score": 0.65,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "institutional_subversion_salience": {
+          "raw_score": 0.25,
+          "salience": 0.25,
+          "confidence": 0.65
+        },
+        "institutional_respect_confidence": {
+          "raw_score": 0.75,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "institutional_subversion_confidence": {
+          "raw_score": 0.65,
+          "salience": 0.25,
+          "confidence": 0.65
+        },
+        "systemic_continuity_score": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.60
+        },
+        "systemic_replacement_score": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.55
+        },
+        "systemic_continuity_salience": {
+          "raw_score": 0.45,
+          "salience": 0.45,
+          "confidence": 0.60
+        },
+        "systemic_replacement_salience": {
+          "raw_score": 0.35,
+          "salience": 0.35,
+          "confidence": 0.55
+        },
+        "systemic_continuity_confidence": {
+          "raw_score": 0.60,
+          "salience": 0.45,
+          "confidence": 0.60
+        },
+        "systemic_replacement_confidence": {
+          "raw_score": 0.55,
+          "salience": 0.35,
+          "confidence": 0.55
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "First, we must move quickly to complete the unfinished business of our country, to balance the budget, renew our democracy, and finish the job of welfare reform.",
+          "confidence": 0.8,
+          "context_type": "Procedural Language"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My balanced budget makes an unprecedented commitment to these goals, $51 billion next year. But far more than money is required. I have a plan, a call to action for American education, based on these 10 principles: First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them.",
+          "confidence": 0.8,
+          "context_type": "Procedural Language"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "We do not need a constitutional amendment; we need action.",
+          "confidence": 0.7,
+          "context_type": "Procedural Rejection"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "We must do something else, too, something both Republican and Democratic Governors have asked us to do, to restore basic health and disability benefits when misfortunate strikes immigrants who came to this country legally, who work hard, pay taxes, and obey the law. To do otherwise is simply unworthy of a great nation of immigrants.",
+          "confidence": 0.75,
+          "context_type": "Institutional Support"
+        },
+        {
+          "dimension": "institutional_respect_score",
+          "quote_text": "And let me say something that's not in my script tonight. I know this is not going to be easy. But another reason I was elected is to take the tough decisions in the next 4 years that will carry our country through the next 50 years. I know it is easier for me than for you to say or do.",
+          "confidence": 0.7,
+          "context_type": "Institutional Role Assumption"
+        },
+        {
+          "dimension": "institutional_subversion_score",
+          "quote_text": "My balanced budget makes an unprecedented commitment to these goals, $51 billion next year. But far more than money is required. I have a plan, a call to action for American education, based on these 10 principles: First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century. Every State and school must shape the curriculum to reflect these standards and train teachers to lift students up to them.",
+          "confidence": 0.6,
+          "context_type": "Policy Proposal"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "Our growing economy has helped to revive poor urban and rural neighborhoods. But we must do more to empower them to create jobs through investment by businesses and loans by banks. We should double the number of empowerment zones.",
+          "confidence": 0.6,
+          "context_type": "Systemic Improvement Focus"
+        },
+        {
+          "dimension": "systemic_continuity_score",
+          "quote_text": "We must also protect our global environment, working to ban the worst toxic chemicals and to reduce the greenhouse gases that challenge our health even as they change our climate.",
+          "confidence": 0.5,
+          "context_type": "Environmental Policy Continuity"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "Let's work together to meet these three goals: Every 8-year-old must be able to read; every 12-year-old must be able to log on to the Internet; every 18-year-old must be able to go to college; and every adult American must be able to keep on learning for a lifetime.",
+          "confidence": 0.55,
+          "context_type": "Systemic Goal Setting"
+        },
+        {
+          "dimension": "systemic_replacement_score",
+          "quote_text": "We must also make the 13th and 14th years of education, at least 2 years of college, just as universal in America by the 21st century as a high school education is today, and we must open the doors of college to all Americans.",
+          "confidence": 0.6,
+          "context_type": "Systemic Goal Setting"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

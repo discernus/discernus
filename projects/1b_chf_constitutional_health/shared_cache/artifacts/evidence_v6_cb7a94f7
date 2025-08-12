@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:46:59.924439+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+      "confidence": 0.9,
+      "context_type": "direct_mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924395+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our Founders understood that the preservation of our liberty and our Union depended upon responsible citizenship. And we need a new sense of responsibility for a new century. There is work to do, work that Government alone cannot do: teaching children to read, hiring people off welfare rolls, coming out from behind locked doors and shuttered windows to help reclaim our streets from drugs and gangs and crime, taking time out of our own lives to serve others.",
+      "confidence": 0.8,
+      "context_type": "direct_mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924409+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The President spoke at 12:05 p.m. at the West Front of the Capitol. Prior to the address, Chief Justice William Rehnquist administered the oath of office.",
+      "confidence": 0.7,
+      "context_type": "description_of_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924414+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As times change, so Government must change. We need a new Government for a new century, humble enough not to try to solve all our problems for us but strong enough to give us the tools to solve our problems ourselves, a Government that is smaller, lives within its means, and does more with less.",
+      "confidence": 0.9,
+      "context_type": "direct_mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924418+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "From the height of this place and the summit of this century, let us go forth.",
+      "confidence": 0.8,
+      "context_type": "metaphorical_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924421+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The word should be \"come\" not \"comes,\" but it was printed as \"comes\" in the Public Papers of the Presidents of the United States. Our usual practice is to try to reproduce the text of the \"official\" publication, even if that involves errors or typos.",
+      "confidence": 0.7,
+      "context_type": "editorial_note",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924423+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America became the world's mightiest industrial power, saved the world from tyranny in two World Wars and a long cold war, and time and again reached out across the globe to millions who, like us, longed for the blessings of liberty.",
+      "confidence": 0.8,
+      "context_type": "historical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924426+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our land of new promise will be a nation that meets its obligations, a nation that balances its budget but never loses the balance of its values, a nation where our grandparents have secure retirement and health care and their grandchildren know we have made the reforms necessary to sustain those benefits for their time, a nation that fortifies the world's most productive economy even as it protects the great natural bounty of our waters, air, and majestic land.",
+      "confidence": 0.7,
+      "context_type": "aspirational_continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924429+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "The challenge of our past remains the challenge of our future: Will we be one Nation, one people, with one common destiny, or not? Will we all come together, or come apart?",
+      "confidence": 0.7,
+      "context_type": "rhetorical_question_implying_change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:46:59.924433+00:00"
+    }
+  ]
+}

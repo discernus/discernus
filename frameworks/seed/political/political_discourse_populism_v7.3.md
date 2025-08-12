@@ -108,26 +108,26 @@ This framework is optimized for temporal analysis of populist discourse emergenc
       "acceptable": [0.60, 0.69],
       "poor": [0.0, 0.59]
     },
-    "notes": "Defines quality thresholds for framework reliability in longitudinal populism studies."
-  },
+    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
+  }
+}
+```
+
+</details>
+
+<GASKET_SCHEMA_START>
+{
   "gasket_schema": {
-    "version": "7.1",
+    "version": "v7.3",
     "extraction_method": "intelligent_extractor",
     "target_keys": [
-      "populism_pluralism_axis_score",
-      "nationalism_patriotism_axis_score",
-      "populism_pluralism_axis_salience",
-      "nationalism_patriotism_axis_salience",
-      "populism_pluralism_axis_confidence",
-      "nationalism_patriotism_axis_confidence"
+      "populism_pluralism_axis_score", "nationalism_patriotism_axis_score",
+      "populism_pluralism_axis_salience", "nationalism_patriotism_axis_salience",
+      "populism_pluralism_axis_confidence", "nationalism_patriotism_axis_confidence"
     ],
     "extraction_patterns": {
-      "populism_pluralism_axis_score": ["populism.{0,20}pluralism.{0,20}axis.{0,20}score", "populism.{0,20}axis.{0,20}rating", "vertical\\s*axis\\s*:\\s*[0-9]"],
-      "nationalism_patriotism_axis_score": ["nationalism.{0,20}patriotism.{0,20}axis.{0,20}score", "nationalism.{0,20}axis.{0,20}rating", "horizontal\\s*axis\\s*:\\s*[0-9]"],
-      "populism_pluralism_axis_salience": ["populism.{0,20}pluralism.{0,20}axis.{0,20}salience", "populism.{0,20}axis.{0,20}importance", "vertical.{0,20}axis.{0,20}centrality"],
-      "nationalism_patriotism_axis_salience": ["nationalism.{0,20}patriotism.{0,20}axis.{0,20}salience", "nationalism.{0,20}axis.{0,20}importance", "horizontal.{0,20}axis.{0,20}centrality"],
-      "populism_pluralism_axis_confidence": ["populism.{0,20}pluralism.{0,20}axis.{0,20}confidence", "populism.{0,20}axis.{0,20}certainty", "vertical.{0,20}axis.{0,20}sure"],
-      "nationalism_patriotism_axis_confidence": ["nationalism.{0,20}patriotism.{0,20}axis.{0,20}confidence", "nationalism.{0,20}axis.{0,20}certainty", "horizontal.{0,20}axis.{0,20}sure"]
+      "populism_pluralism_axis_score": ["populism.*?pluralism.*?axis.*?score.*?([0-9]\\.[0-9])", "populism.*?axis.*?([0-9]\\.[0-9])", "vertical\\s*axis\\s*:\\s*([0-9]\\.[0-9])"],
+      "nationalism_patriotism_axis_score": ["nationalism.*?patriotism.*?axis.*?score.*?([0-9]\\.[0-9])", "nationalism.*?axis.*?([0-9]\\.[0-9])", "horizontal\\s*axis\\s*:\\s*([0-9]\\.[0-9])"]
     },
     "validation_rules": {
       "required_fields": [
@@ -142,6 +142,4 @@ This framework is optimized for temporal analysis of populist discourse emergenc
     }
   }
 }
-```
-
-</details>
+<GASKET_SCHEMA_END>

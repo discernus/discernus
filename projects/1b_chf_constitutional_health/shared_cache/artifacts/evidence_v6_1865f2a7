@@ -1,0 +1,101 @@
+{
+  "evidence_metadata": {
+    "document_hash": "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f",
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-12T02:45:20.184150+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+      "confidence": 0.8,
+      "context_type": "procedural_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184125+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As I begin, I thank President Clinton for his service to our Nation, and I thank Vice President Gore for a contest conducted with spirit and end with grace.",
+      "confidence": 0.7,
+      "context_type": "procedural_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184131+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I am honored and humbled to stand here where so many of America's leaders have come before me, and so many will follow.",
+      "confidence": 0.9,
+      "context_type": "authority_recognition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184133+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We have a place, all of us, in a long story, a story we continue but whose end we will not see.",
+      "confidence": 0.6,
+      "context_type": "system_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184136+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Our nation's courage has been clear in times of depression and war, when defeating common dangers defined our common good.",
+      "confidence": 0.7,
+      "context_type": "system_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184138+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It is the American story, a story of flawed and fallible people united across the generations by grand and enduring ideals.",
+      "confidence": 0.6,
+      "context_type": "heritage_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184140+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The greatest of these ideals is an unfolding American promise that everyone belongs, that everyone deserves a chance, that no insignificant person was ever born.",
+      "confidence": 0.6,
+      "context_type": "heritage_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184142+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And sometimes our differences run so deep, it seems we share a continent but not a country.",
+      "confidence": 0.4,
+      "context_type": "process_dismissal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184144+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Our summit, our Union, is a serious work of leaders and citizens and every generation.",
+      "confidence": 0.3,
+      "context_type": "revolution_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-12T02:45:20.184146+00:00"
+    }
+  ]
+}

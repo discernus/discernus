@@ -1,0 +1,45 @@
+{
+	"folders": [
+		{
+			"name": "discernus",
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.defaultInterpreterPath": "./venv/bin/python3",
+		"python.terminal.activateEnvironment": true,
+		"python.terminal.activateEnvInCurrentTerminal": true,
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/*.pyc": true,
+			".git": false,
+			"venv/lib": true,
+			"venv/include": true,
+			"venv/share": true
+		},
+		"terminal.integrated.defaultProfile.osx": "zsh",
+		"terminal.integrated.profiles.osx": {
+			"zsh": {
+				"path": "/bin/zsh",
+				"args": [
+					"-l"
+				]
+			}
+		},
+		"files.associations": {
+			"*.md": "markdown",
+			"*.yaml": "yaml",
+			"*.yml": "yaml"
+		},
+		"editor.rulers": [
+			100,
+			120
+		],
+		"editor.wordWrap": "on",
+		"markdown.preview.fontSize": 14,
+		"workbench.editor.enablePreview": true,
+		"explorer.confirmDelete": false,
+		"git.autofetch": true,
+		"git.confirmSync": false
+	}
+}

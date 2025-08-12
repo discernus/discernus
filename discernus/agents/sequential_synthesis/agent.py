@@ -105,7 +105,28 @@ class SequentialSynthesisAgent:
             "task_description": step_config['query_generation_task']
         })
         
-        response_content, _ = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['query_generator'])
+        response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['query_generator'])
+        
+        # Log cost information
+        if self.audit_logger and metadata.get("usage"):
+            usage_data = metadata["usage"]
+            try:
+                self.audit_logger.log_cost(
+                    operation="synthesis_query_generation",
+                    model=metadata.get("model", self.model),
+                    tokens_used=usage_data.get("total_tokens", 0),
+                    cost_usd=usage_data.get("response_cost_usd", 0.0),
+                    agent_name="SequentialSynthesisAgent",
+                    metadata={
+                        "step": step_name,
+                        "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                        "completion_tokens": usage_data.get("completion_tokens", 0),
+                        "attempts": metadata.get("attempts", 1)
+                    }
+                )
+            except Exception as e:
+                self.logger.warning(f"Failed to log cost for query generation: {e}")
+        
         queries = self._extract_json_list(response_content)
         
         self.provenance_log.append({"step": step_name, "action": "generate_queries", "queries": queries, "llm_response": response_content})
@@ -151,7 +172,27 @@ class SequentialSynthesisAgent:
             "task_description": step_config['synthesis_task']
         })
 
-        response_content, _ = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['synthesis_researcher'])
+        response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['synthesis_researcher'])
+        
+        # Log cost information
+        if self.audit_logger and metadata.get("usage"):
+            usage_data = metadata["usage"]
+            try:
+                self.audit_logger.log_cost(
+                    operation="synthesis_step",
+                    model=metadata.get("model", self.model),
+                    tokens_used=usage_data.get("total_tokens", 0),
+                    cost_usd=usage_data.get("response_cost_usd", 0.0),
+                    agent_name="SequentialSynthesisAgent",
+                    metadata={
+                        "step": step_name,
+                        "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                        "completion_tokens": usage_data.get("completion_tokens", 0),
+                        "attempts": metadata.get("attempts", 1)
+                    }
+                )
+            except Exception as e:
+                self.logger.warning(f"Failed to log cost for synthesis step: {e}")
         
         self.provenance_log.append({"step": step_name, "action": "synthesize", "llm_response": response_content})
         return response_content

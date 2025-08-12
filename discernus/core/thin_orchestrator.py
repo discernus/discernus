@@ -418,6 +418,10 @@ Respond with only the JSON object."""
                 "statistical_results_hash": response.statistical_results_hash,
                 "curated_evidence_hash": response.curated_evidence_hash,
                 
+                # Include cost information from synthesis pipeline response
+                "synthesis_cost_usd": response.total_cost_usd,
+                "synthesis_tokens": response.total_tokens,
+                
                 # Additional THIN-specific metadata
                 "thin_metadata": {
                     "pipeline_version": "production_v1.0",
@@ -1185,8 +1189,11 @@ Respond with only the JSON object."""
                 "synthesis_confidence": synthesis_results.get("synthesis_confidence")
             })
             
-            # Get synthesis costs for logging and display
-            synthesis_costs = audit.get_session_costs()
+
+            
+            # Get synthesis costs from synthesis results instead of audit logger
+            synthesis_cost_usd = synthesis_results.get("synthesis_cost_usd", 0.0)
+            synthesis_tokens = synthesis_results.get("synthesis_tokens", 0)
             
             # Log synthesis phase completion
             self.logger.info("Synthesis phase completed", extra={
@@ -1194,14 +1201,14 @@ Respond with only the JSON object."""
                 "result_hash": synthesis_results.get("result_hash"),
                 "duration_seconds": synthesis_results.get("duration_seconds"),
                 "synthesis_confidence": synthesis_results.get("synthesis_confidence"),
-                "total_cost_usd": synthesis_costs.get('total_cost_usd', 0.0),
-                "total_tokens": synthesis_costs.get('total_tokens', 0)
+                "total_cost_usd": synthesis_cost_usd,
+                "total_tokens": synthesis_tokens
             })
             
             # Display synthesis cost update
             print(f"✅ Synthesis phase complete!")
-            print(f"   💰 Total cost so far: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
-            print(f"   🔢 Total tokens: {synthesis_costs.get('total_tokens', 0):,}")
+            print(f"   💰 Total cost so far: ${synthesis_cost_usd:.4f} USD")
+            print(f"   🔢 Total tokens: {synthesis_tokens:,}")
             
             # Record synthesis stage
             agent_name = "ProductionThinSynthesisPipeline"
@@ -1225,10 +1232,15 @@ Respond with only the JSON object."""
 
             # Generate final report with cost transparency
             base_report_content = synthesis_results.get("synthesis_report_markdown", "Synthesis failed.")
-            session_costs = audit.get_session_costs()
+            
+            # Create cost summary using synthesis costs from results
+            synthesis_costs = {
+                "total_cost_usd": synthesis_cost_usd,
+                "total_tokens": synthesis_tokens
+            }
             
             # Add cost summary section to report
-            cost_section = self._generate_cost_summary_section(session_costs, run_timestamp)
+            cost_section = self._generate_cost_summary_section(synthesis_costs, run_timestamp)
             final_report_content = base_report_content + "\n\n" + cost_section
             
             report_hash = storage.put_artifact(
