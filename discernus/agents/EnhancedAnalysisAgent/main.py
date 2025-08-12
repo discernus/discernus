@@ -147,14 +147,33 @@ class EnhancedAnalysisAgent:
         system_prompt = "You are an expert discourse analyst. Follow the provided framework instructions precisely."
         
         try:
-            response_content, metadata = gateway.execute_call(
-                model=model, 
-                prompt=prompt_text, 
-                system_prompt=system_prompt
-            )
+            from ...core.logging_config import perf_timer
+            with perf_timer("llm_call", 
+                           model=model, 
+                           agent="EnhancedAnalysisAgent",
+                           batch_id=batch_id):
+                response_content, metadata = gateway.execute_call(
+                    model=model, 
+                    prompt=prompt_text, 
+                    system_prompt=system_prompt
+                )
             
             if not response_content or not response_content.strip():
                 raise EnhancedAnalysisAgentError("LLM returned empty response")
+            
+            # Log LLM interaction for complete audit trail
+            self.audit.log_llm_interaction(
+                model=model,
+                prompt=prompt_text,
+                response=response_content,
+                agent_name=self.agent_name,
+                interaction_type="batch_analysis",
+                metadata={
+                    "batch_id": batch_id,
+                    "system_prompt": system_prompt,
+                    **metadata
+                }
+            )
             
             # Log cost information from gateway metadata
             if metadata.get('success') and 'usage' in metadata:

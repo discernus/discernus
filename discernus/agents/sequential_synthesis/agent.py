@@ -13,6 +13,8 @@ from dataclasses import dataclass
 from pathlib import Path
 import yaml
 
+from ...core.logging_config import perf_timer
+
 from ...gateway.llm_gateway import LLMGateway
 from ...gateway.model_registry import ModelRegistry
 from ...core.audit_logger import AuditLogger
@@ -105,7 +107,27 @@ class SequentialSynthesisAgent:
             "task_description": step_config['query_generation_task']
         })
         
-        response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['query_generator'])
+        with perf_timer("llm_call", 
+                       model=self.model, 
+                       agent="SequentialSynthesisAgent",
+                       step=step_name,
+                       operation="query_generation"):
+            response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['query_generator'])
+        
+        # Log LLM interaction for complete audit trail
+        if self.audit_logger:
+            self.audit_logger.log_llm_interaction(
+                model=self.model,
+                prompt=prompt,
+                response=response_content,
+                agent_name="SequentialSynthesisAgent",
+                interaction_type="query_generation",
+                metadata={
+                    "step": step_name,
+                    "system_prompt": self.prompts['system_prompts']['query_generator'],
+                    **metadata
+                }
+            )
         
         # Log cost information
         if self.audit_logger and metadata.get("usage"):
@@ -172,7 +194,29 @@ class SequentialSynthesisAgent:
             "task_description": step_config['synthesis_task']
         })
 
-        response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['synthesis_researcher'])
+        with perf_timer("llm_call", 
+                       model=self.model, 
+                       agent="SequentialSynthesisAgent",
+                       step=step_name,
+                       operation="synthesis_step"):
+            response_content, metadata = self.llm_gateway.execute_call(model=self.model, prompt=prompt, system_prompt=self.prompts['system_prompts']['synthesis_researcher'])
+        
+        # Log LLM interaction for complete audit trail
+        if self.audit_logger:
+            self.audit_logger.log_llm_interaction(
+                model=self.model,
+                prompt=prompt,
+                response=response_content,
+                agent_name="SequentialSynthesisAgent",
+                interaction_type="synthesis_step",
+                metadata={
+                    "step": step_name,
+                    "system_prompt": self.prompts['system_prompts']['synthesis_researcher'],
+                    "has_evidence": bool(retrieved_evidence),
+                    "has_previous_findings": bool(previous_findings),
+                    **metadata
+                }
+            )
         
         # Log cost information
         if self.audit_logger and metadata.get("usage"):
