@@ -1,0 +1,41 @@
+2025-08-11 21:11:50.384 | INFO     | discernus.core.logging_config:setup_logging:120 | Logging system initialized
+2025-08-11 21:11:50.388 | INFO     | discernus.core.logging_config:log_experiment_start:143 | Experiment started
+2025-08-11 21:11:50.388 | INFO     | discernus.core.thin_orchestrator:run_experiment:532 | Starting THIN v2.0 experiment: 20250812T011150Z
+2025-08-11 21:11:50.388 | INFO     | discernus.core.thin_orchestrator:run_experiment:552 | Framework loaded successfully
+2025-08-11 21:11:50.388 | INFO     | discernus.core.thin_orchestrator:run_experiment:555 | Loading corpus from: corpus/
+2025-08-11 21:11:50.391 | INFO     | discernus.core.thin_orchestrator:run_experiment:557 | Loaded 8 corpus documents
+2025-08-11 21:11:50.393 | INFO     | discernus.core.thin_orchestrator:run_experiment:575 | Stored 8 corpus artifacts
+2025-08-11 21:11:50.398 | INFO     | discernus.core.thin_orchestrator:run_experiment:1068 | Initializing EnhancedAnalysisAgent for 8 documents
+2025-08-11 21:11:50.400 | INFO     | discernus.core.thin_orchestrator:_set_stage:119 | Stage set to 'analysis' with model: vertex_ai/gemini-2.5-flash-lite
+2025-08-11 21:11:50.400 | INFO     | discernus.core.logging_config:log_analysis_phase_start:217 | Analysis phase started
+2025-08-11 21:11:50.400 | INFO     | discernus.core.thin_orchestrator:run_experiment:1082 | Starting analysis of 8 documents with model: vertex_ai/gemini-2.5-flash-lite
+2025-08-11 21:11:50.400 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1434 | Starting sequential analysis of 8 documents
+2025-08-11 21:11:50.400 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 1/8: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
+2025-08-11 21:11:53.890 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document alexandria_ocasio_cortez_2025_fighting_oligarchy.txt analyzed successfully
+2025-08-11 21:11:53.891 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 2/8: bernie_sanders_2025_fighting_oligarchy.txt
+2025-08-11 21:11:58.524 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document bernie_sanders_2025_fighting_oligarchy.txt analyzed successfully
+2025-08-11 21:11:58.524 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 3/8: cory_booker_2018_first_step_act.txt
+2025-08-11 21:12:04.660 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document cory_booker_2018_first_step_act.txt analyzed successfully
+2025-08-11 21:12:04.661 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 4/8: jd_vance_2022_natcon_conference.txt
+2025-08-11 21:12:14.711 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document jd_vance_2022_natcon_conference.txt analyzed successfully
+2025-08-11 21:12:14.712 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 5/8: john_lewis_1963_march_on_washington.txt
+2025-08-11 21:12:19.101 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document john_lewis_1963_march_on_washington.txt analyzed successfully
+2025-08-11 21:12:19.101 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 6/8: john_mccain_2008_concession.txt
+2025-08-11 21:12:23.811 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document john_mccain_2008_concession.txt analyzed successfully
+2025-08-11 21:12:23.812 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 7/8: mitt_romney_2020_impeachment.txt
+2025-08-11 21:12:28.218 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document mitt_romney_2020_impeachment.txt analyzed successfully
+2025-08-11 21:12:28.218 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1443 | Analyzing document 8/8: steve_king_2017_house_floor.txt
+2025-08-11 21:12:32.052 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1484 | Document steve_king_2017_house_floor.txt analyzed successfully
+2025-08-11 21:12:32.052 | INFO     | discernus.core.thin_orchestrator:_set_stage:119 | Stage set to 'statistical_prep' with model: vertex_ai/gemini-2.5-flash-lite
+2025-08-11 21:12:32.052 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1508 | Combining analysis artifacts for synthesis
+2025-08-11 21:12:40.904 | INFO     | discernus.core.thin_orchestrator:_execute_analysis_sequentially:1514 | Analysis artifacts combined successfully
+2025-08-11 21:12:40.904 | INFO     | discernus.core.thin_orchestrator:run_experiment:1098 | Analysis phase completed: 8/8 documents processed successfully
+2025-08-11 21:12:40.904 | INFO     | discernus.core.thin_orchestrator:run_experiment:1108 | Analysis phase completed
+2025-08-11 21:12:40.905 | INFO     | discernus.core.thin_orchestrator:run_experiment:1136 | Starting synthesis phase
+2025-08-11 21:12:40.905 | INFO     | discernus.core.thin_orchestrator:_set_stage:119 | Stage set to 'synthesis' with model: vertex_ai/gemini-2.5-flash-lite
+2025-08-11 21:12:40.905 | INFO     | discernus.core.thin_orchestrator:run_experiment:1143 | Using Discernus Advanced Synthesis Pipeline
+2025-08-11 21:12:40.905 | INFO     | discernus.core.logging_config:log_synthesis_phase_start:240 | Synthesis phase started
+2025-08-11 21:13:27.399 | INFO     | discernus.core.thin_orchestrator:run_experiment:1181 | Synthesis phase completed successfully
+2025-08-11 21:13:27.400 | INFO     | discernus.core.thin_orchestrator:run_experiment:1192 | Synthesis phase completed
+2025-08-11 21:13:27.422 | INFO     | discernus.core.thin_orchestrator:run_experiment:1326 | THIN v2.0 experiment completed successfully
+2025-08-11 21:13:27.422 | INFO     | discernus.core.logging_config:log_experiment_complete:152 | Experiment completed
