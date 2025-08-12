@@ -104,15 +104,6 @@ class IntelligentExtractorAgent:
                 }
             )
     
-    def _reformat_and_parse_with_llm(self, response: str) -> Dict[str, Any]:
-        """Fallback to ask an LLM to reformat the JSON."""
-        return parse_llm_json_response(
-            response=response,
-            llm_gateway=self.llm_gateway,
-            model=self.model,
-            audit_logger=self.audit_logger,
-        )
-
     def extract_scores_from_raw_analysis(
         self, 
         raw_analysis_text: str, 
@@ -200,6 +191,22 @@ class IntelligentExtractorAgent:
                     timeout=self.timeout_seconds
                 )
                 
+                # Log LLM interaction for audit trail
+                if self.audit_logger:
+                    self.audit_logger.log_llm_interaction(
+                        model=self.model,
+                        prompt=extraction_prompt,
+                        response=response,
+                        agent_name=self.agent_name,
+                        metadata={
+                            "operation": "intelligent_extraction",
+                            "attempt": attempt,
+                            "gasket_version": gasket_schema.get('version', 'unknown'),
+                            "target_keys_count": len(gasket_schema['target_keys']),
+                            "raw_analysis_length": len(raw_analysis_text)
+                        }
+                    )
+                
                 # Parse extracted scores (now returns list of documents)
                 document_analyses = self._parse_extraction_response(
                     response, gasket_schema['target_keys'], gasket_schema
@@ -227,7 +234,10 @@ class IntelligentExtractorAgent:
                             "tokens_used": tokens_used,
                             "cost_usd": cost_usd,
                             "documents_extracted": len(document_analyses),
-                            "total_extracted_scores": total_extracted
+                            "total_extracted_scores": total_extracted,
+                            "parsing_method": "hard_gasket_v1",
+                            "gasket_version": gasket_schema.get('version', 'unknown'),
+                            "response_length": len(response)
                         }
                     )
                 
@@ -257,7 +267,9 @@ class IntelligentExtractorAgent:
                                 "attempts": attempt,
                                 "error": str(e),
                                 "error_type": type(e).__name__,
-                                "extraction_time_seconds": extraction_time
+                                "extraction_time_seconds": extraction_time,
+                                "parsing_method": "hard_gasket_v1",
+                                "gasket_version": gasket_schema.get('version', 'unknown')
                             }
                         )
                     
@@ -348,18 +360,43 @@ class IntelligentExtractorAgent:
         gasket_schema: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
-        Parse LLM extraction response into per-document structured scores.
+        Parse LLM extraction response using the "Hard Gasket" method.
         
         Args:
-            response: Raw LLM response (JSON array of documents)
-            target_keys: Expected keys from gasket schema
+            response: Raw LLM response containing the proprietary markers.
+            target_keys: Expected keys from gasket schema.
+            gasket_schema: The full gasket schema for validation rules.
             
         Returns:
-            List of dictionaries, one per document with document_name and scores
+            List of dictionaries, one per document with document_name and scores.
+            
+        Raises:
+            IntelligentExtractorError: If markers are not found or JSON is invalid.
         """
         try:
-            # Use the robust, centralized parsing utility
-            parsed_data = self._reformat_and_parse_with_llm(response)
+            # 1. Extract content between proprietary markers
+            start_marker = "<<<DISCERNUS_EXTRACTED_JSON_V1>>>"
+            end_marker = "<<<END_DISCERNUS_EXTRACTED_JSON_V1>>>"
+            
+            start_index = response.find(start_marker)
+            if start_index == -1:
+                # Log telemetry for missing start marker
+                self.logger.error(f"Hard Gasket parsing failed: Start marker not found in response of length {len(response)}")
+                raise IntelligentExtractorError("Start marker not found in LLM response.")
+            
+            end_index = response.find(end_marker, start_index)
+            if end_index == -1:
+                # Log telemetry for missing end marker
+                self.logger.error(f"Hard Gasket parsing failed: End marker not found after position {start_index}")
+                raise IntelligentExtractorError("End marker not found after start marker.")
+                
+            json_text = response[start_index + len(start_marker):end_index].strip()
+            
+            # Log successful marker extraction
+            self.logger.debug(f"Hard Gasket parsing: Successfully extracted {len(json_text)} characters between markers")
+            
+            # 2. Parse the extracted JSON text
+            parsed_data = json.loads(json_text)
 
             # Ensure it's a list
             if not isinstance(parsed_data, list):
@@ -411,10 +448,10 @@ class IntelligentExtractorAgent:
             
             return document_analyses
             
-        except (json.JSONDecodeError, ValueError) as e:
+        except (json.JSONDecodeError, ValueError, IntelligentExtractorError) as e:
             self.logger.error(f"Failed to parse extraction response: {e}")
             self.logger.error(f"Response snippet: {response[:200]}...")
-            raise IntelligentExtractorError(f"Failed to parse extraction response: {e}")
+            raise IntelligentExtractorError(f"Failed to parse extraction response: {e}") from e
     
     def get_extraction_stats(self) -> Dict[str, Any]:
         """

@@ -29,7 +29,7 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from .provenance_organizer import ProvenanceOrganizer
-from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context, log_analysis_phase_start, log_analysis_phase_complete, log_synthesis_phase_start, log_synthesis_phase_complete
+from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context, log_analysis_phase_start, log_analysis_phase_complete, log_synthesis_phase_start, log_synthesis_phase_complete, perf_timer
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
@@ -577,7 +577,9 @@ Respond with only the JSON object."""
             self._log_status(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
             
             # Load framework
-            framework_content = self._load_framework(experiment_config["framework"])
+            with perf_timer("framework_load", 
+                           framework_path=experiment_config["framework"]):
+                framework_content = self._load_framework(experiment_config["framework"])
             
             # Store framework content and audit logger for gasket integration
             self._current_framework_content = framework_content
@@ -597,7 +599,9 @@ Respond with only the JSON object."""
             
             # Load corpus documents and manifest
             self._log_progress(f"Loading corpus from: {experiment_config['corpus_path']}")
-            corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
+            with perf_timer("corpus_load", 
+                           corpus_path=experiment_config["corpus_path"]):
+                corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
             self._log_status(f"Loaded {len(corpus_documents)} corpus documents")
             
             corpus_hashes = []
@@ -1096,14 +1100,18 @@ Respond with only the JSON object."""
             self._log_status(f"Starting analysis of {len(corpus_documents)} documents with model: {analysis_model}")
             self._log_progress(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
             
-            all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
-                analysis_agent,
-                corpus_documents,
-                framework_content,
-                experiment_config,
-                analysis_model,
-                ensemble_runs
-            )
+            with perf_timer("analysis_phase", 
+                           model=analysis_model, 
+                           document_count=len(corpus_documents),
+                           ensemble_runs=ensemble_runs):
+                all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
+                    analysis_agent,
+                    corpus_documents,
+                    framework_content,
+                    experiment_config,
+                    analysis_model,
+                    ensemble_runs
+                )
             
             # Calculate success count BEFORE combining artifacts (which modifies the list)
             successful_count = len([res for res in all_analysis_results if 'error' not in res and res.get('analysis_result', {}).get('result_hash')])
@@ -1155,19 +1163,22 @@ Respond with only the JSON object."""
                 analysis_artifacts_count=2  # scores_hash + evidence_hash
             )
             
-            synthesis_results = self._run_thin_synthesis(
-                scores_hash=scores_hash,
-                evidence_hash=evidence_hash,
-                framework_content=framework_content,
-                experiment_config=experiment_config,
-                model=synthesis_model,
-                audit_logger=audit,
-                storage=storage,
-                framework_hash=framework_hash,
-                corpus_manifest_hash=corpus_manifest_hash,
-                corpus_manifest=corpus_manifest,
-                analysis_model=analysis_model
-            )
+            with perf_timer("synthesis_phase", 
+                           model=synthesis_model,
+                           analysis_artifacts=2):
+                synthesis_results = self._run_thin_synthesis(
+                    scores_hash=scores_hash,
+                    evidence_hash=evidence_hash,
+                    framework_content=framework_content,
+                    experiment_config=experiment_config,
+                    model=synthesis_model,
+                    audit_logger=audit,
+                    storage=storage,
+                    framework_hash=framework_hash,
+                    corpus_manifest_hash=corpus_manifest_hash,
+                    corpus_manifest=corpus_manifest,
+                    analysis_model=analysis_model
+                )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
             

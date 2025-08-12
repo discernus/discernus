@@ -16,6 +16,8 @@ Features:
 
 import sys
 import os
+import time
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Dict, Any, Optional
 from loguru import logger
@@ -126,7 +128,7 @@ def setup_logging(
         "structured": structured
     })
 
-def get_logger(name: str) -> "logger":
+def get_logger(name: str):
     """
     Get a logger instance for a specific component.
     
@@ -294,3 +296,79 @@ def log_debug_with_context(message: str, context: Dict[str, Any], **kwargs) -> N
         "context": context,
         **kwargs
     })
+
+@contextmanager
+def perf_timer(operation_name: str, **context):
+    """
+    Ultra-thin performance timing context manager.
+    
+    Automatically times operations and logs to performance.log with zero overhead
+    when performance logging is disabled.
+    
+    Usage:
+        with perf_timer("llm_call", model="gpt-4", tokens=1500):
+            response = call_llm()
+        
+        with perf_timer("file_io", operation="save", file_size=1024):
+            save_artifact()
+    
+    Args:
+        operation_name: Human-readable name for the operation
+        **context: Additional context to include in performance log
+    """
+    start_time = time.perf_counter()
+    start_memory = None
+    
+    # Optional memory tracking (low overhead)
+    try:
+        import psutil
+        process = psutil.Process()
+        start_memory = process.memory_info().rss
+    except (ImportError, Exception):
+        # Graceful degradation if psutil not available
+        pass
+    
+    try:
+        yield
+    finally:
+        # Calculate timing
+        duration = time.perf_counter() - start_time
+        
+        # Calculate memory delta if available
+        memory_delta = None
+        if start_memory is not None:
+            try:
+                end_memory = process.memory_info().rss
+                memory_delta = end_memory - start_memory
+            except Exception:
+                pass
+        
+        # Build performance log entry
+        perf_context = {
+            "performance": True,
+            "timing": True,
+            "operation": operation_name,
+            "duration_seconds": duration,
+            **context
+        }
+        
+        # Add memory info if available
+        if memory_delta is not None:
+            perf_context["memory_delta_bytes"] = memory_delta
+        
+        # Log performance data
+        logger.info(f"Performance: {operation_name} completed in {duration:.3f}s", extra=perf_context)
+        
+        # Also log to audit logger if available (for research provenance)
+        try:
+            from discernus.core.audit_logger import get_audit_logger
+            audit = get_audit_logger()
+            if audit:
+                audit.log_performance_metric(
+                    metric_name=f"{operation_name}_duration",
+                    value=duration,
+                    context=context
+                )
+        except (ImportError, AttributeError, Exception):
+            # Graceful degradation if audit logger not available
+            pass
