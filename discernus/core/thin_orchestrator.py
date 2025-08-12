@@ -35,6 +35,7 @@ from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
+from ..cli_console import DiscernusConsole
 
 # Import THIN Synthesis Pipeline for enhanced synthesis
 from ..agents.thin_synthesis.orchestration.pipeline import (
@@ -86,6 +87,9 @@ class ThinOrchestrator:
         # Initialize logger for this orchestrator instance
         self.logger = get_logger("orchestrator")
         
+        # Initialize rich console for consistent terminal output
+        self.rich_console = DiscernusConsole()
+        
         # Stage-aware architecture for Epic 401 alignment
         self.current_stage = None
         self.stage_models = {}
@@ -93,7 +97,41 @@ class ThinOrchestrator:
         self.synthesis_model = None
         
         self.logger.info(f"THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
-        print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
+        self._log_progress(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
+    
+    def _log_progress(self, message: str):
+        """
+        Log progress message to application.log and print to console.
+        
+        Args:
+            message: Progress message to log and display
+        """
+        self.logger.info(message)
+        self.rich_console.echo(message)
+    
+    def _log_status(self, message: str):
+        """
+        Log significant milestone to application.log and print to console.
+        
+        Args:
+            message: Status message to log and display
+        """
+        self.logger.info(f"STATUS: {message}")
+        self.rich_console.print_success(message)
+    
+    def _log_error_context(self, message: str, exc: Optional[Exception] = None):
+        """
+        Log error context to errors.log and print to console.
+        
+        Args:
+            message: Error message to log and display
+            exc: Optional exception object for additional context
+        """
+        if exc:
+            self.logger.error(f"{message} | Exception: {exc}")
+        else:
+            self.logger.error(message)
+        self.rich_console.print_error(message)
     
     def _set_stage(self, stage_name: str, analysis_model: str, synthesis_model: str) -> None:
         """
@@ -117,7 +155,7 @@ class ThinOrchestrator:
         }
         
         self.logger.info(f"Stage set to '{stage_name}' with model: {self._get_stage_model()}")
-        print(f"🎯 Stage: {stage_name} → Model: {self._get_stage_model()}")
+        self._log_status(f"🎯 Stage: {stage_name} → Model: {self._get_stage_model()}")
     
     def _get_stage_model(self) -> str:
         """
@@ -179,13 +217,13 @@ class ThinOrchestrator:
             # Handle validation results
             if validation_result.recommended_action == "FAIL_EXPERIMENT":
                 error_msg = f"Framework dimension validation failed: {validation_result.error_message}"
-                print(f"❌ {error_msg}")
+                self._log_error_context(f"❌ {error_msg}")
                 raise ThinOrchestratorError(error_msg)
             elif validation_result.recommended_action == "RETRY_ANALYSIS":
-                print(f"⚠️ Framework dimension concerns: {validation_result.impact_assessment}")
-                print("⚠️ Proceeding with caution - may need framework adjustments")
+                self._log_error_context(f"⚠️ Framework dimension concerns: {validation_result.impact_assessment}")
+                self._log_error_context("⚠️ Proceeding with caution - may need framework adjustments")
             else:
-                print("✅ Framework dimension validation passed")
+                self._log_status("✅ Framework dimension validation passed")
                 
         except ThinOrchestratorError:
             # Re-raise validation failures - these should block the experiment
@@ -206,8 +244,8 @@ class ThinOrchestrator:
             )
             
             # Don't fail the experiment for genuine system errors, just warn
-            print(f"⚠️ Framework dimension validation system error: {str(e)}")
-            print("⚠️ Proceeding without dimension validation")
+            self._log_error_context(f"⚠️ Framework dimension validation system error: {str(e)}")
+            self._log_error_context("⚠️ Proceeding without dimension validation")
     
     def _check_framework_compatibility_with_llm(self, current_framework: str, cached_framework: str, cached_artifact_id: str, audit_logger: Optional[AuditLogger] = None) -> Dict[str, Any]:
         """
@@ -345,7 +383,7 @@ Respond with only the JSON object."""
         
         compatible_storage = MinIOCompatibleStorage(storage)
         
-        print(f"🔧 Creating synthesis pipeline with model: {model}")
+        self._log_progress(f"🔧 Creating synthesis pipeline with model: {model}")
         return ProductionThinSynthesisPipeline(
             artifact_client=compatible_storage,
             audit_logger=audit_logger,
@@ -393,7 +431,9 @@ Respond with only the JSON object."""
             framework_hash=framework_hash,
             corpus_hash=corpus_manifest_hash, # Use manifest hash for provenance
             framework_name=experiment_config.get('framework', 'Unknown framework'),
-            corpus_manifest=corpus_manifest
+            corpus_manifest=corpus_manifest,
+            # Pass experiment config for declarative statistical analyses
+            experiment_config=experiment_config
         )
         
         # Execute pipeline
@@ -533,8 +573,8 @@ Respond with only the JSON object."""
                 "architecture": "thin_v2.0_direct_calls"
             })
             
-            self.logger.info(f"Starting THIN v2.0 experiment: {run_timestamp}")
-            print(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
+            self._log_progress(f"Starting THIN v2.0 experiment: {run_timestamp}")
+            self._log_status(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
             
             # Load framework
             framework_content = self._load_framework(experiment_config["framework"])
@@ -553,12 +593,12 @@ Respond with only the JSON object."""
             
             # Framework validation is handled by ExperimentCoherenceAgent during experiment setup
             # Post-analysis dimension validation will occur during synthesis to verify analysis results
-            self.logger.info("Framework loaded successfully")
+            self._log_status("Framework loaded successfully")
             
             # Load corpus documents and manifest
-            self.logger.info(f"Loading corpus from: {experiment_config['corpus_path']}")
+            self._log_progress(f"Loading corpus from: {experiment_config['corpus_path']}")
             corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
-            self.logger.info(f"Loaded {len(corpus_documents)} corpus documents")
+            self._log_status(f"Loaded {len(corpus_documents)} corpus documents")
             
             corpus_hashes = []
             corpus_metadata = []
@@ -576,7 +616,7 @@ Respond with only the JSON object."""
             
             manifest.add_corpus_artifacts(corpus_hashes, corpus_metadata)
             
-            self.logger.info(f"Stored {len(corpus_hashes)} corpus artifacts")
+            self._log_status(f"Stored {len(corpus_hashes)} corpus artifacts")
             
             audit.log_orchestrator_event("inputs_loaded", {
                 "framework_hash": framework_hash,
@@ -586,14 +626,14 @@ Respond with only the JSON object."""
 
             # Handle analysis-only mode: run analysis and exit early
             if analysis_only:
-                print("🔍 Analysis-only mode: Running analysis and saving artifacts for later synthesis...")
+                self._log_progress("🔍 Analysis-only mode: Running analysis and saving artifacts for later synthesis...")
                 
                 # Execute analysis phase
-                self.logger.info(f"Starting analysis phase for {len(corpus_documents)} documents")
-                print(f"📊 Analysis-only mode: Processing {len(corpus_documents)} documents...")
+                self._log_status(f"Starting analysis phase for {len(corpus_documents)} documents")
+                self._log_progress(f"📊 Analysis-only mode: Processing {len(corpus_documents)} documents...")
                 
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
-                self.logger.info(f"Initialized EnhancedAnalysisAgent with model: {analysis_model}")
+                self._log_status(f"Initialized EnhancedAnalysisAgent with model: {analysis_model}")
                 
                 all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
                     analysis_agent,
@@ -606,28 +646,18 @@ Respond with only the JSON object."""
                 
                 # Log analysis results
                 successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
-                self.logger.info(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully", extra={
-                    "total_documents": len(corpus_documents),
-                    "successful_analyses": successful_count,
-                    "failed_analyses": len(corpus_documents) - successful_count,
-                    "scores_hash": scores_hash,
-                    "evidence_hash": evidence_hash
-                })
+                self._log_status(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully")
                 
                 # Display analysis-only cost
                 analysis_costs = audit.get_session_costs()
-                print(f"✅ Analysis complete: {successful_count}/{len(corpus_documents)} documents processed")
-                print(f"   💰 Total cost: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
-                print(f"   🔢 Total tokens: {analysis_costs.get('total_tokens', 0):,}")
+                self._log_status(f"✅ Analysis complete: {successful_count}/{len(corpus_documents)} documents processed")
+                self._log_status(f"   💰 Total cost: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
+                self._log_status(f"   🔢 Total tokens: {analysis_costs.get('total_tokens', 0):,}")
                 
                 # Check if analysis succeeded
                 successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
                 if not successful_analyses:
-                    self.logger.error("Analysis phase failed - no successful analyses", extra={
-                        "total_documents": len(corpus_documents),
-                        "successful_analyses": 0,
-                        "failed_analyses": len(corpus_documents)
-                    })
+                    self._log_error_context("Analysis phase failed - no successful analyses")
                     raise ThinOrchestratorError("Analysis failed. No artifacts saved.")
                 
                 # Create results directory and save artifact references
@@ -653,11 +683,11 @@ Respond with only the JSON object."""
                 )
                 
                 if csv_export_result:
-                    print(f"📊 CSV files exported:")
+                    self._log_status(f"📊 CSV files exported:")
                     for filename, info in csv_export_result.get('files', {}).items():
-                        print(f"   - {filename}: {info.get('records', 0)} records ({info.get('size_bytes', 0):,} bytes)")
+                        self._log_status(f"   - {filename}: {info.get('records', 0)} records ({info.get('size_bytes', 0):,} bytes)")
                 else:
-                    print(f"⚠️  CSV export failed - continuing without CSV files")
+                    self._log_error_context(f"⚠️  CSV export failed - continuing without CSV files")
                 
                             # Create provenance-first artifact organization for analysis-only runs
             try:
@@ -676,20 +706,20 @@ Respond with only the JSON object."""
                 )
                 
                 if provenance_result["success"]:
-                    print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                    self._log_status(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
                 else:
-                    print("⚠️  Provenance organization failed, continuing with standard structure")
+                    self._log_error_context("⚠️  Provenance organization failed, continuing with standard structure")
                     
             except Exception as e:
-                print(f"⚠️  Provenance organization error: {str(e)}")
+                self._log_error_context(f"⚠️  Provenance organization error: {str(e)}")
                 audit.log_error("provenance_organization_error", str(e), {})
             
 
                 
-                print(f"✅ Analysis completed - artifacts saved for synthesis:")
-                print(f"   - Scores: {scores_hash[:12]}...")
-                print(f"   - Evidence: {evidence_hash[:12]}...")
-                print(f"   - Ready for: discernus run --synthesis-only or --stage commands")
+                self._log_status(f"✅ Analysis completed - artifacts saved for synthesis:")
+                self._log_status(f"   - Scores: {scores_hash[:12]}...")
+                self._log_status(f"   - Evidence: {evidence_hash[:12]}...")
+                self._log_status(f"   - Ready for: discernus run --synthesis-only or --stage commands")
                 
                 # Update manifest and return
                 end_time = datetime.now(timezone.utc).isoformat()
@@ -715,7 +745,7 @@ Respond with only the JSON object."""
                     }
                     commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
                     if not commit_success:
-                        print("⚠️  Auto-commit to Git failed (analysis completed successfully)")
+                        self._log_error_context("⚠️  Auto-commit to Git failed (analysis completed successfully)")
                 
                 return {
                     "run_id": run_timestamp,
@@ -730,7 +760,7 @@ Respond with only the JSON object."""
             
             # Handle resume from specific THIN synthesis stage
             if resume_stage:
-                print(f"⏩ Resume mode: Starting from THIN synthesis stage '{resume_stage}'...")
+                self._log_progress(f"⏩ Resume mode: Starting from THIN synthesis stage '{resume_stage}'...")
                 
                 # Validate that we can resume (artifacts exist)
                 shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts" 
@@ -742,12 +772,7 @@ Respond with only the JSON object."""
 
             if synthesis_only:
                 # Log synthesis-only mode start
-                self.logger.info("Synthesis-only mode starting", extra={
-                    "run_id": run_timestamp,
-                    "synthesis_model": synthesis_model,
-                    "cache_directory": str(self.experiment_path / "shared_cache" / "artifacts"),
-                    "architecture": "thin_v2.0_synthesis_only"
-                })
+                self._log_progress("Synthesis-only mode starting")
                 
                 # Find latest run with complete analysis
                 shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
@@ -797,7 +822,7 @@ Respond with only the JSON object."""
                 
                 # If no exact match, use LLM-based semantic compatibility checking
                 if not json_artifact_hash:
-                    print("🔍 No exact framework match found. Using LLM semantic compatibility analysis...")
+                    self._log_progress("🔍 No exact framework match found. Using LLM semantic compatibility analysis...")
                     
                     # Try LLM semantic analysis for frameworks with stored content
                     for artifact_id, info in registry.items():
@@ -812,7 +837,7 @@ Respond with only the JSON object."""
                             cached_framework_content and 
                             artifact_framework_hash != current_framework_hash):
                             
-                            print(f"   🧠 Checking semantic compatibility with LLM for {artifact_id[:8]}...")
+                            self._log_progress(f"   🧠 Checking semantic compatibility with LLM for {artifact_id[:8]}...")
                             
                             compatibility_result = self._check_framework_compatibility_with_llm(
                                 current_framework_content, 
@@ -828,25 +853,25 @@ Respond with only the JSON object."""
                                     latest_json_time = timestamp
                                     json_artifact_hash = artifact_id
                                     compatibility_info = compatibility_result
-                                    print(f"   ✅ LLM determined semantic compatibility: {artifact_id[:8]}...")
+                                    self._log_status(f"   ✅ LLM determined semantic compatibility: {artifact_id[:8]}...")
                                     break
                     
                     # No compatible artifact found, proceed with full run
                     if not json_artifact_hash:
-                        print("   📎 No semantically compatible artifacts found. Proceeding with full analysis.")
+                        self._log_progress("   📎 No semantically compatible artifacts found. Proceeding with full analysis.")
                 
                 if json_artifact_hash:
                     # Use compatible artifact for both scores and evidence
                     scores_hash = json_artifact_hash
                     evidence_hash = json_artifact_hash
                     
-                    print(f"✅ Using compatible analysis from shared cache")
-                    print(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
-                    print(f"   - Framework: {current_framework_hash[:12]}... ")
-                    print(f"   - Compatibility: {compatibility_info['compatibility']} "
+                    self._log_status(f"✅ Using compatible analysis from shared cache")
+                    self._log_status(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
+                    self._log_status(f"   - Framework: {current_framework_hash[:12]}... ")
+                    self._log_status(f"   - Compatibility: {compatibility_info['compatibility']} "
                           f"({compatibility_info['confidence']:.2f} confidence)")
-                    print(f"   - Method: {compatibility_info['method']}")
-                    print(f"   - Reasoning: {compatibility_info['reasoning']}")
+                    self._log_status(f"   - Method: {compatibility_info['method']}")
+                    self._log_status(f"   - Reasoning: {compatibility_info['reasoning']}")
                 else:
                     # Log available artifacts for debugging
                     available_artifacts = []
@@ -859,12 +884,12 @@ Respond with only the JSON object."""
                                 "timestamp": info.get("created_at")
                             })
                     
-                    print(f"❌ No compatible analysis artifacts found")
-                    print(f"   Current framework hash: {current_framework_hash[:12]}...")
-                    print(f"   Available artifacts: {len(available_artifacts)}")
+                    self._log_error_context(f"❌ No compatible analysis artifacts found")
+                    self._log_error_context(f"   Current framework hash: {current_framework_hash[:12]}...")
+                    self._log_error_context(f"   Available artifacts: {len(available_artifacts)}")
                     for artifact in available_artifacts:
-                        print(f"     - {artifact['artifact_id']}... (fw: {artifact['framework_hash']}...)")
-                    print("   💡 LLM determined no semantic compatibility with existing frameworks")
+                        self._log_error_context(f"     - {artifact['artifact_id']}... (fw: {artifact['framework_hash']}...)")
+                    self._log_error_context("   💡 LLM determined no semantic compatibility with existing frameworks")
                     
                     raise ThinOrchestratorError(
                         f"No compatible analysis artifacts found for current framework. "
@@ -877,20 +902,20 @@ Respond with only the JSON object."""
                 import shutil
                 shutil.copy2(shared_cache_dir / json_artifact_hash, results_dir / "analysis.json")
                 
-                print(f"📊 Using existing analysis from shared cache (THIN v2.1)")
-                print(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
-                print(f"   - Framework: {current_framework_hash[:12]}...")
-                print(f"   - THIN Compatibility: {compatibility_info['compatibility']} "
+                self._log_status(f"📊 Using existing analysis from shared cache (THIN v2.1)")
+                self._log_status(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
+                self._log_status(f"   - Framework: {current_framework_hash[:12]}...")
+                self._log_status(f"   - THIN Compatibility: {compatibility_info['compatibility']} "
                       f"({compatibility_info['confidence']:.2f} confidence)")
-                print(f"   - Validation Method: {compatibility_info['method']}")
-                print(f"   - Reasoning: {compatibility_info['reasoning']}")
+                self._log_status(f"   - Validation Method: {compatibility_info['method']}")
+                self._log_status(f"   - Reasoning: {compatibility_info['reasoning']}")
                 
                 # Load framework and corpus for synthesis context (even in synthesis-only mode)
                 framework_content = self._load_framework(experiment_config["framework"])
                 _, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
                 
                 # Run synthesis only
-                print("🏭 Using Discernus Advanced Synthesis Pipeline...")
+                self._log_progress("🏭 Using Discernus Advanced Synthesis Pipeline...")
                 
                 # Calculate framework hash for provenance
                 framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
@@ -902,15 +927,10 @@ Respond with only the JSON object."""
                 # Calculate corpus manifest hash for provenance
                 corpus_manifest_hash = hashlib.sha256(json.dumps(corpus_manifest).encode('utf-8')).hexdigest() if corpus_manifest else ""
                 
-                print(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
+                self._log_progress(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
                 
                 # Log synthesis phase start for synthesis-only mode
-                self.logger.info("Synthesis phase starting for synthesis-only mode", extra={
-                    "synthesis_model": synthesis_model,
-                    "scores_hash": scores_hash,
-                    "evidence_hash": evidence_hash,
-                    "framework_hash": framework_hash
-                })
+                self._log_status("Synthesis phase starting for synthesis-only mode")
                 
                 synthesis_results = self._run_thin_synthesis(
                     scores_hash=scores_hash,
@@ -929,26 +949,16 @@ Respond with only the JSON object."""
                 synthesis_end_time = datetime.now(timezone.utc).isoformat()
                 
                 # Log synthesis phase completion for synthesis-only mode
-                self.logger.info("Synthesis phase completed for synthesis-only mode", extra={
-                    "synthesis_model": synthesis_model,
-                    "result_hash": synthesis_results.get("result_hash") if synthesis_results else None,
-                    "synthesis_confidence": synthesis_results.get("synthesis_confidence") if synthesis_results else None
-                })
+                self._log_status("Synthesis phase completed for synthesis-only mode")
                 
                 # Display synthesis-only cost
                 synthesis_costs = audit.get_session_costs()
-                print(f"✅ Synthesis complete using cached analysis!")
-                print(f"   💰 Synthesis cost: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
-                print(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
+                self._log_status(f"✅ Synthesis complete using cached analysis!")
+                self._log_status(f"   💰 Synthesis cost: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
+                self._log_status(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
                 
                 # Log synthesis-only completion
-                self.logger.info("Synthesis-only mode completed", extra={
-                    "run_id": run_timestamp,
-                    "synthesis_model": synthesis_model,
-                    "total_cost_usd": synthesis_costs.get('total_cost_usd', 0.0),
-                    "total_tokens": synthesis_costs.get('total_tokens', 0),
-                    "architecture": "thin_v2.0_synthesis_only"
-                })
+                self._log_status("Synthesis-only mode completed")
                 
                 if not synthesis_results or not isinstance(synthesis_results, dict):
                     raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_results)}")
@@ -1000,12 +1010,12 @@ Respond with only the JSON object."""
                     )
                     
                     if provenance_result["success"]:
-                        print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                        self._log_status(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
                     else:
-                        print("⚠️  Provenance organization failed, continuing with standard structure")
+                        self._log_error_context("⚠️  Provenance organization failed, continuing with standard structure")
                         
                 except Exception as e:
-                    print(f"⚠️  Provenance organization error: {str(e)}")
+                    self._log_error_context(f"⚠️  Provenance organization error: {str(e)}")
                     audit.log_error("provenance_organization_error", str(e), {})
                 
                 # Update manifest
@@ -1032,7 +1042,7 @@ Respond with only the JSON object."""
                     }
                     commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
                     if not commit_success:
-                        print("⚠️  Auto-commit to Git failed (synthesis completed successfully)")
+                        self._log_error_context("⚠️  Auto-commit to Git failed (synthesis completed successfully)")
                 
                 return {
                     "run_id": run_timestamp,
@@ -1065,11 +1075,11 @@ Respond with only the JSON object."""
                 "context_window_limit": 0
             })
             
-            print(f"💰 Cost tracking: Per-document analysis costs will be displayed")
-            print(f"📊 Processing: {len(corpus_documents)} documents individually")
+            self._log_progress(f"💰 Cost tracking: Per-document analysis costs will be displayed")
+            self._log_progress(f"📊 Processing: {len(corpus_documents)} documents individually")
             
             # Initialize analysis and synthesis agents
-            self.logger.info(f"Initializing EnhancedAnalysisAgent for {len(corpus_documents)} documents")
+            self._log_status(f"Initializing EnhancedAnalysisAgent for {len(corpus_documents)} documents")
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
             # Set stage for individual document analysis
@@ -1083,8 +1093,8 @@ Respond with only the JSON object."""
             )
             
             # Execute analysis (in chunks)
-            self.logger.info(f"Starting analysis of {len(corpus_documents)} documents with model: {analysis_model}")
-            print(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
+            self._log_status(f"Starting analysis of {len(corpus_documents)} documents with model: {analysis_model}")
+            self._log_progress(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
             
             all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
                 analysis_agent,
@@ -1099,27 +1109,16 @@ Respond with only the JSON object."""
             successful_count = len([res for res in all_analysis_results if 'error' not in res and res.get('analysis_result', {}).get('result_hash')])
             
             # Log analysis results
-            self.logger.info(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully", extra={
-                "total_documents": len(corpus_documents),
-                "successful_analyses": successful_count,
-                "failed_analyses": len(corpus_documents) - successful_count,
-                "scores_hash": scores_hash,
-                "evidence_hash": evidence_hash,
-                "ensemble_runs": ensemble_runs
-            })
+            self._log_status(f"Analysis phase completed: {successful_count}/{len(corpus_documents)} documents processed successfully")
             
             # Log analysis phase completion
-            self.logger.info("Analysis phase completed", extra={
-                "experiment_name": experiment_config.get("name", "Unknown"),
-                "run_id": run_timestamp,
-                "documents_processed": successful_count
-            })
+            self._log_status("Analysis phase completed")
             
             # Display analysis progress and cost
             analysis_costs = audit.get_session_costs()
-            print(f"✅ Analysis phase complete: {successful_count}/{len(corpus_documents)} documents processed")
-            print(f"   💰 Analysis cost so far: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
-            print(f"   🔢 Tokens used: {analysis_costs.get('total_tokens', 0):,}")
+            self._log_status(f"✅ Analysis phase complete: {successful_count}/{len(corpus_documents)} documents processed")
+            self._log_status(f"   💰 Analysis cost so far: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
+            self._log_status(f"   🔢 Tokens used: {analysis_costs.get('total_tokens', 0):,}")
 
             # TODO: Ensemble runs disabled pending architectural review
             # Report ensemble quality summary if ensemble runs were used
@@ -1128,29 +1127,20 @@ Respond with only the JSON object."""
 
             # Check if any analysis tasks succeeded
             if not successful_count:
-                self.logger.error("Analysis phase failed - no successful analyses", extra={
-                    "total_documents": len(corpus_documents),
-                    "successful_analyses": 0,
-                    "failed_analyses": len(corpus_documents),
-                    "analysis_results": all_analysis_results
-                })
+                self._log_error_context("Analysis phase failed - no successful analyses")
                 raise ThinOrchestratorError("All analysis batches failed. Halting experiment.")
 
             # Execute synthesis
-            self.logger.info("Starting synthesis phase")
-            print("\n🔬 Synthesizing results...")
+            self._log_status("Starting synthesis phase")
+            self._log_progress("\n🔬 Synthesizing results...")
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
             # Set stage for synthesis operations
             self._set_stage("synthesis", self.analysis_model, self.synthesis_model)
             
-            self.logger.info("Using Discernus Advanced Synthesis Pipeline", extra={
-                "synthesis_model": synthesis_model,
-                "scores_hash": scores_hash,
-                "evidence_hash": evidence_hash
-            })
-            print("🏭 Using Discernus Advanced Synthesis Pipeline...")
-            print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
+            self._log_status("Using Discernus Advanced Synthesis Pipeline")
+            self._log_progress("🏭 Using Discernus Advanced Synthesis Pipeline...")
+            self._log_progress(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
             
             # Calculate framework hash for provenance
             framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
@@ -1182,12 +1172,7 @@ Respond with only the JSON object."""
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
             
             # Log synthesis completion
-            self.logger.info("Synthesis phase completed successfully", extra={
-                "synthesis_model": synthesis_model,
-                "result_hash": synthesis_results.get("result_hash"),
-                "duration_seconds": synthesis_results.get("duration_seconds"),
-                "synthesis_confidence": synthesis_results.get("synthesis_confidence")
-            })
+            self._log_status("Synthesis phase completed successfully")
             
 
             
@@ -1196,19 +1181,12 @@ Respond with only the JSON object."""
             synthesis_tokens = synthesis_results.get("synthesis_tokens", 0)
             
             # Log synthesis phase completion
-            self.logger.info("Synthesis phase completed", extra={
-                "synthesis_model": synthesis_model,
-                "result_hash": synthesis_results.get("result_hash"),
-                "duration_seconds": synthesis_results.get("duration_seconds"),
-                "synthesis_confidence": synthesis_results.get("synthesis_confidence"),
-                "total_cost_usd": synthesis_cost_usd,
-                "total_tokens": synthesis_tokens
-            })
+            self._log_status("Synthesis phase completed")
+            self._log_status(f"   💰 Total cost so far: ${synthesis_cost_usd:.4f} USD")
+            self._log_status(f"   🔢 Total tokens: {synthesis_tokens:,}")
             
             # Display synthesis cost update
-            print(f"✅ Synthesis phase complete!")
-            print(f"   💰 Total cost so far: ${synthesis_cost_usd:.4f} USD")
-            print(f"   🔢 Total tokens: {synthesis_tokens:,}")
+            self._log_status(f"✅ Synthesis phase complete!")
             
             # Record synthesis stage
             agent_name = "ProductionThinSynthesisPipeline"
@@ -1268,12 +1246,12 @@ Respond with only the JSON object."""
                 )
                 
                 if provenance_result["success"]:
-                    print(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
+                    self._log_status(f"📁 Provenance organization: {provenance_result['artifacts_organized']} artifacts organized")
                 else:
-                    print("⚠️  Provenance organization failed, continuing with standard structure")
+                    self._log_error_context("⚠️  Provenance organization failed, continuing with standard structure")
                     
             except Exception as e:
-                print(f"⚠️  Provenance organization error: {str(e)}")
+                self._log_error_context(f"⚠️  Provenance organization error: {str(e)}")
                 audit.log_error("provenance_organization_error", str(e), {})
             
 
@@ -1335,47 +1313,22 @@ Respond with only the JSON object."""
             session_costs = audit.get_session_costs()
             
             # Log experiment completion
-            self.logger.info("THIN v2.0 experiment completed successfully", extra={
-                "run_id": run_timestamp,
-                "total_duration_seconds": total_duration,
-                "analysis_duration": analysis_summary["total_duration_seconds"],
-                "synthesis_duration": synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
-                "final_report_hash": report_hash,
-                "manifest_file": str(manifest_file),
-                "total_cost_usd": session_costs.get('total_cost_usd', 0.0),
-                "total_tokens": session_costs.get('total_tokens', 0)
-            })
-            
-            # Log experiment completion
-            log_experiment_complete(
-                experiment_name=experiment_config.get("name", "Unknown"),
-                run_id=run_timestamp,
-                duration_seconds=total_duration,
-                analysis_duration=analysis_summary["total_duration_seconds"],
-                synthesis_duration=synthesis_results.get("execution_metadata", {}).get("duration_seconds", 0),
-                final_report_hash=report_hash,
-                manifest_file=str(manifest_file),
-                total_cost_usd=session_costs.get('total_cost_usd', 0.0),
-                total_tokens=session_costs.get('total_tokens', 0),
-                architecture="thin_v2.0_direct_calls"
-            )
-            
-            print(f"\n✅ THIN v2.0 experiment completed: {run_timestamp} ({total_duration:.1f}s)")
-            print(f"📋 Results: {results_dir}")
-            print(f"📊 Report: {report_file}")
-            print(f"\n💰 Final Cost Summary:")
-            print(f"   Total Cost: ${session_costs.get('total_cost_usd', 0.0):.4f} USD")
-            print(f"   Total Tokens: {session_costs.get('total_tokens', 0):,}")
+            self._log_status("THIN v2.0 experiment completed successfully")
+            self._log_status(f"📋 Results: {results_dir}")
+            self._log_status(f"📊 Report: {report_file}")
+            self._log_status(f"\n💰 Final Cost Summary:")
+            self._log_status(f"   Total Cost: ${session_costs.get('total_cost_usd', 0.0):.4f} USD")
+            self._log_status(f"   Total Tokens: {session_costs.get('total_tokens', 0):,}")
             
             # Show detailed cost breakdown
             operations = session_costs.get('operations', {})
             if operations:
-                print(f"   Cost by Operation:")
+                self._log_status(f"   Cost by Operation:")
                 for op, op_costs in operations.items():
                     cost_usd = op_costs.get('cost_usd', 0.0)
                     tokens = op_costs.get('tokens', 0)
                     calls = op_costs.get('calls', 0)
-                    print(f"     • {op}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
+                    self._log_status(f"     • {op}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
             
             # Auto-commit successful run to Git (if enabled)
             if auto_commit:
@@ -1385,7 +1338,7 @@ Respond with only the JSON object."""
                 }
                 commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
                 if not commit_success:
-                    print("⚠️  Auto-commit to Git failed (run completed successfully)")
+                    self._log_error_context("⚠️  Auto-commit to Git failed (run completed successfully)")
             
             return {
                 "run_id": run_timestamp,
@@ -1404,17 +1357,7 @@ Respond with only the JSON object."""
             
         except Exception as e:
             # Log error with comprehensive context
-            self.logger.error("Experiment execution failed", extra={
-                "experiment_path": str(self.experiment_path),
-                "run_folder": str(run_folder) if 'run_folder' in locals() else None,
-                "error_type": type(e).__name__,
-                "error_message": str(e),
-                "analysis_model": analysis_model,
-                "synthesis_model": synthesis_model,
-                "ensemble_runs": ensemble_runs,
-                "auto_commit": auto_commit,
-                "resume_stage": resume_stage
-            })
+            self._log_error_context("Experiment execution failed", exc=e)
             
             # Log error and cleanup
             try:
@@ -1443,17 +1386,17 @@ Respond with only the JSON object."""
         
         all_analysis_results = []
         
-        self.logger.info(f"Starting sequential analysis of {len(corpus_documents)} documents", extra={
+        self._log_progress(f"Starting sequential analysis of {len(corpus_documents)} documents", extra={
             "total_documents": len(corpus_documents),
             "model": model,
             "ensemble_runs": ensemble_runs
         })
-        print(f"\n🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
+        self._log_progress(f"\n🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
         
         for i, doc in enumerate(corpus_documents):
             doc_filename = doc.get('filename', 'unknown')
-            self.logger.info(f"Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename}")
-            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename} ---")
+            self._log_progress(f"Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename}")
+            self._log_progress(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename} ---")
             
             # TODO: Ensemble runs disabled pending architectural review
             # if ensemble_runs > 1:
@@ -1493,37 +1436,26 @@ Respond with only the JSON object."""
                 )
                 
                 # Log successful analysis
-                self.logger.info(f"Document {doc_filename} analyzed successfully", extra={
-                    "document_index": i+1,
-                    "total_documents": len(corpus_documents),
-                    "result_hash": result.get('analysis_result', {}).get('result_hash'),
-                    "has_scores": bool(result.get('analysis_result', {}).get('scores')),
-                    "has_evidence": bool(result.get('analysis_result', {}).get('evidence'))
-                })
+                self._log_status(f"Document {doc_filename} analyzed successfully")
                 
                 # Append the analysis result to the list
                 all_analysis_results.append(result)
             except Exception as e:
-                self.logger.error(f"Analysis failed for document {doc_filename}", extra={
-                    "document_index": i+1,
-                    "total_documents": len(corpus_documents),
-                    "error_type": type(e).__name__,
-                    "error_message": str(e)
-                })
-                print(f"❌ Analysis failed for document {doc_filename}: {e}")
+                self._log_error_context(f"Analysis failed for document {doc_filename}", exc=e)
+                self._log_error_context(f"❌ Analysis failed for document {doc_filename}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc_filename})
 
         # Combine all analysis results into a single JSON artifact for synthesis
         # This is statistical preparation work - cross-document extraction and combination
         self._set_stage("statistical_prep", self.analysis_model, self.synthesis_model)
         
-        self.logger.info("Combining analysis artifacts for synthesis")
+        self._log_status("Combining analysis artifacts for synthesis")
         scores_hash, evidence_hash = self._combine_analysis_artifacts(all_analysis_results, analysis_agent.storage)
         
         # THIN: Evidence-only RAG architecture doesn't need combined corpus text
         # Raw corpus is provided directly as context to synthesis agents
         
-        self.logger.info("Analysis artifacts combined successfully", extra={
+        self._log_status("Analysis artifacts combined successfully", extra={
             "scores_hash": scores_hash,
             "evidence_hash": evidence_hash,
             "total_documents": len(corpus_documents),
@@ -1548,7 +1480,7 @@ Respond with only the JSON object."""
         
         for i, result in enumerate(analysis_results):
             if not result or "error" in result:
-                print(f"Warning: Skipping failed analysis result {i}")
+                self._log_error_context(f"Warning: Skipping failed analysis result {i}")
                 continue
                 
             # Extract the actual analysis data from the nested structure
@@ -1572,9 +1504,9 @@ Respond with only the JSON object."""
                                     evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
                                     evidence_list = evidence_artifact.get("evidence_data", [])
                                     all_evidence.extend(evidence_list)
-                                    print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
+                                    self._log_status(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
                             except Exception as e:
-                                print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
+                                self._log_error_context(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
                         
                         # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                         # We need framework content for gasket schema extraction
@@ -1595,10 +1527,10 @@ Respond with only the JSON object."""
                         if extracted_data and "document_analyses" in extracted_data:
                             combined_document_analyses.extend(extracted_data["document_analyses"])
                         else:
-                            print(f"Warning: Failed to extract analysis data from result {i}")
+                            self._log_error_context(f"Warning: Failed to extract analysis data from result {i}")
                             continue
                     else:
-                        print(f"Warning: No raw_analysis_response found in cached result {i}")
+                        self._log_error_context(f"Warning: No raw_analysis_response found in cached result {i}")
                         continue
                 elif "result_hash" in result["analysis_result"]:
                     # Fresh analysis result - load the actual result content from storage
@@ -1617,9 +1549,9 @@ Respond with only the JSON object."""
                                         evidence_artifact = json.loads(evidence_artifact_data.decode('utf-8'))
                                         evidence_list = evidence_artifact.get("evidence_data", [])
                                         all_evidence.extend(evidence_list)
-                                        print(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
+                                        self._log_status(f"    📋 Loaded {len(evidence_list)} evidence pieces from analysis {i}")
                                 except Exception as e:
-                                    print(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
+                                    self._log_error_context(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
                             
                             # Extract analysis data from the result artifact
                             if "raw_analysis_response" in result_artifact:
@@ -1643,19 +1575,19 @@ Respond with only the JSON object."""
                                 if extracted_data and "document_analyses" in extracted_data:
                                     combined_document_analyses.extend(extracted_data["document_analyses"])
                                 else:
-                                    print(f"Warning: Failed to extract analysis data from result {i}")
+                                    self._log_error_context(f"Warning: Failed to extract analysis data from result {i}")
                                     continue
                             else:
-                                print(f"Warning: No raw_analysis_response found in result artifact {i}")
+                                self._log_error_context(f"Warning: No raw_analysis_response found in result artifact {i}")
                                 continue
                         else:
-                            print(f"Warning: Failed to load result artifact for analysis {i}")
+                            self._log_error_context(f"Warning: Failed to load result artifact for analysis {i}")
                             continue
                     except Exception as e:
-                        print(f"Warning: Failed to load result artifact for analysis {i}: {e}")
+                        self._log_error_context(f"Warning: Failed to load result artifact for analysis {i}: {e}")
                         continue
                 else:
-                    print(f"Warning: No result_content or result_hash found in analysis_result {i}")
+                    self._log_error_context(f"Warning: No result_content or result_hash found in analysis_result {i}")
                     continue
             elif "raw_analysis_response" in result:
                 # Direct raw_analysis_response fallback is no longer supported
@@ -1672,7 +1604,7 @@ Respond with only the JSON object."""
                     "evidence": result.get("evidence", [])
                 })
             else:
-                print(f"Warning: Unknown analysis result format for result {i}")
+                self._log_error_context(f"Warning: Unknown analysis result format for result {i}")
                 continue
         
         # Create combined scores result structure
@@ -1719,8 +1651,8 @@ Respond with only the JSON object."""
             }
         )
         
-        print(f"📋 Evidence combination: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
-        print(f"📊 Analysis combination: {len(combined_document_analyses)} documents → {combined_result_hash[:12]}...")
+        self._log_status(f"📋 Evidence combination: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
+        self._log_status(f"📊 Analysis combination: {len(combined_document_analyses)} documents → {combined_result_hash[:12]}...")
         
         return combined_result_hash, evidence_hash
 
@@ -1742,12 +1674,12 @@ Respond with only the JSON object."""
             
             start_pos = framework_content.find(start_marker)
             if start_pos == -1:
-                print("❌ No GASKET_SCHEMA_START marker found in framework")
+                self._log_error_context("❌ No GASKET_SCHEMA_START marker found in framework")
                 return None
                 
             end_pos = framework_content.find(end_marker, start_pos)
             if end_pos == -1:
-                print("❌ No GASKET_SCHEMA_END marker found in framework")
+                self._log_error_context("❌ No GASKET_SCHEMA_END marker found in framework")
                 return None
             
             # Extract content between markers
@@ -1756,12 +1688,12 @@ Respond with only the JSON object."""
             # Find the JSON block within the marked content
             json_start = marker_content.find('{')
             if json_start == -1:
-                print("❌ No JSON content found between gasket schema markers")
+                self._log_error_context("❌ No JSON content found between gasket schema markers")
                 return None
                 
             json_end = marker_content.rfind('}') + 1
             if json_end == 0:
-                print("❌ Malformed JSON between gasket schema markers")
+                self._log_error_context("❌ Malformed JSON between gasket schema markers")
                 return None
             
             json_content = marker_content[json_start:json_end]
@@ -1775,21 +1707,21 @@ Respond with only the JSON object."""
                     # Support v7.3 format
                     supported_versions = ['7.3', 'v7.3']
                     if gasket_schema.get('version') in supported_versions and 'target_keys' in gasket_schema:
-                        print(f"✅ Successfully extracted gasket schema with {len(gasket_schema.get('target_keys', []))} target keys")
+                        self._log_status(f"✅ Successfully extracted gasket schema with {len(gasket_schema.get('target_keys', []))} target keys")
                         return gasket_schema
                     else:
-                        print(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}")
+                        self._log_error_context(f"❌ Unsupported gasket_schema version: {gasket_schema.get('version')}. Supported versions: {supported_versions}")
                         return None
                 else:
-                    print("❌ No gasket_schema found in marked JSON content")
+                    self._log_error_context("❌ No gasket_schema found in marked JSON content")
                     return None
                     
             except json.JSONDecodeError as e:
-                print(f"❌ Failed to parse JSON between gasket schema markers: {e}")
+                self._log_error_context(f"❌ Failed to parse JSON between gasket schema markers: {e}")
                 return None
             
         except Exception as e:
-            print(f"Warning: Failed to extract gasket_schema from framework: {e}")
+            self._log_error_context(f"Warning: Failed to extract gasket_schema from framework: {e}")
             return None
 
     def _convert_v71_gasket_to_v70(self, v71_schema: Dict[str, Any]) -> Dict[str, List[str]]:
@@ -1830,11 +1762,11 @@ Respond with only the JSON object."""
                 'conversion_source': 'v7.1_enhanced'
             }
             
-            print(f"✅ Converted v7.1 gasket schema: {len(target_keys)} target keys")
+            self._log_status(f"✅ Converted v7.1 gasket schema: {len(target_keys)} target keys")
             return v70_schema
             
         except Exception as e:
-            print(f"❌ Failed to convert v7.1 gasket schema: {e}")
+            self._log_error_context(f"❌ Failed to convert v7.1 gasket schema: {e}")
             return None
 
     def _extract_and_map_with_gasket(
@@ -1862,9 +1794,9 @@ Respond with only the JSON object."""
         
         if not gasket_schema:
             # No backward compatibility - error out on non-supported frameworks
-            print("❌ No valid gasket_schema found in framework")
-            print(f"🔍 Framework content length: {len(framework_content)}")
-            print(f"🔍 Contains ```json: {'```json' in framework_content}")
+            self._log_error_context("❌ No valid gasket_schema found in framework")
+            self._log_error_context(f"🔍 Framework content length: {len(framework_content)}")
+            self._log_error_context(f"🔍 Contains ```json: {'```json' in framework_content}")
             raise ValueError("Framework must have valid gasket_schema (v7.1 or v7.3). No backward compatibility with v7.0 or earlier.")
         
         # Extract evidence from raw response for v7.1 integration (Issue #281)
@@ -1882,7 +1814,7 @@ Respond with only the JSON object."""
         )
         
         if not extraction_result.success:
-            print(f"❌ Intelligent Extractor failed: {extraction_result.error_message}")
+            self._log_error_context("❌ Intelligent Extractor failed: {extraction_result.error_message}")
             # No fallback - fail fast on extraction errors
             raise ValueError(f"v7.1 Intelligent Extractor failed: {extraction_result.error_message}. No legacy fallback available.")
         
@@ -1964,7 +1896,7 @@ Respond with only the JSON object."""
             )
             return analysis_data
         except (ValueError, json.JSONDecodeError) as e:
-            print(f"Warning: Failed to parse JSON from legacy format: {e}")
+            self._log_error_context(f"Warning: Failed to parse JSON from legacy format: {e}")
             return None
 
     def _extract_evidence_from_delimited(self, raw_response: str) -> List[Dict[str, Any]]:
@@ -2012,7 +1944,7 @@ Respond with only the JSON object."""
             
             return evidence_list
         except json.JSONDecodeError as e:
-            print(f"Warning: Failed to extract evidence from delimited format: {e}")
+            self._log_error_context(f"Warning: Failed to extract evidence from delimited format: {e}")
             return []
 
     def _combine_batch_results(self, all_analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -2061,7 +1993,7 @@ Respond with only the JSON object."""
             # If all runs failed, return the first error result
             return ensemble_results[0] if ensemble_results else {"error": "All ensemble runs failed", "document": document_name}
         
-        print(f"    ✅ {len(successful_runs)}/{len(ensemble_results)} ensemble runs successful")
+        self._log_status(f"    ✅ {len(successful_runs)}/{len(ensemble_results)} ensemble runs successful")
         
         # Extract scores from each successful run
         all_scores = []
@@ -2097,7 +2029,7 @@ Respond with only the JSON object."""
                 all_durations.append(duration)
                 
             except Exception as e:
-                print(f"    ⚠️ Failed to extract scores from ensemble run: {e}")
+                self._log_error_context(f"    ⚠️ Failed to extract scores from ensemble run: {e}")
                 continue
         
         if not all_scores:
@@ -2271,21 +2203,21 @@ Respond with only the JSON object."""
         avg_variance = consensus_metrics.get("average_variance", 0.0)
         ensemble_runs = consensus_metrics.get("ensemble_runs", 0)
         
-        print(f"    📊 Ensemble Quality for {document_name}:")
-        print(f"       • Consensus Level: {consensus_level.upper()}")
-        print(f"       • Average Variance: {avg_variance:.3f}")
-        print(f"       • Successful Runs: {successful_runs}/{ensemble_runs}")
+        self._log_status(f"    📊 Ensemble Quality for {document_name}:")
+        self._log_status(f"       • Consensus Level: {consensus_level.upper()}")
+        self._log_status(f"       • Average Variance: {avg_variance:.3f}")
+        self._log_status(f"       • Successful Runs: {successful_runs}/{ensemble_runs}")
         
         # Log detailed dimension metrics if consensus is concerning
         if consensus_level == "low":
-            print(f"    ⚠️  Low consensus detected - dimension details:")
+            self._log_error_context(f"    ⚠️  Low consensus detected - dimension details:")
             dimension_metrics = consensus_metrics.get("dimension_metrics", {})
             for dimension, metrics in dimension_metrics.items():
                 variance = metrics.get("variance", 0.0)
                 if variance > 0.3:  # High variance threshold
                     mean = metrics.get("mean", 0.0)
                     std_dev = metrics.get("std_dev", 0.0)
-                    print(f"       • {dimension}: mean={mean:.2f}, variance={variance:.3f}, std_dev={std_dev:.3f}")
+                    self._log_error_context(f"       • {dimension}: mean={mean:.2f}, variance={variance:.3f}, std_dev={std_dev:.3f}")
         
         # Log to audit system for permanent record
         if hasattr(self, '_current_audit_logger') and self._current_audit_logger:
@@ -2310,7 +2242,7 @@ Respond with only the JSON object."""
             all_analysis_results: List of analysis results (potentially aggregated from ensemble runs)
             ensemble_runs: Number of ensemble runs performed
         """
-        print(f"\n📊 Ensemble Analysis Summary ({ensemble_runs} runs per document):")
+        self._log_status(f"\n📊 Ensemble Analysis Summary ({ensemble_runs} runs per document):")
         
         # Collect consensus metrics from all documents
         consensus_levels = []
@@ -2338,13 +2270,13 @@ Respond with only the JSON object."""
             total_docs = len(consensus_levels)
             overall_avg_variance = sum(avg_variances) / len(avg_variances) if avg_variances else 0.0
             
-            print(f"   📈 Consensus Distribution:")
-            print(f"      • High Consensus: {high_consensus}/{total_docs} documents ({high_consensus/total_docs*100:.1f}%)")
-            print(f"      • Medium Consensus: {medium_consensus}/{total_docs} documents ({medium_consensus/total_docs*100:.1f}%)")
-            print(f"      • Low Consensus: {low_consensus}/{total_docs} documents ({low_consensus/total_docs*100:.1f}%)")
-            print(f"   📊 Overall Quality:")
-            print(f"      • Average Variance: {overall_avg_variance:.3f}")
-            print(f"      • Total Dimensions Analyzed: {total_dimensions}")
+            self._log_status(f"   📈 Consensus Distribution:")
+            self._log_status(f"      • High Consensus: {high_consensus}/{total_docs} documents ({high_consensus/total_docs*100:.1f}%)")
+            self._log_status(f"      • Medium Consensus: {medium_consensus}/{total_docs} documents ({medium_consensus/total_docs*100:.1f}%)")
+            self._log_status(f"      • Low Consensus: {low_consensus}/{total_docs} documents ({low_consensus/total_docs*100:.1f}%)")
+            self._log_status(f"   📊 Overall Quality:")
+            self._log_status(f"      • Average Variance: {overall_avg_variance:.3f}")
+            self._log_status(f"      • Total Dimensions Analyzed: {total_dimensions}")
             
             # Provide interpretation
             if overall_avg_variance < 0.1:
@@ -2356,13 +2288,13 @@ Respond with only the JSON object."""
             else:
                 quality_assessment = "CONCERNING - Low ensemble agreement"
             
-            print(f"   🎯 Quality Assessment: {quality_assessment}")
+            self._log_status(f"   🎯 Quality Assessment: {quality_assessment}")
             
             # Warn if many documents have low consensus
             if low_consensus > total_docs * 0.3:  # More than 30% low consensus
-                print(f"   ⚠️  WARNING: {low_consensus} documents show low consensus - consider reviewing analysis or increasing ensemble runs")
+                self._log_error_context(f"   ⚠️  WARNING: {low_consensus} documents show low consensus - consider reviewing analysis or increasing ensemble runs")
         else:
-            print(f"   ⚠️  No ensemble metrics found in analysis results")
+            self._log_error_context(f"   ⚠️  No ensemble metrics found in analysis results")
 
     def _load_experiment_config(self) -> Dict[str, Any]:
         """Load and validate the experiment.md file."""
@@ -2439,7 +2371,7 @@ Respond with only the JSON object."""
             if not framework_file.exists():
                 raise ThinOrchestratorError(f"Canonical framework not found: {framework_filename}")
             
-            print(f"🛡️ Security: Loading canonical framework: {framework_file.name}")
+            self._log_status(f"🛡️ Security: Loading canonical framework: {framework_file.name}")
             # Direct read (orchestrator is trusted infrastructure)
             return framework_file.read_text(encoding='utf-8')
         
@@ -2450,66 +2382,105 @@ Respond with only the JSON object."""
             if not framework_file.exists():
                 raise ThinOrchestratorError(f"Framework file not found: {framework_filename}")
             
-            print(f"🛡️ Security: Loading local framework: {framework_file.name}")
+            self._log_status(f"🛡️ Security: Loading local framework: {framework_file.name}")
             # Use security boundary for local files (agents must stay within boundary)
             return self.security.secure_read_text(framework_file)
     
     def _load_corpus(self, corpus_path: str) -> tuple[List[Dict[str, Any]], Dict[str, Any]]:
-        """Load corpus documents and corpus manifest."""
+        """Load corpus documents according to corpus manifest."""
         corpus_dir = self.experiment_path / corpus_path
         
         if not corpus_dir.exists():
             raise ThinOrchestratorError(f"Corpus directory not found: {corpus_path}")
         
-        # Find all text and PDF files recursively in corpus directory
-        corpus_files = []
-        for root, dirs, files in os.walk(corpus_dir):
-            for file in files:
-                if file.endswith(('.txt', '.pdf')) and not file.startswith('.'):
-                    corpus_files.append(Path(root) / file)
-        
-        if not corpus_files:
-            raise ThinOrchestratorError(f"No .txt or .pdf files found in corpus directory: {corpus_path}")
-        
-        # Load corpus documents
-        documents = []
-        for file_path in sorted(corpus_files):
-            if file_path.suffix == '.txt':
-                content = self.security.secure_read_text(file_path)
-            elif file_path.suffix == '.pdf':
-                # For PDF files, we'll pass them as binary data and let Gemini handle them
-                content = self.security.secure_read_bytes(file_path)
-            
-            documents.append({
-                "filename": file_path.name,
-                "content": content,
-                "filepath": str(file_path.relative_to(self.experiment_path))
-            })
-        
-        # Load corpus manifest from corpus.md
+        # Load corpus manifest from corpus.md FIRST
         corpus_manifest = {}
         corpus_md_file = corpus_dir / "corpus.md"
-        if corpus_md_file.exists():
-            try:
-                corpus_md_content = self.security.secure_read_text(corpus_md_file)
-                
-                # Extract JSON from corpus.md (similar to framework parsing)
-                if '```json' in corpus_md_content:
-                    json_start = corpus_md_content.find('```json') + 7
-                    json_end = corpus_md_content.find('```', json_start)
-                    if json_end > json_start:
-                        json_str = corpus_md_content[json_start:json_end].strip()
-                        corpus_manifest = json.loads(json_str)
-                        print(f"📄 Loaded corpus manifest with {len(corpus_manifest.get('file_manifest', []))} document metadata entries")
-                    else:
-                        print("⚠️ corpus.md found but no valid JSON block detected")
+        if not corpus_md_file.exists():
+            raise ThinOrchestratorError(f"Corpus manifest (corpus.md) not found in: {corpus_path}")
+        
+        try:
+            corpus_md_content = self.security.secure_read_text(corpus_md_file)
+            
+            # Extract JSON from corpus.md
+            if '```json' in corpus_md_content:
+                json_start = corpus_md_content.find('```json') + 7
+                json_end = corpus_md_content.find('```', json_start)
+                if json_end > json_start:
+                    json_str = corpus_md_content[json_start:json_end].strip()
+                    corpus_manifest = json.loads(json_str)
+                    self._log_status(f"📄 Loaded corpus manifest with {len(corpus_manifest.get('file_manifest', []))} document metadata entries")
                 else:
-                    print("⚠️ corpus.md found but no JSON block detected")
+                    raise ThinOrchestratorError("Corpus manifest (corpus.md) has malformed JSON block")
+            else:
+                raise ThinOrchestratorError("Corpus manifest (corpus.md) missing required JSON block")
+        except Exception as e:
+            raise ThinOrchestratorError(f"Failed to parse corpus manifest: {e}")
+        
+        # Get file manifest from corpus manifest
+        file_manifest = corpus_manifest.get('file_manifest', [])
+        if not file_manifest:
+            raise ThinOrchestratorError("Corpus manifest contains no file entries")
+        
+        # Load only files specified in the manifest
+        documents = []
+        missing_files = []
+        
+        for file_entry in file_manifest:
+            filename = file_entry.get('name')
+            if not filename:
+                self.logger.warning(f"Corpus manifest entry missing 'name' field: {file_entry}")
+                continue
+                
+            file_path = corpus_dir / filename
+            
+            if not file_path.exists():
+                missing_files.append(filename)
+                continue
+            
+            try:
+                if file_path.suffix == '.txt':
+                    content = self.security.secure_read_text(file_path)
+                elif file_path.suffix == '.pdf':
+                    content = self.security.secure_read_bytes(file_path)
+                elif file_path.suffix == '.md':
+                    # Support markdown files as well
+                    content = self.security.secure_read_text(file_path)
+                else:
+                    self.logger.warning(f"Unsupported file type: {filename}")
+                    continue
+                
+                documents.append({
+                    "filename": filename,
+                    "content": content,
+                    "filepath": str(file_path.relative_to(self.experiment_path))
+                })
+                
             except Exception as e:
-                print(f"⚠️ Failed to parse corpus.md: {e}")
-                corpus_manifest = {}
-        else:
-            print("⚠️ No corpus.md found - synthesis will have limited metadata awareness")
+                self.logger.error(f"Failed to load corpus file {filename}: {e}")
+                missing_files.append(filename)
+        
+        if missing_files:
+            raise ThinOrchestratorError(f"Corpus files listed in manifest but not found: {missing_files}")
+        
+        if not documents:
+            raise ThinOrchestratorError("No valid corpus documents loaded from manifest")
+        
+        self._log_status(f"📄 Loaded {len(documents)} corpus documents according to manifest")
+        
+        # Validate that no extra files exist that aren't in the manifest
+        actual_files = []
+        for root, dirs, files in os.walk(corpus_dir):
+            for file in files:
+                if file.endswith(('.txt', '.pdf', '.md')) and not file.startswith('.') and file != 'corpus.md':
+                    actual_files.append(file)
+        
+        manifest_files = {entry.get('name') for entry in file_manifest if entry.get('name')}
+        extra_files = set(actual_files) - manifest_files
+        
+        if extra_files:
+            self.logger.warning(f"⚠️  Found {len(extra_files)} files in corpus directory not listed in manifest: {list(extra_files)[:5]}{'...' if len(extra_files) > 5 else ''}")
+            self._log_error_context(f"⚠️  Found {len(extra_files)} files not in manifest - these will be ignored")
         
         return documents, corpus_manifest
     
@@ -2756,7 +2727,7 @@ This report presents the results of computational research analysis using the Di
                 "committed_path": str(run_folder.relative_to(repo_root))
             })
             
-            print(f"📝 Auto-committed to Git: {commit_msg}")
+            self._log_status(f"📝 Auto-committed to Git: {commit_msg}")
             return True
             
         except subprocess.TimeoutExpired:
@@ -2852,10 +2823,10 @@ This research was conducted using the Discernus computational research platform,
                 validation_results[hash_value] = artifact_exists
                 
                 if not artifact_exists:
-                    print(f"WARNING: Artifact hash {hash_value} not found in storage")
+                    self._log_error_context(f"WARNING: Artifact hash {hash_value} not found in storage")
                     
             except Exception as e:
-                print(f"ERROR: Error validating artifact hash {hash_value}: {e}")
+                self._log_error_context(f"ERROR: Error validating artifact hash {hash_value}: {e}")
                 validation_results[hash_value] = False
         
         return validation_results
@@ -2938,9 +2909,9 @@ This research was conducted using the Discernus computational research platform,
             )
             
             if result.success:
-                print(f"📊 Final CSV Export: {len(result.files_created)} files created")
+                self._log_status(f"📊 Final CSV Export: {len(result.files_created)} files created")
                 for filename in result.files_created:
-                    print(f"   • {filename}")
+                    self._log_status(f"   • {filename}")
                 
                 return {
                     "success": True,
@@ -2949,11 +2920,11 @@ This research was conducted using the Discernus computational research platform,
                     "export_time": result.export_time_seconds
                 }
             else:
-                print(f"⚠️  Final CSV export failed: {result.error_message}")
+                self._log_error_context(f"⚠️  Final CSV export failed: {result.error_message}")
                 return None
                 
         except Exception as e:
-            print(f"❌ Final CSV export error: {str(e)}")
+            self._log_error_context(f"❌ Final CSV export error: {str(e)}")
             audit.log_agent_event(
                 "CSVExportAgent",
                 "final_export_error",
@@ -3015,16 +2986,16 @@ This research was conducted using the Discernus computational research platform,
             )
             
             if export_result.success:
-                print(f"📊 CSV Export: {len(export_result.files_created)} files created")
+                self._log_status(f"📊 CSV Export: {len(export_result.files_created)} files created")
                 for file in export_result.files_created:
-                    print(f"   • {file}")
+                    self._log_status(f"   • {file}")
                 return export_result.__dict__
             else:
-                print(f"⚠️  CSV Export failed: {export_result.error_message}")
+                self._log_error_context(f"⚠️  CSV Export failed: {export_result.error_message}")
                 return None
                 
         except Exception as e:
-            print(f"⚠️  CSV Export error: {str(e)}")
+            self._log_error_context(f"⚠️  CSV Export error: {str(e)}")
             audit.log_error("csv_export_error", str(e), {
                 "scores_hash": scores_hash,
                 "evidence_hash": evidence_hash
