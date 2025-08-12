@@ -68,7 +68,8 @@ logs/
 reports/
 outputs/
 temp_results/
-results/
+# Note: results/ directories contain research artifacts that should be tracked
+# Only exclude temporary or large generated files
 *.eps
 *.pdf
 *.png
@@ -88,13 +89,21 @@ service_account.json
 
 # Data files (often large)
 *.csv
-*.json
-*.jsonl
-*.yaml
-*.yml
 data/
 corpus/
 datasets/
+
+# Large JSON files (research data, not configuration)
+# Note: Configuration JSON files (manifests, configs) are tracked
+# Only exclude JSON files that contain large research datasets
+**/large_dataset_*.json
+**/large_dataset_*.jsonl
+
+# Large YAML files (research data, not configuration)
+# Note: Configuration YAML files (prompts, frameworks, configs) are tracked
+# Only exclude YAML files that contain large research datasets
+**/large_dataset_*.yaml
+**/large_dataset_*.yml
 
 # Jupyter Notebook
 .ipynb_checkpoints
