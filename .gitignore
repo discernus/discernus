@@ -90,7 +90,8 @@ service_account.json
 # Data files (often large)
 *.csv
 data/
-corpus/
+# Only ignore the root corpus directory, not project-specific corpus directories
+/corpus/
 datasets/
 
 # Large JSON files (research data, not configuration)
