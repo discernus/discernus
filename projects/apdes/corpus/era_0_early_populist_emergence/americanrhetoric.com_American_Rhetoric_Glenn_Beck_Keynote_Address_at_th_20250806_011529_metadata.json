@@ -1,0 +1,14 @@
+{
+  "url": "https://www.americanrhetoric.com/speeches/glennbeckrestoringhonorkeynote.htm",
+  "title": "American Rhetoric: Glenn Beck: Keynote Address at the Restoring Honor \r\nRally",
+  "method_used": "requests",
+  "word_count": 6217,
+  "confidence_score": 80.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T01:15:29.021273",
+    "page_title": "American Rhetoric: Glenn Beck: Keynote Address at the Restoring Honor \r\nRally",
+    "http_status": 200,
+    "content_type": "text/html"
+  }
+}

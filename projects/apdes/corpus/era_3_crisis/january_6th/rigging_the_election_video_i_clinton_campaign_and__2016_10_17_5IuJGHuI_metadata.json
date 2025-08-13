@@ -1,0 +1,27 @@
+{
+  "video_info": {
+    "video_id": "5IuJGHuIkzY",
+    "title": "Rigging the Election - Video I: Clinton Campaign and DNC Incite Violence at Trump Rallies",
+    "channel": "Project Veritas Action",
+    "upload_date": "2016-10-17",
+    "description": "In this explosive new video from Project Veritas Action, a Democratic dirty tricks operative unwittingly provides a dark money trail to the DNC and Clinton campaign. The video documents violence at Trump rallies that is traced to the Clinton campaign and the DNC through a process called birddogging. \n\nA shady coordinated communications chain between the DNC, Clinton Campaign, Hillary Clinton’s Super PAC (Priorities) and other organizations are revealed. A key Clinton operative is on camera saying, “It doesn’t matter what the friggin’ legal and ethics people say, we need to win this motherfucker.\"\n\nWebsite: http://projectveritasaction.com/\nFacebook: https://www.facebook.com/ProjectVerit...\nTwitter: https://twitter.com/@Pveritas_Action",
+    "duration": 986,
+    "view_count": 6692118,
+    "like_count": 109967,
+    "url": "https://www.youtube.com/watch?v=5IuJGHuIkzY"
+  },
+  "extraction_info": {
+    "language": "en (auto-generated)",
+    "success": true,
+    "transcript_length": 13105
+  },
+  "processing_metadata": {
+    "extraction_date": "2025-08-05T20:56:29.043384",
+    "transcript_length": 13105,
+    "source": "youtube_transcript_api",
+    "video_url": "https://www.youtube.com/watch?v=5IuJGHuIkzY",
+    "processing_notes": [
+      "Enhanced metadata extracted with yt-dlp"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "video_info": {
+    "video_id": "lBH7ql34Ex0",
+    "title": "US election: Trump tells protesters in DC \"we will never give up, we will never concede\" | FULL",
+    "channel": "Global News",
+    "upload_date": "2021-01-06",
+    "description": "U.S. President Donald Trump on Wednesday spoke in front of supporters at a \"Save America March\" in Washington D.C. where he said \"we will never give up, we will never concede,\" while continuing his widely-debunked claim that widespread election fraud took place during the Nov. 3 presidential election with Democrat Joe Biden.\n\nTrump also said \"if Mike Pence does the right thing, we win the election. He went on to falsely claim that \"states want to re-vote. The states got defrauded. They were given false information.\" Speaking before Vice-President Mike Pence was scheduled to count electoral votes in Congress on Wednesday, Trump said \"all Vice-President Pence has to do is send it back to the states to re-certify\"\n\nFor more info, please go to https://globalnews.ca/news/7557930/trump-protests-washington-election-tuesday/\n\nSubscribe to Global News Channel HERE: http://bit.ly/20fcXDc\nLike Global News on Facebook HERE: http://bit.ly/255GMJQ\nFollow Global News on Twitter HERE: http://bit.ly/1Toz8mt\nFollow Global News on Instagram HERE: https://bit.ly/2QZaZIB\n#GlobalNews #USElection #Trump",
+    "duration": 4381,
+    "view_count": 760385,
+    "like_count": 8380,
+    "url": "https://www.youtube.com/watch?v=lBH7ql34Ex0"
+  },
+  "extraction_info": {
+    "language": "en (auto-generated)",
+    "success": true,
+    "transcript_length": 57831
+  },
+  "processing_metadata": {
+    "extraction_date": "2025-08-05T21:14:31.069563",
+    "transcript_length": 57831,
+    "source": "youtube_transcript_api",
+    "video_url": "https://www.youtube.com/watch?v=lBH7ql34Ex0",
+    "processing_notes": [
+      "Enhanced metadata extracted with yt-dlp"
+    ]
+  }
+}

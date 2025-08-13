@@ -1,0 +1,14 @@
+{
+  "url": "https://freerepublic.com/focus/f-news/2446700/posts",
+  "title": "Sarah Palin: Keynote Speech At The Inaugural Tea Party Convention (Transcript)",
+  "method_used": "requests",
+  "word_count": 6949,
+  "confidence_score": 95.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T01:14:59.520043",
+    "page_title": "Sarah Palin: Keynote Speech At The Inaugural Tea Party Convention (Transcript)",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8"
+  }
+}

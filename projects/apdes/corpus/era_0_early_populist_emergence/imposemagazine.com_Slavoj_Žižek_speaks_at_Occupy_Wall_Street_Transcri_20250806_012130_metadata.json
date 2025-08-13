@@ -1,0 +1,14 @@
+{
+  "url": "https://www.imposemagazine.com/bytes/slavoj-zizek-at-occupy-wall-street-transcript",
+  "title": "Slavoj Žižek speaks at Occupy Wall Street: Transcript - IMPOSE Magazine",
+  "method_used": "requests",
+  "word_count": 1255,
+  "confidence_score": 100.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T01:21:30.026273",
+    "page_title": "Slavoj Žižek speaks at Occupy Wall Street: Transcript - IMPOSE Magazine",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8"
+  }
+}

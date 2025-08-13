@@ -1,0 +1,14 @@
+{
+  "url": "https://www.americanrhetoric.com/speeches/barackobama/barackobamageorgemason.htm",
+  "title": "American Rhetoric: Barack Obama - Speech on the Economy at George Mason \r\nUniversity",
+  "method_used": "requests",
+  "word_count": 2743,
+  "confidence_score": 95.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T12:39:25.415054",
+    "page_title": "American Rhetoric: Barack Obama - Speech on the Economy at George Mason \r\nUniversity",
+    "http_status": 200,
+    "content_type": "text/html"
+  }
+}
