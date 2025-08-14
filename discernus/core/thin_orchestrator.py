@@ -656,47 +656,46 @@ Respond with only the JSON object."""
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
 
-            # Handle v8.0 statistical preparation mode: Phase 1 placeholder
+            # Handle v8.0 statistical preparation mode: Phase 2 implementation
             if statistical_prep:
                 self._log_progress("🔬 V8.0 Statistical Preparation Mode: Generating componentized notebook...")
                 
-                # Phase 1 placeholder: Load v8.0 specifications
                 try:
-                    from discernus.core.v8_specifications import V8SpecificationLoader
+                    from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
                     
-                    # Try to load v8.0 experiment specification
-                    v8_loader = V8SpecificationLoader(self.experiment_path)
-                    v8_experiment = v8_loader.load_experiment()
+                    # Initialize notebook generation orchestrator with transactional workspace
+                    notebook_orchestrator = NotebookGenerationOrchestrator(
+                        experiment_path=self.experiment_path,
+                        security=self.security,
+                        audit_logger=audit
+                    )
                     
-                    # Load raw framework and corpus content
-                    framework_content_v8 = v8_loader.load_raw_framework(v8_experiment.framework_path)
-                    corpus_content_v8 = v8_loader.load_raw_corpus(v8_experiment.corpus_path)
+                    # Execute transactional notebook generation
+                    self._log_progress("🔄 Starting transactional notebook generation...")
+                    result = notebook_orchestrator.generate_notebook(
+                        analysis_model=analysis_model,
+                        synthesis_model=synthesis_model
+                    )
                     
-                    self._log_status(f"✅ V8.0 specifications loaded successfully")
-                    self._log_status(f"   📋 Experiment: {v8_experiment.name}")
-                    self._log_status(f"   📄 Framework: {len(framework_content_v8)} characters")
-                    self._log_status(f"   📁 Corpus: {len(corpus_content_v8)} characters")
+                    self._log_status(f"✅ V8.0 notebook generation completed successfully")
+                    self._log_status(f"   📋 Transaction: {result['transaction_id']}")
+                    self._log_status(f"   📁 Artifacts: {len(result['artifacts'])} files generated")
+                    self._log_status(f"   🤖 Agents: {len(result['agents_completed'])} completed")
                     
-                    # Phase 1 placeholder: This will be replaced by the real pipeline in Phase 2
-                    self._log_progress("🚧 Phase 1 Implementation: V8.0 pipeline not yet implemented")
-                    self._log_progress("📝 Next: Implement automated function generation agents (Phase 2)")
-                    
-                    # Return placeholder result
+                    # Return v8.0 result
                     return {
                         "run_id": run_timestamp,
                         "mode": "v8.0_statistical_prep",
-                        "status": "phase_1_placeholder",
-                        "message": "V8.0 specification loading successful - pipeline implementation pending Phase 2",
-                        "v8_experiment": {
-                            "name": v8_experiment.name,
-                            "description": v8_experiment.description,
-                            "framework_path": str(v8_experiment.framework_path),
-                            "corpus_path": str(v8_experiment.corpus_path)
-                        }
+                        "status": "success",
+                        "message": "V8.0 notebook generation completed successfully",
+                        "transaction_id": result["transaction_id"],
+                        "permanent_path": result["permanent_path"],
+                        "artifacts_generated": result["artifacts"],
+                        "agents_completed": result["agents_completed"]
                     }
                     
                 except Exception as e:
-                    error_msg = f"V8.0 specification loading failed: {e}"
+                    error_msg = f"V8.0 notebook generation failed: {e}"
                     self._log_status(f"❌ {error_msg}")
                     raise ThinOrchestratorError(error_msg)
 
