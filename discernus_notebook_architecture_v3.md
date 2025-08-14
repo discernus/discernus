@@ -167,8 +167,8 @@ graph LR
 **CRITICAL**: All agents operate completely automatically. Researchers provide framework specifications (markdown files), system automatically generates all Python functions. No coding, no technical expertise, no manual work required.
 
 #### 3.1.1 Automated Derived Metrics Agent
-**Purpose**: Automatically generate framework-specific calculation functions by parsing any framework specification
-**Automation**: Reads framework markdown → extracts calculation_spec → generates Python functions → validates syntax → delivers ready-to-use code
+**Purpose**: Automatically generate framework-specific calculation functions from any framework specification using THIN-compliant processing
+**Automation**: Reads raw framework markdown → generates Python functions with proprietary delimiters → extracts clean code → validates syntax → delivers ready-to-use code
 
 **Input**: Any framework specification following v7.3 standard (CFF, CAF, PDAF, etc.)
 **Output**: Validated Python functions implementing all mathematical formulas
@@ -186,11 +186,12 @@ def calculate_identity_tension(tribal_score, dignity_score, tribal_salience, dig
 ```
 
 **Automated Features**:
-- **Specification Parsing**: Automatically extracts formulas from any v7.3 framework
+- **THIN Processing**: Reads raw framework content without parsing, passes directly to LLM
+- **Proprietary Delimiter Output**: Uses `<<<DISCERNUS_FUNCTION_START>>>` / `<<<DISCERNUS_FUNCTION_END>>>` for reliable extraction
 - **Framework Agnostic**: Same agent works for CFF, CAF, PDAF without modification
 - **Auto Error Handling**: Generates input validation and error recovery code
 - **Size Management**: Keeps functions small (~50 lines) to prevent LLM truncation
-- **Syntax Validation**: Pre-validates all generated code before delivery
+- **Syntax Validation**: Pre-validates all extracted code before delivery
 
 #### 3.1.2 Automated Statistical Analysis Agent
 **Purpose**: Automatically generate appropriate statistical functions based on framework requirements and data structure
@@ -221,6 +222,8 @@ def perform_cohesion_analysis(df):
 ```
 
 **Automated Features**:
+- **THIN Processing**: Reads raw framework and data structure without parsing
+- **Proprietary Delimiter Output**: Uses delimiter pattern for reliable code extraction
 - **Smart Test Selection**: Automatically chooses appropriate statistical tests
 - **Data-Driven**: Adapts to actual data structure and sample sizes
 - **Effect Size Calculation**: Automatically includes effect sizes and significance
@@ -241,29 +244,150 @@ def perform_cohesion_analysis(df):
 **Input**: Statistical results structure + framework context
 **Output**: Functions creating academic-quality charts, graphs, and tables
 
-### 3.2 Deterministic Orchestration Layer
+### 3.2 THIN-Compliant LLM Output Handling
 
-#### 3.2.1 Universal Notebook Template System
-**Purpose**: Single generic template that automatically works with ANY framework specification - no custom templates required
+#### 3.2.1 Proprietary Delimiter System
+**Purpose**: Reliable extraction of Python code from LLM responses without complex parsing
 
-**UNIVERSAL DESIGN**:
-- **One Template for All**: Same template automatically works for CFF, CAF, PDAF, any v7.3 framework
-- **Auto Function Discovery**: Template automatically imports whatever functions were generated for the specific framework
-- **Framework Agnostic**: No framework-specific code - adapts automatically to any generated functions
-- **Zero Customization**: Never requires modification for different frameworks or experiments
+**Delimiter Pattern**:
+```
+<<<DISCERNUS_FUNCTION_START>>>
+# Clean Python function code here
+<<<DISCERNUS_FUNCTION_END>>>
+```
+
+**Extraction Method**:
+```python
+import re
+
+def extract_function_code(llm_response: str) -> str:
+    pattern = r'<<<DISCERNUS_FUNCTION_START>>>(.*?)<<<DISCERNUS_FUNCTION_END>>>'
+    match = re.search(pattern, llm_response, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    else:
+        raise ValueError("No function code found in LLM response")
+```
+
+**THIN Architecture Benefits**:
+- **No Complex Parsing**: Simple regex extraction only
+- **Model Agnostic**: Works with any text-generating LLM
+- **LLM Natural**: Allows explanations and context outside delimiters
+- **Reliable**: Proprietary delimiters prevent false matches
+- **Binary-Like**: Delimited content extraction similar to binary processing
+
+### 3.3 Componentized Notebook Generation Layer
+
+#### 3.3.1 Token-Limit Compliant Architecture
+**Purpose**: Generate complete research notebooks while respecting Gemini output token limits through componentized generation and data externalization
+
+**Critical Constraint**: Gemini models have ~8,192 output token limits, but complete research notebooks often exceed 10,000+ tokens. The architecture must handle this constraint systematically.
+
+**Solution**: **Componentized Generation** - Multiple small LLM-generated components + deterministic assembly = complete notebooks that never hit token limits.
+
+#### 3.3.2 Transactional Orchestration and Logging
+**Purpose**: To guarantee that the multi-step, multi-agent notebook generation process is **atomic**—it either succeeds completely or fails cleanly, leaving no partial or corrupt artifacts.
+
+**Isolated Workspace Transaction Model**:
+1.  **Begin Transaction**: For each run, the orchestrator creates a unique, temporary workspace (e.g., `/shared_cache/transactions/<run_id>/`).
+2.  **Execute Operations**: All agents write their outputs exclusively to this isolated workspace. The main artifact store is untouched.
+3.  **Commit Transaction**: Upon successful completion of all steps, the orchestrator atomically moves the validated artifacts from the workspace to permanent storage and then deletes the workspace.
+4.  **Rollback Transaction**: If any agent fails, the orchestrator immediately deletes the entire workspace, reverting the system to its pre-run state.
+
+**Comprehensive Transactional Logging**:
+To ensure full visibility and auditability, every step is logged using the dual-track system:
+-   **Development Logs (`application.log`, `errors.log`)**: Capture verbose operational details, timings, and full stack traces for debugging.
+-   **Research Provenance Logs (`orchestrator.jsonl`, `agents.jsonl`)**: Create a structured, immutable record of the transaction's lifecycle, including `transaction_begun`, `agent_execution_success`, `transaction_committed`, and `transaction_rolled_back` events. This provides a complete, auditable history for every run, successful or not.
+
+#### 3.3.3 Componentized Notebook Template System
+**Purpose**: Multi-agent template system that generates notebook components and assembles them into complete, executable research notebooks
+
+**COMPONENTIZED DESIGN**:
+- **Multiple Component Agents**: Each generates small sections (<1000 tokens each)
+- **Token Limit Compliance**: No single LLM call exceeds Gemini limits  
+- **Data Externalization**: All datasets loaded from external artifacts, never embedded
+- **Deterministic Assembly**: Jinja2 template combines components without LLM calls
+- **Framework Agnostic**: Same component system works with any v8.0 framework
+- **Scalable**: Works with any experiment size (100 or 10,000 documents)
+
+**Component Agent Architecture**:
+```python
+class ComponentizedNotebookGeneration:
+    def __init__(self):
+        # Small, focused agents (each <1000 output tokens)
+        self.methodology_agent = NotebookMethodologyAgent()      # <800 tokens
+        self.interpretation_agent = NotebookInterpretationAgent() # <1000 tokens  
+        self.discussion_agent = NotebookDiscussionAgent()        # <800 tokens
+        
+        # Deterministic template system (no token limits)
+        self.template_engine = UniversalNotebookTemplate()
+    
+    def generate_notebook(self, artifacts: Dict) -> str:
+        # Generate small narrative components with LLMs
+        methodology = self.methodology_agent.generate(artifacts['framework'])
+        interpretation = self.interpretation_agent.generate(artifacts['results'])
+        discussion = self.discussion_agent.generate(artifacts['findings'])
+        
+        # Deterministic assembly (no LLM, no token limits)
+        return self.template_engine.render(
+            methodology_section=methodology,        # <800 tokens
+            interpretation_section=interpretation,  # <1000 tokens
+            discussion_section=discussion,          # <800 tokens
+            generated_functions=artifacts['functions'],  # Raw code (no token limits)
+            data_file_paths=artifacts['data_paths']      # File paths only
+        )
+```
 
 **CRITICAL DISTINCTION FROM MATHTOOLKIT:**
 - **MathToolkit**: Runtime parsing of formula strings with `eval()` - brittle and failure-prone  
-- **Universal Template**: Direct calls to pre-generated, pre-validated Python functions - reliable and transparent
-- **MathToolkit**: Same evaluation engine tries to handle all frameworks - frequent failures
-- **Universal Template**: Automatically adapts to whatever functions were generated - always works
+- **Componentized Template**: Direct calls to pre-generated, pre-validated Python functions - reliable and transparent
+- **MathToolkit**: Single monolithic generation approach - hits token limits
+- **Componentized Template**: Multiple small components + deterministic assembly - never hits token limits
+- **MathToolkit**: Embedded data processing - memory and performance issues
+- **Componentized Template**: External data loading - scalable to any dataset size
 
-**Template Characteristics**:
-- Generic Python orchestration - works with any generated functions
-- Automatically imports and calls whatever functions exist for the framework
-- Handles all data loading and I/O operations deterministically  
-- Implements comprehensive error handling and logging
-- **Never requires modification** - same template for every experiment
+**Data Externalization Architecture**:
+- **No Embedded Datasets**: All analysis data loaded from external artifact files
+- **RAG Index Queries**: Evidence queries return results dynamically, not embedded
+- **File Path References**: Only file paths embedded in notebooks (~10 tokens each)
+- **Scalable Data Loading**: Works with any dataset size without token impact
+
+**Template Structure Example**:
+```python
+# Generated Notebook Structure
+import pandas as pd
+from pathlib import Path
+
+# EXTERNAL DATA LOADING (file paths only, not data)
+data_path = Path('shared_cache/artifacts/analysis_data_7f2a9b8c.json')  # ~10 tokens
+evidence_index = Path('shared_cache/rag_indices/experiment_abc123.db')  # ~10 tokens
+
+# LOAD DATA FROM EXTERNAL FILES (no token impact)
+analysis_data = pd.read_json(data_path)                    # Data loaded at runtime
+evidence_curator = ComprehensiveKnowledgeCurator()
+evidence_curator.load_index(evidence_index)
+
+# GENERATED FUNCTIONS (code only, not data)
+{generated_calculation_functions}                          # Raw Python code
+
+# METHODOLOGY SECTION (LLM-generated, <800 tokens)
+"""
+{methodology_section}
+"""
+
+# EXECUTE ANALYSIS (reads from external data)
+analysis_data['derived_metrics'] = analysis_data.apply(calculate_functions, axis=1)
+
+# RESULTS INTERPRETATION (LLM-generated, <1000 tokens)  
+"""
+{interpretation_section}
+"""
+
+# DISCUSSION (LLM-generated, <800 tokens)
+"""
+{discussion_section}
+"""
+```
 
 ```python
 # BEFORE: MathToolkit approach (problematic)
@@ -299,7 +423,7 @@ def main():
 
 **The breakthrough**: One universal template + automatically generated functions = works for any framework without customization.**
 
-#### 3.2.2 Data Handler
+#### 3.3.2 Data Handler
 **Purpose**: Manage all data loading, conversion, and saving operations
 **Key Features**:
 - Robust file path resolution (works from any directory)
@@ -307,7 +431,7 @@ def main():
 - Structured data validation
 - Multiple output formats (JSON, CSV, etc.)
 
-#### 3.2.3 Validation Layer
+#### 3.3.3 Validation Layer
 **Purpose**: Validate generated functions before integration
 **Validation Types**:
 1. **Syntax Validation**: AST parsing to detect syntax errors

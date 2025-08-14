@@ -242,10 +242,11 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='LLM model for validation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
+@click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', help='V8.0: Generate a statistical preparation notebook instead of a final report.')
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', help='Disable automatic Git commit after successful run completion')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -257,6 +258,17 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     if not exp_path.is_dir():
         click.echo(f"❌ Experiment path is not a directory: {exp_path}")
         sys.exit(1)
+    
+    # Auto-detect v8.0 experiments FIRST, before any other processing
+    experiment_v8_file = exp_path / "experiment_v8.md"
+    click.echo(f"🔍 DEBUG: experiment_v8_file.exists()={experiment_v8_file.exists()}, statistical_prep={statistical_prep}")
+    if experiment_v8_file.exists() and not statistical_prep:
+        click.echo("🔬 V8.0 experiment detected - automatically enabling v8.0 pipeline")
+        statistical_prep = True
+    elif experiment_v8_file.exists() and statistical_prep:
+        click.echo("🔍 DEBUG: V8.0 file exists but statistical_prep was already True")
+    else:
+        click.echo("🔍 DEBUG: V8.0 file does not exist, continuing with v7.3 validation")
     
     # Get configuration and apply defaults
     config = ctx.obj['config']
@@ -280,6 +292,10 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     if not no_auto_commit:
         no_auto_commit = not config.auto_commit
     
+    if analysis_only and statistical_prep:
+        rich_console.print_error("Cannot use --analysis-only and --statistical-prep simultaneously.")
+        exit_invalid_usage("Flags --analysis-only and --statistical-prep are mutually exclusive.")
+
     if verbosity == 'verbose':
         rich_console.print_info(f"Using config file: {get_config_file_path() or 'None (using defaults)'}")
         rich_console.print_info(f"Analysis model: {analysis_model}")
@@ -290,14 +306,18 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     else:
         rich_console.echo(f"🎯 Running: {experiment_path}")
     
-    # Validate experiment structure (unless skipped)
-    if not skip_validation:
+    # Validate experiment structure (unless skipped or using v8.0 pipeline)
+    if not skip_validation and not statistical_prep:
         valid, message, experiment = validate_experiment_structure(exp_path, analysis_model)
         if not valid:
             rich_console.print_error(message.replace("❌ ", ""))
             exit_validation_failed("Experiment structure validation failed")
         
         click.echo(message)
+    elif statistical_prep:
+        # V8.0 pipeline uses its own validation approach - skip v7.3 validation
+        click.echo("🔬 V8.0 Mode: Skipping v7.3 experiment validation (using v8.0 specifications)")
+        experiment = {}
     else:
         # Skip structure validation - just load basic experiment info
         click.echo("⚠️  Skipping experiment structure validation")
@@ -328,8 +348,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         except Exception as e:
             experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
     
-    # Validate experiment coherence (unless skipped)
-    if not skip_validation:
+    # Validate experiment coherence (unless skipped or using v8.0 pipeline)
+    if not skip_validation and not statistical_prep:
         click.echo("🔍 Validating experiment coherence...")
         try:
             from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
@@ -427,7 +447,9 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             synthesis_model=synthesis_model,
             validation_model=validation_model,
             auto_commit=(not no_auto_commit),
-            ensemble_runs=1
+            ensemble_runs=1,
+            analysis_only=analysis_only,
+            statistical_prep=statistical_prep
         )
         
         # Show completion with enhanced details

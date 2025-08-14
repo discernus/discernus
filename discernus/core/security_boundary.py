@@ -40,9 +40,12 @@ class ExperimentSecurityBoundary:
         # Convert to absolute path and resolve any symlinks
         self.experiment_root = experiment_path.resolve()
         
-        # Ensure this is actually an experiment directory
-        if not (self.experiment_root / "experiment.md").exists():
-            raise SecurityError(f"Invalid experiment directory: {experiment_path} (missing experiment.md)")
+        # Ensure this is actually an experiment directory (support both v7.3 and v8.0)
+        has_v7_experiment = (self.experiment_root / "experiment.md").exists()
+        has_v8_experiment = (self.experiment_root / "experiment_v8.md").exists()
+        
+        if not (has_v7_experiment or has_v8_experiment):
+            raise SecurityError(f"Invalid experiment directory: {experiment_path} (missing experiment.md or experiment_v8.md)")
         
         # Store the boundary info for logging
         self.experiment_name = self.experiment_root.name
