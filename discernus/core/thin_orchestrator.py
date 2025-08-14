@@ -3013,3 +3013,123 @@ This research was conducted using the Discernus computational research platform,
             })
             return None
     
+
+    def _calculate_derived_metrics(
+        self,
+        scores_hash: str,
+        evidence_hash: str,
+        framework_content: str,
+        experiment_config: Dict[str, Any],
+        storage: LocalArtifactStorage,
+        audit: AuditLogger
+    ) -> str:
+        """
+        Generate executable Python notebook for derived metrics calculation.
+        
+        This method replaces the problematic MathToolkit integration with a
+        Notebook Generator Agent that creates executable Python notebooks
+        for researchers to run and calculate derived metrics.
+        
+        Args:
+            scores_hash: Hash of analysis scores artifact
+            evidence_hash: Hash of evidence artifact
+            framework_content: Framework content with calculation specs
+            experiment_config: Experiment configuration
+            storage: Artifact storage for loading data
+            audit: Audit logger for provenance
+            
+        Returns:
+            Hash of derived metrics artifact (now contains notebook metadata)
+        """
+        try:
+            self._log_status("📊 Loading analysis data for notebook generation...")
+            
+            # Load scores and evidence data
+            scores_data = storage.load_artifact(scores_hash)
+            if not scores_data:
+                raise ThinOrchestratorError(f"Failed to load scores artifact: {scores_hash}")
+            
+            evidence_data = storage.load_artifact(evidence_hash)
+            if not evidence_data:
+                raise ThinOrchestratorError(f"Failed to load evidence artifact: {evidence_hash}")
+            
+            # Extract document analyses
+            document_analyses = scores_data.get('document_analyses', [])
+            if not document_analyses:
+                raise ThinOrchestratorError("No document analyses found in scores data")
+            
+            self._log_status(f"📊 Generating executable notebook for {len(document_analyses)} documents...")
+            
+            # Initialize Notebook Generator Agent
+            from discernus.agents.notebook_generator_agent import NotebookGeneratorAgent
+            
+            notebook_agent = NotebookGeneratorAgent(
+                audit_logger=audit,
+                model="vertex_ai/gemini-2.5-pro"  # Use Pro model for reliable notebook generation
+            )
+            
+            # Generate notebook
+            notebook_path = Path(self.experiment_path) / "runs" / "latest" / "results" / "derived_metrics_notebook.py"
+            notebook_result = notebook_agent.generate_derived_metrics_notebook(
+                scores_data=scores_data,
+                evidence_data=evidence_data,
+                framework_content=framework_content,
+                experiment_config=experiment_config,
+                output_path=notebook_path
+            )
+            
+            if not notebook_result.success:
+                raise ThinOrchestratorError(f"Notebook generation failed: {notebook_result.error_message}")
+            
+            # Create derived metrics artifact with notebook metadata
+            derived_metrics = {
+                "calculation_timestamp": datetime.now(timezone.utc).isoformat(),
+                "framework_name": experiment_config.get("framework", "Unknown"),
+                "document_count": len(document_analyses),
+                "calculation_method": "executable_python_notebook",
+                "notebook_path": str(notebook_path),
+                "notebook_metadata": notebook_result.metadata,
+                "researcher_instructions": {
+                    "notebook_file": "derived_metrics_notebook.py",
+                    "usage": "Run this Python file to calculate derived metrics",
+                    "dependencies": ["pandas", "numpy", "matplotlib", "seaborn"],
+                    "customization": "Modify the notebook to add your own analysis"
+                }
+            }
+            
+            # Store derived metrics artifact
+            derived_metrics_hash = storage.store_artifact(
+                "derived_metrics",
+                derived_metrics,
+                metadata={
+                    "type": "derived_metrics_notebook",
+                    "source_scores_hash": scores_hash,
+                    "source_evidence_hash": evidence_hash,
+                    "framework": experiment_config.get("framework", "Unknown"),
+                    "calculation_timestamp": derived_metrics["calculation_timestamp"],
+                    "notebook_path": str(notebook_path)
+                }
+            )
+            
+            self._log_status(f"✅ Executable notebook generated and stored: {derived_metrics_hash[:12]}...")
+            self._log_status(f"   📓 Notebook: {notebook_path}")
+            self._log_status(f"   📊 Framework: {experiment_config.get("framework", "Unknown")}")
+            
+            audit.log_agent_event(
+                "notebook_generation_completed",
+                "Executable notebook generated successfully for derived metrics calculation",
+                {
+                    "derived_metrics_hash": derived_metrics_hash,
+                    "document_count": len(document_analyses),
+                    "notebook_path": str(notebook_path),
+                    "model_used": "vertex_ai/gemini-2.5-pro"
+                }
+            )
+            
+            return derived_metrics_hash
+            
+        except Exception as e:
+            error_msg = f"Notebook generation failed: {str(e)}"
+            self._log_error_context(f"❌ {error_msg}")
+            audit.log_error("notebook_generation_error", error_msg, {"error": str(e)})
+            raise ThinOrchestratorError(error_msg)
