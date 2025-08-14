@@ -252,8 +252,20 @@ class ThinOrchestrator:
 # NEW: discernus/agents/automated_function_generation/
 class AutomatedDerivedMetricsAgent:
     def generate_calculation_functions(self, framework_v8: str) -> str:
-        """Generate calculation functions from v8.0 natural language descriptions."""
-        pass
+        """Generate calculation functions from v8.0 natural language descriptions using THIN-compliant extraction."""
+        # Pass raw framework content to LLM (THIN)
+        llm_response = self._generate_with_delimiters(framework_v8)
+        
+        # Extract using proprietary delimiters (THIN)
+        clean_functions = self._extract_functions_with_delimiters(llm_response)
+        
+        return clean_functions
+    
+    def _extract_functions_with_delimiters(self, response: str) -> List[str]:
+        """Extract function code using proprietary delimiters."""
+        pattern = r'<<<DISCERNUS_FUNCTION_START>>>(.*?)<<<DISCERNUS_FUNCTION_END>>>'
+        matches = re.findall(pattern, response, re.DOTALL)
+        return [match.strip() for match in matches]
 
 class AutomatedStatisticalAnalysisAgent:
     def generate_statistics_functions(self, data_structure: Dict, framework_context: str) -> str:
@@ -276,27 +288,124 @@ class AutomatedVisualizationAgent:
 # NEW: discernus/core/function_validation.py
 class FunctionValidator:
     def validate_syntax(self, function_code: str) -> bool:
+        """Validate extracted function syntax using AST parsing."""
+        pass
     def validate_execution(self, function_code: str, sample_data: Dict) -> bool:
+        """Test extracted function execution with sample data."""
+        pass
     def validate_mathematical_correctness(self, function_code: str) -> bool:
+        """Verify mathematical correctness of extracted functions."""
+        pass
     def validate_integration(self, functions: List[str]) -> bool:
+        """Ensure extracted functions work together properly."""
+        pass
+
+# NEW: discernus/core/thin_output_extraction.py  
+class ThinOutputExtractor:
+    def extract_function_code(self, llm_response: str) -> List[str]:
+        """THIN-compliant function extraction using proprietary delimiters."""
+        pattern = r'<<<DISCERNUS_FUNCTION_START>>>(.*?)<<<DISCERNUS_FUNCTION_END>>>'
+        matches = re.findall(pattern, llm_response, re.DOTALL)
+        return [match.strip() for match in matches]
+    
+    def validate_extraction_success(self, llm_response: str) -> bool:
+        """Validate that delimiter extraction was successful."""
+        return len(self.extract_function_code(llm_response)) > 0
 ```
 
-### **Phase 3: Universal Notebook Template System**
+### **Phase 3: Componentized Notebook Template System**
 
-#### **NEW: Universal Template Engine**
+#### **NEW: Token-Limit Compliant Architecture**
+**Critical Constraint**: Gemini models have ~8,192 output token limits, but complete research notebooks often exceed 10,000+ tokens.
+
+**Solution**: Componentized generation - multiple small LLM components + deterministic assembly = complete notebooks that never hit token limits.
+
+#### **NEW: Componentized Template Engine**
 ```python
-# NEW: discernus/core/universal_notebook_template.py
-class UniversalNotebookTemplate:
-    def generate_notebook(self, 
-                         functions: List[str],
-                         analysis_data: Dict,
-                         experiment_context: Dict) -> str:
-        """Generate framework-agnostic notebook that imports and calls generated functions."""
-        pass
+# NEW: discernus/core/componentized_notebook_generation.py
+class ComponentizedNotebookGeneration:
+    """Generate notebooks through multiple small components, each under token limits."""
     
-    def create_notebook_metadata(self, ...) -> Dict:
-        """Create comprehensive notebook provenance and metadata."""
+    def __init__(self):
+        # Small, focused agents (each <1000 output tokens)
+        self.methodology_agent = NotebookMethodologyAgent()      # <800 tokens
+        self.interpretation_agent = NotebookInterpretationAgent() # <1000 tokens  
+        self.discussion_agent = NotebookDiscussionAgent()        # <800 tokens
+        
+        # Deterministic template system (no token limits)
+        self.template_engine = UniversalNotebookTemplate()
+    
+    def generate_notebook(self, artifacts: Dict) -> str:
+        """Generate complete notebook without hitting token limits."""
+        
+        # Generate small narrative components with LLMs
+        methodology = self.methodology_agent.generate(artifacts['framework'])
+        interpretation = self.interpretation_agent.generate(artifacts['results']) 
+        discussion = self.discussion_agent.generate(artifacts['findings'])
+        
+        # Deterministic assembly (no LLM, no token limits)
+        return self.template_engine.render(
+            methodology_section=methodology,        # <800 tokens
+            interpretation_section=interpretation,  # <1000 tokens
+            discussion_section=discussion,          # <800 tokens
+            generated_functions=artifacts['functions'],  # Raw code (no token limits)
+            data_file_paths=artifacts['data_paths']      # File paths only
+        )
+
+# NEW: Notebook Component Agents
+class NotebookMethodologyAgent:
+    """Generate methodology sections <800 tokens."""
+    def generate(self, framework_content: str) -> str:
+        """Generate methodology description from framework."""
         pass
+
+class NotebookInterpretationAgent:
+    """Generate results interpretation <1000 tokens."""
+    def generate(self, statistical_results: Dict) -> str:
+        """Generate interpretation of statistical findings."""
+        pass
+
+class NotebookDiscussionAgent:
+    """Generate discussion sections <800 tokens."""
+    def generate(self, findings: Dict) -> str:
+        """Generate academic discussion of findings."""
+        pass
+```
+
+#### **NEW: Data Externalization Architecture**
+```python
+# Template generates notebooks that load data externally
+class UniversalNotebookTemplate:
+    def render(self, **components) -> str:
+        """Render notebook with external data loading patterns."""
+        return f"""
+# EXTERNAL DATA LOADING (file paths only, not data)
+data_path = Path('{components['data_file_paths']['analysis']}')  # ~10 tokens
+evidence_index = Path('{components['data_file_paths']['evidence']}')  # ~10 tokens
+
+# LOAD DATA FROM EXTERNAL FILES (no token impact)
+analysis_data = pd.read_json(data_path)
+evidence_curator = ComprehensiveKnowledgeCurator()
+evidence_curator.load_index(evidence_index)
+
+# GENERATED FUNCTIONS (raw code, no token limits)
+{components['generated_functions']}
+
+# METHODOLOGY (LLM-generated, <800 tokens)
+\"\"\"
+{components['methodology_section']}
+\"\"\"
+
+# RESULTS INTERPRETATION (LLM-generated, <1000 tokens)
+\"\"\"
+{components['interpretation_section']}
+\"\"\"
+
+# DISCUSSION (LLM-generated, <800 tokens)
+\"\"\"
+{components['discussion_section']}
+\"\"\"
+"""
 ```
 
 #### **NEW: Notebook Execution & Validation**
@@ -328,24 +437,32 @@ def run(..., statistical_prep: bool):
 
 ## 📂 File Structure Changes
 
-### **NEW Files Needed (15+ files)**
+### **NEW Files Needed (22+ files)**
 
 ```
 discernus/
 ├── core/
-│   ├── v8_specifications.py                 # NEW: v8.0 spec parsers  
-│   ├── universal_notebook_template.py       # NEW: universal template engine
+│   ├── v8_specifications.py                 # NEW: v8.0 raw content loading (no parsing)
+│   ├── thin_output_extraction.py            # NEW: proprietary delimiter extraction
+│   ├── componentized_notebook_generation.py # NEW: componentized template system
+│   ├── universal_notebook_template.py       # NEW: Jinja2 template engine  
 │   ├── notebook_executor.py                 # NEW: notebook validation/execution
 │   └── function_validation.py               # NEW: function validation system
 ├── agents/
-│   └── automated_function_generation/       # NEW: function generation agents
+│   ├── automated_function_generation/       # NEW: function generation agents
+│   │   ├── __init__.py
+│   │   ├── derived_metrics_agent.py         # Uses delimiter extraction + distributed coordination
+│   │   ├── statistical_analysis_agent.py    # Uses delimiter extraction + distributed coordination
+│   │   ├── evidence_integration_agent.py    # Uses delimiter extraction + distributed coordination
+│   │   ├── visualization_agent.py           # Uses delimiter extraction + distributed coordination
+│   │   └── notebook_generation_orchestrator.py # NEW: distributed, transactional orchestration
+│   └── notebook_component_generation/       # NEW: token-limit compliant components
 │       ├── __init__.py
-│       ├── derived_metrics_agent.py
-│       ├── statistical_analysis_agent.py  
-│       ├── evidence_integration_agent.py
-│       └── visualization_agent.py
+│       ├── methodology_agent.py             # <800 tokens
+│       ├── interpretation_agent.py          # <1000 tokens
+│       └── discussion_agent.py              # <800 tokens
 └── templates/
-    └── universal_notebook_template.py.j2    # NEW: Jinja2 notebook template
+    └── universal_notebook_template.py.j2    # NEW: Jinja2 notebook template with data externalization
 ```
 
 ### **MODIFIED Files (8 files)**
@@ -371,12 +488,12 @@ discernus/
 | Phase | Description | New Code | Modified Code | Estimated Days |
 |-------|-------------|----------|---------------|----------------|
 | **Phase 1** | v8.0 Specification Infrastructure | 800 lines | 400 lines | 5-7 days |
-| **Phase 2** | Automated Function Generation | 1200 lines | 200 lines | 8-10 days |  
-| **Phase 3** | Universal Template System | 600 lines | 300 lines | 4-6 days |
-| **Phase 4** | CLI & Orchestrator Integration | 200 lines | 500 lines | 3-5 days |
-| **Phase 5** | Testing & Validation | 400 lines | 100 lines | 3-4 days |
+| **Phase 2** | Automated Function Generation + Distributed Orchestration | 1600 lines | 300 lines | 10-12 days |  
+| **Phase 3** | Componentized Template System + Token Limit Compliance | 1000 lines | 400 lines | 6-8 days |
+| **Phase 4** | CLI & Orchestrator Integration + Comprehensive Validation | 300 lines | 600 lines | 4-6 days |
+| **Phase 5** | Testing & Token Limit Validation | 500 lines | 150 lines | 4-5 days |
 
-**Total Estimate**: 20-32 days for complete v8.0 implementation
+**Total Estimate**: 29-38 days for complete v8.0 implementation with componentized architecture
 
 ### **Risk Assessment**
 
@@ -393,7 +510,10 @@ discernus/
 **REQUIRES VALIDATION** (Novel LLM capabilities):
 - Natural language → Python function generation (success rate needs validation)
 - Mathematical correctness of auto-generated functions (validation pipeline critical)
-- Framework-agnostic template scalability (needs multi-framework testing)
+- **Token limit compliance** (componentized generation must stay within Gemini limits)
+- **Data externalization scalability** (external loading must work with any dataset size)
+- **Transactional Integrity**: The isolated workspace model must correctly commit on success and roll back on failure, with complete logging.
+- Distributed agent coordination through artifact storage
 
 ---
 

@@ -486,6 +486,7 @@ Respond with only the JSON object."""
                       validation_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
+                      statistical_prep: bool = False,
                       ensemble_runs: int = 1,
                       auto_commit: bool = True,
                       resume_stage: Optional[str] = None,
@@ -500,6 +501,7 @@ Respond with only the JSON object."""
             validation_model: LLM model to use for validation (requires higher intelligence)
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             analysis_only: If True, run only analysis phase and save artifacts
+            statistical_prep: If True, use v8.0 componentized notebook generation (Phase 1 placeholder)
             ensemble_runs: Number of ensemble runs for self-consistency (1 = single run, 3-5 recommended)
             auto_commit: If True, automatically commit successful runs to Git (default: True)
             resume_stage: Resume at specific THIN synthesis sub-stage ('thin-gen', 'thin-exec', 'thin-cure', 'thin-interp')
@@ -544,14 +546,24 @@ Respond with only the JSON object."""
             # Initialize enhanced manifest
             manifest = EnhancedManifest(self.security, run_folder, audit, storage)
             
-            # Load and validate experiment configuration
-            experiment_config = self._load_experiment_config()
-            manifest.set_run_metadata(
-                experiment_config["name"], 
-                str(self.experiment_path),
-                "thin_v2.0_alpha"
-            )
-            manifest.set_experiment_config(experiment_config)
+            # Load and validate experiment configuration (skip for v8.0 pipeline)
+            if statistical_prep:
+                # V8.0 pipeline uses different configuration loading
+                experiment_config = {"name": "v8_pipeline_placeholder", "version": "8.0"}
+                manifest.set_run_metadata(
+                    "v8_pipeline_placeholder", 
+                    str(self.experiment_path),
+                    "thin_v2.0_alpha"
+                )
+                manifest.set_experiment_config(experiment_config)
+            else:
+                experiment_config = self._load_experiment_config()
+                manifest.set_run_metadata(
+                    experiment_config["name"], 
+                    str(self.experiment_path),
+                    "thin_v2.0_alpha"
+                )
+                manifest.set_experiment_config(experiment_config)
             
             # Log experiment start with comprehensive context
             log_experiment_start(
@@ -576,33 +588,49 @@ Respond with only the JSON object."""
             self._log_progress(f"Starting THIN v2.0 experiment: {run_timestamp}")
             self._log_status(f"🚀 Starting THIN v2.0 experiment: {run_timestamp}")
             
-            # Load framework
-            with perf_timer("framework_load", 
-                           framework_path=experiment_config["framework"]):
-                framework_content = self._load_framework(experiment_config["framework"])
-            
-            # Store framework content and audit logger for gasket integration
-            self._current_framework_content = framework_content
-            self._current_audit_logger = audit
-            framework_hash = storage.put_artifact(
-                framework_content.encode('utf-8'),
-                {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
-            )
-            manifest.add_input_artifact("framework", framework_hash, {
-                "filename": experiment_config["framework"],
-                "size_bytes": len(framework_content)
-            })
+            # Load framework (skip for v8.0 pipeline)
+            if not statistical_prep:
+                with perf_timer("framework_load", 
+                               framework_path=experiment_config["framework"]):
+                    framework_content = self._load_framework(experiment_config["framework"])
+                
+                # Store framework content and audit logger for gasket integration
+                self._current_framework_content = framework_content
+                self._current_audit_logger = audit
+                framework_hash = storage.put_artifact(
+                    framework_content.encode('utf-8'),
+                    {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
+                )
+            else:
+                # V8.0 pipeline will handle framework loading differently
+                framework_content = "v8_placeholder"
+                framework_hash = "v8_placeholder_hash"
+            if not statistical_prep:
+                manifest.add_input_artifact("framework", framework_hash, {
+                    "filename": experiment_config["framework"],
+                    "size_bytes": len(framework_content)
+                })
+            else:
+                manifest.add_input_artifact("framework", framework_hash, {
+                    "filename": "v8_framework_placeholder",
+                    "size_bytes": len(framework_content)
+                })
             
             # Framework validation is handled by ExperimentCoherenceAgent during experiment setup
             # Post-analysis dimension validation will occur during synthesis to verify analysis results
             self._log_status("Framework loaded successfully")
             
-            # Load corpus documents and manifest
-            self._log_progress(f"Loading corpus from: {experiment_config['corpus_path']}")
-            with perf_timer("corpus_load", 
-                           corpus_path=experiment_config["corpus_path"]):
-                corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
-            self._log_status(f"Loaded {len(corpus_documents)} corpus documents")
+            # Load corpus documents and manifest (skip for v8.0 pipeline)
+            if not statistical_prep:
+                self._log_progress(f"Loading corpus from: {experiment_config['corpus_path']}")
+                with perf_timer("corpus_load", 
+                               corpus_path=experiment_config["corpus_path"]):
+                    corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
+                self._log_status(f"Loaded {len(corpus_documents)} corpus documents")
+            else:
+                # V8.0 pipeline will handle corpus loading differently
+                corpus_documents = []
+                corpus_manifest = {"documents": []}
             
             corpus_hashes = []
             corpus_metadata = []
@@ -627,6 +655,50 @@ Respond with only the JSON object."""
                 "corpus_documents": len(corpus_documents),
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
+
+            # Handle v8.0 statistical preparation mode: Phase 1 placeholder
+            if statistical_prep:
+                self._log_progress("🔬 V8.0 Statistical Preparation Mode: Generating componentized notebook...")
+                
+                # Phase 1 placeholder: Load v8.0 specifications
+                try:
+                    from discernus.core.v8_specifications import V8SpecificationLoader
+                    
+                    # Try to load v8.0 experiment specification
+                    v8_loader = V8SpecificationLoader(self.experiment_path)
+                    v8_experiment = v8_loader.load_experiment()
+                    
+                    # Load raw framework and corpus content
+                    framework_content_v8 = v8_loader.load_raw_framework(v8_experiment.framework_path)
+                    corpus_content_v8 = v8_loader.load_raw_corpus(v8_experiment.corpus_path)
+                    
+                    self._log_status(f"✅ V8.0 specifications loaded successfully")
+                    self._log_status(f"   📋 Experiment: {v8_experiment.name}")
+                    self._log_status(f"   📄 Framework: {len(framework_content_v8)} characters")
+                    self._log_status(f"   📁 Corpus: {len(corpus_content_v8)} characters")
+                    
+                    # Phase 1 placeholder: This will be replaced by the real pipeline in Phase 2
+                    self._log_progress("🚧 Phase 1 Implementation: V8.0 pipeline not yet implemented")
+                    self._log_progress("📝 Next: Implement automated function generation agents (Phase 2)")
+                    
+                    # Return placeholder result
+                    return {
+                        "run_id": run_timestamp,
+                        "mode": "v8.0_statistical_prep",
+                        "status": "phase_1_placeholder",
+                        "message": "V8.0 specification loading successful - pipeline implementation pending Phase 2",
+                        "v8_experiment": {
+                            "name": v8_experiment.name,
+                            "description": v8_experiment.description,
+                            "framework_path": str(v8_experiment.framework_path),
+                            "corpus_path": str(v8_experiment.corpus_path)
+                        }
+                    }
+                    
+                except Exception as e:
+                    error_msg = f"V8.0 specification loading failed: {e}"
+                    self._log_status(f"❌ {error_msg}")
+                    raise ThinOrchestratorError(error_msg)
 
             # Handle analysis-only mode: run analysis and exit early
             if analysis_only:
