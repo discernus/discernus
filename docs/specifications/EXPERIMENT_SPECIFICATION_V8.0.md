@@ -4,47 +4,62 @@
 **Status**: Current Standard  
 **Replaces**: v7.3
 
-The `experiment_v8.md` file is a YAML file that defines the complete scope of a v8.0 analysis run. It acts as the **single source of truth** for an experiment, telling the Discernus v8.0 system what framework to use, what corpus to analyze, and what research questions to investigate.
+The `experiment.md` file is a Markdown file with YAML appendix that defines the complete scope of a v8.0 analysis run. It acts as the **single source of truth** for an experiment, telling the Discernus v8.0 system what framework to use, what corpus to analyze, and what research questions to investigate.
+
+**Design Philosophy**: Human-first readability with LLM-friendly generation and machine-parseable structure.
 
 ---
 
 ## 1. File Structure & Location
 
-The experiment file MUST be a valid YAML file named `experiment_v8.md`. It is located at the root of a project directory, alongside the corpus and framework references.
+The experiment file MUST be a Markdown file named `experiment.md` located at the root of a project directory, alongside all experiment input files.
 
 ```
 my_research_project/
-├── experiment_v8.md              # Experiment v8.0
-├── corpus/
-│   ├── corpus_v8.md              # Corpus v8.0
-│   └── documents/
-└── framework -> frameworks/reference/flagship/framework_v8.md
+├── experiment.md                 # Experiment specification (standard name)
+├── corpus.md                     # Corpus specification (standard name)  
+├── cff_v8.md                     # Framework file (descriptive name)
+└── corpus/                       # Document directory (text files only)
+    ├── document1.txt
+    ├── document2.txt
+    └── document3.txt
 ```
+
+**Key Principles:**
+- All experiment inputs at project root (simple discovery)
+- Standard names for core files (`experiment.md`, `corpus.md`)
+- Descriptive names for framework files (referenced in experiment.md)
+- Text files only in corpus directory (keep it simple)
 
 ---
 
-## 2. Schema
+## 2. File Format
 
-The file must contain a single YAML configuration block with the following required fields:
+The file follows the **human-first** format: natural language description followed by YAML configuration appendix.
+
+```markdown
+# Democratic Discourse Analysis
+
+This experiment analyzes political speeches to understand how different rhetorical styles contribute to democratic flourishing. We examine institutional vs. populist approaches across temporal and partisan dimensions.
+
+## Research Questions
+- How do institutional and populist communication styles differ in their democratic impact?
+- What rhetorical patterns emerge across temporal sequences?
+- Do progressive and conservative populist variants show different cohesion patterns?
+
+## Expected Outcomes
+Statistical analysis of dimensional scores with longitudinal trends and speaker-type comparisons...
+
+---
+
+## Configuration
 
 ```yaml
-# Required: Unique, machine-readable name for the experiment
-name: "experiment_identifier"
-
-# Required: Human-readable description of the research goals
-description: "Brief description of what this experiment investigates"
-
-# Required: Path to the v8.0 framework file (relative to project root)
-framework: "frameworks/reference/flagship/framework_v8.md"
-
-# Required: Path to the v8.0 corpus specification (relative to experiment root)
-corpus: "corpus/corpus_v8.md"
-
-# Required: Research questions this experiment aims to answer
-questions:
-  - "Primary research question"
-  - "Secondary research question"
-  - "Additional research question"
+name: "democratic_discourse_analysis"
+framework: "cff_v8.md"
+corpus: "corpus.md"
+version: "8.0"
+```
 ```
 
 ---

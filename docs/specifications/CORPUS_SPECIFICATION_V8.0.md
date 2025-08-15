@@ -4,71 +4,78 @@
 **Status**: Current Standard  
 **Replaces**: v7.3
 
-The `corpus_v8.md` file defines a collection of documents for analysis in the v8.0 Discernus system. It serves as the **manifest and metadata source** for all textual materials in an experiment, providing human-readable descriptions and optional structured metadata.
+The `corpus.md` file defines a collection of documents for analysis in the v8.0 Discernus system. It serves as the **manifest and metadata source** for all textual materials in an experiment, providing human-readable descriptions with structured YAML metadata.
+
+**Design Philosophy**: Human-first readability with rich metadata to inform analysis strategy (not analyzed as content).
 
 ---
 
 ## 1. File Structure & Location
 
-The corpus file MUST be a markdown file named `corpus_v8.md` located in the `corpus/` directory within an experiment project.
+The corpus file MUST be a Markdown file named `corpus.md` located at the **project root** (not in corpus directory).
 
 ```
 my_research_project/
-├── experiment_v8.md
-└── corpus/
-    ├── corpus_v8.md              # Corpus v8.0 specification
-    └── documents/
-        ├── document1.txt
-        ├── document2.txt
-        └── ...
+├── experiment.md                 # Experiment specification
+├── corpus.md                     # Corpus specification (at root)
+├── framework.md                  # Framework file (descriptive name)
+└── corpus/                       # Document directory (flat structure)
+    ├── document1.txt             # Text files only
+    ├── document2.txt
+    └── document3.txt
 ```
+
+**Key Principles:**
+- Corpus specification at project root (with other input files)
+- Actual documents in `/corpus/` directory
+- Text files only (`.txt` format for simplicity)
+- Flat directory structure (no nested folders)
+- Metadata informs analysis strategy (not analyzed as content)
 
 ---
 
-## 2. Required Sections
+## 2. File Format
 
-### **Overview**
+The file follows the **human-first** format: natural language description followed by YAML metadata appendix.
+
 ```markdown
-# Corpus Name
+# Political Speeches Corpus
 
-## Overview
-Brief description of the corpus purpose, scope, and contents.
-```
+Four paradigmatic examples of American political communication spanning institutional and populist approaches. Selected to represent key temporal moments and rhetorical styles in contemporary democratic discourse.
 
-### **Documents**  
-```markdown
-## Documents
+The corpus includes concession speeches, floor speeches, and campaign addresses that demonstrate different approaches to democratic engagement and public persuasion.
 
-### document1.txt
-Brief description of this document's content, source, and relevance.
+## Document Overview
 
-### document2.txt
-Brief description of this document's content, source, and relevance.
-```
+- **McCain 2008**: Institutional democratic discourse emphasizing unity and norms
+- **Sanders 2025**: Progressive populist rhetoric with economic justice themes  
+- **AOC 2025**: Progressive populist discourse with systemic critique
+- **King 2017**: Conservative populist discourse with nationalist themes
 
-### **Optional Metadata** (Recommended)
-```markdown
-## Optional Metadata
+---
+
+## Document Manifest
 
 ```yaml
-corpus_metadata:
-  total_documents: 4
-  date_range: "2008-2025"
-  source_types: ["speeches", "statements", "transcripts"]
-  collection_method: "manual_curation"
-  
-document_metadata:
-  document1.txt:
-    author: "John McCain"
-    date: "2008-11-04"
+name: "Political Speeches Corpus"
+version: "8.0"
+total_documents: 4
+date_range: "2008-2025"
+
+documents:
+  - filename: "mccain_2008_concession.txt"
+    speaker: "John McCain"
+    year: 2008
+    party: "Republican"
+    style: "institutional"
     type: "concession_speech"
-    word_count: 1247
     
-  document2.txt:
-    author: "Bernie Sanders"  
-    date: "2025-01-15"
+  - filename: "sanders_2025_oligarchy.txt"
+    speaker: "Bernie Sanders"
+    year: 2025
+    party: "Independent"
+    style: "populist_progressive"
     type: "policy_statement"
-    word_count: 2156
 ```
 ```
 
