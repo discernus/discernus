@@ -239,7 +239,11 @@ class NotebookGenerationOrchestrator:
                        v8_experiment: V8ExperimentSpec, 
                        analysis_model: str, 
                        synthesis_model: str) -> None:
-        """Execute all function generation agents in transactional workspace."""
+        """Execute all function generation agents in transactional workspace.
+        
+        NOTE: Currently executes agents serially. For parallelization strategies,
+        see GitHub Issue #438: "Epic: v8.0 Orchestrator Parallelization Strategy"
+        """
         agents_to_execute = [
             "AutomatedDerivedMetricsAgent",
             "AutomatedStatisticalAnalysisAgent", 
@@ -265,8 +269,9 @@ class NotebookGenerationOrchestrator:
             )
             
             try:
-                # TODO: Implement agent execution
-                # For Phase 2, we'll implement placeholder execution
+                # TODO: Consider parallelization for performance improvement
+                # See GitHub Issue #438 for parallelization strategies
+                # Current implementation: serial execution (simple, reliable)
                 self._execute_agent_placeholder(agent_name, v8_experiment)
                 
                 self.current_transaction.agents_completed.append(agent_name)
