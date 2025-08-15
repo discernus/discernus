@@ -1,0 +1,65 @@
+# NotebookGeneratorAgent YAML Prompt Template
+# Purpose: Generate executable Python notebooks from framework specifications and analysis data
+
+template: |
+  Generate an executable Python notebook (.py file) that calculates derived metrics from analysis data based on the provided framework specification.
+
+  CRITICAL: The framework contains specific mathematical formulas in the "calculation_spec" section. You MUST implement these exact formulas:
+
+  **REQUIRED CFF v7.3 CALCULATIONS:**
+  1. **Tension Scores**: 
+     - identity_tension = min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)
+     - emotional_tension = min(fear_score, hope_score) * abs(fear_salience - hope_salience)
+     - success_tension = min(envy_score, compersion_score) * abs(envy_salience - compersion_salience)
+     - relational_tension = min(enmity_score, amity_score) * abs(enmity_salience - amity_salience)
+     - goal_tension = min(fragmentative_goals_score, cohesive_goals_score) * abs(fragmentative_goals_salience - cohesive_goals_salience)
+
+  2. **Composite Indices**:
+     - strategic_contradiction_index = (identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5
+     - cohesive_index = (individual_dignity_score + hope_score + compersion_score + amity_score + cohesive_goals_score) / 5
+     - fragmentative_index = (tribal_dominance_score + fear_score + envy_score + enmity_score + fragmentative_goals_score) / 5
+     - overall_cohesion_index = cohesive_index - fragmentative_index
+
+  **REQUIREMENTS:**
+  1. **Extract Formula Specifications**: Parse the framework's "calculation_spec" and "formulas" sections
+  2. **Implement Each Formula**: Create Python functions for every calculation listed above
+  3. **Data Loading**: Load analysis data from 'analysis_data.json' containing scores and salience
+  4. **Calculate for All Documents**: Apply formulas to every document in the dataset
+  5. **CSV Output**: Generate 'derived_metrics_results.csv' with all original scores + calculated metrics
+  6. **Validation**: Include sanity checks and error handling for missing data
+
+  **PYTHON STRUCTURE REQUIRED:**
+  ```python
+  #!/usr/bin/env python3
+  import json
+  import pandas as pd
+  import numpy as np
+
+  def calculate_identity_tension(tribal_dominance_score, individual_dignity_score, tribal_dominance_salience, individual_dignity_salience):
+      return min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)
+
+  # ... implement all other calculation functions
+
+  def main():
+      # Load data, apply calculations, save CSV
+      pass
+
+  if __name__ == "__main__":
+      main()
+  ```
+
+  **FRAMEWORK AND DATA CONTEXT:**
+  {llm_input}
+
+  Generate ONLY the complete Python notebook code with ALL CFF calculations implemented. The code must be immediately executable and produce accurate derived metrics.
+
+system_prompt: "You are an expert Python programmer specializing in academic research data analysis and statistical calculations. You generate clean, executable Python notebooks that implement framework-specific derived metrics calculations with complete transparency and academic rigor."
+
+# Metadata for the prompt template
+metadata:
+  purpose: "Generate executable Python notebooks from framework specifications and analysis data"
+  architecture: "THIN - automated notebook generation with framework-specific calculations"
+  input_format: "Framework specification (markdown) + analysis data structure + experiment configuration"
+  output_format: "Executable Python notebook (.py file) with all required calculations"
+  framework_agnostic: false
+  agent_type: "NotebookGeneratorAgent"

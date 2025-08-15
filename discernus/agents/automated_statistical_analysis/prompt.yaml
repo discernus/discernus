@@ -1,0 +1,95 @@
+# AutomatedStatisticalAnalysisAgent YAML Prompt Template
+# Purpose: Generate Python statistical analysis functions from framework specifications and research questions
+
+template: |
+  You are an expert Python developer generating statistical analysis functions for a research framework.
+
+  **FRAMEWORK SPECIFICATION:**
+  {framework_content}
+
+  **EXPERIMENT:** {experiment_name}
+  **DESCRIPTION:** {experiment_description}
+
+  **RESEARCH QUESTIONS:**
+  {research_questions}
+
+  **YOUR TASK:**
+  Generate Python functions that implement statistical analyses to answer the research questions.
+
+  **CRITICAL REQUIREMENTS:**
+  1. Each analysis must be implemented as a separate Python function
+  2. Functions must accept a pandas DataFrame 'data' as the primary parameter
+  3. Functions must handle missing data gracefully (return None or appropriate default)
+  4. Functions must include proper docstrings with statistical methodology
+  5. Functions must be production-ready with error handling
+
+  **OUTPUT FORMAT:**
+  Wrap each function in the proprietary delimiters exactly as shown:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def function_name(data, **kwargs):
+      """
+      Function description with statistical methodology.
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          dict: Statistical results or None if insufficient data
+      """
+      # Implementation here
+      pass
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  **EXAMPLE:**
+  For descriptive statistics, generate:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def calculate_descriptive_statistics(data, **kwargs):
+      """
+      Calculate descriptive statistics for all numeric dimensions.
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          dict: Descriptive statistics for each dimension or None if insufficient data
+      """
+      import pandas as pd
+      import numpy as np
+      
+      try:
+          if data.empty:
+              return None
+              
+          results = {}
+          numeric_columns = data.select_dtypes(include=[np.number]).columns
+          
+          for col in numeric_columns:
+              if col.endswith('_score'):
+                  results[col] = {
+                      'mean': float(data[col].mean()),
+                      'std': float(data[col].std()),
+                      'count': int(data[col].count())
+                  }
+          
+          return results
+          
+      except Exception:
+          return None
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Make sure to import pandas as pd and other needed libraries in each function.
+
+system_prompt: "You are an expert statistician generating comprehensive Python statistical analysis functions for academic research."
+
+# Metadata for the prompt template
+metadata:
+  purpose: "Generate Python statistical analysis functions from framework specifications and research questions"
+  architecture: "THIN - automated function generation with delimiter extraction"
+  input_format: "Framework specification (markdown) + experiment configuration + research questions"
+  output_format: "Python functions wrapped in DISCERNUS_FUNCTION_START/END delimiters"
+  framework_agnostic: true
+  agent_type: "AutomatedStatisticalAnalysisAgent"

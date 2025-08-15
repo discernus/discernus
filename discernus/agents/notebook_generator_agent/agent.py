@@ -28,6 +28,47 @@ class NotebookGeneratorAgent:
         self.model = model
         # Initialize LLM gateway when needed (lazy initialization)
         self._llm_gateway = None
+        
+    def _load_prompt_template(self) -> str:
+        """Load external YAML prompt template following THIN architecture."""
+        import os
+        import yaml
+        
+        # Find prompt.yaml in agent directory
+        agent_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(agent_dir, 'prompt.yaml')
+        
+        if not os.path.exists(prompt_path):
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        
+        # Load prompt template
+        with open(prompt_path, 'r') as f:
+            prompt_content = f.read()
+            prompt_data = yaml.safe_load(prompt_content)
+        
+        if 'template' not in prompt_data:
+            raise ValueError(f"Prompt file missing 'template' key: {prompt_path}")
+        
+        return prompt_data['template']
+    
+    def _load_prompt_data(self) -> Dict[str, Any]:
+        """Load external YAML prompt data following THIN architecture."""
+        import os
+        import yaml
+        
+        # Find prompt.yaml in agent directory
+        agent_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(agent_dir, 'prompt.yaml')
+        
+        if not os.path.exists(prompt_path):
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        
+        # Load prompt data
+        with open(prompt_path, 'r') as f:
+            prompt_content = f.read()
+            prompt_data = yaml.safe_load(prompt_content)
+        
+        return prompt_data
     
     @property
     def llm_gateway(self):
@@ -168,61 +209,15 @@ The notebook should be completely self-contained and executable.
     def _generate_notebook_with_llm(self, llm_input):
         """Generate executable Python notebook using LLM with framework-specific calculations"""
         
-        system_prompt = """You are an expert Python programmer specializing in academic research data analysis and statistical calculations. You generate clean, executable Python notebooks that implement framework-specific derived metrics calculations with complete transparency and academic rigor."""
+        # Load external system prompt
+        prompt_data = self._load_prompt_data()
+        system_prompt = prompt_data.get('system_prompt', 'You are an expert Python programmer specializing in academic research data analysis and statistical calculations.')
         
-        # Create comprehensive prompt for notebook generation
-        prompt = f"""
-Generate an executable Python notebook (.py file) that calculates derived metrics from analysis data based on the provided framework specification.
-
-CRITICAL: The framework contains specific mathematical formulas in the "calculation_spec" section. You MUST implement these exact formulas:
-
-REQUIRED CFF v7.3 CALCULATIONS:
-1. **Tension Scores**: 
-   - identity_tension = min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)
-   - emotional_tension = min(fear_score, hope_score) * abs(fear_salience - hope_salience)
-   - success_tension = min(envy_score, compersion_score) * abs(envy_salience - compersion_salience)
-   - relational_tension = min(enmity_score, amity_score) * abs(enmity_salience - amity_salience)
-   - goal_tension = min(fragmentative_goals_score, cohesive_goals_score) * abs(fragmentative_goals_salience - cohesive_goals_salience)
-
-2. **Composite Indices**:
-   - strategic_contradiction_index = (identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5
-   - cohesive_index = (individual_dignity_score + hope_score + compersion_score + amity_score + cohesive_goals_score) / 5
-   - fragmentative_index = (tribal_dominance_score + fear_score + envy_score + enmity_score + fragmentative_goals_score) / 5
-   - overall_cohesion_index = cohesive_index - fragmentative_index
-
-REQUIREMENTS:
-1. **Extract Formula Specifications**: Parse the framework's "calculation_spec" and "formulas" sections
-2. **Implement Each Formula**: Create Python functions for every calculation listed above
-3. **Data Loading**: Load analysis data from 'analysis_data.json' containing scores and salience
-4. **Calculate for All Documents**: Apply formulas to every document in the dataset
-5. **CSV Output**: Generate 'derived_metrics_results.csv' with all original scores + calculated metrics
-6. **Validation**: Include sanity checks and error handling for missing data
-
-PYTHON STRUCTURE REQUIRED:
-```python
-#!/usr/bin/env python3
-import json
-import pandas as pd
-import numpy as np
-
-def calculate_identity_tension(tribal_dominance_score, individual_dignity_score, tribal_dominance_salience, individual_dignity_salience):
-    return min(tribal_dominance_score, individual_dignity_score) * abs(tribal_dominance_salience - individual_dignity_salience)
-
-# ... implement all other calculation functions
-
-def main():
-    # Load data, apply calculations, save CSV
-    pass
-
-if __name__ == "__main__":
-    main()
-```
-
-FRAMEWORK AND DATA CONTEXT:
-{llm_input}
-
-Generate ONLY the complete Python notebook code with ALL CFF calculations implemented. The code must be immediately executable and produce accurate derived metrics.
-"""
+        # Load external prompt template
+        prompt_template = self._load_prompt_template()
+        
+        # Format prompt with experiment data
+        prompt = prompt_template.format(llm_input=llm_input)
 
         try:
             # Execute LLM call using the gateway

@@ -148,86 +148,16 @@ class AutomatedStatisticalAnalysisAgent:
         questions = experiment_spec.get("questions", [])
         questions_text = "\n".join([f"- {q}" for q in questions]) if questions else "- No specific research questions provided"
         
-        prompt = f"""You are an expert Python developer generating statistical analysis functions for a research framework.
-
-**FRAMEWORK SPECIFICATION:**
-{framework_content}
-
-**EXPERIMENT:** {experiment_spec.get('name', 'Unknown')}
-**DESCRIPTION:** {experiment_spec.get('description', 'No description')}
-
-**RESEARCH QUESTIONS:**
-{questions_text}
-
-**YOUR TASK:**
-Generate Python functions that implement statistical analyses to answer the research questions.
-
-**CRITICAL REQUIREMENTS:**
-1. Each analysis must be implemented as a separate Python function
-2. Functions must accept a pandas DataFrame 'data' as the primary parameter
-3. Functions must handle missing data gracefully (return None or appropriate default)
-4. Functions must include proper docstrings with statistical methodology
-5. Functions must be production-ready with error handling
-
-**OUTPUT FORMAT:**
-Wrap each function in the proprietary delimiters exactly as shown:
-
-<<<DISCERNUS_FUNCTION_START>>>
-def function_name(data, **kwargs):
-    \"\"\"
-    Function description with statistical methodology.
-    
-    Args:
-        data: pandas DataFrame with dimension scores
-        **kwargs: Additional parameters
+        # Load external prompt template
+        prompt_template = self._load_prompt_template()
         
-    Returns:
-        dict: Statistical results or None if insufficient data
-    \"\"\"
-    # Implementation here
-    pass
-<<<DISCERNUS_FUNCTION_END>>>
-
-**EXAMPLE:**
-For descriptive statistics, generate:
-
-<<<DISCERNUS_FUNCTION_START>>>
-def calculate_descriptive_statistics(data, **kwargs):
-    \"\"\"
-    Calculate descriptive statistics for all numeric dimensions.
-    
-    Args:
-        data: pandas DataFrame with dimension scores
-        **kwargs: Additional parameters
-        
-    Returns:
-        dict: Descriptive statistics for each dimension or None if insufficient data
-    \"\"\"
-    import pandas as pd
-    import numpy as np
-    
-    try:
-        if data.empty:
-            return None
-            
-        results = {{}}
-        numeric_columns = data.select_dtypes(include=[np.number]).columns
-        
-        for col in numeric_columns:
-            if col.endswith('_score'):
-                results[col] = {{
-                    'mean': float(data[col].mean()),
-                    'std': float(data[col].std()),
-                    'count': int(data[col].count())
-                }}
-        
-        return results
-        
-    except Exception:
-        return None
-<<<DISCERNUS_FUNCTION_END>>>
-
-Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Make sure to import pandas as pd and other needed libraries in each function."""
+        # Format prompt with experiment data
+        prompt = prompt_template.format(
+            framework_content=framework_content,
+            experiment_name=experiment_spec.get('name', 'Unknown'),
+            experiment_description=experiment_spec.get('description', 'No description'),
+            research_questions=questions_text
+        )
 
         try:
             response_text, metadata = self.llm_gateway.execute_call(
@@ -243,6 +173,28 @@ Generate functions for descriptive statistics, correlation analysis, and any oth
         except Exception as e:
             self._log_event("LLM_STATISTICAL_GENERATION_FAILED", {"error": str(e)})
             raise
+    
+    def _load_prompt_template(self) -> str:
+        """Load external YAML prompt template following THIN architecture."""
+        import os
+        import yaml
+        
+        # Find prompt.yaml in agent directory
+        agent_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(agent_dir, 'prompt.yaml')
+        
+        if not os.path.exists(prompt_path):
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        
+        # Load prompt template
+        with open(prompt_path, 'r') as f:
+            prompt_content = f.read()
+            prompt_data = yaml.safe_load(prompt_content)
+        
+        if 'template' not in prompt_data:
+            raise ValueError(f"Prompt file missing 'template' key: {prompt_path}")
+        
+        return prompt_data['template']
     
     def _create_statistical_module(self, functions: List[str], experiment_spec: Dict[str, Any]) -> str:
         """Create complete Python module with all generated statistical functions."""

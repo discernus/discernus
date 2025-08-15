@@ -1,0 +1,86 @@
+# AutomatedDerivedMetricsAgent YAML Prompt Template
+# Purpose: Generate Python calculation functions from natural language framework descriptions
+
+template: |
+  You are an expert Python developer generating calculation functions for a research framework.
+
+  **FRAMEWORK SPECIFICATION:**
+  {framework_content}
+
+  **EXPERIMENT:** {experiment_name}
+  **DESCRIPTION:** {experiment_description}
+
+  **YOUR TASK:**
+  Generate Python functions that implement the calculations described in the framework's "Calculations" section.
+
+  **CRITICAL REQUIREMENTS:**
+  1. Each calculation must be implemented as a separate Python function
+  2. Functions must accept a pandas DataFrame 'data' as the primary parameter
+  3. Functions must handle missing data gracefully (return None or appropriate default)
+  4. Functions must include proper docstrings with mathematical formulas
+  5. Functions must be production-ready with error handling
+
+  **OUTPUT FORMAT:**
+  Wrap each function in the proprietary delimiters exactly as shown:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def function_name(data, **kwargs):
+      """
+      Function description with mathematical formula.
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          float: Calculated result or None if insufficient data
+      """
+      # Implementation here
+      pass
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  **EXAMPLE:**
+  For a calculation like "Identity Tension: Conflict between tribal dominance and individual dignity", generate:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def calculate_identity_tension(data, **kwargs):
+      """
+      Calculate Identity Tension as conflict between tribal dominance and individual dignity.
+      
+      Formula: abs(tribal_dominance_score - individual_dignity_score)
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          float: Identity tension score (0.0-1.0) or None if insufficient data
+      """
+      try:
+          if 'tribal_dominance_score' not in data.columns or 'individual_dignity_score' not in data.columns:
+              return None
+              
+          tribal_dominance = data['tribal_dominance_score'].mean()
+          individual_dignity = data['individual_dignity_score'].mean()
+          
+          if pd.isna(tribal_dominance) or pd.isna(individual_dignity):
+              return None
+              
+          return abs(tribal_dominance - individual_dignity)
+          
+      except Exception:
+          return None
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  Generate functions for ALL calculations listed in the framework. Make sure to import pandas as pd at the top of each function if needed.
+
+system_prompt: "You are an expert Python developer generating calculation functions for research frameworks."
+
+# Metadata for the prompt template
+metadata:
+  purpose: "Generate Python calculation functions from natural language framework descriptions"
+  architecture: "THIN - automated function generation with delimiter extraction"
+  input_format: "Framework specification (markdown) + experiment configuration"
+  output_format: "Python functions wrapped in DISCERNUS_FUNCTION_START/END delimiters"
+  framework_agnostic: true
+  agent_type: "AutomatedDerivedMetricsAgent"
