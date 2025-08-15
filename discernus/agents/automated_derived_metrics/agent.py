@@ -128,79 +128,39 @@ class AutomatedDerivedMetricsAgent:
             })
             raise
     
+    def _load_prompt_template(self) -> str:
+        """Load external YAML prompt template following THIN architecture."""
+        import os
+        import yaml
+        
+        # Find prompt.yaml in agent directory
+        agent_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(agent_dir, 'prompt.yaml')
+        
+        if not os.path.exists(prompt_path):
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        
+        # Load prompt template
+        with open(prompt_path, 'r') as f:
+            prompt_content = f.read()
+            prompt_data = yaml.safe_load(prompt_content)
+        
+        if 'template' not in prompt_data:
+            raise ValueError(f"Prompt file missing 'template' key: {prompt_path}")
+        
+        return prompt_data['template']
+
     def _generate_calculation_functions(self, framework_content: str, experiment_spec: Dict[str, Any]) -> str:
         """Generate calculation functions using LLM with THIN delimiter output."""
-        prompt = f"""You are an expert Python developer generating calculation functions for a research framework.
-
-**FRAMEWORK SPECIFICATION:**
-{framework_content}
-
-**EXPERIMENT:** {experiment_spec.get('name', 'Unknown')}
-**DESCRIPTION:** {experiment_spec.get('description', 'No description')}
-
-**YOUR TASK:**
-Generate Python functions that implement the calculations described in the framework's "Calculations" section.
-
-**CRITICAL REQUIREMENTS:**
-1. Each calculation must be implemented as a separate Python function
-2. Functions must accept a pandas DataFrame 'data' as the primary parameter
-3. Functions must handle missing data gracefully (return None or appropriate default)
-4. Functions must include proper docstrings with mathematical formulas
-5. Functions must be production-ready with error handling
-
-**OUTPUT FORMAT:**
-Wrap each function in the proprietary delimiters exactly as shown:
-
-<<<DISCERNUS_FUNCTION_START>>>
-def function_name(data, **kwargs):
-    \"\"\"
-    Function description with mathematical formula.
-    
-    Args:
-        data: pandas DataFrame with dimension scores
-        **kwargs: Additional parameters
+        # Load external prompt template
+        prompt_template = self._load_prompt_template()
         
-    Returns:
-        float: Calculated result or None if insufficient data
-    \"\"\"
-    # Implementation here
-    pass
-<<<DISCERNUS_FUNCTION_END>>>
-
-**EXAMPLE:**
-For a calculation like "Identity Tension: Conflict between tribal dominance and individual dignity", generate:
-
-<<<DISCERNUS_FUNCTION_START>>>
-def calculate_identity_tension(data, **kwargs):
-    \"\"\"
-    Calculate Identity Tension as conflict between tribal dominance and individual dignity.
-    
-    Formula: abs(tribal_dominance_score - individual_dignity_score)
-    
-    Args:
-        data: pandas DataFrame with dimension scores
-        **kwargs: Additional parameters
-        
-    Returns:
-        float: Identity tension score (0.0-1.0) or None if insufficient data
-    \"\"\"
-    try:
-        if 'tribal_dominance_score' not in data.columns or 'individual_dignity_score' not in data.columns:
-            return None
-            
-        tribal_dominance = data['tribal_dominance_score'].mean()
-        individual_dignity = data['individual_dignity_score'].mean()
-        
-        if pd.isna(tribal_dominance) or pd.isna(individual_dignity):
-            return None
-            
-        return abs(tribal_dominance - individual_dignity)
-        
-    except Exception:
-        return None
-<<<DISCERNUS_FUNCTION_END>>>
-
-Generate functions for ALL calculations listed in the framework. Make sure to import pandas as pd at the top of each function if needed."""
+        # Format prompt with experiment data
+        prompt = prompt_template.format(
+            framework_content=framework_content,
+            experiment_name=experiment_spec.get('name', 'Unknown'),
+            experiment_description=experiment_spec.get('description', 'No description')
+        )
 
         try:
             response_text, metadata = self.llm_gateway.execute_call(
