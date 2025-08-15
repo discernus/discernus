@@ -659,48 +659,10 @@ Respond with only the JSON object."""
             # Store statistical_prep flag for later use
             self._statistical_prep = statistical_prep
             
-            # Handle v8.0 statistical preparation mode: Phase 2 implementation
-            if statistical_prep:
-                self._log_progress("🔬 V8.0 Statistical Preparation Mode: Generating componentized notebook...")
-                
-                try:
-                    from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
-                    
-                    # Initialize notebook generation orchestrator with transactional workspace
-                    notebook_orchestrator = NotebookGenerationOrchestrator(
-                        experiment_path=self.experiment_path,
-                        security=self.security,
-                        audit_logger=audit
-                    )
-                    
-                    # Execute transactional notebook generation
-                    self._log_progress("🔄 Starting transactional notebook generation...")
-                    result = notebook_orchestrator.generate_notebook(
-                        analysis_model=analysis_model,
-                        synthesis_model=synthesis_model
-                    )
-                    
-                    self._log_status(f"✅ V8.0 notebook generation completed successfully")
-                    self._log_status(f"   📋 Transaction: {result['transaction_id']}")
-                    self._log_status(f"   📁 Artifacts: {len(result['artifacts'])} files generated")
-                    self._log_status(f"   🤖 Agents: {len(result['agents_completed'])} completed")
-                    
-                    # Return v8.0 result
-                    return {
-                        "run_id": run_timestamp,
-                        "mode": "v8.0_statistical_prep",
-                        "status": "success",
-                        "message": "V8.0 notebook generation completed successfully",
-                        "transaction_id": result["transaction_id"],
-                        "permanent_path": result["permanent_path"],
-                        "artifacts_generated": result["artifacts"],
-                        "agents_completed": result["agents_completed"]
-                    }
-                    
-                except Exception as e:
-                    error_msg = f"V8.0 notebook generation failed: {e}"
-                    self._log_status(f"❌ {error_msg}")
-                    raise ThinOrchestratorError(error_msg)
+            # DEBUG: Log parameter values
+            self._log_status(f"🔍 DEBUG: analysis_only={analysis_only}, statistical_prep={statistical_prep}")
+            
+            # v8.0 statistical_prep mode will be handled after analysis completes
 
             # Handle analysis-only mode: run analysis and exit early
             if analysis_only:
@@ -713,6 +675,7 @@ Respond with only the JSON object."""
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
                 self._log_status(f"Initialized EnhancedAnalysisAgent with model: {analysis_model}")
                 
+                self._log_status("🔍 Debug: ANALYSIS_ONLY path calling _execute_analysis_sequentially")
                 all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
                     analysis_agent,
                     corpus_documents,
@@ -1178,7 +1141,8 @@ Respond with only the JSON object."""
                            model=analysis_model, 
                            document_count=len(corpus_documents),
                            ensemble_runs=ensemble_runs):
-                all_analysis_results, scores_hash, evidence_hash, _ = self._execute_analysis_sequentially(
+                self._log_status("🔍 Debug: NORMAL path calling _execute_analysis_sequentially")
+                analysis_result = self._execute_analysis_sequentially(
                     analysis_agent,
                     corpus_documents,
                     framework_content,
@@ -1186,6 +1150,56 @@ Respond with only the JSON object."""
                     analysis_model,
                     ensemble_runs
                 )
+                
+                # v8.0 statistical_prep mode: Skip synthesis entirely and go to notebook generation  
+                if hasattr(self, '_statistical_prep') and self._statistical_prep:
+                    self._log_progress("🔬 V8.0 Statistical Preparation Mode: Bypassing synthesis, proceeding to notebook generation...")
+                    
+                    # Extract analysis results from the tuple
+                    all_analysis_results, scores_hash, evidence_hash, _ = analysis_result
+                    
+                    try:
+                        from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
+                        
+                        # Initialize notebook generation orchestrator with transactional workspace
+                        notebook_orchestrator = NotebookGenerationOrchestrator(
+                            experiment_path=self.experiment_path,
+                            security=self.security,
+                            audit_logger=audit
+                        )
+                        
+                        # Execute transactional notebook generation with analysis results
+                        self._log_progress("🔄 Starting transactional notebook generation with analysis results...")
+                        result = notebook_orchestrator.generate_notebook(
+                            analysis_model=analysis_model,
+                            synthesis_model=synthesis_model,
+                            analysis_results=all_analysis_results  # Pass the analysis results directly
+                        )
+                        
+                        self._log_status(f"✅ V8.0 notebook generation completed successfully")
+                        self._log_status(f"   📋 Transaction: {result['transaction_id']}")
+                        self._log_status(f"   📁 Artifacts: {len(result['artifacts'])} files generated")
+                        self._log_status(f"   🤖 Agents: {len(result['agents_completed'])} completed")
+                        
+                        # Return v8.0 result
+                        return {
+                            "run_id": run_timestamp,
+                            "mode": "v8.0_statistical_prep",
+                            "status": "success",
+                            "message": "V8.0 notebook generation completed successfully",
+                            "transaction_id": result["transaction_id"],
+                            "permanent_path": result["permanent_path"],
+                            "artifacts_generated": result["artifacts"],
+                            "agents_completed": result["agents_completed"]
+                        }
+                        
+                    except Exception as e:
+                        error_msg = f"V8.0 notebook generation failed: {e}"
+                        self._log_status(f"❌ {error_msg}")
+                        raise ThinOrchestratorError(error_msg)
+                
+                # Normal v7.3 mode: Unpack the tuple as usual
+                all_analysis_results, scores_hash, evidence_hash, _ = analysis_result
             
             # Calculate success count BEFORE combining artifacts (which modifies the list)
             successful_count = len([res for res in all_analysis_results if 'error' not in res and res.get('analysis_result', {}).get('result_hash')])
@@ -1530,7 +1544,23 @@ Respond with only the JSON object."""
                 self._log_error_context(f"❌ Analysis failed for document {doc_filename}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc_filename})
 
-        # Combine all analysis results into a single JSON artifact for synthesis
+        # v8.0 statistical_prep mode: Skip legacy synthesis pipeline entirely
+        self._log_status(f"🔍 Debug: hasattr(_statistical_prep)={hasattr(self, '_statistical_prep')}")
+        if hasattr(self, '_statistical_prep'):
+            self._log_status(f"🔍 Debug: _statistical_prep={self._statistical_prep}")
+        
+        if hasattr(self, '_statistical_prep') and self._statistical_prep:
+            self._log_status("📊 Statistical prep mode: Skipping legacy synthesis pipeline")
+            self._log_status("🚀 Proceeding directly to v8.0 notebook generation with analysis results")
+            
+            # Return analysis results directly for notebook generation
+            return {
+                "analysis_results": all_analysis_results,
+                "mode": "v8.0_analysis_complete",
+                "status": "success"
+            }
+        
+        # Legacy v7.3 mode: Combine all analysis results into a single JSON artifact for synthesis
         # This is statistical preparation work - cross-document extraction and combination
         self._set_stage("statistical_prep", self.analysis_model, self.synthesis_model)
         
