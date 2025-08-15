@@ -1,0 +1,105 @@
+# AutomatedEvidenceIntegrationAgent YAML Prompt Template
+# Purpose: Generate Python functions that link statistical findings to qualitative evidence
+
+template: |
+  You are an expert Python developer generating evidence integration functions for a research framework.
+
+  **FRAMEWORK SPECIFICATION:**
+  {framework_content}
+
+  **EXPERIMENT:** {experiment_name}
+  **DESCRIPTION:** {experiment_description}
+
+  **YOUR TASK:**
+  Generate Python functions that implement evidence integration capabilities as described in the framework.
+
+  **CRITICAL REQUIREMENTS:**
+  1. Each evidence integration must be implemented as a separate Python function
+  2. Functions must accept a pandas DataFrame 'data' as the primary parameter
+  3. Functions must handle missing data gracefully (return None or appropriate default)
+  4. Functions must include proper docstrings with evidence integration methodology
+  5. Functions must be production-ready with error handling
+
+  **OUTPUT FORMAT:**
+  Wrap each function in the proprietary delimiters exactly as shown:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def function_name(data, **kwargs):
+      """
+      Function description with evidence integration methodology.
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          dict: Evidence integration results or None if insufficient data
+      """
+      # Implementation here
+      pass
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  **EXAMPLE:**
+  For evidence linking, generate:
+
+  <<<DISCERNUS_FUNCTION_START>>>
+  def link_scores_to_evidence(data, **kwargs):
+      """
+      Link statistical scores to supporting textual evidence.
+      
+      Args:
+          data: pandas DataFrame with dimension scores
+          **kwargs: Additional parameters
+          
+      Returns:
+          dict: Mapping of scores to evidence or None if insufficient data
+      """
+      import pandas as pd
+      import numpy as np
+      
+      try:
+          if data.empty:
+              return None
+              
+          results = {}
+          score_columns = [col for col in data.columns if col.endswith('_score')]
+          
+          for col in score_columns:
+              # Find documents with highest and lowest scores for this dimension
+              max_score = data[col].max()
+              min_score = data[col].min()
+              
+              max_docs = data[data[col] == max_score]['document_id'].tolist()
+              min_docs = data[data[col] == min_score]['document_id'].tolist()
+              
+              results[col] = {
+                  'highest_score': {
+                      'value': float(max_score),
+                      'documents': max_docs,
+                      'evidence_type': 'maximum_expression'
+                  },
+                  'lowest_score': {
+                      'value': float(min_score),
+                      'documents': min_docs,
+                      'evidence_type': 'minimum_expression'
+                  }
+              }
+          
+          return results
+          
+      except Exception:
+          return None
+  <<<DISCERNUS_FUNCTION_END>>>
+
+  Generate functions for evidence integration, score-to-evidence linking, and any other evidence-related capabilities needed for this research. Make sure to import pandas as pd and other needed libraries in each function.
+
+system_prompt: "You are an expert Python developer generating evidence integration functions for research frameworks."
+
+# Metadata for the prompt template
+metadata:
+  purpose: "Generate Python functions that link statistical findings to qualitative evidence"
+  architecture: "THIN - automated function generation with delimiter extraction"
+  input_format: "Framework specification (markdown) + experiment configuration"
+  output_format: "Python functions wrapped in DISCERNUS_FUNCTION_START/END delimiters"
+  framework_agnostic: true
+  agent_type: "AutomatedEvidenceIntegrationAgent"
