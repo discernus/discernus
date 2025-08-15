@@ -1,0 +1,146 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+    "total_evidence_pieces": 15,
+    "extraction_method": "gasket_evidence_extraction_v1.0",
+    "extraction_time": "2025-08-15T03:26:28.475029+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "dimension": "tribal_dominance",
+      "quote_text": "Tonight - tonight more than any night - I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama.",
+      "confidence": 0.95,
+      "context_type": "explicit_rejection_of_division",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470630+00:00"
+    },
+    {
+      "dimension": "individual_dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.9,
+      "context_type": "recognition_of_group_dignity",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470653+00:00"
+    },
+    {
+      "dimension": "individual_dignity",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it.",
+      "confidence": 0.85,
+      "context_type": "universal_opportunity",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470657+00:00"
+    },
+    {
+      "dimension": "fear",
+      "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment_of_challenges",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470660+00:00"
+    },
+    {
+      "dimension": "fear",
+      "quote_text": "defend our security in a dangerous world",
+      "confidence": 0.8,
+      "context_type": "external_threat_context",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470662+00:00"
+    },
+    {
+      "dimension": "hope",
+      "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+      "confidence": 0.9,
+      "context_type": "aspirational_achievement",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470665+00:00"
+    },
+    {
+      "dimension": "hope",
+      "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+      "confidence": 0.9,
+      "context_type": "call_to_optimism",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470667+00:00"
+    },
+    {
+      "dimension": "envy",
+      "quote_text": "No evidence of envy.",
+      "confidence": 0.95,
+      "context_type": "absence_of_linguistic_markers",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470669+00:00"
+    },
+    {
+      "dimension": "compassion",
+      "quote_text": "A little while ago, I had the honor of calling Senator Barack Obama to congratulate him...to congratulate him on being elected the next president of the country that we both love.",
+      "confidence": 0.9,
+      "context_type": "explicit_congratulation",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470672+00:00"
+    },
+    {
+      "dimension": "compassion",
+      "quote_text": "his success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans...is something I deeply admire and commend him for achieving.",
+      "confidence": 0.9,
+      "context_type": "admiration_of_achievement",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470674+00:00"
+    },
+    {
+      "dimension": "enmity",
+      "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president",
+      "confidence": 0.95,
+      "context_type": "rejection_of_adversarial_role",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470676+00:00"
+    },
+    {
+      "dimension": "amity",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...",
+      "confidence": 0.9,
+      "context_type": "call_for_unity_and_cooperation",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470679+00:00"
+    },
+    {
+      "dimension": "amity",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.9,
+      "context_type": "emphasis_on_shared_identity",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470681+00:00"
+    },
+    {
+      "dimension": "fragmentative_goals",
+      "quote_text": "No evidence of fragmentative goals.",
+      "confidence": 0.95,
+      "context_type": "absence_of_linguistic_markers",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470684+00:00"
+    },
+    {
+      "dimension": "cohesive_goals",
+      "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.9,
+      "context_type": "positive_sum_objectives",
+      "extraction_method": "gasket_evidence_extraction_v1.0",
+      "source_type": "gasket_llm_extraction",
+      "extraction_timestamp": "2025-08-15T03:26:28.470686+00:00"
+    }
+  ]
+}

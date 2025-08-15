@@ -335,6 +335,12 @@ class ProductionThinSynthesisPipeline:
         Raises:
             ValueError: If the gasket_schema is not found or is invalid.
         """
+        # 🎯 V8.0 SYNTHESIS BYPASS: Skip gasket extraction for v8.0 frameworks
+        if ('v8.0' in str(framework_spec) or 'cff_v8' in str(framework_spec) or 
+            'version: 8.0' in str(framework_spec) or 'Version 8.0' in str(framework_spec)):
+            print("🎯 V8.0 BYPASS: Skipping gasket schema extraction for v8.0 framework")
+            return {"version": "8.0", "target_keys": [], "bypass": True}
+            
         try:
             start_marker = "<GASKET_SCHEMA_START>"
             end_marker = "<GASKET_SCHEMA_END>"

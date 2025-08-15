@@ -81,13 +81,15 @@ class NotebookGenerationOrchestrator:
     
     def generate_notebook(self, 
                          analysis_model: str = "vertex_ai/gemini-2.5-flash",
-                         synthesis_model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
+                         synthesis_model: str = "vertex_ai/gemini-2.5-pro",
+                         analysis_results: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
         """
         Generate notebook using atomic transaction model.
         
         Args:
             analysis_model: LLM model for analysis tasks
             synthesis_model: LLM model for synthesis tasks
+            analysis_results: Pre-computed analysis results from v8.0 analysis phase
             
         Returns:
             Transaction result with notebook artifacts
@@ -101,8 +103,14 @@ class NotebookGenerationOrchestrator:
             # Phase 1: BEGIN TRANSACTION
             self._begin_transaction(transaction_id)
             
-            # Phase 2: LOAD V8.0 SPECIFICATIONS
-            v8_experiment = self._load_v8_specifications()
+            # Phase 2: STORE ANALYSIS RESULTS (if provided) 
+            if analysis_results:
+                self._store_analysis_results(analysis_results)
+                # Skip v8.0 specification loading when analysis results are provided
+                v8_experiment = None
+            else:
+                # Phase 2: LOAD V8.0 SPECIFICATIONS (only when no analysis results)
+                v8_experiment = self._load_v8_specifications()
             
             # Phase 3: EXECUTE AGENTS (in transactional workspace)
             self._execute_agents(v8_experiment, analysis_model, synthesis_model)
@@ -196,6 +204,37 @@ class NotebookGenerationOrchestrator:
             )
             raise
     
+    def _store_analysis_results(self, analysis_results: List[Dict[str, Any]]) -> None:
+        """Store analysis results in transaction workspace for agent access."""
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "ANALYSIS_RESULTS_STORAGE_START",
+            {"results_count": len(analysis_results)}
+        )
+        
+        try:
+            workspace = self.current_transaction.workspace_path
+            analysis_file = workspace / "analysis_results.json"
+            analysis_file.write_text(json.dumps(analysis_results, indent=2))
+            
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "ANALYSIS_RESULTS_STORAGE_SUCCESS",
+                {
+                    "results_count": len(analysis_results),
+                    "storage_file": "analysis_results.json",
+                    "file_size": analysis_file.stat().st_size
+                }
+            )
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "ANALYSIS_RESULTS_STORAGE_FAILED",
+                {"error": str(e)}
+            )
+            raise
+    
     def _execute_agents(self, 
                        v8_experiment: V8ExperimentSpec, 
                        analysis_model: str, 
@@ -277,8 +316,9 @@ class NotebookGenerationOrchestrator:
         else:
             # Create placeholder function file for unimplemented agents
             function_file = workspace / f"{agent_name.lower()}_functions.py"
+            experiment_name = v8_experiment.name if v8_experiment is not None else "from_analysis_results"
             placeholder_content = f"""# {agent_name} - Generated Functions
-# Experiment: {v8_experiment.name}
+# Experiment: {experiment_name}
 # Generated: {datetime.now(timezone.utc).isoformat()}
 
 def placeholder_function():
@@ -429,3 +469,125 @@ def placeholder_function():
                     "rollback_error": str(rollback_error)
                 }
             )
+    
+    def generate_notebook_with_analysis(self, 
+                                       analysis_model: str = "vertex_ai/gemini-2.5-flash",
+                                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
+                                       analysis_results: List[Dict[str, Any]] = None,
+                                       framework_content: str = None) -> Dict[str, Any]:
+        """
+        Generate notebook with pre-computed analysis results and framework content.
+        
+        This method ensures that the required framework_content.md file is created
+        in the transaction workspace even when analysis results are provided.
+        
+        Args:
+            analysis_model: LLM model for analysis tasks
+            synthesis_model: LLM model for synthesis tasks
+            analysis_results: Pre-computed analysis results from v8.0 analysis phase
+            framework_content: Raw framework content to store in transaction workspace
+            
+        Returns:
+            Transaction result with notebook artifacts
+        """
+        transaction_id = f"notebook_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+        
+        try:
+            # Phase 1: BEGIN TRANSACTION
+            self._begin_transaction(transaction_id)
+            
+            # Phase 2: STORE ANALYSIS RESULTS AND FRAMEWORK CONTENT
+            if analysis_results:
+                self._store_analysis_results(analysis_results)
+            
+            if framework_content:
+                self._store_framework_content(framework_content)
+                
+            # Create minimal experiment spec for agents
+            self._store_experiment_spec()
+                
+            # Phase 3: EXECUTE AGENTS (in transactional workspace)
+            self._execute_agents(None, analysis_model, synthesis_model)
+            
+            # Phase 4: VALIDATE GENERATED FUNCTIONS
+            self._validate_functions()
+            
+            # Phase 5: COMMIT TRANSACTION
+            result = self._commit_transaction()
+            
+            return result
+            
+        except Exception as e:
+            # Phase 6: ROLLBACK ON FAILURE
+            self._rollback_transaction(str(e))
+            raise
+    
+    def _store_framework_content(self, framework_content: str) -> None:
+        """Store framework content in transaction workspace for agent access."""
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "FRAMEWORK_CONTENT_STORAGE_START",
+            {"content_size": len(framework_content)}
+        )
+        
+        try:
+            workspace = self.current_transaction.workspace_path
+            framework_file = workspace / "framework_content.md"
+            framework_file.write_text(framework_content)
+            
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "FRAMEWORK_CONTENT_STORAGE_SUCCESS",
+                {
+                    "storage_file": "framework_content.md",
+                    "file_size": framework_file.stat().st_size
+                }
+            )
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "FRAMEWORK_CONTENT_STORAGE_FAILED",
+                {"error": str(e)}
+            )
+            raise
+    
+    def _store_experiment_spec(self) -> None:
+        """Store minimal experiment spec in transaction workspace for agent access."""
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "EXPERIMENT_SPEC_STORAGE_START",
+            {}
+        )
+        
+        try:
+            workspace = self.current_transaction.workspace_path
+            experiment_spec_file = workspace / "experiment_spec.json"
+            
+            # Create minimal experiment spec
+            experiment_spec = {
+                "name": self.experiment_path.name,
+                "version": "8.0",
+                "framework_path": "cff_v8.md",
+                "corpus_path": "corpus",
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+            
+            experiment_spec_file.write_text(json.dumps(experiment_spec, indent=2))
+            
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "EXPERIMENT_SPEC_STORAGE_SUCCESS",
+                {
+                    "storage_file": "experiment_spec.json",
+                    "file_size": experiment_spec_file.stat().st_size
+                }
+            )
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "EXPERIMENT_SPEC_STORAGE_FAILED",
+                {"error": str(e)}
+            )
+            raise
