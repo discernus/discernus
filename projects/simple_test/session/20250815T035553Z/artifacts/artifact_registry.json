@@ -1,0 +1,86 @@
+{
+  "100cdb5d20f44258cf5e82d83bf5bb789affdfdb2e1748466e06363d4b382187": {
+    "artifact_path": "artifacts/analysis_result_100cdb5d",
+    "created_at": "2025-08-15T03:56:40.667532+00:00",
+    "human_filename": "analysis_result_100cdb5d",
+    "metadata": {
+      "artifact_type": "analysis_result",
+      "batch_id": "batch_5685cbbc929a"
+    },
+    "size_bytes": 27410,
+    "source_run": "20250815T035553Z"
+  },
+  "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6": {
+    "artifact_path": "artifacts/alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+    "created_at": "2025-08-15T03:55:53.356753+00:00",
+    "human_filename": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "batch_id": "batch_5685cbbc929a",
+      "original_filename": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt"
+    },
+    "size_bytes": 6411,
+    "source_run": "20250815T035553Z"
+  },
+  "185948439788cee36bef2e44549b34f4521bc7109ff6239949fa2ba6277b7171": {
+    "artifact_path": "artifacts/evidence_v6_18594843",
+    "created_at": "2025-08-15T03:56:40.666892+00:00",
+    "human_filename": "evidence_v6_18594843",
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hash": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 30444,
+    "source_run": "20250815T035553Z"
+  },
+  "1f027dce2cd0bf3b632bbdefdc6fd387cf2150976054ddaae8a1d337c53c003b": {
+    "artifact_path": "artifacts/raw_analysis_response_v6_1f027dce",
+    "created_at": "2025-08-15T03:56:40.666049+00:00",
+    "human_filename": "raw_analysis_response_v6_1f027dce",
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hash": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "framework_hash": "3a4d666e734645faffc8903d7fbe5a34401a8a3bd9bdb06faadb85b93e574423",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 24404,
+    "source_run": "20250815T035553Z"
+  },
+  "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd": {
+    "artifact_path": "artifacts/bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+    "created_at": "2025-08-15T03:55:53.357824+00:00",
+    "human_filename": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "batch_id": "batch_5685cbbc929a",
+      "original_filename": "bernie_sanders_2025_fighting_oligarchy.txt"
+    },
+    "size_bytes": 4789,
+    "source_run": "20250815T035553Z"
+  },
+  "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82": {
+    "artifact_path": "artifacts/steve_king_2017_house_floor_738780d9.txt",
+    "created_at": "2025-08-15T03:55:53.357066+00:00",
+    "human_filename": "steve_king_2017_house_floor_738780d9.txt",
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "batch_id": "batch_5685cbbc929a",
+      "original_filename": "steve_king_2017_house_floor.txt"
+    },
+    "size_bytes": 26200,
+    "source_run": "20250815T035553Z"
+  },
+  "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35": {
+    "artifact_path": "artifacts/john_mccain_2008_concession_ff9b26f2.txt",
+    "created_at": "2025-08-15T03:55:53.357442+00:00",
+    "human_filename": "john_mccain_2008_concession_ff9b26f2.txt",
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "batch_id": "batch_5685cbbc929a",
+      "original_filename": "john_mccain_2008_concession.txt"
+    },
+    "size_bytes": 6604,
+    "source_run": "20250815T035553Z"
+  }
+}

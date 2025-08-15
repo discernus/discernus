@@ -1,0 +1,16 @@
+[
+  {
+    "batch_result": {
+      "analysis_result": {
+        "batch_id": "batch_5685cbbc929a",
+        "result_hash": "6293bfbcafec756f6876393f99ad05f51750d42232416f5688bfd2bc80e0639e",
+        "duration_seconds": 70.362191
+      },
+      "scores_hash": "cdf54f258acd95f656c9f4b5e3e82d427d3e17c96b0a148e82cc972bb69e18d2",
+      "evidence_hash": "23ffd2c50181f98a89110759eaded088be51e538b32e6f902913ca971b337314"
+    },
+    "document_count": 4,
+    "scores_hash": "cdf54f258acd95f656c9f4b5e3e82d427d3e17c96b0a148e82cc972bb69e18d2",
+    "evidence_hash": "23ffd2c50181f98a89110759eaded088be51e538b32e6f902913ca971b337314"
+  }
+]

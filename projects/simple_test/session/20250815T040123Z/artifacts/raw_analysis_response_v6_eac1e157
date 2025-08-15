@@ -1,0 +1,622 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Cohesive Flourishing Framework",
+    "framework_version": "v8.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Sequential chain-of-thought analysis with salience weighting, focusing solely on raw dimensional scores and evidence extraction."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance_score": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity_score": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "fear_score": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "hope_score": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "envy_score": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "compassion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "enmity_score": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "amity_score": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals_score": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "cohesive_goals_score": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 0.9,
+          "context_type": "us_vs_them_framing"
+        },
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "We must put our people first, ahead of all others.",
+          "confidence": 0.9,
+          "context_type": "in_group_preference"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "confidence": 0.7,
+          "context_type": "affirmation_of_worth"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "If you are willing to fight for someone you don’t know, you are welcome here.",
+          "confidence": 0.7,
+          "context_type": "inclusive_call"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "confidence": 0.8,
+          "context_type": "catastrophic_language"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+          "confidence": 0.8,
+          "context_type": "threat_perception"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "Together we can build a better future for all.",
+          "confidence": 0.8,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.8,
+          "context_type": "optimistic_collective_vision"
+        },
+        {
+          "dimension": "envy_score",
+          "quote_text": "They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+          "confidence": 0.8,
+          "context_type": "accusation_of_theft"
+        },
+        {
+          "dimension": "envy_score",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.8,
+          "context_type": "resentment_of_power"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "I don't want us to live like this anymore, Greeley.",
+          "confidence": 0.7,
+          "context_type": "general_dissatisfaction"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "This isn't just about Republicans. We need a Democratic Party that fights harder for us too.",
+          "confidence": 0.9,
+          "context_type": "identifying_adversaries"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.9,
+          "context_type": "direct_combative_language"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "we need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot",
+          "confidence": 0.9,
+          "context_type": "call_for_cooperation"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "emphasis_on_unity"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.8,
+          "context_type": "zero_sum_objective"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.8,
+          "context_type": "defeat_oriented_goal"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "confidence": 0.8,
+          "context_type": "shared_aspiration"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 0.8,
+          "context_type": "positive_sum_framing"
+        }
+      ]
+    },
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "fear_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "hope_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "envy_score": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "compassion_score": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "enmity_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "fragmentative_goals_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "cohesive_goals_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "our obligation then is to say, 'Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice.'",
+          "confidence": 0.95,
+          "context_type": "in_group_norm"
+        },
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "This is another life lost to an, an illegal criminal alien who was unlawfully present in America, who had no business being in America in the first place, and whom law enforcement already had picked up at least once.",
+          "confidence": 0.95,
+          "context_type": "exclusionary_identity"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here",
+          "confidence": 0.85,
+          "context_type": "dehumanizing_language"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "the President's policy of amnesty, de facto amnesty, amnesty by executive edict, that has been part and parcel of the Obama policy since the beginning of his time here in office.",
+          "confidence": 0.85,
+          "context_type": "criticism_of_inclusive_policy"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "it's costing, it's costing in the end thousands of lives in America.",
+          "confidence": 0.9,
+          "context_type": "catastrophic_outcome"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization or prosecutorial discretion is costing lives in America.",
+          "confidence": 0.9,
+          "context_type": "existential_threat_framing"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution, if the Supreme Court of the United States believes that they can write law.",
+          "confidence": 0.8,
+          "context_type": "desire_for_restoration"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "The sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us",
+          "confidence": 0.8,
+          "context_type": "sympathy_for_in_group"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "Her life abruptly ended by a criminal alien who had been, and who had been encountered by law enforcement before",
+          "confidence": 0.8,
+          "context_type": "narrative_of_suffering"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "we have a court that will write, make it up as they go along, write laws.",
+          "confidence": 0.95,
+          "context_type": "adversarial_positioning"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "confidence": 0.95,
+          "context_type": "direct_antagonism"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "we need a president that will appoint justices to the Supreme Court that will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+          "confidence": 0.9,
+          "context_type": "objective_to_counter_opponent"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+          "confidence": 0.9,
+          "context_type": "zero_sum_objective"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives.",
+          "confidence": 0.85,
+          "context_type": "in_group_protection_goal"
+        }
+      ]
+    },
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "tribal_dominance_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "individual_dignity_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fear_score": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "hope_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "envy_score": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "compassion_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "enmity_score": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "amity_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fragmentative_goals_score": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "cohesive_goals_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.9,
+          "context_type": "inclusive_statement"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 0.95,
+          "context_type": "universal_recognition"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+          "confidence": 0.95,
+          "context_type": "affirmation_of_opportunity"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "Tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.95,
+          "context_type": "forward_looking_statement"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "confidence": 0.95,
+          "context_type": "aspirational_language"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+          "confidence": 0.95,
+          "context_type": "celebration_of_opponent's_success"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day",
+          "confidence": 0.95,
+          "context_type": "expression_of_sympathy"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.95,
+          "context_type": "call_for_cooperation"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.95,
+          "context_type": "emphasis_on_unity"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "work together to get our country moving again, to restore our prosperity, to defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.95,
+          "context_type": "integrative_objectives"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "find the necessary compromises to bridge our differences and help restore our prosperity",
+          "confidence": 0.95,
+          "context_type": "shared_benefit_framing"
+        }
+      ]
+    },
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance_score": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "individual_dignity_score": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "fear_score": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope_score": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "envy_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "compassion_score": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "enmity_score": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity_score": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals_score": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals_score": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "The American people are outraged at what’s going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "confidence": 0.95,
+          "context_type": "us_vs_them_framing"
+        },
+        {
+          "dimension": "tribal_dominance_score",
+          "quote_text": "they don't care who they step on.",
+          "confidence": 0.95,
+          "context_type": "out_group_rejection"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "we can create the kind of nation that we deserve.",
+          "confidence": 0.7,
+          "context_type": "implied_dignity"
+        },
+        {
+          "dimension": "individual_dignity_score",
+          "quote_text": "I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.",
+          "confidence": 0.7,
+          "context_type": "common_sense_appeal"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+          "confidence": 0.9,
+          "context_type": "destructive_threat"
+        },
+        {
+          "dimension": "fear_score",
+          "quote_text": "the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "confidence": 0.9,
+          "context_type": "catastrophic_language"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "that is what we are going to change.",
+          "confidence": 0.8,
+          "context_type": "statement_of_progress"
+        },
+        {
+          "dimension": "hope_score",
+          "quote_text": "not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.8,
+          "context_type": "aspirational_vision"
+        },
+        {
+          "dimension": "envy_score",
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "confidence": 0.95,
+          "context_type": "resentment_of_gain"
+        },
+        {
+          "dimension": "envy_score",
+          "quote_text": "there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 0.95,
+          "context_type": "accusation_of_unfairness"
+        },
+        {
+          "dimension": "compassion_score",
+          "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country in sector after sector, whether it is agriculture, transportation, media, financial services, what you have is a small number of extraordinarily large corporations who charge us outrageous prices for the products that we have to buy.",
+          "confidence": 0.7,
+          "context_type": "critique_of_market_concentration"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "confidence": 0.95,
+          "context_type": "direct_defiance"
+        },
+        {
+          "dimension": "enmity_score",
+          "quote_text": "Billionaires are funding the Democratic Party and preventing that party from standing up for working families.",
+          "confidence": 0.95,
+          "context_type": "adversarial_accusation"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.9,
+          "context_type": "call_for_internal_unity"
+        },
+        {
+          "dimension": "amity_score",
+          "quote_text": "The American people are outraged at what’s going on... We will not accept an oligarchic form of society.",
+          "confidence": 0.9,
+          "context_type": "shared_sentiment_mobilization"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "We will not accept the richest guy in the world running all over Washington",
+          "confidence": 0.9,
+          "context_type": "defeat_oriented_objective"
+        },
+        {
+          "dimension": "fragmentative_goals_score",
+          "quote_text": "not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.9,
+          "context_type": "zero_sum_strategy"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "create the kind of nation that we deserve.",
+          "confidence": 0.7,
+          "context_type": "shared_prosperity_goal"
+        },
+        {
+          "dimension": "cohesive_goals_score",
+          "quote_text": "the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "confidence": 0.7,
+          "context_type": "collective_vision"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
