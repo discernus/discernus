@@ -1,115 +1,57 @@
-# Democratic Discourse Corpus v7.1
+# Democratic Discourse Corpus
 
-## Overview
-A comparative corpus examining social cohesion patterns in contrasting approaches to democratic discourse. This research-grade corpus contains four paradigmatic examples of American political communication: institutional gracious concession, populist anti-establishment critique, populist conservative rhetoric, and populist progressive advocacy.
+Four paradigmatic examples of American political communication spanning institutional and populist approaches to democratic discourse.
 
-## Collection Methodology
-Documents were selected from public domain sources representing distinct democratic discourse styles. Selection criteria prioritized rhetorical authenticity, temporal significance, and analytical contrast potential for social cohesion research.
-
-## Ethical Considerations
-All documents are public domain political speeches with no privacy concerns. Content represents legitimate democratic discourse and is used for academic research purposes examining social cohesion patterns.
-
-## Corpus Description
-This corpus contains four documents spanning institutional, populist, and integrity-focused approaches to American democratic discourse, selected to enable comparative analysis of social cohesion signatures across different rhetorical strategies and political contexts.
-
-## Support for Analytical Goals
-The corpus structure supports comparative analysis through consistent metadata fields enabling statistical grouping by speaker, party, ideology, and temporal variables. Document selection ensures sufficient contrast for meaningful social cohesion pattern differentiation.
-
-## File Manifest
+<details>
+<summary>Machine-Readable Configuration</summary>
 
 ```json
 {
-  "corpus_version": "v7.4",
+  "corpus_version": "v7.3",
+  "field_naming_standards": {
+    "document_id": "Unique identifier for each document",
+    "temporal_sequence": "Chronological ordering (1-4)"
+  },
+  "statistical_readiness": true,
   "file_manifest": [
     {
       "name": "john_mccain_2008_concession.txt",
-      "document_type": "concession_speech",
+      "document_id": "mccain_2008_concession",
+      "speaker": "John McCain",
       "party": "Republican",
       "year": 2008,
-      "temporal_sequence": 1,
-      "speaker": "John McCain",
-      "ideology": "conservative",
-      "discourse_style": "institutional",
-      "event": "Presidential Concession Speech",
-      "word_count": 1247,
-      "source": "Public Domain"
+      "style": "institutional",
+      "temporal_sequence": 1
+    },
+    {
+      "name": "steve_king_2017_house_floor.txt", 
+      "document_id": "king_2017_floor",
+      "speaker": "Steve King",
+      "party": "Republican", 
+      "year": 2017,
+      "style": "populist_conservative",
+      "temporal_sequence": 2
     },
     {
       "name": "bernie_sanders_2025_fighting_oligarchy.txt",
-      "document_type": "floor_speech", 
+      "document_id": "sanders_2025_oligarchy",
+      "speaker": "Bernie Sanders",
       "party": "Independent",
       "year": 2025,
-      "temporal_sequence": 2,
-      "speaker": "Bernie Sanders",
-      "ideology": "progressive",
-      "discourse_style": "populist",
-      "event": "Senate Floor Speech on Economic Inequality",
-      "word_count": 892,
-      "source": "Public Domain"
-    },
-    {
-      "name": "steve_king_2017_house_floor.txt",
-      "document_type": "house_floor_speech",
-      "party": "Republican",
-      "year": 2017,
-      "temporal_sequence": 3,
-      "speaker": "Steve King",
-      "ideology": "conservative",
-      "discourse_style": "populist_conservative",
-      "event": "House Floor Speech on Immigration and Cultural Identity",
-      "word_count": 5200,
-      "source": "Public Domain"
+      "style": "populist_progressive",
+      "temporal_sequence": 3
     },
     {
       "name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
-      "document_type": "house_floor_speech",
+      "document_id": "aoc_2025_oligarchy", 
+      "speaker": "Alexandria Ocasio-Cortez",
       "party": "Democratic",
       "year": 2025,
-      "temporal_sequence": 4,
-      "speaker": "Alexandria Ocasio-Cortez",
-      "ideology": "progressive",
-      "discourse_style": "populist_progressive",
-      "event": "House Floor Speech on Oligarchy and Economic Inequality",
-      "word_count": 1250,
-      "source": "Public Domain"
+      "style": "populist_progressive",
+      "temporal_sequence": 4
     }
-  ],
-  "field_naming_standards": {
-    "required_consistency": ["document_type", "party", "speaker", "year"],
-    "prohibited_variations": {
-      "speech_type": "document_type",
-      "political_party": "party",
-      "author": "speaker"
-    }
-  },
-  "statistical_readiness": {
-    "grouping_variables": ["party", "speaker", "document_type"],
-    "temporal_variables": ["year", "temporal_sequence"]
-  }
+  ]
 }
 ```
 
-## Research Context
-
-This corpus enables comparative analysis of social cohesion patterns in democratic discourse, featuring:
-
-1. **Democratic Discourse Contrast**: Institutional (McCain) vs Populist (Sanders, King, AOC) approaches
-2. **Temporal Span**: 2008-2025, capturing different eras of American political communication
-3. **Rhetorical Diversity**: Gracious concession, systemic critique, populist conservative rhetoric, and populist progressive advocacy discourse styles
-4. **Social Cohesion Analysis**: Optimized for CFF v7.3 framework dimensions
-5. **Statistical Reliability**: Consistent field naming enables robust comparative analysis
-
-## Expected Social Cohesion Patterns
-
-**McCain (Institutional)**: Higher cohesion indices (dignity, hope, amity, cohesive goals)
-**Sanders (Populist)**: Higher fragmentative elements (tribal dominance, enmity) with strategic contradictions
-**King (Populist Conservative)**: Lower cohesion with divisive rhetoric and cultural identity focus
-**AOC (Populist Progressive)**: Moderate cohesion with systemic critique and economic justice focus
-
-## Analytical Capabilities
-
-This corpus supports:
-- **Comparative Analysis**: Statistical grouping by party, speaker, and discourse style
-- **Temporal Analysis**: Chronological ordering via temporal_sequence field
-- **Social Cohesion Research**: Framework-agnostic metadata supporting CFF v7.3 analysis
-- **Democratic Resilience Studies**: Contrasting discourse types for impact assessment
+</details>

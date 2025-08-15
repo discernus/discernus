@@ -656,6 +656,9 @@ Respond with only the JSON object."""
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
 
+            # Store statistical_prep flag for later use
+            self._statistical_prep = statistical_prep
+            
             # Handle v8.0 statistical preparation mode: Phase 2 implementation
             if statistical_prep:
                 self._log_progress("🔬 V8.0 Statistical Preparation Mode: Generating componentized notebook...")
@@ -1590,6 +1593,12 @@ Respond with only the JSON object."""
                             except Exception as e:
                                 self._log_error_context(f"Warning: Failed to load evidence artifact for analysis {i}: {e}")
                         
+                        # Skip gasket extraction for v8.0 statistical_prep mode - we bypass legacy synthesis
+                        if hasattr(self, '_statistical_prep') and self._statistical_prep:
+                            # v8.0 mode: Skip legacy gasket extraction, use raw analysis data directly
+                            self._log_status("📊 Statistical prep mode: Skipping legacy gasket extraction")
+                            continue
+                        
                         # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                         # We need framework content for gasket schema extraction
                         framework_content = getattr(self, '_current_framework_content', None)
@@ -1638,6 +1647,12 @@ Respond with only the JSON object."""
                             # Extract analysis data from the result artifact
                             if "raw_analysis_response" in result_artifact:
                                 raw_response = result_artifact["raw_analysis_response"]
+                                
+                                # Skip gasket extraction for v8.0 statistical_prep mode - we bypass legacy synthesis
+                                if hasattr(self, '_statistical_prep') and self._statistical_prep:
+                                    # v8.0 mode: Skip legacy gasket extraction, use raw analysis data directly
+                                    self._log_status("📊 Statistical prep mode: Skipping legacy gasket extraction")
+                                    continue
                                 
                                 # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                                 framework_content = getattr(self, '_current_framework_content', None)
@@ -1871,6 +1886,12 @@ Respond with only the JSON object."""
         Returns:
             Extracted analysis data or None if extraction fails
         """
+        # Skip gasket extraction for v8.0 statistical_prep mode - we bypass legacy synthesis
+        if hasattr(self, '_statistical_prep') and self._statistical_prep:
+            # v8.0 mode: Skip legacy gasket extraction entirely
+            self._log_status("📊 Statistical prep mode: Bypassing gasket extraction method")
+            return None
+        
         # Extract gasket schema from framework
         gasket_schema = self._extract_gasket_schema_from_framework(framework_content)
         
@@ -2088,6 +2109,12 @@ Respond with only the JSON object."""
                 cached_result = run["analysis_result"]["result_content"]
                 raw_response = cached_result["raw_analysis_response"]
                 all_raw_responses.append(raw_response)
+                
+                # Skip gasket extraction for v8.0 statistical_prep mode - we bypass legacy synthesis
+                if hasattr(self, '_statistical_prep') and self._statistical_prep:
+                    # v8.0 mode: Skip legacy gasket extraction, use raw analysis data directly
+                    self._log_status("📊 Statistical prep mode: Skipping legacy gasket extraction")
+                    continue
                 
                 # Extract scores using gasket or legacy parsing
                 framework_content = getattr(self, '_current_framework_content', None)
@@ -3116,13 +3143,15 @@ This research was conducted using the Discernus computational research platform,
             self._log_status("📊 Loading analysis data for notebook generation...")
             
             # Load scores and evidence data
-            scores_data = storage.load_artifact(scores_hash)
-            if not scores_data:
+            scores_bytes = storage.get_artifact(scores_hash)
+            if not scores_bytes:
                 raise ThinOrchestratorError(f"Failed to load scores artifact: {scores_hash}")
+            scores_data = json.loads(scores_bytes.decode('utf-8'))
             
-            evidence_data = storage.load_artifact(evidence_hash)
-            if not evidence_data:
+            evidence_bytes = storage.get_artifact(evidence_hash)
+            if not evidence_bytes:
                 raise ThinOrchestratorError(f"Failed to load evidence artifact: {evidence_hash}")
+            evidence_data = json.loads(evidence_bytes.decode('utf-8'))
             
             # Extract document analyses
             document_analyses = scores_data.get('document_analyses', [])

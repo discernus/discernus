@@ -262,6 +262,18 @@ class NotebookGenerationOrchestrator:
             result = agent.generate_functions(workspace)
             self.current_transaction.artifacts_generated.append(result["output_file"])
             
+        elif agent_name == "AutomatedStatisticalAnalysisAgent":
+            # Execute real AutomatedStatisticalAnalysisAgent
+            from discernus.agents.automated_statistical_analysis import AutomatedStatisticalAnalysisAgent
+            
+            agent = AutomatedStatisticalAnalysisAgent(
+                model="vertex_ai/gemini-2.5-flash",
+                audit_logger=self.audit_logger
+            )
+            
+            result = agent.generate_functions(workspace)
+            self.current_transaction.artifacts_generated.append(result["output_file"])
+            
         else:
             # Create placeholder function file for unimplemented agents
             function_file = workspace / f"{agent_name.lower()}_functions.py"
