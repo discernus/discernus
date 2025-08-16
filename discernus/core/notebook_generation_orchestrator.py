@@ -21,6 +21,7 @@ Transactional Model:
 
 import json
 import shutil
+import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional, List
@@ -29,6 +30,7 @@ from dataclasses import dataclass
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.v8_specifications import V8SpecificationLoader, V8ExperimentSpec
+from discernus.core.universal_notebook_template import DataPath
 
 
 @dataclass
@@ -73,8 +75,8 @@ class NotebookGenerationOrchestrator:
         # Initialize v8.0 specification loader
         self.v8_loader = V8SpecificationLoader(experiment_path)
         
-        # Transaction workspace base (outside experiment directory for isolation)
-        self.transactions_base = experiment_path.parent / "transactions"
+        # Transaction workspace base (inside experiment directory for security compliance)
+        self.transactions_base = experiment_path / "transactions"
         
         # Current transaction state
         self.current_transaction: Optional[TransactionState] = None
@@ -118,7 +120,10 @@ class NotebookGenerationOrchestrator:
             # Phase 4: VALIDATE GENERATED FUNCTIONS
             self._validate_functions()
             
-            # Phase 5: COMMIT TRANSACTION
+            # Phase 5: GENERATE COMPLETE NOTEBOOK (Phase 3 Integration)
+            self._generate_complete_notebook(v8_experiment, analysis_model, synthesis_model)
+            
+            # Phase 6: COMMIT TRANSACTION
             result = self._commit_transaction()
             
             return result
@@ -205,7 +210,7 @@ class NotebookGenerationOrchestrator:
             raise
     
     def _store_analysis_results(self, analysis_results: List[Dict[str, Any]]) -> None:
-        """Store analysis results in transaction workspace for agent access."""
+        """Store analysis results using proven provenance pattern (not 2GB dumps)."""
         self.audit_logger.log_agent_event(
             self.agent_name,
             "ANALYSIS_RESULTS_STORAGE_START",
@@ -214,16 +219,61 @@ class NotebookGenerationOrchestrator:
         
         try:
             workspace = self.current_transaction.workspace_path
-            analysis_file = workspace / "analysis_results.json"
-            analysis_file.write_text(json.dumps(analysis_results, indent=2))
+            
+            # SURGICAL FIX: Use proven provenance pattern instead of 2GB dumps
+            # Create clean summary manifest (like your working system)
+            analysis_summary = {
+                "analysis_metadata": {
+                    "total_documents_analyzed": len(analysis_results),
+                    "analysis_timestamp": datetime.now(timezone.utc).isoformat(),
+                    "analysis_model": "vertex_ai/gemini-2.5-flash"
+                },
+                "document_summary": [],
+                "provenance": {
+                    "analysis_results_stored": "artifacts/analysis_results/",
+                    "simplified_data_format": "analysis_data.json"
+                }
+            }
+            
+            # Create simplified DataFrame-compatible format for notebook (ONLY)
+            analysis_data = self._extract_dataframe_format_clean(analysis_results)
+            analysis_data_file = workspace / "analysis_data.json"
+            analysis_data_file.write_text(json.dumps(analysis_data, indent=2))
+            
+            # Store clean summary instead of massive dump
+            summary_file = workspace / "analysis_summary.json"
+            summary_file.write_text(json.dumps(analysis_summary, indent=2))
+            
+            # Store raw results in content-addressable artifacts (like your working system)
+            artifacts_dir = workspace / "artifacts" / "analysis_results"
+            artifacts_dir.mkdir(parents=True, exist_ok=True)
+            
+            for i, result in enumerate(analysis_results):
+                # Store each result as separate artifact (content-addressable)
+                result_hash = hashlib.sha256(json.dumps(result, sort_keys=True).encode()).hexdigest()[:16]
+                artifact_file = artifacts_dir / f"analysis_{i:04d}_{result_hash}.json"
+                artifact_file.write_text(json.dumps(result, indent=2))
+                
+                # Add to summary
+                analysis_summary["document_summary"].append({
+                    "document_index": i,
+                    "artifact_hash": result_hash,
+                    "artifact_file": str(artifact_file.relative_to(workspace))
+                })
+            
+            # Update summary with document info
+            summary_file.write_text(json.dumps(analysis_summary, indent=2))
             
             self.audit_logger.log_agent_event(
                 self.agent_name,
                 "ANALYSIS_RESULTS_STORAGE_SUCCESS",
                 {
                     "results_count": len(analysis_results),
-                    "storage_file": "analysis_results.json",
-                    "file_size": analysis_file.stat().st_size
+                    "summary_file": "analysis_summary.json",
+                    "dataframe_file": "analysis_data.json",
+                    "artifacts_stored": len(analysis_results),
+                    "summary_file_size": summary_file.stat().st_size,
+                    "dataframe_file_size": analysis_data_file.stat().st_size
                 }
             )
             
@@ -234,6 +284,118 @@ class NotebookGenerationOrchestrator:
                 {"error": str(e)}
             )
             raise
+    
+    def _extract_dataframe_format_clean(self, analysis_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Extract clean DataFrame-compatible format without duplication."""
+        dataframe_records = []
+        
+        # SURGICAL FIX: Process only unique documents, avoid duplication
+        processed_documents = set()
+        
+        for result in analysis_results:
+            try:
+                result_content = result['analysis_result']['result_content']
+                raw_response = result_content['raw_analysis_response']
+                
+                # Extract JSON between delimiters
+                start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                json_start = raw_response.find(start_marker) + len(start_marker)
+                json_end = raw_response.find(end_marker)
+                
+                if json_start == -1 + len(start_marker) or json_end == -1:
+                    continue
+                    
+                json_str = raw_response[json_start:json_end].strip()
+                analysis_json = json.loads(json_str)
+                
+                # Extract dimensional scores from each document (AVOID DUPLICATION)
+                for doc_analysis in analysis_json['document_analyses']:
+                    doc_name = doc_analysis['document_name']
+                    
+                    # Skip if we've already processed this document
+                    if doc_name in processed_documents:
+                        continue
+                    processed_documents.add(doc_name)
+                    
+                    doc_record = {'document_name': doc_name}
+                    
+                    # Extract raw scores, salience, and confidence
+                    for dimension, score_data in doc_analysis['dimensional_scores'].items():
+                        base_name = dimension.replace('_score', '')
+                        doc_record[base_name] = score_data['raw_score']
+                        doc_record[f"{base_name}_salience"] = score_data['salience']
+                        doc_record[f"{base_name}_confidence"] = score_data['confidence']
+                    
+                    dataframe_records.append(doc_record)
+                    
+            except (KeyError, json.JSONDecodeError, ValueError) as e:
+                # Log but continue processing other results
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "CLEAN_DATAFRAME_EXTRACTION_WARNING",
+                    {"error": str(e), "result_index": len(dataframe_records)}
+                )
+                continue
+        
+        # Log deduplication results
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "DATAFRAME_DEDUPLICATION_SUCCESS",
+            {
+                "unique_documents": len(processed_documents),
+                "total_records": len(dataframe_records),
+                "deduplication_applied": True
+            }
+        )
+        
+        return dataframe_records
+    
+    def _extract_dataframe_format(self, analysis_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Extract DataFrame-compatible format from complex analysis results."""
+        dataframe_records = []
+        
+        for result in analysis_results:
+            try:
+                result_content = result['analysis_result']['result_content']
+                raw_response = result_content['raw_analysis_response']
+                
+                # Extract JSON between delimiters
+                start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                json_start = raw_response.find(start_marker) + len(start_marker)
+                json_end = raw_response.find(end_marker)
+                
+                if json_start == -1 + len(start_marker) or json_end == -1:
+                    # Fallback: skip malformed results
+                    continue
+                    
+                json_str = raw_response[json_start:json_end].strip()
+                analysis_json = json.loads(json_str)
+                
+                # Extract dimensional scores from each document
+                for doc_analysis in analysis_json['document_analyses']:
+                    doc_record = {'document_name': doc_analysis['document_name']}
+                    
+                    # Extract raw scores, salience, and confidence
+                    for dimension, score_data in doc_analysis['dimensional_scores'].items():
+                        base_name = dimension.replace('_score', '')
+                        doc_record[base_name] = score_data['raw_score']
+                        doc_record[f"{base_name}_salience"] = score_data['salience']
+                        doc_record[f"{base_name}_confidence"] = score_data['confidence']
+                    
+                    dataframe_records.append(doc_record)
+                    
+            except (KeyError, json.JSONDecodeError, ValueError) as e:
+                # Log but continue processing other results
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "DATAFRAME_EXTRACTION_WARNING",
+                    {"error": str(e), "result_index": len(dataframe_records)}
+                )
+                continue
+        
+        return dataframe_records
     
     def _execute_agents(self, 
                        v8_experiment: V8ExperimentSpec, 
@@ -541,7 +703,10 @@ def placeholder_function():
             # Phase 4: VALIDATE GENERATED FUNCTIONS
             self._validate_functions()
             
-            # Phase 5: COMMIT TRANSACTION
+            # Phase 5: GENERATE COMPLETE NOTEBOOK (Phase 3 Integration)
+            self._generate_complete_notebook(None, analysis_model, synthesis_model)
+            
+            # Phase 6: COMMIT TRANSACTION
             result = self._commit_transaction()
             
             return result
@@ -620,3 +785,121 @@ def placeholder_function():
                 {"error": str(e)}
             )
             raise
+    
+    def _generate_complete_notebook(self, 
+                                  v8_experiment: Optional[Any],
+                                  analysis_model: str,
+                                  synthesis_model: str) -> None:
+        """Generate complete research notebook using Phase 3 components."""
+        try:
+            # Import Phase 3 components
+            from discernus.core.componentized_notebook_generation import ComponentizedNotebookGeneration
+            from discernus.core.notebook_executor import NotebookExecutor
+            from discernus.core.universal_notebook_template import DataPath
+            
+            # Initialize componentized notebook generator
+            notebook_generator = ComponentizedNotebookGeneration(
+                analysis_model=analysis_model,
+                synthesis_model=synthesis_model,
+                audit_logger=self.audit_logger
+            )
+            
+            # Collect generated functions from workspace
+            workspace = self.current_transaction.workspace_path
+            generated_functions = self._collect_generated_functions(workspace)
+            
+            # Prepare data paths for external loading
+            data_paths = self._prepare_data_paths()
+            
+            # Determine experiment details
+            if v8_experiment:
+                experiment_name = v8_experiment.name
+                framework_name = getattr(v8_experiment, 'framework_name', 'Unknown')
+                framework_content = getattr(v8_experiment, 'framework_content', '')
+                document_count = getattr(v8_experiment, 'document_count', 0)
+            else:
+                experiment_name = self.experiment_path.name
+                framework_name = "Analysis Results"
+                framework_content = "Generated from pre-computed analysis results"
+                document_count = 1  # Placeholder when using analysis results
+            
+            # Generate complete notebook
+            complete_notebook = notebook_generator.generate_complete_notebook(
+                experiment_name=experiment_name,
+                framework_name=framework_name,
+                framework_content=framework_content,
+                document_count=document_count,
+                generated_functions=generated_functions,
+                data_paths=data_paths,
+                statistical_summary="Statistical analysis pending execution",
+                key_findings="Findings will be generated during notebook execution",
+                research_context=f"Computational analysis using {framework_name} framework"
+            )
+            
+            # Execute and validate notebook
+            notebook_executor = NotebookExecutor(
+                security=self.security,
+                audit_logger=self.audit_logger
+            )
+            
+            notebook_path = workspace / "research_notebook.py"
+            execution_result = notebook_executor.validate_and_execute_notebook(
+                notebook_content=complete_notebook,
+                notebook_path=notebook_path,
+                execution_timeout=300
+            )
+            
+            # Log notebook generation success
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "COMPLETE_NOTEBOOK_GENERATION_SUCCESS",
+                {
+                    "notebook_path": str(notebook_path),
+                    "execution_result": execution_result,
+                    "experiment_name": experiment_name
+                }
+            )
+            
+            # Add notebook to transaction artifacts
+            self.current_transaction.artifacts_generated.append("research_notebook.py")
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "COMPLETE_NOTEBOOK_GENERATION_FAILED",
+                {"error": str(e)}
+            )
+            raise
+    
+    def _collect_generated_functions(self, workspace: Path) -> Dict[str, str]:
+        """Collect generated functions from workspace."""
+        functions = {}
+        
+        # Map agent output files to function categories
+        function_mappings = {
+            "derived_metrics": "automatedderivedmetricsagent_functions.py",
+            "statistical_analysis": "automatedstatisticalanalysisagent_functions.py",
+            "evidence_integration": "automatedevidenceintegrationagent_functions.py",
+            "visualization": "automatedvisualizationagent_functions.py"
+        }
+        
+        for category, filename in function_mappings.items():
+            function_file = workspace / filename
+            if function_file.exists():
+                functions[category] = function_file.read_text()
+            else:
+                functions[category] = f"# {category} functions not generated\npass"
+        
+        return functions
+    
+    def _prepare_data_paths(self) -> List[DataPath]:
+        """Prepare data paths for external loading in notebook."""
+        # For now, return basic data paths
+        # This would be enhanced to use actual content-addressable storage paths
+        return [
+            DataPath(
+                variable_name="analysis_data",
+                file_path="analysis_data.json",
+                description="Analysis results from v8.0 analysis phase"
+            )
+        ]

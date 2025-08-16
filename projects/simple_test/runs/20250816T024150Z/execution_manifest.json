@@ -1,0 +1,23 @@
+{
+  "experiment_metadata": {
+    "experiment_name": "simple_test",
+    "framework_name": "Analysis Results",
+    "document_count": 1,
+    "generation_timestamp": "2025-08-16T02:41:27.505925+00:00",
+    "analysis_model": "vertex_ai/gemini-2.5-flash",
+    "synthesis_model": "vertex_ai/gemini-2.5-pro"
+  },
+  "execution_summary": {
+    "derived_metrics_calculated": 4,
+    "statistical_analysis_completed": true,
+    "evidence_integration_completed": true,
+    "visualizations_generated": true
+  },
+  "artifacts_generated": {
+    "derived_metrics_csv": "derived_metrics_results.csv",
+    "notebook_execution": "research_notebook.py"
+  },
+  "data_sources": {
+    "analysis_data": "analysis_data.json"
+  }
+}

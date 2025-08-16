@@ -64,7 +64,7 @@ template: |
           if data.empty:
               return None
               
-          results = {}
+          results = {{}}
           numeric_columns = data.select_dtypes(include=[np.number]).columns
           
           for col in numeric_columns:

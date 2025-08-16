@@ -7,7 +7,6 @@ questions:
   - "Will McCain's institutional discourse show higher cohesion than populist styles?"
   - "Do populist progressive and conservative variants differ in social cohesion patterns?"
   - "What strategic contradictions emerge across different discourse types?"
-  - "How do temporal factors influence cohesion patterns independent of discourse style?"
 ---
 
 # Democratic Discourse Cohesion Study - v8.0
