@@ -19,8 +19,11 @@ template: |
   CORPUS MANIFEST:
   {corpus_manifest}
 
+  SPECIFICATION REFERENCES (Latest Standards):
+  {specification_references}
+
   VALIDATION TASK:
-  Validate the Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution. Focus on critical blocking issues only.
+  Validate the Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution. Use the specification references above to validate compliance with current standards. Focus on critical blocking issues only.
 
   **HELEN 2.0 PRIORITY CLASSIFICATION:**
   

@@ -1,0 +1,154 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Cohesive Flourishing Framework",
+    "framework_version": "v8.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Sequential chain-of-thought analysis with salience weighting applied to each dimension. Document clearly demonstrates high intensity in conflict-oriented dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "Tribal Dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Individual Dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "Fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "Envy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "Compassion": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.95
+        },
+        "Enmity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Amity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "Fragmentative Goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Cohesive Goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Tribal Dominance",
+          "quote_text": "We must put our people first, ahead of all others... Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "Tribal Dominance",
+          "quote_text": "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+          "confidence": 0.9,
+          "context_type": "policy_recommendation"
+        },
+        {
+          "dimension": "Individual Dignity",
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "confidence": 0.7,
+          "context_type": "conditional_statement"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "This happens every day in this country. It happens hundreds of times in this country each year. These incidents of illegal aliens that are, that are arrested and turned loose on the street... is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "confidence": 0.95,
+          "context_type": "rhetorical_framing"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "It would kick the breath out of your gut to hear that if you're a constitutionalist. And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow?'",
+          "confidence": 0.9,
+          "context_type": "emotional_appeal"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution, if the Supreme Court of the United States believes that they can write law.",
+          "confidence": 0.85,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "Envy",
+          "quote_text": "A Supreme Court writing law. And then the next morning... came the next decision... where the Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command.",
+          "confidence": 0.9,
+          "context_type": "critical_analysis"
+        },
+        {
+          "dimension": "Envy",
+          "quote_text": "He's been criticized for his effectiveness by the people that don't want to enforce the law.",
+          "confidence": 0.8,
+          "context_type": "accusatory_statement"
+        },
+        {
+          "dimension": "Compassion",
+          "quote_text": "I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological president who, I'd say to the other side of the aisle, who's not doing his job.",
+          "confidence": 0.6,
+          "context_type": "expression_of_sympathy"
+        },
+        {
+          "dimension": "Enmity",
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean.",
+          "confidence": 0.95,
+          "context_type": "accusatory_framing"
+        },
+        {
+          "dimension": "Enmity",
+          "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+          "confidence": 0.9,
+          "context_type": "causal_blame"
+        },
+        {
+          "dimension": "Amity",
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "confidence": 0.7,
+          "context_type": "conditional_statement"
+        },
+        {
+          "dimension": "Fragmentative Goals",
+          "quote_text": "It would be destroyed by another presidential appointment.",
+          "confidence": 0.95,
+          "context_type": "predictive_statement"
+        },
+        {
+          "dimension": "Fragmentative Goals",
+          "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job.",
+          "confidence": 0.9,
+          "context_type": "causal_blame"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

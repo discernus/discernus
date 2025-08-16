@@ -2,7 +2,7 @@
 name: "democratic_discourse_cohesion_study"
 description: "Comparative analysis of social cohesion patterns across institutional and populist democratic discourse styles"
 framework: "cff_v8.md"
-corpus: "corpus/"
+corpus: "corpus.md"
 questions:
   - "Will McCain's institutional discourse show higher cohesion than populist styles?"
   - "Do populist progressive and conservative variants differ in social cohesion patterns?"
@@ -26,7 +26,7 @@ A comparative analysis of social cohesion patterns across four distinct approach
 **Focus**: Social cohesion analysis through 10 dimensions
 
 ## Corpus
-**Path**: `corpus/`
+**Path**: `corpus.md`
 **Documents**: 4 paradigmatic examples of American political communication
 - John McCain 2008 concession speech (institutional)
 - Bernie Sanders 2025 anti-oligarchy critique (populist progressive)

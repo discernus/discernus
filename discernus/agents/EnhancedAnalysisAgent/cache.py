@@ -27,12 +27,15 @@ class AnalysisCache:
             if (metadata.get("artifact_type") == "analysis_result" and
                     metadata.get("batch_id") == batch_id):
 
+                print(f"💾 Cache hit for analysis: {batch_id}")
                 self.audit.log_agent_event(
                     self.agent_name, "cache_hit",
                     {"batch_id": batch_id, "cached_artifact_hash": artifact_hash}
                 )
                 cached_content = self.storage.get_artifact(artifact_hash)
                 return json.loads(cached_content.decode('utf-8'))
+        
+        print(f"🔍 No cache hit for {batch_id} - will perform analysis...")
         return None
 
 
