@@ -239,6 +239,7 @@ class NotebookExecutor:
             "placeholder_usage_count": 0,
             "syntax_warnings": [],
             "missing_functions": [],
+            "placeholder_content_detected": False,
             "details": []
         }
         
@@ -249,6 +250,15 @@ class NotebookExecutor:
             ("⚠️", "WARNING_SYMBOL"),
             ("functions not available", "FUNCTIONS_MISSING"),
             ("skipping plots", "PLOTS_SKIPPED")
+        ]
+        
+        # CRITICAL: Detect placeholder content in final output
+        placeholder_content_patterns = [
+            ("Statistical analysis pending execution", "PLACEHOLDER_STATISTICAL"),
+            ("Findings will be generated during notebook execution", "PLACEHOLDER_FINDINGS"),
+            ("currently pending execution", "PLACEHOLDER_PENDING"),
+            ("will be generated subsequent to", "PLACEHOLDER_FUTURE"),
+            ("comprehensive interpretation.*pending", "PLACEHOLDER_INTERPRETATION")
         ]
         
         # Analyze stdout for critical warnings
@@ -267,6 +277,32 @@ class NotebookExecutor:
                 elif warning_type == "WARNING_SYMBOL":
                     warnings["placeholder_usage_count"] += count
         
+        # CRITICAL: Check for placeholder content in final output
+        import re
+        for pattern, warning_type in placeholder_content_patterns:
+            if warning_type == "PLACEHOLDER_INTERPRETATION":
+                # Use regex for complex pattern
+                if re.search(pattern, stdout):
+                    warnings["placeholder_content_detected"] = True
+                    warnings["details"].append({
+                        "type": warning_type,
+                        "pattern": pattern,
+                        "count": 1,
+                        "source": "stdout",
+                        "critical": True
+                    })
+            else:
+                # Use simple string containment for exact patterns
+                if pattern in stdout:
+                    warnings["placeholder_content_detected"] = True
+                    warnings["details"].append({
+                        "type": warning_type,
+                        "pattern": pattern,
+                        "count": 1,
+                        "source": "stdout",
+                        "critical": True
+                    })
+        
         # Analyze stderr for syntax warnings and errors
         if stderr:
             stderr_lines = stderr.split('\n')
@@ -283,7 +319,8 @@ class NotebookExecutor:
         warnings["has_critical_warnings"] = (
             warnings["function_not_available_count"] > 0 or
             warnings["placeholder_usage_count"] > 0 or
-            len(warnings["syntax_warnings"]) > 0
+            len(warnings["syntax_warnings"]) > 0 or
+            warnings["placeholder_content_detected"]  # CRITICAL: Placeholder content is a critical failure
         )
         
         # Log detailed warning analysis

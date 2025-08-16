@@ -823,8 +823,9 @@ def placeholder_function():
                 framework_content = "Generated from pre-computed analysis results"
                 document_count = 1  # Placeholder when using analysis results
             
-            # Generate complete notebook
-            complete_notebook = notebook_generator.generate_complete_notebook(
+            # CRITICAL FIX: Generate notebook with placeholder content first
+            # Then execute it to get real results, then regenerate with real content
+            initial_notebook = notebook_generator.generate_complete_notebook(
                 experiment_name=experiment_name,
                 framework_name=framework_name,
                 framework_content=framework_content,
@@ -836,7 +837,7 @@ def placeholder_function():
                 research_context=f"Computational analysis using {framework_name} framework"
             )
             
-            # Execute and validate notebook
+            # Execute and validate notebook to get REAL results
             notebook_executor = NotebookExecutor(
                 security=self.security,
                 audit_logger=self.audit_logger
@@ -844,10 +845,33 @@ def placeholder_function():
             
             notebook_path = workspace / "research_notebook.py"
             execution_result = notebook_executor.validate_and_execute_notebook(
-                notebook_content=complete_notebook,
+                notebook_content=initial_notebook,
                 notebook_path=notebook_path,
                 execution_timeout=300
             )
+            
+            # CRITICAL: Extract actual results from execution
+            actual_results = self._extract_execution_results(workspace, execution_result)
+            
+            # VALIDATION: Fail if no real results were produced
+            if not actual_results.get('has_real_results', False):
+                raise Exception("CRITICAL FAILURE: Notebook executed but produced no real results. Experiment cannot complete.")
+            
+            # Generate FINAL notebook with REAL results
+            final_notebook = notebook_generator.generate_complete_notebook(
+                experiment_name=experiment_name,
+                framework_name=framework_name,
+                framework_content=framework_content,
+                document_count=document_count,
+                generated_functions=generated_functions,
+                data_paths=data_paths,
+                statistical_summary=actual_results.get('statistical_summary', ''),
+                key_findings=actual_results.get('key_findings', ''),
+                research_context=actual_results.get('research_context', f"Computational analysis using {framework_name} framework")
+            )
+            
+            # Write the final notebook with real results
+            notebook_path.write_text(final_notebook)
             
             # Log notebook generation success
             self.audit_logger.log_agent_event(
@@ -856,7 +880,9 @@ def placeholder_function():
                 {
                     "notebook_path": str(notebook_path),
                     "execution_result": execution_result,
-                    "experiment_name": experiment_name
+                    "experiment_name": experiment_name,
+                    "has_real_results": actual_results.get('has_real_results', False),
+                    "results_summary": actual_results.get('summary', 'No results extracted')
                 }
             )
             
@@ -903,3 +929,71 @@ def placeholder_function():
                 description="Analysis results from v8.0 analysis phase"
             )
         ]
+
+    def _extract_execution_results(self, workspace: Path, execution_result: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract actual results from notebook execution for content generation."""
+        try:
+            results = {
+                'has_real_results': False,
+                'statistical_summary': '',
+                'key_findings': '',
+                'research_context': '',
+                'summary': 'No results extracted'
+            }
+            
+            # Check if execution was successful
+            if not execution_result.get('success', False):
+                results['summary'] = f"Execution failed: {execution_result.get('error', 'Unknown error')}"
+                return results
+            
+            # Look for generated output files
+            execution_manifest_path = workspace / "execution_manifest.json"
+            derived_metrics_path = workspace / "derived_metrics_results.csv"
+            
+            if execution_manifest_path.exists():
+                try:
+                    manifest = json.loads(execution_manifest_path.read_text())
+                    results['has_real_results'] = True
+                    results['summary'] = f"Execution successful: {manifest.get('execution_summary', {}).get('derived_metrics_calculated', 0)} metrics calculated"
+                    
+                    # Extract key findings from manifest
+                    if 'execution_summary' in manifest:
+                        summary = manifest['execution_summary']
+                        results['statistical_summary'] = f"Statistical analysis completed successfully. {summary.get('derived_metrics_calculated', 0)} derived metrics calculated."
+                        results['key_findings'] = f"Analysis of {manifest.get('experiment_metadata', {}).get('document_count', 0)} documents completed with {summary.get('derived_metrics_calculated', 0)} metrics."
+                        
+                except Exception as e:
+                    results['summary'] = f"Failed to parse execution manifest: {str(e)}"
+            
+            if derived_metrics_path.exists():
+                try:
+                    # Read CSV to verify data was actually generated
+                    import pandas as pd
+                    df = pd.read_csv(derived_metrics_path)
+                    if len(df) > 0:
+                        results['has_real_results'] = True
+                        results['summary'] = f"Generated {len(df)} rows of derived metrics data"
+                        
+                        # Generate research context from actual data
+                        if 'has_real_results' not in results or not results['has_real_results']:
+                            results['research_context'] = f"Computational analysis completed with {len(df)} data points"
+                except Exception as e:
+                    results['summary'] = f"Failed to read derived metrics: {str(e)}"
+            
+            # Check stdout/stderr for execution evidence
+            if execution_result.get('stdout'):
+                stdout = execution_result['stdout']
+                if '✅' in stdout and 'Complete' in stdout:
+                    results['has_real_results'] = True
+                    results['summary'] = "Execution completed with success indicators in output"
+            
+            return results
+            
+        except Exception as e:
+            return {
+                'has_real_results': False,
+                'statistical_summary': '',
+                'key_findings': '',
+                'research_context': '',
+                'summary': f'Error extracting results: {str(e)}'
+            }
