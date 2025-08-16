@@ -1,0 +1,151 @@
+{
+  "evidence_metadata": {
+    "document_hash": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+    "total_evidence_pieces": 14,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-16T12:11:46.163518+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Tribal Dominance",
+      "quote_text": "We must put our people first, ahead of all others... Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163488+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Tribal Dominance",
+      "quote_text": "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+      "confidence": 0.9,
+      "context_type": "policy_recommendation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163493+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Individual Dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.7,
+      "context_type": "conditional_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163495+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fear",
+      "quote_text": "This happens every day in this country. It happens hundreds of times in this country each year. These incidents of illegal aliens that are, that are arrested and turned loose on the street... is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+      "confidence": 0.95,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163497+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fear",
+      "quote_text": "It would kick the breath out of your gut to hear that if you're a constitutionalist. And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow?'",
+      "confidence": 0.9,
+      "context_type": "emotional_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163499+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Hope",
+      "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution, if the Supreme Court of the United States believes that they can write law.",
+      "confidence": 0.85,
+      "context_type": "aspirational_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163501+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Envy",
+      "quote_text": "A Supreme Court writing law. And then the next morning... came the next decision... where the Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command.",
+      "confidence": 0.9,
+      "context_type": "critical_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163503+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Envy",
+      "quote_text": "He's been criticized for his effectiveness by the people that don't want to enforce the law.",
+      "confidence": 0.8,
+      "context_type": "accusatory_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163504+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Compassion",
+      "quote_text": "I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological president who, I'd say to the other side of the aisle, who's not doing his job.",
+      "confidence": 0.6,
+      "context_type": "expression_of_sympathy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163506+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Enmity",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean.",
+      "confidence": 0.95,
+      "context_type": "accusatory_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163508+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Enmity",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 0.9,
+      "context_type": "causal_blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163509+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Amity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.7,
+      "context_type": "conditional_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163511+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fragmentative Goals",
+      "quote_text": "It would be destroyed by another presidential appointment.",
+      "confidence": 0.95,
+      "context_type": "predictive_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163513+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "Fragmentative Goals",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job.",
+      "confidence": 0.9,
+      "context_type": "causal_blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-16T12:11:46.163514+00:00"
+    }
+  ]
+}

@@ -150,14 +150,15 @@ class NotebookExecutor:
     def _validate_security(self, notebook_content: str) -> bool:
         """Validate notebook content for security compliance."""
         # More intelligent security checks for academic research notebooks
+        # Only block truly dangerous patterns, not legitimate Python built-ins
         dangerous_patterns = [
             'os.system(',
             'subprocess.call(',
             'subprocess.run(',
             'exec(',
             '__import__(',
-            'globals(',
-            'locals(',
+            # Removed 'globals(' and 'locals(' - these are legitimate Python built-ins
+            # that are commonly used in research notebooks for variable introspection
         ]
         
         for pattern in dangerous_patterns:
@@ -177,9 +178,10 @@ class NotebookExecutor:
         
         try:
             # Execute notebook using subprocess for isolation
+            # Fix: Use absolute paths to avoid path resolution issues
             result = subprocess.run(
-                [sys.executable, str(notebook_path)],
-                cwd=notebook_path.parent,
+                [sys.executable, str(notebook_path.absolute())],
+                cwd=str(notebook_path.parent.absolute()),
                 capture_output=True,
                 text=True,
                 timeout=timeout

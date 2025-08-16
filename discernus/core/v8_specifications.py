@@ -31,7 +31,7 @@ class V8SpecificationLoader:
     def __init__(self, experiment_dir: Path):
         self.experiment_dir = experiment_dir.resolve()
 
-    def load_experiment(self, experiment_file: str = "experiment_v8.md") -> V8ExperimentSpec:
+    def load_experiment(self, experiment_file: str = "experiment.md") -> V8ExperimentSpec:
         """
         Loads the v8.0 experiment file and returns its raw content.
         This method validates file existence but not content.
@@ -90,14 +90,16 @@ class V8SpecificationLoader:
 
     def load_raw_corpus(self, corpus_path: Path) -> str:
         """Loads the raw markdown content of a corpus file."""
-        if not corpus_path.is_file():
-            # Fallback to checking for corpus.md in a directory
-            corpus_dir_path = corpus_path
-            corpus_file_path = corpus_dir_path / "corpus_v8.md"
-            if not corpus_file_path.is_file():
-                 raise FileNotFoundError(f"Corpus file not found in: {corpus_dir_path}")
+        if corpus_path.is_file():
+            # Direct file path - load the file
+            with open(corpus_path, 'r') as f:
+                return f.read()
         else:
-            corpus_file_path = corpus_path
+            # Directory path - look for corpus.md in the directory
+            corpus_dir_path = corpus_path
+            corpus_file_path = corpus_dir_path / "corpus.md"
+            if not corpus_file_path.is_file():
+                raise FileNotFoundError(f"Corpus file not found in: {corpus_dir_path}")
             
-        with open(corpus_file_path, 'r') as f:
-            return f.read()
+            with open(corpus_file_path, 'r') as f:
+                return f.read()

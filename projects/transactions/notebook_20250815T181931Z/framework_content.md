@@ -130,8 +130,8 @@ Integrative positive-sum objectives
 
 ### **Strategic Indices**
 - **Strategic Contradiction Index**: `(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5`
-- **Salience-Weighted Cohesive Index**: `(individual_dignity_score × individual_dignity_salience + hope_score × hope_salience + compersion_score × compersion_salience + amity_score × amity_salience + cohesive_goals_score × cohesive_goals_salience) / max(1.0, individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience)`
-- **Salience-Weighted Fragmentative Index**: `(tribal_dominance_score × tribal_dominance_salience + fear_score × fear_salience + envy_score × envy_salience + enmity_score × enmity_salience + fragmentative_goals_score × fragmentative_goals_salience) / max(1.0, tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience)`
+- **Salience-Weighted Cohesive Index**: `(individual_dignity_score × individual_dignity_salience + hope_score × hope_salience + compersion_score × compersion_salience + amity_score × amity_salience + cohesive_goals_score × cohesive_goals_salience) / (individual_dignity_salience + hope_salience + compersion_salience + amity_salience + cohesive_goals_salience)`
+- **Salience-Weighted Fragmentative Index**: `(tribal_dominance_score × tribal_dominance_salience + fear_score × fear_salience + envy_score × envy_salience + enmity_score × enmity_salience + fragmentative_goals_score × fragmentative_goals_salience) / (tribal_dominance_salience + fear_salience + envy_salience + enmity_salience + fragmentative_goals_salience)`
 
 ## Expected Output Structure
 ```yaml

@@ -1,0 +1,50 @@
+# NotebookInterpretationAgent YAML Prompt Template
+# Purpose: Generate academic results interpretation sections for research notebooks
+# Token Limit: <1000 tokens per generation
+
+template: |
+  Generate a comprehensive academic interpretation of statistical results for a computational social science research notebook.
+  
+  **CONTEXT:**
+  Framework: {framework_name}
+  Experiment: {experiment_name}
+  Documents Analyzed: {document_count}
+  
+  **STATISTICAL RESULTS SUMMARY:**
+  {statistical_summary}
+  
+  **KEY FINDINGS:**
+  {key_findings}
+  
+  **REQUIREMENTS:**
+  1. **Academic Style**: Write in third person, formal academic tone
+  2. **Token Limit**: Keep output under 1000 tokens
+  3. **Statistical Focus**: Interpret the numbers, don't recalculate them
+  4. **Theoretical Connection**: Link findings back to the analytical framework
+  5. **Significance Assessment**: Discuss practical and theoretical significance
+  
+  **STRUCTURE:**
+  - **Overview**: Brief summary of key statistical findings
+  - **Dimensional Analysis**: Interpretation of primary dimension scores
+  - **Statistical Relationships**: Discussion of correlations, differences, patterns
+  - **Theoretical Implications**: What these results mean for the framework
+  - **Limitations**: Acknowledge analytical constraints and scope
+  
+  **EXAMPLE OUTPUT:**
+  ```
+  ## Results Interpretation
+  
+  **Overview**: The statistical analysis reveals [key pattern/finding] across the [document count] documents analyzed using the [Framework Name] framework.
+  
+  **Dimensional Analysis**: [Interpretation of primary scores and their distribution]
+  
+  **Statistical Relationships**: [Discussion of significant correlations, differences, or patterns found]
+  
+  **Theoretical Implications**: These findings suggest [theoretical insights] consistent with [framework predictions/expectations].
+  
+  **Limitations**: The analysis is constrained by [sample size/scope/methodology limitations] and should be interpreted within these bounds.
+  ```
+  
+  **CRITICAL**: Do not generate new statistics. Interpret the provided results only.
+  
+  Generate the results interpretation section now:

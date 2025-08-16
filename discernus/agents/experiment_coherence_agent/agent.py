@@ -128,6 +128,16 @@ class ExperimentCoherenceAgent:
             )
         
         try:
+            # Load specification references (latest versions)
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "loading_specification_references",
+                    {"status": "starting"}
+                )
+            
+            specification_references = self._load_specification_references()
+            
             # Load experiment artifacts
             if self.audit_logger:
                 self.audit_logger.log_agent_event(
@@ -151,9 +161,9 @@ class ExperimentCoherenceAgent:
                     }
                 )
             
-            # Create validation prompt
+            # Create validation prompt with specification references
             validation_prompt = self._create_validation_prompt(
-                experiment_spec, framework_spec, corpus_manifest
+                experiment_spec, framework_spec, corpus_manifest, specification_references
             )
             
             if self.audit_logger:
@@ -301,98 +311,80 @@ class ExperimentCoherenceAgent:
         with open(framework_file, 'r') as f:
             return f.read()
     
-    def _load_corpus_manifest(self, experiment_path: Path, experiment_spec: Dict) -> Dict:
-        """Load corpus manifest."""
-        corpus_path = experiment_path / experiment_spec.get('corpus_path', 'corpus')
-        corpus_manifest_file = corpus_path / "corpus.md"
+    def _load_corpus_manifest(self, experiment_path: Path, experiment_spec: Dict) -> str:
+        """Load corpus manifest as raw content for LLM validation."""
+        corpus_path = experiment_path / experiment_spec.get('corpus', 'corpus')
         
-        if not corpus_manifest_file.exists():
-            raise FileNotFoundError(f"corpus.md not found in {corpus_path}")
+        # Handle both direct file paths and directory paths
+        if corpus_path.is_file():
+            # Direct file path - load the file
+            with open(corpus_path, 'r') as f:
+                return f.read()
+        elif corpus_path.is_dir():
+            # Directory path - look for corpus.md inside
+            corpus_manifest_file = corpus_path / "corpus.md"
+            if not corpus_manifest_file.exists():
+                raise FileNotFoundError(f"corpus.md not found in {corpus_path}")
             
-        with open(corpus_manifest_file, 'r') as f:
-            content = f.read()
-            
-        # Extract JSON manifest
-        if '```json' in content:
-            json_start = content.find('```json') + 7
-            json_end = content.find('```', json_start)
-            if json_end != -1:
-                json_content = content[json_start:json_end].strip()
-                return json.loads(json_content)
-            else:
-                raise ValueError("Invalid corpus.md format (malformed JSON block)")
+            with open(corpus_manifest_file, 'r') as f:
+                return f.read()
         else:
-            raise ValueError("corpus.md missing JSON manifest")
+            # Neither file nor directory exists
+            raise FileNotFoundError(f"Corpus path not found: {corpus_path}")
     
-    def _validate_statistical_prerequisites(self, experiment_path: Path, experiment_spec: Dict, corpus_manifest: Dict) -> List[ValidationIssue]:
+    def _validate_statistical_prerequisites(self, experiment_path: Path, experiment_spec: Dict, corpus_manifest: str) -> List[ValidationIssue]:
         """
         Validate statistical prerequisites for academically valid results.
         
         Args:
             experiment_path: Path to experiment directory
             experiment_spec: Experiment specification
-            corpus_manifest: Corpus manifest data
+            corpus_manifest: Raw corpus manifest content
             
         Returns:
             List of validation issues related to statistical prerequisites
         """
         issues = []
         
-        # Sample size validation
-        file_manifest = corpus_manifest.get('file_manifest', [])
-        corpus_size = len(file_manifest)
+        # THIN approach: Let the LLM handle corpus parsing and validation
+        # This method now just provides basic file accessibility checks
         
-        if corpus_size < 3:
-            issues.append(ValidationIssue(
-                category="statistical_validity",
-                description=f"Insufficient corpus size: {corpus_size} documents",
-                impact="Will produce perfect correlations and invalid statistical analysis",
-                fix=f"Add {3 - corpus_size} more documents to corpus directory",
-                priority="BLOCKING",
-                affected_files=[str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
-            ))
-        elif corpus_size < 5:
-            issues.append(ValidationIssue(
-                category="statistical_validity",
-                description=f"Minimal corpus size: {corpus_size} documents",
-                impact="Statistical power will be limited, results may be unstable",
-                fix="Consider adding more documents for robust statistical analysis",
-                priority="QUALITY",
-                affected_files=[str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
-            ))
-        
-        # Framework complexity validation
-        framework_path = experiment_path / experiment_spec.get('framework', 'framework.md')
-        if framework_path.exists():
-            try:
-                with open(framework_path, 'r') as f:
-                    framework_content = f.read()
-                
-                # Count expected dimensions (rough heuristic)
-                dimension_indicators = ['score', 'dimension', 'axis', 'index']
-                dimension_count = sum(framework_content.lower().count(indicator) for indicator in dimension_indicators)
-                
-                # If we have many expected dimensions but small corpus, warn about coverage
-                if dimension_count > 10 and corpus_size < 10:
-                    issues.append(ValidationIssue(
-                        category="framework_coverage",
-                        description=f"Complex framework ({dimension_count} dimension indicators) with small corpus ({corpus_size} documents)",
-                        impact="Many framework dimensions may not be detectable, leading to calculation failures",
-                        fix="Either simplify framework or expand corpus to ensure dimension coverage",
-                        priority="QUALITY",
-                        affected_files=[str(framework_path), str(experiment_path / experiment_spec.get('corpus_path', 'corpus'))]
-                    ))
-            except Exception as e:
-                issues.append(ValidationIssue(
-                    category="framework_analysis",
-                    description=f"Could not analyze framework complexity: {str(e)}",
-                    impact="Cannot predict framework dimension coverage",
-                    fix="Ensure framework file is readable and well-formed",
-                    priority="SUGGESTION",
-                    affected_files=[str(framework_path)]
-                                ))
+        # Check if corpus directory exists and has text files
+        # Note: corpus.md is at project root, but text files are in corpus/ directory
+        corpus_dir = experiment_path / "corpus"
+        if corpus_dir.exists():
+            corpus_files = list(corpus_dir.glob("*.txt"))
+            corpus_size = len(corpus_files)
             
-            return issues
+            if corpus_size < 3:
+                issues.append(ValidationIssue(
+                    category="statistical_validity",
+                    description=f"Insufficient corpus size: {corpus_size} text files found",
+                    impact="Will produce perfect correlations and invalid statistical analysis",
+                    fix=f"Add {3 - corpus_size} more text files to corpus directory",
+                    priority="BLOCKING",
+                    affected_files=[str(corpus_dir)]
+                ))
+            elif corpus_size < 5:
+                issues.append(ValidationIssue(
+                    category="statistical_validity",
+                    description=f"Minimal corpus size: {corpus_size} text files found",
+                    impact="Statistical power will be limited, results may be unstable",
+                    fix="Consider adding more text files for robust statistical analysis",
+                    priority="QUALITY",
+                    affected_files=[str(corpus_dir)]
+                ))
+        else:
+            issues.append(ValidationIssue(
+                category="corpus_accessibility",
+                description=f"Corpus directory not found: {corpus_dir}",
+                impact="Cannot access corpus files for analysis",
+                fix="Ensure corpus directory exists and contains text files",
+                priority="BLOCKING",
+                affected_files=[str(corpus_dir)]
+            ))
+        
+        return issues
     
     def _request_llm_reformat(self, malformed_response: str) -> ValidationResult:
         """
@@ -491,7 +483,7 @@ class ExperimentCoherenceAgent:
                 suggestions=["Review prompt template for JSON format requirements"]
             )
 
-    def _create_validation_prompt(self, experiment_spec: Dict, framework_spec: str, corpus_manifest: Dict) -> str:
+    def _create_validation_prompt(self, experiment_spec: Dict, framework_spec: str, corpus_manifest: Dict, specification_references: Dict[str, str]) -> str:
         """Create validation prompt using externalized YAML template."""
         current_date = datetime.now().strftime("%Y-%m-%d")
         
@@ -499,7 +491,8 @@ class ExperimentCoherenceAgent:
             current_date=current_date,
             experiment_spec=json.dumps(experiment_spec, indent=2),
             framework_spec=framework_spec,
-            corpus_manifest=json.dumps(corpus_manifest, indent=2)
+            corpus_manifest=json.dumps(corpus_manifest, indent=2),
+            specification_references=json.dumps(specification_references, indent=2)
         )
     
     def _parse_validation_response(self, response: str) -> ValidationResult:
@@ -575,3 +568,63 @@ class ExperimentCoherenceAgent:
                 )],
                 suggestions=["Contact system administrator if issue persists"]
             ) 
+
+    def _load_specification_references(self) -> Dict[str, str]:
+        """Load the latest specification reference documents."""
+        try:
+            # Find the project root by looking for docs/specifications
+            current_dir = Path(__file__).parent
+            project_root = current_dir
+            while project_root != project_root.parent:
+                if (project_root / "docs" / "specifications").exists():
+                    break
+                project_root = project_root.parent
+            
+            if project_root == project_root.parent:
+                raise FileNotFoundError("Could not find project root with docs/specifications")
+            
+            specs_dir = project_root / "docs" / "specifications"
+            
+            # Load specification files (assume latest version)
+            specifications = {}
+            
+            spec_files = {
+                "corpus": "CORPUS_SPECIFICATION.md",
+                "experiment": "EXPERIMENT_SPECIFICATION.md", 
+                "framework": "FRAMEWORK_SPECIFICATION.md"
+            }
+            
+            for spec_type, filename in spec_files.items():
+                spec_path = specs_dir / filename
+                if spec_path.exists():
+                    with open(spec_path, 'r') as f:
+                        specifications[spec_type] = f.read()
+                else:
+                    specifications[spec_type] = f"# {spec_type.title()} Specification\n\nSpecification file not found: {filename}"
+            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "specification_references_loaded",
+                    {
+                        "specs_loaded": list(specifications.keys()),
+                        "specs_dir": str(specs_dir)
+                    }
+                )
+            
+            return specifications
+            
+        except Exception as e:
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "specification_references_failed",
+                    {"error": str(e)}
+                )
+            
+            # Return empty specs if loading fails
+            return {
+                "corpus": "# Corpus Specification\n\nCould not load specification reference",
+                "experiment": "# Experiment Specification\n\nCould not load specification reference",
+                "framework": "# Framework Specification\n\nCould not load specification reference"
+            } 

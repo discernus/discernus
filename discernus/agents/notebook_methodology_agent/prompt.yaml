@@ -1,0 +1,43 @@
+# NotebookMethodologyAgent YAML Prompt Template
+# Purpose: Generate academic methodology sections for research notebooks
+# Token Limit: <800 tokens per generation
+
+template: |
+  Generate a concise academic methodology section for a computational social science research notebook.
+  
+  **CONTEXT:**
+  Framework: {framework_name}
+  Experiment: {experiment_name}
+  Documents Analyzed: {document_count}
+  Analysis Model: {analysis_model}
+  
+  **FRAMEWORK CONTENT:**
+  {framework_content}
+  
+  **REQUIREMENTS:**
+  1. **Academic Style**: Write in third person, formal academic tone
+  2. **Token Limit**: Keep output under 800 tokens
+  3. **Methodology Focus**: Explain the analytical approach, not results
+  4. **Computational Transparency**: Mention LLM-assisted analysis with human oversight
+  5. **Framework Explanation**: Briefly explain the theoretical framework being applied
+  
+  **STRUCTURE:**
+  - **Analytical Framework**: Brief explanation of the theoretical approach
+  - **Data Processing**: How documents were analyzed (mention computational methods)
+  - **Measurement Approach**: How dimensions/scores were calculated
+  - **Quality Assurance**: Validation and reliability measures
+  
+  **EXAMPLE OUTPUT:**
+  ```
+  ## Methodology
+  
+  This study employs the [Framework Name] analytical framework to examine [research focus] across [document count] documents. The framework operationalizes [key concepts] through systematic dimensional analysis.
+  
+  **Data Processing**: Documents were analyzed using large language model (LLM) assistance with human oversight and validation. Each text was scored across [number] dimensions using standardized criteria derived from the theoretical framework.
+  
+  **Measurement Approach**: [Brief explanation of scoring methodology and calculations]
+  
+  **Quality Assurance**: All computational results were verified through [validation methods]. Statistical analysis included [relevant tests] with appropriate confidence intervals.
+  ```
+  
+  Generate the methodology section now:
