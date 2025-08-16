@@ -96,27 +96,38 @@ class AutomatedDerivedMetricsAgent:
             )
             
             # Extract clean functions using THIN delimiter approach
-            extracted_functions = self.extractor.extract_code_blocks(generated_functions)
+            print(f"🔍 DEBUG: LLM response length: {len(generated_functions)}")
+            print(f"🔍 DEBUG: LLM response preview: {generated_functions[:500]}...")
             
-            if not extracted_functions:
+            # The generated_functions already contains clean Python functions
+            # (extraction was done in _generate_single_function for each individual function)
+            print(f"🔍 DEBUG: Using combined functions directly (no re-extraction needed)")
+            print(f"Combined functions length: {len(generated_functions)}")
+            
+            if not generated_functions or not generated_functions.strip():
+                print(f"🔍 DEBUG: Empty combined functions!")
                 raise ValueError("No functions extracted from LLM response")
             
-            # Combine all functions into single module
-            function_module = self._create_function_module(extracted_functions, experiment_spec)
+            # Create module from the already-combined functions
+            function_module = self._create_function_module([generated_functions], experiment_spec)
             
             # Save to workspace
             output_file = workspace_path / "automatedderivedmetricsagent_functions.py"
             output_file.write_text(function_module)
             
+            # Count the number of functions by counting how many calculations were attempted
+            calculations = self._extract_individual_calculations(framework_content)
+            functions_count = len(calculations)
+            
             self._log_event("FUNCTION_GENERATION_SUCCESS", {
-                "functions_extracted": len(extracted_functions),
+                "functions_extracted": functions_count,
                 "output_file": str(output_file.name),
                 "module_size": len(function_module)
             })
             
             return {
                 "status": "success",
-                "functions_generated": len(extracted_functions),
+                "functions_generated": functions_count,
                 "output_file": str(output_file.name),
                 "module_size": len(function_module)
             }
@@ -151,31 +162,56 @@ class AutomatedDerivedMetricsAgent:
         return prompt_data['template']
 
     def _generate_calculation_functions(self, framework_content: str, experiment_spec: Dict[str, Any]) -> str:
-        """Generate calculation functions using LLM with THIN delimiter output."""
-        # Load external prompt template
-        prompt_template = self._load_prompt_template()
+        """Generate calculation functions using componentized generation (one function at a time)."""
+        # Extract individual calculations from framework
+        calculations = self._extract_individual_calculations(framework_content)
         
-        # Format prompt with experiment data
-        prompt = prompt_template.format(
-            framework_content=framework_content,
-            experiment_name=experiment_spec.get('name', 'Unknown'),
-            experiment_description=experiment_spec.get('description', 'No description')
-        )
-
-        try:
-            response_text, metadata = self.llm_gateway.execute_call(
-                model=self.model,
-                prompt=prompt,
-                system_prompt="You are an expert Python developer generating calculation functions for research frameworks.",
-                temperature=0.1,
-                max_tokens=4000
-            )
+        generated_functions = []
+        
+        # Generate ONE function at a time (componentized generation)
+        for calc_name, calc_description in calculations.items():
+            try:
+                function_code = self._generate_single_function(
+                    calc_name, 
+                    calc_description, 
+                    framework_content,
+                    experiment_spec
+                )
+                
+                # Validate the generated function
+                if self._validate_function_syntax(function_code):
+                    generated_functions.append(function_code)
+                    self._log_event("SINGLE_FUNCTION_GENERATED", {
+                        "function_name": calc_name,
+                        "function_length": len(function_code)
+                    })
+                else:
+                    self._log_event("FUNCTION_VALIDATION_FAILED", {
+                        "function_name": calc_name,
+                        "reason": "syntax_error"
+                    })
+                    
+            except Exception as e:
+                self._log_event("SINGLE_FUNCTION_GENERATION_FAILED", {
+                    "function_name": calc_name,
+                    "error": str(e)
+                })
+                continue
+        
+        # Combine all generated functions
+        print(f"🔍 DEBUG: Generated functions summary:")
+        print(f"Total functions attempted: {len(calculations)}")
+        print(f"Successfully generated: {len(generated_functions)}")
+        print(f"Function names: {list(calculations.keys())}")
+        
+        if not generated_functions:
+            raise ValueError("No valid functions were generated")
+        
+        print(f"🔍 DEBUG: Combining {len(generated_functions)} functions")
+        combined = "\n\n".join(generated_functions)
+        print(f"🔍 DEBUG: Combined module length: {len(combined)}")
             
-            return response_text
-            
-        except Exception as e:
-            self._log_event("LLM_GENERATION_FAILED", {"error": str(e)})
-            raise
+        return combined
     
     def _create_function_module(self, functions: List[str], experiment_spec: Dict[str, Any]) -> str:
         """Create complete Python module with all generated functions."""
@@ -223,13 +259,44 @@ def calculate_all_derived_metrics(data: pd.DataFrame) -> Dict[str, Optional[floa
     for name, obj in inspect.getmembers(current_module):
         if (inspect.isfunction(obj) and 
             name.startswith('calculate_') and 
-            name != 'calculate_all_derived_metrics'):
+            name not in ['calculate_all_derived_metrics', 'calculate_derived_metrics']):
             try:
                 results[name.replace('calculate_', '')] = obj(data)
             except Exception as e:
                 results[name.replace('calculate_', '')] = None
                 
     return results
+
+
+def calculate_derived_metrics(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Template-compatible wrapper function for derived metrics calculation.
+    
+    This function is called by the universal notebook template and returns
+    the original data with additional derived metric columns.
+    
+    Args:
+        data: pandas DataFrame with dimension scores
+        
+    Returns:
+        DataFrame with original data plus derived metric columns
+    """
+    # Calculate all derived metrics
+    derived_metrics = calculate_all_derived_metrics(data)
+    
+    # Create a copy of the original data
+    result = data.copy()
+    
+    # Add derived metrics as new columns
+    for metric_name, metric_value in derived_metrics.items():
+        if metric_value is not None:
+            # For scalar metrics, broadcast to all rows
+            result[metric_name] = metric_value
+        else:
+            # For failed calculations, use NaN
+            result[metric_name] = np.nan
+    
+    return result
 '''
         
         return header + all_functions + footer
@@ -242,3 +309,149 @@ def calculate_all_derived_metrics(data: pd.DataFrame) -> Dict[str, Optional[floa
                 event_type,
                 details
             )
+    
+    def _extract_individual_calculations(self, framework_content: str) -> Dict[str, str]:
+        """Extract individual calculations from framework content for componentized generation."""
+        calculations = {}
+        
+        # Parse the CFF v8.0 framework for calculation descriptions
+        import re
+        
+        # Look for calculation sections in the framework
+        calc_section_match = re.search(r'## Advanced Metrics.*?(?=##|$)', framework_content, re.DOTALL | re.IGNORECASE)
+        if not calc_section_match:
+            # Fallback: look for any calculations section
+            calc_section_match = re.search(r'## Calculations.*?(?=##|$)', framework_content, re.DOTALL | re.IGNORECASE)
+        
+        if calc_section_match:
+            calc_section = calc_section_match.group(0)
+            
+            # Extract individual calculations
+            # Look for patterns like "**Identity Tension**: description"
+            calc_matches = re.findall(r'\*\*([^*]+)\*\*:\s*([^*\n]+)', calc_section)
+            for calc_name, calc_desc in calc_matches:
+                # Clean up the names
+                clean_name = calc_name.strip().lower().replace(' ', '_')
+                calculations[clean_name] = calc_desc.strip()
+        
+        # If no calculations found, provide defaults for CFF
+        if not calculations:
+            calculations = {
+                "identity_tension": "Conflict between tribal dominance and individual dignity dimensions",
+                "emotional_balance": "Difference between hope and fear scores", 
+                "success_climate": "Difference between compersion and envy scores",
+                "relational_climate": "Difference between amity and enmity scores",
+                "goal_orientation": "Difference between cohesive goals and fragmentative goals",
+                "overall_cohesion_index": "Comprehensive measure combining all dimensions"
+            }
+        
+        return calculations
+    
+    def _generate_single_function(self, calc_name: str, calc_description: str, 
+                                framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+        """Generate a single calculation function using focused LLM prompt."""
+        
+        # Create focused prompt for single function
+        single_function_prompt = f"""You are an expert Python developer generating ONE calculation function for a research framework.
+
+**CALCULATION TO IMPLEMENT:**
+Name: {calc_name}
+Description: {calc_description}
+
+**FRAMEWORK CONTEXT:**
+{framework_content[:1000]}...
+
+**REQUIREMENTS:**
+1. Generate EXACTLY ONE Python function
+2. Function name: calculate_{calc_name}
+3. Accept pandas DataFrame 'data' as primary parameter
+4. Handle missing data gracefully (return None)
+5. Include proper docstring with formula
+6. Be production-ready with error handling
+
+**CRITICAL OUTPUT FORMAT - YOU MUST FOLLOW THIS EXACTLY:**
+You MUST start your response with the opening delimiter and end with the closing delimiter.
+Do NOT include any other text before or after the delimiters.
+
+<<<DISCERNUS_FUNCTION_START>>>
+def calculate_{calc_name}(data, **kwargs):
+    \"\"\"
+    Calculate {calc_name}: {calc_description}
+    
+    Args:
+        data: pandas DataFrame with dimension scores
+        **kwargs: Additional parameters
+        
+    Returns:
+        float: Calculated result or None if insufficient data
+    \"\"\"
+    import pandas as pd
+    import numpy as np
+    
+    try:
+        # Implementation here
+        pass
+    except Exception:
+        return None
+<<<DISCERNUS_FUNCTION_END>>>
+
+**MANDATORY RULES:**
+- Your response MUST begin with: <<<DISCERNUS_FUNCTION_START>>>
+- Your response MUST end with: <<<DISCERNUS_FUNCTION_END>>>
+- Generate ONLY ONE function between these delimiters
+- Do NOT add explanatory text outside the delimiters
+- The delimiters are case-sensitive and must match exactly
+
+Generate ONLY this one function. Do not generate multiple functions."""
+
+        try:
+            response_text, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=single_function_prompt,
+                system_prompt=f"You are an expert Python developer. Generate exactly one function for {calc_name}."
+            )
+            
+            # Extract the function using THIN delimiter approach
+            print(f"🔍 DEBUG: LLM response for {calc_name}:")
+            print(f"Length: {len(response_text)}")
+            print(f"Preview: {response_text[:200]}...")
+            print(f"Contains start delimiter: {'<<<DISCERNUS_FUNCTION_START>>>' in response_text}")
+            print(f"Contains end delimiter: {'<<<DISCERNUS_FUNCTION_END>>>' in response_text}")
+            
+            extracted_functions = self.extractor.extract_code_blocks(response_text)
+            print(f"Extracted functions count: {len(extracted_functions)}")
+            
+            if not extracted_functions:
+                print(f"🔍 DEBUG: Full LLM response for {calc_name}: {response_text}")
+                raise ValueError(f"No function extracted for {calc_name}")
+            
+            if len(extracted_functions) > 1:
+                # Take the first function if multiple were generated
+                self._log_event("MULTIPLE_FUNCTIONS_WARNING", {
+                    "calc_name": calc_name,
+                    "functions_count": len(extracted_functions)
+                })
+            
+            return extracted_functions[0]
+            
+        except Exception as e:
+            self._log_event("SINGLE_FUNCTION_LLM_FAILED", {
+                "calc_name": calc_name,
+                "error": str(e)
+            })
+            raise
+    
+    def _validate_function_syntax(self, function_code: str) -> bool:
+        """Validate that generated function has correct Python syntax."""
+        import ast
+        
+        try:
+            # Try to parse the function code
+            ast.parse(function_code)
+            return True
+        except SyntaxError as e:
+            self._log_event("FUNCTION_SYNTAX_ERROR", {
+                "error": str(e),
+                "line": getattr(e, 'lineno', 'unknown')
+            })
+            return False

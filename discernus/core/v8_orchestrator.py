@@ -111,7 +111,8 @@ class V8Orchestrator:
             
             # Phase 3: Run analysis (our reliable working component)
             analysis_results = self._run_analysis_phase(analysis_model, audit_logger)
-            self._log_status(f"Analysis completed: {len(analysis_results)} documents analyzed")
+            successful_analyses = len([r for r in analysis_results if 'error' not in r])
+            self._log_status(f"Analysis completed: {successful_analyses}/{len(analysis_results)} documents analyzed successfully")
             
             # Phase 4: Execute v8.0 agents via notebook orchestrator
             notebook_results = self._execute_v8_agents(
@@ -159,11 +160,14 @@ class V8Orchestrator:
                 run_folder=run_folder
             )
             
-            # Initialize artifact storage
+            # Initialize artifact storage - USE SHARED CACHE for perfect caching
             self._log_progress("🔧 Initializing artifact storage...")
+            shared_cache_dir = self.experiment_path / "shared_cache"
+            self.security.secure_mkdir(shared_cache_dir)
             self.artifact_storage = LocalArtifactStorage(
                 security_boundary=self.security,
-                run_folder=run_folder
+                run_folder=shared_cache_dir,
+                run_name=run_id
             )
             
             # Initialize manifest
@@ -267,36 +271,72 @@ class V8Orchestrator:
         
         self._log_progress(f"📊 Analyzing {len(corpus_documents)} text documents with metadata context...")
         
-        # Run analysis on all documents as a batch
-        self._log_progress(f"📊 Running batch analysis on {len(corpus_documents)} documents...")
+        # Run sequential analysis on documents (THIN principle: one at a time for scalability)
+        self._log_progress(f"🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
         
         experiment_config = {
             "name": self.experiment_path.name,
             "version": "8.0"
         }
         
-        result = analysis_agent.analyze_batch(
-            framework_content=framework_content,
-            corpus_documents=corpus_documents,
-            experiment_config=experiment_config,
-            model=analysis_model
-        )
+        analysis_results = []
         
-        # Extract individual document results from batch result
-        # The batch analysis returns a different format, let's check what we got
-        self._log_progress(f"🔍 DEBUG: Batch result keys: {list(result.keys())}")
+        # Process each document individually for optimal caching and scalability
+        for i, doc in enumerate(corpus_documents):
+            doc_filename = doc.get('filename', 'unknown')
+            self._log_progress(f"📄 Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename}")
+            
+            try:
+                # Single document analysis (proven ThinOrchestrator pattern)
+                result = analysis_agent.analyze_batch(
+                    framework_content=framework_content,
+                    corpus_documents=[doc],  # Single document for optimal caching
+                    experiment_config=experiment_config,
+                    model=analysis_model,
+                    current_scores_hash=None,  # Individual document analysis
+                    current_evidence_hash=None
+                )
+                
+                # Log successful analysis with provenance
+                self._log_status(f"Document {doc_filename} analyzed successfully")
+                audit_logger.log_agent_event(
+                    "v8_analysis_phase", 
+                    "document_analysis_complete",
+                    {
+                        "document_filename": doc_filename,
+                        "document_index": i + 1,
+                        "total_documents": len(corpus_documents),
+                        "analysis_model": analysis_model,
+                        "scores_hash": result.get('scores_hash'),
+                        "evidence_hash": result.get('evidence_hash')
+                    }
+                )
+                
+                # Preserve individual document results for v8.0 agents
+                analysis_results.append(result)
+                
+            except Exception as e:
+                error_msg = f"Analysis failed for document {doc_filename}: {str(e)}"
+                self._log_progress(f"❌ {error_msg}")
+                audit_logger.log_agent_event(
+                    "v8_analysis_phase",
+                    "document_analysis_error", 
+                    {
+                        "document_filename": doc_filename,
+                        "document_index": i + 1,
+                        "error": str(e)
+                    }
+                )
+                # Store error result for completeness
+                analysis_results.append({
+                    "error": str(e), 
+                    "document": doc_filename,
+                    "document_index": i + 1
+                })
         
-        if 'scores_hash' in result and 'evidence_hash' in result:
-            # This is the expected format - create analysis results structure
-            analysis_results = [{
-                'batch_result': result,
-                'document_count': len(corpus_documents),
-                'scores_hash': result.get('scores_hash'),
-                'evidence_hash': result.get('evidence_hash')
-            }]
-        else:
-            # Fallback: use the result as-is
-            analysis_results = [result] if result else []
+        # Log completion with accurate count
+        successful_analyses = len([r for r in analysis_results if 'error' not in r])
+        self._log_status(f"Sequential analysis completed: {successful_analyses}/{len(corpus_documents)} documents analyzed successfully")
         
         return analysis_results
     

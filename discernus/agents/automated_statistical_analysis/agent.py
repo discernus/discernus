@@ -143,36 +143,44 @@ class AutomatedStatisticalAnalysisAgent:
             raise
     
     def _generate_statistical_functions(self, framework_content: str, experiment_spec: Dict[str, Any]) -> str:
-        """Generate statistical analysis functions using LLM with THIN delimiter output."""
+        """Generate statistical analysis functions using componentized generation approach."""
+        # Extract individual statistical analyses needed
+        statistical_analyses = self._extract_statistical_analyses(framework_content, experiment_spec)
         
-        questions = experiment_spec.get("questions", [])
-        questions_text = "\n".join([f"- {q}" for q in questions]) if questions else "- No specific research questions provided"
+        print(f"🔍 DEBUG: Generating {len(statistical_analyses)} statistical functions individually...")
         
-        # Load external prompt template
-        prompt_template = self._load_prompt_template()
+        generated_functions = []
+        for analysis_name, analysis_description in statistical_analyses.items():
+            try:
+                print(f"🔍 DEBUG: Generating function for: {analysis_name}")
+                function_code = self._generate_single_statistical_function(
+                    analysis_name, analysis_description, framework_content, experiment_spec
+                )
+                generated_functions.append(function_code)
+                print(f"🔍 DEBUG: Successfully generated {analysis_name}")
+                
+            except Exception as e:
+                print(f"❌ Failed to generate {analysis_name}: {str(e)}")
+                self._log_event("SINGLE_STATISTICAL_FUNCTION_LLM_FAILED", {
+                    "analysis_name": analysis_name,
+                    "error": str(e)
+                })
+                continue
         
-        # Format prompt with experiment data
-        prompt = prompt_template.format(
-            framework_content=framework_content,
-            experiment_name=experiment_spec.get('name', 'Unknown'),
-            experiment_description=experiment_spec.get('description', 'No description'),
-            research_questions=questions_text
-        )
-
-        try:
-            response_text, metadata = self.llm_gateway.execute_call(
-                model=self.model,
-                prompt=prompt,
-                system_prompt="You are an expert statistician generating comprehensive Python statistical analysis functions for academic research.",
-                temperature=0.1,
-                max_tokens=6000
-            )
+        # Combine all generated functions
+        print(f"🔍 DEBUG: Statistical functions summary:")
+        print(f"Total functions attempted: {len(statistical_analyses)}")
+        print(f"Successfully generated: {len(generated_functions)}")
+        print(f"Function names: {list(statistical_analyses.keys())}")
+        
+        if not generated_functions:
+            raise ValueError("No valid statistical functions were generated")
+        
+        print(f"🔍 DEBUG: Combining {len(generated_functions)} statistical functions")
+        combined = "\n\n".join(generated_functions)
+        print(f"🔍 DEBUG: Combined statistical module length: {len(combined)}")
             
-            return response_text
-            
-        except Exception as e:
-            self._log_event("LLM_STATISTICAL_GENERATION_FAILED", {"error": str(e)})
-            raise
+        return combined
     
     def _load_prompt_template(self) -> str:
         """Load external YAML prompt template following THIN architecture."""
@@ -267,6 +275,22 @@ def run_complete_statistical_analysis(data: pd.DataFrame, alpha: float = 0.05) -
                 results[name] = {'error': f'Analysis failed: {str(e)}'}
                 
     return results
+
+
+def perform_statistical_analysis(data: pd.DataFrame) -> Dict[str, Any]:
+    """
+    Template-compatible wrapper function for statistical analysis.
+    
+    This function is called by the universal notebook template and performs
+    comprehensive statistical analysis on the provided dataset.
+    
+    Args:
+        data: pandas DataFrame with dimension scores and derived metrics
+        
+    Returns:
+        Dictionary containing all statistical analysis results
+    """
+    return run_complete_statistical_analysis(data)
 
 
 def generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str:
@@ -367,3 +391,127 @@ def generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str
                 event_type,
                 details
             )
+    
+    def _extract_statistical_analyses(self, framework_content: str, experiment_spec: Dict[str, Any]) -> Dict[str, str]:
+        """Extract individual statistical analyses needed for componentized generation."""
+        analyses = {}
+        
+        # Standard statistical analyses for any framework
+        analyses["descriptive_statistics"] = "Generate descriptive statistics (mean, median, std, etc.) for all numeric dimensions"
+        analyses["correlation_analysis"] = "Generate correlation matrix and significance tests between all dimensions"
+        analyses["reliability_analysis"] = "Generate Cronbach's alpha and other reliability measures for dimension consistency"
+        
+        # Framework-specific analyses based on content
+        if "tension" in framework_content.lower():
+            analyses["tension_analysis"] = "Generate statistical analysis for tension-based metrics and relationships"
+        
+        if "cohesion" in framework_content.lower() or "cohesive" in framework_content.lower():
+            analyses["cohesion_analysis"] = "Generate statistical analysis for cohesion metrics and patterns"
+        
+        # Research question-specific analyses
+        questions = experiment_spec.get("questions", [])
+        if questions:
+            analyses["hypothesis_testing"] = "Generate hypothesis testing functions based on research questions"
+        
+        return analyses
+    
+    def _generate_single_statistical_function(self, analysis_name: str, analysis_description: str, 
+                                            framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+        """Generate a single statistical analysis function using LLM with THIN delimiters."""
+        
+        # Create focused prompt for single function
+        questions = experiment_spec.get("questions", [])
+        questions_text = "\n".join([f"- {q}" for q in questions]) if questions else "- No specific research questions provided"
+        
+        single_function_prompt = f"""You are an expert statistician generating ONE statistical analysis function for academic research.
+
+**STATISTICAL ANALYSIS TO IMPLEMENT:**
+Name: {analysis_name}
+Description: {analysis_description}
+
+**RESEARCH CONTEXT:**
+Experiment: {experiment_spec.get('name', 'Unknown')}
+Description: {experiment_spec.get('description', 'No description')}
+Research Questions:
+{questions_text}
+
+**FRAMEWORK CONTEXT:**
+{framework_content[:1500]}...
+
+**REQUIREMENTS:**
+1. Generate EXACTLY ONE Python function
+2. Function name: {analysis_name.replace(' ', '_').lower()}
+3. Accept pandas DataFrame 'data' as primary parameter
+4. Use scientific libraries: pandas, numpy, scipy.stats, pingouin
+5. Handle missing data gracefully (return None or appropriate message)
+6. Include proper docstring with statistical methodology
+7. Return structured results (dict format)
+8. Be production-ready with comprehensive error handling
+
+**OUTPUT FORMAT:**
+Wrap the function in proprietary delimiters:
+
+<<<DISCERNUS_FUNCTION_START>>>
+def {analysis_name.replace(' ', '_').lower()}(data, **kwargs):
+    \"\"\"
+    {analysis_description}
+    
+    Args:
+        data: pandas DataFrame with dimension scores
+        **kwargs: Additional statistical parameters
+        
+    Returns:
+        dict: Statistical results with significance tests
+    \"\"\"
+    import pandas as pd
+    import numpy as np
+    from scipy import stats
+    import pingouin as pg
+    
+    try:
+        # Your statistical analysis implementation here
+        # Return structured results
+        return {{'results': 'implementation_here'}}
+        
+    except Exception as e:
+        return {{'error': f'Statistical analysis failed: {{str(e)}}'}}
+<<<DISCERNUS_FUNCTION_END>>>
+
+Generate the complete function now:"""
+
+        try:
+            # Call LLM without problematic parameters
+            response_text, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=single_function_prompt,
+                system_prompt=f"You are an expert statistician. Generate exactly one function for {analysis_name}."
+            )
+            
+            # Extract the function using THIN delimiter approach
+            print(f"🔍 DEBUG: LLM response for {analysis_name}:")
+            print(f"Length: {len(response_text)}")
+            print(f"Preview: {response_text[:200]}...")
+            print(f"Contains start delimiter: {'<<<DISCERNUS_FUNCTION_START>>>' in response_text}")
+            print(f"Contains end delimiter: {'<<<DISCERNUS_FUNCTION_END>>>' in response_text}")
+            
+            extracted_functions = self.extractor.extract_code_blocks(response_text)
+            print(f"🔍 DEBUG: Extracted functions count: {len(extracted_functions)}")
+            
+            if not extracted_functions:
+                raise ValueError(f"No function extracted for {analysis_name}")
+            
+            if len(extracted_functions) > 1:
+                # Take the first function if multiple were generated
+                self._log_event("MULTIPLE_STATISTICAL_FUNCTIONS_WARNING", {
+                    "analysis_name": analysis_name,
+                    "functions_count": len(extracted_functions)
+                })
+            
+            return extracted_functions[0]
+            
+        except Exception as e:
+            self._log_event("SINGLE_STATISTICAL_FUNCTION_LLM_FAILED", {
+                "analysis_name": analysis_name,
+                "error": str(e)
+            })
+            raise
