@@ -1,9 +1,9 @@
 # NotebookMethodologyAgent YAML Prompt Template
-# Purpose: Generate academic methodology sections for research notebooks
+# Purpose: Generate specific, data-driven methodology sections for research notebooks
 # Token Limit: <800 tokens per generation
 
 template: |
-  Generate a concise academic methodology section for a computational social science research notebook.
+  Generate a specific, data-driven academic methodology section for a computational social science research notebook.
   
   **CONTEXT:**
   Framework: {framework_name}
@@ -14,30 +14,33 @@ template: |
   **FRAMEWORK CONTENT:**
   {framework_content}
   
-  **REQUIREMENTS:**
-  1. **Academic Style**: Write in third person, formal academic tone
-  2. **Token Limit**: Keep output under 800 tokens
-  3. **Methodology Focus**: Explain the analytical approach, not results
-  4. **Computational Transparency**: Mention LLM-assisted analysis with human oversight
-  5. **Framework Explanation**: Briefly explain the theoretical framework being applied
+  **CRITICAL REQUIREMENTS:**
+  1. **Specific Content**: Use the actual framework details and document count - NO generic placeholders
+  2. **Data-Driven**: Reference specific dimensions, calculations, and methods from the framework
+  3. **Academic Style**: Write in third person, formal academic tone
+  4. **Token Limit**: Keep output under 800 tokens
+  5. **Computational Transparency**: Mention LLM-assisted analysis with human oversight
+  6. **NO PLACEHOLDERS**: Never use phrases like "Insert specific detail" or "List the specific dimensions"
   
   **STRUCTURE:**
-  - **Analytical Framework**: Brief explanation of the theoretical approach
-  - **Data Processing**: How documents were analyzed (mention computational methods)
-  - **Measurement Approach**: How dimensions/scores were calculated
+  - **Analytical Framework**: Explain the specific theoretical approach from the framework
+  - **Data Processing**: How documents were analyzed (mention computational methods and document count)
+  - **Measurement Approach**: Describe the specific dimensions and scoring methodology from the framework
   - **Quality Assurance**: Validation and reliability measures
   
-  **EXAMPLE OUTPUT:**
+  **EXAMPLE OUTPUT (Data-Driven):**
   ```
   ## Methodology
   
-  This study employs the [Framework Name] analytical framework to examine [research focus] across [document count] documents. The framework operationalizes [key concepts] through systematic dimensional analysis.
+  This study employs the Cohesive Flourishing Framework (v8.0) to analyze political discourse for patterns indicative of cohesion versus fragmentation. The framework operationalizes social dynamics through systematic dimensional analysis of tribal dominance, individual dignity, hope, fear, and relational climate scores.
   
-  **Data Processing**: Documents were analyzed using large language model (LLM) assistance with human oversight and validation. Each text was scored across [number] dimensions using standardized criteria derived from the theoretical framework.
+  **Data Processing**: The analysis was conducted on a corpus of 4 documents using large language model (LLM) assistance with human oversight and validation. Each text was scored across 9 dimensions using standardized criteria derived from the theoretical framework.
   
-  **Measurement Approach**: [Brief explanation of scoring methodology and calculations]
+  **Measurement Approach**: The dimensional scoring system assigns values from 0.0 to 1.0 for each dimension based on presence, salience, and nature within the text. Salience weighting considers textual frequency and rhetorical emphasis, while confidence levels reflect evidence clarity.
   
-  **Quality Assurance**: All computational results were verified through [validation methods]. Statistical analysis included [relevant tests] with appropriate confidence intervals.
+  **Quality Assurance**: All computational results underwent rigorous human oversight and validation. Statistical analysis included descriptive statistics, correlation analysis, and derived metrics calculations with appropriate confidence intervals.
   ```
+  
+  **IMPORTANT**: Generate specific content based on the framework provided. Do NOT use generic placeholders or template language.
   
   Generate the methodology section now:

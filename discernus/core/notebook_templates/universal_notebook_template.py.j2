@@ -153,26 +153,6 @@ print("""
 
 print("💾 Exporting Results...")
 
-# Export final results with complete provenance
-results_export = {
-    'experiment_metadata': {
-        'experiment_name': '{{ experiment_name }}',
-        'framework_name': '{{ framework_name }}',
-        'document_count': {{ document_count }},
-        'generation_timestamp': '{{ generation_timestamp }}',
-        'analysis_model': '{{ analysis_model }}',
-        'synthesis_model': '{{ synthesis_model }}'
-    },
-    'derived_metrics': derived_results.to_dict('records'),
-    'statistical_results': statistical_results,
-    'evidence_integration': evidence_integration,
-    'data_provenance': {
-        {% for data_path in data_paths %}
-        '{{ data_path.variable_name }}': '{{ data_path.file_path }}',
-        {% endfor %}
-    }
-}
-
 # SURGICAL FIX: Create clean manifest instead of 2GB dump
 results_manifest = {
     "experiment_metadata": {
@@ -190,7 +170,10 @@ results_manifest = {
         "visualizations_generated": True
     },
     "artifacts_generated": {
-        "derived_metrics_csv": "derived_metrics_results.csv",
+        "raw_scores_csv": "raw_scores.csv",
+        "derived_metrics_csv": "derived_metrics.csv",
+        "evidence_csv": "evidence.csv",
+        "statistical_analysis_csv": "statistical_analysis.csv",
         "notebook_execution": "research_notebook.py"
     },
     "data_sources": {
@@ -204,12 +187,62 @@ results_manifest = {
 with open('execution_manifest.json', 'w') as f:
     json.dump(results_manifest, f, indent=2, default=str)
 
-# Save CSV for external analysis
-derived_results.to_csv('derived_metrics_results.csv', index=False)
+# FIXED: Export separate, clean CSV files instead of one messy file
+print("📊 Exporting organized data files...")
 
+# 1. Raw Scores CSV: One row per document, all dimensions
+raw_scores = analysis_data.copy()
+raw_scores.to_csv('raw_scores.csv', index=False)
+print("✅ Raw scores exported: raw_scores.csv")
+
+# 2. Derived Metrics CSV: One row per document, calculated values only
+# Extract only the derived metric columns (not raw scores)
+derived_columns = [col for col in derived_results.columns if col not in analysis_data.columns]
+if derived_columns:
+    derived_metrics_only = derived_results[['document_name'] + derived_columns].copy()
+    derived_metrics_only.to_csv('derived_metrics.csv', index=False)
+    print("✅ Derived metrics exported: derived_metrics.csv")
+else:
+    print("⚠️ No derived metrics calculated")
+
+# 3. Evidence CSV: One row per document, quotes and context
+# Create evidence DataFrame from analysis data if available
+if 'evidence' in analysis_data.columns:
+    evidence_data = analysis_data[['document_name', 'evidence']].copy()
+    evidence_data.to_csv('evidence.csv', index=False)
+    print("✅ Evidence exported: evidence.csv")
+else:
+    print("⚠️ No evidence data available")
+
+# 4. Statistical Analysis CSV: ANOVA, correlations, descriptive stats
+if isinstance(statistical_results, dict) and statistical_results:
+    # Convert statistical results to DataFrame format
+    stats_data = []
+    for test_name, test_results in statistical_results.items():
+        if isinstance(test_results, dict) and 'statistic' in test_results:
+            stats_data.append({
+                'test_name': test_name,
+                'statistic': test_results.get('statistic', 'N/A'),
+                'p_value': test_results.get('p_value', 'N/A'),
+                'significance': test_results.get('significance', 'N/A')
+            })
+    
+    if stats_data:
+        stats_df = pd.DataFrame(stats_data)
+        stats_df.to_csv('statistical_analysis.csv', index=False)
+        print("✅ Statistical analysis exported: statistical_analysis.csv")
+    else:
+        print("⚠️ No statistical test results available")
+else:
+    print("⚠️ No statistical analysis results available")
+
+print()
 print("✅ Results exported:")
 print("  - execution_manifest.json (clean execution summary)")
-print("  - derived_metrics_results.csv (tabular data for external analysis)")
+print("  - raw_scores.csv (one row per document, all dimensions)")
+print("  - derived_metrics.csv (one row per document, calculated values only)")
+print("  - evidence.csv (one row per document, quotes and context)")
+print("  - statistical_analysis.csv (ANOVA, correlations, descriptive stats)")
 print()
 
 print("🎉 Analysis Complete!")

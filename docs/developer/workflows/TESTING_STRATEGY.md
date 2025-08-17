@@ -20,6 +20,16 @@ This document establishes strategic testing principles for Discernus that **prev
 
 ## Strategic Testing Approaches
 
+### 0. Fast Iteration Testing Methods ⭐ **NEW**
+
+**Purpose**: Enable rapid development iteration without costly full experiment runs
+
+**Methods**:
+- **[Mock Testing for Infrastructure](../testing/FAST_ITERATION_TESTING_METHODS.md#1-mock-testing-for-infrastructure)** - Test code logic with simulated data (0 cost, instant feedback)
+- **[Prompt Engineering Testing Harness](../testing/FAST_ITERATION_TESTING_METHODS.md#2-prompt-engineering-testing-harness)** - Iterate on LLM prompts directly (minimal cost, fast iteration)
+
+**Key Principle**: Use the right testing method for the job to minimize cost and maximize speed.
+
 ### 1. Infrastructure Validation Testing
 
 **Purpose**: Verify ultra-thin infrastructure components work correctly
@@ -155,6 +165,11 @@ thin_conversation_logger.py: ≤40 lines
 
 ### Development Testing
 
+**0. Fast Iteration Testing** ⭐ **NEW**:
+- **Mock Testing**: `python3 test_infrastructure_mock.py` (0 cost, instant feedback)
+- **Prompt Engineering**: `python3 test_prompt_variations.py` (minimal cost, fast iteration)
+- **Reserve Full Experiments**: For integration testing and final validation only
+
 **1. THIN Infrastructure Test**:
 - Run `python3 discernus/tests/simple_test.py`
 - Validates core components without LLM dependencies
@@ -187,15 +202,51 @@ thin_conversation_logger.py: ≤40 lines
 - Timing consistency measured across runs
 - Resource utilization optimized for institutional budgets
 
+## Testing Methodology Selection
+
+### When to Use Each Testing Method
+
+**Mock Testing for Infrastructure**:
+- [x] Debugging data extraction bugs
+- [x] Testing file I/O operations  
+- [x] Validating business logic
+- [x] Testing error handling
+- [x] Infrastructure changes
+- [x] Unit testing components
+
+**Prompt Engineering Testing Harness**:
+- [x] LLM responses are inconsistent
+- [x] Prompt templates need optimization
+- [x] Testing different prompt variations
+- [x] Debugging parsing failures
+- [x] Cost optimization
+- [x] Framework-specific prompt testing
+
+**Full Experiment Runs**:
+- [x] End-to-end integration testing
+- [x] Performance benchmarking
+- [x] Production validation
+- [x] User acceptance testing
+- [x] Final quality assurance
+
+### Cost and Time Comparison
+
+| Method | Time | Cost | Use Case |
+|--------|------|------|----------|
+| Mock Testing | Seconds | $0 | Infrastructure logic |
+| Prompt Harness | Minutes | $0.01-0.05 | LLM prompt iteration |
+| Full Experiment | 5-15 minutes | $0.10-0.50 | Integration testing |
+
 ## Troubleshooting Integration
 
 ### Test-Driven Troubleshooting
 
 **When Tests Fail**:
-1. **Check THIN Compliance**: Is agent writing parsing logic?
-2. **Verify Infrastructure**: Are core components working?
-3. **Test Natural Language Flow**: Are LLMs communicating correctly?
-4. **Validate Academic Standards**: Are outputs suitable for publication?
+1. **Use Fast Iteration Testing**: Start with [mock testing](../testing/FAST_ITERATION_TESTING_METHODS.md) for infrastructure issues
+2. **Check THIN Compliance**: Is agent writing parsing logic?
+3. **Verify Infrastructure**: Are core components working?
+4. **Test Natural Language Flow**: Are LLMs communicating correctly?
+5. **Validate Academic Standards**: Are outputs suitable for publication?
 
 **When Agents Drift**:
 1. **Run Complexity Analysis**: Check line counts and function complexity

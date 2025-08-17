@@ -32,7 +32,7 @@ from typing import Dict, Any, Optional, List
 # Disable huggingface tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-from discernus.core.thin_orchestrator import ThinOrchestrator, ThinOrchestratorError
+from discernus.core.v8_orchestrator import V8Orchestrator, V8OrchestrationError
 from discernus.core.config import get_config, get_config_file_path
 from discernus.core.infrastructure_telemetry import InfrastructureTelemetry
 from discernus.core.exit_codes import (
@@ -242,11 +242,11 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='LLM model for validation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
-@click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', help='V8.0: Generate a statistical preparation notebook instead of a final report.')
+
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', help='Disable automatic Git commit after successful run completion')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -259,16 +259,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         click.echo(f"❌ Experiment path is not a directory: {exp_path}")
         sys.exit(1)
     
-    # Auto-detect v8.0 experiments FIRST, before any other processing
-    experiment_v8_file = exp_path / "experiment_v8.md"
-    click.echo(f"🔍 DEBUG: experiment_v8_file.exists()={experiment_v8_file.exists()}, statistical_prep={statistical_prep}")
-    if experiment_v8_file.exists() and not statistical_prep:
-        click.echo("🔬 V8.0 experiment detected - automatically enabling v8.0 pipeline")
-        statistical_prep = True
-    elif experiment_v8_file.exists() and statistical_prep:
-        click.echo("🔍 DEBUG: V8.0 file exists but statistical_prep was already True")
-    else:
-        click.echo("🔍 DEBUG: V8.0 file does not exist, continuing with v7.3 validation")
+    # All experiments now use v8.0 pipeline
+    click.echo("🔬 Using V8.0 pipeline for all experiments")
     
     # Get configuration and apply defaults
     config = ctx.obj['config']
@@ -292,9 +284,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     if not no_auto_commit:
         no_auto_commit = not config.auto_commit
     
-    if analysis_only and statistical_prep:
-        rich_console.print_error("Cannot use --analysis-only and --statistical-prep simultaneously.")
-        exit_invalid_usage("Flags --analysis-only and --statistical-prep are mutually exclusive.")
+
 
     if verbosity == 'verbose':
         rich_console.print_info(f"Using config file: {get_config_file_path() or 'None (using defaults)'}")
@@ -306,102 +296,36 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     else:
         rich_console.echo(f"🎯 Running: {experiment_path}")
     
-    # Validate experiment structure (unless skipped or using v8.0 pipeline)
-    if not skip_validation and not statistical_prep:
-        valid, message, experiment = validate_experiment_structure(exp_path, analysis_model)
-        if not valid:
-            rich_console.print_error(message.replace("❌ ", ""))
-            exit_validation_failed("Experiment structure validation failed")
-        
-        click.echo(message)
-    elif statistical_prep:
-        # V8.0 pipeline uses its own validation approach - skip v7.3 validation
-        click.echo("🔬 V8.0 Mode: Skipping v7.3 experiment validation (using v8.0 specifications)")
-        experiment = {}
-    else:
-        # Skip structure validation - just load basic experiment info
-        click.echo("⚠️  Skipping experiment structure validation")
-        try:
-            import yaml
-            with open(exp_path / "experiment.md", 'r') as f:
-                content = f.read()
-                # Extract YAML front matter
-                if content.startswith('---'):
-                    parts = content.split('---', 2)
-                    if len(parts) >= 3:
-                        yaml_content = parts[1]
-                        experiment = yaml.safe_load(yaml_content)
-                        if experiment is None:
-                            experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
-                        else:
-                            # Count corpus files
-                            corpus_path = exp_path / experiment.get('corpus_path', 'corpus')
-                            if corpus_path.exists():
-                                corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
-                                experiment['_corpus_file_count'] = len(corpus_files)
-                            else:
-                                experiment['_corpus_file_count'] = 0
+    # Load basic experiment info for display
+    try:
+        import yaml
+        with open(exp_path / "experiment.md", 'r') as f:
+            content = f.read()
+            # Extract YAML front matter
+            if content.startswith('---'):
+                parts = content.split('---', 2)
+                if len(parts) >= 3:
+                    yaml_content = parts[1]
+                    experiment = yaml.safe_load(yaml_content)
+                    if experiment is None:
+                        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
                     else:
-                        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
+                        # Count corpus files for v8.0 experiments
+                        corpus_path = exp_path / "corpus"
+                        if corpus_path.exists():
+                            corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
+                            experiment['_corpus_file_count'] = len(corpus_files)
+                        else:
+                            experiment['_corpus_file_count'] = 0
                 else:
-                    experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
-        except Exception as e:
-            experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus_path': 'corpus', '_corpus_file_count': 0}
-    
-    # Validate experiment coherence (unless skipped or using v8.0 pipeline)
-    if not skip_validation and not statistical_prep:
-        click.echo("🔍 Validating experiment coherence...")
-        try:
-            from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
-            validator = ExperimentCoherenceAgent(model=analysis_model)
-            validation_result = validator.validate_experiment(exp_path)
-            
-            # Helen 2.0: Display issues by priority, smart exit codes
-            blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
-            quality_issues = validation_result.get_issues_by_priority("QUALITY")
-            suggestions = validation_result.get_issues_by_priority("SUGGESTION")
-            
-            if blocking_issues:
-                click.echo("🚫 BLOCKING Issues (must fix):")
-                for issue in blocking_issues:
-                    click.echo(f"\n  • {issue.description}")
-                    click.echo(f"    Impact: {issue.impact}")
-                    click.echo(f"    Fix: {issue.fix}")
-                    if issue.affected_files:
-                        click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
-            
-            if quality_issues:
-                click.echo(f"\n⚠️ QUALITY Issues (should fix):")
-                for issue in quality_issues:
-                    click.echo(f"\n  • {issue.description}")
-                    click.echo(f"    Impact: {issue.impact}")
-                    click.echo(f"    Fix: {issue.fix}")
-                    if issue.affected_files:
-                        click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
-            
-            if suggestions:
-                click.echo(f"\n💡 SUGGESTIONS (nice to have):")
-                for issue in suggestions:
-                    click.echo(f"\n  • {issue.description}")
-                    click.echo(f"    Fix: {issue.fix}")
-            
-            if validation_result.suggestions:
-                click.echo(f"\n💡 General Suggestions:")
-                for suggestion in validation_result.suggestions:
-                    click.echo(f"  • {suggestion}")
-            
-            # Helen 2.0: Only blocking issues cause exit 1
-            if blocking_issues:
-                click.echo(f"\n💡 To skip validation when running, use: --skip-validation")
-                sys.exit(1)
+                    experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
             else:
-                if quality_issues or suggestions:
-                    click.echo("✅ Validation passed with recommendations")
-                else:
-                    click.echo("✅ Experiment coherence validation passed")
-        except Exception as e:
-            click.echo(f"⚠️  Validation failed with error: {e}")
-            click.echo("💡 Continuing without validation...")
+                experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
+    except Exception as e:
+        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
+    
+    # V8.0 pipeline handles its own validation - just show basic info
+    click.echo("🔬 V8.0 pipeline will handle validation during execution")
     
     execution_mode = "Analysis + CSV export only" if analysis_only else "Complete experiment"
     
@@ -435,21 +359,20 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         rich_console.echo(f"📝 Using analysis model: {analysis_model}")
         rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
             
-        orchestrator = ThinOrchestrator(exp_path)
+        # Use V8.0 orchestrator for all experiments
+        click.echo("🔬 Using V8.0 Orchestrator for statistical analysis pipeline")
+        orchestrator = V8Orchestrator(exp_path)
         
         # Execute experiment with status indication
         rich_console.print_info("Experiment execution started - this may take several minutes...")
         rich_console.echo("⏳ Processing corpus documents and generating analysis...")
         
-        # Execute experiment (unified pipeline)
+        # Execute experiment with V8.0 orchestrator
         result = orchestrator.run_experiment(
             analysis_model=analysis_model,
             synthesis_model=synthesis_model,
             validation_model=validation_model,
-            auto_commit=(not no_auto_commit),
-            ensemble_runs=1,
-            analysis_only=analysis_only,
-            statistical_prep=statistical_prep
+            skip_validation=skip_validation
         )
         
         # Show completion with enhanced details
@@ -460,7 +383,30 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             results_table = rich_console.create_table("Experiment Results", ["Item", "Location"])
             results_table.add_row("Run ID", result['run_id'])
             results_table.add_row("Results Directory", str(exp_path / 'runs' / result['run_id']))
-            results_table.add_row("Final Report", str(exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'))
+            
+            # Check if final report actually exists
+            final_report_path = exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'
+            if final_report_path.exists():
+                results_table.add_row("Final Report", str(final_report_path))
+            else:
+                results_table.add_row("Final Report", "Not generated")
+            
+            # Show what was actually generated
+            run_dir = exp_path / 'runs' / result['run_id']
+            if run_dir.exists():
+                generated_files = []
+                for file_path in run_dir.rglob('*'):
+                    if file_path.is_file():
+                        relative_path = file_path.relative_to(run_dir)
+                        generated_files.append(str(relative_path))
+                
+                if generated_files:
+                    results_table.add_row("Generated Files", f"{len(generated_files)} files")
+                    # Show key files
+                    key_files = [f for f in generated_files if any(key in f for key in ['notebook', 'functions', 'analysis', 'data'])]
+                    if key_files:
+                        results_table.add_row("Key Files", ", ".join(key_files[:3]))  # Show first 3 key files
+            
             rich_console.print_table(results_table)
             
             # Show cost summary if available
@@ -469,7 +415,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         else:
             rich_console.print_info("Results available in experiment runs directory")
         
-    except ThinOrchestratorError as e:
+    except V8OrchestrationError as e:
         rich_console.print_error(f"Experiment failed: {e}")
         exit_general_error(f"Experiment execution failed: {e}")
     except Exception as e:
@@ -477,85 +423,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         exit_general_error(f"Unexpected error: {e}")
 
 
-@cli.command(name='continue')
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', 
-              help='LLM model for synthesis [default: vertex_ai/gemini-2.5-pro] (e.g., vertex_ai/gemini-2.5-flash-lite)')
-def continue_experiment(experiment_path: str, synthesis_model: str):
-    """Intelligently resume experiment from existing artifacts. Defaults to current directory."""
-    exp_path = Path(experiment_path).resolve()
-    
-    # Check if experiment path exists
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
-    
-    click.echo(f"🔄 Continuing experiment: {experiment_path}")
-    
-    # Validate experiment structure
-    valid, message, experiment = validate_experiment_structure(exp_path)
-    if not valid:
-        click.echo(message)
-        sys.exit(1)
-    
-    click.echo(message)
-    
-    # Check for existing artifacts to determine resume point
-    shared_cache_dir = exp_path / "shared_cache" / "artifacts"
-    if not shared_cache_dir.exists():
-        click.echo("❌ No analysis artifacts found")
-        click.echo("   💡 Run: discernus run to start from beginning")
-        sys.exit(1)
-    
-    # Ensure infrastructure is running
-    if not ensure_infrastructure():
-        click.echo("❌ Infrastructure startup failed. Run 'discernus start' manually.")
-        sys.exit(1)
-    
-    try:
-        click.echo(f"🚀 Resuming experiment with intelligent artifact detection...")
-        click.echo(f"📝 Using synthesis model: {synthesis_model}")
-            
-        orchestrator = ThinOrchestrator(exp_path)
-        
-        # Execute with unified pipeline (intelligent resume via caching)
-        result = orchestrator.run_experiment(
-            synthesis_model=synthesis_model
-        )
-        
-        # Show completion
-        click.echo("✅ Experiment resumed and completed successfully!")
-        if isinstance(result, dict) and 'run_id' in result:
-            click.echo(f"   📋 Run ID: {result['run_id']}")
-            click.echo(f"   📁 Results: {exp_path / 'runs' / result['run_id']}")
-            click.echo(f"   📄 Report: {exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'}")
-            
-            # Display cost information for research transparency
-            if 'costs' in result:
-                costs = result['costs']
-                click.echo(f"   💰 Resume Cost: ${costs.get('total_cost_usd', 0.0):.4f} USD")
-                click.echo(f"   🔢 Tokens Used: {costs.get('total_tokens', 0):,}")
-                
-                # Show breakdown by operation if available
-                operations = costs.get('operations', {})
-                if operations:
-                    click.echo("   📊 Operation Breakdown:")
-                    for operation, op_costs in operations.items():
-                        cost_usd = op_costs.get('cost_usd', 0.0)
-                        tokens = op_costs.get('tokens', 0)
-                        calls = op_costs.get('calls', 0)
-                        click.echo(f"      • {operation}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
-        
-    except ThinOrchestratorError as e:
-        click.echo(f"❌ Resume failed: {e}")
-        sys.exit(1)
-    except Exception as e:
-        click.echo(f"❌ Unexpected error: {e}")
-        sys.exit(1)
+# DISABLED - Legacy continue command removed
+# V8.0 orchestrator handles resuming automatically via caching
 
 
 @cli.command()
