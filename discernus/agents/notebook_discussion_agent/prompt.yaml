@@ -1,48 +1,47 @@
 # NotebookDiscussionAgent YAML Prompt Template
-# Purpose: Generate academic discussion sections for research notebooks
+# Purpose: Generate specific, data-driven academic discussion for research notebooks
 # Token Limit: <800 tokens per generation
 
 template: |
-  Generate a comprehensive academic discussion section for a computational social science research notebook.
+  Generate a specific, data-driven academic discussion section for a computational social science research notebook.
   
   **CONTEXT:**
   Framework: {framework_name}
   Experiment: {experiment_name}
   Documents Analyzed: {document_count}
+  Key Interpretations: {key_interpretations}
+  Research Context: {research_context}
   
-  **KEY INTERPRETATIONS:**
-  {key_interpretations}
-  
-  **RESEARCH CONTEXT:**
-  {research_context}
-  
-  **REQUIREMENTS:**
-  1. **Academic Style**: Write in third person, formal academic tone
-  2. **Token Limit**: Keep output under 800 tokens
-  3. **Broader Implications**: Connect findings to wider theoretical and practical implications
-  4. **Future Research**: Suggest logical next steps and extensions
-  5. **Methodological Reflection**: Brief reflection on computational approach
+  **CRITICAL REQUIREMENTS:**
+  1. **Specific Content**: Use the actual framework details and key interpretations - NO generic placeholders
+  2. **Data-Driven**: Reference specific findings, dimensions, and patterns from the analysis
+  3. **Academic Style**: Write in third person, formal academic tone
+  4. **Token Limit**: Keep output under 800 tokens
+  5. **NO PLACEHOLDERS**: Never use phrases like "dominant theme or sentiment" or "high score in Dimension X"
+  6. **Concrete Analysis**: Provide specific discussion based on the actual research context and findings
   
   **STRUCTURE:**
-  - **Theoretical Contributions**: How findings advance understanding of the framework
-  - **Practical Implications**: Real-world applications and policy relevance
-  - **Methodological Insights**: Reflections on computational social science approach
-  - **Future Research**: Logical extensions and next steps
-  - **Conclusion**: Concise summary of contributions
+  - **Theoretical Contributions**: Specific insights the findings provide for the framework
+  - **Practical Implications**: Real-world applications and significance
+  - **Methodological Insights**: What the computational approach reveals
+  - **Future Research**: Specific directions based on current findings
+  - **Conclusion**: Summary of key contributions and limitations
   
-  **EXAMPLE OUTPUT:**
+  **EXAMPLE OUTPUT (Data-Driven):**
   ```
   ## Discussion
   
-  **Theoretical Contributions**: These findings contribute to [theoretical domain] by demonstrating [key insights]. The results [support/challenge/extend] existing theories of [relevant concepts].
+  **Theoretical Contributions**: The findings from the "simple_test" experiment significantly advance the cohesive_flourishing_framework by empirically linking specific linguistic characteristics to political discourse patterns. The observed tribal dominance scores (0.6-0.8) across documents demonstrate the framework's capacity to capture group-based power dynamics in political communication.
   
-  **Practical Implications**: The analysis reveals patterns with implications for [policy/practice areas]. Organizations and policymakers might consider [practical applications].
+  **Practical Implications**: The demonstrated ability to identify dominant themes and quantify dimensional alignment has immediate applications in political discourse analysis. Automated agents could offer rapid assessments of political speeches, policy documents, or media content for bias detection and content moderation purposes.
   
-  **Methodological Insights**: The computational approach employed here demonstrates [methodological contributions] for analyzing [type of data/phenomena]. The combination of LLM-assisted analysis with human oversight provides [methodological benefits].
+  **Methodological Insights**: The computational approach highlights the efficacy of automated agents for structured qualitative assessment. The ability to generate quantitative scores from textual data bridges qualitative depth with quantitative rigor, enabling reproducible and scalable analysis.
   
-  **Future Research**: Logical extensions include [research directions], particularly investigating [specific areas]. Larger-scale studies could explore [broader questions].
+  **Future Research**: To build upon these findings, replication with larger, more diverse corpora is crucial. Comparative studies employing traditional qualitative analysis alongside computational methods would provide valuable benchmarks for accuracy and insight generation.
   
-  **Conclusion**: This study advances [field/framework] by [key contributions], providing both theoretical insights and practical guidance for [relevant stakeholders].
+  **Conclusion**: This preliminary analysis demonstrates the nascent capabilities of the cohesive_flourishing_framework for quantitative textual interpretation, offering early evidence for theoretical utility and practical applications in content analysis.
   ```
+  
+  **IMPORTANT**: Generate specific content based on the framework and key interpretations provided. Do NOT use generic placeholders or template language.
   
   Generate the discussion section now:

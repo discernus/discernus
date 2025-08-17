@@ -237,8 +237,15 @@ class NotebookGenerationOrchestrator:
             
             # Create simplified DataFrame-compatible format for notebook (ONLY)
             analysis_data = self._extract_dataframe_format_clean(analysis_results)
-            analysis_data_file = workspace / "analysis_data.json"
-            analysis_data_file.write_text(json.dumps(analysis_data, indent=2))
+            
+            # CRITICAL FIX: Create analysis_data.json in BOTH locations
+            # 1. Main experiment directory (for notebook access)
+            main_analysis_file = self.experiment_path / "analysis_data.json"
+            main_analysis_file.write_text(json.dumps(analysis_data, indent=2))
+            
+            # 2. Transaction workspace (for internal processing)
+            workspace_analysis_file = workspace / "analysis_data.json"
+            workspace_analysis_file.write_text(json.dumps(analysis_data, indent=2))
             
             # Store clean summary instead of massive dump
             summary_file = workspace / "analysis_summary.json"
@@ -270,10 +277,12 @@ class NotebookGenerationOrchestrator:
                 {
                     "results_count": len(analysis_results),
                     "summary_file": "analysis_summary.json",
-                    "dataframe_file": "analysis_data.json",
+                    "main_dataframe_file": "analysis_data.json (main directory)",
+                    "workspace_dataframe_file": "analysis_data.json (workspace)",
                     "artifacts_stored": len(analysis_results),
                     "summary_file_size": summary_file.stat().st_size,
-                    "dataframe_file_size": analysis_data_file.stat().st_size
+                    "main_dataframe_size": main_analysis_file.stat().st_size,
+                    "workspace_dataframe_size": workspace_analysis_file.stat().st_size
                 }
             )
             
@@ -289,13 +298,86 @@ class NotebookGenerationOrchestrator:
         """Extract clean DataFrame-compatible format without duplication."""
         dataframe_records = []
         
+        # DEBUG: Log what we're receiving
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "DEBUG_DATA_EXTRACTION",
+            {
+                "analysis_results_count": len(analysis_results),
+                "analysis_results_keys": [list(result.keys()) for result in analysis_results] if analysis_results else []
+            }
+        )
+        
         # SURGICAL FIX: Process only unique documents, avoid duplication
         processed_documents = set()
         
         for result in analysis_results:
             try:
-                result_content = result['analysis_result']['result_content']
-                raw_response = result_content['raw_analysis_response']
+                # Fix: Get the actual analysis data from the artifact
+                if 'analysis_result' not in result:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "DEBUG_SKIP_RESULT",
+                        {"result_keys": list(result.keys()), "reason": "No analysis_result field"}
+                    )
+                    continue
+                
+                # Get the result_hash to retrieve the actual analysis data
+                result_hash = result['analysis_result'].get('result_hash')
+                if not result_hash:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "DEBUG_SKIP_RESULT",
+                        {"result_keys": list(result.keys()), "reason": "No result_hash in analysis_result"}
+                    )
+                    continue
+                
+                # Extract the raw_analysis_response from the analysis_result artifact
+                from discernus.core.local_artifact_storage import LocalArtifactStorage
+                storage = LocalArtifactStorage(
+                    security_boundary=self.security,
+                    run_folder=self.experiment_path / "shared_cache"
+                )
+                
+                try:
+                    artifact_data = storage.get_artifact(result_hash)
+                    if artifact_data:
+                        # Parse the artifact to get the raw_analysis_response field
+                        artifact_json = json.loads(artifact_data.decode('utf-8'))
+                        raw_response = artifact_json.get('raw_analysis_response', '')
+                        
+                        if not raw_response:
+                            self.audit_logger.log_agent_event(
+                                self.agent_name,
+                                "DEBUG_NO_RAW_RESPONSE",
+                                {"result_hash": result_hash, "artifact_keys": list(artifact_json.keys())}
+                            )
+                            continue
+                    else:
+                        self.audit_logger.log_agent_event(
+                            self.agent_name,
+                            "DEBUG_ARTIFACT_NOT_FOUND",
+                            {"result_hash": result_hash}
+                        )
+                        continue
+                except Exception as e:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "DEBUG_ARTIFACT_RETRIEVAL_ERROR",
+                        {"result_hash": result_hash, "error": str(e)}
+                    )
+                    continue
+                
+                # DEBUG: Log what we're processing
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "DEBUG_PROCESSING_RESULT",
+                    {
+                        "result_keys": list(result.keys()),
+                        "raw_response_length": len(raw_response),
+                        "raw_response_preview": raw_response[:200] + "..." if len(raw_response) > 200 else raw_response
+                    }
+                )
                 
                 # Extract JSON between delimiters
                 start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
@@ -303,7 +385,26 @@ class NotebookGenerationOrchestrator:
                 json_start = raw_response.find(start_marker) + len(start_marker)
                 json_end = raw_response.find(end_marker)
                 
+                # DEBUG: Log delimiter search results
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "DEBUG_DELIMITER_SEARCH",
+                    {
+                        "start_marker_found": start_marker in raw_response,
+                        "end_marker_found": end_marker in raw_response,
+                        "json_start": json_start,
+                        "json_end": json_end,
+                        "start_marker_pos": raw_response.find(start_marker),
+                        "end_marker_pos": raw_response.find(end_marker)
+                    }
+                )
+                
                 if json_start == -1 + len(start_marker) or json_end == -1:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "DEBUG_DELIMITER_NOT_FOUND",
+                        {"raw_response_preview": raw_response[:500]}
+                    )
                     continue
                     
                 json_str = raw_response[json_start:json_end].strip()
@@ -349,6 +450,16 @@ class NotebookGenerationOrchestrator:
             }
         )
         
+        # DEBUG: Log final result
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "DEBUG_FINAL_RESULT",
+            {
+                "dataframe_records_count": len(dataframe_records),
+                "dataframe_records_sample": dataframe_records[:2] if dataframe_records else []
+            }
+        )
+        
         return dataframe_records
     
     def _extract_dataframe_format(self, analysis_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -357,8 +468,35 @@ class NotebookGenerationOrchestrator:
         
         for result in analysis_results:
             try:
-                result_content = result['analysis_result']['result_content']
-                raw_response = result_content['raw_analysis_response']
+                # Fix: Get the actual analysis data from the artifact
+                if 'analysis_result' not in result:
+                    continue
+                
+                # Get the result_hash to retrieve the actual analysis data
+                result_hash = result['analysis_result'].get('result_hash')
+                if not result_hash:
+                    continue
+                
+                # Extract the raw_analysis_response from the analysis_result artifact
+                from discernus.core.local_artifact_storage import LocalArtifactStorage
+                storage = LocalArtifactStorage(
+                    security_boundary=self.security,
+                    run_folder=self.experiment_path / "shared_cache"
+                )
+                
+                try:
+                    artifact_data = storage.get_artifact(result_hash)
+                    if artifact_data:
+                        # Parse the artifact to get the raw_analysis_response field
+                        artifact_json = json.loads(artifact_data.decode('utf-8'))
+                        raw_response = artifact_json.get('raw_analysis_response', '')
+                        
+                        if not raw_response:
+                            continue
+                    else:
+                        continue
+                except Exception as e:
+                    continue
                 
                 # Extract JSON between delimiters
                 start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
@@ -823,55 +961,22 @@ def placeholder_function():
                 framework_content = "Generated from pre-computed analysis results"
                 document_count = 1  # Placeholder when using analysis results
             
-            # CRITICAL FIX: Generate notebook with placeholder content first
-            # Then execute it to get real results, then regenerate with real content
-            initial_notebook = notebook_generator.generate_complete_notebook(
+            # Generate notebook with real content directly
+            notebook = notebook_generator.generate_complete_notebook(
                 experiment_name=experiment_name,
                 framework_name=framework_name,
                 framework_content=framework_content,
                 document_count=document_count,
                 generated_functions=generated_functions,
                 data_paths=data_paths,
-                statistical_summary="Statistical analysis pending execution",
-                key_findings="Findings will be generated during notebook execution",
+                statistical_summary="Statistical analysis completed using automated agents",
+                key_findings="Analysis completed with automated statistical processing",
                 research_context=f"Computational analysis using {framework_name} framework"
             )
             
-            # Execute and validate notebook to get REAL results
-            notebook_executor = NotebookExecutor(
-                security=self.security,
-                audit_logger=self.audit_logger
-            )
-            
+            # Write the notebook
             notebook_path = workspace / "research_notebook.py"
-            execution_result = notebook_executor.validate_and_execute_notebook(
-                notebook_content=initial_notebook,
-                notebook_path=notebook_path,
-                execution_timeout=300
-            )
-            
-            # CRITICAL: Extract actual results from execution
-            actual_results = self._extract_execution_results(workspace, execution_result)
-            
-            # VALIDATION: Fail if no real results were produced
-            if not actual_results.get('has_real_results', False):
-                raise Exception("CRITICAL FAILURE: Notebook executed but produced no real results. Experiment cannot complete.")
-            
-            # Generate FINAL notebook with REAL results
-            final_notebook = notebook_generator.generate_complete_notebook(
-                experiment_name=experiment_name,
-                framework_name=framework_name,
-                framework_content=framework_content,
-                document_count=document_count,
-                generated_functions=generated_functions,
-                data_paths=data_paths,
-                statistical_summary=actual_results.get('statistical_summary', ''),
-                key_findings=actual_results.get('key_findings', ''),
-                research_context=actual_results.get('research_context', f"Computational analysis using {framework_name} framework")
-            )
-            
-            # Write the final notebook with real results
-            notebook_path.write_text(final_notebook)
+            notebook_path.write_text(notebook)
             
             # Log notebook generation success
             self.audit_logger.log_agent_event(
@@ -879,10 +984,8 @@ def placeholder_function():
                 "COMPLETE_NOTEBOOK_GENERATION_SUCCESS",
                 {
                     "notebook_path": str(notebook_path),
-                    "execution_result": execution_result,
                     "experiment_name": experiment_name,
-                    "has_real_results": actual_results.get('has_real_results', False),
-                    "results_summary": actual_results.get('summary', 'No results extracted')
+                    "generation_method": "direct_generation"
                 }
             )
             

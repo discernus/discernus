@@ -31,6 +31,7 @@
 ### Workflows & Processes
 - **[Git Best Practices](workflows/GIT_BEST_PRACTICES.md)** - Version control guidelines
 - **[Testing Strategy](workflows/TESTING_STRATEGY.md)** - Testing approach and tools
+- **[Fast Iteration Testing](testing/FAST_ITERATION_TESTING_METHODS.md)** - Mock testing and prompt engineering harness
 - **[Research Provenance Guide](workflows/RESEARCH_PROVENANCE_GUIDE.md)** - Academic audit trails
 - **[Provenance Validation Reference](workflows/PROVENANCE_VALIDATION_REFERENCE.md)** - Integrity validation
 
@@ -57,6 +58,9 @@
 
 **Troubleshoot an issue**
 → Check [Troubleshooting Guide](troubleshooting/TROUBLESHOOTING_GUIDE.md)
+
+**Debug infrastructure issues quickly**
+→ Use [Fast Iteration Testing](testing/FAST_ITERATION_TESTING_METHODS.md)
 
 **Contribute to development**
 → Begin with [Agent Briefing](setup/AGENT_BRIEFING.md)
@@ -109,6 +113,18 @@ make check
 
 # Run tests
 make test
+```
+
+### Testing Methods
+```bash
+# Mock testing for infrastructure (0 cost, instant feedback)
+python3 test_infrastructure_mock.py
+
+# Prompt engineering harness (minimal cost, fast iteration)
+python3 test_prompt_variations.py
+
+# Full experiment (higher cost, comprehensive testing)
+discernus run projects/simple_test
 ```
 
 ### Modern CLI Development

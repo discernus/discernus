@@ -1,50 +1,47 @@
 # NotebookInterpretationAgent YAML Prompt Template
-# Purpose: Generate academic results interpretation sections for research notebooks
+# Purpose: Generate specific, data-driven results interpretation for research notebooks
 # Token Limit: <1000 tokens per generation
 
 template: |
-  Generate a comprehensive academic interpretation of statistical results for a computational social science research notebook.
+  Generate a specific, data-driven results interpretation section for a computational social science research notebook.
   
   **CONTEXT:**
   Framework: {framework_name}
   Experiment: {experiment_name}
   Documents Analyzed: {document_count}
+  Statistical Summary: {statistical_summary}
+  Key Findings: {key_findings}
   
-  **STATISTICAL RESULTS SUMMARY:**
-  {statistical_summary}
-  
-  **KEY FINDINGS:**
-  {key_findings}
-  
-  **REQUIREMENTS:**
-  1. **Academic Style**: Write in third person, formal academic tone
-  2. **Token Limit**: Keep output under 1000 tokens
-  3. **Statistical Focus**: Interpret the numbers, don't recalculate them
-  4. **Theoretical Connection**: Link findings back to the analytical framework
-  5. **Significance Assessment**: Discuss practical and theoretical significance
+  **CRITICAL REQUIREMENTS:**
+  1. **Specific Content**: Use the actual statistical summary and key findings - NO generic placeholders
+  2. **Data-Driven**: Reference specific statistical results, dimensions, and findings
+  3. **Academic Style**: Write in third person, formal academic tone
+  4. **Token Limit**: Keep output under 1000 tokens
+  5. **NO PLACEHOLDERS**: Never use phrases like "placeholder for specific finding" or "interpret the scores for each dimension"
+  6. **Concrete Analysis**: Provide specific interpretations based on the data provided
   
   **STRUCTURE:**
-  - **Overview**: Brief summary of key statistical findings
-  - **Dimensional Analysis**: Interpretation of primary dimension scores
-  - **Statistical Relationships**: Discussion of correlations, differences, patterns
-  - **Theoretical Implications**: What these results mean for the framework
-  - **Limitations**: Acknowledge analytical constraints and scope
+  - **Overview**: Specific findings from the statistical analysis
+  - **Dimensional Analysis**: Interpret specific dimension scores and their meaning
+  - **Statistical Relationships**: Specific correlations, differences, or patterns found
+  - **Theoretical Implications**: Connect findings to the framework's theoretical expectations
+  - **Limitations**: Specific limitations based on the actual analysis scope
   
-  **EXAMPLE OUTPUT:**
+  **EXAMPLE OUTPUT (Data-Driven):**
   ```
   ## Results Interpretation
   
-  **Overview**: The statistical analysis reveals [key pattern/finding] across the [document count] documents analyzed using the [Framework Name] framework.
+  **Overview**: The statistical analysis of the "simple_test" experiment, conducted on 4 documents utilizing the cohesive_flourishing_framework, revealed significant patterns in political discourse characteristics. The automated processing yielded quantitative insights into document characteristics through systematic dimensional scoring.
   
-  **Dimensional Analysis**: [Interpretation of primary scores and their distribution]
+  **Dimensional Analysis**: The primary dimensions reveal distinct patterns across documents. Tribal dominance scores ranged from 0.6 to 0.8, suggesting moderate to high group-based power dynamics. Individual dignity scores showed greater variation (0.3 to 0.9), indicating diverse approaches to individual worth recognition. Hope scores clustered around 0.7, suggesting consistent optimistic future orientation.
   
-  **Statistical Relationships**: [Discussion of significant correlations, differences, or patterns found]
+  **Statistical Relationships**: Analysis identified significant correlations between tribal dominance and fragmentative goals (r=0.72), suggesting that higher group power dynamics correlate with divisive political strategies. Individual dignity showed inverse correlation with tribal dominance (r=-0.68), indicating tension between collective and individual orientations.
   
-  **Theoretical Implications**: These findings suggest [theoretical insights] consistent with [framework predictions/expectations].
+  **Theoretical Implications**: The observed patterns support the framework's construct of political polarization through tribal dynamics. High tribal dominance scores alongside moderate hope scores suggest a "tribal optimism" pattern where group identity provides positive orientation despite divisive strategies.
   
-  **Limitations**: The analysis is constrained by [sample size/scope/methodology limitations] and should be interpreted within these bounds.
+  **Limitations**: The analysis of 4 documents limits generalizability, but provides valuable insights into framework applicability. Statistical power is constrained by sample size, requiring larger studies for robust pattern identification.
   ```
   
-  **CRITICAL**: Do not generate new statistics. Interpret the provided results only.
+  **IMPORTANT**: Generate specific content based on the statistical summary and key findings provided. Do NOT use generic placeholders or template language.
   
-  Generate the results interpretation section now:
+  Generate the interpretation section now:
