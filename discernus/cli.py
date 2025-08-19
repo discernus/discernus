@@ -32,7 +32,7 @@ from typing import Dict, Any, Optional, List
 # Disable huggingface tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-from discernus.core.v8_orchestrator import V8Orchestrator, V8OrchestrationError
+from discernus.core.experiment_orchestrator import ExperimentOrchestrator, V8OrchestrationError
 from discernus.core.config import get_config, get_config_file_path
 from discernus.core.infrastructure_telemetry import InfrastructureTelemetry
 from discernus.core.exit_codes import (
@@ -67,122 +67,35 @@ def ensure_infrastructure() -> bool:
     return True
 
 
-def validate_experiment_structure(experiment_path: Path, model: str = "vertex_ai/gemini-2.5-flash-lite") -> tuple[bool, str, Dict[str, Any]]:
-    """Validate experiment directory structure and configuration"""
-    if not experiment_path.exists():
-        return False, f"❌ Experiment path does not exist: {experiment_path}", {}
+def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dict[str, Any]]:
+    """Perform a basic structural check on the experiment directory."""
+    if not experiment_path.exists() or not experiment_path.is_dir():
+        return False, f"❌ Experiment path does not exist or is not a directory: {experiment_path}", {}
     
-    # Check for experiment.md
     experiment_file = experiment_path / "experiment.md"
     if not experiment_file.exists():
         return False, f"❌ Missing experiment.md in {experiment_path}", {}
-    
-    # Parse experiment configuration
+        
+    # Basic parsing to get experiment name for display
     try:
-        with open(experiment_file, 'r') as f:
-            content = f.read()
-            
-        # Extract YAML frontmatter
-        if content.startswith('---'):
-            parts = content.split('---', 2)
-            if len(parts) >= 3:
+        content = experiment_file.read_text(encoding='utf-8')
+        if '## Configuration Appendix' in content:
+            _, appendix_content = content.split('## Configuration Appendix', 1)
+            if '```yaml' in appendix_content:
+                yaml_start = appendix_content.find('```yaml') + 7
+                yaml_end = appendix_content.rfind('```')
+                yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
                 import yaml
-                config = yaml.safe_load(parts[1])
+                config = yaml.safe_load(yaml_content)
+                experiment_name = config.get('metadata', {}).get('experiment_name', 'Unknown')
             else:
-                return False, "❌ Invalid experiment.md format (missing YAML frontmatter)", {}
+                experiment_name = 'Unknown'
         else:
-            return False, "❌ experiment.md missing YAML frontmatter", {}
-            
-    except Exception as e:
-        return False, f"❌ Error parsing experiment.md: {e}", {}
-    
-    # Check framework file exists (handle both canonical and local paths)
-    framework_filename = config.get('framework', 'framework.md')
-    
-    if framework_filename.startswith("../../frameworks/"):
-        # Canonical framework - resolve relative to project root
-        # Find project root by looking for discernus directory
-        current_path = experiment_path
-        project_root = None
-        
-        # Walk up the directory tree to find project root
-        while current_path != current_path.parent:  # Stop at filesystem root
-            if (current_path / "discernus").exists() and (current_path / "frameworks").exists():
-                project_root = current_path
-                break
-            current_path = current_path.parent
-        
-        if not project_root:
-            return False, f"❌ Cannot find project root for canonical framework: {framework_filename}", {}
-        
-        canonical_path = framework_filename.lstrip("../../")
-        framework_file = project_root / canonical_path
-        
-        if not framework_file.exists():
-            return False, f"❌ Canonical framework not found: {framework_filename}", {}
-    else:
-        # Local framework - resolve relative to experiment directory
-        framework_file = experiment_path / framework_filename
-        if not framework_file.exists():
-            return False, f"❌ Framework file not found: {framework_file}", {}
-    
-    # Check framework character limit (50KB maximum)
-    try:
-        with open(framework_file, 'r') as f:
-            framework_content = f.read()
-        framework_size = len(framework_content)
-        if framework_size > 50000:
-            return False, f"❌ Framework exceeds 50KB limit: {framework_size:,} characters (limit: 50,000). See Framework Specification v7.3 for reduction strategies.", {}
-    except Exception as e:
-        return False, f"❌ Error reading framework file: {e}", {}
-    
-    # Check corpus directory exists
-    corpus_path = experiment_path / config.get('corpus_path', 'corpus')
-    if not corpus_path.exists():
-        return False, f"❌ Corpus directory not found: {corpus_path}", {}
-    
-    # THIN: Delegate validation to ExperimentCoherenceAgent
-    from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
-    
-    try:
-        # Use ExperimentCoherenceAgent for comprehensive validation with the specified model
-        coherence_agent = ExperimentCoherenceAgent(model=model)
-        validation_result = coherence_agent.validate_experiment(experiment_path)
-        
-        # Helen 2.0: Only blocking issues cause validation failure
-        if validation_result.has_blocking_issues():
-            # Return detailed validation failure information for blocking issues
-            blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
-            if blocking_issues:
-                issue = blocking_issues[0]
-                return False, f"❌ {issue.description}", {"validation_result": validation_result}
-            else:
-                return False, "❌ Experiment has blocking validation issues", {}
-        
-        # Validation passed - extract basic info for CLI
-        corpus_path = experiment_path / config.get('corpus_path', 'corpus')
-        corpus_manifest_file = corpus_path / "corpus.md"
-        
-        # Quick file count for CLI display
-        with open(corpus_manifest_file, 'r') as f:
-            content = f.read()
-        
-        if '```json' in content:
-            json_start = content.find('```json') + 7
-            json_end = content.find('```', json_start)
-            if json_end != -1:
-                json_content = content[json_start:json_end].strip()
-                manifest_data = json.loads(json_content)
-                file_count = len(manifest_data.get('file_manifest', []))
-                
-                config['_corpus_file_count'] = file_count
-                config['corpus_path'] = str(corpus_path)
-                return True, f"✅ Valid experiment with {file_count} corpus files (THIN validation)", config
-        
-        return True, "✅ Valid experiment (THIN validation)", config
-        
-    except Exception as e:
-        return False, f"❌ Validation error: {e}", {}
+            experiment_name = 'Unknown'
+    except Exception:
+        experiment_name = 'Unknown'
+
+    return True, "✅ Basic structure is valid. Full validation will occur during the run.", {"name": experiment_name}
 
 
 @click.group()
@@ -259,8 +172,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         click.echo(f"❌ Experiment path is not a directory: {exp_path}")
         sys.exit(1)
     
-    # All experiments now use v8.0 pipeline
-    click.echo("🔬 Using V8.0 pipeline for all experiments")
+    click.echo("🔬 Using clean pipeline for all experiments")
     
     # Get configuration and apply defaults
     config = ctx.obj['config']
@@ -310,7 +222,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
                     if experiment is None:
                         experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
                     else:
-                        # Count corpus files for v8.0 experiments
+                        # Count corpus files
                         corpus_path = exp_path / "corpus"
                         if corpus_path.exists():
                             corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
@@ -324,8 +236,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     except Exception as e:
         experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
     
-    # V8.0 pipeline handles its own validation - just show basic info
-    click.echo("🔬 V8.0 pipeline will handle validation during execution")
+    # The pipeline handles its own validation - just show basic info
+    click.echo("🔬 Pipeline will handle validation during execution")
     
     execution_mode = "Analysis + CSV export only" if analysis_only else "Complete experiment"
     
@@ -359,15 +271,15 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         rich_console.echo(f"📝 Using analysis model: {analysis_model}")
         rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
             
-        # Use V8.0 orchestrator for all experiments
-        click.echo("🔬 Using V8.0 Orchestrator for statistical analysis pipeline")
-        orchestrator = V8Orchestrator(exp_path)
+        # Use orchestrator for all experiments
+        click.echo("🔬 Using Experiment Orchestrator for statistical analysis pipeline")
+        orchestrator = ExperimentOrchestrator(exp_path)
         
         # Execute experiment with status indication
         rich_console.print_info("Experiment execution started - this may take several minutes...")
         rich_console.echo("⏳ Processing corpus documents and generating analysis...")
         
-        # Execute experiment with V8.0 orchestrator
+        # Execute experiment with orchestrator
         result = orchestrator.run_experiment(
             analysis_model=analysis_model,
             synthesis_model=synthesis_model,
@@ -528,39 +440,17 @@ def validate(experiment_path: str, dry_run: bool):
     
     if dry_run:
         click.echo(f"🔍 [DRY RUN] Would validate experiment: {experiment_path}")
-    else:
-        click.echo(f"🔍 Validating experiment: {experiment_path}")
+        return
+
+    click.echo(f"🔍 Validating experiment: {experiment_path}")
     
-    valid, message, experiment = validate_experiment_structure(exp_path)
+    # Perform basic validation only at the CLI level
+    valid, message, _ = validate_experiment_structure(exp_path)
     click.echo(message)
     
     if valid:
-        click.echo(f"   📋 Name: {experiment['name']}")
-        click.echo(f"   📄 Framework: {experiment['framework']}")
-        click.echo(f"   📁 Corpus: {experiment['corpus_path']} ({experiment['_corpus_file_count']} files)")
-        
-        if dry_run:
-            click.echo(f"   ✅ [DRY RUN] Basic structure valid. Would run coherence validation.")
-        
-    else:
-        # Show detailed validation issues if available (same format as run command)
-        if 'validation_result' in experiment:
-            validation_result = experiment['validation_result']
-            click.echo("❌ Validation failed:")
-            for issue in validation_result.issues:
-                click.echo(f"\n  • {issue.description}")
-                click.echo(f"    Impact: {issue.impact}")
-                click.echo(f"    Fix: {issue.fix}")
-                if issue.affected_files:
-                    click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
-            
-            if validation_result.suggestions:
-                click.echo(f"\n💡 Suggestions:")
-                for suggestion in validation_result.suggestions:
-                    click.echo(f"  • {suggestion}")
-            
-            click.echo(f"\n💡 To skip validation when running, use: --skip-validation")
-    
+        click.echo("   💡 Full coherence and logical validation will be performed by the orchestrator when you run the experiment.")
+
     sys.exit(0 if valid else 1)
 
 
@@ -901,11 +791,11 @@ def list():
     for exp in sorted(experiments, key=lambda x: x['path']):
         if exp['valid']:
             status = "✅ Valid"
-            name = exp['config'].get('name', 'Unnamed')
-            framework = exp['config'].get('framework', 'framework.md')
-            corpus_count = str(exp['config']['_corpus_file_count'])
-            
-            table.add_row(status, exp['path'], name, framework, corpus_count)
+            config = exp.get('config', {})
+            name = config.get('name', 'Unnamed')
+            framework = config.get('components', {}).get('framework', 'N/A')
+            # Corpus file count is not easily available from basic check, so we omit it
+            table.add_row(status, exp['path'], name, framework, "-")
         else:
             table.add_row("❌ Invalid", exp['path'], "-", "-", "-")
     

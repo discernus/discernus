@@ -12,7 +12,7 @@ Follows THIN architecture with externalized YAML prompts.
 import json
 import yaml
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -59,12 +59,14 @@ class ExperimentCoherenceAgent:
     
     def __init__(self, 
                  model: str = "vertex_ai/gemini-2.5-pro",
-                 audit_logger: Optional[AuditLogger] = None):
+                 audit_logger: Optional[AuditLogger] = None,
+                 specification_references: Optional[Dict[str, str]] = None):
         self.model = model
         self.agent_name = "ExperimentCoherenceAgent"
         
         # Store audit logger (optional)
         self.audit_logger = audit_logger
+        self.specification_references = specification_references or {}
         
         model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(model_registry)
@@ -128,63 +130,76 @@ class ExperimentCoherenceAgent:
             )
         
         try:
-            # Load specification references (latest versions)
-            if self.audit_logger:
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "loading_specification_references",
-                    {"status": "starting"}
-                )
-            
-            specification_references = self._load_specification_references()
-            
             # Load experiment artifacts
-            if self.audit_logger:
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "loading_artifacts",
-                    {"status": "starting"}
-                )
+            experiment_spec_content = self._load_artifact(experiment_path, "experiment.md")
             
-            experiment_spec = self._load_experiment_spec(experiment_path)
-            framework_spec = self._load_framework_spec(experiment_path, experiment_spec)
-            corpus_manifest = self._load_corpus_manifest(experiment_path, experiment_spec)
+            # Parse the experiment spec content to a dictionary
+            try:
+                if '## Configuration Appendix' in experiment_spec_content:
+                    _, appendix_content = experiment_spec_content.split('## Configuration Appendix', 1)
+                    if '```yaml' in appendix_content:
+                        yaml_start = appendix_content.find('```yaml') + 7
+                        yaml_end = appendix_content.rfind('```')
+                        yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
+                        experiment_spec = yaml.safe_load(yaml_content)
+                    else:
+                        raise ValueError("YAML code fence not found in appendix.")
+                else:
+                    raise ValueError("'## Configuration Appendix' not found.")
+            except Exception as e:
+                raise ValueError(f"Failed to parse experiment.md YAML: {e}")
+
+            # Extract framework and corpus paths from experiment spec
+            framework_file, corpus_file = self._extract_paths_from_experiment(experiment_spec, experiment_path)
             
-            if self.audit_logger:
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "artifacts_loaded",
-                    {
-                        "experiment_name": experiment_spec.get("name", "unknown"),
-                        "framework_path": experiment_spec.get("framework", "unknown"),
-                        "corpus_path": experiment_spec.get("corpus_path", "unknown")
-                    }
-                )
+            framework_spec = self._load_artifact(experiment_path, framework_file)
+            corpus_manifest = self._load_artifact(experiment_path, corpus_file)
+
+            # Parse specs into dictionaries for internal use
+            try:
+                if '## Part 2: The Machine-Readable Appendix' in framework_spec:
+                    _, framework_yaml_block = framework_spec.split('## Part 2: The Machine-Readable Appendix', 1)
+                    if '```yaml' in framework_yaml_block:
+                        yaml_start = framework_yaml_block.find('```yaml') + 7
+                        yaml_end = framework_yaml_block.rfind('```')
+                        framework_yaml = framework_yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else framework_yaml_block[yaml_start:].strip()
+                        framework_dict = yaml.safe_load(framework_yaml)
+                    else:
+                        raise ValueError("YAML code fence not found in framework appendix.")
+                else:
+                    raise ValueError("Framework appendix not found.")
+            except Exception as e:
+                raise ValueError(f"Failed to parse framework YAML: {e}")
             
-            # Create validation prompt with specification references
-            validation_prompt = self._create_validation_prompt(
-                experiment_spec, framework_spec, corpus_manifest, specification_references
+            try:
+                if '## Document Manifest' in corpus_manifest:
+                    _, corpus_yaml_block = corpus_manifest.split('## Document Manifest', 1)
+                    if '```yaml' in corpus_yaml_block:
+                        yaml_start = corpus_yaml_block.find('```yaml') + 7
+                        yaml_end = corpus_yaml_block.rfind('```')
+                        corpus_yaml = corpus_yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else corpus_yaml_block[yaml_start:].strip()
+                        corpus_dict = yaml.safe_load(corpus_yaml)
+                    else:
+                        raise ValueError("YAML code fence not found in corpus manifest.")
+                else:
+                    raise ValueError("Corpus manifest appendix not found.")
+            except Exception as e:
+                raise ValueError(f"Failed to parse corpus manifest YAML: {e}")
+
+
+            # Assemble the prompt with the content of the artifacts
+            prompt = self.prompt_template.format(
+                current_date=datetime.now().strftime("%Y-%m-%d"),
+                experiment_spec=experiment_spec,
+                framework_spec=framework_dict,
+                corpus_manifest=corpus_dict,
+                specification_references=json.dumps(self.specification_references, indent=2)
             )
             
-            if self.audit_logger:
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "llm_validation_prompt",
-                    {"prompt": validation_prompt}
-                )
-                self.audit_logger.log_agent_event(
-                    self.agent_name,
-                    "llm_validation_start",
-                    {"model": self.model}
-                )
-            
-            # Add statistical prerequisite validation
-            statistical_issues = self._validate_statistical_prerequisites(experiment_path, experiment_spec, corpus_manifest)
-            
-            # Get LLM validation
-            response, metadata = self.llm_gateway.execute_call(
+            # Call LLM for validation
+            raw_response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
-                prompt=validation_prompt,
+                prompt=prompt,
                 system_prompt="You are a validation expert for the Discernus research platform."
             )
 
@@ -207,7 +222,7 @@ class ExperimentCoherenceAgent:
                 )
 
             # Check if response is empty
-            if not response or not response.strip():
+            if not raw_response or not raw_response.strip():
                 error_msg = "LLM returned empty response"
                 if self.audit_logger:
                     self.audit_logger.log_error("llm_validation_empty_response", error_msg, {"agent": self.agent_name})
@@ -228,13 +243,18 @@ class ExperimentCoherenceAgent:
                 self.audit_logger.log_agent_event(
                     self.agent_name,
                     "llm_validation_response",
-                    {"response": response}
+                    {"response": raw_response}
                 )
             
             # Parse validation result
-            result = self._parse_validation_response(response)
+            result = self._parse_validation_response(raw_response)
             
             # Combine LLM validation issues with statistical prerequisite issues
+            statistical_issues = self._validate_statistical_prerequisites(
+                experiment_path,
+                experiment_spec,
+                corpus_dict
+            )
             all_issues = statistical_issues + result.issues
             blocking_statistical_issues = [issue for issue in statistical_issues if issue.priority == "BLOCKING"]
             combined_result = ValidationResult(
@@ -283,63 +303,43 @@ class ExperimentCoherenceAgent:
                 suggestions=["Ensure experiment.md, framework.md, and corpus/ directory exist"]
             )
     
-    def _load_experiment_spec(self, experiment_path: Path) -> Dict:
-        """Load and parse experiment specification."""
-        experiment_file = experiment_path / "experiment.md"
-        if not experiment_file.exists():
-            raise FileNotFoundError(f"experiment.md not found in {experiment_path}")
+    def _load_artifact(self, experiment_path: Path, filename: str) -> str:
+        """Load a single artifact (experiment.md, framework.md, corpus.md) from the experiment directory."""
+        artifact_path = experiment_path / filename
+        if not artifact_path.exists():
+            raise FileNotFoundError(f"{filename} not found in {experiment_path}")
             
-        with open(experiment_file, 'r') as f:
-            content = f.read()
-            
-        # Extract YAML frontmatter
-        if content.startswith('---'):
-            parts = content.split('---', 2)
-            if len(parts) >= 3:
-                return yaml.safe_load(parts[1])
-            else:
-                raise ValueError("Invalid experiment.md format (missing YAML frontmatter)")
-        else:
-            raise ValueError("experiment.md missing YAML frontmatter")
-    
-    def _load_framework_spec(self, experiment_path: Path, experiment_spec: Dict) -> str:
-        """Load framework specification."""
-        framework_file = experiment_path / experiment_spec.get('framework', 'framework.md')
-        if not framework_file.exists():
-            raise FileNotFoundError(f"Framework file not found: {framework_file}")
-            
-        with open(framework_file, 'r') as f:
+        with open(artifact_path, 'r') as f:
             return f.read()
+
+    def _extract_paths_from_experiment(self, experiment_spec: Dict, experiment_path: Path) -> Tuple[str, str]:
+        """Extract framework and corpus file paths from the experiment specification."""
+        framework_path = experiment_spec.get('components', {}).get('framework')
+        corpus_path = experiment_spec.get('components', {}).get('corpus')
+
+        if not framework_path:
+            raise ValueError("Framework path not found in experiment.md `components` section.")
+        if not corpus_path:
+            raise ValueError("Corpus path not found in experiment.md `components` section.")
+
+        # Ensure framework_path is a file
+        if not (experiment_path / framework_path).is_file():
+            raise FileNotFoundError(f"Framework file not found: {experiment_path / framework_path}")
+
+        # For v10, corpus path points to a file, not a directory
+        if not (experiment_path / corpus_path).is_file():
+            raise FileNotFoundError(f"Corpus manifest file not found: {experiment_path / corpus_path}")
+
+        return framework_path, corpus_path
     
-    def _load_corpus_manifest(self, experiment_path: Path, experiment_spec: Dict) -> str:
-        """Load corpus manifest as raw content for LLM validation."""
-        corpus_path = experiment_path / experiment_spec.get('corpus', 'corpus')
-        
-        # Handle both direct file paths and directory paths
-        if corpus_path.is_file():
-            # Direct file path - load the file
-            with open(corpus_path, 'r') as f:
-                return f.read()
-        elif corpus_path.is_dir():
-            # Directory path - look for corpus.md inside
-            corpus_manifest_file = corpus_path / "corpus.md"
-            if not corpus_manifest_file.exists():
-                raise FileNotFoundError(f"corpus.md not found in {corpus_path}")
-            
-            with open(corpus_manifest_file, 'r') as f:
-                return f.read()
-        else:
-            # Neither file nor directory exists
-            raise FileNotFoundError(f"Corpus path not found: {corpus_path}")
-    
-    def _validate_statistical_prerequisites(self, experiment_path: Path, experiment_spec: Dict, corpus_manifest: str) -> List[ValidationIssue]:
+    def _validate_statistical_prerequisites(self, experiment_path: Path, experiment_spec: Dict, corpus_manifest: Dict) -> List[ValidationIssue]:
         """
         Validate statistical prerequisites for academically valid results.
         
         Args:
             experiment_path: Path to experiment directory
             experiment_spec: Experiment specification
-            corpus_manifest: Raw corpus manifest content
+            corpus_manifest: Parsed corpus manifest dictionary
             
         Returns:
             List of validation issues related to statistical prerequisites
