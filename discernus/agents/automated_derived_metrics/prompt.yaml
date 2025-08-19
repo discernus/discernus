@@ -10,8 +10,17 @@ template: |
   **EXPERIMENT:** {experiment_name}
   **DESCRIPTION:** {experiment_description}
 
+  **ACTUAL DATA STRUCTURE:**
+  The analysis data contains the following columns:
+  {data_columns}
+
+  **SAMPLE DATA:**
+  {sample_data}
+
   **YOUR TASK:**
   Generate Python functions that implement the calculations described in the framework's "Calculations" section.
+  
+  **CRITICAL:** Use the EXACT column names shown in the actual data structure above. Do NOT assume or invent column names.
 
   **CRITICAL REQUIREMENTS:**
   1. Each calculation must be implemented as a separate Python function

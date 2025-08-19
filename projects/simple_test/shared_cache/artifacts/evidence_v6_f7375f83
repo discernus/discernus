@@ -1,0 +1,161 @@
+{
+  "evidence_metadata": {
+    "document_hash": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+    "total_evidence_pieces": 15,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-18T22:55:38.087567+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Tribal Dominance",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.85,
+      "context_type": "rhetorical_framing_to_overcome_division",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087506+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Individual Dignity",
+      "quote_text": "I\u2019ve always believed that America offers opportunities to all who have the industry and will to seize it.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087525+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Individual Dignity",
+      "quote_text": "America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+      "confidence": 0.95,
+      "context_type": "affirmation_of_progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087529+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Fear",
+      "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment_of_challenges",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087531+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Fear",
+      "quote_text": "defend our security in a dangerous world",
+      "confidence": 0.8,
+      "context_type": "acknowledgment_of_external_threats",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087535+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Hope",
+      "quote_text": "Tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.95,
+      "context_type": "aspirational_call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087538+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Hope",
+      "quote_text": "leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.9,
+      "context_type": "vision_for_the_future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087540+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Envy",
+      "quote_text": "His success alone commands my respect for his ability and perseverance.",
+      "confidence": 0.95,
+      "context_type": "explicit_denial_of_envy_by_showing_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087543+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Compassion",
+      "quote_text": "I had the honor of calling Senator Barack Obama to congratulate him... on being elected the next president of the country that we both love.",
+      "confidence": 0.95,
+      "context_type": "direct_congratulations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087545+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Compassion",
+      "quote_text": "His success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans... is something I deeply admire and commend him for achieving.",
+      "confidence": 0.95,
+      "context_type": "expression_of_admiration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087548+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Enmity",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed.",
+      "confidence": 0.9,
+      "context_type": "factual_acknowledgment_of_past_conflict",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087551+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Amity",
+      "quote_text": "I urge all Americans... to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity...",
+      "confidence": 0.95,
+      "context_type": "call_for_unity_and_cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087553+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Amity",
+      "quote_text": "Tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.95,
+      "context_type": "direct_appeal_for_collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087555+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Fragmentative Goals",
+      "quote_text": "We fought \u2013 we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment_of_personal_defeat_in_a_contest",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087558+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Cohesive Goals",
+      "quote_text": "help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.95,
+      "context_type": "articulation_of_shared_national_objectives",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-18T22:55:38.087560+00:00"
+    }
+  ]
+}

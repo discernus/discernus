@@ -27,16 +27,26 @@ from ratelimit import limits, RateLimitException
 # LLMArchiveManager was removed during cleanup - functionality moved to agents
 # from discernus.core.llm_archive_manager import LLMArchiveManager
 
+import json
+from ..core.logging_config import get_logger
+
+
 class LLMGateway(BaseGateway):
     """
     A unified gateway for making calls to various Large Language Models (LLMs)
     through the LiteLLM library. It includes logic for intelligent model fallback
     in case of failures.
     """
-    def __init__(self, model_registry: ModelRegistry, archive_manager = None):
+    def __init__(self, model_registry: ModelRegistry):
+        """
+        Initialize the gateway.
+        
+        Args:
+            model_registry: An instance of ModelRegistry.
+        """
         self.model_registry = model_registry
-        self.parameter_manager = ProviderParameterManager()
-        self.archive_manager = archive_manager
+        self.param_manager = ProviderParameterManager()
+        self.logger = get_logger("llm_gateway")
         
         # Create rate-limited completion functions per provider
         self._rate_limited_completions = self._create_rate_limiters()
@@ -48,7 +58,7 @@ class LLMGateway(BaseGateway):
         """
         limiters = {}
         
-        for provider, config in self.parameter_manager.provider_defaults.items():
+        for provider, config in self.param_manager.provider_defaults.items():
             # Get RPM limit from provider defaults or use conservative default
             rpm_limit = config.get('default_rpm_limit', 60)
             
@@ -71,10 +81,10 @@ class LLMGateway(BaseGateway):
         Get the appropriate rate-limited completion function for a model.
         Falls back to unrestricted litellm.completion if no rate limiter is configured.
         """
-        provider = self.parameter_manager.get_provider_from_model(model)
+        provider = self.param_manager.get_provider_from_model(model)
         return self._rate_limited_completions.get(provider, litellm.completion)
 
-    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, **kwargs) -> Tuple[str, Dict[str, Any]]:
+    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, response_schema: Optional[Dict[str, Any]] = None, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
         Executes a call to an LLM provider via LiteLLM, with intelligent fallback.
         """
@@ -90,8 +100,8 @@ class LLMGateway(BaseGateway):
 
             try:
                 # --- Moderation Guardrail ---
-                provider = self.parameter_manager.get_provider_from_model(current_model)
-                provider_config = self.parameter_manager.provider_defaults.get(provider, {})
+                provider = self.param_manager.get_provider_from_model(current_model)
+                provider_config = self.param_manager.provider_defaults.get(provider, {})
                 
                 if provider_config.get("requires_pre_moderation"):
                     mod_response = moderation(input=prompt)
@@ -102,30 +112,35 @@ class LLMGateway(BaseGateway):
                             flagged_categories = [category for category, flagged in categories.items() if flagged]
                         error_msg = f"Prompt flagged by moderation API for categories: {', '.join(flagged_categories)}"
                         
-                        # Archive moderation failure
-                        if self.archive_manager:
-                            self.archive_manager.save_call(
-                                prompt=prompt,
-                                system_prompt=system_prompt,
-                                response="",
-                                model=current_model,
-                                usage_data={},
-                                success=False,
-                                error=error_msg
-                            )
-                        
-                        return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
+                        return None, {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
 
                 print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
                 
                 # Clean parameters based on provider requirements
-                clean_params = self.parameter_manager.get_clean_parameters(current_model, kwargs)
+                call_kwargs = kwargs.copy()
+                if response_schema:
+                    call_kwargs['response_format'] = {
+                        "type": "json_object",
+                        "schema": response_schema
+                    }
+
+                clean_params = self.param_manager.get_clean_parameters(current_model, call_kwargs)
                 
                 # Use rate-limited completion function for this provider
                 completion_func = self._get_rate_limited_completion(current_model)
                 response = completion_func(model=current_model, messages=messages, stream=False, **clean_params)
                 
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
+
+                # If the response is a JSON string, parse it for structured output
+                if isinstance(content, str) and content.strip().startswith('{'):
+                    try:
+                        parsed_content = json.loads(content)
+                        content = parsed_content
+                    except json.JSONDecodeError as e:
+                        # Not a valid JSON string, leave content as is
+                        pass
+
                 usage_obj = getattr(response, 'usage', None)
                 
                 # Extract cost data from LiteLLM response
@@ -158,17 +173,6 @@ class LLMGateway(BaseGateway):
                     "response_cost_usd": response_cost
                 }
                 
-                # Archive successful LLM call
-                if self.archive_manager:
-                    self.archive_manager.save_call(
-                        prompt=prompt,
-                        system_prompt=system_prompt,
-                        response=content,
-                        model=current_model,
-                        usage_data=usage_data,
-                        success=True
-                    )
-                
                 return content, {"success": True, "model": current_model, "usage": usage_data, "attempts": attempts}
             
             except litellm.exceptions.APIConnectionError as e:
@@ -199,34 +203,11 @@ class LLMGateway(BaseGateway):
                 else:
                     error_msg = f"All fallbacks failed. Last error on {current_model}: {str(e)}"
                     
-                    # Archive failed LLM call
-                    if self.archive_manager:
-                        self.archive_manager.save_call(
-                            prompt=prompt,
-                            system_prompt=system_prompt,
-                            response="",
-                            model=current_model,
-                            usage_data={},
-                            success=False,
-                            error=error_msg
-                        )
-                    
-                    return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
+                    return None, {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
         
         # Archive final max retries failure
         final_error = f"Max retries exceeded for {model}"
-        if self.archive_manager:
-            self.archive_manager.save_call(
-                prompt=prompt,
-                system_prompt=system_prompt,
-                response="",
-                model=current_model,
-                usage_data={},
-                success=False,
-                error=final_error
-            )
-        
-        return "", {"success": False, "error": final_error, "model": current_model, "attempts": max_retries}
+        return None, {"success": False, "error": final_error, "model": current_model, "attempts": max_retries}
 
     async def check_model_health(self, model_name: str) -> Dict[str, Any]:
         """
@@ -238,7 +219,7 @@ class LLMGateway(BaseGateway):
             # A more robust health check would involve model-specific parameters
             # and potentially a more complex prompt.
             messages = [{"role": "user", "content": "Hello, model!"}]
-            clean_params = self.parameter_manager.get_clean_parameters(model_name, {}) # Assuming no specific parameters needed for this basic check
+            clean_params = self.param_manager.get_clean_parameters(model_name, {}) # Assuming no specific parameters needed for this basic check
             
             # Use rate-limited completion function for health checks too
             completion_func = self._get_rate_limited_completion(model_name)
@@ -274,7 +255,7 @@ class LLMGateway(BaseGateway):
 if __name__ == '__main__':
     # Demo of how to use the LLMGateway
     registry = ModelRegistry()
-    gateway = LLMGateway(registry)
+    gateway = LLMGateway(registry, gcp_project_id="your-gcp-project-id")
     
     print("Executing call with Claude Haiku...")
     response, metadata = gateway.execute_call(

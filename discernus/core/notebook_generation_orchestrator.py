@@ -22,6 +22,8 @@ Transactional Model:
 import json
 import shutil
 import hashlib
+import pandas as pd
+import numpy as np
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional, List
@@ -119,6 +121,9 @@ class NotebookGenerationOrchestrator:
             
             # Phase 4: VALIDATE GENERATED FUNCTIONS
             self._validate_functions()
+            
+            # Phase 4.5: EXECUTE FUNCTIONS TO GENERATE REAL DATA
+            self._execute_functions_to_generate_data()
             
             # Phase 5: GENERATE COMPLETE NOTEBOOK (Phase 3 Integration)
             self._generate_complete_notebook(v8_experiment, analysis_model, synthesis_model)
@@ -841,6 +846,9 @@ def placeholder_function():
             # Phase 4: VALIDATE GENERATED FUNCTIONS
             self._validate_functions()
             
+            # Phase 4.5: EXECUTE FUNCTIONS TO GENERATE REAL DATA (CRITICAL FIX)
+            self._execute_functions_to_generate_data()
+            
             # Phase 5: GENERATE COMPLETE NOTEBOOK (Phase 3 Integration)
             self._generate_complete_notebook(None, analysis_model, synthesis_model)
             
@@ -961,18 +969,43 @@ def placeholder_function():
                 framework_content = "Generated from pre-computed analysis results"
                 document_count = 1  # Placeholder when using analysis results
             
-            # Generate notebook with real content directly
-            notebook = notebook_generator.generate_complete_notebook(
-                experiment_name=experiment_name,
-                framework_name=framework_name,
-                framework_content=framework_content,
-                document_count=document_count,
-                generated_functions=generated_functions,
-                data_paths=data_paths,
-                statistical_summary="Statistical analysis completed using automated agents",
-                key_findings="Analysis completed with automated statistical processing",
-                research_context=f"Computational analysis using {framework_name} framework"
-            )
+            # 🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+            # Extract REAL statistical results or error out
+            real_statistical_data = self._extract_real_statistical_data(workspace)
+            
+            if not real_statistical_data['valid']:
+                # Data validation failed - create error notebook instead of fabricating
+                error_notebook = self._create_data_validation_error_notebook(
+                    experiment_name=experiment_name,
+                    framework_name=framework_name,
+                    validation_errors=real_statistical_data['errors'],
+                    generated_functions=generated_functions,
+                    data_paths=data_paths
+                )
+                notebook = error_notebook
+                
+                # Log the data validation failure
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "DATA_VALIDATION_FAILED_NOTEBOOK_CREATED",
+                    {
+                        "errors": real_statistical_data['errors'],
+                        "action": "created_error_notebook_instead_of_fabricating"
+                    }
+                )
+            else:
+                # Data validation passed - generate notebook with REAL data
+                notebook = notebook_generator.generate_complete_notebook(
+                    experiment_name=experiment_name,
+                    framework_name=framework_name,
+                    framework_content=framework_content,
+                    document_count=document_count,
+                    generated_functions=generated_functions,
+                    data_paths=data_paths,
+                    statistical_summary=real_statistical_data['statistical_summary'],
+                    key_findings=real_statistical_data['key_findings'],
+                    research_context=real_statistical_data['research_context']
+                )
             
             # Write the notebook
             notebook_path = workspace / "research_notebook.py"
@@ -1100,3 +1133,463 @@ def placeholder_function():
                 'research_context': '',
                 'summary': f'Error extracting results: {str(e)}'
             }
+    
+    def _extract_real_statistical_data(self, workspace: Path) -> Dict[str, Any]:
+        """
+        🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+        Extract REAL statistical data from workspace or error out with specific missing data.
+        
+        Returns:
+            Dict with 'valid' bool and either real data or specific error details
+        """
+        validation_errors = []
+        statistical_summary = ""
+        key_findings = ""
+        research_context = ""
+        
+        # 1. VALIDATE ANALYSIS DATA EXISTS
+        analysis_data_path = workspace / "analysis_data.json"
+        if not analysis_data_path.exists():
+            validation_errors.append("analysis_data.json file does not exist")
+        else:
+            try:
+                with open(analysis_data_path, 'r') as f:
+                    analysis_data = json.load(f)
+                if not analysis_data or analysis_data == []:
+                    validation_errors.append("analysis_data.json is empty - no documents were analyzed")
+                else:
+                    # Real analysis data exists
+                    doc_count = len(analysis_data)
+                    research_context = f"Analysis completed on {doc_count} documents with measurable results"
+                    
+                    # Extract sample of actual dimension values
+                    if doc_count > 0 and isinstance(analysis_data[0], dict):
+                        sample_doc = analysis_data[0]
+                        dimensions = [k for k in sample_doc.keys() if k != 'document_name' and not k.endswith('_confidence') and not k.endswith('_salience')]
+                        key_findings = f"Analysis extracted {len(dimensions)} dimensions from {doc_count} documents: {', '.join(dimensions[:3])}{'...' if len(dimensions) > 3 else ''}"
+            except Exception as e:
+                validation_errors.append(f"Failed to read analysis_data.json: {str(e)}")
+        
+        # 2. VALIDATE DERIVED METRICS EXIST  
+        derived_metrics_path = workspace / "derived_metrics.csv"
+        if not derived_metrics_path.exists():
+            validation_errors.append("derived_metrics.csv file does not exist")
+        else:
+            try:
+                import pandas as pd
+                df = pd.read_csv(derived_metrics_path)
+                if df.empty:
+                    validation_errors.append("derived_metrics.csv is empty - no calculations were performed")
+                else:
+                    # Real derived metrics exist
+                    metrics_count = len([col for col in df.columns if col != 'document_name'])
+                    statistical_summary = f"Successfully calculated {metrics_count} derived metrics for {len(df)} documents"
+                    
+                    # Add sample of actual calculated values
+                    numeric_cols = df.select_dtypes(include=['number']).columns
+                    if len(numeric_cols) > 0:
+                        sample_values = []
+                        for col in numeric_cols[:3]:  # First 3 numeric columns
+                            mean_val = df[col].mean()
+                            if pd.notna(mean_val):
+                                sample_values.append(f"{col}: {mean_val:.3f}")
+                        if sample_values:
+                            statistical_summary += f". Sample values: {', '.join(sample_values)}"
+            except Exception as e:
+                validation_errors.append(f"Failed to read derived_metrics.csv: {str(e)}")
+        
+        # 3. VALIDATE STATISTICAL FUNCTIONS WERE EXECUTED
+        stat_functions_path = workspace / "automatedstatisticalanalysisagent_functions.py"
+        if not stat_functions_path.exists():
+            validation_errors.append("Statistical analysis functions were not generated")
+        else:
+            # Check if statistical results exist
+            raw_scores_path = workspace / "raw_scores.csv"
+            if raw_scores_path.exists():
+                try:
+                    import pandas as pd
+                    scores_df = pd.read_csv(raw_scores_path)
+                    if not scores_df.empty:
+                        statistical_summary += f". Raw dimensional scores available for {len(scores_df)} documents"
+                except Exception as e:
+                    validation_errors.append(f"Raw scores file exists but cannot be read: {str(e)}")
+        
+        # Return validation result
+        if validation_errors:
+            return {
+                'valid': False,
+                'errors': validation_errors,
+                'statistical_summary': '',
+                'key_findings': '',
+                'research_context': '',
+                'message': f"DATA VALIDATION FAILED: {len(validation_errors)} critical data issues found"
+            }
+        else:
+            return {
+                'valid': True,
+                'errors': [],
+                'statistical_summary': statistical_summary,
+                'key_findings': key_findings,
+                'research_context': research_context,
+                'message': "Data validation passed - real statistical results available"
+            }
+    
+    def _create_data_validation_error_notebook(self, 
+                                             experiment_name: str,
+                                             framework_name: str, 
+                                             validation_errors: List[str],
+                                             generated_functions: Dict[str, str],
+                                             data_paths: List) -> str:
+        """
+        🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+        Create error notebook when data validation fails instead of fabricating content.
+        """
+        error_details = '\n'.join(f"- {error}" for error in validation_errors)
+        
+        error_notebook = f'''#!/usr/bin/env python3
+"""
+{experiment_name} - DATA VALIDATION FAILED
+🚨 ANTI-FABRICATION SAFEGUARD ACTIVATED 🚨
+===========================================
+
+This notebook was created because the data validation failed.
+NO CONTENT WAS FABRICATED.
+
+Framework: {framework_name}
+Generated: {datetime.now(timezone.utc).isoformat()}
+
+🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+==========================================
+This system refused to generate academic content because:
+
+{error_details}
+
+REQUIRED ACTIONS:
+1. Fix the data pipeline to generate real analysis results
+2. Ensure analysis_data.json contains actual document analysis
+3. Ensure derived_metrics.csv contains real calculations
+4. Re-run the experiment after fixing data issues
+
+NO FABRICATED CONTENT BELOW - ONLY ERROR REPORTING
+==================================================
+"""
+
+import pandas as pd
+import numpy as np
+from pathlib import Path
+import json
+
+# 🚨 DATA VALIDATION FAILED 🚨
+print("🚨 DATA VALIDATION FAILED")
+print("🎯 ANTI-FABRICATION PRINCIPLE: Data or Die")
+print()
+print("VALIDATION ERRORS:")
+{chr(10).join(f'print("- {error}")' for error in validation_errors)}
+print()
+print("REQUIRED ACTIONS:")
+print("1. Fix the data pipeline to generate real analysis results")
+print("2. Ensure analysis_data.json contains actual document analysis") 
+print("3. Ensure derived_metrics.csv contains real calculations")
+print("4. Re-run the experiment after fixing data issues")
+print()
+print("❌ NO ACADEMIC CONTENT GENERATED")
+print("❌ NO FABRICATED STATISTICS")
+print("❌ NO FAKE INTERPRETATIONS")
+print("✅ SYSTEM REFUSED TO FABRICATE")
+
+# Generated functions are preserved for debugging
+# (These work correctly - the issue is missing data, not broken functions)
+{generated_functions.get('derived_metrics', '# No derived metrics functions')}
+
+{generated_functions.get('statistical_analysis', '# No statistical analysis functions')}
+
+print("🎯 Anti-fabrication safeguard completed successfully")
+print("📋 Next step: Fix data pipeline, then re-run experiment")
+'''
+        
+        return error_notebook
+    
+    def _execute_functions_to_generate_data(self) -> None:
+        """
+        🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+        Execute generated functions against real analysis data to create CSV results.
+        
+        This is the critical step that creates the real statistical data that narrative
+        agents need to generate authentic, data-driven content.
+        """
+        self.audit_logger.log_agent_event(
+            self.agent_name,
+            "FUNCTION_EXECUTION_START",
+            {"workspace": str(self.current_transaction.workspace_path)}
+        )
+        
+        try:
+            workspace = self.current_transaction.workspace_path
+            
+            # 1. LOAD REAL ANALYSIS DATA
+            analysis_data_path = workspace / "analysis_data.json"
+            if not analysis_data_path.exists():
+                raise ValueError("Cannot execute functions: analysis_data.json not found")
+            
+            with open(analysis_data_path, 'r') as f:
+                analysis_data = json.load(f)
+            
+            if not analysis_data:
+                raise ValueError("Cannot execute functions: analysis_data.json is empty")
+            
+            # Convert to DataFrame for function execution
+            df = pd.DataFrame(analysis_data)
+            
+            # 2. EXECUTE DERIVED METRICS FUNCTIONS
+            derived_metrics_results = self._execute_derived_metrics_functions(workspace, df)
+            
+            # 3. EXECUTE STATISTICAL ANALYSIS FUNCTIONS  
+            statistical_results = self._execute_statistical_analysis_functions(workspace, df, derived_metrics_results)
+            
+            # 4. GENERATE CSV OUTPUTS
+            self._generate_csv_outputs(workspace, df, derived_metrics_results, statistical_results)
+            
+            # 5. COPY CSV FILES TO MAIN EXPERIMENT DIRECTORY (CRITICAL FIX)
+            self._copy_csv_files_to_main_directory(workspace, derived_metrics_results, statistical_results)
+            
+            # 6. LOG SUCCESS
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "FUNCTION_EXECUTION_SUCCESS",
+                {
+                    "workspace": str(workspace),
+                    "documents_processed": len(df),
+                    "derived_metrics_calculated": len(derived_metrics_results),
+                    "statistical_analyses_completed": len(statistical_results),
+                    "csv_files_generated": ["derived_metrics.csv", "raw_scores.csv", "statistical_analysis.csv"],
+                    "csv_files_copied_to_main": True
+                }
+            )
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "FUNCTION_EXECUTION_FAILED",
+                {"error": str(e), "workspace": str(self.current_transaction.workspace_path)}
+            )
+            raise Exception(f"Function execution failed: {str(e)}")
+    
+    def _execute_derived_metrics_functions(self, workspace: Path, df: pd.DataFrame) -> Dict[str, Any]:
+        """Execute derived metrics functions and return calculated results."""
+        derived_metrics_file = workspace / "automatedderivedmetricsagent_functions.py"
+        if not derived_metrics_file.exists():
+            return {}
+        
+        # Load and execute the generated functions
+        exec_globals = {'pandas': pd, 'np': np, 'pd': pd}
+        with open(derived_metrics_file, 'r') as f:
+            function_code = f.read()
+        
+        # Execute the functions file to define them
+        exec(function_code, exec_globals)
+        
+        # Apply each function to the dataframe
+        derived_results = df.copy()
+        functions_executed = []
+        
+        # Look for calculation functions in the executed globals
+        for name, obj in exec_globals.items():
+            if callable(obj) and name.startswith('calculate_'):
+                try:
+                    # Execute function on each row
+                    function_name = name.replace('calculate_', '')
+                    derived_results[function_name] = df.apply(lambda row: obj(row), axis=1)
+                    functions_executed.append(function_name)
+                except Exception as e:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "FUNCTION_EXECUTION_WARNING",
+                        {"function": name, "error": str(e)}
+                    )
+        
+        return {
+            'dataframe': derived_results,
+            'functions_executed': functions_executed,
+            'metrics_calculated': [col for col in derived_results.columns if col not in df.columns]
+        }
+    
+    def _execute_statistical_analysis_functions(self, workspace: Path, df: pd.DataFrame, derived_metrics: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute statistical analysis functions and return results."""
+        statistical_file = workspace / "automatedstatisticalanalysisagent_functions.py"
+        if not statistical_file.exists():
+            return {}
+        
+        # Load and execute the generated functions
+        exec_globals = {'pandas': pd, 'np': np, 'pd': pd, 'stats': None}
+        
+        # Import scipy.stats if available
+        try:
+            import scipy.stats as stats
+            exec_globals['stats'] = stats
+        except ImportError:
+            pass
+        
+        with open(statistical_file, 'r') as f:
+            function_code = f.read()
+        
+        # Execute the functions file to define them
+        exec(function_code, exec_globals)
+        
+        # Use derived metrics dataframe if available
+        analysis_df = derived_metrics.get('dataframe', df)
+        
+        # Execute statistical functions
+        statistical_results = {}
+        functions_executed = []
+        
+        # Look for statistical functions in the executed globals
+        for name, obj in exec_globals.items():
+            if callable(obj) and ('calculate_' in name or 'perform_' in name) and name not in ['calculate_basic_statistics']:
+                try:
+                    result = obj(analysis_df)
+                    statistical_results[name] = result
+                    functions_executed.append(name)
+                except Exception as e:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "STATISTICAL_FUNCTION_WARNING",
+                        {"function": name, "error": str(e)}
+                    )
+                    statistical_results[name] = {"error": str(e)}
+        
+        # Always calculate basic statistics if function exists
+        if 'calculate_basic_statistics' in exec_globals:
+            try:
+                basic_stats = exec_globals['calculate_basic_statistics'](analysis_df)
+                statistical_results['calculate_basic_statistics'] = basic_stats
+                functions_executed.append('calculate_basic_statistics')
+            except Exception as e:
+                statistical_results['calculate_basic_statistics'] = {"error": str(e)}
+        
+        return {
+            'results': statistical_results,
+            'functions_executed': functions_executed,
+            'analysis_metadata': {
+                'sample_size': len(analysis_df),
+                'variables_analyzed': list(analysis_df.columns),
+                'functions_available': functions_executed
+            }
+        }
+    
+    def _generate_csv_outputs(self, workspace: Path, original_df: pd.DataFrame, derived_metrics: Dict[str, Any], statistical_results: Dict[str, Any]) -> None:
+        """Generate CSV files from function execution results."""
+        
+        # 1. Generate derived_metrics.csv
+        if derived_metrics and 'dataframe' in derived_metrics:
+            derived_df = derived_metrics['dataframe']
+            derived_csv_path = workspace / "derived_metrics.csv"
+            derived_df.to_csv(derived_csv_path, index=False)
+            
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "CSV_GENERATED",
+                {
+                    "file": "derived_metrics.csv",
+                    "rows": len(derived_df),
+                    "columns": len(derived_df.columns),
+                    "metrics_calculated": derived_metrics.get('metrics_calculated', [])
+                }
+            )
+        
+        # 2. Generate raw_scores.csv (original analysis data)
+        raw_scores_path = workspace / "raw_scores.csv"
+        original_df.to_csv(raw_scores_path, index=False)
+        
+        # 3. Generate statistical_analysis.csv
+        if statistical_results and 'results' in statistical_results:
+            stats_data = []
+            for func_name, result in statistical_results['results'].items():
+                if isinstance(result, dict) and 'error' not in result:
+                    # Flatten statistical results into CSV format
+                    row = {'analysis_function': func_name}
+                    if isinstance(result, dict):
+                        for key, value in result.items():
+                            if isinstance(value, (int, float, str, bool)):
+                                row[key] = value
+                    stats_data.append(row)
+            
+            if stats_data:
+                stats_df = pd.DataFrame(stats_data)
+                stats_csv_path = workspace / "statistical_analysis.csv"
+                stats_df.to_csv(stats_csv_path, index=False)
+                
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "CSV_GENERATED",
+                    {
+                        "file": "statistical_analysis.csv",
+                        "rows": len(stats_df),
+                        "functions_executed": statistical_results.get('functions_executed', [])
+                    }
+                )
+    
+    def _copy_csv_files_to_main_directory(self, workspace: Path, derived_metrics: Dict[str, Any], statistical_results: Dict[str, Any]) -> None:
+        """
+        🎯 CRITICAL FIX: Copy generated CSV files from transaction workspace to main experiment directory.
+        
+        This ensures the notebook template can access the required CSV files for data validation
+        and narrative generation.
+        """
+        try:
+            # List of CSV files that should be copied
+            csv_files_to_copy = [
+                "derived_metrics.csv",
+                "raw_scores.csv", 
+                "statistical_analysis.csv"
+            ]
+            
+            files_copied = []
+            
+            for csv_file in csv_files_to_copy:
+                source_path = workspace / csv_file
+                target_path = self.experiment_path / csv_file
+                
+                if source_path.exists():
+                    # Copy file to main experiment directory
+                    import shutil
+                    shutil.copy2(source_path, target_path)
+                    files_copied.append(csv_file)
+                    
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "CSV_FILE_COPIED",
+                        {
+                            "source": str(source_path),
+                            "target": str(target_path),
+                            "file": csv_file
+                        }
+                    )
+                else:
+                    self.audit_logger.log_agent_event(
+                        self.agent_name,
+                        "CSV_FILE_MISSING",
+                        {
+                            "expected_file": csv_file,
+                            "workspace": str(workspace)
+                        }
+                    )
+            
+            # Log overall copy operation
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "CSV_COPY_OPERATION_COMPLETED",
+                {
+                    "files_copied": files_copied,
+                    "total_expected": len(csv_files_to_copy),
+                    "main_directory": str(self.experiment_path)
+                }
+            )
+            
+        except Exception as e:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "CSV_COPY_OPERATION_FAILED",
+                {"error": str(e), "workspace": str(workspace)}
+            )
+            # Don't fail the entire operation - just log the error
+            # The notebook generation can still proceed with files that were copied

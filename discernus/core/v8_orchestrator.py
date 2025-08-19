@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-THIN V8.0 Orchestrator - Clean Architecture
+THIN Orchestrator - Clean Architecture
 ==========================================
 
-A focused 150-line orchestrator for v8.0 experiments that preserves the working
+A focused orchestrator for experiments that preserves a working
 analysis stage and adds clean notebook generation without legacy synthesis complexity.
 
 Architecture:
-1. Load v8.0 specs (experiment.md, cff_v8.md, corpus)
-2. Run analysis (reuse existing EnhancedAnalysisAgent - our only reliable piece)
+1. Load specs (experiment.md, framework, corpus)
+2. Run analysis (using EnhancedAnalysisAgent)
 3. Run coherence validation (ExperimentCoherenceAgent)
-4. Execute v8.0 agents via NotebookGenerationOrchestrator
+4. Execute agents via NotebookGenerationOrchestrator
 5. Generate notebook with functions
 
 THIN Principles:
@@ -37,20 +37,20 @@ from ..cli_console import DiscernusConsole
 
 
 class V8OrchestrationError(Exception):
-    """V8.0 orchestrator specific exceptions"""
+    """Orchestrator specific exceptions"""
     pass
 
 
 class V8Orchestrator:
     """
-    Clean v8.0 orchestrator focused on notebook generation.
+    Clean orchestrator focused on notebook generation.
     
-    Preserves the working analysis stage and adds clean v8.0 agent execution
+    Preserves the working analysis stage and adds clean agent execution
     without the complexity of legacy synthesis pipelines.
     """
     
     def __init__(self, experiment_path: Path):
-        """Initialize v8.0 orchestrator for an experiment."""
+        """Initialize orchestrator for an experiment."""
         self.experiment_path = Path(experiment_path).resolve()
         
         # Initialize core infrastructure (reuse existing, working components)
@@ -58,8 +58,8 @@ class V8Orchestrator:
         self.logger = get_logger("v8_orchestrator")
         self.console = DiscernusConsole()
         
-        self.logger.info(f"V8.0 Orchestrator initialized for: {self.security.experiment_name}")
-        self._log_progress(f"🎯 V8.0 Orchestrator initialized for: {self.security.experiment_name}")
+        self.logger.info(f"Orchestrator initialized for: {self.security.experiment_name}")
+        self._log_progress(f"🎯 Orchestrator initialized for: {self.security.experiment_name}")
     
     def _log_progress(self, message: str):
         """Log progress with rich console output."""
@@ -77,11 +77,11 @@ class V8Orchestrator:
                       validation_model: str = "vertex_ai/gemini-2.5-pro",
                       skip_validation: bool = False) -> Dict[str, Any]:
         """
-        Run complete v8.0 experiment pipeline.
+        Run complete experiment pipeline.
         
         Args:
             analysis_model: LLM model for analysis tasks
-            synthesis_model: LLM model for synthesis tasks (used by v8.0 agents)
+            synthesis_model: LLM model for synthesis tasks (used by agents)
             validation_model: LLM model for validation tasks
             skip_validation: Skip coherence validation
             
@@ -97,12 +97,12 @@ class V8Orchestrator:
             audit_logger = self._initialize_infrastructure(run_id)
             log_experiment_start(self.security.experiment_name, run_id)
             
-            self._log_progress("🚀 Starting V8.0 experiment pipeline...")
+            self._log_progress("🚀 Starting experiment pipeline...")
             
-            # Phase 1: Load and validate v8.0 specifications
-            self._log_progress("📋 Loading V8.0 specifications...")
+            # Phase 1: Load and validate specifications
+            self._log_progress("📋 Loading specifications...")
             experiment_config = self._load_v8_specs()
-            self._log_status("V8.0 specifications loaded")
+            self._log_status("Specifications loaded")
             
             # Phase 2: Run coherence validation (unless skipped)
             if not skip_validation:
@@ -114,14 +114,14 @@ class V8Orchestrator:
             successful_analyses = len([r for r in analysis_results if 'error' not in r])
             self._log_status(f"Analysis completed: {successful_analyses}/{len(analysis_results)} documents analyzed successfully")
             
-            # Phase 4: Execute v8.0 agents via notebook orchestrator
+            # Phase 4: Execute agents via notebook orchestrator
             notebook_results = self._execute_v8_agents(
                 analysis_results, 
                 analysis_model, 
                 synthesis_model, 
                 audit_logger
             )
-            self._log_status("V8.0 agents executed successfully")
+            self._log_status("Agents executed successfully")
             
             # Phase 5: Finalize and return results
             results = {
@@ -135,14 +135,14 @@ class V8Orchestrator:
             
             duration_seconds = (datetime.now(timezone.utc) - start_time).total_seconds()
             log_experiment_complete(self.security.experiment_name, run_id, duration_seconds)
-            self._log_progress("✅ V8.0 experiment completed successfully!")
+            self._log_progress("✅ Experiment completed successfully!")
             
             return results
             
         except Exception as e:
             log_experiment_failure(self.security.experiment_name, run_id, str(e), "orchestration")
-            self._log_progress(f"❌ V8.0 experiment failed: {str(e)}")
-            raise V8OrchestrationError(f"V8.0 experiment failed: {str(e)}") from e
+            self._log_progress(f"❌ Experiment failed: {str(e)}")
+            raise V8OrchestrationError(f"Experiment failed: {str(e)}") from e
     
     def _initialize_infrastructure(self, run_id: str) -> AuditLogger:
         """Initialize logging and storage infrastructure."""
@@ -185,7 +185,7 @@ class V8Orchestrator:
             raise
     
     def _load_v8_specs(self) -> Dict[str, Any]:
-        """Load v8.0 experiment specifications - experiment agnostic."""
+        """Load experiment specifications - experiment agnostic."""
         experiment_file = Path(self.experiment_path) / "experiment.md"
         if not experiment_file.exists():
             raise V8OrchestrationError(f"Experiment file not found: {experiment_file}")
@@ -256,7 +256,7 @@ class V8Orchestrator:
         # Get corpus documents (text files only, intelligent filtering)
         corpus_documents = []
         
-        # V8.0 Specification: Text files only in corpus directory
+        # Specification: Text files only in corpus directory
         for doc_file in corpus_path.glob("*.txt"):
             corpus_documents.append({
                 "filename": doc_file.name,
@@ -264,7 +264,7 @@ class V8Orchestrator:
             })
         
         if not corpus_documents:
-            raise V8OrchestrationError(f"No text documents found in {corpus_path} (v8.0 requires .txt files only)")
+            raise V8OrchestrationError(f"No text documents found in {corpus_path} (requires .txt files)")
         
         # Load corpus metadata for analysis context (do NOT analyze as content)
         corpus_metadata = self._load_corpus_metadata()
@@ -300,7 +300,7 @@ class V8Orchestrator:
                 # Log successful analysis with provenance
                 self._log_status(f"Document {doc_filename} analyzed successfully")
                 audit_logger.log_agent_event(
-                    "v8_analysis_phase", 
+                    "analysis_phase", 
                     "document_analysis_complete",
                     {
                         "document_filename": doc_filename,
@@ -319,7 +319,7 @@ class V8Orchestrator:
                 error_msg = f"Analysis failed for document {doc_filename}: {str(e)}"
                 self._log_progress(f"❌ {error_msg}")
                 audit_logger.log_agent_event(
-                    "v8_analysis_phase",
+                    "analysis_phase",
                     "document_analysis_error", 
                     {
                         "document_filename": doc_filename,
@@ -345,8 +345,8 @@ class V8Orchestrator:
                           analysis_model: str, 
                           synthesis_model: str, 
                           audit_logger: AuditLogger) -> Dict[str, Any]:
-        """Execute v8.0 agents via the notebook generation orchestrator."""
-        self._log_progress("🔬 Executing V8.0 agents via notebook orchestrator...")
+        """Execute agents via the notebook generation orchestrator."""
+        self._log_progress("🔬 Executing agents via notebook orchestrator...")
         
         # Initialize notebook generation orchestrator
         notebook_orchestrator = NotebookGenerationOrchestrator(

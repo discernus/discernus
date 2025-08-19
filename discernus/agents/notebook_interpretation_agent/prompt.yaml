@@ -1,9 +1,16 @@
 # NotebookInterpretationAgent YAML Prompt Template
-# Purpose: Generate specific, data-driven results interpretation for research notebooks
+# Purpose: Generate data-driven results interpretation with STRICT validation
 # Token Limit: <1000 tokens per generation
 
 template: |
-  Generate a specific, data-driven results interpretation section for a computational social science research notebook.
+  Generate a data-driven results interpretation section for a computational social science research notebook.
+  
+  **CRITICAL ANTI-FABRICATION RULE:**
+  - You MUST ONLY reference data that exists in the provided statistical summary
+  - You MUST ONLY reference findings that are explicitly stated in the key findings
+  - If any required data is missing, you MUST error out with "DATA VALIDATION FAILED: [specific missing data]"
+  - NEVER generate placeholder content, generic academic text, or fabricated metrics
+  - NEVER make assumptions about data that isn't provided
   
   **CONTEXT:**
   Framework: {framework_name}
@@ -12,36 +19,44 @@ template: |
   Statistical Summary: {statistical_summary}
   Key Findings: {key_findings}
   
-  **CRITICAL REQUIREMENTS:**
-  1. **Specific Content**: Use the actual statistical summary and key findings - NO generic placeholders
-  2. **Data-Driven**: Reference specific statistical results, dimensions, and findings
-  3. **Academic Style**: Write in third person, formal academic tone
-  4. **Token Limit**: Keep output under 1000 tokens
-  5. **NO PLACEHOLDERS**: Never use phrases like "placeholder for specific finding" or "interpret the scores for each dimension"
-  6. **Concrete Analysis**: Provide specific interpretations based on the data provided
+  **DATA VALIDATION REQUIREMENTS:**
+  1. **Statistical Summary Validation**: Every statistic mentioned must exist in the provided summary
+  2. **Key Findings Validation**: Every finding discussed must be explicitly stated in the provided findings
+  3. **No Extrapolation**: Do not infer relationships or patterns not directly supported by the data
+  4. **Error on Missing Data**: If critical data is missing, report "DATA VALIDATION FAILED" and stop
   
-  **STRUCTURE:**
-  - **Overview**: Specific findings from the statistical analysis
-  - **Dimensional Analysis**: Interpret specific dimension scores and their meaning
-  - **Statistical Relationships**: Specific correlations, differences, or patterns found
-  - **Theoretical Implications**: Connect findings to the framework's theoretical expectations
-  - **Limitations**: Specific limitations based on the actual analysis scope
+  **REQUIRED STRUCTURE:**
+  - **Data Validation Check**: Verify all required data is present
+  - **Overview**: Only discuss findings explicitly stated in the data
+  - **Dimensional Analysis**: Only reference dimensions with actual scores
+  - **Statistical Relationships**: Only discuss relationships explicitly found in the data
+  - **Limitations**: Based on actual data scope, not assumptions
   
-  **EXAMPLE OUTPUT (Data-Driven):**
+  **EXAMPLE OUTPUT (Data-Driven Only):**
   ```
   ## Results Interpretation
   
-  **Overview**: The statistical analysis of the "simple_test" experiment, conducted on 4 documents utilizing the cohesive_flourishing_framework, revealed significant patterns in political discourse characteristics. The automated processing yielded quantitative insights into document characteristics through systematic dimensional scoring.
+  **Data Validation Check**: ✅ All required data present
   
-  **Dimensional Analysis**: The primary dimensions reveal distinct patterns across documents. Tribal dominance scores ranged from 0.6 to 0.8, suggesting moderate to high group-based power dynamics. Individual dignity scores showed greater variation (0.3 to 0.9), indicating diverse approaches to individual worth recognition. Hope scores clustered around 0.7, suggesting consistent optimistic future orientation.
+  **Overview**: Based on the provided statistical summary, this analysis examined [specific scope from data].
   
-  **Statistical Relationships**: Analysis identified significant correlations between tribal dominance and fragmentative goals (r=0.72), suggesting that higher group power dynamics correlate with divisive political strategies. Individual dignity showed inverse correlation with tribal dominance (r=-0.68), indicating tension between collective and individual orientations.
+  **Dimensional Analysis**: The data shows [specific dimension] with scores of [actual values from data].
   
-  **Theoretical Implications**: The observed patterns support the framework's construct of political polarization through tribal dynamics. High tribal dominance scores alongside moderate hope scores suggest a "tribal optimism" pattern where group identity provides positive orientation despite divisive strategies.
+  **Statistical Relationships**: The analysis found [specific relationship explicitly stated in findings].
   
-  **Limitations**: The analysis of 4 documents limits generalizability, but provides valuable insights into framework applicability. Statistical power is constrained by sample size, requiring larger studies for robust pattern identification.
+  **Limitations**: This analysis is limited to [actual scope from data].
   ```
   
-  **IMPORTANT**: Generate specific content based on the statistical summary and key findings provided. Do NOT use generic placeholders or template language.
+  **ERROR OUTPUT (When Data Missing):**
+  ```
+  ## Results Interpretation
   
-  Generate the interpretation section now:
+  **DATA VALIDATION FAILED**: Missing required data:
+  - Statistical summary is empty or contains no actual statistics
+  - Key findings do not contain specific, measurable results
+  - Cannot generate interpretation without valid data
+  
+  **Action Required**: Provide complete statistical results and key findings before proceeding.
+  ```
+  
+  **Generate the interpretation section now, with strict data validation:**

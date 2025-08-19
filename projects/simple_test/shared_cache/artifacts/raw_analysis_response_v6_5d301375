@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted on a legislative floor speech focusing on judicial appointments and immigration, revealing strong 'us vs. them' framing and a crisis mentality."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "envy": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "compassion": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "We have a Constitution to preserve, protect, defend, and defend. And that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter, we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification, he's demonstrated that in the past with his appointments to the court.",
+          "confidence": 0.9,
+          "context_type": "Group affirmation and defense of in-group principles"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+          "confidence": 0.8,
+          "context_type": "Implied value of specific national identity"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "And it brings you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow? I couldn't react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution,' if the Supreme Court of the United States believes that they can write law.",
+          "confidence": 0.95,
+          "context_type": "Emotional appeal describing distress and existential threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+          "confidence": 0.7,
+          "context_type": "Conditional vision for the future"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "People like Joe Biden and Harry Reid and Chuck Schumer all would agree with Senator Chuck Grassley. No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "confidence": 0.8,
+          "context_type": "Critique of political opponents' past actions"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "She's testified before the Judiciary Committee in the past at least once, and I have met her at an immigration event in Richmond, Virginia on another occasion and listened to the tragic, tragic story of her son Joshua, who was, um, essentially abducted from his school at, um, as about a sophomore in high school or so and hauled out into outside of town where he was beaten mercilessly and bludgeoned and finally murdered and had and then the perpetrator, an illegal alien whom the law enforcement had encountered and released onto the streets of America, who had no business being in America in the first place, and whom law enforcement already had picked up at least once.",
+          "confidence": 0.8,
+          "context_type": "Narrative of victim's suffering, no universal empathy"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological President who, I'd say to the other side of the aisle, who's not doing his job. In fact, he's ordering law enforcement officers not to do their job.",
+          "confidence": 0.9,
+          "context_type": "Direct accusation and adversarial framing of political opposition"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "So I'd like to put this back in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+          "confidence": 0.8,
+          "context_type": "Critical framing of perceived opposition's actions, no appeal for common ground"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+          "confidence": 0.9,
+          "context_type": "Prescriptive, exclusionary policy objectives"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives.",
+          "confidence": 0.8,
+          "context_type": "Goals presented as cohesive for in-group but based on exclusion of out-group"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

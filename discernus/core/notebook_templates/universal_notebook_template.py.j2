@@ -216,21 +216,39 @@ else:
 
 # 4. Statistical Analysis CSV: ANOVA, correlations, descriptive stats
 if isinstance(statistical_results, dict) and statistical_results:
-    # Convert statistical results to DataFrame format
+    # Convert statistical results to DataFrame format - FIXED for actual structure
     stats_data = []
+    
     for test_name, test_results in statistical_results.items():
-        if isinstance(test_results, dict) and 'statistic' in test_results:
-            stats_data.append({
-                'test_name': test_name,
-                'statistic': test_results.get('statistic', 'N/A'),
-                'p_value': test_results.get('p_value', 'N/A'),
-                'significance': test_results.get('significance', 'N/A')
-            })
+        if isinstance(test_results, dict):
+            # Handle basic statistics (most common case)
+            if test_name == 'calculate_basic_statistics':
+                for dimension, stats in test_results.items():
+                    if isinstance(stats, dict) and 'mean' in stats:
+                        stats_data.append({
+                            'test_name': f'basic_stats_{dimension}',
+                            'statistic': stats.get('mean', 'N/A'),
+                            'std': stats.get('std', 'N/A'),
+                            'count': stats.get('count', 'N/A'),
+                            'missing': stats.get('missing', 'N/A')
+                        })
+            
+            # Handle other statistical results with analysis_metadata
+            elif 'analysis_metadata' in test_results:
+                metadata = test_results['analysis_metadata']
+                stats_data.append({
+                    'test_name': test_name,
+                    'sample_size': metadata.get('sample_size', 'N/A'),
+                    'alpha_level': metadata.get('alpha_level', 'N/A'),
+                    'variables_analyzed': len(metadata.get('variables_analyzed', [])),
+                    'timestamp': metadata.get('timestamp', 'N/A')
+                })
     
     if stats_data:
         stats_df = pd.DataFrame(stats_data)
         stats_df.to_csv('statistical_analysis.csv', index=False)
         print("✅ Statistical analysis exported: statistical_analysis.csv")
+        print(f"   📊 Exported {len(stats_data)} statistical results")
     else:
         print("⚠️ No statistical test results available")
 else:

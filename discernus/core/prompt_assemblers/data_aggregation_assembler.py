@@ -33,35 +33,19 @@ class DataAggregationPromptAssembler:
         # Use the first analysis file as a representative sample
         sample_content = self._read_file(analysis_file_paths[0])
 
-        prompt = f"""
-You are a senior data engineer. Your task is to write a Python script that aggregates data from a list of JSON files into a single pandas DataFrame.
+        prompt = f"""You are a Python code generator. Your response must contain ONLY executable Python code, no explanations, no markdown blocks, no comments outside the code.
 
-**INSTRUCTIONS:**
-1.  Define a function `aggregate_data(file_paths: list) -> pd.DataFrame`.
-2.  The function will accept a list of file paths.
-3.  For each file, load the JSON content.
-4.  Flatten the nested `dimensional_scores` dictionary. Each key within `dimensional_scores` should become a new column in the DataFrame. The value should be the `raw_score`.
-5.  The script must ignore the `evidence` key and its content entirely to ensure scalability.
-6.  The function must return a single pandas DataFrame containing the aggregated and flattened data.
-7.  The script MUST be self-contained and ready for immediate execution. It should include all necessary imports (like `pandas` and `json`).
+Generate a function `aggregate_data(file_paths: list) -> pd.DataFrame` that:
+1. Reads JSON files from the file_paths list
+2. Extracts dimensional scores from the nested structure shown in the sample data
+3. Flattens dimensional_scores into DataFrame columns (one column per dimension containing raw_score values)
+4. Ignores all evidence data
+5. Returns a pandas DataFrame with all scores aggregated
 
----
-**FRAMEWORK OUTPUT SCHEMA:**
-This is the schema of the JSON files. Use it to understand the structure of the data you need to extract.
-```yaml
-{yaml.dump(output_schema, indent=2)}
-```
-
----
-**DATA SAMPLE:**
-Here is a complete sample of one of the JSON files you will be processing.
-```json
+DATA STRUCTURE SAMPLE:
 {json.dumps(json.loads(sample_content), indent=2)}
-```
----
 
-Now, provide the complete Python script.
-"""
+Respond with pure Python code only - no markdown, no explanations."""
         return prompt.strip()
 
     def _read_file(self, file_path: Path) -> str:

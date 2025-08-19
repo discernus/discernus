@@ -1,0 +1,218 @@
+✅ Loaded prompt from: test_aggregation_prompt.txt
+
+🚀 Testing Model: vertex_ai/gemini-2.5-flash
+================================================================================
+🎯 Making direct call to: vertex_ai/gemini-2.5-flash
+📝 System prompt: You are a helpful assistant.
+💬 User prompt: You are a senior data engineer. Your task is to write a Python script that aggregates data from a list of JSON files into a single pandas DataFrame.
+
+**INSTRUCTIONS:**
+1.  Define a function `aggregate...
+================================================================================
+
+📊 RESULTS:
+================================================================================
+✅ SUCCESS
+📝 Response Length: 11814 characters
+🔢 Token Usage: 3054 prompt + 9395 completion = 12449 total
+
+📄 MODEL RESPONSE:
+----------------------------------------
+To aggregate data from a list of JSON files into a single pandas DataFrame, we need to carefully navigate the nested structure of the provided JSON. The `dimensional_scores` are embedded within a string field (`raw_analysis_response`), which itself contains a JSON string delimited by custom markers. The solution involves parsing this inner JSON, extracting the `raw_score` for each dimension, and ensuring the `evidence` key is completely ignored as requested.
+
+Here's the Python script:
+
+```python
+import pandas as pd
+import json
+import os
+import re
+
+def aggregate_data(file_paths: list) -> pd.DataFrame:
+    """
+    Aggregates data from a list of JSON files into a single pandas DataFrame.
+
+    For each file, it loads the JSON content, extracts relevant information,
+    flattens the 'dimensional_scores' dictionary, and ignores the 'evidence' key.
+
+    Args:
+        file_paths (list): A list of paths to JSON files.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the aggregated and flattened data.
+    """
+    all_records = []
+
+    for file_path in file_paths:
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            # Navigate to the raw analysis response, which is a string containing another JSON
+            raw_analysis_response_str = data \
+                                        .get("analysis_result", {}) \
+                                        .get("result_content", {}) \
+                                        .get("raw_analysis_response")
+
+            if not raw_analysis_response_str:
+                print(f"Warning: 'raw_analysis_response' not found or is empty in {file_path}. Skipping file.")
+                continue
+
+            # Extract the actual JSON string from within the markers
+            # The markers are <<<DISCERNUS_ANALYSIS_JSON_v6>>>\n and \n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+            json_match = re.search(r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+                                   raw_analysis_response_str, re.DOTALL)
+
+            if not json_match:
+                print(f"Warning: Could not find valid JSON markers in 'raw_analysis_response' in {file_path}. Skipping file.")
+                continue
+
+            inner_json_str = json_match.group(1)
+
+            # Parse the inner JSON string
+            inner_data = json.loads(inner_json_str)
+
+            # We expect 'document_analyses' to be a list, and we'll process its first element
+            document_analyses = inner_data.get("document_analyses")
+            if not document_analyses or not isinstance(document_analyses, list) or not document_analyses:
+                print(f"Warning: 'document_analyses' not found, empty, or not a list in inner JSON of {file_path}. Skipping file.")
+                continue
+
+            # Process the first document analysis entry (as per sample structure)
+            doc_analysis = document_analyses[0]
+            record = {}
+
+            # Add document metadata for traceability
+            record['document_id'] = doc_analysis.get('document_id')
+            record['document_name'] = doc_analysis.get('document_name')
+
+            # Extract and flatten dimensional_scores
+            dimensional_scores = doc_analysis.get("dimensional_scores")
+
+            if dimensional_scores and isinstance(dimensional_scores, dict):
+                for dimension, score_obj in dimensional_scores.items():
+                    # Ensure score_obj is a dict and contains 'raw_score'
+                    if isinstance(score_obj, dict) and "raw_score" in score_obj:
+                        record[dimension] = score_obj["raw_score"]
+                    else:
+                        print(f"Warning: 'raw_score' not found for dimension '{dimension}' in {file_path}. Skipping this dimension for current record.")
+            else:
+                print(f"Warning: 'dimensional_scores' not found or not a dictionary in {file_path}. No scores extracted for this record.")
+
+            # The 'evidence' key is explicitly ignored as per instructions by not being processed.
+
+            if record: # Only append if we actually extracted some data
+                all_records.append(record)
+
+        except FileNotFoundError:
+            print(f"Error: File not found at {file_path}. Skipping file.")
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {file_path}: {e}. Skipping file.")
+        except KeyError as e:
+            print(f"Error: Missing expected key {e} in {file_path}. Skipping file.")
+        except Exception as e:
+            print(f"An unexpected error occurred while processing {file_path}: {e}. Skipping file.")
+
+    # Create DataFrame from collected records
+    df = pd.DataFrame(all_records)
+    return df
+
+# --- Self-contained execution example ---
+if __name__ == "__main__":
+    # Create a temporary directory for dummy JSON files
+    output_dir = "temp_json_data"
+    os.makedirs(output_dir, exist_ok=True)
+    json_files_to_create = []
+
+    # Sample data for file1.json (based on the provided sample structure)
+    file1_data = {
+      "analysis_result": {
+        "batch_id": "batch_29fa408355b5",
+        "result_hash": "c9f37db2bd2c590748b9f4cb1aaf317dd4e02d47af5d88b9aa51812c4d5f0254",
+        "result_content": {
+          "batch_id": "batch_29fa408355b5",
+          "agent_name": "EnhancedAnalysisAgent",
+          "agent_version": "enhanced_v2.1_raw_output",
+          "experiment_name": "simple_test",
+          "model_used": "vertex_ai/gemini-2.5-flash",
+          "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis focused on the rhetorical strategy of unity and concession in a political speech following a presidential election.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"doc_speech_001\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\"raw_score\": 0.1, \"salience\": 0.05, \"confidence\": 0.9, \"evidence\": \"ignored\"},\n        \"individual_dignity\": {\"raw_score\": 0.9, \"salience\": 0.85, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"fear\": {\"raw_score\": 0.4, \"salience\": 0.3, \"confidence\": 0.8, \"evidence\": \"ignored\"},\n        \"hope\": {\"raw_score\": 0.9, \"salience\": 0.9, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"envy\": {\"raw_score\": 0.05, \"salience\": 0.05, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"compassion\": {\"raw_score\": 0.85, \"salience\": 0.8, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"enmity\": {\"raw_score\": 0.1, \"salience\": 0.15, \"confidence\": 0.9, \"evidence\": \"ignored\"},\n        \"amity\": {\"raw_score\": 0.9, \"salience\": 0.95, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"fragmentative_goals\": {\"raw_score\": 0.05, \"salience\": 0.05, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"cohesive_goals\": {\"raw_score\": 0.9, \"salience\": 0.9, \"confidence\": 0.95, \"evidence\": \"ignored\"},\n        \"compersion\": {\"raw_score\": 0.7, \"salience\": 0.6, \"confidence\": 0.85, \"evidence\": \"ignored\"}\n      },\n      \"evidence\": [\n        {\"dimension\": \"tribal_dominance\", \"quote_text\": \"Example quote 1\", \"confidence\": 0.9}\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+          "evidence_hash": "9f8bfede2fa4655b8bb76b1e20fe4cbe73ef068372687ee8db3b51e23cba89e9",
+          "execution_metadata": {},
+          "input_artifacts": {},
+          "provenance": {}
+        },
+        "cached": True
+      },
+      "scores_hash": "d2296255b803a912388bcc620a51c628f1f8ffe6b1cc09e247061a9a16ad72a8",
+      "evidence_hash": "ce6a2bdf69f802a39bc10138671c92954969c08409bcc52325ffea40fe9885a7"
+    }
+
+    file1_path = os.path.join(output_dir, "report_mccain.json")
+    with open(file1_path, 'w', encoding='utf-8') as f:
+        json.dump(file1_data, f, indent=2)
+    json_files_to_create.append(file1_path)
+
+    # Sample data for file2.json (different scores, some dimensions missing)
+    file2_data = {
+      "analysis_result": {
+        "result_content": {
+          "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"document_analyses\": [\n    {\n      \"document_id\": \"doc_article_002\",\n      \"document_name\": \"economic_article.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\"raw_score\": 0.8, \"salience\": 0.7, \"confidence\": 0.9},\n        \"individual_dignity\": {\"raw_score\": 0.2, \"salience\": 0.3, \"confidence\": 0.8},\n        \"fear\": {\"raw_score\": 0.7, \"salience\": 0.6, \"confidence\": 0.95},\n        \"hope\": {\"raw_score\": 0.3, \"salience\": 0.2, \"confidence\": 0.7}\n      },\n      \"evidence\": []\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+        }
+      }
+    }
+    file2_path = os.path.join(output_dir, "report_economy.json")
+    with open(file2_path, 'w', encoding='utf-8') as f:
+        json.dump(file2_data, f, indent=2)
+    json_files_to_create.append(file2_path)
+
+    # Sample data for file3.json (missing raw_score for one dimension, includes a new dimension)
+    file3_data = {
+      "analysis_result": {
+        "result_content": {
+          "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"document_analyses\": [\n    {\n      \"document_id\": \"doc_policy_003\",\n      \"document_name\": \"new_policy_brief.txt\",\n      \"dimensional_scores\": {\n        \"compersion\": {\"raw_score\": 0.95, \"salience\": 0.9, \"confidence\": 0.99},\n        \"envy\": {\"raw_score\": 0.15, \"salience\": 0.1, \"confidence\": 0.8},\n        \"some_new_dimension\": {\"salience\": 0.5, \"confidence\": 0.7} \n      },\n      \"evidence\": []\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+        }
+      }
+    }
+    file3_path = os.path.join(output_dir, "report_policy.json")
+    with open(file3_path, 'w', encoding='utf-8') as f:
+        json.dump(file3_data, f, indent=2)
+    json_files_to_create.append(file3_path)
+
+    # A file that's malformed (not a valid JSON at top level)
+    malformed_file_path = os.path.join(output_dir, "malformed_top_level.json")
+    with open(malformed_file_path, 'w', encoding='utf-8') as f:
+        f.write("{'bad_json': 'no_quotes'}")
+    json_files_to_create.append(malformed_file_path)
+
+    # A file that's missing the raw_analysis_response key
+    missing_key_file_path = os.path.join(output_dir, "missing_raw_key.json")
+    with open(missing_key_file_path, 'w', encoding='utf-8') as f:
+        json.dump({"analysis_result": {"result_content": {"not_the_right_key": "data"}}}, f, indent=2)
+    json_files_to_create.append(missing_key_file_path)
+
+    print(f"Created {len(json_files_to_create)} dummy JSON files in '{output_dir}'.")
+
+    # List of file paths to process, including a non-existent file to test error handling
+    all_file_paths = json_files_to_create + [os.path.join(output_dir, "non_existent_file.json")]
+
+    # Aggregate the data
+    print("\n--- Aggregating Data ---")
+    aggregated_df = aggregate_data(all_file_paths)
+
+    # Print the resulting DataFrame
+    print("\n--- Aggregated DataFrame ---")
+    print(aggregated_df)
+    print(f"\nDataFrame shape: {aggregated_df.shape}")
+
+    # Clean up dummy files and directory
+    print("\n--- Cleaning up dummy files ---")
+    for f_path in json_files_to_create:
+        if os.path.exists(f_path):
+            os.remove(f_path)
+    if os.path.exists(output_dir):
+        os.rmdir(output_dir)
+    print(f"Removed '{output_dir}' and its contents.")
+```
+----------------------------------------
+
+🏁 Test completed for model: vertex_ai/gemini-2.5-flash
