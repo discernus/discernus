@@ -1,0 +1,156 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a highly polemical political speech. Its rhetoric is built on a clear in-group/out-group conflict, pitting 'working people' against 'oligarchs' and 'billionaires'. This central adversarial frame drives high scores in dimensions like Enmity, Envy, Fear, and Fragmentative Goals. Simultaneously, the speech makes strong appeals for solidarity and unity within its defined in-group, leading to high scores in Amity, Individual Dignity, and Cohesive Goals. The tension between these two sets of dimensions is palpable. The dimension of Hope is present but less emphasized than the immediate threat (Fear), and Compersion is entirely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.65,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another...",
+          "confidence": 0.9,
+          "context_type": "in_group_definition"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "If you are willing to fight for someone you don't know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "moral_framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "It's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"",
+          "confidence": 0.95,
+          "context_type": "statement_of_purpose"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 1.0,
+          "context_type": "threat_assessment"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Just look at what Elon Musk and Donald Trump are doing to our healthcare, our veterans' benefits, and Social Security. They are slashing programs that we and you have spent a lifetime paying into.",
+          "confidence": 0.9,
+          "context_type": "specific_threat_example"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "call_to_action_outcome"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them. They're stealing them.",
+          "confidence": 1.0,
+          "context_type": "delegitimization_of_wealth"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "No evidence for this dimension could be found in the text. The speech focuses on resentment of the wealthy's success (envy), not celebrating it.",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "He's handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback.",
+          "confidence": 1.0,
+          "context_type": "adversarial_characterization"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.95,
+          "context_type": "adversarial_objective"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "in_group_cohesion_appeal"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "But his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "confidence": 0.9,
+          "context_type": "characterization_of_opponent_goals"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "...endless greed is costing the lives of everyone else.",
+          "confidence": 0.95,
+          "context_type": "zero_sum_framing"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 1.0,
+          "context_type": "statement_of_unifying_purpose"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
