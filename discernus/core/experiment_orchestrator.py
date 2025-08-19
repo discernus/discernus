@@ -24,20 +24,26 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import yaml
 
+from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
-from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
-from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
-from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
 from ..cli_console import DiscernusConsole
+from .prompt_assemblers.data_aggregation_assembler import DataAggregationPromptAssembler
+from ..gateway.llm_gateway import LLMGateway
+from ..gateway.model_registry import ModelRegistry
+from .secure_code_executor import SecureCodeExecutor
+import pandas as pd
+from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
+from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 
 
 class V8OrchestrationError(Exception):
-    """Orchestrator specific exceptions"""
+    """Custom exception for orchestration errors."""
     pass
 
 
@@ -53,10 +59,13 @@ class ExperimentOrchestrator:
         """Initialize orchestrator for an experiment."""
         self.experiment_path = Path(experiment_path).resolve()
         
-        # Initialize core infrastructure (reuse existing, working components)
+        # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
-        self.logger = get_logger("experiment_orchestrator")
         self.console = DiscernusConsole()
+        self.logger = get_logger("experiment_orchestrator")
+        self.config = {}
+        self.llm_gateway = None
+        self.secure_code_executor = None
         
         self.logger.info(f"Orchestrator initialized for: {self.security.experiment_name}")
         self._log_progress(f"🎯 Orchestrator initialized for: {self.security.experiment_name}")
@@ -101,7 +110,7 @@ class ExperimentOrchestrator:
             
             # Phase 1: Load and validate specifications
             self._log_progress("📋 Loading specifications...")
-            experiment_config = self._load_specs()
+            self.config = self._load_specs()
             self._log_status("Specifications loaded")
             
             # Phase 2: Run coherence validation (unless skipped)
@@ -110,36 +119,22 @@ class ExperimentOrchestrator:
                 self._log_status("Experiment coherence validated")
             
             # Phase 3: Run analysis (our reliable working component)
-            analysis_results = self._run_analysis_phase(analysis_model, audit_logger)
-            successful_analyses = len([r for r in analysis_results if 'error' not in r])
-            self._log_status(f"Analysis completed: {successful_analyses}/{len(analysis_results)} documents analyzed successfully")
-            
-            # Phase 4: Execute agents via notebook orchestrator
-            notebook_results = self._execute_v8_agents(
-                analysis_results, 
-                analysis_model, 
-                synthesis_model, 
-                audit_logger
-            )
-            self._log_status("Agents executed successfully")
-            
-            # Phase 5: Finalize and return results
-            results = {
-                "run_id": run_id,
-                "experiment_name": self.security.experiment_name,
-                "analysis_results": analysis_results,
-                "notebook_results": notebook_results,
-                "status": "completed",
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            duration_seconds = (datetime.now(timezone.utc) - start_time).total_seconds()
-            log_experiment_complete(self.security.experiment_name, run_id, duration_seconds)
+            analysis_artifact_paths = self._run_analysis_phase(analysis_model, audit_logger)
+            self._log_status(f"Analysis completed: {len(analysis_artifact_paths)} documents processed")
+
+            # Phase 4: Aggregate analysis results
+            raw_scores_df = self._aggregate_analysis_results(analysis_artifact_paths)
+            self._log_status(f"Analysis results aggregated into DataFrame ({raw_scores_df.shape[0]} rows)")
+
+            # Phase 5: Calculate derived metrics
+            # ... integration for DerivedMetricsPipeline will go here ...
+
             self._log_progress("✅ Experiment completed successfully!")
+            self.console.print_success("Experiment completed successfully!")
             
             return results
             
-        except Exception as e:
+        except V8OrchestrationError as e:
             log_experiment_failure(self.security.experiment_name, run_id, str(e), "orchestration")
             self._log_progress(f"❌ Experiment failed: {str(e)}")
             raise V8OrchestrationError(f"Experiment failed: {str(e)}") from e
@@ -178,6 +173,14 @@ class ExperimentOrchestrator:
                 audit_logger=audit_logger,
                 artifact_storage=self.artifact_storage
             )
+
+            # Initialize LLM Gateway
+            self._log_progress("🔧 Initializing LLM Gateway...")
+            self.llm_gateway = LLMGateway(ModelRegistry())
+
+            # Initialize Secure Code Executor
+            self._log_progress("🔧 Initializing Secure Code Executor...")
+            self.secure_code_executor = SecureCodeExecutor()
             
             return audit_logger
         except Exception as e:
@@ -230,7 +233,7 @@ class ExperimentOrchestrator:
             "name": config.get('metadata', {}).get('experiment_name', self.experiment_path.name),
             "version": "10.0", 
             "framework": framework_filename,
-            "corpus": "corpus" # The orchestrator still expects the directory name for processing
+            "corpus": corpus_filename
         }
     
     def _run_coherence_validation(self, validation_model: str, audit_logger: AuditLogger):
@@ -269,117 +272,146 @@ class ExperimentOrchestrator:
             issues_summary = "; ".join([issue.description for issue in blocking_issues])
             raise V8OrchestrationError(f"Blocking validation issues: {issues_summary}")
     
-    def _run_analysis_phase(self, analysis_model: str, audit_logger: AuditLogger) -> List[Dict[str, Any]]:
-        """Run analysis phase using the existing, working analysis agent - experiment agnostic."""
-        # Get experiment specifications (agnostic detection)
-        experiment_config = self._load_specs()
+    def _run_analysis_phase(self, analysis_model: str, audit_logger: AuditLogger) -> List[Path]:
+        """Run analysis phase using a corrected, proven pattern."""
+        self._log_progress("📊 Starting corrected analysis phase...")
         
-        # Load corpus documents from the 'corpus' subdirectory, as per v10 standard
-        corpus_path = Path(self.experiment_path) / "corpus"
-        if not corpus_path.exists():
-            raise V8OrchestrationError(f"Corpus directory not found: {corpus_path}")
+        framework_content = (self.experiment_path / self.config['framework']).read_text(encoding='utf-8')
         
-        # Load framework (now located in the same directory as the experiment)
-        framework_path = Path(self.experiment_path) / experiment_config["framework"]
-        if not framework_path.exists():
-            raise V8OrchestrationError(f"Framework not found: {framework_path}")
-        
-        framework_content = framework_path.read_text(encoding='utf-8')
-        
-        # Initialize analysis agent (our reliable working component)
         analysis_agent = EnhancedAnalysisAgent(
             security_boundary=self.security,
             audit_logger=audit_logger,
             artifact_storage=self.artifact_storage
         )
-        
-        # Get corpus documents (text files only, intelligent filtering)
-        corpus_documents = []
-        
-        # Specification: Text files only in corpus directory
-        for doc_file in corpus_path.glob("*.txt"):
-            corpus_documents.append({
-                "filename": doc_file.name,
-                "content": doc_file.read_text(encoding='utf-8')
-            })
-        
-        if not corpus_documents:
-            raise V8OrchestrationError(f"No text documents found in {corpus_path} (requires .txt files)")
-        
-        # Load corpus metadata for analysis context (do NOT analyze as content)
-        corpus_metadata = self._load_corpus_metadata()
-        
-        self._log_progress(f"📊 Analyzing {len(corpus_documents)} text documents with metadata context...")
-        
-        # Run sequential analysis on documents (THIN principle: one at a time for scalability)
-        self._log_progress(f"🚀 Starting sequential analysis of {len(corpus_documents)} documents...")
-        
-        experiment_config = {
-            "name": self.experiment_path.name,
-            "version": "10.0"
-        }
-        
-        analysis_results = []
-        
-        # Process each document individually for optimal caching and scalability
-        for i, doc in enumerate(corpus_documents):
-            doc_filename = doc.get('filename', 'unknown')
-            self._log_progress(f"📄 Analyzing document {i+1}/{len(corpus_documents)}: {doc_filename}")
+
+        documents = self._load_corpus_documents()
+        self._log_progress(f"📋 Analyzing {len(documents)} documents from corpus manifest...")
+
+        results = []
+        for i, doc_manifest in enumerate(documents):
+            doc_filename = doc_manifest.get('filename')
+            if not doc_filename:
+                self._log_progress(f"⚠️ Skipping document {i+1} due to missing filename in manifest.")
+                continue
+
+            doc_path = self.experiment_path / 'corpus' / doc_filename
+            if not doc_path.exists():
+                self._log_progress(f"⚠️ Skipping missing document: {doc_path}")
+                continue
+            
+            doc_content = doc_path.read_text(encoding='utf-8')
+            doc_metadata = doc_manifest.get('metadata', {})
+            
+            self._log_progress(f"📄 Analyzing document {i+1}/{len(documents)}: {doc_filename}")
             
             try:
-                # Single document analysis (proven ThinOrchestrator pattern)
-                result = analysis_agent.analyze_batch(
+                # This is the proven pattern: analyze one document at a time for caching
+                analysis_data = analysis_agent.analyze_batch(
                     framework_content=framework_content,
-                    corpus_documents=[doc],  # Single document for optimal caching
-                    experiment_config=experiment_config,
+                    corpus_documents=[{'filename': doc_filename, 'content': doc_content, 'metadata': doc_metadata}],
+                    experiment_config=self.config,
                     model=analysis_model,
-                    current_scores_hash=None,  # Individual document analysis
-                    current_evidence_hash=None
                 )
                 
-                # Log successful analysis with provenance
-                self._log_status(f"Document {doc_filename} analyzed successfully")
-                audit_logger.log_agent_event(
-                    "analysis_phase", 
-                    "document_analysis_complete",
-                    {
-                        "document_filename": doc_filename,
-                        "document_index": i + 1,
-                        "total_documents": len(corpus_documents),
-                        "analysis_model": analysis_model,
-                        "scores_hash": result.get('scores_hash'),
-                        "evidence_hash": result.get('evidence_hash')
+                # The orchestrator is responsible for storing the artifact
+                artifact_hash = self.artifact_storage.put_artifact(
+                    content=json.dumps(analysis_data).encode('utf-8'),
+                    metadata={
+                        'artifact_type': 'analysis_result',
+                        'document_id': doc_manifest.get('document_id', doc_filename)
                     }
                 )
+                artifact_path = self.artifact_storage.get_artifact_path(artifact_hash)
                 
-                # Preserve individual document results for v8.0 agents
-                analysis_results.append(result)
-                
-            except Exception as e:
-                error_msg = f"Analysis failed for document {doc_filename}: {str(e)}"
-                self._log_progress(f"❌ {error_msg}")
-                audit_logger.log_agent_event(
-                    "analysis_phase",
-                    "document_analysis_error", 
-                    {
-                        "document_filename": doc_filename,
-                        "document_index": i + 1,
-                        "error": str(e)
-                    }
-                )
-                # Store error result for completeness
-                analysis_results.append({
-                    "error": str(e), 
+                results.append({
                     "document": doc_filename,
-                    "document_index": i + 1
+                    "artifact_path": artifact_path,
+                    "status": "success"
                 })
+                self._log_status(f"Document {doc_filename} analyzed successfully.")
+
+            except Exception as e:
+                self._log_progress(f"❌ Analysis failed for document {doc_filename}: {e}")
+                results.append({"document": doc_filename, "status": "failed", "error": str(e)})
+
+        successful_analyses = [r for r in results if r['status'] == 'success']
+        self._log_status(f"Analysis phase complete: {len(successful_analyses)}/{len(documents)} documents processed.")
         
-        # Log completion with accurate count
-        successful_analyses = len([r for r in analysis_results if 'error' not in r])
-        self._log_status(f"Sequential analysis completed: {successful_analyses}/{len(corpus_documents)} documents analyzed successfully")
+        return [r['artifact_path'] for r in successful_analyses]
+
+    def _load_corpus_documents(self) -> List[Dict[str, Any]]:
+        """Loads and parses the corpus manifest to get document details."""
+        corpus_manifest_path = self.experiment_path / self.config['corpus']
+        if not corpus_manifest_path.exists():
+            raise V8OrchestrationError(f"Corpus manifest not found: {corpus_manifest_path}")
+
+        content = corpus_manifest_path.read_text(encoding='utf-8')
+        if '## Document Manifest' in content:
+            _, yaml_block = content.split('## Document Manifest', 1)
+            if '```yaml' in yaml_block:
+                yaml_start = yaml_block.find('```yaml') + 7
+                yaml_end = yaml_block.rfind('```')
+                yaml_content = yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else yaml_block[yaml_start:].strip()
+                manifest_data = yaml.safe_load(yaml_content)
+                return manifest_data.get('documents', [])
         
-        return analysis_results
-    
+        raise V8OrchestrationError("Could not parse `documents` from corpus manifest.")
+
+    def _aggregate_analysis_results(self, analysis_artifact_paths: List[Path]) -> pd.DataFrame:
+        """
+        Generates and executes code to aggregate individual analysis JSON files into a single DataFrame.
+        """
+        self._log_progress("📊 Aggregating analysis results...")
+
+        # 1. Assemble the prompt for the aggregation script
+        assembler = DataAggregationPromptAssembler()
+        prompt = assembler.assemble_prompt(
+            framework_path=self.experiment_path / self.config['framework'],
+            analysis_file_paths=analysis_artifact_paths
+        )
+
+        # 2. Generate the aggregation script via LLM
+        # This uses the architectural mandate for structured output
+        code_schema = {
+            "type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]
+        }
+        model_name = "vertex_ai/gemini-2.5-flash" # Use a fast model for code-gen
+        
+        structured_response, metadata = self.llm_gateway.execute_call(
+            model=model_name,
+            prompt=prompt,
+            response_schema=code_schema
+        )
+        if not metadata.get("success"):
+            raise V8OrchestrationError(f"Failed to generate data aggregation script: {metadata.get('error')}")
+        
+        aggregation_script = structured_response.get("code")
+        if not aggregation_script:
+            raise V8OrchestrationError("LLM failed to return code for data aggregation.")
+
+        # 3. Execute the script
+        # The script's `aggregate_data` function needs the list of file paths.
+        # We pass the paths as a list of strings to be JSON-safe for the executor.
+        file_paths_str = [str(p) for p in analysis_artifact_paths]
+        
+        executor = SecureCodeExecutor()
+        result = executor.execute_code(
+            code_str=aggregation_script,
+            function_to_call="aggregate_data",
+            function_args=[file_paths_str]
+        )
+
+        if not result["success"]:
+            raise V8OrchestrationError(f"Failed to execute data aggregation script: {result['stderr']}")
+            
+        # The result of the function call is returned as a JSON string in 'result_json'
+        df_json = result.get("result_json")
+        if not df_json:
+            raise V8OrchestrationError("Aggregation script did not return the expected JSON result.")
+            
+        return pd.read_json(df_json, orient='split')
+
+
     def _execute_v8_agents(self, 
                           analysis_results: List[Dict[str, Any]], 
                           analysis_model: str, 
