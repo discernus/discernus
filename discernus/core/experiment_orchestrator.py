@@ -118,16 +118,21 @@ class ExperimentOrchestrator:
             analysis_artifact_paths = self._run_analysis_phase(analysis_model, audit_logger)
             self._log_status(f"Analysis completed: {len(analysis_artifact_paths)} documents processed")
 
-            # Phase 4: Aggregate analysis results
-            raw_scores_df = self._aggregate_analysis_results(analysis_artifact_paths)
-            self._log_status(f"Analysis results aggregated into DataFrame ({raw_scores_df.shape[0]} rows)")
+            # Phase 4: Load analysis results from simplified format
+            raw_scores_df = self._load_analysis_data_simple()
+            self._log_status(f"Analysis data loaded into DataFrame ({raw_scores_df.shape[0]} rows)")
 
             # Phase 5: Calculate derived metrics
-            # ... integration for DerivedMetricsPipeline will go here ...
+            derived_metrics_df = self._calculate_derived_metrics(raw_scores_df)
+            self._log_status(f"Derived metrics calculated ({derived_metrics_df.shape[1] - raw_scores_df.shape[1]} new columns)")
+
+            # Phase 6: Perform statistical analysis
+            statistical_results = self._perform_statistical_analysis(raw_scores_df, derived_metrics_df)
+            self._log_status(f"Statistical analysis completed ({len(statistical_results)} result categories)")
 
             self._log_progress("✅ Experiment completed successfully!")
             
-            return {"status": "completed", "raw_scores_df": raw_scores_df}
+            return {"status": "completed", "raw_scores_df": raw_scores_df, "derived_metrics_df": derived_metrics_df, "statistical_results": statistical_results}
             
         except V8OrchestrationError as e:
             log_experiment_failure(self.security.experiment_name, run_id, str(e), "orchestration")
@@ -224,7 +229,7 @@ class ExperimentOrchestrator:
 
         if not framework_filename or not corpus_filename:
             raise V8OrchestrationError("Experiment `components` section must specify both `framework` and `corpus` files.")
-            
+        
         return {
             "name": config.get('metadata', {}).get('experiment_name', self.experiment_path.name),
             "version": "10.0", 
@@ -279,7 +284,7 @@ class ExperimentOrchestrator:
             audit_logger=audit_logger,
             artifact_storage=self.artifact_storage
         )
-
+        
         documents = self._load_corpus_documents()
         self._log_progress(f"📋 Analyzing {len(documents)} documents from corpus manifest...")
 
@@ -428,7 +433,235 @@ result_json = result_df.to_json(orient='records')
             
         return pd.read_json(df_json, orient='records')
 
+    def _load_analysis_data_simple(self):
+        """
+        Load analysis data directly from raw_analysis_response files.
+        This works with the current storage architecture.
+        """
+        artifacts_dir = self.experiment_path / "shared_cache/artifacts"
+        raw_files = list(artifacts_dir.glob("raw_analysis_response_v6_*"))
+        
+        if not raw_files:
+            raise V8OrchestrationError("No raw analysis response files found")
+        
+        dimensions_data = []
+        
+        for raw_file in raw_files:
+            with open(raw_file, 'r') as f:
+                raw_response = f.read()
+            
+            # Parse the JSON content
+            import re
+            json_match = re.search(r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>', raw_response, re.DOTALL)
+            
+            if json_match:
+                try:
+                    inner_json = json.loads(json_match.group(1))
+                    doc_analysis = inner_json['document_analyses'][0]
+                    
+                    dimensions_data.append({
+                        'document_name': doc_analysis.get('document_name'),
+                        'document_id': doc_analysis.get('document_id', doc_analysis.get('document_name')),
+                        'dimensions': doc_analysis.get('dimensional_scores', {})
+                    })
+                except (json.JSONDecodeError, KeyError, IndexError) as e:
+                    self.logger.warning(f"Failed to parse {raw_file.name}: {e}")
+                    continue
+        
+        if not dimensions_data:
+            raise V8OrchestrationError("No valid analysis data could be parsed from raw response files")
+        
+        return pd.DataFrame(dimensions_data)
 
+    def _calculate_derived_metrics(self, raw_scores_df):
+        """
+        Generate and execute Python code to calculate derived metrics from raw scores.
+        Uses the same THIN approach as data aggregation.
+        """
+        self._log_progress("📊 Generating derived metrics calculation code...")
+        
+        # 1. Get framework derived metrics definitions
+        framework_derived_metrics = self._get_framework_derived_metrics()
+        if not framework_derived_metrics:
+            self._log_progress("ℹ️  No derived metrics defined in framework, skipping calculation")
+            return raw_scores_df
+        
+        # 2. Convert DataFrame to JSON sample for the prompt  
+        sample_data = raw_scores_df.head(2).to_dict('records')  # Use first 2 rows as sample
+        
+        prompt = f"""You are a Python code generator. Your response must contain ONLY executable Python code, no explanations, no markdown blocks, no comments outside the code.
+
+Generate a function `calculate_derived_metrics(df: pd.DataFrame) -> pd.DataFrame` that:
+1. Takes a pandas DataFrame where each row has a 'dimensions' column containing nested dimensional scores
+2. Calculates derived metrics by implementing the mathematical formulas explicitly (NO eval, NO dynamic execution)
+3. Access nested values like: row['dimensions']['tribal_dominance']['raw_score']
+4. Returns the original DataFrame with new derived metric columns added
+5. Uses only these allowed libraries: pandas, numpy, math, statistics
+6. CRITICAL: Do NOT use eval(), exec(), or any dynamic code execution - write explicit calculations
+
+FRAMEWORK DERIVED METRICS TO IMPLEMENT:
+{json.dumps(framework_derived_metrics, indent=2)}
+
+DATA STRUCTURE SAMPLE (first 2 rows):
+{json.dumps(sample_data, indent=2)}
+
+EXAMPLE: For formula "min(dimensions.fear.raw_score, dimensions.hope.raw_score)", write:
+min(row['dimensions']['fear']['raw_score'], row['dimensions']['hope']['raw_score'])
+
+Respond with pure Python code only - no markdown, no explanations."""
+
+        # 3. Generate the derived metrics script via LLM
+        model_name = "vertex_ai/gemini-2.5-flash"
+        
+        response_text, metadata = self.llm_gateway.execute_call(
+            model=model_name,
+            prompt=prompt
+        )
+        if not metadata.get("success") or not response_text:
+            raise V8OrchestrationError(f"Failed to generate derived metrics script: {metadata.get('error')}")
+        
+        # 4. Handle both pure Python (Flash) and markdown-wrapped Python (Flash Lite)
+        derived_metrics_script = response_text.strip()
+        
+        # If wrapped in markdown blocks, extract the code
+        if derived_metrics_script.startswith('```python') and derived_metrics_script.endswith('```'):
+            lines = derived_metrics_script.split('\n')
+            derived_metrics_script = '\n'.join(lines[1:-1])
+        
+        # Basic validation
+        if not derived_metrics_script or not any(keyword in derived_metrics_script for keyword in ['def ', 'import ', 'pandas']):
+            raise V8OrchestrationError(f"LLM response does not appear to be Python code. Response: {response_text[:200]}...")
+
+        # 5. Execute the script with the raw scores DataFrame
+        execution_script = f"""{derived_metrics_script}
+
+# Execute the function and store result
+import json
+result_df = calculate_derived_metrics(df)
+result_json = result_df.to_json(orient='records')
+"""
+
+        # Use core capabilities (includes pandas, numpy, math, statistics)
+        capability_registry = CapabilityRegistry()
+        executor = SecureCodeExecutor(capability_registry=capability_registry)
+        
+        result = executor.execute_code(
+            code=execution_script,
+            context={'df': raw_scores_df}
+        )
+        
+        if not result['success']:
+            raise V8OrchestrationError(f"Failed to execute derived metrics script: {result['error']}")
+        
+        # Extract the result DataFrame
+        context = result.get('context', {})
+        result_json = context.get('result_json')
+        if not result_json:
+            raise V8OrchestrationError("Derived metrics script did not return result_json")
+        
+        # Convert back to DataFrame
+        derived_metrics_df = pd.read_json(result_json, orient='records')
+        
+        return derived_metrics_df
+
+    def _perform_statistical_analysis(self, raw_scores_df, derived_metrics_df):
+        """
+        Generate and execute Python code for comprehensive statistical analysis.
+        Uses the same THIN approach as other code generation components.
+        """
+        self._log_progress("📊 Generating statistical analysis code...")
+        
+        # 1. Assemble the prompt for statistical analysis code generation
+        from .prompt_assemblers.statistical_analysis_assembler import StatisticalAnalysisPromptAssembler
+        assembler = StatisticalAnalysisPromptAssembler()
+        
+        prompt = assembler.assemble_prompt(
+            framework_path=self.experiment_path / self.config['framework'],
+            experiment_path=self.experiment_path / 'experiment.md',
+            raw_scores_df=raw_scores_df,
+            derived_metrics_df=derived_metrics_df
+        )
+
+        # 2. Generate the statistical analysis script via LLM
+        model_name = "vertex_ai/gemini-2.5-flash"
+        
+        response_text, metadata = self.llm_gateway.execute_call(
+            model=model_name,
+            prompt=prompt
+        )
+        if not metadata.get("success") or not response_text:
+            raise V8OrchestrationError(f"Failed to generate statistical analysis script: {metadata.get('error')}")
+        
+        # 3. Handle both pure Python (Flash) and markdown-wrapped Python (Flash Lite)
+        statistical_script = response_text.strip()
+        
+        # If wrapped in markdown blocks, extract the code
+        if statistical_script.startswith('```python') and statistical_script.endswith('```'):
+            lines = statistical_script.split('\n')
+            statistical_script = '\n'.join(lines[1:-1])
+        
+        # Basic validation
+        if not statistical_script or not any(keyword in statistical_script for keyword in ['def ', 'import ', 'pandas']):
+            raise V8OrchestrationError(f"LLM response does not appear to be Python code. Response: {response_text[:200]}...")
+
+        # 4. Execute the script with both DataFrames
+        execution_script = f"""{statistical_script}
+
+# Execute the function and store result
+import json
+statistical_results = perform_statistical_analysis(raw_df, derived_df)
+result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
+"""
+
+        # Use core capabilities (includes pandas, numpy, scipy, statistics)
+        capability_registry = CapabilityRegistry()
+        executor = SecureCodeExecutor(capability_registry=capability_registry)
+        
+        result = executor.execute_code(
+            code=execution_script,
+            context={'raw_df': raw_scores_df, 'derived_df': derived_metrics_df}
+        )
+        
+        if not result['success']:
+            raise V8OrchestrationError(f"Failed to execute statistical analysis script: {result['error']}")
+        
+        # Extract the result
+        context = result.get('context', {})
+        result_json = context.get('result_json')
+        if not result_json:
+            raise V8OrchestrationError("Statistical analysis script did not return result_json")
+        
+        # Parse the statistical results
+        statistical_results = json.loads(result_json)
+        
+        return statistical_results
+
+    def _get_framework_derived_metrics(self):
+        """Extract derived metrics definitions from the loaded framework."""
+        framework_content = self._read_file(self.experiment_path / self.config['framework'])
+        framework_yaml = self._parse_framework_yaml(framework_content)
+        return framework_yaml.get('derived_metrics', {})
+
+    def _parse_framework_yaml(self, content: str):
+        """Parse YAML from framework's machine-readable appendix."""
+        try:
+            if '## Part 2: The Machine-Readable Appendix' in content:
+                _, appendix_content = content.split('## Part 2: The Machine-Readable Appendix', 1)
+                if '```yaml' in appendix_content:
+                    yaml_start = appendix_content.find('```yaml') + 7
+                    yaml_end = appendix_content.rfind('```')
+                    yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
+                    return yaml.safe_load(yaml_content)
+            raise ValueError("Machine-readable appendix not found in framework.")
+        except Exception as e:
+            raise ValueError(f"Failed to parse framework YAML: {e}")
+
+    def _read_file(self, file_path):
+        """Read file content safely."""
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
+
+    
     def _execute_v8_agents(self, 
                           analysis_results: List[Dict[str, Any]], 
                           analysis_model: str, 

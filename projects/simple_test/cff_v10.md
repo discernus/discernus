@@ -80,6 +80,8 @@ analysis_variants:
       1.  A `raw_score` (0.0-1.0) for its intensity.
       2.  A `salience` score (0.0-1.0) for its rhetorical prominence and emphasis. REMEMBER: Salience is NOT the same as intensity.
       3.  A direct quote as `evidence`.
+
+      IMPORTANT DISTINCTION: "Compersion" measures joy from others' success (distinct from "compassion" which is empathy for suffering). Use the exact dimension names as specified - do not substitute similar concepts.
       4.  Your `confidence` in the assessment (0.0-1.0).
 
 # 5.3: Dimensions
@@ -89,7 +91,7 @@ dimensions:
   - { name: "fear", description: "Crisis mentality and existential threat perception." }
   - { name: "hope", description: "Progress orientation and optimistic collective vision." }
   - { name: "envy", description: "Resentment toward others' success, zero-sum thinking." }
-  - { name: "compersion", description: "Celebration of others' success, abundance mindset." }
+  - { name: "compersion", description: "Compersion: the joy derived from others' success and achievements. This is distinct from compassion (empathy for suffering) - compersion specifically measures positive emotional responses to others' prosperity, accomplishments, and good fortune. Reflects abundance mindset and non-zero-sum thinking." }
   - { name: "enmity", description: "Hostility and adversarial positioning." }
   - { name: "amity", description: "Friendship appeals and cooperative framing." }
   - { name: "fragmentative_goals", description: "Divisive zero-sum objectives." }
@@ -98,15 +100,15 @@ dimensions:
 # 5.4: Derived Metrics
 derived_metrics:
   - name: "identity_tension"
-    formula: "min(dimensional_scores.tribal_dominance.raw_score, dimensional_scores.individual_dignity.raw_score) * abs(dimensional_scores.tribal_dominance.salience - dimensional_scores.individual_dignity.salience)"
+    formula: "min(dimensions.tribal_dominance.raw_score, dimensions.individual_dignity.raw_score) * abs(dimensions.tribal_dominance.salience - dimensions.individual_dignity.salience)"
   - name: "emotional_tension"
-    formula: "min(dimensional_scores.fear.raw_score, dimensional_scores.hope.raw_score) * abs(dimensional_scores.fear.salience - dimensional_scores.hope.salience)"
+    formula: "min(dimensions.fear.raw_score, dimensions.hope.raw_score) * abs(dimensions.fear.salience - dimensions.hope.salience)"
   - name: "success_tension"
-    formula: "min(dimensional_scores.envy.raw_score, dimensional_scores.compersion.raw_score) * abs(dimensional_scores.envy.salience - dimensional_scores.compersion.salience)"
+    formula: "min(dimensions.envy.raw_score, dimensions.compersion.raw_score) * abs(dimensions.envy.salience - dimensions.compersion.salience)"
   - name: "relational_tension"
-    formula: "min(dimensional_scores.enmity.raw_score, dimensional_scores.amity.raw_score) * abs(dimensional_scores.enmity.salience - dimensional_scores.amity.salience)"
+    formula: "min(dimensions.enmity.raw_score, dimensions.amity.raw_score) * abs(dimensions.enmity.salience - dimensions.amity.salience)"
   - name: "goal_tension"
-    formula: "min(dimensional_scores.fragmentative_goals.raw_score, dimensional_scores.cohesive_goals.raw_score) * abs(dimensional_scores.fragmentative_goals.salience - dimensional_scores.cohesive_goals.salience)"
+    formula: "min(dimensions.fragmentative_goals.raw_score, dimensions.cohesive_goals.raw_score) * abs(dimensions.fragmentative_goals.salience - dimensions.cohesive_goals.salience)"
   - name: "strategic_contradiction_index"
     formula: "(derived_metrics.identity_tension + derived_metrics.emotional_tension + derived_metrics.success_tension + derived_metrics.relational_tension + derived_metrics.goal_tension) / 5"
 

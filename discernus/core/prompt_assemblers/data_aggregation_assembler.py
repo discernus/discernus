@@ -36,11 +36,14 @@ class DataAggregationPromptAssembler:
         prompt = f"""You are a Python code generator. Your response must contain ONLY executable Python code, no explanations, no markdown blocks, no comments outside the code.
 
 Generate a function `aggregate_data(file_paths: list) -> pd.DataFrame` that:
-1. Reads JSON files from the file_paths list
-2. Extracts dimensional scores from the nested structure shown in the sample data
-3. Flattens dimensional_scores into DataFrame columns (one column per dimension containing raw_score values)
-4. Ignores all evidence data
-5. Returns a pandas DataFrame with all scores aggregated
+1. Reads analysis_result JSON files from the file_paths list
+2. For each file, if result_content contains raw_analysis_response, parse it directly
+3. If result_content is missing raw_analysis_response, look for a separate raw_analysis_response_v6_[hash] file in the same directory
+4. Extract dimensional scores from the nested JSON structure within the DISCERNUS_ANALYSIS_JSON_v6 delimiters
+5. Create a 'dimensions' column containing the complete dimensional_scores dictionary for each document
+6. Also include document_id and document_name for identification
+7. Ignores all evidence data (text content only - evidence arrays should be ignored for scalability)
+8. Returns a pandas DataFrame where each row has a 'dimensions' column containing the nested score structure
 
 DATA STRUCTURE SAMPLE:
 {json.dumps(json.loads(sample_content), indent=2)}
