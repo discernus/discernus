@@ -29,7 +29,7 @@ import logging
 import os # Added for os.remove
 
 # Import LLM code sanitization
-from .llm_code_sanitizer import sanitize_llm_code
+from .deprecated.llm_code_sanitizer import sanitize_llm_code
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent

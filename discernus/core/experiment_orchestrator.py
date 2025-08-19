@@ -37,7 +37,7 @@ from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 from .secure_code_executor import SecureCodeExecutor
 from .capability_registry import CapabilityRegistry
-from .unified_synthesis_agent import UnifiedSynthesisAgent
+from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
 import pandas as pd
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent

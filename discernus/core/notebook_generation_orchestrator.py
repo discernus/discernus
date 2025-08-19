@@ -31,8 +31,8 @@ from dataclasses import dataclass
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
-from discernus.core.v8_specifications import V8SpecificationLoader, V8ExperimentSpec
-from discernus.core.universal_notebook_template import DataPath
+from discernus.core.deprecated.v8_specifications import V8SpecificationLoader, V8ExperimentSpec
+from discernus.core.reuse_candidates.universal_notebook_template import DataPath
 
 
 @dataclass
@@ -941,7 +941,7 @@ def placeholder_function():
             # Import Phase 3 components
             from discernus.core.componentized_notebook_generation import ComponentizedNotebookGeneration
             from discernus.core.notebook_executor import NotebookExecutor
-            from discernus.core.universal_notebook_template import DataPath
+            from discernus.core.reuse_candidates.universal_notebook_template import DataPath
             
             # Initialize componentized notebook generator
             notebook_generator = ComponentizedNotebookGeneration(

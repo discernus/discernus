@@ -24,7 +24,7 @@
 
 **STATUS UPDATE**: Major breakthrough achieved! CRIT-006 Enhanced Synthesis Agent operational and producing academic-quality reports (2,850-3,060 words vs. previous ~1,500 words). CRIT-007 Infrastructure cleanup completed. Core pipeline now clean and framework-agnostic.
 
-**COMPLETED CRITICAL ITEMS**: CRIT-006 ✅, CRIT-007 ✅, CRIT-008 ✅
+**COMPLETED CRITICAL ITEMS**: CRIT-006 ✅, CRIT-007 ✅, CRIT-008 ✅, CRIT-009 ✅, CRIT-001 ✅, CRIT-002 ✅, CRIT-003 ✅
 
 #### [CRIT-008] Robust Path Resolution and Validation ✅ COMPLETED
 - **Description**: ✅ COMPLETED - Fixed "works on my machine" problems with robust filename matching
@@ -360,15 +360,15 @@
 
 ## 🎯 Updated Sprint Planning (Post-CRIT-006/007 Success)
 
-### Sprint 1: Platform Robustness (Immediate)
-- [ ] CRIT-008: Robust Path Resolution and Validation (HIGH)
-- [ ] CRIT-009: Appropriate Reliability Metrics (MEDIUM)
+### Sprint 1: Platform Robustness ✅ COMPLETED
+- [x] CRIT-008: Robust Path Resolution and Validation ✅
+- [x] CRIT-009: Appropriate Reliability Metrics ✅
 - [ ] TECH-003: Error Handling & Resilience
 
-### Sprint 2: Publication Readiness (Source Access)
-- [ ] CRIT-001: Missing Corpus Documents in Results
-- [ ] CRIT-002: Evidence Database Not Accessible  
-- [ ] CRIT-003: Source Metadata Missing
+### Sprint 2: Publication Readiness (Source Access) - 75% COMPLETE
+- [x] CRIT-001: Missing Corpus Documents in Results ✅
+- [x] CRIT-002: Evidence Database Not Accessible ✅  
+- [x] CRIT-003: Source Metadata Missing ✅
 - [ ] CRIT-004: Quote Verification Impossible
 
 ### Sprint 3: Complete Reproducibility
