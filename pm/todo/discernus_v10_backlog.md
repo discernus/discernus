@@ -90,14 +90,58 @@
 - **Dependencies**: None
 - **Observed**: Enhanced CFF v10.0 with 18 metrics vs. previous 6 metrics shows processing delays
 
-#### [CRIT-006] Synthesis Agent Framework-Awareness Gap
-- **Description**: Synthesis agent ignores sophisticated framework capabilities, producing generic reports despite rich data
-- **Impact**: Enhanced frameworks provide no benefit in final reports, wasting analytical sophistication
-- **Acceptance Criteria**: Synthesis agent uses framework-specific guidance to leverage enhanced metrics and capabilities
-- **Effort**: High
+#### [ARCH-001] Multi-Agent Progressive Synthesis Architecture (Phase 2)
+- **Description**: Implement 4-stage multi-agent synthesis pipeline for comprehensive discovery capabilities beyond single-agent limitations
+- **Impact**: Enables full hybrid experimental design paradigm with systematic pattern discovery, computational analysis, and cross-validation
+- **Acceptance Criteria**: 
+  - Stage 1: Parallel specialized agents (Statistical Enhancement, Evidence Analysis, Pattern Recognition)
+  - Stage 2: Sequential advanced synthesis (Cross-Dimensional Network Analysis, Anomaly Detection, Archetype Validation)
+  - Stage 3: Integration agents (Insight Synthesis, Methodological Assessment)
+  - Stage 4: Communication agents (Academic Report Generation, Executive Intelligence)
+  - Computational service integration for mathematical operations with full provenance
+  - Multi-agent cross-validation and uncertainty quantification
+- **Effort**: Very High
+- **Dependencies**: CRIT-006 (Enhanced Single-Agent Synthesis)
+- **Capabilities**: Advanced mathematical operations, systematic evidence validation, multi-perspective analysis
+- **Expected Outcome**: Claude-level analytical sophistication through systematic agent collaboration
+- **Priority**: HIGH - Enables complete hybrid experimental design vision
+- **Implementation Strategy**: Progressive enhancement building on Phase 1 single-agent foundation
+
+#### [CRIT-007] Infrastructure Cruft Cleanup and Deprecation
+- **Description**: Surgical cleanup of contaminated/unused components revealed by infrastructure audit; core pipeline appears clean but architectural confusion from legacy components
+- **Impact**: Contaminated agents create confusion and potential failure points; unclear which components are actually active
+- **Critical Issues Found**:
+  - notebook_generator_agent: CFF v7.3 hardcoding (appears bypassed but still exists)
+  - automated_derived_metrics: CFF v8.0 assumptions (unclear if active)
+  - csv_export_agent: simple_test path hardcoding (active contamination)
+  - Multiple orchestrators: ThinOrchestrator, ExperimentOrchestrator, V8Orchestrator (architectural confusion)
+- **Acceptance Criteria**:
+  - Deprecate/remove unused contaminated components
+  - Fix active contamination in csv_export_agent
+  - Clarify which orchestrator/calculation system is actually active
+  - Clean up architectural confusion from multiple parallel systems
+  - Validate framework agnosticism with non-CFF framework test
+- **Effort**: Medium
 - **Dependencies**: None
-- **Observed**: Enhanced CFF v10.0 with salience analysis, tension indices, and cohesion calculations completely ignored in final report
-- **Priority**: CRITICAL - Blocks value realization from framework enhancements
+- **Priority**: HIGH - Clean foundation required before enhancements
+- **Strategy**: Surgical removal of cruft, not comprehensive rewrite
+
+#### [CRIT-006] Enhanced Framework-Agnostic Synthesis Agent (Phase 1)
+- **Description**: Current synthesis agent produces shallow reports despite rich statistical data; enhance with comprehensive analytical architecture while preserving framework agnosticism and existing RAG capabilities
+- **Impact**: Enhanced frameworks provide no benefit in final reports; reports lack academic depth and multi-level insights
+- **Acceptance Criteria**: 
+  - Framework-agnostic synthesis prompt working with any compliant framework
+  - Multi-level analytical architecture (Basic → Advanced → Cross-dimensional → Temporal → Meta-analysis)
+  - Comprehensive statistical utilization with confidence analysis, tension patterns, derived metrics
+  - Enhanced evidence integration leveraging existing RAG capabilities for systematic quote validation
+  - Academic-quality output approaching iterative human-AI collaboration results
+  - Integration with existing single-agent pipeline architecture
+- **Effort**: High
+- **Dependencies**: CRIT-007 (Infrastructure Agnosticism Fixes)
+- **Capabilities**: Existing RAG evidence synthesis, statistical interpretation, framework-agnostic operation
+- **Limitations**: Cannot perform new mathematical computations, single-perspective analysis
+- **Expected Improvement**: 2-3x analytical depth increase, academic writing quality
+- **Priority**: CRITICAL - Foundation for hybrid experimental design
 
 ---
 

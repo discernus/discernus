@@ -166,7 +166,8 @@ class CSVExportAgent:
                 artifact_content = self.artifact_storage.get_artifact(artifact_hash)
                 return json.loads(artifact_content.decode('utf-8'))
 
-            shared_cache_path = Path("projects/simple_test/shared_cache/artifacts")
+            # Use experiment-agnostic shared cache path discovery
+            shared_cache_path = Path(self.experiment_path) / "shared_cache" / "artifacts"
             artifact_path = shared_cache_path / artifact_hash
             if not artifact_path.exists():
                 raise FileNotFoundError(f"Artifact not found: {artifact_hash}")

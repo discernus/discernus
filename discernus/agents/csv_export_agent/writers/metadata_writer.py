@@ -82,7 +82,7 @@ def generate_final_metadata_csv(
     filepath = os.path.join(export_path, filename)
 
     # Extract metadata from various sources
-    experiment_name = corpus_manifest.get('corpus_name', corpus_manifest.get('experiment_name', 'simple_test'))
+    experiment_name = corpus_manifest.get('corpus_name', corpus_manifest.get('experiment_name', 'unknown_experiment'))
     framework_name = framework_config.get('name', 'CAF_v7.0')
     framework_version = framework_config.get('version', 'v7.0')
     corpus_size = len(corpus_manifest.get('documents', []))

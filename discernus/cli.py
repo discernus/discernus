@@ -901,7 +901,7 @@ def telemetry(project_path: str):
     if not (project_path / "runs").exists():
         # Try looking in projects/ subdirectory if we're in root
         if (project_path / "projects").exists():
-            rich_console.print_error("❌ Please specify a specific project path (e.g., projects/simple_test)")
+            rich_console.print_error("❌ Please specify a specific project path (e.g., projects/your_experiment)")
             exit_invalid_usage()
         else:
             rich_console.print_error(f"❌ No runs directory found in {project_path}")

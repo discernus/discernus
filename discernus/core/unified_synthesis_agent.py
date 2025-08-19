@@ -32,23 +32,31 @@ class UnifiedSynthesisAgent:
     
     def __init__(self, 
                  model: str = "vertex_ai/gemini-2.5-pro",
-                 audit_logger: Optional[AuditLogger] = None):
+                 audit_logger: Optional[AuditLogger] = None,
+                 enhanced_mode: bool = True):
         """
         Initialize unified synthesis agent.
         
         Args:
             model: LLM model for synthesis (Pro model for reliability)
             audit_logger: Optional audit logger for provenance
+            enhanced_mode: Use enhanced multi-level analysis (CRIT-006)
         """
         self.model = model
         self.llm_gateway = LLMGateway(ModelRegistry())
         self.audit_logger = audit_logger
         self.agent_name = "UnifiedSynthesisAgent"
+        self.enhanced_mode = enhanced_mode
+        
+        # Load enhanced synthesis prompt template
+        if enhanced_mode:
+            self.enhanced_prompt_template = self._load_enhanced_prompt_template()
         
         if self.audit_logger:
             self.audit_logger.log_agent_event(self.agent_name, "initialization", {
                 "model": self.model,
-                "capabilities": ["final_report_generation", "evidence_integration", "statistical_interpretation"]
+                "enhanced_mode": enhanced_mode,
+                "capabilities": ["final_report_generation", "evidence_integration", "statistical_interpretation", "multi_level_analysis"]
             })
     
     def generate_final_report(self,
@@ -78,27 +86,33 @@ class UnifiedSynthesisAgent:
             })
         
         try:
-            # 1. Assemble comprehensive synthesis prompt with embedded evidence
-            assembler = SynthesisPromptAssembler()
-            synthesis_prompt = assembler.assemble_prompt(
-                framework_path=framework_path,
-                experiment_path=experiment_path,
-                research_data_artifact_hash=research_data_artifact_hash,
-                artifact_storage=artifact_storage,
-                evidence_artifacts=evidence_artifact_hashes
-            )
-            
-            # 2. Embed evidence directly in prompt for immediate synthesis
-            evidence_context = self._prepare_evidence_context(evidence_artifact_hashes, artifact_storage)
-            enhanced_prompt = f"""{synthesis_prompt}
+            # Choose synthesis approach based on mode
+            if self.enhanced_mode:
+                # Enhanced multi-level analysis approach
+                final_report = self._generate_enhanced_report(
+                    framework_path, experiment_path, research_data_artifact_hash, 
+                    evidence_artifact_hashes, artifact_storage
+                )
+            else:
+                # Legacy synthesis approach
+                assembler = SynthesisPromptAssembler()
+                synthesis_prompt = assembler.assemble_prompt(
+                    framework_path=framework_path,
+                    experiment_path=experiment_path,
+                    research_data_artifact_hash=research_data_artifact_hash,
+                    artifact_storage=artifact_storage,
+                    evidence_artifacts=evidence_artifact_hashes
+                )
+                
+                evidence_context = self._prepare_evidence_context(evidence_artifact_hashes, artifact_storage)
+                enhanced_prompt = f"""{synthesis_prompt}
 
 AVAILABLE EVIDENCE FOR CITATION:
 {evidence_context}
 
 Use this evidence to support your statistical interpretations. Quote directly from the evidence above with proper attribution."""
-            
-            # 3. Generate final report using THIN approach
-            final_report = self._generate_report_with_evidence_integration(enhanced_prompt)
+                
+                final_report = self._generate_report_with_evidence_integration(enhanced_prompt)
             
             # 4. Validate report quality
             quality_metrics = self._validate_report_quality(final_report)
@@ -119,6 +133,76 @@ Use this evidence to support your statistical interpretations. Quote directly fr
         except Exception as e:
             if self.audit_logger:
                 self.audit_logger.log_agent_event(self.agent_name, "synthesis_failed", {
+                    "error": str(e)
+                })
+            raise
+    
+    def _load_enhanced_prompt_template(self) -> Dict[str, Any]:
+        """Load enhanced synthesis prompt template."""
+        try:
+            import yaml
+            prompt_file = Path(__file__).parent / "enhanced_synthesis_prompt.yaml"
+            with open(prompt_file, 'r') as f:
+                return yaml.safe_load(f)
+        except Exception as e:
+            # Fallback to basic mode if enhanced template not available
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "enhanced_template_load_failed", {
+                    "error": str(e),
+                    "fallback": "basic_mode"
+                })
+            return {}
+    
+    def _generate_enhanced_report(self, framework_path: Path, experiment_path: Path, 
+                                research_data_artifact_hash: str, evidence_artifact_hashes: List[str], 
+                                artifact_storage) -> str:
+        """Generate enhanced multi-level analytical report."""
+        
+        # 1. Load all required data
+        framework_content = framework_path.read_text(encoding='utf-8')
+        experiment_content = experiment_path.read_text(encoding='utf-8')
+        
+        # 2. Get research data
+        research_data_bytes = artifact_storage.get_artifact(research_data_artifact_hash)
+        research_data = json.loads(research_data_bytes.decode('utf-8'))
+        
+        # 3. Prepare evidence context
+        evidence_context = self._prepare_evidence_context(evidence_artifact_hashes, artifact_storage)
+        
+        # 4. Assemble enhanced prompt
+        enhanced_prompt = self.enhanced_prompt_template['template'].format(
+            framework_content=framework_content,
+            experiment_content=experiment_content,
+            research_data=json.dumps(research_data, indent=2),
+            evidence_context=evidence_context
+        )
+        
+        # 5. Generate report with enhanced prompt
+        return self._generate_report_with_llm(enhanced_prompt)
+    
+    def _generate_report_with_llm(self, prompt: str) -> str:
+        """Generate report using LLM with enhanced prompt."""
+        try:
+            response, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=prompt,
+                system_prompt=self.enhanced_prompt_template.get('system_prompt', ''),
+                max_tokens=8000,  # Increased for comprehensive reports
+                temperature=0.1   # Low temperature for analytical consistency
+            )
+            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "enhanced_report_generated", {
+                    "tokens_used": metadata.get('usage', {}).get('total_tokens', 0),
+                    "model": self.model,
+                    "report_length": len(response)
+                })
+            
+            return response
+            
+        except Exception as e:
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "llm_generation_failed", {
                     "error": str(e)
                 })
             raise

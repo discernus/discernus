@@ -879,6 +879,18 @@
     "size_bytes": 6782,
     "source_run": "20250819T120746Z"
   },
+  "bd293c1257b00dc95c957f405d504a403775e85e351546c01ee173ee1d537069": {
+    "artifact_path": "artifacts/derived_metrics_csv_bd293c12",
+    "created_at": "2025-08-19T17:43:25.888926+00:00",
+    "human_filename": "derived_metrics_csv_bd293c12",
+    "metadata": {
+      "artifact_type": "derived_metrics_csv",
+      "experiment_name": "simple_test",
+      "metrics_count": 17
+    },
+    "size_bytes": 8463,
+    "source_run": "20250819T174151Z"
+  },
   "bde09be1e8d0667a9ba89d2cdec768ab0850ec225e03eaaf3ea003ec38a536af": {
     "artifact_path": "artifacts/evidence_v6_bde09be1",
     "created_at": "2025-08-19T12:21:14.891308+00:00",
@@ -978,6 +990,18 @@
     },
     "size_bytes": 28621,
     "source_run": "20250819T121818Z"
+  },
+  "d8cdb153e87b27cb15ca59dd2eeab449044c0f16dffa20ba4098f96fc71f0028": {
+    "artifact_path": "artifacts/statistical_results_json_d8cdb153",
+    "created_at": "2025-08-19T17:43:25.898905+00:00",
+    "human_filename": "statistical_results_json_d8cdb153",
+    "metadata": {
+      "artifact_type": "statistical_results_json",
+      "experiment_name": "simple_test",
+      "result_categories": 4
+    },
+    "size_bytes": 85456,
+    "source_run": "20250819T174151Z"
   },
   "d96c445b518dae2525ebcc4083f5e2a519c36177b48637895132b718909f7755": {
     "artifact_path": "artifacts/analysis_result_d96c445b",
@@ -1089,6 +1113,18 @@
     },
     "size_bytes": 15235,
     "source_run": "20250819T121818Z"
+  },
+  "f1b20d720076196a358ba396810424648b3c07fa6933757ddf413c6fdef7194e": {
+    "artifact_path": "artifacts/complete_research_data_f1b20d72",
+    "created_at": "2025-08-19T17:43:25.906502+00:00",
+    "human_filename": "complete_research_data_f1b20d72",
+    "metadata": {
+      "artifact_type": "complete_research_data",
+      "experiment_name": "simple_test",
+      "ready_for_synthesis": true
+    },
+    "size_bytes": 117835,
+    "source_run": "20250819T174151Z"
   },
   "f31f1b2286c1565a70a983699b42f7df478929c9cd1c576b89cf228fb5ce6ed9": {
     "artifact_path": "artifacts/analysis_result_f31f1b22",

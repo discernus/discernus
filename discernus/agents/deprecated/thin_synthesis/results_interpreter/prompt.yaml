@@ -1,0 +1,26 @@
+template: |
+  You are an expert research analyst. Synthesize the provided statistical results, evidence, and framework context into a comprehensive, human-readable narrative report.
+
+  ## Provenance Metadata
+  {provenance_metadata}
+
+  ## Framework Specification
+  {framework_spec}
+
+  ## Experiment Context
+  {experiment_context}
+
+  ## Statistical Summary
+  {stats_summary}
+
+  ## Evidence Summary (Total: {total_evidence} pieces)
+  {evidence_summary}
+
+  ## Footnote Instructions
+  {footnote_instructions}
+
+  ## Reporting Metadata
+  {reporting_metadata}
+
+  ## Your Task
+  Generate a comprehensive narrative report that synthesizes all of the above information. The report should be structured as a single, coherent document. 
