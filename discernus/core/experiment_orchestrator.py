@@ -115,6 +115,14 @@ class ExperimentOrchestrator:
                 self._run_coherence_validation(validation_model, audit_logger)
                 self._log_status("Experiment coherence validated")
             
+            # Phase 2.5: Validate corpus files exist (always run)
+            missing_files = self._validate_corpus_files_exist()
+            if missing_files:
+                error_msg = f"Corpus validation failed. Missing files: {', '.join(missing_files)}"
+                self._log_progress(f"❌ {error_msg}")
+                raise V8OrchestrationError(error_msg)
+            self._log_status("Corpus files validated")
+            
             # Phase 3: Run analysis (our reliable working component)
             analysis_artifact_paths = self._run_analysis_phase(analysis_model, audit_logger)
             self._log_status(f"Analysis completed: {len(analysis_artifact_paths)} documents processed")
@@ -323,9 +331,10 @@ class ExperimentOrchestrator:
                 self._log_progress(f"⚠️ Skipping document {i+1} due to missing filename in manifest.")
                 continue
 
-            doc_path = self.experiment_path / 'corpus' / doc_filename
-            if not doc_path.exists():
-                self._log_progress(f"⚠️ Skipping missing document: {doc_path}")
+            # Robust path resolution with fuzzy filename matching
+            doc_path = self._resolve_corpus_file_path(doc_filename)
+            if not doc_path:
+                self._log_progress(f"⚠️ Skipping missing document: {doc_filename} (not found in corpus directory)")
                 continue
             
             doc_content = doc_path.read_text(encoding='utf-8')
@@ -903,6 +912,73 @@ result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
         
         return notebook_results
     
+    def _resolve_corpus_file_path(self, filename: str) -> Optional[Path]:
+        """
+        Robust corpus file path resolution with fuzzy matching.
+        
+        Handles common filename variations:
+        - Exact match: filename.txt
+        - Hash suffix match: filename_abc123.txt  
+        - Extension variations: filename.md vs filename.txt
+        
+        Args:
+            filename: Filename from corpus manifest
+            
+        Returns:
+            Path to actual file, or None if not found
+        """
+        corpus_dir = self.experiment_path / 'corpus'
+        if not corpus_dir.exists():
+            return None
+        
+        # 1. Try exact match first
+        exact_path = corpus_dir / filename
+        if exact_path.exists():
+            return exact_path
+        
+        # 2. Try fuzzy matching for hash suffixes
+        base_name = Path(filename).stem  # Remove extension
+        extension = Path(filename).suffix
+        
+        # Look for files that start with the base name
+        for file_path in corpus_dir.glob(f"{base_name}*{extension}"):
+            if file_path.is_file():
+                self._log_progress(f"📁 Fuzzy match: {filename} → {file_path.name}")
+                return file_path
+        
+        # 3. Try without extension (for .md vs .txt variations)
+        for file_path in corpus_dir.glob(f"{base_name}*"):
+            if file_path.is_file():
+                self._log_progress(f"📁 Extension-flexible match: {filename} → {file_path.name}")
+                return file_path
+        
+        return None
+    
+    def _validate_corpus_files_exist(self) -> List[str]:
+        """
+        Validate that all corpus files specified in manifest actually exist.
+        
+        Returns:
+            List of missing filenames (empty if all found)
+        """
+        try:
+            documents = self._load_corpus_documents()
+            missing_files = []
+            
+            for doc_manifest in documents:
+                filename = doc_manifest.get('filename')
+                if not filename:
+                    missing_files.append("(missing filename in manifest)")
+                    continue
+                
+                if not self._resolve_corpus_file_path(filename):
+                    missing_files.append(filename)
+            
+            return missing_files
+            
+        except Exception as e:
+            return [f"Error validating corpus: {str(e)}"]
+
     def _load_corpus_metadata(self) -> Dict[str, Any]:
         """Load corpus metadata from corpus.md (do NOT analyze as content)."""
         corpus_metadata_file = Path(self.experiment_path) / "corpus.md"
