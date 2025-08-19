@@ -52,11 +52,21 @@
 ### Medium Priority - Should Fix Soon
 
 #### [TECH-001] Framework Specification Enhancement
-- **Description**: Current framework specification lacks prompting strategy guidance and intellectual rigor
-- **Impact**: Frameworks may not provide sufficient guidance for quality analysis and effective LLM prompting
-- **Acceptance Criteria**: Enhanced specification with prompting strategies, academic depth, and clear guidance
+- **Description**: Framework specification enhanced with LLM optimization, sequential analysis, and comprehensive guidance
+- **Impact**: Significantly improved framework quality and LLM reliability
+- **Acceptance Criteria**: ✅ COMPLETED - Enhanced specification with prompting strategies, academic depth, and clear guidance
 - **Effort**: High
 - **Dependencies**: None
+- **Status**: ✅ COMPLETED
+
+#### [TECH-004] Framework Library Compliance Update
+- **Description**: All existing frameworks need updating to comply with enhanced v10.0 specification
+- **Impact**: Inconsistent framework quality across the platform, reduced LLM reliability for non-compliant frameworks
+- **Acceptance Criteria**: All frameworks in reference library updated with LLM optimization features (examples, anti-examples, scoring calibration, sequential variants)
+- **Effort**: High
+- **Dependencies**: TECH-001 (completed)
+- **Affected Frameworks**: PDAF, other reference frameworks, seed frameworks
+- **Priority**: High - Required for platform consistency
 
 #### [TECH-002] Model Selection Optimization
 - **Description**: Currently hardcoded to Pro model for all operations
@@ -71,6 +81,23 @@
 - **Acceptance Criteria**: Comprehensive error handling with graceful degradation
 - **Effort**: Medium
 - **Dependencies**: None
+
+#### [TECH-005] Complex Framework Performance Optimization
+- **Description**: Enhanced frameworks with 18 derived metrics cause significant processing delays
+- **Impact**: Long experiment runtimes may affect user experience and research velocity
+- **Acceptance Criteria**: Optimize derived metrics generation for complex frameworks
+- **Effort**: Medium
+- **Dependencies**: None
+- **Observed**: Enhanced CFF v10.0 with 18 metrics vs. previous 6 metrics shows processing delays
+
+#### [CRIT-006] Synthesis Agent Framework-Awareness Gap
+- **Description**: Synthesis agent ignores sophisticated framework capabilities, producing generic reports despite rich data
+- **Impact**: Enhanced frameworks provide no benefit in final reports, wasting analytical sophistication
+- **Acceptance Criteria**: Synthesis agent uses framework-specific guidance to leverage enhanced metrics and capabilities
+- **Effort**: High
+- **Dependencies**: None
+- **Observed**: Enhanced CFF v10.0 with salience analysis, tension indices, and cohesion calculations completely ignored in final report
+- **Priority**: CRITICAL - Blocks value realization from framework enhancements
 
 ---
 

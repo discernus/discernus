@@ -323,16 +323,24 @@ dimensions:
     description: "In-group supremacy and exclusionary identity patterns."
     markers:
       positive_examples:
-        - "real Americans" - emphasizes authentic group membership vs. outsiders
-        - "our people" - creates in-group/out-group distinction
-        - "superior values" - claims group moral or cultural superiority
-        - "not our kind" - explicit exclusion of others
-        - "chosen people" - special status claims for the group
+        - phrase: "real Americans"
+          explanation: "emphasizes authentic group membership vs. outsiders"
+        - phrase: "our people"
+          explanation: "creates in-group/out-group distinction"
+        - phrase: "superior values"
+          explanation: "claims group moral or cultural superiority"
+        - phrase: "not our kind"
+          explanation: "explicit exclusion of others"
+        - phrase: "chosen people"
+          explanation: "special status claims for the group"
       negative_examples:
-        - "patriotic" - love of country without exclusion doesn't qualify
-        - "community pride" - positive group identity without supremacy claims
+        - phrase: "patriotic"
+          explanation: "love of country without exclusion doesn't qualify"
+        - phrase: "community pride"
+          explanation: "positive group identity without supremacy claims"
       boundary_cases:
-        - "we are different" - depends on context; supremacy claims vs. simple distinction
+        - phrase: "we are different"
+          explanation: "depends on context; supremacy claims vs. simple distinction"
     scoring_calibration:
       high: "0.7-1.0: Explicit supremacy claims, strong us-vs-them rhetoric, exclusionary language"
       medium: "0.4-0.6: Moderate in-group preference, subtle exclusion, implied superiority"
@@ -345,16 +353,24 @@ dimensions:
     description: "Universal human worth and inclusive recognition."
     markers:
       positive_examples:
-        - "every person" - universal scope of human worth
-        - "inherent dignity" - intrinsic value regardless of group membership
-        - "common humanity" - shared human experience transcending divisions
-        - "equal treatment" - procedural fairness across groups
-        - "everyone belongs" - inclusive community vision
+        - phrase: "every person"
+          explanation: "universal scope of human worth"
+        - phrase: "inherent dignity"
+          explanation: "intrinsic value regardless of group membership"
+        - phrase: "common humanity"
+          explanation: "shared human experience transcending divisions"
+        - phrase: "equal treatment"
+          explanation: "procedural fairness across groups"
+        - phrase: "everyone belongs"
+          explanation: "inclusive community vision"
       negative_examples:
-        - "individual rights" - legal/political concept, not dignity focus
-        - "personal achievement" - individual success, not universal worth
+        - phrase: "individual rights"
+          explanation: "legal/political concept, not dignity focus"
+        - phrase: "personal achievement"
+          explanation: "individual success, not universal worth"
       boundary_cases:
-        - "respect for persons" - depends on universality vs. selective respect
+        - phrase: "respect for persons"
+          explanation: "depends on universality vs. selective respect"
     scoring_calibration:
       high: "0.7-1.0: Strong universal worth language, explicit inclusion, dignity emphasis"
       medium: "0.4-0.6: Moderate inclusivity, some universal recognition"
@@ -365,16 +381,24 @@ dimensions:
     description: "Crisis mentality and existential threat perception."
     markers:
       positive_examples:
-        - "existential threat" - survival-level danger
-        - "catastrophe" - disaster language and crisis framing
-        - "under attack" - active threat perception
-        - "running out of time" - urgency and deadline pressure
-        - "emergency" - crisis requiring immediate action
+        - phrase: "existential threat"
+          explanation: "survival-level danger"
+        - phrase: "catastrophe"
+          explanation: "disaster language and crisis framing"
+        - phrase: "under attack"
+          explanation: "active threat perception"
+        - phrase: "running out of time"
+          explanation: "urgency and deadline pressure"
+        - phrase: "emergency"
+          explanation: "crisis requiring immediate action"
       negative_examples:
-        - "challenge" - difficulty without crisis implication
-        - "concern" - worry without existential threat
+        - phrase: "challenge"
+          explanation: "difficulty without crisis implication"
+        - phrase: "concern"
+          explanation: "worry without existential threat"
       boundary_cases:
-        - "serious problem" - depends on urgency and threat level
+        - phrase: "serious problem"
+          explanation: "depends on urgency and threat level"
     scoring_calibration:
       high: "0.7-1.0: Existential crisis, survival threats, imminent catastrophe"
       medium: "0.4-0.6: Serious concerns, significant risks, urgent problems"
@@ -385,16 +409,24 @@ dimensions:
     description: "Progress orientation and optimistic collective vision."
     markers:
       positive_examples:
-        - "bright future" - optimistic forward vision
-        - "breakthrough" - significant positive progress
-        - "moving forward" - progress and advancement
-        - "opportunity" - positive potential and possibility
-        - "success" - achievement and accomplishment focus
+        - phrase: "bright future"
+          explanation: "optimistic forward vision"
+        - phrase: "breakthrough"
+          explanation: "significant positive progress"
+        - phrase: "moving forward"
+          explanation: "progress and advancement"
+        - phrase: "opportunity"
+          explanation: "positive potential and possibility"
+        - phrase: "success"
+          explanation: "achievement and accomplishment focus"
       negative_examples:
-        - "stability" - maintaining status quo, not progress
-        - "recovery" - returning to previous state, not advancement
+        - phrase: "stability"
+          explanation: "maintaining status quo, not progress"
+        - phrase: "recovery"
+          explanation: "returning to previous state, not advancement"
       boundary_cases:
-        - "better days ahead" - depends on progress vs. simple improvement
+        - phrase: "better days ahead"
+          explanation: "depends on progress vs. simple improvement"
     scoring_calibration:
       high: "0.7-1.0: Strong optimism, clear progress vision, breakthrough language"
       medium: "0.4-0.6: Moderate optimism, some progress indicators"
@@ -405,16 +437,24 @@ dimensions:
     description: "Resentment toward others' success, zero-sum thinking."
     markers:
       positive_examples:
-        - "privileged elite" - resentment toward successful groups
-        - "didn't earn it" - questioning legitimacy of others' success
-        - "rigged system" - systemic unfairness claims
-        - "taking our share" - zero-sum resource thinking
-        - "unfair advantage" - resentment over others' benefits
+        - phrase: "privileged elite"
+          explanation: "resentment toward successful groups"
+        - phrase: "didn't earn it"
+          explanation: "questioning legitimacy of others' success"
+        - phrase: "rigged system"
+          explanation: "systemic unfairness claims"
+        - phrase: "taking our share"
+          explanation: "zero-sum resource thinking"
+        - phrase: "unfair advantage"
+          explanation: "resentment over others' benefits"
       negative_examples:
-        - "inequality" - factual disparity without resentment
-        - "fairness" - justice concern without envy
+        - phrase: "inequality"
+          explanation: "factual disparity without resentment"
+        - phrase: "fairness"
+          explanation: "justice concern without envy"
       boundary_cases:
-        - "they have too much" - depends on resentment vs. policy concern
+        - phrase: "they have too much"
+          explanation: "depends on resentment vs. policy concern"
     scoring_calibration:
       high: "0.7-1.0: Strong resentment, clear zero-sum thinking, success delegitimization"
       medium: "0.4-0.6: Moderate resentment, some zero-sum indicators"
@@ -425,16 +465,24 @@ dimensions:
     description: "Joy from others' success, abundance mindset, merit celebration."
     markers:
       positive_examples:
-        - "well-deserved" - affirming legitimacy of others' success
-        - "hard-earned" - recognizing merit in others' achievements
-        - "celebrate success" - positive response to others' accomplishments
-        - "rising tide lifts all boats" - abundance mindset, non-zero-sum
-        - "impressive accomplishment" - admiration for others' achievements
+        - phrase: "well-deserved"
+          explanation: "affirming legitimacy of others' success"
+        - phrase: "hard-earned"
+          explanation: "recognizing merit in others' achievements"
+        - phrase: "celebrate success"
+          explanation: "positive response to others' accomplishments"
+        - phrase: "rising tide lifts all boats"
+          explanation: "abundance mindset, non-zero-sum"
+        - phrase: "impressive accomplishment"
+          explanation: "admiration for others' achievements"
       negative_examples:
-        - "compassion" - empathy for suffering, not joy for success
-        - "tolerance" - acceptance without celebration
+        - phrase: "compassion"
+          explanation: "empathy for suffering, not joy for success"
+        - phrase: "tolerance"
+          explanation: "acceptance without celebration"
       boundary_cases:
-        - "good for them" - depends on genuine joy vs. dismissive tone
+        - phrase: "good for them"
+          explanation: "depends on genuine joy vs. dismissive tone"
     scoring_calibration:
       high: "0.7-1.0: Clear joy for others' success, strong abundance mindset"
       medium: "0.4-0.6: Moderate appreciation, some merit recognition"
@@ -447,16 +495,24 @@ dimensions:
     description: "Hostility and adversarial positioning."
     markers:
       positive_examples:
-        - "enemy" - explicit adversarial designation
-        - "destroy" - aggressive action language
-        - "evil" - moral condemnation and dehumanization
-        - "corrupt" - character assassination
-        - "crush" - domination and destruction language
+        - phrase: "enemy"
+          explanation: "explicit adversarial designation"
+        - phrase: "destroy"
+          explanation: "aggressive action language"
+        - phrase: "evil"
+          explanation: "moral condemnation and dehumanization"
+        - phrase: "corrupt"
+          explanation: "character assassination"
+        - phrase: "crush"
+          explanation: "domination and destruction language"
       negative_examples:
-        - "disagree" - opposition without hostility
-        - "oppose" - resistance without aggression
+        - phrase: "disagree"
+          explanation: "opposition without hostility"
+        - phrase: "oppose"
+          explanation: "resistance without aggression"
       boundary_cases:
-        - "fight against" - depends on hostility level vs. principled opposition
+        - phrase: "fight against"
+          explanation: "depends on hostility level vs. principled opposition"
     scoring_calibration:
       high: "0.7-1.0: Clear hostility, enemy designation, destruction language"
       medium: "0.4-0.6: Moderate adversarial positioning, some hostile language"
@@ -467,16 +523,24 @@ dimensions:
     description: "Friendship appeals and cooperative framing."
     markers:
       positive_examples:
-        - "friend" - explicit positive relationship designation
-        - "ally" - partnership and cooperation language
-        - "together" - unity and collaboration emphasis
-        - "united" - solidarity and common purpose
-        - "cooperation" - collaborative approach emphasis
+        - phrase: "friend"
+          explanation: "explicit positive relationship designation"
+        - phrase: "ally"
+          explanation: "partnership and cooperation language"
+        - phrase: "together"
+          explanation: "unity and collaboration emphasis"
+        - phrase: "united"
+          explanation: "solidarity and common purpose"
+        - phrase: "cooperation"
+          explanation: "collaborative approach emphasis"
       negative_examples:
-        - "neutral" - absence of conflict without positive relationship
-        - "professional" - working relationship without friendship
+        - phrase: "neutral"
+          explanation: "absence of conflict without positive relationship"
+        - phrase: "professional"
+          explanation: "working relationship without friendship"
       boundary_cases:
-        - "partner" - depends on warmth vs. transactional relationship
+        - phrase: "partner"
+          explanation: "depends on warmth vs. transactional relationship"
     scoring_calibration:
       high: "0.7-1.0: Strong friendship language, clear cooperation emphasis"
       medium: "0.4-0.6: Moderate cooperation, some unity language"
@@ -487,16 +551,24 @@ dimensions:
     description: "Divisive zero-sum objectives."
     markers:
       positive_examples:
-        - "divide and conquer" - explicit fragmentation strategy
-        - "tear down" - destruction of existing structures
-        - "separate" - division and isolation emphasis
-        - "break apart" - fragmentation of unity
-        - "defeat them" - zero-sum victory objectives
+        - phrase: "divide and conquer"
+          explanation: "explicit fragmentation strategy"
+        - phrase: "tear down"
+          explanation: "destruction of existing structures"
+        - phrase: "separate"
+          explanation: "division and isolation emphasis"
+        - phrase: "break apart"
+          explanation: "fragmentation of unity"
+        - phrase: "defeat them"
+          explanation: "zero-sum victory objectives"
       negative_examples:
-        - "reform" - change without destruction
-        - "replace" - substitution without fragmentation
+        - phrase: "reform"
+          explanation: "change without destruction"
+        - phrase: "replace"
+          explanation: "substitution without fragmentation"
       boundary_cases:
-        - "restructure" - depends on destruction vs. reorganization
+        - phrase: "restructure"
+          explanation: "depends on destruction vs. reorganization"
     scoring_calibration:
       high: "0.7-1.0: Clear fragmentation objectives, strong divisive language"
       medium: "0.4-0.6: Moderate division emphasis, some zero-sum objectives"
@@ -507,16 +579,24 @@ dimensions:
     description: "Integrative positive-sum objectives."
     markers:
       positive_examples:
-        - "bring together" - explicit unification objectives
-        - "unite" - solidarity and integration emphasis
-        - "build bridges" - connection and relationship building
-        - "strengthen bonds" - relationship enhancement
-        - "common ground" - shared foundation emphasis
+        - phrase: "bring together"
+          explanation: "explicit unification objectives"
+        - phrase: "unite"
+          explanation: "solidarity and integration emphasis"
+        - phrase: "build bridges"
+          explanation: "connection and relationship building"
+        - phrase: "strengthen bonds"
+          explanation: "relationship enhancement"
+        - phrase: "common ground"
+          explanation: "shared foundation emphasis"
       negative_examples:
-        - "maintain" - preservation without building
-        - "manage" - administration without integration
+        - phrase: "maintain"
+          explanation: "preservation without building"
+        - phrase: "manage"
+          explanation: "administration without integration"
       boundary_cases:
-        - "work together" - depends on integration vs. temporary cooperation
+        - phrase: "work together"
+          explanation: "depends on integration vs. temporary cooperation"
     scoring_calibration:
       high: "0.7-1.0: Strong integration objectives, clear unity building"
       medium: "0.4-0.6: Moderate unification, some building language"

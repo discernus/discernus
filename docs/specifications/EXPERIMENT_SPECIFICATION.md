@@ -1,220 +1,76 @@
-# Experiment Specification (v8.0)
+# Experiment Specification (v10.0)
 
-**Version**: 8.0  
-**Status**: Current Standard  
-**Replaces**: v7.3
-
-The `experiment.md` file is a Markdown file with YAML appendix that defines the complete scope of a v8.0 analysis run. It acts as the **single source of truth** for an experiment, telling the Discernus v8.0 system what framework to use, what corpus to analyze, and what research questions to investigate.
-
-**Design Philosophy**: Human-first readability with LLM-friendly generation and machine-parseable structure.
+**Version**: 10.0  
+**Status**: Active Standard  
+**Replaces**: v8.0
 
 ---
 
-## 1. File Structure & Location
+## Introduction: The Experiment as a Research Plan
 
-The experiment file MUST be a Markdown file named `experiment.md` located at the root of a project directory, alongside all experiment input files.
+An **Experiment** in Discernus is a formal research plan. It is a self-contained document that brings together a `Framework` and a `Corpus` to investigate a specific set of research questions. Like the `v10.0` Framework, it is a hybrid document, designed for both human comprehension and machine execution.
 
-```
-my_research_project/
-├── experiment.md                 # Experiment specification (standard name)
-├── corpus.md                     # Corpus specification (standard name)  
-├── cff_v8.md                     # Framework file (descriptive name)
-└── corpus/                       # Document directory (text files only)
-    ├── document1.txt
-    ├── document2.txt
-    └── document3.txt
-```
-
-**Key Principles:**
-- All experiment inputs at project root (simple discovery)
-- Standard names for core files (`experiment.md`, `corpus.md`)
-- Descriptive names for framework files (referenced in experiment.md)
-- Text files only in corpus directory (keep it simple)
+The `experiment.md` file is the single source of truth that tells the Discernus system what to analyze, how to analyze it, and why.
 
 ---
 
-## 2. File Format
+## Part 1: The Scholarly Document (The Human-Readable Narrative)
 
-The file follows the **human-first** format: natural language description followed by YAML configuration appendix.
+This part is written in standard Markdown and outlines the intellectual goals of the experiment.
 
-```markdown
-# Democratic Discourse Analysis
+### Section 1: Abstract
 
-This experiment analyzes political speeches to understand how different rhetorical styles contribute to democratic flourishing. We examine institutional vs. populist approaches across temporal and partisan dimensions.
+**(Required)**
+A brief, high-level summary of the experiment's purpose, scope, and expected contribution.
 
-## Research Questions
-- How do institutional and populist communication styles differ in their democratic impact?
-- What rhetorical patterns emerge across temporal sequences?
-- Do progressive and conservative populist variants show different cohesion patterns?
+### Section 2: Research Questions
 
-## Expected Outcomes
-Statistical analysis of dimensional scores with longitudinal trends and speaker-type comparisons...
+**(Required)**
+A list of the specific, answerable research questions that the experiment is designed to investigate.
+
+### Section 3: Expected Outcomes
+
+**(Optional but Recommended)**
+A description of the anticipated results or the types of analysis that will be conducted (e.g., "A comparative statistical analysis of cohesion scores between the two speakers.").
 
 ---
 
-## Configuration
+## Part 2: The Machine-Readable Appendix
+
+This is a single YAML block at the end of the document containing the precise configuration for the orchestrator.
+
+### Section 4: Configuration Appendix
+
+**(Required)**
 
 ```yaml
-name: "democratic_discourse_analysis"
-framework: "cff_v8.md"
-corpus: "corpus.md"
-version: "8.0"
-```
-```
+# --- Start of Machine-Readable Appendix ---
 
----
+# 4.1: Metadata (Required)
+metadata:
+  experiment_name: "your_experiment_name_in_snake_case"
+  author: "Your Name or Organization"
+  spec_version: "10.0"
 
-## 3. Field Specifications
+# 4.2: Components (Required)
+components:
+  # The filename of the v10.0 Framework file.
+  # Must be in the same directory as this experiment.md.
+  framework: "cff_v10.md"
 
-### **name** (Required)
-- **Type**: String
-- **Format**: Snake_case identifier
-- **Purpose**: Machine-readable experiment identifier
-- **Example**: `"democratic_discourse_cohesion_study"`
-- **Constraints**: Must be unique within project, no spaces or special characters
+  # The filename of the v8.0 compliant Corpus manifest file.
+  # Must be in the same directory as this experiment.md.
+  corpus: "corpus.md"
 
-### **description** (Required)  
-- **Type**: String
-- **Purpose**: Human-readable explanation of research objectives
-- **Example**: `"Comparative analysis of social cohesion patterns across institutional and populist democratic discourse styles"`
-- **Constraints**: Should be 1-2 sentences, focus on what is being studied
-
-### **framework** (Required)
-- **Type**: String (File Path)
-- **Purpose**: Path to the v8.0 framework specification
-- **Example**: `"frameworks/reference/flagship/cff_v8.md"`
-- **Constraints**: Must point to valid v8.0 framework file, path relative to project root
-
-### **corpus** (Required)
-- **Type**: String (File Path)  
-- **Purpose**: Path to the v8.0 corpus specification
-- **Example**: `"corpus/corpus_v8.md"`
-- **Constraints**: Must point to valid v8.0 corpus file, path relative to experiment root
-
-### **questions** (Required)
-- **Type**: Array of Strings
-- **Purpose**: Research questions the experiment aims to answer
-- **Example**: 
-  ```yaml
-  questions:
-    - "Will McCain's institutional discourse show higher cohesion than populist styles?"
-    - "Do populist progressive and conservative variants differ in social cohesion patterns?"
-  ```
-- **Constraints**: Minimum 1 question, maximum 5 questions, each should be specific and answerable
-
----
-
-## 4. Validation Rules
-
-### File Validation
-- ✅ File must be named `experiment.md`
-- ✅ File must be located in experiment root directory
-- ✅ File must contain valid markdown syntax
-
-### Schema Validation
-- ✅ All required fields must be present: `name`, `description`, `framework`, `corpus`, `questions`
-- ✅ `name` must be valid identifier (no spaces, special characters)
-- ✅ `framework` path must exist and point to valid v8.0 framework
-- ✅ `corpus` path must exist and point to valid v8.0 corpus
-- ✅ `questions` must contain at least 1 research question
-
-### Content Validation
-- ✅ Framework file must comply with Framework Specification v8.0
-- ✅ Corpus file must comply with Corpus Specification v8.0  
-- ✅ Research questions should be specific and investigable
-- ✅ Description should clearly state research objectives
-
----
-
-## Migration from v7.3 to v8.0
-
-**File Name**: `experiment.md` → `experiment.md` (no change needed)
-**Framework Path**: Update to point to v8.0 framework
-**Corpus Path**: Now points to `corpus.md` (canonical name)
-**Questions**: Add research questions array
-**Validation**: Enable v8.0 validation
-
-### Migration Steps:
-1. **No file rename needed** - keep `experiment.md`
-2. **Update framework path** to point to v8.0 framework
-3. **Update corpus path** to point to `corpus.md`
-4. **Add research questions** array
-5. **Enable v8.0 validation**
-
-### Compatibility
-- **v8.0 experiments** are NOT compatible with v7.3 orchestration systems
-- **v7.3 experiments** are NOT compatible with v8.0 notebook generation pipeline
-- **No automatic migration** - experiments must be manually updated
-
----
-
-## 6. Example v8.0 Experiment
-
-```yaml
-name: "democratic_discourse_cohesion_study"
-
-description: "Comparative analysis of social cohesion patterns across institutional and populist democratic discourse styles"
-
-framework: "frameworks/reference/flagship/cff_v8.md"
-
-corpus: "corpus/corpus_v8.md"
-
-questions:
-  - "Will McCain's institutional discourse show higher cohesion than populist styles?"
-  - "Do populist progressive and conservative variants differ in social cohesion patterns?"
-  - "What derived metrics best distinguish institutional from populist discourse?"
+# --- End of Machine-Readable Appendix ---
 ```
 
 ---
 
-## 7. Integration with v8.0 Pipeline
+## Validation Rules
 
-### Analysis Flow
-1. **Specification Loading**: v8.0 loader reads raw experiment content
-2. **Framework Resolution**: Resolves framework path and loads v8.0 framework
-3. **Corpus Resolution**: Resolves corpus path and loads v8.0 corpus
-4. **Question Integration**: Research questions guide analysis focus
-5. **Function Generation**: Automated agents generate analysis functions
-6. **Notebook Assembly**: Universal template creates executable notebook
-
-### CLI Integration
-```bash
-# v8.0 experiments are automatically detected by experiment_v8.md filename
-discernus run --statistical-prep
-
-# Or explicitly specify v8.0 mode
-discernus run --statistical-prep --experiment-file experiment_v8.md
-```
-
-### Validation Integration
-```bash
-# Validate v8.0 experiment structure
-discernus validate --v8
-
-# Validate all components (experiment, framework, corpus)
-discernus validate --v8 --comprehensive
-```
-
----
-
-## 8. Best Practices
-
-### Experiment Design
-- **Clear Objectives**: Write specific, testable research questions
-- **Focused Scope**: Limit to 3-5 related research questions
-- **Appropriate Framework**: Choose framework that matches research goals
-- **Quality Corpus**: Ensure corpus contains relevant documents
-
-### File Organization
-- **Consistent Naming**: Use descriptive, machine-readable identifiers
-- **Logical Structure**: Organize corpus documents meaningfully
-- **Version Control**: Track all changes to experiment specifications
-- **Documentation**: Include README explaining experiment context
-
-### Research Questions
-- **Specific**: Avoid vague or overly broad questions
-- **Answerable**: Ensure questions can be addressed with available data
-- **Focused**: Each question should target specific aspects
-- **Complementary**: Questions should build on each other logically
-
-This v8.0 specification prioritizes simplicity and human readability while maintaining the rigor needed for systematic research.
+-   The file must be named `experiment.md`.
+-   It must contain a valid YAML appendix.
+-   All required fields (`experiment_name`, `spec_version`, `framework`, `corpus`) must be present.
+-   The `spec_version` in the experiment must be compatible with the `spec_version` in the referenced framework.
+-   The files specified in `framework` and `corpus` must exist in the same directory as the `experiment.md` file.
