@@ -169,8 +169,17 @@ Use this evidence to support your statistical interpretations. Quote directly fr
         # 3. Prepare evidence context
         evidence_context = self._prepare_evidence_context(evidence_artifact_hashes, artifact_storage)
         
-        # 4. Assemble enhanced prompt
+        # 4. Create experiment metadata from available information
+        experiment_metadata = f"""
+        Experiment Path: {experiment_path}
+        Framework Path: {framework_path}
+        Research Data Available: Yes
+        Evidence Artifacts: {len(evidence_artifact_hashes)} available
+        """
+        
+        # 5. Assemble enhanced prompt
         enhanced_prompt = self.enhanced_prompt_template['template'].format(
+            experiment_metadata=experiment_metadata,
             framework_content=framework_content,
             experiment_content=experiment_content,
             research_data=json.dumps(research_data, indent=2),

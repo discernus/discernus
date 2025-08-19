@@ -382,29 +382,35 @@ class CleanAnalysisOrchestrator:
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
-                artifact_storage=self.artifact_storage
+                enhanced_mode=True
             )
             
-            # Load framework and experiment content for synthesis
+            # Prepare paths for synthesis
             framework_path = self.experiment_path / self.config['framework']
-            framework_content = framework_path.read_text(encoding='utf-8')
+            experiment_path = self.experiment_path / "experiment.md"
             
-            experiment_content = f"""
-            Experiment: {self.config['name']}
-            Description: {self.config.get('description', '')}
-            Questions: {'; '.join(self.config.get('questions', []))}
-            """
+            # Get research data artifact hash (we need to store the statistical results first)
+            research_data_json = json.dumps(statistical_results, indent=2)
+            research_data_hash = self.artifact_storage.put_artifact(
+                research_data_json.encode('utf-8'),
+                {"artifact_type": "research_data_for_synthesis"}
+            )
             
-            # Create synthesis request
-            synthesis_request = {
-                "framework_content": framework_content,
-                "experiment_content": experiment_content,
-                "research_data": statistical_results.get('statistical_results', {}),
-                "evidence_context": "Evidence available in shared cache"
-            }
+            # Get evidence artifact hashes from the artifacts directory
+            evidence_artifact_hashes = []
+            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
+            if artifacts_dir.exists():
+                evidence_files = list(artifacts_dir.glob("evidence_v6_*"))
+                evidence_artifact_hashes = [f.stem for f in evidence_files]
             
             # Generate synthesis report
-            synthesis_result = synthesis_agent.generate_synthesis_report(synthesis_request)
+            synthesis_result = synthesis_agent.generate_final_report(
+                framework_path=framework_path,
+                experiment_path=experiment_path,
+                research_data_artifact_hash=research_data_hash,
+                evidence_artifact_hashes=evidence_artifact_hashes,
+                artifact_storage=self.artifact_storage
+            )
             
             # Store synthesis report
             if synthesis_result.get('final_report'):
