@@ -1,0 +1,19 @@
+{
+  "experiment_name": "simple_test",
+  "run_id": "20250819T120746Z",
+  "framework": "cff_v10.md",
+  "corpus": "corpus.md",
+  "completion_time": "2025-08-19T12:10:26.565950+00:00",
+  "artifacts": {
+    "raw_analysis_data.csv": "Complete dimensional scores for all documents",
+    "derived_metrics.csv": "Calculated composite metrics and tension indices",
+    "statistical_results.json": "Comprehensive statistical analysis results",
+    "complete_research_data.json": "Combined dataset ready for synthesis"
+  },
+  "artifact_hashes": {
+    "raw_scores_csv": "4fc1fbd0eb864e3cb2911350ed9565c0752f0c898f0b81a69573cb27f710e244",
+    "derived_metrics_csv": "522c99966e0076c9dc89286f3e94859c3422a0d27387bf3e359b75ae103cb933",
+    "statistical_results": "cb1ac6b81f207385eceeb84c70eabc7b015606bb7ac5cebbadc4358447886786",
+    "research_data": "ad533834970acc368c8ea82a89c47adbd516548db372cfd92efe11d682282818"
+  }
+}

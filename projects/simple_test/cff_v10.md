@@ -100,15 +100,15 @@ dimensions:
 # 5.4: Derived Metrics
 derived_metrics:
   - name: "identity_tension"
-    formula: "min(dimensions.tribal_dominance.raw_score, dimensions.individual_dignity.raw_score) * abs(dimensions.tribal_dominance.salience - dimensions.individual_dignity.salience)"
+    formula: "min(dimensional_scores.tribal_dominance.raw_score, dimensional_scores.individual_dignity.raw_score) * abs(dimensional_scores.tribal_dominance.salience - dimensional_scores.individual_dignity.salience)"
   - name: "emotional_tension"
-    formula: "min(dimensions.fear.raw_score, dimensions.hope.raw_score) * abs(dimensions.fear.salience - dimensions.hope.salience)"
+    formula: "min(dimensional_scores.fear.raw_score, dimensional_scores.hope.raw_score) * abs(dimensional_scores.fear.salience - dimensional_scores.hope.salience)"
   - name: "success_tension"
-    formula: "min(dimensions.envy.raw_score, dimensions.compersion.raw_score) * abs(dimensions.envy.salience - dimensions.compersion.salience)"
+    formula: "min(dimensional_scores.envy.raw_score, dimensional_scores.compersion.raw_score) * abs(dimensional_scores.envy.salience - dimensional_scores.compersion.salience)"
   - name: "relational_tension"
-    formula: "min(dimensions.enmity.raw_score, dimensions.amity.raw_score) * abs(dimensions.enmity.salience - dimensions.amity.salience)"
+    formula: "min(dimensional_scores.enmity.raw_score, dimensional_scores.amity.raw_score) * abs(dimensional_scores.enmity.salience - dimensional_scores.amity.salience)"
   - name: "goal_tension"
-    formula: "min(dimensions.fragmentative_goals.raw_score, dimensions.cohesive_goals.raw_score) * abs(dimensions.fragmentative_goals.salience - dimensions.cohesive_goals.salience)"
+    formula: "min(dimensional_scores.fragmentative_goals.raw_score, dimensional_scores.cohesive_goals.raw_score) * abs(dimensional_scores.fragmentative_goals.salience - dimensional_scores.cohesive_goals.salience)"
   - name: "strategic_contradiction_index"
     formula: "(derived_metrics.identity_tension + derived_metrics.emotional_tension + derived_metrics.success_tension + derived_metrics.relational_tension + derived_metrics.goal_tension) / 5"
 

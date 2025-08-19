@@ -37,6 +37,7 @@ from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 from .secure_code_executor import SecureCodeExecutor
 from .capability_registry import CapabilityRegistry
+from .unified_synthesis_agent import UnifiedSynthesisAgent
 import pandas as pd
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
@@ -77,7 +78,7 @@ class ExperimentOrchestrator:
         self.logger.info(f"STATUS: {message}")
     
     def run_experiment(self, 
-                      analysis_model: str = "vertex_ai/gemini-2.5-flash",
+                      analysis_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
                       validation_model: str = "vertex_ai/gemini-2.5-pro",
                       skip_validation: bool = False) -> Dict[str, Any]:
@@ -123,16 +124,43 @@ class ExperimentOrchestrator:
             self._log_status(f"Analysis data loaded into DataFrame ({raw_scores_df.shape[0]} rows)")
 
             # Phase 5: Calculate derived metrics
-            derived_metrics_df = self._calculate_derived_metrics(raw_scores_df)
+            derived_metrics_df = self._calculate_derived_metrics(raw_scores_df, synthesis_model)
             self._log_status(f"Derived metrics calculated ({derived_metrics_df.shape[1] - raw_scores_df.shape[1]} new columns)")
 
             # Phase 6: Perform statistical analysis
-            statistical_results = self._perform_statistical_analysis(raw_scores_df, derived_metrics_df)
+            statistical_results = self._perform_statistical_analysis(raw_scores_df, derived_metrics_df, synthesis_model)
             self._log_status(f"Statistical analysis completed ({len(statistical_results)} result categories)")
+
+            # Phase 7: Store all research artifacts
+            artifact_hashes = self._store_research_artifacts(raw_scores_df, derived_metrics_df, statistical_results)
+            self._log_status(f"Research artifacts stored: {len(artifact_hashes)} files")
+
+            # Phase 8: Generate final synthesis report (optional - continue on failure)
+            synthesis_result = None
+            try:
+                synthesis_result = self._generate_final_report(synthesis_model, artifact_hashes)
+                self._log_status(f"Final synthesis report generated: {synthesis_result['report_length']} characters")
+            except Exception as e:
+                self._log_progress(f"⚠️ Synthesis failed (core pipeline still successful): {e}")
+                # Continue without synthesis - core research deliverables are complete
+
+            # Phase 9: Organize final results in run-specific directory
+            results_dir = self._create_run_results_directory(run_id, artifact_hashes, synthesis_result)
+            self._log_status(f"Final results organized in: {results_dir}")
 
             self._log_progress("✅ Experiment completed successfully!")
             
-            return {"status": "completed", "raw_scores_df": raw_scores_df, "derived_metrics_df": derived_metrics_df, "statistical_results": statistical_results}
+            return {
+                "status": "completed", 
+                "run_id": run_id,
+                "results_directory": str(results_dir),
+                "final_report": synthesis_result["final_report"],
+                "raw_scores_df": raw_scores_df, 
+                "derived_metrics_df": derived_metrics_df, 
+                "statistical_results": statistical_results,
+                "artifact_hashes": artifact_hashes,
+                "synthesis_quality": synthesis_result["quality_metrics"]
+            }
             
         except V8OrchestrationError as e:
             log_experiment_failure(self.security.experiment_name, run_id, str(e), "orchestration")
@@ -473,7 +501,7 @@ result_json = result_df.to_json(orient='records')
         
         return pd.DataFrame(dimensions_data)
 
-    def _calculate_derived_metrics(self, raw_scores_df):
+    def _calculate_derived_metrics(self, raw_scores_df, model_name: str):
         """
         Generate and execute Python code to calculate derived metrics from raw scores.
         Uses the same THIN approach as data aggregation.
@@ -511,7 +539,6 @@ min(row['dimensions']['fear']['raw_score'], row['dimensions']['hope']['raw_score
 Respond with pure Python code only - no markdown, no explanations."""
 
         # 3. Generate the derived metrics script via LLM
-        model_name = "vertex_ai/gemini-2.5-flash"
         
         response_text, metadata = self.llm_gateway.execute_call(
             model=model_name,
@@ -564,7 +591,7 @@ result_json = result_df.to_json(orient='records')
         
         return derived_metrics_df
 
-    def _perform_statistical_analysis(self, raw_scores_df, derived_metrics_df):
+    def _perform_statistical_analysis(self, raw_scores_df, derived_metrics_df, model_name: str):
         """
         Generate and execute Python code for comprehensive statistical analysis.
         Uses the same THIN approach as other code generation components.
@@ -583,7 +610,6 @@ result_json = result_df.to_json(orient='records')
         )
 
         # 2. Generate the statistical analysis script via LLM
-        model_name = "vertex_ai/gemini-2.5-flash"
         
         response_text, metadata = self.llm_gateway.execute_call(
             model=model_name,
@@ -635,6 +661,190 @@ result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
         statistical_results = json.loads(result_json)
         
         return statistical_results
+
+    def _store_research_artifacts(self, raw_scores_df, derived_metrics_df, statistical_results):
+        """
+        Store all research deliverables as persistent artifacts with full provenance.
+        This is what makes an experiment actually complete.
+        """
+        self._log_progress("💾 Storing research artifacts...")
+        
+        artifact_hashes = {}
+        
+        # 1. Store Raw Analysis Data CSV
+        raw_scores_csv = raw_scores_df.to_csv(index=False)
+        raw_scores_hash = self.artifact_storage.put_artifact(
+            content=raw_scores_csv.encode('utf-8'),
+            metadata={
+                'artifact_type': 'raw_analysis_data_csv',
+                'experiment_name': self.security.experiment_name,
+                'document_count': len(raw_scores_df),
+                'dimension_count': len([col for col in raw_scores_df.columns if col.startswith('dimensions')])
+            }
+        )
+        artifact_hashes['raw_scores_csv'] = raw_scores_hash
+        
+        # 2. Store Derived Metrics Data CSV  
+        derived_metrics_csv = derived_metrics_df.to_csv(index=False)
+        derived_metrics_hash = self.artifact_storage.put_artifact(
+            content=derived_metrics_csv.encode('utf-8'),
+            metadata={
+                'artifact_type': 'derived_metrics_csv',
+                'experiment_name': self.security.experiment_name,
+                'metrics_count': len(derived_metrics_df.columns) - len(raw_scores_df.columns)
+            }
+        )
+        artifact_hashes['derived_metrics_csv'] = derived_metrics_hash
+        
+        # 3. Store Statistical Results JSON
+        statistical_json = json.dumps(statistical_results, indent=2, default=str)
+        statistical_hash = self.artifact_storage.put_artifact(
+            content=statistical_json.encode('utf-8'),
+            metadata={
+                'artifact_type': 'statistical_results_json',
+                'experiment_name': self.security.experiment_name,
+                'result_categories': len(statistical_results)
+            }
+        )
+        artifact_hashes['statistical_results'] = statistical_hash
+        
+        # 4. Store Combined Research Data (for synthesis)
+        research_data = {
+            'experiment_metadata': {
+                'name': self.security.experiment_name,
+                'framework': self.config.get('framework'),
+                'corpus_documents': len(raw_scores_df),
+            },
+            'raw_analysis_data': raw_scores_df.to_dict('records'),
+            'derived_metrics_data': derived_metrics_df.to_dict('records'), 
+            'statistical_results': statistical_results
+        }
+        
+        research_data_json = json.dumps(research_data, indent=2, default=str)
+        research_data_hash = self.artifact_storage.put_artifact(
+            content=research_data_json.encode('utf-8'),
+            metadata={
+                'artifact_type': 'complete_research_data',
+                'experiment_name': self.security.experiment_name,
+                'ready_for_synthesis': True
+            }
+        )
+        artifact_hashes['research_data'] = research_data_hash
+        
+        self._log_progress(f"📋 Artifacts stored with hashes: {list(artifact_hashes.keys())}")
+        
+        return artifact_hashes
+
+    def _generate_final_report(self, synthesis_model: str, artifact_hashes: Dict[str, str]) -> Dict[str, Any]:
+        """
+        Generate final synthesis report using unified synthesis agent with txtai RAG integration.
+        """
+        self._log_progress("📝 Generating final synthesis report...")
+        
+        # Get evidence artifact hashes from the registry
+        evidence_hashes = []
+        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                evidence_hashes.append(artifact_hash)
+        
+        if not evidence_hashes:
+            raise V8OrchestrationError("No evidence artifacts found for synthesis")
+        
+        # Initialize unified synthesis agent
+        synthesis_agent = UnifiedSynthesisAgent(
+            model=synthesis_model,
+            audit_logger=self.audit_logger if hasattr(self, 'audit_logger') else None
+        )
+        
+        # Generate final report
+        synthesis_result = synthesis_agent.generate_final_report(
+            framework_path=self.experiment_path / self.config['framework'],
+            experiment_path=self.experiment_path / 'experiment.md',
+            research_data_artifact_hash=artifact_hashes['research_data'],
+            evidence_artifact_hashes=evidence_hashes,
+            artifact_storage=self.artifact_storage
+        )
+        
+        # Store final report as artifact
+        final_report_hash = self.artifact_storage.put_artifact(
+            content=synthesis_result['final_report'].encode('utf-8'),
+            metadata={
+                'artifact_type': 'final_synthesis_report',
+                'experiment_name': self.security.experiment_name,
+                'report_length': len(synthesis_result['final_report']),
+                'evidence_pieces': synthesis_result['evidence_pieces_indexed'],
+                'quality_score': synthesis_result['quality_metrics'].get('meets_basic_structure', False)
+            }
+        )
+        
+        return {
+            "final_report": synthesis_result['final_report'],
+            "quality_metrics": synthesis_result['quality_metrics'],
+            "report_hash": final_report_hash,
+            "report_length": len(synthesis_result['final_report'])
+        }
+
+    def _create_run_results_directory(self, run_id: str, artifact_hashes: Dict[str, str], synthesis_result: Optional[Dict[str, Any]] = None) -> Path:
+        """
+        Create run-specific results directory and copy final research artifacts there.
+        This provides researchers with a clean, organized view of their results.
+        """
+        # Create run directory structure
+        run_dir = self.experiment_path / "runs" / run_id
+        results_dir = run_dir / "results"
+        results_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Define user-friendly filenames for research deliverables
+        artifact_mappings = {
+            'raw_scores_csv': 'raw_analysis_data.csv',
+            'derived_metrics_csv': 'derived_metrics.csv', 
+            'statistical_results': 'statistical_results.json',
+            'research_data': 'complete_research_data.json'
+        }
+        
+        # Add final report if synthesis was completed
+        if synthesis_result and 'report_hash' in synthesis_result:
+            artifact_mappings['final_report'] = 'final_report.md'
+            artifact_hashes['final_report'] = synthesis_result['report_hash']
+        
+        # Copy artifacts to results directory with user-friendly names
+        for artifact_key, user_filename in artifact_mappings.items():
+            if artifact_key in artifact_hashes:
+                artifact_hash = artifact_hashes[artifact_key]
+                
+                # Get artifact content from storage
+                artifact_content = self.artifact_storage.get_artifact(artifact_hash)
+                
+                # Write to user-friendly location
+                result_file = results_dir / user_filename
+                with open(result_file, 'wb') as f:
+                    f.write(artifact_content)
+                
+                self._log_progress(f"📄 Copied {artifact_key} → {user_filename}")
+        
+        # Create a summary file
+        summary = {
+            "experiment_name": self.security.experiment_name,
+            "run_id": run_id,
+            "framework": self.config.get('framework'),
+            "corpus": self.config.get('corpus'),
+            "completion_time": datetime.now(timezone.utc).isoformat(),
+            "artifacts": {
+                "raw_analysis_data.csv": "Complete dimensional scores for all documents",
+                "derived_metrics.csv": "Calculated composite metrics and tension indices",
+                "statistical_results.json": "Comprehensive statistical analysis results",
+                "complete_research_data.json": "Combined dataset ready for synthesis",
+                "final_report.md": "Publication-ready research report with evidence citations"
+            },
+            "artifact_hashes": artifact_hashes
+        }
+        
+        summary_file = results_dir / "experiment_summary.json"
+        with open(summary_file, 'w') as f:
+            json.dump(summary, f, indent=2)
+        
+        return results_dir
 
     def _get_framework_derived_metrics(self):
         """Extract derived metrics definitions from the loaded framework."""

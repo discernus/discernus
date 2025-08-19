@@ -80,7 +80,7 @@ class EnhancedAnalysisAgent:
             document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
             new_scores_hash, new_evidence_hash = process_json_response(
                 cached_result['raw_analysis_response'],
-                document_hashes[0] if document_hashes else "unknown_artifact",
+                document_hashes,
                 self.storage, self.audit, self.agent_name, {}
             )
             # BUGFIX: Include result_hash for cache hits to match counting logic expectations
@@ -102,7 +102,7 @@ class EnhancedAnalysisAgent:
 
         analysis_provenance = {"framework_hash": framework_hash}
         new_scores_hash, new_evidence_hash = process_json_response(
-            result_content, document_hashes[0], self.storage, self.audit, self.agent_name, analysis_provenance
+            result_content, document_hashes, self.storage, self.audit, self.agent_name, analysis_provenance
         )
 
         duration = self._calculate_duration(start_time, datetime.now(timezone.utc).isoformat())
