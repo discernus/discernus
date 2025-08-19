@@ -1,9 +1,16 @@
 # NotebookDiscussionAgent YAML Prompt Template
-# Purpose: Generate specific, data-driven academic discussion for research notebooks
+# Purpose: Generate data-driven academic discussion with STRICT validation
 # Token Limit: <800 tokens per generation
 
 template: |
-  Generate a specific, data-driven academic discussion section for a computational social science research notebook.
+  Generate a data-driven academic discussion section for a computational social science research notebook.
+  
+  **CRITICAL ANTI-FABRICATION RULE:**
+  - You MUST ONLY reference findings that exist in the provided key interpretations
+  - You MUST ONLY reference context that is explicitly stated in the research context
+  - If any required data is missing, you MUST error out with "DATA VALIDATION FAILED: [specific missing data]"
+  - NEVER generate placeholder content, generic academic text, or fabricated insights
+  - NEVER make assumptions about findings that aren't provided
   
   **CONTEXT:**
   Framework: {framework_name}
@@ -12,36 +19,44 @@ template: |
   Key Interpretations: {key_interpretations}
   Research Context: {research_context}
   
-  **CRITICAL REQUIREMENTS:**
-  1. **Specific Content**: Use the actual framework details and key interpretations - NO generic placeholders
-  2. **Data-Driven**: Reference specific findings, dimensions, and patterns from the analysis
-  3. **Academic Style**: Write in third person, formal academic tone
-  4. **Token Limit**: Keep output under 800 tokens
-  5. **NO PLACEHOLDERS**: Never use phrases like "dominant theme or sentiment" or "high score in Dimension X"
-  6. **Concrete Analysis**: Provide specific discussion based on the actual research context and findings
+  **DATA VALIDATION REQUIREMENTS:**
+  1. **Key Interpretations Validation**: Every insight discussed must exist in the provided interpretations
+  2. **Research Context Validation**: Every context reference must be explicitly stated
+  3. **No Extrapolation**: Do not infer implications or contributions not directly supported by the data
+  4. **Error on Missing Data**: If critical data is missing, report "DATA VALIDATION FAILED" and stop
   
-  **STRUCTURE:**
-  - **Theoretical Contributions**: Specific insights the findings provide for the framework
-  - **Practical Implications**: Real-world applications and significance
-  - **Methodological Insights**: What the computational approach reveals
-  - **Future Research**: Specific directions based on current findings
-  - **Conclusion**: Summary of key contributions and limitations
+  **REQUIRED STRUCTURE:**
+  - **Data Validation Check**: Verify all required data is present
+  - **Theoretical Contributions**: Only discuss contributions explicitly supported by the data
+  - **Practical Implications**: Only discuss implications directly derived from findings
+  - **Methodological Insights**: Only discuss insights based on actual methods used
+  - **Future Research**: Only suggest directions supported by actual findings
   
-  **EXAMPLE OUTPUT (Data-Driven):**
+  **EXAMPLE OUTPUT (Data-Driven Only):**
   ```
   ## Discussion
   
-  **Theoretical Contributions**: The findings from the "simple_test" experiment significantly advance the cohesive_flourishing_framework by empirically linking specific linguistic characteristics to political discourse patterns. The observed tribal dominance scores (0.6-0.8) across documents demonstrate the framework's capacity to capture group-based power dynamics in political communication.
+  **Data Validation Check**: ✅ All required data present
   
-  **Practical Implications**: The demonstrated ability to identify dominant themes and quantify dimensional alignment has immediate applications in political discourse analysis. Automated agents could offer rapid assessments of political speeches, policy documents, or media content for bias detection and content moderation purposes.
+  **Theoretical Contributions**: Based on the provided key interpretations, this work contributes [specific contribution from data].
   
-  **Methodological Insights**: The computational approach highlights the efficacy of automated agents for structured qualitative assessment. The ability to generate quantitative scores from textual data bridges qualitative depth with quantitative rigor, enabling reproducible and scalable analysis.
+  **Practical Implications**: The findings suggest [specific implication directly supported by data].
   
-  **Future Research**: To build upon these findings, replication with larger, more diverse corpora is crucial. Comparative studies employing traditional qualitative analysis alongside computational methods would provide valuable benchmarks for accuracy and insight generation.
+  **Methodological Insights**: The approach demonstrates [specific insight from actual methods].
   
-  **Conclusion**: This preliminary analysis demonstrates the nascent capabilities of the cohesive_flourishing_framework for quantitative textual interpretation, offering early evidence for theoretical utility and practical applications in content analysis.
+  **Future Research**: Building on these findings, future work should [specific direction supported by data].
   ```
   
-  **IMPORTANT**: Generate specific content based on the framework and key interpretations provided. Do NOT use generic placeholders or template language.
+  **ERROR OUTPUT (When Data Missing):**
+  ```
+  ## Discussion
   
-  Generate the discussion section now:
+  **DATA VALIDATION FAILED**: Missing required data:
+  - Key interpretations are empty or contain no specific findings
+  - Research context does not provide sufficient information
+  - Cannot generate discussion without valid interpretation data
+  
+  **Action Required**: Provide complete key interpretations and research context before proceeding.
+  ```
+  
+  **Generate the discussion section now, with strict data validation:**

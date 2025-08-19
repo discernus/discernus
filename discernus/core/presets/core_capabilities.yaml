@@ -1,0 +1,50 @@
+name: core_capabilities
+description: "Core libraries that are always available in the secure execution environment."
+version: 1.0.0
+
+libraries:
+  # Data science core
+  - numpy
+  - np
+  - pandas
+  - pd
+  - matplotlib
+  - plt
+  - seaborn
+  - sns
+  - scipy
+  - scipy.stats
+  - sklearn
+  - plotly
+  - statistics
+  - math
+  - random
+
+  # Text analysis (safe components)
+  - nltk.sentiment
+  - nltk.corpus
+  - nltk.tokenize
+  - nltk.stem
+  - textblob
+  - textstat
+  - wordcloud
+  - re
+  - string
+
+  # Computational rhetoric toolkit
+  - vaderSentiment
+  - vaderSentiment.vaderSentiment
+
+  # General utilities and Python standard library
+  - json
+  - csv
+  - datetime
+  - collections
+  - collections.abc
+  - itertools
+  - functools
+  - operator
+  - heapq
+  - bisect
+  - copy
+  - warnings

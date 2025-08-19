@@ -95,7 +95,7 @@ documents:
 - ✅ Each document must have brief description
 
 ### Document Requirements  
-- ✅ All listed documents must exist in `corpus/documents/` directory
+- ✅ All listed documents must exist in `corpus/` directory
 - ✅ Document filenames must match exactly (case-sensitive)
 - ✅ Documents must be readable text files (.txt, .md preferred)
 - ✅ No empty or corrupted files
@@ -130,74 +130,44 @@ documents:
 
 ## 5. Example v8.0 Corpus
 
-```markdown
-# Simple Test Corpus
-
-## Overview
-A curated collection of political discourse samples representing different rhetorical styles: institutional (McCain), progressive populist (Sanders, AOC), and conservative populist (King). Selected to test social cohesion analysis across diverse democratic discourse patterns.
-
-## Documents
-
-### alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
-Alexandria Ocasio-Cortez's 2025 statement on economic inequality and oligarchy. Represents progressive populist rhetoric with strong social justice framing and systemic critique.
-
-### bernie_sanders_2025_fighting_oligarchy.txt  
-Bernie Sanders' 2025 policy statement on wealth inequality and corporate power. Classic progressive populist discourse with economic justice themes and anti-establishment positioning.
-
-### john_mccain_2008_concession.txt
-John McCain's concession speech from the 2008 presidential election. Exemplifies institutional democratic discourse with emphasis on unity, respect, and democratic norms.
-
-### steve_king_2017_house_floor.txt
-Representative Steve King's 2017 House floor remarks on immigration and cultural identity. Represents conservative populist discourse with nationalist and exclusionary themes.
-
-## Optional Metadata
+A valid corpus manifest `corpus.md` file MUST be a Markdown document containing a YAML appendix with the following structure:
 
 ```yaml
-corpus_metadata:
-  total_documents: 4
-  date_range: "2008-2025"
-  source_types: ["speeches", "statements", "floor_remarks"]
-  collection_method: "manual_curation"
-  political_spectrum: ["institutional", "progressive_populist", "conservative_populist"]
-  
-document_metadata:
-  alexandria_ocasio_cortez_2025_fighting_oligarchy.txt:
-    author: "Alexandria Ocasio-Cortez"
-    date: "2025-01-15"
-    type: "policy_statement"
-    political_position: "progressive_populist"
-    word_count: 1856
-    
-  bernie_sanders_2025_fighting_oligarchy.txt:
-    author: "Bernie Sanders"
-    date: "2025-01-10"  
-    type: "policy_statement"
-    political_position: "progressive_populist"
-    word_count: 2134
-    
-  john_mccain_2008_concession.txt:
-    author: "John McCain"
-    date: "2008-11-04"
-    type: "concession_speech"
-    political_position: "institutional"
-    word_count: 1247
-    
-  steve_king_2017_house_floor.txt:
-    author: "Steve King"
-    date: "2017-03-12"
-    type: "floor_remarks"  
-    political_position: "conservative_populist"
-    word_count: 987
+name: "Name of the Corpus"
+version: "1.0"
+description: "A brief description of the corpus."
+documents:
+  - filename: "document1.txt"
+    document_id: "unique_id_1"
+    metadata:
+      author: "Author Name"
+      date: "YYYY-MM-DD"
+  - filename: "document2.txt"
+    document_id: "unique_id_2"
+    metadata:
+      author: "Another Author"
+      date: "YYYY-MM-DD"
 ```
-```
+
+### 3. Document Content
+
+Each document listed in the manifest must exist as a plain text (`.txt`) file within the `corpus/` subdirectory of the experiment.
+
+### 4. Validation Rules
+
+1.  **YAML Validity:** The appendix must be valid YAML.
+2.  **Required Fields:** The `name`, `version`, and `documents` fields are mandatory.
+3.  **Document Fields:** Each entry in `documents` must have a `filename` and a `document_id`.
+4.  **File Existence:** The file specified in `filename` must exist in the `corpus/` directory.
+5.  **ID Uniqueness:** All `document_id` values must be unique within the manifest.
 
 ---
 
 ## 6. Integration with v8.0 Pipeline
 
 ### Loading Process
-1. **Specification Reading**: v8.0 loader reads raw corpus_v8.md content
-2. **Document Discovery**: Automatically scans corpus/documents/ directory
+1. **Specification Reading**: v8.0 loader reads raw corpus.md content
+2. **Document Discovery**: Automatically scans corpus/ directory
 3. **Metadata Extraction**: Parses optional YAML metadata if present
 4. **Validation**: Ensures all listed documents exist and are readable
 5. **Content Preparation**: Loads document content for analysis agents
@@ -232,7 +202,7 @@ document_metadata:
 
 ### File Organization
 - **Clear Naming**: Use descriptive, consistent document filenames
-- **Logical Structure**: Organize documents meaningfully within corpus/documents/
+- **Logical Structure**: Organize documents meaningfully within corpus/
 - **Version Control**: Track changes to corpus composition and metadata
 - **Documentation**: Explain corpus creation and curation decisions
 

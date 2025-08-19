@@ -92,7 +92,8 @@ class AutomatedDerivedMetricsAgent:
             # Generate calculation functions using LLM
             generated_functions = self._generate_calculation_functions(
                 framework_content, 
-                experiment_spec
+                experiment_spec,
+                workspace_path
             )
             
             # Extract clean functions using THIN delimiter approach
@@ -161,10 +162,13 @@ class AutomatedDerivedMetricsAgent:
         
         return prompt_data['template']
 
-    def _generate_calculation_functions(self, framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+    def _generate_calculation_functions(self, framework_content: str, experiment_spec: Dict[str, Any], workspace_path: Path) -> str:
         """Generate calculation functions using componentized generation (one function at a time)."""
         # Extract individual calculations from framework
         calculations = self._extract_individual_calculations(framework_content)
+        
+        # Load actual data structure for data-aware prompting
+        data_structure_info = self._load_data_structure(workspace_path)
         
         generated_functions = []
         
@@ -175,7 +179,8 @@ class AutomatedDerivedMetricsAgent:
                     calc_name, 
                     calc_description, 
                     framework_content,
-                    experiment_spec
+                    experiment_spec,
+                    data_structure_info
                 )
                 
                 # Validate the generated function
@@ -348,7 +353,8 @@ def calculate_derived_metrics(data: pd.DataFrame) -> pd.DataFrame:
         return calculations
     
     def _generate_single_function(self, calc_name: str, calc_description: str, 
-                                framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+                                framework_content: str, experiment_spec: Dict[str, Any],
+                                data_structure_info: Dict[str, Any]) -> str:
         """Generate a single calculation function using focused LLM prompt."""
         
         # Create focused prompt for single function
@@ -361,13 +367,23 @@ Description: {calc_description}
 **FRAMEWORK CONTEXT:**
 {framework_content[:1000]}...
 
+**ACTUAL DATA STRUCTURE:**
+The analysis data contains the following columns:
+{data_structure_info['columns_info']}
+
+**SAMPLE DATA:**
+{data_structure_info['sample_data']}
+
 **REQUIREMENTS:**
 1. Generate EXACTLY ONE Python function
 2. Function name: calculate_{calc_name}
-3. Accept pandas DataFrame 'data' as primary parameter
-4. Handle missing data gracefully (return None)
-5. Include proper docstring with formula
-6. Be production-ready with error handling
+3. Accept pandas DataFrame 'data' as primary parameter (this will be a single row/Series)
+4. Use the EXACT column names shown in the actual data structure above
+5. Handle missing data gracefully (return None)
+6. Include proper docstring with formula
+7. Be production-ready with error handling
+
+**CRITICAL:** Use the EXACT column names shown in the actual data structure above. Do NOT assume or invent column names.
 
 **CRITICAL OUTPUT FORMAT - YOU MUST FOLLOW THIS EXACTLY:**
 You MUST start your response with the opening delimiter and end with the closing delimiter.
@@ -455,3 +471,85 @@ Generate ONLY this one function. Do not generate multiple functions."""
                 "line": getattr(e, 'lineno', 'unknown')
             })
             return False
+    
+    def _load_data_structure(self, workspace_path: Path) -> Dict[str, Any]:
+        """
+        Load actual data structure from workspace for data-aware prompting.
+        
+        Returns:
+            Dictionary with columns_info and sample_data for prompting
+        """
+        import pandas as pd
+        
+        try:
+            # Load analysis data from workspace
+            analysis_data_path = workspace_path / "analysis_data.json"
+            if not analysis_data_path.exists():
+                # Fallback to generic structure if no data available
+                return {
+                    'columns_info': "No analysis data available - use generic column names",
+                    'sample_data': "No sample data available"
+                }
+            
+            with open(analysis_data_path, 'r') as f:
+                analysis_data = json.load(f)
+            
+            if not analysis_data:
+                return {
+                    'columns_info': "Analysis data is empty - use generic column names", 
+                    'sample_data': "No sample data available"
+                }
+            
+            # Convert to DataFrame to analyze structure
+            df = pd.DataFrame(analysis_data)
+            
+            # Generate columns info with data types and value ranges
+            columns_info = []
+            for col in df.columns:
+                if col == 'document_name':
+                    columns_info.append(f"- {col} (string)")
+                else:
+                    # Check if column contains real numeric data
+                    non_null_values = df[col].dropna()
+                    if len(non_null_values) > 0 and pd.api.types.is_numeric_dtype(non_null_values):
+                        min_val = non_null_values.min()
+                        max_val = non_null_values.max()
+                        columns_info.append(f"- {col} (float {min_val:.2f}-{max_val:.2f}) ← REAL DATA")
+                    else:
+                        columns_info.append(f"- {col} (float - mostly NaN, ignore)")
+            
+            # Generate sample data showing first valid row
+            sample_data = "Sample row from actual data:\n"
+            if len(df) > 0:
+                first_row = df.iloc[0]
+                doc_name = first_row.get('document_name', 'unknown')[:30]
+                sample_data += f"Document: {doc_name}\n"
+                
+                # Show key numeric columns with real values
+                numeric_cols = df.select_dtypes(include=['number']).columns
+                real_data_cols = []
+                for col in numeric_cols:
+                    if col in first_row and pd.notna(first_row[col]):
+                        real_data_cols.append(f"{col}={first_row[col]}")
+                
+                if real_data_cols:
+                    sample_data += f"Real values: {', '.join(real_data_cols[:6])}..."
+                else:
+                    sample_data += "No real numeric values found in first row"
+            
+            return {
+                'columns_info': '\n'.join(columns_info),
+                'sample_data': sample_data
+            }
+            
+        except Exception as e:
+            self._log_event("DATA_STRUCTURE_LOADING_FAILED", {
+                "error": str(e),
+                "workspace": str(workspace_path)
+            })
+            
+            # Return safe fallback
+            return {
+                'columns_info': f"Failed to load data structure: {str(e)}",
+                'sample_data': "No sample data available"
+            }

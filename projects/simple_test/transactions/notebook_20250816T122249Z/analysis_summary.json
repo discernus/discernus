@@ -1,0 +1,33 @@
+{
+  "analysis_metadata": {
+    "total_documents_analyzed": 4,
+    "analysis_timestamp": "2025-08-16T12:22:49.674124+00:00",
+    "analysis_model": "vertex_ai/gemini-2.5-flash"
+  },
+  "document_summary": [
+    {
+      "document_index": 0,
+      "artifact_hash": "c8c44ca7fe77d74a",
+      "artifact_file": "artifacts/analysis_results/analysis_0000_c8c44ca7fe77d74a.json"
+    },
+    {
+      "document_index": 1,
+      "artifact_hash": "8a8246c40edd5124",
+      "artifact_file": "artifacts/analysis_results/analysis_0001_8a8246c40edd5124.json"
+    },
+    {
+      "document_index": 2,
+      "artifact_hash": "2459ab846f7a84d5",
+      "artifact_file": "artifacts/analysis_results/analysis_0002_2459ab846f7a84d5.json"
+    },
+    {
+      "document_index": 3,
+      "artifact_hash": "317b915f0dcedef9",
+      "artifact_file": "artifacts/analysis_results/analysis_0003_317b915f0dcedef9.json"
+    }
+  ],
+  "provenance": {
+    "analysis_results_stored": "artifacts/analysis_results/",
+    "simplified_data_format": "analysis_data.json"
+  }
+}

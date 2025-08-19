@@ -98,6 +98,7 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     return True, "✅ Basic structure is valid. Full validation will occur during the run.", {"name": experiment_name}
 
 
+# Main CLI group
 @click.group()
 @click.version_option(version='0.2.0', prog_name='Discernus')
 @click.option('--verbose', '-v', is_flag=True, envvar='DISCERNUS_VERBOSE', help='Enable verbose output')
@@ -273,7 +274,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             
         # Use orchestrator for all experiments
         click.echo("🔬 Using Experiment Orchestrator for statistical analysis pipeline")
-        orchestrator = ExperimentOrchestrator(exp_path)
+        orchestrator = ExperimentOrchestrator(experiment_path=Path(experiment_path))
         
         # Execute experiment with status indication
         rich_console.print_info("Experiment execution started - this may take several minutes...")

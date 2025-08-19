@@ -1,0 +1,111 @@
+{
+  "evidence_metadata": {
+    "document_hash": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-19T00:27:55.300268+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+      "confidence": 0.9,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300239+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Our lives deserve dignity and our work deserves respect.",
+      "confidence": 0.85,
+      "context_type": "Direct Claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300249+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.9,
+      "context_type": "Problem Description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300252+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "If you are willing to fight for someone you don't know, you are welcome here.",
+      "confidence": 0.85,
+      "context_type": "Call to Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300254+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "These kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them.",
+      "confidence": 0.8,
+      "context_type": "Accusation of Injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300255+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "compassion",
+      "quote_text": "Mass media and Fox News, and the right will have you believe that these American values are something out of the Communist Manifesto.",
+      "confidence": 0.7,
+      "context_type": "Absence/Contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300257+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "enmity",
+      "quote_text": "Those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+      "confidence": 0.95,
+      "context_type": "Direct Opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300259+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "This isn't just about Republicans. We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+      "confidence": 0.85,
+      "context_type": "In-Group Unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300261+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+      "confidence": 0.9,
+      "context_type": "Strategy Description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300262+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+      "confidence": 0.9,
+      "context_type": "Goal Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T00:27:55.300264+00:00"
+    }
+  ]
+}

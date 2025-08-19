@@ -1,46 +1,62 @@
 # NotebookMethodologyAgent YAML Prompt Template
-# Purpose: Generate specific, data-driven methodology sections for research notebooks
+# Purpose: Generate data-driven methodology with STRICT validation
 # Token Limit: <800 tokens per generation
 
 template: |
-  Generate a specific, data-driven academic methodology section for a computational social science research notebook.
+  Generate a data-driven academic methodology section for a computational social science research notebook.
+  
+  **CRITICAL ANTI-FABRICATION RULE:**
+  - You MUST ONLY reference framework details that exist in the provided framework content
+  - You MUST ONLY reference experiment details that are explicitly provided
+  - If any required data is missing, you MUST error out with "DATA VALIDATION FAILED: [specific missing data]"
+  - NEVER generate placeholder content, generic academic text, or fabricated framework descriptions
+  - NEVER make assumptions about frameworks or methods that aren't provided
   
   **CONTEXT:**
-  Framework: {framework_name}
-  Experiment: {experiment_name}
-  Documents Analyzed: {document_count}
+  Framework Content: {framework_content}
+  Experiment Name: {experiment_name}
+  Framework Name: {framework_name}
+  Document Count: {document_count}
   Analysis Model: {analysis_model}
   
-  **FRAMEWORK CONTENT:**
-  {framework_content}
+  **DATA VALIDATION REQUIREMENTS:**
+  1. **Framework Content Validation**: Every framework detail mentioned must exist in the provided content
+  2. **Experiment Validation**: Every experiment detail must be explicitly provided
+  3. **No Extrapolation**: Do not infer framework capabilities or methods not directly stated
+  4. **Error on Missing Data**: If critical data is missing, report "DATA VALIDATION FAILED" and stop
   
-  **CRITICAL REQUIREMENTS:**
-  1. **Specific Content**: Use the actual framework details and document count - NO generic placeholders
-  2. **Data-Driven**: Reference specific dimensions, calculations, and methods from the framework
-  3. **Academic Style**: Write in third person, formal academic tone
-  4. **Token Limit**: Keep output under 800 tokens
-  5. **Computational Transparency**: Mention LLM-assisted analysis with human oversight
-  6. **NO PLACEHOLDERS**: Never use phrases like "Insert specific detail" or "List the specific dimensions"
+  **REQUIRED STRUCTURE:**
+  - **Data Validation Check**: Verify all required data is present
+  - **Analytical Framework**: Only describe framework elements explicitly stated
+  - **Data Processing**: Only describe methods actually used
+  - **Measurement Approach**: Only describe dimensions and methods explicitly defined
+  - **Quality Assurance**: Only describe validation methods actually implemented
   
-  **STRUCTURE:**
-  - **Analytical Framework**: Explain the specific theoretical approach from the framework
-  - **Data Processing**: How documents were analyzed (mention computational methods and document count)
-  - **Measurement Approach**: Describe the specific dimensions and scoring methodology from the framework
-  - **Quality Assurance**: Validation and reliability measures
-  
-  **EXAMPLE OUTPUT (Data-Driven):**
+  **EXAMPLE OUTPUT (Data-Driven Only):**
   ```
   ## Methodology
   
-  This study employs the Cohesive Flourishing Framework (v8.0) to analyze political discourse for patterns indicative of cohesion versus fragmentation. The framework operationalizes social dynamics through systematic dimensional analysis of tribal dominance, individual dignity, hope, fear, and relational climate scores.
+  **Data Validation Check**: ✅ All required data present
   
-  **Data Processing**: The analysis was conducted on a corpus of 4 documents using large language model (LLM) assistance with human oversight and validation. Each text was scored across 9 dimensions using standardized criteria derived from the theoretical framework.
+  **Analytical Framework**: This study employs the [specific framework name] as described in the provided content.
   
-  **Measurement Approach**: The dimensional scoring system assigns values from 0.0 to 1.0 for each dimension based on presence, salience, and nature within the text. Salience weighting considers textual frequency and rhetorical emphasis, while confidence levels reflect evidence clarity.
+  **Data Processing**: The analysis was conducted on [actual document count] documents using [specific analysis model].
   
-  **Quality Assurance**: All computational results underwent rigorous human oversight and validation. Statistical analysis included descriptive statistics, correlation analysis, and derived metrics calculations with appropriate confidence intervals.
+  **Measurement Approach**: The framework defines [specific dimensions] with [specific methodology].
+  
+  **Quality Assurance**: [Specific validation methods from framework content].
   ```
   
-  **IMPORTANT**: Generate specific content based on the framework provided. Do NOT use generic placeholders or template language.
+  **ERROR OUTPUT (When Data Missing):**
+  ```
+  ## Methodology
   
-  Generate the methodology section now:
+  **DATA VALIDATION FAILED**: Missing required data:
+  - Framework content is empty or contains no specific details
+  - Experiment details are incomplete or missing
+  - Cannot generate methodology without valid framework and experiment data
+  
+  **Action Required**: Provide complete framework content and experiment details before proceeding.
+  ```
+  
+  **Generate the methodology section now, with strict data validation:**

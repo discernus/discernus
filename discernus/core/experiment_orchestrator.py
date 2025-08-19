@@ -32,11 +32,11 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
-from ..cli_console import DiscernusConsole
 from .prompt_assemblers.data_aggregation_assembler import DataAggregationPromptAssembler
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 from .secure_code_executor import SecureCodeExecutor
+from .capability_registry import CapabilityRegistry
 import pandas as pd
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
@@ -61,24 +61,20 @@ class ExperimentOrchestrator:
         
         # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
-        self.console = DiscernusConsole()
         self.logger = get_logger("experiment_orchestrator")
         self.config = {}
         self.llm_gateway = None
         self.secure_code_executor = None
         
         self.logger.info(f"Orchestrator initialized for: {self.security.experiment_name}")
-        self._log_progress(f"🎯 Orchestrator initialized for: {self.security.experiment_name}")
     
     def _log_progress(self, message: str):
         """Log progress with rich console output."""
         self.logger.info(message)
-        self.console.echo(message)
     
     def _log_status(self, message: str):
         """Log status updates."""
         self.logger.info(f"STATUS: {message}")
-        self.console.echo(f"✅ {message}")
     
     def run_experiment(self, 
                       analysis_model: str = "vertex_ai/gemini-2.5-flash",
@@ -130,9 +126,8 @@ class ExperimentOrchestrator:
             # ... integration for DerivedMetricsPipeline will go here ...
 
             self._log_progress("✅ Experiment completed successfully!")
-            self.console.print_success("Experiment completed successfully!")
             
-            return results
+            return {"status": "completed", "raw_scores_df": raw_scores_df}
             
         except V8OrchestrationError as e:
             log_experiment_failure(self.security.experiment_name, run_id, str(e), "orchestration")
@@ -180,7 +175,8 @@ class ExperimentOrchestrator:
 
             # Initialize Secure Code Executor
             self._log_progress("🔧 Initializing Secure Code Executor...")
-            self.secure_code_executor = SecureCodeExecutor()
+            capability_registry = CapabilityRegistry()
+            self.secure_code_executor = SecureCodeExecutor(capability_registry=capability_registry)
             
             return audit_logger
         except Exception as e:
@@ -378,45 +374,59 @@ class ExperimentOrchestrator:
         )
 
         # 2. Generate the aggregation script via LLM
-        # This uses the architectural mandate for structured output
-        code_schema = {
-            "type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]
-        }
-        model_name = "vertex_ai/gemini-2.5-flash" # Use a fast model for code-gen
+        # Use natural markdown format instead of structured output for better reliability
+        model_name = "vertex_ai/gemini-2.5-flash" # Use Flash for reliable code generation
         
-        structured_response, metadata = self.llm_gateway.execute_call(
+        response_text, metadata = self.llm_gateway.execute_call(
             model=model_name,
-            prompt=prompt,
-            response_schema=code_schema
+            prompt=prompt
         )
-        if not metadata.get("success"):
+        if not metadata.get("success") or not response_text:
             raise V8OrchestrationError(f"Failed to generate data aggregation script: {metadata.get('error')}")
         
-        aggregation_script = structured_response.get("code")
-        if not aggregation_script:
-            raise V8OrchestrationError("LLM failed to return code for data aggregation.")
+        # Handle both pure Python (Flash) and markdown-wrapped Python (Flash Lite)
+        aggregation_script = response_text.strip()
+        
+        # If wrapped in markdown blocks, extract the code
+        if aggregation_script.startswith('```python') and aggregation_script.endswith('```'):
+            lines = aggregation_script.split('\n')
+            aggregation_script = '\n'.join(lines[1:-1])  # Remove first and last lines
+        
+        # Basic validation - ensure it looks like Python code
+        if not aggregation_script or not any(keyword in aggregation_script for keyword in ['def ', 'import ', 'pandas']):
+            raise V8OrchestrationError(f"LLM response does not appear to be Python code. Response: {response_text[:200]}...")
 
         # 3. Execute the script
         # The script's `aggregate_data` function needs the list of file paths.
         # We pass the paths as a list of strings to be JSON-safe for the executor.
         file_paths_str = [str(p) for p in analysis_artifact_paths]
         
-        executor = SecureCodeExecutor()
-        result = executor.execute_code(
-            code_str=aggregation_script,
-            function_to_call="aggregate_data",
-            function_args=[file_paths_str]
-        )
+        # Simple approach: append our execution code after the LLM script
+        # The SecureCodeExecutor will execute everything and we'll extract result_json from the context
+        execution_code = f"""{aggregation_script}
+
+# Execution wrapper - call the function and store result
+import json
+file_paths = {file_paths_str}
+result_df = aggregate_data(file_paths)
+result_json = result_df.to_json(orient='records')
+"""
+        
+        # Use data_aggregation preset for controlled file operations
+        capability_registry = CapabilityRegistry()
+        executor = SecureCodeExecutor(capability_registry=capability_registry)
+        result = executor.execute_code(code=execution_code)
 
         if not result["success"]:
-            raise V8OrchestrationError(f"Failed to execute data aggregation script: {result['stderr']}")
+            raise V8OrchestrationError(f"Failed to execute data aggregation script: {result['error']}")
             
-        # The result of the function call is returned as a JSON string in 'result_json'
-        df_json = result.get("result_json")
+        # Extract the result_json from the execution context
+        context = result.get("context", {})
+        df_json = context.get("result_json")
         if not df_json:
             raise V8OrchestrationError("Aggregation script did not return the expected JSON result.")
             
-        return pd.read_json(df_json, orient='split')
+        return pd.read_json(df_json, orient='records')
 
 
     def _execute_v8_agents(self, 

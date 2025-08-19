@@ -15,6 +15,7 @@ THIN Architecture Principles:
 
 from pathlib import Path
 from typing import Dict, Any, Optional, List
+import pandas as pd
 
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.universal_notebook_template import UniversalNotebookTemplate, DataPath
@@ -105,6 +106,10 @@ class ComponentizedNotebookGeneration:
                 }
             )
             
+            # 🎯 ANTI-FABRICATION PRINCIPLE: Data or Die
+            # Data validation is handled by orchestrator before calling this method
+            # If statistical_summary/key_findings are empty, agents will error out per YAML prompts
+            
             # Generate methodology section (<800 tokens)
             methodology_section = self.methodology_agent.generate_methodology(
                 framework_content=framework_content,
@@ -170,3 +175,4 @@ class ComponentizedNotebookGeneration:
                 data={"error": str(e), "experiment_name": experiment_name}
             )
             raise Exception(f"Componentized notebook generation failed: {str(e)}")
+
