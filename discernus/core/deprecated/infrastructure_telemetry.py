@@ -21,7 +21,7 @@ from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
 from collections import defaultdict, Counter
 
-from .audit_logger import AuditLogger
+from ..audit_logger import AuditLogger
 
 
 @dataclass

@@ -187,6 +187,21 @@
 - **Dependencies**: None
 - **Priority**: MEDIUM - Improves academic reproducibility and research integrity
 
+#### [TECH-007] Dev Tools Integration Decision
+- **Description**: Decide future of standalone dev_tools directory and integrate or organize appropriately
+- **Impact**: Current dev_tools/verify_model_health.py duplicates functionality available in gateway system, creating confusion about where to find health checking capabilities
+- **Acceptance Criteria**:
+  - Evaluate dev_tools/verify_model_health.py against built-in gateway health checks
+  - Decide between integration, reorganization, or deprecation
+  - If integration: Move functionality to main CLI as `discernus health` command
+  - If reorganization: Move to scripts/developer_tools/ for better discoverability
+  - If deprecation: Remove standalone tool and enhance built-in functionality
+  - Document decision and rationale for future reference
+- **Effort**: Low
+- **Dependencies**: None
+- **Priority**: LOW - Development workflow improvement, not blocking production
+- **Current Status**: Tool is well-maintained but standalone, overlaps with gateway health checks
+
 #### [ARCH-001] Multi-Agent Progressive Synthesis Architecture (Phase 2)
 - **Description**: Implement 4-stage multi-agent synthesis pipeline for comprehensive discovery capabilities beyond single-agent limitations
 - **Impact**: Enables full hybrid experimental design paradigm with systematic pattern discovery, computational analysis, and cross-validation

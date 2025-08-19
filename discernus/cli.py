@@ -32,9 +32,10 @@ from typing import Dict, Any, Optional, List
 # Disable huggingface tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator, CleanAnalysisError
 from discernus.core.experiment_orchestrator import ExperimentOrchestrator, V8OrchestrationError
 from discernus.core.config import get_config, get_config_file_path
-from discernus.core.infrastructure_telemetry import InfrastructureTelemetry
+from discernus.core.deprecated.infrastructure_telemetry import InfrastructureTelemetry
 from discernus.core.exit_codes import (
     ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
     exit_validation_failed, exit_infrastructure_error, exit_file_error, exit_config_error
@@ -157,11 +158,11 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='LLM model for validation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
-
+@click.option('--use-legacy-orchestrator', is_flag=True, help='Use legacy notebook-based orchestrator (for debugging)')
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', help='Disable automatic Git commit after successful run completion')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, use_legacy_orchestrator: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -273,9 +274,13 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         rich_console.echo(f"📝 Using analysis model: {analysis_model}")
         rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
             
-        # Use orchestrator for all experiments
-        click.echo("🔬 Using Experiment Orchestrator for statistical analysis pipeline")
-        orchestrator = ExperimentOrchestrator(experiment_path=Path(experiment_path))
+        # Choose orchestrator based on user preference
+        if use_legacy_orchestrator:
+            click.echo("🔬 Using Legacy Experiment Orchestrator (notebook-based)")
+            orchestrator = ExperimentOrchestrator(experiment_path=Path(experiment_path))
+        else:
+            click.echo("🔬 Using Clean Analysis Orchestrator (no notebook cruft)")
+            orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path))
         
         # Execute experiment with status indication
         rich_console.print_info("Experiment execution started - this may take several minutes...")
@@ -329,7 +334,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         else:
             rich_console.print_info("Results available in experiment runs directory")
         
-    except V8OrchestrationError as e:
+    except (CleanAnalysisError, V8OrchestrationError) as e:
         rich_console.print_error(f"Experiment failed: {e}")
         exit_general_error(f"Experiment execution failed: {e}")
     except Exception as e:

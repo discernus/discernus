@@ -939,8 +939,8 @@ def placeholder_function():
         """Generate complete research notebook using Phase 3 components."""
         try:
             # Import Phase 3 components
-            from discernus.core.componentized_notebook_generation import ComponentizedNotebookGeneration
-            from discernus.core.notebook_executor import NotebookExecutor
+            from discernus.core.reuse_candidates.componentized_notebook_generation import ComponentizedNotebookGeneration
+            from discernus.core.deprecated.notebook_executor import NotebookExecutor
             from discernus.core.reuse_candidates.universal_notebook_template import DataPath
             
             # Initialize componentized notebook generator

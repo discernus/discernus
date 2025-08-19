@@ -19,7 +19,7 @@ from datetime import datetime
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
-from discernus.core.parsing_utils import parse_llm_json_response
+from discernus.core.deprecated.parsing_utils import parse_llm_json_response
 
 
 @dataclass

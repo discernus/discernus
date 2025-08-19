@@ -16,11 +16,11 @@ import tempfile
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-from ..gateway.llm_gateway import LLMGateway
-from ..gateway.model_registry import ModelRegistry
+from ...gateway.llm_gateway import LLMGateway
+from ...gateway.model_registry import ModelRegistry
 # txtai integration temporarily disabled for Phase 3 MVP
-from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
-from .audit_logger import AuditLogger
+from ..prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
+from ..audit_logger import AuditLogger
 
 
 class UnifiedSynthesisAgent:
