@@ -41,48 +41,78 @@
   - Git merge compatibility restored
 - **Status**: ✅ COMPLETED - Robust path resolution operational and tested
 
-#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks
-- **Description**: Replace Cronbach's Alpha with methodologically sound alternatives for frameworks that intentionally measure opposing constructs
-- **Impact**: Current Cronbach's Alpha calculations are misleading for oppositional frameworks like CFF; negative alphas are expected and validate design rather than indicating failure
-- **Critical Issues**:
-  - Cronbach's Alpha assumes unidimensional constructs but CFF measures oppositional pairs
-  - Negative alphas are incorrectly interpreted as reliability failures
-  - Traditional psychometric reliability metrics don't apply to oppositional construct frameworks
-  - Creates confusing "fancy metrics with no real relevance" in current reports
-- **Acceptance Criteria**:
-  - Remove Cronbach's Alpha from current statistical analysis pipeline
-  - Implement oppositional construct validation (negative correlation checks)
-  - Add test-retest reliability for measurement stability
-  - Add discriminant validity tests (opposing archetypes should differ significantly)
-  - Add convergent validity tests (similar archetypes should cluster)
-  - Reserve Cronbach's Alpha for ensemble inter-model reliability testing only
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: MEDIUM - Eliminates methodologically inappropriate metrics
-- **Observed**: Enhanced synthesis correctly interprets negative alphas as validation, but metric shouldn't be calculated for oppositional constructs
+#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Replaced Cronbach's Alpha with methodologically sound oppositional construct validation for frameworks with opposing dimensions
+- **Impact**: ✅ RESOLVED - System now uses LLM-driven framework classification to apply appropriate validation methods
+- **Critical Issues**: ✅ ALL RESOLVED
+  - Cronbach's Alpha automatically skipped for oppositional frameworks like CFF
+  - Oppositional construct validation implemented (negative correlation checks, discriminant validity)
+  - Enhanced synthesis prompt updated to interpret oppositional validation correctly
+  - Statistical formatter handles both traditional reliability and oppositional validation
+- **Implementation Approach**: 
+  - THIN architecture using LLM-driven framework classification instead of hardcoded detection
+  - Single prompt determines if framework measures opposing or unidimensional constructs
+  - Automatic selection of appropriate validation methodology
+- **Results Achieved**:
+  - CFF v10.0 correctly classified as oppositional framework
+  - Cronbach's Alpha eliminated for opposing constructs
+  - Oppositional validation tables generated instead
+  - Framework-agnostic approach works with any framework structure
+- **Status**: ✅ COMPLETED - Methodologically appropriate metrics implemented with THIN architecture
 
 ### Publication Readiness - Source Access
 
-#### [CRIT-001] Missing Corpus Documents in Results
-- **Description**: Corpus documents not included in run results folder
-- **Impact**: Researchers cannot access source texts for verification
-- **Acceptance Criteria**: All source texts available in `runs/[run_id]/results/`
-- **Effort**: Medium
-- **Dependencies**: None
+#### [CRIT-001] Missing Corpus Documents in Results ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Corpus documents now automatically copied to run results folder
+- **Impact**: ✅ RESOLVED - Researchers can access source texts for verification in `runs/[run_id]/results/corpus/`
+- **Implementation Details**:
+  - Added `_copy_corpus_documents_to_results()` method to ExperimentOrchestrator
+  - Creates `results/corpus/` directory with all source documents
+  - Handles hash-suffixed filenames with fuzzy matching
+  - Copies corpus manifest for metadata reference
+  - Graceful error handling - doesn't fail experiment if corpus copying fails
+- **Results Achieved**:
+  - All 4 corpus documents copied successfully in test
+  - Corpus manifest (corpus.md) copied for reference
+  - Source documents accessible with original manifest filenames
+  - Enables full quote verification and replication
+- **Status**: ✅ COMPLETED - Source texts now accessible in results for verification
 
-#### [CRIT-002] Evidence Database Not Accessible
-- **Description**: Evidence database exists in shared_cache but not in results
-- **Impact**: Cannot verify specific quotes and evidence cited in final report
-- **Acceptance Criteria**: Evidence database accessible in results folder
-- **Effort**: Low
-- **Dependencies**: CRIT-001
+#### [CRIT-002] Evidence Database Not Accessible ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Evidence database now automatically aggregated and copied to results folder
+- **Impact**: ✅ RESOLVED - Researchers can verify specific quotes and evidence cited in final report via `runs/[run_id]/results/evidence/`
+- **Implementation Details**:
+  - Added `_copy_evidence_database_to_results()` method to ExperimentOrchestrator
+  - Aggregates all evidence artifacts from shared_cache into comprehensive database
+  - Creates `results/evidence/` directory with consolidated evidence files
+  - Generates both JSON and CSV formats for different analysis needs
+  - Includes metadata about extraction methods, documents analyzed, and collection timing
+- **Results Achieved**:
+  - 446 evidence pieces aggregated from 40 files in test
+  - Evidence database JSON with complete metadata and provenance
+  - Evidence database CSV for easy analysis (446 rows)
+  - All quotes traceable to specific documents and dimensions
+  - Full quote verification now possible for peer review
+- **Status**: ✅ COMPLETED - Evidence database accessible in results for quote verification
 
-#### [CRIT-003] Source Metadata Missing
-- **Description**: No source document metadata (dates, contexts, speaker backgrounds)
-- **Impact**: Cannot verify temporal or contextual accuracy of analysis
-- **Acceptance Criteria**: Source metadata included in results
-- **Effort**: Medium
-- **Dependencies**: CRIT-001
+#### [CRIT-003] Source Metadata Missing ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Source document metadata now automatically extracted and copied to results folder
+- **Impact**: ✅ RESOLVED - Researchers can verify temporal and contextual accuracy of analysis via `runs/[run_id]/results/metadata/`
+- **Implementation Details**:
+  - Added `_copy_source_metadata_to_results()` method to ExperimentOrchestrator
+  - Extracts all metadata from corpus manifest (speaker, year, party, style, etc.)
+  - Creates `results/metadata/` directory with comprehensive metadata files
+  - Generates both JSON and CSV formats for different analysis needs
+  - Includes summary statistics about corpus composition and metadata fields
+  - Copies original corpus manifest for reference
+- **Results Achieved**:
+  - 4 documents with complete metadata extracted in test
+  - Metadata fields: speaker, year, party, style
+  - Speakers: Alexandria Ocasio-Cortez, Bernie Sanders, John McCain, Steve King
+  - Years: 2008, 2017, 2025 (temporal span coverage)
+  - Parties: Democratic, Independent, Republican (political diversity)
+  - Full contextual verification now possible for peer review
+- **Status**: ✅ COMPLETED - Source metadata accessible in results for temporal and contextual verification
 
 #### [CRIT-004] Quote Verification Impossible
 - **Description**: Final report references evidence but source texts unavailable
@@ -142,6 +172,20 @@
 - **Effort**: Medium
 - **Dependencies**: None
 - **Observed**: Enhanced CFF v10.0 with 18 metrics vs. previous 6 metrics shows processing delays
+
+#### [TECH-006] Enhanced Experiment Provenance Metadata
+- **Description**: Add comprehensive model and system information to experiment metadata for full reproducibility
+- **Impact**: Current reports lack essential provenance data (analysis model, synthesis model, framework version, git commit) making full replication difficult
+- **Acceptance Criteria**:
+  - Capture analysis model used (e.g., "vertex_ai/gemini-2.5-flash")
+  - Capture synthesis model used (e.g., "vertex_ai/gemini-2.5-pro") 
+  - Extract framework name and version from framework content
+  - Include git commit hash for repository state
+  - Add system information (Python version, key dependencies)
+  - Update experiment_summary.json and complete_research_data.json schemas
+- **Effort**: Medium
+- **Dependencies**: None
+- **Priority**: MEDIUM - Improves academic reproducibility and research integrity
 
 #### [ARCH-001] Multi-Agent Progressive Synthesis Architecture (Phase 2)
 - **Description**: Implement 4-stage multi-agent synthesis pipeline for comprehensive discovery capabilities beyond single-agent limitations

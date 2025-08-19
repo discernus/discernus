@@ -399,7 +399,13 @@ def generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str
         # Standard statistical analyses for any framework
         analyses["descriptive_statistics"] = "Generate descriptive statistics (mean, median, std, etc.) for all numeric dimensions"
         analyses["correlation_analysis"] = "Generate correlation matrix and significance tests between all dimensions"
-        analyses["reliability_analysis"] = "Generate Cronbach's alpha and other reliability measures for dimension consistency"
+        
+        # Framework-appropriate reliability/validation analysis (LLM-determined)
+        validation_type = self._determine_framework_validation_type(framework_content)
+        if validation_type == "oppositional_validation":
+            analyses["oppositional_validation"] = "Generate oppositional construct validation including negative correlation checks, discriminant validity tests, and convergent validity assessment for opposing dimension pairs"
+        else:
+            analyses["reliability_analysis"] = "Generate Cronbach's alpha and other reliability measures for dimension consistency"
         
         # Framework-specific analyses based on content
         if "tension" in framework_content.lower():
@@ -414,6 +420,69 @@ def generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str
             analyses["hypothesis_testing"] = "Generate hypothesis testing functions based on research questions"
         
         return analyses
+    
+    def _determine_framework_validation_type(self, framework_content: str) -> str:
+        """
+        Use LLM to determine appropriate validation approach for the framework.
+        
+        Args:
+            framework_content: The complete framework markdown content
+            
+        Returns:
+            str: Either "oppositional_validation" or "reliability_analysis"
+        """
+        # Truncate framework content to avoid token limits while preserving key sections
+        framework_excerpt = framework_content[:3000]
+        if len(framework_content) > 3000:
+            framework_excerpt += "\n\n[Content truncated for analysis]"
+        
+        classification_prompt = f"""Analyze this research framework to determine the appropriate statistical validation approach.
+
+FRAMEWORK TO ANALYZE:
+{framework_excerpt}
+
+TASK: Determine if this framework measures opposing constructs or unidimensional constructs.
+
+OPPOSING CONSTRUCTS are dimensions designed to be conceptually opposite (like Hope vs Fear, Truth vs Manipulation, Dignity vs Tribalism). These should be negatively correlated and require oppositional construct validation.
+
+UNIDIMENSIONAL CONSTRUCTS are dimensions that should correlate positively with each other and can be validated using traditional reliability measures like Cronbach's Alpha.
+
+ANALYSIS CRITERIA:
+- Look for explicit opposing pairs (A vs B, A ↔ B)
+- Check if dimensions are described as conceptual opposites
+- Consider whether negative correlations would validate the framework design
+- Assess if dimensions measure competing or complementary concepts
+
+RESPOND WITH EXACTLY ONE WORD:
+- "OPPOSITIONAL" if this framework measures opposing constructs
+- "UNIDIMENSIONAL" if this framework measures constructs that should correlate positively
+
+RESPONSE:"""
+
+        try:
+            response_text, _ = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=classification_prompt,
+                system_prompt="You are an expert psychometrician analyzing research frameworks for appropriate validation methods."
+            )
+            
+            response = response_text.strip().upper()
+            
+            # Log the classification decision
+            self._log_event("FRAMEWORK_CLASSIFICATION", {
+                "classification": response,
+                "framework_length": len(framework_content)
+            })
+            
+            return "oppositional_validation" if "OPPOSITIONAL" in response else "reliability_analysis"
+            
+        except Exception as e:
+            # Fallback to reliability analysis if LLM call fails
+            self._log_event("FRAMEWORK_CLASSIFICATION_ERROR", {
+                "error": str(e),
+                "fallback": "reliability_analysis"
+            })
+            return "reliability_analysis"
     
     def _generate_single_statistical_function(self, analysis_name: str, analysis_description: str, 
                                             framework_content: str, experiment_spec: Dict[str, Any]) -> str:

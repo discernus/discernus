@@ -20,6 +20,9 @@ template: |
 
   # RESEARCH CONTEXT
   
+  **Experiment Metadata:**
+  {experiment_metadata}
+  
   **Framework Specification:**
   {framework_content}
   
@@ -38,7 +41,9 @@ template: |
   - Interpret descriptive statistics for all measured dimensions
   - Identify patterns in means, standard deviations, and distributions
   - Note significant correlations and their strength
-  - Assess reliability metrics and measurement quality
+  - Assess measurement quality using framework-appropriate validation:
+    * For oppositional frameworks: Interpret negative correlations as validation (opposing constructs should be negatively correlated)
+    * For unidimensional frameworks: Interpret traditional reliability metrics (Cronbach's Alpha)
 
   ## Level 2: Advanced Pattern Recognition  
   - Analyze cross-dimensional relationships and interaction effects
@@ -66,6 +71,23 @@ template: |
 
   # REPORT STRUCTURE REQUIREMENTS
 
+  ## 0. Experiment Provenance Header (REQUIRED FIRST)
+  Start every report with available experiment metadata:
+  
+  ```
+  # [Framework Name] Analysis Report
+  
+  **Experiment**: [experiment_name]  
+  **Run ID**: [run_id]  
+  **Date**: [completion_date]  
+  **Framework**: [framework_filename]  
+  **Corpus**: [corpus_filename] ([document_count] documents)  
+  
+  ---
+  ```
+  
+  Use only metadata that is actually available in the experiment_metadata. This header enables traceability of results.
+
   ## 1. Executive Summary (2-3 paragraphs)
   - Key findings with statistical support
   - Primary insights and their significance
@@ -89,8 +111,11 @@ template: |
 
   ## 5. Comprehensive Results
   ### 5.1 Descriptive Statistics
-  - Dimensional means, distributions, and patterns
-  - Statistical tables with interpretation
+  - Present all statistical results in properly formatted Markdown tables
+  - Include significance indicators: * p<0.05, ** p<0.01, *** p<0.001
+  - Add effect size interpretations (Small/Medium/Large based on Cohen's conventions)
+  - Use consistent decimal precision (2-3 places)
+  - Dimensional means, distributions, and patterns with statistical interpretation
 
   ### 5.2 Advanced Metric Analysis
   - Derived metrics interpretation
@@ -98,11 +123,18 @@ template: |
   - Confidence-weighted analysis
 
   ### 5.3 Correlation and Interaction Analysis
-  - Cross-dimensional relationships
+  - Cross-dimensional relationships with theoretical interpretation
   - Network effects and clustering patterns
   - Meta-strategy identification
+  
+  ### 5.4 Pattern Recognition and Theoretical Insights
+  - Identify the strongest correlations and explain their practical significance
+  - Connect statistical patterns to theoretical frameworks and literature
+  - Explain what correlation patterns reveal about the framework's construct validity
+  - Highlight unexpected findings and their implications
+  - Assess framework-corpus fit based on statistical patterns
 
-  ### 5.4 Framework Effectiveness Assessment
+  ### 5.5 Framework Effectiveness Assessment
   - Discriminatory power analysis
   - Framework-corpus fit evaluation
   - Methodological insights

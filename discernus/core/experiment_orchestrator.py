@@ -833,6 +833,15 @@ result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
                 
                 self._log_progress(f"📄 Copied {artifact_key} → {user_filename}")
         
+        # Copy corpus documents for source verification (CRIT-001)
+        self._copy_corpus_documents_to_results(results_dir)
+        
+        # Copy evidence database for quote verification (CRIT-002)
+        self._copy_evidence_database_to_results(results_dir)
+        
+        # Copy source metadata for verification (CRIT-003)
+        self._copy_source_metadata_to_results(results_dir)
+        
         # Create a summary file
         summary = {
             "experiment_name": self.security.experiment_name,
@@ -855,6 +864,309 @@ result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
             json.dump(summary, f, indent=2)
         
         return results_dir
+
+    def _copy_corpus_documents_to_results(self, results_dir: Path) -> None:
+        """
+        Copy corpus documents to results directory for source verification.
+        Addresses CRIT-001: Missing Corpus Documents in Results.
+        """
+        try:
+            # Create corpus subdirectory in results
+            corpus_results_dir = results_dir / "corpus"
+            corpus_results_dir.mkdir(exist_ok=True)
+            
+            # Load corpus documents from manifest
+            corpus_documents = self._load_corpus_documents()
+            
+            # Copy each document from corpus directory to results/corpus/
+            corpus_dir = self.experiment_path / "corpus"
+            documents_copied = 0
+            
+            for doc_info in corpus_documents:
+                filename = doc_info.get('filename')
+                if not filename:
+                    self._log_progress(f"⚠️ Skipping document with missing filename: {doc_info}")
+                    continue
+                
+                # Handle potential hash suffixes in actual filenames
+                source_file = self._find_corpus_file(corpus_dir, filename)
+                if source_file and source_file.exists():
+                    # Copy to results with original manifest filename (without hash suffix)
+                    dest_file = corpus_results_dir / filename
+                    dest_file.write_bytes(source_file.read_bytes())
+                    documents_copied += 1
+                    self._log_progress(f"📄 Copied corpus document: {filename}")
+                else:
+                    self._log_progress(f"⚠️ Corpus document not found: {filename}")
+            
+            # Copy corpus manifest for reference
+            corpus_manifest_path = self.experiment_path / self.config.get('corpus', 'corpus.md')
+            if corpus_manifest_path.exists():
+                dest_manifest = corpus_results_dir / "corpus.md"
+                dest_manifest.write_bytes(corpus_manifest_path.read_bytes())
+                self._log_progress(f"📄 Copied corpus manifest: corpus.md")
+            
+            self._log_progress(f"✅ Corpus documents copied: {documents_copied} files to results/corpus/")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy corpus documents: {str(e)}")
+            # Don't raise - this shouldn't fail the entire experiment
+    
+    def _find_corpus_file(self, corpus_dir: Path, filename: str) -> Path:
+        """
+        Find corpus file handling potential hash suffixes.
+        Supports both exact matches and fuzzy matching for hash-suffixed files.
+        """
+        # Try exact match first
+        exact_file = corpus_dir / filename
+        if exact_file.exists():
+            return exact_file
+        
+        # Try fuzzy matching for hash-suffixed files
+        base_name = filename.rsplit('.', 1)[0] if '.' in filename else filename
+        extension = filename.rsplit('.', 1)[1] if '.' in filename else ''
+        
+        # Look for files that start with base_name and end with extension
+        pattern = f"{base_name}_*.{extension}" if extension else f"{base_name}_*"
+        matches = list(corpus_dir.glob(pattern))
+        
+        if matches:
+            return matches[0]  # Return first match
+        
+        return corpus_dir / filename  # Return original path even if it doesn't exist
+
+    def _copy_evidence_database_to_results(self, results_dir: Path) -> None:
+        """
+        Copy evidence database to results directory for quote verification.
+        Addresses CRIT-002: Evidence Database Not Accessible.
+        """
+        try:
+            # Create evidence subdirectory in results
+            evidence_results_dir = results_dir / "evidence"
+            evidence_results_dir.mkdir(exist_ok=True)
+            
+            # Get all evidence artifacts from shared cache
+            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
+            evidence_files = list(artifacts_dir.glob("evidence_v6_*"))
+            
+            if not evidence_files:
+                self._log_progress("⚠️ No evidence artifacts found in shared cache")
+                return
+            
+            # Aggregate all evidence into a comprehensive database
+            all_evidence = []
+            evidence_metadata = {
+                "total_files_processed": 0,
+                "total_evidence_pieces": 0,
+                "extraction_methods": set(),
+                "documents_analyzed": set(),
+                "collection_time": datetime.now(timezone.utc).isoformat()
+            }
+            
+            for evidence_file in evidence_files:
+                try:
+                    with open(evidence_file, 'r', encoding='utf-8') as f:
+                        evidence_data = json.load(f)
+                    
+                    # Extract metadata
+                    metadata = evidence_data.get('evidence_metadata', {})
+                    evidence_pieces = evidence_data.get('evidence_data', [])
+                    
+                    # Update aggregated metadata
+                    evidence_metadata["total_files_processed"] += 1
+                    evidence_metadata["total_evidence_pieces"] += len(evidence_pieces)
+                    if metadata.get('extraction_method'):
+                        evidence_metadata["extraction_methods"].add(metadata['extraction_method'])
+                    
+                    # Add evidence pieces to aggregated collection
+                    for piece in evidence_pieces:
+                        if piece.get('document_name'):
+                            evidence_metadata["documents_analyzed"].add(piece['document_name'])
+                        all_evidence.append(piece)
+                    
+                except Exception as e:
+                    self._log_progress(f"⚠️ Failed to process evidence file {evidence_file.name}: {e}")
+                    continue
+            
+            # Convert sets to lists for JSON serialization
+            evidence_metadata["extraction_methods"] = list(evidence_metadata["extraction_methods"])
+            evidence_metadata["documents_analyzed"] = list(evidence_metadata["documents_analyzed"])
+            
+            # Create comprehensive evidence database
+            evidence_database = {
+                "evidence_database_metadata": evidence_metadata,
+                "evidence_collection": all_evidence
+            }
+            
+            # Save comprehensive evidence database
+            evidence_db_file = evidence_results_dir / "evidence_database.json"
+            with open(evidence_db_file, 'w', encoding='utf-8') as f:
+                json.dump(evidence_database, f, indent=2, ensure_ascii=False)
+            
+            # Create evidence CSV for easy analysis
+            self._create_evidence_csv(evidence_results_dir, all_evidence)
+            
+            self._log_progress(f"✅ Evidence database created: {len(all_evidence)} quotes from {len(evidence_files)} files")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy evidence database: {str(e)}")
+            # Don't raise - this shouldn't fail the entire experiment
+
+    def _create_evidence_csv(self, evidence_dir: Path, evidence_collection: List[Dict]) -> None:
+        """Create a CSV file of all evidence for easy analysis and verification."""
+        try:
+            import csv
+            
+            csv_file = evidence_dir / "evidence_database.csv"
+            
+            if not evidence_collection:
+                self._log_progress("⚠️ No evidence to export to CSV")
+                return
+            
+            # Define CSV headers based on evidence structure
+            headers = [
+                'document_name', 'dimension', 'quote_text', 'confidence', 
+                'context_type', 'extraction_method', 'source_type', 'extraction_timestamp'
+            ]
+            
+            with open(csv_file, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=headers)
+                writer.writeheader()
+                
+                for evidence in evidence_collection:
+                    # Create row with all available data
+                    row = {}
+                    for header in headers:
+                        row[header] = evidence.get(header, '')
+                    writer.writerow(row)
+            
+            self._log_progress(f"📊 Evidence CSV created: {len(evidence_collection)} rows")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create evidence CSV: {str(e)}")
+
+    def _copy_source_metadata_to_results(self, results_dir: Path) -> None:
+        """
+        Copy source document metadata to results directory for verification.
+        Addresses CRIT-003: Source Metadata Missing.
+        """
+        try:
+            # Create metadata subdirectory in results
+            metadata_results_dir = results_dir / "metadata"
+            metadata_results_dir.mkdir(exist_ok=True)
+            
+            # Load corpus documents from manifest to get metadata
+            corpus_documents = self._load_corpus_documents()
+            
+            if not corpus_documents:
+                self._log_progress("⚠️ No corpus documents found in manifest")
+                return
+            
+            # Extract and organize metadata
+            document_metadata = []
+            metadata_summary = {
+                "total_documents": len(corpus_documents),
+                "metadata_fields": set(),
+                "speakers": set(),
+                "years": set(),
+                "parties": set(),
+                "styles": set(),
+                "collection_time": datetime.now(timezone.utc).isoformat()
+            }
+            
+            for doc_info in corpus_documents:
+                filename = doc_info.get('filename', '')
+                document_id = doc_info.get('document_id', '')
+                metadata = doc_info.get('metadata', {})
+                
+                # Create comprehensive metadata record
+                doc_metadata = {
+                    'filename': filename,
+                    'document_id': document_id,
+                    **metadata  # Include all metadata fields from corpus manifest
+                }
+                
+                document_metadata.append(doc_metadata)
+                
+                # Track metadata fields and values for summary
+                for key, value in metadata.items():
+                    metadata_summary["metadata_fields"].add(key)
+                    if key == 'speaker' and value:
+                        metadata_summary["speakers"].add(str(value))
+                    elif key == 'year' and value:
+                        metadata_summary["years"].add(str(value))
+                    elif key == 'party' and value:
+                        metadata_summary["parties"].add(str(value))
+                    elif key == 'style' and value:
+                        metadata_summary["styles"].add(str(value))
+            
+            # Convert sets to sorted lists for JSON serialization
+            for key in ["metadata_fields", "speakers", "years", "parties", "styles"]:
+                metadata_summary[key] = sorted(list(metadata_summary[key]))
+            
+            # Create comprehensive metadata database
+            metadata_database = {
+                "metadata_summary": metadata_summary,
+                "document_metadata": document_metadata
+            }
+            
+            # Save comprehensive metadata database
+            metadata_db_file = metadata_results_dir / "source_metadata.json"
+            with open(metadata_db_file, 'w', encoding='utf-8') as f:
+                json.dump(metadata_database, f, indent=2, ensure_ascii=False)
+            
+            # Create metadata CSV for easy analysis
+            self._create_metadata_csv(metadata_results_dir, document_metadata)
+            
+            # Copy original corpus manifest for reference
+            corpus_manifest_path = self.experiment_path / self.config.get('corpus', 'corpus.md')
+            if corpus_manifest_path.exists():
+                dest_manifest = metadata_results_dir / "corpus_manifest.md"
+                dest_manifest.write_bytes(corpus_manifest_path.read_bytes())
+                self._log_progress(f"📄 Copied original corpus manifest for reference")
+            
+            self._log_progress(f"✅ Source metadata created: {len(document_metadata)} documents with {len(metadata_summary['metadata_fields'])} fields")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy source metadata: {str(e)}")
+            # Don't raise - this shouldn't fail the entire experiment
+
+    def _create_metadata_csv(self, metadata_dir: Path, document_metadata: List[Dict]) -> None:
+        """Create a CSV file of all document metadata for easy analysis."""
+        try:
+            import csv
+            
+            csv_file = metadata_dir / "source_metadata.csv"
+            
+            if not document_metadata:
+                self._log_progress("⚠️ No metadata to export to CSV")
+                return
+            
+            # Get all unique fields across all documents
+            all_fields = set()
+            for doc in document_metadata:
+                all_fields.update(doc.keys())
+            
+            # Sort fields with filename and document_id first
+            priority_fields = ['filename', 'document_id']
+            other_fields = sorted([f for f in all_fields if f not in priority_fields])
+            headers = priority_fields + other_fields
+            
+            with open(csv_file, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=headers)
+                writer.writeheader()
+                
+                for doc_metadata in document_metadata:
+                    # Create row with all available data
+                    row = {}
+                    for header in headers:
+                        row[header] = doc_metadata.get(header, '')
+                    writer.writerow(row)
+            
+            self._log_progress(f"📊 Metadata CSV created: {len(document_metadata)} rows with {len(headers)} columns")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create metadata CSV: {str(e)}")
 
     def _get_framework_derived_metrics(self):
         """Extract derived metrics definitions from the loaded framework."""

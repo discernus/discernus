@@ -130,7 +130,7 @@ class StatisticalResultsFormatter:
                             cv_val
                         ])
             
-            # Reliability analysis (Cronbach's alpha)
+            # Reliability analysis (Cronbach's alpha) - for unidimensional frameworks
             elif rtype in ('cronbach_alpha', 'reliability_analysis'):
                 dimension = task_result.get('dimension', task_name)
                 alpha = task_result.get('cronbach_alpha')
@@ -142,6 +142,21 @@ class StatisticalResultsFormatter:
                         dimension,
                         alpha_value,
                         [ci_lower, ci_upper],
+                    ])
+            
+            # Oppositional validation - for oppositional frameworks
+            elif rtype in ('oppositional_validation',):
+                axis_name = task_result.get('axis_name', task_name)
+                correlation = task_result.get('negative_correlation')
+                is_oppositional = task_result.get('is_oppositional', False)
+                discriminant_p = task_result.get('discriminant_validity_p')
+                
+                if correlation is not None:
+                    reliability_rows.append([
+                        axis_name,
+                        float(correlation),
+                        "✓" if is_oppositional else "✗",
+                        discriminant_p if discriminant_p is not None else "N/A"
                     ])
 
         # Assemble tables
@@ -187,11 +202,21 @@ class StatisticalResultsFormatter:
 
         reliability_summary = None
         if reliability_rows:
-            reliability_summary = {
-                "table_format": "Measurement Reliability Table",
-                "headers": ["Dimension", "Cronbach's Alpha", "95% CI"],
-                "rows": reliability_rows
-            }
+            # Determine if we have oppositional validation or traditional reliability
+            has_oppositional = any(len(row) >= 4 for row in reliability_rows)
+            
+            if has_oppositional:
+                reliability_summary = {
+                    "table_format": "Oppositional Construct Validation",
+                    "headers": ["Axis", "Correlation", "Oppositional", "Discriminant p-value"],
+                    "rows": reliability_rows
+                }
+            else:
+                reliability_summary = {
+                    "table_format": "Measurement Reliability Table", 
+                    "headers": ["Dimension", "Cronbach's Alpha", "95% CI"],
+                    "rows": reliability_rows
+                }
 
         # Deterministic fit diagnostics to avoid LLM arithmetic
         fit_diagnostics = None
