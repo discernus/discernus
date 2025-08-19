@@ -26,7 +26,14 @@ class CapabilityRegistry:
     """
     
     def __init__(self, extensions_dir: str = "extensions", presets_dir: str = "discernus/core/presets"):
-        self.presets_dir = Path(presets_dir)
+        # Use absolute path for presets to avoid working directory issues
+        if Path(presets_dir).is_absolute():
+            self.presets_dir = Path(presets_dir)
+        else:
+            # Find the repo root and use absolute path
+            repo_root = Path(__file__).parent.parent.parent
+            self.presets_dir = repo_root / presets_dir
+        
         self.extensions_dir = Path(extensions_dir)
         self.extensions_dir.mkdir(exist_ok=True)
         
