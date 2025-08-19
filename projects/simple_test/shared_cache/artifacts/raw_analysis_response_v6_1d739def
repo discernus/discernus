@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a strong example of populist, class-based political rhetoric. It clearly defines an in-group ('working people') and an out-group ('oligarchs'), resulting in high scores in dimensions like Enmity, Fear, and Tribal Dominance. Countervailing themes such as Individual Dignity and Amity are also present, but they are framed as virtues for the in-group's internal solidarity. The dimension of Compersion is notably absent, creating a stark contrast with the high score in Envy."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 1.0,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.95,
+          "context_type": "in-group/out-group definition"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "confidence": 0.95,
+          "context_type": "statement of inclusive values"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "They're stealing them from you and you and me. Just look at what Elon Musk and Donald Trump are doing to our healthcare, our veterans' benefits, and Social Security. They are slashing programs that we and you have spent a lifetime paying into.",
+          "confidence": 0.95,
+          "context_type": "framing of existential threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "vision of collective action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them.",
+          "confidence": 1.0,
+          "context_type": "delegitimization of out-group success"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "The text contains no language expressing joy for others' success. The rhetoric consistently frames the wealth of the 'oligarchs' as illegitimate and harmful, which is the antithesis of compersion.",
+          "confidence": 1.0,
+          "context_type": "absence of dimension"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "It's shorthand for the right wing's entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+          "confidence": 1.0,
+          "context_type": "adversarial characterization"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.95,
+          "context_type": "in-group solidarity appeal"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.95,
+          "context_type": "statement of zero-sum objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 0.9,
+          "context_type": "statement of integrative objective"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

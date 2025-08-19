@@ -57,7 +57,7 @@ def _extract_evidence_from_analysis_response(result_content: str, audit: AuditLo
 
 def process_json_response(
     result_content: str,
-    document_hash: str,
+    document_hashes: List[str],
     storage: LocalArtifactStorage,
     audit: AuditLogger,
     agent_name: str,
@@ -67,11 +67,36 @@ def process_json_response(
     THIN approach: Extract evidence during analysis time, not post-processing.
     This eliminates the need for LLM calls during evidence extraction.
     """
+    # Replace placeholder artifact_id with the actual document hash
+    # This is a critical fix for data integrity. The LLM is instructed to use
+    # a placeholder, which we replace here with the content-addressable hash.
+    
+    json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+    json_match = re.search(json_pattern, result_content, re.DOTALL)
+    
+    if json_match:
+        try:
+            analysis_data = json.loads(json_match.group(1).strip())
+            document_analyses = analysis_data.get('document_analyses', [])
+
+            if len(document_analyses) == len(document_hashes):
+                for i, doc_analysis in enumerate(document_analyses):
+                    doc_analysis['document_id'] = document_hashes[i]
+                
+                # Re-serialize the JSON with the correct document IDs
+                updated_json_str = json.dumps(analysis_data, indent=2)
+                result_content = result_content.replace(json_match.group(1).strip(), updated_json_str)
+
+        except json.JSONDecodeError:
+            # If JSON is malformed, we proceed with the original content
+            pass
+
+
     raw_response_hash = storage.put_artifact(
         result_content.encode('utf-8'),
         {
             "artifact_type": "raw_analysis_response_v6",
-            "document_hash": document_hash,
+            "document_hashes": document_hashes,
             "framework_version": "v6.0",
             "framework_hash": analysis_provenance.get("framework_hash", "unknown")
         }
@@ -81,7 +106,7 @@ def process_json_response(
 
     evidence_artifact = {
         "evidence_metadata": {
-            "document_hash": document_hash,
+            "document_hashes": document_hashes,
             "total_evidence_pieces": len(evidence_list),
             "extraction_method": "analysis_time_extraction_v1.0",
             "extraction_time": datetime.now(timezone.utc).isoformat(),
@@ -94,13 +119,13 @@ def process_json_response(
         json.dumps(evidence_artifact, indent=2).encode('utf-8'),
         {
             "artifact_type": "evidence_v6",
-            "document_hash": document_hash,
+            "document_hashes": document_hashes,
             "extraction_method": "analysis_time_extraction"
         }
     )
 
     audit.log_agent_event(agent_name, "evidence_extracted", {
-        "document_hash": document_hash,
+        "document_hashes": document_hashes,
         "evidence_pieces": len(evidence_list),
         "evidence_hash": evidence_hash,
         "approach": "thin_analysis_time_extraction"

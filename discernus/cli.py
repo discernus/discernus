@@ -149,6 +149,7 @@ def cli(ctx, verbose, quiet, no_color, config):
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', help='Show what would be done without executing')
 @click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', 
+              default='vertex_ai/gemini-2.5-pro',
               help='LLM model for analysis (e.g., vertex_ai/gemini-2.5-flash, openai/gpt-4o)')
 @click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', 
               help='LLM model for synthesis (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
