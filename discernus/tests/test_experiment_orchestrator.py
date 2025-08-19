@@ -32,8 +32,11 @@ class TestExperimentOrchestrator(unittest.TestCase):
 
         # Mock the artifact storage, as the orchestrator now uses it directly
         mock_storage = self.orchestrator.artifact_storage
-        mock_storage.store_artifact.return_value = "dummy_hash"
-        mock_storage.get_artifact_path.return_value = Path("/fake/path/analysis_result_dummy_hash.json")
+        mock_storage.put_artifact.return_value = "dummy_hash"
+        mock_storage.get_artifact_metadata.return_value = {
+            "artifact_path": "artifacts/analysis_result_dummy_hash.json"
+        }
+        mock_storage.run_folder = Path("/fake/run") # Needed for path construction
 
         mock_documents = [
             {'filename': 'doc1.txt', 'metadata': {}, 'document_id': 'doc1'},
@@ -58,8 +61,7 @@ class TestExperimentOrchestrator(unittest.TestCase):
              patch.object(self.orchestrator, '_load_corpus_documents', return_value=mock_documents), \
              patch('pathlib.Path.read_text', return_value="---\n# Mock Framework\n---"), \
              patch('pathlib.Path.exists', return_value=True), \
-             patch('pathlib.Path.glob', return_value=[Path('doc1.txt'), Path('doc2.txt')]), \
-             patch('pathlib.Path.__truediv__', return_value=mock_doc_path): # Mocks the / operator for paths
+             patch('pathlib.Path.glob', return_value=[Path('doc1.txt'), Path('doc2.txt')]):
             
             # Manually set the config because _load_specs is mocked
             self.orchestrator.config = mock_config
@@ -77,6 +79,7 @@ class TestExperimentOrchestrator(unittest.TestCase):
         # Verify that the agent and storage were called for each document
         self.assertEqual(mock_agent_instance.analyze_batch.call_count, 2)
         self.assertEqual(mock_storage.put_artifact.call_count, 2)
+        self.assertEqual(mock_storage.get_artifact_metadata.call_count, 2)
 
 if __name__ == '__main__':
     unittest.main()
