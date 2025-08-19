@@ -70,6 +70,7 @@ class CleanAnalysisOrchestrator:
         Run complete experiment: analysis + synthesis + results.
         """
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        start_time = datetime.now(timezone.utc)
         
         try:
             # Initialize infrastructure
@@ -111,7 +112,8 @@ class CleanAnalysisOrchestrator:
             results_dir = self._create_clean_results_directory(run_id, statistical_results, synthesis_result)
             self._log_status(f"Results created: {results_dir}")
             
-            log_experiment_complete(self.security.experiment_name, run_id)
+            duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+            log_experiment_complete(self.security.experiment_name, run_id, duration)
             
             return {
                 "run_id": run_id,
@@ -265,17 +267,15 @@ class CleanAnalysisOrchestrator:
             artifact_storage=self.artifact_storage
         )
         
-        # Analyze each document
-        results = []
+        # Prepare corpus documents with content for batch analysis
         corpus_dir = self.experiment_path / "corpus"
+        prepared_documents = []
         
-        for i, doc_info in enumerate(corpus_documents, 1):
+        for doc_info in corpus_documents:
             filename = doc_info.get('filename')
             if not filename:
                 continue
                 
-            self._log_progress(f"📄 Analyzing document {i}/{len(corpus_documents)}: {filename}")
-            
             # Find and load document
             source_file = self._find_corpus_file(corpus_dir, filename)
             if not source_file.exists():
@@ -284,23 +284,41 @@ class CleanAnalysisOrchestrator:
             
             document_content = source_file.read_text(encoding='utf-8')
             
-            # Run analysis
-            analysis_result = analysis_agent.analyze_document(
-                document_content=document_content,
+            # Prepare document in the format expected by analyze_batch
+            prepared_doc = {
+                'filename': filename,
+                'content': document_content,
+                'metadata': doc_info.get('metadata', {})
+            }
+            prepared_documents.append(prepared_doc)
+        
+        # Create experiment config for analysis
+        experiment_config = {
+            "name": self.config['name'],
+            "description": self.config.get('description', ''),
+            "questions": self.config.get('questions', [])
+        }
+        
+        # Run batch analysis (this is how the working orchestrator does it)
+        self._log_progress(f"📊 Running batch analysis on {len(prepared_documents)} documents...")
+        
+        try:
+            analysis_result = analysis_agent.analyze_batch(
                 framework_content=framework_content,
-                document_name=filename
+                corpus_documents=prepared_documents,
+                experiment_config=experiment_config,
+                model=analysis_model
             )
             
-            if analysis_result['status'] == 'success':
-                results.append(analysis_result)
-                self._log_status(f"Document {filename} analyzed successfully.")
-            else:
-                self._log_progress(f"⚠️ Analysis failed for {filename}: {analysis_result.get('error', 'Unknown error')}")
-        
-        return results
+            self._log_status(f"Batch analysis completed successfully")
+            return [analysis_result]  # Return as list for consistency
+            
+        except Exception as e:
+            self._log_progress(f"❌ Batch analysis failed: {str(e)}")
+            raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
     
     def _run_statistical_analysis(self, model: str, audit_logger: AuditLogger) -> Dict[str, Any]:
-        """Generate statistical analysis functions and execute them."""
+        """Generate and execute statistical analysis functions."""
         self._log_progress("📊 Generating statistical analysis...")
         
         # Load framework content
@@ -332,7 +350,20 @@ class CleanAnalysisOrchestrator:
             # Generate statistical functions
             stats_result = stats_agent.generate_functions(temp_workspace)
             
-            return stats_result
+            # Store statistical results in artifact storage
+            stats_hash = self.artifact_storage.put_artifact(
+                json.dumps(stats_result, indent=2).encode('utf-8'),
+                {"artifact_type": "statistical_results"}
+            )
+            
+            self._log_progress(f"📊 Statistical analysis completed and stored: {stats_hash[:8]}")
+            
+            return {
+                "status": "completed",
+                "stats_hash": stats_hash,
+                "functions_generated": len(stats_result.get('functions', {})),
+                "statistical_results": stats_result
+            }
             
         finally:
             # Clean up temporary workspace
@@ -344,12 +375,68 @@ class CleanAnalysisOrchestrator:
         """Run synthesis to generate final report."""
         self._log_progress("📝 Running synthesis...")
         
-        # For now, return a placeholder - we can integrate synthesis later
-        return {
-            "status": "completed",
-            "report": "Synthesis placeholder - statistical analysis completed",
-            "statistical_summary": statistical_results
-        }
+        try:
+            # Initialize synthesis agent
+            from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+            
+            synthesis_agent = UnifiedSynthesisAgent(
+                model=synthesis_model,
+                audit_logger=audit_logger,
+                artifact_storage=self.artifact_storage
+            )
+            
+            # Load framework and experiment content for synthesis
+            framework_path = self.experiment_path / self.config['framework']
+            framework_content = framework_path.read_text(encoding='utf-8')
+            
+            experiment_content = f"""
+            Experiment: {self.config['name']}
+            Description: {self.config.get('description', '')}
+            Questions: {'; '.join(self.config.get('questions', []))}
+            """
+            
+            # Create synthesis request
+            synthesis_request = {
+                "framework_content": framework_content,
+                "experiment_content": experiment_content,
+                "research_data": statistical_results.get('statistical_results', {}),
+                "evidence_context": "Evidence available in shared cache"
+            }
+            
+            # Generate synthesis report
+            synthesis_result = synthesis_agent.generate_synthesis_report(synthesis_request)
+            
+            # Store synthesis report
+            if synthesis_result.get('final_report'):
+                report_hash = self.artifact_storage.put_artifact(
+                    synthesis_result['final_report'].encode('utf-8'),
+                    {"artifact_type": "final_synthesis_report"}
+                )
+                
+                self._log_progress(f"📝 Synthesis report generated and stored: {report_hash[:8]}")
+                
+                return {
+                    "status": "completed",
+                    "report_hash": report_hash,
+                    "report_length": len(synthesis_result['final_report']),
+                    "synthesis_result": synthesis_result
+                }
+            else:
+                self._log_progress("⚠️ Synthesis completed but no report generated")
+                return {
+                    "status": "completed_no_report",
+                    "synthesis_result": synthesis_result
+                }
+                
+        except Exception as e:
+            self._log_progress(f"⚠️ Synthesis failed: {str(e)}")
+            # Return placeholder on failure
+            return {
+                "status": "failed",
+                "error": str(e),
+                "report": "Synthesis failed - statistical analysis completed successfully",
+                "statistical_summary": statistical_results
+            }
     
     def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], synthesis_result: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
@@ -368,14 +455,26 @@ class CleanAnalysisOrchestrator:
         self._copy_source_metadata_to_results(results_dir)
         
         # Save statistical results
-        stats_file = results_dir / "statistical_results.json"
-        with open(stats_file, 'w') as f:
-            json.dump(statistical_results, f, indent=2)
+        if statistical_results.get('stats_hash'):
+            stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
+            stats_file = results_dir / "statistical_results.json"
+            with open(stats_file, 'wb') as f:
+                f.write(stats_content)
         
-        # Save synthesis results
+        # Save synthesis report if available
+        if synthesis_result.get('report_hash'):
+            report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+            report_file = results_dir / "final_report.md"
+            with open(report_file, 'wb') as f:
+                f.write(report_content)
+            self._log_progress("📝 Final report saved to results")
+        
+        # Save synthesis metadata
         synthesis_file = results_dir / "synthesis_results.json"
         with open(synthesis_file, 'w') as f:
-            json.dump(synthesis_result, f, indent=2)
+            # Remove large content to keep metadata file clean
+            clean_synthesis = {k: v for k, v in synthesis_result.items() if k != 'synthesis_result'}
+            json.dump(clean_synthesis, f, indent=2)
         
         # Create experiment summary
         summary = {

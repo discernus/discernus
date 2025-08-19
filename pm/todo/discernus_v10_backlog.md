@@ -187,6 +187,31 @@
 - **Dependencies**: None
 - **Priority**: MEDIUM - Improves academic reproducibility and research integrity
 
+#### [ARCH-002] Complete Clean Orchestrator Implementation (Option A)
+- **Description**: Complete implementation of CleanAnalysisOrchestrator with full feature parity to replace legacy notebook-based orchestrator
+- **Impact**: Eliminates architectural debt from notebook generation cruft, provides clean THIN architecture focused on actual needs
+- **Acceptance Criteria**:
+  - Statistical Analysis Integration: Properly execute AutomatedStatisticalAnalysisAgent with generated functions
+  - Real Synthesis Integration: Replace placeholder with actual synthesis agent integration
+  - Complete Data Pipeline: Raw scores → Derived metrics → Statistical analysis → Synthesis flow
+  - Derived Metrics Calculation: Execute framework-specific derived metrics properly
+  - Evidence Integration: Proper evidence aggregation and linking throughout pipeline
+  - Caching System: Leverage existing artifact caching for performance parity
+  - Comprehensive Error Handling: Robust error handling with graceful degradation
+  - Performance Validation: Verify caching and performance match legacy orchestrator
+  - Complete Testing: Ensure all experiments work with clean orchestrator
+  - CLI Default Switch: Make clean orchestrator the default, deprecate legacy option
+- **Implementation Phases**:
+  - Phase 1: Statistical analysis integration (2-3 hours)
+  - Phase 2: Real synthesis integration (2-3 hours)  
+  - Phase 3: Data pipeline completion (1-2 hours)
+  - Phase 4: Error handling & testing (1 hour)
+  - Phase 5: CLI integration & legacy deprecation (30 minutes)
+- **Effort**: High (6-8 hours total)
+- **Dependencies**: None (CleanAnalysisOrchestrator foundation already created)
+- **Priority**: HIGH - Eliminates major architectural debt and notebook generation cruft
+- **Current Status**: Foundation created, minimal viable version in progress, full implementation planned for tomorrow
+
 #### [TECH-007] Dev Tools Integration Decision
 - **Description**: Decide future of standalone dev_tools directory and integrate or organize appropriately
 - **Impact**: Current dev_tools/verify_model_health.py duplicates functionality available in gateway system, creating confusion about where to find health checking capabilities

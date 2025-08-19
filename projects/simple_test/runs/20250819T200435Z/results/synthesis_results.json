@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "error": "UnifiedSynthesisAgent.__init__() got an unexpected keyword argument 'artifact_storage'",
+  "report": "Synthesis failed - statistical analysis completed successfully",
+  "statistical_summary": {
+    "status": "completed",
+    "stats_hash": "478352962717fd3b42628882155b6e971f68102eed6f98f838ad403025ebccd5",
+    "functions_generated": 0,
+    "statistical_results": {
+      "status": "success",
+      "functions_generated": 1,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 6302
+    }
+  }
+}

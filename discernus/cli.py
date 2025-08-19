@@ -274,12 +274,12 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         rich_console.echo(f"📝 Using analysis model: {analysis_model}")
         rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
             
-        # Choose orchestrator based on user preference
+        # Choose orchestrator based on user preference (default to clean)
         if use_legacy_orchestrator:
-            click.echo("🔬 Using Legacy Experiment Orchestrator (notebook-based)")
+            click.echo("🔬 Using Legacy Experiment Orchestrator (notebook-based - deprecated)")
             orchestrator = ExperimentOrchestrator(experiment_path=Path(experiment_path))
         else:
-            click.echo("🔬 Using Clean Analysis Orchestrator (no notebook cruft)")
+            click.echo("🔬 Using Clean Analysis Orchestrator (THIN architecture)")
             orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path))
         
         # Execute experiment with status indication
