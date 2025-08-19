@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech with strong populist and class-based rhetoric. This makes it an excellent fit for the Cohesive Flourishing Framework. The analysis focused on distinguishing between the 'in-group' (working people, the audience) and the 'out-group' (oligarchs, billionaires, specific political opponents). The rhetoric is characterized by high Enmity and Envy towards the out-group, coupled with calls for Amity and solidarity within the in-group as a means to achieve Fragmentative Goals (defeating opponents)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.95,
+          "context_type": "central_argument"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "confidence": 0.9,
+          "context_type": "inclusive_appeal"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "It's shorthand for the right wing's entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest...",
+          "confidence": 0.9,
+          "context_type": "threat_articulation"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "delegitimization_of_wealth"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "Any billionaires in this room? I didn't think so.",
+          "confidence": 1.0,
+          "context_type": "absence_of_dimension"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "He's handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback.",
+          "confidence": 1.0,
+          "context_type": "adversarial_accusation"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 0.95,
+          "context_type": "in-group_solidarity_appeal"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.95,
+          "context_type": "zero-sum_political_objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do.",
+          "confidence": 0.9,
+          "context_type": "in-group_unification_appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

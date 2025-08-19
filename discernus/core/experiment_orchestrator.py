@@ -751,10 +751,11 @@ result_json = json.dumps(statistical_results, default=str)  # Handle numpy types
         if not evidence_hashes:
             raise V8OrchestrationError("No evidence artifacts found for synthesis")
         
-        # Initialize unified synthesis agent
+        # Initialize unified synthesis agent with enhanced mode
         synthesis_agent = UnifiedSynthesisAgent(
             model=synthesis_model,
-            audit_logger=self.audit_logger if hasattr(self, 'audit_logger') else None
+            audit_logger=self.audit_logger if hasattr(self, 'audit_logger') else None,
+            enhanced_mode=True  # Enable CRIT-006 enhanced synthesis capabilities
         )
         
         # Generate final report

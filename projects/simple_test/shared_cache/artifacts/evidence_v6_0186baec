@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-19T17:57:06.912564+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.95,
+      "context_type": "central_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912545+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+      "confidence": 0.9,
+      "context_type": "inclusive_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912550+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fear",
+      "quote_text": "It's shorthand for the right wing's entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest...",
+      "confidence": 0.9,
+      "context_type": "threat_articulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912552+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "hope",
+      "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+      "confidence": 0.9,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912553+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "envy",
+      "quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+      "confidence": 1.0,
+      "context_type": "delegitimization_of_wealth",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912554+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "compersion",
+      "quote_text": "Any billionaires in this room? I didn't think so.",
+      "confidence": 1.0,
+      "context_type": "absence_of_dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912556+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "enmity",
+      "quote_text": "He's handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback.",
+      "confidence": 1.0,
+      "context_type": "adversarial_accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912557+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "amity",
+      "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+      "confidence": 0.95,
+      "context_type": "in-group_solidarity_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912559+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+      "confidence": 0.95,
+      "context_type": "zero-sum_political_objective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912560+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do.",
+      "confidence": 0.9,
+      "context_type": "in-group_unification_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-19T17:57:06.912561+00:00"
+    }
+  ]
+}

@@ -107,6 +107,44 @@
 - **Priority**: HIGH - Enables complete hybrid experimental design vision
 - **Implementation Strategy**: Progressive enhancement building on Phase 1 single-agent foundation
 
+#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks
+- **Description**: Replace Cronbach's Alpha with methodologically sound alternatives for frameworks that intentionally measure opposing constructs
+- **Impact**: Current Cronbach's Alpha calculations are misleading for oppositional frameworks like CFF; negative alphas are expected and validate design rather than indicating failure
+- **Critical Issues**:
+  - Cronbach's Alpha assumes unidimensional constructs but CFF measures oppositional pairs
+  - Negative alphas are incorrectly interpreted as reliability failures
+  - Traditional psychometric reliability metrics don't apply to oppositional construct frameworks
+  - Creates confusing "fancy metrics with no real relevance" in current reports
+- **Acceptance Criteria**:
+  - Remove Cronbach's Alpha from current statistical analysis pipeline
+  - Implement oppositional construct validation (negative correlation checks)
+  - Add test-retest reliability for measurement stability
+  - Add discriminant validity tests (opposing archetypes should differ significantly)
+  - Add convergent validity tests (similar archetypes should cluster)
+  - Reserve Cronbach's Alpha for ensemble inter-model reliability testing only
+- **Effort**: Medium
+- **Dependencies**: None
+- **Priority**: CRITICAL - Eliminates methodologically inappropriate metrics
+- **Observed**: Enhanced synthesis correctly interprets negative alphas as validation, but metric shouldn't be calculated for oppositional constructs
+
+#### [CRIT-008] Robust Path Resolution and Validation
+- **Description**: Fix "works on my machine" problems caused by brittle filename matching between corpus manifests and actual files
+- **Impact**: Experiments fail when corpus files have different names than manifest expects; git merges break existing experiments
+- **Critical Issues**:
+  - Corpus manifest expects exact filenames but git brings hash-suffixed files
+  - No validation that corpus files actually exist before running
+  - Absolute path dependencies create portability problems
+  - Validation system doesn't catch manifest-file mismatches
+- **Acceptance Criteria**:
+  - Implement fuzzy filename matching (ignore hash suffixes)
+  - Add corpus file existence validation before experiment execution
+  - Enhance experiment coherence validation to catch path issues
+  - Support both exact and approximate filename matching
+- **Effort**: Medium
+- **Dependencies**: None
+- **Priority**: CRITICAL - Prevents "works on my machine" failures
+- **Observed**: simple_test broke after git merge due to filename suffix mismatches
+
 #### [CRIT-007] Infrastructure Cruft Cleanup and Deprecation
 - **Description**: Surgical cleanup of contaminated/unused components revealed by infrastructure audit; core pipeline appears clean but architectural confusion from legacy components
 - **Impact**: Contaminated agents create confusion and potential failure points; unclear which components are actually active

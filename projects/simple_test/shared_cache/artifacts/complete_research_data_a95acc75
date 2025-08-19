@@ -1,0 +1,3090 @@
+{
+  "experiment_metadata": {
+    "name": "simple_test",
+    "framework": "cff_v10.md",
+    "corpus_documents": 8
+  },
+  "raw_analysis_data": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        }
+      }
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        }
+      }
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 1.0,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        }
+      }
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.85
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.85
+        }
+      }
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        }
+      }
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      }
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        }
+      }
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.95,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      }
+    }
+  ],
+  "derived_metrics_data": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9500000000000001
+        },
+        "individual_dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7000000000000001,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.9500000000000001,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        }
+      },
+      "identity_tension": 0.0,
+      "emotional_tension": 0.12,
+      "success_tension": 0,
+      "relational_tension": 0.075,
+      "goal_tension": 0.0,
+      "emotional_cohesion_component": 0.52,
+      "success_cohesion_component": 0.81,
+      "relational_cohesion_component": 0.835,
+      "goal_cohesion_component": 0.81,
+      "identity_cohesion_component": 0.81,
+      "descriptive_salience_total": 3.05,
+      "motivational_salience_total": 3.95,
+      "full_salience_total": 4.95,
+      "strategic_contradiction_index": 0.039,
+      "descriptive_cohesion_index": 0.7098360656,
+      "motivational_cohesion_index": 0.7531645570000001,
+      "full_cohesion_index": 0.7646464646000001
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9500000000000001
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "hope": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7000000000000001,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.30000000000000004,
+          "confidence": 0.8
+        }
+      },
+      "identity_tension": 0.0,
+      "emotional_tension": 0.14,
+      "success_tension": 0,
+      "relational_tension": 0.08,
+      "goal_tension": 0.08,
+      "emotional_cohesion_component": -0.68,
+      "success_cohesion_component": -0.81,
+      "relational_cohesion_component": -0.17,
+      "goal_cohesion_component": -0.5,
+      "identity_cohesion_component": 0.64,
+      "descriptive_salience_total": 3.7,
+      "motivational_salience_total": 4.7,
+      "full_salience_total": 5.6,
+      "strategic_contradiction_index": 0.06,
+      "descriptive_cohesion_index": -0.44864864860000003,
+      "motivational_cohesion_index": -0.4595744681,
+      "full_cohesion_index": -0.2714285714
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.7000000000000001,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7000000000000001,
+          "confidence": 0.9500000000000001
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 1.0,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7000000000000001,
+          "salience": 0.7000000000000001,
+          "confidence": 0.9500000000000001
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "cohesive_goals": {
+          "raw_score": 0.6000000000000001,
+          "salience": 0.5,
+          "confidence": 0.9
+        }
+      },
+      "identity_tension": 0.14,
+      "emotional_tension": 0.15,
+      "success_tension": 0,
+      "relational_tension": 0.21,
+      "goal_tension": 0.18,
+      "emotional_cohesion_component": -0.39,
+      "success_cohesion_component": -0.9,
+      "relational_cohesion_component": -0.51,
+      "goal_cohesion_component": -0.42,
+      "identity_cohesion_component": -0.07,
+      "descriptive_salience_total": 3.9,
+      "motivational_salience_total": 5.2,
+      "full_salience_total": 6.8,
+      "strategic_contradiction_index": 0.136,
+      "descriptive_cohesion_index": -0.4615384615,
+      "motivational_cohesion_index": -0.42692307690000003,
+      "full_cohesion_index": -0.3367647059
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "individual_dignity": {
+          "raw_score": 0.2,
+          "salience": 0.30000000000000004,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7000000000000001,
+          "salience": 0.7000000000000001,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "amity": {
+          "raw_score": 0.4,
+          "salience": 0.30000000000000004,
+          "confidence": 0.85
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.30000000000000004,
+          "salience": 0.30000000000000004,
+          "confidence": 0.85
+        }
+      },
+      "identity_tension": 0.12,
+      "emotional_tension": 0.15,
+      "success_tension": 0,
+      "relational_tension": 0.2,
+      "goal_tension": 0.15,
+      "emotional_cohesion_component": -0.29,
+      "success_cohesion_component": -0.81,
+      "relational_cohesion_component": -0.52,
+      "goal_cohesion_component": -0.55,
+      "identity_cohesion_component": -0.66,
+      "descriptive_salience_total": 3.1,
+      "motivational_salience_total": 4.2,
+      "full_salience_total": 5.4,
+      "strategic_contradiction_index": 0.124,
+      "descriptive_cohesion_index": -0.5225806452,
+      "motivational_cohesion_index": -0.5166666667,
+      "full_cohesion_index": -0.5240740741000001
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "hope": {
+          "raw_score": 0.6000000000000001,
+          "salience": 0.6000000000000001,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "amity": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9500000000000001
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        }
+      },
+      "identity_tension": 0.08,
+      "emotional_tension": 0.12,
+      "success_tension": 0,
+      "relational_tension": 0.16,
+      "goal_tension": 0.14,
+      "emotional_cohesion_component": -0.28,
+      "success_cohesion_component": -0.81,
+      "relational_cohesion_component": -0.61,
+      "goal_cohesion_component": -0.77,
+      "identity_cohesion_component": -0.8,
+      "descriptive_salience_total": 3.7,
+      "motivational_salience_total": 4.8,
+      "full_salience_total": 5.8,
+      "strategic_contradiction_index": 0.1,
+      "descriptive_cohesion_index": -0.4594594595,
+      "motivational_cohesion_index": -0.5145833333000001,
+      "full_cohesion_index": -0.5637931034
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7000000000000001,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "identity_tension": 0.0,
+      "emotional_tension": 0.0,
+      "success_tension": 0,
+      "relational_tension": 0.0,
+      "goal_tension": 0.0,
+      "emotional_cohesion_component": -0.81,
+      "success_cohesion_component": -0.01,
+      "relational_cohesion_component": -0.72,
+      "goal_cohesion_component": -0.56,
+      "identity_cohesion_component": -0.68,
+      "descriptive_salience_total": 1.9000000000000001,
+      "motivational_salience_total": 2.6,
+      "full_salience_total": 3.45,
+      "strategic_contradiction_index": 0.0,
+      "descriptive_cohesion_index": -0.8105263158,
+      "motivational_cohesion_index": -0.8076923077,
+      "full_cohesion_index": -0.8057971014
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9500000000000001
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9500000000000001
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        }
+      },
+      "identity_tension": 0.0,
+      "emotional_tension": 0.12,
+      "success_tension": 0,
+      "relational_tension": 0.08,
+      "goal_tension": 0.0,
+      "emotional_cohesion_component": 0.6000000000000001,
+      "success_cohesion_component": 0.81,
+      "relational_cohesion_component": 0.8,
+      "goal_cohesion_component": 0.72,
+      "identity_cohesion_component": 0.64,
+      "descriptive_salience_total": 2.9,
+      "motivational_salience_total": 3.7,
+      "full_salience_total": 4.5,
+      "strategic_contradiction_index": 0.04,
+      "descriptive_cohesion_index": 0.7620689655,
+      "motivational_cohesion_index": 0.7918918919,
+      "full_cohesion_index": 0.7933333333
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "dimensions": {
+        "tribal_dominance": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.9500000000000001,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7000000000000001
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9500000000000001,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "identity_tension": 0.0,
+      "emotional_tension": 0.0,
+      "success_tension": 0,
+      "relational_tension": 0.0,
+      "goal_tension": 0.0,
+      "emotional_cohesion_component": -0.8075,
+      "success_cohesion_component": -0.04,
+      "relational_cohesion_component": -0.855,
+      "goal_cohesion_component": -0.72,
+      "identity_cohesion_component": -0.765,
+      "descriptive_salience_total": 2.0,
+      "motivational_salience_total": 2.8,
+      "full_salience_total": 3.7,
+      "strategic_contradiction_index": 0.0,
+      "descriptive_cohesion_index": -0.8512500000000001,
+      "motivational_cohesion_index": -0.8651785714,
+      "full_cohesion_index": -0.8614864865
+    }
+  ],
+  "statistical_results": {
+    "descriptive_statistics": {
+      "dimension_scores": {
+        "tribal_dominance": {
+          "count": 8.0,
+          "mean": 0.5062500000000001,
+          "std": 0.4229467207242877,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.75,
+          "75%": 0.8125,
+          "max": 0.9,
+          "skew": -0.5780507091781482,
+          "kurtosis": -2.2068878339870532
+        },
+        "individual_dignity": {
+          "count": 8.0,
+          "mean": 0.45,
+          "std": 0.40708019567928594,
+          "min": 0.0,
+          "25%": 0.07500000000000001,
+          "50%": 0.5,
+          "75%": 0.8,
+          "max": 0.9,
+          "skew": -0.0592952722600625,
+          "kurtosis": -2.565903686087991
+        },
+        "fear": {
+          "count": 8.0,
+          "mean": 0.66875,
+          "std": 0.29873244120545633,
+          "min": 0.2,
+          "25%": 0.575,
+          "50%": 0.8,
+          "75%": 0.8250000000000001,
+          "max": 0.95,
+          "skew": -1.175803417584232,
+          "kurtosis": -0.31215647843932093
+        },
+        "hope": {
+          "count": 8.0,
+          "mean": 0.4125,
+          "std": 0.3090885217631258,
+          "min": 0.0,
+          "25%": 0.15000000000000002,
+          "50%": 0.5,
+          "75%": 0.625,
+          "max": 0.8,
+          "skew": -0.38763356021343903,
+          "kurtosis": -1.493711590531924
+        },
+        "envy": {
+          "count": 8.0,
+          "mean": 0.5,
+          "std": 0.45981362684088806,
+          "min": 0.0,
+          "25%": 0.07500000000000001,
+          "50%": 0.55,
+          "75%": 0.9,
+          "max": 1.0,
+          "skew": -0.047022576886577294,
+          "kurtosis": -2.6143900657414174
+        },
+        "compersion": {
+          "count": 8.0,
+          "mean": 0.225,
+          "std": 0.4166190448976482,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.225,
+          "max": 0.9,
+          "skew": 1.440164599646191,
+          "kurtosis": -1.7763568394002505e-15
+        },
+        "enmity": {
+          "count": 8.0,
+          "mean": 0.6875,
+          "std": 0.3681517544243329,
+          "min": 0.1,
+          "25%": 0.625,
+          "50%": 0.8500000000000001,
+          "75%": 0.9,
+          "max": 1.0,
+          "skew": -1.3108960906809035,
+          "kurtosis": -0.1548532237654081
+        },
+        "amity": {
+          "count": 8.0,
+          "mean": 0.5125000000000001,
+          "std": 0.37201190457142247,
+          "min": 0.0,
+          "25%": 0.30000000000000004,
+          "50%": 0.55,
+          "75%": 0.8250000000000001,
+          "max": 0.9,
+          "skew": -0.4637381946983823,
+          "kurtosis": -1.4726286784599365
+        },
+        "fragmentative_goals": {
+          "count": 8.0,
+          "mean": 0.6375,
+          "std": 0.39618718519695423,
+          "min": 0.0,
+          "25%": 0.6000000000000001,
+          "50%": 0.8,
+          "75%": 0.9,
+          "max": 0.9,
+          "skew": -1.3814846311161662,
+          "kurtosis": -0.07579820382299296
+        },
+        "cohesive_goals": {
+          "count": 8.0,
+          "mean": 0.3875,
+          "std": 0.36815175442433284,
+          "min": 0.0,
+          "25%": 0.15000000000000002,
+          "50%": 0.25,
+          "75%": 0.675,
+          "max": 0.9,
+          "skew": 0.5672318601499403,
+          "kurtosis": -1.3978784233467176
+        }
+      },
+      "derived_metrics": {
+        "identity_tension": {
+          "count": 8.0,
+          "mean": 0.0425,
+          "std": 0.0608863109175031,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.09,
+          "max": 0.14,
+          "skew": 0.895569751579283,
+          "kurtosis": -1.2891844030873076
+        },
+        "emotional_tension": {
+          "count": 8.0,
+          "mean": 0.1,
+          "std": 0.06301927142889364,
+          "min": 0.0,
+          "25%": 0.09,
+          "50%": 0.12,
+          "75%": 0.14250000000000002,
+          "max": 0.15,
+          "skew": -1.2648865721300642,
+          "kurtosis": -0.21459034211479544
+        },
+        "success_tension": {
+          "count": 8.0,
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.0,
+          "max": 0.0,
+          "skew": 0.0,
+          "kurtosis": 0.0
+        },
+        "relational_tension": {
+          "count": 8.0,
+          "mean": 0.100625,
+          "std": 0.08204691602108777,
+          "min": 0.0,
+          "25%": 0.056249999999999994,
+          "50%": 0.08,
+          "75%": 0.17,
+          "max": 0.21,
+          "skew": 0.14726571549045445,
+          "kurtosis": -1.427960114794932
+        },
+        "goal_tension": {
+          "count": 8.0,
+          "mean": 0.06875,
+          "std": 0.0784560841672406,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.04,
+          "75%": 0.14250000000000002,
+          "max": 0.18,
+          "skew": 0.3851897771722142,
+          "kurtosis": -2.0774957752645253
+        },
+        "emotional_cohesion_component": {
+          "count": 8.0,
+          "mean": -0.2671875,
+          "std": 0.5534880265513558,
+          "min": -0.81,
+          "25%": -0.711875,
+          "50%": -0.33999999999999997,
+          "75%": -0.08000000000000002,
+          "max": 0.6,
+          "skew": 0.8425580595936522,
+          "kurtosis": -0.6957537695682703
+        },
+        "success_cohesion_component": {
+          "count": 8.0,
+          "mean": -0.22,
+          "std": 0.7275202500863562,
+          "min": -0.9,
+          "25%": -0.81,
+          "50%": -0.425,
+          "75%": 0.195,
+          "max": 0.81,
+          "skew": 0.6282053574511294,
+          "kurtosis": -1.4348190227671336
+        },
+        "relational_cohesion_component": {
+          "count": 8.0,
+          "mean": -0.21875,
+          "std": 0.6692573175863356,
+          "min": -0.855,
+          "25%": -0.6375,
+          "50%": -0.515,
+          "75%": 0.07250000000000001,
+          "max": 0.835,
+          "skew": 1.1005872733120745,
+          "kurtosis": -0.49767952547132044
+        },
+        "goal_cohesion_component": {
+          "count": 8.0,
+          "mean": -0.24875,
+          "std": 0.63620386445137,
+          "min": -0.77,
+          "25%": -0.6000000000000001,
+          "50%": -0.525,
+          "75%": -0.135,
+          "max": 0.81,
+          "skew": 1.3102221282042252,
+          "kurtosis": -0.12239351935346043
+        },
+        "identity_cohesion_component": {
+          "count": 8.0,
+          "mean": -0.11062499999999997,
+          "std": 0.7076643549633642,
+          "min": -0.8,
+          "25%": -0.70125,
+          "50%": -0.36500000000000005,
+          "75%": 0.64,
+          "max": 0.81,
+          "skew": 0.359026418792866,
+          "kurtosis": -2.2222802512699857
+        },
+        "descriptive_salience_total": {
+          "count": 8.0,
+          "mean": 3.03125,
+          "std": 0.7573155126592125,
+          "min": 1.9,
+          "25%": 2.675,
+          "50%": 3.075,
+          "75%": 3.7,
+          "max": 3.9,
+          "skew": -0.5668124450420138,
+          "kurtosis": -1.003101462822272
+        },
+        "motivational_salience_total": {
+          "count": 8.0,
+          "mean": 3.9937500000000004,
+          "std": 0.9336707510833632,
+          "min": 2.6,
+          "25%": 3.475,
+          "50%": 4.075,
+          "75%": 4.725,
+          "max": 5.2,
+          "skew": -0.419769563055708,
+          "kurtosis": -1.019083849557632
+        },
+        "full_salience_total": {
+          "count": 8.0,
+          "mean": 5.025,
+          "std": 1.1173949295443524,
+          "min": 3.45,
+          "25%": 4.3,
+          "50%": 5.175000000000001,
+          "75%": 5.6499999999999995,
+          "max": 6.8,
+          "skew": -0.01059795865369495,
+          "kurtosis": -0.5612022435578563
+        },
+        "strategic_contradiction_index": {
+          "count": 8.0,
+          "mean": 0.062375,
+          "std": 0.052736372647348435,
+          "min": 0.0,
+          "25%": 0.029249999999999998,
+          "50%": 0.05,
+          "75%": 0.10600000000000001,
+          "max": 0.136,
+          "skew": 0.22992660659334993,
+          "kurtosis": -1.5030659472349752
+        },
+        "descriptive_cohesion_index": {
+          "count": 8.0,
+          "mean": -0.2602623124375,
+          "std": 0.6350254141261484,
+          "min": -0.85125,
+          "25%": -0.59456706285,
+          "50%": -0.4604989605,
+          "75%": -0.15902747004999995,
+          "max": 0.7620689655,
+          "skew": 1.1660337468194597,
+          "kurtosis": -0.2596818043987481
+        },
+        "motivational_cohesion_index": {
+          "count": 8.0,
+          "mean": -0.2556952469,
+          "std": 0.6543723737964097,
+          "min": -0.8651785714,
+          "25%": -0.5894230769500001,
+          "50%": -0.4870789007,
+          "75%": -0.131901168425,
+          "max": 0.7918918919,
+          "skew": 1.1782283565941665,
+          "kurtosis": -0.25739975750215294
+        },
+        "full_cohesion_index": {
+          "count": 8.0,
+          "mean": -0.2256705306,
+          "std": 0.6522173888955358,
+          "min": -0.8614864865,
+          "25%": -0.6242941029,
+          "50%": -0.43041938999999996,
+          "75%": -0.012409812399999998,
+          "max": 0.7933333333,
+          "skew": 1.0369189484783243,
+          "kurtosis": -0.47037683550899345
+        }
+      }
+    },
+    "correlation_analysis": {
+      "correlation_matrix": {
+        "tribal_dominance": {
+          "tribal_dominance": 1.0,
+          "individual_dignity": -0.8401007167119563,
+          "fear": 0.7451788352532717,
+          "hope": -0.4159400411099243,
+          "envy": 0.3342303293502171,
+          "compersion": -0.7387793033083395,
+          "enmity": 0.7070213320912699,
+          "amity": -0.8222575369744844,
+          "fragmentative_goals": 0.7699521540871905,
+          "cohesive_goals": -0.6691759079890609,
+          "identity_tension": 0.2600386589031354,
+          "emotional_tension": -0.39662002695631693,
+          "success_tension": NaN,
+          "relational_tension": -0.0001286483019257699,
+          "goal_tension": 0.25427373101522777,
+          "emotional_cohesion_component": -0.678188424743883,
+          "success_cohesion_component": -0.5226526628587651,
+          "relational_cohesion_component": -0.813525870624995,
+          "goal_cohesion_component": -0.7924146956498641,
+          "identity_cohesion_component": -0.8522590748872599,
+          "descriptive_salience_total": -0.2761047907660579,
+          "motivational_salience_total": -0.21875275687330395,
+          "full_salience_total": -0.17910097756355367,
+          "strategic_contradiction_index": 0.040870674292833004,
+          "descriptive_cohesion_index": -0.7819921608778427,
+          "motivational_cohesion_index": -0.7904546687236197,
+          "full_cohesion_index": -0.828130958891843
+        },
+        "individual_dignity": {
+          "tribal_dominance": -0.8401007167119563,
+          "individual_dignity": 1.0,
+          "fear": -0.6666616353964234,
+          "hope": 0.5733640854433709,
+          "envy": -0.007632031385908197,
+          "compersion": 0.6064784348631228,
+          "enmity": -0.5099750074272711,
+          "amity": 0.948049927579522,
+          "fragmentative_goals": -0.6067532801526105,
+          "cohesive_goals": 0.8150067875706856,
+          "identity_tension": -0.06340083964226624,
+          "emotional_tension": 0.648745760503506,
+          "success_tension": NaN,
+          "relational_tension": 0.23738469062053338,
+          "goal_tension": 0.017891854119241414,
+          "emotional_cohesion_component": 0.6165205249521606,
+          "success_cohesion_component": 0.2691603585558199,
+          "relational_cohesion_component": 0.7675307167283297,
+          "goal_cohesion_component": 0.6961214842426688,
+          "identity_cohesion_component": 0.9262184114926332,
+          "descriptive_salience_total": 0.57691852424195,
+          "motivational_salience_total": 0.524327261892505,
+          "full_salience_total": 0.48444052015989775,
+          "strategic_contradiction_index": 0.2195966298651301,
+          "descriptive_cohesion_index": 0.7253805257070449,
+          "motivational_cohesion_index": 0.7346673786931814,
+          "full_cohesion_index": 0.8000727772990834
+        },
+        "fear": {
+          "tribal_dominance": 0.7451788352532717,
+          "individual_dignity": -0.6666616353964234,
+          "fear": 1.0,
+          "hope": -0.7996910241934061,
+          "envy": 0.4940049993558903,
+          "compersion": -0.968487988821878,
+          "enmity": 0.9571643617501333,
+          "amity": -0.747984214642239,
+          "fragmentative_goals": 0.9709071789673343,
+          "cohesive_goals": -0.9133247726623411,
+          "identity_tension": 0.2719503944548851,
+          "emotional_tension": -0.3983873112312373,
+          "success_tension": NaN,
+          "relational_tension": -0.031146083439577657,
+          "goal_tension": 0.35162088466357055,
+          "emotional_cohesion_component": -0.9730611210087674,
+          "success_cohesion_component": -0.7416172588829961,
+          "relational_cohesion_component": -0.9653879720976016,
+          "goal_cohesion_component": -0.95700814808118,
+          "identity_cohesion_component": -0.7391332263409154,
+          "descriptive_salience_total": -0.15135197931007213,
+          "motivational_salience_total": -0.08787152918095105,
+          "full_salience_total": -0.025678173336411095,
+          "strategic_contradiction_index": 0.06251220921319815,
+          "descriptive_cohesion_index": -0.9903003376962125,
+          "motivational_cohesion_index": -0.9888074910891339,
+          "full_cohesion_index": -0.9720571320061493
+        },
+        "hope": {
+          "tribal_dominance": -0.4159400411099243,
+          "individual_dignity": 0.5733640854433709,
+          "fear": -0.7996910241934061,
+          "hope": 1.0,
+          "envy": 0.020103294760243303,
+          "compersion": 0.6739477780040791,
+          "enmity": -0.626145288061241,
+          "amity": 0.7563123966739387,
+          "fragmentative_goals": -0.64599982102836,
+          "cohesive_goals": 0.8552611077528229,
+          "identity_tension": 0.14233139091319502,
+          "emotional_tension": 0.733408104026472,
+          "success_tension": NaN,
+          "relational_tension": 0.47143021654892703,
+          "goal_tension": 0.13917597468292683,
+          "emotional_cohesion_component": 0.8632036059077747,
+          "success_cohesion_component": 0.2868347407951081,
+          "relational_cohesion_component": 0.7518033518118176,
+          "goal_cohesion_component": 0.6686326705835884,
+          "identity_cohesion_component": 0.5545381405405764,
+          "descriptive_salience_total": 0.5244751853290224,
+          "motivational_salience_total": 0.4817192022027824,
+          "full_salience_total": 0.41569849092312144,
+          "strategic_contradiction_index": 0.3962482431839531,
+          "descriptive_cohesion_index": 0.8035984374872457,
+          "motivational_cohesion_index": 0.7946847980597262,
+          "full_cohesion_index": 0.7809252903129912
+        },
+        "envy": {
+          "tribal_dominance": 0.3342303293502171,
+          "individual_dignity": -0.007632031385908197,
+          "fear": 0.4940049993558903,
+          "hope": 0.020103294760243303,
+          "envy": 1.0,
+          "compersion": -0.6711560552140241,
+          "enmity": 0.7173187343992069,
+          "amity": 0.0751632921593391,
+          "fragmentative_goals": 0.6744009129111277,
+          "cohesive_goals": -0.27004940589146603,
+          "identity_tension": 0.7296868146484141,
+          "emotional_tension": 0.584204764682368,
+          "success_tension": NaN,
+          "relational_tension": 0.7459746803327411,
+          "goal_tension": 0.9226764056287954,
+          "emotional_cohesion_component": -0.39481970539117106,
+          "success_cohesion_component": -0.9437724810406655,
+          "relational_cohesion_component": -0.475480780039904,
+          "goal_cohesion_component": -0.6148222127431829,
+          "identity_cohesion_component": -0.2400388808467992,
+          "descriptive_salience_total": 0.7384409536751846,
+          "motivational_salience_total": 0.7786498884942507,
+          "full_salience_total": 0.7875594454845513,
+          "strategic_contradiction_index": 0.8147644057036484,
+          "descriptive_cohesion_index": -0.4680787045930086,
+          "motivational_cohesion_index": -0.4740458166287975,
+          "full_cohesion_index": -0.43075271924568376
+        },
+        "compersion": {
+          "tribal_dominance": -0.7387793033083395,
+          "individual_dignity": 0.6064784348631228,
+          "fear": -0.968487988821878,
+          "hope": 0.6739477780040791,
+          "envy": -0.6711560552140241,
+          "compersion": 1.0,
+          "enmity": -0.9849548944236928,
+          "amity": 0.6429100507328637,
+          "fragmentative_goals": -0.9931506043228762,
+          "cohesive_goals": 0.8592159717313061,
+          "identity_tension": -0.4308286887194998,
+          "emotional_tension": 0.19588084274975667,
+          "success_tension": NaN,
+          "relational_tension": -0.17396217388384266,
+          "goal_tension": -0.540855711701367,
+          "emotional_cohesion_component": 0.9224250294413544,
+          "success_cohesion_component": 0.8738310744867346,
+          "relational_cohesion_component": 0.955667377533549,
+          "goal_cohesion_component": 0.983489914252336,
+          "identity_cohesion_component": 0.7288186039481854,
+          "descriptive_salience_total": -0.04584384336663368,
+          "motivational_salience_total": -0.11155405811262532,
+          "full_salience_total": -0.16571045299983223,
+          "strategic_contradiction_index": -0.2677233152902733,
+          "descriptive_cohesion_index": 0.9682717057988102,
+          "motivational_cohesion_index": 0.9698351121914465,
+          "full_cohesion_index": 0.9507411025421085
+        },
+        "enmity": {
+          "tribal_dominance": 0.7070213320912699,
+          "individual_dignity": -0.5099750074272711,
+          "fear": 0.9571643617501333,
+          "hope": -0.626145288061241,
+          "envy": 0.7173187343992069,
+          "compersion": -0.9849548944236928,
+          "enmity": 1.0,
+          "amity": -0.5619601645014206,
+          "fragmentative_goals": 0.9929000412228239,
+          "cohesive_goals": -0.7918313570487485,
+          "identity_tension": 0.44134194253306025,
+          "emotional_tension": -0.12930669225301347,
+          "success_tension": NaN,
+          "relational_tension": 0.20602770249143007,
+          "goal_tension": 0.5706373200291774,
+          "emotional_cohesion_component": -0.9074370060012914,
+          "success_cohesion_component": -0.891797545068284,
+          "relational_cohesion_component": -0.9152946700545901,
+          "goal_cohesion_component": -0.9532416877918263,
+          "identity_cohesion_component": -0.6439193093219352,
+          "descriptive_salience_total": 0.12201219092981229,
+          "motivational_salience_total": 0.18468471333909722,
+          "full_salience_total": 0.2378805646626726,
+          "strategic_contradiction_index": 0.30490066864653687,
+          "descriptive_cohesion_index": -0.9369315312944142,
+          "motivational_cohesion_index": -0.9368387808540628,
+          "full_cohesion_index": -0.9059206857464707
+        },
+        "amity": {
+          "tribal_dominance": -0.8222575369744844,
+          "individual_dignity": 0.948049927579522,
+          "fear": -0.747984214642239,
+          "hope": 0.7563123966739387,
+          "envy": 0.0751632921593391,
+          "compersion": 0.6429100507328637,
+          "enmity": -0.5619601645014206,
+          "amity": 1.0,
+          "fragmentative_goals": -0.6433528545977718,
+          "cohesive_goals": 0.8461998764766169,
+          "identity_tension": 0.06780066061046612,
+          "emotional_tension": 0.8013043439663343,
+          "success_tension": NaN,
+          "relational_tension": 0.41392277027739394,
+          "goal_tension": 0.14255564783654565,
+          "emotional_cohesion_component": 0.7444301692308891,
+          "success_cohesion_component": 0.2267060991494951,
+          "relational_cohesion_component": 0.806962087935465,
+          "goal_cohesion_component": 0.7115682755271436,
+          "identity_cohesion_component": 0.8693552003489493,
+          "descriptive_salience_total": 0.6829604604008765,
+          "motivational_salience_total": 0.6315918860921297,
+          "full_salience_total": 0.5782205185197112,
+          "strategic_contradiction_index": 0.3783771530758412,
+          "descriptive_cohesion_index": 0.7960126953954823,
+          "motivational_cohesion_index": 0.7990000261272849,
+          "full_cohesion_index": 0.845569432399756
+        },
+        "fragmentative_goals": {
+          "tribal_dominance": 0.7699521540871905,
+          "individual_dignity": -0.6067532801526105,
+          "fear": 0.9709071789673343,
+          "hope": -0.64599982102836,
+          "envy": 0.6744009129111277,
+          "compersion": -0.9931506043228762,
+          "enmity": 0.9929000412228239,
+          "amity": -0.6433528545977718,
+          "fragmentative_goals": 1.0,
+          "cohesive_goals": -0.8386393689736555,
+          "identity_tension": 0.4278777725614034,
+          "emotional_tension": -0.19453917735219514,
+          "success_tension": NaN,
+          "relational_tension": 0.17277063812205956,
+          "goal_tension": 0.5371511769276918,
+          "emotional_cohesion_component": -0.9161069754322283,
+          "success_cohesion_component": -0.8678458597026091,
+          "relational_cohesion_component": -0.9491216335291026,
+          "goal_cohesion_component": -0.9767536026851613,
+          "identity_cohesion_component": -0.7238266369528955,
+          "descriptive_salience_total": 0.04552984074405555,
+          "motivational_salience_total": 0.11078998022922305,
+          "full_salience_total": 0.164575436539401,
+          "strategic_contradiction_index": 0.2658895723718588,
+          "descriptive_cohesion_index": -0.9616396297628308,
+          "motivational_cohesion_index": -0.9631923277664796,
+          "full_cohesion_index": -0.9442291005442929
+        },
+        "cohesive_goals": {
+          "tribal_dominance": -0.6691759079890609,
+          "individual_dignity": 0.8150067875706856,
+          "fear": -0.9133247726623411,
+          "hope": 0.8552611077528229,
+          "envy": -0.27004940589146603,
+          "compersion": 0.8592159717313061,
+          "enmity": -0.7918313570487485,
+          "amity": 0.8461998764766169,
+          "fragmentative_goals": -0.8386393689736555,
+          "cohesive_goals": 1.0,
+          "identity_tension": -0.16410909776500074,
+          "emotional_tension": 0.5510928074592717,
+          "success_tension": NaN,
+          "relational_tension": 0.15873296447331126,
+          "goal_tension": -0.1811448914068787,
+          "emotional_cohesion_component": 0.8874124418282022,
+          "success_cohesion_component": 0.5605736960925637,
+          "relational_cohesion_component": 0.9248614525747584,
+          "goal_cohesion_component": 0.8844722722604956,
+          "identity_cohesion_component": 0.8285033425332793,
+          "descriptive_salience_total": 0.357710281544882,
+          "motivational_salience_total": 0.2968982100514602,
+          "full_salience_total": 0.23874874190596712,
+          "strategic_contradiction_index": 0.08930876297308815,
+          "descriptive_cohesion_index": 0.9299986477747577,
+          "motivational_cohesion_index": 0.9314713803371966,
+          "full_cohesion_index": 0.9439027824942771
+        },
+        "identity_tension": {
+          "tribal_dominance": 0.2600386589031354,
+          "individual_dignity": -0.06340083964226624,
+          "fear": 0.2719503944548851,
+          "hope": 0.14233139091319502,
+          "envy": 0.7296868146484141,
+          "compersion": -0.4308286887194998,
+          "enmity": 0.44134194253306025,
+          "amity": 0.06780066061046612,
+          "fragmentative_goals": 0.4278777725614034,
+          "cohesive_goals": -0.16410909776500074,
+          "identity_tension": 1.0,
+          "emotional_tension": 0.5435778815101605,
+          "success_tension": NaN,
+          "relational_tension": 0.9147456151351325,
+          "goal_tension": 0.9278279708339389,
+          "emotional_cohesion_component": -0.08883572260604346,
+          "success_cohesion_component": -0.6875818641662718,
+          "relational_cohesion_component": -0.3794169817988842,
+          "goal_cohesion_component": -0.37552634897163123,
+          "identity_cohesion_component": -0.3825724939906842,
+          "descriptive_salience_total": 0.568127187623284,
+          "motivational_salience_total": 0.6486622347292327,
+          "full_salience_total": 0.7464748972062616,
+          "strategic_contradiction_index": 0.9215195767753296,
+          "descriptive_cohesion_index": -0.27929982444514234,
+          "motivational_cohesion_index": -0.2725010342790717,
+          "full_cohesion_index": -0.28207800268449795
+        },
+        "emotional_tension": {
+          "tribal_dominance": -0.39662002695631693,
+          "individual_dignity": 0.648745760503506,
+          "fear": -0.3983873112312373,
+          "hope": 0.733408104026472,
+          "envy": 0.584204764682368,
+          "compersion": 0.19588084274975667,
+          "enmity": -0.12930669225301347,
+          "amity": 0.8013043439663343,
+          "fragmentative_goals": -0.19453917735219514,
+          "cohesive_goals": 0.5510928074592717,
+          "identity_tension": 0.5435778815101605,
+          "emotional_tension": 1.0,
+          "success_tension": NaN,
+          "relational_tension": 0.8288722028176251,
+          "goal_tension": 0.6501064455864197,
+          "emotional_cohesion_component": 0.4806217778847185,
+          "success_cohesion_component": -0.3013075193642681,
+          "relational_cohesion_component": 0.4054428107945115,
+          "goal_cohesion_component": 0.26616618575216944,
+          "identity_cohesion_component": 0.4696077241202763,
+          "descriptive_salience_total": 0.9009863775789158,
+          "motivational_salience_total": 0.8910475744332325,
+          "full_salience_total": 0.860176834430354,
+          "strategic_contradiction_index": 0.8158579233287518,
+          "descriptive_cohesion_index": 0.42578033211017835,
+          "motivational_cohesion_index": 0.42379038733069013,
+          "full_cohesion_index": 0.4612641591028072
+        },
+        "success_tension": {
+          "tribal_dominance": NaN,
+          "individual_dignity": NaN,
+          "fear": NaN,
+          "hope": NaN,
+          "envy": NaN,
+          "compersion": NaN,
+          "enmity": NaN,
+          "amity": NaN,
+          "fragmentative_goals": NaN,
+          "cohesive_goals": NaN,
+          "identity_tension": NaN,
+          "emotional_tension": NaN,
+          "success_tension": NaN,
+          "relational_tension": NaN,
+          "goal_tension": NaN,
+          "emotional_cohesion_component": NaN,
+          "success_cohesion_component": NaN,
+          "relational_cohesion_component": NaN,
+          "goal_cohesion_component": NaN,
+          "identity_cohesion_component": NaN,
+          "descriptive_salience_total": NaN,
+          "motivational_salience_total": NaN,
+          "full_salience_total": NaN,
+          "strategic_contradiction_index": NaN,
+          "descriptive_cohesion_index": NaN,
+          "motivational_cohesion_index": NaN,
+          "full_cohesion_index": NaN
+        },
+        "relational_tension": {
+          "tribal_dominance": -0.0001286483019257699,
+          "individual_dignity": 0.23738469062053338,
+          "fear": -0.031146083439577657,
+          "hope": 0.47143021654892703,
+          "envy": 0.7459746803327411,
+          "compersion": -0.17396217388384266,
+          "enmity": 0.20602770249143007,
+          "amity": 0.41392277027739394,
+          "fragmentative_goals": 0.17277063812205956,
+          "cohesive_goals": 0.15873296447331126,
+          "identity_tension": 0.9147456151351325,
+          "emotional_tension": 0.8288722028176251,
+          "success_tension": NaN,
+          "relational_tension": 1.0,
+          "goal_tension": 0.9155937521053248,
+          "emotional_cohesion_component": 0.19814132647973945,
+          "success_cohesion_component": -0.5809701926471098,
+          "relational_cohesion_component": -0.05094328922434065,
+          "goal_cohesion_component": -0.11715223525526955,
+          "identity_cohesion_component": -0.05535216000982124,
+          "descriptive_salience_total": 0.7991619622148929,
+          "motivational_salience_total": 0.8453055090913153,
+          "full_salience_total": 0.888388826115263,
+          "strategic_contradiction_index": 0.9929056991188255,
+          "descriptive_cohesion_index": 0.03528738336088739,
+          "motivational_cohesion_index": 0.0361522235084936,
+          "full_cohesion_index": 0.04010642183480516
+        },
+        "goal_tension": {
+          "tribal_dominance": 0.25427373101522777,
+          "individual_dignity": 0.017891854119241414,
+          "fear": 0.35162088466357055,
+          "hope": 0.13917597468292683,
+          "envy": 0.9226764056287954,
+          "compersion": -0.540855711701367,
+          "enmity": 0.5706373200291774,
+          "amity": 0.14255564783654565,
+          "fragmentative_goals": 0.5371511769276918,
+          "cohesive_goals": -0.1811448914068787,
+          "identity_tension": 0.9278279708339389,
+          "emotional_tension": 0.6501064455864197,
+          "success_tension": NaN,
+          "relational_tension": 0.9155937521053248,
+          "goal_tension": 1.0,
+          "emotional_cohesion_component": -0.19852805462878922,
+          "success_cohesion_component": -0.8527120087562674,
+          "relational_cohesion_component": -0.4039913800763371,
+          "goal_cohesion_component": -0.4839388989320485,
+          "identity_cohesion_component": -0.2870396672562857,
+          "descriptive_salience_total": 0.7545164584914406,
+          "motivational_salience_total": 0.8140911595318915,
+          "full_salience_total": 0.8640707674153801,
+          "strategic_contradiction_index": 0.9520525288935133,
+          "descriptive_cohesion_index": -0.3398868498985099,
+          "motivational_cohesion_index": -0.34092770784052034,
+          "full_cohesion_index": -0.32316460843604267
+        },
+        "emotional_cohesion_component": {
+          "tribal_dominance": -0.678188424743883,
+          "individual_dignity": 0.6165205249521606,
+          "fear": -0.9730611210087674,
+          "hope": 0.8632036059077747,
+          "envy": -0.39481970539117106,
+          "compersion": 0.9224250294413544,
+          "enmity": -0.9074370060012914,
+          "amity": 0.7444301692308891,
+          "fragmentative_goals": -0.9161069754322283,
+          "cohesive_goals": 0.8874124418282022,
+          "identity_tension": -0.08883572260604346,
+          "emotional_tension": 0.4806217778847185,
+          "success_tension": NaN,
+          "relational_tension": 0.19814132647973945,
+          "goal_tension": -0.19852805462878922,
+          "emotional_cohesion_component": 1.0,
+          "success_cohesion_component": 0.6530809943871307,
+          "relational_cohesion_component": 0.9087355542760894,
+          "goal_cohesion_component": 0.9068846818720907,
+          "identity_cohesion_component": 0.6363649152352663,
+          "descriptive_salience_total": 0.23151359211154632,
+          "motivational_salience_total": 0.18179779402075638,
+          "full_salience_total": 0.13459308103780993,
+          "strategic_contradiction_index": 0.09693767157397526,
+          "descriptive_cohesion_index": 0.9670297297897713,
+          "motivational_cohesion_index": 0.9647818218699857,
+          "full_cohesion_index": 0.9360429533167876
+        },
+        "success_cohesion_component": {
+          "tribal_dominance": -0.5226526628587651,
+          "individual_dignity": 0.2691603585558199,
+          "fear": -0.7416172588829961,
+          "hope": 0.2868347407951081,
+          "envy": -0.9437724810406655,
+          "compersion": 0.8738310744867346,
+          "enmity": -0.891797545068284,
+          "amity": 0.2267060991494951,
+          "fragmentative_goals": -0.8678458597026091,
+          "cohesive_goals": 0.5605736960925637,
+          "identity_tension": -0.6875818641662718,
+          "emotional_tension": -0.3013075193642681,
+          "success_tension": NaN,
+          "relational_tension": -0.5809701926471098,
+          "goal_tension": -0.8527120087562674,
+          "emotional_cohesion_component": 0.6530809943871307,
+          "success_cohesion_component": 1.0,
+          "relational_cohesion_component": 0.7313789730811876,
+          "goal_cohesion_component": 0.8296711561255541,
+          "identity_cohesion_component": 0.4840337349874125,
+          "descriptive_salience_total": -0.5080720319195686,
+          "motivational_salience_total": -0.5656329081481957,
+          "full_salience_total": -0.5995966531472987,
+          "strategic_contradiction_index": -0.6652704857748255,
+          "descriptive_cohesion_index": 0.7268430656345336,
+          "motivational_cohesion_index": 0.7309726592224124,
+          "full_cohesion_index": 0.6958940569778375
+        },
+        "relational_cohesion_component": {
+          "tribal_dominance": -0.813525870624995,
+          "individual_dignity": 0.7675307167283297,
+          "fear": -0.9653879720976016,
+          "hope": 0.7518033518118176,
+          "envy": -0.475480780039904,
+          "compersion": 0.955667377533549,
+          "enmity": -0.9152946700545901,
+          "amity": 0.806962087935465,
+          "fragmentative_goals": -0.9491216335291026,
+          "cohesive_goals": 0.9248614525747584,
+          "identity_tension": -0.3794169817988842,
+          "emotional_tension": 0.4054428107945115,
+          "success_tension": NaN,
+          "relational_tension": -0.05094328922434065,
+          "goal_tension": -0.4039913800763371,
+          "emotional_cohesion_component": 0.9087355542760894,
+          "success_cohesion_component": 0.7313789730811876,
+          "relational_cohesion_component": 1.0,
+          "goal_cohesion_component": 0.9698871047347913,
+          "identity_cohesion_component": 0.8736947562792886,
+          "descriptive_salience_total": 0.1709298956129143,
+          "motivational_salience_total": 0.09563479251010872,
+          "full_salience_total": 0.021681932936641633,
+          "strategic_contradiction_index": -0.12676606141758026,
+          "descriptive_cohesion_index": 0.9821867628508066,
+          "motivational_cohesion_index": 0.9833709169754645,
+          "full_cohesion_index": 0.9914201663251302
+        },
+        "goal_cohesion_component": {
+          "tribal_dominance": -0.7924146956498641,
+          "individual_dignity": 0.6961214842426688,
+          "fear": -0.95700814808118,
+          "hope": 0.6686326705835884,
+          "envy": -0.6148222127431829,
+          "compersion": 0.983489914252336,
+          "enmity": -0.9532416877918263,
+          "amity": 0.7115682755271436,
+          "fragmentative_goals": -0.9767536026851613,
+          "cohesive_goals": 0.8844722722604956,
+          "identity_tension": -0.37552634897163123,
+          "emotional_tension": 0.26616618575216944,
+          "success_tension": NaN,
+          "relational_tension": -0.11715223525526955,
+          "goal_tension": -0.4839388989320485,
+          "emotional_cohesion_component": 0.9068846818720907,
+          "success_cohesion_component": 0.8296711561255541,
+          "relational_cohesion_component": 0.9698871047347913,
+          "goal_cohesion_component": 1.0,
+          "identity_cohesion_component": 0.7985819544838509,
+          "descriptive_salience_total": 0.013249969038585154,
+          "motivational_salience_total": -0.04832511518267023,
+          "full_salience_total": -0.0881690355783659,
+          "strategic_contradiction_index": -0.20354356143938207,
+          "descriptive_cohesion_index": 0.9660060822732853,
+          "motivational_cohesion_index": 0.973206813025109,
+          "full_cohesion_index": 0.9682952345715371
+        },
+        "identity_cohesion_component": {
+          "tribal_dominance": -0.8522590748872599,
+          "individual_dignity": 0.9262184114926332,
+          "fear": -0.7391332263409154,
+          "hope": 0.5545381405405764,
+          "envy": -0.2400388808467992,
+          "compersion": 0.7288186039481854,
+          "enmity": -0.6439193093219352,
+          "amity": 0.8693552003489493,
+          "fragmentative_goals": -0.7238266369528955,
+          "cohesive_goals": 0.8285033425332793,
+          "identity_tension": -0.3825724939906842,
+          "emotional_tension": 0.4696077241202763,
+          "success_tension": NaN,
+          "relational_tension": -0.05535216000982124,
+          "goal_tension": -0.2870396672562857,
+          "emotional_cohesion_component": 0.6363649152352663,
+          "success_cohesion_component": 0.4840337349874125,
+          "relational_cohesion_component": 0.8736947562792886,
+          "goal_cohesion_component": 0.7985819544838509,
+          "identity_cohesion_component": 1.0,
+          "descriptive_salience_total": 0.34017440835710616,
+          "motivational_salience_total": 0.2646373962778666,
+          "full_salience_total": 0.19224745060215898,
+          "strategic_contradiction_index": -0.07873341476288287,
+          "descriptive_cohesion_index": 0.7923106122645412,
+          "motivational_cohesion_index": 0.7990356985510897,
+          "full_cohesion_index": 0.8608057768353082
+        },
+        "descriptive_salience_total": {
+          "tribal_dominance": -0.2761047907660579,
+          "individual_dignity": 0.57691852424195,
+          "fear": -0.15135197931007213,
+          "hope": 0.5244751853290224,
+          "envy": 0.7384409536751846,
+          "compersion": -0.04584384336663368,
+          "enmity": 0.12201219092981229,
+          "amity": 0.6829604604008765,
+          "fragmentative_goals": 0.04552984074405555,
+          "cohesive_goals": 0.357710281544882,
+          "identity_tension": 0.568127187623284,
+          "emotional_tension": 0.9009863775789158,
+          "success_tension": NaN,
+          "relational_tension": 0.7991619622148929,
+          "goal_tension": 0.7545164584914406,
+          "emotional_cohesion_component": 0.23151359211154632,
+          "success_cohesion_component": -0.5080720319195686,
+          "relational_cohesion_component": 0.1709298956129143,
+          "goal_cohesion_component": 0.013249969038585154,
+          "identity_cohesion_component": 0.34017440835710616,
+          "descriptive_salience_total": 1.0,
+          "motivational_salience_total": 0.9938336417256826,
+          "full_salience_total": 0.9599406008457564,
+          "strategic_contradiction_index": 0.8196841913571858,
+          "descriptive_cohesion_index": 0.19720195072080338,
+          "motivational_cohesion_index": 0.18974684613773554,
+          "full_cohesion_index": 0.2380388960541944
+        },
+        "motivational_salience_total": {
+          "tribal_dominance": -0.21875275687330395,
+          "individual_dignity": 0.524327261892505,
+          "fear": -0.08787152918095105,
+          "hope": 0.4817192022027824,
+          "envy": 0.7786498884942507,
+          "compersion": -0.11155405811262532,
+          "enmity": 0.18468471333909722,
+          "amity": 0.6315918860921297,
+          "fragmentative_goals": 0.11078998022922305,
+          "cohesive_goals": 0.2968982100514602,
+          "identity_tension": 0.6486622347292327,
+          "emotional_tension": 0.8910475744332325,
+          "success_tension": NaN,
+          "relational_tension": 0.8453055090913153,
+          "goal_tension": 0.8140911595318915,
+          "emotional_cohesion_component": 0.18179779402075638,
+          "success_cohesion_component": -0.5656329081481957,
+          "relational_cohesion_component": 0.09563479251010872,
+          "goal_cohesion_component": -0.04832511518267023,
+          "identity_cohesion_component": 0.2646373962778666,
+          "descriptive_salience_total": 0.9938336417256826,
+          "motivational_salience_total": 1.0,
+          "full_salience_total": 0.983677459503814,
+          "strategic_contradiction_index": 0.8679889139609145,
+          "descriptive_cohesion_index": 0.12989978941096664,
+          "motivational_cohesion_index": 0.12438407757180726,
+          "full_cohesion_index": 0.16994344777676512
+        },
+        "full_salience_total": {
+          "tribal_dominance": -0.17910097756355367,
+          "individual_dignity": 0.48444052015989775,
+          "fear": -0.025678173336411095,
+          "hope": 0.41569849092312144,
+          "envy": 0.7875594454845513,
+          "compersion": -0.16571045299983223,
+          "enmity": 0.2378805646626726,
+          "amity": 0.5782205185197112,
+          "fragmentative_goals": 0.164575436539401,
+          "cohesive_goals": 0.23874874190596712,
+          "identity_tension": 0.7464748972062616,
+          "emotional_tension": 0.860176834430354,
+          "success_tension": NaN,
+          "relational_tension": 0.888388826115263,
+          "goal_tension": 0.8640707674153801,
+          "emotional_cohesion_component": 0.13459308103780993,
+          "success_cohesion_component": -0.5995966531472987,
+          "relational_cohesion_component": 0.021681932936641633,
+          "goal_cohesion_component": -0.0881690355783659,
+          "identity_cohesion_component": 0.19224745060215898,
+          "descriptive_salience_total": 0.9599406008457564,
+          "motivational_salience_total": 0.983677459503814,
+          "full_salience_total": 1.0,
+          "strategic_contradiction_index": 0.9114733543072144,
+          "descriptive_cohesion_index": 0.06480923558386197,
+          "motivational_cohesion_index": 0.06479642121982755,
+          "full_cohesion_index": 0.10770485512638217
+        },
+        "strategic_contradiction_index": {
+          "tribal_dominance": 0.040870674292833004,
+          "individual_dignity": 0.2195966298651301,
+          "fear": 0.06251220921319815,
+          "hope": 0.3962482431839531,
+          "envy": 0.8147644057036484,
+          "compersion": -0.2677233152902733,
+          "enmity": 0.30490066864653687,
+          "amity": 0.3783771530758412,
+          "fragmentative_goals": 0.2658895723718588,
+          "cohesive_goals": 0.08930876297308815,
+          "identity_tension": 0.9215195767753296,
+          "emotional_tension": 0.8158579233287518,
+          "success_tension": NaN,
+          "relational_tension": 0.9929056991188255,
+          "goal_tension": 0.9520525288935133,
+          "emotional_cohesion_component": 0.09693767157397526,
+          "success_cohesion_component": -0.6652704857748255,
+          "relational_cohesion_component": -0.12676606141758026,
+          "goal_cohesion_component": -0.20354356143938207,
+          "identity_cohesion_component": -0.07873341476288287,
+          "descriptive_salience_total": 0.8196841913571858,
+          "motivational_salience_total": 0.8679889139609145,
+          "full_salience_total": 0.9114733543072144,
+          "strategic_contradiction_index": 1.0,
+          "descriptive_cohesion_index": -0.052882438650233426,
+          "motivational_cohesion_index": -0.05182872867194986,
+          "full_cohesion_index": -0.03856836834291715
+        },
+        "descriptive_cohesion_index": {
+          "tribal_dominance": -0.7819921608778427,
+          "individual_dignity": 0.7253805257070449,
+          "fear": -0.9903003376962125,
+          "hope": 0.8035984374872457,
+          "envy": -0.4680787045930086,
+          "compersion": 0.9682717057988102,
+          "enmity": -0.9369315312944142,
+          "amity": 0.7960126953954823,
+          "fragmentative_goals": -0.9616396297628308,
+          "cohesive_goals": 0.9299986477747577,
+          "identity_tension": -0.27929982444514234,
+          "emotional_tension": 0.42578033211017835,
+          "success_tension": NaN,
+          "relational_tension": 0.03528738336088739,
+          "goal_tension": -0.3398868498985099,
+          "emotional_cohesion_component": 0.9670297297897713,
+          "success_cohesion_component": 0.7268430656345336,
+          "relational_cohesion_component": 0.9821867628508066,
+          "goal_cohesion_component": 0.9660060822732853,
+          "identity_cohesion_component": 0.7923106122645412,
+          "descriptive_salience_total": 0.19720195072080338,
+          "motivational_salience_total": 0.12989978941096664,
+          "full_salience_total": 0.06480923558386197,
+          "strategic_contradiction_index": -0.052882438650233426,
+          "descriptive_cohesion_index": 1.0,
+          "motivational_cohesion_index": 0.99921393433389,
+          "full_cohesion_index": 0.9913200347285626
+        },
+        "motivational_cohesion_index": {
+          "tribal_dominance": -0.7904546687236197,
+          "individual_dignity": 0.7346673786931814,
+          "fear": -0.9888074910891339,
+          "hope": 0.7946847980597262,
+          "envy": -0.4740458166287975,
+          "compersion": 0.9698351121914465,
+          "enmity": -0.9368387808540628,
+          "amity": 0.7990000261272849,
+          "fragmentative_goals": -0.9631923277664796,
+          "cohesive_goals": 0.9314713803371966,
+          "identity_tension": -0.2725010342790717,
+          "emotional_tension": 0.42379038733069013,
+          "success_tension": NaN,
+          "relational_tension": 0.0361522235084936,
+          "goal_tension": -0.34092770784052034,
+          "emotional_cohesion_component": 0.9647818218699857,
+          "success_cohesion_component": 0.7309726592224124,
+          "relational_cohesion_component": 0.9833709169754645,
+          "goal_cohesion_component": 0.973206813025109,
+          "identity_cohesion_component": 0.7990356985510897,
+          "descriptive_salience_total": 0.18974684613773554,
+          "motivational_salience_total": 0.12438407757180726,
+          "full_salience_total": 0.06479642121982755,
+          "strategic_contradiction_index": -0.05182872867194986,
+          "descriptive_cohesion_index": 0.99921393433389,
+          "motivational_cohesion_index": 1.0,
+          "full_cohesion_index": 0.9934878707428709
+        },
+        "full_cohesion_index": {
+          "tribal_dominance": -0.828130958891843,
+          "individual_dignity": 0.8000727772990834,
+          "fear": -0.9720571320061493,
+          "hope": 0.7809252903129912,
+          "envy": -0.43075271924568376,
+          "compersion": 0.9507411025421085,
+          "enmity": -0.9059206857464707,
+          "amity": 0.845569432399756,
+          "fragmentative_goals": -0.9442291005442929,
+          "cohesive_goals": 0.9439027824942771,
+          "identity_tension": -0.28207800268449795,
+          "emotional_tension": 0.4612641591028072,
+          "success_tension": NaN,
+          "relational_tension": 0.04010642183480516,
+          "goal_tension": -0.32316460843604267,
+          "emotional_cohesion_component": 0.9360429533167876,
+          "success_cohesion_component": 0.6958940569778375,
+          "relational_cohesion_component": 0.9914201663251302,
+          "goal_cohesion_component": 0.9682952345715371,
+          "identity_cohesion_component": 0.8608057768353082,
+          "descriptive_salience_total": 0.2380388960541944,
+          "motivational_salience_total": 0.16994344777676512,
+          "full_salience_total": 0.10770485512638217,
+          "strategic_contradiction_index": -0.03856836834291715,
+          "descriptive_cohesion_index": 0.9913200347285626,
+          "motivational_cohesion_index": 0.9934878707428709,
+          "full_cohesion_index": 1.0
+        }
+      },
+      "p_values_matrix": {
+        "tribal_dominance": {
+          "tribal_dominance": 0.0,
+          "individual_dignity": 4.643858982668262e-05,
+          "fear": 0.0009239532147029245,
+          "hope": 0.10906726944591928,
+          "envy": 0.2057835387075016,
+          "compersion": 0.001078768313608534,
+          "enmity": 0.002193127020306147,
+          "amity": 9.261512792836626e-05,
+          "fragmentative_goals": 0.00048526180927143476,
+          "cohesive_goals": 0.0045834407269297545,
+          "identity_tension": 0.3307263652831284,
+          "emotional_tension": 0.128266260606829,
+          "success_tension": NaN,
+          "relational_tension": 0.9996227237911175,
+          "goal_tension": 0.3419405440102533,
+          "emotional_cohesion_component": 0.0038816295947987213,
+          "success_cohesion_component": 0.03779030668337769,
+          "relational_cohesion_component": 0.0001263981531124347,
+          "goal_cohesion_component": 0.00025215742232209394,
+          "identity_cohesion_component": 2.7620183921209666e-05,
+          "descriptive_salience_total": 0.30060829578943865,
+          "motivational_salience_total": 0.4156670528386951,
+          "full_salience_total": 0.5068887661158635,
+          "strategic_contradiction_index": 0.8805413810146122,
+          "descriptive_cohesion_index": 0.0003448421381260793,
+          "motivational_cohesion_index": 0.0002677964960173649,
+          "full_cohesion_index": 7.442596010784327e-05
+        },
+        "individual_dignity": {
+          "tribal_dominance": 4.643858982668262e-05,
+          "individual_dignity": 0.0,
+          "fear": 0.004796352932524911,
+          "hope": 0.020235352892956276,
+          "envy": 0.9776207807432582,
+          "compersion": 0.012748325914578522,
+          "enmity": 0.04357840960251331,
+          "amity": 2.3855523579146326e-08,
+          "fragmentative_goals": 0.012696955012762242,
+          "cohesive_goals": 0.00012003953753499715,
+          "identity_tension": 0.8155553860764605,
+          "emotional_tension": 0.006553308818972235,
+          "success_tension": NaN,
+          "relational_tension": 0.3760132109127542,
+          "goal_tension": 0.947563618171066,
+          "emotional_cohesion_component": 0.010974201704171975,
+          "success_cohesion_component": 0.3134207163863886,
+          "relational_cohesion_component": 0.0005185234390072503,
+          "goal_cohesion_component": 0.002741733438122341,
+          "identity_cohesion_component": 2.621736471722861e-07,
+          "descriptive_salience_total": 0.019299027575283272,
+          "motivational_salience_total": 0.037071456408492735,
+          "full_salience_total": 0.05721907400855047,
+          "strategic_contradiction_index": 0.4138252153800581,
+          "descriptive_cohesion_index": 0.0014719968896885535,
+          "motivational_cohesion_index": 0.001188984604881073,
+          "full_cohesion_index": 0.00019810683717911241
+        },
+        "fear": {
+          "tribal_dominance": 0.0009239532147029245,
+          "individual_dignity": 0.004796352932524911,
+          "fear": 0.0,
+          "hope": 0.00020055151538898592,
+          "envy": 0.05178506989069227,
+          "compersion": 7.612303235048241e-10,
+          "enmity": 6.334537168726179e-09,
+          "amity": 0.0008620868570681359,
+          "fragmentative_goals": 4.3800193280585325e-10,
+          "cohesive_goals": 7.816823710220418e-07,
+          "identity_tension": 0.3082353393641024,
+          "emotional_tension": 0.12641951670153528,
+          "success_tension": NaN,
+          "relational_tension": 0.9088374158036867,
+          "goal_tension": 0.18170708251902606,
+          "emotional_cohesion_component": 2.5710785248452237e-10,
+          "success_cohesion_component": 0.001007688135071801,
+          "relational_cohesion_component": 1.4560987943012194e-09,
+          "goal_cohesion_component": 6.495312543226689e-09,
+          "identity_cohesion_component": 0.0010696864187447366,
+          "descriptive_salience_total": 0.5757941415688841,
+          "motivational_salience_total": 0.7462402024654058,
+          "full_salience_total": 0.924794955889221,
+          "strategic_contradiction_index": 0.8181000348633127,
+          "descriptive_cohesion_index": 2.1113202989470952e-13,
+          "motivational_cohesion_index": 5.728499735919905e-13,
+          "full_cohesion_index": 3.312822867313834e-10
+        },
+        "hope": {
+          "tribal_dominance": 0.10906726944591928,
+          "individual_dignity": 0.020235352892956276,
+          "fear": 0.00020055151538898592,
+          "hope": 0.0,
+          "envy": 0.9410923560380504,
+          "compersion": 0.004200205619200704,
+          "enmity": 0.009462043508330506,
+          "amity": 0.0006981037771105697,
+          "fragmentative_goals": 0.006862772796494708,
+          "cohesive_goals": 2.4124160972767876e-05,
+          "identity_tension": 0.5990041207574133,
+          "emotional_tension": 0.0012245195105939019,
+          "success_tension": NaN,
+          "relational_tension": 0.06527127237591875,
+          "goal_tension": 0.6072108031134154,
+          "emotional_cohesion_component": 1.661392272666336e-05,
+          "success_cohesion_component": 0.2814317778100822,
+          "relational_cohesion_component": 0.0007833599075925668,
+          "goal_cohesion_component": 0.0046287884804637365,
+          "identity_cohesion_component": 0.025794081617176758,
+          "descriptive_salience_total": 0.03700845757828007,
+          "motivational_salience_total": 0.05883926752552971,
+          "full_salience_total": 0.10929404333955287,
+          "strategic_contradiction_index": 0.12865711643674474,
+          "descriptive_cohesion_index": 0.0001766745221133165,
+          "motivational_cohesion_index": 0.00023499722497919746,
+          "full_cohesion_index": 0.00035573725385071114
+        },
+        "envy": {
+          "tribal_dominance": 0.2057835387075016,
+          "individual_dignity": 0.9776207807432582,
+          "fear": 0.05178506989069227,
+          "hope": 0.9410923560380504,
+          "envy": 0.0,
+          "compersion": 0.004421149744582257,
+          "enmity": 0.0017601006255798593,
+          "amity": 0.7820444376905804,
+          "fragmentative_goals": 0.004165195043826488,
+          "cohesive_goals": 0.3117628905922427,
+          "identity_tension": 0.001334629907920161,
+          "emotional_tension": 0.017484734800339456,
+          "success_tension": NaN,
+          "relational_tension": 0.0009060446047457469,
+          "goal_tension": 3.605563209739114e-07,
+          "emotional_cohesion_component": 0.1301665757767378,
+          "success_cohesion_component": 4.1033979636332455e-08,
+          "relational_cohesion_component": 0.06268060217294352,
+          "goal_cohesion_component": 0.01125970601107063,
+          "identity_cohesion_component": 0.3705392330608608,
+          "descriptive_salience_total": 0.0010875094410293363,
+          "motivational_salience_total": 0.0003799260860162722,
+          "full_salience_total": 0.0002923600968943698,
+          "strategic_contradiction_index": 0.00012106163664044788,
+          "descriptive_cohesion_index": 0.06747335061372058,
+          "motivational_cohesion_index": 0.06358959744458932,
+          "full_cohesion_index": 0.09578380389605792
+        },
+        "compersion": {
+          "tribal_dominance": 0.001078768313608534,
+          "individual_dignity": 0.012748325914578522,
+          "fear": 7.612303235048241e-10,
+          "hope": 0.004200205619200704,
+          "envy": 0.004421149744582257,
+          "compersion": 0.0,
+          "enmity": 4.4967637330850096e-12,
+          "amity": 0.00722476814711893,
+          "fragmentative_goals": 1.8624466450951293e-14,
+          "cohesive_goals": 2.009141333099629e-05,
+          "identity_tension": 0.0957187934629111,
+          "emotional_tension": 0.4671920395066045,
+          "success_tension": NaN,
+          "relational_tension": 0.5193515945354166,
+          "goal_tension": 0.030517996291569788,
+          "emotional_cohesion_component": 3.685907664887489e-07,
+          "success_cohesion_component": 9.714133838384191e-06,
+          "relational_cohesion_component": 8.024262620276985e-09,
+          "goal_cohesion_component": 8.584162112190855e-12,
+          "identity_cohesion_component": 0.0013614474911046062,
+          "descriptive_salience_total": 0.8661208831450764,
+          "motivational_salience_total": 0.6808466490153866,
+          "full_salience_total": 0.5396528168167054,
+          "strategic_contradiction_index": 0.31611126983080357,
+          "descriptive_cohesion_index": 7.981059552029105e-10,
+          "motivational_cohesion_index": 5.626654676167578e-10,
+          "full_cohesion_index": 1.6558092868138422e-08
+        },
+        "enmity": {
+          "tribal_dominance": 0.002193127020306147,
+          "individual_dignity": 0.04357840960251331,
+          "fear": 6.334537168726179e-09,
+          "hope": 0.009462043508330506,
+          "envy": 0.0017601006255798593,
+          "compersion": 4.4967637330850096e-12,
+          "enmity": 0.0,
+          "amity": 0.02347815517231329,
+          "fragmentative_goals": 2.3934391514372023e-14,
+          "cohesive_goals": 0.0002567306673087025,
+          "identity_tension": 0.0870212952015186,
+          "emotional_tension": 0.6331607976373017,
+          "success_tension": NaN,
+          "relational_tension": 0.4439559965727101,
+          "goal_tension": 0.02097715348020628,
+          "emotional_cohesion_component": 1.2186105031552285e-06,
+          "success_cohesion_component": 3.482465228219356e-06,
+          "relational_cohesion_component": 6.69061696262337e-07,
+          "goal_cohesion_component": 1.157540178111582e-08,
+          "identity_cohesion_component": 0.007104894463517706,
+          "descriptive_salience_total": 0.6526039636836144,
+          "motivational_salience_total": 0.4935072477401117,
+          "full_salience_total": 0.37498717388189107,
+          "strategic_contradiction_index": 0.250854271178647,
+          "descriptive_cohesion_index": 8.999057531799181e-08,
+          "motivational_cohesion_index": 9.089836394644564e-08,
+          "full_cohesion_index": 1.3597729000764488e-06
+        },
+        "amity": {
+          "tribal_dominance": 9.261512792836626e-05,
+          "individual_dignity": 2.3855523579146326e-08,
+          "fear": 0.0008620868570681359,
+          "hope": 0.0006981037771105697,
+          "envy": 0.7820444376905804,
+          "compersion": 0.00722476814711893,
+          "enmity": 0.02347815517231329,
+          "amity": 0.0,
+          "fragmentative_goals": 0.00717197826285367,
+          "cohesive_goals": 3.5980537050242315e-05,
+          "identity_tension": 0.8029821134246131,
+          "emotional_tension": 0.00019038796652942258,
+          "success_tension": NaN,
+          "relational_tension": 0.11097129938584016,
+          "goal_tension": 0.5984225721010696,
+          "emotional_cohesion_component": 0.0009410638178762005,
+          "success_cohesion_component": 0.39847951449896674,
+          "relational_cohesion_component": 0.00015805725993832146,
+          "goal_cohesion_component": 0.001992367586287087,
+          "identity_cohesion_component": 1.2246258655944412e-05,
+          "descriptive_salience_total": 0.003546668926317657,
+          "motivational_salience_total": 0.00868235285513748,
+          "full_salience_total": 0.018964579132635925,
+          "strategic_contradiction_index": 0.14842445733373294,
+          "descriptive_cohesion_index": 0.000225416107540956,
+          "motivational_cohesion_index": 0.0002050401836356454,
+          "full_cohesion_index": 3.6960505140316734e-05
+        },
+        "fragmentative_goals": {
+          "tribal_dominance": 0.00048526180927143476,
+          "individual_dignity": 0.012696955012762242,
+          "fear": 4.3800193280585325e-10,
+          "hope": 0.006862772796494708,
+          "envy": 0.004165195043826488,
+          "compersion": 1.8624466450951293e-14,
+          "enmity": 2.3934391514372023e-14,
+          "amity": 0.00717197826285367,
+          "fragmentative_goals": 0.0,
+          "cohesive_goals": 4.9289730975569396e-05,
+          "identity_tension": 0.09826712981914394,
+          "emotional_tension": 0.4703084888761346,
+          "success_tension": NaN,
+          "relational_tension": 0.5222612558685473,
+          "goal_tension": 0.03190355740162262,
+          "emotional_cohesion_component": 6.268020348314158e-07,
+          "success_cohesion_component": 1.3216239192948663e-05,
+          "relational_cohesion_component": 2.06759510964769e-08,
+          "goal_cohesion_component": 9.251256725571402e-11,
+          "identity_cohesion_component": 0.0015243053371822466,
+          "descriptive_salience_total": 0.8670302601347388,
+          "motivational_salience_total": 0.6829262833580267,
+          "full_salience_total": 0.542472532481224,
+          "strategic_contradiction_index": 0.3195640351516655,
+          "descriptive_cohesion_index": 2.961039865353919e-09,
+          "motivational_cohesion_index": 2.226539768743209e-09,
+          "full_cohesion_index": 3.88049622828141e-08
+        },
+        "cohesive_goals": {
+          "tribal_dominance": 0.0045834407269297545,
+          "individual_dignity": 0.00012003953753499715,
+          "fear": 7.816823710220418e-07,
+          "hope": 2.4124160972767876e-05,
+          "envy": 0.3117628905922427,
+          "compersion": 2.009141333099629e-05,
+          "enmity": 0.0002567306673087025,
+          "amity": 3.5980537050242315e-05,
+          "fragmentative_goals": 4.9289730975569396e-05,
+          "cohesive_goals": 0.0,
+          "identity_tension": 0.5436329424863521,
+          "emotional_tension": 0.026926844260842915,
+          "success_tension": NaN,
+          "relational_tension": 0.5570891475641122,
+          "goal_tension": 0.5019709388693494,
+          "emotional_cohesion_component": 4.543908553041702e-06,
+          "success_cohesion_component": 0.02389813916421455,
+          "relational_cohesion_component": 2.967549720731674e-07,
+          "goal_cohesion_component": 5.398688258765097e-06,
+          "identity_cohesion_component": 7.33814355761119e-05,
+          "descriptive_salience_total": 0.17373567070546025,
+          "motivational_salience_total": 0.26413368804954546,
+          "full_salience_total": 0.37319449137266325,
+          "strategic_contradiction_index": 0.7422199707067307,
+          "descriptive_cohesion_index": 1.8328864768213018e-07,
+          "motivational_cohesion_index": 1.585701333342228e-07,
+          "full_cohesion_index": 4.0387075768552635e-08
+        },
+        "identity_tension": {
+          "tribal_dominance": 0.3307263652831284,
+          "individual_dignity": 0.8155553860764605,
+          "fear": 0.3082353393641024,
+          "hope": 0.5990041207574133,
+          "envy": 0.001334629907920161,
+          "compersion": 0.0957187934629111,
+          "enmity": 0.0870212952015186,
+          "amity": 0.8029821134246131,
+          "fragmentative_goals": 0.09826712981914394,
+          "cohesive_goals": 0.5436329424863521,
+          "identity_tension": 0.0,
+          "emotional_tension": 0.029529421580691377,
+          "success_tension": NaN,
+          "relational_tension": 6.989724613002841e-07,
+          "goal_tension": 2.2564499629473246e-07,
+          "emotional_cohesion_component": 0.743542475589819,
+          "success_cohesion_component": 0.0032448573337538894,
+          "relational_cohesion_component": 0.14722111294489235,
+          "goal_cohesion_component": 0.15175769680305928,
+          "identity_cohesion_component": 0.14360996574500526,
+          "descriptive_salience_total": 0.02167842089491606,
+          "motivational_salience_total": 0.00656255518953015,
+          "full_salience_total": 0.0008949346775559872,
+          "strategic_contradiction_index": 3.9880159960532656e-07,
+          "descriptive_cohesion_index": 0.2948192649871437,
+          "motivational_cohesion_index": 0.30721794755905135,
+          "full_cohesion_index": 0.289839857806117
+        },
+        "emotional_tension": {
+          "tribal_dominance": 0.128266260606829,
+          "individual_dignity": 0.006553308818972235,
+          "fear": 0.12641951670153528,
+          "hope": 0.0012245195105939019,
+          "envy": 0.017484734800339456,
+          "compersion": 0.4671920395066045,
+          "enmity": 0.6331607976373017,
+          "amity": 0.00019038796652942258,
+          "fragmentative_goals": 0.4703084888761346,
+          "cohesive_goals": 0.026926844260842915,
+          "identity_tension": 0.029529421580691377,
+          "emotional_tension": 0.0,
+          "success_tension": NaN,
+          "relational_tension": 7.235888032986533e-05,
+          "goal_tension": 0.006404135204818695,
+          "emotional_cohesion_component": 0.05950210791605004,
+          "success_cohesion_component": 0.2567646158348354,
+          "relational_cohesion_component": 0.11922995367534393,
+          "goal_cohesion_component": 0.31904180065558774,
+          "identity_cohesion_component": 0.06646210036353148,
+          "descriptive_salience_total": 1.918759315493045e-06,
+          "motivational_salience_total": 3.6474679212839723e-06,
+          "full_salience_total": 1.920220639392104e-05,
+          "strategic_contradiction_index": 0.00011650708035472408,
+          "descriptive_cohesion_index": 0.10010740651292067,
+          "motivational_cohesion_index": 0.10187577966040506,
+          "full_cohesion_index": 0.07211720519590348
+        },
+        "success_tension": {
+          "tribal_dominance": NaN,
+          "individual_dignity": NaN,
+          "fear": NaN,
+          "hope": NaN,
+          "envy": NaN,
+          "compersion": NaN,
+          "enmity": NaN,
+          "amity": NaN,
+          "fragmentative_goals": NaN,
+          "cohesive_goals": NaN,
+          "identity_tension": NaN,
+          "emotional_tension": NaN,
+          "success_tension": 0.0,
+          "relational_tension": NaN,
+          "goal_tension": NaN,
+          "emotional_cohesion_component": NaN,
+          "success_cohesion_component": NaN,
+          "relational_cohesion_component": NaN,
+          "goal_cohesion_component": NaN,
+          "identity_cohesion_component": NaN,
+          "descriptive_salience_total": NaN,
+          "motivational_salience_total": NaN,
+          "full_salience_total": NaN,
+          "strategic_contradiction_index": NaN,
+          "descriptive_cohesion_index": NaN,
+          "motivational_cohesion_index": NaN,
+          "full_cohesion_index": NaN
+        },
+        "relational_tension": {
+          "tribal_dominance": 0.9996227237911175,
+          "individual_dignity": 0.3760132109127542,
+          "fear": 0.9088374158036867,
+          "hope": 0.06527127237591875,
+          "envy": 0.0009060446047457469,
+          "compersion": 0.5193515945354166,
+          "enmity": 0.4439559965727101,
+          "amity": 0.11097129938584016,
+          "fragmentative_goals": 0.5222612558685473,
+          "cohesive_goals": 0.5570891475641122,
+          "identity_tension": 6.989724613002841e-07,
+          "emotional_tension": 7.235888032986533e-05,
+          "success_tension": NaN,
+          "relational_tension": 0.0,
+          "goal_tension": 6.532299460038134e-07,
+          "emotional_cohesion_component": 0.461964438813979,
+          "success_cohesion_component": 0.018273024082347922,
+          "relational_cohesion_component": 0.8513752598817812,
+          "goal_cohesion_component": 0.6656762642270249,
+          "identity_cohesion_component": 0.838663439168118,
+          "descriptive_salience_total": 0.00020398085747502583,
+          "motivational_salience_total": 3.737733200393966e-05,
+          "full_salience_total": 4.286628954698236e-06,
+          "strategic_contradiction_index": 2.380155301117397e-14,
+          "descriptive_cohesion_index": 0.8967728496581956,
+          "motivational_cohesion_index": 0.8942559597169474,
+          "full_cohesion_index": 0.8827606855325846
+        },
+        "goal_tension": {
+          "tribal_dominance": 0.3419405440102533,
+          "individual_dignity": 0.947563618171066,
+          "fear": 0.18170708251902606,
+          "hope": 0.6072108031134154,
+          "envy": 3.605563209739114e-07,
+          "compersion": 0.030517996291569788,
+          "enmity": 0.02097715348020628,
+          "amity": 0.5984225721010696,
+          "fragmentative_goals": 0.03190355740162262,
+          "cohesive_goals": 0.5019709388693494,
+          "identity_tension": 2.2564499629473246e-07,
+          "emotional_tension": 0.006404135204818695,
+          "success_tension": NaN,
+          "relational_tension": 6.532299460038134e-07,
+          "goal_tension": 0.0,
+          "emotional_cohesion_component": 0.4610730062890862,
+          "success_cohesion_component": 2.706704930505827e-05,
+          "relational_cohesion_component": 0.12068516438024457,
+          "goal_cohesion_component": 0.05751522141869805,
+          "identity_cohesion_component": 0.28107288544638553,
+          "descriptive_salience_total": 0.0007310973844819085,
+          "motivational_salience_total": 0.00012393870777717043,
+          "full_salience_total": 1.5928880243789412e-05,
+          "strategic_contradiction_index": 1.375632015244122e-08,
+          "descriptive_cohesion_index": 0.19773790104212782,
+          "motivational_cohesion_index": 0.19628001791356592,
+          "full_cohesion_index": 0.222125634056168
+        },
+        "emotional_cohesion_component": {
+          "tribal_dominance": 0.0038816295947987213,
+          "individual_dignity": 0.010974201704171975,
+          "fear": 2.5710785248452237e-10,
+          "hope": 1.661392272666336e-05,
+          "envy": 0.1301665757767378,
+          "compersion": 3.685907664887489e-07,
+          "enmity": 1.2186105031552285e-06,
+          "amity": 0.0009410638178762005,
+          "fragmentative_goals": 6.268020348314158e-07,
+          "cohesive_goals": 4.543908553041702e-06,
+          "identity_tension": 0.743542475589819,
+          "emotional_tension": 0.05950210791605004,
+          "success_tension": NaN,
+          "relational_tension": 0.461964438813979,
+          "goal_tension": 0.4610730062890862,
+          "emotional_cohesion_component": 0.0,
+          "success_cohesion_component": 0.006087446222125938,
+          "relational_cohesion_component": 1.1077748061953115e-06,
+          "goal_cohesion_component": 1.2685193390178946e-06,
+          "identity_cohesion_component": 0.008041711559296135,
+          "descriptive_salience_total": 0.38827785439863394,
+          "motivational_salience_total": 0.5004047425256173,
+          "full_salience_total": 0.6192086396726961,
+          "strategic_contradiction_index": 0.7209870094903807,
+          "descriptive_cohesion_index": 1.0407741325373473e-09,
+          "motivational_cohesion_index": 1.641605746923262e-09,
+          "full_cohesion_index": 9.901257031934134e-08
+        },
+        "success_cohesion_component": {
+          "tribal_dominance": 0.03779030668337769,
+          "individual_dignity": 0.3134207163863886,
+          "fear": 0.001007688135071801,
+          "hope": 0.2814317778100822,
+          "envy": 4.1033979636332455e-08,
+          "compersion": 9.714133838384191e-06,
+          "enmity": 3.482465228219356e-06,
+          "amity": 0.39847951449896674,
+          "fragmentative_goals": 1.3216239192948663e-05,
+          "cohesive_goals": 0.02389813916421455,
+          "identity_tension": 0.0032448573337538894,
+          "emotional_tension": 0.2567646158348354,
+          "success_tension": NaN,
+          "relational_tension": 0.018273024082347922,
+          "goal_tension": 2.706704930505827e-05,
+          "emotional_cohesion_component": 0.006087446222125938,
+          "success_cohesion_component": 0.0,
+          "relational_cohesion_component": 0.0012836000890104832,
+          "goal_cohesion_component": 7.018473396793728e-05,
+          "identity_cohesion_component": 0.05745914560954007,
+          "descriptive_salience_total": 0.044501472737541424,
+          "motivational_salience_total": 0.022393034975416167,
+          "full_salience_total": 0.014088592595489714,
+          "strategic_contradiction_index": 0.004917517308812844,
+          "descriptive_cohesion_index": 0.0014241089033420354,
+          "motivational_cohesion_index": 0.0012957053705403786,
+          "full_cohesion_index": 0.0027542602341933333
+        },
+        "relational_cohesion_component": {
+          "tribal_dominance": 0.0001263981531124347,
+          "individual_dignity": 0.0005185234390072503,
+          "fear": 1.4560987943012194e-09,
+          "hope": 0.0007833599075925668,
+          "envy": 0.06268060217294352,
+          "compersion": 8.024262620276985e-09,
+          "enmity": 6.69061696262337e-07,
+          "amity": 0.00015805725993832146,
+          "fragmentative_goals": 2.06759510964769e-08,
+          "cohesive_goals": 2.967549720731674e-07,
+          "identity_tension": 0.14722111294489235,
+          "emotional_tension": 0.11922995367534393,
+          "success_tension": NaN,
+          "relational_tension": 0.8513752598817812,
+          "goal_tension": 0.12068516438024457,
+          "emotional_cohesion_component": 1.1077748061953115e-06,
+          "success_cohesion_component": 0.0012836000890104832,
+          "relational_cohesion_component": 0.0,
+          "goal_cohesion_component": 5.559885612887874e-10,
+          "identity_cohesion_component": 9.784153393779995e-06,
+          "descriptive_salience_total": 0.52677081231067,
+          "motivational_salience_total": 0.724600178661062,
+          "full_salience_total": 0.9364749319020194,
+          "strategic_contradiction_index": 0.6399080132152579,
+          "descriptive_cohesion_index": 1.4559840032678472e-11,
+          "motivational_cohesion_index": 9.02389742363667e-12,
+          "full_cohesion_index": 8.972040993436557e-14
+        },
+        "goal_cohesion_component": {
+          "tribal_dominance": 0.00025215742232209394,
+          "individual_dignity": 0.002741733438122341,
+          "fear": 6.495312543226689e-09,
+          "hope": 0.0046287884804637365,
+          "envy": 0.01125970601107063,
+          "compersion": 8.584162112190855e-12,
+          "enmity": 1.157540178111582e-08,
+          "amity": 0.001992367586287087,
+          "fragmentative_goals": 9.251256725571402e-11,
+          "cohesive_goals": 5.398688258765097e-06,
+          "identity_tension": 0.15175769680305928,
+          "emotional_tension": 0.31904180065558774,
+          "success_tension": NaN,
+          "relational_tension": 0.6656762642270249,
+          "goal_tension": 0.05751522141869805,
+          "emotional_cohesion_component": 1.2685193390178946e-06,
+          "success_cohesion_component": 7.018473396793728e-05,
+          "relational_cohesion_component": 5.559885612887874e-10,
+          "goal_cohesion_component": 0.0,
+          "identity_cohesion_component": 0.0002077961670154429,
+          "descriptive_salience_total": 0.9611565531021427,
+          "motivational_salience_total": 0.8589405409028292,
+          "full_salience_total": 0.7454075098880832,
+          "strategic_contradiction_index": 0.44958971099651235,
+          "descriptive_cohesion_index": 1.2856553827293045e-09,
+          "motivational_cohesion_index": 2.47626565894519e-10,
+          "full_cohesion_index": 7.940218700073912e-10
+        },
+        "identity_cohesion_component": {
+          "tribal_dominance": 2.7620183921209666e-05,
+          "individual_dignity": 2.621736471722861e-07,
+          "fear": 0.0010696864187447366,
+          "hope": 0.025794081617176758,
+          "envy": 0.3705392330608608,
+          "compersion": 0.0013614474911046062,
+          "enmity": 0.007104894463517706,
+          "amity": 1.2246258655944412e-05,
+          "fragmentative_goals": 0.0015243053371822466,
+          "cohesive_goals": 7.33814355761119e-05,
+          "identity_tension": 0.14360996574500526,
+          "emotional_tension": 0.06646210036353148,
+          "success_tension": NaN,
+          "relational_tension": 0.838663439168118,
+          "goal_tension": 0.28107288544638553,
+          "emotional_cohesion_component": 0.008041711559296135,
+          "success_cohesion_component": 0.05745914560954007,
+          "relational_cohesion_component": 9.784153393779995e-06,
+          "goal_cohesion_component": 0.0002077961670154429,
+          "identity_cohesion_component": 0.0,
+          "descriptive_salience_total": 0.1973344298213163,
+          "motivational_salience_total": 0.32193429678911883,
+          "full_salience_total": 0.4756552402892685,
+          "strategic_contradiction_index": 0.7719411863875463,
+          "descriptive_cohesion_index": 0.0002529684300979026,
+          "motivational_cohesion_index": 0.000204806436861206,
+          "full_cohesion_index": 1.8638245647097536e-05
+        },
+        "descriptive_salience_total": {
+          "tribal_dominance": 0.30060829578943865,
+          "individual_dignity": 0.019299027575283272,
+          "fear": 0.5757941415688841,
+          "hope": 0.03700845757828007,
+          "envy": 0.0010875094410293363,
+          "compersion": 0.8661208831450764,
+          "enmity": 0.6526039636836144,
+          "amity": 0.003546668926317657,
+          "fragmentative_goals": 0.8670302601347388,
+          "cohesive_goals": 0.17373567070546025,
+          "identity_tension": 0.02167842089491606,
+          "emotional_tension": 1.918759315493045e-06,
+          "success_tension": NaN,
+          "relational_tension": 0.00020398085747502583,
+          "goal_tension": 0.0007310973844819085,
+          "emotional_cohesion_component": 0.38827785439863394,
+          "success_cohesion_component": 0.044501472737541424,
+          "relational_cohesion_component": 0.52677081231067,
+          "goal_cohesion_component": 0.9611565531021427,
+          "identity_cohesion_component": 0.1973344298213163,
+          "descriptive_salience_total": 0.0,
+          "motivational_salience_total": 8.943346484992402e-15,
+          "full_salience_total": 3.992342539896167e-09,
+          "strategic_contradiction_index": 0.00010167663725164604,
+          "descriptive_cohesion_index": 0.464133311523408,
+          "motivational_cohesion_index": 0.4815228895590061,
+          "full_cohesion_index": 0.37465988666698313
+        },
+        "motivational_salience_total": {
+          "tribal_dominance": 0.4156670528386951,
+          "individual_dignity": 0.037071456408492735,
+          "fear": 0.7462402024654058,
+          "hope": 0.05883926752552971,
+          "envy": 0.0003799260860162722,
+          "compersion": 0.6808466490153866,
+          "enmity": 0.4935072477401117,
+          "amity": 0.00868235285513748,
+          "fragmentative_goals": 0.6829262833580267,
+          "cohesive_goals": 0.26413368804954546,
+          "identity_tension": 0.00656255518953015,
+          "emotional_tension": 3.6474679212839723e-06,
+          "success_tension": NaN,
+          "relational_tension": 3.737733200393966e-05,
+          "goal_tension": 0.00012393870777717043,
+          "emotional_cohesion_component": 0.5004047425256173,
+          "success_cohesion_component": 0.022393034975416167,
+          "relational_cohesion_component": 0.724600178661062,
+          "goal_cohesion_component": 0.8589405409028292,
+          "identity_cohesion_component": 0.32193429678911883,
+          "descriptive_salience_total": 8.943346484992402e-15,
+          "motivational_salience_total": 0.0,
+          "full_salience_total": 7.928337328408727e-12,
+          "strategic_contradiction_index": 1.3121620574942464e-05,
+          "descriptive_cohesion_index": 0.6315895656058814,
+          "motivational_cohesion_index": 0.6462580335342205,
+          "full_cohesion_index": 0.5291947092075581
+        },
+        "full_salience_total": {
+          "tribal_dominance": 0.5068887661158635,
+          "individual_dignity": 0.05721907400855047,
+          "fear": 0.924794955889221,
+          "hope": 0.10929404333955287,
+          "envy": 0.0002923600968943698,
+          "compersion": 0.5396528168167054,
+          "enmity": 0.37498717388189107,
+          "amity": 0.018964579132635925,
+          "fragmentative_goals": 0.542472532481224,
+          "cohesive_goals": 0.37319449137266325,
+          "identity_tension": 0.0008949346775559872,
+          "emotional_tension": 1.920220639392104e-05,
+          "success_tension": NaN,
+          "relational_tension": 4.286628954698236e-06,
+          "goal_tension": 1.5928880243789412e-05,
+          "emotional_cohesion_component": 0.6192086396726961,
+          "success_cohesion_component": 0.014088592595489714,
+          "relational_cohesion_component": 0.9364749319020194,
+          "goal_cohesion_component": 0.7454075098880832,
+          "identity_cohesion_component": 0.4756552402892685,
+          "descriptive_salience_total": 3.992342539896167e-09,
+          "motivational_salience_total": 7.928337328408727e-12,
+          "full_salience_total": 0.0,
+          "strategic_contradiction_index": 9.017704403435014e-07,
+          "descriptive_cohesion_index": 0.8115259026040476,
+          "motivational_cohesion_index": 0.8115625452408084,
+          "full_cohesion_index": 0.6913448744302946
+        },
+        "strategic_contradiction_index": {
+          "tribal_dominance": 0.8805413810146122,
+          "individual_dignity": 0.4138252153800581,
+          "fear": 0.8181000348633127,
+          "hope": 0.12865711643674474,
+          "envy": 0.00012106163664044788,
+          "compersion": 0.31611126983080357,
+          "enmity": 0.250854271178647,
+          "amity": 0.14842445733373294,
+          "fragmentative_goals": 0.3195640351516655,
+          "cohesive_goals": 0.7422199707067307,
+          "identity_tension": 3.9880159960532656e-07,
+          "emotional_tension": 0.00011650708035472408,
+          "success_tension": NaN,
+          "relational_tension": 2.380155301117397e-14,
+          "goal_tension": 1.375632015244122e-08,
+          "emotional_cohesion_component": 0.7209870094903807,
+          "success_cohesion_component": 0.004917517308812844,
+          "relational_cohesion_component": 0.6399080132152579,
+          "goal_cohesion_component": 0.44958971099651235,
+          "identity_cohesion_component": 0.7719411863875463,
+          "descriptive_salience_total": 0.00010167663725164604,
+          "motivational_salience_total": 1.3121620574942464e-05,
+          "full_salience_total": 9.017704403435014e-07,
+          "strategic_contradiction_index": 0.0,
+          "descriptive_cohesion_index": 0.8457798233264369,
+          "motivational_cohesion_index": 0.8488194744450515,
+          "full_cohesion_index": 0.8872294857809564
+        },
+        "descriptive_cohesion_index": {
+          "tribal_dominance": 0.0003448421381260793,
+          "individual_dignity": 0.0014719968896885535,
+          "fear": 2.1113202989470952e-13,
+          "hope": 0.0001766745221133165,
+          "envy": 0.06747335061372058,
+          "compersion": 7.981059552029105e-10,
+          "enmity": 8.999057531799181e-08,
+          "amity": 0.000225416107540956,
+          "fragmentative_goals": 2.961039865353919e-09,
+          "cohesive_goals": 1.8328864768213018e-07,
+          "identity_tension": 0.2948192649871437,
+          "emotional_tension": 0.10010740651292067,
+          "success_tension": NaN,
+          "relational_tension": 0.8967728496581956,
+          "goal_tension": 0.19773790104212782,
+          "emotional_cohesion_component": 1.0407741325373473e-09,
+          "success_cohesion_component": 0.0014241089033420354,
+          "relational_cohesion_component": 1.4559840032678472e-11,
+          "goal_cohesion_component": 1.2856553827293045e-09,
+          "identity_cohesion_component": 0.0002529684300979026,
+          "descriptive_salience_total": 0.464133311523408,
+          "motivational_salience_total": 0.6315895656058814,
+          "full_salience_total": 0.8115259026040476,
+          "strategic_contradiction_index": 0.8457798233264369,
+          "descriptive_cohesion_index": 0.0,
+          "motivational_cohesion_index": 4.9619550679253695e-21,
+          "full_cohesion_index": 9.728604085592606e-14
+        },
+        "motivational_cohesion_index": {
+          "tribal_dominance": 0.0002677964960173649,
+          "individual_dignity": 0.001188984604881073,
+          "fear": 5.728499735919905e-13,
+          "hope": 0.00023499722497919746,
+          "envy": 0.06358959744458932,
+          "compersion": 5.626654676167578e-10,
+          "enmity": 9.089836394644564e-08,
+          "amity": 0.0002050401836356454,
+          "fragmentative_goals": 2.226539768743209e-09,
+          "cohesive_goals": 1.585701333342228e-07,
+          "identity_tension": 0.30721794755905135,
+          "emotional_tension": 0.10187577966040506,
+          "success_tension": NaN,
+          "relational_tension": 0.8942559597169474,
+          "goal_tension": 0.19628001791356592,
+          "emotional_cohesion_component": 1.641605746923262e-09,
+          "success_cohesion_component": 0.0012957053705403786,
+          "relational_cohesion_component": 9.02389742363667e-12,
+          "goal_cohesion_component": 2.47626565894519e-10,
+          "identity_cohesion_component": 0.000204806436861206,
+          "descriptive_salience_total": 0.4815228895590061,
+          "motivational_salience_total": 0.6462580335342205,
+          "full_salience_total": 0.8115625452408084,
+          "strategic_contradiction_index": 0.8488194744450515,
+          "descriptive_cohesion_index": 4.9619550679253695e-21,
+          "motivational_cohesion_index": 0.0,
+          "full_cohesion_index": 1.3090754133410592e-14
+        },
+        "full_cohesion_index": {
+          "tribal_dominance": 7.442596010784327e-05,
+          "individual_dignity": 0.00019810683717911241,
+          "fear": 3.312822867313834e-10,
+          "hope": 0.00035573725385071114,
+          "envy": 0.09578380389605792,
+          "compersion": 1.6558092868138422e-08,
+          "enmity": 1.3597729000764488e-06,
+          "amity": 3.6960505140316734e-05,
+          "fragmentative_goals": 3.88049622828141e-08,
+          "cohesive_goals": 4.0387075768552635e-08,
+          "identity_tension": 0.289839857806117,
+          "emotional_tension": 0.07211720519590348,
+          "success_tension": NaN,
+          "relational_tension": 0.8827606855325846,
+          "goal_tension": 0.222125634056168,
+          "emotional_cohesion_component": 9.901257031934134e-08,
+          "success_cohesion_component": 0.0027542602341933333,
+          "relational_cohesion_component": 8.972040993436557e-14,
+          "goal_cohesion_component": 7.940218700073912e-10,
+          "identity_cohesion_component": 1.8638245647097536e-05,
+          "descriptive_salience_total": 0.37465988666698313,
+          "motivational_salience_total": 0.5291947092075581,
+          "full_salience_total": 0.6913448744302946,
+          "strategic_contradiction_index": 0.8872294857809564,
+          "descriptive_cohesion_index": 9.728604085592606e-14,
+          "motivational_cohesion_index": 1.3090754133410592e-14,
+          "full_cohesion_index": 0.0
+        }
+      }
+    },
+    "reliability_analysis": {
+      "overall_cronbach_alpha": -0.1505469593926392,
+      "subscale_cronbach_alpha": {
+        "identity": -10.460048426150127,
+        "emotion": -1.8468822027035448,
+        "relational": -2.5654761904761907,
+        "goal": -10.223880597014926
+      }
+    },
+    "significance_testing": {
+      "one_sample_t_tests": {
+        "tribal_dominance": {
+          "t_statistic": 0.04179644542317597,
+          "p_value": 0.967828156442204,
+          "cohens_d_effect_size": 0.014777274994110584
+        },
+        "individual_dignity": {
+          "t_statistic": -0.3474041668898255,
+          "p_value": 0.7384988411975196,
+          "cohens_d_effect_size": -0.12282592111012934
+        },
+        "fear": {
+          "t_statistic": 1.5977410266354484,
+          "p_value": 0.154132444777802,
+          "cohens_d_effect_size": 0.5648867572569408
+        },
+        "hope": {
+          "t_statistic": -0.8007006277798857,
+          "p_value": 0.44962263288468374,
+          "cohens_d_effect_size": -0.28309042180174143
+        },
+        "envy": {
+          "t_statistic": 0.0,
+          "p_value": 1.0,
+          "cohens_d_effect_size": 0.0
+        },
+        "compersion": {
+          "t_statistic": -1.8669752831301571,
+          "p_value": 0.10413940835513369,
+          "cohens_d_effect_size": -0.6600754415045043
+        },
+        "enmity": {
+          "t_statistic": 1.4405203276001517,
+          "p_value": 0.19290910749150564,
+          "cohens_d_effect_size": 0.5093008460415671
+        },
+        "amity": {
+          "t_statistic": 0.09503819266229882,
+          "p_value": 0.9269478706828744,
+          "cohens_d_effect_size": 0.03360107525161253
+        },
+        "fragmentative_goals": {
+          "t_statistic": 0.9816287456628994,
+          "p_value": 0.35898480405101124,
+          "cohens_d_effect_size": 0.3470581713329405
+        },
+        "cohesive_goals": {
+          "t_statistic": -0.8643121965600912,
+          "p_value": 0.41604858168736847,
+          "cohens_d_effect_size": -0.30558050762494027
+        },
+        "identity_tension": {
+          "t_statistic": 1.9743050776156752,
+          "p_value": 0.08892516336591248,
+          "cohens_d_effect_size": 0.6980222542565385
+        },
+        "emotional_tension": {
+          "t_statistic": 4.488193945462511,
+          "p_value": 0.0028382238121523588,
+          "cohens_d_effect_size": 1.5868161870584734
+        },
+        "relational_tension": {
+          "t_statistic": 3.4688748002963887,
+          "p_value": 0.010421726044216578,
+          "cohens_d_effect_size": 1.2264324471883536
+        },
+        "goal_tension": {
+          "t_statistic": 2.4785122389207275,
+          "p_value": 0.04230218983564892,
+          "cohens_d_effect_size": 0.8762864056973496
+        },
+        "emotional_cohesion_component": {
+          "t_statistic": -1.3653779958020513,
+          "p_value": 0.21438903239335824,
+          "cohens_d_effect_size": -0.482734019857264
+        },
+        "success_cohesion_component": {
+          "t_statistic": -0.8553081063658375,
+          "p_value": 0.42068852027701664,
+          "cohens_d_effect_size": -0.30239708100755425
+        },
+        "relational_cohesion_component": {
+          "t_statistic": -0.9244851229563331,
+          "p_value": 0.38599411406000794,
+          "cohens_d_effect_size": -0.32685484977425117
+        },
+        "goal_cohesion_component": {
+          "t_statistic": -1.1058896158817568,
+          "p_value": 0.3053272572176774,
+          "cohens_d_effect_size": -0.39099102331688823
+        },
+        "identity_cohesion_component": {
+          "t_statistic": -0.44215135110379516,
+          "p_value": 0.6717178699009334,
+          "cohens_d_effect_size": -0.15632410933814384
+        },
+        "descriptive_salience_total": {
+          "t_statistic": 11.321133105779902,
+          "p_value": 9.38984204984243e-06,
+          "cohens_d_effect_size": 4.0026249949062445
+        },
+        "motivational_salience_total": {
+          "t_statistic": 12.098516330674395,
+          "p_value": 6.018702912569943e-06,
+          "cohens_d_effect_size": 4.277471469858026
+        },
+        "full_salience_total": {
+          "t_statistic": 12.719626629812321,
+          "p_value": 4.297349562025258e-06,
+          "cohens_d_effect_size": 4.497067122050642
+        },
+        "strategic_contradiction_index": {
+          "t_statistic": 3.3453787784343203,
+          "p_value": 0.01232850732664115,
+          "cohens_d_effect_size": 1.1827700099342382
+        },
+        "descriptive_cohesion_index": {
+          "t_statistic": -1.1592181472931715,
+          "p_value": 0.2843775984983838,
+          "cohens_d_effect_size": -0.40984550641275375
+        },
+        "motivational_cohesion_index": {
+          "t_statistic": -1.105204621956799,
+          "p_value": 0.3056043342608134,
+          "cohens_d_effect_size": -0.3907488413921837
+        },
+        "full_cohesion_index": {
+          "t_statistic": -0.9786501569450474,
+          "p_value": 0.3603559528910616,
+          "cohens_d_effect_size": -0.346005081192561
+        }
+      }
+    }
+  }
+}

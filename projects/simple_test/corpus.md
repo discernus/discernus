@@ -23,28 +23,28 @@ total_documents: 4
 date_range: "2008-2025"
 
 documents:
-  - filename: "john_mccain_2008_concession.txt"
+  - filename: "john_mccain_2008_concession_ff9b26f2.txt"
     document_id: "mccain_2008_concession"
     metadata:
       speaker: "John McCain"
       year: 2008
       party: "Republican"
       style: "institutional"
-  - filename: "steve_king_2017_house_floor.txt"
+  - filename: "steve_king_2017_house_floor_738780d9.txt"
     document_id: "king_2017_house_floor"
     metadata:
       speaker: "Steve King"
       year: 2017
       party: "Republican"
       style: "populist_conservative"
-  - filename: "bernie_sanders_2025_fighting_oligarchy.txt"
+  - filename: "bernie_sanders_2025_fighting_oligarchy_261b893a.txt"
     document_id: "sanders_2025_oligarchy"
     metadata:
       speaker: "Bernie Sanders"
       year: 2025
       party: "Independent"
       style: "populist_progressive"
-  - filename: "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt"
+  - filename: "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt"
     document_id: "aoc_2025_oligarchy"
     metadata:
       speaker: "Alexandria Ocasio-Cortez"
