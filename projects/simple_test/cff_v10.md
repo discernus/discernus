@@ -19,33 +19,132 @@ This framework is designed for researchers, policymakers, and civic leaders who 
 
 The CFF is grounded in a multi-disciplinary body of research from social psychology, political communication, and conflict resolution theory. Its core innovation—the independent scoring of opposing conceptual anchors—is a direct response to the information loss problem observed in traditional valence-based content analysis.
 
--   **Social Psychology**: The framework's dimensions are informed by research on in-group/out-group dynamics, threat perception, and social identity theory.
--   **Political Communication**: The methodology leverages insights into rhetorical strategies that build or undermine democratic engagement and social capital. (See, for example, the work of K. H. Jamieson on political rhetoric).
--   **Empirical Justification for Salience**: The use of salience-weighting is empirically grounded. A meta-analysis of 10 comprehensive studies demonstrated that static, predetermined weights for analytical dimensions have zero empirical support, whereas weighting based on the speaker's actual rhetorical emphasis provides a defensible and context-aware methodology.
+#### **Social Identity Theory Foundation**
+
+The framework's identity dimensions (Tribal Dominance vs. Individual Dignity) are grounded in Social Identity Theory (Tajfel & Turner, 1979), which demonstrates how group membership affects intergroup behavior and attitudes. Research shows that in-group favoritism and out-group derogation are fundamental processes in social categorization (Brewer, 1999). The framework's approach to measuring group supremacy rhetoric builds on work by Sidanius & Pratto (1999) on Social Dominance Theory, which explains how societies maintain group-based hierarchies.
+
+**Key Citations**:
+- Tajfel, H., & Turner, J. C. (1979). An integrative theory of intergroup conflict. In W. G. Austin & S. Worchel (Eds.), *The social psychology of intergroup relations* (pp. 33-47). Brooks/Cole.
+- Brewer, M. B. (1999). The psychology of prejudice: Ingroup love and outgroup hate? *Journal of Social Issues*, 55(3), 429-444.
+- Sidanius, J., & Pratto, F. (1999). *Social dominance: An intergroup theory of social hierarchy and oppression*. Cambridge University Press.
+
+#### **Political Communication Research**
+
+The framework's approach to emotional climate analysis (Fear vs. Hope) draws from extensive research on emotional appeals in political discourse. Brader (2006) demonstrated that emotional appeals significantly influence political behavior and decision-making. The framework's emphasis on preserving complex emotional information addresses limitations identified by Marcus et al. (2000) in their Affective Intelligence Theory.
+
+The relational dimensions (Enmity vs. Amity) are informed by research on political polarization and democratic discourse. Jamieson & Cappella (2008) showed how media discourse patterns can increase political polarization, while Gutmann & Thompson (1996) outlined conditions for constructive democratic deliberation.
+
+**Key Citations**:
+- Brader, T. (2006). *Campaigning for hearts and minds: How emotional appeals in political ads work*. University of Chicago Press.
+- Marcus, G. E., Neuman, W. R., & MacKuen, M. (2000). *Affective intelligence and political judgment*. University of Chicago Press.
+- Jamieson, K. H., & Cappella, J. N. (2008). *Echo chamber: Rush Limbaugh and the conservative media establishment*. Oxford University Press.
+- Gutmann, A., & Thompson, D. (1996). *Democracy and disagreement*. Harvard University Press.
+
+#### **Discourse Analysis Methodology**
+
+The framework's independent scoring approach addresses the "information loss problem" identified in traditional valence-based content analysis. Krippendorff (2004) emphasized the importance of preserving analytical complexity rather than forcing artificial binary classifications. The salience-weighting methodology builds on work by van Dijk (2008) on critical discourse analysis, which emphasizes the importance of rhetorical emphasis and structural positioning in meaning construction.
+
+**Key Citations**:
+- Krippendorff, K. (2004). *Content analysis: An introduction to its methodology* (2nd ed.). Sage Publications.
+- van Dijk, T. A. (2008). *Discourse and power*. Palgrave Macmillan.
+
+#### **Empirical Justification for Salience Weighting**
+
+The use of salience-weighting is empirically grounded in research demonstrating that static, predetermined weights for analytical dimensions lack empirical support. Studies in computational linguistics (Pang & Lee, 2008) and political communication (Laver et al., 2003) have shown that context-dependent weighting based on textual emphasis patterns provides more accurate and reliable results than fixed weighting schemes.
+
+**Key Citations**:
+- Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. *Foundations and Trends in Information Retrieval*, 2(1-2), 1-135.
+- Laver, M., Benoit, K., & Garry, J. (2003). Extracting policy positions from political texts using words as data. *American Political Science Review*, 97(2), 311-331.
+
+#### **Democratic Health and Social Cohesion**
+
+The framework's focus on democratic health builds on Putnam's (2000) work on social capital and civic engagement, which demonstrated the relationship between discourse patterns and community cohesion. The normative layers approach draws from deliberative democracy theory (Habermas, 1996), which provides criteria for evaluating the quality of democratic discourse.
+
+**Key Citations**:
+- Putnam, R. D. (2000). *Bowling alone: The collapse and revival of American community*. Simon & Schuster.
+- Habermas, J. (1996). *Between facts and norms: Contributions to a discourse theory of law and democracy*. MIT Press.
 
 ### Section 3: Analytical Methodology
 
-CFF employs a multi-layered analytical approach.
+CFF employs a multi-layered analytical approach with transparent normative layering.
 
--   **Dimensions**: The framework scores ten conceptual anchors independently on a 0.0 to 1.0 scale, organized into five opposing pairs:
-    -   **Identity**: Tribal Dominance vs. Individual Dignity
-    -   **Emotional Climate**: Fear vs. Hope
-    -   **Success Orientation**: Envy vs. Compersion
-    -   **Relational Climate**: Enmity vs. Amity
-    -   **Goal Orientation**: Fragmentative Goals vs. Cohesive Goals
+**Dimensions**: The framework scores ten conceptual anchors independently on a 0.0 to 1.0 scale, organized into five opposing pairs:
 
--   **Advanced Concepts**:
-    -   **Salience vs. Intensity**: A critical distinction is made between a dimension's *intensity* (its raw 0.0-1.0 score) and its *salience* (its rhetorical prominence or emphasis within the text, also scored 0.0-1.0). This dual-track analysis reveals not just *what* is being said, but *how much emphasis* it receives.
-    -   **Rhetorical Tension**: The framework calculates the strategic tension between opposing pairs to measure the coherence of the discourse. The formula `Tension = min(Score_A, Score_B) × |Salience_A - Salience_B|` quantifies contradictions where a speaker employs competing appeals.
+**Identity Axis**: 
+-   **Tribal Dominance** (0.0-1.0): In-group supremacy, exclusionary identity patterns, "us versus them" rhetoric
+-   **Individual Dignity** (0.0-1.0): Universal human worth, inclusive recognition, equal treatment emphasis
 
--   **Derived & Composite Metrics**:
-    -   **Tension Indices**: Each dimensional pair has a tension score. The average of these is the **Strategic Contradiction Index**, which measures overall rhetorical coherence.
-    -   **Salience-Weighted Cohesion Index**: A comprehensive index that measures the discourse's contribution to social cohesion. It is calculated by weighting each dimension's score by its salience, providing an empirically defensible measure of the text's overall impact.
+**Emotional Climate**:
+-   **Fear** (0.0-1.0): Crisis mentality, existential threat perception, vulnerability emphasis
+-   **Hope** (0.0-1.0): Progress orientation, optimistic collective vision, opportunity language
+
+**Success Orientation**:
+-   **Envy** (0.0-1.0): Resentment toward others' success, zero-sum thinking, grievance rhetoric
+-   **Compersion** (0.0-1.0): Joy from others' success, abundance mindset, merit celebration
+
+**Relational Climate**:
+-   **Enmity** (0.0-1.0): Hostility, adversarial positioning, conflict emphasis
+-   **Amity** (0.0-1.0): Friendship appeals, cooperative framing, unity language
+
+**Goal Orientation**:
+-   **Fragmentative Goals** (0.0-1.0): Divisive zero-sum objectives, separation emphasis
+-   **Cohesive Goals** (0.0-1.0): Integrative positive-sum objectives, building emphasis
+
+**Advanced Concepts**:
+-   **Salience vs. Intensity**: A critical distinction is made between a dimension's *intensity* (its raw 0.0-1.0 score) and its *salience* (its rhetorical prominence or emphasis within the text, also scored 0.0-1.0). This dual-track analysis reveals not just *what* is being said, but *how much emphasis* it receives.
+-   **Rhetorical Tension**: The framework calculates the strategic tension between opposing pairs to measure the coherence of the discourse. The formula `Tension = min(Score_A, Score_B) × |Salience_A - Salience_B|` quantifies contradictions where a speaker employs competing appeals.
+
+**Three Analytical Layers with Normative Transparency**:
+
+| Layer | Focus | Key Questions | Normative Load | Applications |
+|-------|-------|---------------|----------------|--------------|
+| **1 - Pattern Recognition** | Rhetorical strategies | What rhetorical patterns are being used? How sophisticated is the messaging? | **Low** | Academic research, content analysis, baseline measurement |
+| **2 - Motivational Assessment** | Behavioral implications | What behaviors might this inspire? How will audiences likely respond? | **Moderate** | Strategic communication, audience analysis, campaign evaluation |
+| **3 - Social Health Evaluation** | Democratic impact | Does this strengthen or weaken democratic institutions? What are the social consequences? | **High** | Policy evaluation, intervention design, community health monitoring |
+
+Each layer builds on the previous one, adding interpretive depth while maintaining transparency about analytical assumptions. This normative transparency enables appropriate analytical depth selection while maintaining scholarly rigor.
+
+**Derived & Composite Metrics**:
+
+**Tension Indices** (0.0-1.0, higher = more contradiction):
+-   **Identity Tension**: Measures contradiction between tribal dominance and individual dignity appeals
+  - **Formula**: `min(tribal_dominance_score, individual_dignity_score) × |tribal_dominance_salience - individual_dignity_salience|`
+-   **Emotional Tension**: Measures contradiction between fear and hope messaging
+  - **Formula**: `min(fear_score, hope_score) × |fear_salience - hope_salience|`
+-   **Success Tension**: Measures contradiction between envy and compersion rhetoric
+  - **Formula**: `min(envy_score, compersion_score) × |envy_salience - compersion_salience|`
+-   **Relational Tension**: Measures contradiction between enmity and amity positioning
+  - **Formula**: `min(enmity_score, amity_score) × |enmity_salience - amity_salience|`
+-   **Goal Tension**: Measures contradiction between fragmentative and cohesive objectives
+  - **Formula**: `min(fragmentative_goals_score, cohesive_goals_score) × |fragmentative_goals_salience - cohesive_goals_salience|`
+
+**Strategic Contradiction Index** (0.0-1.0, higher = more incoherent):
+-   **Average of all tension indices** measuring overall rhetorical coherence
+-   **Formula**: `(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5`
+-   **Low values** indicate consistent, coherent messaging
+-   **High values** indicate strategic contradictions and mixed appeals
+
+**Salience-Weighted Cohesion Indices** (-1.0 to +1.0, negative = fragmentative, positive = cohesive):
+
+**Descriptive Cohesion Index**: Measures immediate emotional and relational climate using salience weighting. **Positive values** indicate hope, compersion, and amity emphasis; **negative values** indicate fear, envy, and enmity emphasis.
+
+**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience)` divided by the sum of all salience weights for these dimensions.
+
+**Motivational Cohesion Index**: Assesses likely behavioral consequences with salience-adjusted emphasis. **Positive values** suggest cooperative, abundance-oriented behaviors; **negative values** suggest competitive, zero-sum behaviors.
+
+**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions.
+
+**Full Cohesion Index**: Comprehensive evaluation of democratic health and social cohesion. **Positive values** indicate discourse supporting democratic institutions and social solidarity; **negative values** indicate discourse undermining democratic health and promoting fragmentation.
+
+**Formula**: `(individual_dignity_score × individual_dignity_salience - tribal_dominance_score × tribal_dominance_salience) + (hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions.
+
+**Calculation Method**: All indices use salience-weighted calculations where each dimension's score is multiplied by its rhetorical prominence (salience), ensuring that what speakers actually emphasize receives appropriate influence on the final measurement. The normalization by total salience weights ensures indices remain within the -1.0 to +1.0 range while reflecting the relative emphasis patterns in the discourse.
 
 ### Section 4: Intended Application & Corpus Fit
 
 -   **Target Corpus Description**: CFF is designed for the analysis of persuasive or strategic communication, particularly in the political and social spheres. This includes political speeches, campaign materials, policy documents, and organizational communications.
 -   **Known Limitations & Scope**: The framework is less suited for analyzing purely informational, conversational, or fictional texts. The complexity of the salience and tension assessments requires a text with sufficient length and rhetorical structure to be meaningful.
+-   **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro, Claude 3 Opus, GPT-4) for reliable analysis. The sophisticated dual-track analysis (intensity + salience), complex concept distinctions, and mathematical framework exceed the capabilities of basic or lightweight models.
 -   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
 
 ---
@@ -67,38 +166,366 @@ analysis_variants:
   default:
     description: "Complete v10.0 implementation with salience and tension analysis."
     analysis_prompt: |
-      You are an expert discourse analyst specializing in social cohesion and democratic health, grounded in political psychology. Your task is to analyze the provided text using the Cohesive Flourishing Framework v10.0.
+      You are an expert discourse analyst specializing in social cohesion and democratic health, grounded in political psychology and social identity theory. Your task is to analyze the provided text using the Cohesive Flourishing Framework v10.0.
 
+      FRAMEWORK METHODOLOGY:
+      This framework measures discourse's impact on community cohesion through independent scoring of opposing rhetorical dimensions. It preserves complex rhetorical information by avoiding forced binary choices, enabling sophisticated analysis of strategic communication that employs competing appeals simultaneously.
+
+      DIMENSIONAL ANALYSIS:
       You must evaluate 10 dimensions across 5 opposing pairs:
       - Identity: Tribal Dominance vs. Individual Dignity
-      - Emotional Climate: Fear vs. Hope
+      - Emotional Climate: Fear vs. Hope  
       - Success Orientation: Envy vs. Compersion
       - Relational Climate: Enmity vs. Amity
       - Goal Orientation: Fragmentative Goals vs. Cohesive Goals
 
-      CRITICAL: For EACH of the 10 dimensions, you must provide:
-      1.  A `raw_score` (0.0-1.0) for its intensity.
-      2.  A `salience` score (0.0-1.0) for its rhetorical prominence and emphasis. REMEMBER: Salience is NOT the same as intensity.
-      3.  A direct quote as `evidence`.
+      IMPORTANT DISTINCTIONS:
+      - "Compersion" measures joy from others' success (distinct from "compassion" which is empathy for suffering)
+      - "Individual Dignity" focuses on universal human worth (not personal achievement or individual rights)
+      - "Tribal Dominance" measures group supremacy rhetoric (not just group loyalty or identity)
+      - Use exact dimension names as specified - do not substitute similar concepts
 
-      IMPORTANT DISTINCTION: "Compersion" measures joy from others' success (distinct from "compassion" which is empathy for suffering). Use the exact dimension names as specified - do not substitute similar concepts.
-      4.  Your `confidence` in the assessment (0.0-1.0).
+      EVIDENCE STANDARDS:
+      - Provide exact quotations, not paraphrases
+      - Include context for ambiguous references
+      - If evidence is unclear or ambiguous, lower confidence score accordingly
+      - Prioritize direct rhetorical indicators over interpretive inferences
+
+      ANALYTICAL APPROACH:
+      - Score each dimension independently based on textual evidence
+      - Assess both intensity (how strong) and salience (how prominent/emphasized)
+      - Recognize that opposing dimensions can both be present simultaneously
+      - Focus on observable rhetorical patterns rather than assumed intentions
+
+      CONTEXTUAL GUIDANCE:
+      - In political speeches, emphasize rhetorical strategies and audience appeals
+      - Look for structural positioning (opening/closing statements carry higher salience)
+      - Consider repetition patterns as indicators of rhetorical emphasis
+      - Distinguish between policy content and rhetorical strategy
+
+      SALIENCE ASSESSMENT: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+
+  # Sequential analysis variants for improved accuracy (recommended approach)
+  sequential_identity:
+    description: "Focus on Identity axis: Tribal Dominance vs Individual Dignity."
+    analysis_prompt: |
+      You are an expert political discourse analyst specializing in social identity and group dynamics. Focus exclusively on evaluating the Identity axis in the provided text using the Cohesive Flourishing Framework v10.0.
+
+      DIMENSIONAL FOCUS: Identity Axis Only
+      - Tribal Dominance: In-group supremacy, exclusionary identity patterns
+      - Individual Dignity: Universal human worth, inclusive recognition
+
+      IDENTITY-SPECIFIC GUIDANCE:
+      - Look for language that creates in-group/out-group distinctions
+      - Assess whether group identity includes or excludes others
+      - Distinguish between group pride and group supremacy
+      - Focus on universality vs. selectivity in human worth language
+
+      CRITICAL DISTINCTIONS:
+      - "Tribal Dominance" measures group supremacy rhetoric (not just group loyalty)
+      - "Individual Dignity" focuses on universal human worth (not individual rights or achievement)
+
+      Provide raw_score, salience, evidence, and confidence for BOTH dimensions.
+
+  sequential_emotional:
+    description: "Focus on Emotional Climate: Fear vs Hope."
+    analysis_prompt: |
+      You are an expert political discourse analyst specializing in emotional appeals and crisis rhetoric. Focus exclusively on evaluating the Emotional Climate in the provided text using the Cohesive Flourishing Framework v10.0.
+
+      DIMENSIONAL FOCUS: Emotional Climate Only
+      - Fear: Crisis mentality, existential threat perception
+      - Hope: Progress orientation, optimistic collective vision
+
+      EMOTIONAL-SPECIFIC GUIDANCE:
+      - Look for temporal framing (crisis vs. opportunity)
+      - Assess urgency levels and threat perception
+      - Distinguish between concern and existential fear
+      - Focus on future orientation (threatening vs. promising)
+
+      CRITICAL DISTINCTIONS:
+      - "Fear" requires crisis/threat language, not just concern or caution
+      - "Hope" requires progress/opportunity language, not just positive sentiment
+
+      Provide raw_score, salience, evidence, and confidence for BOTH dimensions.
+
+  sequential_success:
+    description: "Focus on Success Orientation: Envy vs Compersion."
+    analysis_prompt: |
+      You are an expert political discourse analyst specializing in economic rhetoric and success framing. Focus exclusively on evaluating Success Orientation in the provided text using the Cohesive Flourishing Framework v10.0.
+
+      DIMENSIONAL FOCUS: Success Orientation Only
+      - Envy: Resentment toward others' success, zero-sum thinking
+      - Compersion: Joy from others' success, abundance mindset
+
+      SUCCESS-SPECIFIC GUIDANCE:
+      - Look for attitudes toward others' achievements and prosperity
+      - Assess zero-sum vs. abundance thinking patterns
+      - Distinguish between policy critique and personal resentment
+      - Focus on emotional responses to others' success
+
+      CRITICAL DISTINCTIONS:
+      - "Envy" requires resentment and zero-sum thinking, not just inequality concern
+      - "Compersion" measures joy for others' success (distinct from compassion for suffering)
+
+      Provide raw_score, salience, evidence, and confidence for BOTH dimensions.
+
+  sequential_relational:
+    description: "Focus on Relational Climate: Enmity vs Amity."
+    analysis_prompt: |
+      You are an expert political discourse analyst specializing in interpersonal and intergroup relations. Focus exclusively on evaluating Relational Climate in the provided text using the Cohesive Flourishing Framework v10.0.
+
+      DIMENSIONAL FOCUS: Relational Climate Only
+      - Enmity: Hostility and adversarial positioning
+      - Amity: Friendship appeals and cooperative framing
+
+      RELATIONAL-SPECIFIC GUIDANCE:
+      - Look for relationship characterizations and interpersonal framing
+      - Assess cooperative vs. adversarial positioning
+      - Distinguish between disagreement and hostility
+      - Focus on relationship quality rather than policy positions
+
+      CRITICAL DISTINCTIONS:
+      - "Enmity" requires hostility and adversarial language, not just opposition
+      - "Amity" requires friendship/cooperation language, not just absence of conflict
+
+      Provide raw_score, salience, evidence, and confidence for BOTH dimensions.
+
+  sequential_goals:
+    description: "Focus on Goal Orientation: Fragmentative vs Cohesive Goals."
+    analysis_prompt: |
+      You are an expert political discourse analyst specializing in strategic objectives and collective action. Focus exclusively on evaluating Goal Orientation in the provided text using the Cohesive Flourishing Framework v10.0.
+
+      DIMENSIONAL FOCUS: Goal Orientation Only
+      - Fragmentative Goals: Divisive zero-sum objectives
+      - Cohesive Goals: Integrative positive-sum objectives
+
+      GOAL-SPECIFIC GUIDANCE:
+      - Look for stated or implied objectives and strategic aims
+      - Assess whether goals build unity or create division
+      - Distinguish between competitive and destructive objectives
+      - Focus on collective outcomes rather than individual benefits
+
+      CRITICAL DISTINCTIONS:
+      - "Fragmentative Goals" require division/separation objectives, not just competition
+      - "Cohesive Goals" require integration/unity building, not just cooperation
+
+      Provide raw_score, salience, evidence, and confidence for BOTH dimensions.
 
 # 5.3: Dimensions
 dimensions:
-  - { name: "tribal_dominance", description: "In-group supremacy and exclusionary identity patterns." }
-  - { name: "individual_dignity", description: "Universal human worth and inclusive recognition." }
-  - { name: "fear", description: "Crisis mentality and existential threat perception." }
-  - { name: "hope", description: "Progress orientation and optimistic collective vision." }
-  - { name: "envy", description: "Resentment toward others' success, zero-sum thinking." }
-  - { name: "compersion", description: "Compersion: the joy derived from others' success and achievements. This is distinct from compassion (empathy for suffering) - compersion specifically measures positive emotional responses to others' prosperity, accomplishments, and good fortune. Reflects abundance mindset and non-zero-sum thinking." }
-  - { name: "enmity", description: "Hostility and adversarial positioning." }
-  - { name: "amity", description: "Friendship appeals and cooperative framing." }
-  - { name: "fragmentative_goals", description: "Divisive zero-sum objectives." }
-  - { name: "cohesive_goals", description: "Integrative positive-sum objectives." }
+  - name: "tribal_dominance"
+    description: "In-group supremacy and exclusionary identity patterns."
+    markers:
+      positive_examples:
+        - "real Americans" - emphasizes authentic group membership vs. outsiders
+        - "our people" - creates in-group/out-group distinction
+        - "superior values" - claims group moral or cultural superiority
+        - "not our kind" - explicit exclusion of others
+        - "chosen people" - special status claims for the group
+      negative_examples:
+        - "patriotic" - love of country without exclusion doesn't qualify
+        - "community pride" - positive group identity without supremacy claims
+      boundary_cases:
+        - "we are different" - depends on context; supremacy claims vs. simple distinction
+    scoring_calibration:
+      high: "0.7-1.0: Explicit supremacy claims, strong us-vs-them rhetoric, exclusionary language"
+      medium: "0.4-0.6: Moderate in-group preference, subtle exclusion, implied superiority"
+      low: "0.1-0.3: Mild group preference, weak exclusionary hints"
+      absent: "0.0: No group supremacy, exclusion, or superiority claims"
+    disambiguation:
+      overlap_with_individual_dignity: "When both appear, tribal dominance takes precedence if exclusionary language is present"
+
+  - name: "individual_dignity"
+    description: "Universal human worth and inclusive recognition."
+    markers:
+      positive_examples:
+        - "every person" - universal scope of human worth
+        - "inherent dignity" - intrinsic value regardless of group membership
+        - "common humanity" - shared human experience transcending divisions
+        - "equal treatment" - procedural fairness across groups
+        - "everyone belongs" - inclusive community vision
+      negative_examples:
+        - "individual rights" - legal/political concept, not dignity focus
+        - "personal achievement" - individual success, not universal worth
+      boundary_cases:
+        - "respect for persons" - depends on universality vs. selective respect
+    scoring_calibration:
+      high: "0.7-1.0: Strong universal worth language, explicit inclusion, dignity emphasis"
+      medium: "0.4-0.6: Moderate inclusivity, some universal recognition"
+      low: "0.1-0.3: Weak inclusive hints, minimal dignity language"
+      absent: "0.0: No universal worth, inclusion, or dignity themes"
+
+  - name: "fear"
+    description: "Crisis mentality and existential threat perception."
+    markers:
+      positive_examples:
+        - "existential threat" - survival-level danger
+        - "catastrophe" - disaster language and crisis framing
+        - "under attack" - active threat perception
+        - "running out of time" - urgency and deadline pressure
+        - "emergency" - crisis requiring immediate action
+      negative_examples:
+        - "challenge" - difficulty without crisis implication
+        - "concern" - worry without existential threat
+      boundary_cases:
+        - "serious problem" - depends on urgency and threat level
+    scoring_calibration:
+      high: "0.7-1.0: Existential crisis, survival threats, imminent catastrophe"
+      medium: "0.4-0.6: Serious concerns, significant risks, urgent problems"
+      low: "0.1-0.3: Minor worries, potential problems, mild anxiety"
+      absent: "0.0: No threat language, crisis indicators, or fear appeals"
+
+  - name: "hope"
+    description: "Progress orientation and optimistic collective vision."
+    markers:
+      positive_examples:
+        - "bright future" - optimistic forward vision
+        - "breakthrough" - significant positive progress
+        - "moving forward" - progress and advancement
+        - "opportunity" - positive potential and possibility
+        - "success" - achievement and accomplishment focus
+      negative_examples:
+        - "stability" - maintaining status quo, not progress
+        - "recovery" - returning to previous state, not advancement
+      boundary_cases:
+        - "better days ahead" - depends on progress vs. simple improvement
+    scoring_calibration:
+      high: "0.7-1.0: Strong optimism, clear progress vision, breakthrough language"
+      medium: "0.4-0.6: Moderate optimism, some progress indicators"
+      low: "0.1-0.3: Mild optimism, weak progress hints"
+      absent: "0.0: No optimism, progress language, or positive vision"
+
+  - name: "envy"
+    description: "Resentment toward others' success, zero-sum thinking."
+    markers:
+      positive_examples:
+        - "privileged elite" - resentment toward successful groups
+        - "didn't earn it" - questioning legitimacy of others' success
+        - "rigged system" - systemic unfairness claims
+        - "taking our share" - zero-sum resource thinking
+        - "unfair advantage" - resentment over others' benefits
+      negative_examples:
+        - "inequality" - factual disparity without resentment
+        - "fairness" - justice concern without envy
+      boundary_cases:
+        - "they have too much" - depends on resentment vs. policy concern
+    scoring_calibration:
+      high: "0.7-1.0: Strong resentment, clear zero-sum thinking, success delegitimization"
+      medium: "0.4-0.6: Moderate resentment, some zero-sum indicators"
+      low: "0.1-0.3: Mild resentment hints, weak zero-sum thinking"
+      absent: "0.0: No resentment, zero-sum thinking, or success delegitimization"
+
+  - name: "compersion"
+    description: "Joy from others' success, abundance mindset, merit celebration."
+    markers:
+      positive_examples:
+        - "well-deserved" - affirming legitimacy of others' success
+        - "hard-earned" - recognizing merit in others' achievements
+        - "celebrate success" - positive response to others' accomplishments
+        - "rising tide lifts all boats" - abundance mindset, non-zero-sum
+        - "impressive accomplishment" - admiration for others' achievements
+      negative_examples:
+        - "compassion" - empathy for suffering, not joy for success
+        - "tolerance" - acceptance without celebration
+      boundary_cases:
+        - "good for them" - depends on genuine joy vs. dismissive tone
+    scoring_calibration:
+      high: "0.7-1.0: Clear joy for others' success, strong abundance mindset"
+      medium: "0.4-0.6: Moderate appreciation, some merit recognition"
+      low: "0.1-0.3: Weak appreciation hints, minimal success celebration"
+      absent: "0.0: No joy for others' success, merit recognition, or abundance thinking"
+    disambiguation:
+      vs_compassion: "Compersion = joy for success; Compassion = empathy for suffering"
+
+  - name: "enmity"
+    description: "Hostility and adversarial positioning."
+    markers:
+      positive_examples:
+        - "enemy" - explicit adversarial designation
+        - "destroy" - aggressive action language
+        - "evil" - moral condemnation and dehumanization
+        - "corrupt" - character assassination
+        - "crush" - domination and destruction language
+      negative_examples:
+        - "disagree" - opposition without hostility
+        - "oppose" - resistance without aggression
+      boundary_cases:
+        - "fight against" - depends on hostility level vs. principled opposition
+    scoring_calibration:
+      high: "0.7-1.0: Clear hostility, enemy designation, destruction language"
+      medium: "0.4-0.6: Moderate adversarial positioning, some hostile language"
+      low: "0.1-0.3: Mild adversarial hints, weak hostility"
+      absent: "0.0: No hostility, enemy language, or adversarial positioning"
+
+  - name: "amity"
+    description: "Friendship appeals and cooperative framing."
+    markers:
+      positive_examples:
+        - "friend" - explicit positive relationship designation
+        - "ally" - partnership and cooperation language
+        - "together" - unity and collaboration emphasis
+        - "united" - solidarity and common purpose
+        - "cooperation" - collaborative approach emphasis
+      negative_examples:
+        - "neutral" - absence of conflict without positive relationship
+        - "professional" - working relationship without friendship
+      boundary_cases:
+        - "partner" - depends on warmth vs. transactional relationship
+    scoring_calibration:
+      high: "0.7-1.0: Strong friendship language, clear cooperation emphasis"
+      medium: "0.4-0.6: Moderate cooperation, some unity language"
+      low: "0.1-0.3: Weak cooperation hints, minimal friendship appeals"
+      absent: "0.0: No friendship, cooperation, or unity language"
+
+  - name: "fragmentative_goals"
+    description: "Divisive zero-sum objectives."
+    markers:
+      positive_examples:
+        - "divide and conquer" - explicit fragmentation strategy
+        - "tear down" - destruction of existing structures
+        - "separate" - division and isolation emphasis
+        - "break apart" - fragmentation of unity
+        - "defeat them" - zero-sum victory objectives
+      negative_examples:
+        - "reform" - change without destruction
+        - "replace" - substitution without fragmentation
+      boundary_cases:
+        - "restructure" - depends on destruction vs. reorganization
+    scoring_calibration:
+      high: "0.7-1.0: Clear fragmentation objectives, strong divisive language"
+      medium: "0.4-0.6: Moderate division emphasis, some zero-sum objectives"
+      low: "0.1-0.3: Weak divisive hints, minimal fragmentation"
+      absent: "0.0: No fragmentation, division, or zero-sum objectives"
+
+  - name: "cohesive_goals"
+    description: "Integrative positive-sum objectives."
+    markers:
+      positive_examples:
+        - "bring together" - explicit unification objectives
+        - "unite" - solidarity and integration emphasis
+        - "build bridges" - connection and relationship building
+        - "strengthen bonds" - relationship enhancement
+        - "common ground" - shared foundation emphasis
+      negative_examples:
+        - "maintain" - preservation without building
+        - "manage" - administration without integration
+      boundary_cases:
+        - "work together" - depends on integration vs. temporary cooperation
+    scoring_calibration:
+      high: "0.7-1.0: Strong integration objectives, clear unity building"
+      medium: "0.4-0.6: Moderate unification, some building language"
+      low: "0.1-0.3: Weak integration hints, minimal unity emphasis"
+      absent: "0.0: No integration, unity building, or positive-sum objectives"
 
 # 5.4: Derived Metrics
 derived_metrics:
+  # Basic tension indices (measure rhetorical contradictions)
   - name: "identity_tension"
     formula: "min(dimensional_scores.tribal_dominance.raw_score, dimensional_scores.individual_dignity.raw_score) * abs(dimensional_scores.tribal_dominance.salience - dimensional_scores.individual_dignity.salience)"
   - name: "emotional_tension"
@@ -109,8 +536,38 @@ derived_metrics:
     formula: "min(dimensional_scores.enmity.raw_score, dimensional_scores.amity.raw_score) * abs(dimensional_scores.enmity.salience - dimensional_scores.amity.salience)"
   - name: "goal_tension"
     formula: "min(dimensional_scores.fragmentative_goals.raw_score, dimensional_scores.cohesive_goals.raw_score) * abs(dimensional_scores.fragmentative_goals.salience - dimensional_scores.cohesive_goals.salience)"
+  
+  # Strategic coherence index
   - name: "strategic_contradiction_index"
     formula: "(derived_metrics.identity_tension + derived_metrics.emotional_tension + derived_metrics.success_tension + derived_metrics.relational_tension + derived_metrics.goal_tension) / 5"
+  
+  # Intermediate calculations for salience-weighted cohesion indices
+  - name: "emotional_cohesion_component"
+    formula: "(dimensional_scores.hope.raw_score * dimensional_scores.hope.salience - dimensional_scores.fear.raw_score * dimensional_scores.fear.salience)"
+  - name: "success_cohesion_component"
+    formula: "(dimensional_scores.compersion.raw_score * dimensional_scores.compersion.salience - dimensional_scores.envy.raw_score * dimensional_scores.envy.salience)"
+  - name: "relational_cohesion_component"
+    formula: "(dimensional_scores.amity.raw_score * dimensional_scores.amity.salience - dimensional_scores.enmity.raw_score * dimensional_scores.enmity.salience)"
+  - name: "goal_cohesion_component"
+    formula: "(dimensional_scores.cohesive_goals.raw_score * dimensional_scores.cohesive_goals.salience - dimensional_scores.fragmentative_goals.raw_score * dimensional_scores.fragmentative_goals.salience)"
+  - name: "identity_cohesion_component"
+    formula: "(dimensional_scores.individual_dignity.raw_score * dimensional_scores.individual_dignity.salience - dimensional_scores.tribal_dominance.raw_score * dimensional_scores.tribal_dominance.salience)"
+  
+  # Salience weight calculations
+  - name: "descriptive_salience_total"
+    formula: "(dimensional_scores.hope.salience + dimensional_scores.fear.salience + dimensional_scores.compersion.salience + dimensional_scores.envy.salience + dimensional_scores.amity.salience + dimensional_scores.enmity.salience)"
+  - name: "motivational_salience_total"
+    formula: "(dimensional_scores.hope.salience + dimensional_scores.fear.salience + dimensional_scores.compersion.salience + dimensional_scores.envy.salience + dimensional_scores.amity.salience + dimensional_scores.enmity.salience + dimensional_scores.cohesive_goals.salience + dimensional_scores.fragmentative_goals.salience)"
+  - name: "full_salience_total"
+    formula: "(dimensional_scores.individual_dignity.salience + dimensional_scores.tribal_dominance.salience + dimensional_scores.hope.salience + dimensional_scores.fear.salience + dimensional_scores.compersion.salience + dimensional_scores.envy.salience + dimensional_scores.amity.salience + dimensional_scores.enmity.salience + dimensional_scores.cohesive_goals.salience + dimensional_scores.fragmentative_goals.salience)"
+  
+  # Final salience-weighted cohesion indices (using intermediate calculations)
+  - name: "descriptive_cohesion_index"
+    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component) / derived_metrics.descriptive_salience_total"
+  - name: "motivational_cohesion_index"
+    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / derived_metrics.motivational_salience_total"
+  - name: "full_cohesion_index"
+    formula: "(derived_metrics.identity_cohesion_component + derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / derived_metrics.full_salience_total"
 
 # 5.5: Output Schema
 output_schema:
