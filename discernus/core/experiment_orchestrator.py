@@ -269,12 +269,12 @@ class ExperimentOrchestrator:
         """Run experiment coherence validation using the intelligent agent."""
         self._log_progress("🔬 Validating experiment coherence with AI agent...")
         
-        # Define paths to the V10 specification documents
+        # Define paths to the current specification documents
         # Assuming a standard project structure where 'docs' is at the project root
         project_root = Path(__file__).resolve().parents[2]
         spec_paths = {
             "FRAMEWORK_SPECIFICATION": project_root / "docs/specifications/FRAMEWORK_SPECIFICATION.md",
-            "EXPERIMENT_SPECIFICATION": project_root / "docs/specifications/EXPERIMENT_SPECIFICATION_V10.md",
+            "EXPERIMENT_SPECIFICATION": project_root / "docs/specifications/EXPERIMENT_SPECIFICATION.md",
             "CORPUS_SPECIFICATION": project_root / "docs/specifications/CORPUS_SPECIFICATION.md"
         }
 
