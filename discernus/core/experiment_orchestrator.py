@@ -321,8 +321,15 @@ class ExperimentOrchestrator:
                         'document_id': doc_manifest.get('document_id', doc_filename)
                     }
                 )
-                artifact_path = self.artifact_storage.get_artifact_path(artifact_hash)
                 
+                # Get the full path from the artifact metadata
+                metadata = self.artifact_storage.get_artifact_metadata(artifact_hash)
+                relative_path = metadata.get('artifact_path')
+                if not relative_path:
+                    raise V8OrchestrationError(f"Artifact {artifact_hash} was stored, but no path was found in metadata.")
+                
+                artifact_path = self.artifact_storage.run_folder / relative_path
+
                 results.append({
                     "document": doc_filename,
                     "artifact_path": artifact_path,
