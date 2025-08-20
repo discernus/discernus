@@ -21,6 +21,23 @@ from typing import Dict, Any, Optional
 class SynthesisPromptAssembler:
     """Assembles synthesis prompts for final report generation."""
     
+    def __init__(self):
+        """Initialize with external YAML prompt template."""
+        self.prompt_template = self._load_prompt_template()
+    
+    def _load_prompt_template(self) -> Dict[str, Any]:
+        """Load external YAML prompt template following THIN architecture."""
+        import yaml
+        
+        # Load the enhanced synthesis prompt template
+        prompt_file = Path(__file__).parent.parent / "reuse_candidates" / "enhanced_synthesis_prompt.yaml"
+        
+        if not prompt_file.exists():
+            raise FileNotFoundError(f"Enhanced synthesis prompt template not found: {prompt_file}")
+        
+        with open(prompt_file, 'r') as f:
+            return yaml.safe_load(f)
+    
     def assemble_prompt(self, 
                        framework_path: Path,
                        experiment_path: Path, 
@@ -60,72 +77,29 @@ class SynthesisPromptAssembler:
                                   for hash in evidence_artifacts)
         
         # 6. Assemble the comprehensive prompt
-        prompt = f"""You are an expert research analyst specializing in computational social science. Your task is to generate a comprehensive, publication-ready research report based on the complete analysis results provided.
-
-FRAMEWORK METHODOLOGY:
-{self._extract_framework_description(framework_content)}
-
-EXPERIMENT OBJECTIVES:
-{self._extract_experiment_objectives(experiment_content)}
-
-RESEARCH HYPOTHESES:
-{self._format_hypotheses(experiment_yaml.get('hypotheses', []))}
-
-STATISTICAL ANALYSIS RESULTS:
-{statistical_summary}
-
-RAG EVIDENCE DATABASE:
-You have access to {total_evidence_pieces} pieces of textual evidence extracted during analysis. For each major finding, you should query the evidence database to retrieve supporting quotes that validate your statistical interpretations.
-
-EVIDENCE RETRIEVAL INSTRUCTIONS:
-- Use semantic queries to find relevant evidence for each statistical finding
-- Ensure every major claim is supported by direct quotes with proper attribution
-- Include speaker identification and source document for all citations
-- Prioritize evidence with high confidence scores (>0.8)
-
-REQUIRED REPORT STRUCTURE:
-
-# [Experiment Name]: [Framework Name] Analysis
-
-## Executive Summary
-[2-3 paragraphs summarizing key findings, methodology, and implications]
-
-## Methodology  
-[Brief description of framework, corpus, and analytical approach]
-
-## Results
-
-### Dimensional Analysis
-[Analysis of raw dimensional scores with evidence support]
-
-### Derived Metrics Analysis  
-[Analysis of calculated tension indices and composite metrics with evidence support]
-
-### Statistical Findings
-[Comprehensive interpretation of statistical results with evidence support]
-
-### Framework-Corpus Fit Assessment
-[Evaluation of how well the framework captured meaningful variance in the corpus]
-
-## Discussion
-[Interpretation of findings in broader context with theoretical implications]
-
-## Conclusion
-[Key takeaways, limitations, and future research directions]
-
-## Evidence Citations
-[Complete bibliography of all quoted evidence with source attribution]
-
-CRITICAL REQUIREMENTS:
-1. Every major statistical claim MUST be supported by direct textual evidence
-2. Use proper academic citation format: "As [Speaker] stated: '[exact quote]' (Source: [document_name])"
-3. Integrate statistical findings with qualitative evidence to create coherent narratives
-4. Maintain academic rigor throughout - no unsupported claims or speculation
-5. Ensure all calculations and interpretations are grounded in the provided data
-
-Generate a complete research report that meets publication standards for computational social science research."""
+        # Use external YAML prompt template (THIN architecture)
+        prompt = self.prompt_template['template'].format(
+            experiment_metadata=self._create_experiment_metadata(experiment_yaml),
+            framework_content=self._extract_framework_description(framework_content),
+            experiment_content=self._extract_experiment_objectives(experiment_content),
+            research_data=statistical_summary,
+            evidence_context=f"You have access to {total_evidence_pieces} pieces of textual evidence extracted during analysis. Use semantic queries to find relevant evidence for each statistical finding."
+        )
 
         return prompt
+    
+    def _create_experiment_metadata(self, experiment_yaml: Dict[str, Any]) -> str:
+        """Create experiment metadata section for provenance."""
+        metadata_parts = []
+        
+        if 'name' in experiment_yaml:
+            metadata_parts.append(f"**Experiment**: {experiment_yaml['name']}")
+        if 'framework' in experiment_yaml:
+            metadata_parts.append(f"**Framework**: {experiment_yaml['framework']}")
+        if 'corpus' in experiment_yaml:
+            metadata_parts.append(f"**Corpus**: {experiment_yaml['corpus']}")
+        
+        return "\n".join(metadata_parts) if metadata_parts else "**Experiment Metadata**: Available in experiment configuration"
     
     def _parse_framework_yaml(self, content: str) -> Dict[str, Any]:
         """Parse YAML from framework's machine-readable appendix."""
@@ -192,16 +166,9 @@ Generate a complete research report that meets publication standards for computa
         return "\n".join(formatted)
     
     def _create_statistical_summary(self, statistical_results: Dict[str, Any]) -> str:
-        """Create a concise summary of statistical results for context."""
-        summary_parts = []
-        
-        for category, results in statistical_results.items():
-            if isinstance(results, dict) and results:
-                summary_parts.append(f"**{category.replace('_', ' ').title()}**: {len(results)} metrics calculated")
-            elif isinstance(results, list) and results:
-                summary_parts.append(f"**{category.replace('_', ' ').title()}**: {len(results)} results")
-        
-        return "\n".join(summary_parts) if summary_parts else "Statistical analysis completed."
+        """Provide complete statistical results as JSON for LLM to format into tables."""
+        # THIN approach: Provide the raw data and let the LLM create the tables
+        return f"Complete Statistical Results (format into Markdown tables as instructed):\n{json.dumps(statistical_results, indent=2)}"
     
     def _get_evidence_from_artifact(self, evidence_content: bytes) -> list:
         """Extract evidence list from evidence artifact."""

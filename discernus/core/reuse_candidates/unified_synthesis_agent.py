@@ -237,13 +237,27 @@ Use this evidence to support your statistical interpretations. Quote directly fr
         return all_evidence
     
     def _prepare_evidence_context(self, evidence_artifact_hashes: List[str], artifact_storage) -> str:
-        """Prepare evidence context for direct embedding in synthesis prompt."""
+        """Prepare comprehensive evidence context with count and direct access."""
         all_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
         
         if not all_evidence:
             return "No evidence available for citation."
         
-        evidence_lines = []
+        # Enhanced mode: Provide evidence count AND direct access (superior to RAG queries)
+        evidence_lines = [
+            f"EVIDENCE DATABASE: {len(all_evidence)} pieces of textual evidence extracted during analysis.",
+            f"All evidence is provided below for direct citation - no queries needed.",
+            "",
+            "CITATION REQUIREMENTS:",
+            "- Every major statistical claim MUST be supported by direct quotes from evidence below",
+            "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
+            "- Prioritize evidence with confidence scores >0.8",
+            "- Integrate statistical findings with textual evidence for coherent narratives",
+            "",
+            "AVAILABLE EVIDENCE FOR DIRECT CITATION:",
+            ""
+        ]
+        
         for i, evidence in enumerate(all_evidence, 1):
             doc_name = evidence.get('document_name', 'Unknown')
             dimension = evidence.get('dimension', 'Unknown')

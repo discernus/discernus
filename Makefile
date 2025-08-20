@@ -38,6 +38,11 @@ harness:  ## Show prompt harness usage examples
 	@echo "  Test simple:    make harness-simple MODEL=<model> PROMPT=<prompt>"
 	@echo "  Test file:      make harness-file MODEL=<model> FILE=<file>"
 
+validate-framework:  ## Validate a framework against current specification
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make validate-framework FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Validating framework: $(FRAMEWORK)"
+	@python3 scripts/framework_validation/framework_validator.py $(FRAMEWORK)
+
 harness-list:  ## List available models
 	@python3 scripts/prompt_engineering_harness.py --list-models
 

@@ -128,15 +128,15 @@ Each layer builds on the previous one, adding interpretive depth while maintaini
 
 **Descriptive Cohesion Index**: Measures immediate emotional and relational climate using salience weighting. **Positive values** indicate hope, compersion, and amity emphasis; **negative values** indicate fear, envy, and enmity emphasis.
 
-**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience)` divided by the sum of all salience weights for these dimensions.
+**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience)` divided by the sum of all salience weights for these dimensions plus epsilon (0.001) to prevent division by zero.
 
 **Motivational Cohesion Index**: Assesses likely behavioral consequences with salience-adjusted emphasis. **Positive values** suggest cooperative, abundance-oriented behaviors; **negative values** suggest competitive, zero-sum behaviors.
 
-**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions.
+**Formula**: `(hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions plus epsilon (0.001) to prevent division by zero.
 
 **Full Cohesion Index**: Comprehensive evaluation of democratic health and social cohesion. **Positive values** indicate discourse supporting democratic institutions and social solidarity; **negative values** indicate discourse undermining democratic health and promoting fragmentation.
 
-**Formula**: `(individual_dignity_score × individual_dignity_salience - tribal_dominance_score × tribal_dominance_salience) + (hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions.
+**Formula**: `(individual_dignity_score × individual_dignity_salience - tribal_dominance_score × tribal_dominance_salience) + (hope_score × hope_salience - fear_score × fear_salience) + (compersion_score × compersion_salience - envy_score × envy_salience) + (amity_score × amity_salience - enmity_score × enmity_salience) + (cohesive_goals_score × cohesive_goals_salience - fragmentative_goals_score × fragmentative_goals_salience)` divided by the sum of all salience weights for these dimensions plus epsilon (0.001) to prevent division by zero.
 
 **Calculation Method**: All indices use salience-weighted calculations where each dimension's score is multiplied by its rhetorical prominence (salience), ensuring that what speakers actually emphasize receives appropriate influence on the final measurement. The normalization by total salience weights ensures indices remain within the -1.0 to +1.0 range while reflecting the relative emphasis patterns in the discourse.
 
@@ -347,7 +347,7 @@ dimensions:
       low: "0.1-0.3: Mild group preference, weak exclusionary hints"
       absent: "0.0: No group supremacy, exclusion, or superiority claims"
     disambiguation:
-      overlap_with_individual_dignity: "When both appear, tribal dominance takes precedence if exclusionary language is present"
+      overlap_with_individual_dignity: "Both dimensions can be present simultaneously; score each independently based on textual evidence"
 
   - name: "individual_dignity"
     description: "Universal human worth and inclusive recognition."
@@ -643,11 +643,11 @@ derived_metrics:
   
   # Final salience-weighted cohesion indices (using intermediate calculations)
   - name: "descriptive_cohesion_index"
-    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component) / derived_metrics.descriptive_salience_total"
+    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component) / (derived_metrics.descriptive_salience_total + 0.001)"
   - name: "motivational_cohesion_index"
-    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / derived_metrics.motivational_salience_total"
+    formula: "(derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / (derived_metrics.motivational_salience_total + 0.001)"
   - name: "full_cohesion_index"
-    formula: "(derived_metrics.identity_cohesion_component + derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / derived_metrics.full_salience_total"
+    formula: "(derived_metrics.identity_cohesion_component + derived_metrics.emotional_cohesion_component + derived_metrics.success_cohesion_component + derived_metrics.relational_cohesion_component + derived_metrics.goal_cohesion_component) / (derived_metrics.full_salience_total + 0.001)"
 
 # 5.5: Output Schema
 output_schema:

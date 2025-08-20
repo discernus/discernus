@@ -33,6 +33,7 @@ from .logging_config import setup_logging, get_logger, log_experiment_start, log
 from .security_boundary import ExperimentSecurityBoundary
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
+from .enhanced_manifest import EnhancedManifest
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
@@ -129,29 +130,52 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"Experiment failed: {str(e)}")
     
     def _initialize_infrastructure(self, run_id: str) -> AuditLogger:
-        """Initialize minimal infrastructure components."""
-        # Initialize audit logging
-        session_dir = self.experiment_path / "session" / run_id
-        session_dir.mkdir(parents=True, exist_ok=True)
-        
-        audit_logger = AuditLogger(
-            security_boundary=self.security,
-            run_folder=session_dir / "logs"
-        )
-        self._log_progress(f"📋 Audit logging initialized: {session_dir / 'logs'}")
-        
-        # Initialize artifact storage
-        shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
-        shared_cache_dir.mkdir(parents=True, exist_ok=True)
-        
-        self.artifact_storage = LocalArtifactStorage(
-            security_boundary=self.security,
-            run_folder=shared_cache_dir,
-            run_name=run_id
-        )
-        self._log_progress(f"🗄️ Local artifact storage initialized")
-        
-        return audit_logger
+        """Initialize infrastructure components matching legacy pattern."""
+        try:
+            # Setup logging (matching legacy pattern)
+            self._log_progress("🔧 Setting up logging...")
+            run_folder = Path(self.experiment_path) / "session" / run_id
+            run_folder.mkdir(parents=True, exist_ok=True)
+            setup_logging(Path(self.experiment_path), run_folder)
+            
+            # Initialize audit logger (matching legacy pattern)
+            self._log_progress("🔧 Initializing audit logger...")
+            audit_logger = AuditLogger(
+                security_boundary=self.security,
+                run_folder=run_folder
+            )
+            
+            # Initialize artifact storage - USE SHARED CACHE for perfect caching (matching legacy)
+            self._log_progress("🔧 Initializing artifact storage...")
+            shared_cache_dir = self.experiment_path / "shared_cache"
+            self.security.secure_mkdir(shared_cache_dir)
+            self.artifact_storage = LocalArtifactStorage(
+                security_boundary=self.security,
+                run_folder=shared_cache_dir,
+                run_name=run_id
+            )
+            
+            # Initialize manifest (matching legacy pattern)
+            self._log_progress("🔧 Initializing manifest...")
+            self.manifest = EnhancedManifest(
+                security_boundary=self.security,
+                run_folder=run_folder,
+                audit_logger=audit_logger,
+                artifact_storage=self.artifact_storage
+            )
+            
+            # Initialize LLM Gateway (matching legacy pattern)
+            self._log_progress("🔧 Initializing LLM Gateway...")
+            from ..gateway.llm_gateway import LLMGateway
+            from ..gateway.model_registry import ModelRegistry
+            self.llm_gateway = LLMGateway(ModelRegistry())
+            
+            self._log_progress("✅ Infrastructure initialization completed")
+            return audit_logger
+            
+        except Exception as e:
+            self._log_progress(f"❌ Infrastructure initialization failed: {str(e)}")
+            raise CleanAnalysisError(f"Infrastructure initialization failed: {str(e)}") from e
     
     def _load_specs(self) -> Dict[str, Any]:
         """Load experiment specifications."""
@@ -532,21 +556,105 @@ class CleanAnalysisOrchestrator:
         # We need at least one successful statistical result with numerical data
         return successful_results > 0
     
+    def _validate_synthesis_assets(self, statistical_results: Dict[str, Any]) -> None:
+        """Comprehensive validation that all required assets exist on disk before synthesis."""
+        self._log_progress("🔍 Validating synthesis assets...")
+        
+        # 1. Framework file must exist and be readable
+        framework_path = self.experiment_path / self.config['framework']
+        if not framework_path.exists():
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework file not found on disk: {framework_path}")
+        if not framework_path.is_file():
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework path is not a file: {framework_path}")
+        try:
+            framework_content = framework_path.read_text(encoding='utf-8')
+            if len(framework_content.strip()) < 100:
+                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework file appears empty or too short: {len(framework_content)} chars")
+        except Exception as e:
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot read framework file: {e}")
+        
+        # 2. Experiment file must exist and be readable  
+        experiment_path = self.experiment_path / "experiment.md"
+        if not experiment_path.exists():
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file not found on disk: {experiment_path}")
+        try:
+            experiment_content = experiment_path.read_text(encoding='utf-8')
+            if len(experiment_content.strip()) < 50:
+                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file appears empty or too short: {len(experiment_content)} chars")
+        except Exception as e:
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot read experiment file: {e}")
+        
+        # 3. Statistical results must contain actual numerical data
+        if not self._validate_statistical_results(statistical_results):
+            raise CleanAnalysisError(
+                "SYNTHESIS BLOCKED: Statistical results contain no numerical data. "
+                "Cannot generate report without valid statistical analysis."
+            )
+        
+        # 4. Evidence artifacts must exist in artifact storage
+        evidence_count = 0
+        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                evidence_count += 1
+                # Verify the artifact actually exists on disk
+                try:
+                    evidence_data = self.artifact_storage.get_artifact(artifact_hash)
+                    if not evidence_data or len(evidence_data) < 10:
+                        raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Evidence artifact {artifact_hash[:8]} exists in registry but is empty on disk")
+                except Exception as e:
+                    raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot retrieve evidence artifact {artifact_hash[:8]}: {e}")
+        
+        if evidence_count == 0:
+            raise CleanAnalysisError(
+                "SYNTHESIS BLOCKED: No evidence artifacts found in storage. "
+                "Cannot generate report without textual evidence for citations."
+            )
+        
+        # 5. Corpus files must exist and be accessible
+        corpus_manifest_path = self.experiment_path / self.config.get('corpus', 'corpus.md')
+        if not corpus_manifest_path.exists():
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Corpus manifest not found: {corpus_manifest_path}")
+        
+        # Validate that corpus documents referenced in manifest actually exist
+        try:
+            corpus_documents = self._load_corpus_documents()
+            if not corpus_documents:
+                raise CleanAnalysisError("SYNTHESIS BLOCKED: Corpus manifest contains no documents")
+            
+            missing_docs = []
+            corpus_dir = self.experiment_path / "corpus"
+            for doc_info in corpus_documents:
+                filename = doc_info.get('filename')
+                if filename:
+                    doc_file = self._find_corpus_file(corpus_dir, filename)
+                    if not doc_file or not doc_file.exists():
+                        missing_docs.append(filename)
+            
+            if missing_docs:
+                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Corpus documents missing from disk: {missing_docs}")
+                
+        except Exception as e:
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot validate corpus documents: {e}")
+        
+        self._log_progress(f"✅ Synthesis assets validated: framework, experiment, {evidence_count} evidence artifacts, {len(corpus_documents)} corpus documents")
+        self._log_progress("🟢 All required assets confirmed on disk - synthesis can proceed")
+    
     def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run synthesis to generate final report."""
-        self._log_progress("📝 Running synthesis...")
+        """Run synthesis using RAG approach with comprehensive asset validation."""
+        self._log_progress("📝 Validating synthesis assets before attempting report generation...")
         
         try:
+            # CRITICAL: Validate all required assets exist on disk before synthesis
+            self._validate_synthesis_assets(statistical_results)
+            
             # Initialize synthesis agent
-            from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+            from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
             
-            synthesis_agent = UnifiedSynthesisAgent(
-                model=synthesis_model,
-                audit_logger=audit_logger,
-                enhanced_mode=True
-            )
+            # Use RAG approach via SynthesisPromptAssembler (proven architecture)
+            assembler = SynthesisPromptAssembler()
             
-            # Prepare paths for synthesis
+            # Prepare paths for synthesis (already validated above)
             framework_path = self.experiment_path / self.config['framework']
             experiment_path = self.experiment_path / "experiment.md"
             
@@ -557,53 +665,126 @@ class CleanAnalysisOrchestrator:
                 {"artifact_type": "research_data_for_synthesis"}
             )
             
-            # Get evidence artifact hashes from the artifacts directory
+            # Get evidence artifact hashes from the artifact registry (already validated above)
             evidence_artifact_hashes = []
-            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
-            if artifacts_dir.exists():
-                evidence_files = list(artifacts_dir.glob("evidence_v6_*"))
-                evidence_artifact_hashes = [f.stem for f in evidence_files]
+            for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                metadata = artifact_info.get("metadata", {})
+                if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                    evidence_artifact_hashes.append(artifact_hash)
             
-            # Generate synthesis report
-            synthesis_result = synthesis_agent.generate_final_report(
+            # Generate base synthesis prompt
+            base_synthesis_prompt = assembler.assemble_prompt(
                 framework_path=framework_path,
                 experiment_path=experiment_path,
                 research_data_artifact_hash=research_data_hash,
-                evidence_artifact_hashes=evidence_artifact_hashes,
-                artifact_storage=self.artifact_storage
+                artifact_storage=self.artifact_storage,
+                evidence_artifacts=evidence_artifact_hashes
             )
             
-            # Store synthesis report
-            if synthesis_result.get('final_report'):
-                report_hash = self.artifact_storage.put_artifact(
-                    synthesis_result['final_report'].encode('utf-8'),
-                    {"artifact_type": "final_synthesis_report"}
+            # Add actual evidence context (the working approach)
+            evidence_context = self._prepare_evidence_context(evidence_artifact_hashes, self.artifact_storage)
+            
+            complete_synthesis_prompt = f"""{base_synthesis_prompt}
+
+AVAILABLE EVIDENCE FOR CITATION:
+{evidence_context}
+
+Use this evidence to support your statistical interpretations. Quote directly from the evidence above with proper attribution."""
+            
+            # Generate report using initialized LLM gateway
+            final_report, metadata = self.llm_gateway.execute_call(
+                model=synthesis_model,
+                prompt=complete_synthesis_prompt,
+                temperature=0.1
+            )
+            synthesis_result = {"final_report": final_report}
+            
+            # Transaction validation: Synthesis must produce a report with evidence integration
+            final_report = synthesis_result.get('final_report')
+            if not final_report:
+                raise CleanAnalysisError(
+                    "Synthesis transaction failed: No final report generated. "
+                    "Enhanced synthesis must produce a complete report."
                 )
-                
-                self._log_progress(f"📝 Synthesis report generated and stored: {report_hash[:8]}")
-                
-                return {
-                    "status": "completed",
-                    "report_hash": report_hash,
-                    "report_length": len(synthesis_result['final_report']),
-                    "synthesis_result": synthesis_result
-                }
-            else:
-                self._log_progress("⚠️ Synthesis completed but no report generated")
-                return {
-                    "status": "completed_no_report",
-                    "synthesis_result": synthesis_result
-                }
+            
+            # Validate evidence integration in report
+            if len(evidence_artifact_hashes) > 0:
+                # Check if report contains evidence citations (basic validation)
+                if "No evidence available" in final_report or "absence of qualitative data" in final_report:
+                    raise CleanAnalysisError(
+                        f"Evidence integration transaction failed: Report claims no evidence available "
+                        f"but {len(evidence_artifact_hashes)} evidence artifacts exist in registry. "
+                        f"Enhanced synthesis must integrate available evidence."
+                    )
+            
+            # Store synthesis report
+            report_hash = self.artifact_storage.put_artifact(
+                final_report.encode('utf-8'),
+                {"artifact_type": "final_synthesis_report"}
+            )
+            
+            self._log_progress(f"✅ RAG synthesis completed with evidence integration: {report_hash[:8]}")
+            
+            return {
+                "status": "completed",
+                "report_hash": report_hash,
+                "report_length": len(final_report),
+                "evidence_artifacts_used": len(evidence_artifact_hashes),
+                "synthesis_result": synthesis_result
+            }
                 
         except Exception as e:
-            self._log_progress(f"⚠️ Synthesis failed: {str(e)}")
-            # Return placeholder on failure
-            return {
-                "status": "failed",
-                "error": str(e),
-                "report": "Synthesis failed - statistical analysis completed successfully",
-                "statistical_summary": statistical_results
-            }
+            self._log_progress(f"⚠️ RAG synthesis failed: {str(e)}")
+            raise CleanAnalysisError(f"RAG synthesis failed: {str(e)}") from e
+    
+    def _get_all_evidence(self, evidence_artifact_hashes: List[str], artifact_storage) -> List[Dict[str, Any]]:
+        """Retrieve and combine all evidence from artifacts."""
+        all_evidence = []
+        
+        for hash_id in evidence_artifact_hashes:
+            try:
+                evidence_content = artifact_storage.get_artifact(hash_id)
+                evidence_data = json.loads(evidence_content.decode('utf-8'))
+                evidence_list = evidence_data.get('evidence_data', [])
+                all_evidence.extend(evidence_list)
+            except Exception as e:
+                self._log_progress(f"⚠️ Failed to retrieve evidence artifact {hash_id[:8]}: {e}")
+                continue
+        
+        return all_evidence
+    
+    def _prepare_evidence_context(self, evidence_artifact_hashes: List[str], artifact_storage) -> str:
+        """Prepare evidence context for direct citation (the working approach)."""
+        all_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
+        
+        if not all_evidence:
+            return "No evidence available for citation."
+        
+        evidence_lines = [
+            f"EVIDENCE DATABASE: {len(all_evidence)} pieces of textual evidence extracted during analysis.",
+            f"All evidence is provided below for direct citation - no queries needed.",
+            "",
+            "CITATION REQUIREMENTS:",
+            "- Every major statistical claim MUST be supported by direct quotes from evidence below",
+            "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
+            "- Prioritize evidence with confidence scores >0.8",
+            "- Integrate statistical findings with textual evidence for coherent narratives",
+            "",
+            "AVAILABLE EVIDENCE FOR DIRECT CITATION:",
+            ""
+        ]
+        
+        for i, evidence in enumerate(all_evidence, 1):
+            doc_name = evidence.get('document_name', 'Unknown')
+            dimension = evidence.get('dimension', 'Unknown')
+            quote = evidence.get('quote_text', '')
+            confidence = evidence.get('confidence', 0.0)
+            
+            evidence_lines.append(f"{i}. **{dimension}** evidence from {doc_name} (confidence: {confidence:.2f}):")
+            evidence_lines.append(f"   \"{quote}\"")
+            evidence_lines.append("")  # Empty line for readability
+        
+        return "\n".join(evidence_lines)
     
     def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], synthesis_result: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
