@@ -1,20 +1,23 @@
 # Discernus v10 Backlog
 
-**Date**: 2025-01-19  
-**Status**: Major Breakthrough - Enhanced Synthesis Operational  
+**Date**: 2025-08-20  
+**Status**: THIN Architecture Restored - Statistical Tables Operational  
 **Version**: v10.0
 
 ## 🏆 Major Achievements Summary
 
-**BREAKTHROUGH**: Enhanced Framework-Agnostic Synthesis Agent (CRIT-006) now operational and producing **academic-quality reports** with 2x+ word count and 3x+ analytical sophistication.
+**BREAKTHROUGH**: THIN Architecture Restored! SynthesisPromptAssembler now uses external YAML templates instead of embedded code, restoring proper architectural principles and enabling sophisticated statistical table generation.
 
 **KEY MILESTONES COMPLETED**:
+- ✅ **THIN Architecture Restoration**: External YAML prompts replace embedded code (enhanced_synthesis_prompt.yaml)
+- ✅ **Statistical Tables Restored**: Proper Markdown tables with real numerical data in synthesis reports
+- ✅ **Framework Mathematical Fixes**: Division-by-zero prevention and logical consistency corrections
 - ✅ **Enhanced Synthesis**: Multi-level analytical architecture with literature integration
 - ✅ **Infrastructure Cleanup**: Clean, framework-agnostic pipeline with deprecated contamination  
 - ✅ **Framework Enhancement**: CFF v10.0 with 18 derived metrics and academic depth
 - ✅ **Hybrid Design Foundation**: Minimal experiments → comprehensive analysis capability proven
 
-**CURRENT CAPABILITY**: 7-line experiment specification → 3,000-word academic analysis with statistical tables, literature review, and evidence integration.
+**CURRENT CAPABILITY**: 7-line experiment specification → 3,000-word academic analysis with sophisticated statistical tables, literature review, and evidence integration using proper THIN architecture.
 
 ---
 
@@ -153,43 +156,27 @@
 - **Priority**: HIGH - Enables complete hybrid experimental design vision
 - **Implementation Strategy**: Progressive enhancement building on Phase 1 single-agent foundation
 
-#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks
-- **Description**: Replace Cronbach's Alpha with methodologically sound alternatives for frameworks that intentionally measure opposing constructs
-- **Impact**: Current Cronbach's Alpha calculations are misleading for oppositional frameworks like CFF; negative alphas are expected and validate design rather than indicating failure
-- **Critical Issues**:
-  - Cronbach's Alpha assumes unidimensional constructs but CFF measures oppositional pairs
-  - Negative alphas are incorrectly interpreted as reliability failures
-  - Traditional psychometric reliability metrics don't apply to oppositional construct frameworks
-  - Creates confusing "fancy metrics with no real relevance" in current reports
-- **Acceptance Criteria**:
-  - Remove Cronbach's Alpha from current statistical analysis pipeline
-  - Implement oppositional construct validation (negative correlation checks)
-  - Add test-retest reliability for measurement stability
-  - Add discriminant validity tests (opposing archetypes should differ significantly)
-  - Add convergent validity tests (similar archetypes should cluster)
-  - Reserve Cronbach's Alpha for ensemble inter-model reliability testing only
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: CRITICAL - Eliminates methodologically inappropriate metrics
-- **Observed**: Enhanced synthesis correctly interprets negative alphas as validation, but metric shouldn't be calculated for oppositional constructs
+#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Replace Cronbach's Alpha with methodologically sound alternatives for frameworks that intentionally measure opposing constructs
+- **Impact**: ✅ RESOLVED - LLM-driven framework classification now determines appropriate statistical validation approach
+- **Results Achieved**:
+  - Replaced hardcoded Cronbach's Alpha with LLM-driven framework type detection
+  - Implemented oppositional construct validation for opposing dimension frameworks
+  - Maintained traditional reliability metrics for unidimensional frameworks
+  - AutomatedStatisticalAnalysisAgent now uses `_determine_framework_validation_type` method
+  - Framework-appropriate statistical analysis generated dynamically
+- **Status**: ✅ COMPLETED - Methodologically appropriate metrics now used based on framework design
 
-#### [CRIT-008] Robust Path Resolution and Validation
-- **Description**: Fix "works on my machine" problems caused by brittle filename matching between corpus manifests and actual files
-- **Impact**: Experiments fail when corpus files have different names than manifest expects; git merges break existing experiments
-- **Critical Issues**:
-  - Corpus manifest expects exact filenames but git brings hash-suffixed files
-  - No validation that corpus files actually exist before running
-  - Absolute path dependencies create portability problems
-  - Validation system doesn't catch manifest-file mismatches
-- **Acceptance Criteria**:
-  - Implement fuzzy filename matching (ignore hash suffixes)
-  - Add corpus file existence validation before experiment execution
-  - Enhance experiment coherence validation to catch path issues
-  - Support both exact and approximate filename matching
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: CRITICAL - Prevents "works on my machine" failures
-- **Observed**: simple_test broke after git merge due to filename suffix mismatches
+#### [CRIT-008] Robust Path Resolution and Validation ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Fix "works on my machine" problems caused by brittle filename matching between corpus manifests and actual files
+- **Impact**: ✅ RESOLVED - Fuzzy filename matching now handles hash-suffixed files and git merge scenarios
+- **Results Achieved**:
+  - Implemented fuzzy filename matching in CleanAnalysisOrchestrator
+  - Added corpus file existence validation before experiment execution
+  - Enhanced experiment coherence validation to catch path issues
+  - Support for both exact and approximate filename matching with hash suffix tolerance
+  - Comprehensive logging of file resolution process for debugging
+- **Status**: ✅ COMPLETED - Robust path resolution prevents "works on my machine" failures
 
 #### [CRIT-007] Infrastructure Cruft Cleanup and Deprecation ✅ COMPLETED
 - **Description**: ✅ COMPLETED - Surgical cleanup of contaminated/unused components
@@ -384,6 +371,10 @@
 
 ### Completed Major Milestones ✅
 **All critical publication-blocking issues resolved!** See `DONE.md` for complete achievement records.
+- [x] **THIN Architecture Restoration** ✅ - External YAML prompts, statistical tables operational
+- [x] **Framework Mathematical Fixes** ✅ - Division-by-zero prevention, logical consistency
+- [x] **Appropriate Reliability Metrics** ✅ - LLM-driven framework classification (CRIT-009)
+- [x] **Robust Path Resolution** ✅ - Fuzzy filename matching with hash tolerance (CRIT-008)
 - [x] Enhanced Framework-Agnostic Synthesis Agent ✅
 - [x] Infrastructure Cruft Cleanup ✅
 - [x] Publication Readiness (Source Access) ✅
@@ -421,6 +412,14 @@
 - [x] **Appropriate reliability metrics**: Oppositional validation for opposing constructs, Cronbach's Alpha for unidimensional ✅
 - [x] **Clean architecture**: THIN orchestrator without notebook generation cruft ✅
 - [x] **THIN compliance**: 100% architectural compliance achieved ✅
+
+### THIN Architecture Restoration ✅ COMPLETED
+- [x] **External YAML prompts**: SynthesisPromptAssembler loads enhanced_synthesis_prompt.yaml ✅
+- [x] **Eliminated embedded code**: Removed 76-line embedded prompt template from Python code ✅
+- [x] **Sophisticated statistical tables**: Real numerical data in proper Markdown table format ✅
+- [x] **Framework mathematical robustness**: Division-by-zero prevention with epsilon (0.001) ✅
+- [x] **Logical consistency**: Removed contradictory disambiguation rules ✅
+- [x] **Academic quality reports**: Multi-level analysis with literature review and evidence integration ✅
 
 ---
 

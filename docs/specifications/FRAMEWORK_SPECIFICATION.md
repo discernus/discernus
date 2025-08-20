@@ -284,6 +284,27 @@ For each dimension, provide concrete examples to prevent misinterpretation:
 - "[Ambiguous phrase]" - [how to resolve this ambiguity]
 ```
 
+**Advanced Markers Structure** (Recommended Best Practice):
+
+While the specification shows simple string lists for markers, an enhanced object structure provides superior context for LLM agents:
+
+```yaml
+markers:
+  positive_examples:
+    - phrase: "corrupt elite"
+      explanation: "explicit moral corruption claims against elites"
+    - phrase: "rigged system"  
+      explanation: "systemic corruption language"
+  negative_examples:
+    - phrase: "disagreement"
+      explanation: "policy differences without moral dichotomy"
+  boundary_cases:
+    - phrase: "out of touch"
+      explanation: "depends on whether it implies moral corruption vs. disconnect"
+```
+
+This richer format significantly improves agent accuracy by providing detailed context for each example. Framework authors are encouraged to use this enhanced structure when developing complex analytical frameworks.
+
 #### **Concept Disambiguation Strategies**
 
 **(Critical for Complex Frameworks)**
@@ -320,6 +341,42 @@ When text contains both positive and negative indicators:
 - **Disambiguation Clarity**: Overlap and conflict resolution strategies work reliably
 - **Evidence Grounding**: Specific guidance produces high-quality textual evidence
 
+#### **Derived Metrics Best Practices**
+
+**(Recommended for Robust Frameworks)**
+
+When creating derived metrics that involve division or complex calculations, follow these defensive programming practices:
+
+**Division-by-Zero Prevention**:
+```yaml
+# Add small constant to prevent division by zero
+formula: "(numerator) / (denominator + 0.001)"
+```
+
+**Salience-Weighted Calculations**:
+```yaml
+# Safe salience weighting with defensive constant
+formula: "(dim_a.raw_score * dim_a.salience + dim_b.raw_score * dim_b.salience) / (dim_a.salience + dim_b.salience + 0.001)"
+```
+
+**Tension Metrics** (for measuring strategic contradictions):
+```yaml
+# Measures tension between competing dimensions
+formula: "min(dim_a.raw_score, dim_b.raw_score) * abs(dim_a.salience - dim_b.salience)"
+```
+
+**Advanced Statistical Functions**:
+```yaml
+# Standard deviation calculation using numpy
+formula: "np.std([dim_a.salience, dim_b.salience, dim_c.salience])"
+# Correlation using scipy
+formula: "scipy.stats.pearsonr(dim_a.raw_score, dim_b.raw_score)[0]"
+```
+
+**Note**: The Discernus formula engine supports all functions from the available libraries (numpy, pandas, scipy, sklearn, statistics, math, etc.). Framework authors can use any mathematical or statistical function these libraries provide without needing to implement basic operations.
+
+These practices ensure numerical stability and prevent execution failures in edge cases where salience values might sum to zero.
+
 ### Section 4: Intended Application & Corpus Fit
 
 **(Required)**
@@ -335,6 +392,39 @@ This section defines the proper scope and application of your framework, which i
 ## Part 2: The Machine-Readable Appendix
 
 This part of the framework must be a single, valid YAML block placed at the very end of the document. It contains the precise, structured instructions that the Discernus AI agents will use to execute the analysis.
+
+### Formula Engine Capabilities
+
+The Discernus secure execution environment provides access to the following Python libraries for derived metrics calculations:
+
+#### **Core Data Science Libraries**
+- **numpy** - Mathematical operations, arrays, statistical functions (e.g., `np.std()`, `np.min()`, `np.abs()`, `np.mean()`)
+- **pandas** - Data manipulation, aggregation, statistical analysis (e.g., `pd.DataFrame`, `df.mean()`, `df.std()`)
+- **scipy** - Advanced scientific computing, statistical tests (e.g., `scipy.stats.pearsonr()`, `scipy.stats.f_oneway()`)
+- **sklearn** - Machine learning algorithms and utilities (e.g., `sklearn.metrics.silhouette_score()`)
+- **statistics** - Python standard library statistics functions (e.g., `statistics.mean()`, `statistics.stdev()`)
+
+#### **Mathematical Libraries**
+- **math** - Python standard mathematical functions (e.g., `math.sqrt()`, `math.pow()`, `math.log()`)
+- **random** - Random number generation and sampling (e.g., `random.random()`, `random.choice()`)
+
+#### **Text Analysis Libraries**
+- **nltk** - Natural language processing toolkit (e.g., `nltk.sentiment.vader`, `nltk.tokenize`)
+- **textblob** - Text processing and sentiment analysis
+- **re** - Regular expressions for pattern matching
+
+#### **General Utilities**
+- **json** - JSON data handling
+- **csv** - CSV data processing
+- **datetime** - Date and time operations
+- **collections** - Advanced data structures
+- **itertools** - Efficient looping and iteration
+
+**Important Notes:**
+- Framework authors can use any function from these libraries in their derived metrics formulas
+- The LLM will automatically select appropriate functions based on the required calculations
+- All functions are executed in a secure, sandboxed environment with resource limits
+- No file I/O, network access, or system operations are permitted
 
 ### Section 5: Configuration Appendix
 
@@ -449,6 +539,9 @@ derived_metrics:
   - name: "example_derived_metric"
     description: "A clear description of what this metric calculates."
     formula: "dimensions.example_dimension_1.raw_score * 2"
+  - name: "example_ratio_metric"
+    description: "Example of a ratio metric with defensive programming against division by zero."
+    formula: "(dimensions.example_dimension_1.raw_score * dimensions.example_dimension_1.salience) / (dimensions.example_dimension_1.salience + 0.001)"
 
 # 5.5: Output Schema (Required)
 # Note: This schema should be authored in YAML for readability.
