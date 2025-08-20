@@ -27,6 +27,7 @@ import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import pandas as pd
 
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary
@@ -101,7 +102,7 @@ class CleanAnalysisOrchestrator:
             self._log_status(f"Analysis completed: {len(analysis_results)} documents processed")
             
             # Phase 5: Generate statistics
-            statistical_results = self._run_statistical_analysis(synthesis_model, audit_logger)
+            statistical_results = self._run_statistical_analysis(synthesis_model, audit_logger, analysis_results)
             self._log_status("Statistical analysis completed")
             
             # Phase 6: Run synthesis
@@ -317,7 +318,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Batch analysis failed: {str(e)}")
             raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
     
-    def _run_statistical_analysis(self, model: str, audit_logger: AuditLogger) -> Dict[str, Any]:
+    def _run_statistical_analysis(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Generate and execute statistical analysis functions."""
         self._log_progress("📊 Generating statistical analysis...")
         
@@ -348,28 +349,188 @@ class CleanAnalysisOrchestrator:
             (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
             
             # Generate statistical functions
-            stats_result = stats_agent.generate_functions(temp_workspace)
+            stats_generation_result = stats_agent.generate_functions(temp_workspace)
             
-            # Store statistical results in artifact storage
-            stats_hash = self.artifact_storage.put_artifact(
-                json.dumps(stats_result, indent=2).encode('utf-8'),
-                {"artifact_type": "statistical_results"}
+            # CRITICAL: Execute the generated statistical functions on analysis data
+            self._log_progress("🔢 Executing statistical functions on analysis data...")
+            statistical_results = self._execute_statistical_functions(
+                temp_workspace, 
+                analysis_results, 
+                audit_logger
             )
             
-            self._log_progress(f"📊 Statistical analysis completed and stored: {stats_hash[:8]}")
+            # Transaction validation: Ensure we got actual statistical results
+            if not self._validate_statistical_results(statistical_results):
+                raise CleanAnalysisError(
+                    "Statistical analysis transaction failed: No numerical results produced. "
+                    "Generated functions but failed to execute or produce statistical outputs."
+                )
+            
+            # Store statistical results in artifact storage
+            complete_stats_result = {
+                "generation_metadata": stats_generation_result,
+                "statistical_data": statistical_results,
+                "status": "success_with_data",
+                "validation_passed": True
+            }
+            
+            stats_hash = self.artifact_storage.put_artifact(
+                json.dumps(complete_stats_result, indent=2).encode('utf-8'),
+                {"artifact_type": "statistical_results_with_data"}
+            )
+            
+            self._log_progress(f"✅ Statistical analysis executed successfully: {len(statistical_results)} result sets")
             
             return {
                 "status": "completed",
                 "stats_hash": stats_hash,
-                "functions_generated": len(stats_result.get('functions', {})),
-                "statistical_results": stats_result
+                "functions_generated": stats_generation_result.get('functions_generated', 0),
+                "statistical_results": complete_stats_result
             }
             
+        except Exception as e:
+            self._log_progress(f"❌ Statistical analysis failed: {str(e)}")
+            raise CleanAnalysisError(f"Statistical analysis failed: {str(e)}")
+        
         finally:
             # Clean up temporary workspace
             if temp_workspace.exists():
                 import shutil
                 shutil.rmtree(temp_workspace)
+    
+    def _execute_statistical_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
+        """Execute the generated statistical functions on analysis data."""
+        import pandas as pd
+        import numpy as np
+        import sys
+        import importlib.util
+        
+        # Load the generated statistical functions module
+        functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
+        if not functions_file.exists():
+            raise CleanAnalysisError("Statistical functions file not found")
+        
+        # Import the generated module
+        spec = importlib.util.spec_from_file_location("statistical_functions", functions_file)
+        stats_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(stats_module)
+        
+        # Convert analysis results to DataFrame format expected by statistical functions
+        analysis_data = self._convert_analysis_to_dataframe(analysis_results)
+        
+        # Execute each statistical function and collect results
+        statistical_outputs = {}
+        
+        # Get all functions from the module that don't start with underscore
+        function_names = [name for name in dir(stats_module) if not name.startswith('_') and callable(getattr(stats_module, name))]
+        
+        self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
+        
+        for func_name in function_names:
+            try:
+                func = getattr(stats_module, func_name)
+                self._log_progress(f"  📊 Running {func_name}...")
+                
+                # Execute the function with the analysis data
+                result = func(analysis_data)
+                statistical_outputs[func_name] = result
+                
+                self._log_progress(f"  ✅ {func_name} completed")
+                
+            except Exception as e:
+                self._log_progress(f"  ⚠️ {func_name} failed: {str(e)}")
+                statistical_outputs[func_name] = {"error": str(e), "status": "failed"}
+        
+        return statistical_outputs
+    
+    def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
+        """Convert analysis results to pandas DataFrame for statistical functions."""
+        import pandas as pd
+        import json
+        
+        # Extract the analysis data from the first result (batch analysis)
+        if not analysis_results or len(analysis_results) == 0:
+            raise CleanAnalysisError("No analysis results to convert")
+        
+        analysis_result = analysis_results[0]
+        
+        # Debug: Log the structure of analysis_result
+        self._log_progress(f"🔍 Analysis result keys: {list(analysis_result.keys())}")
+        
+        # Parse the raw analysis response to get document analyses
+        raw_response = analysis_result.get('raw_analysis_response', '')
+        
+        # If raw_response is empty, load it from artifact storage
+        if not raw_response:
+            self._log_progress(f"📥 Loading raw analysis response from artifact storage...")
+            
+            # Load the raw analysis response from artifact storage
+            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts" / "artifacts"
+            raw_response_files = list(artifacts_dir.glob("raw_analysis_response_v6_*"))
+            
+            if raw_response_files:
+                # Take the most recent one (sorted by name which includes timestamp)
+                raw_response_file = sorted(raw_response_files)[-1]
+                raw_response = raw_response_file.read_text(encoding='utf-8')
+                self._log_progress(f"📥 Loaded raw analysis response from {raw_response_file.name}")
+            else:
+                raise CleanAnalysisError("No raw analysis response found in artifacts directory")
+        
+        # Extract JSON from the delimited response
+        start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+        end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+        
+        start_idx = raw_response.find(start_marker)
+        end_idx = raw_response.find(end_marker)
+        
+        if start_idx == -1 or end_idx == -1:
+            # Debug: Log what we actually have
+            self._log_progress(f"❌ Could not find JSON markers. Response length: {len(raw_response)}")
+            self._log_progress(f"❌ Response preview: {raw_response[:500]}...")
+            raise CleanAnalysisError(f"Could not find analysis JSON markers in response. Response length: {len(raw_response)}")
+        
+        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+        
+        try:
+            analysis_data = json.loads(json_content)
+        except json.JSONDecodeError as e:
+            self._log_progress(f"❌ JSON parsing failed: {str(e)}")
+            self._log_progress(f"❌ JSON content preview: {json_content[:500]}...")
+            raise CleanAnalysisError(f"Failed to parse analysis JSON: {str(e)}")
+        
+        # Convert document analyses to DataFrame rows
+        rows = []
+        for doc_analysis in analysis_data.get('document_analyses', []):
+            row = {'document_name': doc_analysis.get('document_name', '')}
+            
+            # Add dimensional scores (both raw_score and salience)
+            for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
+                row[f"{dimension}_raw"] = scores.get('raw_score', 0.0)
+                row[f"{dimension}_salience"] = scores.get('salience', 0.0)
+                row[f"{dimension}_confidence"] = scores.get('confidence', 0.0)
+            
+            rows.append(row)
+        
+        df = pd.DataFrame(rows)
+        self._log_progress(f"📊 Converted analysis to DataFrame: {len(df)} documents, {len(df.columns)} features")
+        
+        return df
+    
+    def _validate_statistical_results(self, statistical_results: Dict[str, Any]) -> bool:
+        """Validate that statistical analysis produced actual numerical results."""
+        if not statistical_results:
+            return False
+        
+        # Check that we have at least one successful statistical function result
+        successful_results = 0
+        for func_name, result in statistical_results.items():
+            if isinstance(result, dict) and result.get('status') != 'failed':
+                # Check for numerical data in the result
+                if any(isinstance(v, (int, float, list, dict)) for v in result.values() if v is not None):
+                    successful_results += 1
+        
+        # We need at least one successful statistical result with numerical data
+        return successful_results > 0
     
     def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
         """Run synthesis to generate final report."""
