@@ -89,8 +89,6 @@ The framework measures how populist and nationalist appeals interact strategical
 - **Low Populism + High Nationalism (0.3- vertical, 0.7+ horizontal)**: Elite Nationalist Discourse
 - **Low Populism + Low Nationalism (0.3- both axes)**: Liberal Democratic Discourse
 
-**Note**: Quadrant classification is computed in post-processing based on the raw dimensional scores and axis calculations. This ensures accurate classification using the full analytical context.
-
 ## Intended Application & Corpus Fit
 
 ### Target Corpus
@@ -115,12 +113,6 @@ This framework is designed for analysis of:
 
 ### System Validation Note
 This framework is designed to work with the Discernus v10.0 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and interaction patterns. The framework's reliability metrics are calculated automatically during analysis execution.
-
-## References
-
-Mudde, C. (2004). The populist zeitgeist. *Government and Opposition*, 39(4), 541-563.
-
-Smith, A. D. (2010). *Nationalism: Theory, Ideology, History* (2nd ed.). Polity Press.
 
 # --- Start of Machine-Readable Appendix ---
 
@@ -332,31 +324,33 @@ derived_metrics:
   # Axis-level scores
   - name: "vertical_axis_score"
     description: "Populism vs Pluralism balance score (0.0 = pure pluralism, 1.0 = pure populism)."
-            formula: "(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score + 1) / 2"
+    formula: "(dimensions.populism.raw_score - dimensions.pluralism.raw_score + 1) / 2"
 
   - name: "horizontal_axis_score"
     description: "Nationalism vs Patriotism balance score (0.0 = pure patriotism, 1.0 = pure nationalism)."
-            formula: "(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score + 1) / 2"
+    formula: "(dimensions.nationalism.raw_score - dimensions.patriotism.raw_score + 1) / 2"
 
   # Strategic interaction indices
   - name: "populist_nationalist_reinforcement_index"
     description: "Measures when populist and nationalist appeals reinforce each other strategically."
-            formula: "min(dimensional_scores.populism.raw_score, dimensional_scores.nationalism.raw_score) * min(dimensional_scores.populism.salience, dimensional_scores.nationalism.salience)"
+    formula: "min(dimensions.populism.raw_score, dimensions.nationalism.raw_score) * min(dimensions.populism.salience, dimensions.nationalism.salience)"
 
   - name: "strategic_contradiction_index"
-    description: "Measures the maximum intra-axis tension, indicating the strongest internal conflict within either the Populism-Pluralism axis or the Nationalism-Patriotism axis."
-            formula: "max(abs(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score), abs(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score))"
+    description: "Measures conflicting appeals that may confuse audiences or create strategic problems."
+    formula: "abs(dimensions.populism.raw_score - dimensions.nationalism.raw_score) * abs(dimensions.populism.salience - dimensions.nationalism.salience)"
 
   - name: "appeal_balance_index"
-    description: "Measures how speakers balance different types of appeals across the orthogonal space (higher score = more balanced distribution)."
-            formula: "1 - ((abs(dimensional_scores.populism.salience - 0.25) + abs(dimensional_scores.pluralism.salience - 0.25) + abs(dimensional_scores.nationalism.salience - 0.25) + abs(dimensional_scores.patriotism.salience - 0.25)) / 2)"
+    description: "Measures how speakers balance different types of appeals across the orthogonal space."
+    formula: "sqrt(dimensions.populism.salience^2 + dimensions.nationalism.salience^2 + dimensions.pluralism.salience^2 + dimensions.patriotism.salience^2) / 2"
 
   # Overall positioning metrics
   - name: "political_discourse_index"
     description: "Overall political positioning strength across both orthogonal axes."
-    formula: "(derived_metrics.vertical_axis_score + derived_metrics.horizontal_axis_score) / 2"
+    formula: "sqrt(derived_metrics.vertical_axis_score^2 + derived_metrics.horizontal_axis_score^2) / sqrt(2)"
 
-
+  - name: "quadrant_classification"
+    description: "Categorical classification based on axis thresholds for strategic positioning analysis."
+    formula: "if(derived_metrics.vertical_axis_score >= 0.7 && derived_metrics.horizontal_axis_score >= 0.7, 'Ethno-Populist', if(derived_metrics.vertical_axis_score >= 0.7 && derived_metrics.horizontal_axis_score <= 0.3, 'Civic Populist', if(derived_metrics.vertical_axis_score <= 0.3 && derived_metrics.horizontal_axis_score >= 0.7, 'Elite Nationalist', 'Liberal Democratic')))"
 
 output_schema:
   type: object
@@ -400,6 +394,9 @@ output_schema:
           type: number
           minimum: 0.0
           maximum: 1.0
+        quadrant_classification:
+          type: string
+          enum: ["Ethno-Populist", "Civic Populist", "Elite Nationalist", "Liberal Democratic"]
   required: ["dimensional_scores", "derived_metrics"]
   definitions:
     score_object:

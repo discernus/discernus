@@ -1,4 +1,4 @@
-# Populist Discourse Analysis Framework (PDAF) v10.0
+# Populist Discourse Analysis Framework (PDAF) v10.0.0
 
 ---
 
@@ -39,67 +39,91 @@ The PDAF employs a multi-layered analytical approach with **nine core dimensions
 
 **Core Innovation**: PDAF introduces cross-ideological populist measurement with salience-weighted tension analysis, enabling researchers to distinguish between coherent populist strategies and strategic overreach where speakers attempt contradictory populist appeals simultaneously.
 
-**Dimensions**: The framework evaluates populist discourse across nine dimensions organized into three categories, employing an extended 0.0-2.0 scale to accommodate high-intensity populist rhetoric:
+**Dimensions**: The framework evaluates populist discourse across nine dimensions organized into three categories, employing a standard 0.0-1.0 scale for consistent measurement across the Discernus platform:
 
 **Primary Populist Core Anchors** (Based on Mudde's minimal definition and Müller's anti-pluralist theory):
-1. **Manichaean People-Elite Framing** (0.0-2.0): Moral dichotomy between pure, virtuous people and corrupt, self-serving elites
-2. **Crisis-Restoration Temporal Narrative** (0.0-2.0): Decline-crisis-redemption temporal structuring where current crisis stems from elite betrayal
-3. **Popular Sovereignty Claims** (0.0-2.0): Direct people's will as ultimate political authority, bypassing representative institutions
-4. **Anti-Pluralist Exclusion** (0.0-2.0): Rejection of legitimate opposition and institutional constraints on popular will
+1. **Manichaean People-Elite Framing** (0.0-1.0): Moral dichotomy between pure, virtuous people and corrupt, self-serving elites
+2. **Crisis-Restoration Temporal Narrative** (0.0-1.0): Decline-crisis-redemption temporal structuring where current crisis stems from elite betrayal
+3. **Popular Sovereignty Claims** (0.0-1.0): Direct people's will as ultimate political authority, bypassing representative institutions
+4. **Anti-Pluralist Exclusion** (0.0-1.0): Rejection of legitimate opposition and institutional constraints on popular will
 
 **Populist Mechanism Anchors** (Grounded in mobilization and representation theories):
-5. **Elite Conspiracy/Systemic Corruption** (0.0-2.0): Elite coordination against people's interests through hidden networks or institutional capture
-6. **Authenticity vs. Political Class** (0.0-2.0): Genuine representation versus professional politician artifice
-7. **Homogeneous People Construction** (0.0-2.0): Unified people identity transcending internal divisions of class, region, or interest
+5. **Elite Conspiracy/Systemic Corruption** (0.0-1.0): Elite coordination against people's interests through hidden networks or institutional capture
+6. **Authenticity vs. Political Class** (0.0-1.0): Genuine representation versus professional politician artifice
+7. **Homogeneous People Construction** (0.0-1.0): Unified people identity transcending internal divisions of class, region, or interest
 
 **Boundary Distinction Anchors** (Based on exclusion mechanisms and boundary-drawing research):
-8. **Nationalist Exclusion** (0.0-2.0): Cultural/ethnic homogeneity and external threat emphasis that defines populist community boundaries
-9. **Economic Populist Appeals** (0.0-2.0): Populist economic discourse regardless of ideological direction
+8. **Nationalist Exclusion** (0.0-1.0): Cultural/ethnic homogeneity and external threat emphasis that defines populist community boundaries
+9. **Economic Populist Appeals** (0.0-1.0): Populist economic discourse regardless of ideological direction
 
 **Advanced Analytical Features**:
 - **Salience-Weighted Analysis**: Captures not just populist intensity but rhetorical emphasis patterns (0.0-1.0 salience scoring)
 - **Populist Strategic Tension Mathematics**: Quantifies contradictory populist appeals using the formula: `Tension = min(Anchor_A_score, Anchor_B_score) × |Anchor_A_salience - Anchor_B_salience|`
-- **Populist Strategic Contradiction Index (PSCI)**: Overall measure of strategic coherence vs. contradiction across tension pairs
-- **Extended 0.0-2.0 Scale**: Accommodates high-intensity populist rhetoric beyond standard measurement ranges
+- **Populist Strategic Contradiction Index (PSCI)**: Overall measure of strategic coherence vs. contradiction across tension pairs. The PSCI is calculated directly from base dimensions to ensure numerical stability and avoid dependency chaining between derived metrics. This robust implementation provides the same mathematical result as averaging the three tension metrics but with enhanced computational reliability.
+
+**Salience-Weighted Indices**: These metrics account for both the intensity and rhetorical prominence of populist dimensions:
+
+- **Salience-Weighted Core Populism Index**: `(Manichaean × Salience + Crisis-Restoration × Salience + Popular Sovereignty × Salience + Anti-Pluralist × Salience) / (Total Salience + 0.001)`
+- **Salience-Weighted Populism Mechanisms Index**: `(Elite Conspiracy × Salience + Authenticity × Salience + Homogeneous People × Salience) / (Total Salience + 0.001)`
+- **Salience-Weighted Boundary Distinctions Index**: `(Nationalist Exclusion × Salience + Economic Populist × Salience) / (Total Salience + 0.001)`
+- **Salience-Weighted Overall Populism Index**: `(All Dimensions × Salience) / (Total Salience + 0.001)`
+
+**Note**: The `+ 0.001` term prevents division-by-zero errors in cases where total salience might be zero, ensuring numerical stability.
+
+- **Standard 0.0-1.0 Scale**: Provides consistent measurement compatible with the Discernus platform
 
 **Scoring Calibration Guidelines**:
 
-The PDAF employs a 0.0-2.0 scale for raw scores and 0.0-1.0 for salience and confidence. This extended scale accommodates high-intensity populist rhetoric while maintaining precision:
-
-**Raw Score Ranges**:
-- **0.0**: No evidence of the dimension
-- **0.1-0.6**: Weak to moderate evidence
-- **0.7-1.3**: Moderate to strong evidence  
-- **1.4-2.0**: Strong to overwhelming evidence
-
-**Salience Ranges**:
-- **0.0**: Not rhetorically central to the text
-- **0.1-0.4**: Peripheral rhetorical presence
-- **0.5-0.7**: Moderately central to the message
-- **0.8-1.0**: Highly central to the overall rhetoric
-
-**Confidence Ranges**:
-- **0.0**: No confidence in assessment
-- **0.1-0.4**: Low confidence due to ambiguity
-- **0.5-0.7**: Moderate confidence with some uncertainty
-- **0.8-1.0**: High confidence based on clear evidence
+The PDAF employs a 0.0-1.0 scale for raw scores and 0.0-1.0 for salience and confidence. For detailed, dimension-specific scoring calibration that provides precise guidance for each dimension, refer to the machine-readable appendix in Section 5.3, which contains comprehensive calibration examples for all nine dimensions.
 
 **Examples and Anti-Examples**:
 
 **Manichaean People-Elite Framing**:
-- ✅ **Positive**: "The corrupt political establishment has betrayed the American people" (explicit moral dichotomy)
-- ❌ **Negative**: "Some politicians are dishonest" (generic criticism without elite framing)
-- ⚠️ **Boundary**: "The ruling class" (context-dependent for corruption vs. leadership)
+- ✅ **Positive**: "The corrupt political establishment has betrayed the American people" - explicit moral dichotomy between virtuous people and corrupt elites
+- ❌ **Negative**: "Some politicians are dishonest" - generic criticism without elite framing or moral dichotomy
+- ⚠️ **Boundary**: "The ruling class" - context-dependent for corruption vs. leadership distinction
 
 **Crisis-Restoration Narrative**:
-- ✅ **Positive**: "We face a national emergency that requires immediate action" (crisis language with urgency)
-- ❌ **Negative**: "We have challenges to address" (problems without crisis framing)
-- ⚠️ **Boundary**: "This is a serious issue" (depends on urgency and restoration promises)
+- ✅ **Positive**: "We face a national emergency that requires immediate action" - crisis language with urgency and restoration promise
+- ❌ **Negative**: "We have challenges to address" - problems without crisis framing or restoration narrative
+- ⚠️ **Boundary**: "This is a serious issue" - depends on urgency and restoration promises for full crisis-restoration structure
 
 **Popular Sovereignty Claims**:
-- ✅ **Positive**: "The people's will must prevail over institutional obstacles" (direct popular authority)
-- ❌ **Negative**: "Democracy is important" (institutional focus without direct popular authority)
-- ⚠️ **Boundary**: "The people have spoken" (depends on context for sovereignty vs. electoral results)
+- ✅ **Positive**: "The people's will must prevail over institutional obstacles" - direct popular authority as ultimate political source
+- ❌ **Negative**: "Democracy is important" - institutional focus without direct popular authority claims
+- ⚠️ **Boundary**: "The people have spoken" - depends on context for sovereignty vs. electoral results interpretation
+
+**Anti-Pluralist Exclusion**:
+- ✅ **Positive**: "The opposition are enemies of the people" - explicit opposition rejection and legitimacy denial
+- ❌ **Negative**: "We disagree with their policies" - policy disagreement without opposition rejection
+- ⚠️ **Boundary**: "Strong opposition" - depends on whether it implies rejection vs. recognition of legitimate opposition
+
+**Elite Conspiracy/Systemic Corruption**:
+- ✅ **Positive**: "The elites are secretly coordinating against us" - explicit conspiracy claims and systemic corruption emphasis
+- ❌ **Negative**: "Some politicians are corrupt" - individual corruption without coordination claims
+- ⚠️ **Boundary**: "Systemic problems" - depends on whether it implies coordination vs. dysfunction
+
+**Authenticity vs. Political Class**:
+- ✅ **Positive**: "I'm not a politician, I'm a real person" - authenticity claims vs. political class positioning
+- ❌ **Negative**: "I have experience in government" - professional qualification without anti-establishment positioning
+- ⚠️ **Boundary**: "New to politics" - depends on whether it implies authenticity vs. inexperience
+
+**Homogeneous People Construction**:
+- ✅ **Positive**: "We are one people, united and indivisible" - explicit unity construction and homogeneity emphasis
+- ❌ **Negative**: "Our community has diverse views" - group acknowledgment without unity claims
+- ⚠️ **Boundary**: "Together" - depends on whether it implies unity vs. cooperation
+
+**Nationalist Exclusion**:
+- ✅ **Positive**: "Our culture is under threat from foreign influences" - cultural exclusion claims and external threat emphasis
+- ❌ **Negative**: "We're proud of our heritage" - pride without exclusion or threat framing
+- ⚠️ **Boundary**: "Our heritage" - depends on whether it implies exclusion vs. celebration
+
+**Economic Populist Appeals**:
+- ✅ **Positive**: "The economic elite has rigged the system against us" - economic elite framing with populist economic rhetoric
+- ❌ **Negative**: "Economic growth is important" - performance focus without populist appeals
+- ⚠️ **Boundary**: "Economic reform" - depends on whether it implies populist vs. technocratic approach
+
+**Note**: For comprehensive, dimension-specific scoring calibration with precise examples for each dimension, refer to the machine-readable appendix in Section 5.3, which contains the definitive calibration guidelines used by the analysis agents.
 
 ### Section 4: Intended Application & Corpus Fit
 
@@ -126,7 +150,7 @@ metadata:
 # 5.2: Analysis Variants
 analysis_variants:
   default:
-    description: "Complete salience-weighted populist analysis with strategic tension pattern quantification and comprehensive dimensional assessment."
+    description: "Provides a comprehensive, single-pass analysis of all nine populist dimensions for a holistic overview. This variant is ideal for initial exploration and overall assessment. For highest quality results with focused attention on specific dimension groups, use the sequential analysis variants below."
     analysis_prompt: |
       You are an expert populist discourse analyst with deep understanding of populist rhetorical strategies across different political contexts. Your task is to analyze the provided text using the Populist Discourse Analysis Framework (PDAF) v10.0, which measures populist discourse patterns through nine core anchors with enhanced metadata reporting and strategic tension analysis.
 
@@ -146,24 +170,19 @@ analysis_variants:
       - Structural positioning (opening, closing, thesis statements)
       - Thematic centrality to the overall message
       - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
-      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (1.0) but high salience (0.9) if it's rhetorically central.
+      SALIENCE ≠ INTENSITY. A dimension can have high intensity (e.g., 0.9) but low salience (e.g., 0.2) if it's just a passing mention, or moderate intensity (e.g., 0.5) but high salience (e.g., 0.9) if it is the central theme of the text.
 
-      For each of the nine anchors, provide:
-      - **Score (0.0-2.0)**: Based on strength of evidence in the text
-      - **Salience (0.0-1.0)**: How central is this anchor to this specific text?
+      For each of the nine dimensions, provide:
+      - **Score (0.0-1.0)**: Based on strength of evidence in the text
+      - **Salience (0.0-1.0)**: How central is this dimension to this specific text?
       - **Confidence (0.0-1.0)**: How certain are you in this assessment?
       - **Evidence**: Direct quote supporting your assessment
 
-      Write a comprehensive analytical report that covers:
-      - Application of the PDAF methodology to this specific text
-      - Detailed analysis of each relevant anchor with scores, salience, confidence, and evidence
-      - Assessment of populist strategic patterns and rhetorical contradictions
-      - Overall populist discourse profile with salience weighting
-      - Key insights about the speaker's populist approach
+      Your analysis should focus on evaluating each dimension according to the PDAF methodology, providing clear reasoning for scores, salience, and confidence assessments, and identifying key textual evidence that supports your dimensional assessments.
+      
+      **Note**: For highest quality results with focused attention on specific dimension groups, use the sequential analysis variants below.
 
-      Embed your numerical assessments naturally within the analysis. Focus on rigorous intellectual analysis supported by direct textual evidence and clear reasoning for all scores and metadata.
 
-      **CRITICAL OUTPUT REQUIREMENT**: Your final output MUST be a JSON object strictly conforming to the `output_schema` provided in this framework, containing `dimensional_scores` for all nine dimensions, each with `raw_score`, `salience`, `confidence`, and `evidence`. The Discernus system requires this structured format for automated processing.
 
   # Sequential analysis variants for improved accuracy (recommended approach)
   sequential_core_anchors:
@@ -189,7 +208,7 @@ analysis_variants:
       - "Popular Sovereignty" focuses on direct democracy, not just people references
       - "Anti-Pluralist Exclusion" measures opposition rejection, not just disagreement
 
-      Provide raw_score (0.0-2.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for ALL FOUR dimensions.
+      Provide raw_score (0.0-1.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for ALL FOUR dimensions.
 
   sequential_mechanism_anchors:
     description: "Focus on Populist Mechanism Anchors: Elite Conspiracy/Systemic Corruption, Authenticity vs. Political Class, Homogeneous People Construction."
@@ -212,7 +231,7 @@ analysis_variants:
       - "Authenticity" measures anti-establishment positioning, not just honesty
       - "Homogeneous People" requires unity construction, not just group references
 
-      Provide raw_score (0.0-2.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for ALL THREE dimensions.
+      Provide raw_score (0.0-1.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for ALL THREE dimensions.
 
   sequential_boundary_anchors:
     description: "Focus on Boundary Distinction Anchors: Nationalist Exclusion, Economic Populist Appeals."
@@ -233,7 +252,7 @@ analysis_variants:
       - "Nationalist Exclusion" requires boundary-drawing, not just patriotism
       - "Economic Populist Appeals" measures populist framing, not just economic policy
 
-      Provide raw_score (0.0-2.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for BOTH dimensions.
+      Provide raw_score (0.0-1.0), salience (0.0-1.0), evidence, and confidence (0.0-1.0) for BOTH dimensions.
 
 # 5.3: Dimensions
 dimensions:
@@ -260,9 +279,11 @@ dimensions:
         - phrase: "out of touch"
           explanation: "depends on whether it implies moral corruption vs. disconnect"
     scoring_calibration:
-      high: "1.4-2.0: Strong moral dichotomy, clear us-vs-them rhetoric, explicit corruption claims"
-      medium: "0.7-1.3: Moderate people-elite framing, some moral contrast, implied corruption"
-      low: "0.1-0.6: Weak people-elite hints, minimal moral dichotomy"
+      maximum: "0.9-1.0: Maximum moral dichotomy, overwhelming us-vs-them rhetoric, explicit corruption claims"
+      high: "0.7-0.8: Strong moral dichotomy, clear us-vs-them rhetoric, explicit corruption claims"
+      medium: "0.5-0.6: Moderate people-elite framing, some moral contrast, implied corruption"
+      weak: "0.3-0.4: Weak people-elite hints, minimal moral dichotomy"
+      minimal: "0.1-0.2: Very weak moral hints, barely detectable opposition"
       absent: "0.0: No people-elite moral dichotomy or corruption claims"
     disambiguation:
       overlap_with_anti_pluralist: "Both dimensions can be present; score each independently based on textual evidence"
@@ -290,9 +311,11 @@ dimensions:
         - phrase: "serious issue"
           explanation: "depends on urgency and crisis framing"
     scoring_calibration:
-      high: "1.4-2.0: Strong crisis narrative, clear decline-restoration structure, urgent restoration promises"
-      medium: "0.7-1.3: Moderate crisis language, some decline narrative, restoration hints"
-      low: "0.1-0.6: Weak crisis hints, minimal decline-restoration structure"
+      maximum: "0.9-1.0: Maximum crisis narrative, overwhelming decline-restoration structure, urgent restoration promises"
+      high: "0.7-0.8: Strong crisis narrative, clear decline-restoration structure, urgent restoration promises"
+      medium: "0.5-0.6: Moderate crisis language, some decline narrative, restoration hints"
+      weak: "0.3-0.4: Weak crisis hints, minimal decline-restoration structure"
+      minimal: "0.1-0.2: Very weak crisis hints, barely detectable decline-restoration"
       absent: "0.0: No crisis narrative, decline language, or restoration promises"
     disambiguation:
       vs_elite_conspiracy: "Crisis-restoration focuses on temporal narrative; elite conspiracy focuses on causal attribution"
@@ -320,9 +343,11 @@ dimensions:
         - phrase: "people's choice"
           explanation: "depends on whether it implies direct vs. representative democracy"
     scoring_calibration:
-      high: "1.4-2.0: Strong popular sovereignty claims, clear direct democracy language, institution bypassing"
-      medium: "0.7-1.3: Moderate popular authority, some direct democracy, limited institution bypassing"
-      low: "0.1-0.6: Weak popular sovereignty hints, minimal direct democracy language"
+      maximum: "0.9-1.0: Maximum popular sovereignty claims, overwhelming direct democracy language, institution bypassing"
+      high: "0.7-0.8: Strong popular sovereignty claims, clear direct democracy language, institution bypassing"
+      medium: "0.5-0.6: Moderate popular authority, some direct democracy, limited institution bypassing"
+      weak: "0.3-0.4: Weak popular sovereignty hints, minimal direct democracy language"
+      minimal: "0.1-0.2: Very weak popular sovereignty hints, barely detectable direct democracy"
       absent: "0.0: No popular sovereignty claims, direct democracy language, or institution bypassing"
     disambiguation:
       vs_anti_pluralist: "Popular sovereignty focuses on direct democracy; anti-pluralist focuses on opposition rejection"
@@ -350,9 +375,11 @@ dimensions:
         - phrase: "strong opposition"
           explanation: "depends on whether it implies rejection vs. recognition"
     scoring_calibration:
-      high: "1.4-2.0: Strong opposition rejection, clear legitimacy denial, exclusionary language"
-      medium: "0.7-1.3: Moderate opposition rejection, some legitimacy denial, limited exclusion"
-      low: "0.1-0.6: Weak opposition rejection hints, minimal exclusionary language"
+      maximum: "0.9-1.0: Maximum opposition rejection, overwhelming legitimacy denial, exclusionary language"
+      high: "0.7-0.8: Strong opposition rejection, clear legitimacy denial, exclusionary language"
+      medium: "0.5-0.6: Moderate opposition rejection, some legitimacy denial, limited exclusion"
+      weak: "0.3-0.4: Weak opposition rejection hints, minimal exclusionary language"
+      minimal: "0.1-0.2: Very weak opposition rejection hints, barely detectable exclusion"
       absent: "0.0: No opposition rejection, legitimacy denial, or exclusionary language"
     disambiguation:
       vs_popular_sovereignty: "Anti-pluralist focuses on opposition rejection; popular sovereignty focuses on direct democracy"
@@ -380,12 +407,13 @@ dimensions:
         - phrase: "systemic problems"
           explanation: "depends on whether it implies coordination vs. dysfunction"
     scoring_calibration:
-      high: "1.4-2.0: Strong conspiracy claims, clear systemic corruption, hidden coordination language"
-      medium: "0.7-1.3: Moderate conspiracy hints, some systemic corruption, limited coordination claims"
-      low: "0.1-0.6: Weak conspiracy hints, minimal systemic corruption language"
+      high: "0.8-1.0: Strong conspiracy claims, clear systemic corruption, hidden coordination language"
+      medium: "0.5-0.7: Moderate conspiracy hints, some systemic corruption, limited coordination claims"
+      low: "0.1-0.4: Weak conspiracy hints, minimal systemic corruption language"
       absent: "0.0: No conspiracy claims, systemic corruption, or coordination language"
     disambiguation:
       vs_manichaean: "Elite conspiracy focuses on coordination; manichaean focuses on moral dichotomy"
+      vs_crisis_restoration: "Elite conspiracy focuses on causal attribution; crisis-restoration focuses on temporal narrative structure"
 
   - name: "authenticity_vs_political_class"
     description: "Genuine representation versus professional politician artifice."
@@ -410,12 +438,13 @@ dimensions:
         - phrase: "new to politics"
           explanation: "depends on whether it implies authenticity vs. inexperience"
     scoring_calibration:
-      high: "1.4-2.0: Strong authenticity claims, clear anti-political class positioning, outsider identity"
-      medium: "0.7-1.3: Moderate authenticity, some anti-establishment, limited outsider claims"
-      low: "0.1-0.6: Weak authenticity hints, minimal anti-political class language"
+      high: "0.8-1.0: Strong authenticity claims, clear anti-political class positioning, outsider identity"
+      medium: "0.5-0.7: Moderate authenticity, some anti-establishment, limited outsider claims"
+      low: "0.1-0.4: Weak authenticity hints, minimal anti-political class language"
       absent: "0.0: No authenticity claims, anti-establishment positioning, or outsider identity"
     disambiguation:
       vs_elite_conspiracy: "Authenticity focuses on personal identity; elite conspiracy focuses on coordination claims"
+      vs_manichaean: "Authenticity focuses on personal positioning; manichaean focuses on moral dichotomy between groups"
 
   - name: "homogeneous_people_construction"
     description: "Unified people identity transcending internal divisions of class, region, or interest."
@@ -440,9 +469,9 @@ dimensions:
         - phrase: "together"
           explanation: "depends on whether it implies unity vs. cooperation"
     scoring_calibration:
-      high: "1.4-2.0: Strong unity construction, clear homogeneous identity, division transcendence"
-      medium: "0.7-1.3: Moderate unity, some homogeneous identity, limited division transcendence"
-      low: "0.1-0.6: Weak unity hints, minimal homogeneous identity language"
+      high: "0.8-1.0: Strong unity construction, clear homogeneous identity, division transcendence"
+      medium: "0.5-0.7: Moderate unity, some homogeneous identity, limited division transcendence"
+      low: "0.1-0.4: Weak unity hints, minimal homogeneous identity language"
       absent: "0.0: No unity construction, homogeneous identity, or division transcendence"
     disambiguation:
       vs_nationalist_exclusion: "Homogeneous people focuses on internal unity; nationalist exclusion focuses on external boundaries"
@@ -470,9 +499,9 @@ dimensions:
         - phrase: "our heritage"
           explanation: "depends on whether it implies exclusion vs. celebration"
     scoring_calibration:
-      high: "1.4-2.0: Strong cultural exclusion, clear external threats, homogeneous identity emphasis"
-      medium: "0.7-1.3: Moderate cultural exclusion, some external threats, limited homogeneity"
-      low: "0.1-0.6: Weak cultural exclusion hints, minimal external threat language"
+      high: "0.8-1.0: Strong cultural exclusion, clear external threats, homogeneous identity emphasis"
+      medium: "0.5-0.7: Moderate cultural exclusion, some external threats, limited homogeneity"
+      low: "0.1-0.4: Weak cultural exclusion hints, minimal external threat language"
       absent: "0.0: No cultural exclusion, external threats, or homogeneous identity emphasis"
     disambiguation:
       vs_homogeneous_people: "Nationalist exclusion focuses on external boundaries; homogeneous people focuses on internal unity"
@@ -500,36 +529,45 @@ dimensions:
         - phrase: "economic reform"
           explanation: "depends on whether it implies populist vs. technocratic approach"
     scoring_calibration:
-      high: "1.4-2.0: Strong economic populist appeals, clear economic elite framing, economic corruption claims"
-      medium: "0.7-1.3: Moderate economic populism, some economic elite framing, limited corruption claims"
-      low: "0.1-0.6: Weak economic populist hints, minimal economic elite language"
+      high: "0.8-1.0: Strong economic populist appeals, clear economic elite framing, economic corruption claims"
+      medium: "0.5-0.7: Moderate economic populism, some economic elite framing, limited corruption claims"
+      low: "0.1-0.4: Weak economic populist hints, minimal economic elite language"
       absent: "0.0: No economic populist appeals, economic elite framing, or economic corruption claims"
     disambiguation:
       vs_elite_conspiracy: "Economic populist focuses on economic domain; elite conspiracy focuses on coordination claims"
+      vs_manichaean: "Economic populist focuses on economic elite framing; manichaean focuses on moral dichotomy regardless of domain"
 
 # 5.4: Derived Metrics
 derived_metrics:
   # Basic tension indices (measure rhetorical contradictions)
   - name: "democratic_authoritarian_tension"
-    formula: "min(dimensional_scores.popular_sovereignty_claims.raw_score, dimensional_scores.anti_pluralist_exclusion.raw_score) * abs(dimensional_scores.popular_sovereignty_claims.salience - dimensional_scores.anti_pluralist_exclusion.salience)"
+    description: "Measures the strategic tension between claims of direct popular will and the rejection of legitimate opposition, quantifying the classic populist contradiction of invoking democratic authority while undermining pluralist norms."
+    formula: "min(dimensions.popular_sovereignty_claims.raw_score, dimensions.anti_pluralist_exclusion.raw_score) * abs(dimensions.popular_sovereignty_claims.salience - dimensions.anti_pluralist_exclusion.salience)"
   - name: "internal_external_focus_tension"
-    formula: "min(dimensional_scores.homogeneous_people_construction.raw_score, dimensional_scores.nationalist_exclusion.raw_score) * abs(dimensional_scores.homogeneous_people_construction.salience - dimensional_scores.nationalist_exclusion.salience)"
+    description: "Measures the strategic tension between constructing internal people unity and emphasizing external cultural threats, capturing the populist balance between cohesion-building and boundary-drawing rhetoric."
+    formula: "min(dimensions.homogeneous_people_construction.raw_score, dimensions.nationalist_exclusion.raw_score) * abs(dimensions.homogeneous_people_construction.salience - dimensions.nationalist_exclusion.salience)"
   - name: "crisis_elite_attribution_tension"
-    formula: "min(dimensional_scores.crisis_restoration_narrative.raw_score, dimensional_scores.elite_conspiracy_systemic_corruption.raw_score) * abs(dimensional_scores.crisis_restoration_narrative.salience - dimensional_scores.elite_conspiracy_systemic_corruption.salience)"
+    description: "Measures the strategic tension between temporal crisis narratives and elite conspiracy claims, quantifying how populist speakers balance decline-restoration framing with causal attribution to elite coordination."
+    formula: "min(dimensions.crisis_restoration_narrative.raw_score, dimensions.elite_conspiracy_systemic_corruption.raw_score) * abs(dimensions.crisis_restoration_narrative.salience - dimensions.elite_conspiracy_systemic_corruption.salience)"
   
-  # Strategic coherence index
+  # Strategic coherence index (calculated directly from base dimensions to avoid dependency chaining)
   - name: "populist_strategic_contradiction_index"
-    formula: "(derived_metrics.democratic_authoritarian_tension + derived_metrics.internal_external_focus_tension + derived_metrics.crisis_elite_attribution_tension) / 3"
+    description: "Overall measure of populist strategic coherence vs. contradiction, calculated as the average of the three core tension scores to assess whether a speaker employs contradictory populist appeals simultaneously."
+    formula: "(min(dimensions.popular_sovereignty_claims.raw_score, dimensions.anti_pluralist_exclusion.raw_score) * abs(dimensions.popular_sovereignty_claims.salience - dimensions.anti_pluralist_exclusion.salience) + min(dimensions.homogeneous_people_construction.raw_score, dimensions.nationalist_exclusion.raw_score) * abs(dimensions.homogeneous_people_construction.salience - dimensions.nationalist_exclusion.salience) + min(dimensions.crisis_restoration_narrative.raw_score, dimensions.elite_conspiracy_systemic_corruption.raw_score) * abs(dimensions.crisis_restoration_narrative.salience - dimensions.elite_conspiracy_systemic_corruption.salience)) / 3"
   
   # Salience-weighted populist indices
   - name: "salience_weighted_core_populism_index"
-    formula: "(dimensional_scores.manichaean_people_elite_framing.raw_score * dimensional_scores.manichaean_people_elite_framing.salience + dimensional_scores.crisis_restoration_narrative.raw_score * dimensional_scores.crisis_restoration_narrative.salience + dimensional_scores.popular_sovereignty_claims.raw_score * dimensional_scores.popular_sovereignty_claims.salience + dimensional_scores.anti_pluralist_exclusion.raw_score * dimensional_scores.anti_pluralist_exclusion.salience) / (dimensional_scores.manichaean_people_elite_framing.salience + dimensional_scores.crisis_restoration_narrative.salience + dimensional_scores.popular_sovereignty_claims.salience + dimensional_scores.anti_pluralist_exclusion.salience + 0.001)"
-  - name: "salience_weighted_populist_mechanisms_index"
-    formula: "(dimensional_scores.elite_conspiracy_systemic_corruption.raw_score * dimensional_scores.elite_conspiracy_systemic_corruption.salience + dimensional_scores.authenticity_vs_political_class.raw_score * dimensional_scores.authenticity_vs_political_class.salience + dimensional_scores.homogeneous_people_construction.raw_score * dimensional_scores.homogeneous_people_construction.salience) / (dimensional_scores.elite_conspiracy_systemic_corruption.salience + dimensional_scores.authenticity_vs_political_class.salience + dimensional_scores.homogeneous_people_construction.salience + 0.001)"
+    description: "Salience-weighted measure of core populist appeals, emphasizing rhetorically prominent dimensions to capture not just populist intensity but strategic emphasis patterns in the Primary Populist Core Anchors."
+    formula: "(dimensions.manichaean_people_elite_framing.raw_score * dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.raw_score * dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.raw_score * dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.raw_score * dimensions.anti_pluralist_exclusion.salience) / (dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.salience + 0.001)"
+  - name: "salience_weighted_populism_mechanisms_index"
+    description: "Salience-weighted measure of populist mobilization mechanisms, capturing how speakers emphasize different populist mobilization strategies including conspiracy claims, authenticity positioning, and people unity construction."
+    formula: "(dimensions.elite_conspiracy_systemic_corruption.raw_score * dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.raw_score * dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.raw_score * dimensions.homogeneous_people_construction.salience) / (dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.salience + 0.001)"
   - name: "salience_weighted_boundary_distinctions_index"
-    formula: "(dimensional_scores.nationalist_exclusion.raw_score * dimensional_scores.nationalist_exclusion.salience + dimensional_scores.economic_populist_appeals.raw_score * dimensional_scores.economic_populist_appeals.salience) / (dimensional_scores.nationalist_exclusion.salience + dimensional_scores.economic_populist_appeals.salience + 0.001)"
+    description: "Salience-weighted measure of populist boundary-drawing mechanisms, capturing how speakers emphasize cultural exclusion and economic populist appeals to define in-group and out-group boundaries."
+    formula: "(dimensions.nationalist_exclusion.raw_score * dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.raw_score * dimensions.economic_populist_appeals.salience) / (dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.salience + 0.001)"
   - name: "salience_weighted_overall_populism_index"
-    formula: "(dimensional_scores.manichaean_people_elite_framing.raw_score * dimensional_scores.manichaean_people_elite_framing.salience + dimensional_scores.crisis_restoration_narrative.raw_score * dimensional_scores.crisis_restoration_narrative.salience + dimensional_scores.popular_sovereignty_claims.raw_score * dimensional_scores.popular_sovereignty_claims.salience + dimensional_scores.anti_pluralist_exclusion.raw_score * dimensional_scores.anti_pluralist_exclusion.salience + dimensional_scores.elite_conspiracy_systemic_corruption.raw_score * dimensional_scores.elite_conspiracy_systemic_corruption.salience + dimensional_scores.authenticity_vs_political_class.raw_score * dimensional_scores.authenticity_vs_political_class.salience + dimensional_scores.homogeneous_people_construction.raw_score * dimensional_scores.homogeneous_people_construction.salience + dimensional_scores.nationalist_exclusion.raw_score * dimensional_scores.nationalist_exclusion.salience + dimensional_scores.economic_populist_appeals.raw_score * dimensional_scores.economic_populist_appeals.salience) / (dimensional_scores.manichaean_people_elite_framing.salience + dimensional_scores.crisis_restoration_narrative.salience + dimensional_scores.popular_sovereignty_claims.salience + dimensional_scores.anti_pluralist_exclusion.salience + dimensional_scores.elite_conspiracy_systemic_corruption.salience + dimensional_scores.authenticity_vs_political_class.salience + dimensional_scores.homogeneous_people_construction.salience + dimensional_scores.nationalist_exclusion.salience + dimensional_scores.economic_populist_appeals.salience + 0.001)"
+    description: "Comprehensive salience-weighted populist measure across all nine dimensions, providing an overall assessment of populist discourse that accounts for both intensity and rhetorical emphasis patterns."
+    formula: "(dimensions.manichaean_people_elite_framing.raw_score * dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.raw_score * dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.raw_score * dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.raw_score * dimensions.anti_pluralist_exclusion.salience + dimensions.elite_conspiracy_systemic_corruption.raw_score * dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.raw_score * dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.raw_score * dimensions.homogeneous_people_construction.salience + dimensions.nationalist_exclusion.raw_score * dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.raw_score * dimensions.economic_populist_appeals.salience) / (dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.salience + dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.salience + dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.salience + 0.001)"
 
 # 5.5: Output Schema
 output_schema:
@@ -552,7 +590,7 @@ output_schema:
     score_object:
       type: object
       properties:
-        raw_score: { type: number, minimum: 0.0, maximum: 2.0 }
+        raw_score: { type: number, minimum: 0.0, maximum: 1.0 }
         salience: { type: number, minimum: 0.0, maximum: 1.0 }
         confidence: { type: number, minimum: 0.0, maximum: 1.0 }
         evidence: { type: string }

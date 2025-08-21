@@ -43,6 +43,31 @@ validate-framework:  ## Validate a framework against current specification
 	@echo "🔍 Validating framework: $(FRAMEWORK)"
 	@python3 scripts/framework_validation/framework_validator.py $(FRAMEWORK)
 
+enhanced-validate-framework:  ## Enhanced validation with academic grounding
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make enhanced-validate-framework FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Enhanced validation with academic grounding: $(FRAMEWORK)"
+	@python3 scripts/framework_researcher/enhanced_framework_validator.py $(FRAMEWORK)
+
+enhanced-validate-framework-verbose:  ## Enhanced validation with detailed transparency
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make enhanced-validate-framework-verbose FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Enhanced validation with full transparency: $(FRAMEWORK)"
+	@python3 scripts/framework_researcher/enhanced_framework_validator.py $(FRAMEWORK) --verbose
+
+enhanced-validate-framework-research:  ## Enhanced validation with research directions generation
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make enhanced-validate-framework-research FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Enhanced validation with research directions: $(FRAMEWORK)"
+	@python3 scripts/framework_researcher/enhanced_framework_validator.py $(FRAMEWORK) --research-directions
+
+enhanced-validate-framework-full:  ## Enhanced validation with research directions and verbose mode
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make enhanced-validate-framework-full FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Enhanced validation with research directions and full transparency: $(FRAMEWORK)"
+	@python3 scripts/framework_researcher/enhanced_framework_validator.py $(FRAMEWORK) --research-directions --verbose
+
+enhanced-validate-framework-librarian:  ## Enhanced validation with research directions and librarian research initiation
+	@if [ -z "$(FRAMEWORK)" ]; then echo "❌ Usage: make enhanced-validate-framework-librarian FRAMEWORK=path/to/framework.md"; exit 1; fi
+	@echo "🔍 Enhanced validation with research directions and librarian research: $(FRAMEWORK)"
+	@python3 scripts/framework_researcher/enhanced_framework_validator.py $(FRAMEWORK) --research-directions --initiate-research
+
 harness-list:  ## List available models
 	@python3 scripts/prompt_engineering_harness.py --list-models
 

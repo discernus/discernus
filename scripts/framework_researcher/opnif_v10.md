@@ -332,29 +332,29 @@ derived_metrics:
   # Axis-level scores
   - name: "vertical_axis_score"
     description: "Populism vs Pluralism balance score (0.0 = pure pluralism, 1.0 = pure populism)."
-            formula: "(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score + 1) / 2"
+    formula: "(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score + 1) / 2"
 
   - name: "horizontal_axis_score"
     description: "Nationalism vs Patriotism balance score (0.0 = pure patriotism, 1.0 = pure nationalism)."
-            formula: "(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score + 1) / 2"
+    formula: "(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score + 1) / 2"
 
   # Strategic interaction indices
   - name: "populist_nationalist_reinforcement_index"
     description: "Measures when populist and nationalist appeals reinforce each other strategically."
-            formula: "min(dimensional_scores.populism.raw_score, dimensional_scores.nationalism.raw_score) * min(dimensional_scores.populism.salience, dimensional_scores.nationalism.salience)"
+    formula: "min(dimensional_scores.populism.raw_score, dimensional_scores.nationalism.raw_score) * min(dimensional_scores.populism.salience, dimensional_scores.nationalism.salience)"
 
   - name: "strategic_contradiction_index"
     description: "Measures the maximum intra-axis tension, indicating the strongest internal conflict within either the Populism-Pluralism axis or the Nationalism-Patriotism axis."
-            formula: "max(abs(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score), abs(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score))"
+    formula: "max(abs(dimensional_scores.populism.raw_score - dimensional_scores.pluralism.raw_score), abs(dimensional_scores.nationalism.raw_score - dimensional_scores.patriotism.raw_score))"
 
   - name: "appeal_balance_index"
     description: "Measures how speakers balance different types of appeals across the orthogonal space (higher score = more balanced distribution)."
-            formula: "1 - ((abs(dimensional_scores.populism.salience - 0.25) + abs(dimensional_scores.pluralism.salience - 0.25) + abs(dimensional_scores.nationalism.salience - 0.25) + abs(dimensional_scores.patriotism.salience - 0.25)) / 2)"
+    formula: "1 - ((abs(dimensional_scores.populism.salience - 0.25) + abs(dimensional_scores.pluralism.salience - 0.25) + abs(dimensional_scores.nationalism.salience - 0.25) + abs(dimensional_scores.patriotism.salience - 0.25)) / 2)"
 
   # Overall positioning metrics
   - name: "political_discourse_index"
     description: "Overall political positioning strength across both orthogonal axes."
-    formula: "(derived_metrics.vertical_axis_score + derived_metrics.horizontal_axis_score) / 2"
+    formula: "(dimensional_scores.populism.raw_score + dimensional_scores.nationalism.raw_score) / 2"
 
 
 
