@@ -263,7 +263,6 @@ dimensions:
   moral_evaluation:
     name: "Moral Evaluation"
     description: "What values and moral judgments are invoked and how actions are evaluated ethically"
-    scoring_range: [0.0, 1.0]
     markers:
       positive_examples:
         - phrase: "justice demands"
@@ -300,7 +299,6 @@ dimensions:
   treatment_recommendation:
     name: "Treatment Recommendation"
     description: "What solutions are proposed and how policy options are presented and prioritized"
-    scoring_range: [0.0, 1.0]
     markers:
       positive_examples:
         - phrase: "we must immediately"
@@ -352,17 +350,17 @@ derived_metrics:
 
   - name: "strategic_framing_profile"
     description: "Classifies the strategic communication approach based on framing function emphasis patterns"
-    formula: "argmax([dimensions.problem_definition.salience, dimensions.causal_attribution.salience, dimensions.moral_evaluation.salience, dimensions.treatment_recommendation.salience])"
+    formula: "np.argmax([dimensions.problem_definition.salience, dimensions.causal_attribution.salience, dimensions.moral_evaluation.salience, dimensions.treatment_recommendation.salience])"
     interpretation: "Identifies which framing function receives the most strategic emphasis, revealing the speaker's primary communication approach: 0=Problem-focused, 1=Cause-focused, 2=Values-focused, 3=Solution-focused."
 
   - name: "framing_independence_score"
     description: "Measures the empirical independence of framing functions as predicted by Entman's theory"
-    formula: "1 - abs(dimensions.problem_definition.raw_score - dimensions.causal_attribution.raw_score) - abs(dimensions.moral_evaluation.raw_score - dimensions.treatment_recommendation.raw_score) / 2"
+    formula: "1 - (abs(dimensions.problem_definition.raw_score - dimensions.causal_attribution.raw_score) + abs(dimensions.moral_evaluation.raw_score - dimensions.treatment_recommendation.raw_score)) / 2"
     interpretation: "Higher values indicate framing functions vary independently as predicted by theory. Lower values suggest functions are deployed in correlated patterns."
 
 output_schema:
   type: object
-  required: ["dimensional_scores", "derived_metrics", "strategic_analysis"]
+  required: ["dimensional_scores", "derived_metrics"]
   properties:
     dimensional_scores:
       type: object
@@ -370,7 +368,7 @@ output_schema:
       properties:
         problem_definition:
           type: object
-          required: ["raw_score", "salience", "confidence"]
+          required: ["raw_score", "salience", "confidence", "evidence"]
           properties:
             raw_score:
               type: number
@@ -387,9 +385,12 @@ output_schema:
               minimum: 0.0
               maximum: 1.0
               description: "Analyst confidence in assessment (0.0-1.0)"
+            evidence:
+              type: string
+              description: "Textual evidence supporting the problem definition assessment"
         causal_attribution:
           type: object
-          required: ["raw_score", "salience", "confidence"]
+          required: ["raw_score", "salience", "confidence", "evidence"]
           properties:
             raw_score:
               type: number
@@ -406,9 +407,12 @@ output_schema:
               minimum: 0.0
               maximum: 1.0
               description: "Analyst confidence in assessment (0.0-1.0)"
+            evidence:
+              type: string
+              description: "Textual evidence supporting the causal attribution assessment"
         moral_evaluation:
           type: object
-          required: ["raw_score", "salience", "confidence"]
+          required: ["raw_score", "salience", "confidence", "evidence"]
           properties:
             raw_score:
               type: number
@@ -425,9 +429,12 @@ output_schema:
               minimum: 0.0
               maximum: 1.0
               description: "Analyst confidence in assessment (0.0-1.0)"
+            evidence:
+              type: string
+              description: "Textual evidence supporting the moral evaluation assessment"
         treatment_recommendation:
           type: object
-          required: ["raw_score", "salience", "confidence"]
+          required: ["raw_score", "salience", "confidence", "evidence"]
           properties:
             raw_score:
               type: number
@@ -444,6 +451,9 @@ output_schema:
               minimum: 0.0
               maximum: 1.0
               description: "Analyst confidence in assessment (0.0-1.0)"
+            evidence:
+              type: string
+              description: "Textual evidence supporting the treatment recommendation assessment"
     derived_metrics:
       type: object
       required: ["message_completeness_index", "framing_coherence_index", "salience_weighted_message_completeness", "strategic_framing_profile", "framing_independence_score"]
@@ -473,17 +483,5 @@ output_schema:
           minimum: 0.0
           maximum: 1.0
           description: "Empirical independence of framing functions"
-    strategic_analysis:
-      type: object
-      required: ["communication_profile", "framing_sophistication", "strategic_insights"]
-      properties:
-        communication_profile:
-          type: string
-          description: "Classification of strategic communication approach"
-        framing_sophistication:
-          type: string
-          description: "Assessment of message construction sophistication"
-        strategic_insights:
-          type: string
-          description: "Key insights about framing strategy and communication effectiveness"
+
 ```
