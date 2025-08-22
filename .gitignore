@@ -18,6 +18,9 @@ var/
 wheels/
 *.egg-info/
 .installed.cfg
+
+# Temporary files and large media
+tmp/
 *.egg
 MANIFEST
 
