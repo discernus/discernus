@@ -16,8 +16,8 @@ def scrape_channel_videos(channel_url, output_file):
     # Configure yt-dlp options to extract information without downloading
     ydl_opts = {
         'quiet': True,
-        'extract_flat': True,  # Extract only metadata, not the video itself
         'force_generic_extractor': True,
+        'get_upload_date': True,
     }
 
     video_data = []
