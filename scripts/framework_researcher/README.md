@@ -1,50 +1,69 @@
 # Framework Researcher: Enhanced Validation Integration
 
-**Purpose**: Explore integration between framework structural validation and academic literature grounding using DiscernusLibrarian methodology.
+**Purpose**: Comprehensive framework validation combining structural compliance, academic grounding, and research synthesis using DiscernusLibrarian methodology.
 
-## 🏗️ Architecture Overview
+## 🎯 Raison d'Être
 
-This directory contains an experimental integration that combines:
+**Why This Tool Exists**: Structural validation alone is insufficient for production frameworks. Researchers need **academic grounding and research synthesis** to ensure frameworks are theoretically sound, methodologically robust, and aligned with current literature. This tool provides the missing academic validation layer that transforms basic compliance into scholarly excellence.
 
-1. **Structural Validation** (from `framework_validator.py`)
+**The Problem It Solves**: 
+- Frameworks can pass structural validation while remaining theoretically weak
+- Researchers lack systematic access to academic literature for framework validation
+- Validation outputs are scattered and difficult to track over time
+- No integration between structural compliance and academic rigor
+
+**The Solution**: A comprehensive validation system that combines canonical structural validation with LLM-based academic assessment, DiscernusLibrarian integration for systematic literature reviews, and organized output management that keeps validation history alongside frameworks.
+
+This directory contains the enhanced framework validation system that combines:
+
+1. **Structural Validation** (imported from `framework_validation/framework_validator.py`)
    - Framework specification compliance
    - Internal coherence and consistency
    - Output schema validation
 
-2. **Academic Validation** (from `discernuslibrarian.py` methodology)
+2. **Academic Validation** (LLM-based assessment)
    - Theoretical foundation assessment
    - Literature support analysis
    - Research gap identification
    - Methodological validation
 
-3. **Integrated Assessment**
+3. **Research Directions Generation**
+   - Priority research questions identification
+   - Systematic literature review orchestration
+   - Academic grounding validation
+
+4. **Integrated Assessment**
    - Combined scoring (60% structural + 40% academic)
    - Comprehensive recommendations
-   - Enhanced validation reports
+   - Enhanced validation reports with full research synthesis
 
 ## 📁 Files
 
-- **`enhanced_framework_validator.py`**: Main integration tool
-- **`framework_validator.py`**: Original structural validator (copied)
-- **`discernuslibrarian.py`**: Original librarian tool (copied)
-- **`test_framework.md`**: Example framework for testing the validator
+- **`enhanced_framework_validator.py`**: Main enhanced validation tool
+- **`test_enhanced_framework_validator.py`**: Unit tests for the validator
+- **`test_report_generation.py`**: Test script for report generation
+- **`README.md`**: This documentation
+
+**Note**: The enhanced validator now imports the canonical `FrameworkValidator` from `scripts/framework_validation/` and `DiscernusLibrarian` from `discernus/librarian/` rather than duplicating code.
 
 ## 🚀 Usage
 
 ### Basic Enhanced Validation
 ```bash
-python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10.md
+python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md
 ```
 
 ### Structural Validation Only
 ```bash
-python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10.md --no-academic
+python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md --no-academic
 ```
 
 ### Save Report to File
 ```bash
-python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10.md --output validation_report.md
+python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md --output enhanced_validation_2025-08-21.md
 ```
+
+**Note**: Reports are now automatically saved to the framework's `validation_reports/` directory with framework name prefixes for discoverability.
 
 ### Verbose Mode with Full Transparency
 ```bash
@@ -63,6 +82,11 @@ make enhanced-validate-framework-verbose FRAMEWORK=frameworks/reference/flagship
 python3 scripts/framework_researcher/enhanced_framework_validator.py scripts/framework_researcher/test_framework.md
 ```
 
+### Full Research Integration
+```bash
+python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md --initiate-research
+```
+
 ## 🔬 Validation Phases
 
 ### Phase 1: Structural Validation
@@ -78,11 +102,17 @@ python3 scripts/framework_researcher/enhanced_framework_validator.py scripts/fra
 - Methodological validation
 - Citation quality evaluation
 
-### Phase 3: Integrated Assessment
+### Phase 3: Research Directions & Librarian Research
+- Priority research question generation
+- Systematic literature review orchestration
+- Academic grounding validation
+- Research synthesis and recommendations
+
+### Phase 4: Integrated Assessment
 - Combined scoring algorithm
 - Overall status determination
 - Integrated recommendations
-- Comprehensive reporting
+- Comprehensive reporting with research synthesis
 
 ## 📊 Scoring System
 
@@ -129,6 +159,26 @@ The enhanced integration now provides **complete transparency** by embedding all
 2. **Research Synthesis**: Detailed analysis and actionable insights
 3. **Detailed Research Appendices**: File references and content descriptions
 4. **Complete Research Reports**: Full, unedited detailed reports embedded as appendices
+
+### New Directory Structure
+
+All validation artifacts are now organized alongside the frameworks they assess:
+
+```
+frameworks/reference/flagship/pdaf_v10/
+├── pdaf_v10.md                           # The framework itself
+├── validation_reports/                    # All validation outputs
+│   ├── pdaf_v10_enhanced_validation_*.md
+│   └── pdaf_v10_research_synthesis_*.md
+└── research_directions/                   # Research questions
+    └── pdaf_v10_research_directions_*.md
+```
+
+This structure provides:
+- **Discoverability**: Framework and validation history are co-located
+- **Provenance**: Clear relationship between framework and validation artifacts
+- **Versioning**: Multiple validation reports can track framework evolution
+- **Organization**: Each framework gets its own research ecosystem
 
 ### Research Report Content
 
@@ -195,12 +245,20 @@ make enhanced-validate-framework-research FRAMEWORK=path/to/framework.md
 make enhanced-validate-framework-verbose FRAMEWORK=path/to/framework.md
 ```
 
+**Note**: Update framework paths to use the new directory structure (e.g., `frameworks/reference/flagship/pdaf_v10/pdaf_v10.md`)
+
 ## 🔧 Technical Implementation
 
 ### LLM Integration
 - **Structural Model**: Gemini 2.5 Pro for framework analysis
 - **Academic Model**: Gemini 2.5 Pro for academic validation
+- **Research Model**: Gemini 2.5 Pro for research synthesis
 - **Fallback Parsing**: Handles partial LLM responses gracefully
+
+### Directory Management
+- **Framework Directory Creation**: Automatically creates framework-specific directories
+- **File Organization**: Saves outputs to appropriate subdirectories with framework name prefixes
+- **Path Resolution**: Handles both local and project-relative paths correctly
 
 ### Transparency & Debugging
 - **Verbose Mode**: Full visibility into LLM prompts, responses, and metadata
@@ -267,12 +325,16 @@ make enhanced-validate-framework-verbose FRAMEWORK=path/to/framework.md
 - **Librarian Research Orchestration**: ✅ Executes systematic literature reviews
 - **Research Synthesis**: ✅ Combines findings into actionable recommendations
 - **Complete Research Integration**: ✅ Embeds detailed reports as appendices
+- **Directory Organization**: ✅ Automatically organizes outputs by framework with clear naming
 
 ### Recent Improvements
 - **Enhanced LLM Integration**: Added system prompts and temperature control
 - **Improved JSON Parsing**: Better handling of code blocks and partial responses
 - **Intelligent Fallback**: Smarter parsing of truncated LLM responses
 - **Debug Output**: Added detailed logging for development and troubleshooting
+- **Directory Restructuring**: Moved from scripts directory to framework-specific directories
+- **Framework Name Prefixing**: All outputs now include framework names for discoverability
+- **Canonical Validator Integration**: Now imports FrameworkValidator instead of duplicating code
 
 ## 🚧 Current Limitations
 
@@ -305,11 +367,25 @@ make enhanced-validate-framework-verbose FRAMEWORK=path/to/framework.md
 
 ## 📁 Output Files
 
-The integration generates several types of output files:
-- `research_directions/` - Generated research questions in markdown
-- `research_synthesis/` - Complete synthesis reports with embedded detailed findings
-- `discernus/librarian/reports/` - Individual detailed research reports
-- `discernus/librarian/research_data/` - Raw research data in JSON format
+The integration now generates outputs organized by framework:
+
+### Framework Directory Structure
+```
+frameworks/reference/flagship/{framework_name}/
+├── {framework_name}.md                    # The framework file
+├── validation_reports/                     # All validation outputs
+│   ├── {framework_name}_enhanced_validation_*.md
+│   └── {framework_name}_research_synthesis_*.md
+└── research_directions/                    # Research questions
+    └── {framework_name}_research_directions_*.md
+```
+
+### File Naming Convention
+- **Enhanced Validation**: `{framework_name}_enhanced_validation_{timestamp}.md`
+- **Research Synthesis**: `{framework_name}_research_synthesis_{timestamp}.md`
+- **Research Directions**: `{framework_name}_research_directions_{timestamp}.md`
+
+This ensures all outputs are clearly associated with their source framework and easily discoverable.
 
 ## 🎓 Academic Use Cases
 
@@ -322,9 +398,37 @@ This tool is designed for:
 ## 📚 Related Documentation
 
 - **Framework Specification v10.0**: `/docs/specifications/FRAMEWORK_SPECIFICATION.md`
-- **Original Framework Validator**: `/scripts/framework_validation/`
+- **Canonical Framework Validator**: `/scripts/framework_validation/`
 - **DiscernusLibrarian**: `/discernus/librarian/`
 - **Framework Examples**: `/frameworks/reference/flagship/`
+
+## 🔗 Related Tools
+
+### Canonical Framework Validator
+This enhanced validator builds upon the **canonical framework validator** (`scripts/framework_validation/framework_validator.py`) by importing and extending its structural validation capabilities.
+
+**Tool Relationship:**
+- **Canonical validator**: Focused structural compliance and quality assessment
+- **Enhanced validator**: Comprehensive validation with academic grounding, research synthesis, and organized output management
+
+**When to use which tool:**
+- **Canonical validator**: Quick structural compliance checks during development, CI/CD integration
+- **Enhanced validator**: Comprehensive validation with academic grounding and research synthesis for production frameworks
+
+## 🏗️ Architecture Benefits
+
+### Before (Old Structure)
+- Validation artifacts scattered in scripts directory
+- No clear relationship between frameworks and validation outputs
+- Difficult to track framework evolution over time
+- Cluttered scripts directory with multiple versions
+
+### After (New Structure)
+- **Co-location**: Framework and validation history are together
+- **Discoverability**: Clear file naming with framework prefixes
+- **Provenance**: Easy to see what was validated when
+- **Organization**: Each framework gets its own research ecosystem
+- **Clean Scripts**: Only core tools remain in scripts directory
 
 ## 🤝 Contributing
 
@@ -350,4 +454,4 @@ This is an experimental integration project. Contributions and feedback are welc
 
 ---
 
-*This is an experimental integration exploring enhanced framework validation with academic grounding. The integration is now functional and successfully combines structural and academic validation phases.*
+*This is a production-ready enhanced framework validation system that successfully combines structural compliance, academic grounding, and research synthesis. The system now provides organized, discoverable validation artifacts alongside the frameworks they assess.*

@@ -2,9 +2,13 @@
 
 A dedicated tool for validating Discernus frameworks against the current framework specification. Uses Gemini 2.5 Pro to assess framework coherence, compliance, and quality.
 
-## 🎯 Purpose
+## 🎯 Raison d'Être
 
-Framework developers need a simple, reliable way to validate their frameworks before running experiments. This tool provides:
+**Why This Tool Exists**: Framework validation is the critical first step in the research pipeline. Without proper validation, researchers waste time and resources on experiments with flawed frameworks. This tool provides **fast, reliable structural validation** that catches issues before they propagate through the system.
+
+**The Problem It Solves**: Manual framework review is slow, inconsistent, and error-prone. Researchers need a tool that can quickly assess framework compliance, identify blocking issues, and provide actionable feedback for improvement.
+
+**The Solution**: Automated LLM-powered validation that understands the framework specification, identifies structural and quality issues, and provides clear, actionable recommendations for framework improvement.
 
 - **Automated validation** against the current framework specification
 - **Clear, actionable feedback** on blocking issues, quality problems, and suggestions
@@ -103,8 +107,26 @@ scripts/
 ├── framework_validation/
 │   ├── framework_validator.py      # Main validation tool
 │   └── README.md                   # This documentation
+├── framework_researcher/
+│   ├── enhanced_framework_validator.py  # Enhanced validation with research synthesis
+│   └── README.md                         # Enhanced validator documentation
 └── ...
 ```
+
+## 🔗 Related Tools
+
+### Enhanced Framework Validator
+The **enhanced framework validator** (`scripts/framework_researcher/enhanced_framework_validator.py`) builds upon this canonical validator by adding:
+
+- **Academic validation** using LLM-based assessment
+- **Research directions generation** for priority research questions
+- **DiscernusLibrarian integration** for systematic literature reviews
+- **Research synthesis** combining findings into actionable recommendations
+- **Organized output structure** with framework-specific directories
+
+**When to use which tool:**
+- **This validator**: Quick structural compliance checks during development
+- **Enhanced validator**: Comprehensive validation with academic grounding and research synthesis
 
 ## 🎯 Best Practices
 
