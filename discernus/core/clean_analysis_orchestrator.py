@@ -550,10 +550,14 @@ class CleanAnalysisOrchestrator:
                     self._log_progress(f"🔍 No cache hit for: {prepared_doc.get('filename', 'Unknown')} - running analysis...")
                     self.performance_metrics["cache_misses"] += 1
                 
+                # Load framework content (not just filename)
+                framework_path = self.experiment_path / self.config['framework']
+                framework_content = framework_path.read_text(encoding='utf-8')
+                
                 # Analyze single document
                 result = analysis_agent.analyze_documents(
                     corpus_documents=[prepared_doc],
-                    framework_content=self.config.get('framework', ''),
+                    framework_content=framework_content,
                     experiment_config=self.config,
                     model=analysis_model
                 )
