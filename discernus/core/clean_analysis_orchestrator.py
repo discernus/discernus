@@ -580,10 +580,13 @@ class CleanAnalysisOrchestrator:
                     analysis_result = result['analysis_result']
                     result_content = analysis_result.get('result_content', {})
                     
+                    # The raw_analysis_response is stored in result_content, not nested deeper
+                    raw_analysis_response = result_content.get('raw_analysis_response', '')
+                    
                     # Store the full result with raw_analysis_response at top level for statistical processing
                     full_result = {
                         'analysis_result': analysis_result,
-                        'raw_analysis_response': result_content.get('raw_analysis_response', ''),
+                        'raw_analysis_response': raw_analysis_response,
                         'scores_hash': result.get('scores_hash', ''),
                         'evidence_hash': result.get('evidence_hash', ''),
                         'document_id': doc_hash,
@@ -739,8 +742,12 @@ class CleanAnalysisOrchestrator:
         # Execute each statistical function and collect results
         statistical_outputs = {}
         
-        # Get all functions from the module that don't start with underscore
-        function_names = [name for name in dir(stats_module) if not name.startswith('_') and callable(getattr(stats_module, name))]
+        # Get all functions from the module that don't start with underscore and aren't type annotations
+        type_annotations = {'Any', 'Dict', 'List', 'Optional', 'Tuple', 'Union', 'Callable', 'TypeVar', 'Generic'}
+        function_names = [name for name in dir(stats_module) 
+                         if not name.startswith('_') 
+                         and callable(getattr(stats_module, name))
+                         and name not in type_annotations]
         
         self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
         

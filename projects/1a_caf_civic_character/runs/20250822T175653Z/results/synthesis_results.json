@@ -1,0 +1,5 @@
+{
+  "synthesis_text": "Synthesis failed: RAG synthesis failed: Synthesis transaction failed: No final report generated. Enhanced synthesis must produce a complete report.",
+  "status": "failed",
+  "error": "RAG synthesis failed: Synthesis transaction failed: No final report generated. Enhanced synthesis must produce a complete report."
+}
