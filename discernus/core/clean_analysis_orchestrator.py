@@ -324,23 +324,70 @@ class CleanAnalysisOrchestrator:
             "questions": self.config.get('questions', [])
         }
         
-        # Run batch analysis (this is how the working orchestrator does it)
-        self._log_progress(f"📊 Running batch analysis on {len(prepared_documents)} documents...")
+        # Run individual analysis (RESTORED PATTERN from ExperimentOrchestrator)
+        self._log_progress(f"📊 Running individual analysis on {len(prepared_documents)} documents...")
         
-        try:
-            analysis_result = analysis_agent.analyze_batch(
-                framework_content=framework_content,
-                corpus_documents=prepared_documents,
-                experiment_config=experiment_config,
-                model=analysis_model
-            )
+        results = []
+        for i, prepared_doc in enumerate(prepared_documents):
+            doc_filename = prepared_doc['filename']
+            self._log_progress(f"📄 Analyzing document {i+1}/{len(prepared_documents)}: {doc_filename}")
             
-            self._log_status(f"Batch analysis completed successfully")
-            return [analysis_result]  # Return as list for consistency
-            
-        except Exception as e:
-            self._log_progress(f"❌ Batch analysis failed: {str(e)}")
-            raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
+            try:
+                # CRITICAL: Individual processing - analyze one document at a time for caching
+                analysis_response = analysis_agent.analyze_batch(
+                    framework_content=framework_content,
+                    corpus_documents=[prepared_doc],  # Single document in list
+                    experiment_config=experiment_config,
+                    model=analysis_model,
+                )
+                
+                # Extract the analysis result hash from the response
+                analysis_result_info = analysis_response.get('analysis_result', {})
+                result_hash = analysis_result_info.get('result_hash')
+                
+                if not result_hash:
+                    raise CleanAnalysisError(f"No result hash returned for document {doc_filename}")
+                
+                # Load the actual analysis data from the artifact
+                analysis_data_bytes = self.artifact_storage.get_artifact(result_hash)
+                analysis_data = json.loads(analysis_data_bytes.decode('utf-8'))
+                
+                # Get artifact path for provenance
+                metadata = self.artifact_storage.get_artifact_metadata(result_hash)
+                relative_path = metadata.get('artifact_path')
+                if not relative_path:
+                    raise CleanAnalysisError(f"Artifact {result_hash} was stored, but no path was found in metadata.")
+                
+                artifact_path = self.artifact_storage.run_folder / relative_path
+
+                results.append({
+                    "document": doc_filename,
+                    "artifact_path": artifact_path,
+                    "artifact_hash": result_hash,
+                    "analysis_data": analysis_data,  # Include for statistical processing
+                    "status": "success"
+                })
+                self._log_progress(f"✅ Document {doc_filename} analyzed successfully.")
+
+            except Exception as e:
+                self._log_progress(f"❌ Analysis failed for document {doc_filename}: {e}")
+                results.append({"document": doc_filename, "status": "failed", "error": str(e)})
+
+        successful_analyses = [r for r in results if r['status'] == 'success']
+        self._log_progress(f"📊 Individual analysis complete: {len(successful_analyses)}/{len(prepared_documents)} documents processed.")
+        
+        # Return successful analysis data for statistical processing
+        # Include the raw analysis response for DataFrame conversion
+        analysis_results_for_stats = []
+        for r in successful_analyses:
+            analysis_data = r['analysis_data']
+            # Ensure raw_analysis_response is included for DataFrame conversion
+            if 'raw_analysis_response' in analysis_data:
+                analysis_results_for_stats.append(analysis_data)
+            else:
+                self._log_progress(f"⚠️ Analysis result for {r['document']} missing raw_analysis_response")
+        
+        return analysis_results_for_stats
     
     def _run_statistical_analysis(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Generate and execute statistical analysis functions."""
@@ -468,75 +515,62 @@ class CleanAnalysisOrchestrator:
         return statistical_outputs
     
     def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
-        """Convert analysis results to pandas DataFrame for statistical functions."""
+        """Convert individual analysis results to pandas DataFrame for statistical functions."""
         import pandas as pd
         import json
         
-        # Extract the analysis data from the first result (batch analysis)
         if not analysis_results or len(analysis_results) == 0:
             raise CleanAnalysisError("No analysis results to convert")
         
-        analysis_result = analysis_results[0]
+        self._log_progress(f"🔍 Converting {len(analysis_results)} individual analysis results to DataFrame...")
         
-        # Debug: Log the structure of analysis_result
-        self._log_progress(f"🔍 Analysis result keys: {list(analysis_result.keys())}")
+        # Aggregate document analyses from all individual results
+        all_rows = []
         
-        # Parse the raw analysis response to get document analyses
-        raw_response = analysis_result.get('raw_analysis_response', '')
-        
-        # If raw_response is empty, load it from artifact storage
-        if not raw_response:
-            self._log_progress(f"📥 Loading raw analysis response from artifact storage...")
+        for i, analysis_result in enumerate(analysis_results):
+            # Each analysis_result is now an individual document analysis
+            raw_response = analysis_result.get('raw_analysis_response', '')
             
-            # Load the raw analysis response from artifact storage
-            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts" / "artifacts"
-            raw_response_files = list(artifacts_dir.glob("raw_analysis_response_v6_*"))
+            if not raw_response:
+                self._log_progress(f"⚠️ Skipping analysis result {i+1} - no raw response")
+                continue
             
-            if raw_response_files:
-                # Take the most recent one (sorted by name which includes timestamp)
-                raw_response_file = sorted(raw_response_files)[-1]
-                raw_response = raw_response_file.read_text(encoding='utf-8')
-                self._log_progress(f"📥 Loaded raw analysis response from {raw_response_file.name}")
-            else:
-                raise CleanAnalysisError("No raw analysis response found in artifacts directory")
-        
-        # Extract JSON from the delimited response
-        start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
-        end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-        
-        start_idx = raw_response.find(start_marker)
-        end_idx = raw_response.find(end_marker)
-        
-        if start_idx == -1 or end_idx == -1:
-            # Debug: Log what we actually have
-            self._log_progress(f"❌ Could not find JSON markers. Response length: {len(raw_response)}")
-            self._log_progress(f"❌ Response preview: {raw_response[:500]}...")
-            raise CleanAnalysisError(f"Could not find analysis JSON markers in response. Response length: {len(raw_response)}")
-        
-        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
-        
-        try:
-            analysis_data = json.loads(json_content)
-        except json.JSONDecodeError as e:
-            self._log_progress(f"❌ JSON parsing failed: {str(e)}")
-            self._log_progress(f"❌ JSON content preview: {json_content[:500]}...")
-            raise CleanAnalysisError(f"Failed to parse analysis JSON: {str(e)}")
-        
-        # Convert document analyses to DataFrame rows
-        rows = []
-        for doc_analysis in analysis_data.get('document_analyses', []):
-            row = {'document_name': doc_analysis.get('document_name', '')}
+            # Extract JSON from the delimited response
+            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
             
-            # Add dimensional scores (both raw_score and salience)
-            for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
-                row[f"{dimension}_raw"] = scores.get('raw_score', 0.0)
-                row[f"{dimension}_salience"] = scores.get('salience', 0.0)
-                row[f"{dimension}_confidence"] = scores.get('confidence', 0.0)
+            start_idx = raw_response.find(start_marker)
+            end_idx = raw_response.find(end_marker)
             
-            rows.append(row)
+            if start_idx == -1 or end_idx == -1:
+                self._log_progress(f"⚠️ Skipping analysis result {i+1} - no JSON markers found")
+                continue
+            
+            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            
+            try:
+                analysis_data = json.loads(json_content)
+            except json.JSONDecodeError as e:
+                self._log_progress(f"⚠️ Skipping analysis result {i+1} - JSON parsing failed: {str(e)}")
+                continue
+            
+            # Process document analyses from this individual result
+            for doc_analysis in analysis_data.get('document_analyses', []):
+                row = {'document_name': doc_analysis.get('document_name', '')}
+                
+                # Add dimensional scores (both raw_score and salience)
+                for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
+                    row[f"{dimension}_raw"] = scores.get('raw_score', 0.0)
+                    row[f"{dimension}_salience"] = scores.get('salience', 0.0)
+                    row[f"{dimension}_confidence"] = scores.get('confidence', 0.0)
+                
+                all_rows.append(row)
         
-        df = pd.DataFrame(rows)
-        self._log_progress(f"📊 Converted analysis to DataFrame: {len(df)} documents, {len(df.columns)} features")
+        if not all_rows:
+            raise CleanAnalysisError("No valid document analyses found in individual results")
+        
+        df = pd.DataFrame(all_rows)
+        self._log_progress(f"📊 Converted individual analysis to DataFrame: {len(df)} documents, {len(df.columns)} features")
         
         return df
     

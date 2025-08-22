@@ -99,30 +99,47 @@
 - **Dependencies**: None
 - **Priority**: MEDIUM - Improves academic reproducibility and research integrity
 
-#### [ARCH-002] Complete Clean Orchestrator Implementation (Option A)
-- **Description**: Complete implementation of CleanAnalysisOrchestrator with full feature parity to replace legacy notebook-based orchestrator
-- **Impact**: Eliminates architectural debt from notebook generation cruft, provides clean THIN architecture focused on actual needs
+#### [ARCH-002] **CRITICAL REGRESSION**: Batch Processing Architecture Failure
+- **Description**: **URGENT**: CleanAnalysisOrchestrator uses batch processing instead of individual document processing, breaking caching, synthesis, and scalability
+- **Impact**: 
+  - **IMMEDIATE**: Statistical analysis path bug causing experiment failures
+  - **SCALABILITY**: Cannot handle thousands of documents (context window limits)
+  - **CACHING**: Complete loss of document-level content-addressable caching
+  - **SYNTHESIS**: Broken asset validation and evidence linkage
+  - **COST**: Re-analyzes all documents when any one changes
+- **Root Cause**: New orchestrator calls `analyze_batch()` with ALL documents vs working pattern of single document loops
+- **Evidence**: PDAF test creates 1 batch file with 4 documents vs CFF test with individual files
 - **Acceptance Criteria**:
-  - Statistical Analysis Integration: Properly execute AutomatedStatisticalAnalysisAgent with generated functions
-  - Real Synthesis Integration: Replace placeholder with actual synthesis agent integration
-  - Complete Data Pipeline: Raw scores → Derived metrics → Statistical analysis → Synthesis flow
-  - Derived Metrics Calculation: Execute framework-specific derived metrics properly
-  - Evidence Integration: Proper evidence aggregation and linking throughout pipeline
-  - Caching System: Leverage existing artifact caching for performance parity
-  - Comprehensive Error Handling: Robust error handling with graceful degradation
-  - Performance Validation: Verify caching and performance match legacy orchestrator
-  - Complete Testing: Ensure all experiments work with clean orchestrator
+  - **Phase 1 (IMMEDIATE)**: Fix statistical analysis path bug (`/artifacts/artifacts` → `/artifacts`)
+  - **Phase 2 (CRITICAL)**: Restore individual document processing loop from ExperimentOrchestrator
+  - **Phase 3 (VALIDATION)**: Comprehensive test coverage with mocked dependencies
+  - **Phase 4 (INTEGRATION)**: Statistical analysis integration with individual artifacts
+  - **Phase 5 (SYNTHESIS)**: Real synthesis integration with proper asset validation
+  - **Phase 6 (PERFORMANCE)**: Document-level caching and resumption capability
+- **Implementation Strategy**: Test-Driven Development to minimize API costs
+  - Unit tests with mocked dependencies (0 cost)
+  - Implementation using proven ExperimentOrchestrator pattern
+  - Integration tests with mocked LLM calls (0 cost)
+  - Limited live testing with minimal experiments ($2-5)
+  - Full validation with original experiments ($3-8)
+- **Effort**: High (6-8 hours total) - **CRITICAL PATH ITEM**
+- **Dependencies**: None (working pattern exists in ExperimentOrchestrator)
+- **Priority**: **CRITICAL** - Blocks all production experiments, breaks THIN architecture
+- **Current Status**: **REGRESSION IDENTIFIED** - Detailed remediation plan created
+- **Documentation**: `docs/developer/BATCH_PROCESSING_REGRESSION_REMEDIATION_PLAN.md`
+
+#### [ARCH-003] Complete Clean Orchestrator Feature Parity (Post-Regression Fix)
+- **Description**: Complete remaining CleanAnalysisOrchestrator features after batch processing regression is fixed
+- **Impact**: Eliminates remaining architectural debt from notebook generation cruft
+- **Acceptance Criteria**:
+  - Enhanced Error Handling: Robust error handling with graceful degradation
+  - Performance Optimization: Verify caching and performance optimization
+  - Complete Testing: Comprehensive test coverage for all scenarios
   - CLI Default Switch: Make clean orchestrator the default, deprecate legacy option
-- **Implementation Phases**:
-  - Phase 1: Statistical analysis integration (2-3 hours)
-  - Phase 2: Real synthesis integration (2-3 hours)  
-  - Phase 3: Data pipeline completion (1-2 hours)
-  - Phase 4: Error handling & testing (1 hour)
-  - Phase 5: CLI integration & legacy deprecation (30 minutes)
-- **Effort**: High (6-8 hours total)
-- **Dependencies**: None (CleanAnalysisOrchestrator foundation already created)
-- **Priority**: HIGH - Eliminates major architectural debt and notebook generation cruft
-- **Current Status**: Foundation created, minimal viable version in progress, full implementation planned for tomorrow
+- **Effort**: Medium (2-3 hours)
+- **Dependencies**: ARCH-002 (Batch Processing Regression Fix)
+- **Priority**: HIGH - Completes clean orchestrator implementation
+- **Current Status**: Blocked by ARCH-002 regression
 
 #### [TECH-007] Dev Tools Integration Decision
 - **Description**: Decide future of standalone dev_tools directory and integrate or organize appropriately
@@ -349,16 +366,25 @@
 
 ## 🎯 Current Sprint Planning
 
-### Sprint 1: Framework Library Compliance (Current Priority)
+### **CRITICAL SPRINT**: Batch Processing Regression Fix (IMMEDIATE PRIORITY)
+- [ ] **ARCH-002**: **CRITICAL REGRESSION** - Batch Processing Architecture Failure
+  - [ ] Phase 1: Fix statistical analysis path bug (30 minutes, $0)
+  - [ ] Phase 2: Unit tests with mocked dependencies (1-2 hours, $0)
+  - [ ] Phase 3: Implement individual document processing (2-3 hours, $0)
+  - [ ] Phase 4: Integration tests with mocked LLM calls (1 hour, $0)
+  - [ ] Phase 5: Limited live testing (30 minutes, $2-5)
+  - [ ] Phase 6: Full validation with original experiments (15 minutes, $3-8)
+
+### Sprint 1: Clean Orchestrator Completion (Post-Regression)
+- [ ] ARCH-003: Complete Clean Orchestrator Feature Parity
+- [ ] TEST-001: Unit Test Coverage Targets
+- [ ] TEST-002: Integration Test Strategy
+
+### Sprint 2: Framework Library Compliance
 - [ ] TECH-004: Framework Library Compliance Update
 - [ ] FRAMEWORK-001: Automated Validation Pipeline
 
-### Sprint 2: Clean Orchestrator Completion
-- [ ] ARCH-002: Complete Clean Orchestrator Implementation
-
 ### Sprint 3: Testing & Quality Enhancement
-- [ ] TEST-001: Unit Test Coverage Targets
-- [ ] TEST-002: Integration Test Strategy
 - [ ] TEST-003: Test Data Management
 
 ### Sprint 4: Developer Experience
