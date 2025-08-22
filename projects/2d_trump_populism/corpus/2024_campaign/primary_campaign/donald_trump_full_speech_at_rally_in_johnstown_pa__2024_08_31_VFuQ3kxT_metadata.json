@@ -1,0 +1,29 @@
+{
+  "video_info": {
+    "video_id": "VFuQ3kxTDMI",
+    "title": "Donald Trump full speech at rally in Johnstown, PA (Aug. 30. 2024)",
+    "channel": "WFAA",
+    "upload_date": "2024-08-31",
+    "description": "Former President Donald Trump gave a full speech at a campaign event in Johnstown, Pennsylvania on August 30, 2024.",
+    "duration": 5091,
+    "view_count": 133498,
+    "like_count": 2645,
+    "url": "https://www.youtube.com/watch?v=VFuQ3kxTDMI"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 77.00411315642701,
+    "success": true,
+    "transcript_length": 68958,
+    "whisper_model": "base"
+  },
+  "processing_metadata": {
+    "transcript_length": 68958,
+    "extraction_date": "2025-08-22T10:03:09.467408",
+    "source": "openai_whisper",
+    "model": "base",
+    "detected_language": "en",
+    "segments": 1524
+  }
+}

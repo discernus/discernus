@@ -152,34 +152,91 @@ def _parse_experiment_for_display(experiment_path: Path) -> Dict[str, Any]:
 
 
 def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dict[str, Any]]:
-    """Perform a basic structural check on the experiment directory."""
+    """
+    Enhanced basic structural validation with file existence checks.
+    THIN approach: CLI handles file system validation, coherence agent handles semantic validation.
+    """
     if not experiment_path.exists() or not experiment_path.is_dir():
         return False, f"❌ Experiment path does not exist or is not a directory: {experiment_path}", {}
     
     experiment_file = experiment_path / "experiment.md"
     if not experiment_file.exists():
         return False, f"❌ Missing experiment.md in {experiment_path}", {}
-        
-    # Basic parsing to get experiment name for display
+    
+    # Parse experiment to get component references and basic info
     try:
-        content = experiment_file.read_text(encoding='utf-8')
-        if '## Configuration Appendix' in content:
-            _, appendix_content = content.split('## Configuration Appendix', 1)
-            if '```yaml' in appendix_content:
-                yaml_start = appendix_content.find('```yaml') + 7
-                yaml_end = appendix_content.rfind('```')
-                yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
-                import yaml
-                config = yaml.safe_load(yaml_content)
-                experiment_name = config.get('metadata', {}).get('experiment_name', 'Unknown')
-            else:
-                experiment_name = 'Unknown'
-        else:
-            experiment_name = 'Unknown'
-    except Exception:
-        experiment_name = 'Unknown'
+        config_info = _parse_experiment_for_display(experiment_path)
+        experiment_name = config_info.get('name', 'Unknown')
+        framework_file = config_info.get('framework', 'Unknown')
+        corpus_file = config_info.get('corpus', 'Unknown')
+        
+        # Enhanced validation: Check referenced files exist
+        if framework_file != 'Unknown':
+            framework_path = experiment_path / framework_file
+            if not framework_path.exists():
+                return False, f"❌ Referenced framework file not found: {framework_file}", {"name": experiment_name}
+        
+        if corpus_file != 'Unknown':
+            corpus_path = experiment_path / corpus_file
+            if not corpus_path.exists():
+                return False, f"❌ Referenced corpus file not found: {corpus_file}", {"name": experiment_name}
+            
+            # Enhanced validation: Check corpus documents exist
+            corpus_validation_result = _validate_corpus_documents(experiment_path, corpus_path)
+            if not corpus_validation_result[0]:
+                return False, corpus_validation_result[1], {"name": experiment_name}
+        
+        return True, "✅ Enhanced validation passed. Files exist and references are valid.", {"name": experiment_name}
+        
+    except Exception as e:
+        return False, f"❌ Validation error: {str(e)}", {"name": "Unknown"}
 
-    return True, "✅ Basic structure is valid. Full validation will occur during the run.", {"name": experiment_name}
+
+def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path) -> tuple[bool, str]:
+    """
+    Validate that corpus documents referenced in manifest actually exist.
+    THIN approach: Simple file existence checks, no semantic validation.
+    """
+    try:
+        content = corpus_manifest_path.read_text(encoding='utf-8')
+        
+        # Extract YAML from corpus manifest
+        if '## Document Manifest' in content:
+            _, yaml_block = content.split('## Document Manifest', 1)
+            if '```yaml' in yaml_block:
+                yaml_start = yaml_block.find('```yaml') + 7
+                yaml_end = yaml_block.rfind('```')
+                yaml_content = yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else yaml_block[yaml_start:].strip()
+                
+                import yaml
+                manifest_data = yaml.safe_load(yaml_content)
+                
+                # Check document count consistency
+                declared_count = manifest_data.get('total_documents', 0)
+                actual_documents = manifest_data.get('documents', [])
+                actual_count = len(actual_documents)
+                
+                if declared_count != actual_count:
+                    return False, f"❌ Corpus count mismatch: declared {declared_count} documents, found {actual_count} in manifest"
+                
+                # Check each document file exists
+                corpus_dir = experiment_path / "corpus"
+                if not corpus_dir.exists():
+                    return False, f"❌ Corpus directory not found: corpus/"
+                
+                for doc in actual_documents:
+                    filename = doc.get('filename')
+                    if filename:
+                        doc_path = corpus_dir / filename
+                        if not doc_path.exists():
+                            return False, f"❌ Corpus document not found: corpus/{filename}"
+                
+                return True, "✅ All corpus documents found"
+        
+        return False, "❌ Could not parse corpus manifest YAML"
+        
+    except Exception as e:
+        return False, f"❌ Corpus validation error: {str(e)}"
 
 
 # Main CLI group

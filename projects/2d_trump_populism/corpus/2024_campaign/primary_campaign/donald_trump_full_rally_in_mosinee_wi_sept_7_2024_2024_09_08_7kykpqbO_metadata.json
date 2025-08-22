@@ -1,0 +1,29 @@
+{
+  "video_info": {
+    "video_id": "7kykpqbOSjI",
+    "title": "Donald Trump full rally in Mosinee, WI (Sept. 7, 2024)",
+    "channel": "WFAA",
+    "upload_date": "2024-09-08",
+    "description": "Former President Donald Trump delivered remarks at a campaign rally in Mosinee, Wisconsin, on September 7, 2024.",
+    "duration": 5959,
+    "view_count": 130963,
+    "like_count": 2238,
+    "url": "https://www.youtube.com/watch?v=7kykpqbOSjI"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 77.26222036820951,
+    "success": true,
+    "transcript_length": 85389,
+    "whisper_model": "base"
+  },
+  "processing_metadata": {
+    "transcript_length": 85389,
+    "extraction_date": "2025-08-22T10:39:09.954235",
+    "source": "openai_whisper",
+    "model": "base",
+    "detected_language": "en",
+    "segments": 442
+  }
+}
