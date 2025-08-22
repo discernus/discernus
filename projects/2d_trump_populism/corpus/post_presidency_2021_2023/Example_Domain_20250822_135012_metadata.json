@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.example.com",
+  "title": "Example Domain",
+  "extraction_method": "html_extractor",
+  "word_count": 28,
+  "confidence": 90.0,
+  "collected_date": "2025-08-22 13:50:12",
+  "notes": "Extracted from raw HTML content. Review for formatting."
+}

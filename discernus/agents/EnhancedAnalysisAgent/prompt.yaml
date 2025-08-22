@@ -84,4 +84,4 @@ template: |
 
   ---
 
-  Begin analysis now for batch `{batch_id}`. Apply the framework to all {num_documents} documents and return your analysis as valid JSON with raw scores and evidence only. 
+  Begin analysis now for analysis `{analysis_id}`. Apply the framework to all {num_documents} documents and return your analysis as valid JSON with raw scores and evidence only. 

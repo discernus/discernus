@@ -281,11 +281,19 @@ class CleanAnalysisOrchestrator:
             test_key = "cache_test_key"
             test_data = {"test": "data", "timestamp": datetime.now(timezone.utc).isoformat()}
             
-            # Store test data
-            self.artifact_storage.put_artifact(test_key, test_data)
+            # Store test data (encode as JSON bytes)
+            import json
+            test_data_bytes = json.dumps(test_data).encode('utf-8')
+            self.artifact_storage.put_artifact(test_data_bytes, {"artifact_type": "cache_test", "test_key": test_key})
             
-            # Retrieve test data
-            retrieved_data = self.artifact_storage.get_artifact(test_key)
+            # Retrieve test data by finding the artifact with the test_key metadata
+            retrieved_data = None
+            for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                metadata = artifact_info.get("metadata", {})
+                if metadata.get("test_key") == test_key:
+                    artifact_bytes = self.artifact_storage.get_artifact(artifact_hash)
+                    retrieved_data = json.loads(artifact_bytes.decode('utf-8'))
+                    break
             
             if retrieved_data and retrieved_data.get("test") == "data":
                 self._log_progress("✅ Cache performance verified - storage and retrieval working")
@@ -422,8 +430,13 @@ class CleanAnalysisOrchestrator:
         if not corpus_file:
             raise CleanAnalysisError("Missing required field: components.corpus")
             
+        # Extract experiment name from metadata
+        experiment_name = config.get('metadata', {}).get('experiment_name', 'unknown_experiment')
+        
+        # Add convenience fields to config for downstream use
         config['framework'] = framework_file
         config['corpus'] = corpus_file
+        config['name'] = experiment_name
         
         return config
     
@@ -565,10 +578,12 @@ class CleanAnalysisOrchestrator:
                 if result and 'analysis_result' in result:
                     # Extract analysis result from agent response
                     analysis_result = result['analysis_result']
+                    result_content = analysis_result.get('result_content', {})
                     
-                    # Store the full result including metadata from agent
+                    # Store the full result with raw_analysis_response at top level for statistical processing
                     full_result = {
                         'analysis_result': analysis_result,
+                        'raw_analysis_response': result_content.get('raw_analysis_response', ''),
                         'scores_hash': result.get('scores_hash', ''),
                         'evidence_hash': result.get('evidence_hash', ''),
                         'document_id': doc_hash,

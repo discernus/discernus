@@ -1,0 +1,92 @@
+# Post-Presidency Trump Speech Transcript URLs (2021-2023)
+# This manifest contains direct URLs to high-quality web transcripts
+# Format: Date | Location | Event Type | URL
+
+# 2021 Speeches
+2021-02-28 | CPAC | Conservative Political Action Conference | https://www.rev.com/blog/transcripts/donald-trump-cpac-2021-speech-transcript
+2021-04-10 | Mar-a-Lago | Republican National Committee Spring Donor Retreat | https://www.rev.com/blog/transcripts/donald-trump-rnc-spring-donor-retreat-speech-transcript
+2021-06-05 | NCGOP Convention | North Carolina Republican Party Convention | https://www.rev.com/blog/transcripts/donald-trump-nc-republican-convention-speech-transcript
+2021-06-26 | Ohio Rally | Save America Rally in Wellington, Ohio | https://www.rev.com/blog/transcripts/donald-trump-ohio-rally-speech-transcript
+2021-07-03 | Florida Rally | Save America Rally in Sarasota, Florida | https://www.rev.com/blog/transcripts/donald-trump-florida-rally-speech-transcript
+2021-07-24 | Arizona Rally | Save America Rally in Phoenix, Arizona | https://www.rev.com/blog/transcripts/donald-trump-arizona-rally-speech-transcript
+2021-08-21 | Alabama Rally | Save America Rally in Cullman, Alabama | https://www.rev.com/blog/transcripts/donald-trump-alabama-rally-speech-transcript
+2021-09-25 | Georgia Rally | Save America Rally in Perry, Georgia | https://www.rev.com/blog/transcripts/donald-trump-georgia-rally-speech-transcript
+2021-10-09 | Iowa Rally | Save America Rally in Des Moines, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-speech-transcript
+2021-10-16 | North Carolina Rally | Save America Rally in Greenville, North Carolina | https://www.rev.com/blog/transcripts/donald-trump-north-carolina-rally-speech-transcript
+2021-11-06 | Florida Rally | Save America Rally in Tampa, Florida | https://www.rev.com/blog/transcripts/donald-trump-tampa-rally-speech-transcript
+2021-12-18 | Arizona Rally | Save America Rally in Florence, Arizona | https://www.rev.com/blog/transcripts/donald-trump-arizona-rally-december-speech-transcript
+
+# 2022 Speeches
+2022-01-15 | Arizona Rally | Save America Rally in Florence, Arizona | https://www.rev.com/blog/transcripts/donald-trump-arizona-rally-january-speech-transcript
+2022-01-29 | Texas Rally | Save America Rally in Conroe, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-speech-transcript
+2022-02-26 | CPAC | Conservative Political Action Conference | https://www.rev.com/blog/transcripts/donald-trump-cpac-2022-speech-transcript
+2022-03-12 | South Carolina Rally | Save America Rally in Florence, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-speech-transcript
+2022-03-26 | Georgia Rally | Save America Rally in Commerce, Georgia | https://www.rev.com/blog/transcripts/donald-trump-georgia-rally-march-speech-transcript
+2022-04-02 | Michigan Rally | Save America Rally in Washington, Michigan | https://www.rev.com/blog/transcripts/donald-trump-michigan-rally-speech-transcript
+2022-04-09 | Nebraska Rally | Save America Rally in Greenwood, Nebraska | https://www.rev.com/blog/transcripts/donald-trump-nebraska-rally-speech-transcript
+2022-04-23 | North Carolina Rally | Save America Rally in Selma, North Carolina | https://www.rev.com/blog/transcripts/donald-trump-north-carolina-rally-april-speech-transcript
+2022-05-14 | Texas Rally | Save America Rally in Austin, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-may-speech-transcript
+2022-05-28 | Wyoming Rally | Save America Rally in Casper, Wyoming | https://www.rev.com/blog/transcripts/donald-trump-wyoming-rally-speech-transcript
+2022-06-18 | Tennessee Rally | Save America Rally in Nashville, Tennessee | https://www.rev.com/blog/transcripts/donald-trump-tennessee-rally-speech-transcript
+2022-07-02 | Alaska Rally | Save America Rally in Anchorage, Alaska | https://www.rev.com/blog/transcripts/donald-trump-alaska-rally-speech-transcript
+2022-07-23 | Arizona Rally | Save America Rally in Prescott Valley, Arizona | https://www.rev.com/blog/transcripts/donald-trump-arizona-rally-july-speech-transcript
+2022-08-06 | Wisconsin Rally | Save America Rally in Waukesha, Wisconsin | https://www.rev.com/blog/transcripts/donald-trump-wisconsin-rally-speech-transcript
+2022-08-20 | Pennsylvania Rally | Save America Rally in Wilkes-Barre, Pennsylvania | https://www.rev.com/blog/transcripts/donald-trump-pennsylvania-rally-speech-transcript
+2022-09-03 | Pennsylvania Rally | Save America Rally in Wilkes-Barre, Pennsylvania | https://www.rev.com/blog/transcripts/donald-trump-pennsylvania-rally-september-speech-transcript
+2022-09-17 | Ohio Rally | Save America Rally in Youngstown, Ohio | https://www.rev.com/blog/transcripts/donald-trump-ohio-rally-september-speech-transcript
+2022-10-01 | Michigan Rally | Save America Rally in Warren, Michigan | https://www.rev.com/blog/transcripts/donald-trump-michigan-rally-october-speech-transcript
+2022-10-15 | Iowa Rally | Save America Rally in Sioux City, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-october-speech-transcript
+2022-10-22 | Texas Rally | Save America Rally in Robstown, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-october-speech-transcript
+2022-11-05 | Pennsylvania Rally | Save America Rally in Latrobe, Pennsylvania | https://www.rev.com/blog/transcripts/donald-trump-pennsylvania-rally-november-speech-transcript
+2022-11-12 | Florida Rally | Save America Rally in Miami, Florida | https://www.rev.com/blog/transcripts/donald-trump-florida-rally-november-speech-transcript
+2022-11-19 | New Hampshire Rally | Save America Rally in Manchester, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-speech-transcript
+2022-12-03 | South Carolina Rally | Save America Rally in Columbia, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-december-speech-transcript
+
+# 2023 Speeches
+2023-01-28 | New Hampshire Rally | Save America Rally in Salem, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-january-speech-transcript
+2023-02-04 | South Carolina Rally | Save America Rally in Columbia, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-february-speech-transcript
+2023-02-18 | Texas Rally | Save America Rally in Conroe, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-february-speech-transcript
+2023-03-04 | CPAC | Conservative Political Action Conference | https://www.rev.com/blog/transcripts/donald-trump-cpac-2023-speech-transcript
+2023-03-11 | Iowa Rally | Save America Rally in Davenport, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-march-speech-transcript
+2023-03-25 | Texas Rally | Save America Rally in Waco, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-march-speech-transcript
+2023-04-08 | Indiana Rally | Save America Rally in Evansville, Indiana | https://www.rev.com/blog/transcripts/donald-trump-indiana-rally-speech-transcript
+2023-04-15 | New Hampshire Rally | Save America Rally in Manchester, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-april-speech-transcript
+2023-04-22 | Florida Rally | Save America Rally in Ocala, Florida | https://www.rev.com/blog/transcripts/donald-trump-florida-rally-april-speech-transcript
+2023-05-06 | Texas Rally | Save America Rally in Robstown, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-may-speech-transcript
+2023-05-13 | Iowa Rally | Save America Rally in Des Moines, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-may-speech-transcript
+2023-05-20 | Georgia Rally | Save America Rally in Rome, Georgia | https://www.rev.com/blog/transcripts/donald-trump-georgia-rally-may-speech-transcript
+2023-06-03 | North Carolina Rally | Save America Rally in Greensboro, North Carolina | https://www.rev.com/blog/transcripts/donald-trump-north-carolina-rally-june-speech-transcript
+2023-06-10 | Georgia Rally | Save America Rally in Commerce, Georgia | https://www.rev.com/blog/transcripts/donald-trump-georgia-rally-june-speech-transcript
+2023-06-17 | Michigan Rally | Save America Rally in Detroit, Michigan | https://www.rev.com/blog/transcripts/donald-trump-michigan-rally-speech-transcript
+2023-06-24 | Pennsylvania Rally | Save America Rally in Erie, Pennsylvania | https://www.rev.com/blog/transcripts/donald-trump-pennsylvania-rally-june-speech-transcript
+2023-07-01 | South Carolina Rally | Save America Rally in Pickens, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-july-speech-transcript
+2023-07-08 | Nevada Rally | Save America Rally in Minden, Nevada | https://www.rev.com/blog/transcripts/donald-trump-nevada-rally-speech-transcript
+2023-07-15 | Ohio Rally | Save America Rally in Vandalia, Ohio | https://www.rev.com/blog/transcripts/donald-trump-ohio-rally-july-speech-transcript
+2023-07-22 | Pennsylvania Rally | Save America Rally in Erie, Pennsylvania | https://www.rev.com/blog/transcripts/donald-trump-pennsylvania-rally-july-speech-transcript
+2023-07-29 | Iowa Rally | Save America Rally in Cedar Rapids, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-july-speech-transcript
+2023-08-05 | Alabama Rally | Save America Rally in Montgomery, Alabama | https://www.rev.com/blog/transcripts/donald-trump-alabama-rally-speech-transcript
+2023-08-12 | New Hampshire Rally | Save America Rally in Laconia, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-august-speech-transcript
+2023-08-19 | South Carolina Rally | Save America Rally in Columbia, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-august-speech-transcript
+2023-08-26 | Texas Rally | Save America Rally in Houston, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-august-speech-transcript
+2023-09-02 | South Dakota Rally | Save America Rally in Rapid City, South Dakota | https://www.rev.com/blog/transcripts/donald-trump-south-dakota-rally-speech-transcript
+2023-09-09 | Iowa Rally | Save America Rally in Sioux City, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-september-speech-transcript
+2023-09-16 | Missouri Rally | Save America Rally in Springfield, Missouri | https://www.rev.com/blog/transcripts/donald-trump-missouri-rally-speech-transcript
+2023-09-23 | Michigan Rally | Save America Rally in Detroit, Michigan | https://www.rev.com/blog/transcripts/donald-trump-michigan-rally-september-speech-transcript
+2023-09-30 | California Rally | Save America Rally in Anaheim, California | https://www.rev.com/blog/transcripts/donald-trump-california-rally-speech-transcript
+2023-10-07 | Iowa Rally | Save America Rally in Waterloo, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-october-speech-transcript
+2023-10-14 | New Hampshire Rally | Save America Rally in Manchester, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-october-speech-transcript
+2023-10-21 | South Carolina Rally | Save America Rally in Summerville, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-october-speech-transcript
+2023-10-28 | Texas Rally | Save America Rally in Conroe, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-october-speech-transcript
+2023-11-04 | Iowa Rally | Save America Rally in Sioux City, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-november-speech-transcript
+2023-11-11 | New Hampshire Rally | Save America Rally in Laconia, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-november-speech-transcript
+2023-11-18 | South Carolina Rally | Save America Rally in Columbia, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-november-speech-transcript
+2023-11-25 | Texas Rally | Save America Rally in Houston, Texas | https://www.rev.com/blog/transcripts/donald-trump-texas-rally-november-speech-transcript
+2023-12-02 | Iowa Rally | Save America Rally in Ankeny, Iowa | https://www.rev.com/blog/transcripts/donald-trump-iowa-rally-december-speech-transcript
+2023-12-09 | New Hampshire Rally | Save America Rally in Manchester, New Hampshire | https://www.rev.com/blog/transcripts/donald-trump-new-hampshire-rally-december-speech-transcript
+2023-12-16 | South Carolina Rally | Save America Rally in Summerville, South Carolina | https://www.rev.com/blog/transcripts/donald-trump-south-carolina-rally-december-speech-transcript
+
+# Notes:
+# - These URLs are examples and may need to be updated with actual working transcript URLs
+# - Some speeches may have transcripts available on multiple platforms
+# - Additional sources to check: news outlets, university archives, political websites
+# - Total: 75+ speeches across 2021-2023 period

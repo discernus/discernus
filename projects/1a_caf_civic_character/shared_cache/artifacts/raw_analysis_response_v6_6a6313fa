@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the provided text, which is a powerful and historically significant speech from the Civil Rights Movement. The speaker, John Lewis, employs strong rhetoric characterized by a combination of grievance (Resentment), calls for systemic fairness (Justice), descriptions of threats (Fear), and an aspirational vision (Hope). The framework's ability to score opposing dimensions simultaneously is crucial for capturing the speech's complexity, where both the problems (Resentment, Fear) and the proposed solutions (Justice, Hope) are given high rhetorical prominence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "pragmatism": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+          "confidence": 0.9,
+          "context_type": "in-group_vs_out-group_framing"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 1.0,
+          "context_type": "direct_statement_of_principle"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "confidence": 0.9,
+          "context_type": "critique_of_others_manipulation"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 0.95,
+          "context_type": "factual_critique_of_legislation"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 1.0,
+          "context_type": "grievance_expression"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+          "confidence": 1.0,
+          "context_type": "demand_for_procedural_fairness"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?",
+          "confidence": 0.95,
+          "context_type": "rhetorical_question_highlighting_threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.95,
+          "context_type": "aspirational_vision_for_the_future"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "The speech is grounded in the harsh realities of the civil rights struggle and demands concrete legislative action; it does not contain unrealistic promises or magical thinking.",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 0.95,
+          "context_type": "specific_critique_of_policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

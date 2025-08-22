@@ -184,7 +184,7 @@ class EnhancedAnalysisAgent:
                     tokens_used=usage.get('total_tokens', 0),
                     cost_usd=usage.get('response_cost_usd', 0.0),
                     agent_name=self.agent_name,
-                    metadata={"batch_id": batch_id}
+                    metadata={"analysis_id": analysis_id}
                 )
             
             # Create a response-like object for compatibility with existing code
