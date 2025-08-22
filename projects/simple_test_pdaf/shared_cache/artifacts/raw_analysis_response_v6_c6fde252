@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document provided is a clear and powerful example of left-wing economic populist rhetoric. The core themes of Manichaean division between the people and an economic oligarchy, systemic corruption (a 'rigged economy'), and a call for popular sovereignty are explicit and central to the text. This made scoring for most dimensions straightforward. The 'nationalist_exclusion' and 'authenticity_vs_political_class' dimensions were notably absent, with the speaker focusing on class-based divisions and operating from within the political system rather than as an outsider."
+  },
+  "document_analyses": [
+    {
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 1.0
+        },
+        "homogenous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 1.0,
+          "context_type": "explicit_dichotomy"
+        },
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "confidence": 0.9,
+          "context_type": "moral_judgment"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.",
+          "confidence": 1.0,
+          "context_type": "narrative_of_decline"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \u201cWe will not accept an oligarchic form of society.\"",
+          "confidence": 1.0,
+          "context_type": "claim_of_popular_will"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "confidence": 0.8,
+          "context_type": "delegitimization_of_opposition_interests"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Today you've got three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "confidence": 1.0,
+          "context_type": "allegation_of_systemic_capture"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 1.0,
+          "context_type": "claim_of_systemic_corruption"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I bump into them in my line of work, they are not nice guys.",
+          "confidence": 0.5,
+          "context_type": "weak_authenticity_claim_based_on_insider_knowledge"
+        },
+        {
+          "dimension": "homogenous_people_construction",
+          "quote_text": "I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.",
+          "confidence": 1.0,
+          "context_type": "transcending_internal_divisions"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "No evidence found for this dimension in the text. The conflict is framed entirely in economic class terms, not national or cultural ones.",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+          "confidence": 1.0,
+          "context_type": "central_economic_grievance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

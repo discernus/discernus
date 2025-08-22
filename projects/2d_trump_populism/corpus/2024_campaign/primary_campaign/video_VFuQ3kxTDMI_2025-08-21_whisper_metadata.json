@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "url": "https://www.youtube.com/watch?v=VFuQ3kxTDMI&ab_channel=WFAA",
+  "method": "whisper",
+  "confidence": 75.0,
+  "transcript_length": 68844,
+  "word_count": 12731,
+  "language": "en",
+  "extraction_timestamp": "2025-08-21T22:47:22.945280",
+  "processing_time": 331.79587411880493,
+  "error_type": null,
+  "error_message": null,
+  "retry_after": null,
+  "fallback_attempted": true,
+  "fallback_success": true,
+  "video_info": {
+    "title": null,
+    "channel": null,
+    "duration": null,
+    "upload_date": null,
+    "video_id": "VFuQ3kxTDMI"
+  }
+}

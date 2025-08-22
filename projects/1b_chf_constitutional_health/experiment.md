@@ -1,115 +1,8 @@
----
-version: "7.0"
-name: "presidential_sotu_constitutional_health_trends"
-description: |
-  This experiment tests whether the Salience-Weighted Constitutional Direction Index 
-  of presidential State of the Union rhetoric has declined significantly since 1992. 
-  Using the Constitutional Health Framework v7.3, we analyze 37+ SOTU addresses 
-  from Clinton (1993-2000) through Biden (2021-2024) to determine if there is a 
-  statistically significant downward trend in constitutional health scores over time.
-
-hypothesis: |
-  The Salience-Weighted Constitutional Direction Index of presidential State of 
-  the Union addresses has declined significantly since 1992, indicating a 
-  systematic decrease in constitutional health rhetoric over the past three decades.
-
-framework: "../../frameworks/reference/core/chf_v7.3.md"
-framework_version: "v7.3"
-corpus_path: "./corpus/"
-models:
-  - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 1
-analysis_variant: "default"
-
-# Declarative statistical analyses to be performed by the MathToolkit.
-statistical_analyses:
-  - type: "linear_regression"
-    dependent_variable: "Salience_Weighted_Constitutional_Direction_Index"
-    independent_variables: ["year"]
-  - type: "descriptive_stats"
-    columns:
-      - "Salience_Weighted_Constitutional_Direction_Index"
-      - "year"
-  - type: "correlation_matrix"
-    columns:
-      - "Procedural_Health_Score"
-      - "Institutional_Health_Score"
-      - "Systemic_Health_Score"
-      - "Procedural_Pathology_Score"
-      - "Institutional_Pathology_Score"
-      - "Systemic_Pathology_Score"
-
-# Enhanced v3.0 Analysis Configuration
-analysis:
-  evaluations_per_document: 3
-  statistical_confidence: 0.95
-  variance_threshold: 0.15
-
-# Comprehensive Statistical Validation  
-validation:
-  required_tests: ["temporal_trend_analysis", "constitutional_health_correlation_matrix", "cdi_reliability", "dimensional_relationship_analysis"]
-  reliability_threshold: 0.70
-  effect_size_reporting: true
-  statistical_requirements: "Corpus contains 37+ SOTU addresses spanning 1993-2024, providing sufficient data for robust time series analysis and regression testing."
-
-# Academic Reporting Configuration
-reporting:
-  format: "academic"
-  structure:
-    - "executive_summary"
-    - "temporal_trend_analysis"
-    - "constitutional_health_patterns"
-    - "procedural_dimension_analysis"
-    - "institutional_dimension_analysis"
-    - "systemic_dimension_analysis"
-    - "dimensional_relationship_analysis"
-    - "statistical_significance_testing"
-    - "effect_size_analysis"
-    - "findings_discussion"
-    - "limitations"
-  show_statistical_work: true
-  include_confidence_metrics: true
-
-# Research Hypotheses
-hypotheses:
-  H1_Temporal_Decline: "Test whether the Salience-Weighted Constitutional Direction Index has declined significantly since 1992"
-  H2_Trend_Significance: "Test whether any observed decline is statistically significant (p < 0.05)"
-  H3_Effect_Size: "Test the magnitude of any decline (R² for time explaining variance in scores)"
-  H4_Dimensional_Contributors: "Test which constitutional health dimensions contribute most to any observed decline"
-  H5_Platform_Validation: "Test whether the JSON synthesis architecture successfully processes time series analysis with constitutional health metrics"
-
-# Required Workflow Steps
-workflow:
-  - agent: EnhancedAnalysisAgent
-    inputs:
-      - experiment
-      - framework
-      - corpus
-    outputs:
-      - raw_analysis_log
-
-  - agent: IntelligentExtractorAgent
-    inputs:
-      - raw_analysis_log
-      - framework
-    outputs:
-      - structured_data
-
-  - agent: ProductionThinSynthesisPipeline
-    inputs:
-      - structured_data
-      - experiment
-      - framework
-    outputs:
-      - final_report.md
-      - statistical_results.json
----
-
 # Constitutional Health Time Series Analysis: Presidential SOTU Rhetoric Trends Since 1992
 
-## Overview
+## Abstract
 
-This experiment tests whether the Salience-Weighted Constitutional Direction Index of presidential State of the Union rhetoric has declined significantly since 1992. Using the Constitutional Health Framework v7.3, we analyze 37+ SOTU addresses from Clinton (1993-2000) through Biden (2021-2024) to determine if there is a statistically significant downward trend in constitutional health scores over time. The large corpus size and consistent speech format provide robust data for time series analysis and regression testing.
+This experiment tests whether the Salience-Weighted Constitutional Direction Index of presidential State of the Union rhetoric has declined significantly since 1992. Using the Constitutional Health Framework v10.0, we analyze 37+ SOTU addresses from Clinton (1993-2000) through Biden (2021-2024) to determine if there is a statistically significant downward trend in constitutional health scores over time. The large corpus size and consistent speech format provide robust data for time series analysis and regression testing.
 
 ## Research Questions
 
@@ -119,10 +12,14 @@ This experiment tests whether the Salience-Weighted Constitutional Direction Ind
 4. How do the trends vary across different presidential administrations?
 5. What are the implications of any decline for constitutional discourse quality?
 
+## Expected Outcomes
+
+This experiment will produce empirical findings on constitutional health trajectory, administration effects, temporal significance, and democratic discourse quality. The analysis will include time series regression, trend significance testing, effect size measurement, administration comparison, and dimensional contribution analysis.
+
 ## Methodology
 
 ### Framework
-**Constitutional Health Framework v7.3** provides:
+**Constitutional Health Framework v10.0** provides:
 - 6-dimensional constitutional health analysis (3 health vs 3 pathology dimensions)
 - Salience-Weighted Constitutional Direction Index for overall health measurement
 - JSON-first architecture with enhanced synthesis integration
@@ -181,3 +78,18 @@ This experiment represents the first computational analysis of constitutional he
 4. **Democratic discourse quality**: Whether constitutional health correlates with democratic institutional stability
 
 The large corpus size and consistent speech format provide robust data for time series analysis while testing the platform's ability to detect meaningful trends in constitutional discourse health over time.
+
+---
+
+# --- Start of Machine-Readable Appendix ---
+
+metadata:
+  experiment_name: "presidential_sotu_constitutional_health_trends"
+  author: "Discernus Research Team"
+  spec_version: "10.0"
+
+components:
+  framework: "chf_v10.md"
+  corpus: "corpus.md"
+
+# --- End of Machine-Readable Appendix ---

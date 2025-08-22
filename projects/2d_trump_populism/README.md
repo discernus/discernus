@@ -1,146 +1,101 @@
-# Trump Populist Rhetoric Analysis: Exploratory Study
+# Trump Populism Corpus Collection Project
 
----
+## 🎯 **Project Overview**
+This project collects and processes Donald Trump's political discourse across his entire political career for the Discernus experiment. The goal is to achieve comprehensive temporal and geographical coverage to enable longitudinal analysis of his rhetorical evolution.
 
-## Experiment Overview
+## 📊 **Current Status: Phase 1 - Strategic 2024 Collection**
 
-**Experiment Name**: Trump Populist Rhetoric Analysis: Exploratory Study  
-**Experiment Date**: 2025-01-19  
-**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0  
-**Analysis Type**: Exploratory longitudinal analysis  
+### **Progress: 18 of 74 speeches collected (24.3%)**
+- **Strategy**: Targeted collection for temporal/geographical balance
+- **Target**: ~35-40 speeches total (not bulk processing all 74)
+- **Focus**: Key campaign phases and swing states
 
----
+### **Current Coverage (18 speeches)**
+- **June 2024**: 7 speeches (AZ, NV, MI, WI, PA, PA, VA)
+- **July 2024**: 3 speeches (MI, NC, MN)  
+- **August 2024**: 8 speeches (GA, MT, NC, PA, NC, AZ)
 
-## Directory Structure
+### **Strategic Gaps to Fill**
+- **September 2024**: 2-3 speeches (mid-campaign phase)
+- **October 2024**: 3-4 speeches (late campaign phase)
+- **November 2024**: 2-3 speeches (election week)
+
+## 🗂️ **Project Structure**
 
 ```
-2d_trump_populism/
-├── README.md                    # This file - experiment overview and navigation
-├── experiment.md                # Main experiment specification and design
-├── framework.md                 # Framework reference and rationale
-├── corpus.md                    # Corpus manifest and description
-├── corpus/                      # Corpus content directory
-│   ├── campaign_2015_2016/     # Campaign phase speeches
-│   ├── presidential_2017_2020/ # First presidency addresses
-│   ├── reelection_2019_2020/   # Re-election phase addresses
-│   ├── second_presidency_2025/ # Second presidency addresses
-│   └── corpus_summary.md       # Corpus assembly summary
-├── runs/                        # Experiment run outputs
-│   └── [Analysis and synthesis results]
-└── shared_cache/                # Shared analysis cache
-    └── [Cached analysis data]
+projects/2d_trump_populism/
+├── corpus/
+│   ├── 2024_campaign/           # Current collection focus
+│   │   ├── primary_campaign/    # Extracted transcripts
+│   │   └── 2024_campaign_metadata.json
+│   ├── campaign_2015_2016/      # ✅ COMPLETE (~125+ speeches)
+│   ├── presidential_2017_2020/  # ✅ BASIC COVERAGE (5 speeches)
+│   ├── first_campaign_1988_2000/ # ❌ NOT STARTED (critical baseline)
+│   └── post_presidency_2021_2024/ # ❌ NOT STARTED (critical transformation)
+├── docs/
+│   ├── corpus_collection_status.md  # Detailed status tracking
+│   └── cleanup_summary.md           # Project organization summary
+└── tests/                           # Test scripts and validation
 ```
 
----
+## 🎯 **Strategic Collection Plan**
 
-## Experiment Purpose
+### **Phase 1: Complete Strategic 2024 Coverage** ⏳ **IN PROGRESS**
+- Achieve temporal and geographical balance
+- Target ~35-40 total speeches
+- Focus on key campaign phases and swing states
 
-This exploratory experiment examines Donald Trump's populist rhetorical patterns across different phases of his political career (2015-2025) using the PDAF v10.0 framework. The study aims to uncover how populist discourse evolves over time and across different political contexts, without imposing predefined hypotheses to allow for emergent insights.
+### **Phase 2: Add 2000 Campaign Baseline** 📋 **PLANNED**
+- Establish pre-populist Trump baseline
+- Target 3-5 key speeches from first presidential run
+- Essential for transformation analysis
 
-**Key Research Areas**:
-- Populist strategy evolution across political roles (candidate → president → re-election candidate → second-term president)
-- Strategic coherence vs. contradiction patterns over time
-- Rhetorical emphasis shifts and audience adaptation
-- Cross-dimensional populist pattern relationships
+### **Phase 3: Add 2021-2023 Transformation Period** 📋 **PLANNED**
+- Document post-January 6 evolution
+- Target critical speeches (Jan 6, Jan 9, 2021)
+- Sample of 2021-2023 speeches
 
----
+## 🛠️ **Technical Infrastructure**
 
-## Framework Information
+### **Transcript Extraction**
+- **Primary Method**: OpenAI Whisper (local processing)
+- **Fallback Method**: YouTube API (when accessible)
+- **Model**: Standardized on "base" model
+- **Performance**: ~5 minutes per speech
 
-**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0  
-**Location**: `frameworks/reference/flagship/pdaf_v10.md`  
-**Dimensions**: 9 core populist dimensions across three categories  
-**Advanced Features**: Salience-weighted analysis, strategic tension mathematics, derived metrics  
+### **Quality Assurance**
+- High-quality transcripts with metadata
+- Consistent file naming and organization
+- Full provenance tracking
+- Robust error handling and fallbacks
 
-**Analysis Variants**:
-- **Default**: Comprehensive single-pass analysis
-- **Sequential Core Anchors**: Primary populist dimensions focus
-- **Sequential Mechanism Anchors**: Mobilization strategies focus  
-- **Sequential Boundary Anchors**: Exclusion and economic appeals focus
+## 📈 **Collection Metrics**
 
----
+- **Total Available**: 74 speeches (2024 campaign)
+- **Successfully Processed**: 18 speeches
+- **Success Rate**: 100%
+- **Processing Time**: ~5 minutes per speech
 
-## Corpus Information
+## 🎯 **Next Actions**
 
-**Corpus Name**: Trump Political Discourse Corpus  
-**Time Period**: 2015-2025  
-**Political Phases**:
-1. **Campaign Phase (2015-2016)**: Initial populist positioning
-2. **Presidential Phase (2017-2020)**: Governing populism
-3. **Re-election Phase (2019-2020)**: Campaign with authority
-4. **Second Presidency Phase (2025)**: Return to presidential populism
+1. **Continue 2024 Strategic Collection**
+   - Target September-October-November phases
+   - Achieve temporal and geographical balance
 
-**Content Types**: Speeches, campaign rallies, inaugural addresses, State of the Union addresses
+2. **Begin 2000 Campaign Research**
+   - Identify available 2000 campaign speeches
+   - Plan collection strategy for baseline period
 
----
+3. **Research 2021-2023 Content**
+   - Locate January 6 and January 9, 2021 speeches
+   - Identify key 2021-2023 speech sources
 
-## Experimental Design
+## 📝 **Key Documents**
 
-**Design Type**: Exploratory longitudinal analysis  
-**Analysis Approach**: Multi-phase discourse analysis with temporal comparison  
-**No Predefined Hypotheses**: Encourages emergent pattern discovery  
-
-**Analysis Phases**:
-- Each political phase analyzed separately using PDAF
-- Cross-phase comparison for temporal patterns
-- Strategic evolution mapping and coherence analysis
-
----
-
-## Expected Outcomes
-
-**Primary Deliverables**:
-- Comprehensive populist discourse analysis for each time period
-- Temporal pattern identification and strategic evolution mapping
-- Strategic tension analysis across different political contexts
-- Salience-weighted populist indices for comparative analysis
-
-**Exploratory Insights**: Synthesis agents will explore all meaningful patterns, contradictions, and insights from the analysis data.
+- **[Corpus Collection Status](docs/corpus_collection_status.md)** - Detailed progress tracking
+- **[Cleanup Summary](docs/cleanup_summary.md)** - Project organization details
 
 ---
 
-## Usage Notes
-
-**For Analysis Agents**:
-- Use PDAF v10.0 framework with sequential analysis variants for highest quality
-- Focus on comprehensive coverage of all nine dimensions
-- Pay attention to temporal patterns and strategic evolution
-- Maintain high evidence quality and confidence scoring
-
-**For Synthesis Agents**:
-- Approach with exploratory mindset - discover all meaningful patterns
-- Focus on strategic adaptation and coherence patterns over time
-- Generate emergent insights about populist discourse evolution
-- Consider both obvious and subtle patterns across all dimensions
-
----
-
-## Success Criteria
-
-**Technical Success**:
-- Successful PDAF analysis across all four time periods
-- Complete dimensional scoring with salience and confidence metrics
-- Derived metrics calculation including strategic tension indices
-- Comprehensive evidence documentation for all assessments
-
-**Exploratory Success**:
-- Identification of meaningful temporal patterns in populist rhetoric
-- Discovery of strategic adaptation patterns across political contexts
-- Emergence of novel insights about populist discourse evolution
-- Comprehensive synthesis of all analytical findings
-
----
-
-## Next Steps
-
-1. **Corpus Preparation**: ✅ Corpus content assembled and organized by phase
-2. **Framework Validation**: Ensure PDAF v10.0 is properly validated and accessible
-3. **Analysis Execution**: Run PDAF analysis across all four political phases
-4. **Synthesis**: Enable synthesis agents to explore all insights and patterns
-5. **Documentation**: Document findings and emergent insights
-
----
-
-## Contact and Support
-
-This experiment is part of the Discernus platform's framework validation and research capabilities. For technical support or questions about the experiment design, refer to the main project documentation and framework specifications.
+*Last Updated: August 21, 2025*
+*Status: Phase 1 (2024 Strategic Collection) - IN PROGRESS*

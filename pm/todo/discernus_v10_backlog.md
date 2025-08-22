@@ -23,13 +23,58 @@
 
 ## 🚨 Critical Issues (Publication Blocking)
 
-**STATUS UPDATE**: All critical publication-blocking issues have been resolved! The system now provides complete source access, evidence verification, and reproducibility. See `DONE.md` for detailed completion records.
+**STATUS UPDATE**: All original critical publication-blocking issues have been resolved! However, new critical CLI v10 compliance issues have been discovered that block proper v10 experiment execution.
 
 **COMPLETED CRITICAL ITEMS**: All CRIT-001 through CRIT-009 issues resolved ✅
 
+**NEW CRITICAL ITEMS**: CLI architecture audit revealed v10 specification compliance failures
+
 **ARCHITECTURAL BREAKTHROUGH**: Clean Analysis Orchestrator operational! Legacy notebook generation cruft eliminated from default pipeline. THIN architecture principles restored with direct analysis → statistics → synthesis flow.
 
-**CURRENT STATUS**: Publication-ready with full source access, evidence verification, and end-to-end reproducibility achieved.
+**CURRENT STATUS**: Publication-ready with source access and reproducibility, v10 experiment execution enabled! CLI-001 and CLI-003 completed successfully.
+
+#### [CLI-001] Fix CleanAnalysisOrchestrator v10 Parsing ✅ COMPLETED
+- **Description**: ✅ COMPLETED - CleanAnalysisOrchestrator._load_specs() incorrectly expected v7.3 YAML frontmatter instead of v10 machine-readable appendix
+- **Impact**: ✅ RESOLVED - All pure v10 experiments (like CAF) can now run on current production pipeline
+- **Status**: ✅ COMPLETED - v10 experiment execution enabled
+- **Root Cause**: ✅ IDENTIFIED - Production orchestrator had v10 parsing bug, only worked with hybrid format
+- **Evidence**: ✅ VALIDATED - simple_test_pdaf works (hybrid format), CAF experiment now works (pure v10)
+- **Framework File Requirements**: ✅ CONFIRMED - v10 spec requires framework files co-located with experiment.md
+- **Implementation Results**: 
+  - ✅ Path resolution PRESERVED (local framework files per v10 spec)
+  - ✅ Parsing logic FIXED (now supports both v10 appendix formats)
+  - ✅ Comprehensive validation added (required fields, spec version checking)
+  - ✅ Clear error messages for v7.3 format rejection
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ Updated _load_specs() method to parse v10 machine-readable appendix format
+  - ✅ Removed dependency on v7.3 frontmatter format
+  - ✅ Ensured compatibility with official v10 specification
+  - ✅ Tested with CAF experiment (pure v10 format)
+  - ✅ Verified framework co-location requirement compliance
+- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
+- **Dependencies**: None
+- **Priority**: ✅ **CRITICAL** - Was blocking all pure v10 experiment execution
+- **Implementation Details**: 
+  - Supports both v10 formats: delimited (`# --- Start/End ---`) and appendix (`## Configuration Appendix`)
+  - Comprehensive unit test coverage (7 tests, all passing)
+  - Real-world validation with CAF experiment successful
+  - Framework co-location logic preserved and validated
+  - Clear error messages guide users from v7.3 to v10 format
+
+#### [CLI-004] Fix Broken CLI Commands 🚨 HIGH PRIORITY
+- **Description**: Debug command completely broken (missing ThinOrchestrator), CLI dry-run parsing fails
+- **Impact**: Critical CLI functionality unavailable for debugging and validation
+- **Root Cause**: Debug command references deprecated ThinOrchestrator, CLI parsing expects old format
+- **Acceptance Criteria**:
+  - [ ] Fix debug command to use CleanAnalysisOrchestrator
+  - [ ] Fix CLI dry-run parsing for v10 experiments
+  - [ ] Remove all references to missing ThinOrchestrator
+  - [ ] Test all CLI commands with v10 experiments
+- **Effort**: Medium (2-3 hours)
+- **Dependencies**: CLI-001 (v10 parsing fix)
+- **Priority**: **HIGH** - Critical CLI functionality broken
+
+---
 
 ---
 
@@ -40,6 +85,54 @@
 ### Medium Priority - Should Fix Soon
 
 **Note**: Framework specification enhancement has been completed and moved to `DONE.md`. The v10.0 specification is now operational with LLM optimization features.
+
+#### [CLI-002] Fix Non-Compliant Test Experiments ⚠️ MEDIUM PRIORITY
+- **Description**: simple_test_cff and simple_test_pdaf use non-compliant hybrid format (frontmatter + appendix)
+- **Impact**: Creates confusion about correct v10 format, masks CLI parsing bugs
+- **Root Cause**: Test experiments were created before v10 spec was finalized, use legacy hybrid format
+- **Acceptance Criteria**:
+  - [ ] Remove YAML frontmatter from simple_test_cff/experiment.md
+  - [ ] Remove YAML frontmatter from simple_test_pdaf/experiment.md
+  - [ ] Verify experiments still run correctly with pure v10 format
+  - [ ] Update any documentation referencing these experiments
+- **Effort**: Low (1 hour)
+- **Dependencies**: CLI-001 (v10 parsing fix)
+- **Priority**: MEDIUM - Quality and compliance issue
+
+#### [CLI-003] Investigate Coherence Agent Validation Bypass ✅ COMPLETED
+- **Description**: ✅ COMPLETED - ExperimentCoherenceAgent had brittle parsing that couldn't handle delimited v10 format
+- **Impact**: ✅ RESOLVED - Validation gaps fixed, all v10 formats now properly validated
+- **Root Cause**: ✅ IDENTIFIED - Agent used brittle parsing instead of format-agnostic LLM validation
+- **Implementation Results**:
+  - ✅ Removed brittle parsing logic that only handled `## Configuration Appendix` format
+  - ✅ Implemented format-agnostic file discovery for framework and corpus files
+  - ✅ Added current specifications loading from `docs/specifications/` for compliance validation
+  - ✅ Updated prompt to prioritize spec compliance over internal coherence
+  - ✅ Raw content approach lets LLM handle all format detection and parsing
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ Investigated why hybrid format experiments passed validation (format parsing gap)
+  - ✅ Enhanced validation to be format-agnostic and enforce v10 compliance
+  - ✅ Added comprehensive test cases for format validation scenarios
+  - ✅ Documented new validation behavior and capabilities
+- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
+- **Dependencies**: None
+- **Priority**: ✅ MEDIUM - Quality assurance gap resolved
+- **Testing Results**: 4/4 unit tests pass for format-agnostic validation
+- **Real-world Validation**: Successfully tested with both CAF (delimited) and simple_test (appendix) formats
+- **Related Tools Inspection**: Framework validation tools (`scripts/framework_validation/`, `scripts/framework_researcher/`) already use correct format-agnostic approach - no changes needed
+
+#### [CLI-005] Enhance CLI Validation ⚠️ MEDIUM PRIORITY
+- **Description**: CLI validate command only does basic structural checks, not deep coherence validation
+- **Impact**: Users get false confidence from superficial validation, miss coherence issues
+- **Root Cause**: CLI validation separated from orchestrator validation for performance
+- **Acceptance Criteria**:
+  - [ ] Integrate ExperimentCoherenceAgent into CLI validate command
+  - [ ] Add --strict flag for comprehensive validation
+  - [ ] Provide clear validation feedback with specific errors
+  - [ ] Document validation levels and capabilities
+- **Effort**: Medium (2-3 hours)
+- **Dependencies**: CLI-003 (coherence validation investigation)
+- **Priority**: MEDIUM - User experience improvement
 
 #### [TECH-004] Framework Library Compliance Update ✅ COMPLETED
 - **Description**: ✅ COMPLETED - Update framework library to v10.0 specification compliance
@@ -164,6 +257,50 @@
   - Test mode configuration for development and testing scenarios
   - CLI updated to make clean orchestrator the default with deprecation warnings for legacy
   - Comprehensive test suite covering all new features (10 tests, all passing)
+
+#### [CLI-006] Clean Up Orchestrator Architecture 🔧 LOW PRIORITY
+- **Description**: Multiple orchestrators cause confusion (ExperimentOrchestrator marked deprecated but has better v10 support)
+- **Impact**: Architectural confusion, maintenance burden, unclear migration path
+- **Root Cause**: ExperimentOrchestrator marked deprecated but actually has correct v10 parsing
+- **Acceptance Criteria**:
+  - [ ] Migrate unique ExperimentOrchestrator v10 parsing logic to CleanAnalysisOrchestrator
+  - [ ] Add proper deprecation warnings to ExperimentOrchestrator
+  - [ ] Remove broken ThinOrchestrator references from codebase
+  - [ ] Document single recommended orchestrator path
+  - [ ] Update CLI help text to reflect current architecture
+- **Effort**: Medium (2-3 hours)
+- **Dependencies**: CLI-001 (v10 parsing fix)
+- **Priority**: LOW - Architectural cleanup, not blocking functionality
+
+#### [CLI-007] Implement CLI Logging & Provenance 🔧 LOW PRIORITY
+- **Description**: CLI operations lack comprehensive logging for debugging and audit trails
+- **Impact**: Difficult to debug CLI issues, poor operational visibility, no audit trails
+- **Root Cause**: CLI focused on user experience over operational logging
+- **Acceptance Criteria**:
+  - [ ] Add structured logging to all CLI commands
+  - [ ] Implement operation provenance tracking
+  - [ ] Create CLI operation audit trails
+  - [ ] Add performance metrics for CLI operations
+  - [ ] Integrate with existing experiment logging system
+- **Effort**: Medium (3-4 hours)
+- **Dependencies**: None
+- **Priority**: LOW - Operational improvement, not blocking functionality
+
+#### [CLI-008] Comprehensive CLI Testing 🔧 LOW PRIORITY
+- **Description**: All CLI modernization changes need comprehensive test coverage
+- **Impact**: Risk of regression, lack of confidence in changes, difficult maintenance
+- **Root Cause**: CLI testing was minimal, focused on integration over unit testing
+- **Acceptance Criteria**:
+  - [ ] Unit tests for all CLI command parsing and validation
+  - [ ] Integration tests for end-to-end v10 experiment pipeline
+  - [ ] Mock tests for LLM gateway interactions
+  - [ ] Test coverage for error scenarios and edge cases
+  - [ ] Automated CLI regression testing
+- **Effort**: High (4-6 hours)
+- **Dependencies**: CLI-001, CLI-004 (core functionality fixes)
+- **Priority**: LOW - Quality improvement, not blocking functionality
+
+
 
 #### [TECH-007] Dev Tools Integration Decision
 - **Description**: Decide future of standalone dev_tools directory and integrate or organize appropriately
@@ -390,27 +527,35 @@
 
 ## 🎯 Current Sprint Planning
 
-### **CRITICAL SPRINT**: Batch Processing Regression Fix (IMMEDIATE PRIORITY) ✅ COMPLETED
-- [x] **ARCH-002**: **CRITICAL REGRESSION** - Batch Processing Architecture Failure ✅ COMPLETED
-  - [x] Phase 1: Fix statistical analysis path bug (30 minutes, $0) ✅
-  - [x] Phase 2: Unit tests with mocked dependencies (1-2 hours, $0) ✅
-  - [x] Phase 3: Implement individual document processing (2-3 hours, $0) ✅
-  - [x] Phase 4: Integration tests with mocked LLM calls (1 hour, $0) ✅
-  - [x] Phase 5: Limited live testing (30 minutes, $2-5) ✅
-  - [x] Phase 6: Full validation with original experiments (15 minutes, $3-8) ✅
+### **CRITICAL SPRINT**: CLI v10 Compliance Fix (IMMEDIATE PRIORITY) ✅ MAJOR PROGRESS
+- [x] **CLI-001**: **CRITICAL** - Fix CleanAnalysisOrchestrator v10 Parsing ✅ COMPLETED
+  - [x] Phase 1: Write unit tests for v10 parsing (1 hour, $0) ✅
+  - [x] Phase 2: Implement v10 machine-readable appendix parsing (1-2 hours, $0) ✅
+  - [x] Phase 3: Test with CAF experiment (30 minutes, $0) ✅
+  - [x] Phase 4: Validate with other v10 experiments (15 minutes, $0) ✅
+- [x] **CLI-003**: Fix Coherence Agent Validation Gap ✅ COMPLETED
+  - [x] Phase 1: Investigate validation bypass (30 minutes, $0) ✅
+  - [x] Phase 2: Implement format-agnostic validation (1-2 hours, $0) ✅
+  - [x] Phase 3: Update prompt for spec compliance priority (30 minutes, $0) ✅
+  - [x] Phase 4: Test with multiple v10 formats (30 minutes, $0) ✅
+- [ ] **CLI-004**: Fix Broken CLI Commands (HIGH PRIORITY)
+  - [ ] Phase 1: Fix debug command orchestrator references (30 minutes, $0)
+  - [ ] Phase 2: Fix CLI dry-run parsing for v10 (30 minutes, $0)
+  - [ ] Phase 3: Test all CLI commands with v10 experiments (30 minutes, $0)
 
-### Sprint 1: Clean Orchestrator Completion (Post-Regression) ✅ COMPLETED
-- [x] ARCH-003: Complete Clean Orchestrator Feature Parity ✅ **COMPLETED**
+### Sprint 1: CLI Quality & Compliance ⚠️ IN PROGRESS
+- [ ] CLI-002: Fix Non-Compliant Test Experiments
+- [x] CLI-003: Investigate Coherence Agent Validation Bypass ✅ COMPLETED
+- [ ] CLI-005: Enhance CLI Validation
+
+### Sprint 2: Testing & Quality Enhancement
+- [ ] CLI-008: Comprehensive CLI Testing
 - [ ] TEST-001: Unit Test Coverage Targets
 - [ ] TEST-002: Integration Test Strategy
 
-### Sprint 2: Framework Library Compliance ✅ COMPLETED
-- [x] TECH-004: Framework Library Compliance Update ✅ **COMPLETED**
-- [x] FRAMEWORK-001: Automated Validation Pipeline ✅ **COMPLETED**
-
-### Sprint 3: Testing & Quality Enhancement
-- [ ] TEST-001: Unit Test Coverage Targets
-- [ ] TEST-002: Integration Test Strategy
+### Sprint 3: CLI Architecture Cleanup 🔧
+- [ ] CLI-006: Clean Up Orchestrator Architecture
+- [ ] CLI-007: Implement CLI Logging & Provenance
 
 ### Sprint 4: Developer Experience
 - [ ] DX-001: Onboarding Documentation
@@ -421,7 +566,10 @@
 - [ ] TECH-003: Error Handling & Resilience
 
 ### Completed Major Milestones ✅
-**All critical publication-blocking issues resolved!** See `DONE.md` for complete achievement records.
+**All previous critical publication-blocking issues resolved!** See `DONE.md` for complete achievement records.
+- [x] **CRITICAL SPRINT**: Batch Processing Regression Fix ✅ COMPLETED
+- [x] **Sprint 1**: Clean Orchestrator Completion ✅ COMPLETED  
+- [x] **Sprint 2**: Framework Library Compliance ✅ COMPLETED
 - [x] **THIN Architecture Restoration** ✅ - External YAML prompts, statistical tables operational
 - [x] **Framework Mathematical Fixes** ✅ - Division-by-zero prevention, logical consistency
 - [x] **Appropriate Reliability Metrics** ✅ - LLM-driven framework classification (CRIT-009)
@@ -487,15 +635,15 @@
 
 ## 🎯 Current Focus Areas
 
-### Framework Quality & Compliance
-- **Goal**: Update all frameworks to v10.0 specification
-- **Priority**: HIGH - Required for platform consistency
-- **Next Steps**: TECH-004 implementation
+### CLI v10 Compliance (IMMEDIATE PRIORITY)
+- **Goal**: Fix CLI v10 parsing and command functionality
+- **Priority**: **CRITICAL** - Blocks v10 experiment execution
+- **Next Steps**: CLI-001 (v10 parsing fix) by other agent, then CLI-002 through CLI-008
 
-### Clean Orchestrator Completion ✅ COMPLETED
-- **Goal**: Full feature parity with legacy orchestrator
-- **Priority**: ✅ **COMPLETED** - All features implemented with comprehensive testing
-- **Next Steps**: ✅ ARCH-002 and ARCH-003 completed, moving to testing strategy and framework compliance
+### Legacy Experiment v10 Compliance ✅ COMPLETED
+- **Goal**: Update legacy experiments to v10.0 specification format
+- **Priority**: ✅ **COMPLETED** - All 5 experiments now v10.0 compliant
+- **Next Steps**: Ready for v10 pipeline testing once CLI-001 is complete
 
 ### Testing & Quality Enhancement
 - **Goal**: Establish comprehensive testing strategy
@@ -558,23 +706,23 @@
 
 ## 🎯 Current Status & Next Priorities
 
-### ✅ **ARCH-002: FULLY RESOLVED**
-**Status**: Critical batch processing regression completely fixed using proven TDD methodology
-**Outcome**: Individual document processing restored, scalability regained, synthesis working
-**Documentation**: Complete TDD protocol documented across project for future agents
+### ✅ **EXPERIMENT-001: FULLY RESOLVED**
+**Status**: All 5 legacy experiments successfully updated to v10.0 specification compliance
+**Outcome**: Experiments now follow v10.0 format, use local framework files, have proper corpus placement
+**Documentation**: Complete v10 compliance implementation documented in DONE.md
 
-### 🚀 **Next Priority: ARCH-003 - Clean Orchestrator Completion**
-**Goal**: Complete remaining CleanAnalysisOrchestrator features for full feature parity
-**Status**: ✅ **READY TO START** - No longer blocked by critical regression
-**Effort**: Medium (2-3 hours) - Can now proceed with confidence
-**Impact**: Eliminates remaining architectural debt, completes clean orchestrator implementation
+### 🚀 **Next Priority: CLI v10 Compliance Fix**
+**Goal**: Fix CLI v10 parsing and command functionality to enable v10 experiment execution
+**Status**: **BLOCKING** - CLI-001 being worked on by other agent
+**Effort**: Medium (2-3 hours) - Can proceed once CLI-001 is complete
+**Impact**: Enables all v10 experiments to run on current production pipeline
 
 ### 📋 **Immediate Next Steps**
-1. **ARCH-003 Implementation**: Complete CleanAnalysisOrchestrator feature parity
-2. **Testing Strategy**: Implement TEST-001 through TEST-003 for comprehensive quality
-3. **Framework Compliance**: Begin TECH-004 for v10.0 specification updates
+1. **Wait for CLI-001**: v10 parsing fix by other agent
+2. **CLI-002 through CLI-008**: Fix remaining CLI issues and enhance functionality
+3. **Test v10 Experiments**: Validate that all 5 updated experiments work on v10 pipeline
 
-**Note**: The critical regression has been resolved, and the system is now stable for continued development. The proven TDD methodology is documented and ready for future critical issues.
+**Note**: Legacy experiment v10 compliance is complete. The system is now ready for v10 pipeline testing once the CLI parsing issues are resolved.
 
 ## 🏆 SUCCESS: ARCH-003 Clean Orchestrator Feature Parity
 
@@ -661,3 +809,5 @@
 **Testing**: Full test coverage for validation pipeline
 
 **Impact**: Platform now has enterprise-grade framework management with automated quality assurance
+
+

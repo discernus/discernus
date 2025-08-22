@@ -1,0 +1,298 @@
+{
+  "status": "completed",
+  "stats_hash": "1e2c18b86e2ccfa7f453d39821ef11cf0499b53391f725abb059e5e2f9a85262",
+  "functions_generated": 1,
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 1,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 6339
+    },
+    "statistical_data": {
+      "Any": {
+        "error": "Any cannot be instantiated",
+        "status": "failed"
+      },
+      "Dict": {
+        "error": "Type Dict cannot be instantiated; use dict() instead",
+        "status": "failed"
+      },
+      "List": {
+        "error": "Type List cannot be instantiated; use list() instead",
+        "status": "failed"
+      },
+      "Optional": {
+        "error": "Cannot instantiate typing.Optional",
+        "status": "failed"
+      },
+      "Tuple": {
+        "error": "Type Tuple cannot be instantiated; use tuple() instead",
+        "status": "failed"
+      },
+      "calculate_basic_statistics": {
+        "manichaean_people_elite_framing_raw": {
+          "mean": 0.65,
+          "std": 0.4358898943540674,
+          "count": 4,
+          "missing": 0
+        },
+        "manichaean_people_elite_framing_salience": {
+          "mean": 0.6875,
+          "std": 0.4625563028792639,
+          "count": 4,
+          "missing": 0
+        },
+        "manichaean_people_elite_framing_confidence": {
+          "mean": 0.9750000000000001,
+          "std": 0.028867513459481315,
+          "count": 4,
+          "missing": 0
+        },
+        "crisis_restoration_narrative_raw": {
+          "mean": 0.55,
+          "std": 0.40414518843273806,
+          "count": 4,
+          "missing": 0
+        },
+        "crisis_restoration_narrative_salience": {
+          "mean": 0.55,
+          "std": 0.40414518843273806,
+          "count": 4,
+          "missing": 0
+        },
+        "crisis_restoration_narrative_confidence": {
+          "mean": 0.9625,
+          "std": 0.0478713553878169,
+          "count": 4,
+          "missing": 0
+        },
+        "popular_sovereignty_claims_raw": {
+          "mean": 0.42500000000000004,
+          "std": 0.4349329450233297,
+          "count": 4,
+          "missing": 0
+        },
+        "popular_sovereignty_claims_salience": {
+          "mean": 0.41250000000000003,
+          "std": 0.42106016988865935,
+          "count": 4,
+          "missing": 0
+        },
+        "popular_sovereignty_claims_confidence": {
+          "mean": 0.9375,
+          "std": 0.047871355387816894,
+          "count": 4,
+          "missing": 0
+        },
+        "anti_pluralist_exclusion_raw": {
+          "mean": 0.4,
+          "std": 0.27080128015453203,
+          "count": 4,
+          "missing": 0
+        },
+        "anti_pluralist_exclusion_salience": {
+          "mean": 0.4375,
+          "std": 0.29825883613622134,
+          "count": 4,
+          "missing": 0
+        },
+        "anti_pluralist_exclusion_confidence": {
+          "mean": 0.9249999999999999,
+          "std": 0.04999999999999999,
+          "count": 4,
+          "missing": 0
+        },
+        "elite_conspiracy_systemic_corruption_raw": {
+          "mean": 0.6375,
+          "std": 0.4308421984903522,
+          "count": 4,
+          "missing": 0
+        },
+        "elite_conspiracy_systemic_corruption_salience": {
+          "mean": 0.625,
+          "std": 0.42720018726587655,
+          "count": 4,
+          "missing": 0
+        },
+        "elite_conspiracy_systemic_corruption_confidence": {
+          "mean": 0.975,
+          "std": 0.04999999999999999,
+          "count": 4,
+          "missing": 0
+        },
+        "authenticity_vs_political_class_raw": {
+          "mean": 0.25,
+          "std": 0.4358898943540674,
+          "count": 4,
+          "missing": 0
+        },
+        "authenticity_vs_political_class_salience": {
+          "mean": 0.225,
+          "std": 0.38622100754188227,
+          "count": 4,
+          "missing": 0
+        },
+        "authenticity_vs_political_class_confidence": {
+          "mean": 1.0,
+          "std": 0.0,
+          "count": 4,
+          "missing": 0
+        },
+        "homogeneous_people_construction_raw": {
+          "mean": 0.26666666666666666,
+          "std": 0.37859388972001823,
+          "count": 3,
+          "missing": 1
+        },
+        "homogeneous_people_construction_salience": {
+          "mean": 0.3,
+          "std": 0.43588989435406733,
+          "count": 3,
+          "missing": 1
+        },
+        "homogeneous_people_construction_confidence": {
+          "mean": 0.9333333333333332,
+          "std": 0.05773502691896257,
+          "count": 3,
+          "missing": 1
+        },
+        "nationalist_exclusion_raw": {
+          "mean": 0.2375,
+          "std": 0.475,
+          "count": 4,
+          "missing": 0
+        },
+        "nationalist_exclusion_salience": {
+          "mean": 0.225,
+          "std": 0.45000000000000007,
+          "count": 4,
+          "missing": 0
+        },
+        "nationalist_exclusion_confidence": {
+          "mean": 0.975,
+          "std": 0.04999999999999999,
+          "count": 4,
+          "missing": 0
+        },
+        "economic_populist_appeals_raw": {
+          "mean": 0.5,
+          "std": 0.5773502691896257,
+          "count": 4,
+          "missing": 0
+        },
+        "economic_populist_appeals_salience": {
+          "mean": 0.5,
+          "std": 0.5773502691896257,
+          "count": 4,
+          "missing": 0
+        },
+        "economic_populist_appeals_confidence": {
+          "mean": 1.0,
+          "std": 0.0,
+          "count": 4,
+          "missing": 0
+        },
+        "homogenous_people_construction_raw": {
+          "mean": 0.8,
+          "std": NaN,
+          "count": 1,
+          "missing": 3
+        },
+        "homogenous_people_construction_salience": {
+          "mean": 0.8,
+          "std": NaN,
+          "count": 1,
+          "missing": 3
+        },
+        "homogenous_people_construction_confidence": {
+          "mean": 1.0,
+          "std": NaN,
+          "count": 1,
+          "missing": 3
+        }
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-21T22:20:32.025892",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "manichaean_people_elite_framing_raw",
+            "manichaean_people_elite_framing_salience",
+            "manichaean_people_elite_framing_confidence",
+            "crisis_restoration_narrative_raw",
+            "crisis_restoration_narrative_salience",
+            "crisis_restoration_narrative_confidence",
+            "popular_sovereignty_claims_raw",
+            "popular_sovereignty_claims_salience",
+            "popular_sovereignty_claims_confidence",
+            "anti_pluralist_exclusion_raw",
+            "anti_pluralist_exclusion_salience",
+            "anti_pluralist_exclusion_confidence",
+            "elite_conspiracy_systemic_corruption_raw",
+            "elite_conspiracy_systemic_corruption_salience",
+            "elite_conspiracy_systemic_corruption_confidence",
+            "authenticity_vs_political_class_raw",
+            "authenticity_vs_political_class_salience",
+            "authenticity_vs_political_class_confidence",
+            "homogeneous_people_construction_raw",
+            "homogeneous_people_construction_salience",
+            "homogeneous_people_construction_confidence",
+            "nationalist_exclusion_raw",
+            "nationalist_exclusion_salience",
+            "nationalist_exclusion_confidence",
+            "economic_populist_appeals_raw",
+            "economic_populist_appeals_salience",
+            "economic_populist_appeals_confidence",
+            "homogenous_people_construction_raw",
+            "homogenous_people_construction_salience",
+            "homogenous_people_construction_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-21T22:20:32.073546",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "manichaean_people_elite_framing_raw",
+            "manichaean_people_elite_framing_salience",
+            "manichaean_people_elite_framing_confidence",
+            "crisis_restoration_narrative_raw",
+            "crisis_restoration_narrative_salience",
+            "crisis_restoration_narrative_confidence",
+            "popular_sovereignty_claims_raw",
+            "popular_sovereignty_claims_salience",
+            "popular_sovereignty_claims_confidence",
+            "anti_pluralist_exclusion_raw",
+            "anti_pluralist_exclusion_salience",
+            "anti_pluralist_exclusion_confidence",
+            "elite_conspiracy_systemic_corruption_raw",
+            "elite_conspiracy_systemic_corruption_salience",
+            "elite_conspiracy_systemic_corruption_confidence",
+            "authenticity_vs_political_class_raw",
+            "authenticity_vs_political_class_salience",
+            "authenticity_vs_political_class_confidence",
+            "homogeneous_people_construction_raw",
+            "homogeneous_people_construction_salience",
+            "homogeneous_people_construction_confidence",
+            "nationalist_exclusion_raw",
+            "nationalist_exclusion_salience",
+            "nationalist_exclusion_confidence",
+            "economic_populist_appeals_raw",
+            "economic_populist_appeals_salience",
+            "economic_populist_appeals_confidence",
+            "homogenous_people_construction_raw",
+            "homogenous_people_construction_salience",
+            "homogenous_people_construction_confidence"
+          ]
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

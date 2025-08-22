@@ -1,100 +1,8 @@
----
-version: "7.0"
-name: "emotional_climate_factorial_analysis"
-description: |
-  This experiment analyzes emotional climate patterns in political discourse 
-  using the Emotional Climate Framework v7.1. The corpus employs a 2×3 factorial 
-  design examining Ideology (Conservative/Progressive) × Era (Civil Rights/
-  Institutional/Populist) spanning 60 years (1963-2025). The analysis will 
-  measure emotional climate dimensions across experimental factors to identify 
-  any statistical patterns, relationships, or interactions present in the data.
-
-hypothesis: |
-  Emotional climate dimensions will be analyzed across political eras and 
-  ideological affiliations to test for statistical differences. The analysis 
-  will examine whether temporal factors, ideological factors, or their interaction 
-  account for variance in fear/hope, enmity/amity, and envy/compersion patterns. 
-  Statistical tests will determine if significant relationships exist between 
-  experimental factors and emotional climate dimensions.
-
-framework: "../../frameworks/reference/core/ecf_v7.3.md"
-corpus_path: "corpus/"
-models:
-  - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 1
-analysis_variant: "default"
-
-# Enhanced v3.0 Analysis Configuration
-analysis:
-  evaluations_per_document: 3
-  statistical_confidence: 0.95
-  variance_threshold: 0.15
-
-# Comprehensive Statistical Validation  
-validation:
-  required_tests: ["two_way_anova_ideology_era", "emotional_climate_correlation_matrix", "climate_axis_reliability", "dimensional_trajectory_analysis", "factor_clustering_analysis", "climate_pattern_analysis"]
-  reliability_threshold: 0.70
-  effect_size_reporting: true
-
-# Academic Reporting Configuration
-reporting:
-  format: "academic"
-  structure:
-    - "executive_summary"
-    - "emotional_climate_patterns"
-    - "ideological_factor_analysis"
-    - "fear_hope_axis_analysis"
-    - "enmity_amity_axis_analysis"
-    - "envy_compersion_axis_analysis"
-    - "dimensional_relationship_analysis"
-    - "temporal_pattern_analysis"
-    - "factorial_design_results"
-    - "findings_discussion"
-    - "limitations"
-  show_statistical_work: true
-  include_confidence_metrics: true
-
-# Multi-Hypothesis Framework
-hypotheses:
-  H1_Temporal: "Test whether emotional climate dimensions differ significantly across political eras"
-  H2_Ideological: "Test whether emotional climate dimensions differ significantly between ideological groups"
-  H3_Interaction: "Test whether ideology×era interaction effects exist for emotional climate patterns"
-  H4_Axis_Relationships: "Test whether the three emotional axes show distinct statistical patterns across experimental factors"
-  H5_Temporal_Patterns: "Test whether emotional climate dimensions show systematic patterns across time periods"
-  H6_Platform_Validation: "Test whether the JSON synthesis architecture successfully processes factorial design with 6-dimensional analysis"
-
-# Required Workflow Steps
-workflow:
-  - agent: EnhancedAnalysisAgent
-    inputs:
-      - experiment
-      - framework
-      - corpus
-    outputs:
-      - raw_analysis_log
-
-  - agent: IntelligentExtractorAgent
-    inputs:
-      - raw_analysis_log
-      - framework
-    outputs:
-      - structured_data
-
-  - agent: ProductionThinSynthesisPipeline
-    inputs:
-      - structured_data
-      - experiment
-      - framework
-    outputs:
-      - final_report.md
-      - statistical_results.json
----
-
 # Emotional Climate Factorial Analysis: Psychological Atmosphere Patterns Across American Political Eras and Ideological Lines
 
-## Overview
+## Abstract
 
-This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v7.1. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025).
+This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v10.0. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025). The factorial structure enables sophisticated emotional climate interaction analysis across conservative and progressive speakers in civil rights, institutional, and populist eras.
 
 ## Research Questions
 
@@ -103,10 +11,14 @@ This experiment analyzes emotional climate patterns in political discourse using
 3. How do emotional climate patterns vary across the interaction of ideology and era?
 4. What statistical relationships exist between experimental factors and emotional atmosphere measures?
 
+## Expected Outcomes
+
+This experiment will produce empirical findings on temporal emotional climate effects, ideological emotional signatures, emotional climate interactions, and democratic discourse psychology. The analysis will include two-way ANOVA, multi-evaluation reliability, emotional climate clustering, emotional axis trajectory analysis, climate polarization analysis, and cross-axis correlation analysis.
+
 ## Methodology
 
 ### Framework
-**Emotional Climate Framework v7.1** provides:
+**Emotional Climate Framework v10.0** provides:
 - 6-dimensional emotional climate analysis across 3 axes (fear/hope, enmity/amity, envy/compersion)
 - Emotional atmosphere measurement independent of rhetorical strategy
 - JSON-first architecture with enhanced synthesis integration
@@ -156,3 +68,18 @@ This experiment represents the first computational analysis of emotional climate
 4. **Democratic discourse psychology**: Whether emotional climate correlates with political stability and democratic health
 
 The factorial design provides comprehensive validation of emotional climate analysis while testing the platform's ability to detect complex psychological relationships in political discourse across six decades of American political development. This analysis will reveal the emotional foundations underlying political communication patterns and their evolution over time.
+
+---
+
+# --- Start of Machine-Readable Appendix ---
+
+metadata:
+  experiment_name: "emotional_climate_factorial_analysis"
+  author: "Discernus Research Team"
+  spec_version: "10.0"
+
+components:
+  framework: "ecf_v10.md"
+  corpus: "corpus.md"
+
+# --- End of Machine-Readable Appendix ---

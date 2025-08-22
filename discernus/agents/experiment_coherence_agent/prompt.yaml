@@ -5,7 +5,10 @@ template: |
   You are validating a Discernus experiment setup for practical functionality on {current_date}.
 
   **VALIDATION PHILOSOPHY:**
-  Focus on functional coherence over bureaucratic compliance. Validate that components work together effectively, not that they meet every theoretical requirement. Flag only issues that would actually prevent successful execution or compromise research quality.
+  PRIORITY 1: Specification compliance with current Discernus standards (BLOCKING issues)
+  PRIORITY 2: Internal coherence and research quality (QUALITY issues)
+  
+  Validate that experiments comply with current specifications AND that components work together effectively. Specification compliance issues are blocking and must be fixed before execution. Internal coherence issues are quality concerns that should be addressed but don't prevent execution.
 
   **CORPUS HANDLING POLICY:**
   Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to validate experiment coherence, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
@@ -23,16 +26,26 @@ template: |
   {specification_references}
 
   VALIDATION TASK:
-  Validate the Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution. Use the specification references above to validate compliance with current standards. Focus on critical blocking issues only.
+  FIRST: Check specification compliance - does this experiment conform to the current v10.0 specifications provided above? Look for:
+  - Experiment format: Must use v10.0 machine-readable appendix (NOT v7.3 frontmatter)
+  - Required fields: metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
+  - File co-location: Framework and corpus files must be in same directory as experiment.md
+  - Version compatibility: spec_version must be "10.0"
+  
+  SECOND: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution?
+  
+  Use the specification references above as the authoritative source for current standards. Prioritize blocking compliance issues over quality concerns.
 
   **HELEN 2.0 PRIORITY CLASSIFICATION:**
   
   🚫 **BLOCKING ISSUES** (priority: "BLOCKING", exit 1):
-  - File Accessibility: Framework/corpus files cannot be found or accessed
+  - Specification Non-Compliance: Experiment format does not match current v10.0 specification requirements
+  - File Accessibility: Framework/corpus files cannot be found or accessed  
   - Data Structure Failures: Corpus structure completely incompatible with framework
   - Workflow Impossibility: Experiment workflow cannot execute with given parameters
   - Mathematical Errors: Framework calculations are syntactically invalid or will crash
   - Configuration Corruption: Essential configuration is missing or malformed
+  - Format Violations: Experiment uses deprecated formats not supported by current pipeline
   
   ⚠️ **QUALITY ISSUES** (priority: "QUALITY", exit 0 with warnings):
   - Framework inconsistencies that don't prevent execution but reduce reliability

@@ -107,6 +107,68 @@ class ExperimentCoherenceAgent:
             raise ValueError(f"Prompt file missing 'template' key: {prompt_path}")
         
         return prompt_data['template']
+    
+    def _find_and_load_framework(self, experiment_path: Path) -> str:
+        """Find and load framework file using format-agnostic discovery."""
+        # Common framework filenames to check
+        framework_candidates = [
+            "framework.md",
+            "caf_v10.md", "cff_v10.md", "pdaf_v10.md", "chf_v10.md", "ecf_v10.md",
+            "framework_v10.md"
+        ]
+        
+        for filename in framework_candidates:
+            framework_file = experiment_path / filename
+            if framework_file.exists():
+                return framework_file.read_text(encoding='utf-8')
+        
+        # If no standard files found, raise error
+        raise ValueError(f"No framework file found in {experiment_path}. Expected one of: {', '.join(framework_candidates)}")
+    
+    def _find_and_load_corpus(self, experiment_path: Path) -> str:
+        """Find and load corpus manifest file using format-agnostic discovery."""
+        # Common corpus manifest filenames to check
+        corpus_candidates = [
+            "corpus.md",
+            "corpus_manifest.md",
+            "corpus_v8.md"
+        ]
+        
+        for filename in corpus_candidates:
+            corpus_file = experiment_path / filename
+            if corpus_file.exists():
+                return corpus_file.read_text(encoding='utf-8')
+        
+        # If no standard files found, raise error
+        raise ValueError(f"No corpus manifest found in {experiment_path}. Expected one of: {', '.join(corpus_candidates)}")
+    
+    def _load_current_specifications(self) -> str:
+        """Load current specifications from docs/specifications/ for compliance validation."""
+        # Find project root (go up from agent directory)
+        current_dir = Path(__file__).parent
+        project_root = None
+        
+        # Search up to 5 levels for project root
+        for _ in range(5):
+            if (current_dir / "docs" / "specifications").exists():
+                project_root = current_dir
+                break
+            current_dir = current_dir.parent
+        
+        if not project_root:
+            raise ValueError("Could not find project root with docs/specifications directory")
+        
+        specs_dir = project_root / "docs" / "specifications"
+        specifications = []
+        
+        # Load all current specifications
+        for spec_file in ["EXPERIMENT_SPECIFICATION.md", "FRAMEWORK_SPECIFICATION.md", "CORPUS_SPECIFICATION.md"]:
+            spec_path = specs_dir / spec_file
+            if spec_path.exists():
+                content = spec_path.read_text(encoding='utf-8')
+                specifications.append(f"=== {spec_file} ===\n{content}")
+        
+        return "\n\n".join(specifications)
         
     def validate_experiment(self, experiment_path: Path) -> ValidationResult:
         """
@@ -130,70 +192,23 @@ class ExperimentCoherenceAgent:
             )
         
         try:
-            # Load experiment artifacts
+            # Load raw experiment content (format agnostic)
             experiment_spec_content = self._load_artifact(experiment_path, "experiment.md")
             
-            # Parse the experiment spec content to a dictionary
-            try:
-                if '## Configuration Appendix' in experiment_spec_content:
-                    _, appendix_content = experiment_spec_content.split('## Configuration Appendix', 1)
-                    if '```yaml' in appendix_content:
-                        yaml_start = appendix_content.find('```yaml') + 7
-                        yaml_end = appendix_content.rfind('```')
-                        yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
-                        experiment_spec = yaml.safe_load(yaml_content)
-                    else:
-                        raise ValueError("YAML code fence not found in appendix.")
-                else:
-                    raise ValueError("'## Configuration Appendix' not found.")
-            except Exception as e:
-                raise ValueError(f"Failed to parse experiment.md YAML: {e}")
+            # Find and load framework and corpus files (format agnostic discovery)
+            framework_spec = self._find_and_load_framework(experiment_path)
+            corpus_manifest = self._find_and_load_corpus(experiment_path)
 
-            # Extract framework and corpus paths from experiment spec
-            framework_file, corpus_file = self._extract_paths_from_experiment(experiment_spec, experiment_path)
-            
-            framework_spec = self._load_artifact(experiment_path, framework_file)
-            corpus_manifest = self._load_artifact(experiment_path, corpus_file)
+            # Load current specifications for compliance validation
+            current_specifications = self._load_current_specifications()
 
-            # Parse specs into dictionaries for internal use
-            try:
-                if '## Part 2: The Machine-Readable Appendix' in framework_spec:
-                    _, framework_yaml_block = framework_spec.split('## Part 2: The Machine-Readable Appendix', 1)
-                    if '```yaml' in framework_yaml_block:
-                        yaml_start = framework_yaml_block.find('```yaml') + 7
-                        yaml_end = framework_yaml_block.rfind('```')
-                        framework_yaml = framework_yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else framework_yaml_block[yaml_start:].strip()
-                        framework_dict = yaml.safe_load(framework_yaml)
-                    else:
-                        raise ValueError("YAML code fence not found in framework appendix.")
-                else:
-                    raise ValueError("Framework appendix not found.")
-            except Exception as e:
-                raise ValueError(f"Failed to parse framework YAML: {e}")
-            
-            try:
-                if '## Document Manifest' in corpus_manifest:
-                    _, corpus_yaml_block = corpus_manifest.split('## Document Manifest', 1)
-                    if '```yaml' in corpus_yaml_block:
-                        yaml_start = corpus_yaml_block.find('```yaml') + 7
-                        yaml_end = corpus_yaml_block.rfind('```')
-                        corpus_yaml = corpus_yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else corpus_yaml_block[yaml_start:].strip()
-                        corpus_dict = yaml.safe_load(corpus_yaml)
-                    else:
-                        raise ValueError("YAML code fence not found in corpus manifest.")
-                else:
-                    raise ValueError("Corpus manifest appendix not found.")
-            except Exception as e:
-                raise ValueError(f"Failed to parse corpus manifest YAML: {e}")
-
-
-            # Assemble the prompt with the content of the artifacts
+            # Assemble the prompt with raw content (let LLM handle parsing)
             prompt = self.prompt_template.format(
                 current_date=datetime.now().strftime("%Y-%m-%d"),
-                experiment_spec=experiment_spec,
-                framework_spec=framework_dict,
-                corpus_manifest=corpus_dict,
-                specification_references=json.dumps(self.specification_references, indent=2)
+                experiment_spec=experiment_spec_content,
+                framework_spec=framework_spec,
+                corpus_manifest=corpus_manifest,
+                specification_references=current_specifications
             )
             
             # Call LLM for validation

@@ -336,19 +336,93 @@ class CleanAnalysisOrchestrator:
         return max(0, min(100, score))  # Clamp between 0 and 100
     
     def _load_specs(self) -> Dict[str, Any]:
-        """Load experiment specifications."""
+        """Load experiment specifications - supports v10.0 machine-readable appendix format."""
         experiment_file = self.experiment_path / "experiment.md"
         if not experiment_file.exists():
             raise CleanAnalysisError(f"Experiment file not found: {experiment_file}")
         
-        # Parse frontmatter from experiment.md
-        content = experiment_file.read_text(encoding='utf-8')
-        if content.startswith('---'):
-            _, frontmatter_block, _ = content.split('---', 2)
-            config = yaml.safe_load(frontmatter_block)
-            return config
-        else:
-            raise CleanAnalysisError("Experiment file missing YAML frontmatter")
+        # Parse experiment.md to extract v10.0 machine-readable appendix
+        try:
+            content = experiment_file.read_text(encoding='utf-8')
+            
+            # Try v10.0 delimited format first (# --- Start/End --- pattern)
+            if '# --- Start of Machine-Readable Appendix ---' in content:
+                start_marker = '# --- Start of Machine-Readable Appendix ---'
+                end_marker = '# --- End of Machine-Readable Appendix ---'
+                
+                start_idx = content.find(start_marker) + len(start_marker)
+                end_idx = content.find(end_marker)
+                
+                if end_idx > start_idx:
+                    yaml_content = content[start_idx:end_idx].strip()
+                else:
+                    # No end marker found, take everything after start
+                    yaml_content = content[start_idx:].strip()
+                
+                config = yaml.safe_load(yaml_content)
+                if not isinstance(config, dict):
+                    raise CleanAnalysisError("Invalid YAML structure in machine-readable appendix.")
+            
+            # Try v10.0 Configuration Appendix format (## Configuration Appendix)
+            elif '## Configuration Appendix' in content:
+                _, appendix_content = content.split('## Configuration Appendix', 1)
+                # Isolate the YAML block from markdown fences
+                if '```yaml' in appendix_content:
+                    yaml_start = appendix_content.find('```yaml') + 7
+                    yaml_end = appendix_content.rfind('```')
+                    if yaml_end > yaml_start:
+                        yaml_content = appendix_content[yaml_start:yaml_end].strip()
+                    else: # No closing fence found
+                        yaml_content = appendix_content[yaml_start:].strip()
+                else: # No yaml fence, assume raw content
+                    yaml_content = appendix_content.strip()
+
+                config = yaml.safe_load(yaml_content)
+                if not isinstance(config, dict):
+                    raise CleanAnalysisError("Invalid YAML structure in experiment appendix.")
+            
+            # Reject v7.3 frontmatter format with helpful error
+            elif content.startswith('---'):
+                raise CleanAnalysisError(
+                    "This experiment uses v7.3 frontmatter format. "
+                    "CleanAnalysisOrchestrator requires v10.0 machine-readable appendix format. "
+                    "Please convert to v10.0 specification."
+                )
+            
+            else:
+                raise CleanAnalysisError(
+                    "Could not find v10.0 machine-readable appendix in experiment.md. "
+                    "Expected either '# --- Start of Machine-Readable Appendix ---' or '## Configuration Appendix'."
+                )
+        
+        except yaml.YAMLError as e:
+            raise CleanAnalysisError(f"Failed to parse experiment.md YAML: {e}")
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to parse experiment.md: {e}")
+
+        # V10 Specification Validation
+        if not config.get('metadata'):
+            raise CleanAnalysisError("Missing required field: metadata")
+        
+        if not config.get('components'):
+            raise CleanAnalysisError("Missing required field: components")
+        
+        spec_version = config.get('metadata', {}).get('spec_version')
+        if not spec_version:
+            raise CleanAnalysisError("Missing required field: metadata.spec_version")
+        
+        if not str(spec_version).startswith('10.'):
+            raise CleanAnalysisError(f"Experiment spec_version is '{spec_version}', but CleanAnalysisOrchestrator requires v10.0.")
+        
+        # Validate required component fields
+        components = config.get('components', {})
+        if not components.get('framework'):
+            raise CleanAnalysisError("Missing required field: components.framework")
+        
+        if not components.get('corpus'):
+            raise CleanAnalysisError("Missing required field: components.corpus")
+        
+        return config
     
     def _run_coherence_validation(self, validation_model: str, audit_logger: AuditLogger):
         """Run experiment coherence validation."""

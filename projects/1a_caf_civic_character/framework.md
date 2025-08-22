@@ -1,381 +1,650 @@
-# Civic Analysis Framework (CAF) v7.3
+# Civic Analysis Framework (CAF) v10.0
 
-The Civic Analysis Framework provides a systematic approach to evaluating the civic character of political discourse, focusing on the fundamental tensions between competing civic virtues and their strategic deployment in public communication.
+---
 
-## Raison d'Être
+## Part 1: The Scholarly Document
 
-Democratic governance depends on civic discourse that embodies fundamental virtues: dignity, truth, justice, hope, and pragmatism. However, political communication often involves strategic tensions where speakers simultaneously appeal to competing virtues and their pathological counterparts. This framework provides a rigorous methodology for evaluating these tensions and assessing the overall civic character of political discourse.
+### Section 1: Abstract & *Raison d'être*
 
-## Research Foundations
+**What is this framework?**
+The Civic Analysis Framework (CAF) provides a systematic approach to evaluating the civic character of political discourse. It analyzes the moral character displayed by speakers, based on Aristotelian virtue ethics and contemporary civic republican theory. The framework evaluates what civic virtues and vices speakers demonstrate through their rhetorical choices, focusing on the fundamental tensions between competing values.
 
-This framework is grounded in:
-- **Classical Civic Republican Theory**: Sustainable democratic governance requires citizens and leaders who embody civic virtues
-- **Virtue Ethics**: Character assessment through demonstrated patterns of moral reasoning
-- **Political Communication Theory**: Strategic deployment of appeals in public discourse
-- **Tension Mathematics**: Quantitative assessment of competing value systems
+**What problem does it solve?**
+Democratic governance depends on civic discourse that embodies fundamental virtues. However, political communication often involves strategic tensions where speakers simultaneously appeal to competing virtues and their pathological counterparts. This framework provides a rigorous methodology for evaluating these tensions and assessing the overall civic character of political discourse. It moves beyond simple sentiment analysis to quantify the moral coherence of a speaker's communication.
 
-## Dimensions and Axes
+**Who is it for?**
+This framework is designed for researchers, journalists, educators, and citizens who need to assess the moral fitness and integrity of political leaders. It is applicable to political speeches, debates, interviews, and other forms of public communication where a speaker's character is revealed.
 
-The framework evaluates political discourse across five bipolar axes that form the foundation of civic character:
+### Section 2: Theoretical & Empirical Foundations
 
-### Identity Axis: Dignity ↔ Tribalism
-- **Dignity (0.0-1.0)**: Appeals to universal human worth, respect for individuals regardless of group membership, emphasis on shared humanity and individual moral agency
-- **Tribalism (0.0-1.0)**: Appeals to group identity, us-vs-them framing, emphasis on group loyalty over universal principles, exclusionary rhetoric
+The CAF is grounded in a multi-disciplinary body of research from political philosophy, virtue ethics, and political communication theory.
 
-### Truth Axis: Truth ↔ Manipulation  
-- **Truth (0.0-1.0)**: Commitment to factual accuracy, acknowledgment of complexity, intellectual honesty, evidence-based reasoning
-- **Manipulation (0.0-1.0)**: Strategic distortion of information, emotional manipulation, misleading framing, exploitation of cognitive biases
+#### **Aristotelian Virtue Ethics in a Political Context**
+Drawing from Aristotle's *Nicomachean Ethics*, CAF recognizes that excellence in public life depends on the cultivation of specific virtues and the habitual avoidance of corresponding vices. Political leadership requires not merely policy competence but demonstrated moral character worthy of democratic trust. The framework operationalizes this by measuring the observable rhetorical habits of speakers.
 
-### Justice Axis: Justice ↔ Resentment
-- **Justice (0.0-1.0)**: Concern for fair outcomes, procedural fairness, protection of rights, systemic equity considerations
-- **Resentment (0.0-1.0)**: Exploitation of grievances, blame-focused rhetoric, zero-sum framing, victimization narratives
+**Core Principle**: Character is revealed through choices under pressure. How leaders communicate when facing political challenges reveals their fundamental moral orientation.
 
-### Emotional Axis: Hope ↔ Fear
-- **Hope (0.0-1.0)**: Constructive optimism, positive vision for the future, empowerment rhetoric, possibility-focused language
-- **Fear (0.0-1.0)**: Anxiety-inducing rhetoric, threat-focused language, catastrophic framing, security-based appeals
+#### **Civic Republican Character Theory**
+Building on contemporary scholarship by figures like Michael Sandel and Philip Pettit, CAF examines how speakers either embody the civic virtues necessary for democratic leadership or display vices that undermine their fitness for public trust.
 
-### Reality Axis: Pragmatism ↔ Fantasy
-- **Pragmatism (0.0-1.0)**: Realistic problem-solving, acknowledgment of constraints, practical solutions, incremental progress
-- **Fantasy (0.0-1.0)**: Unrealistic promises, magical thinking, oversimplified solutions, denial of constraints
+**Key Insight**: Democratic governance depends on leaders who prioritize universal principles over narrow interests, demonstrate intellectual integrity, and maintain commitment to democratic norms even when politically costly.
 
-## Linguistic Markers
+#### **The Importance of Salience Weighting**
+A core innovation of the v10 specification is the distinction between a dimension's **intensity** (its raw 0.0-1.0 score) and its **salience** (its rhetorical prominence or emphasis, also 0.0-1.0). This is empirically grounded in research showing that context-dependent weighting based on textual emphasis provides more accurate results than fixed weighting schemes (Laver et al., 2003). By analyzing both intensity and salience, CAF captures not just *what* is being said, but *how much emphasis* it receives, providing a more nuanced and valid assessment.
 
-**Critical Note**: These markers represent semantic spaces and conceptual patterns, not keyword lists. Analysts should look for the underlying concepts and meanings expressed through various linguistic forms, not just literal word matches.
+**Key Citations**:
+- Aristotle. *Nicomachean Ethics*.
+- Sandel, M. J. (2009). *Justice: What's the right thing to do?*. Farrar, Straus and Giroux.
+- Pettit, P. (1997). *Republicanism: A theory of freedom and government*. Oxford University Press.
+- Laver, M., Benoit, K., & Garry, J. (2003). Extracting policy positions from political texts using words as data. *American Political Science Review*, 97(2), 311-331.
 
-### Dignity Markers
-Look for dignity concepts such as:
-- Universal pronouns: "all people," "every citizen," "human dignity"
-- Individual agency: "personal responsibility," "individual choice," "human potential"  
-- Inclusive language: "regardless of," "irrespective of," "common humanity"
+### Section 3: Analytical Methodology
 
-*Consider related semantic expressions beyond these specific words - focus on the concept of universal human worth and individual moral agency regardless of the exact language used.*
+CAF evaluates political discourse across five bipolar axes that form the foundation of civic character. Each of the ten dimensions is scored independently for both intensity (raw_score) and rhetorical prominence (salience).
 
-### Tribalism Markers
-Look for tribalism concepts such as:
-- Group identifiers: "us vs them," "our people," "real Americans"
-- Exclusionary language: "outsiders," "enemies within," "not one of us"
-- Loyalty tests: "with us or against us," "true believers," "betrayal"
+**Dimensions & Axes**:
 
-*Consider related semantic expressions - focus on the concept of group loyalty over universal principles and exclusionary rhetoric regardless of specific terminology.*
+**Identity Axis**: 
+-   **Tribalism** (0.0-1.0): Group loyalty over universal principles, us-vs-them framing.
+-   **Dignity** (0.0-1.0): Respect for universal human worth, emphasis on shared humanity.
 
-### Truth Markers
-Look for truth-commitment concepts such as:
-- Evidence language: "data shows," "research indicates," "facts demonstrate"
-- Complexity acknowledgment: "on the other hand," "however," "it's complicated"
-- Intellectual humility: "I could be wrong," "more study needed," "uncertain"
+**Truth Axis**:
+-   **Manipulation** (0.0-1.0): Strategic distortion of information, emotional manipulation.
+-   **Truth** (0.0-1.0): Commitment to factual accuracy, intellectual honesty.
 
-*Consider related semantic expressions - focus on commitment to factual accuracy and intellectual honesty regardless of exact phrasing.*
+**Justice Axis**:
+-   **Resentment** (0.0-1.0): Exploitation of grievances, blame-focused rhetoric.
+-   **Justice** (0.0-1.0): Concern for fair outcomes, procedural fairness.
 
-### Manipulation Markers
-Look for manipulation concepts such as:
-- Emotional triggers: "outrageous," "shocking," "unbelievable"
-- False dichotomies: "only two choices," "either/or," "no middle ground"
-- Cognitive bias exploitation: "everyone knows," "obviously," "common sense"
+**Emotional Axis**:
+-   **Fear** (0.0-1.0): Anxiety-inducing rhetoric, threat-focused language.
+-   **Hope** (0.0-1.0): Constructive optimism, positive vision for the future.
 
-*Consider related semantic expressions - focus on strategic information distortion and emotional manipulation regardless of specific techniques used.*
+**Reality Axis**:
+-   **Fantasy** (0.0-1.0): Unrealistic promises, magical thinking, oversimplified solutions.
+-   **Pragmatism** (0.0-1.0): Realistic problem-solving, acknowledgment of constraints.
 
-### Justice Markers
-Look for justice concepts such as:
-- Fairness language: "equal treatment," "level playing field," "due process"
-- Rights protection: "constitutional rights," "civil liberties," "equal protection"
-- Systemic thinking: "structural issues," "institutional reform," "systemic change"
+**Interpretive Guidance: Pattern Classifications**
+While not calculated as formal metrics, the synthesis agent should be guided by the following interpretive patterns to assess the overall character profile. These patterns emerge from the relationships between dimensional scores and salience.
+- **Authentic Virtue**: High scores and high salience for virtue dimensions, indicating a genuine commitment to civic ideals.
+- **Strategic Virtue Signaling**: High scores but low salience for virtue dimensions, suggesting superficial appeals without substantive commitment.
+- **Strategic Pathology**: High scores and high salience for vice dimensions, indicating a deliberate deployment of divisive or manipulative rhetoric.
+- **Incoherent Messaging**: High tension scores between opposing dimensions, indicating inconsistent or contradictory value appeals.
 
-*Consider related semantic expressions - focus on concern for fair outcomes and rights protection regardless of exact legal or political terminology.*
+**Derived & Composite Metrics**:
 
-### Resentment Markers
-Look for resentment concepts such as:
-- Grievance language: "they took from us," "we've been wronged," "victims of"
-- Blame attribution: "it's their fault," "they caused this," "responsible for our problems"
-- Zero-sum framing: "their gain is our loss," "finite resources," "winner takes all"
+**Character Tension Indices** (0.0-1.0, higher = more contradiction):
+These metrics, restored from CAF v5.0, quantify the strategic contradictions in a speaker's rhetoric. They are now salience-weighted to reflect the prominence of the competing appeals.
+- **Formula**: `Tension = min(Virtue_Score, Vice_Score) * abs(Virtue_Salience - Vice_Salience)`
+- **Indices**: `identity_tension`, `truth_tension`, `justice_tension`, `emotional_tension`, `reality_tension`.
 
-*Consider related semantic expressions - focus on exploitation of grievances and blame-focused rhetoric regardless of specific targets or language.*
+**Salience-Weighted Civic Character Index** (-1.0 to +1.0, negative = vice-dominant, positive = virtue-dominant):
+This is the primary summary metric, calculating the overall character orientation of the discourse. It weights each dimension by its rhetorical prominence.
+- **Formula**: The sum of all (Virtue Score * Virtue Salience) minus the sum of all (Vice Score * Vice Salience), normalized by the total salience of all dimensions. This ensures that the most emphasized themes have the greatest impact on the final character assessment.
 
-### Hope Markers
-Look for hope concepts such as:
-- Possibility language: "we can," "together we will," "bright future"
-- Empowerment rhetoric: "in our hands," "we have the power," "make it happen"
-- Constructive vision: "building," "creating," "improving"
+**Sequential Analysis Strategy**:
+For highest fidelity analysis, it is recommended to run the five sequential analysis variants (sequential_identity, sequential_truth, sequential_justice, sequential_emotional, sequential_reality) and combine the results. This approach allows the analysis agent to focus exclusively on one axis at a time, reducing cognitive load and improving scoring accuracy. The combined results provide a comprehensive character profile with enhanced reliability.
 
-*Consider related semantic expressions - focus on constructive optimism and positive future vision regardless of specific aspirational language used.*
+**Concept Overlap Resolution**:
+The framework addresses the inherent complexity of political discourse where speakers may simultaneously appeal to competing values. Each dimension includes explicit disambiguation rules to guide consistent scoring when conceptual overlap occurs:
 
-### Fear Markers
-Look for fear concepts such as:
-- Threat language: "danger," "crisis," "under attack"
-- Catastrophic framing: "disaster," "collapse," "end of"
-- Security appeals: "protect ourselves," "defend against," "safety first"
+- **Identity Axis**: When statements refer to in-group dignity (e.g., "respect for our citizens"), the agent assesses whether the primary function is to create exclusionary contrast (Tribalism) or emphasize universal worth (Dignity). Both can be scored if clearly present.
 
-*Consider related semantic expressions - focus on anxiety-inducing rhetoric and threat-focused language regardless of specific fears or threats mentioned.*
+- **Truth Axis**: Distinguishes between strategic deception (Manipulation) and genuine intellectual honesty (Truth). A statement can be factually correct but manipulative if framed deceptively.
 
-### Pragmatism Markers
-Look for pragmatism concepts such as:
-- Constraint acknowledgment: "within our means," "realistic goals," "step by step"
-- Problem-solving focus: "practical solutions," "what works," "evidence-based"
-- Incremental progress: "gradual improvement," "building on," "next steps"
+- **Justice Axis**: Separates punitive blame-focus (Resentment) from restorative fairness (Justice). Both may use "fairness" language, so the agent evaluates temporal focus and intent.
 
-*Consider related semantic expressions - focus on realistic problem-solving and constraint acknowledgment regardless of specific policy areas or approaches.*
+- **Emotional Axis**: Allows independent scoring of Fear and Hope, recognizing that speakers can simultaneously warn of threats while offering positive vision.
 
-### Fantasy Markers
-Look for fantasy concepts such as:
-- Magical thinking: "easy solutions," "simple fix," "overnight change"
-- Unrealistic promises: "eliminate all," "perfect world," "no more"
-- Constraint denial: "money is no object," "unlimited resources," "anything is possible"
+- **Reality Axis**: Distinguishes between acknowledging constraints (Pragmatism) and denying complexity (Fantasy). Bold plans are Hope, not Fantasy, if grounded in plausible achievement paths.
 
-*Consider related semantic expressions - focus on unrealistic promises and constraint denial regardless of specific policy areas or promises made.*
+This systematic approach ensures that the framework captures the full complexity of political rhetoric while maintaining scoring consistency and reliability.
 
-## Analysis Methodology
+**Machine-Readable Implementation**: The YAML appendix uses structured object formats to enhance LLM agent performance:
 
-The framework employs sequential chain-of-thought analysis, examining each dimension group independently before integration. This approach improves analytical consistency and evidence quality by focusing attention on specific patterns before synthesis.
+- **Enhanced Markers**: Each dimension's `markers` section uses `{ phrase: "...", explanation: "..." }` objects instead of simple lists. This provides context for each example, helping agents understand why specific phrases indicate particular dimensions.
 
-## Weighting Scheme
+- **Structured Disambiguation**: The `disambiguation` sections use nested objects with `rule`, `context_clues`, `priority`, and `co_occurrence_strategy` keys. This formal structure reduces ambiguity and ensures consistent agent interpretation of complex conceptual overlaps.
 
-**Dynamic Salience Weighting**: Each dimension receives a salience weight (0.0-1.0) based on its centrality to the specific text being analyzed. This allows the framework to adapt to different types of political discourse while maintaining analytical rigor.
+These structured formats exceed the base specification requirements but significantly improve scoring accuracy and reliability by providing explicit guidance for boundary cases and concept resolution.
 
-## Calculated Metrics
+### Section 4: Intended Application & Corpus Fit
 
-### Tension Scores
-- **Dignity-Tribalism Tension**: (dignity_score + (1 - tribalism_score)) / 2
-- **Truth-Manipulation Tension**: (truth_score + (1 - manipulation_score)) / 2  
-- **Justice-Resentment Tension**: (justice_score + (1 - resentment_score)) / 2
-- **Hope-Fear Tension**: (hope_score + (1 - fear_score)) / 2
-- **Pragmatism-Fantasy Tension**: (pragmatism_score + (1 - fantasy_score)) / 2
+-   **Target Corpus Description**: CAF is designed for the analysis of persuasive or strategic communication where a speaker's character is a central element, such as political speeches, candidate debates, and public statements.
+-   **Known Limitations & Scope**: The framework is less suited for analyzing purely informational texts, policy documents, or artistic works. It requires a text where a speaker is actively making choices that reveal their moral and civic orientation.
+-   **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro) for reliable analysis due to the nuanced distinctions between dimensions and the dual-track intensity/salience scoring.
+-   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
 
-### Composite Indices
-- **Civic Character Index**: Average of all tension scores
-- **Salience-Weighted Civic Character Index**: Tension scores weighted by dimension salience
-- **Virtue Index**: Average of positive dimension scores (dignity, truth, justice, hope, pragmatism)
-- **Pathology Index**: Average of negative dimension scores (tribalism, manipulation, resentment, fear, fantasy)
+---
 
-## Pattern Classifications
+## Part 2: The Machine-Readable Appendix
+```yaml
+# --- Start of Machine-Readable Appendix ---
 
-### Civic Character Profiles
-- **High Civic Character** (≥0.75): Consistent virtue appeals with minimal pathological elements
-- **Mixed Character** (0.50-0.74): Balance of virtue and pathology with strategic tensions
-- **Low Civic Character** (0.25-0.49): Predominantly pathological appeals with limited virtue
-- **Pathological Discourse** (<0.25): Systematic virtue deficits across multiple dimensions
+# 5.1: Metadata
+metadata:
+  framework_name: "civic_analysis_framework"
+  framework_version: "1.0.0"
+  author: "Discernus Project"
+  spec_version: "10.0"
 
-### Strategic Patterns
-- **Virtue Signaling** (High virtue scores, low salience): Superficial virtue appeals without substantive commitment
-- **Strategic Pathology** (High pathology scores, high salience): Deliberate deployment of divisive rhetoric
-- **Authentic Virtue** (High virtue scores, high salience): Genuine commitment to civic ideals
-- **Incoherent Messaging** (High variance across dimensions): Inconsistent value appeals
+# 5.2: Analysis Variants
+analysis_variants:
+  default:
+    description: "Complete v10.0 implementation with salience and tension analysis. For highest fidelity analysis, it is recommended to execute the five `sequential_*` analysis variants and combine the results."
+    analysis_prompt: |
+      You are an expert analyst of civic character and political ethics, grounded in Aristotelian virtue ethics and civic republican theory. Your task is to analyze the provided text using the Civic Analysis Framework v10.0.
 
-## Reliability and Validity
+      FRAMEWORK METHODOLOGY:
+      This framework evaluates civic virtues and vices speakers demonstrate through rhetorical choices. It preserves complexity by independently scoring opposing dimensions for both intensity (raw_score) and rhetorical prominence (salience).
 
-### Inter-Rater Reliability
-Framework designed for high consistency across analysts through:
-- Clear operational definitions for each dimension
-- Specific linguistic markers and examples
-- Sequential analysis methodology
-- Explicit confidence reporting requirements
+      DIMENSIONAL ANALYSIS:
+      You must evaluate 10 dimensions across 5 opposing pairs:
+      - Identity: Tribalism vs. Dignity
+      - Truth: Manipulation vs. Truth
+      - Justice: Resentment vs. Justice
+      - Emotional: Fear vs. Hope
+      - Reality: Fantasy vs. Pragmatism
 
-### Construct Validity
-Dimensions grounded in established political theory and validated through:
-- Classical civic republican literature
-- Contemporary political communication research
-- Empirical testing across diverse political texts
-- Expert review and refinement
+      EVIDENCE STANDARDS:
+      - Provide exact quotations, not paraphrases.
+      - Prioritize direct rhetorical indicators over interpretive inferences.
+      - If evidence is ambiguous, lower the confidence score.
 
-## Considerations on Bias
+      SALIENCE ASSESSMENT: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
 
-### Potential Sources
-- **Ideological Bias**: Analysts' political preferences may influence virtue/pathology assessments
-- **Cultural Bias**: Framework developed within Western democratic context
-- **Temporal Bias**: Contemporary political norms may not apply to historical texts
-- **Selection Bias**: Text sampling may not represent full spectrum of political discourse
+      LLM GUIDANCE:
+      - Avoid anchoring bias from example scores in the markers section
+      - Adhere strictly to the provided disambiguation rules to prevent concept conflation
+      - Base scores on textual evidence, not inference or assumptions
+      - Score each dimension independently; opposing dimensions can both be present
+      - Use the boundary_cases guidance to resolve ambiguous phrases
 
-### Mitigation Strategies
-- **Multi-Analyst Review**: Independent analysis by multiple trained assessors
-- **Blind Analysis**: Analysts unaware of speaker identity during assessment
-- **Cross-Cultural Validation**: Testing framework across different political systems
-- **Longitudinal Consistency**: Regular recalibration using benchmark texts
+  sequential_identity:
+    description: "Focused analysis of Identity axis dimensions (Tribalism, Dignity)"
+    analysis_prompt: |
+      DIMENSIONAL ANALYSIS: Focus exclusively on the Identity axis dimensions.
+      
+      **TRIBALISM**: Look for in-group supremacy claims, exclusionary language, "us vs. them" dynamics.
+      **DIGNITY**: Look for universal worth language, shared humanity emphasis, inclusive recognition.
+      
+      **SALIENCE ASSESSMENT**: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+      
+      **CRITICAL DISAMBIGUATION**: When statements refer to "our people" or "our citizens":
+      - If primary function is creating exclusionary contrast → score as Tribalism
+      - If primary function is emphasizing inherent worth → score as Dignity  
+      - If both present, score both independently and note tension
+      
+      **BOUNDARY CASES**:
+      - "We are a special people" → assess context for superiority vs. pride
+      - "Respect for our citizens" → assess for exclusionary vs. universal worth emphasis
+      
+      Use the scoring calibration guidelines defined for the `tribalism` and `dignity` dimensions and focus only on these two dimensions.
 
-## Analytical Layers
+  sequential_truth:
+    description: "Focused analysis of Truth axis dimensions (Manipulation, Truth)"
+    analysis_prompt: |
+      DIMENSIONAL ANALYSIS: Focus exclusively on the Truth axis dimensions.
+      
+      **MANIPULATION**: Look for strategic deception, emotional exploitation, misleading framing.
+      **TRUTH**: Look for factual commitment, intellectual honesty, complexity acknowledgment.
+      
+      **SALIENCE ASSESSMENT**: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+      
+      **CRITICAL DISAMBIGUATION**: 
+      - Manipulation involves INTENT to mislead (strategic deception)
+      - Truth is about adherence to evidence (intellectual honesty)
+      - A statement can be factually correct but manipulative if framed deceptively
+      - Score both if applicable
+      
+      **BOUNDARY CASES**:
+      - "A biased media" → legitimate critique (Truth) vs. manipulative deflection (Manipulation)
+      - "An inconvenient truth" → genuine honesty vs. rhetorical framing device
+      
+      Use the scoring calibration guidelines defined for the `manipulation` and `truth` dimensions and focus only on these two dimensions.
 
-### Layer 1: Surface Features
-Direct textual evidence of virtue/pathology markers through linguistic analysis
+  sequential_justice:
+    description: "Focused analysis of Justice axis dimensions (Resentment, Justice)"
+    analysis_prompt: |
+      DIMENSIONAL ANALYSIS: Focus exclusively on the Justice axis dimensions.
+      
+      **RESENTMENT**: Look for grievance exploitation, blame-focused rhetoric, past wrongs emphasis.
+      **JUSTICE**: Look for fair outcomes, procedural fairness, systemic solutions.
+      
+      **SALIENCE ASSESSMENT**: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+      
+      **CRITICAL DISAMBIGUATION**: Both may use "fairness" language:
+      - Resentment: backward-looking, punitive focus on blame
+      - Justice: forward-looking, restorative focus on systems
+      - Temporal orientation and intent are key differentiators
+      
+      **BOUNDARY CASES**:
+      - "They must be held accountable" → punitive blame (Resentment) vs. restorative fairness (Justice)
+      - "Restoring order" → legitimate goal (Justice) vs. pretext for suppression
+      
+      Use the scoring calibration guidelines defined for the `resentment` and `justice` dimensions and focus only on these two dimensions.
 
-### Layer 2: Strategic Intent
-Assessment of deliberate rhetorical choices and their civic implications
+  sequential_emotional:
+    description: "Focused analysis of Emotional axis dimensions (Fear, Hope)"
+    analysis_prompt: |
+      DIMENSIONAL ANALYSIS: Focus exclusively on the Emotional axis dimensions.
+      
+      **FEAR**: Look for anxiety-inducing rhetoric, threat-focused language, survival concerns.
+      **HOPE**: Look for constructive optimism, positive vision, proactive language.
+      
+      **SALIENCE ASSESSMENT**: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+      
+      **CRITICAL DISAMBIGUATION**: 
+      - Fear focuses on preventing negative future (threat prevention)
+      - Hope focuses on achieving positive future (positive vision)
+      - A statement can contain both aspects; score independently
+      - Hope requires proactive, possibility-focused language (not just fear reduction)
+      
+      **BOUNDARY CASES**:
+      - "A dangerous path" → legitimate warning (Pragmatism) vs. fear appeal
+      - "A new American dream" → genuine hope vs. simple reassurance (fear reduction without positive vision)
+      
+      Use the scoring calibration guidelines defined for the `fear` and `hope` dimensions and focus only on these two dimensions.
 
-### Layer 3: Systemic Impact
-Evaluation of discourse's contribution to democratic health and civic culture
+  sequential_reality:
+    description: "Focused analysis of Reality axis dimensions (Fantasy, Pragmatism)"
+    analysis_prompt: |
+      DIMENSIONAL ANALYSIS: Focus exclusively on the Reality axis dimensions.
+      
+      **FANTASY**: Look for unrealistic promises, magical thinking, complexity denial.
+      **PRAGMATISM**: Look for realistic problem-solving, constraint acknowledgment, trade-offs.
+      
+      **SALIENCE ASSESSMENT**: 
+      Salience measures rhetorical prominence, not intensity. Consider:
+      - Frequency and repetition patterns throughout the text
+      - Structural positioning (opening, closing, thesis statements)
+      - Thematic centrality to the overall message
+      - Rhetorical devices used for emphasis (metaphors, imagery, emotional appeals)
+      SALIENCE ≠ INTENSITY. A dimension can have moderate intensity (0.5) but high salience (0.9) if it's rhetorically central.
+      
+      **CRITICAL DISAMBIGUATION**: 
+      - Fantasy denies constraints (impossible outcomes)
+      - Pragmatism acknowledges constraints (realistic solutions)
+      - Bold, ambitious plans are Hope (not Fantasy) if grounded in plausible achievement paths
+      - Pragmatism ≠ pessimism; can still be hopeful
+      
+      **BOUNDARY CASES**:
+      - "A chicken in every pot" → folksy promise (Hope) vs. unrealistic fantasy
+      - "A bold new plan" → pragmatic strategy vs. complete fantasy
+      
+      Use the scoring calibration guidelines defined for the `fantasy` and `pragmatism` dimensions and focus only on these two dimensions.
 
-## Inter-Framework Relationships
+# 5.3: Dimensions
+dimensions:
+  - name: "tribalism"
+    description: "Group loyalty over universal principles, us-vs-them framing."
+    markers:
+      positive_examples:
+        - { phrase: "our people", explanation: "creates in-group/out-group distinction" }
+        - { phrase: "real Americans", explanation: "emphasizes authentic group membership vs. outsiders" }
+        - { phrase: "better people", explanation: "claims group moral or cultural superiority" }
+        - { phrase: "not our kind", explanation: "explicit exclusion of others" }
+        - { phrase: "chosen people", explanation: "special status claims for the group" }
+      negative_examples:
+        - { phrase: "patriotism", explanation: "love of country without exclusion doesn't qualify" }
+        - { phrase: "community pride", explanation: "positive group identity without supremacy claims" }
+        - { phrase: "we are different", explanation: "simple distinction without superiority claims" }
+      boundary_cases:
+        - { phrase: "we are a special people", explanation: "depends on context; could be simple pride or imply superiority." }
+    disambiguation:
+      overlap_with_dignity:
+        rule: "When a statement expresses respect for an in-group ('our people'), assess the context."
+        context_clues: "Look for 'us vs. them' dynamic or implied superiority vs. emphasis on inherent worth"
+        priority: "If both aspects present, score both and note tension in evidence"
+        co_occurrence_strategy: "Tribalism and Dignity can coexist; score independently based on textual evidence"
+    
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong supremacy claims and clear exclusionary implications."
+      medium: "0.4-0.6: Moderate in-group preference, subtle exclusion"
+      low: "0.1-0.3: Mild group preference, weak exclusionary hints"
+      absent: "0.0: No group supremacy or exclusion"
 
-**CAF** serves as the foundational civic assessment within the Triadic Architecture:
-- **With CHF**: CAF assesses civic virtue while CHF evaluates character heuristics and decision-making patterns
-- **With ECF**: CAF focuses on explicit civic appeals while ECF analyzes emotional climate and affective dimensions
-- **Synthesis Approach**: Human-led integration of complementary analytical perspectives for comprehensive assessment
+  - name: "dignity"
+    description: "Respect for universal human worth, emphasis on shared humanity."
+    markers:
+      positive_examples:
+        - { phrase: "every person", explanation: "universal scope of human worth" }
+        - { phrase: "common humanity", explanation: "shared human experience transcending divisions" }
+        - { phrase: "inherent dignity", explanation: "intrinsic value regardless of group membership" }
+        - { phrase: "equal treatment", explanation: "procedural fairness across groups" }
+        - { phrase: "everyone belongs", explanation: "inclusive community vision" }
+      negative_examples:
+        - { phrase: "individual rights", explanation: "legal/political concept, not dignity focus" }
+        - { phrase: "personal achievement", explanation: "individual success, not universal worth" }
+        - { phrase: "respect for persons", explanation: "depends on universality vs. selective respect" }
+      boundary_cases:
+        - { phrase: "respect for our citizens", explanation: "depends on whether 'our' is descriptive or exclusionary." }
+    disambiguation:
+      overlap_with_tribalism:
+        rule: "When a statement refers to 'our citizens' or similar in-group language, assess whether it emphasizes universal worth or creates exclusionary contrast."
+        context_clues: "Universal worth emphasis vs. 'us vs. them' dynamic"
+        priority: "If both aspects present, score both independently"
+        co_occurrence_strategy: "Dignity and Tribalism can coexist; score based on textual evidence"
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong universal worth language and explicit inclusion."
+      medium: "0.4-0.6: Moderate inclusivity, some universal recognition"
+      low: "0.1-0.3: Weak inclusive hints, minimal dignity language"
+      absent: "0.0: No universal worth themes"
 
-<details>
-<summary>Machine-Readable Configuration</summary>
+  - name: "manipulation"
+    description: "Strategic distortion of information, emotional manipulation."
+    markers:
+      positive_examples:
+        - { phrase: "they're hiding the truth", explanation: "conspiratorial framing" }
+        - { phrase: "don't be fooled", explanation: "implies hidden deceptions" }
+        - { phrase: "misleading information", explanation: "false claims or deceptive statements" }
+        - { phrase: "propaganda", explanation: "information warfare or message control" }
+        - { phrase: "emotional manipulation", explanation: "feeling exploitation for rhetorical gain" }
+      negative_examples:
+        - { phrase: "let's look at the facts", explanation: "evidence-based appeal without distortion" }
+        - { phrase: "the evidence shows", explanation: "appeal to verifiable facts" }
+        - { phrase: "it's a complex issue", explanation: "acknowledgment of nuance" }
+      boundary_cases:
+        - { phrase: "a biased media", explanation: "could be a legitimate critique (Truth) or a manipulative deflection (Manipulation)." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines clear deceptive rhetoric and emotional exploitation."
+      medium: "0.4-0.6: Some misleading framing or spin"
+      low: "0.1-0.3: Minor rhetorical exaggeration"
+      absent: "0.0: No deceptive or manipulative rhetoric"
+    disambiguation:
+      overlap_with_truth:
+        rule: "Manipulation involves intent to mislead."
+        context_clues: "Look for strategic deception vs. good faith errors"
+        priority: "Intent is the key differentiator"
+        co_occurrence_strategy: "A statement can be factually correct but manipulative if framed deceptively"
 
-```json
-{
-  "name": "civic_analysis_framework",
-  "version": "v7.3",
-  "display_name": "Civic Analysis Framework (CAF) v7.3",
-  "analysis_variants": {
-    "default": {
-      "description": "Sequential civic character analysis with chain-of-thought methodology",
-      "analysis_prompt": "You are an expert political discourse analyst specializing in civic character assessment. Analyze this text through focused sequential steps, examining each dimension group independently before integration.\n\nSTEP 1 - IDENTITY AXIS ANALYSIS\nFocus ONLY on dignity vs. tribalism patterns (ignore other dimensions for now):\n- Look for dignity patterns: universal pronouns (\"all people,\" \"every citizen\"), individual agency language (\"personal responsibility,\" \"human potential\"), inclusive framing (\"regardless of,\" \"common humanity\") - Note: These are semantic concepts, look for the underlying meaning of universal human worth, not just these exact words\n- Look for tribalism patterns: group identifiers (\"us vs them,\" \"our people\"), exclusionary language (\"outsiders,\" \"enemies within\"), loyalty tests (\"with us or against us\") - Note: These are semantic concepts, look for the underlying meaning of group loyalty over universal principles, not just these exact words\n- Score dignity dimension (0.0-1.0) with specific textual evidence\n- Score tribalism dimension (0.0-1.0) with specific textual evidence\n- Assess dignity salience (0.0-1.0): How central are dignity appeals to the overall message?
-- Assess tribalism salience (0.0-1.0): How central are tribalism appeals to the overall message?\n- State dignity confidence (0.0-1.0): How certain are you about the dignity score?\n- State tribalism confidence (0.0-1.0): How certain are you about the tribalism score?\nShow your analytical work and evidence before proceeding.\n\nSTEP 2 - TRUTH AXIS ANALYSIS\nNow focus ONLY on truth vs. manipulation patterns:\n- Look for truth patterns: evidence language (\"data shows,\" \"research indicates\"), complexity acknowledgment (\"however,\" \"it's complicated\"), intellectual humility (\"I could be wrong\") - Note: These are semantic concepts, look for commitment to factual accuracy and intellectual honesty, not just these exact phrases\n- Look for manipulation patterns: emotional triggers (\"outrageous,\" \"shocking\"), false dichotomies (\"only two choices\"), cognitive bias exploitation (\"everyone knows,\" \"obviously\") - Note: These are semantic concepts, look for strategic information distortion and emotional manipulation, not just these exact techniques\n- Score truth dimension (0.0-1.0) with specific textual evidence\n- Score manipulation dimension (0.0-1.0) with specific textual evidence\n- Assess truth salience (0.0-1.0): How central are truth appeals to the overall message?
-- Assess manipulation salience (0.0-1.0): How central are manipulation patterns to the overall message?\n- State truth confidence (0.0-1.0): How certain are you about the truth score?\n- State manipulation confidence (0.0-1.0): How certain are you about the manipulation score?\nShow your analytical work and evidence before proceeding.\n\nSTEP 3 - JUSTICE AXIS ANALYSIS\nNow focus ONLY on justice vs. resentment patterns:\n- Look for justice patterns: fairness language (\"equal treatment,\" \"level playing field\"), rights protection (\"constitutional rights,\" \"due process\"), systemic thinking (\"structural issues,\" \"institutional reform\") - Note: These are semantic concepts, look for concern for fair outcomes and rights protection, not just these exact terms\n- Look for resentment patterns: grievance language (\"they took from us,\" \"we've been wronged\"), blame attribution (\"it's their fault\"), zero-sum framing (\"their gain is our loss\") - Note: These are semantic concepts, look for exploitation of grievances and blame-focused rhetoric, not just these exact phrases\n- Score justice dimension (0.0-1.0) with specific textual evidence\n- Score resentment dimension (0.0-1.0) with specific textual evidence\n- Assess justice salience (0.0-1.0): How central are justice appeals to the overall message?
-- Assess resentment salience (0.0-1.0): How central are resentment patterns to the overall message?\n- State justice confidence (0.0-1.0): How certain are you about the justice score?\n- State resentment confidence (0.0-1.0): How certain are you about the resentment score?\nShow your analytical work and evidence before proceeding.\n\nSTEP 4 - EMOTIONAL AXIS ANALYSIS\nNow focus ONLY on hope vs. fear patterns:\n- Look for hope patterns: possibility language (\"we can,\" \"together we will\"), empowerment rhetoric (\"in our hands,\" \"we have the power\"), constructive vision (\"building,\" \"creating\") - Note: These are semantic concepts, look for constructive optimism and positive future vision, not just these exact expressions\n- Look for fear patterns: threat language (\"danger,\" \"crisis,\" \"under attack\"), catastrophic framing (\"disaster,\" \"collapse\"), security appeals (\"protect ourselves,\" \"defend against\") - Note: These are semantic concepts, look for anxiety-inducing rhetoric and threat-focused language, not just these exact terms\n- Score hope dimension (0.0-1.0) with specific textual evidence\n- Score fear dimension (0.0-1.0) with specific textual evidence\n- Assess hope salience (0.0-1.0): How central are hope appeals to the overall message?
-- Assess fear salience (0.0-1.0): How central are fear patterns to the overall message?\n- State hope confidence (0.0-1.0): How certain are you about the hope score?\n- State fear confidence (0.0-1.0): How certain are you about the fear score?\nShow your analytical work and evidence before proceeding.\n\nSTEP 5 - REALITY AXIS ANALYSIS\nNow focus ONLY on pragmatism vs. fantasy patterns:\n- Look for pragmatism patterns: constraint acknowledgment (\"within our means,\" \"realistic goals\"), problem-solving focus (\"practical solutions,\" \"what works\"), incremental progress (\"step by step,\" \"gradual improvement\") - Note: These are semantic concepts, look for realistic problem-solving and constraint acknowledgment, not just these exact approaches\n- Look for fantasy patterns: magical thinking (\"easy solutions,\" \"simple fix\"), unrealistic promises (\"eliminate all,\" \"perfect world\"), constraint denial (\"money is no object,\" \"unlimited resources\") - Note: These are semantic concepts, look for unrealistic promises and constraint denial, not just these exact claims\n- Score pragmatism dimension (0.0-1.0) with specific textual evidence\n- Score fantasy dimension (0.0-1.0) with specific textual evidence\n- Assess pragmatism salience (0.0-1.0): How central are pragmatism appeals to the overall message?
-- Assess fantasy salience (0.0-1.0): How central are fantasy patterns to the overall message?\n- State pragmatism confidence (0.0-1.0): How certain are you about the pragmatism score?\n- State fantasy confidence (0.0-1.0): How certain are you about the fantasy score?\nShow your analytical work and evidence before proceeding.\n\nFINAL STEP - INTEGRATION AND VALIDATION\nReview your step-by-step analysis:\n- Check for scoring consistency across all dimension groups\n- Validate that evidence quality meets academic standards\n- Identify strategic tensions between competing virtues (e.g., high dignity + high tribalism)\n- Confirm confidence levels are appropriately calibrated\n- Calculate tension scores and civic character indices\n- Apply pattern classifications based on overall profile\n\nProvide your final structured analysis following this format:\n\n**CIVIC CHARACTER ASSESSMENT**\n\n**Identity Axis**: [dignity score]/[tribalism score] (dignity salience: [score], tribalism salience: [score], dignity confidence: [score], tribalism confidence: [score])\n**Truth Axis**: [truth score]/[manipulation score] (truth salience: [score], manipulation salience: [score], truth confidence: [score], manipulation confidence: [score])  \n**Justice Axis**: [justice score]/[resentment score] (justice salience: [score], resentment salience: [score], justice confidence: [score], resentment confidence: [score])\n**Emotional Axis**: [hope score]/[fear score] (hope salience: [score], fear salience: [score], hope confidence: [score], fear confidence: [score])\n**Reality Axis**: [pragmatism score]/[fantasy score] (pragmatism salience: [score], fantasy salience: [score], pragmatism confidence: [score], fantasy confidence: [score])\n\n**Calculated Metrics**:\n- Civic Character Index: [calculated score]\n- Salience-Weighted Index: [calculated score]\n- Pattern Classification: [classification]\n\n**Key Insights**: [Summary of strategic tensions, dominant patterns, and civic implications]"
-    }
-  },
-  "dimension_groups": {
-    "identity_axis": ["dignity", "tribalism"],
-    "truth_axis": ["truth", "manipulation"],
-    "justice_axis": ["justice", "resentment"],
-    "emotional_axis": ["hope", "fear"],
-    "reality_axis": ["pragmatism", "fantasy"]
-  },
-  "calculation_spec": {
-    "execution_order": [
-      "dignity_tribalism_tension",
-      "truth_manipulation_tension", 
-      "justice_resentment_tension",
-      "hope_fear_tension",
-      "pragmatism_fantasy_tension",
-      "identity_axis_salience",
-      "truth_axis_salience", 
-      "justice_axis_salience",
-      "emotional_axis_salience",
-      "reality_axis_salience",
-      "virtue_index",
-      "pathology_index", 
-      "avg_virtue_salience",
-      "avg_pathology_salience",
-      "dimension_variance",
-      "civic_character_index",
-      "salience_weighted_civic_character_index"
-    ],
-    "formulas": {
-      "dignity_tribalism_tension": "(dignity_score + (1 - tribalism_score)) / 2",
-      "truth_manipulation_tension": "(truth_score + (1 - manipulation_score)) / 2",
-      "justice_resentment_tension": "(justice_score + (1 - resentment_score)) / 2",
-      "hope_fear_tension": "(hope_score + (1 - fear_score)) / 2",
-      "pragmatism_fantasy_tension": "(pragmatism_score + (1 - fantasy_score)) / 2",
-      "civic_character_index": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5",
-      "identity_axis_salience": "(dignity_salience + tribalism_salience) / 2",
-      "truth_axis_salience": "(truth_salience + manipulation_salience) / 2", 
-      "justice_axis_salience": "(justice_salience + resentment_salience) / 2",
-      "emotional_axis_salience": "(hope_salience + fear_salience) / 2",
-      "reality_axis_salience": "(pragmatism_salience + fantasy_salience) / 2",
-      "salience_weighted_civic_character_index": "(dignity_tribalism_tension * identity_axis_salience + truth_manipulation_tension * truth_axis_salience + justice_resentment_tension * justice_axis_salience + hope_fear_tension * emotional_axis_salience + pragmatism_fantasy_tension * reality_axis_salience) / (identity_axis_salience + truth_axis_salience + justice_axis_salience + emotional_axis_salience + reality_axis_salience + 1e-9)",
-      "virtue_index": "(dignity_score + truth_score + justice_score + hope_score + pragmatism_score) / 5",
-      "pathology_index": "(tribalism_score + manipulation_score + resentment_score + fear_score + fantasy_score) / 5",
-      "avg_virtue_salience": "(dignity_salience + truth_salience + justice_salience + hope_salience + pragmatism_salience) / 5",
-      "avg_pathology_salience": "(tribalism_salience + manipulation_salience + resentment_salience + fear_salience + fantasy_salience) / 5",
-      "dimension_variance": "numpy.var([dignity_score, tribalism_score, truth_score, manipulation_score, justice_score, resentment_score, hope_score, fear_score, pragmatism_score, fantasy_score])"
-    },
-    "pattern_classifications": {
-      "civic_character_profile": {
-        "high_civic_character": {"threshold": ">=0.75", "description": "Consistent virtue appeals with minimal pathological elements"},
-        "mixed_character": {"threshold": "0.50-0.74", "description": "Balance of virtue and pathology with strategic tensions"},
-        "low_civic_character": {"threshold": "0.25-0.49", "description": "Predominantly pathological appeals with limited virtue"},
-        "pathological_discourse": {"threshold": "<0.25", "description": "Systematic virtue deficits across multiple dimensions"}
-      },
-      "strategic_patterns": {
-        "virtue_signaling": {"condition": "virtue_index > 0.7 AND avg_virtue_salience < 0.4", "description": "Superficial virtue appeals without substantive commitment"},
-        "strategic_pathology": {"condition": "pathology_index > 0.7 AND avg_pathology_salience > 0.6", "description": "Deliberate deployment of divisive rhetoric"},
-        "authentic_virtue": {"condition": "virtue_index > 0.7 AND avg_virtue_salience > 0.6", "description": "Genuine commitment to civic ideals"},
-        "incoherent_messaging": {"condition": "dimension_variance >= 0.22", "description": "Inconsistent value appeals across dimensions"}
-      }
-    }
-  },
-  "reporting_metadata": {
-    "framework_summary": "Systematic assessment of civic character through virtue-pathology tensions",
-    "primary_dimensions": ["dignity", "truth", "justice", "hope", "pragmatism"],
-    "key_metrics": ["civic_character_index", "virtue_index", "pathology_index"],
-    "bias_considerations": "Framework may reflect Western democratic values; requires multi-analyst validation",
-    "reliability_notes": "Designed for high inter-rater consistency through sequential methodology"
-  },
-  "output_contract": {
-    "raw_analysis_log_structure": {
-      "step_1_identity": "Dignity vs. tribalism analysis with scores, salience, confidence, and evidence",
-      "step_2_truth": "Truth vs. manipulation analysis with scores, salience, confidence, and evidence", 
-      "step_3_justice": "Justice vs. resentment analysis with scores, salience, confidence, and evidence",
-      "step_4_emotional": "Hope vs. fear analysis with scores, salience, confidence, and evidence",
-      "step_5_reality": "Pragmatism vs. fantasy analysis with scores, salience, confidence, and evidence",
-      "final_integration": "Calculated metrics, pattern classifications, and civic character assessment"
-    },
-    "instructions": "Follow the sequential analysis format exactly. Each step must include specific textual evidence, numerical scores (0.0-1.0), salience assessment, and confidence rating. Final integration must calculate all tension scores and apply pattern classifications."
-  },
-  "reliability_rubric": {
-    "cronbachs_alpha": {
-      "excellent": [0.80, 1.0],
-      "good": [0.70, 0.79],
-      "acceptable": [0.60, 0.69],
-      "poor": [0.0, 0.59]
-    },
-    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
-  }
-}
-```
+  - name: "truth"
+    description: "Commitment to factual accuracy, intellectual honesty."
+    markers:
+      positive_examples:
+        - { phrase: "the evidence shows", explanation: "appeal to verifiable facts" }
+        - { phrase: "it's a complex issue", explanation: "acknowledgment of nuance" }
+        - { phrase: "factual accuracy", explanation: "empirical evidence and verifiable data" }
+        - { phrase: "intellectual honesty", explanation: "honest assessment and candid evaluation" }
+        - { phrase: "acknowledge uncertainty", explanation: "admit mistakes and correct errors" }
+      negative_examples:
+        - { phrase: "believe me", explanation: "appeal to authority, not evidence" }
+        - { phrase: "trust me", explanation: "appeal to personal credibility over facts" }
+        - { phrase: "everyone knows", explanation: "appeal to common knowledge without evidence" }
+      boundary_cases:
+        - { phrase: "an inconvenient truth", explanation: "could be genuine intellectual honesty or a rhetorical framing device." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong factual commitment and complexity acknowledgment."
+      medium: "0.4-0.6: Generally factual, but may omit inconvenient details"
+      low: "0.1-0.3: Some appeal to facts, but weak"
+      absent: "0.0: No commitment to factual accuracy"
+    disambiguation:
+      overlap_with_manipulation:
+        rule: "Truth is about adherence to evidence and intellectual honesty."
+        context_clues: "Factual accuracy vs. deceptive framing"
+        priority: "Score both if applicable"
+        co_occurrence_strategy: "A statement can be factually correct but still manipulative if framed deceptively"
 
-</details>
+  - name: "resentment"
+    description: "Exploitation of grievances, blame-focused rhetoric."
+    markers:
+      positive_examples:
+        - { phrase: "the system is rigged", explanation: "grievance and systemic blame" }
+        - { phrase: "it's their fault", explanation: "direct blame attribution" }
+        - { phrase: "grievance", explanation: "complaint and injustice suffered" }
+        - { phrase: "victimization", explanation: "persecution and discrimination claims" }
+        - { phrase: "historical wrong", explanation: "past injustice and inherited grievance" }
+      negative_examples:
+        - { phrase: "we need reform", explanation: "focus on solutions, not blame" }
+        - { phrase: "let's fix this", explanation: "constructive problem-solving approach" }
+        - { phrase: "moving forward", explanation: "future-oriented rather than backward-looking" }
+      boundary_cases:
+        - { phrase: "they must be held accountable", explanation: "could be a call for Justice or a simple expression of Resentment." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong grievance focus and clear blame assignment."
+      medium: "0.4-0.6: Moderate grievance framing"
+      low: "0.1-0.3: Minor hints of blame or grievance"
+      absent: "0.0: No grievance or blame rhetoric"
+    disambiguation:
+      overlap_with_justice:
+        rule: "Resentment focuses on blame for past wrongs. Justice focuses on solutions for future fairness."
+        context_clues: "Punitive focus vs. restorative focus"
+        priority: "Temporal focus and intent are key"
+        co_occurrence_strategy: "Both may use 'fairness' language; distinguish between backward-looking grievance and forward-looking systemic focus"
 
-<GASKET_SCHEMA_START>
-{
-  "gasket_schema": {
-    "version": "v7.3",
-    "extraction_method": "intelligent_extractor",
-    "target_keys": [
-      "dignity_score", "tribalism_score", "dignity_salience", "tribalism_salience", "dignity_confidence", "tribalism_confidence",
-      "truth_score", "manipulation_score", "truth_salience", "manipulation_salience", "truth_confidence", "manipulation_confidence",
-      "justice_score", "resentment_score", "justice_salience", "resentment_salience", "justice_confidence", "resentment_confidence",
-      "hope_score", "fear_score", "hope_salience", "fear_salience", "hope_confidence", "fear_confidence",
-      "pragmatism_score", "fantasy_score", "pragmatism_salience", "fantasy_salience", "pragmatism_confidence", "fantasy_confidence"
-    ],
-    "extraction_patterns": {
-      "dignity_score": ["dignity.{0,20}score", "dignity.{0,20}[0-9]\\.[0-9]"],
-      "tribalism_score": ["tribalism.{0,20}score", "tribalism.{0,20}[0-9]\\.[0-9]"],
-      "truth_score": ["truth.{0,20}score", "truth.{0,20}[0-9]\\.[0-9]"],
-      "manipulation_score": ["manipulation.{0,20}score", "manipulation.{0,20}[0-9]\\.[0-9]"],
-      "justice_score": ["justice.{0,20}score", "justice.{0,20}[0-9]\\.[0-9]"],
-      "resentment_score": ["resentment.{0,20}score", "resentment.{0,20}[0-9]\\.[0-9]"],
-      "hope_score": ["hope.{0,20}score", "hope.{0,20}[0-9]\\.[0-9]"],
-      "fear_score": ["fear.{0,20}score", "fear.{0,20}[0-9]\\.[0-9]"],
-      "pragmatism_score": ["pragmatism.{0,20}score", "pragmatism.{0,20}[0-9]\\.[0-9]"],
-      "fantasy_score": ["fantasy.{0,20}score", "fantasy.{0,20}[0-9]\\.[0-9]"],
-      "dignity_salience": ["dignity.{0,20}salience", "dignity.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "tribalism_salience": ["tribalism.{0,20}salience", "tribalism.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "truth_salience": ["truth.{0,20}salience", "truth.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "manipulation_salience": ["manipulation.{0,20}salience", "manipulation.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "justice_salience": ["justice.{0,20}salience", "justice.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "resentment_salience": ["resentment.{0,20}salience", "resentment.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "hope_salience": ["hope.{0,20}salience", "hope.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "fear_salience": ["fear.{0,20}salience", "fear.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "pragmatism_salience": ["pragmatism.{0,20}salience", "pragmatism.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "fantasy_salience": ["fantasy.{0,20}salience", "fantasy.{0,20}salience.{0,20}[0-9]\\.[0-9]"],
-      "dignity_confidence": ["dignity.{0,20}confidence", "dignity.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "tribalism_confidence": ["tribalism.{0,20}confidence", "tribalism.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "truth_confidence": ["truth.{0,20}confidence", "truth.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "manipulation_confidence": ["manipulation.{0,20}confidence", "manipulation.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "justice_confidence": ["justice.{0,20}confidence", "justice.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "resentment_confidence": ["resentment.{0,20}confidence", "resentment.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "hope_confidence": ["hope.{0,20}confidence", "hope.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "fear_confidence": ["fear.{0,20}confidence", "fear.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "pragmatism_confidence": ["pragmatism.{0,20}confidence", "pragmatism.{0,20}confidence.{0,20}[0-9]\\.[0-9]"],
-      "fantasy_confidence": ["fantasy.{0,20}confidence", "fantasy.{0,20}confidence.{0,20}[0-9]\\.[0-9]"]
-    },
-    "validation_rules": {
-      "required_fields": [
-        "dignity_score", "tribalism_score", "truth_score", "manipulation_score", "justice_score", "resentment_score", "hope_score", "fear_score", "pragmatism_score", "fantasy_score",
-        "dignity_salience", "tribalism_salience", "truth_salience", "manipulation_salience", "justice_salience", "resentment_salience", "hope_salience", "fear_salience", "pragmatism_salience", "fantasy_salience",
-        "dignity_confidence", "tribalism_confidence", "truth_confidence", "manipulation_confidence", "justice_confidence", "resentment_confidence", "hope_confidence", "fear_confidence", "pragmatism_confidence", "fantasy_confidence"
-      ],
-      "score_ranges": {"min": 0.0, "max": 1.0},
-      "metadata_ranges": {
-        "salience": {"min": 0.0, "max": 1.0},
-        "confidence": {"min": 0.0, "max": 1.0}
-      },
-      "fallback_strategy": "use_default_values"
-    }
-  }
-}
-<GASKET_SCHEMA_END>
+  - name: "justice"
+    description: "Concern for fair outcomes, procedural fairness."
+    markers:
+      positive_examples:
+        - { phrase: "equal treatment for all", explanation: "appeal to procedural fairness" }
+        - { phrase: "a level playing field", explanation: "metaphor for fair opportunity" }
+        - { phrase: "due process", explanation: "procedural fairness and established process" }
+        - { phrase: "proportional response", explanation: "appropriate measure and fitting consequence" }
+        - { phrase: "fair consideration", explanation: "balanced approach and impartial treatment" }
+      negative_examples:
+        - { phrase: "we must win at all costs", explanation: "focus on outcomes over process" }
+        - { phrase: "ends justify means", explanation: "outcome focus over procedural fairness" }
+        - { phrase: "whatever it takes", explanation: "goal orientation over fair process" }
+      boundary_cases:
+        - { phrase: "restoring order", explanation: "could be a legitimate goal of Justice or a pretext for suppressing dissent." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong fairness focus and procedural emphasis."
+      medium: "0.4-0.6: Moderate concern for fairness"
+      low: "0.1-0.3: Weak appeals to fairness"
+      absent: "0.0: No concern for fairness or justice"
+    disambiguation:
+      overlap_with_resentment:
+        rule: "Justice seeks fair systems and procedures. Resentment seeks retribution for perceived slights."
+        context_clues: "Forward-looking systemic focus vs. backward-looking grievance focus"
+        priority: "Temporal orientation is key"
+        co_occurrence_strategy: "Both may use 'fairness' language; distinguish between restorative systems and punitive blame"
+
+  - name: "fear"
+    description: "Anxiety-inducing rhetoric, threat-focused language."
+    markers:
+      positive_examples:
+        - { phrase: "existential threat", explanation: "survival-level danger" }
+        - { phrase: "our way of life is under attack", explanation: "active threat perception" }
+        - { phrase: "catastrophe", explanation: "disaster language and crisis framing" }
+        - { phrase: "running out of time", explanation: "urgency and deadline pressure" }
+        - { phrase: "emergency", explanation: "crisis requiring immediate action" }
+      negative_examples:
+        - { phrase: "we face challenges", explanation: "difficulty without crisis implication" }
+        - { phrase: "serious problem", explanation: "significant issue without existential threat" }
+        - { phrase: "concern", explanation: "worry without crisis implication" }
+      boundary_cases:
+        - { phrase: "a dangerous path", explanation: "could be a legitimate warning (Pragmatism) or an appeal to Fear." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines existential crisis and survival threats."
+      medium: "0.4-0.6: Serious concerns, significant risks"
+      low: "0.1-0.3: Minor worries, potential problems"
+      absent: "0.0: No threat language or fear appeals"
+    disambiguation:
+      overlap_with_hope:
+        rule: "Fear focuses on preventing a negative future. Hope focuses on achieving a positive one."
+        context_clues: "Threat prevention vs. positive vision"
+        priority: "Score both independently if present"
+        co_occurrence_strategy: "A statement can contain both (e.g., 'We must act now to avoid disaster and build a better world')"
+
+  - name: "hope"
+    description: "Constructive optimism, positive vision for the future."
+    markers:
+      positive_examples:
+        - { phrase: "a brighter future is possible", explanation: "optimistic forward vision" }
+        - { phrase: "we can build a better world", explanation: "empowerment and positive action" }
+        - { phrase: "breakthrough", explanation: "significant positive progress" }
+        - { phrase: "moving forward", explanation: "progress and advancement" }
+        - { phrase: "opportunity", explanation: "positive potential and possibility" }
+      negative_examples:
+        - { phrase: "we must protect what we have", explanation: "maintaining status quo, not progress" }
+        - { phrase: "stability", explanation: "maintaining current state, not advancement" }
+        - { phrase: "recovery", explanation: "returning to previous state, not advancement" }
+      boundary_cases:
+        - { phrase: "a new American dream", explanation: "could be genuine Hope or a form of political Fantasy." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong optimism and clear progress vision."
+      medium: "0.4-0.6: Moderate optimism, some progress indicators"
+      low: "0.1-0.3: Mild optimism"
+      absent: "0.0: No optimistic or progress-oriented language"
+    disambiguation:
+      overlap_with_fear:
+        rule: "Hope is not merely the absence of fear."
+        context_clues: "Proactive, possibility-focused language vs. fear reduction"
+        priority: "Look for positive, constructive vision"
+        co_occurrence_strategy: "A speaker can reduce fear without inspiring hope; require proactive language"
+
+  - name: "fantasy"
+    description: "Unrealistic promises, magical thinking, oversimplified solutions."
+    markers:
+      positive_examples:
+        - { phrase: "we can solve this overnight", explanation: "unrealistic timeline" }
+        - { phrase: "a simple solution", explanation: "denial of complexity" }
+        - { phrase: "magical thinking", explanation: "wishful thinking and fantasy solutions" }
+        - { phrase: "perfect world", explanation: "ideal society without flaws" }
+        - { phrase: "effortless solutions", explanation: "painless change and cost-free benefits" }
+      negative_examples:
+        - { phrase: "it will be difficult, but...", explanation: "acknowledgment of reality and constraints" }
+        - { phrase: "complex challenges", explanation: "recognition of difficulty" }
+        - { phrase: "trade-offs", explanation: "acknowledgment of constraints" }
+      boundary_cases:
+        - { phrase: "a chicken in every pot", explanation: "could be a folksy promise (Hope) or an unrealistic Fantasy." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines impossible outcomes and complexity denial."
+      medium: "0.4-0.6: Some oversimplification or unrealistic expectations"
+      low: "0.1-0.3: Mildly unrealistic"
+      absent: "0.0: No magical thinking or complexity denial"
+    disambiguation:
+      overlap_with_pragmatism:
+        rule: "Fantasy denies constraints, while Pragmatism acknowledges them."
+        context_clues: "Constraint denial vs. constraint acknowledgment"
+        priority: "Bold plans can be Hope if grounded in plausible achievement paths"
+        co_occurrence_strategy: "Distinguish between unrealistic promises and ambitious but achievable goals"
+
+  - name: "pragmatism"
+    description: "Realistic problem-solving, acknowledgment of constraints."
+    markers:
+      positive_examples:
+        - { phrase: "there are no easy answers", explanation: "acknowledgment of complexity" }
+        - { phrase: "we must make tough choices", explanation: "recognition of trade-offs" }
+        - { phrase: "practical solutions", explanation: "workable approach and feasible plan" }
+        - { phrase: "implementation strategy", explanation: "execution plan and delivery mechanism" }
+        - { phrase: "results-oriented", explanation: "outcome-focused and achievement-directed" }
+      negative_examples:
+        - { phrase: "we can have it all", explanation: "denial of constraints" }
+        - { phrase: "perfect solution", explanation: "unrealistic expectations" }
+        - { phrase: "no trade-offs", explanation: "denial of complexity" }
+      boundary_cases:
+        - { phrase: "a bold new plan", explanation: "could be a pragmatic, ambitious strategy or a complete fantasy." }
+    scoring_calibration:
+      high: "0.7-1.0: Combines strong practical focus and constraint recognition."
+      medium: "0.4-0.6: Some practical considerations"
+      low: "0.1-0.3: Weakly pragmatic"
+      absent: "0.0: No focus on practical constraints"
+    disambiguation:
+      overlap_with_fantasy:
+        rule: "Pragmatism is the opposite of Fantasy."
+        context_clues: "Constraint acknowledgment vs. constraint denial"
+        priority: "Acknowledging constraints and trade-offs"
+        co_occurrence_strategy: "Distinguish from pessimism; pragmatic approach can still be hopeful"
+
+# 5.4: Derived Metrics
+derived_metrics:
+  # Character Tension Indices (from v5.0)
+  - name: "identity_tension"
+    description: "Measures the strategic contradiction between Dignity and Tribalism appeals, weighted by salience."
+    formula: "min(dimensions.dignity.raw_score, dimensions.tribalism.raw_score) * abs(dimensions.dignity.salience - dimensions.tribalism.salience)"
+  - name: "truth_tension"
+    description: "Measures the strategic contradiction between Truth and Manipulation appeals, weighted by salience."
+    formula: "min(dimensions.truth.raw_score, dimensions.manipulation.raw_score) * abs(dimensions.truth.salience - dimensions.manipulation.salience)"
+  - name: "justice_tension"
+    description: "Measures the strategic contradiction between Justice and Resentment appeals, weighted by salience."
+    formula: "min(dimensions.justice.raw_score, dimensions.resentment.raw_score) * abs(dimensions.justice.salience - dimensions.resentment.salience)"
+  - name: "emotional_tension"
+    description: "Measures the strategic contradiction between Hope and Fear appeals, weighted by salience."
+    formula: "min(dimensions.hope.raw_score, dimensions.fear.raw_score) * abs(dimensions.hope.salience - dimensions.fear.salience)"
+  - name: "reality_tension"
+    description: "Measures the strategic contradiction between Pragmatism and Fantasy appeals, weighted by salience."
+    formula: "min(dimensions.pragmatism.raw_score, dimensions.fantasy.raw_score) * abs(dimensions.pragmatism.salience - dimensions.fantasy.salience)"
+  
+  # Intermediate calculations for Salience-Weighted Civic Character Index
+  - name: "virtue_salience_total"
+    description: "Sum of all virtue dimension salience weights for normalization."
+    formula: "(dimensions.dignity.salience + dimensions.truth.salience + dimensions.justice.salience + dimensions.hope.salience + dimensions.pragmatism.salience)"
+  - name: "vice_salience_total"
+    description: "Sum of all vice dimension salience weights for normalization."
+    formula: "(dimensions.tribalism.salience + dimensions.manipulation.salience + dimensions.resentment.salience + dimensions.fear.salience + dimensions.fantasy.salience)"
+  - name: "combined_salience_total"
+    description: "Total salience across all dimensions for normalization."
+    formula: "(dimensions.dignity.salience + dimensions.truth.salience + dimensions.justice.salience + dimensions.hope.salience + dimensions.pragmatism.salience + dimensions.tribalism.salience + dimensions.manipulation.salience + dimensions.resentment.salience + dimensions.fear.salience + dimensions.fantasy.salience)"
+    
+  - name: "weighted_virtue_score"
+    description: "Sum of all virtue scores multiplied by their respective salience weights."
+    formula: "((dimensions.dignity.raw_score * dimensions.dignity.salience) + (dimensions.truth.raw_score * dimensions.truth.salience) + (dimensions.justice.raw_score * dimensions.justice.salience) + (dimensions.hope.raw_score * dimensions.hope.salience) + (dimensions.pragmatism.raw_score * dimensions.pragmatism.salience))"
+  - name: "weighted_vice_score"
+    description: "Sum of all vice scores multiplied by their respective salience weights."
+    formula: "((dimensions.tribalism.raw_score * dimensions.tribalism.salience) + (dimensions.manipulation.raw_score * dimensions.manipulation.salience) + (dimensions.resentment.raw_score * dimensions.resentment.salience) + (dimensions.fear.raw_score * dimensions.fear.salience) + (dimensions.fantasy.raw_score * dimensions.fantasy.salience))"
+  
+  # Final Salience-Weighted Civic Character Index
+  - name: "civic_character_index"
+    description: "Primary summary metric measuring overall character orientation, weighted by rhetorical prominence."
+    formula: "(derived_metrics.weighted_virtue_score - derived_metrics.weighted_vice_score) / (derived_metrics.combined_salience_total + 0.001)"
+
+# 5.5: Output Schema
+output_schema:
+  type: object
+  properties:
+    dimensional_scores:
+      type: object
+      properties:
+        tribalism: { $ref: "#/definitions/score_object" }
+        dignity: { $ref: "#/definitions/score_object" }
+        manipulation: { $ref: "#/definitions/score_object" }
+        truth: { $ref: "#/definitions/score_object" }
+        resentment: { $ref: "#/definitions/score_object" }
+        justice: { $ref: "#/definitions/score_object" }
+        fear: { $ref: "#/definitions/score_object" }
+        hope: { $ref: "#/definitions/score_object" }
+        fantasy: { $ref: "#/definitions/score_object" }
+        pragmatism: { $ref: "#/definitions/score_object" }
+  required: [ "dimensional_scores" ]
+  definitions:
+    score_object:
+      type: object
+      properties:
+        raw_score: { type: number, minimum: 0.0, maximum: 1.0 }
+        salience: { type: number, minimum: 0.0, maximum: 1.0 }
+        confidence: { type: number, minimum: 0.0, maximum: 1.0 }
+        evidence: { type: string }
+      required: [ "raw_score", "salience", "confidence", "evidence" ]
+
+# --- End of Machine-Readable Appendix ---

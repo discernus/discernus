@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "url": "https://www.youtube.com/watch?v=-1UAZqFLVYI&ab_channel=TheTimesandTheSundayTimes",
+  "method": "whisper",
+  "confidence": 75.0,
+  "transcript_length": 73110,
+  "word_count": 13569,
+  "language": "en",
+  "extraction_timestamp": "2025-08-21T20:45:36.173788",
+  "processing_time": 297.871386051178,
+  "error_type": null,
+  "error_message": null,
+  "retry_after": null,
+  "fallback_attempted": true,
+  "fallback_success": true,
+  "video_info": {
+    "title": null,
+    "channel": null,
+    "duration": null,
+    "upload_date": null,
+    "video_id": "-1UAZqFLVYI"
+  }
+}

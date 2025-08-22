@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "url": "https://www.youtube.com/watch?v=YA7Pi8F1I7s&ab_channel=MAGNONEWSLIVE",
+  "method": "whisper",
+  "confidence": 75.0,
+  "transcript_length": 71832,
+  "word_count": 13300,
+  "language": "en",
+  "extraction_timestamp": "2025-08-21T20:40:31.927127",
+  "processing_time": 302.00972604751587,
+  "error_type": null,
+  "error_message": null,
+  "retry_after": null,
+  "fallback_attempted": true,
+  "fallback_success": true,
+  "video_info": {
+    "title": null,
+    "channel": null,
+    "duration": null,
+    "upload_date": null,
+    "video_id": "YA7Pi8F1I7s"
+  }
+}

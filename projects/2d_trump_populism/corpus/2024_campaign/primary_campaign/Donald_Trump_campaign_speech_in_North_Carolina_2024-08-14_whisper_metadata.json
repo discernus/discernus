@@ -1,0 +1,27 @@
+{
+  "document_id": "trump_2024_2024-08-14_NC_local_whisper",
+  "title": "Donald Trump campaign speech in North Carolina",
+  "speaker": "Donald Trump",
+  "speaker_role": "presidential_candidate",
+  "date": "2024-08-14",
+  "venue": "Campaign Event in North Carolina",
+  "state": "NC",
+  "category": "campaign_speech",
+  "domain": "political",
+  "language": "en",
+  "country": "US",
+  "audience_type": "campaign_rally",
+  "formality_level": "informal",
+  "rhetorical_style": [
+    "campaign",
+    "populist",
+    "rally"
+  ],
+  "campaign_phase": "general_election",
+  "extraction_method": "whisper_local",
+  "source_file": "/Volumes/code/discernus/tmp/Speech 17 - North Carolina August 21 2024.mp4",
+  "transcript_length": 46773,
+  "word_count": 8647,
+  "extraction_date": "2025-08-21T22:01:25.593994",
+  "notes": "Processed from local file due to YouTube access restrictions. Note: File was misnamed as 'August 21' but is actually August 14 speech."
+}
