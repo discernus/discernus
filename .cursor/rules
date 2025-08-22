@@ -1,3 +1,40 @@
+# Cursor Agent Rules for Discernus Project
+
+## Critical Regression Remediation: Test-Driven Development (TDD) Protocol
+
+### When Critical Regressions Are Identified
+- **IMMEDIATE STOP**: Do not attempt live debugging or expensive API-based experiments
+- **Document the Issue**: Log in `pm/todo/discernus_v10_backlog.md` with ARCH-XXX identifier
+- **Create Remediation Plan**: Document detailed 6-phase TDD approach before any implementation
+
+### 6-Phase TDD Protocol (Proven Success Pattern)
+1. **Unit Test Development**: Write focused tests validating regression patterns and expected behavior
+2. **Path Bug Investigation**: Identify and fix configuration/path issues with minimal code changes
+3. **Core Implementation**: Implement fixes using proven patterns from working code
+4. **Integration Testing**: Use mocks to verify end-to-end pipeline logic without API calls
+5. **Limited Live Testing**: Create minimal 1-document experiments to validate fixes
+6. **Full Validation**: Rerun original experiments to confirm complete resolution
+
+### Cost Containment Rules
+- **NO live experiments until Phase 5**: Use unit tests and mocks for 90% of debugging
+- **Maximum 1-document tests**: Validate fixes without expensive multi-document runs
+- **Document all costs**: Track API usage and justify each live experiment
+- **Use proven patterns**: Import working functionality rather than rebuilding from scratch
+
+### Success Criteria
+- ✅ Unit tests pass for all regression patterns
+- ✅ Integration tests pass with mocked dependencies  
+- ✅ Limited live test completes successfully
+- ✅ Original experiment reruns without errors
+- ✅ Individual processing restored (not batch processing)
+- ✅ All artifacts properly structured and accessible
+
+### Documentation Requirements
+- Update `docs/developer/` with detailed remediation plans
+- Update `pm/todo/discernus_v10_backlog.md` with progress and completion
+- Preserve all test files for future regression detection
+- Document lessons learned in project memory
+
 # THIN Architecture Rules - Cursor AI must follow these STRICTLY
 
 ## 🚨 CRITICAL: ENVIRONMENT MANAGEMENT RULES (Updated August 2025)

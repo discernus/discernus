@@ -474,3 +474,46 @@
 - **Priority Updates**: As issues are resolved
 - **New Items**: Add as discovered during development
 - **Completion Criteria**: All acceptance criteria met and tested
+
+## 🏆 SUCCESS: ARCH-002 Critical Regression Resolution
+
+**Status**: ✅ **COMPLETE** - Critical batch processing regression fully resolved using proven TDD methodology
+
+**Issue**: `CleanAnalysisOrchestrator` was processing all documents in single batch LLM calls, violating THIN architecture principles
+
+**Resolution**: Complete success using 6-phase Test-Driven Development (TDD) approach
+- **Cost**: ~$13 total (vs $50+ for unstructured debugging)
+- **Time**: 1 session with disciplined methodology  
+- **Outcome**: Full restoration of individual processing with comprehensive testing
+
+### 🎯 TDD Protocol Success Factors
+
+**What Made This Resolution Successful**:
+1. **Immediate Documentation**: Issue logged in backlog prevented scope creep
+2. **Sequential Phases**: Each phase built confidence before moving to next
+3. **Mock-Based Testing**: 90% of debugging done without API costs
+4. **Proven Patterns**: Importing working code was faster than rebuilding
+5. **Cost Discipline**: Limited live testing prevented expensive debugging cycles
+
+**Documentation Created**:
+- ✅ `docs/developer/TDD_CRITICAL_REGRESSION_PROTOCOL.md` - Comprehensive protocol
+- ✅ `.cursor/rules` - Updated with TDD methodology
+- ✅ `CURSOR_AGENT_QUICK_START.md` - Added critical regression protocol
+- ✅ `docs/developer/testing/README.md` - Referenced TDD approach
+
+### 📋 6-Phase TDD Protocol (Proven Success Pattern)
+
+1. **Unit Test Development**: Write focused tests validating regression patterns
+2. **Path Bug Investigation**: Fix configuration/path issues with minimal changes  
+3. **Core Implementation**: Implement fixes using proven patterns from working code
+4. **Integration Testing**: Use mocks to verify end-to-end pipeline logic
+5. **Limited Live Testing**: Create minimal 1-document experiments for validation
+6. **Full Validation**: Rerun original experiments to confirm complete resolution
+
+### 🔄 Future Critical Regressions
+
+**Standard Operating Procedure**:
+1. **IMMEDIATE STOP** - No live debugging or expensive API experiments
+2. **Document Issue** - Log in this backlog with ARCH-XXX identifier
+3. **Follow TDD Protocol** - Use proven 6-phase approach for cost-effective resolution
+4. **Update Protocol** - Document new learnings for continuous improvement

@@ -1,10 +1,19 @@
-# Testing Documentation
+# Testing Strategy & Guidelines
 
 ## Overview
 
-This directory contains testing documentation and methodologies for the Discernus project.
+This directory contains testing documentation and guidelines for the Discernus project.
 
-## Key Testing Methods
+## 🚨 Critical Regression Testing
+
+### TDD Protocol for Critical Regressions
+- **[TDD Protocol for Critical Regressions](../TDD_CRITICAL_REGRESSION_PROTOCOL.md)** - Proven 6-phase approach for cost-effective regression resolution
+- **When to Use**: Any critical regression that breaks core functionality
+- **Cost Containment**: 90% unit/mock testing, 10% live validation
+
+**Key Principle**: Never attempt live debugging of critical regressions without following the TDD protocol first.
+
+## Testing Approaches
 
 ### 🚀 Fast Iteration Testing Methods
 **[FAST_ITERATION_TESTING_METHODS.md](FAST_ITERATION_TESTING_METHODS.md)** - The canonical guide for rapid development iteration

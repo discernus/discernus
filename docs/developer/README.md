@@ -14,6 +14,17 @@
 - **[Agent Briefing](setup/AGENT_BRIEFING.md)** - Quick start for new contributors
 - **[Testing Strategy](workflows/TESTING_STRATEGY.md)** - Testing approach and guidelines
 
+## 🚨 Critical Development Protocols
+
+### Critical Regression Remediation
+- **[TDD Protocol for Critical Regressions](TDD_CRITICAL_REGRESSION_PROTOCOL.md)** - Proven 6-phase approach that successfully resolved ARCH-002
+- **[Batch Processing Regression Remediation Plan](BATCH_PROCESSING_REGRESSION_REMEDIATION_PLAN.md)** - Detailed case study of ARCH-002 resolution
+
+**When critical regressions are identified:**
+1. **IMMEDIATE STOP** - No live debugging or expensive API experiments
+2. **Document Issue** - Log in `pm/todo/discernus_v10_backlog.md` with ARCH-XXX identifier
+3. **Follow TDD Protocol** - Use proven 6-phase approach for cost-effective resolution
+
 ## 📚 Documentation Structure
 
 ### CLI Documentation
