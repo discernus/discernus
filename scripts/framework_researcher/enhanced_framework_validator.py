@@ -12,27 +12,36 @@ from typing import Dict, Any, Optional, List
 # Add project root to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+# Import the original framework validator as a module
+sys.path.insert(0, str(Path(__file__).parent.parent / "framework_validation"))
+from framework_validator import FrameworkValidator, ValidationResult, ValidationIssue
+
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
 class EnhancedFrameworkValidator:
     """
     Enhanced Framework Validator that combines:
-    1. Structural validation (specification compliance)
+    1. Structural validation (specification compliance) - using original FrameworkValidator
     2. Academic validation (literature grounding and credibility)
+    3. Research directions generation
+    4. DiscernusLibrarian integration for full research synthesis
     """
     
     def __init__(self):
-        """Initialize the enhanced validator with LLM gateway"""
+        """Initialize the enhanced validator with original validator and LLM gateway"""
+        # Initialize the original framework validator for structural validation
+        self.original_validator = FrameworkValidator(model="vertex_ai/gemini-2.5-pro")
+        
+        # Initialize LLM gateway for academic validation and research
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         
-        # Model selection for different validation phases
-        self.structural_model = "vertex_ai/gemini-2.5-pro"  # For framework analysis
-        self.academic_model = "vertex_ai/gemini-2.5-pro"    # For academic validation
+        # Model selection for academic validation and research
+        self.academic_model = "vertex_ai/gemini-2.5-pro"
         
         print("🔍 Enhanced Framework Validator initialized")
-        print("📚 Combines structural compliance + academic validation")
+        print("📚 Combines structural compliance + academic validation + research synthesis")
     
     def validate_framework(self, framework_path: str, enable_academic_validation: bool = True, verbose: bool = False, generate_research_directions: bool = False) -> Dict[str, Any]:
         """
@@ -49,7 +58,7 @@ class EnhancedFrameworkValidator:
         """
         print(f"\n🔍 Validating framework: {framework_path}")
         
-        # Phase 1: Structural Validation
+        # Phase 1: Structural Validation using original validator
         print("📋 Phase 1: Structural Validation...")
         structural_results = self._validate_structure(framework_path, verbose)
         print(f"📋 Structural validation results: {structural_results}")
@@ -90,102 +99,57 @@ class EnhancedFrameworkValidator:
         }
     
     def _validate_structure(self, framework_path: str, verbose: bool = False) -> Dict[str, Any]:
-        """Phase 1: Structural validation using LLM analysis"""
+        """Phase 1: Structural validation using the original FrameworkValidator"""
         
-        # Load framework content
         try:
-            with open(framework_path, 'r', encoding='utf-8') as f:
-                framework_content = f.read()
-        except Exception as e:
-            return {
-                'status': 'ERROR',
-                'error': f'Failed to read framework file: {e}',
-                'details': None
+            # Use the original validator to get proper validation results
+            validation_result = self.original_validator.validate_framework(Path(framework_path))
+            
+            # Convert ValidationResult to dict format for consistency
+            structural_results = {
+                'status': 'PASSED' if validation_result.success else 'FAILED',
+                'structural_score': 10.0 if validation_result.success else 0.0,
+                'issues': [],
+                'summary': f"Framework validation {'passed' if validation_result.success else 'failed'}"
             }
-        
-        # Load framework specification
-        spec_content = self._load_framework_specification()
-        
-        # LLM-based structural validation
-        prompt = f"""You are a framework validation expert. Analyze this framework against the Discernus v10.0 specification.
-
-FRAMEWORK CONTENT:
-{framework_content}
-
-FRAMEWORK SPECIFICATION:
-{spec_content}
-
-Analyze the framework for:
-1. **Structural Compliance**: Does it follow the specification format?
-2. **Content Quality**: Are all required sections present and well-formed?
-3. **Coherence**: Is the framework internally consistent?
-4. **Completeness**: Are all required elements present?
-
-Provide a JSON response with:
-{{
-    "status": "PASSED|FAILED|WARNING",
-    "structural_score": 0-10,
-    "issues": [
-        {{
-            "type": "BLOCKING|QUALITY|SUGGESTION",
-            "description": "Issue description",
-            "impact": "Impact on framework execution",
-            "fix": "How to resolve this issue"
-        }}
-    ],
-    "summary": "Overall assessment of framework structure"
-}}"""
-
-        try:
-            response, metadata = self.llm_gateway.execute_call(
-                model=self.structural_model,
-                prompt=prompt,
-                system_prompt="You are a framework validation specialist. Provide clear, actionable feedback in JSON format.",
-                temperature=0.1,
-                max_tokens=8000
-            )
             
-            # Store raw response for verbose logging
-            if verbose:
-                structural_results = {
-                    'raw_llm_response': response,
-                    'llm_metadata': metadata,
-                    'prompt_used': prompt[:1000] + "..." if len(prompt) > 1000 else prompt
+            # Convert ValidationIssue objects to dict format
+            for issue in validation_result.issues:
+                issue_dict = {
+                    'type': issue.priority,
+                    'description': issue.description,
+                    'impact': issue.impact,
+                    'fix': issue.fix
                 }
-            else:
-                structural_results = {}
+                structural_results['issues'].append(issue_dict)
+                
+                # Adjust score based on issue severity
+                if issue.priority == 'BLOCKING':
+                    structural_results['structural_score'] = 0.0
+                    structural_results['status'] = 'FAILED'
+                elif issue.priority == 'QUALITY':
+                    structural_results['structural_score'] = max(5.0, structural_results['structural_score'] - 2.0)
+                elif issue.priority == 'SUGGESTION':
+                    structural_results['structural_score'] = max(7.0, structural_results['structural_score'] - 0.5)
             
-            # Parse JSON response
-            try:
-                validation_data = json.loads(response)
-                structural_results.update(validation_data)
-                return structural_results
-            except json.JSONDecodeError:
-                # Try to find JSON in code blocks first
-                if "```json" in response:
-                    json_start = response.find("```json") + 7
-                    json_end = response.rfind("```")
-                    json_content = response[json_start:json_end].strip()
-                    try:
-                        validation_data = json.loads(json_content)
-                        structural_results.update(validation_data)
-                        return structural_results
-                    except json.JSONDecodeError:
-                        pass
-                
-                # Fallback parsing for partial responses
-                fallback_data = self._parse_partial_validation_response(response)
-                structural_results.update(fallback_data)
-                return structural_results
-                
+            # Add verbose information if requested
+            if verbose:
+                structural_results['validation_result_object'] = validation_result
+                structural_results['framework_name'] = validation_result.framework_name
+                structural_results['framework_version'] = validation_result.framework_version
+            
+            return structural_results
+            
         except Exception as e:
             error_result = {
                 'status': 'ERROR',
-                'error': f'LLM validation failed: {e}',
-                'details': None
+                'error': f'Structural validation failed: {e}',
+                'structural_score': 0.0,
+                'issues': [],
+                'summary': f'Validation error: {e}'
             }
             if verbose:
-                error_result['prompt_used'] = prompt[:1000] + "..." if len(prompt) > 1000 else prompt
+                error_result['exception'] = str(e)
             return error_result
     
     def _validate_academic_grounding(self, framework_path: str, structural_results: Dict[str, Any], verbose: bool = False) -> Dict[str, Any]:
@@ -228,7 +192,7 @@ Provide a JSON response with:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.academic_model,
                 prompt=academic_prompt,
-                max_tokens=8000
+                max_tokens=32000  # Increased from 8000 to prevent truncation
             )
             
             # Store raw response for verbose logging
@@ -236,8 +200,8 @@ Provide a JSON response with:
                 academic_results = {
                     'raw_llm_response': response,
                     'llm_metadata': metadata,
-                    'prompt_used': academic_prompt[:1000] + "..." if len(academic_prompt) > 1000 else academic_prompt,
-                    'theoretical_content_extracted': theoretical_elements[:500] + "..." if len(theoretical_elements) > 500 else theoretical_elements
+                    'prompt_used': academic_prompt,
+                    'theoretical_content_extracted': theoretical_elements
                 }
             else:
                 academic_results = {}
@@ -259,8 +223,8 @@ Provide a JSON response with:
                 'confidence_level': 'LOW'
             }
             if verbose:
-                error_result['prompt_used'] = academic_prompt[:1000] + "..." if len(academic_prompt) > 1000 else academic_prompt
-                error_result['theoretical_content_extracted'] = theoretical_elements[:500] + "..." if len(theoretical_elements) > 500 else theoretical_elements
+                error_result['prompt_used'] = academic_prompt
+                error_result['theoretical_content_extracted'] = theoretical_elements
             return error_result
     
     def _integrate_validation_results(self, structural_results: Dict[str, Any], academic_results: Optional[Dict[str, Any]]) -> Dict[str, Any]:
@@ -345,12 +309,12 @@ Provide your response in markdown format with the following structure:
                 max_tokens=8000
             )
             
-            # Store verbose information if requested
+            # Store raw response for verbose logging
             if verbose:
                 self._last_research_directions = {
                     'raw_llm_response': response,
                     'llm_metadata': metadata,
-                    'prompt_used': research_prompt[:1000] + "..." if len(research_prompt) > 1000 else research_prompt
+                    'prompt_used': research_prompt
                 }
             
             # Save research directions directly as markdown
@@ -415,15 +379,16 @@ Provide your response in markdown format with the following structure:
             return Path("research_directions_failed.md")
 
     def _save_research_directions(self, framework_name: str, research_data: Dict[str, Any], verbose: bool = False) -> Path:
-        """Save research directions to a markdown file with JSON structure"""
+        """Save research directions to a markdown file in the framework's directory structure"""
         
-        # Create research directions directory
-        research_dir = Path(__file__).parent / "research_directions"
-        research_dir.mkdir(exist_ok=True)
+        # Extract framework directory from framework name
+        framework_dir = self._get_framework_directory(framework_name)
+        research_dir = framework_dir / "research_directions"
+        research_dir.mkdir(parents=True, exist_ok=True)
         
-        # Generate filename
+        # Generate filename with framework name prefix
         timestamp = self._get_timestamp().replace(' ', '_').replace(':', '-')
-        filename = f"research_directions_{framework_name}_{timestamp}.md"
+        filename = f"{framework_name}_research_directions_{timestamp}.md"
         file_path = research_dir / filename
         
         # Create markdown content
@@ -533,17 +498,8 @@ Provide your response in markdown format with the following structure:
             }
         
         print(f"🔬 Found {parsed_directions['total_questions']} research questions")
-        
-        # Read the full framework content
-        try:
-            with open(framework_path, 'r', encoding='utf-8') as f:
-                framework_content = f.read()
-        except Exception as e:
-            print(f"⚠️ Failed to read framework: {e}")
-            return {
-                'status': 'FRAMEWORK_READ_ERROR',
-                'message': f'Failed to read framework: {e}'
-            }
+        print("📚 DiscernusLibrarian initialized with multi-stage literature validation")
+        print("🔬 Literature review models: Vertex AI Gemini 2.5 Pro (exclusive)")
         
         # Initialize librarian (we'll need to import it)
         try:
@@ -556,26 +512,34 @@ Provide your response in markdown format with the following structure:
                 'message': 'DiscernusLibrarian not available for import'
             }
         
-        research_results = []
+        # Read the full framework content
+        try:
+            with open(framework_path, 'r', encoding='utf-8') as f:
+                framework_content = f.read()
+        except Exception as e:
+            print(f"⚠️ Failed to read framework: {e}")
+            return {
+                'status': 'FRAMEWORK_READ_ERROR',
+                'message': f'Failed to read framework: {e}'
+            }
         
-        # For each question, execute librarian research sequentially
-        for question_data in parsed_directions['questions']:
-            priority = question_data['priority']
-            question = question_data['question']
-            
-            print(f"🔬 Researching Priority {priority}: {question[:100]}...")
+        research_results = []
+        for priority, question in enumerate(parsed_directions['questions'], 1):
+            print(f"🔬 Researching Priority {priority}: {question['question']}")
+            print(f"**Specific Research Question**: {question['question']}")
+            print(f"   📚 Executing research for Priority {priority}...")
             
             # Create research prompt combining framework and research directions
             research_prompt = f"""You are conducting academic research to strengthen an analytical framework.
 
 FRAMEWORK CONTEXT:
-{framework_content[:8000]}  # Limit framework content to avoid token limits
+{framework_content}
 
 RESEARCH DIRECTIONS CONTEXT:
-{parsed_directions['raw_content'][:4000]}  # Limit research directions content
+{parsed_directions['raw_content']}
 
 RESEARCH QUESTION:
-{question}
+{question['question']}
 
 Please conduct a focused literature review on this specific question. Consider how it relates to the broader framework context and the academic reasoning provided in the research directions.
 
@@ -608,21 +572,36 @@ Provide a comprehensive research report with proper citations and academic rigor
                 else:
                     findings = "Key findings not available"
                 
-                # Get the detailed report path if available
+                # Get the detailed report path and content if available
                 detailed_report_path = None
+                detailed_report_content = None
                 if hasattr(research_result, 'saved_files') and research_result.saved_files:
                     detailed_report_path = research_result.saved_files.get('report_file')
+                    # Read the detailed report content - adjust path to be relative to project root
+                    if detailed_report_path:
+                        # Convert to absolute path from project root
+                        project_root = Path(__file__).parent.parent.parent
+                        full_report_path = project_root / detailed_report_path
+                        if full_report_path.exists():
+                            try:
+                                with open(full_report_path, 'r', encoding='utf-8') as f:
+                                    detailed_report_content = f.read()
+                            except Exception as e:
+                                print(f"   ⚠️ Failed to read detailed report: {e}")
+                        else:
+                            print(f"   ⚠️ Report file not found: {full_report_path}")
                 
-                # Store the research result
+                # Store the research result with full content
                 research_results.append({
                     'priority': priority,
-                    'question': question,
+                    'question': question['question'],
                     'status': 'COMPLETED',
                     'summary': summary,
                     'findings': findings,
                     'research_object': research_result,
                     'detailed_report_path': detailed_report_path,
-                    'prompt_used': research_prompt[:500] + "..." if len(research_prompt) > 500 else research_prompt
+                    'detailed_report_content': detailed_report_content,
+                    'prompt_used': research_prompt
                 })
                 
                 print(f"   ✅ Research completed for Priority {priority}")
@@ -631,10 +610,10 @@ Provide a comprehensive research report with proper citations and academic rigor
                 print(f"   ⚠️ Research failed for Priority {priority}: {e}")
                 research_results.append({
                     'priority': priority,
-                    'question': question,
+                    'question': question['question'],
                     'status': 'FAILED',
                     'error': str(e),
-                    'prompt_used': research_prompt[:500] + "..." if len(research_prompt) > 500 else research_prompt
+                    'prompt_used': research_prompt
                 })
         
         # Generate synthesis of all research results
@@ -657,94 +636,111 @@ Provide a comprehensive research report with proper citations and academic rigor
                                    parsed_directions: Dict[str, Any]) -> Dict[str, Any]:
         """Synthesize research results into actionable recommendations"""
         
-        # Filter completed research
-        completed_research = [r for r in research_results if r['status'] == 'COMPLETED']
+        # Set verbose flag for debugging
+        verbose = True
         
-        if not completed_research:
+        if not research_results:
             return {
                 'status': 'NO_RESULTS',
-                'message': 'No completed research to synthesize'
+                'message': 'No research results to synthesize'
             }
         
-        print(f"   🔬 Synthesizing {len(completed_research)} research results...")
+        # Create synthesis prompt using the detailed research content
+        completed_research = [r for r in research_results if r['status'] == 'COMPLETED']
         
-        # Create synthesis prompt
-        framework_name = Path(framework_path).stem
-        synthesis_prompt = f"""You are an academic research synthesizer. You have completed research on {len(completed_research)} key questions for the {framework_name} analytical framework.
+        # Build detailed research content for synthesis
+        research_content = []
+        for i, research in enumerate(completed_research, 1):
+            research_content.append(f"""
+Research Question {i}: {research['question']}
+Status: {research['status']}
+Summary: {research.get('summary', 'No summary available')}
+Detailed Report: {research.get('detailed_report_content', 'No detailed report available')}
+""")
+        
+        synthesis_prompt = f"""You are synthesizing academic research findings to strengthen an analytical framework.
 
 RESEARCH CONTEXT:
-{parsed_directions['raw_content'][:3000]}
+Framework: {Path(framework_path).name}
+Total Research Questions: {parsed_directions['total_questions']}
+Completed Research: {len(completed_research)}
+Failed Research: {len([r for r in research_results if r['status'] == 'FAILED'])}
 
-RESEARCH RESULTS:
-"""
-        
-        # Add each research result
-        for i, research in enumerate(completed_research, 1):
-            synthesis_prompt += f"""
-RESEARCH {i} - Priority {research['priority']}:
-Question: {research['question']}
-Summary: {research.get('summary', 'No summary available')}
-Key Findings: {research.get('findings', 'No findings available')}
+DETAILED RESEARCH FINDINGS:
+{chr(10).join(research_content)}
 
-"""
-        
-        synthesis_prompt += f"""
-Based on this research, please provide:
+Please synthesize these research findings into a comprehensive report that includes:
 
-1. **Key Insights**: What are the main academic findings that strengthen or challenge the framework?
+1. **Executive Summary**: Brief overview of key findings and their implications
+2. **Key Theoretical Insights**: Main theoretical discoveries about the framework's foundations
+3. **Literature Alignment**: Areas where the framework aligns with academic literature
+4. **Theoretical Gaps**: Areas where the framework needs theoretical strengthening
+5. **Specific Recommendations**: Actionable steps for framework improvement
+6. **Research Gaps**: Areas requiring further investigation
+7. **Overall Assessment**: Summary of the framework's academic robustness
 
-2. **Framework Recommendations**: What specific improvements should be made to the framework based on this research?
-
-3. **Theoretical Strengthening**: How can the framework's theoretical foundations be improved?
-
-4. **Methodological Improvements**: What methodological enhancements are suggested by the research?
-
-5. **Academic Validation**: How well does the current framework align with established academic literature?
-
-Provide your response in markdown format with clear sections and actionable recommendations.
-
-IMPORTANT: After your synthesis, include a section called "## Detailed Research Appendices" that lists each research question and notes that detailed reports are available for academic review.
-"""
+Provide your response in valid JSON format with these keys:
+- executive_summary: "brief overview of findings"
+- theoretical_insights: ["insight 1", "insight 2", ...]
+- literature_alignment: ["area 1", "area 2", ...]
+- theoretical_gaps: ["gap 1", "gap 2", ...]
+- improvement_recommendations: ["recommendation 1", "recommendation 2", ...]
+- research_gaps: ["gap 1", "gap 2", ...]
+- overall_assessment: "summary assessment of academic robustness"
+- confidence_level: "HIGH/MEDIUM/LOW based on evidence quality" """
         
         try:
-            # Use the academic model for synthesis
+            # Call LLM for synthesis
             response, metadata = self.llm_gateway.execute_call(
                 model=self.academic_model,
                 prompt=synthesis_prompt,
-                max_tokens=6000
+                max_tokens=8000
             )
             
-            # Save synthesis to file
-            synthesis_file_path = self._save_research_synthesis(framework_name, response, research_results)
+            # Store raw response for verbose logging
+            if verbose:
+                synthesis_results = {
+                    'raw_llm_response': response,
+                    'llm_metadata': metadata,
+                    'prompt_used': synthesis_prompt,
+                    'research_results': research_results
+                }
+            else:
+                synthesis_results = {}
             
-            return {
-                'status': 'SYNTHESIS_COMPLETED',
-                'synthesis_content': response,
-                'synthesis_file_path': str(synthesis_file_path),
-                'llm_metadata': metadata,
-                'prompt_used': synthesis_prompt[:1000] + "..." if len(synthesis_prompt) > 1000 else synthesis_prompt
-            }
-            
+            # Parse JSON response
+            try:
+                synthesis_data = json.loads(response)
+                synthesis_results.update(synthesis_data)
+                return synthesis_results
+            except json.JSONDecodeError:
+                fallback_data = self._parse_partial_synthesis_response(response)
+                synthesis_results.update(fallback_data)
+                return synthesis_results
+                
         except Exception as e:
-            print(f"   ⚠️ Synthesis failed: {e}")
-            return {
-                'status': 'SYNTHESIS_FAILED',
-                'error': str(e),
-                'message': 'Failed to generate research synthesis'
+            error_result = {
+                'error': f'Research synthesis failed: {e}',
+                'status': 'FAILED'
             }
+            if verbose:
+                error_result['prompt_used'] = synthesis_prompt
+                error_result['research_results'] = research_results
+            return error_result
 
-    def _save_research_synthesis(self, framework_name: str, synthesis_content: str, 
+    def _save_research_synthesis(self, framework_name: str, synthesis_data: Dict[str, Any], 
                                 research_results: List[Dict[str, Any]]) -> Path:
-        """Save research synthesis to a markdown file"""
+        """Save research synthesis to a markdown file in the framework's directory structure"""
         
-        # Create synthesis directory
-        synthesis_dir = Path(__file__).parent / "research_synthesis"
-        synthesis_dir.mkdir(exist_ok=True)
+        # Extract framework directory from framework name
+        framework_dir = self._get_framework_directory(framework_name)
+        validation_dir = framework_dir / "validation_reports"
+        validation_dir.mkdir(parents=True, exist_ok=True)
         
-        # Generate filename
+        # Generate filename with framework name prefix
         timestamp = self._get_timestamp().replace(' ', '_').replace(':', '-')
-        filename = f"research_synthesis_{framework_name}_{timestamp}.md"
-        file_path = synthesis_dir / filename
+        filename = f"{framework_name}_research_synthesis_{timestamp}.md"
+        file_path = validation_dir / filename
         
         # Create markdown content
         full_markdown = f"""# Research Synthesis for {framework_name}
@@ -760,35 +756,30 @@ IMPORTANT: After your synthesis, include a section called "## Detailed Research 
         # Add research question summaries
         for research in research_results:
             if research['status'] == 'COMPLETED':
-                full_markdown += f"""### Priority {research['priority']}: {research['question'][:100]}...
+                full_markdown += f"""### Priority {research['priority']}: {research['question']}
 **Status**: ✅ Completed
-**Summary**: {research.get('summary', 'No summary available')[:200]}...
+**Summary**: {research.get('summary', 'No summary available')}
 
 """
         
         # Add synthesis content
         full_markdown += f"""## Research Synthesis
 
-{synthesis_content}
+**Executive Summary**: {synthesis_data.get('executive_summary', 'No executive summary available')}
 
-## Detailed Research Appendices
+**Theoretical Insights**: {synthesis_data.get('theoretical_insights', 'No theoretical insights available')}
 
-The following detailed research reports are available for academic review and contain the full multi-stage research validation, counter-evidence analysis, and comprehensive findings:
+**Literature Alignment**: {synthesis_data.get('literature_alignment', 'No literature alignment available')}
 
-"""
-        
-        # Add detailed report references
-        for research in research_results:
-            if research['status'] == 'COMPLETED' and research.get('detailed_report_path'):
-                full_markdown += f"""### Priority {research['priority']}: {research['question'][:100]}...
-**Detailed Report**: `{research['detailed_report_path']}`
-**Content**: Multi-stage research validation, counter-evidence analysis, literature completeness check, red team critique, and comprehensive findings with academic citations.
+**Theoretical Gaps**: {synthesis_data.get('theoretical_gaps', 'No theoretical gaps identified')}
 
-"""
-        
-        # Now append the actual detailed reports
-        full_markdown += f"""
----
+**Improvement Recommendations**: {synthesis_data.get('improvement_recommendations', 'No recommendations available')}
+
+**Research Gaps**: {synthesis_data.get('research_gaps', 'No research gaps identified')}
+
+**Overall Assessment**: {synthesis_data.get('overall_assessment', 'No overall assessment available')}
+
+**Confidence Level**: {synthesis_data.get('confidence_level', 'Not specified')}
 
 ## Detailed Research Reports
 
@@ -796,17 +787,15 @@ The following sections contain the complete, unedited research reports for each 
 
 """
         
-        # Append each detailed report
+        # Append each detailed report directly
         for research in research_results:
-            if research['status'] == 'COMPLETED' and research.get('detailed_report_path'):
-                try:
-                    with open(research['detailed_report_path'], 'r', encoding='utf-8') as f:
-                        detailed_content = f.read()
-                    
-                    full_markdown += f"""
+            if research['status'] == 'COMPLETED':
+                detailed_content = research.get('detailed_report_content', 'No detailed report content available')
+                
+                full_markdown += f"""
 ---
 
-### Priority {research['priority']}: {research['question'][:100]}...
+### Priority {research['priority']}: {research['question']}
 
 **Complete Research Report:**
 
@@ -814,39 +803,19 @@ The following sections contain the complete, unedited research reports for each 
 
 ---
 """
-                except Exception as e:
-                    full_markdown += f"""
----
-
-### Priority {research['priority']}: {research['question'][:100]}...
-
-**Error**: Could not load detailed report: {e}
-
----
-"""
         
-        full_markdown += f"""
----
-
-*Generated by Enhanced Framework Validator - Research Synthesis Module*
-"""
+        # Write the complete file
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(full_markdown)
         
-        # Save file
-        try:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(full_markdown)
-            
-            print(f"   📄 Research synthesis saved to: {file_path}")
-            return file_path
-            
-        except Exception as e:
-            print(f"   ⚠️ Failed to save synthesis: {e}")
-            return Path("research_synthesis_failed.md")
+        print(f"📄 Research synthesis saved to: {file_path}")
+        return file_path
     
     def _generate_enhanced_report(self, framework_path: str, structural_results: Dict[str, Any], 
                                  academic_results: Optional[Dict[str, Any]], 
                                  integrated_results: Dict[str, Any], verbose: bool = False, 
-                                 research_directions: Optional[Dict[str, Any]] = None) -> str:
+                                 research_directions: Optional[Dict[str, Any]] = None,
+                                 librarian_research: Optional[Dict[str, Any]] = None) -> str:
         """Generate comprehensive enhanced validation report"""
         
         framework_name = Path(framework_path).stem
@@ -924,10 +893,27 @@ The following sections contain the complete, unedited research reports for each 
 
 ---
 
+## 🔬 Phase 4: Research Directions & Librarian Research
+
+**Research Directions Generated**: {'Yes' if research_directions else 'No'}
+**Librarian Research Executed**: {'Yes' if librarian_research else 'No'}"""
+
+        # Add research directions section if available
+        if research_directions:
+            report += self._generate_research_directions_report_section(research_directions)
+        
+        # Add librarian research results if available
+        if librarian_research:
+            report += self._generate_librarian_research_report_section(librarian_research)
+        
+        report += f"""
+
+---
+
 ## 📊 Validation Summary
 
 **Framework**: {framework_name}
-**Validation Method**: Enhanced validation with structural + academic assessment
+**Validation Method**: Enhanced validation with structural + academic assessment + research synthesis
 **Overall Assessment**: {integrated_results['overall_status']} ({integrated_results['overall_score']}/10)
 
 **Key Strengths**: {self._identify_strengths(structural_results, academic_results)}
@@ -935,20 +921,12 @@ The following sections contain the complete, unedited research reports for each 
 
 """
 
-        # Add research directions section if available
-        if research_directions:
-            report += self._generate_research_directions_report_section(research_directions)
-        
         report += """
 
 ---
 
-*Generated by Enhanced Framework Validator with academic grounding validation*
+*Generated by Enhanced Framework Validator with academic grounding validation and research synthesis*
 """
-
-        # Add verbose content if requested
-        if verbose:
-            report += self._generate_verbose_report_section(structural_results, academic_results)
         
         return report
     
@@ -1000,7 +978,7 @@ The following sections contain the complete, unedited research reports for each 
                 return '\n\n'.join(theoretical_sections)
             else:
                 # More comprehensive fallback - include more content for better context
-                return content[:8000]  # Increased from 2000 to 8000 characters
+                return content
                 
         except Exception as e:
             return f"Error extracting theoretical content: {e}"
@@ -1068,14 +1046,14 @@ The following sections contain the complete, unedited research reports for each 
             'status': status,
             'structural_score': structural_score,
             'issues': issues,
-            'summary': f'Partial validation response analyzed: {response[:300]}...'
+            'summary': f'Partial validation response analyzed: {response}'
         }
     
     def _parse_partial_academic_response(self, response: str) -> Dict[str, Any]:
-        """Parse partial LLM response for academic validation"""
+        """Parse partial academic validation response when JSON parsing fails"""
         return {
-            'academic_credibility_score': 5,  # Default score
-            'theoretical_validation': f'Partial academic assessment: {response[:200]}...',
+            'academic_credibility_score': 5,
+            'theoretical_validation': f'Partial academic assessment: {response}',
             'literature_coverage': 'Partial analysis due to truncated response',
             'research_gaps': 'Unable to complete gap analysis',
             'methodological_validation': 'Partial methodology assessment',
@@ -1083,33 +1061,47 @@ The following sections contain the complete, unedited research reports for each 
             'recommendations': 'Retry academic validation for complete assessment'
         }
     
+    def _parse_partial_research_response(self, response: str) -> Dict[str, Any]:
+        """Parse partial research directions response when JSON parsing fails"""
+        return {
+            'research_questions': [],
+            'total_questions': 0,
+            'error': 'Failed to parse research directions response',
+            'raw_response': response
+        }
+    
+    def _parse_partial_synthesis_response(self, response: str) -> Dict[str, Any]:
+        """Parse partial synthesis response when JSON parsing fails"""
+        return {
+            'synthesis_content': response,
+            'status': 'PARTIAL_SYNTHESIS',
+            'error': 'Failed to parse synthesis response',
+            'raw_response': response
+        }
+    
     def _generate_integrated_recommendations(self, structural_results: Dict[str, Any], 
-                                          academic_results: Optional[Dict[str, Any]]) -> str:
-        """Generate integrated recommendations based on both validation phases"""
+                                           academic_results: Optional[Dict[str, Any]]) -> str:
+        """Generate integrated recommendations from both validation phases"""
         recommendations = []
         
-        # Structural recommendations
-        if structural_results.get('status') == 'FAILED':
-            recommendations.append("Address all blocking structural issues before proceeding")
+        # Add structural recommendations
+        if structural_results.get('issues'):
+            for issue in structural_results['issues']:
+                recommendations.append(f"Improve: {issue.get('fix', 'Address this issue')}")
         
-        for issue in structural_results.get('issues', []):
-            if issue.get('type') == 'BLOCKING':
-                recommendations.append(f"Critical: {issue.get('fix', 'Fix required')}")
-            elif issue.get('type') == 'QUALITY':
-                recommendations.append(f"Improve: {issue.get('fix', 'Quality improvement needed')}")
+        # Add academic recommendations
+        if academic_results and academic_results.get('recommendations'):
+            recommendations.append(academic_results['recommendations'])
         
-        # Academic recommendations
-        if academic_results:
-            if academic_results.get('academic_credibility_score', 0) < 6:
-                recommendations.append("Strengthen academic foundations with additional literature review")
-            
-            if academic_results.get('confidence_level') == 'LOW':
-                recommendations.append("Conduct more comprehensive academic validation")
-        
+        # Add general recommendations if none found
         if not recommendations:
-            recommendations.append("Framework appears well-validated across all dimensions")
+            if academic_results:
+                recommendations.append("Strengthen academic foundations with additional literature review")
+                recommendations.append("Conduct more comprehensive academic validation")
+            else:
+                recommendations.append("Complete academic validation to assess theoretical foundations")
         
-        return '; '.join(recommendations)
+        return "; ".join(recommendations)
     
     def _identify_strengths(self, structural_results: Dict[str, Any], 
                            academic_results: Optional[Dict[str, Any]]) -> str:
@@ -1275,10 +1267,71 @@ The following sections contain the complete, unedited research reports for each 
         
         return research_section
     
+    def _generate_librarian_research_report_section(self, librarian_research: Dict[str, Any]) -> str:
+        """Generate librarian research report section for the enhanced report"""
+        
+        research_section = f"""
+
+---
+
+## 🔬 Librarian Research Executed
+
+**Framework**: {Path(librarian_research.get('framework_path', 'Unknown')).name}
+**Research Questions**: {librarian_research.get('total_questions', 0)}
+**Research File**: {librarian_research.get('research_file_path', 'Not saved')}
+
+**Research Results**:"""
+
+        # Add research results
+        for result in librarian_research.get('research_results', []):
+            research_section += f"""
+
+### Priority {result.get('priority', 'N/A')}: {result.get('question', 'No question provided')}
+**Status**: {result.get('status', 'UNKNOWN')}
+**Summary**: {result.get('summary', 'No summary available')}
+**Findings**: {result.get('findings', 'No findings available')}"""
+            if result.get('detailed_report_path'):
+                research_section += f"""
+**Detailed Report**: `{result['detailed_report_path']}`"""
+        
+        # Add synthesis content
+        if librarian_research.get('synthesis'):
+            synthesis = librarian_research['synthesis']
+            research_section += f"""
+
+**Research Synthesis**:
+
+{synthesis.get('theoretical_insights', 'No theoretical insights available')}
+
+**Literature Alignment**: {synthesis.get('literature_alignment', 'No literature alignment available')}
+
+**Theoretical Gaps**: {synthesis.get('theoretical_gaps', 'No theoretical gaps identified')}
+
+**Improvement Recommendations**: {synthesis.get('improvement_recommendations', 'No recommendations available')}
+
+**Research Gaps**: {synthesis.get('research_gaps', 'No research gaps identified')}"""
+        
+        return research_section
+    
     def _get_timestamp(self) -> str:
         """Get current timestamp for validation reports"""
         from datetime import datetime
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC")
+    
+    def _get_framework_directory(self, framework_name: str) -> Path:
+        """Get the framework's directory based on its name and current structure"""
+        
+        # Project root is three levels up from this script
+        project_root = Path(__file__).parent.parent.parent
+        
+        # For now, assume flagship frameworks - this could be made more sophisticated
+        # by parsing the original framework path
+        framework_dir = project_root / "frameworks" / "reference" / "flagship" / framework_name
+        
+        # Create the directory if it doesn't exist
+        framework_dir.mkdir(parents=True, exist_ok=True)
+        
+        return framework_dir
 
 def main():
     """Main function for command-line usage"""
@@ -1292,7 +1345,7 @@ def main():
                        help='Generate research directions for frameworks that pass validation')
     parser.add_argument('--initiate-research', action='store_true',
                        help='Initiate librarian research after generating directions')
-    parser.add_argument('--output', help='Output file for validation report')
+    parser.add_argument('--output', help='Output file for validation report (relative to framework_researcher directory)')
     
     args = parser.parse_args()
     
@@ -1309,6 +1362,31 @@ def main():
             results['research_directions']
         )
         results['librarian_research'] = research_results
+        
+        # Save research synthesis if available
+        if research_results.get('synthesis'):
+            print("🔬 Saving research synthesis...")
+            framework_name = Path(args.framework_path).stem
+            synthesis_file_path = validator._save_research_synthesis(
+                framework_name, 
+                research_results['synthesis'], 
+                research_results.get('research_results', [])
+            )
+            # Update the synthesis with the file path
+            research_results['synthesis']['synthesis_file_path'] = str(synthesis_file_path)
+    
+    # Generate final report with all components
+    final_report = validator._generate_enhanced_report(
+        args.framework_path, 
+        results['structural_validation'], 
+        results.get('academic_validation'), 
+        results['integrated_assessment'], 
+        args.verbose, 
+        results.get('research_directions'),
+        results.get('librarian_research')
+    )
+    
+    results['final_report'] = final_report
     
     # Print results
     print("\n" + "="*80)
@@ -1330,12 +1408,26 @@ def main():
             if synthesis.get('synthesis_file_path'):
                 print(f"Synthesis Report: {synthesis['synthesis_file_path']}")
     
-    # Save report if output file specified
+    # Save report if output file specified - save to framework's validation_reports directory
     if args.output:
         try:
-            with open(args.output, 'w', encoding='utf-8') as f:
+            # Extract framework name and get its directory
+            framework_name = Path(args.framework_path).stem
+            framework_dir = validator._get_framework_directory(framework_name)
+            validation_dir = framework_dir / "validation_reports"
+            validation_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Generate filename with framework name prefix
+            if args.output.startswith(framework_name):
+                output_filename = args.output
+            else:
+                output_filename = f"{framework_name}_{args.output}"
+            
+            output_path = validation_dir / output_filename
+            
+            with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(results['final_report'])
-            print(f"\n📄 Enhanced validation report saved to: {args.output}")
+            print(f"\n📄 Enhanced validation report saved to: {output_path}")
         except Exception as e:
             print(f"⚠️ Failed to save report: {e}")
     

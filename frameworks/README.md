@@ -9,6 +9,8 @@ The Discernus Framework Ecosystem provides a comprehensive, modular approach to 
 
 **Architecture**: **Core + Modules** design enables both standalone framework application and integrated multi-framework analysis across domains and temporal contexts.
 
+**Current Status**: 🚀 **v10.0 Specification Compliant** - All frameworks have been migrated to the latest specification with intellectual heritage restored.
+
 ---
 
 ## Framework Categories
@@ -16,31 +18,27 @@ The Discernus Framework Ecosystem provides a comprehensive, modular approach to 
 ### 🏗️ **Reference Frameworks** (Core Maintains)
 
 #### **Core Modules** (Universal, Timeless)
-- **ECF v1.0**: Emotional Climate Framework - Pure emotional atmosphere assessment
-- **CAF v4.1**: Character Assessment Framework - Speaker moral character with identity foundation  
-- **CHF v1.0**: Constitutional Health Framework - Bagehot constitutional system health
+- **ECF v10.0**: Emotional Climate Framework - Pure emotional atmosphere assessment
+- **CAF v10.0**: Character Assessment Framework - Speaker moral character with identity foundation  
+- **CHF v10.0**: Constitutional Health Framework - Bagehot constitutional system health
 
 #### **Flagship Module** (Comprehensive Analysis)
-- **CFF v4.2**: Cohesive Flourishing Framework - Complete democratic health assessment
+- **CFF v10.0**: Cohesive Flourishing Framework - Complete democratic health assessment
+- **PDAF v10.0**: Political Discourse Analysis Framework - Democratic engagement assessment
+- **OPNIF v10.0**: Open Network Information Framework - Information ecosystem health assessment
 
 ### 🌱 **Seed Frameworks** (Community Adoption)
 
 #### **Political Domain**
-- **MFT v4.0**: Moral Foundations Theory - 12-dimension moral psychology (Haidt)
-- **PDAF v4.0**: Political Discourse Analysis Framework - Democratic engagement assessment
-- **PWT v4.0**: Political Worldview Triad - 3-dimensional political orientation
-- **PPF v4.0**: Populism-Pluralism Framework - Democratic governance analysis
+- **MFT v10.0**: Moral Foundations Theory - 12-dimension moral psychology (Haidt)
+- **PWT v10.0**: Political Worldview Triad - 3-dimensional political orientation
 
 #### **Ethics Domain**  
-- **BEF v4.0**: Business Ethics Framework - Corporate communication ethics (Freeman stakeholder theory)
-- **IDITI v4.0**: Individual Dignity vs Tribal Identity - Single-axis identity analysis
+- **BEF v10.0**: Business Ethics Framework - Corporate communication ethics (Freeman stakeholder theory, Solomon virtue ethics)
 
 #### **Communication Domain**
-- **EFF v4.0**: Entman Framing Functions - Communication theory (4 framing functions)
-- **LFF v4.0**: Lakoff Framing Framework - Family model political communication (Strict Father vs Nurturant Parent)
-
-#### **Temporal Domain**
-- **PRM v1.0**: Populist Rhetoric Module - Contemporary populist communication (2010s-2030s)
+- **EFF v10.0**: Entman Framing Functions - Communication theory (4 framing functions, independence hypothesis)
+- **LFF v10.0**: Lakoff Framing Framework - Family model political communication (Strict Father vs Nurturant Parent, coherence hypothesis)
 
 ### 🏘️ **Community Frameworks** (User-Created)
 *Directory ready for community-contributed frameworks across all domains*
@@ -53,25 +51,23 @@ The Discernus Framework Ecosystem provides a comprehensive, modular approach to 
 /discernus/frameworks/
 ├── reference/                    # Core team maintains
 │   ├── core/                    # Universal Core Modules
-│   │   ├── ecf_v1.0_refined.md
-│   │   ├── caf_v4.1_enhanced.md
-│   │   └── chf_v1.0_bagehot.md
-│   └── flagship/                # Comprehensive framework
-│       └── Cohesive Flourishing Framework (CFF) v4.2.md
+│   │   ├── ecf_v10.md
+│   │   ├── caf_v10.md
+│   │   └── chf_v10.md
+│   └── flagship/                # Comprehensive frameworks
+│       ├── cff_v10.md
+│       ├── pdaf_v10.md
+│       └── opnif_v10.md
 ├── seed/                        # Community adoption encouraged
 │   ├── political/               # Political science frameworks
-│   │   ├── moral_foundations_theory_v4.md
-│   │   ├── political_discourse_v4.md
-│   │   ├── political_worldview_triad_v4.md
-│   │   └── populism_pluralism_v4.md
+│   │   ├── mft_v10.md
+│   │   └── political_worldview_triad_v10.md
 │   ├── ethics/                  # Ethics and character frameworks
-│   │   ├── business_ethics_v4.md
-│   │   └── iditi_v4.md
+│   │   └── business_ethics_v10.md
 │   ├── communication/           # Communication theory frameworks
-│   │   ├── entman_v4.md
-│   │   └── lakoff_framing_v4.md
-│   └── temporal/                # Era-specific frameworks
-│       └── prm_v1.0_temporal_module.md
+│   │   ├── entman_v10.md
+│   │   └── lakoff_framing_v10.md
+│   └── z_deprecated/           # Historical versions preserved
 └── community/                   # User-created frameworks
     └── [Future community contributions]
 ```
@@ -86,6 +82,10 @@ Apply individual frameworks for focused research questions:
 - **CAF**: Speaker character evaluation  
 - **CHF**: Constitutional health monitoring
 - **CFF**: Comprehensive democratic health
+- **MFT**: Moral psychology analysis
+- **BEF**: Corporate communication ethics
+- **EFF**: Framing function analysis
+- **LFF**: Family model political communication
 
 ### **Multi-Framework Integration**
 
@@ -102,10 +102,17 @@ Apply individual frameworks for focused research questions:
 **Core Modules + Domain Frameworks**: Targeted research applications
 - Example: ECF + CAF + CHF + MFT (moral psychology focus)
 - Example: ECF + CAF + CHF + BEF (corporate communication)
+- Example: ECF + CAF + CHF + EFF (framing analysis)
+- Example: ECF + CAF + CHF + LFF (family model analysis)
 
-#### **Core + Temporal Analysis** (Era-Specific)
-**Core Modules + Temporal Frameworks**: Contemporary comprehensive assessment
-- Example: ECF + CAF + CHF + PRM (current populist movements)
+#### **Communication Theory Integration**
+**EFF + LFF**: Comprehensive communication analysis
+- Framing functions + Family model patterns
+- Strategic communication assessment
+
+#### **Ethics + Communication Integration**
+**BEF + EFF + LFF**: Corporate and political communication ethics
+- Business ethics + Framing analysis + Family model patterns
 
 ### **Cross-Temporal Research**
 **Core Modules Only**: Consistent analysis across different political eras
@@ -117,11 +124,14 @@ Apply individual frameworks for focused research questions:
 ## Quality Standards
 
 ### **All Frameworks Include:**
-- **V4 Specification Compliance**: Standardized structure and quality
-- **Enhanced Linguistic Markers**: Comprehensive language pattern identification  
+- **V10.0 Specification Compliance**: Standardized structure and quality
+- **Enhanced Linguistic Markers**: Comprehensive language pattern identification with phrase/explanation structure
 - **Mathematical Specifications**: Precise scoring and calculation methods
-- **JSON Output Contracts**: Machine-readable computational integration
+- **YAML Output Contracts**: Machine-readable computational integration
 - **Evidence Requirements**: Quotation and confidence assessment standards
+- **Analysis Variants**: Multiple analytical protocols for different research needs
+- **Derived Metrics**: Sophisticated calculations for higher-level analysis
+- **Disambiguation Rules**: Clear guidance to prevent concept conflation
 
 ### **Framework Independence**
 - **MECE Architecture**: Mutually Exclusive, Collectively Exhaustive dimensions
@@ -133,22 +143,22 @@ Apply individual frameworks for focused research questions:
 ## Research Applications
 
 ### **Academic Research**
-- **Political Science**: Democratic health, institutional resilience, populist studies
-- **Communication Studies**: Message effectiveness, platform analysis, rhetorical strategy
-- **Psychology**: Moral foundations, character assessment, emotional impact
-- **Ethics**: Corporate communication, leadership evaluation, virtue analysis
+- **Political Science**: Democratic health, institutional resilience, populist studies, moral psychology
+- **Communication Studies**: Message effectiveness, platform analysis, rhetorical strategy, framing theory
+- **Psychology**: Moral foundations, character assessment, emotional impact, family model theory
+- **Ethics**: Corporate communication, leadership evaluation, virtue analysis, stakeholder theory
 
 ### **Professional Analysis**
-- **Political Consulting**: Message strategy, audience response prediction
-- **Corporate Communications**: Ethical assessment, stakeholder impact
-- **Policy Analysis**: Democratic health monitoring, constitutional impact
-- **Media Analysis**: Cross-platform discourse assessment
+- **Political Consulting**: Message strategy, audience response prediction, framing analysis
+- **Corporate Communications**: Ethical assessment, stakeholder impact, communication strategy
+- **Policy Analysis**: Democratic health monitoring, constitutional impact, policy communication
+- **Media Analysis**: Cross-platform discourse assessment, framing analysis, strategic communication
 
 ### **Technology Integration**
-- **Large-Scale Analysis**: Computational framework application
-- **Machine Learning**: Multi-framework pattern recognition
+- **Large-Scale Analysis**: Computational framework application across multiple frameworks
+- **Machine Learning**: Multi-framework pattern recognition and integration
 - **API Integration**: Automated discourse assessment systems
-- **Visualization**: Multi-dimensional discourse mapping
+- **Visualization**: Multi-dimensional discourse mapping and analysis
 
 ---
 
@@ -161,16 +171,33 @@ Apply individual frameworks for focused research questions:
 - **Documentation**: Complete specifications and integration guidance
 
 ### **Seed Frameworks** (Community Transition)
-- **High-Quality Starting Points**: Production-ready frameworks ready for adoption
+- **High-Quality Starting Points**: Production-ready v10.0 frameworks ready for adoption
 - **Domain Expertise**: Natural ownership by subject matter experts
 - **Community Development**: Encourage enhancement and specialization
 - **Ecosystem Growth**: Demonstrate platform breadth and capability
+- **Intellectual Heritage**: Restored theoretical foundations and advanced analytical concepts
 
 ### **Community Frameworks** (User-Created)
 - **Open Innovation**: Unlimited domain and methodological exploration
 - **Version Control**: User-managed development and maintenance
 - **Quality Self-Regulation**: Community standards and peer review
 - **Integration Ready**: Compatible with Core + Modules architecture
+
+---
+
+## Recent Accomplishments
+
+### **v10.0 Migration Complete** ✅
+- **Business Ethics Framework**: Restored Freeman stakeholder theory, Solomon virtue ethics, salience-weighted analysis
+- **Entman Framing Functions**: Restored independence hypothesis, salience-enhanced analysis, advanced derived metrics
+- **Lakoff Framing Framework**: Restored family model coherence hypothesis, tension analysis, strategic contradiction index
+- **All Core Frameworks**: Updated to v10.0 specification with enhanced features
+
+### **Intellectual Heritage Restoration** 🧠
+- **Historical Recovery**: Identified and restored valuable theoretical foundations from earlier versions
+- **Advanced Analytics**: Re-integrated sophisticated analytical concepts (salience, tension analysis, strategic patterns)
+- **Academic Citations**: Restored proper theoretical attribution and validation
+- **Methodological Depth**: Enhanced analytical protocols and derived metrics
 
 ---
 
@@ -181,10 +208,10 @@ Apply individual frameworks for focused research questions:
 - **Methodological Enhancement**: Mathematical and computational improvements
 - **Cross-Linguistic Expansion**: International research compatibility
 
-### **Temporal Module Rotation**
-- **Era-Specific Updates**: Replace outdated temporal modules with contemporary patterns
-- **2030s Modules**: Climate Emergency Rhetoric, Technological Governance, Economic Transformation
-- **2040s-2050s Modules**: AI Rights Rhetoric, Post-Human Governance, Species Representation
+### **Seed Framework Enhancement**
+- **Community Adoption**: Encourage domain experts to take ownership
+- **Specialization**: Develop domain-specific variants and extensions
+- **Integration Research**: Explore novel multi-framework combinations
 
 ### **Community Ecosystem Growth**
 - **Domain Expansion**: Medieval rhetoric, fan community analysis, international relations
@@ -193,7 +220,8 @@ Apply individual frameworks for focused research questions:
 
 ---
 
-**Ecosystem Status**: 🚀 **Production Ready**  
-**Framework Coverage**: 📊 **Universal + Domain + Temporal**  
+**Ecosystem Status**: 🚀 **v10.0 Production Ready**  
+**Framework Coverage**: 📊 **Universal + Domain + Communication + Ethics**  
 **Community Integration**: 🤝 **Seed + Community Architecture Established**  
-**Research Applications**: 🔬 **Multi-Disciplinary Academic + Professional**
+**Research Applications**: 🔬 **Multi-Disciplinary Academic + Professional**  
+**Intellectual Heritage**: 🧠 **Fully Restored and Enhanced**

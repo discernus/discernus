@@ -1,0 +1,29 @@
+{
+  "video_info": {
+    "video_id": "0XVJW5oC7FU",
+    "title": "🇺🇸 Donald Trump | Presidential Election Rally in Butler, Pennsylvania (July 13, 2024) [LIVE]",
+    "channel": "MAGNO NEWS",
+    "upload_date": "2024-07-13",
+    "description": "#MAGNONEWS – Driven by Truth, Powered by Freedom, Fueled by Patriots. Sharp, independent, and unfiltered #BreakingNews delivered through live streams and exclusive videos. https://youtube.com/@MAGNONEWS | https://youtube.com/@MAGNONEWSLIVE | Website: https://magno.news | Merchandising: https://magnonews.com\n\n📹 Live streams and video content licensed by Reuters, Telemedia Press, public domain sources as federal and state official agencies, political and non-political organizations.\n\n© To reuse our content, request consent by email, to avoid automated copyright claims.\n\n#DonaldTrump #Trump2025 #WhiteHouse #PresidentTrump #TrumpLive #TrumpNews #DOGE #ElonMusk #JDVance #MarcoRubio #ScottBessent #PeteHegseth #PamBondi #DougBurgum #BrookeRollins #HowardLutnick #LoriChavezDeRemer #RFKJr #ScottTurner #SeanDuffy #ChrisWright #LindaMcMahon #DougCollins #KristiNoem #LeeZeldin #RussellVought #TulsiGabbard #JohnRatcliffe #JamiesonGreer #KellyLoeffler #SusieWiles",
+    "duration": 972,
+    "view_count": 132886,
+    "like_count": 3500,
+    "url": "https://www.youtube.com/watch?v=0XVJW5oC7FU"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 74.41089204797501,
+    "success": true,
+    "transcript_length": 7261,
+    "whisper_model": "base"
+  },
+  "processing_metadata": {
+    "transcript_length": 7261,
+    "extraction_date": "2025-08-21T09:26:18.868073",
+    "source": "openai_whisper",
+    "model": "base",
+    "detected_language": "en",
+    "segments": 172
+  }
+}

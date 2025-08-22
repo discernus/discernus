@@ -98,6 +98,8 @@ make debug EXPERIMENT=<path>   # Interactive debugging
 
 - **GitHub Issues**: For bug reports and feature requests
 - **Architecture Docs**: `docs/architecture/` for system design
+- **Corpus Library**: `corpus/` for text collections and analysis datasets
+- **GitHub Repositories**: `corpus/github_repositories/` for integrated external speech corpora
 - **Active Projects**: `pm/active_projects/` for current development
 - **Frameworks**: `frameworks/` for analytical approaches
 - **Experiments**: `projects/` for research experiments

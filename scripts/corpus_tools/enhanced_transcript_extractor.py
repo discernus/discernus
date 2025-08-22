@@ -396,17 +396,17 @@ def main():
         transcript_file = args.output_dir / filename
         with open(transcript_file, 'w', encoding='utf-8') as f:
             # Write enhanced header
-            f.write(f"# {result.video_info.title or 'YouTube Video Transcript'}\\n")
-            f.write(f"# Channel: {result.video_info.channel or 'Unknown'}\\n")
-            f.write(f"# Upload Date: {result.video_info.upload_date or 'Unknown'}\\n")
-            f.write(f"# Video URL: {result.video_info.url}\\n")
-            f.write(f"# Language: {result.language or 'Unknown'}\\n")
-            f.write(f"# Extraction Method: {result.extraction_method}\\n")
-            f.write(f"# Confidence: {result.confidence_score:.1f}%\\n")
+            f.write(f"# {result.video_info.title or 'YouTube Video Transcript'}\n")
+            f.write(f"# Channel: {result.video_info.channel or 'Unknown'}\n")
+            f.write(f"# Upload Date: {result.video_info.upload_date or 'Unknown'}\n")
+            f.write(f"# Video URL: {result.video_info.url}\n")
+            f.write(f"# Language: {result.language or 'Unknown'}\n")
+            f.write(f"# Extraction Method: {result.extraction_method}\n")
+            f.write(f"# Confidence: {result.confidence_score:.1f}%\n")
             if result.whisper_model_used:
-                f.write(f"# Whisper Model: {result.whisper_model_used}\\n")
-            f.write(f"# Extracted: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\\n")
-            f.write("\\n" + "="*80 + "\\n\\n")
+                f.write(f"# Whisper Model: {result.whisper_model_used}\n")
+            f.write(f"# Extracted: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("\n" + "="*80 + "\n\n")
             f.write(result.transcript_text)
         
         print(f"📄 Transcript saved: {transcript_file}")

@@ -13,6 +13,8 @@ The Entman Framing Functions Framework v10.0 implements Robert Entman's foundati
 
 **Core Innovation**: Systematic communication analysis that treats framing functions as independent analytical dimensions rather than correlated message elements, enabling precise measurement of strategic communication patterns and message construction sophistication.
 
+It is designed for political scientists, communication scholars, media analysts, and researchers studying strategic communication, framing theory, and political discourse analysis.
+
 ---
 
 ## Theoretical & Empirical Foundations
@@ -63,6 +65,20 @@ The framework empirically tests Entman's independence hypothesis by measuring wh
 
 Identifies communication profiles based on which framing functions receive emphasis, enabling classification of strategic communication approaches and message construction sophistication.
 
+### **Derived & Composite Metrics**
+
+The framework generates five key derived metrics to quantify strategic communication patterns:
+
+1. **Message Completeness Index**: Average coverage across all four framing functions, measuring how comprehensively the text addresses the complete framing spectrum.
+
+2. **Framing Coherence Index**: Geometric mean of framing function scores, measuring internal consistency and balanced deployment across all functions.
+
+3. **Salience-Weighted Message Completeness**: Message completeness weighted by strategic emphasis, revealing coverage of strategically important functions.
+
+4. **Strategic Framing Profile**: Classification of primary communication approach (0=Problem-focused, 1=Cause-focused, 2=Values-focused, 3=Solution-focused).
+
+5. **Framing Independence Score**: Standard deviation of framing function scores, measuring empirical independence as predicted by Entman's theory.
+
 ---
 
 ## Intended Application & Corpus Fit
@@ -81,24 +97,28 @@ Identifies communication profiles based on which framing functions receive empha
 
 **System Validation Note**: The Discernus platform will perform a post-hoc statistical analysis to measure the framework's fit with the chosen corpus. This framework-corpus fit score is a key indicator of the research design's validity and will be provided in the final analysis results.
 
+### **Known Limitations & Scope**
+
+This framework is specifically designed for strategic communication analysis and has clear boundaries of applicability. It is **unsuitable for**:
+- **Non-strategic texts**: Personal correspondence, technical documentation, or purely descriptive content where framing functions are not intentionally deployed
+- **Short-form content**: Brief statements, tweets, or headlines that lack sufficient length to assess multiple framing functions
+- **Non-persuasive discourse**: Factual reporting, academic writing, or neutral informational content without strategic intent
+- **Non-verbal communication**: Visual media, audio content, or other non-textual forms where linguistic framing markers cannot be identified
+
+**Potential pitfalls** include over-interpreting framing patterns in texts where they are minimal or absent, and misattributing strategic intent to naturally occurring language patterns. The framework should be applied with awareness of the speaker's communicative context and intent.
+
 ---
 
 ## Machine-Readable Framework Specification
 
+--- Start of Machine-Readable Appendix ---
+
 ```yaml
 metadata:
   framework_name: "entman_framing_functions"
-  framework_version: "v10.0"
+  framework_version: "10.0.0"
   spec_version: "10.0"
-  display_name: "Entman Framing Functions Framework v10.0"
-  description: "Systematic communication analysis through four independent framing functions based on Robert Entman's foundational theory"
-  author: "Discernus Research Team"
-  created_date: "2025-01-27"
-  last_modified: "2025-01-27"
-  academic_citations:
-    - "Entman, R. M. (1993). Framing: Toward clarification of a fractured paradigm. Journal of Communication, 43(4), 51-58."
-    - "Entman, R. M. (2007). Framing bias: Media in the distribution of power. Journal of Communication, 57(1), 163-173."
-    - "Chong, D., & Druckman, J. N. (2007). Framing theory. Annual Review of Political Science, 10, 103-126."
+  author: "Robert Entman, adapted by Discernus Research Team"
 
 analysis_variants:
   default:
@@ -106,65 +126,25 @@ analysis_variants:
     analysis_prompt: |
       You are an expert analyst specializing in communication framing and strategic messaging. Analyze this text using the Entman Framing Functions Framework v10.0, which examines four independent framing functions based on Robert Entman's foundational communication theory.
 
-      **FRAMING FUNCTIONS TO ANALYZE:**
+        **FRAMING FUNCTIONS TO ANALYZE:**
 
-      1. **Problem Definition** (0.0-1.0): What issues are identified as requiring attention and how problems are conceptualized. Look for: issue identification ('the real issue is,' 'we face a crisis of,' 'the challenge before us'), crisis framing ('urgent need,' 'what's really at stake'), scope setting ('affects everyone,' 'widespread implications').
+        1. **Problem Definition** (0.0-1.0): What issues are identified as requiring attention and how problems are conceptualized. Look for: issue identification ('the real issue is,' 'we face a crisis of,' 'the challenge before us'), crisis framing ('urgent need,' 'what's really at stake'), scope setting ('affects everyone,' 'widespread implications').
 
-      2. **Causal Attribution** (0.0-1.0): What factors or actors are presented as causing problems and how responsibility is assigned. Look for: responsibility language ('X is responsible for,' 'this stems from Y's actions'), blame attribution ('the fault lies with,' 'caused by'), causal explanation ('due to,' 'resulted from,' 'roots of this problem').
+        2. **Causal Attribution** (0.0-1.0): What factors or actors are presented as causing problems and how responsibility is assigned. Look for: responsibility language ('X is responsible for,' 'this stems from Y's actions'), blame attribution ('the fault lies with,' 'caused by'), causal explanation ('due to,' 'resulted from,' 'roots of this problem').
 
-      3. **Moral Evaluation** (0.0-1.0): What values and moral judgments are invoked and how actions are evaluated ethically. Look for: value language ('justice demands,' 'fairness requires,' 'liberty is at stake'), moral judgment ('right thing,' 'wrong approach,' 'ethical'), values framework ('core values,' 'moral foundation,' 'ethical standards').
+        3. **Moral Evaluation** (0.0-1.0): What values and moral judgments are invoked and how actions are evaluated ethically. Look for: value language ('justice demands,' 'fairness requires,' 'liberty is at stake'), moral judgment ('right thing,' 'wrong approach,' 'ethical'), values framework ('core values,' 'moral foundation,' 'ethical standards').
 
-      4. **Treatment Recommendation** (0.0-1.0): What solutions are proposed and how policy options are presented and prioritized. Look for: solution language ('we must,' 'need to,' 'the answer is'), policy options ('I propose,' 'recommend,' 'plan to'), action imperative ('take action,' 'immediate steps,' 'decisive action').
+        4. **Treatment Recommendation** (0.0-1.0): What solutions are proposed and how policy options are presented and prioritized. Look for: solution language ('we must,' 'need to,' 'the answer is'), policy options ('I propose,' 'recommend,' 'plan to'), action imperative ('take action,' 'immediate steps,' 'decisive action').
 
-      **ANALYSIS PROCESS:**
-      - Score each function from 0.0-1.0 based on evidence strength and frequency
-      - Assess salience (0.0-1.0) for each function: how central is it to the message?
-      - Provide specific quotations as evidence for each assessment
-      - Evaluate whether functions operate independently as predicted by Entman's theory
-      - Identify strategic communication patterns and message construction approach
-
-      **OUTPUT FORMAT:**
-      Return a comprehensive analysis covering all four framing functions with scores, salience assessments, evidence, and insights about strategic communication patterns.
+        Analyze each framing function independently, scoring from 0.0-1.0 based on evidence strength and frequency, assessing salience (0.0-1.0) for strategic prominence, and providing specific quotations as evidence. Evaluate whether functions operate independently as predicted by Entman's theory and identify strategic communication patterns.
 
   sequential_analysis:
     description: "Step-by-step analysis of each framing function before integration"
     analysis_prompt: |
       You are an expert communication analyst. Analyze this text through focused sequential steps, examining each framing function independently before integration.
 
-      **STEP 1 - PROBLEM DEFINITION ANALYSIS**
-      Focus ONLY on problem definition patterns (ignore other functions for now):
-      - Look for problem identification markers and issue language
-      - Assess problem framing completeness and clarity
-      - Score problem definition (0.0-1.0) with specific evidence
-      - Assess salience (0.0-1.0): How central is problem definition to this text?
-      - Show your analytical work before proceeding
-
-      **STEP 2 - CAUSAL ATTRIBUTION ANALYSIS**
-      Now focus ONLY on causal attribution patterns:
-      - Look for responsibility language and causal markers
-      - Assess attribution clarity and responsibility assignment
-      - Score causal attribution (0.0-1.0) with specific evidence
-      - Assess salience (0.0-1.0): How central is causal attribution to the message?
-      - Show your analytical work before proceeding
-
-      **STEP 3 - MORAL EVALUATION ANALYSIS**
-      Now focus ONLY on moral evaluation patterns:
-      - Look for values language and ethical markers
-      - Assess moral framework clarity and ethical positioning
-      - Score moral evaluation (0.0-1.0) with specific evidence
-      - Assess salience (0.0-1.0): How central are moral evaluations to the message?
-      - Show your analytical work before proceeding
-
-      **STEP 4 - TREATMENT RECOMMENDATION ANALYSIS**
-      Now focus ONLY on treatment recommendation patterns:
-      - Look for solution language and policy markers
-      - Assess solution clarity and policy direction
-      - Score treatment recommendation (0.0-1.0) with specific evidence
-      - Assess salience (0.0-1.0): How central are treatment recommendations to the message?
-      - Show your analytical work before proceeding
-
-      **FINAL STEP - INTEGRATION AND VALIDATION**
-      Review your step-by-step analysis and provide final structured output with all scores, salience assessments, and strategic communication insights.
+      **ANALYSIS APPROACH:**
+      Focus on each framing function sequentially, examining problem definition, causal attribution, moral evaluation, and treatment recommendation patterns independently. For each function, assess evidence strength, score from 0.0-1.0, evaluate salience (0.0-1.0) for strategic prominence, and provide specific textual evidence. After individual analysis, integrate findings to assess framing function independence and strategic communication patterns.
 
   strategic_focus:
     description: "Analysis focused on strategic communication patterns and message construction"
@@ -172,24 +152,14 @@ analysis_variants:
       You are an expert in strategic communication and framing theory. Analyze this text using the Entman Framing Functions Framework v10.0 with emphasis on strategic communication patterns.
 
       **STRATEGIC ANALYSIS FOCUS:**
-      - Which framing functions receive the most rhetorical investment?
-      - How do the four functions work together (or independently) to construct the message?
-      - What strategic communication approach is revealed through framing function deployment?
-      - How sophisticated is the message construction (systematic vs. ad hoc)?
+      Examine which framing functions receive the most rhetorical investment, how the four functions work together or independently to construct the message, what strategic communication approach is revealed through framing function deployment, and how sophisticated the message construction is (systematic vs. ad hoc).
 
       **FRAMING FUNCTION ASSESSMENT:**
-      For each of the four functions (Problem Definition, Causal Attribution, Moral Evaluation, Treatment Recommendation):
-      - Score intensity (0.0-1.0) based on evidence strength
-      - Assess salience (0.0-1.0) for strategic prominence
-      - Provide key evidence quotations
-      - Analyze strategic deployment patterns
-
-      **STRATEGIC COMMUNICATION OUTPUT:**
-      Provide comprehensive analysis with scores, salience assessments, strategic pattern identification, and communication sophistication evaluation.
+      For each of the four functions (Problem Definition, Causal Attribution, Moral Evaluation, Treatment Recommendation), score intensity (0.0-1.0) based on evidence strength, assess salience (0.0-1.0) for strategic prominence, provide key evidence quotations, and analyze strategic deployment patterns.
 
 dimensions:
-  problem_definition:
-    name: "Problem Definition"
+  - name: "problem_definition"
+    display_name: "Problem Definition"
     description: "What issues are identified as requiring attention and how problems are conceptualized"
     markers:
       positive_examples:
@@ -224,8 +194,8 @@ dimensions:
       low: "0.1-0.3: Minimal problem identification or vague issue framing"
       absent: "0.0: No problem definition language or issue identification"
 
-  causal_attribution:
-    name: "Causal Attribution"
+  - name: "causal_attribution"
+    display_name: "Causal Attribution"
     description: "What factors or actors are presented as causing problems and how responsibility is assigned"
     markers:
       positive_examples:
@@ -260,8 +230,8 @@ dimensions:
       low: "0.1-0.3: Minimal causal explanation or vague responsibility assignment"
       absent: "0.0: No causal attribution or responsibility assignment language"
 
-  moral_evaluation:
-    name: "Moral Evaluation"
+  - name: "moral_evaluation"
+    display_name: "Moral Evaluation"
     description: "What values and moral judgments are invoked and how actions are evaluated ethically"
     markers:
       positive_examples:
@@ -296,8 +266,8 @@ dimensions:
       low: "0.1-0.3: Minimal moral judgment or vague ethical language"
       absent: "0.0: No moral evaluation or value judgment language"
 
-  treatment_recommendation:
-    name: "Treatment Recommendation"
+  - name: "treatment_recommendation"
+    display_name: "Treatment Recommendation"
     description: "What solutions are proposed and how policy options are presented and prioritized"
     markers:
       positive_examples:
@@ -340,7 +310,7 @@ derived_metrics:
 
   - name: "framing_coherence_index"
     description: "Measures the internal consistency of framing function deployment"
-    formula: "sqrt(dimensions.problem_definition.raw_score * dimensions.causal_attribution.raw_score * dimensions.moral_evaluation.raw_score * dimensions.treatment_recommendation.raw_score)"
+    formula: "(dimensions.problem_definition.raw_score * dimensions.causal_attribution.raw_score * dimensions.moral_evaluation.raw_score * dimensions.treatment_recommendation.raw_score) ** 0.25"
     interpretation: "Higher values indicate balanced deployment across all functions. Lower values suggest uneven or lopsided framing emphasis."
 
   - name: "salience_weighted_message_completeness"
@@ -355,105 +325,48 @@ derived_metrics:
 
   - name: "framing_independence_score"
     description: "Measures the empirical independence of framing functions as predicted by Entman's theory"
-    formula: "1 - (abs(dimensions.problem_definition.raw_score - dimensions.causal_attribution.raw_score) + abs(dimensions.moral_evaluation.raw_score - dimensions.treatment_recommendation.raw_score)) / 2"
+    formula: "np.std([dimensions.problem_definition.raw_score, dimensions.causal_attribution.raw_score, dimensions.moral_evaluation.raw_score, dimensions.treatment_recommendation.raw_score])"
     interpretation: "Higher values indicate framing functions vary independently as predicted by theory. Lower values suggest functions are deployed in correlated patterns."
 
 output_schema:
   type: object
   required: ["dimensional_scores", "derived_metrics"]
+  definitions:
+    score_object:
+      type: object
+      required: ["raw_score", "salience", "confidence", "evidence"]
+      properties:
+        raw_score:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: "Framing function strength (0.0-1.0)"
+        salience:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: "Strategic prominence of the framing function (0.0-1.0)"
+        confidence:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: "Analyst confidence in assessment (0.0-1.0)"
+        evidence:
+          type: string
+          description: "Textual evidence supporting the assessment"
   properties:
     dimensional_scores:
       type: object
       required: ["problem_definition", "causal_attribution", "moral_evaluation", "treatment_recommendation"]
       properties:
         problem_definition:
-          type: object
-          required: ["raw_score", "salience", "confidence", "evidence"]
-          properties:
-            raw_score:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Problem definition function strength (0.0-1.0)"
-            salience:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Strategic prominence of problem definition (0.0-1.0)"
-            confidence:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Analyst confidence in assessment (0.0-1.0)"
-            evidence:
-              type: string
-              description: "Textual evidence supporting the problem definition assessment"
+          $ref: "#/definitions/score_object"
         causal_attribution:
-          type: object
-          required: ["raw_score", "salience", "confidence", "evidence"]
-          properties:
-            raw_score:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Causal attribution function strength (0.0-1.0)"
-            salience:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Strategic prominence of causal attribution (0.0-1.0)"
-            confidence:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Analyst confidence in assessment (0.0-1.0)"
-            evidence:
-              type: string
-              description: "Textual evidence supporting the causal attribution assessment"
+          $ref: "#/definitions/score_object"
         moral_evaluation:
-          type: object
-          required: ["raw_score", "salience", "confidence", "evidence"]
-          properties:
-            raw_score:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Moral evaluation function strength (0.0-1.0)"
-            salience:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Strategic prominence of moral evaluation (0.0-1.0)"
-            confidence:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Analyst confidence in assessment (0.0-1.0)"
-            evidence:
-              type: string
-              description: "Textual evidence supporting the moral evaluation assessment"
+          $ref: "#/definitions/score_object"
         treatment_recommendation:
-          type: object
-          required: ["raw_score", "salience", "confidence", "evidence"]
-          properties:
-            raw_score:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Treatment recommendation function strength (0.0-1.0)"
-            salience:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Strategic prominence of treatment recommendation (0.0-1.0)"
-            confidence:
-              type: number
-              minimum: 0.0
-              maximum: 1.0
-              description: "Analyst confidence in assessment (0.0-1.0)"
-            evidence:
-              type: string
-              description: "Textual evidence supporting the treatment recommendation assessment"
+          $ref: "#/definitions/score_object"
     derived_metrics:
       type: object
       required: ["message_completeness_index", "framing_coherence_index", "salience_weighted_message_completeness", "strategic_framing_profile", "framing_independence_score"]
@@ -484,4 +397,4 @@ output_schema:
           maximum: 1.0
           description: "Empirical independence of framing functions"
 
-```
+--- End of Machine-Readable Appendix ---

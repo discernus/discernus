@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "FjCYUNEiQGA",
+    "title": "🇺🇸 Donald Trump | Full Speech at Rally in Racine, Wisconsin (Subtitles) [Multilanguage CC]",
+    "channel": "MAGNO NEWS",
+    "upload_date": "2024-06-19",
+    "description": "Live coverage of speeches, rallies, and events across America with raw, unfiltered, authentic reporting. MAGNO NEWS is committed to transparency and consistency, delivering full videos without commentary or alterations, focusing on honesty and clarity in news presentation.\n\nWatch more: https://youtube.com/@MAGNONEWS\nVisit our website: https://magno.news\n\n📹 Providing professionally licensed video content from accredited media providers, official government streams, and public archives.\n\n© For content licensing or reuse, please contact us directly to avoid automated copyright enforcement.\n\n#MAGNONEWS #BreakingNews #LiveCoverage #PoliticalSpeeches #Unfiltered #NewMedia #Election2026 #Election2028",
+    "duration": 4744,
+    "view_count": 5816,
+    "like_count": 737,
+    "url": "https://www.youtube.com/watch?v=FjCYUNEiQGA"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en",
+    "confidence": 100.0,
+    "success": true,
+    "transcript_length": 69488,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 69488,
+    "extraction_date": "2025-08-21T08:30:22.339575",
+    "source": "youtube_transcript_api"
+  }
+}
