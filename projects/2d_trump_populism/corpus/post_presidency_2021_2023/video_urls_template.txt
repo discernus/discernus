@@ -1,0 +1,23 @@
+# VIDEO URLS TEMPLATE FOR POST-PRESIDENCY TRANSCRIPTS (2021-2023)
+# ================================================================
+#
+# INSTRUCTIONS:
+# 1. Use the youtube_search_guide.html to find videos of post-presidency events
+# 2. Copy video URLs from YouTube and paste them below (one per line)
+# 3. Save this file
+# 4. Run the batch extractor: python3 scripts/corpus_tools/batch_post_presidency_extractor.py
+#
+# FORMAT: One YouTube URL per line, starting with https://www.youtube.com/watch?v=
+# 
+# EXAMPLE:
+# https://www.youtube.com/watch?v=VIDEO_ID_HERE
+#
+# ================================================================
+
+# CPAC 2021 (Already extracted - example)
+# https://www.youtube.com/watch?v=VIDEO_ID_HERE
+
+# Add your found video URLs below:
+https://www.youtube.com/watch?v=9kL9KiUNoZQ&themeRefresh=1
+https://www.youtube.com/watch?v=ht20eDYmLXU
+https://www.youtube.com/watch?v=QK3IIoFjiv8

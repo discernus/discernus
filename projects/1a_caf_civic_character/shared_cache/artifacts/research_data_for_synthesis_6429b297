@@ -1,0 +1,278 @@
+{
+  "status": "completed",
+  "stats_hash": "7dc7d7ee97afd8beae541e2032bd78e2636c6443417594aee7a4f8138b55a6c8",
+  "functions_generated": 1,
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 1,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 6263
+    },
+    "statistical_data": {
+      "calculate_basic_statistics": {
+        "tribalism_raw": {
+          "mean": 0.50625,
+          "std": 0.4021704507153297,
+          "count": 8,
+          "missing": 0
+        },
+        "tribalism_salience": {
+          "mean": 0.59375,
+          "std": 0.39680644796028347,
+          "count": 8,
+          "missing": 0
+        },
+        "tribalism_confidence": {
+          "mean": 0.95,
+          "std": 0.037796447300922714,
+          "count": 8,
+          "missing": 0
+        },
+        "dignity_raw": {
+          "mean": 0.5750000000000001,
+          "std": 0.37321001364608947,
+          "count": 8,
+          "missing": 0
+        },
+        "dignity_salience": {
+          "mean": 0.575,
+          "std": 0.39551051999734654,
+          "count": 8,
+          "missing": 0
+        },
+        "dignity_confidence": {
+          "mean": 0.9125000000000001,
+          "std": 0.05824823725107173,
+          "count": 8,
+          "missing": 0
+        },
+        "manipulation_raw": {
+          "mean": 0.35,
+          "std": 0.3779644730092272,
+          "count": 8,
+          "missing": 0
+        },
+        "manipulation_salience": {
+          "mean": 0.39999999999999997,
+          "std": 0.3779644730092272,
+          "count": 8,
+          "missing": 0
+        },
+        "manipulation_confidence": {
+          "mean": 0.90625,
+          "std": 0.06232117273791122,
+          "count": 8,
+          "missing": 0
+        },
+        "truth_raw": {
+          "mean": 0.65,
+          "std": 0.20701966780270628,
+          "count": 8,
+          "missing": 0
+        },
+        "truth_salience": {
+          "mean": 0.70625,
+          "std": 0.1821253492986159,
+          "count": 8,
+          "missing": 0
+        },
+        "truth_confidence": {
+          "mean": 0.88125,
+          "std": 0.04580626906564521,
+          "count": 8,
+          "missing": 0
+        },
+        "resentment_raw": {
+          "mean": 0.675,
+          "std": 0.3882193783343198,
+          "count": 8,
+          "missing": 0
+        },
+        "resentment_salience": {
+          "mean": 0.7,
+          "std": 0.4026696625558687,
+          "count": 8,
+          "missing": 0
+        },
+        "resentment_confidence": {
+          "mean": 0.94375,
+          "std": 0.06781013409302686,
+          "count": 8,
+          "missing": 0
+        },
+        "justice_raw": {
+          "mean": 0.6375,
+          "std": 0.350255009141299,
+          "count": 8,
+          "missing": 0
+        },
+        "justice_salience": {
+          "mean": 0.65625,
+          "std": 0.3539950564626574,
+          "count": 8,
+          "missing": 0
+        },
+        "justice_confidence": {
+          "mean": 0.90625,
+          "std": 0.07763237542601482,
+          "count": 8,
+          "missing": 0
+        },
+        "fear_raw": {
+          "mean": 0.475,
+          "std": 0.3195979617313871,
+          "count": 8,
+          "missing": 0
+        },
+        "fear_salience": {
+          "mean": 0.5187499999999999,
+          "std": 0.2802263116024006,
+          "count": 8,
+          "missing": 0
+        },
+        "fear_confidence": {
+          "mean": 0.9,
+          "std": 0.046291004988627545,
+          "count": 8,
+          "missing": 0
+        },
+        "hope_raw": {
+          "mean": 0.6,
+          "std": 0.23904572186687875,
+          "count": 8,
+          "missing": 0
+        },
+        "hope_salience": {
+          "mean": 0.6312500000000001,
+          "std": 0.26851110644759985,
+          "count": 8,
+          "missing": 0
+        },
+        "hope_confidence": {
+          "mean": 0.875,
+          "std": 0.07071067811865474,
+          "count": 8,
+          "missing": 0
+        },
+        "fantasy_raw": {
+          "mean": 0.3125,
+          "std": 0.34820970692960296,
+          "count": 8,
+          "missing": 0
+        },
+        "fantasy_salience": {
+          "mean": 0.325,
+          "std": 0.3494894235064306,
+          "count": 8,
+          "missing": 0
+        },
+        "fantasy_confidence": {
+          "mean": 0.91875,
+          "std": 0.08425090080061033,
+          "count": 8,
+          "missing": 0
+        },
+        "pragmatism_raw": {
+          "mean": 0.50625,
+          "std": 0.38770156048177057,
+          "count": 8,
+          "missing": 0
+        },
+        "pragmatism_salience": {
+          "mean": 0.475,
+          "std": 0.36154430670982185,
+          "count": 8,
+          "missing": 0
+        },
+        "pragmatism_confidence": {
+          "mean": 0.9187500000000001,
+          "std": 0.06512350903146595,
+          "count": 8,
+          "missing": 0
+        }
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-22T14:22:49.023767",
+          "sample_size": 8,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribalism_raw",
+            "tribalism_salience",
+            "tribalism_confidence",
+            "dignity_raw",
+            "dignity_salience",
+            "dignity_confidence",
+            "manipulation_raw",
+            "manipulation_salience",
+            "manipulation_confidence",
+            "truth_raw",
+            "truth_salience",
+            "truth_confidence",
+            "resentment_raw",
+            "resentment_salience",
+            "resentment_confidence",
+            "justice_raw",
+            "justice_salience",
+            "justice_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "fantasy_raw",
+            "fantasy_salience",
+            "fantasy_confidence",
+            "pragmatism_raw",
+            "pragmatism_salience",
+            "pragmatism_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-22T14:22:49.062681",
+          "sample_size": 8,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribalism_raw",
+            "tribalism_salience",
+            "tribalism_confidence",
+            "dignity_raw",
+            "dignity_salience",
+            "dignity_confidence",
+            "manipulation_raw",
+            "manipulation_salience",
+            "manipulation_confidence",
+            "truth_raw",
+            "truth_salience",
+            "truth_confidence",
+            "resentment_raw",
+            "resentment_salience",
+            "resentment_confidence",
+            "justice_raw",
+            "justice_salience",
+            "justice_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "fantasy_raw",
+            "fantasy_salience",
+            "fantasy_confidence",
+            "pragmatism_raw",
+            "pragmatism_salience",
+            "pragmatism_confidence"
+          ]
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}
