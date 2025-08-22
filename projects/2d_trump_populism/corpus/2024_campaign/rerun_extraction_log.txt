@@ -1,0 +1,510 @@
+SUCCESS (extracted): trump_2024_2024-06-06_AZ_NY6oOhea7Tg.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=NY6oOhea7Tg&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=NY6oOhea7Tg&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump at Turning Point USA Rally in Phoenix, Arizona (June 6, 2024)
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 77724 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_at_turning_point_usa_rally_in_phoenix_2024_06_06_NY6oOhea.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_at_turning_point_usa_rally_in_phoenix_2024_06_06_NY6oOhea_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 77,724 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: 🇺🇸 Donald Trump at Turning Point USA Rally in Phoenix, Arizona (June 6, 2024)
+  - Channel: MAGNO NEWS
+  - Views: 38,639
+
+SUCCESS (extracted): trump_2024_2024-06-09_NV_-nyZJZf7_1c.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=-nyZJZf7_1c&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=-nyZJZf7_1c&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | Save America Rally at Sunset Park in Las Vegas, Nevada (June 9, 2024) [LIVE]
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 52873 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_save_america_rally_at_sunset_park_in__2024_06_09_-nyZJZf7.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_save_america_rally_at_sunset_park_in__2024_06_09_-nyZJZf7_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 52,873 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: 🇺🇸 Donald Trump | Save America Rally at Sunset Park in Las Vegas, Nevada (June 9, 2024) [LIVE]
+  - Channel: MAGNO NEWS
+  - Views: 34,864
+
+SUCCESS (extracted): trump_2024_2024-06-15_MI_-YNaRMLdZ6M.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=-YNaRMLdZ6M&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=-YNaRMLdZ6M&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | The People’s Convention by Turning Point USA in Detroit, Michigan (June 15, 2024)
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 65458 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_the_peoples_convention_by_turning_poi_2024_06_15_-YNaRMLd.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_the_peoples_convention_by_turning_poi_2024_06_15_-YNaRMLd_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 65,458 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: 🇺🇸 Donald Trump | The People’s Convention by Turning Point USA in Detroit, Michigan (June 15, 2024)
+  - Channel: MAGNO NEWS
+  - Views: 55,811
+
+SUCCESS (extracted): trump_2024_2024-06-18_WI_FjCYUNEiQGA.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=FjCYUNEiQGA&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=FjCYUNEiQGA&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | Full Speech at Rally in Racine, Wisconsin (Subtitles) [Multilanguage CC]
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 69488 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_racine_wiscon_2024_06_19_FjCYUNEi.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_racine_wiscon_2024_06_19_FjCYUNEi_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 69,488 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: 🇺🇸 Donald Trump | Full Speech at Rally in Racine, Wisconsin (Subtitles) [Multilanguage CC]
+  - Channel: MAGNO NEWS
+  - Views: 5,816
+
+SUCCESS (extracted): trump_2024_2024-06-22_PA_9vN1ysKxXP8.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=9vN1ysKxXP8&ab_channel=Infinite-LeeProductions
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=9vN1ysKxXP8&ab_channel=Infinite-LeeProductions
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: Donald Trump's speech Philadelphia June 22, 2024 I Temple University I @DonaldJTrumpforPresident
+📺 Channel: Infinite-Lee Productions
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 61204 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trumps_speech_philadelphia_june_22_2024_i_t_2024_06_25_9vN1ysKx.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trumps_speech_philadelphia_june_22_2024_i_t_2024_06_25_9vN1ysKx_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 61,204 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: Donald Trump's speech Philadelphia June 22, 2024 I Temple University I @DonaldJTrumpforPresident
+  - Channel: Infinite-Lee Productions
+  - Views: 588
+
+SUCCESS (extracted): trump_2024_2024-06-28_VA_7R8UVSvqJRQ.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=7R8UVSvqJRQ&ab_channel=13NewsNow
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=7R8UVSvqJRQ&ab_channel=13NewsNow
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: Donald Trump campaign rally in Chesapeake, Virginia, one day after first 2024 presidential debate
+📺 Channel: 13News Now
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 78909 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_campaign_rally_in_chesapeake_virginia_2024_06_28_7R8UVSvq.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_campaign_rally_in_chesapeake_virginia_2024_06_28_7R8UVSvq_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 78,909 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: Donald Trump campaign rally in Chesapeake, Virginia, one day after first 2024 presidential debate
+  - Channel: 13News Now
+  - Views: 53,673
+
+SUCCESS (extracted): trump_2024_2024-07-09_FL_eojBR3JiL6Y.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=eojBR3JiL6Y&ab_channel=TheTimesandTheSundayTimes
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=eojBR3JiL6Y&ab_channel=TheTimesandTheSundayTimes
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: LIVE: Donald Trump hosts MAGA rally in Florida
+📺 Channel: Times News
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 59208 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_florida_2024_07_10_eojBR3Ji.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_florida_2024_07_10_eojBR3Ji_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 59,208 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: LIVE: Donald Trump hosts MAGA rally in Florida
+  - Channel: Times News
+  - Views: 93,452
+
+SUCCESS (extracted): trump_2024_2024-07-13_PA_0XVJW5oC7FU.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=0XVJW5oC7FU&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=0XVJW5oC7FU&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | Presidential Election Rally in Butler, Pennsylvania (July 13, 2024) [LIVE]
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 7555 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_presidential_election_rally_in_butler_2024_07_13_0XVJW5oC.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_presidential_election_rally_in_butler_2024_07_13_0XVJW5oC_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 7,555 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: 🇺🇸 Donald Trump | Presidential Election Rally in Butler, Pennsylvania (July 13, 2024) [LIVE]
+  - Channel: MAGNO NEWS
+  - Views: 132,899
+
+SUCCESS (extracted): trump_2024_2024-07-20_MI_4v46FwsLUOc.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=4v46FwsLUOc&ab_channel=LiveNOWfromFOX
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=4v46FwsLUOc&ab_channel=LiveNOWfromFOX
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: WATCH: Trump FULL SPEECH in Michigan, first rally since assassination attempt | LiveNOW FOX
+📺 Channel: LiveNOW from FOX
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 21558 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/watch_trump_full_speech_in_michigan_first_rally_si_2024_07_20_4v46FwsL.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/watch_trump_full_speech_in_michigan_first_rally_si_2024_07_20_4v46FwsL_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 21,558 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: WATCH: Trump FULL SPEECH in Michigan, first rally since assassination attempt | LiveNOW FOX
+  - Channel: LiveNOW from FOX
+  - Views: 1,875,784
+
+SUCCESS (extracted): trump_2024_2024-07-24_NC_37VqgNlQbQg.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=37VqgNlQbQg&ab_channel=MAGNONEWS
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=37VqgNlQbQg&ab_channel=MAGNONEWS
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | Full Speech at Rally in Charlotte, North Carolina [CC Subtitles] (July 24, 2024)
+📺 Channel: MAGNO NEWS
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 74263 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_charlotte_nor_2024_07_25_37VqgNlQ.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_charlotte_nor_2024_07_25_37VqgNlQ_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 74,263 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: 🇺🇸 Donald Trump | Full Speech at Rally in Charlotte, North Carolina [CC Subtitles] (July 24, 2024)
+  - Channel: MAGNO NEWS
+  - Views: 8,503
+
+SUCCESS (extracted): trump_2024_2024-07-27_MN_-4Drs2TmEhc.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=-4Drs2TmEhc&ab_channel=LiveNOWfromFOX
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=-4Drs2TmEhc&ab_channel=LiveNOWfromFOX
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: WATCH: Trump rally FULL SPEECH at St Cloud campaign event | LiveNOW from FOX
+📺 Channel: LiveNOW from FOX
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 20531 chars, confidence: 100.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/watch_trump_rally_full_speech_at_st_cloud_campaign_2024_07_28_-4Drs2Tm.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/watch_trump_rally_full_speech_at_st_cloud_campaign_2024_07_28_-4Drs2Tm_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 20,531 characters
+  - Language: en
+  - Confidence: 100.0%
+  - Title: WATCH: Trump rally FULL SPEECH at St Cloud campaign event | LiveNOW from FOX
+  - Channel: LiveNOW from FOX
+  - Views: 669,775
+
+SUCCESS (extracted): trump_2024_2024-07-31_PA_YA7Pi8F1I7s.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=YA7Pi8F1I7s&ab_channel=MAGNONEWSLIVE
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=YA7Pi8F1I7s&ab_channel=MAGNONEWSLIVE
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: 🇺🇸 Donald Trump | Full Speech at MAGA Rally in Harrisburg, Pennsylvania (July 31, 2024) [LIVE]
+📺 Channel: MAGNO NEWS LIVE
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 70000 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_maga_rally_in_harrisbu_2024_07_31_YA7Pi8F1.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_full_speech_at_maga_rally_in_harrisbu_2024_07_31_YA7Pi8F1_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 70,000 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: 🇺🇸 Donald Trump | Full Speech at MAGA Rally in Harrisburg, Pennsylvania (July 31, 2024) [LIVE]
+  - Channel: MAGNO NEWS LIVE
+  - Views: 68
+
+SUCCESS (extracted): trump_2024_2024-08-03_GA_-1UAZqFLVYI.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=-1UAZqFLVYI&ab_channel=TheTimesandTheSundayTimes
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=-1UAZqFLVYI&ab_channel=TheTimesandTheSundayTimes
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: LIVE: Donald Trump speaks at MAGA rally in Georgia
+📺 Channel: Times News
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 71268 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 71,268 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: LIVE: Donald Trump speaks at MAGA rally in Georgia
+  - Channel: Times News
+  - Views: 309,104
+
+SUCCESS (extracted): trump_2024_2024-08-09_MT_D4IdhXexLko.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=D4IdhXexLko&ab_channel=TheTimesandTheSundayTimes
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=D4IdhXexLko&ab_channel=TheTimesandTheSundayTimes
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: LIVE: Donald Trump hosts MAGA rally in Montana
+📺 Channel: Times News
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 81199 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_montana_2024_08_10_D4IdhXex.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_montana_2024_08_10_D4IdhXex_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 81,199 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: LIVE: Donald Trump hosts MAGA rally in Montana
+  - Channel: Times News
+  - Views: 1,582,160
+
+SUCCESS (extracted): trump_2024_2024-08-14_NC_bAIPi1cPY4c.txt
+🎙️  Whisper available for high-quality transcription
+🎯 Enhanced Transcript Extractor for APDES
+📋 URL: https://www.youtube.com/watch?v=bAIPi1cPY4c&ab_channel=FOX4Dallas-FortWorth
+📁 Output: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign
+🌐 Languages: en
+🎙️  Whisper Model: base
+🔄 Prefer Whisper: False
+============================================================
+🔄 Loading Whisper model: base
+✅ Whisper base model loaded successfully
+🎯 Enhanced Transcript Extraction
+📋 URL: https://www.youtube.com/watch?v=bAIPi1cPY4c&ab_channel=FOX4Dallas-FortWorth
+🌐 Languages: en
+🎙️  Prefer Whisper: False
+------------------------------------------------------------
+🎬 Video: Donald Trump economic plan: FULL SPEECH
+📺 Channel: FOX 4 Dallas-Fort Worth
+
+📝 Attempting YouTube transcript extraction...
+✅ YouTube API success: 62379 chars, confidence: 80.0%
+📄 Transcript saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_economic_plan_full_speech_2024_08_14_bAIPi1cP.txt
+📊 Metadata saved: /Volumes/code/discernus/projects/2d_trump_populism/corpus/2024_campaign/primary_campaign/donald_trump_economic_plan_full_speech_2024_08_14_bAIPi1cP_metadata.json
+============================================================
+✅ Enhanced extraction completed successfully!
+📊 Stats:
+  - Method: youtube_api
+  - Transcript length: 62,379 characters
+  - Language: en (auto-generated)
+  - Confidence: 80.0%
+  - Title: Donald Trump economic plan: FULL SPEECH
+  - Channel: FOX 4 Dallas-Fort Worth
+  - Views: 441,877
+

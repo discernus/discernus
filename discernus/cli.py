@@ -68,6 +68,89 @@ def ensure_infrastructure() -> bool:
     return True
 
 
+def _parse_experiment_for_display(experiment_path: Path) -> Dict[str, Any]:
+    """
+    Parse experiment for CLI display purposes only.
+    THIN approach: Light parsing for basic info, no deep validation.
+    """
+    try:
+        experiment_file = experiment_path / "experiment.md"
+        if not experiment_file.exists():
+            return {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'Unknown', '_corpus_file_count': 0}
+        
+        content = experiment_file.read_text(encoding='utf-8')
+        
+        # Try v10.0 delimited format first
+        if '# --- Start of Machine-Readable Appendix ---' in content:
+            start_marker = '# --- Start of Machine-Readable Appendix ---'
+            start_idx = content.find(start_marker) + len(start_marker)
+            end_idx = content.find('# --- End of Machine-Readable Appendix ---')
+            
+            if end_idx > start_idx:
+                yaml_content = content[start_idx:end_idx].strip()
+            else:
+                yaml_content = content[start_idx:].strip()
+            
+            import yaml
+            config = yaml.safe_load(yaml_content)
+            
+            # Extract display info
+            name = config.get('metadata', {}).get('experiment_name', 'Unknown')
+            framework = config.get('components', {}).get('framework', 'Unknown')
+            corpus = config.get('components', {}).get('corpus', 'Unknown')
+        
+        # Try v10.0 Configuration Appendix format
+        elif '## Configuration Appendix' in content:
+            _, appendix_content = content.split('## Configuration Appendix', 1)
+            if '```yaml' in appendix_content:
+                yaml_start = appendix_content.find('```yaml') + 7
+                yaml_end = appendix_content.rfind('```')
+                yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
+                
+                import yaml
+                config = yaml.safe_load(yaml_content)
+                
+                # Extract display info
+                name = config.get('metadata', {}).get('experiment_name', 'Unknown')
+                framework = config.get('components', {}).get('framework', 'Unknown')
+                corpus = config.get('components', {}).get('corpus', 'Unknown')
+            else:
+                name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
+        
+        # Legacy v7.3 frontmatter (for backward compatibility display only)
+        elif content.startswith('---'):
+            parts = content.split('---', 2)
+            if len(parts) >= 3:
+                yaml_content = parts[1]
+                import yaml
+                config = yaml.safe_load(yaml_content)
+                name = config.get('name', 'Unknown')
+                framework = config.get('framework', 'Unknown')
+                corpus = config.get('corpus', 'Unknown')
+            else:
+                name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
+        else:
+            name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
+        
+        # Count corpus files for display
+        corpus_path = experiment_path / "corpus"
+        if corpus_path.exists():
+            corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
+            corpus_count = len(corpus_files)
+        else:
+            corpus_count = 0
+        
+        return {
+            'name': name,
+            'framework': framework,
+            'corpus': corpus,
+            '_corpus_file_count': corpus_count
+        }
+        
+    except Exception as e:
+        return {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'Unknown', '_corpus_file_count': 0}
+
+
 def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dict[str, Any]]:
     """Perform a basic structural check on the experiment directory."""
     if not experiment_path.exists() or not experiment_path.is_dir():
@@ -211,33 +294,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     else:
         rich_console.echo(f"🎯 Running: {experiment_path}")
     
-    # Load basic experiment info for display
-    try:
-        import yaml
-        with open(exp_path / "experiment.md", 'r') as f:
-            content = f.read()
-            # Extract YAML front matter
-            if content.startswith('---'):
-                parts = content.split('---', 2)
-                if len(parts) >= 3:
-                    yaml_content = parts[1]
-                    experiment = yaml.safe_load(yaml_content)
-                    if experiment is None:
-                        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
-                    else:
-                        # Count corpus files
-                        corpus_path = exp_path / "corpus"
-                        if corpus_path.exists():
-                            corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
-                            experiment['_corpus_file_count'] = len(corpus_files)
-                        else:
-                            experiment['_corpus_file_count'] = 0
-                else:
-                    experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
-            else:
-                experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
-    except Exception as e:
-        experiment = {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'corpus'}
+    # Load basic experiment info for display (v10 compatible)
+    experiment = _parse_experiment_for_display(exp_path)
     
     # The pipeline handles its own validation - just show basic info
     click.echo("🔬 Pipeline will handle validation during execution")
@@ -392,13 +450,20 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
         click.echo(f"📝 Using synthesis model: {synthesis_model}")
         click.echo(f"🔍 Debug level: {'verbose' if verbose else 'standard'}")
             
-        orchestrator = ThinOrchestrator(exp_path)
+        # Use CleanAnalysisOrchestrator for debug mode
+        orchestrator = CleanAnalysisOrchestrator(exp_path)
         
-        # Execute with debug parameters
+        # Enable test mode for debugging (no real LLM calls)
+        if verbose:
+            click.echo("🔧 Enabling test mode for safe debugging...")
+            orchestrator.enable_test_mode(mock_llm=True, performance_monitoring=True)
+        
+        # Execute with debug parameters (adapted for CleanAnalysisOrchestrator)
         result = orchestrator.run_experiment(
+            analysis_model="vertex_ai/gemini-2.5-flash",  # Use faster model for debug
             synthesis_model=synthesis_model,
-            debug_agent=agent,
-            debug_level='verbose' if verbose else 'debug'
+            validation_model="vertex_ai/gemini-2.5-flash",
+            skip_validation=True  # Skip validation in debug mode for speed
         )
         
         # Show completion
@@ -423,7 +488,7 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
                         calls = agent_costs.get('calls', 0)
                         click.echo(f"      • {agent}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
         
-    except ThinOrchestratorError as e:
+    except CleanAnalysisError as e:
         click.echo(f"❌ Debug execution failed: {e}")
         sys.exit(1)
     except Exception as e:
@@ -434,7 +499,8 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, help='Preview validation without executing coherence validation')
-def validate(experiment_path: str, dry_run: bool):
+@click.option('--strict', is_flag=True, help='Include comprehensive coherence validation (Stage 1 + Stage 2)')
+def validate(experiment_path: str, dry_run: bool, strict: bool):
     """Validate experiment structure and configuration. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -448,19 +514,66 @@ def validate(experiment_path: str, dry_run: bool):
         sys.exit(1)
     
     if dry_run:
-        click.echo(f"🔍 [DRY RUN] Would validate experiment: {experiment_path}")
+        mode_desc = "basic + coherence validation" if strict else "basic validation only"
+        click.echo(f"🔍 [DRY RUN] Would validate experiment: {experiment_path} ({mode_desc})")
         return
 
     click.echo(f"🔍 Validating experiment: {experiment_path}")
     
-    # Perform basic validation only at the CLI level
+    # Stage 1: Basic structural validation (always runs)
+    click.echo("📋 Stage 1: Basic structural validation...")
     valid, message, _ = validate_experiment_structure(exp_path)
-    click.echo(message)
+    click.echo(f"   {message}")
     
-    if valid:
-        click.echo("   💡 Full coherence and logical validation will be performed by the orchestrator when you run the experiment.")
+    if not valid:
+        click.echo("❌ Basic validation failed. Fix structural issues before proceeding.")
+        sys.exit(1)
+    
+    # Stage 2: Coherence validation (only if --strict)
+    if strict:
+        click.echo("🔬 Stage 2: Comprehensive coherence validation...")
+        try:
+            from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
+            
+            # Run coherence validation
+            coherence_agent = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-flash")
+            validation_result = coherence_agent.validate_experiment(exp_path)
+            
+            if validation_result.success:
+                click.echo("   ✅ Coherence validation passed")
+                if validation_result.suggestions:
+                    click.echo("   💡 Suggestions for improvement:")
+                    for suggestion in validation_result.suggestions[:3]:  # Show top 3
+                        click.echo(f"      • {suggestion}")
+            else:
+                click.echo("   ❌ Coherence validation failed")
+                
+                # Show blocking issues
+                blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
+                if blocking_issues:
+                    click.echo("   🚫 Blocking Issues:")
+                    for issue in blocking_issues:
+                        click.echo(f"      • {issue.description}")
+                        click.echo(f"        Fix: {issue.fix}")
+                
+                # Show quality issues
+                quality_issues = validation_result.get_issues_by_priority("QUALITY")
+                if quality_issues:
+                    click.echo("   ⚠️ Quality Issues:")
+                    for issue in quality_issues[:3]:  # Show top 3
+                        click.echo(f"      • {issue.description}")
+                
+                sys.exit(1)
+                
+        except Exception as e:
+            click.echo(f"   ⚠️ Coherence validation failed to run: {e}")
+            click.echo("   💡 Experiment may still be valid - coherence agent had technical issues")
+    
+    else:
+        click.echo("   💡 For comprehensive validation, use --strict flag")
+        click.echo("   💡 Full coherence validation will occur during experiment execution")
 
-    sys.exit(0 if valid else 1)
+    sys.exit(0)
 
 
 @cli.command()

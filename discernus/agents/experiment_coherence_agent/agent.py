@@ -264,14 +264,9 @@ class ExperimentCoherenceAgent:
             # Parse validation result
             result = self._parse_validation_response(raw_response)
             
-            # Combine LLM validation issues with statistical prerequisite issues
-            statistical_issues = self._validate_statistical_prerequisites(
-                experiment_path,
-                experiment_spec,
-                corpus_dict
-            )
-            all_issues = statistical_issues + result.issues
-            blocking_statistical_issues = [issue for issue in statistical_issues if issue.priority == "BLOCKING"]
+            # Use LLM validation results only (THIN approach - let LLM handle statistical validation)
+            all_issues = result.issues
+            blocking_statistical_issues = []
             combined_result = ValidationResult(
                 success=result.success and len(blocking_statistical_issues) == 0,
                 issues=all_issues,

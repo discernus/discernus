@@ -27,7 +27,8 @@ date_range: "1963-2025"
 description: "Diverse political speeches for testing CAF dimensional analysis"
 
 documents:
-  - filename: "john_lewis_1963_march_on_washington_ab348df3.txt"
+  - document_id: "john_lewis_1963_march"
+    filename: "john_lewis_1963_march_on_washington_ab348df3.txt"
     speaker: "John Lewis"
     year: 1963
     party: "Democratic"
@@ -35,7 +36,8 @@ documents:
     type: "protest_speech"
     context: "March on Washington for Jobs and Freedom"
     
-  - filename: "john_mccain_2008_concession_ff9b26f2.txt"
+  - document_id: "john_mccain_2008_concession"
+    filename: "john_mccain_2008_concession_ff9b26f2.txt"
     speaker: "John McCain"
     year: 2008
     party: "Republican"
@@ -43,7 +45,8 @@ documents:
     type: "concession_speech"
     context: "2008 presidential election concession"
     
-  - filename: "steve_king_2017_house_floor_738780d9.txt"
+  - document_id: "steve_king_2017_immigration"
+    filename: "steve_king_2017_house_floor_738780d9.txt"
     speaker: "Steve King"
     year: 2017
     party: "Republican"
@@ -51,7 +54,8 @@ documents:
     type: "floor_speech"
     context: "House floor speech on immigration"
     
-  - filename: "cory_booker_2018_first_step_act_0c32812a.txt"
+  - document_id: "cory_booker_2018_first_step"
+    filename: "cory_booker_2018_first_step_act_0c32812a.txt"
     speaker: "Cory Booker"
     year: 2018
     party: "Democratic"
@@ -59,7 +63,8 @@ documents:
     type: "policy_speech"
     context: "First Step Act criminal justice reform"
     
-  - filename: "mitt_romney_2020_impeachment_9ebec73f.txt"
+  - document_id: "mitt_romney_2020_impeachment"
+    filename: "mitt_romney_2020_impeachment_9ebec73f.txt"
     speaker: "Mitt Romney"
     year: 2020
     party: "Republican"
@@ -67,7 +72,8 @@ documents:
     type: "impeachment_speech"
     context: "Trump impeachment trial speech"
     
-  - filename: "jd_vance_2022_natcon_conference_516a3c9c.txt"
+  - document_id: "jd_vance_2022_natcon"
+    filename: "jd_vance_2022_natcon_conference_516a3c9c.txt"
     speaker: "JD Vance"
     year: 2022
     party: "Republican"
@@ -75,7 +81,8 @@ documents:
     type: "conference_speech"
     context: "National Conservatism Conference"
     
-  - filename: "bernie_sanders_2025_fighting_oligarchy_261b893a.txt"
+  - document_id: "bernie_sanders_2025_oligarchy"
+    filename: "bernie_sanders_2025_fighting_oligarchy_261b893a.txt"
     speaker: "Bernie Sanders"
     year: 2025
     party: "Independent"
@@ -83,7 +90,8 @@ documents:
     type: "policy_statement"
     context: "Economic justice and oligarchy critique"
     
-  - filename: "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt"
+  - document_id: "aoc_2025_oligarchy"
+    filename: "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt"
     speaker: "Alexandria Ocasio-Cortez"
     year: 2025
     party: "Democratic"
