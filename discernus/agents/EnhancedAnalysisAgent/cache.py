@@ -20,22 +20,22 @@ class AnalysisCache:
         self.audit = audit
         self.agent_name = agent_name
 
-    def check_cache(self, batch_id: str) -> Optional[Dict[str, Any]]:
+    def check_cache(self, analysis_id: str) -> Optional[Dict[str, Any]]:
         """Check if an analysis result is already cached."""
         for artifact_hash, artifact_info in self.storage.registry.items():
             metadata = artifact_info.get("metadata", {})
             if (metadata.get("artifact_type") == "analysis_result" and
-                    metadata.get("batch_id") == batch_id):
+                    metadata.get("analysis_id") == analysis_id):
 
-                print(f"💾 Cache hit for analysis: {batch_id}")
+                print(f"💾 Cache hit for analysis: {analysis_id}")
                 self.audit.log_agent_event(
                     self.agent_name, "cache_hit",
-                    {"batch_id": batch_id, "cached_artifact_hash": artifact_hash}
+                    {"analysis_id": analysis_id, "cached_artifact_hash": artifact_hash}
                 )
                 cached_content = self.storage.get_artifact(artifact_hash)
                 return json.loads(cached_content.decode('utf-8'))
         
-        print(f"🔍 No cache hit for {batch_id} - will perform analysis...")
+        print(f"🔍 No cache hit for {analysis_id} - will perform analysis...")
         return None
 
 

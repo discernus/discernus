@@ -1,0 +1,139 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Inferred Economic/Political Discourse Framework",
+    "framework_version": "1.0-inferred",
+    "analyst_confidence": 0.7,
+    "analysis_notes": "The analytical framework's 'dimension_groups' and 'analysis_prompt' content were not provided in the input. Dimensions have been inferred directly from the highly salient themes present in the document. Confidence in the analysis is based on the application of these inferred dimensions, not on their correctness relative to a missing defined framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimensional_scores": {
+        "Economic Inequality": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "Corporate/Elite Power (Oligarchy)": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "Threat to Social Programs": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "Public Discontent/Anger": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "Political Corruption/Influence": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "Call for Collective Action/Empowerment": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "Moral Critique of Elites": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Economic Inequality",
+          "quote_text": "all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+          "confidence": 1.0,
+          "context_type": "Direct Statement"
+        },
+        {
+          "dimension": "Economic Inequality",
+          "quote_text": "real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.",
+          "confidence": 1.0,
+          "context_type": "Statistical Evidence/Comparison"
+        },
+        {
+          "dimension": "Corporate/Elite Power (Oligarchy)",
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "confidence": 1.0,
+          "context_type": "Core Argument"
+        },
+        {
+          "dimension": "Corporate/Elite Power (Oligarchy)",
+          "quote_text": "Today you've got three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "confidence": 1.0,
+          "context_type": "Specific Example/Statistic"
+        },
+        {
+          "dimension": "Threat to Social Programs",
+          "quote_text": "making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education",
+          "confidence": 1.0,
+          "context_type": "Specific Policy Critique"
+        },
+        {
+          "dimension": "Threat to Social Programs",
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "confidence": 1.0,
+          "context_type": "Consequential Claim"
+        },
+        {
+          "dimension": "Public Discontent/Anger",
+          "quote_text": "The American people are outraged at what's going on",
+          "confidence": 1.0,
+          "context_type": "Emotional State Description"
+        },
+        {
+          "dimension": "Public Discontent/Anger",
+          "quote_text": "You know why the American people are angry and they are angry all over this country?",
+          "confidence": 1.0,
+          "context_type": "Rhetorical Question"
+        },
+        {
+          "dimension": "Political Corruption/Influence",
+          "quote_text": "Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 1.0,
+          "context_type": "Analogy/Critique"
+        },
+        {
+          "dimension": "Political Corruption/Influence",
+          "quote_text": "the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.",
+          "confidence": 1.0,
+          "context_type": "Specific Allegation"
+        },
+        {
+          "dimension": "Call for Collective Action/Empowerment",
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.9,
+          "context_type": "Concluding Call to Action"
+        },
+        {
+          "dimension": "Call for Collective Action/Empowerment",
+          "quote_text": "99% is a hell of a lot larger number than 1%.",
+          "confidence": 0.9,
+          "context_type": "Empowerment Argument"
+        },
+        {
+          "dimension": "Moral Critique of Elites",
+          "quote_text": "the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "confidence": 1.0,
+          "context_type": "Figurative Language/Strong Critique"
+        },
+        {
+          "dimension": "Moral Critique of Elites",
+          "quote_text": "These guys have no sense of what goes on in the real world. They live in another planet.",
+          "confidence": 1.0,
+          "context_type": "Character Assessment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,21 @@
+{
+  "filename": "full_speech_donald_trump_holds_rally_in_savannah_g_2024_09_24_XCogFRCw.txt",
+  "document_id": "full_speech_donald_trump_holds_rally_in_savannah_g_2024_09_24_XCogFRCw",
+  "metadata": {
+    "title": "FULL SPEECH: Donald Trump holds rally in Savannah, GA | LiveNOW from FOX",
+    "speaker": "Donald Trump",
+    "date": "2024-09-24",
+    "channel": "LiveNOW from FOX",
+    "url": "https://www.youtube.com/watch?v=XCogFRCwa18",
+    "view_count": 1796534,
+    "category": "Political Speech"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 76.33844984426987,
+    "transcript_length_chars": 71692,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T11:54:21.519959"
+  }
+}

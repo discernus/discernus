@@ -340,11 +340,11 @@ class CleanAnalysisOrchestrator:
         experiment_file = self.experiment_path / "experiment.md"
         if not experiment_file.exists():
             raise CleanAnalysisError(f"Experiment file not found: {experiment_file}")
-        
-        # Parse experiment.md to extract v10.0 machine-readable appendix
+
         try:
             content = experiment_file.read_text(encoding='utf-8')
-            
+            yaml_content = ""
+
             # Try v10.0 delimited format first (# --- Start/End --- pattern)
             if '# --- Start of Machine-Readable Appendix ---' in content:
                 start_marker = '# --- Start of Machine-Readable Appendix ---'
@@ -353,35 +353,26 @@ class CleanAnalysisOrchestrator:
                 start_idx = content.find(start_marker) + len(start_marker)
                 end_idx = content.find(end_marker)
                 
-                if end_idx > start_idx:
-                    yaml_content = content[start_idx:end_idx].strip()
-                else:
-                    # No end marker found, take everything after start
-                    yaml_content = content[start_idx:].strip()
-                
-                config = yaml.safe_load(yaml_content)
-                if not isinstance(config, dict):
-                    raise CleanAnalysisError("Invalid YAML structure in machine-readable appendix.")
-            
-            # Try v10.0 Configuration Appendix format (## Configuration Appendix)
-            elif '## Configuration Appendix' in content:
-                _, appendix_content = content.split('## Configuration Appendix', 1)
-                # Isolate the YAML block from markdown fences
+                appendix_content = content[start_idx:end_idx].strip() if end_idx > start_idx else content[start_idx:].strip()
+
                 if '```yaml' in appendix_content:
                     yaml_start = appendix_content.find('```yaml') + 7
                     yaml_end = appendix_content.rfind('```')
-                    if yaml_end > yaml_start:
-                        yaml_content = appendix_content[yaml_start:yaml_end].strip()
-                    else: # No closing fence found
-                        yaml_content = appendix_content[yaml_start:].strip()
-                else: # No yaml fence, assume raw content
-                    yaml_content = appendix_content.strip()
+                    yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
+                else:
+                    yaml_content = appendix_content
 
-                config = yaml.safe_load(yaml_content)
-                if not isinstance(config, dict):
-                    raise CleanAnalysisError("Invalid YAML structure in experiment appendix.")
+            # Try v10.0 Configuration Appendix format (## Configuration Appendix)
+            elif '## Configuration Appendix' in content:
+                _, appendix_content = content.split('## Configuration Appendix', 1)
+                if '```yaml' in appendix_content:
+                    yaml_start = appendix_content.find('```yaml') + 7
+                    yaml_end = appendix_content.rfind('```')
+                    yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
+                else:
+                    yaml_content = appendix_content.strip()
             
-            # Reject v7.3 frontmatter format with helpful error
+            # Reject v7.3 frontmatter format
             elif content.startswith('---'):
                 raise CleanAnalysisError(
                     "This experiment uses v7.3 frontmatter format. "
@@ -394,7 +385,14 @@ class CleanAnalysisOrchestrator:
                     "Could not find v10.0 machine-readable appendix in experiment.md. "
                     "Expected either '# --- Start of Machine-Readable Appendix ---' or '## Configuration Appendix'."
                 )
-        
+
+            if not yaml_content:
+                raise CleanAnalysisError("YAML content is empty in the machine-readable appendix.")
+
+            config = yaml.safe_load(yaml_content)
+            if not isinstance(config, dict):
+                raise CleanAnalysisError("Invalid YAML structure in machine-readable appendix.")
+
         except yaml.YAMLError as e:
             raise CleanAnalysisError(f"Failed to parse experiment.md YAML: {e}")
         except Exception as e:
@@ -414,13 +412,18 @@ class CleanAnalysisOrchestrator:
         if not str(spec_version).startswith('10.'):
             raise CleanAnalysisError(f"Experiment spec_version is '{spec_version}', but CleanAnalysisOrchestrator requires v10.0.")
         
-        # Validate required component fields
+        # Validate required component fields and add to config
         components = config.get('components', {})
-        if not components.get('framework'):
+        framework_file = components.get('framework')
+        if not framework_file:
             raise CleanAnalysisError("Missing required field: components.framework")
         
-        if not components.get('corpus'):
+        corpus_file = components.get('corpus')
+        if not corpus_file:
             raise CleanAnalysisError("Missing required field: components.corpus")
+            
+        config['framework'] = framework_file
+        config['corpus'] = corpus_file
         
         return config
     
@@ -519,7 +522,6 @@ class CleanAnalysisOrchestrator:
         
         # Initialize analysis agent
         analysis_agent = EnhancedAnalysisAgent(
-            model=analysis_model,
             security_boundary=self.security,
             audit_logger=audit_logger,
             artifact_storage=self.artifact_storage
@@ -533,36 +535,38 @@ class CleanAnalysisOrchestrator:
             try:
                 # Check if we already have cached results for this document
                 doc_hash = prepared_doc.get('document_id', '')
-                cached_result = self.artifact_storage.get_artifact(f"analysis_result_{doc_hash}")
-                
+                cached_result = None
+                try:
+                    cached_result = self.artifact_storage.get_artifact(f"analysis_result_{doc_hash}")
+                except Exception:
+                    cached_result = None # Artifact not found
+
                 if cached_result:
                     self._log_progress(f"✅ Using cached analysis for: {prepared_doc.get('filename', 'Unknown')}")
                     self.performance_metrics["cache_hits"] += 1
                     analysis_results.append(cached_result)
                     continue
                 else:
+                    self._log_progress(f"🔍 No cache hit for: {prepared_doc.get('filename', 'Unknown')} - running analysis...")
                     self.performance_metrics["cache_misses"] += 1
                 
                 # Analyze single document
-                result = analysis_agent.analyze_batch(
+                result = analysis_agent.analyze_documents(
                     corpus_documents=[prepared_doc],
                     framework_content=self.config.get('framework', ''),
-                    questions=self.config.get('questions', [])
+                    experiment_config=self.config,
+                    model=analysis_model
                 )
                 
-                if result and 'analysis_data' in result:
-                    # Store individual analysis result
-                    analysis_data = result['analysis_data']
-                    result_hash = self.artifact_storage.put_artifact(
-                        f"analysis_result_{doc_hash}",
-                        analysis_data
-                    )
+                if result and 'analysis_result' in result:
+                    # Extract analysis result from agent response
+                    analysis_result = result['analysis_result']
                     
-                    # Store the full result including raw_analysis_response
+                    # Store the full result including metadata from agent
                     full_result = {
-                        'analysis_data': analysis_data,
-                        'raw_analysis_response': result.get('raw_analysis_response', ''),
-                        'result_hash': result_hash,
+                        'analysis_result': analysis_result,
+                        'scores_hash': result.get('scores_hash', ''),
+                        'evidence_hash': result.get('evidence_hash', ''),
                         'document_id': doc_hash,
                         'filename': prepared_doc.get('filename', 'Unknown')
                     }

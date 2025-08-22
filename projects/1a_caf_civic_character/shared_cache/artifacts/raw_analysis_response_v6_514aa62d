@@ -1,0 +1,152 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Authority and Identity",
+    "framework_version": "1.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the speaker's rhetorical strategies for constructing his own authority and defining ingroup/outgroup identities. The central narrative is a populist appeal, contrasting a virtuous, nationalistic ingroup of 'the American people' with a detached, self-interested 'elite' outgroup. The speaker heavily relies on personal biography and shared heritage to establish authority and build a connection with the audience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63",
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimensional_scores": {
+        "AC_Personal_Experience": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "AC_Moral_Superiority": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "AC_Expertise": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 1.0
+        },
+        "AC_Association": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "ICI_Shared_Values": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "ICI_Shared_Struggle": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "ICI_Shared_Heritage": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "ICI_Virtuous_Character": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "ICO_Threat_to_Values": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "ICO_Elite_Status": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "ICO_Malicious_Intent": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "ICO_Foreignness": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "AC_Personal_Experience",
+          "quote_text": "But in that cemetery, in that cemetery, there are people who were born around the time of the American Civil War. And if, as I hope, my, my wife and I eventually are laid to rest there and our kids follow us, there will be seven generations just in that small mountain cemetery plot in Eastern Kentucky.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "AC_Moral_Superiority",
+          "quote_text": "But my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "AC_Expertise",
+          "quote_text": "But in the last four years, thanks to Joe Biden's open border policies, the City of Springfield has gone from 55,000 residents to 75,000 residents. The 20,000 resident Delta is almost all recent Haitian immigrants.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "AC_Association",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump. And that, and that, and I remember in 2019, when I came to speak of this conference, and as you all know, um, and of course Trump knows because he has a memory like a steel trap.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICI_Shared_Values",
+          "quote_text": "We're doing that and the very, very basic and simple principle that American leaders should look out for Americans.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICI_Shared_Struggle",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICI_Shared_Heritage",
+          "quote_text": "But America is not just an idea. Though we were founded on great ideas, America is a nation. It is a group of people with a common history and a common future.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICI_Virtuous_Character",
+          "quote_text": "Go to Breathitt County, Kentucky, and tell me that these are privileged people. They are very hardworking people and they're very good people. And they are people who love this country not because it's a good idea, but because in their bones they know that this is their home and it will be their children's home and they would die fighting to protect it.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICO_Threat_to_Values",
+          "quote_text": "This is like a fundamental broken translation function in our, in our sacred democracy that our elites don't seem to care about.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICO_Elite_Status",
+          "quote_text": "this, one of the things that we consistently find, uh, from the, you know, the UK elites to certainly the American elites, is they seem to really not like their own fellow citizens, even though the wars that they want are going to be, of course, fought by the people in the heartland and not by the people who are walking down the streets of Washington D.C.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICO_Malicious_Intent",
+          "quote_text": "And why don't our elites seem to care about it? Well, number one, they really benefit from the cheap labor. Okay? Number two, they actually don't really like the people who make up the domestic populations of their own country.",
+          "confidence": 1.0,
+          "context_type": "Political Speech"
+        },
+        {
+          "dimension": "ICO_Foreignness",
+          "quote_text": "It would be, you, the, the equivalent of allowing the Nazi Germans in 1942 to make all of our ships and missiles. People recognize that that era has come to a close.",
+          "confidence": 0.9,
+          "context_type": "Political Speech"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

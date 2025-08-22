@@ -1,26 +1,21 @@
 {
-  "video_info": {
-    "video_id": "D4IdhXexLko",
+  "filename": "live_donald_trump_hosts_maga_rally_in_montana_2024_08_10_D4IdhXex.txt",
+  "document_id": "live_donald_trump_hosts_maga_rally_in_montana_2024_08_10_D4IdhXex",
+  "metadata": {
     "title": "LIVE: Donald Trump hosts MAGA rally in Montana",
+    "speaker": "Donald Trump",
+    "date": "2024-08-10",
     "channel": "Times News",
-    "upload_date": "2024-08-10",
-    "description": "Republican presidential nominee Donald Trump holds a rally in Bozeman, Montana.\n\nTrump claimed that the Biden administration had brought America to the brink of another Great Depression and “World War Three” yesterday, as he challenged Kamala Harris to three presidential debates next month.\n\nThe former president, in a press conference from his residence in Mar-a-Lago, warned that “our country right now is in the most dangerous period it has ever been in” from an “economic standpoint and a safety standpoint”.\n\nRead the best of our journalism: https://www.thetimes.com/\nSubscribe to The Times and The Sunday Times YouTube channel: https://www.youtube.com/subscription_center?add_user=timesonlinevideo\nFind us on Facebook: https://www.facebook.com/timesandsundaytimes/\nFind us on Twitter: https://twitter.com/thetimes\nFind us on Instagram: https://www.instagram.com/thetimes/\n\n#livestream #trump #maga #montana",
-    "duration": 5868,
+    "url": "https://www.youtube.com/watch?v=D4IdhXexLko",
     "view_count": 1582160,
-    "like_count": 23991,
-    "url": "https://www.youtube.com/watch?v=D4IdhXexLko"
+    "category": "Political Speech"
   },
   "extraction_info": {
-    "method": "youtube_api",
-    "language": "en (auto-generated)",
-    "confidence": 80.0,
-    "success": true,
-    "transcript_length": 81199,
-    "whisper_model": null
-  },
-  "processing_metadata": {
-    "transcript_length": 81199,
-    "extraction_date": "2025-08-22T09:49:24.633768",
-    "source": "youtube_transcript_api"
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 75.57064333565116,
+    "transcript_length_chars": 83075,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T13:19:24.456442"
   }
 }

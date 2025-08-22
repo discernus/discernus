@@ -1,29 +1,21 @@
 {
-  "video_info": {
-    "video_id": "GYnvNd77o3Y",
+  "filename": "donald_trump_holds_town_hall_in_la_crosse_wi_aug_2_2024_08_30_GYnvNd77.txt",
+  "document_id": "donald_trump_holds_town_hall_in_la_crosse_wi_aug_2_2024_08_30_GYnvNd77",
+  "metadata": {
     "title": "Donald Trump holds town hall in La Crosse, WI (Aug. 29, 2024)",
+    "speaker": "Donald Trump",
+    "date": "2024-08-30",
     "channel": "WFAA",
-    "upload_date": "2024-08-30",
-    "description": "Former President Donald Trump is on the campaign trail in the Midwest. He held a town hall in La Crosse, Wisconsin.",
-    "duration": 2022,
+    "url": "https://www.youtube.com/watch?v=GYnvNd77o3Y",
     "view_count": 42412,
-    "like_count": 552,
-    "url": "https://www.youtube.com/watch?v=GYnvNd77o3Y"
+    "category": "Political Speech"
   },
   "extraction_info": {
     "method": "whisper",
     "language": "en (whisper)",
-    "confidence": 77.32999644021335,
-    "success": true,
-    "transcript_length": 29755,
-    "whisper_model": "base"
-  },
-  "processing_metadata": {
-    "transcript_length": 29755,
-    "extraction_date": "2025-08-22T09:58:50.945607",
-    "source": "openai_whisper",
-    "model": "base",
-    "detected_language": "en",
-    "segments": 485
+    "confidence": 77.33404168938891,
+    "transcript_length_chars": 29749,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T12:01:02.878740"
   }
 }

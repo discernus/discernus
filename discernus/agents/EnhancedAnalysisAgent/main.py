@@ -57,25 +57,25 @@ class EnhancedAnalysisAgent:
         with open(prompt_path, 'r') as f:
             return yaml.safe_load(f)['template']
 
-    def analyze_batch(self,
-                     framework_content: str,
-                     corpus_documents: List[Dict[str, Any]],
-                     experiment_config: Dict[str, Any],
-                     model: str = "vertex_ai/gemini-2.5-flash",
-                     current_scores_hash: Optional[str] = None,
-                     current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
-        """Performs enhanced batch analysis of documents."""
+    def analyze_documents(self,
+                         framework_content: str,
+                         corpus_documents: List[Dict[str, Any]],
+                         experiment_config: Dict[str, Any],
+                         model: str = "vertex_ai/gemini-2.5-flash",
+                         current_scores_hash: Optional[str] = None,
+                         current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
+        """Performs enhanced analysis of documents (individual or multiple)."""
         start_time = datetime.now(timezone.utc).isoformat()
         framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
         corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
         doc_content_hash = hashlib.sha256(corpus_content.encode()).hexdigest()[:16]
-        batch_id = f"batch_{hashlib.sha256(f'{framework_content}{doc_content_hash}{model}'.encode()).hexdigest()[:12]}"
+        analysis_id = f"analysis_{hashlib.sha256(f'{framework_content}{doc_content_hash}{model}'.encode()).hexdigest()[:12]}"
 
-        self.audit.log_agent_event(self.agent_name, "batch_analysis_start", {
-            "batch_id": batch_id, "num_documents": len(corpus_documents), "model": model
+        self.audit.log_agent_event(self.agent_name, "document_analysis_start", {
+            "analysis_id": analysis_id, "num_documents": len(corpus_documents), "model": model
         })
 
-        cached_result = self.cache.check_cache(batch_id)
+        cached_result = self.cache.check_cache(analysis_id)
         if cached_result:
             document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
             new_scores_hash, new_evidence_hash = process_json_response(
@@ -83,21 +83,21 @@ class EnhancedAnalysisAgent:
                 document_hashes,
                 self.storage, self.audit, self.agent_name, {}
             )
-            # BUGFIX: Include result_hash for cache hits to match counting logic expectations
+            # Include result_hash for cache hits to match counting logic expectations
             result_hash = self.storage.put_artifact(
                 json.dumps(cached_result, indent=2).encode('utf-8'),
-                {"artifact_type": "analysis_result", "batch_id": batch_id, "cached": True}
+                {"artifact_type": "analysis_result", "analysis_id": analysis_id, "cached": True}
             )
             return {
-                "analysis_result": {"batch_id": batch_id, "result_hash": result_hash, "result_content": cached_result, "cached": True},
+                "analysis_result": {"analysis_id": analysis_id, "result_hash": result_hash, "result_content": cached_result, "cached": True},
                 "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
             }
 
-        documents, document_hashes = self._prepare_documents(corpus_documents, batch_id)
-        prompt_text = create_analysis_prompt(self.prompt_template, batch_id, framework_content, documents)
+        documents, document_hashes = self._prepare_documents(corpus_documents, analysis_id)
+        prompt_text = create_analysis_prompt(self.prompt_template, analysis_id, framework_content, documents)
         self.audit.log_agent_event(self.agent_name, "prompt_prepared", {"prompt_length": len(prompt_text)})
 
-        response = self._execute_llm_call(model, prompt_text, batch_id)
+        response = self._execute_llm_call(model, prompt_text, analysis_id)
         result_content = response.choices[0].message.content
 
         analysis_provenance = {"framework_hash": framework_hash}
@@ -107,26 +107,26 @@ class EnhancedAnalysisAgent:
 
         duration = self._calculate_duration(start_time, datetime.now(timezone.utc).isoformat())
         enhanced_result = self._create_enhanced_result(
-            batch_id, model, result_content, new_evidence_hash, start_time, duration,
+            analysis_id, model, result_content, new_evidence_hash, start_time, duration,
             framework_hash, document_hashes, experiment_config
         )
         result_hash = self.storage.put_artifact(
             json.dumps(enhanced_result, indent=2).encode('utf-8'),
-            {"artifact_type": "analysis_result", "batch_id": batch_id}
+            {"artifact_type": "analysis_result", "analysis_id": analysis_id}
         )
 
         return {
-            "analysis_result": {"batch_id": batch_id, "result_hash": result_hash, "duration_seconds": duration},
+            "analysis_result": {"analysis_id": analysis_id, "result_hash": result_hash, "duration_seconds": duration},
             "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
         }
 
-    def _prepare_documents(self, corpus_documents: List[Dict[str, Any]], batch_id: str) -> tuple[List[Dict[str, Any]], List[str]]:
+    def _prepare_documents(self, corpus_documents: List[Dict[str, Any]], analysis_id: str) -> tuple[List[Dict[str, Any]], List[str]]:
         """Prepares documents for analysis and returns them along with their hashes."""
         documents, document_hashes = [], []
         for i, doc in enumerate(corpus_documents):
             content_bytes = doc['content'] if isinstance(doc.get('content'), bytes) else str(doc.get('content', '')).encode('utf-8')
             doc_hash = self.storage.put_artifact(content_bytes, {
-                "artifact_type": "corpus_document", "original_filename": doc.get('filename', f'doc_{i+1}'), "batch_id": batch_id
+                "artifact_type": "corpus_document", "original_filename": doc.get('filename', f'doc_{i+1}'), "analysis_id": analysis_id
             })
             documents.append({
                 'index': i + 1, 'hash': doc_hash, 'content': base64.b64encode(content_bytes).decode('utf-8'),
@@ -135,9 +135,9 @@ class EnhancedAnalysisAgent:
             document_hashes.append(doc_hash)
         return documents, document_hashes
 
-    def _execute_llm_call(self, model: str, prompt_text: str, batch_id: str) -> Any:
+    def _execute_llm_call(self, model: str, prompt_text: str, analysis_id: str) -> Any:
         """Executes the LLM call and handles the response."""
-        self.audit.log_agent_event(self.agent_name, "llm_call_start", {"batch_id": batch_id, "model": model})
+        self.audit.log_agent_event(self.agent_name, "llm_call_start", {"analysis_id": analysis_id, "model": model})
         
         # Use LLMGateway for proper cost tracking instead of calling litellm directly
         from ...gateway.llm_gateway import LLMGateway
@@ -151,7 +151,7 @@ class EnhancedAnalysisAgent:
             with perf_timer("llm_call", 
                            model=model, 
                            agent="EnhancedAnalysisAgent",
-                           batch_id=batch_id):
+                           analysis_id=analysis_id):
                 response_content, metadata = gateway.execute_call(
                     model=model, 
                     prompt=prompt_text, 
@@ -167,9 +167,9 @@ class EnhancedAnalysisAgent:
                 prompt=prompt_text,
                 response=response_content,
                 agent_name=self.agent_name,
-                interaction_type="batch_analysis",
+                interaction_type="document_analysis",
                 metadata={
-                    "batch_id": batch_id,
+                    "analysis_id": analysis_id,
                     "system_prompt": system_prompt,
                     **metadata
                 }
@@ -215,10 +215,10 @@ class EnhancedAnalysisAgent:
 
 
 
-    def _create_enhanced_result(self, batch_id, model, analysis_data, evidence_hash, start_time, duration, framework_hash, document_hashes, experiment_config):
+    def _create_enhanced_result(self, analysis_id, model, analysis_data, evidence_hash, start_time, duration, framework_hash, document_hashes, experiment_config):
         """Creates the final enhanced result dictionary."""
         return {
-            "batch_id": batch_id,
+            "analysis_id": analysis_id,
             "agent_name": self.agent_name,
             "agent_version": "enhanced_v2.1_raw_output",
             "experiment_name": experiment_config.get("name", "unknown"),

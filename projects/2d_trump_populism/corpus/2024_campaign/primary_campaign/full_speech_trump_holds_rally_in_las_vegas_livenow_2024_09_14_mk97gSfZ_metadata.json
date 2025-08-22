@@ -1,29 +1,21 @@
 {
-  "video_info": {
-    "video_id": "mk97gSfZiDg",
+  "filename": "full_speech_trump_holds_rally_in_las_vegas_livenow_2024_09_14_mk97gSfZ.txt",
+  "document_id": "full_speech_trump_holds_rally_in_las_vegas_livenow_2024_09_14_mk97gSfZ",
+  "metadata": {
     "title": "FULL SPEECH: Trump holds rally in Las Vegas | LiveNOW from FOX",
+    "speaker": "Donald Trump",
+    "date": "2024-09-14",
     "channel": "LiveNOW from FOX",
-    "upload_date": "2024-09-14",
-    "description": "Former President Trump held a campaign rally in Las Vegas, Nevada on Friday night, just days after Tuesday's debate against Vice President Kamala Harris. The event was held at the Expo World Market Center. Other speakers included Tulsi Gabbard, a member of Trump's transition team, and Sam Brown, a Senate candidate in Nevada. It comes after Trump held a news conference earlier Friday in California where he slammed Harris on illegal immigration and crime. Meantime on Saturday, Gabbard and Robert F. Kennedy Jr. are slated to hold a Trump campaign event in Glendale, Arizona.\n\nSubscribe to LiveNOW from FOX! https://www.youtube.com/livenowfox?sub_confirmation=1\nWhere to watch LiveNOW from FOX: https://www.livenowfox.com/\nFollow us @LiveNOWFOX on Twitter: https://twitter.com/livenowfox\n\nRaw and unfiltered. Watch a non-stop stream of breaking news, live events and stories across the nation. Limited commentary. No opinion. Experience LiveNOW from FOX.",
-    "duration": 4847,
+    "url": "https://www.youtube.com/watch?v=mk97gSfZiDg",
     "view_count": 964706,
-    "like_count": 11708,
-    "url": "https://www.youtube.com/watch?v=mk97gSfZiDg"
+    "category": "Political Speech"
   },
   "extraction_info": {
     "method": "whisper",
     "language": "en (whisper)",
-    "confidence": 75.14002945220334,
-    "success": true,
-    "transcript_length": 33986,
-    "whisper_model": "base"
-  },
-  "processing_metadata": {
-    "transcript_length": 33986,
-    "extraction_date": "2025-08-22T11:29:59.572533",
-    "source": "openai_whisper",
-    "model": "base",
-    "detected_language": "en",
-    "segments": 384
+    "confidence": 76.03519188375128,
+    "transcript_length_chars": 36068,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T12:10:44.871073"
   }
 }

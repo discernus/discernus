@@ -1,26 +1,21 @@
 {
-  "video_info": {
-    "video_id": "NY6oOhea7Tg",
+  "filename": "donald_trump_at_turning_point_usa_rally_in_phoenix_2024_06_06_NY6oOhea.txt",
+  "document_id": "donald_trump_at_turning_point_usa_rally_in_phoenix_2024_06_06_NY6oOhea",
+  "metadata": {
     "title": "🇺🇸 Donald Trump at Turning Point USA Rally in Phoenix, Arizona (June 6, 2024)",
+    "speaker": "Donald Trump",
+    "date": "2024-06-06",
     "channel": "MAGNO NEWS",
-    "upload_date": "2024-06-06",
-    "description": "#MAGNONEWS – Driven by Truth, Powered by Freedom, Fueled by Patriots. Sharp, independent, and unfiltered #BreakingNews delivered through live streams and exclusive videos. https://youtube.com/@MAGNONEWS | https://youtube.com/@MAGNONEWSLIVE | Website: https://magno.news | Merchandising: https://magnonews.com\n\n📹 Live streams and video content licensed by Reuters, Telemedia Press, public domain sources as federal and state official agencies, political and non-political organizations.\n\n© To reuse our content, request consent by email, to avoid automated copyright claims.\n\n#DonaldTrump #Trump2025 #WhiteHouse #PresidentTrump #TrumpLive #TrumpNews #DOGE #ElonMusk #JDVance #MarcoRubio #ScottBessent #PeteHegseth #PamBondi #DougBurgum #BrookeRollins #HowardLutnick #LoriChavezDeRemer #RFKJr #ScottTurner #SeanDuffy #ChrisWright #LindaMcMahon #DougCollins #KristiNoem #LeeZeldin #RussellVought #TulsiGabbard #JohnRatcliffe #JamiesonGreer #KellyLoeffler #SusieWiles",
-    "duration": 5266,
+    "url": "https://www.youtube.com/watch?v=NY6oOhea7Tg",
     "view_count": 38639,
-    "like_count": 1394,
-    "url": "https://www.youtube.com/watch?v=NY6oOhea7Tg"
+    "category": "Political Speech"
   },
   "extraction_info": {
-    "method": "youtube_api",
-    "language": "en",
-    "confidence": 100.0,
-    "success": true,
-    "transcript_length": 77724,
-    "whisper_model": null
-  },
-  "processing_metadata": {
-    "transcript_length": 77724,
-    "extraction_date": "2025-08-22T09:48:17.893565",
-    "source": "youtube_transcript_api"
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 76.35672840187101,
+    "transcript_length_chars": 76914,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T11:48:18.953401"
   }
 }

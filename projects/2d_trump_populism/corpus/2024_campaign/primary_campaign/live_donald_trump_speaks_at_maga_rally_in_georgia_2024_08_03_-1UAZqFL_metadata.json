@@ -1,26 +1,21 @@
 {
-  "video_info": {
-    "video_id": "-1UAZqFLVYI",
+  "filename": "live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL.txt",
+  "document_id": "live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL",
+  "metadata": {
     "title": "LIVE: Donald Trump speaks at MAGA rally in Georgia",
+    "speaker": "Donald Trump",
+    "date": "2024-08-03",
     "channel": "Times News",
-    "upload_date": "2024-08-03",
-    "description": "Republican presidential candidate Donald Trump and his running mate JD Vance hold a campaign rally in Atlanta, in the battleground state of Georgia.\n\nTrump labelled his Democratic rival for the presidency “phoney” and “crazy” as he held his first rally in Pennsylvania since the attempt on his life there last month.\n\nSpeaking to thousands of supporters at an indoor stadium in Harrisburg on Wednesday, the former president stepped up his personal attacks on Kamala Harris hours after he caused uproar with comments about her race.\n\nRead the best of our journalism: https://www.thetimes.com/\nSubscribe to The Times and The Sunday Times YouTube channel: https://www.youtube.com/subscription_center?add_user=timesonlinevideo\nFind us on Facebook: https://www.facebook.com/timesandsundaytimes/\nFind us on Twitter: https://twitter.com/thetimes\nFind us on Instagram: https://www.instagram.com/thetimes/\n\n#livestream #trump #maga #georgia",
-    "duration": 5426,
+    "url": "https://www.youtube.com/watch?v=-1UAZqFLVYI",
     "view_count": 309104,
-    "like_count": 5530,
-    "url": "https://www.youtube.com/watch?v=-1UAZqFLVYI"
+    "category": "Political Speech"
   },
   "extraction_info": {
-    "method": "youtube_api",
-    "language": "en (auto-generated)",
-    "confidence": 80.0,
-    "success": true,
-    "transcript_length": 71268,
-    "whisper_model": null
-  },
-  "processing_metadata": {
-    "transcript_length": 71268,
-    "extraction_date": "2025-08-22T09:49:19.187144",
-    "source": "youtube_transcript_api"
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 75.60856109774821,
+    "transcript_length_chars": 72492,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T11:53:05.243946"
   }
 }

@@ -266,9 +266,8 @@ class ExperimentCoherenceAgent:
             
             # Use LLM validation results only (THIN approach - let LLM handle statistical validation)
             all_issues = result.issues
-            blocking_statistical_issues = []
             combined_result = ValidationResult(
-                success=result.success and len(blocking_statistical_issues) == 0,
+                success=result.success,
                 issues=all_issues,
                 suggestions=result.suggestions
             )
@@ -280,9 +279,7 @@ class ExperimentCoherenceAgent:
                     "validation_complete",
                     {
                         "success": combined_result.success,
-                        "issues_count": len(combined_result.issues),
-                        "statistical_issues_count": len(statistical_issues),
-                        "blocking_statistical_issues": len(blocking_statistical_issues)
+                        "issues_count": len(combined_result.issues)
                     }
                 )
             

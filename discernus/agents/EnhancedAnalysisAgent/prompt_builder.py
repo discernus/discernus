@@ -24,7 +24,7 @@ def format_documents_for_prompt(documents: List[Dict]) -> str:
 
 def create_analysis_prompt(
     prompt_template: str,
-    batch_id: str,
+    analysis_id: str,
     framework_content: str,
     documents: List[Dict],
 ) -> str:
@@ -32,7 +32,7 @@ def create_analysis_prompt(
     framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
 
     return prompt_template.format(
-        batch_id=batch_id,
+        batch_id=analysis_id,
         frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
         documents=format_documents_for_prompt(documents),
         num_frameworks=1,

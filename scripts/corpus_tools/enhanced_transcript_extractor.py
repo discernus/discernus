@@ -316,6 +316,36 @@ class EnhancedTranscriptExtractor:
         
         return min(confidence, 100.0)
 
+def format_corpus_metadata(result: EnhancedTranscriptResult, filename: str) -> Dict[str, Any]:
+    """Formats the extraction result into the corpus metadata schema."""
+    if not result.success or not result.video_info:
+        return {}
+
+    video_info = result.video_info
+    
+    # Basic structure from the corpus specification
+    metadata = {
+        "filename": filename,
+        "document_id": Path(filename).stem,
+        "metadata": {
+            "title": video_info.title,
+            "speaker": "Donald Trump",  # Assuming for this project
+            "date": video_info.upload_date,
+            "channel": video_info.channel,
+            "url": video_info.url,
+            "view_count": video_info.view_count,
+            "category": "Political Speech", # Default category
+        },
+        "extraction_info": {
+            "method": result.extraction_method,
+            "language": result.language,
+            "confidence": result.confidence_score,
+            "transcript_length_chars": len(result.transcript_text) if result.transcript_text else 0,
+            "whisper_model_used": result.whisper_model_used,
+            "extracted_at": datetime.now().isoformat(),
+        }
+    }
+    return metadata
 
 def main():
     parser = argparse.ArgumentParser(
@@ -413,23 +443,13 @@ def main():
         
         # Save metadata if requested
         if not args.no_metadata:
-            metadata_file = args.output_dir / f"{filename.replace('.txt', '_metadata.json')}"
+            metadata_file = args.output_dir / f"{Path(filename).stem}_metadata.json"
             
-            full_metadata = {
-                "video_info": result.video_info.__dict__ if result.video_info else None,
-                "extraction_info": {
-                    "method": result.extraction_method,
-                    "language": result.language,
-                    "confidence": result.confidence_score,
-                    "success": result.success,
-                    "transcript_length": len(result.transcript_text) if result.transcript_text else 0,
-                    "whisper_model": result.whisper_model_used
-                },
-                "processing_metadata": result.metadata or {}
-            }
+            # Use the new formatting function
+            corpus_metadata = format_corpus_metadata(result, filename)
             
             with open(metadata_file, 'w', encoding='utf-8') as f:
-                json.dump(full_metadata, f, indent=2, ensure_ascii=False)
+                json.dump(corpus_metadata, f, indent=2, ensure_ascii=False)
             
             print(f"📊 Metadata saved: {metadata_file}")
         

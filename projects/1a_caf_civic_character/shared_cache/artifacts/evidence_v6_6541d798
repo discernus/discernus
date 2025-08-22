@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-22T15:56:38.964743+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "GrievanceExpression",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation.",
+      "confidence": 1.0,
+      "context_type": "Expression of specific economic and political injustices",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964727+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "UrgencyImmediacy",
+      "quote_text": "To those who have said, \"Be patient and wait,\" we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!",
+      "confidence": 1.0,
+      "context_type": "Direct rejection of gradualism and demand for immediate change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964730+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "ThreatFraming",
+      "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state. It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.",
+      "confidence": 1.0,
+      "context_type": "Description of state-sanctioned threats to citizens",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964732+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "CollectiveAction",
+      "quote_text": "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.",
+      "confidence": 1.0,
+      "context_type": "Direct call to action for mass mobilization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964733+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "InstitutionalChallenge",
+      "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+      "confidence": 1.0,
+      "context_type": "Direct critique of the political system and its actors",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964734+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "RevolutionaryAdvocacy",
+      "quote_text": "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South, through the streets of Jackson, through the streets of Danville, through the streets of Cambridge, through the streets of Birmingham.",
+      "confidence": 0.9,
+      "context_type": "Threat of escalating action to fundamentally disrupt the existing order",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964735+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "InGroupIdentity",
+      "quote_text": "We come here today with a great sense of misgiving. It is true that we support the administration's civil rights bill. We support it with great reservations, however.",
+      "confidence": 1.0,
+      "context_type": "Use of \"we\" to establish a collective stance and shared identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964736+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "OutGroupTargeting",
+      "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+      "confidence": 1.0,
+      "context_type": "Naming of specific political opponents as the out-group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964737+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "MoralPolarization",
+      "quote_text": "Where is our party? Where is the political party that will make it unnecessary to march on Washington?",
+      "confidence": 0.95,
+      "context_type": "Rhetorical questions positioning the movement as morally necessary due to political party failures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964738+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "HopeAppeal",
+      "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy. We must say: Wake up America! Wake up!",
+      "confidence": 0.9,
+      "context_type": "Vision of a reconstructed and democratic future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964739+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "FearAppeal",
+      "quote_text": "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?",
+      "confidence": 1.0,
+      "context_type": "Highlighting extreme danger faced by movement participants",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964740+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "AngerFrustration",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, \"Be patient.\" How long can we be patient?",
+      "confidence": 1.0,
+      "context_type": "Direct and repeated expression of exhaustion and frustration with injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T15:56:38.964741+00:00"
+    }
+  ]
+}

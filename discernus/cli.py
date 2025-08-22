@@ -378,7 +378,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         sys.exit(1)
     
     # Execute using THIN v2.0 orchestrator with direct function calls
-    rich_console.print_info("Initializing THIN v2.0 orchestrator with batch management...")
+    rich_console.print_info("Initializing THIN v2.0 orchestrator with document processing...")
     
     # Display experiment summary
     rich_console.print_experiment_summary(experiment)

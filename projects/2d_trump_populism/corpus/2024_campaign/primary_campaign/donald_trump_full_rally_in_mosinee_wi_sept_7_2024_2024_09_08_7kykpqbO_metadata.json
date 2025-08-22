@@ -1,29 +1,21 @@
 {
-  "video_info": {
-    "video_id": "7kykpqbOSjI",
+  "filename": "donald_trump_full_rally_in_mosinee_wi_sept_7_2024_2024_09_08_7kykpqbO.txt",
+  "document_id": "donald_trump_full_rally_in_mosinee_wi_sept_7_2024_2024_09_08_7kykpqbO",
+  "metadata": {
     "title": "Donald Trump full rally in Mosinee, WI (Sept. 7, 2024)",
+    "speaker": "Donald Trump",
+    "date": "2024-09-08",
     "channel": "WFAA",
-    "upload_date": "2024-09-08",
-    "description": "Former President Donald Trump delivered remarks at a campaign rally in Mosinee, Wisconsin, on September 7, 2024.",
-    "duration": 5959,
+    "url": "https://www.youtube.com/watch?v=7kykpqbOSjI",
     "view_count": 130963,
-    "like_count": 2238,
-    "url": "https://www.youtube.com/watch?v=7kykpqbOSjI"
+    "category": "Political Speech"
   },
   "extraction_info": {
     "method": "whisper",
     "language": "en (whisper)",
-    "confidence": 77.26222036820951,
-    "success": true,
-    "transcript_length": 85389,
-    "whisper_model": "base"
-  },
-  "processing_metadata": {
-    "transcript_length": 85389,
-    "extraction_date": "2025-08-22T10:39:09.954235",
-    "source": "openai_whisper",
-    "model": "base",
-    "detected_language": "en",
-    "segments": 442
+    "confidence": 77.00424994447076,
+    "transcript_length_chars": 85877,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T11:42:16.234565"
   }
 }

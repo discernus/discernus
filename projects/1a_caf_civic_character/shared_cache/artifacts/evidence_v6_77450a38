@@ -1,0 +1,203 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 19,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-22T16:00:43.253316+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Constitutionalism",
+      "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+      "confidence": 1.0,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253282+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Constitutionalism",
+      "quote_text": "While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution\u2019s requirement that the Senate, not the voters, try the president.",
+      "confidence": 1.0,
+      "context_type": "argumentative refutation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253293+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "CivicDuty",
+      "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+      "confidence": 1.0,
+      "context_type": "personal commitment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253294+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "CivicDuty",
+      "quote_text": "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+      "confidence": 1.0,
+      "context_type": "justification of action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253296+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "MoralityEthics",
+      "quote_text": "I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 1.0,
+      "context_type": "personal belief",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253297+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "MoralityEthics",
+      "quote_text": "While ignoring a conflict of interest is not a crime, it is surely very wrong.",
+      "confidence": 1.0,
+      "context_type": "moral judgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253298+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Partisanship",
+      "quote_text": "I knew from the outset that being tasked with judging the president, the leader of my own party, would be the most difficult decision I have ever faced.",
+      "confidence": 1.0,
+      "context_type": "acknowledgment of political pressure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253300+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Partisanship",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history\u2019s rebuke and the censure of my own conscience.",
+      "confidence": 1.0,
+      "context_type": "resistance to partisan pressure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253301+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Bipartisanship",
+      "quote_text": "We have arrived at different judgments, but I hope we respect each other's good faith.",
+      "confidence": 0.9,
+      "context_type": "brief acknowledgment of differing views",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253302+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Accountability",
+      "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+      "confidence": 1.0,
+      "context_type": "direct accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253304+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "Accountability",
+      "quote_text": "Accordingly, the president is guilty of an appalling abuse of public trust.",
+      "confidence": 1.0,
+      "context_type": "verdict statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253305+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "NationalInterest",
+      "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+      "confidence": 1.0,
+      "context_type": "statement of national harm",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253306+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "NationalInterest",
+      "quote_text": "I love our country. I believe that our Constitution was inspired by Providence. I\u2019m convinced that freedom itself is dependent on the strength and vitality of our national character.",
+      "confidence": 1.0,
+      "context_type": "patriotic sentiment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253307+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "RhetoricalAppeals",
+      "quote_text": "I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 1.0,
+      "context_type": "ethos establishment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253308+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "RhetoricalAppeals",
+      "quote_text": "The historic meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal.",
+      "confidence": 1.0,
+      "context_type": "logos through legal/historical reasoning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253309+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "FutureImplications",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history\u2019s rebuke and the censure of my own conscience.",
+      "confidence": 1.0,
+      "context_type": "personal fear of historical judgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253310+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "FutureImplications",
+      "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+      "confidence": 1.0,
+      "context_type": "legacy and future generations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253311+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "PublicOpinion",
+      "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution\u2019s requirement that the Senate, not the voters, try the president.",
+      "confidence": 1.0,
+      "context_type": "discussion of public's role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253312+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "PublicOpinion",
+      "quote_text": "I\u2019m aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced. I\u2019m sure to hear abuse from the president and his supporters.",
+      "confidence": 1.0,
+      "context_type": "anticipation of public backlash",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-22T16:00:43.253313+00:00"
+    }
+  ]
+}
