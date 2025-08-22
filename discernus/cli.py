@@ -276,10 +276,12 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             
         # Choose orchestrator based on user preference (default to clean)
         if use_legacy_orchestrator:
-            click.echo("🔬 Using Legacy Experiment Orchestrator (notebook-based - deprecated)")
+            click.echo("⚠️  Using Legacy Experiment Orchestrator (notebook-based - DEPRECATED)")
+            click.echo("⚠️  This orchestrator will be removed in future versions")
+            click.echo("🔬 Switch to Clean Analysis Orchestrator for better performance and reliability")
             orchestrator = ExperimentOrchestrator(experiment_path=Path(experiment_path))
         else:
-            click.echo("🔬 Using Clean Analysis Orchestrator (THIN architecture)")
+            click.echo("🔬 Using Clean Analysis Orchestrator (THIN architecture - RECOMMENDED)")
             orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path))
         
         # Execute experiment with status indication

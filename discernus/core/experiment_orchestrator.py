@@ -52,6 +52,9 @@ class ExperimentOrchestrator:
     """
     Clean orchestrator focused on notebook generation.
     
+    DEPRECATED: This orchestrator is deprecated and will be removed in future versions.
+    Use CleanAnalysisOrchestrator for better performance, reliability, and THIN architecture compliance.
+    
     Preserves the working analysis stage and adds clean agent execution
     without the complexity of legacy synthesis pipelines.
     """
@@ -66,6 +69,10 @@ class ExperimentOrchestrator:
         self.config = {}
         self.llm_gateway = None
         self.secure_code_executor = None
+        
+        # Deprecation warning
+        self.logger.warning("DEPRECATED: ExperimentOrchestrator is deprecated. Use CleanAnalysisOrchestrator instead.")
+        self.logger.warning("This orchestrator will be removed in future versions.")
         
         self.logger.info(f"Orchestrator initialized for: {self.security.experiment_name}")
     
