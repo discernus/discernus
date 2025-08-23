@@ -18,62 +18,90 @@ template: |
 
   **CRITICAL REQUIREMENTS:**
   1. Each analysis must be implemented as a separate Python function
-  2. Functions must accept a pandas DataFrame 'data' as the primary parameter
+  2. Functions must read data from workspace files in the current directory
   3. Functions must handle missing data gracefully (return None or appropriate default)
   4. Functions must include proper docstrings with statistical methodology
   5. Functions must be production-ready with error handling
+  6. Functions should NOT take parameters - they read from workspace files
+
+  **WORKSPACE FILES AVAILABLE:**
+  - Raw analysis data: JSON files in the current directory
+  - Derived metrics data: JSON files in the current directory
+  - Framework content: framework_content.md in the current directory
+  - Experiment spec: experiment_spec.json in the current directory
 
   **OUTPUT FORMAT:**
   Wrap each function in the proprietary delimiters exactly as shown:
 
   <<<DISCERNUS_FUNCTION_START>>>
-  def function_name(data, **kwargs):
+  def function_name():
       """
       Function description with statistical methodology.
       
-      Args:
-          data: pandas DataFrame with dimension scores
-          **kwargs: Additional parameters
-          
       Returns:
           dict: Statistical results or None if insufficient data
       """
-      # Implementation here
-      pass
+      import pandas as pd
+      import numpy as np
+      import json
+      import glob
+      from pathlib import Path
+      
+      try:
+          # Read data from workspace files
+          # Implementation here
+          pass
+      except Exception:
+          return None
   <<<DISCERNUS_FUNCTION_END>>>
 
   **EXAMPLE:**
   For descriptive statistics, generate:
 
   <<<DISCERNUS_FUNCTION_START>>>
-  def calculate_descriptive_statistics(data, **kwargs):
+  def calculate_descriptive_statistics():
       """
       Calculate descriptive statistics for all numeric dimensions.
       
-      Args:
-          data: pandas DataFrame with dimension scores
-          **kwargs: Additional parameters
-          
       Returns:
           dict: Descriptive statistics for each dimension or None if insufficient data
       """
       import pandas as pd
       import numpy as np
+      import json
+      import glob
+      from pathlib import Path
       
       try:
-          if data.empty:
+          # Read analysis data from workspace
+          analysis_files = glob.glob("*.json")
+          if not analysis_files:
               return None
               
+          # Load and process data
+          data_list = []
+          for file_path in analysis_files:
+              try:
+                  with open(file_path, 'r') as f:
+                      data_list.append(json.load(f))
+              except Exception:
+                  continue
+          
+          if not data_list:
+              return None
+              
+          # Convert to DataFrame and calculate statistics
+          df = pd.DataFrame(data_list)
           results = {{}}
-          numeric_columns = data.select_dtypes(include=[np.number]).columns
+          numeric_columns = df.select_dtypes(include=[np.number]).columns
           
           for col in numeric_columns:
               if col.endswith('_score'):
-                  results[col] = {
-                      'mean': float(data[col].mean()),
-                      'std': float(data[col].std()),
-                      'count': int(data[col].count())
-                  }
+                  results[col] = {{
+                      'mean': float(df[col].mean()),
+                      'std': float(df[col].std()),
+                      'count': int(df[col].count())
+                  }}
           
           return results
           
@@ -81,7 +109,7 @@ template: |
           return None
   <<<DISCERNUS_FUNCTION_END>>>
 
-  Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Make sure to import pandas as pd and other needed libraries in each function.
+  Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function should read data from workspace files and not take parameters.
 
 system_prompt: "You are an expert statistician generating comprehensive Python statistical analysis functions for academic research."
 

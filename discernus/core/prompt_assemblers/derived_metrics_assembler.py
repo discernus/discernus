@@ -30,8 +30,6 @@ class DerivedMetricsPromptAssembler:
             The fully formatted prompt string.
         """
         framework_content = self._read_file(framework_path)
-        framework_yaml = self._parse_framework(framework_content)
-        
         analysis_samples = self._sample_analysis_data(analysis_dir, sample_size)
 
         prompt = f"""
@@ -53,9 +51,7 @@ You are a senior computational social scientist. Your task is to write a single,
 
 ---
 **FRAMEWORK:**
-```yaml
-{yaml.dump(framework_yaml, indent=2)}
-```
+{framework_content}
 
 ---
 **DATA SAMPLE:**
@@ -74,19 +70,6 @@ Now, provide the complete Python script.
             raise FileNotFoundError(f"File not found: {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
-
-    def _parse_framework(self, content: str) -> Dict[str, Any]:
-        try:
-            if '## Part 2: The Machine-Readable Appendix' in content:
-                _, appendix_content = content.split('## Part 2: The Machine-Readable Appendix', 1)
-                if '```yaml' in appendix_content:
-                    yaml_start = appendix_content.find('```yaml') + 7
-                    yaml_end = appendix_content.rfind('```')
-                    yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
-                    return yaml.safe_load(yaml_content)
-            raise ValueError("Machine-readable appendix not found in framework.")
-        except Exception as e:
-            raise ValueError(f"Failed to parse framework YAML: {e}")
 
     def _sample_analysis_data(self, analysis_dir: Path, sample_size: int) -> List[Dict[str, Any]]:
         if not analysis_dir.is_dir():

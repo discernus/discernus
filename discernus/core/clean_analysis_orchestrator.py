@@ -760,62 +760,44 @@ class CleanAnalysisOrchestrator:
             temp_workspace.mkdir(exist_ok=True)
             
             try:
-                # Convert analysis results to DataFrame format for the assembler
-                import pandas as pd
+                # Write analysis results to workspace for the assembler to access
+                analysis_dir = temp_workspace / "analysis_data"
+                analysis_dir.mkdir(exist_ok=True)
                 
-                # Extract raw scores from analysis results
-                raw_scores_data = []
-                for result in analysis_results:
-                    if isinstance(result, dict) and 'analysis_result' in result:
-                        # Extract dimensional scores from the raw analysis response
-                        raw_response = result['analysis_result'].get('raw_analysis_response', '')
-                        
-                        if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
-                            # Parse the JSON content from the response
-                            json_start = raw_response.find('<<<DISCERNUS_ANALYSIS_JSON_v6>>>') + len('<<<DISCERNUS_ANALYSIS_JSON_v6>>>')
-                            json_end = raw_response.find('<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>')
-                            
-                            if json_end > json_start:
-                                json_content = raw_response[json_start:json_end].strip()
-                                
-                                try:
-                                    analysis_data = json.loads(json_content)
-                                    
-                                    if 'document_analyses' in analysis_data and analysis_data['document_analyses']:
-                                        doc_analysis = analysis_data['document_analyses'][0]
-                                        
-                                        if 'dimensional_scores' in doc_analysis:
-                                            scores = doc_analysis['dimensional_scores']
-                                            
-                                            # Flatten the scores into a single row
-                                            row_data = {'document_name': result.get('filename', 'unknown')}
-                                            for dim_name, dim_data in scores.items():
-                                                if isinstance(dim_data, dict):
-                                                    row_data[f"{dim_name}_raw_score"] = dim_data.get('raw_score', 0.0)
-                                                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
-                                                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
-                                            raw_scores_data.append(row_data)
-                                except json.JSONDecodeError as e:
-                                    self._log_progress(f"⚠️ Failed to parse analysis JSON for {result.get('filename', 'unknown')}: {e}")
-                                    continue
+                for i, result in enumerate(analysis_results):
+                    analysis_file = analysis_dir / f"analysis_{i}.json"
+                    analysis_file.write_text(json.dumps(result, indent=2))
                 
-                if not raw_scores_data:
-                    raise CleanAnalysisError("No valid raw scores data found for statistical analysis")
+                # Write derived metrics results to workspace for the assembler to access
+                derived_metrics_dir = temp_workspace / "derived_metrics_data"
+                derived_metrics_dir.mkdir(exist_ok=True)
                 
-                raw_scores_df = pd.DataFrame(raw_scores_data)
-                
-                # Convert derived metrics to DataFrame format
-                derived_metrics_data = []
                 if derived_metrics_results.get('status') == 'completed':
                     derived_metrics = derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
                     if derived_metrics:
-                        derived_metrics_data = derived_metrics
+                        for i, metric in enumerate(derived_metrics):
+                            metric_file = derived_metrics_dir / f"derived_metric_{i}.json"
+                            metric_file.write_text(json.dumps(metric, indent=2))
+                    else:
+                        # Fallback: create empty derived metrics file
+                        empty_metric_file = derived_metrics_dir / "derived_metric_empty.json"
+                        empty_metric_file.write_text(json.dumps({"status": "no_derived_metrics"}, indent=2))
+                else:
+                    # Fallback: create empty derived metrics file
+                    empty_metric_file = derived_metrics_dir / "derived_metric_empty.json"
+                    empty_metric_file.write_text(json.dumps({"status": "derived_metrics_failed"}, indent=2))
                 
-                if not derived_metrics_data:
-                    # Fallback: create empty derived metrics DataFrame
-                    derived_metrics_data = [{'document_name': result.get('filename', 'unknown')} for result in analysis_results]
+                # Write framework and experiment content to workspace for the agent to access
+                framework_content = framework_path.read_text(encoding='utf-8')
+                (temp_workspace / "framework_content.md").write_text(framework_content)
                 
-                derived_metrics_df = pd.DataFrame(derived_metrics_data)
+                experiment_content = experiment_path.read_text(encoding='utf-8')
+                experiment_spec = {
+                    "name": self.config.get('name', 'Unknown Experiment'),
+                    "description": "Statistical analysis experiment",
+                    "questions": []
+                }
+                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
                 
                 # Use the existing StatisticalAnalysisPromptAssembler to build the prompt
                 from .prompt_assemblers.statistical_analysis_assembler import StatisticalAnalysisPromptAssembler
@@ -826,17 +808,13 @@ class CleanAnalysisOrchestrator:
                 prompt = assembler.assemble_prompt(
                     framework_path=framework_path,
                     experiment_path=experiment_path,
-                    raw_scores_df=raw_scores_df,
-                    derived_metrics_df=derived_metrics_df
+                    analysis_dir=analysis_dir,
+                    derived_metrics_dir=derived_metrics_dir
                 )
                 
                 # Store the assembled prompt
                 prompt_file = temp_workspace / "statistical_analysis_prompt.txt"
                 prompt_file.write_text(prompt)
-                
-                # Store the data for the agent to process
-                raw_scores_df.to_csv(temp_workspace / "raw_scores.csv", index=False)
-                derived_metrics_df.to_csv(temp_workspace / "derived_metrics.csv", index=False)
                 
                 # Initialize statistical analysis agent
                 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
@@ -847,14 +825,12 @@ class CleanAnalysisOrchestrator:
                 
                 # Generate statistical analysis functions using the assembled prompt
                 self._log_progress("🔧 Generating statistical analysis functions...")
-                functions_result = stats_agent.generate_functions(temp_workspace)
+                functions_result = stats_agent.generate_functions(temp_workspace, pre_assembled_prompt=prompt)
                 
                 # Execute the generated functions on the data
                 self._log_progress("🔢 Executing statistical analysis functions...")
                 statistical_results = self._execute_statistical_analysis_functions(
                     temp_workspace, 
-                    raw_scores_df, 
-                    derived_metrics_df, 
                     audit_logger
                 )
                 
@@ -950,10 +926,8 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             raise CleanAnalysisError(f"Failed to execute derived metrics functions: {e}")
     
-    def _execute_statistical_analysis_functions(self, workspace_path: Path, raw_scores_df: pd.DataFrame, derived_metrics_df: pd.DataFrame, audit_logger: AuditLogger) -> Dict[str, Any]:
+    def _execute_statistical_analysis_functions(self, workspace_path: Path, audit_logger: AuditLogger) -> Dict[str, Any]:
         """Execute the generated statistical analysis functions on the data."""
-        import pandas as pd
-        import numpy as np
         import sys
         import importlib.util
         
@@ -973,12 +947,11 @@ class CleanAnalysisOrchestrator:
         # Execute statistical analysis
         try:
             if hasattr(stats_module, 'perform_statistical_analysis'):
-                statistical_results = stats_module.perform_statistical_analysis(raw_scores_df, derived_metrics_df)
+                # The generated function now reads data from workspace files, so no parameters needed
+                statistical_results = stats_module.perform_statistical_analysis()
                 
                 return {
                     "status": "success",
-                    "raw_scores_count": len(raw_scores_df),
-                    "derived_metrics_count": len(derived_metrics_df),
                     "statistical_results": statistical_results
                 }
             else:
@@ -1054,7 +1027,6 @@ class CleanAnalysisOrchestrator:
             self._log_progress("🔢 Executing statistical functions on analysis data...")
             statistical_results = self._execute_statistical_functions(
                 temp_workspace, 
-                analysis_results, 
                 audit_logger
             )
             
@@ -1097,7 +1069,7 @@ class CleanAnalysisOrchestrator:
                 import shutil
                 shutil.rmtree(temp_workspace)
     
-    def _execute_statistical_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
+    def _execute_statistical_functions(self, workspace_path: Path, audit_logger: AuditLogger) -> Dict[str, Any]:
         """Execute the generated statistical functions on analysis data."""
         import pandas as pd
         import numpy as np

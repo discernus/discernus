@@ -988,4 +988,27 @@ Orchestrator → SynthesisAssembler → Rich Prompt → UnifiedSynthesisAgent �
 
 **Impact**: Will establish proper THIN architecture with clear separation of concerns, making the system more maintainable, testable, and aligned with architectural principles
 
+#### [TECH-008] LLM Cost Optimization Strategy Revisit 🔧 LOW PRIORITY
+- **Description**: Revisit decision between componentized (individual calls) vs batch (single call) approach for function generation
+- **Impact**: Current componentized approach costs ~$0.0005 per experiment vs potential batch approach at ~$0.0001-0.0002 (50-70% savings)
+- **Current Approach**: Componentized generation with individual LLM calls for each derived metric and statistical analysis type
+  - **Derived Metrics**: 6 individual calls (identity_tension, emotional_balance, success_climate, etc.)
+  - **Statistical Analysis**: 4 individual calls (descriptive_statistics, correlation_analysis, etc.)
+  - **Benefits**: High reliability, excellent debugging, focused quality, partial success capability
+  - **Cost**: ~$0.0005 per experiment with Gemini 2.5 Pro
+- **Alternative Approach**: Single batch call for all functions
+  - **Benefits**: 50-70% cost reduction, 5x faster execution
+  - **Drawbacks**: Lower reliability, poorer debugging, potential quality degradation
+- **Hybrid Option**: Smart batching with fallback to componentized generation
+- **Acceptance Criteria**:
+  - [ ] Evaluate cost vs quality trade-offs for academic research use case
+  - [ ] Consider model optimization (Gemini 2.5 Flash vs Pro) for additional 5x cost reduction
+  - [ ] Implement hybrid approach if cost savings justify complexity
+  - [ ] Document decision rationale and implementation plan
+- **Effort**: Medium (2-3 hours analysis + implementation)
+- **Dependencies**: None
+- **Priority**: LOW - Current approach working well, cost optimization for future consideration
+- **Current Status**: Componentized approach proven effective with excellent reliability and quality
+- **Next Review**: Revisit after 6 months or when cost becomes significant concern
+
 

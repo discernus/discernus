@@ -6,7 +6,7 @@
 
 **Experiment Name**: Trump Populist Rhetoric Analysis: Exploratory Study  
 **Experiment Date**: 2025-01-19  
-**Model Used**: Vertex AI Gemini 2.5 Flash (Analysis), Vertex AI Gemini 2.5 Pro (Synthesis)  
+**Model Used**: vertex_ai/gemini-2.5-flash (Analysis), vertex_ai/gemini-2.5-pro (Synthesis)  
 **Framework**: Populist Discourse Analysis Framework (PDAF) v10.0 (see `pdaf_v10.md`)  
 
 ---

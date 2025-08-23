@@ -24,7 +24,7 @@ This corpus contains Donald Trump's political discourse across different phases 
 
 ## Corpus Structure
 
-### **Phase 1: Early Political Period (1988-2000)**
+### **Phase 1: Early Political Period (1988-2014)**
 **Political Role**: Business leader and political commentator  
 **Context**: Initial political positioning and early populist themes  
 **Content Types**:
@@ -1606,7 +1606,7 @@ documents:
       speaker: "Donald Trump"
       date: "1988-2000"
       event_type: "CPAC Speech"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
       location: "Conservative Political Action Conference"
 
   - filename: "first_campaign_1988_2000/transcripts/Donald_Trump_2000_Presidential_Race___7_Oct_1999.txt"
@@ -1615,7 +1615,7 @@ documents:
       speaker: "Donald Trump"
       date: "1988-2000"
       event_type: "Campaign Event"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
 
   - filename: "first_campaign_1988_2000/transcripts/Donald_Trump_Teases_a_President_Bid_During_a_1988_Oprah_Show___The_Oprah_Winfrey_Show___OWN.txt"
     document_id: "doc_Donald_Trump_Teases_a_President_Bid_During_a_1988_"
@@ -1623,7 +1623,7 @@ documents:
       speaker: "Donald Trump"
       date: "1988-2000"
       event_type: "Campaign Event"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
 
   - filename: "first_campaign_1988_2000/transcripts/Donald_Trump__CPAC_2011.txt"
     document_id: "doc_Donald_Trump__CPAC_2011"
@@ -1631,7 +1631,7 @@ documents:
       speaker: "Donald Trump"
       date: "1988-2000"
       event_type: "CPAC Speech"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
       location: "Conservative Political Action Conference"
 
   - filename: "first_campaign_1988_2000/transcripts/Trump_Campaign_Speech_2000.txt"
@@ -1640,7 +1640,7 @@ documents:
       speaker: "Donald Trump"
       date: "1988-2000"
       event_type: "Political Speech"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
 
   - filename: "post_presidency_2021_2023/Donald_Trump_CPAC_2021_Speech_Transcript_20250822_135533.txt"
     document_id: "doc_Donald_Trump_CPAC_2021_Speech_Transcript_20250822_"
@@ -1791,9 +1791,6 @@ documents:
       date: "2021-2023"
       event_type: "CPAC Speech"
       political_phase: "Between Presidencies (2021-2023)"
-      location: "Conservative Political Action Conference"
-
-
       location: "Conservative Political Action Conference"
 
   - filename: "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Delivers a Speech at the 2022 CPAC Convention in Dallas - August 6, 2022.txt"

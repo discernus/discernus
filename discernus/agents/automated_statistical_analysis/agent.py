@@ -64,12 +64,12 @@ class AutomatedStatisticalAnalysisAgent:
         # Initialize THIN output extractor
         self.extractor = ThinOutputExtractor()
     
-    def generate_functions(self, workspace_path: Path) -> Dict[str, Any]:
-        """
-        Generate statistical analysis functions from experiment and framework specifications.
+    def generate_functions(self, workspace_path: Path, pre_assembled_prompt: str = None) -> Dict[str, Any]:
+        """Generate statistical analysis functions from framework and experiment specifications.
         
         Args:
             workspace_path: Transactional workspace for reading inputs and writing outputs
+            pre_assembled_prompt: Optional pre-assembled prompt from StatisticalAnalysisPromptAssembler
             
         Returns:
             Generation result with function details
@@ -79,25 +79,40 @@ class AutomatedStatisticalAnalysisAgent:
         """
         self._log_event("STATISTICAL_GENERATION_START", {
             "workspace": str(workspace_path),
-            "model": self.model
+            "model": self.model,
+            "using_pre_assembled_prompt": pre_assembled_prompt is not None
         })
         
         try:
-            # Read raw content from workspace
-            framework_content = (workspace_path / "framework_content.md").read_text()
+            # Always read experiment_spec for module creation
             experiment_spec = json.loads((workspace_path / "experiment_spec.json").read_text())
             
-            self._log_event("INPUTS_LOADED", {
-                "framework_size": len(framework_content),
-                "experiment_name": experiment_spec.get("name", "unknown"),
-                "questions_count": len(experiment_spec.get("questions", []))
-            })
-            
-            # Generate statistical analysis functions using LLM
-            generated_functions = self._generate_statistical_functions(
-                framework_content, 
-                experiment_spec
-            )
+            if pre_assembled_prompt:
+                # Use the pre-assembled prompt from the assembler
+                self._log_event("USING_PRE_ASSEMBLED_PROMPT", {
+                    "prompt_length": len(pre_assembled_prompt)
+                })
+                
+                # Generate functions using the pre-assembled prompt
+                generated_functions = self._generate_functions_with_prompt(pre_assembled_prompt)
+            else:
+                # Fall back to the original approach (for backward compatibility)
+                self._log_event("USING_LEGACY_PROMPT_GENERATION", {})
+                
+                # Read raw content from workspace
+                framework_content = (workspace_path / "framework_content.md").read_text()
+                
+                self._log_event("INPUTS_LOADED", {
+                    "framework_size": len(framework_content),
+                    "experiment_name": experiment_spec.get("name", "unknown"),
+                    "questions_count": len(experiment_spec.get("questions", []))
+                })
+                
+                # Generate statistical analysis functions using LLM
+                generated_functions = self._generate_statistical_functions(
+                    framework_content, 
+                    experiment_spec
+                )
             
             # Extract clean functions using THIN delimiter approach
             extracted_functions = self.extractor.extract_code_blocks(generated_functions)
@@ -182,6 +197,54 @@ class AutomatedStatisticalAnalysisAgent:
             
         return combined
     
+    def _generate_functions_with_prompt(self, pre_assembled_prompt: str) -> str:
+        """Generate statistical analysis functions using a pre-assembled prompt.
+        
+        Args:
+            pre_assembled_prompt: The complete prompt assembled by StatisticalAnalysisPromptAssembler
+            
+        Returns:
+            Generated function code as a string
+        """
+        try:
+            # Debug: Log the prompt being sent
+            print(f"🔍 DEBUG: Sending pre-assembled prompt to LLM:")
+            print(f"Prompt length: {len(pre_assembled_prompt)}")
+            print(f"Prompt preview: {pre_assembled_prompt[:500]}...")
+            print(f"Prompt contains 'read data from workspace': {'read data from workspace' in pre_assembled_prompt.lower()}")
+            print(f"Prompt contains 'no parameters': {'no parameters' in pre_assembled_prompt.lower()}")
+            
+            # Use the pre-assembled prompt directly with the LLM
+            response, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=pre_assembled_prompt,
+                max_tokens=8000,
+                temperature=0.1
+            )
+            
+            if not response:
+                raise ValueError("LLM returned empty response")
+            
+            # Debug: Log the response
+            print(f"🔍 DEBUG: LLM response:")
+            print(f"Response length: {len(response)}")
+            print(f"Response preview: {response[:500]}...")
+            print(f"Response contains 'def perform_statistical_analysis()': {'def perform_statistical_analysis()' in response}")
+            print(f"Response contains 'def perform_statistical_analysis(data': {'def perform_statistical_analysis(data' in response}")
+            
+            self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
+                "response_length": len(response),
+                "response_preview": response[:500]
+            })
+            
+            return response
+            
+        except Exception as e:
+            self._log_event("PROMPT_BASED_GENERATION_FAILED", {
+                "error": str(e)
+            })
+            raise
+
     def _load_prompt_template(self) -> str:
         """Load external YAML prompt template following THIN architecture."""
         import os
