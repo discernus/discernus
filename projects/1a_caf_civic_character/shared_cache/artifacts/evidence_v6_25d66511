@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-23T12:39:50.410207+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "tribalism",
+      "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+      "confidence": 0.9,
+      "context_type": "in-group_vs_out-group_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410189+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "dignity",
+      "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+      "confidence": 1.0,
+      "context_type": "direct_statement_of_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410195+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "manipulation",
+      "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+      "confidence": 0.9,
+      "context_type": "critique_of_others_manipulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410197+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "truth",
+      "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+      "confidence": 0.95,
+      "context_type": "factual_critique_of_legislation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410198+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+      "confidence": 1.0,
+      "context_type": "grievance_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410199+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "justice",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+      "confidence": 1.0,
+      "context_type": "demand_for_procedural_fairness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410200+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fear",
+      "quote_text": "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?",
+      "confidence": 0.95,
+      "context_type": "rhetorical_question_highlighting_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410202+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "hope",
+      "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.95,
+      "context_type": "aspirational_vision_for_the_future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410203+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fantasy",
+      "quote_text": "The speech is grounded in the harsh realities of the civil rights struggle and demands concrete legislative action; it does not contain unrealistic promises or magical thinking.",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410203+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+      "confidence": 0.95,
+      "context_type": "specific_critique_of_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:39:50.410205+00:00"
+    }
+  ]
+}

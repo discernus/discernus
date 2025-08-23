@@ -1,8 +1,8 @@
-# Corpus Specification (v8.0)
+# Corpus Specification (v8.0.1)
 
-**Version**: 8.0  
+**Version**: 8.0.1  
 **Status**: Current Standard  
-**Replaces**: v7.3
+**Replaces**: v8.0
 
 The `corpus.md` file defines a collection of documents for analysis in the v8.0 Discernus system. It serves as the **manifest and metadata source** for all textual materials in an experiment, providing human-readable descriptions with structured YAML metadata.
 
@@ -19,18 +19,68 @@ my_research_project/
 ├── experiment.md                 # Experiment specification
 ├── corpus.md                     # Corpus specification (at root)
 ├── framework.md                  # Framework file (descriptive name)
-└── corpus/                       # Document directory (flat structure)
-    ├── document1.txt             # Text files only
-    ├── document2.txt
-    └── document3.txt
+└── corpus/                       # Document directory (flexible structure)
+    ├── campaign_2024/            # Organized by campaign phase
+    │   ├── primary_speeches/     # Sub-organized by speech type
+    │   │   ├── speech1.txt
+    │   │   └── speech2.txt
+    │   └── general_election/     # Another sub-organization
+    │       └── speech3.txt
+    ├── presidency_2017_2020/     # Organized by time period
+    │   ├── inaugural.txt
+    │   └── sotu_2020.txt
+    └── post_presidency/          # Organized by political phase
+        └── rally_2022.txt
 ```
 
 **Key Principles:**
 - Corpus specification at project root (with other input files)
 - Actual documents in `/corpus/` directory
 - Text files only (`.txt` format for simplicity)
-- Flat directory structure (no nested folders)
+- **Flexible directory structure**: Nested directories allowed for human organization
+- **Explicit metadata required**: Directory structure meaning must be defined in metadata, not implied by structure
 - Metadata informs analysis strategy (not analyzed as content)
+
+---
+
+## 1.1 Directory Structure Principles
+
+**Human Organization vs. Machine Understanding**
+
+The corpus directory structure serves **human researchers** for organization and convenience, but **all semantic meaning must be explicitly defined in metadata**.
+
+### ✅ **Good: Explicit Metadata with Organized Structure**
+```yaml
+documents:
+  - filename: "campaign_2024/primary_speeches/speech1.txt"
+    political_phase: "campaign_2024"
+    speech_type: "primary_campaign"
+    speaker: "Donald Trump"
+    date: "2024-01-15"
+    venue: "Iowa Rally"
+    
+  - filename: "presidency_2017_2020/inaugural.txt"
+    political_phase: "first_presidency"
+    speech_type: "inaugural_address"
+    speaker: "Donald Trump"
+    date: "2017-01-20"
+    venue: "US Capitol"
+```
+
+### ❌ **Bad: Implicit Meaning from Directory Structure**
+```yaml
+documents:
+  - filename: "campaign_2024/primary_speeches/speech1.txt"
+    # Missing political_phase, speech_type - system cannot infer meaning
+    speaker: "Donald Trump"
+    date: "2024-01-15"
+```
+
+### **Directory Organization Guidelines**
+- **Use meaningful names**: `campaign_2024/` not `folder1/`
+- **Group logically**: By time period, campaign phase, speech type, etc.
+- **Keep reasonable depth**: 2-3 levels maximum for maintainability
+- **Document organization**: Explain your directory structure in the corpus overview
 
 ---
 
@@ -58,24 +108,26 @@ The corpus includes concession speeches, floor speeches, and campaign addresses 
 
 ```yaml
 name: "Political Speeches Corpus"
-version: "8.0"
+version: "8.0.1"
 total_documents: 4
 date_range: "2008-2025"
 
 documents:
-  - filename: "mccain_2008_concession.txt"
+  - filename: "campaign_2008/mccain_concession.txt"
     speaker: "John McCain"
     year: 2008
     party: "Republican"
     style: "institutional"
     type: "concession_speech"
+    political_phase: "campaign_2008"
     
-  - filename: "sanders_2025_oligarchy.txt"
+  - filename: "policy_2025/sanders_oligarchy.txt"
     speaker: "Bernie Sanders"
     year: 2025
     party: "Independent"
     style: "populist_progressive"
     type: "policy_statement"
+    political_phase: "policy_2025"
 ```
 ```
 
@@ -95,10 +147,11 @@ documents:
 - ✅ Each document must have brief description
 
 ### Document Requirements  
-- ✅ All listed documents must exist in `corpus/` directory
-- ✅ Document filenames must match exactly (case-sensitive)
+- ✅ All listed documents must exist in `corpus/` directory (including nested paths)
+- ✅ Document filenames must match exactly (case-sensitive, including path separators)
 - ✅ Documents must be readable text files (.txt, .md preferred)
 - ✅ No empty or corrupted files
+- ✅ **All semantic meaning must be explicitly defined in metadata** (not inferred from directory structure)
 
 ### Optional Metadata
 - ✅ If present, metadata must be valid YAML
@@ -126,9 +179,15 @@ documents:
 - **v7.3 corpus** specifications are NOT compatible with v8.0 pipeline
 - **No automatic migration** - corpus files must be manually updated
 
+### **Update Note (v8.0.1)**
+- **Nested directory support**: Added support for organized directory structures
+- **Metadata requirement**: All semantic meaning must be explicitly defined in metadata
+- **Validation updated**: System now validates nested paths correctly
+- **Backward compatible**: Existing flat-structure corpora continue to work
+
 ---
 
-## 5. Example v8.0 Corpus
+## 5. Example v8.0.1 Corpus
 
 A valid corpus manifest `corpus.md` file MUST be a Markdown document containing a YAML appendix with the following structure:
 
@@ -166,17 +225,20 @@ Each document listed in the manifest must exist as a plain text (`.txt`) file wi
 ## 6. Integration with v8.0 Pipeline
 
 ### Loading Process
-1. **Specification Reading**: v8.0 loader reads raw corpus.md content
-2. **Document Discovery**: Automatically scans corpus/ directory
-3. **Metadata Extraction**: Parses optional YAML metadata if present
-4. **Validation**: Ensures all listed documents exist and are readable
-5. **Content Preparation**: Loads document content for analysis agents
+1. **Specification Reading**: v8.0.1 loader reads raw corpus.md content
+2. **Document Discovery**: Loads files according to manifest (no directory scanning)
+3. **Path Resolution**: Handles nested directory paths correctly
+4. **Metadata Extraction**: Parses optional YAML metadata if present
+5. **Validation**: Ensures all listed documents exist and are readable
+6. **Content Preparation**: Loads document content for analysis agents
 
 ### Analysis Integration
-- **Framework Agnostic**: Works with any v8.0 framework
+- **Framework Agnostic**: Works with any v8.0.1 framework
 - **Flexible Metadata**: Optional structured data for advanced analysis
 - **Human Context**: Document descriptions inform analysis approach
 - **Scalable**: Handles small focused corpora or large document collections
+- **Organized Structure**: Supports nested directories for logical organization
+- **Explicit Semantics**: All analytical meaning comes from metadata, not structure
 
 ---
 
@@ -206,4 +268,4 @@ Each document listed in the manifest must exist as a plain text (`.txt`) file wi
 - **Version Control**: Track changes to corpus composition and metadata
 - **Documentation**: Explain corpus creation and curation decisions
 
-This v8.0 specification balances human readability with structured metadata support, enabling both intuitive corpus management and systematic analysis.
+This v8.0.1 specification balances human readability with structured metadata support, enabling both intuitive corpus management and systematic analysis. It now supports organized directory structures while maintaining the principle that all semantic meaning must be explicitly defined in metadata.

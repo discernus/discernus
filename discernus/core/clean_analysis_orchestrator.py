@@ -658,6 +658,18 @@ class CleanAnalysisOrchestrator:
                 analysis_dir = temp_workspace / "analysis_data"
                 analysis_dir.mkdir(exist_ok=True)
                 
+                # Write framework content to workspace for the agent to access
+                framework_content = framework_path.read_text(encoding='utf-8')
+                (temp_workspace / "framework_content.md").write_text(framework_content)
+                
+                # Write experiment spec to workspace for the agent to access
+                experiment_spec = {
+                    "name": "Test Experiment",
+                    "description": "Test experiment for derived metrics",
+                    "framework": "framework.md"
+                }
+                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
+                
                 # Write analysis results as individual files for the assembler to sample
                 for i, result in enumerate(analysis_results):
                     analysis_file = analysis_dir / f"analysis_{i}.json"

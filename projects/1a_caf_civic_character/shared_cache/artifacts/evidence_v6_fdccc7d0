@@ -1,0 +1,153 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 14,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-23T12:54:41.127227+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "tribalism",
+      "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us. This bill is a recognition of the fact that we are bound together as a people by the most precious ideals in humanity - the ideals that were put forth by our founders and that have been aspired to in every generation and have been worked on in every generation, making us a more perfect union.",
+      "confidence": 1.0,
+      "context_type": "Argumentation (Rejection of Dimension)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127212+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "You cannot deny justice to any American without it affecting us all. You cannot keep injustice for some without it cheapening the justice of us all.",
+      "confidence": 1.0,
+      "context_type": "Rhetorical Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127214+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "We as a nation have demonstrated the capacity to improve. Like people, we have demonstrated as a nation the capacity to redeem ourselves.",
+      "confidence": 0.9,
+      "context_type": "Rhetorical Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127215+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "truth",
+      "quote_text": "And even though we only have 5% of the world's population, one in four of the incarcerated people on the planet Earth are here in the United States of America. One in three of all the incarcerated women on the planet Earth are here in the United States of America. And today, close to a third of all the adults in the United States has a criminal record.",
+      "confidence": 1.0,
+      "context_type": "Evidentiary Support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127216+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "But I want to return to this fact: that we are poised to do this bill because of the deeply savage, broken criminal justice system that we have.",
+      "confidence": 1.0,
+      "context_type": "Problem Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127217+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "This is a system in our country that feeds upon certain communities and not others. The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+      "confidence": 1.0,
+      "context_type": "Systemic Critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127218+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+      "confidence": 1.0,
+      "context_type": "Core Thesis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127219+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "The scales of justice in America are not balanced.",
+      "confidence": 1.0,
+      "context_type": "Declarative Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127220+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fear",
+      "quote_text": "This system as a whole is a cancer on the soul of our country, and it\u2019s hurting every single American.",
+      "confidence": 0.8,
+      "context_type": "Metaphorical Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127221+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "None of us should ever be judged by the least of what we've done, but instead by our ability and our capacity to find redemption. Every generation has worked to make our ideals more true and real, making the dream more accessible to us all.",
+      "confidence": 1.0,
+      "context_type": "Aspirational Appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127222+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "But this is a first step. It is a necessary step for the sake of thousands of Americans whose lives will be directly affected. This is a step in the right direction. I hope that we all come together and make this first step momentum on the journey we have.",
+      "confidence": 1.0,
+      "context_type": "Call to Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127223+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fantasy",
+      "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction...",
+      "confidence": 1.0,
+      "context_type": "Argumentation (Rejection of Dimension)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127223+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "And that\u2019s why I\u2019m proud that this is a bipartisan compromise bill with leadership - extraordinary leadership on both sides of the aisle - saying, hey, there are things we need to begin to correct in this system. There\u2019s ways to make this system more fair. There\u2019s ways to make the system better reflect our collective values and ideals.",
+      "confidence": 1.0,
+      "context_type": "Political Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127224+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+      "confidence": 1.0,
+      "context_type": "Strategic Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.127225+00:00"
+    }
+  ]
+}

@@ -66,7 +66,7 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 **No Predefined Hypotheses**: The experiment encourages emergent pattern discovery
 
 **Analysis Phases**:
-1. **Early Political Period (1988-2000)**: Initial political positioning and early populist themes
+1. **Early Political Period (1988-2014)**: Initial political positioning and early populist themes
 2. **Campaign Launch (2015-2016)**: Initial populist positioning and campaign rhetoric
 3. **First Presidency (2017-2020)**: Governing populism and institutional populist appeals
 4. **Between Presidencies (2021-2023)**: Post-presidential populist discourse and movement leadership
@@ -177,7 +177,7 @@ metadata:
 components:
   # The filename of the v10.0 Framework file.
   # Must be in the same directory as this experiment.md.
-  framework: "framework.md"
+  framework: "pdaf_v10.md"
 
   # The filename of the v8.0 compliant Corpus manifest file.
   # Must be in the same directory as this experiment.md.

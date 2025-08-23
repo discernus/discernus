@@ -227,7 +227,8 @@ def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path
                 for doc in actual_documents:
                     filename = doc.get('filename')
                     if filename:
-                        doc_path = corpus_dir / filename
+                        # Handle nested directory paths correctly
+                        doc_path = experiment_path / "corpus" / filename
                         if not doc_path.exists():
                             return False, f"❌ Corpus document not found: corpus/{filename}"
                 
@@ -592,8 +593,12 @@ def validate(experiment_path: str, dry_run: bool, strict: bool):
         try:
             from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
             
-            # Run coherence validation
-            coherence_agent = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-flash")
+            # Run coherence validation with proper validation model
+            from discernus.core.config import get_config
+            config = get_config()
+            validation_model = config.validation_model
+            
+            coherence_agent = ExperimentCoherenceAgent(model=validation_model)
             validation_result = coherence_agent.validate_experiment(exp_path)
             
             if validation_result.success:

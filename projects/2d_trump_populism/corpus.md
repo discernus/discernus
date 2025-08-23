@@ -143,7 +143,7 @@ This corpus contains Donald Trump's political discourse across different phases 
 
 **Framework Compatibility**: This corpus is specifically designed for PDAF v10.0 analysis, with content that aligns with all nine populist dimensions.
 
-**Temporal Coverage**: Comprehensive coverage across four distinct political phases enables robust longitudinal analysis.
+**Temporal Coverage**: Comprehensive coverage across six distinct political phases enables robust longitudinal analysis.
 
 **Content Quality**: High-quality political discourse with clear populist elements ensures meaningful analytical results.
 
@@ -166,7 +166,7 @@ This corpus contains Donald Trump's political discourse across different phases 
 name: "Trump Political Discourse Corpus"
 version: "10.0"
 description: "Complete corpus covering Donald Trump's political discourse from 1988-2025, including early positioning, campaigns, two presidencies, and complete CPAC series evolution."
-total_documents: 219
+total_documents: 212
 date_range: "1988-2025"
 political_phases: 6
 framework_compatibility: "PDAF v10.0"
@@ -423,13 +423,7 @@ documents:
       event_type: "Campaign Rally"
       political_phase: "Campaign to Second Presidency (2023-2024)"
 
-  - filename: "2024_campaign/primary_campaign/live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL.txt"
-    document_id: "doc_live_donald_trump_speaks_at_maga_rally_in_georgia__1"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2024"
-      event_type: "Campaign Rally"
-      political_phase: "Campaign to Second Presidency (2023-2024)"
+
 
   - filename: "2024_campaign/primary_campaign/trump_2024_2024-08-09_MT_D4IdhXexLko.txt"
     document_id: "doc_trump_2024_2024_08_09_MT_D4IdhXexLko"
@@ -1601,9 +1595,9 @@ documents:
     document_id: "doc_CPAC_2013_Donald_Trump"
     metadata:
       speaker: "Donald Trump"
-      date: "1988-2000"
+      date: "2013-03-15"
       event_type: "CPAC Speech"
-      political_phase: "Early Political Period (1988-2000)"
+      political_phase: "Early Political Period (1988-2014)"
       location: "Conservative Political Action Conference"
 
   - filename: "first_campaign_1988_2000/transcripts/CPAC_2014___Donald_Trump,_The_Trump_Organization.txt"
@@ -1657,21 +1651,8 @@ documents:
       political_phase: "Between Presidencies (2021-2023)"
       location: "Conservative Political Action Conference"
 
-  - filename: "post_presidency_2021_2023/logs/batch_extraction_summary_20250822_150804.txt"
-    document_id: "doc_batch_extraction_summary_20250822_150804"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2021-2023"
-      event_type: "Unknown"
-      political_phase: "Between Presidencies (2021-2023)"
 
-  - filename: "post_presidency_2021_2023/post_presidency_urls.txt"
-    document_id: "doc_post_presidency_urls"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2021-2023"
-      event_type: "Unknown"
-      political_phase: "Between Presidencies (2021-2023)"
+
 
   - filename: "post_presidency_2021_2023/post_presidency_video_targets.txt"
     document_id: "doc_post_presidency_video_targets"
@@ -1685,9 +1666,9 @@ documents:
     document_id: "doc_CPAC_2024_LIVE_Former_President_Trump_Speaks_LIVE_"
     metadata:
       speaker: "Donald Trump"
-      date: "2021-2023"
+      date: "2024-02-24"
       event_type: "CPAC Speech"
-      political_phase: "Between Presidencies (2021-2023)"
+      political_phase: "Campaign to Second Presidency (2023-2024)"
       location: "Conservative Political Action Conference"
 
   - filename: "post_presidency_2021_2023/transcripts/Donald Trump economic plan_ FULL SPEECH Asheville, North Carolina on Wednesday, August 14, 2024.txt"
@@ -1812,13 +1793,7 @@ documents:
       political_phase: "Between Presidencies (2021-2023)"
       location: "Conservative Political Action Conference"
 
-  - filename: "post_presidency_2021_2023/transcripts/President_Trump_CPAC_2021_Full_Speech_I_NewsNOW_from_FOX.txt"
-    document_id: "doc_President_Trump_CPAC_2021_Full_Speech_I_NewsNOW_fr_1"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2021-2023"
-      event_type: "CPAC Speech"
-      political_phase: "Between Presidencies (2021-2023)"
+
       location: "Conservative Political Action Conference"
 
   - filename: "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Delivers a Speech at the 2022 CPAC Convention in Dallas - August 6, 2022.txt"
@@ -1891,13 +1866,7 @@ documents:
       event_type: "Unknown"
       political_phase: "Between Presidencies (2021-2023)"
 
-  - filename: "post_presidency_2021_2023/youtube_search_guide.txt"
-    document_id: "doc_youtube_search_guide"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2021-2023"
-      event_type: "Unknown"
-      political_phase: "Between Presidencies (2021-2023)"
+
 
   - filename: "presidential_2017_2020/Trump_Inaugural_2017.txt"
     document_id: "doc_Trump_Inaugural_2017"
@@ -1976,21 +1945,9 @@ documents:
       political_phase: "First Presidency (2017-2020)"
       location: "Conservative Political Action Conference"
 
-  - filename: "reelection_2019_2020/Trump_SOTU_2019.txt"
-    document_id: "doc_Trump_SOTU_2019_1"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2017-2020"
-      event_type: "Unknown"
-      political_phase: "First Presidency (2017-2020)"
 
-  - filename: "reelection_2019_2020/Trump_SOTU_2020.txt"
-    document_id: "doc_Trump_SOTU_2020_1"
-    metadata:
-      speaker: "Donald Trump"
-      date: "2017-2020"
-      event_type: "Unknown"
-      political_phase: "First Presidency (2017-2020)"
+
+
 
   - filename: "second_presidency_2025/Trump_Inaugural_2025.txt"
     document_id: "doc_Trump_Inaugural_2025"

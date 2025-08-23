@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-23T12:54:41.123652+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "tribalism",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.95,
+      "context_type": "explicit rejection of in-group/out-group framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123639+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment of universal worth and historical progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123643+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "manipulation",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.9,
+      "context_type": "admission of fallibility, demonstrating candor over strategic framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123644+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "truth",
+      "quote_text": "The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.95,
+      "context_type": "direct acknowledgment of electoral facts",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123645+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "resentment",
+      "quote_text": "though we fell short, the failure is mine, not yours.",
+      "confidence": 0.98,
+      "context_type": "explicit acceptance of personal responsibility over assigning blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123646+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "justice",
+      "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...",
+      "confidence": 0.95,
+      "context_type": "call to respect the outcome of the democratic process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123647+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "fear",
+      "quote_text": "...defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.85,
+      "context_type": "passing reference to external threats",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123648+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "hope",
+      "quote_text": "I urge all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+      "confidence": 0.95,
+      "context_type": "call for optimism and faith in the nation's future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123648+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "fantasy",
+      "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment of reality and complexity, the opposite of fantasy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123649+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I urge all Americans... to find the necessary compromises to bridge our differences and help restore our prosperity...",
+      "confidence": 0.95,
+      "context_type": "explicit call for practical problem-solving and compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T12:54:41.123650+00:00"
+    }
+  ]
+}
