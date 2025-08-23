@@ -169,6 +169,17 @@ class CleanAnalysisOrchestrator:
                 
                 self._log_status(f"Analysis completed: {len(analysis_results)} documents processed")
                 self._log_phase_timing("analysis_phase", phase_start)
+                
+                # Phase 4.5: Build and cache RAG index immediately after analysis
+                phase_start = datetime.now(timezone.utc)
+                try:
+                    self._build_and_cache_rag_index(audit_logger)
+                    self._log_status("RAG index built and cached successfully")
+                    self._log_phase_timing("rag_index_cache", phase_start)
+                except Exception as e:
+                    # RAG caching failure is not fatal - we can still build it later
+                    self._log_progress(f"⚠️ RAG index caching failed, will build during synthesis: {str(e)}")
+                
             except Exception as e:
                 self._log_progress(f"❌ Analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
@@ -184,10 +195,8 @@ class CleanAnalysisOrchestrator:
                 self._log_status("Derived metrics completed")
                 self._log_phase_timing("derived_metrics_phase", phase_start)
             except Exception as e:
-                self._log_progress(f"⚠️ Derived metrics phase failed, attempting to continue: {str(e)}")
-                # Try to continue with basic analysis results
-                derived_metrics_results = {"error": str(e), "status": "failed"}
-                self._derived_metrics_results = derived_metrics_results
+                self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
             
             # Phase 6: Generate statistics
             phase_start = datetime.now(timezone.utc)
@@ -196,19 +205,22 @@ class CleanAnalysisOrchestrator:
                 self._log_status("Statistical analysis completed")
                 self._log_phase_timing("statistical_analysis", phase_start)
             except Exception as e:
-                self._log_progress(f"⚠️ Statistical analysis failed, attempting to continue: {str(e)}")
-                # Try to continue with basic analysis results
-                statistical_results = {"error": str(e), "status": "failed"}
+                self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
             
-            # Phase 7: Build RAG index for synthesis
+            # Phase 7: Ensure RAG index is available for synthesis
             phase_start = datetime.now(timezone.utc)
             try:
-                self._build_rag_index(audit_logger)
-                self._log_status("RAG index built successfully")
-                self._log_phase_timing("rag_index_build", phase_start)
+                # Check if we already have a cached RAG index, build if needed
+                if not hasattr(self, 'rag_index') or self.rag_index is None:
+                    self._build_rag_index_with_cache(audit_logger)
+                    self._log_status("RAG index prepared for synthesis")
+                else:
+                    self._log_status("RAG index already available from cache")
+                self._log_phase_timing("rag_index_prepare", phase_start)
             except Exception as e:
                 # In RAG-or-nothing mode, this is a fatal error.
-                raise CleanAnalysisError(f"Failed to build RAG index: {str(e)}") from e
+                raise CleanAnalysisError(f"Failed to prepare RAG index: {str(e)}") from e
 
             # Phase 8: Run synthesis with RAG integration
             phase_start = datetime.now(timezone.utc)
@@ -473,23 +485,63 @@ class CleanAnalysisOrchestrator:
         return config
     
     def _run_coherence_validation(self, validation_model: str, audit_logger: AuditLogger):
-        """Run experiment coherence validation."""
+        """Run experiment coherence validation with caching."""
         self._log_progress("🔬 Validating experiment coherence...")
         
+        # Load framework, experiment, and corpus content for cache key generation
+        framework_path = self.experiment_path / self.config['framework']
+        corpus_path = self.experiment_path / self.config['corpus']
+        experiment_path = self.experiment_path / "experiment.md"
+        
+        framework_content = framework_path.read_text(encoding='utf-8')
+        corpus_content = corpus_path.read_text(encoding='utf-8')
+        experiment_content = experiment_path.read_text(encoding='utf-8')
+        
+        # Initialize validation caching
+        from .validation_cache import ValidationCacheManager
+        validation_cache_manager = ValidationCacheManager(self.artifact_storage, audit_logger)
+        
+        # Generate cache key based on all validation inputs
+        cache_key = validation_cache_manager.generate_cache_key(
+            framework_content, experiment_content, corpus_content, validation_model
+        )
+        
+        # Check cache first
+        cache_result = validation_cache_manager.check_cache(cache_key)
+        
+        if cache_result.hit:
+            self._log_progress("💾 Using cached validation result")
+            cached_validation = cache_result.cached_validation
+            
+            # Check if cached validation was successful
+            if not cached_validation.get('success', False):
+                issues = cached_validation.get('issues', ['Unknown validation failure'])
+                raise CleanAnalysisError(f"Experiment validation failed (cached): {'; '.join(issues)}")
+            
+            self.performance_metrics["cache_hits"] += 1
+            return
+        
+        # Perform validation if not cached
+        self.performance_metrics["cache_misses"] += 1
         coherence_agent = ExperimentCoherenceAgent(
             model=validation_model,
             audit_logger=audit_logger
         )
         
-        # Load framework and corpus for validation
-        framework_path = self.experiment_path / self.config['framework']
-        corpus_path = self.experiment_path / self.config['corpus']
-        
-        framework_content = framework_path.read_text(encoding='utf-8')
-        corpus_content = corpus_path.read_text(encoding='utf-8')
-        
         validation_result = coherence_agent.validate_experiment(self.experiment_path)
         
+        # Prepare validation result for caching
+        validation_data = {
+            "success": validation_result.success,
+            "issues": [issue.description for issue in validation_result.issues] if hasattr(validation_result, 'issues') else [],
+            "model": validation_model,
+            "validated_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Store validation result in cache
+        validation_cache_manager.store_validation_result(cache_key, validation_data, validation_model)
+        
+        # Check validation result
         if not validation_result.success:
             issues = [issue.description for issue in validation_result.issues]
             raise CleanAnalysisError(f"Experiment validation failed: {'; '.join(issues)}")
@@ -578,28 +630,12 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"📄 Processing document {i+1}/{len(prepared_documents)}: {prepared_doc.get('filename', 'Unknown')}")
             
             try:
-                # Check if we already have cached results for this document
-                doc_hash = prepared_doc.get('document_id', '')
-                cached_result = None
-                try:
-                    cached_result = self.artifact_storage.get_artifact(f"analysis_result_{doc_hash}")
-                except Exception:
-                    cached_result = None # Artifact not found
-
-                if cached_result:
-                    self._log_progress(f"✅ Using cached analysis for: {prepared_doc.get('filename', 'Unknown')}")
-                    self.performance_metrics["cache_hits"] += 1
-                    analysis_results.append(cached_result)
-                    continue
-                else:
-                    self._log_progress(f"🔍 No cache hit for: {prepared_doc.get('filename', 'Unknown')} - running analysis...")
-                    self.performance_metrics["cache_misses"] += 1
-                
                 # Load framework content (not just filename)
                 framework_path = self.experiment_path / self.config['framework']
                 framework_content = framework_path.read_text(encoding='utf-8')
                 
-                # Analyze single document
+                # Analyze single document (analysis agent handles its own caching)
+                self._log_progress(f"🔬 Analyzing document: {prepared_doc.get('filename', 'Unknown')}")
                 result = analysis_agent.analyze_documents(
                     corpus_documents=[prepared_doc],
                     framework_content=framework_content,
@@ -612,6 +648,12 @@ class CleanAnalysisOrchestrator:
                     analysis_result = result['analysis_result']
                     result_content = analysis_result.get('result_content', {})
                     
+                    # Track cache performance based on analysis agent's caching
+                    if analysis_result.get('cached', False):
+                        self.performance_metrics["cache_hits"] += 1
+                    else:
+                        self.performance_metrics["cache_misses"] += 1
+                    
                     # The raw_analysis_response is stored in result_content, not nested deeper
                     raw_analysis_response = result_content.get('raw_analysis_response', '')
                     
@@ -621,7 +663,7 @@ class CleanAnalysisOrchestrator:
                         'raw_analysis_response': raw_analysis_response,
                         'scores_hash': result.get('scores_hash', ''),
                         'evidence_hash': result.get('evidence_hash', ''),
-                        'document_id': doc_hash,
+                        'document_id': prepared_doc.get('document_id', ''),
                         'filename': prepared_doc.get('filename', 'Unknown')
                     }
                     
@@ -704,6 +746,14 @@ class CleanAnalysisOrchestrator:
                 if cache_result.hit:
                     self._log_progress("💾 Using cached derived metrics functions")
                     functions_result = cache_result.cached_functions
+                    
+                    # Recreate functions file from cached content if available
+                    if functions_result.get('cached_with_code') and functions_result.get('function_code_content'):
+                        functions_file = temp_workspace / "automatedderivedmetricsagent_functions.py"
+                        functions_file.write_text(functions_result['function_code_content'], encoding='utf-8')
+                        self._log_progress("📝 Recreated functions file from cached content")
+                    else:
+                        self._log_progress("⚠️ Cached functions missing code content - may need regeneration")
                 else:
                     # Initialize derived metrics agent
                     from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
@@ -716,8 +766,8 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("🔧 Generating derived metrics functions...")
                     functions_result = derived_metrics_agent.generate_functions(temp_workspace)
                     
-                    # Store in cache for future use
-                    cache_manager.store_functions(cache_key, functions_result)
+                    # Store in cache for future use (with workspace path to capture function code)
+                    cache_manager.store_functions(cache_key, functions_result, str(temp_workspace))
                 
                 # Execute the generated functions on analysis data
                 self._log_progress("🔢 Executing derived metrics functions on analysis data...")
@@ -848,6 +898,14 @@ class CleanAnalysisOrchestrator:
                 if stats_cache_result.hit:
                     self._log_progress("💾 Using cached statistical analysis functions")
                     functions_result = stats_cache_result.cached_functions
+                    
+                    # Recreate functions file from cached content if available
+                    if functions_result.get('cached_with_code') and functions_result.get('function_code_content'):
+                        functions_file = temp_workspace / "automatedstatisticalanalysisagent_functions.py"
+                        functions_file.write_text(functions_result['function_code_content'], encoding='utf-8')
+                        self._log_progress("📝 Recreated statistical functions file from cached content")
+                    else:
+                        self._log_progress("⚠️ Cached statistical functions missing code content - may need regeneration")
                 else:
                     # Initialize statistical analysis agent
                     from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
@@ -860,8 +918,8 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("🔧 Generating statistical analysis functions...")
                     functions_result = stats_agent.generate_functions(temp_workspace, pre_assembled_prompt=prompt)
                     
-                    # Store in cache for future use
-                    stats_cache_manager.store_functions(stats_cache_key, functions_result)
+                    # Store in cache for future use (with workspace path to capture function code)
+                    stats_cache_manager.store_functions(stats_cache_key, functions_result, str(temp_workspace))
                 
                 # Execute the generated functions on the data
                 self._log_progress("🔢 Executing statistical analysis functions...")
@@ -1276,9 +1334,9 @@ class CleanAnalysisOrchestrator:
             metadata = artifact_info.get("metadata", {})
             if metadata.get("artifact_type", "").startswith("evidence_v6"):
                 evidence_count += 1
-                # Verify the artifact actually exists on disk
+                # Verify the artifact actually exists on disk (use quiet=True to suppress verbose logging)
                 try:
-                    evidence_data = self.artifact_storage.get_artifact(artifact_hash)
+                    evidence_data = self.artifact_storage.get_artifact(artifact_hash, quiet=True)
                     if not evidence_data or len(evidence_data) < 10:
                         raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Evidence artifact {artifact_hash[:8]} exists in registry but is empty on disk")
                 except Exception as e:
@@ -1352,6 +1410,97 @@ class CleanAnalysisOrchestrator:
         
         self.rag_index = index
         self._log_progress(f"✅ RAG index built and loaded with {len(evidence_hashes)} evidence sources.")
+
+    def _build_and_cache_rag_index(self, audit_logger: AuditLogger) -> None:
+        """Build and cache RAG index immediately after analysis for performance optimization."""
+        self._log_progress("📚 Building and caching RAG index for future use...")
+        
+        # Get evidence artifact hashes
+        evidence_hashes = []
+        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                evidence_hashes.append(artifact_hash)
+        
+        if not evidence_hashes:
+            self._log_progress("⚠️ No evidence artifacts found - skipping RAG index caching")
+            return
+        
+        # Initialize RAG index cache manager
+        from .rag_index_cache import RAGIndexCacheManager
+        rag_cache_manager = RAGIndexCacheManager(self.artifact_storage, audit_logger)
+        
+        # Generate cache key based on evidence artifacts
+        cache_key = rag_cache_manager.generate_cache_key(evidence_hashes)
+        
+        # Check if already cached
+        cache_result = rag_cache_manager.check_cache(cache_key)
+        if cache_result.hit:
+            self._log_progress("💾 RAG index already cached - storing for synthesis")
+            self.rag_index = cache_result.cached_index
+            self.performance_metrics["cache_hits"] += 1
+            return
+        
+        # Build new RAG index
+        curator = TxtaiEvidenceCurator(
+            model="vertex_ai/gemini-2.5-flash",  # Use fast model for indexing
+            artifact_storage=self.artifact_storage,
+            audit_logger=audit_logger
+        )
+        
+        index = curator.build_and_load_index(
+            evidence_artifact_hashes=evidence_hashes,
+            artifact_storage=self.artifact_storage
+        )
+        
+        if index is None:
+            raise CleanAnalysisError("Failed to build RAG index for caching")
+        
+        # Cache the index for future use
+        try:
+            rag_cache_manager.store_index(cache_key, index, len(evidence_hashes))
+            self._log_progress(f"💾 RAG index cached successfully with {len(evidence_hashes)} evidence sources")
+            self.performance_metrics["cache_misses"] += 1
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to cache RAG index: {str(e)} - continuing with uncached index")
+        
+        # Store index for synthesis
+        self.rag_index = index
+
+    def _build_rag_index_with_cache(self, audit_logger: AuditLogger) -> None:
+        """Build RAG index with cache checking (fallback for synthesis phase)."""
+        self._log_progress("📚 Preparing RAG index for synthesis...")
+        
+        # Get evidence artifact hashes
+        evidence_hashes = []
+        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                evidence_hashes.append(artifact_hash)
+        
+        if not evidence_hashes:
+            self.logger.warning("No evidence artifacts found, RAG index will be empty.")
+            from txtai.embeddings import Embeddings
+            self.rag_index = Embeddings()
+            return
+        
+        # Initialize RAG index cache manager
+        from .rag_index_cache import RAGIndexCacheManager
+        rag_cache_manager = RAGIndexCacheManager(self.artifact_storage, audit_logger)
+        
+        # Generate cache key and check cache
+        cache_key = rag_cache_manager.generate_cache_key(evidence_hashes)
+        cache_result = rag_cache_manager.check_cache(cache_key)
+        
+        if cache_result.hit:
+            self._log_progress("💾 Using cached RAG index")
+            self.rag_index = cache_result.cached_index
+            self.performance_metrics["cache_hits"] += 1
+        else:
+            # Fallback to building index (should rarely happen if caching worked in Phase 4.5)
+            self._log_progress("🔧 Cache miss - building RAG index from scratch")
+            self._build_rag_index(audit_logger)
+            self.performance_metrics["cache_misses"] += 1
 
     def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
         """Run synthesis using SynthesisPromptAssembler and UnifiedSynthesisAgent."""

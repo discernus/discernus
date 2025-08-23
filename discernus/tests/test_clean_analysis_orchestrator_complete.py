@@ -16,7 +16,8 @@ import json
 from datetime import datetime, timezone
 
 from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator, CleanAnalysisError
-from discernus.core.experiment_orchestrator import ExperimentOrchestrator
+# Import deprecated orchestrator for testing deprecation
+# from discernus.core.deprecated.experiment_orchestrator import ExperimentOrchestrator
 
 
 class TestCleanAnalysisOrchestratorEnhanced:
@@ -320,7 +321,7 @@ metadata:
 
 
 class TestLegacyOrchestratorDeprecation:
-    """Test deprecation warnings in legacy orchestrator."""
+    """Test that legacy orchestrator is properly deprecated and moved to deprecated/ folder."""
     
     @pytest.fixture
     def mock_experiment_path(self, tmp_path):
@@ -370,22 +371,28 @@ metadata:
         
         return experiment_dir
     
-    def test_deprecation_warning_on_initialization(self, mock_experiment_path):
-        """Test that legacy orchestrator shows deprecation warnings."""
-        with patch('discernus.core.experiment_orchestrator.get_logger') as mock_logger:
-            mock_logger_instance = Mock()
-            mock_logger.return_value = mock_logger_instance
-            
-            # Create legacy orchestrator
-            orchestrator = ExperimentOrchestrator(mock_experiment_path)
-            
-            # Verify deprecation warnings were logged
-            mock_logger_instance.warning.assert_called()
-            warning_calls = [call.args[0] for call in mock_logger_instance.warning.call_args_list]
-            
-            assert any("DEPRECATED" in call for call in warning_calls)
-            assert any("will be removed" in call for call in warning_calls)
-            assert any("CleanAnalysisOrchestrator" in call for call in warning_calls)
+    def test_legacy_orchestrator_moved_to_deprecated(self):
+        """Test that legacy orchestrator is properly moved to deprecated/ folder."""
+        from pathlib import Path
+        
+        # Verify deprecated orchestrator is in deprecated/ folder
+        deprecated_path = Path(__file__).parent.parent / "core" / "deprecated" / "experiment_orchestrator.py"
+        assert deprecated_path.exists(), "ExperimentOrchestrator should be in deprecated/ folder"
+        
+        # Verify it's not in the main core directory
+        main_path = Path(__file__).parent.parent / "core" / "experiment_orchestrator.py"
+        assert not main_path.exists(), "ExperimentOrchestrator should not be in main core/ directory"
+    
+    def test_clean_orchestrator_is_default(self):
+        """Test that CleanAnalysisOrchestrator is the default and available."""
+        from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
+        
+        # Should be able to import without issues
+        assert CleanAnalysisOrchestrator is not None
+        
+        # Should be in main core directory
+        main_path = Path(__file__).parent.parent / "core" / "clean_analysis_orchestrator.py"
+        assert main_path.exists(), "CleanAnalysisOrchestrator should be in main core/ directory"
 
 
 if __name__ == "__main__":

@@ -1,0 +1,173 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 16,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-23T17:22:24.683316+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "tribalism",
+      "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+      "confidence": 0.9,
+      "context_type": "direct rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683298+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "tribalism",
+      "quote_text": "This is a system in our country that feeds upon certain communities and not others.",
+      "confidence": 0.8,
+      "context_type": "identification of disparity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683300+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+      "confidence": 0.9,
+      "context_type": "universal human worth",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683301+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "we are bound together as a people by the most precious ideals in humanity",
+      "confidence": 0.9,
+      "context_type": "shared humanity principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683302+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "truth",
+      "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent",
+      "confidence": 0.9,
+      "context_type": "factual statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683303+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "truth",
+      "quote_text": "the data is clear - there is no difference between blacks and whites for using drugs or selling drugs... But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+      "confidence": 0.9,
+      "context_type": "presentation of data",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683304+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "because of the deeply savage, broken criminal justice system that we have.",
+      "confidence": 0.8,
+      "context_type": "expression of grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683305+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+      "confidence": 0.8,
+      "context_type": "emphasis on historical wrongs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683306+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "begin to deliver some reform to our savagely broken criminal justice system.",
+      "confidence": 0.9,
+      "context_type": "call for systemic solution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683307+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "ways to make this system more fair. There's ways to make the system better reflect our collective values and ideals.",
+      "confidence": 0.9,
+      "context_type": "focus on fairness and values",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683308+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fear",
+      "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+      "confidence": 0.8,
+      "context_type": "alarming consequence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683309+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fear",
+      "quote_text": "ultimately makes our neighborhoods and communities - ones like mine - less safe, not more.",
+      "confidence": 0.8,
+      "context_type": "threat-focused language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683310+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "we now have an opportunity to reverse course in a significant way.",
+      "confidence": 0.9,
+      "context_type": "optimistic vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683311+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "we as a nation have demonstrated the capacity to redeem ourselves.",
+      "confidence": 0.9,
+      "context_type": "constructive outlook",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683312+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is a product of compromise.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment of trade-offs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683313+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction",
+      "confidence": 0.9,
+      "context_type": "realistic assessment of progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T17:22:24.683314+00:00"
+    }
+  ]
+}

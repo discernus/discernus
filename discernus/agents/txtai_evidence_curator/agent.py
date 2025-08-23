@@ -741,7 +741,8 @@ NARRATIVE:
         all_evidence = []
         for artifact_hash in evidence_artifact_hashes:
             try:
-                evidence_data = artifact_storage.get_artifact(artifact_hash)
+                # Use quiet=True to suppress verbose logging during bulk evidence retrieval for RAG indexing
+                evidence_data = artifact_storage.get_artifact(artifact_hash, quiet=True)
                 if evidence_data:
                     evidence_json = json.loads(evidence_data.decode('utf-8'))
                     all_evidence.extend(evidence_json.get('evidence_data', []))

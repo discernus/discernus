@@ -24,25 +24,25 @@ from typing import Dict, Any, List, Optional, Tuple
 import hashlib # Added for framework hash calculation
 import re
 
-from .security_boundary import ExperimentSecurityBoundary, SecurityError
-from .audit_logger import AuditLogger
-from .local_artifact_storage import LocalArtifactStorage
-from .enhanced_manifest import EnhancedManifest
-from .provenance_organizer import ProvenanceOrganizer
-from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context, log_analysis_phase_start, log_analysis_phase_complete, log_synthesis_phase_start, log_synthesis_phase_complete, perf_timer
-from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
-from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
-from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
-from ..gateway.llm_gateway import LLMGateway
-from ..gateway.model_registry import ModelRegistry
-from ..cli_console import DiscernusConsole
+from ..security_boundary import ExperimentSecurityBoundary, SecurityError
+from ..audit_logger import AuditLogger
+from ..local_artifact_storage import LocalArtifactStorage
+from ..enhanced_manifest import EnhancedManifest
+from ..provenance_organizer import ProvenanceOrganizer
+from ..logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure, log_stage_transition, log_error_with_context, log_analysis_phase_start, log_analysis_phase_complete, log_synthesis_phase_start, log_synthesis_phase_complete, perf_timer
+from ...agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+# from ...agents.intelligent_extractor_agent import IntelligentExtractorAgent  # DEPRECATED
+from ...agents.csv_export_agent import CSVExportAgent, ExportOptions
+from ...gateway.llm_gateway import LLMGateway
+from ...gateway.model_registry import ModelRegistry
+from ...cli_console import DiscernusConsole
 
 # Import THIN Synthesis Pipeline for enhanced synthesis
-from ..agents.thin_synthesis.orchestration.pipeline import (
-    ProductionThinSynthesisPipeline, 
-    ProductionPipelineRequest,
-    ProductionPipelineResponse
-)
+# from ...agents.thin_synthesis.orchestration.pipeline import (  # DEPRECATED
+#     ProductionThinSynthesisPipeline, 
+#     ProductionPipelineRequest,
+#     ProductionPipelineResponse
+# )
 
 from .parsing_utils import parse_llm_json_response
 
@@ -178,7 +178,7 @@ class ThinOrchestrator:
         improving overall experiment reliability.
         """
         try:
-            from ..agents.reliability_analysis_agent import ReliabilityAnalysisAgent
+            # from ...agents.reliability_analysis_agent import ReliabilityAnalysisAgent  # DEPRECATED
             
             # Modern LLMs (especially Gemini Pro) can easily handle full framework content
             # Framework validation requires the complete gasket_schema section at the end
@@ -364,7 +364,7 @@ Respond with only the JSON object."""
                 "reuse_recommendation": "NONE"
             }
         
-    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str, debug_agent: Optional[str] = None, debug_level: str = "info", analysis_model: Optional[str] = None) -> ProductionThinSynthesisPipeline:
+    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str, debug_agent: Optional[str] = None, debug_level: str = "info", analysis_model: Optional[str] = None):  # -> ProductionThinSynthesisPipeline:  # DEPRECATED
         """Create a ProductionThinSynthesisPipeline with proper infrastructure."""
         
         # Create MinIO-compatible wrapper for LocalArtifactStorage
@@ -384,12 +384,13 @@ Respond with only the JSON object."""
         compatible_storage = MinIOCompatibleStorage(storage)
         
         self._log_progress(f"🔧 Creating synthesis pipeline with model: {model}")
-        return ProductionThinSynthesisPipeline(
-            artifact_client=compatible_storage,
-            audit_logger=audit_logger,
-            model=model,
-            analysis_model=analysis_model
-        )
+        # return ProductionThinSynthesisPipeline(  # DEPRECATED
+        #     artifact_client=compatible_storage,
+        #     audit_logger=audit_logger,
+        #     model=model,
+        #     analysis_model=analysis_model
+        # )
+        pass  # DEPRECATED: ProductionThinSynthesisPipeline no longer available
 
     def _run_thin_synthesis(self,
                            scores_hash: str,
@@ -418,67 +419,71 @@ Respond with only the JSON object."""
         experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
         
         # Create pipeline request
-        request = ProductionPipelineRequest(
-            framework_spec=framework_content,
-            scores_artifact_hash=scores_hash,
-            evidence_artifact_hash=evidence_hash,
-            corpus_artifact_hash=None,  # THIN: Evidence-only RAG doesn't need combined corpus
-            experiment_context=experiment_context,
-            max_evidence_per_finding=3,
-            min_confidence_threshold=0.7,
-            interpretation_focus="comprehensive",
-            # Add provenance context (Issue #208 fix)
-            framework_hash=framework_hash,
-            corpus_hash=corpus_manifest_hash, # Use manifest hash for provenance
-            framework_name=experiment_config.get('framework', 'Unknown framework'),
-            corpus_manifest=corpus_manifest,
-            # Pass experiment config for declarative statistical analyses
-            experiment_config=experiment_config
-        )
+        # request = ProductionPipelineRequest(  # DEPRECATED
+        #     framework_spec=framework_content,
+        #     scores_artifact_hash=scores_hash,
+        #     evidence_artifact_hash=evidence_hash,
+        #     corpus_artifact_hash=None,  # THIN: Evidence-only RAG doesn't need combined corpus
+        #     experiment_context=experiment_context,
+        #     max_evidence_per_finding=3,
+        #     min_confidence_threshold=0.7,
+        #     interpretation_focus="comprehensive",
+        #     # Add provenance context (Issue #208 fix)
+        #     framework_hash=framework_hash,
+        #     corpus_hash=corpus_manifest_hash, # Use manifest hash for provenance
+        #     framework_name=experiment_config.get('framework', 'Unknown framework'),
+        #     corpus_manifest=corpus_manifest,
+        #     # Pass experiment config for declarative statistical analyses
+        #     experiment_config=experiment_config
+        # )
+        pass  # DEPRECATED: ProductionPipelineRequest no longer available
         
         # Execute pipeline
-        start_time = time.time()
-        response = pipeline.run(request)
-        duration_seconds = time.time() - start_time
+        # start_time = time.time()
+        # response = pipeline.run(request)  # DEPRECATED
+        # duration_seconds = time.time() - start_time
         
-        if response.success:
-            # Store the narrative report as an artifact for compatibility
-            report_hash = storage.put_artifact(
-                response.narrative_report.encode('utf-8'),
-                {"artifact_type": "synthesis_report", "pipeline": "thin_architecture"}
-            )
+        # if response.success:  # DEPRECATED
+        #     # Store the narrative report as an artifact for compatibility
+        #     report_hash = storage.put_artifact(
+        #         response.narrative_report.encode('utf-8'),
+        #         {"artifact_type": "synthesis_report", "pipeline": "thin_architecture"}
+        #     )
             
-            # Return in EnhancedSynthesisAgent format for compatibility
-            return {
-                "result_hash": report_hash,
-                "duration_seconds": duration_seconds,
-                "synthesis_confidence": 0.95,  # THIN architecture generally high confidence
-                "synthesis_report_markdown": response.narrative_report,
-                # Include artifact hashes for CSV export (Sprint 6 fix)
-                "statistical_results_hash": response.statistical_results_hash,
-                "curated_evidence_hash": response.curated_evidence_hash,
+        #     # Return in EnhancedSynthesisAgent format for compatibility
+        #     return {
+        #         "result_hash": report_hash,
+        #         "duration_seconds": duration_seconds,
+        #         "synthesis_confidence": 0.95,  # THIN architecture generally high confidence
+        #         "synthesis_report_markdown": response.narrative_report,
+        #         # Include artifact hashes for CSV export (Sprint 6 fix)
+        #         "statistical_results_hash": response.statistical_results_hash,
+        #         "curated_evidence_hash": response.curated_evidence_hash,
                 
-                # Include cost information from synthesis pipeline response
-                "synthesis_cost_usd": response.total_cost_usd,
-                "synthesis_tokens": response.total_tokens,
+        #         # Include cost information from synthesis pipeline response
+        #         "synthesis_cost_usd": response.total_cost_usd,
+        #         "synthesis_tokens": response.total_tokens,
                 
-                # Additional THIN-specific metadata
-                "thin_metadata": {
-                    "pipeline_version": "production_v1.0",
-                    "stage_timings": response.stage_timings,
-                    "stage_success": response.stage_success,
-                    "word_count": response.word_count,
-                    "generated_artifacts": {
-                        "analysis_plan": response.analysis_plan_hash,
-                        "statistical_results": response.statistical_results_hash,
-                        "curated_evidence": response.curated_evidence_hash
-                    }
-                }
-            }
-        else:
-            error_msg = f"THIN synthesis failed: {response.error_message}"
-            self.logger.error(f"❌ {error_msg}")
-            raise ThinOrchestratorError(error_msg)
+        #         # Additional THIN-specific metadata
+        #         "thin_metadata": {
+        #             "pipeline_version": "production_v1.0",
+        #             "stage_timings": response.stage_timings,
+        #             "stage_success": response.stage_success,
+        #             "word_count": response.word_count,
+        #             "generated_artifacts": {
+        #             "analysis_plan": response.analysis_plan_hash,
+        #             "statistical_results": response.statistical_results_hash,
+        #             "curated_evidence": response.curated_evidence_hash
+        #             }
+        #         }
+        #     }
+        # else:
+        #     error_msg = f"THIN synthesis failed: {response.error_message}"
+        #     self.logger.error(f"❌ {error_msg}")
+        #     raise ThinOrchestratorError(error_msg)
+        
+        # DEPRECATED: ProductionThinSynthesisPipeline no longer available
+        raise ThinOrchestratorError("ProductionThinSynthesisPipeline is deprecated and no longer available")
 
     def run_experiment(self, 
                       analysis_model: str = "vertex_ai/gemini-2.5-flash",
@@ -667,7 +672,7 @@ Respond with only the JSON object."""
                     )
                     
                     try:
-                        from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
+                        from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
                         
                         # Initialize notebook generation orchestrator with transactional workspace
                         notebook_orchestrator = NotebookGenerationOrchestrator(
@@ -726,7 +731,7 @@ Respond with only the JSON object."""
                     self._log_progress("🔬 V8.0 Statistical Preparation Mode: Bypassing synthesis, proceeding to notebook generation...")
                     
                     try:
-                        from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
+                        from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
                         
                         # Initialize notebook generation orchestrator with transactional workspace
                         notebook_orchestrator = NotebookGenerationOrchestrator(
@@ -1245,7 +1250,7 @@ Respond with only the JSON object."""
                     all_analysis_results, scores_hash, evidence_hash, _ = analysis_result
                     
                     try:
-                        from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
+                        from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
                         
                         # Initialize notebook generation orchestrator with transactional workspace
                         notebook_orchestrator = NotebookGenerationOrchestrator(
@@ -1299,7 +1304,7 @@ Respond with only the JSON object."""
                     
                     try:
                         # Proceed directly to v8.0 notebook generation
-                        from discernus.core.notebook_generation_orchestrator import NotebookGenerationOrchestrator
+                        from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
                         notebook_orchestrator = NotebookGenerationOrchestrator(
                             experiment_path=self.experiment_path,
                             security=self.security,

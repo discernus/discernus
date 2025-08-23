@@ -1,0 +1,20 @@
+# Prompt Engineering Harness Dependencies
+# Core requirements for the harness to function
+
+# LLM Gateway and Model Registry
+# (Included in main Discernus installation)
+
+# Environment and Configuration
+python-dotenv>=1.0.0
+
+# LLM Integration
+litellm>=1.0.0
+
+# YAML Processing (for experiment assets)
+PyYAML>=6.0
+
+# Rich Terminal Output (optional enhancement)
+rich>=13.0.0
+
+# Note: Most dependencies are provided by the main Discernus installation
+# This file documents the specific requirements for standalone usage

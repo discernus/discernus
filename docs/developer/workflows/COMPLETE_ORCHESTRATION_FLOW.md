@@ -95,7 +95,7 @@ Issues      Metadata   Knowledge   Full Audit
 - **Action**: Initialize experiment isolation environment
 - **Component**: `ExperimentSecurityBoundary`
 - **Security**: Prevent path traversal, validate file access
-- **Logging**: `ThinOrchestrator.security_boundary_initialized`
+- **Logging**: `CleanAnalysisOrchestrator.security_boundary_initialized`
 
 #### Step 1.2: Corpus Processing
 - **Action**: Load and validate corpus documents
@@ -245,7 +245,7 @@ Issues      Metadata   Knowledge   Full Audit
 
 ## Stage 3: Finalization
 
-**Agent**: `ThinOrchestrator` + `CSVExportAgent` + `ProvenanceOrganizer`  
+**Agent**: `CleanAnalysisOrchestrator` + `CSVExportAgent` + `ProvenanceOrganizer`  
 **Purpose**: Export research-ready artifacts with complete audit trail  
 **Output**: Publication-ready research package
 

@@ -161,7 +161,7 @@ This section describes the implemented architecture and operational capabilities
 
 ```mermaid
 graph TD
-    subgraph "Orchestration Layer (ThinOrchestrator)"
+    subgraph "Orchestration Layer (CleanAnalysisOrchestrator)"
         A["🔍 Analysis Stage<br/>Enhanced Analysis Agents"] --> B["🧠 Synthesis Stage<br/>ProductionThinSynthesisPipeline"]
         B --> C["📋 Finalization Stage<br/>CSV Export & Provenance"]
     end
@@ -182,7 +182,7 @@ graph TD
 
 **🧠 Synthesis Stage**: The `ProductionThinSynthesisPipeline` is invoked as a modular component. It performs statistical analysis, builds a knowledge index, and generates a comprehensive narrative report.
 
-**📋 Finalization Stage**: The `ThinOrchestrator` completes the process by exporting all final CSVs (scores, evidence, statistical results), organizing all artifacts for provenance, and committing the run to Git.
+**📋 Finalization Stage**: The `CleanAnalysisOrchestrator` completes the process by exporting all final CSVs (scores, evidence, statistical results), organizing all artifacts for provenance, and committing the run to Git.
 
 ### **Data Flow Architecture**
 
@@ -495,7 +495,7 @@ The agent architecture follows a **6-layer classification framework** that mirro
 
 #### 6. Pipeline Orchestration
 
-**ThinOrchestrator** - *Primary Orchestrator*
+**CleanAnalysisOrchestrator** - *Primary Orchestrator*
 - **Function**: Orchestrates the complete, linear 3-stage experiment pipeline.
 - **THIN Compliance**: ✅ Implements direct function calls, minimal coordination logic.
 - **Key Capabilities**:

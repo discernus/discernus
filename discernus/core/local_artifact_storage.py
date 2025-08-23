@@ -171,12 +171,13 @@ class LocalArtifactStorage:
         else:
             return f"{artifact_type}_{short_hash}"
     
-    def get_artifact(self, hash_id: str) -> bytes:
+    def get_artifact(self, hash_id: str, quiet: bool = False) -> bytes:
         """
         Retrieve content by SHA256 hash.
         
         Args:
             hash_id: SHA-256 hash of the content
+            quiet: If True, suppress retrieval logging (useful for bulk operations)
             
         Returns:
             Raw bytes of the artifact
@@ -195,7 +196,9 @@ class LocalArtifactStorage:
             
             content = self.security.secure_read_bytes(artifact_path)
             
-            print(f"📥 Retrieved artifact: {human_filename} ({len(content)} bytes)")
+            # Only log if not in quiet mode
+            if not quiet:
+                print(f"📥 Retrieved artifact: {human_filename} ({len(content)} bytes)")
             return content
             
         except SecurityError as e:

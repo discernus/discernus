@@ -27,13 +27,13 @@ from typing import Dict, Any, List, Optional
 
 from .security_boundary import ExperimentSecurityBoundary
 from .audit_logger import AuditLogger
-from .local_artifact_storage import LocalArtifactStorage
-from .enhanced_manifest import EnhancedManifest
-from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
-from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
-from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
+from ..local_artifact_storage import LocalArtifactStorage
+from ..enhanced_manifest import EnhancedManifest
+from ..logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
+from ...agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+from ...agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from .notebook_generation_orchestrator import NotebookGenerationOrchestrator
-from ..cli_console import DiscernusConsole
+from ...cli_console import DiscernusConsole
 
 
 class V8OrchestrationError(Exception):

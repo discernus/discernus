@@ -72,8 +72,8 @@ class SynthesisPromptAssembler:
         # 4. Prepare statistical summary for context
         statistical_summary = self._create_statistical_summary(research_data['statistical_results'])
         
-        # 5. Prepare evidence count for RAG context
-        total_evidence_pieces = sum(len(self._get_evidence_from_artifact(artifact_storage.get_artifact(hash))) 
+        # 5. Prepare evidence count for RAG context (use quiet=True to suppress verbose logging)
+        total_evidence_pieces = sum(len(self._get_evidence_from_artifact(artifact_storage.get_artifact(hash, quiet=True))) 
                                   for hash in evidence_artifacts)
         
         # 6. Assemble the comprehensive prompt

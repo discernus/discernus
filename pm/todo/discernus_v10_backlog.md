@@ -1,1014 +1,408 @@
 # Discernus v10 Backlog
 
-**Date**: 2025-08-20  
-**Status**: THIN Architecture Restored - Statistical Tables Operational  
-**Version**: v10.0
-
-## 🏆 Major Achievements Summary
-
-**BREAKTHROUGH**: THIN Architecture Restored! SynthesisPromptAssembler now uses external YAML templates instead of embedded code, restoring proper architectural principles and enabling sophisticated statistical table generation.
-
-**KEY MILESTONES COMPLETED**:
-- ✅ **THIN Architecture Restoration**: External YAML prompts replace embedded code (enhanced_synthesis_prompt.yaml)
-- ✅ **Statistical Tables Restored**: Proper Markdown tables with real numerical data in synthesis reports
-- ✅ **Framework Mathematical Fixes**: Division-by-zero prevention and logical consistency corrections
-- ✅ **Enhanced Synthesis**: Multi-level analytical architecture with literature integration
-- ✅ **Infrastructure Cleanup**: Clean, framework-agnostic pipeline with deprecated contamination  
-- ✅ **Framework Enhancement**: CFF v10.0 with 18 derived metrics and academic depth
-- ✅ **Hybrid Design Foundation**: Minimal experiments → comprehensive analysis capability proven
-- ✅ **Enhanced CLI Validation**: Two-stage validation architecture with file existence + coherence validation
-
-**CURRENT CAPABILITY**: 7-line experiment specification → 3,000-word academic analysis with sophisticated statistical tables, literature review, and evidence integration using proper THIN architecture.
+**Date:** 2025-08-23
+**Status:** Testing Infrastructure Fix Required - CLI v10 Compliance Complete
+**Next Priority:** Fix integration test infrastructure to unblock validation
 
 ---
 
-## 🚨 Critical Issues (Publication Blocking)
+## Current Status
 
-**STATUS UPDATE**: All original critical publication-blocking issues have been resolved! However, new critical CLI v10 compliance issues have been discovered that block proper v10 experiment execution.
-
-**COMPLETED CRITICAL ITEMS**: All CRIT-001 through CRIT-009 issues resolved ✅
-
-**NEW CRITICAL ITEMS**: CLI architecture audit revealed v10 specification compliance failures
-
-**ARCHITECTURAL BREAKTHROUGH**: Clean Analysis Orchestrator operational! Legacy notebook generation cruft eliminated from default pipeline. THIN architecture principles restored with direct analysis → statistics → synthesis flow.
-
-**CURRENT STATUS**: Publication-ready with source access and reproducibility, v10 experiment execution enabled! CLI-001 and CLI-003 completed successfully.
-
-#### [CLI-001] Fix CleanAnalysisOrchestrator v10 Parsing ✅ COMPLETED
-- **Description**: ✅ COMPLETED - CleanAnalysisOrchestrator._load_specs() incorrectly expected v7.3 YAML frontmatter instead of v10 machine-readable appendix
-- **Impact**: ✅ RESOLVED - All pure v10 experiments (like CAF) can now run on current production pipeline
-- **Status**: ✅ COMPLETED - v10 experiment execution enabled
-- **Root Cause**: ✅ IDENTIFIED - Production orchestrator had v10 parsing bug, only worked with hybrid format
-- **Evidence**: ✅ VALIDATED - simple_test_pdaf works (hybrid format), CAF experiment now works (pure v10)
-- **Framework File Requirements**: ✅ CONFIRMED - v10 spec requires framework files co-located with experiment.md
-- **Implementation Results**: 
-  - ✅ Path resolution PRESERVED (local framework files per v10 spec)
-  - ✅ Parsing logic FIXED (now supports both v10 appendix formats)
-  - ✅ Comprehensive validation added (required fields, spec version checking)
-  - ✅ Clear error messages for v7.3 format rejection
-- **Acceptance Criteria**: ✅ ALL MET
-  - ✅ Updated _load_specs() method to parse v10 machine-readable appendix format
-  - ✅ Removed dependency on v7.3 frontmatter format
-  - ✅ Ensured compatibility with official v10 specification
-  - ✅ Tested with CAF experiment (pure v10 format)
-  - ✅ Verified framework co-location requirement compliance
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
-- **Dependencies**: None
-- **Priority**: ✅ **CRITICAL** - Was blocking all pure v10 experiment execution
-- **Implementation Details**: 
-  - Supports both v10 formats: delimited (`# --- Start/End ---`) and appendix (`## Configuration Appendix`)
-  - Comprehensive unit test coverage (7 tests, all passing)
-  - Real-world validation with CAF experiment successful
-  - Framework co-location logic preserved and validated
-  - Clear error messages guide users from v7.3 to v10 format
-
-#### [CLI-004] Fix Broken CLI Commands ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Debug command completely broken (missing ThinOrchestrator), CLI dry-run parsing fails
-- **Impact**: ✅ RESOLVED - Critical CLI functionality restored for debugging and validation
-- **Root Cause**: ✅ IDENTIFIED - Debug command references deprecated ThinOrchestrator, CLI parsing expects old format
-- **Acceptance Criteria**:
-  - ✅ Fix debug command to use CleanAnalysisOrchestrator
-  - ✅ Fix CLI dry-run parsing for v10 experiments
-  - ✅ Remove all references to missing ThinOrchestrator
-  - ✅ Test all CLI commands with v10 experiments
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
-- **Dependencies**: ✅ CLI-001 (v10 parsing fix)
-- **Priority**: ✅ **HIGH** - Critical CLI functionality broken
-- **Implementation Results**:
-  - ✅ Debug command now uses CleanAnalysisOrchestrator
-  - ✅ CLI dry-run parsing works with v10 experiments
-  - ✅ All ThinOrchestrator references removed
-  - ✅ CLI commands tested and working with v10 experiments
+**CLI v10 Compliance:** ✅ **COMPLETE**
+**Statistical Analysis Pipeline:** ✅ **COMPLETE**
+**Framework Validation:** ✅ **COMPLETE**
+**Current Blocker:** Integration tests failing due to incorrect mocking
 
 ---
 
----
+## Current Sprint Planning
 
-## 🔧 Technical Debt & Improvements
+### Sprint 1: Critical Fixes (IMMEDIATE PRIORITY)
 
-**Note**: All infrastructure cleanup items have been completed and moved to `DONE.md`. The system now has clean, organized architecture with clear component separation.
+**Timeline:** 2-3 hours
+**Goal:** Fix critical data integrity issues and unblock validation
 
-### Medium Priority - Should Fix Soon
+#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase ✅ **COMPLETED**
 
-**Note**: Framework specification enhancement has been completed and moved to `DONE.md`. The v10.0 specification is now operational with LLM optimization features.
-
-#### [CLI-002] Fix Non-Compliant Test Experiments ⚠️ MEDIUM PRIORITY
-- **Description**: simple_test_cff and simple_test_pdaf use non-compliant hybrid format (frontmatter + appendix)
-- **Impact**: Creates confusion about correct v10 format, masks CLI parsing bugs
-- **Root Cause**: Test experiments were created before v10 spec was finalized, use legacy hybrid format
+- **Description**: **CRITICAL BUG**: Derived metrics phase failures are being silently caught and the experiment continues with degraded results instead of failing fast
+- **Dependencies**: None (blocking everything)
+- **Root Cause**: Lines 197-201 in CleanAnalysisOrchestrator catch derived metrics failures and continue with `{"error": str(e), "status": "failed"}` instead of propagating the error
+- **Evidence**: Terminal shows "Derived metrics phase failed, attempting to continue: Derived metrics functions file not found" but experiment completes successfully
+- **Impact**: 
+  - Masks critical LLM generation failures
+  - Produces unreliable experiment results
+  - Violates THIN architecture fail-fast principles
+  - Makes debugging extremely difficult
 - **Acceptance Criteria**:
-  - [ ] Remove YAML frontmatter from simple_test_cff/experiment.md
-  - [ ] Remove YAML frontmatter from simple_test_pdaf/experiment.md
-  - [ ] Verify experiments still run correctly with pure v10 format
-  - [ ] Update any documentation referencing these experiments
-- **Effort**: Low (1 hour)
-- **Dependencies**: CLI-001 (v10 parsing fix)
-- **Priority**: MEDIUM - Quality and compliance issue
+  - [x] Derived metrics phase failures cause immediate experiment termination
+  - [x] Clear error messages indicate the specific failure point
+  - [x] No graceful degradation for critical pipeline components
+  - [x] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
+- **Effort**: 1-2 hours ✅ **COMPLETED**
+- **Priority**: **CRITICAL** (data integrity issue)
+- **Status**: ✅ **FIXED** - Experiment now fails fast with exit code 1 and clear error message
+- **Follow-up Issue**: Cache invalidation issue discovered - cached functions reference non-existent files
 
-#### [CLI-003] Investigate Coherence Agent Validation Bypass ✅ COMPLETED
-- **Description**: ✅ COMPLETED - ExperimentCoherenceAgent had brittle parsing that couldn't handle delimited v10 format
-- **Impact**: ✅ RESOLVED - Validation gaps fixed, all v10 formats now properly validated
-- **Root Cause**: ✅ IDENTIFIED - Agent used brittle parsing instead of format-agnostic LLM validation
-- **Implementation Results**:
-  - ✅ Removed brittle parsing logic that only handled `## Configuration Appendix` format
-  - ✅ Implemented format-agnostic file discovery for framework and corpus files
-  - ✅ Added current specifications loading from `docs/specifications/` for compliance validation
-  - ✅ Updated prompt to prioritize spec compliance over internal coherence
-  - ✅ Raw content approach lets LLM handle all format detection and parsing
-- **Acceptance Criteria**: ✅ ALL MET
-  - ✅ Investigated why hybrid format experiments passed validation (format parsing gap)
-  - ✅ Enhanced validation to be format-agnostic and enforce v10 compliance
-  - ✅ Added comprehensive test cases for format validation scenarios
-  - ✅ Documented new validation behavior and capabilities
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
-- **Dependencies**: None
-- **Priority**: ✅ MEDIUM - Quality assurance gap resolved
-- **Testing Results**: 4/4 unit tests pass for format-agnostic validation
-- **Real-world Validation**: Successfully tested with both CAF (delimited) and simple_test (appendix) formats
-- **Related Tools Inspection**: Framework validation tools (`scripts/framework_validation/`, `scripts/framework_researcher/`) already use correct format-agnostic approach - no changes needed
+#### [CRITICAL-002] Fix Derived Metrics Cache Stale File References ✅ **COMPLETED**
 
-#### [CLI-005] Enhance CLI Validation ✅ COMPLETED
-- **Description**: ✅ COMPLETED - CLI validate command enhanced with two-stage validation architecture
-- **Impact**: ✅ RESOLVED - Users now get fast file validation + comprehensive coherence validation
-- **Root Cause**: ✅ IDENTIFIED - CLI validation was too basic, missing file existence and cross-reference checks
-- **Implementation Results**:
-  - ✅ **Two-Stage Architecture**: Stage 1 (fast file validation) + Stage 2 (LLM coherence validation)
-  - ✅ **Enhanced Stage 1**: File existence, cross-reference validation, corpus document verification
-  - ✅ **--strict Flag**: Comprehensive validation with ExperimentCoherenceAgent integration
-  - ✅ **THIN Compliance**: CLI handles file system, LLM handles semantic validation
-  - ✅ **Performance**: Stage 1 completes in <1 second, Stage 2 only when --strict used
-- **Acceptance Criteria**: ✅ ALL MET
-  - ✅ Integrate ExperimentCoherenceAgent into CLI validate command
-  - ✅ Add --strict flag for comprehensive validation
-  - ✅ Provide clear validation feedback with specific errors
-  - ✅ Document validation levels and capabilities
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
-- **Dependencies**: ✅ CLI-003 (coherence validation investigation) - COMPLETED
-- **Priority**: ✅ MEDIUM - User experience improvement - COMPLETED
-- **Testing Results**: 7/7 unit tests pass for enhanced validation scenarios
-- **Real-world Validation**: Successfully catches missing files, wrong references, corpus mismatches
-- **Architecture**: Perfect THIN separation - CLI (deterministic) + LLM (intelligent)
-
-#### [CLI-005a] Enhanced Stage 1 Validation Implementation ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Implemented enhanced Stage 1 validation with file existence and cross-reference checks
-- **Impact**: ✅ RESOLVED - CLI now catches file system issues immediately, not just during LLM validation
-- **Root Cause**: ✅ IDENTIFIED - Basic validation only checked experiment.md existence, missed component file validation
-- **Implementation Results**:
-  - ✅ **File Existence Checks**: Framework, corpus manifest, corpus documents verified
-  - ✅ **Cross-Reference Validation**: Experiment references match actual files
-  - ✅ **Corpus Count Consistency**: Manifest count vs actual document count verification
-  - ✅ **Performance**: <1 second validation, no LLM calls
-  - ✅ **THIN Architecture**: CLI handles deterministic file operations, LLM handles semantic validation
-- **Acceptance Criteria**: ✅ ALL MET
-  - ✅ Enhanced validate_experiment_structure() with file existence checks
-  - ✅ _validate_corpus_documents() helper for corpus verification
-  - ✅ Comprehensive unit test coverage (7 tests, all passing)
-  - ✅ Real-world validation with CAF experiment
-  - ✅ Catches missing files, wrong references, corpus mismatches
-- **Effort**: ✅ COMPLETED - Low (1-2 hours)
-- **Dependencies**: CLI-005 (two-stage validation architecture)
-- **Priority**: ✅ MEDIUM - Quality improvement - COMPLETED
-- **Testing Results**: 7/7 unit tests pass for enhanced validation scenarios
-- **Real-world Validation**: Successfully catches missing files, wrong references, corpus mismatches
-- **Architecture**: Perfect THIN separation - CLI (deterministic) + LLM (intelligent)
-
-#### [TECH-004] Framework Library Compliance Update ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Update framework library to v10.0 specification compliance
-- **Impact**: ✅ RESOLVED - All frameworks now compliant with latest specification
-- **Acceptance Criteria**: ✅ ALL MET
-  - Framework ecosystem organized with clear categorization ✅
-  - All frameworks migrated to v10.0 specification ✅
-  - Intellectual heritage preserved and documented ✅
-  - Directory structure optimized for discoverability ✅
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
-- **Dependencies**: None
-- **Priority**: ✅ **HIGH** - Foundation for framework validation
-- **Current Status**: ✅ **COMPLETED** - Comprehensive framework ecosystem operational
-- **Implementation Details**:
-  - Reference frameworks (core + flagship) properly organized
-  - Seed frameworks categorized by domain (political, ethics, communication)
-  - Community framework directory ready for contributions
-  - All frameworks v10.0 specification compliant
-  - Comprehensive documentation and usage examples
-
-#### [FRAMEWORK-001] Automated Validation Pipeline ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Implement automated framework validation pipeline
-- **Impact**: ✅ RESOLVED - Comprehensive validation system operational
-- **Acceptance Criteria**: ✅ ALL MET
-  - Basic structural validation tool ✅
-  - Enhanced validation with academic assessment ✅
-  - DiscernusLibrarian integration ✅
-  - Organized output management ✅
-  - Makefile integration for ease of use ✅
-- **Effort**: ✅ COMPLETED - Large (4-6 hours)
-- **Dependencies**: TECH-004 (Framework Library Compliance)
-- **Priority**: ✅ **HIGH** - Quality assurance for framework ecosystem
-- **Current Status**: ✅ **COMPLETED** - Full validation pipeline operational
-- **Implementation Details**:
-  - Framework Validator: Structural compliance checking
-  - Enhanced Framework Validator: Academic grounding + research synthesis
-  - Validation reports automatically saved to framework directories
-  - Integration with DiscernusLibrarian for systematic literature review
-  - Comprehensive testing and documentation
-
-#### [TECH-002] Model Selection Optimization
-- **Description**: Currently hardcoded to Pro model for all operations
-- **Impact**: May not be cost-optimal for all use cases
-- **Acceptance Criteria**: Configurable model selection based on task requirements
-- **Effort**: Medium
-- **Dependencies**: None
-
-#### [TECH-003] Error Handling & Resilience
-- **Description**: Limited error handling for LLM failures
-- **Impact**: Pipeline may fail silently or produce incomplete results
-- **Acceptance Criteria**: Comprehensive error handling with graceful degradation
-- **Effort**: Medium
-- **Dependencies**: None
-
-#### [TECH-005] Complex Framework Performance Optimization
-- **Description**: Enhanced frameworks with 18 derived metrics cause significant processing delays
-- **Impact**: Long experiment runtimes may affect user experience and research velocity
-- **Acceptance Criteria**: Optimize derived metrics generation for complex frameworks
-- **Effort**: Medium
-- **Dependencies**: None
-- **Observed**: Enhanced CFF v10.0 with 18 metrics vs. previous 6 metrics shows processing delays
-
-#### [TECH-006] Enhanced Experiment Provenance Metadata
-- **Description**: Add comprehensive model and system information to experiment metadata for full reproducibility
-- **Impact**: Current reports lack essential provenance data (analysis model, synthesis model, framework version, git commit) making full replication difficult
+- **Description**: **CRITICAL BUG**: Cached derived metrics functions reference temporary file paths that get cleaned up, causing "functions file not found" errors on cache hits
+- **Dependencies**: [CRITICAL-001] ✅
+- **Root Cause**: Cache stores function metadata pointing to temporary workspace files, but temporary directories are cleaned up after each run (lines 769-772)
+- **Evidence**: Cache hit shows "💾 Using cached derived metrics functions" but then fails with "Derived metrics functions file not found"
+- **Solution**: Store actual function code content in cache, recreate function files from cached content when cache hit occurs
+- **Impact**:
+  - Cache hits cause experiment failures instead of performance improvements
+  - Violates caching reliability principles
+  - Makes development velocity worse instead of better
 - **Acceptance Criteria**:
-  - Capture analysis model used (e.g., "vertex_ai/gemini-2.5-flash")
-  - Capture synthesis model used (e.g., "vertex_ai/gemini-2.5-pro") 
-  - Extract framework name and version from framework content
-  - Include git commit hash for repository state
-  - Add system information (Python version, key dependencies)
-  - Update experiment_summary.json and complete_research_data.json schemas
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: MEDIUM - Improves academic reproducibility and research integrity
+  - [x] Cache stores actual function code content, not just metadata
+  - [x] Cache hits recreate function files from stored content
+  - [x] Both derived metrics and statistical analysis caches fixed
+  - [x] Workspace cleanup doesn't break cached functions
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **CRITICAL** - Blocking caching benefits
+- **Status**: ✅ **FIXED** - Cache now stores and recreates function code content
 
-#### [ARCH-002] **CRITICAL REGRESSION**: Batch Processing Architecture Failure ✅ COMPLETED
-- **Description**: ✅ COMPLETED - CleanAnalysisOrchestrator was using batch processing instead of individual document processing, breaking caching, synthesis, and scalability
-- **Impact**: ✅ RESOLVED
-  - **IMMEDIATE**: Statistical analysis path bug causing experiment failures ✅
-  - **SCALABILITY**: Cannot handle thousands of documents (context window limits) ✅
-  - **CACHING**: Complete loss of document-level content-addressable caching ✅
-  - **SYNTHESIS**: Broken asset validation and evidence linkage ✅
-  - **COST**: Re-analyzes all documents when any one changes ✅
-- **Root Cause**: ✅ IDENTIFIED - New orchestrator calls `analyze_batch()` with ALL documents vs working pattern of single document loops
-- **Evidence**: ✅ CONFIRMED - PDAF test creates 1 batch file with 4 documents vs CFF test with individual files
-- **Acceptance Criteria**: ✅ ALL PHASES COMPLETED
-  - **Phase 1 (IMMEDIATE)**: Fix statistical analysis path bug (`/artifacts/artifacts` → `/artifacts`) ✅
-  - **Phase 2 (CRITICAL)**: Restore individual document processing loop from ExperimentOrchestrator ✅
-  - **Phase 3 (VALIDATION)**: Comprehensive test coverage with mocked dependencies ✅
-  - **Phase 4 (INTEGRATION)**: Statistical analysis integration with individual artifacts ✅
-  - **Phase 5 (SYNTHESIS)**: Real synthesis integration with proper asset validation ✅
-  - **Phase 6 (PERFORMANCE)**: Document-level caching and resumption capability ✅
-- **Implementation Strategy**: ✅ SUCCESSFULLY EXECUTED - Test-Driven Development to minimize API costs
-  - Unit tests with mocked dependencies (0 cost) ✅
-  - Implementation using proven ExperimentOrchestrator pattern ✅
-  - Integration tests with mocked LLM calls (0 cost) ✅
-  - Limited live testing with minimal experiments ($2-5) ✅
-  - Full validation with original experiments ($3-8) ✅
-- **Effort**: ✅ COMPLETED - High (6-8 hours total) - **CRITICAL PATH ITEM**
-- **Dependencies**: ✅ NONE - Working pattern existed in ExperimentOrchestrator
-- **Priority**: ✅ **CRITICAL** - Was blocking all production experiments, breaking THIN architecture
-- **Current Status**: ✅ **COMPLETED** - Individual document processing fully restored with comprehensive testing
-- **Documentation**: ✅ `docs/developer/BATCH_PROCESSING_REGRESSION_REMEDIATION_PLAN.md`
-- **TDD Protocol Documentation**: ✅ Complete documentation created across project for future Cursor agents
+#### [PERF-001] Implement Validation Caching ✅ **COMPLETED**
 
-#### [ARCH-003] Complete Clean Orchestrator Feature Parity (Post-Regression Fix) ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Complete remaining CleanAnalysisOrchestrator features for full feature parity with legacy orchestrator
-- **Impact**: ✅ RESOLVED - Eliminates remaining architectural debt from notebook generation cruft
-- **Acceptance Criteria**: ✅ ALL MET
-  - Enhanced Error Handling: Robust error handling with graceful degradation ✅
-  - Performance Optimization: Verify caching and performance optimization ✅
-  - Complete Testing: Comprehensive test coverage for all scenarios ✅
-  - CLI Default Switch: Make clean orchestrator the default, deprecate legacy option ✅
-- **Effort**: ✅ COMPLETED - Medium (2-3 hours) - **CRITICAL PATH ITEM**
-- **Dependencies**: ✅ ARCH-002 (Batch Processing Regression Fix) - **COMPLETED**
-- **Priority**: ✅ **HIGH** - Completes clean orchestrator implementation
-- **Current Status**: ✅ **COMPLETED** - All features implemented with comprehensive testing
-- **Implementation Details**:
-  - Enhanced error handling with graceful degradation for validation, analysis, and synthesis failures
-  - Performance monitoring with phase timing, cache hit/miss tracking, and performance scoring
-  - Test mode configuration for development and testing scenarios
-  - CLI updated to make clean orchestrator the default with deprecation warnings for legacy
-  - Comprehensive test suite covering all new features (10 tests, all passing)
-
-#### [CLI-006] Clean Up Orchestrator Architecture 🔧 LOW PRIORITY
-- **Description**: Multiple orchestrators cause confusion (ExperimentOrchestrator marked deprecated but has better v10 support)
-- **Impact**: Architectural confusion, maintenance burden, unclear migration path
-- **Root Cause**: ExperimentOrchestrator marked deprecated but actually has correct v10 parsing
+- **Description**: Implement caching for experiment coherence validation to eliminate redundant validation when input assets haven't changed
+- **Dependencies**: [CRITICAL-002] ✅
+- **Root Cause**: Validation runs every time even when framework, experiment, and corpus haven't changed, causing unnecessary LLM calls and delays
+- **Solution**: Cache validation results based on content hashes of framework, experiment, corpus, and model
+- **Impact**:
+  - Eliminates 20-30 second validation delays on repeated runs
+  - Reduces LLM API costs for development iterations
+  - Maintains same validation quality and error detection
 - **Acceptance Criteria**:
-  - [ ] Migrate unique ExperimentOrchestrator v10 parsing logic to CleanAnalysisOrchestrator
-  - [ ] Add proper deprecation warnings to ExperimentOrchestrator
-  - [ ] Remove broken ThinOrchestrator references from codebase
-  - [ ] Document single recommended orchestrator path
-  - [ ] Update CLI help text to reflect current architecture
-- **Effort**: Medium (2-3 hours)
-- **Dependencies**: CLI-001 (v10 parsing fix)
-- **Priority**: LOW - Architectural cleanup, not blocking functionality
+  - [x] ValidationCacheManager created with deterministic cache keys
+  - [x] Cache key based on framework + experiment + corpus + model content
+  - [x] Validation results cached with success/failure status and issues
+  - [x] Cache hits skip validation and use stored results
+  - [x] Failed validations properly cached and re-raise errors
+  - [x] Unit tests cover all caching scenarios
+  - [x] Integration with CleanAnalysisOrchestrator performance metrics
+- **Effort**: 2 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** - Significant development velocity improvement
+- **Status**: ✅ **IMPLEMENTED** - Validation now cached with 20-30 second speedup on cache hits
 
-#### [CLI-007] Implement CLI Logging & Provenance 🔧 LOW PRIORITY
-- **Description**: CLI operations lack comprehensive logging for debugging and audit trails
-- **Impact**: Difficult to debug CLI issues, poor operational visibility, no audit trails
-- **Root Cause**: CLI focused on user experience over operational logging
+#### [TEST-INFRA] Fix Integration Test Infrastructure
+
+- **Description**: Integration tests incorrectly mock critical setup, causing false failures
+- **Impact**: False test failures prevent validation of all features
+- **Root Cause**: Tests mock `_initialize_infrastructure` which bypasses `artifact_storage` setup
 - **Acceptance Criteria**:
-  - [ ] Add structured logging to all CLI commands
-  - [ ] Implement operation provenance tracking
-  - [ ] Create CLI operation audit trails
-  - [ ] Add performance metrics for CLI operations
-  - [ ] Integrate with existing experiment logging system
-- **Effort**: Medium (3-4 hours)
-- **Dependencies**: None
-- **Priority**: LOW - Operational improvement, not blocking functionality
+  - [ ] Integration tests run without infrastructure errors
+  - [ ] Tests accurately reflect actual system status
+  - [ ] False failures are eliminated
+  - [ ] Real issues (if any) are identified
+- **Effort**: 1-2 hours
+- **Priority**: **HIGHEST** - Blocking everything
 
-#### [CLI-008] Comprehensive CLI Testing 🔧 LOW PRIORITY
-- **Description**: All CLI modernization changes need comprehensive test coverage
-- **Impact**: Risk of regression, lack of confidence in changes, difficult maintenance
-- **Root Cause**: CLI testing was minimal, focused on integration over unit testing
+#### [CLI-002] Fix Non-Compliant Test Experiments
+
+- **Description**: Update test experiments to comply with v10 specifications
+- **Dependencies**: [TEST-INFRA] ✅
 - **Acceptance Criteria**:
-  - [ ] Unit tests for all CLI command parsing and validation
-  - [ ] Integration tests for end-to-end v10 experiment pipeline
-  - [ ] Mock tests for LLM gateway interactions
-  - [ ] Test coverage for error scenarios and edge cases
-  - [ ] Automated CLI regression testing
-- **Effort**: High (4-6 hours)
-- **Dependencies**: CLI-001, CLI-004 (core functionality fixes)
-- **Priority**: LOW - Quality improvement, not blocking functionality
-
-
-
-#### [TECH-007] Dev Tools Integration Decision
-- **Description**: Decide future of standalone dev_tools directory and integrate or organize appropriately
-- **Impact**: Current dev_tools/verify_model_health.py duplicates functionality available in gateway system, creating confusion about where to find health checking capabilities
-- **Acceptance Criteria**:
-  - Evaluate dev_tools/verify_model_health.py against built-in gateway health checks
-  - Decide between integration, reorganization, or deprecation
-  - If integration: Move functionality to main CLI as `discernus health` command
-  - If reorganization: Move to scripts/developer_tools/ for better discoverability
-  - If deprecation: Remove standalone tool and enhance built-in functionality
-  - Document decision and rationale for future reference
-- **Effort**: Low
-- **Dependencies**: None
-- **Priority**: LOW - Development workflow improvement, not blocking production
-- **Current Status**: Tool is well-maintained but standalone, overlaps with gateway health checks
-
-#### [ARCH-001] Multi-Agent Progressive Synthesis Architecture (Phase 2)
-- **Description**: Implement 4-stage multi-agent synthesis pipeline for comprehensive discovery capabilities beyond single-agent limitations
-- **Impact**: Enables full hybrid experimental design paradigm with systematic pattern discovery, computational analysis, and cross-validation
-- **Acceptance Criteria**: 
-  - Stage 1: Parallel specialized agents (Statistical Enhancement, Evidence Analysis, Pattern Recognition)
-  - Stage 2: Sequential advanced synthesis (Cross-Dimensional Network Analysis, Anomaly Detection, Archetype Validation)
-  - Stage 3: Integration agents (Insight Synthesis, Methodological Assessment)
-  - Stage 4: Communication agents (Academic Report Generation, Executive Intelligence)
-  - Computational service integration for mathematical operations with full provenance
-  - Multi-agent cross-validation and uncertainty quantification
-- **Effort**: Very High
-- **Dependencies**: CRIT-006 (Enhanced Single-Agent Synthesis)
-- **Capabilities**: Advanced mathematical operations, systematic evidence validation, multi-perspective analysis
-- **Expected Outcome**: Claude-level analytical sophistication through systematic agent collaboration
-- **Priority**: HIGH - Enables complete hybrid experimental design vision
-- **Implementation Strategy**: Progressive enhancement building on Phase 1 single-agent foundation
-
-#### [CRIT-009] Appropriate Reliability Metrics for Oppositional Frameworks ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Replace Cronbach's Alpha with methodologically sound alternatives for frameworks that intentionally measure opposing constructs
-- **Impact**: ✅ RESOLVED - LLM-driven framework classification now determines appropriate statistical validation approach
-- **Results Achieved**:
-  - Replaced hardcoded Cronbach's Alpha with LLM-driven framework type detection
-  - Implemented oppositional construct validation for opposing dimension frameworks
-  - Maintained traditional reliability metrics for unidimensional frameworks
-  - AutomatedStatisticalAnalysisAgent now uses `_determine_framework_validation_type` method
-  - Framework-appropriate statistical analysis generated dynamically
-- **Status**: ✅ COMPLETED - Methodologically appropriate metrics now used based on framework design
-
-#### [CRIT-008] Robust Path Resolution and Validation ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Fix "works on my machine" problems caused by brittle filename matching between corpus manifests and actual files
-- **Impact**: ✅ RESOLVED - Fuzzy filename matching now handles hash-suffixed files and git merge scenarios
-- **Results Achieved**:
-  - Implemented fuzzy filename matching in CleanAnalysisOrchestrator
-  - Added corpus file existence validation before experiment execution
-  - Enhanced experiment coherence validation to catch path issues
-  - Support for both exact and approximate filename matching with hash suffix tolerance
-  - Comprehensive logging of file resolution process for debugging
-- **Status**: ✅ COMPLETED - Robust path resolution prevents "works on my machine" failures
-
-#### [CRIT-007] Infrastructure Cruft Cleanup and Deprecation ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Surgical cleanup of contaminated/unused components
-- **Impact**: ✅ RESOLVED - Clean infrastructure with single active orchestrator, framework agnosticism restored
-- **Critical Issues**: ✅ ALL RESOLVED
-  - notebook_generator_agent: Deprecated (moved to deprecated/)
-  - automated_derived_metrics: Validated as clean and framework-agnostic
-  - csv_export_agent: Fixed simple_test path hardcoding
-  - Multiple orchestrators: ThinOrchestrator and V8Orchestrator deprecated
-- **Results Achieved**:
-  - Single active orchestrator (ExperimentOrchestrator) with clean architecture
-  - 13 active agents identified and validated
-  - 8 contaminated/unused components deprecated
-  - Framework and experiment agnosticism restored
-  - Reference patterns preserved for future multi-agent architecture
-- **Status**: ✅ COMPLETED - Clean foundation established
-
-#### [CRIT-006] Enhanced Framework-Agnostic Synthesis Agent (Phase 1) ✅ COMPLETED
-- **Description**: ✅ COMPLETED - Enhanced synthesis agent with comprehensive analytical architecture while preserving framework agnosticism
-- **Impact**: ✅ RESOLVED - Enhanced frameworks now provide significant benefit; reports have academic depth and multi-level insights
-- **Acceptance Criteria**: ✅ ALL MET
-  - Framework-agnostic synthesis prompt working with any compliant framework ✅
-  - Multi-level analytical architecture (5 levels: Basic → Advanced → Cross-dimensional → Temporal → Meta-analysis) ✅
-  - Comprehensive statistical utilization with confidence analysis, tension patterns, derived metrics ✅
-  - Enhanced evidence integration with systematic quote validation ✅
-  - Academic-quality output approaching iterative human-AI collaboration results ✅
-  - Integration with existing single-agent pipeline architecture ✅
-- **Results Achieved**: 
-  - 2,850-3,060 word comprehensive reports (vs. ~1,500 word originals)
-  - Academic structure with literature review, statistical tables, evidence integration
-  - Multi-level analytical progression implemented
-  - Framework agnosticism preserved and validated
-- **Status**: ✅ COMPLETED - Enhanced synthesis agent operational and producing academic-quality reports
-
----
-
-## 📊 Quality & Validation
-
-### Testing Strategy Enhancement
+  - [ ] All test experiments pass v10 validation
+  - [ ] Test data matches current corpus specifications
+  - [ ] Framework references are current
+- **Effort**: 2-3 hours
 
 #### [TEST-001] Unit Test Coverage Targets
-- **Description**: Establish specific coverage goals for different component types to ensure code quality
-- **Impact**: Inconsistent test coverage across components, unclear quality standards
+
+- **Description**: Establish and achieve unit test coverage targets
+- **Dependencies**: [TEST-INFRA] ✅
 - **Acceptance Criteria**:
-  - Set coverage targets: Core components (90%), Agents (85%), Orchestrators (80%), Utilities (75%)
-  - Implement coverage reporting in CI/CD pipeline
-  - Establish coverage thresholds that block merges
-  - Track coverage trends over time
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: MEDIUM - Improves code quality and reduces regression risk
+  - [ ] Core components have 80%+ coverage
+  - [ ] Critical paths have 90%+ coverage
+  - [ ] Test suite runs in under 30 seconds
+- **Effort**: 4-6 hours
+
+### Sprint 2: THIN Architecture Optimization (HIGH PRIORITY)
+
+**Timeline:** 1-2 days
+**Goal:** Optimize core system architecture
+
+#### [THIN-OPT] Statistical Calculation Process Optimization
+
+- **Description**: Streamline statistical calculation process for better performance
+- **Dependencies**: [TEST-001] ✅
+- **Acceptance Criteria**:
+  - [ ] Statistical calculations complete in under 60 seconds
+  - [ ] Memory usage optimized for large datasets
+  - [ ] Process maintains THIN architecture principles
+- **Effort**: 1 day
+
+#### [CACHE-001] RAG Index Caching Implementation ✅ **COMPLETED**
+
+- **Description**: Implement caching for RAG indexes to eliminate redundant rebuilding and improve development velocity
+- **Dependencies**: [THIN-OPT] ✅
+- **Root Cause**: RAG index rebuilt from scratch every time, even when evidence artifacts are identical, causing 10-15 second delays
+- **Critical Fix Applied**: Fixed txtai directory-based index handling - txtai saves indexes as directories, not files, requiring tar.gz compression for caching
+- **Acceptance Criteria**:
+  - [x] RAG index built and cached immediately after analysis phase (Phase 4.5)
+  - [x] Cache key based on evidence artifact hashes for deterministic caching
+  - [x] Synthesis phase checks cache first, builds only if needed
+  - [x] txtai index save/load functionality integrated with LocalArtifactStorage
+  - [x] **CRITICAL**: Proper tar.gz handling for txtai directory-based indexes
+  - [x] Cache hit provides 10-15 second speed improvement over rebuild
+  - [x] Follows same caching pattern as derived metrics and statistical analysis
+  - [x] Unit tests cover tar.gz compression/decompression scenarios
+- **Effort**: 4 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** - Significant development velocity improvement
+- **Status**: ✅ **IMPLEMENTED** - RAG index caching working with proper txtai directory handling
+
+#### [ARCH-004] Complete Orchestrator Deprecation & Cleanup
+
+- **Description**: Complete the deprecation and cleanup of all legacy orchestrators to establish CleanAnalysisOrchestrator as the sole production orchestrator
+- **Dependencies**: [CACHE-001] ✅
+- **Acceptance Criteria**:
+  - [ ] All deprecated orchestrators moved to deprecated/ folder
+  - [ ] CLI help and documentation updated to remove deprecated options
+  - [ ] No code references to deprecated orchestrators in active codebase
+  - [ ] Clear documentation of single orchestrator architecture
+  - [ ] Deprecation warnings removed from active code
+- **Effort**: 4-6 hours
+
+### Sprint 3: Quality & Documentation (MEDIUM PRIORITY)
+
+**Timeline:** 2-3 days
+**Goal:** Improve system quality and user experience
 
 #### [TEST-002] Integration Test Strategy
-- **Description**: Define when and how to use integration vs unit tests for different testing scenarios
-- **Impact**: Unclear testing approach, potential over-testing or under-testing of system interactions
+
+- **Description**: Develop comprehensive integration test strategy
+- **Dependencies**: [ARCH-004] ✅
 - **Acceptance Criteria**:
-  - Document test pyramid: Unit tests (70%), Integration tests (20%), End-to-end tests (10%)
-  - Define integration test scope: Agent interactions, data flow between components
-  - Establish integration test data management strategy
-  - Create integration test templates for common patterns
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: MEDIUM - Clarifies testing approach and improves test effectiveness
+  - [ ] Integration test plan documented
+  - [ ] Test scenarios cover critical user workflows
+  - [ ] Mock data strategy established
+- **Effort**: 1 day
 
 #### [TEST-003] Test Data Management
-- **Description**: Organize test fixtures and mock data for consistent, maintainable testing
-- **Impact**: Scattered test data, inconsistent test environments, difficult test maintenance
+
+- **Description**: Implement proper test data management and cleanup
+- **Dependencies**: [TEST-002] ✅
 - **Acceptance Criteria**:
-  - Centralized test data repository in `discernus/tests/fixtures/`
-  - Standardized test data formats (JSON, CSV, text)
-  - Mock data generators for common test scenarios
-  - Test data versioning and change management
-- **Effort**: Low
-- **Dependencies**: None
-- **Priority**: LOW - Improves test maintainability and developer experience
-
-### Medium Priority - Should Implement
-
-#### [QUAL-001] Automated Quality Checks
-- **Description**: No automated validation of output quality
-- **Impact**: May produce low-quality results without detection
-- **Acceptance Criteria**: Automated quality validation at each pipeline stage
-- **Effort**: High
-- **Dependencies**: TECH-003
-
-#### [QUAL-002] Statistical Validation
-- **Description**: Limited validation of statistical analysis results
-- **Impact**: May produce statistically invalid conclusions
-- **Acceptance Criteria**: Automated statistical validation and sanity checks
-- **Effort**: Medium
-- **Dependencies**: TECH-003
-
-#### [QUAL-003] Evidence Quality Assessment
-- **Description**: No assessment of evidence quality or relevance
-- **Impact**: May cite weak or irrelevant evidence
-- **Acceptance Criteria**: Evidence quality scoring and filtering
-- **Effort**: High
-- **Dependencies**: CRIT-002
-
----
-
-## 🚀 Performance & Scalability
-
-### Low Priority - Nice to Have
-
-#### [PERF-001] Large Corpus Optimization
-- **Description**: Current pipeline designed for small corpora (4-20 documents)
-- **Impact**: May not scale to research-grade corpora (1000+ documents)
-- **Acceptance Criteria**: Efficient processing of large corpora
-- **Effort**: High
-- **Dependencies**: TECH-003, QUAL-001
-
-#### [PERF-002] Caching Strategy
-- **Description**: Basic caching may not be optimal for repeated analysis
-- **Impact**: Unnecessary recomputation of similar analyses
-- **Acceptance Criteria**: Intelligent caching strategy for analysis results
-- **Effort**: Medium
-- **Dependencies**: None
-
-#### [PERF-003] Parallel Processing
-- **Description**: Sequential processing of documents
-- **Impact**: Slow processing for large corpora
-- **Acceptance Criteria**: Parallel document processing where possible
-- **Effort**: High
-- **Dependencies**: TECH-003
-
----
-
-## 📚 Documentation & User Experience
-
-### Developer Experience
+  - [ ] Test data is isolated and cleanable
+  - [ ] No test artifacts pollute production data
+  - [ ] Test cleanup is automated
+- **Effort**: 6-8 hours
 
 #### [DX-001] Onboarding Documentation
-- **Description**: Create comprehensive onboarding guides for new contributors and researchers
-- **Impact**: New contributors struggle to understand project structure and development workflow
+
+- **Description**: Create clear onboarding documentation for new contributors
+- **Dependencies**: [TEST-003] ✅
 - **Acceptance Criteria**:
-  - Quick start guide for new developers (environment setup, first contribution)
-  - Researcher onboarding guide (experiment design, framework usage)
-  - Architecture overview for contributors (THIN principles, component relationships)
-  - Common development tasks and workflows
-  - Troubleshooting guide for common issues
-- **Effort**: Medium
-- **Dependencies**: None
-- **Priority**: MEDIUM - Improves contributor experience and reduces onboarding friction
-
-### Low Priority - Nice to Have
-
-#### [DOC-001] User Guide
-- **Description**: Limited documentation for researchers
-- **Impact**: Researchers may struggle to use the platform effectively
-- **Acceptance Criteria**: Comprehensive user guide with examples
-- **Effort**: Medium
-- **Dependencies**: None
-
-#### [DOC-002] API Documentation
-- **Description**: No API documentation for programmatic access
-- **Impact**: Developers cannot integrate with the platform
-- **Acceptance Criteria**: Complete API documentation with examples
-- **Effort**: High
-- **Dependencies**: None
-
-#### [DOC-003] Best Practices Guide
-- **Description**: No guidance on best practices for research design
-- **Impact**: Researchers may design suboptimal experiments
-- **Acceptance Criteria**: Best practices guide for research design
-- **Effort**: Medium
-- **Dependencies**: DOC-001
-
----
-
-## 🎯 Current Sprint Planning
-
-### **CRITICAL SPRINT**: CLI v10 Compliance Fix (IMMEDIATE PRIORITY) ✅ MAJOR PROGRESS
-- [x] **CLI-001**: **CRITICAL** - Fix CleanAnalysisOrchestrator v10 Parsing ✅ COMPLETED
-  - [x] Phase 1: Write unit tests for v10 parsing (1 hour, $0) ✅
-  - [x] Phase 2: Implement v10 machine-readable appendix parsing (1-2 hours, $0) ✅
-  - [x] Phase 3: Test with CAF experiment (30 minutes, $0) ✅
-  - [x] Phase 4: Validate with other v10 experiments (15 minutes, $0) ✅
-- [x] **CLI-003**: Fix Coherence Agent Validation Gap ✅ COMPLETED
-  - [x] Phase 1: Investigate validation bypass (30 minutes, $0) ✅
-  - [x] Phase 2: Implement format-agnostic validation (1-2 hours, $0) ✅
-  - [x] Phase 3: Update prompt for spec compliance priority (30 minutes, $0) ✅
-  - [x] Phase 4: Test with multiple v10 formats (30 minutes, $0) ✅
-- [ ] **CLI-004**: Fix Broken CLI Commands (HIGH PRIORITY)
-  - [ ] Phase 1: Fix debug command orchestrator references (30 minutes, $0)
-  - [ ] Phase 2: Fix CLI dry-run parsing for v10 (30 minutes, $0)
-  - [ ] Phase 3: Test all CLI commands with v10 experiments (30 minutes, $0)
-
-### Sprint 1: CLI Quality & Compliance ✅ COMPLETED
-- [ ] CLI-002: Fix Non-Compliant Test Experiments
-- [x] CLI-003: Investigate Coherence Agent Validation Bypass ✅ COMPLETED
-- [x] CLI-005: Enhance CLI Validation ✅ COMPLETED
-
-### Sprint 2: Testing & Quality Enhancement
-- [ ] CLI-008: Comprehensive CLI Testing
-- [ ] TEST-001: Unit Test Coverage Targets
-- [ ] TEST-002: Integration Test Strategy
-
-### Sprint 3: CLI Architecture Cleanup 🔧
-- [ ] CLI-006: Clean Up Orchestrator Architecture
-- [ ] CLI-007: Implement CLI Logging & Provenance
-
-### Sprint 4: Developer Experience
-- [ ] DX-001: Onboarding Documentation
-
-### Sprint 5: Advanced Architecture (Future)
-- [ ] ARCH-001: Multi-Agent Progressive Synthesis Architecture (Phase 2)
-- [ ] TECH-002: Model Selection Optimization
-- [ ] TECH-003: Error Handling & Resilience
-
-### Completed Major Milestones ✅
-**All previous critical publication-blocking issues resolved!** See `DONE.md` for complete achievement records.
-- [x] **CRITICAL SPRINT**: Batch Processing Regression Fix ✅ COMPLETED
-- [x] **Sprint 1**: Clean Orchestrator Completion ✅ COMPLETED  
-- [x] **Sprint 2**: Framework Library Compliance ✅ COMPLETED
-- [x] **THIN Architecture Restoration** ✅ - External YAML prompts, statistical tables operational
-- [x] **Framework Mathematical Fixes** ✅ - Division-by-zero prevention, logical consistency
-- [x] **Appropriate Reliability Metrics** ✅ - LLM-driven framework classification (CRIT-009)
-- [x] **Robust Path Resolution** ✅ - Fuzzy filename matching with hash tolerance (CRIT-008)
-- [x] Enhanced Framework-Agnostic Synthesis Agent ✅
-- [x] Infrastructure Cruft Cleanup ✅
-- [x] Publication Readiness (Source Access) ✅
-- [x] Platform Robustness ✅
-- [x] Framework Specification Enhancement ✅
-- [x] Clean Analysis Orchestrator Foundation ✅
-
----
-
-## 📈 Success Metrics
-
-### Enhanced Synthesis Achievement ✅ COMPLETED
-- [x] **Academic-quality reports**: 2,850-3,060 words vs. previous ~1,500 words ✅
-- [x] **Multi-level analysis**: 5-level analytical architecture implemented ✅
-- [x] **Literature integration**: Proper academic citations and theoretical grounding ✅
-- [x] **Statistical sophistication**: Correlation analysis, significance testing, effect sizes ✅
-- [x] **Evidence integration**: Systematic quote attribution with source identification ✅
-- [x] **Framework agnosticism**: Works with any compliant framework ✅
-
-### Infrastructure Robustness ✅ COMPLETED
-- [x] **Clean architecture**: Single active orchestrator, deprecated contaminated components ✅
-- [x] **Framework agnosticism**: No CFF-specific hardcoding in active pipeline ✅
-- [x] **Experiment agnosticism**: No simple_test dependencies in active components ✅
-- [x] **13 active agents**: Clear component inventory and responsibilities ✅
-
-### Publication Readiness ✅ COMPLETED
-- [x] All source texts accessible in results ✅
-- [x] Evidence database fully accessible ✅
-- [x] Complete source metadata available ✅
-- [x] All quotes verifiable ✅
-- [x] End-to-end reproducibility achieved ✅
-
-### Platform Reliability ✅ COMPLETED
-- [x] **Robust path resolution**: Fuzzy filename matching with hash suffix tolerance ✅
-- [x] **Appropriate reliability metrics**: Oppositional validation for opposing constructs, Cronbach's Alpha for unidimensional ✅
-- [x] **Clean architecture**: THIN orchestrator without notebook generation cruft ✅
-- [x] **THIN compliance**: 100% architectural compliance achieved ✅
-
-### THIN Architecture Restoration ✅ COMPLETED
-- [x] **External YAML prompts**: SynthesisPromptAssembler loads enhanced_synthesis_prompt.yaml ✅
-- [x] **Eliminated embedded code**: Removed 76-line embedded prompt template from Python code ✅
-- [x] **Sophisticated statistical tables**: Real numerical data in proper Markdown table format ✅
-- [x] **Framework mathematical robustness**: Division-by-zero prevention with epsilon (0.001) ✅
-- [x] **Logical consistency**: Removed contradictory disambiguation rules ✅
-- [x] **Academic quality reports**: Multi-level analysis with literature review and evidence integration ✅
-
-### TDD Protocol Documentation ✅ COMPLETED
-- [x] **`.cursor/rules`**: Updated with comprehensive TDD protocol for critical regressions ✅
-- [x] **`docs/developer/TDD_CRITICAL_REGRESSION_PROTOCOL.md`**: Detailed 6-phase protocol documentation ✅
-- [x] **`docs/developer/README.md`**: Added critical development protocols section ✅
-- [x] **`CURSOR_AGENT_QUICK_START.md`**: Added critical regression protocol for new agents ✅
-- [x] **`docs/developer/testing/README.md`**: Referenced TDD approach in testing strategy ✅
-- [x] **`docs/developer/CURSOR_AGENT_TDD_LEARNINGS.md`**: Concise summary for future agents ✅
-- [x] **`pm/todo/discernus_v10_backlog.md`**: Documented success story and lessons learned ✅
-
-**Impact**: Future Cursor agents now have comprehensive guidance on cost-effective critical regression resolution using proven TDD methodology
-
----
-
-## 🎯 Current Focus Areas
-
-### CLI v10 Compliance (IMMEDIATE PRIORITY)
-- **Goal**: Fix CLI v10 parsing and command functionality
-- **Priority**: **CRITICAL** - Blocks v10 experiment execution
-- **Progress**: ✅ CLI-001, CLI-003, CLI-005 completed - Major validation architecture operational
-- **Next Steps**: CLI-002 (test experiments), CLI-004 (broken commands), CLI-006 through CLI-008
-
-### Legacy Experiment v10 Compliance ✅ COMPLETED
-- **Goal**: Update legacy experiments to v10.0 specification format
-- **Priority**: ✅ **COMPLETED** - All 5 experiments now v10.0 compliant
-- **Next Steps**: Ready for v10 pipeline testing once CLI-001 is complete
-
-### Testing & Quality Enhancement
-- **Goal**: Establish comprehensive testing strategy
-- **Priority**: MEDIUM - Improves code quality and reliability
-- **Next Steps**: TEST-001 through TEST-003 implementation
-
----
-
-## 🔄 Backlog Maintenance
-
-- **Review Frequency**: Weekly
-- **Priority Updates**: As issues are resolved
-- **New Items**: Add as discovered during development
-- **Completion Criteria**: All acceptance criteria met and tested
-
-## 🏆 SUCCESS: ARCH-002 Critical Regression Resolution
-
-**Status**: ✅ **COMPLETE** - Critical batch processing regression fully resolved using proven TDD methodology
-
-**Issue**: `CleanAnalysisOrchestrator` was processing all documents in single batch LLM calls, violating THIN architecture principles
-
-**Resolution**: Complete success using 6-phase Test-Driven Development (TDD) approach
-- **Cost**: ~$13 total (vs $50+ for unstructured debugging)
-- **Time**: 1 session with disciplined methodology  
-- **Outcome**: Full restoration of individual processing with comprehensive testing
-
-### 🎯 TDD Protocol Success Factors
-
-**What Made This Resolution Successful**:
-1. **Immediate Documentation**: Issue logged in backlog prevented scope creep
-2. **Sequential Phases**: Each phase built confidence before moving to next
-3. **Mock-Based Testing**: 90% of debugging done without API costs
-4. **Proven Patterns**: Importing working code was faster than rebuilding
-5. **Cost Discipline**: Limited live testing prevented expensive debugging cycles
-
-**Documentation Created**:
-- ✅ `docs/developer/TDD_CRITICAL_REGRESSION_PROTOCOL.md` - Comprehensive protocol
-- ✅ `.cursor/rules` - Updated with TDD methodology
-- ✅ `CURSOR_AGENT_QUICK_START.md` - Added critical regression protocol
-- ✅ `docs/developer/testing/README.md` - Referenced TDD approach
-
-### 📋 6-Phase TDD Protocol (Proven Success Pattern)
-
-1. **Unit Test Development**: Write focused tests validating regression patterns
-2. **Path Bug Investigation**: Fix configuration/path issues with minimal changes  
-3. **Core Implementation**: Implement fixes using proven patterns from working code
-4. **Integration Testing**: Use mocks to verify end-to-end pipeline logic
-5. **Limited Live Testing**: Create minimal 1-document experiments for validation
-6. **Full Validation**: Rerun original experiments to confirm complete resolution
-
-### 🔄 Future Critical Regressions
-
-**Standard Operating Procedure**:
-1. **IMMEDIATE STOP** - No live debugging or expensive API experiments
-2. **Document Issue** - Log in this backlog with ARCH-XXX identifier
-3. **Follow TDD Protocol** - Use proven 6-phase approach for cost-effective resolution
-4. **Update Protocol** - Document new learnings for continuous improvement
-
----
-
-## 🎯 Current Status & Next Priorities
-
-### ✅ **EXPERIMENT-001: FULLY RESOLVED**
-**Status**: All 5 legacy experiments successfully updated to v10.0 specification compliance
-**Outcome**: Experiments now follow v10.0 format, use local framework files, have proper corpus placement
-**Documentation**: Complete v10 compliance implementation documented in DONE.md
-
-### 🚀 **Next Priority: CLI v10 Compliance Fix**
-**Goal**: Fix CLI v10 parsing and command functionality to enable v10 experiment execution
-**Status**: **BLOCKING** - CLI-001 being worked on by other agent
-**Effort**: Medium (2-3 hours) - Can proceed once CLI-001 is complete
-**Impact**: Enables all v10 experiments to run on current production pipeline
-
-### 📋 **Immediate Next Steps**
-1. **Wait for CLI-001**: v10 parsing fix by other agent
-2. **CLI-002 through CLI-008**: Fix remaining CLI issues and enhance functionality
-3. **Test v10 Experiments**: Validate that all 5 updated experiments work on v10 pipeline
-
-**Note**: Legacy experiment v10 compliance is complete. The system is now ready for v10 pipeline testing once the CLI parsing issues are resolved.
-
-## 🏆 SUCCESS: ARCH-003 Clean Orchestrator Feature Parity
-
-**Status**: ✅ **COMPLETE** - All CleanAnalysisOrchestrator features implemented for full feature parity
-
-**Goal**: Complete remaining CleanAnalysisOrchestrator features to achieve full feature parity with legacy orchestrator
-
-**Achievements**: Complete success with comprehensive implementation and testing
-- **Enhanced Error Handling**: Robust error handling with graceful degradation for all pipeline phases
-- **Performance Optimization**: Comprehensive performance monitoring with phase timing, cache tracking, and scoring
-- **Complete Testing**: Comprehensive test suite covering all new features (10 tests, all passing)
-- **CLI Default Switch**: Clean orchestrator now default with deprecation warnings for legacy
-
-### 🎯 Key Features Implemented
-
-1. **Enhanced Error Handling with Graceful Degradation** ✅
-   - Validation failures don't block experiment execution
-   - Statistical analysis failures allow continuation with basic results
-   - Synthesis failures create basic results to avoid complete failure
-   - Results creation failures fall back to basic directory structure
-
-2. **Performance Optimization and Monitoring** ✅
-   - Phase timing for all experiment stages
-   - Cache hit/miss tracking for artifact storage
-   - Performance scoring based on timing and cache efficiency
-   - Cache performance verification during infrastructure initialization
-
-3. **Complete Testing Support** ✅
-   - Test mode configuration for development scenarios
-   - Mock LLM call support for testing
-   - Performance monitoring configuration
-   - Comprehensive test configuration retrieval
-
-4. **CLI Default Switch and Deprecation** ✅
-   - CleanAnalysisOrchestrator now default choice
-   - Legacy orchestrator shows deprecation warnings
-   - Clear migration path for users
-   - Future removal timeline communicated
-
-### 📊 Implementation Results
-
-**Code Changes**: 681 insertions, 107 deletions across 4 files
-**Test Coverage**: 10 comprehensive tests covering all new features
-**Performance**: Real-time monitoring with scoring and optimization
-**Error Handling**: Graceful degradation prevents complete experiment failures
-**User Experience**: Clean orchestrator is now the recommended default
-
-**Impact**: Major architectural debt eliminated, clean orchestrator now production-ready with enterprise-grade features
-
-## 🏆 SUCCESS: Framework Library Compliance & Validation Pipeline
-
-**Status**: ✅ **COMPLETE** - Comprehensive framework ecosystem with automated validation operational
-
-**Goal**: Establish v10.0 specification compliance across all frameworks with automated quality assurance
-
-**Achievements**: Complete success with comprehensive implementation and organization
-- **Framework Library Compliance**: All frameworks migrated to v10.0 specification with organized ecosystem
-- **Automated Validation Pipeline**: Structural + academic validation with DiscernusLibrarian integration
-- **Organized Output Management**: Validation reports saved alongside frameworks for discoverability
-- **Makefile Integration**: Easy-to-use shortcuts for all validation operations
-
-### 🎯 Key Features Implemented
-
-1. **Framework Library Compliance (TECH-004)** ✅
-   - **Reference Frameworks**: Core modules (ECF, CAF, CHF) + Flagship (CFF, PDAF, OPNIF)
-   - **Seed Frameworks**: Political (MFT, PWT), Ethics (BEF), Communication (EFF, LFF)
-   - **Community Directory**: Ready for user-contributed frameworks
-   - **v10.0 Specification**: All frameworks compliant with latest standards
-   - **Intellectual Heritage**: Preserved and documented across all frameworks
-
-2. **Automated Validation Pipeline (FRAMEWORK-001)** ✅
-   - **Framework Validator**: Basic structural compliance checking
-   - **Enhanced Framework Validator**: Academic grounding + research synthesis
-   - **DiscernusLibrarian Integration**: Systematic literature review and research synthesis
-   - **Organized Output Management**: Validation reports saved to framework-specific directories
-   - **Makefile Integration**: Easy shortcuts for validation operations
-
-### 📊 Implementation Results
-
-**Framework Ecosystem**: 9+ frameworks organized across 4 domains
-**Validation Tools**: 2-tier validation system (structural + academic)
-**Integration**: Full DiscernusLibrarian integration for research synthesis
-**Documentation**: Comprehensive READMEs and usage examples
-**Testing**: Full test coverage for validation pipeline
-
-**Impact**: Platform now has enterprise-grade framework management with automated quality assurance
-
-## 🏆 SUCCESS: CAF Experiment Execution Issues Resolved
-
-**Status**: ✅ **COMPLETE** - CAF experiment now runs successfully through analysis and statistical phases
-
-**Goal**: Fix all issues preventing CAF experiment execution to validate the v10 pipeline
-
-**Achievements**: Complete success with comprehensive issue resolution
-- **Statistical Analysis**: Fixed 'name' KeyError and data structure mismatch
-- **Cache Performance**: Resolved string encoding warnings and performance issues
-- **Terminology Refactoring**: Eliminated misleading 'batch' terminology
-- **Type Annotation Errors**: Fixed statistical function execution errors
-- **Performance Optimization**: Dramatically improved execution times
-
-### 🎯 Key Issues Resolved
-
-1. **Statistical Analysis 'name' KeyError (CAF-001a)** ✅
-   - **Root Cause**: Missing experiment_name in config after _load_specs()
-   - **Fix**: Extract experiment_name from metadata and add to config
-   - **Result**: Statistical analysis now works with real data (8 documents, 31 features)
-
-2. **Cache Performance String Encoding Warning (CAF-001b)** ✅
-   - **Root Cause**: put_artifact() expected bytes, got dictionary
-   - **Fix**: Proper JSON encoding and metadata handling
-   - **Result**: Cache performance verified and working perfectly
-
-3. **Batch Terminology Refactoring (CAF-001c)** ✅
-   - **Root Cause**: Misleading 'batch' terminology despite individual document processing
-   - **Fix**: Renamed analyze_batch() to analyze_documents(), batch_id to analysis_id
-   - **Result**: Code now accurately reflects individual document processing
-
-4. **Data Structure Mismatch for Statistical Processing (CAF-001d)** ✅
-   - **Root Cause**: raw_analysis_response not accessible at top level
-   - **Fix**: Proper data structure mapping for statistical analysis
-   - **Result**: Statistical analysis can now process all analysis results
-
-5. **Type Annotation Errors in Statistical Execution (CAF-001e)** ✅
-   - **Root Cause**: dir(stats_module) included Python type annotations
-   - **Fix**: Filter out type annotations from function execution
-   - **Result**: Clean statistical execution without error messages
-
-### 📊 Implementation Results
-
-**Analysis Phase**: 0.02s completion time (vs 470s before)
-**Document Processing**: All 8 documents processed successfully with cache hits
-**Statistical Analysis**: Complete with real statistical results (means, std dev, counts)
-**Evidence Database**: 3,818 quotes extracted and stored
-**Performance**: Dramatically improved across all phases
-**Error Messages**: Clean execution without type annotation warnings
-
-**Current Status**: 98% complete - only synthesis timeout remains (scalability issue, not fundamental)
-
-**Impact**: CAF experiment pipeline fully operational, demonstrating v10 specification compliance and THIN architecture effectiveness
-
-## 🔄 IN PROGRESS: Implement Intended THIN Architecture
-
-**Status**: 🚧 **IN PROGRESS** - Refactoring synthesis approach to proper separation of concerns
-
-**Goal**: Transform current entangled synthesis approach into intended THIN architecture where orchestrator uses `SynthesisAssembler` to prepare context-rich prompts, then hands them to agents for execution
-
-**Problem**: `UnifiedSynthesisAgent` is doing orchestration work (assembling prompts internally), violating separation of concerns
-
-### 🎯 Target Architecture
-```
-Orchestrator → SynthesisAssembler → Rich Prompt → UnifiedSynthesisAgent → LLM Call
-     ↓              ↓                    ↓              ↓              ↓
-  Gathers      Builds Context-      Single String   Executes      Returns
-  Context      Rich Prompt         with All Data    Prompt        Report
-```
-
-### 📋 Implementation Plan
-
-#### Phase 1: Test-Driven Analysis (TDD Foundation) ✅ COMPLETE
-- **Step 1.1**: ✅ Create failing integration test for complete flow
-- **Step 1.2**: ✅ Create failing unit tests for orchestrator synthesis flow
-- **Step 1.3**: ✅ Create failing unit tests for assembler functionality
-- **Step 1.4**: ✅ Create failing unit tests for agent intended flow
-
-#### Phase 2: Implement Orchestrator Changes (THIN Principles) ⏳
-- **Step 2.1**: Refactor `_run_synthesis` method to use assembler
-- **Step 2.2**: Update orchestrator dependencies and initialization
-- **Step 2.3**: Implement context gathering in orchestrator
-
-#### Phase 3: Implement Assembler Functionality ⏳
-- **Step 3.1**: Create/update `SynthesisPromptAssembler` with proper methods
-- **Step 3.2**: Implement prompt template loading from YAML
-- **Step 3.3**: Implement context formatting and prompt assembly
-
-#### Phase 4: Refactor Agent for THIN Execution ⏳
-- **Step 4.1**: Update agent method signature to accept complete prompt
-- **Step 4.2**: Remove internal prompt assembly logic
-- **Step 4.3**: Implement pure execution logic
-
-#### Phase 5: Integration and Validation ⏳
-- **Step 5.1**: Update integration tests to verify new flow
-- **Step 5.2**: Update unit tests for comprehensive coverage
-- **Step 5.3**: End-to-end validation with CAF experiment
-
-#### Phase 6: Cleanup and Documentation ⏳
-- **Step 6.1**: Remove dead code and temporary workarounds
-- **Step 6.2**: Update architecture and component documentation
-- **Step 6.3**: Performance validation and optimization
-
-### 🎯 Success Criteria
-
-#### Functional Requirements
-- [ ] Orchestrator uses `SynthesisPromptAssembler` to build prompts
-- [ ] Agent receives complete prompts and executes without assembly
-- [ ] End-to-end pipeline produces evidence-rich reports
-- [ ] No regression in report quality or completeness
-
-#### Architectural Requirements
-- [ ] Clear separation of concerns maintained
-- [ ] Orchestrator orchestrates, assembler assembles, agent executes
-- [ ] Externalized prompts in YAML files
-- [ ] Proper dependency injection and error handling
-
-#### Quality Requirements
-- [ ] All tests pass (TDD compliance)
-- [ ] No code duplication
-- [ ] Clear, maintainable code structure
-- [ ] Proper error handling and logging
-
-### 📊 Current Progress
-- **Phase 1**: ✅ **100% COMPLETE** - All 4 steps completed (integration + orchestrator + assembler + agent tests)
-- **Overall**: 25% complete - Comprehensive test foundation established, all architectural gaps identified
-
-### 🚨 Risks and Mitigation
-- **Technical Risk**: Breaking existing functionality during refactoring
-- **Mitigation**: Comprehensive test coverage, incremental changes
-- **Timeline Risk**: Underestimating complexity of prompt assembly
-- **Mitigation**: Start with simple cases, iterate with TDD
-
-### 📅 Timeline
-- **Week 1**: Complete Phases 1-2 (Foundation and Orchestrator)
-- **Week 2**: Complete Phases 3-4 (Assembler and Agent)
-- **Week 3**: Complete Phases 5-6 (Integration and Cleanup)
-
-**Impact**: Will establish proper THIN architecture with clear separation of concerns, making the system more maintainable, testable, and aligned with architectural principles
-
-#### [TECH-008] LLM Cost Optimization Strategy Revisit 🔧 LOW PRIORITY
-- **Description**: Revisit decision between componentized (individual calls) vs batch (single call) approach for function generation
-- **Impact**: Current componentized approach costs ~$0.0005 per experiment vs potential batch approach at ~$0.0001-0.0002 (50-70% savings)
-- **Current Approach**: Componentized generation with individual LLM calls for each derived metric and statistical analysis type
-  - **Derived Metrics**: 6 individual calls (identity_tension, emotional_balance, success_climate, etc.)
-  - **Statistical Analysis**: 4 individual calls (descriptive_statistics, correlation_analysis, etc.)
-  - **Benefits**: High reliability, excellent debugging, focused quality, partial success capability
-  - **Cost**: ~$0.0005 per experiment with Gemini 2.5 Pro
-- **Alternative Approach**: Single batch call for all functions
-  - **Benefits**: 50-70% cost reduction, 5x faster execution
-  - **Drawbacks**: Lower reliability, poorer debugging, potential quality degradation
-- **Hybrid Option**: Smart batching with fallback to componentized generation
+  - [ ] Quick start guide for new developers
+  - [ ] Environment setup instructions
+  - [ ] Common troubleshooting guide
+- **Effort**: 1 day
+
+#### [UX-001] Synthesis Flow Logging Cleanup ✅ **COMPLETED**
+
+- **Description**: Fix synthesis phase logging order to improve readability and logical flow
+- **Dependencies**: [TEST-003] ✅
+- **Root Cause**: `LocalArtifactStorage.get_artifact()` logs every evidence retrieval during synthesis and RAG index building, creating hundreds of verbose log lines
+- **Solution**: Added `quiet=True` parameter to `get_artifact()` and updated all bulk evidence retrieval components
 - **Acceptance Criteria**:
-  - [ ] Evaluate cost vs quality trade-offs for academic research use case
-  - [ ] Consider model optimization (Gemini 2.5 Flash vs Pro) for additional 5x cost reduction
-  - [ ] Implement hybrid approach if cost savings justify complexity
-  - [ ] Document decision rationale and implementation plan
-- **Effort**: Medium (2-3 hours analysis + implementation)
-- **Dependencies**: None
-- **Priority**: LOW - Current approach working well, cost optimization for future consideration
-- **Current Status**: Componentized approach proven effective with excellent reliability and quality
-- **Next Review**: Revisit after 6 months or when cost becomes significant concern
+  - [x] Evidence retrieval logging suppressed during bulk synthesis operations
+  - [x] `UnifiedSynthesisAgent._get_all_evidence()` uses quiet mode
+  - [x] `SynthesisPromptAssembler` uses quiet mode for evidence counting
+  - [x] `CleanAnalysisOrchestrator._validate_synthesis_assets()` uses quiet mode for validation
+  - [x] `TxtaiEvidenceCurator._get_all_evidence()` uses quiet mode for RAG index building
+  - [x] Individual artifact retrievals still logged when appropriate
+  - [x] Clean synthesis flow without hundreds of "📥 Retrieved artifact" messages
+- **Effort**: 1.5 hours ✅ **COMPLETED**
+- **Priority**: **LOW** - Minor UX improvement
+- **Status**: ✅ **FULLY IMPLEMENTED** - All synthesis and RAG index logging now clean and readable
 
+#### [UX-002] Optimize Synthesis Asset Validation
 
+- **Description**: Streamline synthesis asset validation to reduce verbosity and eliminate redundant checks when RAG index exists
+- **Dependencies**: [CACHE-001] ✅
+- **Root Cause**: `_validate_synthesis_assets()` performs redundant evidence validation after RAG index is built, creating verbose terminal output
+- **Current Issues**:
+  - Evidence artifacts validated twice (during RAG build + synthesis validation)
+  - Verbose logging for each evidence artifact retrieval
+  - Redundant corpus document validation
+  - Terminal output cluttered with unnecessary validation messages
+- **Acceptance Criteria**:
+  - [ ] Skip evidence artifact validation if RAG index exists and is populated
+  - [ ] Reduce logging verbosity for evidence checks (single summary line)
+  - [ ] Keep essential validations (framework, experiment, statistical results)
+  - [ ] Maintain corpus file validation but with less verbose logging
+  - [ ] Add logic: "if RAG index exists, evidence already validated"
+- **Effort**: 2-3 hours
+- **Priority**: **MEDIUM** - Improves development experience and reduces terminal noise
+
+#### [UX-003] Integrate CSV Export Agent
+
+- **Description**: Integrate CSV Export Agent into CleanAnalysisOrchestrator for professional CSV generation
+- **Dependencies**: [ARCH-004] ✅
+- **Acceptance Criteria**:
+  - [ ] CSV Export Agent integrated into orchestration flow
+  - [ ] Raw scores exported to CSV with proper formatting
+  - [ ] Statistical analysis results exported to CSV with test details
+  - [ ] Derived metrics exported to CSV with dynamic column discovery
+  - [ ] Evidence linking maintained in CSV exports
+  - [ ] Data structure adapter maps current format to CSV agent expectations
+- **Effort**: 4-6 hours
+- **Priority**: **MEDIUM** - Enhances research output quality and usability
+
+#### [UX-004] Integrate Automated Visualization Agent
+
+- **Description**: Integrate AutomatedVisualizationAgent into synthesis process for publication-ready charts and graphs
+- **Dependencies**: [UX-003] ✅
+- **Acceptance Criteria**:
+  - [ ] AutomatedVisualizationAgent integrated into synthesis phase
+  - [ ] Framework-specific visualization functions generated automatically
+  - [ ] Publication-ready charts for dimension scores, correlations, and trends
+  - [ ] Visualizations saved alongside final reports in results directory
+  - [ ] Academic-quality output with proper styling and error handling
+  - [ ] Framework-agnostic approach maintained
+- **Effort**: 6-8 hours
+- **Priority**: **MEDIUM** - Significantly enhances research output quality and publication readiness
+
+### Sprint 4: Future Enhancements (LOW PRIORITY)
+
+**Timeline:** Future sprints
+**Goal:** Prepare for next phase of development
+
+#### [CLI-007] Implement CLI Logging & Provenance
+
+- **Description**: Add comprehensive logging and provenance tracking to CLI
+- **Dependencies**: [DX-001] ✅
+- **Acceptance Criteria**:
+  - [ ] All CLI actions are logged
+  - [ ] Provenance chain is maintained
+  - [ ] Debug information is accessible
+- **Effort**: 2-3 days
+
+#### [CLI-008] Comprehensive CLI Testing
+
+- **Description**: Implement end-to-end CLI testing suite
+- **Dependencies**: [CLI-007] ✅
+- **Acceptance Criteria**:
+  - [ ] CLI test suite covers all commands
+  - [ ] Error scenarios are tested
+  - [ ] Performance benchmarks established
+- **Effort**: 3-4 days
+
+#### [TECH-002] Model Selection Optimization
+
+- **Description**: Optimize model selection for cost and performance
+- **Dependencies**: [CLI-008] ✅
+- **Acceptance Criteria**:
+  - [ ] Model selection is automated
+  - [ ] Cost optimization is implemented
+  - [ ] Performance benchmarks are established
+- **Effort**: 2-3 days
+
+---
+
+## Backlog (Future Consideration)
+
+### [ARCH-001] Multi-Agent Progressive Synthesis Architecture (Phase 2)
+
+- **Description**: Implement progressive synthesis with multiple agents
+- **Priority**: Low - Future enhancement
+- **Effort**: 1-2 weeks
+
+### [TECH-003] Error Handling & Resilience
+
+- **Description**: Implement comprehensive error handling and retry logic
+- **Priority**: Low - Quality improvement
+- **Effort**: 3-5 days
+
+### [RAG-ENHANCE] Evidence Integration Enhancement
+
+- **Description**: Enhance RAG system for better evidence integration
+- **Priority**: Low - Feature enhancement
+- **Effort**: 1 week
+
+### [INTEGRITY-001] Integrate Provenance Stamp System
+
+- **Description**: Integrate tamper-evident content tracking to prevent LLM hallucination and ensure content integrity
+- **Dependencies**: None (strategic infrastructure)
+- **Acceptance Criteria**:
+  - [ ] ProvenanceStamp system integrated into corpus loading
+  - [ ] Content hashes generated for all corpus documents
+  - [ ] LLM prompts enhanced with provenance stamps
+  - [ ] LLM responses validated for correct provenance references
+  - [ ] Provenance reports generated for audit trail
+  - [ ] Integration detects content tampering and hallucination incidents
+- **Effort**: 1-2 days
+- **Priority**: Medium - Critical for research integrity and academic compliance
+- **Academic Value**: Prevents catastrophic failure where LLMs analyze fabricated content
+
+### [EXTEND-001] Integrate Capability Registry System
+
+- **Description**: Integrate THIN extensibility system to allow academics to add domain-specific tools and libraries
+- **Dependencies**: None (strategic infrastructure)
+- **Acceptance Criteria**:
+  - [ ] CapabilityRegistry integrated into SecureCodeExecutor
+  - [ ] Core capabilities loaded from presets
+  - [ ] Extension system supports academic domain-specific libraries
+  - [ ] YAML-based extension templates for researchers
+  - [ ] Security boundaries enforced for allowed libraries and builtins
+  - [ ] Documentation for creating academic extensions
+- **Effort**: 2-3 days
+- **Priority**: Medium - Enables academic adoption and domain-specific research
+- **Academic Value**: Allows researchers to extend platform without forking codebase
+
+### [PROVENANCE-001] Enhance Academic Artifact Organization
+
+- **Description**: Leverage provenance_organizer.py patterns to enhance academic-grade artifact organization and auditing
+- **Dependencies**: [INTEGRITY-001] (provenance stamp system)
+- **Code Reuse**: `discernus/core/provenance_organizer.py` contains valuable patterns for:
+  - Transforming hash-based storage into human-readable academic structure
+  - Academic-standard directory organization with symlink performance
+  - Artifact type mapping and provenance transparency
+  - Complete audit trail generation for external review
+- **Acceptance Criteria**:
+  - [ ] Analyze provenance_organizer.py patterns for reusable components
+  - [ ] Integrate academic-friendly artifact organization into CleanAnalysisOrchestrator
+  - [ ] Maintain performance via symlinks to shared cache
+  - [ ] Provide human-readable artifact names and directory structure
+  - [ ] Generate comprehensive provenance reports for academic compliance
+  - [ ] Support external audit and review workflows
+- **Effort**: 3-4 days
+- **Priority**: Low - Future enhancement for academic adoption
+- **Academic Value**: Transforms technical artifacts into researcher-friendly organization
+
+---
+
+## Dependencies
+
+- **CLI-002**: [TEST-INFRA] ✅
+- **CACHE-001**: [THIN-OPT] ✅
+- **ARCH-004**: [CACHE-001] ✅
+- **CLI-007**: [DX-001] ✅
+- **CLI-008**: [CLI-007] ✅
+- **TECH-002**: [CLI-008] ✅
+
+---
+
+## Current Focus Areas
+
+1. **Testing Infrastructure Fix** - Unblock all validation
+2. **THIN Architecture Optimization** - Improve core system performance
+3. **Quality & Documentation** - Enhance user experience and maintainability
+
+---
+
+## Success Metrics
+
+- **Testing Infrastructure**: All tests pass without false failures
+- **THIN Architecture**: System maintains clean separation of concerns
+- **Code Quality**: 80%+ unit test coverage achieved
+- **User Experience**: Clear onboarding and documentation available
+
+---
+
+## Backlog Maintenance
+
+- **Last Updated**: 2025-01-23
+- **Next Review**: After Sprint 1 completion
+- **Cleanup Status**: ✅ Groomed and streamlined

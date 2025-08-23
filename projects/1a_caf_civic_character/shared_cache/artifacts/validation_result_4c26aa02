@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "issues": [
+    "The experiment's expected outcomes include 'ANOVA results demonstrating significant differences between speakers', but the corpus size of N=8 is insufficient for robust statistical significance testing. The statistical power will be very low, limiting the analysis to descriptive comparisons and qualitative pattern identification.",
+    "The formula for all 'tension' metrics uses `abs(Virtue_Salience - Vice_Salience)` as a multiplier. This results in a tension score that approaches zero as the salience of the competing virtue and vice become equal. This is counter-intuitive, as two high-intensity, equally prominent opposing themes would generally be considered a high-tension scenario.",
+    "The framework's human-readable title is 'Civic Analysis Framework (CAF) v10.0', but the machine-readable metadata specifies 'framework_version: \"1.0.0\"'. While the system-critical 'spec_version' is correctly set to '10.0', this discrepancy in the framework's own content version could cause confusion for future researchers."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-23T17:02:16.229771+00:00"
+}

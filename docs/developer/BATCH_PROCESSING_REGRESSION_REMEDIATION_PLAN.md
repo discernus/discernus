@@ -8,13 +8,13 @@
 
 ### What Went Wrong
 1. **Architecture Change**: New `CleanAnalysisOrchestrator` calls `analyze_batch()` with ALL documents at once
-2. **Lost Pattern**: Working `ExperimentOrchestrator` calls `analyze_batch()` with single document in a loop
+2. **Lost Pattern**: Working `CleanAnalysisOrchestrator` calls `analyze_batch()` with single document in a loop
 3. **Immediate Failure**: Path bug in statistical analysis (`/artifacts/artifacts` vs `/artifacts`)
 
 ### Evidence
 - **PDAF Test**: Single analysis file with 4 documents (`num_documents: 4`)
 - **CFF Test**: Mix of individual (48 files) and batch (38 files) - shows inconsistent behavior over time
-- **Working Pattern**: `ExperimentOrchestrator` and deprecated `ThinOrchestrator` both use individual processing
+- **Working Pattern**: `CleanAnalysisOrchestrator` should use individual processing (like the deprecated orchestrators did)
 
 ## 🎯 Impact Assessment
 
@@ -80,7 +80,7 @@ artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
 ```
 
 #### 2.2 Import Individual Processing Pattern
-- Copy proven pattern from `ExperimentOrchestrator._run_analysis_phase()`
+- Copy proven pattern from deprecated orchestrators' `_run_analysis_phase()`
 - Adapt to `CleanAnalysisOrchestrator` architecture
 - Preserve existing artifact storage integration
 - Maintain audit logging and security boundaries
@@ -238,7 +238,7 @@ for analysis_result in analysis_results:
 ## 🎯 Rollback Plan
 
 If issues arise:
-1. **Immediate**: Use `--use-legacy-orchestrator` flag to revert to `ExperimentOrchestrator`
+1. **Immediate**: Fix `CleanAnalysisOrchestrator` to use individual document processing
 2. **Code Rollback**: Git revert to restore batch processing if needed
 3. **Hybrid Approach**: Keep both patterns and add configuration flag
 

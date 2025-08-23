@@ -247,7 +247,8 @@ Use this evidence to support your statistical interpretations."""
         
         for hash_id in evidence_artifact_hashes:
             try:
-                evidence_content = artifact_storage.get_artifact(hash_id)
+                # Use quiet=True to suppress verbose logging during bulk evidence retrieval
+                evidence_content = artifact_storage.get_artifact(hash_id, quiet=True)
                 evidence_data = json.loads(evidence_content.decode('utf-8'))
                 evidence_list = evidence_data.get('evidence_data', [])
                 all_evidence.extend(evidence_list)

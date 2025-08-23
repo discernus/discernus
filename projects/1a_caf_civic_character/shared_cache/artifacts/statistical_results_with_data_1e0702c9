@@ -1,0 +1,52 @@
+{
+  "generation_metadata": {
+    "status": "success",
+    "functions_generated": 6,
+    "output_file": "automatedstatisticalanalysisagent_functions.py",
+    "module_size": 22858
+  },
+  "statistical_data": {
+    "status": "success",
+    "statistical_results": {
+      "analysis_metadata": {
+        "timestamp": "2025-08-23T11:44:20.537983",
+        "sample_size": 8,
+        "alpha_level": 0.05,
+        "variables_analyzed": [
+          "tribalism_raw",
+          "tribalism_salience",
+          "tribalism_confidence",
+          "dignity_raw",
+          "dignity_salience",
+          "dignity_confidence",
+          "manipulation_raw",
+          "manipulation_salience",
+          "manipulation_confidence",
+          "truth_raw",
+          "truth_salience",
+          "truth_confidence",
+          "resentment_raw",
+          "resentment_salience",
+          "resentment_confidence",
+          "justice_raw",
+          "justice_salience",
+          "justice_confidence",
+          "fear_raw",
+          "fear_salience",
+          "fear_confidence",
+          "hope_raw",
+          "hope_salience",
+          "hope_confidence",
+          "fantasy_raw",
+          "fantasy_salience",
+          "fantasy_confidence",
+          "pragmatism_raw",
+          "pragmatism_salience",
+          "pragmatism_confidence"
+        ]
+      }
+    }
+  },
+  "status": "success_with_data",
+  "validation_passed": true
+}

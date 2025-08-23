@@ -18,11 +18,12 @@ template: |
 
   **CRITICAL REQUIREMENTS:**
   1. Each analysis must be implemented as a separate Python function
-  2. Functions must read data from workspace files in the current directory
-  3. Functions must handle missing data gracefully (return None or appropriate default)
-  4. Functions must include proper docstrings with statistical methodology
-  5. Functions must be production-ready with error handling
-  6. Functions should NOT take parameters - they read from workspace files
+  2. Functions MUST take a 'data' parameter (pandas DataFrame) as their first argument
+  3. Functions can optionally read additional context from workspace files in the current directory
+  4. Functions must handle missing data gracefully (return None or appropriate default)
+  5. Functions must include proper docstrings with statistical methodology
+  6. Functions must be production-ready with error handling
+  7. Functions should follow the exact signature: def function_name(data, **kwargs):
 
   **WORKSPACE FILES AVAILABLE:**
   - Raw analysis data: JSON files in the current directory
@@ -34,10 +35,14 @@ template: |
   Wrap each function in the proprietary delimiters exactly as shown:
 
   <<<DISCERNUS_FUNCTION_START>>>
-  def function_name():
+  def function_name(data, **kwargs):
       """
       Function description with statistical methodology.
       
+      Args:
+          data: pandas DataFrame containing the analysis data
+          **kwargs: Additional parameters
+          
       Returns:
           dict: Statistical results or None if insufficient data
       """
@@ -48,7 +53,8 @@ template: |
       from pathlib import Path
       
       try:
-          # Read data from workspace files
+          # Use the provided data parameter (primary data source)
+          # Optionally read additional context from workspace files if needed
           # Implementation here
           pass
       except Exception:
@@ -59,10 +65,14 @@ template: |
   For descriptive statistics, generate:
 
   <<<DISCERNUS_FUNCTION_START>>>
-  def calculate_descriptive_statistics():
+  def calculate_descriptive_statistics(data, **kwargs):
       """
       Calculate descriptive statistics for all numeric dimensions.
       
+      Args:
+          data: pandas DataFrame containing the analysis data
+          **kwargs: Additional parameters
+          
       Returns:
           dict: Descriptive statistics for each dimension or None if insufficient data
       """
@@ -73,34 +83,26 @@ template: |
       from pathlib import Path
       
       try:
-          # Read analysis data from workspace
-          analysis_files = glob.glob("*.json")
-          if not analysis_files:
+          if data is None or data.empty:
               return None
               
-          # Load and process data
-          data_list = []
-          for file_path in analysis_files:
-              try:
-                  with open(file_path, 'r') as f:
-                      data_list.append(json.load(f))
-              except Exception:
-                  continue
+          # Use the provided data parameter (primary data source)
+          df = data
           
-          if not data_list:
-              return None
-              
-          # Convert to DataFrame and calculate statistics
-          df = pd.DataFrame(data_list)
+          # Optionally read additional context from workspace files if needed
+          # This allows functions to access framework content, experiment spec, etc.
+          
           results = {{}}
           numeric_columns = df.select_dtypes(include=[np.number]).columns
           
           for col in numeric_columns:
-              if col.endswith('_score'):
+              if col.endswith('_score') or col.endswith('_raw') or col.endswith('_salience'):
                   results[col] = {{
                       'mean': float(df[col].mean()),
                       'std': float(df[col].std()),
-                      'count': int(df[col].count())
+                      'count': int(df[col].count()),
+                      'min': float(df[col].min()),
+                      'max': float(df[col].max())
                   }}
           
           return results
@@ -109,7 +111,7 @@ template: |
           return None
   <<<DISCERNUS_FUNCTION_END>>>
 
-  Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function should read data from workspace files and not take parameters.
+  Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function MUST take a 'data' parameter and can optionally read additional context from workspace files.
 
 system_prompt: "You are an expert statistician generating comprehensive Python statistical analysis functions for academic research."
 

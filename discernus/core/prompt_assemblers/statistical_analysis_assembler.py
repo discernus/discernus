@@ -60,7 +60,7 @@ Raw Analysis Sample (first 2 files):
 Derived Metrics Sample (first 2 files):
 {json.dumps(derived_samples, indent=2)}
 
-**IMPORTANT**: The functions you generate should read data from workspace files in the current directory, not take parameters. Use glob or similar to find all JSON files in the current directory.
+**IMPORTANT**: The functions you generate should use the provided 'data' parameter as their primary data source, and can optionally read additional context from workspace files.
 
 Respond with pure Python code only - no markdown, no explanations."""
 

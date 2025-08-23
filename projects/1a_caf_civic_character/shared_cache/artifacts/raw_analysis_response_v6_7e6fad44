@@ -1,0 +1,166 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on the speaker's articulation of systemic issues and proposed legislative solutions within the framework of civic virtues and vices. The speech prominently features calls for justice and hope, grounded in factual realities, while actively rejecting tribalism and fantastical solutions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65",
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+          "confidence": 0.9,
+          "context_type": "direct rejection"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "This is a system in our country that feeds upon certain communities and not others.",
+          "confidence": 0.8,
+          "context_type": "identification of disparity"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+          "confidence": 0.9,
+          "context_type": "universal human worth"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "we are bound together as a people by the most precious ideals in humanity",
+          "confidence": 0.9,
+          "context_type": "shared humanity principle"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent",
+          "confidence": 0.9,
+          "context_type": "factual statement"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "the data is clear - there is no difference between blacks and whites for using drugs or selling drugs... But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "confidence": 0.9,
+          "context_type": "presentation of data"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "because of the deeply savage, broken criminal justice system that we have.",
+          "confidence": 0.8,
+          "context_type": "expression of grievance"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "confidence": 0.8,
+          "context_type": "emphasis on historical wrongs"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "begin to deliver some reform to our savagely broken criminal justice system.",
+          "confidence": 0.9,
+          "context_type": "call for systemic solution"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "ways to make this system more fair. There's ways to make the system better reflect our collective values and ideals.",
+          "confidence": 0.9,
+          "context_type": "focus on fairness and values"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "confidence": 0.8,
+          "context_type": "alarming consequence"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "ultimately makes our neighborhoods and communities - ones like mine - less safe, not more.",
+          "confidence": 0.8,
+          "context_type": "threat-focused language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "we now have an opportunity to reverse course in a significant way.",
+          "confidence": 0.9,
+          "context_type": "optimistic vision"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "we as a nation have demonstrated the capacity to redeem ourselves.",
+          "confidence": 0.9,
+          "context_type": "constructive outlook"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "This legislation is a product of compromise.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of trade-offs"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction",
+          "confidence": 0.9,
+          "context_type": "realistic assessment of progress"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

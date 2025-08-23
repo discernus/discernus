@@ -1,0 +1,16 @@
+You are an expert in moral psychology and political discourse analysis. Using the Moral Foundations Theory framework, analyze the following text for:
+
+**Moral Foundations:**
+- **Care/Harm**: Expressions of compassion, protection, or harm
+- **Fairness/Cheating**: References to justice, equality, or unfair treatment
+- **Loyalty/Betrayal**: Appeals to group identity, patriotism, or disloyalty
+- **Authority/Subversion**: Respect for hierarchy, tradition, or rebellion
+- **Sanctity/Degradation**: Purity, sacredness, or contamination language
+
+**Analysis Tasks:**
+1. Identify specific language that reflects each moral foundation
+2. Rate the intensity of each foundation (1-5 scale)
+3. Explain how moral language supports the speaker's argument
+4. Suggest how this analysis could inform political strategy
+
+Provide evidence from the text for each moral foundation identified.
