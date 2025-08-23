@@ -777,6 +777,18 @@ class CleanAnalysisOrchestrator:
                     audit_logger
                 )
                 
+                # CRITICAL: Validate that we got actual derived metrics results
+                if not derived_metrics_results or not isinstance(derived_metrics_results, dict):
+                    raise CleanAnalysisError(
+                        "Derived metrics phase failed: No results produced. "
+                        "Generated functions but failed to execute or produce derived metrics outputs."
+                    )
+                
+                if derived_metrics_results.get('status') != 'success':
+                    raise CleanAnalysisError(
+                        f"Derived metrics phase failed: {derived_metrics_results.get('error', 'Unknown error')}"
+                    )
+                
                 # Store derived metrics results in artifact storage
                 complete_derived_metrics_result = {
                     "generation_metadata": functions_result,
@@ -928,6 +940,14 @@ class CleanAnalysisOrchestrator:
                     audit_logger,
                     analysis_results
                 )
+                
+                # CRITICAL: Validate that we got actual statistical results
+                if not self._validate_statistical_results(statistical_results):
+                    raise CleanAnalysisError(
+                        "Statistical analysis phase failed: No numerical results produced. "
+                        "Generated functions but failed to execute or produce statistical outputs. "
+                        "This experiment cannot proceed to synthesis without valid statistical data."
+                    )
                 
                 # Store statistical results in artifact storage
                 complete_statistical_result = {
