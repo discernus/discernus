@@ -192,7 +192,7 @@ class CleanAnalysisOrchestrator:
             # Phase 6: Generate statistics
             phase_start = datetime.now(timezone.utc)
             try:
-                statistical_results = self._run_statistical_analysis(synthesis_model, audit_logger, analysis_results)
+                statistical_results = self._run_statistical_analysis_phase(synthesis_model, audit_logger, analysis_results, derived_metrics_results)
                 self._log_status("Statistical analysis completed")
                 self._log_phase_timing("statistical_analysis", phase_start)
             except Exception as e:
@@ -734,6 +734,154 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
             raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
     
+    def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Run statistical analysis phase using StatisticalAnalysisPromptAssembler and AutomatedStatisticalAnalysisAgent."""
+        self._log_progress("📊 Running statistical analysis phase...")
+        
+        try:
+            # Load framework and experiment content
+            framework_path = self.experiment_path / self.config['framework']
+            experiment_path = self.experiment_path / "experiment.md"
+            
+            # Create temporary workspace for statistical analysis
+            temp_workspace = self.experiment_path / "temp_statistical_analysis"
+            temp_workspace.mkdir(exist_ok=True)
+            
+            try:
+                # Convert analysis results to DataFrame format for the assembler
+                import pandas as pd
+                
+                # Extract raw scores from analysis results
+                raw_scores_data = []
+                for result in analysis_results:
+                    if isinstance(result, dict) and 'analysis_result' in result:
+                        # Extract dimensional scores from the raw analysis response
+                        raw_response = result['analysis_result'].get('raw_analysis_response', '')
+                        
+                        if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                            # Parse the JSON content from the response
+                            json_start = raw_response.find('<<<DISCERNUS_ANALYSIS_JSON_v6>>>') + len('<<<DISCERNUS_ANALYSIS_JSON_v6>>>')
+                            json_end = raw_response.find('<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>')
+                            
+                            if json_end > json_start:
+                                json_content = raw_response[json_start:json_end].strip()
+                                
+                                try:
+                                    analysis_data = json.loads(json_content)
+                                    
+                                    if 'document_analyses' in analysis_data and analysis_data['document_analyses']:
+                                        doc_analysis = analysis_data['document_analyses'][0]
+                                        
+                                        if 'dimensional_scores' in doc_analysis:
+                                            scores = doc_analysis['dimensional_scores']
+                                            
+                                            # Flatten the scores into a single row
+                                            row_data = {'document_name': result.get('filename', 'unknown')}
+                                            for dim_name, dim_data in scores.items():
+                                                if isinstance(dim_data, dict):
+                                                    row_data[f"{dim_name}_raw_score"] = dim_data.get('raw_score', 0.0)
+                                                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
+                                                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
+                                            raw_scores_data.append(row_data)
+                                except json.JSONDecodeError as e:
+                                    self._log_progress(f"⚠️ Failed to parse analysis JSON for {result.get('filename', 'unknown')}: {e}")
+                                    continue
+                
+                if not raw_scores_data:
+                    raise CleanAnalysisError("No valid raw scores data found for statistical analysis")
+                
+                raw_scores_df = pd.DataFrame(raw_scores_data)
+                
+                # Convert derived metrics to DataFrame format
+                derived_metrics_data = []
+                if derived_metrics_results.get('status') == 'completed':
+                    derived_metrics = derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
+                    if derived_metrics:
+                        derived_metrics_data = derived_metrics
+                
+                if not derived_metrics_data:
+                    # Fallback: create empty derived metrics DataFrame
+                    derived_metrics_data = [{'document_name': result.get('filename', 'unknown')} for result in analysis_results]
+                
+                derived_metrics_df = pd.DataFrame(derived_metrics_data)
+                
+                # Use the existing StatisticalAnalysisPromptAssembler to build the prompt
+                from .prompt_assemblers.statistical_analysis_assembler import StatisticalAnalysisPromptAssembler
+                assembler = StatisticalAnalysisPromptAssembler()
+                
+                # Assemble the prompt using the existing assembler
+                self._log_progress("🔧 Assembling statistical analysis prompt...")
+                prompt = assembler.assemble_prompt(
+                    framework_path=framework_path,
+                    experiment_path=experiment_path,
+                    raw_scores_df=raw_scores_df,
+                    derived_metrics_df=derived_metrics_df
+                )
+                
+                # Store the assembled prompt
+                prompt_file = temp_workspace / "statistical_analysis_prompt.txt"
+                prompt_file.write_text(prompt)
+                
+                # Store the data for the agent to process
+                raw_scores_df.to_csv(temp_workspace / "raw_scores.csv", index=False)
+                derived_metrics_df.to_csv(temp_workspace / "derived_metrics.csv", index=False)
+                
+                # Initialize statistical analysis agent
+                from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
+                stats_agent = AutomatedStatisticalAnalysisAgent(
+                    model=model,
+                    audit_logger=audit_logger
+                )
+                
+                # Generate statistical analysis functions using the assembled prompt
+                self._log_progress("🔧 Generating statistical analysis functions...")
+                functions_result = stats_agent.generate_functions(temp_workspace)
+                
+                # Execute the generated functions on the data
+                self._log_progress("🔢 Executing statistical analysis functions...")
+                statistical_results = self._execute_statistical_analysis_functions(
+                    temp_workspace, 
+                    raw_scores_df, 
+                    derived_metrics_df, 
+                    audit_logger
+                )
+                
+                # Store statistical results in artifact storage
+                complete_statistical_result = {
+                    "generation_metadata": functions_result,
+                    "statistical_data": statistical_results,
+                    "status": "success_with_data",
+                    "validation_passed": True
+                }
+                
+                statistical_hash = self.artifact_storage.put_artifact(
+                    json.dumps(complete_statistical_result, indent=2).encode('utf-8'),
+                    {"artifact_type": "statistical_results_with_data"}
+                )
+                
+                self._log_progress(f"✅ Statistical analysis phase completed")
+                
+                return {
+                    "status": "completed",
+                    "statistical_hash": statistical_hash,
+                    "functions_generated": functions_result.get('functions_generated', 0),
+                    "statistical_results": complete_statistical_result
+                }
+                
+            except Exception as e:
+                self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
+            
+            finally:
+                # Clean up temporary workspace
+                if temp_workspace.exists():
+                    import shutil
+                    shutil.rmtree(temp_workspace)
+        
+        except Exception as e:
+            self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
+    
     def _execute_derived_metrics_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
         """Execute the generated derived metrics functions on analysis data."""
         import pandas as pd
@@ -789,6 +937,43 @@ class CleanAnalysisOrchestrator:
                 
         except Exception as e:
             raise CleanAnalysisError(f"Failed to execute derived metrics functions: {e}")
+    
+    def _execute_statistical_analysis_functions(self, workspace_path: Path, raw_scores_df: pd.DataFrame, derived_metrics_df: pd.DataFrame, audit_logger: AuditLogger) -> Dict[str, Any]:
+        """Execute the generated statistical analysis functions on the data."""
+        import pandas as pd
+        import numpy as np
+        import sys
+        import importlib.util
+        
+        # Load the generated statistical analysis functions module
+        functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
+        if not functions_file.exists():
+            raise CleanAnalysisError("Statistical analysis functions file not found")
+        
+        # Import the generated module
+        try:
+            spec = importlib.util.spec_from_file_location("statistical_analysis_functions", functions_file)
+            stats_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(stats_module)
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to import statistical analysis functions: {e}")
+        
+        # Execute statistical analysis
+        try:
+            if hasattr(stats_module, 'perform_statistical_analysis'):
+                statistical_results = stats_module.perform_statistical_analysis(raw_scores_df, derived_metrics_df)
+                
+                return {
+                    "status": "success",
+                    "raw_scores_count": len(raw_scores_df),
+                    "derived_metrics_count": len(derived_metrics_df),
+                    "statistical_results": statistical_results
+                }
+            else:
+                raise CleanAnalysisError("Generated module missing 'perform_statistical_analysis' function")
+                
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to execute statistical analysis functions: {e}")
     
     def _prepare_documents_for_analysis(self, corpus_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Prepare corpus documents for analysis by loading content and adding document_id."""
