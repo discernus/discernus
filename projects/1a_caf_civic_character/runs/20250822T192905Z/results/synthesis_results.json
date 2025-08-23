@@ -1,5 +1,0 @@
-{
-  "synthesis_text": "Synthesis failed: RAG synthesis failed: tuple indices must be integers or slices, not str",
-  "status": "failed",
-  "error": "RAG synthesis failed: tuple indices must be integers or slices, not str"
-}

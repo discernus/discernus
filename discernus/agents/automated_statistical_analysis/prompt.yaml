@@ -13,8 +13,17 @@ template: |
   **RESEARCH QUESTIONS:**
   {research_questions}
 
+  **ACTUAL DATA STRUCTURE:**
+  The analysis data contains the following columns:
+  {data_columns}
+
+  **SAMPLE DATA:**
+  {sample_data}
+
   **YOUR TASK:**
   Generate Python functions that implement statistical analyses to answer the research questions.
+
+  **CRITICAL:** Use the EXACT column names shown in the actual data structure above. Do NOT assume or invent column names.
 
   **CRITICAL REQUIREMENTS:**
   1. Each analysis must be implemented as a separate Python function

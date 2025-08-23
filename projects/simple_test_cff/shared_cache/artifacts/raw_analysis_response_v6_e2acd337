@@ -1,0 +1,154 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political concession speech, which provides a very clear and explicit rhetorical context. The speaker's primary goals are to acknowledge defeat gracefully, affirm the legitimacy of the outcome, and call for national unity. This makes the speech a strong example of dimensions like Amity, Compersion, and Cohesive Goals, while being almost entirely devoid of their counterparts (Enmity, Envy, Fragmentative Goals)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "enmity": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.95,
+          "context_type": "explicit rejection of dimension"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 1.0,
+          "context_type": "central theme"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.95,
+          "context_type": "historical context"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "acknowledgement of challenges without crisis framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "confidence": 0.95,
+          "context_type": "praise of opponent's hopeful message"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "confidence": 0.9,
+          "context_type": "call to action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.",
+          "confidence": 1.0,
+          "context_type": "explicit rejection of dimension"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day",
+          "confidence": 1.0,
+          "context_type": "central theme"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties",
+          "confidence": 1.0,
+          "context_type": "explicit rejection of dimension"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him",
+          "confidence": 0.95,
+          "context_type": "opening statement"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "confidence": 1.0,
+          "context_type": "call to action"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 1.0,
+          "context_type": "explicit rejection of dimension"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 1.0,
+          "context_type": "call to action"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.95,
+          "context_type": "central theme"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -32,6 +32,9 @@ class StatisticalAnalysisPromptAssembler:
         raw_samples = self._sample_analysis_data(analysis_dir, 2)
         derived_samples = self._sample_derived_metrics_data(derived_metrics_dir, 2)
         
+        # Extract data structure information from samples
+        data_columns_info, sample_data_info = self._extract_data_structure_info(raw_samples)
+        
         # Load the YAML prompt template
         prompt_template = self._load_prompt_template()
         
@@ -47,7 +50,9 @@ class StatisticalAnalysisPromptAssembler:
             framework_content=framework_content,
             experiment_name=experiment_name,
             experiment_description=experiment_description,
-            research_questions=research_questions_text
+            research_questions=research_questions_text,
+            data_columns=data_columns_info,
+            sample_data=sample_data_info
         )
         
         # Add data structure samples for context
@@ -85,6 +90,62 @@ Respond with pure Python code only - no markdown, no explanations."""
             samples.append(json.loads(content))
         
         return samples
+
+    def _extract_data_structure_info(self, raw_samples: List[Dict[str, Any]]) -> tuple[str, str]:
+        """Extract data structure information from raw analysis samples."""
+        if not raw_samples:
+            return ("No analysis data available - use generic column names ending with _raw, _salience, _confidence", 
+                   "No sample data available")
+        
+        try:
+            # Take the first sample and extract structure
+            sample = raw_samples[0]
+            
+            # Handle different data formats
+            if 'raw_analysis_response' in sample:
+                # Extract JSON from delimited response to understand structure
+                raw_response = sample['raw_analysis_response']
+                start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                
+                start_idx = raw_response.find(start_marker)
+                end_idx = raw_response.find(end_marker)
+                
+                if start_idx != -1 and end_idx != -1:
+                    import json
+                    json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                    parsed_data = json.loads(json_content)
+                    
+                    # Extract column structure from document analyses
+                    if 'document_analyses' in parsed_data and len(parsed_data['document_analyses']) > 0:
+                        doc_analysis = parsed_data['document_analyses'][0]
+                        columns_info = ["- document_name (string)"]
+                        sample_values = []
+                        
+                        for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
+                            columns_info.append(f"- {dimension}_raw (float 0.0-1.0) ← ACTUAL COLUMN NAME")
+                            columns_info.append(f"- {dimension}_salience (float 0.0-1.0) ← ACTUAL COLUMN NAME") 
+                            columns_info.append(f"- {dimension}_confidence (float 0.0-1.0) ← ACTUAL COLUMN NAME")
+                            
+                            # Add sample values
+                            sample_values.extend([
+                                f"{dimension}_raw={scores.get('raw_score', 0.0)}",
+                                f"{dimension}_salience={scores.get('salience', 0.0)}",
+                                f"{dimension}_confidence={scores.get('confidence', 0.0)}"
+                            ])
+                        
+                        columns_str = '\n'.join(columns_info)
+                        sample_str = f"Sample row from actual data:\nDocument: {doc_analysis.get('document_name', 'unknown')[:30]}\nReal values: {', '.join(sample_values[:6])}..."
+                        
+                        return (columns_str, sample_str)
+            
+            # Fallback for other formats
+            return ("Use column names ending with _raw, _salience, _confidence (NOT _score)", 
+                   "No detailed sample data available")
+                   
+        except Exception as e:
+            return (f"Failed to extract data structure: {str(e)}\nUse column names ending with _raw, _salience, _confidence (NOT _score)", 
+                   "No sample data available")
 
     def _sample_derived_metrics_data(self, derived_metrics_dir: Path, sample_size: int) -> List[Dict[str, Any]]:
         """Sample derived metrics data files for context."""

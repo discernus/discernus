@@ -1138,6 +1138,9 @@ class CleanAnalysisOrchestrator:
             (temp_workspace / "framework_content.md").write_text(framework_content)
             (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
             
+            # Write analysis results for data structure discovery
+            (temp_workspace / "individual_analysis_results.json").write_text(json.dumps(analysis_results, indent=2))
+            
             # Generate statistical functions
             stats_generation_result = stats_agent.generate_functions(temp_workspace)
             

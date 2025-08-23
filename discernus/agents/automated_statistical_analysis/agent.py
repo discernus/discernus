@@ -111,7 +111,8 @@ class AutomatedStatisticalAnalysisAgent:
                 # Generate statistical analysis functions using LLM
                 generated_functions = self._generate_statistical_functions(
                     framework_content, 
-                    experiment_spec
+                    experiment_spec,
+                    workspace_path
                 )
             
             # Extract clean functions using THIN delimiter approach
@@ -157,8 +158,145 @@ class AutomatedStatisticalAnalysisAgent:
             })
             raise
     
-    def _generate_statistical_functions(self, framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+    def _load_data_structure(self, workspace_path: Path) -> Dict[str, Any]:
+        """
+        Load actual data structure from workspace for data-aware prompting.
+        
+        Returns:
+            Dictionary with columns_info and sample_data for prompting
+        """
+        import pandas as pd
+        import json
+        
+        try:
+            # Look for analysis data in the workspace - try multiple possible locations
+            possible_paths = [
+                workspace_path / "analysis_data.json",
+                workspace_path / "individual_analysis_results.json",
+                workspace_path / "raw_analysis_data.json"
+            ]
+            
+            analysis_data_path = None
+            for path in possible_paths:
+                if path.exists():
+                    analysis_data_path = path
+                    break
+            
+            if not analysis_data_path:
+                # Fallback to generic structure if no data available
+                return {
+                    'columns_info': "No analysis data available - use generic column names ending with _raw, _salience, _confidence",
+                    'sample_data': "No sample data available"
+                }
+            
+            with open(analysis_data_path, 'r') as f:
+                analysis_data = json.load(f)
+            
+            if not analysis_data:
+                return {
+                    'columns_info': "Analysis data is empty - use generic column names ending with _raw, _salience, _confidence", 
+                    'sample_data': "No sample data available"
+                }
+            
+            # Convert to DataFrame to analyze structure - handle different data formats
+            if isinstance(analysis_data, list) and len(analysis_data) > 0:
+                # Handle list of individual analysis results
+                sample_result = analysis_data[0]
+                if 'raw_analysis_response' in sample_result:
+                    # Extract JSON from delimited response to understand structure
+                    raw_response = sample_result['raw_analysis_response']
+                    start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    
+                    start_idx = raw_response.find(start_marker)
+                    end_idx = raw_response.find(end_marker)
+                    
+                    if start_idx != -1 and end_idx != -1:
+                        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                        parsed_data = json.loads(json_content)
+                        
+                        # Extract column structure from document analyses
+                        if 'document_analyses' in parsed_data and len(parsed_data['document_analyses']) > 0:
+                            doc_analysis = parsed_data['document_analyses'][0]
+                            columns_info = ["- document_name (string)"]
+                            sample_values = []
+                            
+                            for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
+                                columns_info.append(f"- {dimension}_raw (float 0.0-1.0) ← ACTUAL COLUMN NAME")
+                                columns_info.append(f"- {dimension}_salience (float 0.0-1.0) ← ACTUAL COLUMN NAME") 
+                                columns_info.append(f"- {dimension}_confidence (float 0.0-1.0) ← ACTUAL COLUMN NAME")
+                                
+                                # Add sample values
+                                sample_values.extend([
+                                    f"{dimension}_raw={scores.get('raw_score', 0.0)}",
+                                    f"{dimension}_salience={scores.get('salience', 0.0)}",
+                                    f"{dimension}_confidence={scores.get('confidence', 0.0)}"
+                                ])
+                            
+                            return {
+                                'columns_info': '\n'.join(columns_info),
+                                'sample_data': f"Sample row from actual data:\nDocument: {doc_analysis.get('document_name', 'unknown')[:30]}\nReal values: {', '.join(sample_values[:6])}..."
+                            }
+            
+            # Fallback: try to convert directly to DataFrame
+            df = pd.DataFrame(analysis_data)
+            
+            # Generate columns info with data types and value ranges
+            columns_info = []
+            for col in df.columns:
+                if col == 'document_name':
+                    columns_info.append(f"- {col} (string)")
+                else:
+                    # Check if column contains real numeric data
+                    non_null_values = df[col].dropna()
+                    if len(non_null_values) > 0 and pd.api.types.is_numeric_dtype(non_null_values):
+                        min_val = non_null_values.min()
+                        max_val = non_null_values.max()
+                        columns_info.append(f"- {col} (float {min_val:.2f}-{max_val:.2f}) ← ACTUAL COLUMN NAME")
+                    else:
+                        columns_info.append(f"- {col} (float - mostly NaN, ignore)")
+            
+            # Generate sample data showing first valid row
+            sample_data = "Sample row from actual data:\n"
+            if len(df) > 0:
+                first_row = df.iloc[0]
+                doc_name = first_row.get('document_name', 'unknown')[:30]
+                sample_data += f"Document: {doc_name}\n"
+                
+                # Show key numeric columns with real values
+                numeric_cols = df.select_dtypes(include=['number']).columns
+                real_data_cols = []
+                for col in numeric_cols:
+                    if col in first_row and pd.notna(first_row[col]):
+                        real_data_cols.append(f"{col}={first_row[col]}")
+                
+                if real_data_cols:
+                    sample_data += f"Real values: {', '.join(real_data_cols[:6])}..."
+                else:
+                    sample_data += "No real numeric values found in first row"
+            
+            return {
+                'columns_info': '\n'.join(columns_info),
+                'sample_data': sample_data
+            }
+            
+        except Exception as e:
+            self._log_event("DATA_STRUCTURE_LOADING_FAILED", {
+                "error": str(e),
+                "workspace": str(workspace_path)
+            })
+            
+            # Return safe fallback with correct column naming pattern
+            return {
+                'columns_info': f"Failed to load data structure: {str(e)}\nUse column names ending with _raw, _salience, _confidence (NOT _score)",
+                'sample_data': "No sample data available"
+            }
+
+    def _generate_statistical_functions(self, framework_content: str, experiment_spec: Dict[str, Any], workspace_path: Path) -> str:
         """Generate statistical analysis functions using componentized generation approach."""
+        # Load actual data structure for data-aware prompting
+        data_structure_info = self._load_data_structure(workspace_path)
+        
         # Extract individual statistical analyses needed
         statistical_analyses = self._extract_statistical_analyses(framework_content, experiment_spec)
         
@@ -166,7 +304,7 @@ class AutomatedStatisticalAnalysisAgent:
         for analysis_name, analysis_description in statistical_analyses.items():
             try:
                 function_code = self._generate_single_statistical_function(
-                    analysis_name, analysis_description, framework_content, experiment_spec
+                    analysis_name, analysis_description, framework_content, experiment_spec, data_structure_info
                 )
                 generated_functions.append(function_code)
                 
@@ -522,7 +660,8 @@ RESPONSE:"""
             return "reliability_analysis"
     
     def _generate_single_statistical_function(self, analysis_name: str, analysis_description: str, 
-                                            framework_content: str, experiment_spec: Dict[str, Any]) -> str:
+                                            framework_content: str, experiment_spec: Dict[str, Any], 
+                                            data_structure_info: Dict[str, Any]) -> str:
         """Generate a single statistical analysis function using LLM with THIN delimiters."""
         
         # Create focused prompt for single function
@@ -543,6 +682,15 @@ Research Questions:
 
 **FRAMEWORK CONTEXT:**
 {framework_content[:1500]}...
+
+**ACTUAL DATA STRUCTURE:**
+The analysis data contains the following columns:
+{data_structure_info['columns_info']}
+
+**SAMPLE DATA:**
+{data_structure_info['sample_data']}
+
+**CRITICAL:** Use the EXACT column names shown in the actual data structure above. Do NOT assume or invent column names.
 
 **REQUIREMENTS:**
 1. Generate EXACTLY ONE Python function
