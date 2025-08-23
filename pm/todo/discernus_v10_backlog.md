@@ -285,6 +285,86 @@
 - **Effort**: 6-8 hours
 - **Priority**: **MEDIUM** - Significantly enhances research output quality and publication readiness
 
+#### [INTEGRITY-002] Implement FactCheckerAgent for Synthesis Validation
+
+- **Description**: Implement a `FactCheckerAgent` to validate the final synthesis report against source artifacts, preventing factual hallucinations.
+- **Dependencies**: [DOCS-003] ✅
+- **Architecture**:
+  - A second, temporary RAG index will be created post-synthesis containing the final report, framework spec, statistical results, and evidence database.
+  - The `FactCheckerAgent` will query this RAG index using a rubric-driven approach.
+- **Acceptance Criteria**:
+  - [ ] `FactCheckerAgent` is created.
+  - [ ] Orchestrator builds a temporary "Fact-Checker RAG" after synthesis.
+  - [ ] A `fact_checker_rubric.yaml` is created to define specific, verifiable checks.
+  - [ ] The agent generates a `validation_report.md` detailing any findings.
+  - [ ] If CRITICAL issues are found, a warning notice is prepended to the `final_report.md`.
+  - [ ] Rubric checks for: dimension hallucinations, statistical mismatches, evidence quote validity, and grandiose claims.
+- **Effort**: 2-3 days
+- **Priority**: HIGH
+- **Academic Value**: Provides a critical safeguard against LLM hallucination, ensuring the integrity and trustworthiness of the final research output.
+
+#### [DOCS-001] Comprehensive Architecture Document Update
+
+- **Description**: Update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current system state and recent architectural changes
+- **Dependencies**: [ARCH-004] ✅ (orchestrator cleanup complete)
+- **Current Issues**: Document is outdated and doesn't reflect recent THIN compliance achievements, orchestrator deprecation, and current system architecture
+- **Acceptance Criteria**:
+  - [ ] Update "Current System Implementation" section to reflect CleanAnalysisOrchestrator as sole orchestrator
+  - [ ] Document completed THIN compliance achievements (100% compliance across all 17 agents)
+  - [ ] Update agent ecosystem overview to reflect current agent status and deprecation
+  - [ ] Remove references to deprecated orchestrators (ExperimentOrchestrator, ThinOrchestrator, etc.)
+  - [ ] Update technology stack to reflect current implementation (local storage, no Redis, etc.)
+  - [ ] Document current 3-stage pipeline architecture (Analysis → Synthesis → Finalization)
+  - [ ] Update agent classifications and compliance status
+  - [ ] Reflect current caching and performance optimizations
+  - [ ] Update risk assessment based on current system state
+  - [ ] Ensure all architectural diagrams and examples are current
+- **Effort**: 2-3 days
+- **Priority**: **HIGH** - Critical for developer onboarding and architectural clarity
+- **Academic Value**: Ensures documentation matches actual system capabilities and prevents architectural confusion
+- **Impact**: This document is the primary architectural reference for developers and researchers
+
+#### [DOCS-002] Update Dual-Track Logging Architecture Documentation
+
+- **Description**: Update DUAL_TRACK_LOGGING_ARCHITECTURE.md to reflect current logging implementation and recent improvements
+- **Dependencies**: [DOCS-001] (architecture document update)
+- **Current Issues**: Document is outdated and doesn't reflect current logging system implementation, recent improvements, and actual system capabilities
+- **Acceptance Criteria**:
+  - [ ] Update logging architecture overview to reflect current implementation (Loguru-based system)
+  - [ ] Document current logging configuration and capabilities in `discernus/core/logging_config.py`
+  - [ ] Update performance logging section to reflect current `perf_timer()` implementation
+  - [ ] Document current log file structure and rotation policies
+  - [ ] Update terminal output section to reflect current Rich console implementation
+  - [ ] Document current error handling and logging patterns
+  - [ ] Reflect current audit logging and provenance capabilities
+  - [ ] Update implementation examples to match current system behavior
+  - [ ] Document current logging performance and overhead characteristics
+  - [ ] Ensure all architectural diagrams reflect current system state
+- **Effort**: 1-2 days
+- **Priority**: **MEDIUM** - Important for operational understanding and debugging
+- **Academic Value**: Ensures logging documentation matches actual system capabilities for debugging and audit trails
+- **Impact**: This document is critical for understanding system operation and debugging issues
+
+#### [DOCS-003] Comprehensive Architecture Documentation Audit & Update
+
+- **Description**: Comprehensive audit and update of all architecture documentation to ensure consistency and accuracy
+- **Dependencies**: [DOCS-001] ✅, [DOCS-002] ✅
+- **Current Issues**: Multiple architecture documents may have inconsistencies, outdated information, or gaps in coverage
+- **Acceptance Criteria**:
+  - [ ] Audit all architecture documents for consistency and accuracy
+  - [ ] Update PROVENANCE_SYSTEM.md if needed (appears current but verify)
+  - [ ] Ensure all documents reflect current system state and capabilities
+  - [ ] Verify architectural diagrams and examples are current
+  - [ ] Check for any missing architecture documentation
+  - [ ] Ensure cross-references between documents are accurate
+  - [ ] Validate that all recent architectural changes are documented
+  - [ ] Create architecture documentation index/overview if needed
+  - [ ] Ensure all documents follow consistent formatting and structure
+- **Effort**: 1-2 days
+- **Priority**: **MEDIUM** - Ensures documentation quality and consistency
+- **Academic Value**: Maintains high-quality architectural documentation for researchers and developers
+- **Impact**: Prevents architectural confusion and ensures all stakeholders have accurate system understanding
+
 ### Sprint 4: Future Enhancements (LOW PRIORITY)
 
 **Timeline:** Future sprints
