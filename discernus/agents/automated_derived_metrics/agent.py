@@ -97,16 +97,7 @@ class AutomatedDerivedMetricsAgent:
             )
             
             # Extract clean functions using THIN delimiter approach
-            print(f"🔍 DEBUG: LLM response length: {len(generated_functions)}")
-            print(f"🔍 DEBUG: LLM response preview: {generated_functions[:500]}...")
-            
-            # The generated_functions already contains clean Python functions
-            # (extraction was done in _generate_single_function for each individual function)
-            print(f"🔍 DEBUG: Using combined functions directly (no re-extraction needed)")
-            print(f"Combined functions length: {len(generated_functions)}")
-            
             if not generated_functions or not generated_functions.strip():
-                print(f"🔍 DEBUG: Empty combined functions!")
                 raise ValueError("No functions extracted from LLM response")
             
             # Create module from the already-combined functions
@@ -204,17 +195,10 @@ class AutomatedDerivedMetricsAgent:
                 continue
         
         # Combine all generated functions
-        print(f"🔍 DEBUG: Generated functions summary:")
-        print(f"Total functions attempted: {len(calculations)}")
-        print(f"Successfully generated: {len(generated_functions)}")
-        print(f"Function names: {list(calculations.keys())}")
-        
         if not generated_functions:
             raise ValueError("No valid functions were generated")
         
-        print(f"🔍 DEBUG: Combining {len(generated_functions)} functions")
         combined = "\n\n".join(generated_functions)
-        print(f"🔍 DEBUG: Combined module length: {len(combined)}")
             
         return combined
     
@@ -428,17 +412,9 @@ Generate ONLY this one function. Do not generate multiple functions."""
             )
             
             # Extract the function using THIN delimiter approach
-            print(f"🔍 DEBUG: LLM response for {calc_name}:")
-            print(f"Length: {len(response_text)}")
-            print(f"Preview: {response_text[:200]}...")
-            print(f"Contains start delimiter: {'<<<DISCERNUS_FUNCTION_START>>>' in response_text}")
-            print(f"Contains end delimiter: {'<<<DISCERNUS_FUNCTION_END>>>' in response_text}")
-            
             extracted_functions = self.extractor.extract_code_blocks(response_text)
-            print(f"Extracted functions count: {len(extracted_functions)}")
             
             if not extracted_functions:
-                print(f"🔍 DEBUG: Full LLM response for {calc_name}: {response_text}")
                 raise ValueError(f"No function extracted for {calc_name}")
             
             if len(extracted_functions) > 1:

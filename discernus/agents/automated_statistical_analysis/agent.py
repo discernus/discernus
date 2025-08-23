@@ -162,17 +162,13 @@ class AutomatedStatisticalAnalysisAgent:
         # Extract individual statistical analyses needed
         statistical_analyses = self._extract_statistical_analyses(framework_content, experiment_spec)
         
-        print(f"🔍 DEBUG: Generating {len(statistical_analyses)} statistical functions individually...")
-        
         generated_functions = []
         for analysis_name, analysis_description in statistical_analyses.items():
             try:
-                print(f"🔍 DEBUG: Generating function for: {analysis_name}")
                 function_code = self._generate_single_statistical_function(
                     analysis_name, analysis_description, framework_content, experiment_spec
                 )
                 generated_functions.append(function_code)
-                print(f"🔍 DEBUG: Successfully generated {analysis_name}")
                 
             except Exception as e:
                 print(f"❌ Failed to generate {analysis_name}: {str(e)}")
@@ -182,18 +178,10 @@ class AutomatedStatisticalAnalysisAgent:
                 })
                 continue
         
-        # Combine all generated functions
-        print(f"🔍 DEBUG: Statistical functions summary:")
-        print(f"Total functions attempted: {len(statistical_analyses)}")
-        print(f"Successfully generated: {len(generated_functions)}")
-        print(f"Function names: {list(statistical_analyses.keys())}")
-        
         if not generated_functions:
             raise ValueError("No valid statistical functions were generated")
         
-        print(f"🔍 DEBUG: Combining {len(generated_functions)} statistical functions")
         combined = "\n\n".join(generated_functions)
-        print(f"🔍 DEBUG: Combined statistical module length: {len(combined)}")
             
         return combined
     
@@ -207,13 +195,6 @@ class AutomatedStatisticalAnalysisAgent:
             Generated function code as a string
         """
         try:
-            # Debug: Log the prompt being sent
-            print(f"🔍 DEBUG: Sending pre-assembled prompt to LLM:")
-            print(f"Prompt length: {len(pre_assembled_prompt)}")
-            print(f"Prompt preview: {pre_assembled_prompt[:500]}...")
-            print(f"Prompt contains 'read data from workspace': {'read data from workspace' in pre_assembled_prompt.lower()}")
-            print(f"Prompt contains 'no parameters': {'no parameters' in pre_assembled_prompt.lower()}")
-            
             # Use the pre-assembled prompt directly with the LLM
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
@@ -224,13 +205,6 @@ class AutomatedStatisticalAnalysisAgent:
             
             if not response:
                 raise ValueError("LLM returned empty response")
-            
-            # Debug: Log the response
-            print(f"🔍 DEBUG: LLM response:")
-            print(f"Response length: {len(response)}")
-            print(f"Response preview: {response[:500]}...")
-            print(f"Response contains 'def perform_statistical_analysis()': {'def perform_statistical_analysis()' in response}")
-            print(f"Response contains 'def perform_statistical_analysis(data': {'def perform_statistical_analysis(data' in response}")
             
             self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
                 "response_length": len(response),
@@ -612,10 +586,6 @@ def {analysis_name.replace(' ', '_').lower()}(data, **kwargs):
 Generate the complete function now:"""
 
         try:
-            # Debug logging for problematic function
-            if analysis_name == "oppositional_validation":
-                print(f"DEBUG: Generating long-running function '{analysis_name}'. Full prompt:\n{single_function_prompt}")
-            
             # Call LLM without problematic parameters
             response_text, metadata = self.llm_gateway.execute_call(
                 model=self.model,
@@ -624,14 +594,7 @@ Generate the complete function now:"""
             )
             
             # Extract the function using THIN delimiter approach
-            print(f"🔍 DEBUG: LLM response for {analysis_name}:")
-            print(f"Length: {len(response_text)}")
-            print(f"Preview: {response_text[:200]}...")
-            print(f"Contains start delimiter: {'<<<DISCERNUS_FUNCTION_START>>>' in response_text}")
-            print(f"Contains end delimiter: {'<<<DISCERNUS_FUNCTION_END>>>' in response_text}")
-            
             extracted_functions = self.extractor.extract_code_blocks(response_text)
-            print(f"🔍 DEBUG: Extracted functions count: {len(extracted_functions)}")
             
             if not extracted_functions:
                 raise ValueError(f"No function extracted for {analysis_name}")

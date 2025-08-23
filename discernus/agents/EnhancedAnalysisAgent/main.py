@@ -116,7 +116,7 @@ class EnhancedAnalysisAgent:
         )
 
         return {
-            "analysis_result": {"analysis_id": analysis_id, "result_hash": result_hash, "duration_seconds": duration},
+            "analysis_result": {"analysis_id": analysis_id, "result_hash": result_hash, "duration_seconds": duration, "result_content": enhanced_result},
             "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
         }
 
