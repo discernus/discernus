@@ -25,11 +25,13 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 
 **Corpus Name**: Trump Political Discourse Corpus  
 **Corpus Type**: Political speeches, campaign rallies, social media posts, and public statements  
-**Time Period**: 2015-2025 (Presidential campaign through second presidency)  
+**Time Period**: 1988-2025 (Early political positioning through second presidency)  
 **Content Categories**:
+- Early political appearances and interviews (1988-2000)
 - Campaign rally speeches (2015-2016)
 - Inaugural address and State of the Union speeches (2017-2020)
-- Social media posts and statements (2017-2024)
+- Post-presidential speeches and rallies (2021-2023)
+- Return campaign speeches and rallies (2023-2024)
 - Second presidency addresses (2025)
 
 **Corpus Characteristics**: 
@@ -64,10 +66,12 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 **No Predefined Hypotheses**: The experiment encourages emergent pattern discovery
 
 **Analysis Phases**:
-1. **Campaign Phase (2015-2016)**: Initial populist positioning and campaign rhetoric
-2. **Presidential Phase (2017-2020)**: Governing populism and institutional populist appeals
-3. **Re-election Phase (2019-2020)**: Campaign populism with presidential authority
-4. **Second Presidency Phase (2025)**: Return to presidential populism with renewed mandate
+1. **Early Political Period (1988-2000)**: Initial political positioning and early populist themes
+2. **Campaign Launch (2015-2016)**: Initial populist positioning and campaign rhetoric
+3. **First Presidency (2017-2020)**: Governing populism and institutional populist appeals
+4. **Between Presidencies (2021-2023)**: Post-presidential populist discourse and movement leadership
+5. **Campaign to Second Presidency (2023-2024)**: Return campaign populism with presidential experience
+6. **Second Presidency (2025-present)**: Return to presidential populism with renewed mandate
 
 **Corpus Segmentation**: Each phase will be analyzed separately using PDAF, then compared for temporal patterns and strategic evolution.
 

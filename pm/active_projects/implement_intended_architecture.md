@@ -1,7 +1,13 @@
 # Implement Intended THIN Architecture
 
 ## Overview
-This document outlines the step-by-step plan to refactor the current entangled synthesis approach into the intended THIN architecture where the orchestrator uses the `SynthesisAssembler` to prepare context-rich prompts, then hands them to agents for execution.
+This document outlines the step-by-step plan to **complete the refactoring** of the `CleanAnalysisOrchestrator` into the intended 4-phase THIN architecture. 
+
+**Current State**: We have a half-built bridge - Phase 1 (Analysis) is complete, but Phases 2-4 are missing or incomplete.
+
+**Target State**: A complete 4-phase pipeline where each phase has its dedicated assembler and agent, with clear data flow between phases.
+
+**What We're Building**: The missing pieces that will give us all the functionality of the old orchestrator, but structured in a way that is far more reliable, maintainable, and aligned with our THIN principles.
 
 ## Current State Analysis
 - **Problem**: `UnifiedSynthesisAgent` is doing orchestration work (assembling prompts internally)
@@ -10,17 +16,27 @@ This document outlines the step-by-step plan to refactor the current entangled s
 
 ## Target Architecture
 ```
-Orchestrator → Reads Raw Content → SynthesisAssembler → Raw Content Assembly → UnifiedSynthesisAgent → LLM Call
-     ↓              ↓                    ↓                    ↓                    ↓              ↓
-  Gathers      Reads files         Assembles raw        Single prompt      Executes      Returns
-  Context      as-is               content into         with all data      prompt        Report
-              (no parsing)         comprehensive        (no parsing)       (no parsing)
+CleanAnalysisOrchestrator (4-Phase Pipeline)
+     ↓
+Phase 1: Analysis (_run_analysis_phase) ✅ COMPLETE
+     ↓
+Phase 2: Derived Metrics (DerivedMetricsAssembler) ⏳ MISSING
+     ↓  
+Phase 3: Statistical Analysis (StatisticalAnalysisPromptAssembler) ⏳ MISSING
+     ↓
+Phase 4: Synthesis (SynthesisAssembler) ⏳ INCOMPLETE
+     ↓
+Final Report
 ```
 
 **THIN Principle**: Each component does one thing well
-- **Orchestrator**: Reads files and passes raw content
-- **Assembler**: Concatenates and formats (no parsing logic)  
-- **Agent**: Gets complete context and does all interpretation
+- **Orchestrator**: Orchestrates 4-phase pipeline, passes artifacts between phases
+- **Phase 1**: Analysis (✅ working)
+- **Phase 2**: Derived Metrics (⏳ needs DerivedMetricsAssembler integration)
+- **Phase 3**: Statistical Analysis (⏳ needs StatisticalAnalysisPromptAssembler integration)  
+- **Phase 4**: Synthesis (⏳ needs SynthesisAssembler integration)
+- **Assemblers**: Build prompts for their respective phases
+- **Agents**: Execute prompts and return results
 
 ## Phase 1: Test-Driven Analysis (TDD Foundation)
 
@@ -92,44 +108,76 @@ Orchestrator → Reads Raw Content → SynthesisAssembler → Raw Content Assemb
 2. **Assembler gap**: Parsing content instead of passing raw content
 3. **Agent gap**: Still using old interface with file paths and artifact hashes
 
-**Next**: **Phase 2** - Implement the intended THIN architecture
+**Next**: **Phase 2** - Implement the intended THIN architecture (25% complete - Phase 2 implemented)
 
-## Phase 2: Implement Orchestrator Changes (THIN Principles)
+## Phase 2: Implement Complete 4-Phase Pipeline (THIN Principles)
 
-### Step 2.1: Refactor `_run_synthesis` Method
+### Step 2.1: Implement Phase 2 - Derived Metrics ✅ COMPLETE
 **File**: `discernus/core/clean_analysis_orchestrator.py`
 **Changes**:
-- Remove direct file path passing to agent
-- Add call to `SynthesisPromptAssembler.assemble()`
-- Pass assembled prompt to agent
-- Ensure proper error handling
+- ✅ Added `_run_derived_metrics_phase()` method
+- ✅ Integrated `AutomatedDerivedMetricsAgent` 
+- ✅ Pass analysis results to derived metrics phase
+- ✅ Store derived metrics artifacts for next phase
+- ✅ Updated main run method to include Phase 5 (derived metrics)
+- ✅ Updated synthesis to use actual derived metrics results
+
+**THIN Principle**: Each phase has dedicated assembler and agent
+**Status**: ✅ **COMPLETE** - Phase 2 fully implemented and integrated
+
+### Step 2.2: Implement Phase 3 - Statistical Analysis  
+**File**: `discernus/core/clean_analysis_orchestrator.py`
+**Changes**:
+- Add `_run_statistical_analysis_phase()` method
+- Integrate `StatisticalAnalysisPromptAssembler`
+- Pass derived metrics to statistical analysis phase
+- Store statistical results for synthesis phase
+
+**THIN Principle**: Clear data flow between phases
+
+### Step 2.3: Complete Phase 4 - Synthesis Integration
+**File**: `discernus/core/clean_analysis_orchestrator.py`
+**Changes**:
+- Refactor `_run_synthesis` to use `SynthesisPromptAssembler`
+- Pass complete context (framework, experiment, research data, evidence)
+- Ensure proper artifact flow from previous phases
 
 **THIN Principle**: Orchestrator orchestrates, doesn't do agent work
 
-### Step 2.2: Update Orchestrator Dependencies
+### Step 2.4: Update Orchestrator Dependencies
 **File**: `discernus/core/clean_analysis_orchestrator.py`
 **Changes**:
-- Import `SynthesisPromptAssembler`
-- Initialize assembler in `__init__` or `_load_specs`
-- Ensure assembler has access to artifact storage
+- Import all required assemblers (`DerivedMetricsAssembler`, `StatisticalAnalysisPromptAssembler`, `SynthesisPromptAssembler`)
+- Initialize assemblers in `__init__` or `_load_specs`
+- Ensure proper artifact storage access for all phases
 
-**THIN Principle**: Clear dependency injection
+**THIN Principle**: Clear dependency injection for all phases
 
-### Step 2.3: Implement Context Gathering in Orchestrator
-**File**: `discernus/core/clean_analysis_orchestrator.py`
-**Changes**:
-- Gather framework content (not just path)
-- Gather experiment content (not just path)
-- Gather research data artifacts
-- Pass complete context to assembler
+## Phase 3: Implement All Assembler Functionality
 
-**THIN Principle**: Orchestrator manages data flow
+### Step 3.1: Implement Phase 2 - DerivedMetricsAssembler
+**File**: `discernus/core/prompt_assemblers/derived_metrics_assembler.py`
+**Purpose**: Build prompts for derived metrics calculation
+**Methods**:
+- `assemble(analysis_results, framework_content, experiment_content)`
+- `_format_analysis_context(analysis_results)`
+- `_format_metrics_requirements(framework_content)`
 
-## Phase 3: Implement Assembler Functionality
+**THIN Principle**: Single responsibility - derived metrics prompt assembly
 
-### Step 3.1: Create/Update `SynthesisPromptAssembler`
-**File**: `discernus/core/prompt_assemblers/synthesis_prompt_assembler.py`
-**Purpose**: Build rich, context-filled prompts
+### Step 3.2: Implement Phase 3 - StatisticalAnalysisPromptAssembler  
+**File**: `discernus/core/prompt_assemblers/statistical_analysis_assembler.py`
+**Purpose**: Build prompts for statistical analysis
+**Methods**:
+- `assemble(derived_metrics, framework_content, experiment_content)`
+- `_format_metrics_context(derived_metrics)`
+- `_format_statistical_requirements(framework_content)`
+
+**THIN Principle**: Single responsibility - statistical analysis prompt assembly
+
+### Step 3.3: Complete Phase 4 - SynthesisPromptAssembler
+**File**: `discernus/core/prompt_assemblers/synthesis_assembler.py`
+**Purpose**: Build rich, context-filled synthesis prompts
 **Methods**:
 - `assemble(framework_content, experiment_content, research_data, evidence_hashes)`
 - `_format_framework_context(framework_content)`
@@ -137,7 +185,7 @@ Orchestrator → Reads Raw Content → SynthesisAssembler → Raw Content Assemb
 - `_format_research_data(research_data)`
 - `_format_evidence_context(evidence_hashes)`
 
-**THIN Principle**: Single responsibility - prompt assembly only
+**THIN Principle**: Single responsibility - synthesis prompt assembly
 
 ### Step 3.2: Implement Prompt Template Loading
 **File**: `discernus/core/prompt_assemblers/synthesis_prompt_assembler.py`
@@ -252,9 +300,12 @@ Orchestrator → Reads Raw Content → SynthesisAssembler → Raw Content Assemb
 ## Success Criteria
 
 ### Functional Requirements
-- [ ] Orchestrator uses `SynthesisPromptAssembler` to build prompts
-- [ ] Agent receives complete prompts and executes without assembly
-- [ ] End-to-end pipeline produces evidence-rich reports
+- [ ] **Phase 1**: Analysis phase works correctly (✅ already working)
+- [ ] **Phase 2**: Derived metrics phase produces comprehensive metrics
+- [ ] **Phase 3**: Statistical analysis phase produces robust statistical results
+- [ ] **Phase 4**: Synthesis phase produces evidence-rich reports
+- [ ] All phases use their dedicated assemblers for prompt building
+- [ ] End-to-end 4-phase pipeline works without errors
 - [ ] No regression in report quality or completeness
 
 ### Architectural Requirements

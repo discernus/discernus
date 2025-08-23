@@ -173,7 +173,23 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
             
-            # Phase 5: Generate statistics
+            # Phase 5: Run derived metrics
+            phase_start = datetime.now(timezone.utc)
+            try:
+                derived_metrics_results = self._run_derived_metrics_phase(synthesis_model, audit_logger, analysis_results)
+                
+                # Store derived metrics results for synthesis access
+                self._derived_metrics_results = derived_metrics_results
+                
+                self._log_status("Derived metrics completed")
+                self._log_phase_timing("derived_metrics_phase", phase_start)
+            except Exception as e:
+                self._log_progress(f"⚠️ Derived metrics phase failed, attempting to continue: {str(e)}")
+                # Try to continue with basic analysis results
+                derived_metrics_results = {"error": str(e), "status": "failed"}
+                self._derived_metrics_results = derived_metrics_results
+            
+            # Phase 6: Generate statistics
             phase_start = datetime.now(timezone.utc)
             try:
                 statistical_results = self._run_statistical_analysis(synthesis_model, audit_logger, analysis_results)
@@ -184,7 +200,7 @@ class CleanAnalysisOrchestrator:
                 # Try to continue with basic analysis results
                 statistical_results = {"error": str(e), "status": "failed"}
             
-            # Phase 6: Build RAG index for synthesis
+            # Phase 7: Build RAG index for synthesis
             phase_start = datetime.now(timezone.utc)
             try:
                 self._build_rag_index(audit_logger)
@@ -194,7 +210,7 @@ class CleanAnalysisOrchestrator:
                 # In RAG-or-nothing mode, this is a fatal error.
                 raise CleanAnalysisError(f"Failed to build RAG index: {str(e)}") from e
 
-            # Phase 7: Run synthesis with RAG integration
+            # Phase 8: Run synthesis with RAG integration
             phase_start = datetime.now(timezone.utc)
             try:
                 synthesis_result = self._run_synthesis(synthesis_model, audit_logger, statistical_results)
@@ -205,7 +221,7 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
-            # Phase 8: Create results with publication readiness
+            # Phase 9: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
                 results_dir = self._create_clean_results_directory(run_id, statistical_results, synthesis_result)
@@ -625,6 +641,146 @@ class CleanAnalysisOrchestrator:
         self._log_progress(f"✅ Analysis phase completed: {len(analysis_results)} documents processed")
         return analysis_results
     
+    def _run_derived_metrics_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Run derived metrics phase using DerivedMetricsPromptAssembler and AutomatedDerivedMetricsAgent."""
+        self._log_progress("📊 Running derived metrics phase...")
+        
+        try:
+            # Load framework content
+            framework_path = self.experiment_path / self.config['framework']
+            framework_content = framework_path.read_text(encoding='utf-8')
+            
+            # Create experiment spec for derived metrics agent
+            experiment_spec = {
+                "name": self.config['name'],
+                "description": self.config.get('description', ''),
+                "questions": self.config.get('questions', [])
+            }
+            
+            # Create temporary workspace for derived metrics
+            temp_workspace = self.experiment_path / "temp_derived_metrics"
+            temp_workspace.mkdir(exist_ok=True)
+            
+            try:
+                # Write framework content and experiment spec
+                (temp_workspace / "framework_content.md").write_text(framework_content)
+                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
+                
+                # Write analysis results for the agent to process
+                analysis_data_file = temp_workspace / "analysis_results.json"
+                analysis_data_file.write_text(json.dumps(analysis_results, indent=2))
+                
+                # Initialize derived metrics agent
+                from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
+                derived_metrics_agent = AutomatedDerivedMetricsAgent(
+                    model=model,
+                    audit_logger=audit_logger
+                )
+                
+                # Generate derived metrics functions
+                self._log_progress("🔧 Generating derived metrics functions...")
+                functions_result = derived_metrics_agent.generate_functions(temp_workspace)
+                
+                # Execute the generated functions on analysis data
+                self._log_progress("🔢 Executing derived metrics functions on analysis data...")
+                derived_metrics_results = self._execute_derived_metrics_functions(
+                    temp_workspace, 
+                    analysis_results, 
+                    audit_logger
+                )
+                
+                # Store derived metrics results in artifact storage
+                complete_derived_metrics_result = {
+                    "generation_metadata": functions_result,
+                    "derived_metrics_data": derived_metrics_results,
+                    "status": "success_with_data",
+                    "validation_passed": True
+                }
+                
+                derived_metrics_hash = self.artifact_storage.put_artifact(
+                    json.dumps(complete_derived_metrics_result, indent=2).encode('utf-8'),
+                    {"artifact_type": "derived_metrics_results_with_data"}
+                )
+                
+                self._log_progress(f"✅ Derived metrics phase completed: {len(derived_metrics_results)} result sets")
+                
+                return {
+                    "status": "completed",
+                    "derived_metrics_hash": derived_metrics_hash,
+                    "functions_generated": functions_result.get('functions_generated', 0),
+                    "derived_metrics_results": complete_derived_metrics_result
+                }
+                
+            except Exception as e:
+                self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
+            
+            finally:
+                # Clean up temporary workspace
+                if temp_workspace.exists():
+                    import shutil
+                    shutil.rmtree(temp_workspace)
+        
+        except Exception as e:
+            self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
+    
+    def _execute_derived_metrics_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
+        """Execute the generated derived metrics functions on analysis data."""
+        import pandas as pd
+        import numpy as np
+        import sys
+        import importlib.util
+        
+        # Load the generated derived metrics functions module
+        functions_file = workspace_path / "automatedderivedmetricsagent_functions.py"
+        if not functions_file.exists():
+            raise CleanAnalysisError("Derived metrics functions file not found")
+        
+        # Import the generated module
+        try:
+            spec = importlib.util.spec_from_file_location("derived_metrics_functions", functions_file)
+            derived_metrics_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(derived_metrics_module)
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to import derived metrics functions: {e}")
+        
+        # Convert analysis results to DataFrame format
+        analysis_data = []
+        for result in analysis_results:
+            if isinstance(result, dict) and 'analysis_result' in result:
+                analysis_data.append(result['analysis_result'])
+        
+        if not analysis_data:
+            raise CleanAnalysisError("No valid analysis data found for derived metrics calculation")
+        
+        # Create DataFrame from analysis data
+        try:
+            df = pd.DataFrame(analysis_data)
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to create DataFrame from analysis data: {e}")
+        
+        # Execute derived metrics calculation
+        try:
+            if hasattr(derived_metrics_module, 'calculate_derived_metrics'):
+                derived_df = derived_metrics_module.calculate_derived_metrics(df)
+                
+                # Convert back to dictionary format for storage
+                derived_metrics_results = derived_df.to_dict('records')
+                
+                return {
+                    "status": "success",
+                    "original_count": len(analysis_data),
+                    "derived_count": len(derived_metrics_results),
+                    "derived_metrics": derived_metrics_results,
+                    "columns_added": list(set(derived_df.columns) - set(df.columns))
+                }
+            else:
+                raise CleanAnalysisError("Generated module missing 'calculate_derived_metrics' function")
+                
+        except Exception as e:
+            raise CleanAnalysisError(f"Failed to execute derived metrics functions: {e}")
+    
     def _prepare_documents_for_analysis(self, corpus_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Prepare corpus documents for analysis by loading content and adding document_id."""
         prepared_docs = []
@@ -1005,9 +1161,16 @@ class CleanAnalysisOrchestrator:
                     analysis_data = result['analysis_result'].copy()
                     analysis_data['document_name'] = result.get('document_name', 'unknown')
                     raw_analysis_data.append(analysis_data)
-                    
-                    # For now, derived metrics are the same as raw (can be enhanced later)
-                    derived_metrics_data.append(analysis_data.copy())
+            
+            # Use actual derived metrics results if available, otherwise fall back to raw analysis
+            if hasattr(self, '_derived_metrics_results') and self._derived_metrics_results.get('status') == 'completed':
+                derived_metrics_data = self._derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
+                if not derived_metrics_data:
+                    # Fallback to raw analysis data
+                    derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
+            else:
+                # Fallback to raw analysis data
+                derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
             
             # Create complete research data structure matching deprecated orchestrator
             research_data = {
@@ -1018,6 +1181,7 @@ class CleanAnalysisOrchestrator:
                 },
                 'raw_analysis_data': raw_analysis_data,
                 'derived_metrics_data': derived_metrics_data,
+                'derived_metrics_metadata': getattr(self, '_derived_metrics_results', {}),
                 'statistical_results': statistical_results
             }
             

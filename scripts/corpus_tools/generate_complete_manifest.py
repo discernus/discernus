@@ -99,15 +99,34 @@ def extract_metadata_from_filename(filename: str) -> Dict[str, Any]:
     
     return metadata
 
-def generate_complete_manifest(corpus_dir: Path) -> Dict[str, Any]:
-    """Generate complete corpus manifest from directory contents."""
+def generate_complete_manifest(corpus_dir):
+    """Generate a complete v10-compliant corpus manifest."""
+    corpus_dir = Path(corpus_dir)
     
-    # Find all text files
+    # Find all text files in the corpus directory
     text_files = list(corpus_dir.rglob("*.txt"))
     
-    # Generate metadata for each file
+    # Filter out non-document files
+    excluded_files = {
+        "extraction_log.txt",
+        "log.txt",
+        "error_log.txt",
+        "debug_log.txt"
+    }
+    
+    # Filter out files that are not actual corpus documents
+    document_files = []
+    for file_path in text_files:
+        filename = file_path.name
+        # Skip if it's in the excluded list or looks like a log file
+        if filename in excluded_files or filename.startswith("log") or "log" in filename.lower():
+            continue
+        document_files.append(file_path)
+    
+    print(f"Found {len(document_files)} document files (excluded {len(text_files) - len(document_files)} non-document files)")
+    
     documents = []
-    for file_path in sorted(text_files):
+    for file_path in sorted(document_files):
         # Get relative path from corpus directory root
         relative_path = file_path.relative_to(corpus_dir)
         filename = str(relative_path)
