@@ -7,7 +7,7 @@
 **Experiment Name**: Trump Populist Rhetoric Analysis: Exploratory Study  
 **Experiment Date**: 2025-01-19  
 **Model Used**: Vertex AI Gemini 2.5 Flash (Analysis), Vertex AI Gemini 2.5 Pro (Synthesis)  
-**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0  
+**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0 (see `pdaf_v10.md`)  
 
 ---
 
@@ -44,7 +44,7 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 
 ## Analytical Framework
 
-**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0  
+**Framework**: Populist Discourse Analysis Framework (PDAF) v10.0 (see `pdaf_v10.md`)  
 **Framework Rationale**: PDAF provides comprehensive measurement of populist rhetorical patterns across nine dimensions, including strategic tension analysis and salience-weighted measurement. This enables detection of both populist intensity and strategic coherence over time.
 
 **Key Analytical Dimensions**:
@@ -98,7 +98,7 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 
 ## Methodological Notes
 
-**Framework Validation**: PDAF v10.0 has been validated and is specification-compliant  
+**Framework Validation**: PDAF v10.0 (see `pdaf_v10.md`) has been validated and is specification-compliant  
 **Analysis Variants**: Will use sequential analysis variants for highest quality results:
 - Sequential Core Anchors analysis for primary populist dimensions
 - Sequential Mechanism Anchors analysis for mobilization strategies  

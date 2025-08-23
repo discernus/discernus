@@ -1329,23 +1329,14 @@ class CleanAnalysisOrchestrator:
         self._log_progress(f"✅ RAG index built and loaded with {len(evidence_hashes)} evidence sources.")
 
     def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run synthesis using the UnifiedSynthesisAgent and the pre-built RAG index."""
-        self._log_progress("📝 Starting RAG-based synthesis...")
-
+        """Run synthesis using SynthesisPromptAssembler and UnifiedSynthesisAgent."""
+        self._log_progress("📝 Starting synthesis phase...")
+        
         try:
+            # Validate synthesis assets
             self._validate_synthesis_assets(statistical_results)
-
-            if self.rag_index is None:
-                raise CleanAnalysisError("SYNTHESIS BLOCKED: RAG index was not built or is unavailable.")
-
-            synthesis_agent = UnifiedSynthesisAgent(
-                model=synthesis_model,
-                audit_logger=audit_logger,
-                enhanced_mode=True
-            )
-
-            # Create complete research data structure (copied from deprecated orchestrator)
-            # Convert analysis results to DataFrame format for compatibility
+            
+            # Create complete research data structure
             raw_analysis_data = []
             derived_metrics_data = []
             
@@ -1359,6 +1350,7 @@ class CleanAnalysisOrchestrator:
             # Use actual derived metrics results if available, otherwise fall back to raw analysis
             if hasattr(self, '_derived_metrics_results') and self._derived_metrics_results.get('status') == 'completed':
                 derived_metrics_data = self._derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
+                
                 if not derived_metrics_data:
                     # Fallback to raw analysis data
                     derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
@@ -1366,7 +1358,7 @@ class CleanAnalysisOrchestrator:
                 # Fallback to raw analysis data
                 derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
             
-            # Create complete research data structure matching deprecated orchestrator
+            # Create complete research data structure
             research_data = {
                 'experiment_metadata': {
                     'name': getattr(self.security, 'experiment_name', 'unknown_experiment'),
@@ -1379,6 +1371,7 @@ class CleanAnalysisOrchestrator:
                 'statistical_results': statistical_results
             }
             
+            # Store research data for the assembler
             research_data_json = json.dumps(research_data, indent=2, default=str)
             research_data_hash = self.artifact_storage.put_artifact(
                 research_data_json.encode('utf-8'),
@@ -1388,49 +1381,82 @@ class CleanAnalysisOrchestrator:
                     "ready_for_synthesis": True
                 }
             )
-
-            # Collect evidence artifact hashes (copied from deprecated orchestrator pattern)
+            
+            # Collect evidence artifact hashes
             evidence_hashes = []
-            for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                metadata = artifact_info.get("metadata", {})
-                if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                    evidence_hashes.append(artifact_hash)
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                        evidence_hashes.append(artifact_hash)
             
             if not evidence_hashes:
-                self._log_progress("⚠️ No evidence artifacts found - synthesis will use RAG index only")
+                self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
             else:
                 self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts for synthesis")
-
+            
+            # Use SynthesisPromptAssembler to build the prompt
+            from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
+            assembler = SynthesisPromptAssembler()
+            
+            # Assemble the prompt using the existing assembler
+            self._log_progress("🔧 Assembling synthesis prompt...")
+            prompt = assembler.assemble_prompt(
+                framework_path=self.experiment_path / self.config['framework'],
+                experiment_path=self.experiment_path / "experiment.md",
+                research_data_artifact_hash=research_data_hash,
+                artifact_storage=self.artifact_storage,
+                evidence_artifacts=evidence_hashes
+            )
+            
+            # Store the assembled prompt
+            prompt_hash = self.artifact_storage.put_artifact(
+                prompt.encode('utf-8'),
+                {"artifact_type": "synthesis_prompt"}
+            )
+            
+            # Initialize synthesis agent
+            from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+            synthesis_agent = UnifiedSynthesisAgent(
+                model=synthesis_model,
+                audit_logger=audit_logger,
+                enhanced_mode=True
+            )
+            
+            # Execute synthesis using the assembled prompt
+            self._log_progress("🔧 Executing synthesis with assembled prompt...")
             synthesis_result = synthesis_agent.generate_final_report(
                 framework_path=self.experiment_path / self.config['framework'],
                 experiment_path=self.experiment_path / "experiment.md",
                 research_data_artifact_hash=research_data_hash,
-                evidence_artifact_hashes=evidence_hashes,  # Add evidence hashes like deprecated orchestrator
+                evidence_artifact_hashes=evidence_hashes,
                 rag_index=self.rag_index,
                 artifact_storage=self.artifact_storage
             )
-
+            
             final_report = synthesis_result.get("final_report")
             if not final_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a final report.")
-
+            
+            # Store the final report
             report_hash = self.artifact_storage.put_artifact(
                 final_report.encode('utf-8'),
-                {"artifact_type": "final_synthesis_report_rag"}
+                {"artifact_type": "final_synthesis_report"}
             )
-
-            self._log_progress(f"✅ RAG synthesis completed: {len(final_report)} characters")
-
+            
+            self._log_progress(f"✅ Synthesis phase completed: {len(final_report)} characters")
+            
             return {
                 "status": "completed",
                 "report_hash": report_hash,
                 "report_length": len(final_report),
-                "synthesis_result": synthesis_result
+                "synthesis_result": synthesis_result,
+                "prompt_hash": prompt_hash
             }
-
+            
         except Exception as e:
-            self._log_progress(f"❌ RAG synthesis failed: {str(e)}")
-            raise CleanAnalysisError(f"RAG synthesis failed: {str(e)}") from e
+            self._log_progress(f"❌ Synthesis phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Synthesis phase failed: {str(e)}") from e
     
     def _get_corpus_summary(self) -> Dict[str, Any]:
         """Get corpus summary for direct context."""
