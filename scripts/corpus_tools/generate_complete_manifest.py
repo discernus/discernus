@@ -126,12 +126,22 @@ def generate_complete_manifest(corpus_dir):
     print(f"Found {len(document_files)} document files (excluded {len(text_files) - len(document_files)} non-document files)")
     
     documents = []
+    used_ids = set()
     for file_path in sorted(document_files):
         # Get relative path from corpus directory root
         relative_path = file_path.relative_to(corpus_dir)
         filename = str(relative_path)
         
         metadata = extract_metadata_from_filename(filename)
+        
+        # Ensure unique document ID
+        base_id = metadata["document_id"]
+        counter = 1
+        while metadata["document_id"] in used_ids:
+            metadata["document_id"] = f"{base_id}_{counter}"
+            counter += 1
+        used_ids.add(metadata["document_id"])
+        
         documents.append(metadata)
     
     # Create manifest structure

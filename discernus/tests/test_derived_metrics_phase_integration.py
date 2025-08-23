@@ -39,8 +39,21 @@ components:
 """
         (experiment_dir / "experiment.md").write_text(experiment_content)
         
-        # Create framework.md
-        (experiment_dir / "framework.md").write_text("# Test Framework")
+        # Create framework.md with v10 format
+        framework_content = """# Test Framework
+
+## Part 2: The Machine-Readable Appendix
+```yaml
+metadata:
+  spec_version: "10.0"
+  framework_name: "test_framework"
+derived_metrics:
+  - name: "test_metric"
+    description: "A test derived metric"
+    formula: "dimensions.score.raw_score * 2"
+```
+"""
+        (experiment_dir / "framework.md").write_text(framework_content)
         
         # Create corpus.md
         (experiment_dir / "corpus.md").write_text("# Test Corpus")

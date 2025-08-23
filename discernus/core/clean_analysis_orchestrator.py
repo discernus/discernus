@@ -648,27 +648,36 @@ class CleanAnalysisOrchestrator:
         try:
             # Load framework content
             framework_path = self.experiment_path / self.config['framework']
-            framework_content = framework_path.read_text(encoding='utf-8')
-            
-            # Create experiment spec for derived metrics agent
-            experiment_spec = {
-                "name": self.config['name'],
-                "description": self.config.get('description', ''),
-                "questions": self.config.get('questions', [])
-            }
             
             # Create temporary workspace for derived metrics
             temp_workspace = self.experiment_path / "temp_derived_metrics"
             temp_workspace.mkdir(exist_ok=True)
             
             try:
-                # Write framework content and experiment spec
-                (temp_workspace / "framework_content.md").write_text(framework_content)
-                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
+                # Write analysis results to workspace for the assembler to sample
+                analysis_dir = temp_workspace / "analysis_data"
+                analysis_dir.mkdir(exist_ok=True)
                 
-                # Write analysis results for the agent to process
-                analysis_data_file = temp_workspace / "analysis_results.json"
-                analysis_data_file.write_text(json.dumps(analysis_results, indent=2))
+                # Write analysis results as individual files for the assembler to sample
+                for i, result in enumerate(analysis_results):
+                    analysis_file = analysis_dir / f"analysis_{i}.json"
+                    analysis_file.write_text(json.dumps(result, indent=2))
+                
+                # Use the existing DerivedMetricsPromptAssembler to build the prompt
+                from .prompt_assemblers.derived_metrics_assembler import DerivedMetricsPromptAssembler
+                assembler = DerivedMetricsPromptAssembler()
+                
+                # Assemble the prompt using the existing assembler
+                self._log_progress("🔧 Assembling derived metrics prompt...")
+                prompt = assembler.assemble_prompt(
+                    framework_path=framework_path,
+                    analysis_dir=analysis_dir,
+                    sample_size=3
+                )
+                
+                # Store the assembled prompt
+                prompt_file = temp_workspace / "derived_metrics_prompt.txt"
+                prompt_file.write_text(prompt)
                 
                 # Initialize derived metrics agent
                 from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
@@ -677,7 +686,7 @@ class CleanAnalysisOrchestrator:
                     audit_logger=audit_logger
                 )
                 
-                # Generate derived metrics functions
+                # Generate derived metrics functions using the assembled prompt
                 self._log_progress("🔧 Generating derived metrics functions...")
                 functions_result = derived_metrics_agent.generate_functions(temp_workspace)
                 
