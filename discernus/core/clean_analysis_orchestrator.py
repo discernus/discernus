@@ -691,16 +691,33 @@ class CleanAnalysisOrchestrator:
                 prompt_file = temp_workspace / "derived_metrics_prompt.txt"
                 prompt_file.write_text(prompt)
                 
-                # Initialize derived metrics agent
-                from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
-                derived_metrics_agent = AutomatedDerivedMetricsAgent(
-                    model=model,
-                    audit_logger=audit_logger
-                )
+                # Initialize derived metrics caching
+                from .derived_metrics_cache import DerivedMetricsCacheManager
+                cache_manager = DerivedMetricsCacheManager(self.artifact_storage, audit_logger)
                 
-                # Generate derived metrics functions using the assembled prompt
-                self._log_progress("🔧 Generating derived metrics functions...")
-                functions_result = derived_metrics_agent.generate_functions(temp_workspace)
+                # Generate cache key based on framework content, analysis structure, and model
+                cache_key = cache_manager.generate_cache_key(framework_content, analysis_results, model)
+                
+                # Check cache first
+                cache_result = cache_manager.check_cache(cache_key)
+                
+                if cache_result.hit:
+                    self._log_progress("💾 Using cached derived metrics functions")
+                    functions_result = cache_result.cached_functions
+                else:
+                    # Initialize derived metrics agent
+                    from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
+                    derived_metrics_agent = AutomatedDerivedMetricsAgent(
+                        model=model,
+                        audit_logger=audit_logger
+                    )
+                    
+                    # Generate derived metrics functions using the assembled prompt
+                    self._log_progress("🔧 Generating derived metrics functions...")
+                    functions_result = derived_metrics_agent.generate_functions(temp_workspace)
+                    
+                    # Store in cache for future use
+                    cache_manager.store_functions(cache_key, functions_result)
                 
                 # Execute the generated functions on analysis data
                 self._log_progress("🔢 Executing derived metrics functions on analysis data...")
@@ -816,22 +833,42 @@ class CleanAnalysisOrchestrator:
                 prompt_file = temp_workspace / "statistical_analysis_prompt.txt"
                 prompt_file.write_text(prompt)
                 
-                # Initialize statistical analysis agent
-                from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
-                stats_agent = AutomatedStatisticalAnalysisAgent(
-                    model=model,
-                    audit_logger=audit_logger
+                # Initialize statistical analysis caching
+                from .statistical_analysis_cache import StatisticalAnalysisCacheManager
+                stats_cache_manager = StatisticalAnalysisCacheManager(self.artifact_storage, audit_logger)
+                
+                # Generate cache key based on framework, experiment, analysis structure, derived metrics, and model
+                stats_cache_key = stats_cache_manager.generate_cache_key(
+                    framework_content, experiment_content, analysis_results, derived_metrics_results, model
                 )
                 
-                # Generate statistical analysis functions using the assembled prompt
-                self._log_progress("🔧 Generating statistical analysis functions...")
-                functions_result = stats_agent.generate_functions(temp_workspace, pre_assembled_prompt=prompt)
+                # Check cache first
+                stats_cache_result = stats_cache_manager.check_cache(stats_cache_key)
+                
+                if stats_cache_result.hit:
+                    self._log_progress("💾 Using cached statistical analysis functions")
+                    functions_result = stats_cache_result.cached_functions
+                else:
+                    # Initialize statistical analysis agent
+                    from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
+                    stats_agent = AutomatedStatisticalAnalysisAgent(
+                        model=model,
+                        audit_logger=audit_logger
+                    )
+                    
+                    # Generate statistical analysis functions using the assembled prompt
+                    self._log_progress("🔧 Generating statistical analysis functions...")
+                    functions_result = stats_agent.generate_functions(temp_workspace, pre_assembled_prompt=prompt)
+                    
+                    # Store in cache for future use
+                    stats_cache_manager.store_functions(stats_cache_key, functions_result)
                 
                 # Execute the generated functions on the data
                 self._log_progress("🔢 Executing statistical analysis functions...")
                 statistical_results = self._execute_statistical_analysis_functions(
                     temp_workspace, 
-                    audit_logger
+                    audit_logger,
+                    analysis_results
                 )
                 
                 # Store statistical results in artifact storage
@@ -926,7 +963,7 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             raise CleanAnalysisError(f"Failed to execute derived metrics functions: {e}")
     
-    def _execute_statistical_analysis_functions(self, workspace_path: Path, audit_logger: AuditLogger) -> Dict[str, Any]:
+    def _execute_statistical_analysis_functions(self, workspace_path: Path, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Execute the generated statistical analysis functions on the data."""
         import sys
         import importlib.util
@@ -944,11 +981,14 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             raise CleanAnalysisError(f"Failed to import statistical analysis functions: {e}")
         
+        # Convert analysis results to DataFrame format expected by statistical functions
+        analysis_data = self._convert_analysis_to_dataframe(analysis_results)
+        
         # Execute statistical analysis
         try:
             if hasattr(stats_module, 'perform_statistical_analysis'):
-                # The generated function now reads data from workspace files, so no parameters needed
-                statistical_results = stats_module.perform_statistical_analysis()
+                # The generated function now expects a data parameter
+                statistical_results = stats_module.perform_statistical_analysis(analysis_data)
                 
                 return {
                     "status": "success",
@@ -1027,7 +1067,8 @@ class CleanAnalysisOrchestrator:
             self._log_progress("🔢 Executing statistical functions on analysis data...")
             statistical_results = self._execute_statistical_functions(
                 temp_workspace, 
-                audit_logger
+                audit_logger,
+                analysis_results
             )
             
             # Transaction validation: Ensure we got actual statistical results
@@ -1069,7 +1110,7 @@ class CleanAnalysisOrchestrator:
                 import shutil
                 shutil.rmtree(temp_workspace)
     
-    def _execute_statistical_functions(self, workspace_path: Path, audit_logger: AuditLogger) -> Dict[str, Any]:
+    def _execute_statistical_functions(self, workspace_path: Path, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Execute the generated statistical functions on analysis data."""
         import pandas as pd
         import numpy as np
