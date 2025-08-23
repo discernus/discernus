@@ -37,7 +37,8 @@ from .enhanced_manifest import EnhancedManifest
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
-from ..agents.comprehensive_knowledge_curator.agent import ComprehensiveKnowledgeCurator, ComprehensiveIndexRequest
+from ..agents.txtai_evidence_curator.agent import TxtaiEvidenceCurator
+from ..core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 
@@ -76,7 +77,11 @@ class CleanAnalysisOrchestrator:
         }
         
         self.logger.info(f"Clean orchestrator initialized for: {self.security.experiment_name}")
-    
+        self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
+        self.artifact_storage = None
+        self.manifest = None
+        self.rag_index = None # Add instance variable for the RAG index
+
     def enable_test_mode(self, mock_llm: bool = True, performance_monitoring: bool = False):
         """Enable test mode for development and testing."""
         self.test_mode = True
@@ -158,6 +163,10 @@ class CleanAnalysisOrchestrator:
             phase_start = datetime.now(timezone.utc)
             try:
                 analysis_results = self._run_analysis_phase(analysis_model, audit_logger)
+                
+                # Store analysis results for synthesis access
+                self._analysis_results = analysis_results
+                
                 self._log_status(f"Analysis completed: {len(analysis_results)} documents processed")
                 self._log_phase_timing("analysis_phase", phase_start)
             except Exception as e:
@@ -175,16 +184,16 @@ class CleanAnalysisOrchestrator:
                 # Try to continue with basic analysis results
                 statistical_results = {"error": str(e), "status": "failed"}
             
-            # Phase 6: Build RAG index for evidence retrieval
+            # Phase 6: Build RAG index for synthesis
             phase_start = datetime.now(timezone.utc)
             try:
-                self._build_rag_index(audit_logger, statistical_results)
+                self._build_rag_index(audit_logger)
                 self._log_status("RAG index built successfully")
                 self._log_phase_timing("rag_index_build", phase_start)
             except Exception as e:
-                self._log_progress(f"⚠️ RAG index build failed, synthesis may be impaired: {str(e)}")
-                # Continue without RAG - synthesis can fall back to direct evidence
-            
+                # In RAG-or-nothing mode, this is a fatal error.
+                raise CleanAnalysisError(f"Failed to build RAG index: {str(e)}") from e
+
             # Phase 7: Run synthesis with RAG integration
             phase_start = datetime.now(timezone.utc)
             try:
@@ -192,14 +201,10 @@ class CleanAnalysisOrchestrator:
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
             except Exception as e:
-                self._log_progress(f"⚠️ Synthesis failed, creating basic results: {str(e)}")
-                # Create basic synthesis result to avoid complete failure
-                synthesis_result = {
-                    "synthesis_text": f"Synthesis failed: {str(e)}",
-                    "status": "failed",
-                    "error": str(e)
-                }
-            
+                # A failure in synthesis is a fatal error for the experiment.
+                self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
+
             # Phase 8: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
@@ -938,212 +943,136 @@ class CleanAnalysisOrchestrator:
         
         self._log_progress(f"✅ Synthesis assets validated: framework, experiment, {evidence_count} evidence artifacts, {len(corpus_documents)} corpus documents")
         self._log_progress("🟢 All required assets confirmed on disk - synthesis can proceed")
-    
-    def _build_rag_index(self, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> None:
-        """Build RAG index for intelligent evidence retrieval during synthesis."""
+
+    def _build_rag_index(self, audit_logger: AuditLogger) -> None:
+        """Builds the RAG index using the TxtaiEvidenceCurator."""
         self._log_progress("📚 Building RAG index for evidence retrieval...")
+
+        evidence_hashes = []
+        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                evidence_hashes.append(artifact_hash)
         
+        if not evidence_hashes:
+            self.logger.warning("No evidence artifacts found, RAG index will be empty.")
+            # We still create an empty index object to avoid downstream errors.
+            from txtai.embeddings import Embeddings
+            self.rag_index = Embeddings()
+            return
+
+        curator = TxtaiEvidenceCurator(
+            model="vertex_ai/gemini-2.5-flash", # Use a fast model for indexing
+            artifact_storage=self.artifact_storage,
+            audit_logger=audit_logger
+        )
+
+        index = curator.build_and_load_index(
+            evidence_artifact_hashes=evidence_hashes,
+            artifact_storage=self.artifact_storage
+        )
+
+        if index is None:
+            raise CleanAnalysisError("TxtaiEvidenceCurator failed to build and return a RAG index.")
+        
+        self.rag_index = index
+        self._log_progress(f"✅ RAG index built and loaded with {len(evidence_hashes)} evidence sources.")
+
+    def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Run synthesis using the UnifiedSynthesisAgent and the pre-built RAG index."""
+        self._log_progress("📝 Starting RAG-based synthesis...")
+
         try:
-            # Initialize comprehensive knowledge curator
-            self.knowledge_curator = ComprehensiveKnowledgeCurator(
-                model="vertex_ai/gemini-2.5-flash",  # Use Flash for indexing
-                artifact_storage=self.artifact_storage,
-                audit_logger=audit_logger
+            self._validate_synthesis_assets(statistical_results)
+
+            if self.rag_index is None:
+                raise CleanAnalysisError("SYNTHESIS BLOCKED: RAG index was not built or is unavailable.")
+
+            synthesis_agent = UnifiedSynthesisAgent(
+                model=synthesis_model,
+                audit_logger=audit_logger,
+                enhanced_mode=True
             )
+
+            # Create complete research data structure (copied from deprecated orchestrator)
+            # Convert analysis results to DataFrame format for compatibility
+            raw_analysis_data = []
+            derived_metrics_data = []
             
-            # Prepare artifacts for indexing
-            artifacts_to_index = {}
+            # Extract raw analysis data from individual results
+            for result in getattr(self, '_analysis_results', []):
+                if isinstance(result, dict) and 'analysis_result' in result:
+                    analysis_data = result['analysis_result'].copy()
+                    analysis_data['document_name'] = result.get('document_name', 'unknown')
+                    raw_analysis_data.append(analysis_data)
+                    
+                    # For now, derived metrics are the same as raw (can be enhanced later)
+                    derived_metrics_data.append(analysis_data.copy())
             
-            # Get evidence artifacts from the registry
+            # Create complete research data structure matching deprecated orchestrator
+            research_data = {
+                'experiment_metadata': {
+                    'name': getattr(self.security, 'experiment_name', 'unknown_experiment'),
+                    'framework': self.config.get('framework', 'unknown_framework'),
+                    'corpus_documents': len(raw_analysis_data),
+                },
+                'raw_analysis_data': raw_analysis_data,
+                'derived_metrics_data': derived_metrics_data,
+                'statistical_results': statistical_results
+            }
+            
+            research_data_json = json.dumps(research_data, indent=2, default=str)
+            research_data_hash = self.artifact_storage.put_artifact(
+                research_data_json.encode('utf-8'),
+                {
+                    "artifact_type": "complete_research_data",
+                    "experiment_name": getattr(self.security, 'experiment_name', 'unknown'),
+                    "ready_for_synthesis": True
+                }
+            )
+
+            # Collect evidence artifact hashes (copied from deprecated orchestrator pattern)
+            evidence_hashes = []
             for artifact_hash, artifact_info in self.artifact_storage.registry.items():
                 metadata = artifact_info.get("metadata", {})
                 if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                    # Get the first evidence artifact for indexing
-                    evidence_data = self.artifact_storage.get_artifact(artifact_hash)
-                    artifacts_to_index['evidence'] = evidence_data
-                    break
+                    evidence_hashes.append(artifact_hash)
             
-            if not artifacts_to_index:
-                self._log_progress("⚠️ No evidence artifacts found for RAG indexing")
-                return
-            
-            # Create index request
-            index_request = ComprehensiveIndexRequest(
-                run_id=f"rag_index_{hash(str(statistical_results))}"[:16],
-                experiment_context=json.dumps(self.config),
-                framework_spec=self._load_framework_content(),
-                experiment_artifacts=artifacts_to_index
-            )
-            
-            # Build the index
-            index_response = self.knowledge_curator.build_comprehensive_index(index_request)
-            
-            if index_response.success:
-                self._log_progress(f"✅ RAG index built: {index_response.indexed_items} items indexed")
+            if not evidence_hashes:
+                self._log_progress("⚠️ No evidence artifacts found - synthesis will use RAG index only")
             else:
-                self._log_progress(f"❌ RAG index build failed: {index_response.error_message}")
-                
-        except Exception as e:
-            self._log_progress(f"❌ RAG index build failed: {str(e)}")
-            # Don't raise - synthesis can continue without RAG
-    
-    def _load_framework_content(self) -> str:
-        """Load framework content for RAG indexing."""
-        framework_path = self.experiment_path / self.config['framework']
-        return framework_path.read_text(encoding='utf-8')
-    
-    def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run synthesis using RAG-based evidence retrieval (restored working approach)."""
-        self._log_progress("📝 Starting RAG-based synthesis...")
-        
-        try:
-            # CRITICAL: Validate all required assets exist on disk before synthesis
-            self._validate_synthesis_assets(statistical_results)
-            
-            # Check if RAG index was built successfully
-            if not hasattr(self, 'knowledge_curator') or not self.knowledge_curator:
-                self._log_progress("⚠️ No RAG index available, falling back to direct evidence approach")
-                return self._run_synthesis_fallback(synthesis_model, audit_logger, statistical_results)
-            
-            # Use RAG-based synthesis approach (restored working method)
-            from ..agents.deprecated.sequential_synthesis.agent import SequentialSynthesisAgent, SynthesisRequest
-            
-            # Initialize sequential synthesis agent with RAG curator
-            synthesis_agent = SequentialSynthesisAgent(
-                model=synthesis_model,
-                audit_logger=audit_logger
+                self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts for synthesis")
+
+            synthesis_result = synthesis_agent.generate_final_report(
+                framework_path=self.experiment_path / self.config['framework'],
+                experiment_path=self.experiment_path / "experiment.md",
+                research_data_artifact_hash=research_data_hash,
+                evidence_artifact_hashes=evidence_hashes,  # Add evidence hashes like deprecated orchestrator
+                rag_index=self.rag_index,
+                artifact_storage=self.artifact_storage
             )
-            
-            # Prepare direct context (compact data passed directly to LLM)
-            direct_context = {
-                "experiment": {
-                    "name": self.config.get('name', 'Unknown'),
-                    "framework": self.config.get('framework', ''),
-                    "corpus": self.config.get('corpus', '')
-                },
-                "framework": self._load_framework_content(),
-                "corpus": self._get_corpus_summary(),
-                "statistics": statistical_results.get('statistical_results', {})
-            }
-            
-            # Create synthesis request with RAG curator
-            synthesis_request = SynthesisRequest(
-                direct_context=direct_context,
-                rag_curator=self.knowledge_curator
-            )
-            
-            # Execute RAG-based synthesis
-            synthesis_response = synthesis_agent.synthesize_research(synthesis_request)
-            
-            if not synthesis_response.success:
-                raise CleanAnalysisError(f"RAG synthesis failed: {synthesis_response.error_message}")
-            
-            # Store synthesis report
-            final_report = synthesis_response.final_report
+
+            final_report = synthesis_result.get("final_report")
+            if not final_report:
+                raise CleanAnalysisError("Synthesis agent failed to produce a final report.")
+
             report_hash = self.artifact_storage.put_artifact(
                 final_report.encode('utf-8'),
                 {"artifact_type": "final_synthesis_report_rag"}
             )
-            
+
             self._log_progress(f"✅ RAG synthesis completed: {len(final_report)} characters")
-            
+
             return {
                 "status": "completed",
                 "report_hash": report_hash,
                 "report_length": len(final_report),
-                "synthesis_result": {"final_report": final_report},
-                "rag_enabled": True
+                "synthesis_result": synthesis_result
             }
-                
-        except Exception as e:
-            self._log_progress(f"⚠️ RAG synthesis failed: {str(e)}")
-            # Fall back to direct evidence approach
-            return self._run_synthesis_fallback(synthesis_model, audit_logger, statistical_results)
-    
-    def _run_synthesis_fallback(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Fallback synthesis using direct evidence loading (original broken approach)."""
-        self._log_progress("📝 Using fallback synthesis (direct evidence loading)...")
-        
-        try:
-            # Initialize synthesis agent
-            from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
-            
-            # Use RAG approach via SynthesisPromptAssembler (proven architecture)
-            assembler = SynthesisPromptAssembler()
-            
-            # Prepare paths for synthesis (already validated above)
-            framework_path = self.experiment_path / self.config['framework']
-            experiment_path = self.experiment_path / "experiment.md"
-            
-            # Get research data artifact hash (we need to store the statistical results first)
-            research_data_json = json.dumps(statistical_results, indent=2)
-            research_data_hash = self.artifact_storage.put_artifact(
-                research_data_json.encode('utf-8'),
-                {"artifact_type": "research_data_for_synthesis"}
-            )
-            
-            # Get evidence artifact hashes from the artifact registry (already validated above)
-            evidence_artifact_hashes = []
-            for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                metadata = artifact_info.get("metadata", {})
-                if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                    evidence_artifact_hashes.append(artifact_hash)
-            
-            # Generate base synthesis prompt
-            base_synthesis_prompt = assembler.assemble_prompt(
-                framework_path=framework_path,
-                experiment_path=experiment_path,
-                research_data_artifact_hash=research_data_hash,
-                artifact_storage=self.artifact_storage,
-                evidence_artifacts=evidence_artifact_hashes
-            )
-            
-            # Limit evidence to prevent timeouts (emergency fix)
-            evidence_context = self._prepare_limited_evidence_context(evidence_artifact_hashes, self.artifact_storage, limit=50)
-            
-            complete_synthesis_prompt = f"""{base_synthesis_prompt}
 
-AVAILABLE EVIDENCE FOR CITATION (LIMITED SAMPLE):
-{evidence_context}
-
-Use this evidence to support your statistical interpretations. Quote directly from the evidence above with proper attribution."""
-            
-            # Generate report using initialized LLM gateway
-            final_report, metadata = self.llm_gateway.execute_call(
-                model=synthesis_model,
-                prompt=complete_synthesis_prompt,
-                temperature=0.1
-            )
-            synthesis_result = {"final_report": final_report}
-            
-            # Transaction validation: Synthesis must produce a report with evidence integration
-            final_report = synthesis_result.get('final_report')
-            if not final_report:
-                raise CleanAnalysisError(
-                    "Synthesis transaction failed: No final report generated. "
-                    "Enhanced synthesis must produce a complete report."
-                )
-            
-            # Store synthesis report
-            report_hash = self.artifact_storage.put_artifact(
-                final_report.encode('utf-8'),
-                {"artifact_type": "final_synthesis_report"}
-            )
-            
-            self._log_progress(f"✅ Fallback synthesis completed: {report_hash[:8]}")
-            
-            return {
-                "status": "completed",
-                "report_hash": report_hash,
-                "report_length": len(final_report),
-                "evidence_artifacts_used": len(evidence_artifact_hashes),
-                "synthesis_result": synthesis_result,
-                "rag_enabled": False
-            }
-                
         except Exception as e:
-            self._log_progress(f"⚠️ Fallback synthesis failed: {str(e)}")
-            raise CleanAnalysisError(f"Synthesis failed: {str(e)}") from e
+            self._log_progress(f"❌ RAG synthesis failed: {str(e)}")
+            raise CleanAnalysisError(f"RAG synthesis failed: {str(e)}") from e
     
     def _get_corpus_summary(self) -> Dict[str, Any]:
         """Get corpus summary for direct context."""
@@ -1155,41 +1084,6 @@ Use this evidence to support your statistical interpretations. Quote directly fr
             }
         except Exception:
             return {"total_documents": 0, "document_list": []}
-    
-    def _prepare_limited_evidence_context(self, evidence_artifact_hashes: List[str], artifact_storage, limit: int = 50) -> str:
-        """Prepare limited evidence context to prevent timeouts (emergency fallback)."""
-        all_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
-        
-        if not all_evidence:
-            return "No evidence available for citation."
-        
-        # Limit evidence to prevent timeouts
-        limited_evidence = all_evidence[:limit]
-        
-        evidence_lines = [
-            f"EVIDENCE DATABASE: {len(all_evidence)} total pieces (showing first {len(limited_evidence)} for context).",
-            f"This is a limited sample to prevent prompt timeouts.",
-            "",
-            "CITATION REQUIREMENTS:",
-            "- Every major statistical claim should be supported by evidence",
-            "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
-            "- Note: Full evidence database available via RAG queries",
-            "",
-            "AVAILABLE EVIDENCE SAMPLE:",
-            ""
-        ]
-        
-        for i, evidence in enumerate(limited_evidence, 1):
-            doc_name = evidence.get('document_name', 'Unknown')
-            dimension = evidence.get('dimension', 'Unknown')
-            quote = evidence.get('quote_text', '')
-            confidence = evidence.get('confidence', 0.0)
-            
-            evidence_lines.append(f"{i}. **{dimension}** evidence from {doc_name} (confidence: {confidence:.2f}):")
-            evidence_lines.append(f"   \"{quote[:200]}{'...' if len(quote) > 200 else ''}\"")
-            evidence_lines.append("")
-        
-        return "\n".join(evidence_lines)
     
     def _get_all_evidence(self, evidence_artifact_hashes: List[str], artifact_storage) -> List[Dict[str, Any]]:
         """Retrieve and combine all evidence from artifacts."""
@@ -1339,7 +1233,7 @@ Use this evidence to support your statistical interpretations. Quote directly fr
             if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
                 if self.artifact_storage.registry.get("statistical_results_with_data"):
                     warnings.append("Statistical analysis completed, but some functions failed to execute or produce data.")
-                if self.artifact_storage.registry.get("final_synthesis_report"):
+                if self.artifact_storage.registry.get("final_synthesis_report_rag"):
                     warnings.append("Synthesis completed, but report generation failed or produced an empty report.")
         
         return warnings

@@ -1,0 +1,1863 @@
+{
+  "name": "Trump Political Discourse Corpus",
+  "version": "10.0",
+  "description": "Complete corpus covering Donald Trump's political discourse from 1988-2025, including early positioning, campaigns, two presidencies, and complete CPAC series evolution.",
+  "total_documents": 221,
+  "date_range": "1988-2025",
+  "political_phases": 7,
+  "framework_compatibility": "PDAF v10.0",
+  "documents": [
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/extraction_log.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_extraction_log"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/general_election/live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_live_donald_trump_speaks_at_maga_rally_in_georgia_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/Donald_Trump_campaign_speech_in_North_Carolina_2024-08-14_whisper.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_Donald_Trump_campaign_speech_in_North_Carolina_202"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/Donald_Trump_campaign_speech_in_North_Carolina_2024-08-21_whisper.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_Donald_Trump_campaign_speech_in_North_Carolina_202"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/Donald_Trump_full_speech_at_campaign_rally_in_Wilkes_Barre_PA_2024-08-17_whisper.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_Donald_Trump_full_speech_at_campaign_rally_in_Wilk"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_j_trump_robert_f_kennedy_jr_at_rally_in_gle_2024_08_23_jtW6LFSe.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_j_trump_robert_f_kennedy_jr_at_rally_in_gle"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_at_turning_point_usa_rally_in_phoenix_2024_06_06_NY6oOhea.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_at_turning_point_usa_rally_in_phoenix"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_campaign_rally_in_chesapeake_virginia_2024_06_28_7R8UVSvq.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "location": "Virginia",
+      "document_id": "doc_donald_trump_campaign_rally_in_chesapeake_virginia"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_economic_plan_full_speech_2024_08_14_bAIPi1cP.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_economic_plan_full_speech_2024_08_14_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_rally_in_mosinee_wi_sept_7_2024_2024_09_08_7kykpqbO.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_rally_in_mosinee_wi_sept_7_2024_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_campaign_event_in_waun_2024_10_01_huiar-uz.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_campaign_event_in_waun"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_campaign_rally_in_wilk_2024_08_18_Z2ACEVWK.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_campaign_rally_in_wilk"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_campaign_rally_in_wilm_2024_09_23_xC9rEV0G.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_campaign_rally_in_wilm"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_maga_rally_in_harrisbu_2024_07_31_YA7Pi8F1.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_maga_rally_in_harrisbu"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_charlotte_nor_2024_07_25_37VqgNlQ.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_rally_in_charlotte_nor"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_johnstown_pa__2024_08_31_VFuQ3kxT.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_rally_in_johnstown_pa_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_full_speech_at_rally_in_racine_wiscon_2024_06_19_FjCYUNEi.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_full_speech_at_rally_in_racine_wiscon"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_holds_town_hall_in_flint_mi_moderated_2024_09_18_v74Ri4dV.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_holds_town_hall_in_flint_mi_moderated"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_holds_town_hall_in_la_crosse_wi_aug_2_2024_08_30_GYnvNd77.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_holds_town_hall_in_la_crosse_wi_aug_2"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_jd_vance_rally_in_asheboro_north_caro_2024_08_21_IGV3T03f.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_jd_vance_rally_in_asheboro_north_caro"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_presidential_election_rally_in_butler_2024_07_13_0XVJW5oC.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_presidential_election_rally_in_butler"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_remarks_in_mint_hill_north_carolina_s_2024_09_25_xb8O_1JX.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_remarks_in_mint_hill_north_carolina_s"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_save_america_rally_at_sunset_park_in__2024_06_09_-nyZJZf7.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_save_america_rally_at_sunset_park_in_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trump_the_peoples_convention_by_turning_poi_2024_06_15_-YNaRMLd.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trump_the_peoples_convention_by_turning_poi"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/donald_trumps_speech_philadelphia_june_22_2024_i_t_2024_06_25_9vN1ysKx.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_donald_trumps_speech_philadelphia_june_22_2024_i_t"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/full_speech_donald_trump_holds_rally_in_savannah_g_2024_09_24_XCogFRCw.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_full_speech_donald_trump_holds_rally_in_savannah_g"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/full_speech_trump_holds_rally_in_las_vegas_livenow_2024_09_14_mk97gSfZ.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_full_speech_trump_holds_rally_in_las_vegas_livenow"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/full_speech_trump_holds_rally_in_pennsylvania_live_2024_09_24_TM_qD9TV.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "location": "Pennsylvania",
+      "document_id": "doc_full_speech_trump_holds_rally_in_pennsylvania_live"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/full_speech_trump_holds_rally_on_long_island_liven_2024_09_19_A0F-NwN1.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_full_speech_trump_holds_rally_on_long_island_liven"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/full_speech_trump_speaks_on_immigration_in_battleg_2024_09_28_kjQPj3g_.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_full_speech_trump_speaks_on_immigration_in_battleg"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_florida_2024_07_10_eojBR3Ji.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "location": "Florida",
+      "document_id": "doc_live_donald_trump_hosts_maga_rally_in_florida_2024"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/live_donald_trump_hosts_maga_rally_in_montana_2024_08_10_D4IdhXex.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_live_donald_trump_hosts_maga_rally_in_montana_2024"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/live_donald_trump_speaks_at_maga_rally_in_georgia_2024_08_03_-1UAZqFL.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_live_donald_trump_speaks_at_maga_rally_in_georgia_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/trump_2024_2024-08-09_MT_D4IdhXexLko.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_trump_2024_2024_08_09_MT_D4IdhXexLko"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/trump_2024_2024-08-23_AZ_jtW6LFSeMq8.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_trump_2024_2024_08_23_AZ_jtW6LFSeMq8"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/trump_2024_2024-08-29_WI_GYnvNd77o3Y.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_trump_2024_2024_08_29_WI_GYnvNd77o3Y"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/trump_2024_2024-08-30_PA_VFuQ3kxTDMI.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_trump_2024_2024_08_30_PA_VFuQ3kxTDMI"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/trump_2024_2024-09-07_WI_7kykpqbOSjI.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_trump_2024_2024_09_07_WI_7kykpqbOSjI"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/unknown_2025-08-21_whisper.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_unknown_2025_08_21_whisper"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/unknown_title_-nyZJZf7.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_unknown_title__nyZJZf7"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/unknown_title_1XcpN7DG.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_unknown_title_1XcpN7DG"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/unknown_title_6sLUOQAP.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_unknown_title_6sLUOQAP"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/unknown_title_bAIPi1cP.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_unknown_title_bAIPi1cP"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/watch_live_trump_appears_at_campaign_rally_in_tucs_2024_09_12_a5lQkUWh.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_watch_live_trump_appears_at_campaign_rally_in_tucs"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/watch_live_trump_holds_campaign_rally_in_walker_mi_2024_09_27_9WeZn86T.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_watch_live_trump_holds_campaign_rally_in_walker_mi"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/watch_trump_full_speech_in_michigan_first_rally_si_2024_07_20_4v46FwsL.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "location": "Michigan",
+      "document_id": "doc_watch_trump_full_speech_in_michigan_first_rally_si"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/watch_trump_gives_campaign_speech_in_pennsylvania__2024_09_29_zUbDvg2g.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "location": "Pennsylvania",
+      "document_id": "doc_watch_trump_gives_campaign_speech_in_pennsylvania_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/primary_campaign/watch_trump_rally_full_speech_at_st_cloud_campaign_2024_07_28_-4Drs2Tm.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_watch_trump_rally_full_speech_at_st_cloud_campaign"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "2024_campaign/rerun_extraction_log.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign to Second Presidency (2023-2024)",
+      "date": "2024",
+      "document_id": "doc_rerun_extraction_log"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_06_13_Remarks_at_Saint_Anselm_College_in_Manchester_New_Hampshire.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_06_13_Remarks_at_Saint_Anselm_College_in_Manc"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_06_22_Remarks_at_Trump_SoHo_in_New_York_City.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_06_22_Remarks_at_Trump_SoHo_in_New_York_City"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_11_Remarks_in_Virginia_Beach_Virginia.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Virginia",
+      "document_id": "doc_2016_07_11_Remarks_in_Virginia_Beach_Virginia"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_16_Remarks_Introducing_Governor_Mike_Pence_as_the_2016_Republican_Vice_Presidential_Nominee_in_New_York_City.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_07_16_Remarks_Introducing_Governor_Mike_Pence"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_21_Address_Accepting_the_Presidential_Nomination_at_the_Republican_National_Convention_in_Cleveland_Ohio.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Ohio",
+      "document_id": "doc_2016_07_21_Address_Accepting_the_Presidential_Nomi"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_22_Donald_Trump_Republican_presidential_candidate_delivers_remarks_to_volunteers_at_the_Republican_National_Convention.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_07_22_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_25_Donald_Trump_Republican_presidential_candidate_and_Gov_Mike_Pence_Republican_vice_presidential_candidate_hold_a_townhall_meeting.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_07_25_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_26_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_the_VFW_Convention.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_07_26_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_07_27_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_07_27_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_01_Donald_Trump_Republican_presidential_candidate_deliver_remarks_at_a_campaign_event.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_01_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_02_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Ashburn_Virginia.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Virginia",
+      "document_id": "doc_2016_08_02_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_04_Donald_Trump_Republican_Presidential_Candidate_holds_a_campaign_rally_in_Maine.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_04_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_09_Remarks_at_a_Rally_at_the_University_of_North_Carolina_in_Wilmington.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_09_Remarks_at_a_Rally_at_the_University_of"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_10_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_in_Abingdon_Virginia.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Virginia",
+      "document_id": "doc_2016_08_10_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_12_Donald_Trump_Republican_Presidential_Candidate_holds_a_campaign_rally_in_Altoona_PA_24.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_12_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_17_Donald_Trump_Republican_Presidential_Candidate_participates_in_a_Fox_News_townhall_event.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_17_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_22_Donald_Trump_Republican_Presidential_Candidate_Delivers_Remarks_At_A_Campaign_Event.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_22_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_23_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Austin_Texas.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_23_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_23_Remarks_at_Luedecke_Arena_in_Austin_Texas.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_23_Remarks_at_Luedecke_Arena_in_Austin_Tex"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_24_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Tampa_Florida_SD.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_08_24_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_25_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Manchester_New_Hampshire_SD.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_08_25_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_30_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Everett_Washington_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Washington",
+      "document_id": "doc_2016_08_30_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_08_30_Remarks_at_the_XFinity_Arena_in_Everett_Washington.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Washington",
+      "document_id": "doc_2016_08_30_Remarks_at_the_XFinity_Arena_in_Everett"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_03_Remarks_at_Great_Faith_International_Ministries_in_Detroit_Michigan.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_09_03_Remarks_at_Great_Faith_International_Mi"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_06_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Greenville_North_Carolina_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_06_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_06_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_06_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_06_Remarks_at_a_Rally_at_the_Greenville_Convention_Center_in_Greenville_North_Carolina.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_06_Remarks_at_a_Rally_at_the_Greenville_Co"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_07_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_the_New_York_state_Conservative_Party_presidential_convention.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_07_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_09_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Pensacola_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_09_09_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_09_Remarks_at_a_Rally_at_the_Pensacola_Bay_Center_in_Pensacola_Florida.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_09_09_Remarks_at_a_Rally_at_the_Pensacola_Bay"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_09_Remarks_to_the_11th_Annual_Values_Voter_Summit_in_Washington_DC_Omni_Shoreham_Hotel_Washington_DC.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Washington",
+      "document_id": "doc_2016_09_09_Remarks_to_the_11th_Annual_Values_Voter"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_12_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Asheville_North_Carolina_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_12_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_12_Remarks_at_the_US_Cellular_Center_in_Asheville_North_Carolina.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_12_Remarks_at_the_US_Cellular_Center_in_As"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_13_Remarks_at_Seven_Flags_Event_Center_in_Des_Moines_Iowa.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_13_Remarks_at_Seven_Flags_Event_Center_in_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_14_Remarks_at_a_Rally_at_Canton_Memorial_Civic_Center_in_Canton_Ohio.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Ohio",
+      "document_id": "doc_2016_09_14_Remarks_at_a_Rally_at_Canton_Memorial_C"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_15_Remarks_to_the_Economic_Club_of_New_York_at_the_Waldorf_Astoria_in_New_York_City.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_15_Remarks_to_the_Economic_Club_of_New_Yor"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_16_Donald_Trump_GOP_Presidential_Candidate_Remarks_at_Campaign_Event_in_Miami_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_09_16_Donald_Trump_GOP_Presidential_Candidate"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_16_Remarks_at_a_Rally_at_the_James_L_Knight_Center_in_Miami_Florida.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_09_16_Remarks_at_a_Rally_at_the_James_L_Knigh"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_20_Remarks_at_High_Point_University_in_High_Point_North_Carolina.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_20_Remarks_at_High_Point_University_in_Hig"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_22_Remarks_at_a_Rally_at_Sun_Center_Studios_in_Chester_Township_Pennsylvania.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_09_22_Remarks_at_a_Rally_at_Sun_Center_Studio"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_22_Remarks_at_the_Shale_Insight_TM_Conferencee_at_the_David_L_Lawrence_Convention_Center_in_Pittsburgh_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_09_22_Remarks_at_the_Shale_Insight_TM_Confere"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_29_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Bedford_New_Hampshire.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_09_29_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_30_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Novi_Michigan_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_09_30_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_09_30_Remarks_at_the_Suburban_Collection_Showplace_in_Novi_Michigan.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_09_30_Remarks_at_the_Suburban_Collection_Show"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_03_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_Retired_American_Warriors_PAC.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_03_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_03_Remarks_at_the_Budweiser_Events_Center_in_Loveland_Colorado.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Colorado",
+      "document_id": "doc_2016_10_03_Remarks_at_the_Budweiser_Events_Center_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_04_Remarks_at_Prescott_Valley_Event_Center_in_Prescott_Valley_Arizona.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_04_Remarks_at_Prescott_Valley_Event_Center"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_05_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Henderson_Nevada_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_05_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_05_Remarks_at_the_Reno-Sparks_Convention_Center_in_Reno_Nevada.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_05_Remarks_at_the_Reno_Sparks_Convention_C"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_06_Donald_Trump_Republican_presidential_candidate_holds_a_townhall_meeting_Sandown_New_Hampshire.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_06_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_10_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Ambridge_Pennsylvania_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_10_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_10_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_WilkesBarre_Pennsylvania_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_10_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_11_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Panama_City_Florida_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_10_11_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_11_Excerpts_of_Remarks_at_Aaron_Bessant_Park_in_Panama_City_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_10_11_Excerpts_of_Remarks_at_Aaron_Bessant_Pa"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_12_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Lakeland_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_10_12_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_12_Remarks_at_the_Southeastern_Livestock_Pavilion_in_Ocala_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_10_12_Remarks_at_the_Southeastern_Livestock_P"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_13_Remarks_at_the_Renaissance_Hotel_in_Columbus_Ohio.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Ohio",
+      "document_id": "doc_2016_10_13_Remarks_at_the_Renaissance_Hotel_in_Col"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_14_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Charlotte_North_Carolina_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_14_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_14_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Greensboro_North_Carolina_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_14_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_15_Remarks_at_Toyota_of_Portsmouth_in_Portsmouth_New_Hampshire.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_15_Remarks_at_Toyota_of_Portsmouth_in_Port"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_15_Remarks_at_the_Cross_Insurance_Center_in_Bangor_Maine.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_15_Remarks_at_the_Cross_Insurance_Center_i"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_17_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Green_Bay_Wisconsin_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_17_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_17_Remarks_at_the_KI_Convention_Center_in_Green_Bay_Wisconsin.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_17_Remarks_at_the_KI_Convention_Center_in_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_18_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Grand_Junction_Colorado_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Colorado",
+      "document_id": "doc_2016_10_18_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_18_Remarks_at_the_Norris-Penrose_Event_Center_in_Colorado_Springs_Colorado.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Colorado",
+      "document_id": "doc_2016_10_18_Remarks_at_the_Norris_Penrose_Event_Cen"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_20_Remarks_at_the_Delaware_County_Fairgrounds_in_Delaware_Ohio.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Ohio",
+      "document_id": "doc_2016_10_20_Remarks_at_the_Delaware_County_Fairgrou"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_21_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Fletcher_North_Carolina_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_21_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_21_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Johnstown_Pennsylvania_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_21_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_21_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Newtown_Pennsylvania_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_21_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_21_Remarks_at_the_Newtown_Athletic_Club_Sports_Training_Center_in_Newtown_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_21_Remarks_at_the_Newtown_Athletic_Club_Sp"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_21_Remarks_at_the_WNC_Agricultural_Centers_Davis_Event_Center_in_Fletcher_North_Carolina.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_21_Remarks_at_the_WNC_Agricultural_Centers"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_22_Remarks_on_Proposals_for_the_First_100_Days_in_Office_at_the_Eisenhower_Complex_in_Gettysburg_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_10_22_Remarks_on_Proposals_for_the_First_100_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_23_Remarks_at_the_Collier_County_Fairgrounds_in_Naples_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_10_23_Remarks_at_the_Collier_County_Fairgroun"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_26_Remarks_at_McGlohon_Theatre_at_Spirit_Square_in_Charlotte_North_Carolina.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_26_Remarks_at_McGlohon_Theatre_at_Spirit_S"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_29_Remarks_at_the_Jeffco_Fairgrounds_Event_Center_in_Golden_Colorado.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Colorado",
+      "document_id": "doc_2016_10_29_Remarks_at_the_Jeffco_Fairgrounds_Event"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_29_Remarks_at_the_Phoenix_Convention_Center_in_Phoenix_Arizona.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_10_29_Remarks_at_the_Phoenix_Convention_Cente"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_31_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Grand_Rapids_Michigan.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_10_31_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_10_31_Remarks_at_Macomb_Community_College_South_Campus_in_Warren_Michigan.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_10_31_Remarks_at_Macomb_Community_College_Sou"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_01_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event_Eau_Claire_Wisconsin.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_01_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_01_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event_Valley_Forge_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_11_01_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_01_Remarks_on_Obamacare_in_Valley_Forge_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_11_01_Remarks_on_Obamacare_in_Valley_Forge_Pe"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_02_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Miami_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_02_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_02_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Orlando_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_02_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_02_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Pensacola_Florida_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_02_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_02_Remarks_at_the_Bayfront_Park_Amphitheater_in_Miami_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_02_Remarks_at_the_Bayfront_Park_Amphitheat"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_02_Remarks_at_the_Central_Florida_Fairgrounds_in_Orlando_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_02_Remarks_at_the_Central_Florida_Fairgrou"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_03_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Concord_North_Carolina_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_03_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_03_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Jacksonville_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_03_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_04_Donald_Trump_Republican_Presidential_Candidate_deliver_remarks_at_a_campaign_event_in_Hershey_Pennsylvania_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_11_04_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_04_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Atkinson_New_Hampshire_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_04_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_04_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Wilmington_Ohio_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Ohio",
+      "document_id": "doc_2016_11_04_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_05_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Reno_Nevada_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_05_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_05_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Tampa_Florida_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_05_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_06_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Sioux_City_Iowa_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_06_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_07_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Manchester_New_Hampshire_24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_07_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_07_Donald_Trump_Republican_Presidential_Candidate_delivers_remarks_at_a_campaign_event_in_Raleigh_North_Carolina_SD24.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_07_Donald_Trump_Republican_Presidential_Ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_07_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event_Sarasota_Florida.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Florida",
+      "document_id": "doc_2016_11_07_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_07_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event_Scranton_Pennsylvania.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Pennsylvania",
+      "document_id": "doc_2016_11_07_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_07_Remarks_at_JS_Dorton_Arena_in_Raleigh_North_Carolina.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_07_Remarks_at_JS_Dorton_Arena_in_Raleigh_N"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_08_Donald_Trump_Republican_presidential_candidate_delivers_remarks_at_a_campaign_event_Grand_Rapids_Michigan.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Michigan",
+      "document_id": "doc_2016_11_08_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_09_Donald_Trump_Republican_presidential_candidate_delivers_remarks_following_election_results_New_York_City.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_09_Donald_Trump_Republican_presidential_ca"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/2016_11_09_Remarks_in_New_York_City_Accepting_Election_as_the_45th_President_of_the_United_States.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_2016_11_09_Remarks_in_New_York_City_Accepting_Elec"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/transcripts/Donald_Trump_CPAC_2015_Full_Speech_Donald_trump_president.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Donald_Trump_CPAC_2015_Full_Speech_Donald_trump_pr"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.07-11.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.07_11"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.09-01.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.09_01"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.10-03.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.10_03"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.10-13.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.10_13"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.10-14.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.10_14"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.10-29(1).txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.10_29(1)"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.11-08.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.11_08"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.2-01.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.2_01"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.2-09.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.2_09"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.2-20.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.2_20"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.2-23.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.2_23"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.3-01.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.3_01"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.3-15.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.3_15"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.5-03.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.5_03"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.6-22.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.6_22"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.7-21.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.7_21"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.8-08.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.8_08"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.8-19.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.8_19"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.8-20.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.8_20"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.9-17.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.9_17"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "campaign_2015_2016/us.2016.Trump.Announcement.6-16.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Campaign Launch (2015-2016)",
+      "date": "2015-2016",
+      "document_id": "doc_us.2016.Trump.Announcement.6_16"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/CPAC_2013___Donald_Trump.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_CPAC_2013_Donald_Trump"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/CPAC_2014___Donald_Trump,_The_Trump_Organization.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_CPAC_2014_Donald_Trump,_The_Trump_Organization"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/Donald_Trump_2000_Presidential_Race___7_Oct_1999.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "document_id": "doc_Donald_Trump_2000_Presidential_Race_7_Oct_1999"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/Donald_Trump_Teases_a_President_Bid_During_a_1988_Oprah_Show___The_Oprah_Winfrey_Show___OWN.txt",
+      "event_type": "Campaign Event",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "document_id": "doc_Donald_Trump_Teases_a_President_Bid_During_a_1988_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/Donald_Trump__CPAC_2011.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Donald_Trump__CPAC_2011"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "first_campaign_1988_2000/transcripts/Trump_Campaign_Speech_2000.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Early Political Period (1988-2000)",
+      "date": "1988-2000",
+      "document_id": "doc_Trump_Campaign_Speech_2000"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/Donald_Trump_CPAC_2021_Speech_Transcript_20250822_135533.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Donald_Trump_CPAC_2021_Speech_Transcript_20250822_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/logs/batch_extraction_summary_20250822_150804.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_batch_extraction_summary_20250822_150804"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/post_presidency_urls.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_post_presidency_urls"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/post_presidency_video_targets.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_post_presidency_video_targets"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/CPAC_2024_LIVE___Former_President_Trump_Speaks_LIVE_at_CPAC___Donald_Trump_Speech_Live___News18_Live.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_CPAC_2024_LIVE_Former_President_Trump_Speaks_LIVE_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Donald Trump economic plan_ FULL SPEECH Asheville, North Carolina on Wednesday, August 14, 2024.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "North Carolina",
+      "document_id": "doc_Donald_Trump_economic_plan__FULL_SPEECH_Asheville,"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Donald_Trump_Dayton_Ohio_Rally_November_7_2022.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2022-11-07",
+      "location": "Ohio",
+      "document_id": "doc_Donald_Trump_Dayton_Ohio_Rally_November_7_2022"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Donald_Trump_Ellipse_Speech_January_6_2021.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-01-06",
+      "historical_significance": "Critical - Preceded historic events",
+      "document_id": "doc_Donald_Trump_Ellipse_Speech_January_6_2021"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/FULL SPEECH_ Former President Donald Trump speaks at 'Save America' rally in Conroe, Texas.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_FULL_SPEECH__Former_President_Donald_Trump_speaks_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/FULL_SPEECH__President_Trump_speaks_at_CPAC____LiveNOW_from_FOX.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_FULL_SPEECH__President_Trump_speaks_at_CPAC__LiveN"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Former_President_Donald_Trump_Announces_2024_Campaign_|_Election_Rally_from_New_Hampshire___Streamed_live_on_Apr_27,_2023.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_Former_President_Donald_Trump_Announces_2024_Campa"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Full Trump Interview_ ‘I don’t consider us to have much of a democracy right now’.txt",
+      "event_type": "Media Interview",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_Full_Trump_Interview__‘I_don’t_consider_us_to_have"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/IN FULL_ Former US President Donald Trump hints at 2024 run.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_IN_FULL__Former_US_President_Donald_Trump_hints_at"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/LIVE_ President Donald J. Trump to hold a rally in Hialeah, Florida - 11_8_23.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Florida",
+      "document_id": "doc_LIVE__President_Donald_J._Trump_to_hold_a_rally_in"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/LIVE_ Trump Delivers Remarks at the 'Save America Rally' in Washington, D.C..txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Washington",
+      "document_id": "doc_LIVE__Trump_Delivers_Remarks_at_the_'Save_America_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/PRESIDENT_DONALD_J._TRUMP_DELIVERS_REMARKS_AT_CPAC_2023.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_PRESIDENT_DONALD_J._TRUMP_DELIVERS_REMARKS_AT_CPAC"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/President Trump CPAC 2021 Full Speech I NewsNOW from FOX.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_President_Trump_CPAC_2021_Full_Speech_I_NewsNOW_fr"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/President Trump full speech January 6th, 2021.txt",
+      "event_type": "Political Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-01-06",
+      "historical_significance": "Critical - Preceded historic events",
+      "document_id": "doc_President_Trump_full_speech_January_6th,_2021"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/President_Donald_J._Trump_at_CPAC_DC_2025_–_Day_3_Part_2.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_President_Donald_J._Trump_at_CPAC_DC_2025_–_Day_3_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/President_Trump_CPAC_2021_Full_Speech_I_NewsNOW_from_FOX.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_President_Trump_CPAC_2021_Full_Speech_I_NewsNOW_fr"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Delivers a Speech at the 2022 CPAC Convention in Dallas - August 6, 2022.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Speech__Donald_Trump_Delivers_a_Speech_at_the_2022"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Holds a Political Rally in Dayton, Ohio - November 7, 2022.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2022-11-07",
+      "location": "Ohio",
+      "document_id": "doc_Speech__Donald_Trump_Holds_a_Political_Rally_in_Da"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Holds a Political Rally in Delaware, Ohio - April 23, 2022.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Ohio",
+      "document_id": "doc_Speech__Donald_Trump_Holds_a_Political_Rally_in_De"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Speech_ Donald Trump Holds a Political Rally in Youngstown, Ohio - September 17, 2022.txt",
+      "event_type": "Campaign Rally",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Ohio",
+      "document_id": "doc_Speech__Donald_Trump_Holds_a_Political_Rally_in_Yo"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/Speech__Donald_Trump_Delivers_a_Speech_at_the_2022_CPAC_Convention_in_Orlando___February_26,_2022.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Speech__Donald_Trump_Delivers_a_Speech_at_the_2022"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/in_full_former_us_president_donald_trump_hints_at__2021_03_01_KJTlo4bQ.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_in_full_former_us_president_donald_trump_hints_at_"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/transcripts/president_trump_cpac_2021_full_speech_i_newsnow_fr_2021_03_01_9kL9KiUN.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_president_trump_cpac_2021_full_speech_i_newsnow_fr"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/video_urls_template.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_video_urls_template"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "post_presidency_2021_2023/youtube_search_guide.txt",
+      "event_type": "Unknown",
+      "political_phase": "Between Presidencies (2021-2023)",
+      "date": "2021-2023",
+      "document_id": "doc_youtube_search_guide"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/Trump_Inaugural_2017.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_Inaugural_2017"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/Trump_SOTU_2018.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_SOTU_2018"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/Trump_SOTU_2019.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_SOTU_2019"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/Trump_SOTU_2020.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_SOTU_2020"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/transcripts/CPAC_2018___President_Donald_Trump.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_CPAC_2018_President_Donald_Trump"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/transcripts/CPAC_2020___President_Donald_J._Trump.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_CPAC_2020_President_Donald_J._Trump"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/transcripts/Speech__Donald_Trump_Delivers_a_Speech_at_the_2020_CPAC_Convention_in_Orlando___February_28,_2021.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Speech__Donald_Trump_Delivers_a_Speech_at_the_2020"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/transcripts/Trump's_full_speech_at_CPAC_2017.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_Trump's_full_speech_at_CPAC_2017"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "presidential_2017_2020/transcripts/URGENT__President_Trump_EXPLOSIVE_Speech_at_CPAC_2020.txt",
+      "event_type": "CPAC Speech",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "location": "Conservative Political Action Conference",
+      "document_id": "doc_URGENT__President_Trump_EXPLOSIVE_Speech_at_CPAC_2"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "reelection_2019_2020/Trump_SOTU_2019.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_SOTU_2019"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "reelection_2019_2020/Trump_SOTU_2020.txt",
+      "event_type": "Unknown",
+      "political_phase": "First Presidency (2017-2020)",
+      "date": "2017-2020",
+      "document_id": "doc_Trump_SOTU_2020"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "second_presidency_2025/Trump_Inaugural_2025.txt",
+      "event_type": "Unknown",
+      "political_phase": "Second Presidency (2025-present)",
+      "date": "2025",
+      "document_id": "doc_Trump_Inaugural_2025"
+    },
+    {
+      "speaker": "Donald Trump",
+      "filename": "second_presidency_2025/Trump_SOTU_2025.txt",
+      "event_type": "Unknown",
+      "political_phase": "Second Presidency (2025-present)",
+      "date": "2025",
+      "document_id": "doc_Trump_SOTU_2025"
+    }
+  ]
+}

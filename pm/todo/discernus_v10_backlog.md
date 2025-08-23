@@ -902,4 +902,90 @@
 
 **Impact**: CAF experiment pipeline fully operational, demonstrating v10 specification compliance and THIN architecture effectiveness
 
+## 🔄 IN PROGRESS: Implement Intended THIN Architecture
+
+**Status**: 🚧 **IN PROGRESS** - Refactoring synthesis approach to proper separation of concerns
+
+**Goal**: Transform current entangled synthesis approach into intended THIN architecture where orchestrator uses `SynthesisAssembler` to prepare context-rich prompts, then hands them to agents for execution
+
+**Problem**: `UnifiedSynthesisAgent` is doing orchestration work (assembling prompts internally), violating separation of concerns
+
+### 🎯 Target Architecture
+```
+Orchestrator → SynthesisAssembler → Rich Prompt → UnifiedSynthesisAgent → LLM Call
+     ↓              ↓                    ↓              ↓              ↓
+  Gathers      Builds Context-      Single String   Executes      Returns
+  Context      Rich Prompt         with All Data    Prompt        Report
+```
+
+### 📋 Implementation Plan
+
+#### Phase 1: Test-Driven Analysis (TDD Foundation) ✅ COMPLETE
+- **Step 1.1**: ✅ Create failing integration test for complete flow
+- **Step 1.2**: ✅ Create failing unit tests for orchestrator synthesis flow
+- **Step 1.3**: ✅ Create failing unit tests for assembler functionality
+- **Step 1.4**: ✅ Create failing unit tests for agent intended flow
+
+#### Phase 2: Implement Orchestrator Changes (THIN Principles) ⏳
+- **Step 2.1**: Refactor `_run_synthesis` method to use assembler
+- **Step 2.2**: Update orchestrator dependencies and initialization
+- **Step 2.3**: Implement context gathering in orchestrator
+
+#### Phase 3: Implement Assembler Functionality ⏳
+- **Step 3.1**: Create/update `SynthesisPromptAssembler` with proper methods
+- **Step 3.2**: Implement prompt template loading from YAML
+- **Step 3.3**: Implement context formatting and prompt assembly
+
+#### Phase 4: Refactor Agent for THIN Execution ⏳
+- **Step 4.1**: Update agent method signature to accept complete prompt
+- **Step 4.2**: Remove internal prompt assembly logic
+- **Step 4.3**: Implement pure execution logic
+
+#### Phase 5: Integration and Validation ⏳
+- **Step 5.1**: Update integration tests to verify new flow
+- **Step 5.2**: Update unit tests for comprehensive coverage
+- **Step 5.3**: End-to-end validation with CAF experiment
+
+#### Phase 6: Cleanup and Documentation ⏳
+- **Step 6.1**: Remove dead code and temporary workarounds
+- **Step 6.2**: Update architecture and component documentation
+- **Step 6.3**: Performance validation and optimization
+
+### 🎯 Success Criteria
+
+#### Functional Requirements
+- [ ] Orchestrator uses `SynthesisPromptAssembler` to build prompts
+- [ ] Agent receives complete prompts and executes without assembly
+- [ ] End-to-end pipeline produces evidence-rich reports
+- [ ] No regression in report quality or completeness
+
+#### Architectural Requirements
+- [ ] Clear separation of concerns maintained
+- [ ] Orchestrator orchestrates, assembler assembles, agent executes
+- [ ] Externalized prompts in YAML files
+- [ ] Proper dependency injection and error handling
+
+#### Quality Requirements
+- [ ] All tests pass (TDD compliance)
+- [ ] No code duplication
+- [ ] Clear, maintainable code structure
+- [ ] Proper error handling and logging
+
+### 📊 Current Progress
+- **Phase 1**: ✅ **100% COMPLETE** - All 4 steps completed (integration + orchestrator + assembler + agent tests)
+- **Overall**: 25% complete - Comprehensive test foundation established, all architectural gaps identified
+
+### 🚨 Risks and Mitigation
+- **Technical Risk**: Breaking existing functionality during refactoring
+- **Mitigation**: Comprehensive test coverage, incremental changes
+- **Timeline Risk**: Underestimating complexity of prompt assembly
+- **Mitigation**: Start with simple cases, iterate with TDD
+
+### 📅 Timeline
+- **Week 1**: Complete Phases 1-2 (Foundation and Orchestrator)
+- **Week 2**: Complete Phases 3-4 (Assembler and Agent)
+- **Week 3**: Complete Phases 5-6 (Integration and Cleanup)
+
+**Impact**: Will establish proper THIN architecture with clear separation of concerns, making the system more maintainable, testable, and aligned with architectural principles
+
 

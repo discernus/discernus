@@ -173,6 +173,9 @@ class LLMGateway(BaseGateway):
                     "response_cost_usd": response_cost
                 }
                 
+                if "flash" in current_model.lower():
+                    self.logger.info(f"Full successful response from {current_model}:\n{content}")
+
                 return content, {"success": True, "model": current_model, "usage": usage_data, "attempts": attempts}
             
             except litellm.exceptions.APIConnectionError as e:

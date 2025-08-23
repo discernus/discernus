@@ -4,9 +4,12 @@ Batch transcript extractor for Donald Trump's post-presidency videos (2021-2023)
 Processes multiple video URLs and extracts transcripts with metadata
 """
 
+import argparse
 import json
 import logging
+import os
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -243,10 +246,19 @@ class BatchPostPresidencyExtractor:
 
 def main():
     """Main function for batch extraction"""
-    output_dir = "projects/2d_trump_populism/corpus/post_presidency_2021_2023"
+    parser = argparse.ArgumentParser(description="Batch extract transcripts from post-presidency videos")
+    parser.add_argument("--output-dir", default="projects/2d_trump_populism/corpus/post_presidency_2021_2023",
+                       help="Output directory for transcripts")
+    parser.add_argument("--url-file", help="Specific URL file to use")
+    parser.add_argument("--auto-confirm", action="store_true", help="Automatically confirm extraction")
+    parser.add_argument("--whisper-model", default="base", help="Whisper model to use")
+    
+    args = parser.parse_args()
+    
+    output_dir = args.output_dir
     
     # Initialize extractor
-    extractor = BatchPostPresidencyExtractor(output_dir, whisper_model="base")
+    extractor = BatchPostPresidencyExtractor(output_dir, whisper_model=args.whisper_model)
     
     print("🔍 BATCH POST-PRESIDENCY TRANSCRIPT EXTRACTOR")
     print("=" * 50)
@@ -259,45 +271,63 @@ def main():
     # Check for existing URL files
     url_files = list(Path(output_dir).glob("*urls*.txt")) + list(Path(output_dir).glob("*urls*.json"))
     
-    if url_files:
+    if args.url_file:
+        # Use specified URL file
+        selected_file = Path(args.url_file)
+        if not selected_file.exists():
+            print(f"❌ Specified URL file not found: {args.url_file}")
+            return
+        url_files = [selected_file]
+        choice = "1"
+    elif url_files:
         print(f"\n📁 Found existing URL files:")
         for i, file in enumerate(url_files, 1):
             print(f"{i}. {file.name}")
         
-        choice = input(f"\nSelect file number (1-{len(url_files)}) or press Enter to input URLs manually: ").strip()
-        
-        if choice.isdigit() and 1 <= int(choice) <= len(url_files):
-            selected_file = url_files[int(choice) - 1]
-            print(f"Using file: {selected_file.name}")
-            
-            # Load URLs from file
-            urls = extractor.load_video_urls(str(selected_file))
-            
-            if urls:
-                print(f"Loaded {len(urls)} URLs from {selected_file.name}")
-                
-                # Confirm before proceeding
-                proceed = input(f"Proceed with extraction of {len(urls)} videos? (y/N): ").strip().lower()
-                if proceed == 'y':
-                    # Run batch extraction
-                    results = extractor.extract_batch(urls, delay=2.0)
-                    
-                    # Save results
-                    results_file = extractor.save_batch_results()
-                    
-                    # Print summary
-                    extractor.print_summary()
-                    
-                    print(f"\n✅ Batch extraction complete! Results saved to: {results_file}")
-                else:
-                    print("Extraction cancelled.")
-            else:
-                print(f"No URLs found in {selected_file.name}")
+        if args.auto_confirm:
+            choice = "1"  # Use first file automatically
+            print("Auto-confirm enabled, using first file")
         else:
-            print("Manual URL input not implemented yet. Please create a URL file first.")
+            choice = input(f"\nSelect file number (1-{len(url_files)}) or press Enter to input URLs manually: ").strip()
     else:
         print(f"\n❌ No URL files found in {output_dir}")
         print("Please create a file with video URLs first, or use the search guide to find videos.")
+        return
+    
+    if choice.isdigit() and 1 <= int(choice) <= len(url_files):
+        selected_file = url_files[int(choice) - 1]
+        print(f"Using file: {selected_file.name}")
+        
+        # Load URLs from file
+        urls = extractor.load_video_urls(str(selected_file))
+        
+        if urls:
+            print(f"Loaded {len(urls)} URLs from {selected_file.name}")
+            
+            # Confirm before proceeding
+            if args.auto_confirm:
+                proceed = "y"
+                print("Auto-confirm enabled, proceeding with extraction")
+            else:
+                proceed = input(f"Proceed with extraction of {len(urls)} videos? (y/N): ").strip().lower()
+            
+            if proceed == 'y':
+                # Run batch extraction
+                results = extractor.extract_batch(urls, delay=2.0)
+                
+                # Save results
+                results_file = extractor.save_batch_results()
+                
+                # Print summary
+                extractor.print_summary()
+                
+                print(f"\n✅ Batch extraction complete! Results saved to: {results_file}")
+            else:
+                print("Extraction cancelled.")
+        else:
+            print(f"No URLs found in {selected_file.name}")
+    else:
+        print("Manual URL input not implemented yet. Please create a URL file first.")
 
 if __name__ == "__main__":
     main()

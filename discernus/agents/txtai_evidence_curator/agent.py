@@ -34,6 +34,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
+from discernus.core.local_artifact_storage import LocalArtifactStorage
 
 
 @dataclass
@@ -93,7 +94,7 @@ class TxtaiEvidenceCurator:
     to massive evidence pools.
     """
     
-    def __init__(self, model: str, audit_logger=None):
+    def __init__(self, model: str, artifact_storage: LocalArtifactStorage, audit_logger=None):
         """
         Initialize the txtai Evidence Curator.
         
@@ -671,6 +672,108 @@ NARRATIVE:
             success=False,
             error_message=error_message
         )
+
+    def build_and_load_index(self, evidence_artifact_hashes: List[str], artifact_storage: LocalArtifactStorage) -> Optional[Embeddings]:
+        """
+        Builds and loads a txtai index from a list of evidence artifacts.
+
+        Args:
+            evidence_artifact_hashes: A list of hashes for the evidence artifacts.
+            artifact_storage: The artifact storage system to retrieve evidence.
+
+        Returns:
+            A queryable txtai Embeddings object, or None if indexing fails.
+        """
+        self.logger.info(f"Building RAG index from {len(evidence_artifact_hashes)} evidence artifacts...")
+        if not evidence_artifact_hashes:
+            self.logger.warning("No evidence artifacts provided for RAG indexing.")
+            return None
+
+        try:
+            # 1. Prepare documents for indexing
+            documents_to_index = []
+            doc_id = 0
+            all_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
+
+            for evidence in all_evidence:
+                quote_text = evidence.get('quote_text', '')
+                doc_name = evidence.get('document_name', '')
+                dimension = evidence.get('dimension', '')
+                
+                searchable_text = f"Evidence from {doc_name} for {dimension}: {quote_text}"
+                
+                documents_to_index.append({
+                    "id": doc_id,
+                    "text": searchable_text,
+                    "source_quote": quote_text,
+                    "metadata": evidence
+                })
+                doc_id += 1
+
+            if not documents_to_index:
+                self.logger.warning("No valid evidence content found to index.")
+                return None
+
+            # 2. Build and return the txtai index
+            embeddings = Embeddings()
+            embeddings.index(documents_to_index)
+            self.index_built = True
+            self.logger.info(f"✅ Successfully built RAG index with {len(documents_to_index)} documents.")
+            return embeddings
+
+        except Exception as e:
+            self.logger.error(f"❌ Failed to build RAG index: {str(e)}")
+            if self.audit_logger:
+                self.audit_logger.log_error("rag_index_build_failed", str(e), {"agent": self.agent_name})
+            return None
+
+    def _get_all_evidence(self, evidence_artifact_hashes: List[str], artifact_storage: LocalArtifactStorage) -> List[Dict[str, Any]]:
+        """
+        Retrieves and consolidates all evidence from a list of artifact hashes.
+
+        Args:
+            evidence_artifact_hashes: A list of hashes for the evidence artifacts.
+            artifact_storage: The artifact storage system to retrieve evidence.
+
+        Returns:
+            A single list containing all evidence items from all artifacts.
+        """
+        all_evidence = []
+        for artifact_hash in evidence_artifact_hashes:
+            try:
+                evidence_data = artifact_storage.get_artifact(artifact_hash)
+                if evidence_data:
+                    evidence_json = json.loads(evidence_data.decode('utf-8'))
+                    all_evidence.extend(evidence_json.get('evidence_data', []))
+            except Exception as e:
+                self.logger.warning(f"Could not process evidence artifact {artifact_hash}: {e}")
+        return all_evidence
+
+    def _load_prompt_template(self) -> str:
+        """Loads the prompt template for evidence synthesis."""
+        # This method is not used in the current code, but is part of the new_code.
+        # It would typically load a prompt file or define it directly.
+        return """You are a research assistant synthesizing evidence for a computational social science report.
+
+STATISTICAL FINDING:
+{finding_summary}
+
+RETRIEVED EVIDENCE (programmatically identified as most relevant):
+{evidence_text}
+
+FRAMEWORK CONTEXT:
+{framework_spec[:1000]}
+
+TASK: Write a 2-3 paragraph narrative that establishes the connection between this evidence and the statistical finding. Explain how this evidence supports or illustrates the statistical result, using direct quotes and specific references to the framework's analytical dimensions.
+
+Your narrative should:
+1. Connect the evidence to the statistical finding
+2. Use direct quotes from the evidence
+3. Reference the framework's theoretical foundation
+4. Maintain academic tone and precision
+
+NARRATIVE:
+"""
 
 
 # Convenience function for backward compatibility

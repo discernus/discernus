@@ -549,6 +549,10 @@ def {analysis_name.replace(' ', '_').lower()}(data, **kwargs):
 Generate the complete function now:"""
 
         try:
+            # Debug logging for problematic function
+            if analysis_name == "oppositional_validation":
+                print(f"DEBUG: Generating long-running function '{analysis_name}'. Full prompt:\n{single_function_prompt}")
+            
             # Call LLM without problematic parameters
             response_text, metadata = self.llm_gateway.execute_call(
                 model=self.model,

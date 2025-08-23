@@ -1,0 +1,21 @@
+{
+  "filename": "president_trump_cpac_2021_full_speech_i_newsnow_fr_2021_03_01_9kL9KiUN.txt",
+  "document_id": "president_trump_cpac_2021_full_speech_i_newsnow_fr_2021_03_01_9kL9KiUN",
+  "metadata": {
+    "title": "President Trump CPAC 2021 Full Speech I NewsNOW from FOX",
+    "speaker": "Donald Trump",
+    "date": "2021-03-01",
+    "channel": "LiveNOW from FOX",
+    "url": "https://www.youtube.com/watch?v=9kL9KiUNoZQ",
+    "view_count": 334351,
+    "category": "Political Speech"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 76.07035225386423,
+    "transcript_length_chars": 72019,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T15:02:15.510569"
+  }
+}

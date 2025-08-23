@@ -155,3 +155,29 @@ This exploratory experiment examines Donald Trump's populist rhetorical patterns
 **Comprehensive Coverage**: Ensure your synthesis covers all analytical dimensions and time periods. Look for both individual insights and integrative patterns across the entire dataset.
 
 **Emergent Hypotheses**: While this is exploratory research, feel free to generate hypotheses based on your discoveries for future research consideration.
+
+---
+
+## Configuration Appendix
+
+```yaml
+# --- Start of Machine-Readable Appendix ---
+
+# 4.1: Metadata (Required)
+metadata:
+  experiment_name: "trump_populist_rhetoric_analysis_exploratory_study"
+  author: "Discernus Research Team"
+  spec_version: "10.0"
+
+# 4.2: Components (Required)
+components:
+  # The filename of the v10.0 Framework file.
+  # Must be in the same directory as this experiment.md.
+  framework: "framework.md"
+
+  # The filename of the v8.0 compliant Corpus manifest file.
+  # Must be in the same directory as this experiment.md.
+  corpus: "corpus.md"
+
+# --- End of Machine-Readable Appendix ---
+```
