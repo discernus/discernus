@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech with a strong, clear rhetorical structure. The central theme is a class-based conflict, framing 'working people' against 'oligarchs'. This allows for high scores on seemingly contradictory dimensions like Tribal Dominance (class-based us-vs-them), Individual Dignity (call for universal dignity within the 'us' group), Enmity (towards the 'them' group), and Amity (within the 'us' group). The rhetoric is consistent, making confidence in scoring high."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.9,
+          "context_type": "Rhetorical Framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "confidence": 1.0,
+          "context_type": "Direct Statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+          "confidence": 0.9,
+          "context_type": "Threat Assertion"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "Conditional Assertion"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "Direct Accusation"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "The text's central argument is that the success of the 'oligarchs' is illegitimate and harmful to society, which is the antithesis of the Compersion dimension. There are no quotes celebrating the success of others or suggesting an abundance mindset.",
+          "confidence": 1.0,
+          "context_type": "Explanation of Absence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 1.0,
+          "context_type": "Call to Action"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "confidence": 0.9,
+          "context_type": "Direct Appeal for Unity"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "...give Evans and Boebert the boot, and replace them...",
+          "confidence": 0.9,
+          "context_type": "Stated Zero-Sum Objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 1.0,
+          "context_type": "Direct Statement of Purpose"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

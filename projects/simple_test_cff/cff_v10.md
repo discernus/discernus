@@ -1,4 +1,4 @@
-# Cohesive Flourishing Framework (CFF) v10.0
+# Cohesive Flourishing Framework (CFF) v10.1
 
 ---
 
@@ -157,8 +157,9 @@ Each layer builds on the previous one, adding interpretive depth while maintaini
 # 5.1: Metadata
 metadata:
   framework_name: "cohesive_flourishing_framework"
-  framework_version: "10.0.0"
+  framework_version: "10.0"
   author: "Discernus Project"
+  date: "2025-08-20"
   spec_version: "10.0"
 
 # 5.2: Analysis Variants

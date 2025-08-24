@@ -1,0 +1,203 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 19,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-23T20:39:19.700044+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here...",
+      "confidence": 0.95,
+      "context_type": "strong us-vs-them framing, highlighting threat to in-group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700025+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "...people over on this side of the aisle have their fingers in their ears on data. But when they see the faces, when they hear the anguish and the voices, especially of the mothers, or the voice of the father, Scott Root...",
+      "confidence": 0.9,
+      "context_type": "political in-group/out-group distinction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700027+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally. Secure our borders.",
+      "confidence": 0.8,
+      "context_type": "qualified universal dignity, immediately limited by exclusionary border rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700028+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+      "confidence": 0.85,
+      "context_type": "concern for life, but explicitly limited to national identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700029+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "This is costing, it's costing in the end thousands of lives in America.",
+      "confidence": 0.95,
+      "context_type": "existential threat, direct consequence of policy failures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700030+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow? I couldn't react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution,' if the Supreme Court of the United States believes that they can write law.",
+      "confidence": 0.9,
+      "context_type": "evokes deep distress and crisis over constitutional integrity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700031+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+      "confidence": 0.8,
+      "context_type": "reactive goal to restore, not a forward-looking vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700031+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+      "confidence": 0.8,
+      "context_type": "goals are defensive and punitive, not optimistic or cohesive",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700032+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "The Supreme Court ruled with the majority opinion written by the Chief Justice of the Supreme Court, but they could add words into Obamacare where it says, 'the states may establish exchanges.' They, they added, 'the states or federal government may establish exchanges.' They made it up.",
+      "confidence": 0.9,
+      "context_type": "resentment towards perceived illegitimate power grab by Supreme Court",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700033+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "He's demonstrated that in the past with his appointments to the court. He will demonstrate that again. We have a Constitution to preserve, protect, defend, and support and defend.",
+      "confidence": 0.85,
+      "context_type": "implies resentment of presidential appointments undermining constitutional principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700034+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "compassion",
+      "quote_text": "No direct evidence found for this dimension.",
+      "confidence": 0.0,
+      "context_type": "No content detected that reflects joy from others' success, an abundance mindset, or merit celebration.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700035+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.95,
+      "context_type": "direct adversarial framing of the President and his appointees",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700036+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body... It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here...",
+      "confidence": 0.95,
+      "context_type": "dehumanizing and hostile portrayal of an 'illegal criminal alien'",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700037+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "amity",
+      "quote_text": "we here who take an oath to support and defend the Constitution\u2014and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter\u2014we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification, he's demonstrated that in the past with his appointments to the court.",
+      "confidence": 0.8,
+      "context_type": "conditional in-group amity, immediately followed by criticism of political opponents",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700037+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "amity",
+      "quote_text": "I thank God for Laura Wilkinson and I ask God to bless the life and the memory and the soul of Joshua Wilkinson who has paid a tremendously high price because we have an ideological President who, I'd say to the other side of the aisle, who's not doing his job.",
+      "confidence": 0.75,
+      "context_type": "expression of empathy for victims within a partisan framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700038+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.95,
+      "context_type": "identifying and condemning those with opposing constitutional interpretations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700039+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "There's no right in the Constitution for a same-sex marriage... It's a complete manufactured, not just a right, but a command by the Supreme Court of the United States.",
+      "confidence": 0.9,
+      "context_type": "denying legitimacy of judicial action, fostering division",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700040+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "This is the constitutional structure of this government that we have, Mr. Speaker, and it's, it's a bit um, frustrating for me to listen to the dialogue otherwise that the Senate's not doing their job because they withhold a confirmation, uh, of a presidential appointment when we have a President that has proven that he's not going to put up an appointment that will protect our Constitution.",
+      "confidence": 0.8,
+      "context_type": "focus on defending a specific constitutional view within a contentious partisan context, not broad unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700041+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally. Secure our borders.",
+      "confidence": 0.75,
+      "context_type": "initial hint of equality undermined by subsequent focus on separation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-23T20:39:19.700042+00:00"
+    }
+  ]
+}

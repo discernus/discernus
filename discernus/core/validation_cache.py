@@ -81,7 +81,7 @@ class ValidationCacheManager:
                     continue
                 
                 # Cache hit!
-                print(f"💾 Cache hit for validation: {cache_key}")
+                pass  # Reduced verbosity - validation cache hit
                 
                 try:
                     cached_content = self.storage.get_artifact(artifact_hash)
@@ -105,7 +105,7 @@ class ValidationCacheManager:
                     continue
         
         # No cache hit
-        print(f"🔍 No cache hit for validation: {cache_key} - will perform validation...")
+        pass  # Reduced verbosity - no validation cache hit
         return ValidationCacheResult(hit=False)
     
     def store_validation_result(self, cache_key: str, validation_result: Dict[str, Any], 

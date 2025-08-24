@@ -14,8 +14,9 @@ requiring external infrastructure dependencies.
 import hashlib
 import json
 from pathlib import Path
-from typing import Union, Optional
+from typing import Union, Optional, Dict, Any
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
+import shutil
 
 
 class LocalArtifactStorageError(Exception):
@@ -95,7 +96,7 @@ class LocalArtifactStorage:
             
             # Check if already exists (cache hit)
             if self.artifact_exists(hash_id):
-                print(f"💾 Cache hit for artifact: {human_filename}")
+                pass  # Reduced verbosity - cache hit
                 return hash_id
             
             # Store the artifact with human-readable filename
@@ -103,21 +104,39 @@ class LocalArtifactStorage:
             self.security.secure_write_bytes(artifact_path, content)
             
             # Update registry with metadata
-            self.registry[hash_id] = {
-                "size_bytes": len(content),
-                "created_at": self._get_timestamp(),
-                "artifact_path": str(artifact_path.relative_to(self.run_folder)),
-                "human_filename": human_filename,
-                "metadata": metadata or {},
-                "source_run": self.run_name  # Track which run generated this artifact
-            }
-            self._save_registry()
+            self._register_artifact(
+                hash_id,
+                metadata,
+                size_bytes=len(content),
+                human_filename=human_filename,
+            )
             
-            print(f"🗄️ Stored artifact: {human_filename} ({len(content)} bytes)")
+            pass  # Reduced verbosity - stored artifact
             return hash_id
             
         except Exception as e:
             raise LocalArtifactStorageError(f"Failed to store artifact: {e}")
+
+    def _register_artifact(
+        self,
+        hash_id: str,
+        metadata: Dict[str, Any],
+        size_bytes: Optional[int] = None,
+        human_filename: Optional[str] = None,
+        is_directory: bool = False,
+    ):
+        """Register an artifact in the registry."""
+        relative_path = human_filename or hash_id
+        self.registry[hash_id] = {
+            "size_bytes": size_bytes,
+            "created_at": self._get_timestamp(),
+            "artifact_path": relative_path,
+            "human_filename": human_filename,
+            "metadata": metadata or {},
+            "source_run": self.run_name,
+            "is_directory": is_directory,
+        }
+        self._save_registry()
     
     def _generate_human_filename(self, metadata: Optional[dict], short_hash: str) -> str:
         """
@@ -198,7 +217,7 @@ class LocalArtifactStorage:
             
             # Only log if not in quiet mode
             if not quiet:
-                print(f"📥 Retrieved artifact: {human_filename} ({len(content)} bytes)")
+                pass  # Reduced verbosity - retrieved artifact
             return content
             
         except SecurityError as e:
@@ -231,6 +250,72 @@ class LocalArtifactStorage:
             return self.security.is_within_boundary(artifact_path) and artifact_path.exists()
         except Exception:
             return False
+
+    def _calculate_content_hash(self, content: bytes) -> str:
+        """Calculate SHA-256 hash of content."""
+        return hashlib.sha256(content).hexdigest()
+
+    def put_directory_artifact(
+        self, source_dir: Path, metadata: Dict[str, Any]
+    ) -> str:
+        """
+        Store a directory as a content-addressable artifact.
+
+        Args:
+            source_dir: The path to the source directory to store.
+            metadata: A dictionary of metadata to associate with the artifact.
+
+        Returns:
+            The SHA-256 hash of the directory contents.
+        """
+        if not source_dir.is_dir():
+            raise LocalArtifactStorageError(f"Source path is not a directory: {source_dir}")
+
+        dir_hash = self._calculate_directory_hash(source_dir)
+        target_dir = self.artifacts_dir / dir_hash
+
+        if not target_dir.exists():
+            shutil.copytree(source_dir, target_dir)
+            self._register_artifact(
+                dir_hash,
+                metadata,
+                is_directory=True,
+                human_filename=dir_hash,  # Use hash as the "filename" for directories
+            )
+        
+        return dir_hash
+
+    def get_directory_artifact_path(self, dir_hash: str) -> Path:
+        """
+        Get the path to a stored directory artifact.
+
+        Args:
+            dir_hash: The hash of the directory artifact.
+
+        Returns:
+            The path to the artifact directory.
+        """
+        artifact_path = self.artifacts_dir / dir_hash
+        if not self.artifact_exists(dir_hash) or not artifact_path.is_dir():
+            raise LocalArtifactStorageError(f"Directory artifact not found: {dir_hash}")
+        return artifact_path
+
+    def _calculate_directory_hash(self, directory: Path) -> str:
+        """
+        Calculate a deterministic SHA-256 hash for a directory's contents.
+        """
+        hasher = hashlib.sha256()
+        # We sort the paths to ensure the hash is consistent regardless of
+        # filesystem order.
+        for path in sorted(directory.rglob('*')):
+            if path.is_file():
+                # Add relative path to the hash to account for structure
+                hasher.update(str(path.relative_to(directory)).encode())
+                # Add file content to the hash
+                with open(path, 'rb') as f:
+                    while chunk := f.read(8192):
+                        hasher.update(chunk)
+        return hasher.hexdigest()
     
     def put_file(self, filepath: Union[str, Path], metadata: Optional[dict] = None) -> str:
         """

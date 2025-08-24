@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The 'Dimension Hallucination' check cannot be completed. The required 'dimensions' list from the framework specification was not provided. Without this official list, it is impossible to cross-reference and verify if the analytical dimensions mentioned in the report are actually defined. The dimensions extracted from the report that would need validation are: 'fear', 'envy', 'amity', 'cohesive goals', 'compersion', 'tribal dominance', 'enmity', 'compassion'.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cannot perform 'Evidence Quote Mismatch' check as the 'Source materials for validation' (evidence database) were explicitly stated as 'could not be retrieved'. Therefore, it is impossible to confirm the presence of any quotes. Additionally, the report only provides 3 explicit quotes with sources, which is fewer than the 5 required for random selection by the instructions.",
+      "examples": [
+        "\"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+        "\"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it...\" (Source: john_mccain_2008_concession.txt)",
+        "\"They want us to think that our lives are suffering because of th\" (Source: implied, from AOC context)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains claims of definitive efficacy and robustness ('proves to be robust', 'particularly effective') despite explicitly stating the absence of complete quantitative statistical results. These claims appear unsubstantiated given the stated data limitations and may be considered overly promotional for an academic tone.",
+      "examples": [
+        "The CFF proves to be a robust conceptual tool for dissecting political communication...",
+        "Its design... is particularly effective in capturing the inherent complexity of political rhetoric."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The 'Dimension Hallucination' check cannot be completed. The required 'dimensions' list from the framework specification was not provided. Without this official list, it is impossible to cross-reference and verify if the analytical dimensions mentioned in the report are actually defined. The dimensions extracted from the report that would need validation are: 'fear', 'envy', 'amity', 'cohesive goals', 'compersion', 'tribal dominance', 'enmity', 'compassion'.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cannot perform 'Evidence Quote Mismatch' check as the 'Source materials for validation' (evidence database) were explicitly stated as 'could not be retrieved'. Therefore, it is impossible to confirm the presence of any quotes. Additionally, the report only provides 3 explicit quotes with sources, which is fewer than the 5 required for random selection by the instructions.",
+        "examples": [
+          "\"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+          "\"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it...\" (Source: john_mccain_2008_concession.txt)",
+          "\"They want us to think that our lives are suffering because of th\" (Source: implied, from AOC context)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains claims of definitive efficacy and robustness ('proves to be robust', 'particularly effective') despite explicitly stating the absence of complete quantitative statistical results. These claims appear unsubstantiated given the stated data limitations and may be considered overly promotional for an academic tone.",
+        "examples": [
+          "The CFF proves to be a robust conceptual tool for dissecting political communication...",
+          "Its design... is particularly effective in capturing the inherent complexity of political rhetoric."
+        ]
+      }
+    ]
+  }
+}

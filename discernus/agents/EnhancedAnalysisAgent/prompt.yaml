@@ -54,6 +54,9 @@ template: |
   3. Focus on evidence quality and confidence assessment
   4. Follow the framework's analysis_prompt for dimensional interpretation
   5. Ensure JSON is valid and parseable
+  6. Verify ALL dimension names in your response exactly match the framework's dimension_groups before sending
+  7. If any dimension names don't match, correct them to use the framework's canonical terminology
+  8. For the "quote_text" field, you MUST provide a direct quote from the document. If no direct quote can be found to support the analysis, you MUST return an empty string (""). Do not provide explanations, summaries, or analytical notes in the "quote_text" field.
 
   ---
 
@@ -61,18 +64,6 @@ template: |
 
   1. A single analytical framework (base64 encoded) - contains dimensional definitions and analysis guidance
   2. A batch of documents (base64 encoded) - texts to be analyzed
-
-  **YOUR ANALYSIS PROCESS:**
-
-  1. Decode the framework and documents
-  2. Apply the framework's `analysis_prompt` guidance for dimensional understanding
-  3. For each document and dimension:
-     - Assess raw intensity (0.0-1.0) based on framework criteria
-     - Evaluate salience (0.0-1.0) reflecting rhetorical prominence  
-     - Assign confidence (0.0-1.0) in your assessment
-     - Extract 1-2 strongest supporting quotes as evidence
-  4. Output structured JSON following the exact format above
-  5. DO NOT perform any mathematical calculations or compute derived metrics
 
   ---
 

@@ -1,0 +1,20 @@
+checks:
+  - name: "Dimension Hallucination"
+    severity: "CRITICAL"
+    description: "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification."
+    instructions: "Extract all capitalized dimension names from the report. Cross-reference them against the 'dimensions' list in the framework file. Report any dimensions that are not in the official list."
+
+  - name: "Statistic Mismatch"
+    severity: "CRITICAL"
+    description: "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file."
+    instructions: "For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), query the statistical results file for the corresponding value. Report any mismatches."
+
+  - name: "Evidence Quote Mismatch"
+    severity: "WARNING"
+    description: "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database."
+    instructions: "Randomly select 5 evidence quotes from the report. For each, search the evidence database to confirm its presence. Report any quotes that cannot be found."
+    
+  - name: "Grandiose Claim"
+    severity: "WARNING"
+    description: "Identify and flag unsubstantiated or overly promotional claims."
+    instructions: "Scan the report for superlative or promotional phrases like 'major breakthrough,' 'first ever,' 'unprecedented,' or 'proves beyond a doubt.' Report these as claims that may require editorial review for academic tone."

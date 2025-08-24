@@ -30,7 +30,7 @@ from typing import Dict, Any, List, Optional
 import pandas as pd
 
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
-from .security_boundary import ExperimentSecurityBoundary
+from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
@@ -41,6 +41,11 @@ from ..agents.txtai_evidence_curator.agent import TxtaiEvidenceCurator
 from ..core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
+from .rag_index_cache import RAGIndexCacheManager
+from .statistical_analysis_cache import StatisticalAnalysisCacheManager
+from .validation_cache import ValidationCacheManager
+from .rag_index_manager import RAGIndexManager
+from txtai.embeddings import Embeddings
 
 
 class CleanAnalysisError(Exception):
@@ -233,10 +238,21 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
+            # Phase 8.5: Run fact-checking validation
+            phase_start = datetime.now(timezone.utc)
+            try:
+                fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, synthesis_result, statistical_results)
+                self._log_status("Fact-checking completed")
+                self._log_phase_timing("fact_checking_phase", phase_start)
+            except Exception as e:
+                # Fact-checking failure is not fatal - we can still produce results
+                self._log_progress(f"⚠️ Fact-checking failed, continuing with warning: {str(e)}")
+                fact_check_results = {"status": "failed", "error": str(e)}
+
             # Phase 9: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
-                results_dir = self._create_clean_results_directory(run_id, statistical_results, synthesis_result)
+                results_dir = self._create_clean_results_directory(run_id, statistical_results, synthesis_result, fact_check_results)
                 self._log_status(f"Results created: {results_dir}")
                 self._log_phase_timing("results_creation", phase_start)
             except Exception as e:
@@ -935,7 +951,7 @@ class CleanAnalysisOrchestrator:
                 
                 # Execute the generated functions on the data
                 self._log_progress("🔢 Executing statistical analysis functions...")
-                statistical_results = self._execute_statistical_analysis_functions(
+                statistical_results = self._execute_statistical_functions(
                     temp_workspace, 
                     audit_logger,
                     analysis_results
@@ -966,7 +982,7 @@ class CleanAnalysisOrchestrator:
                 
                 return {
                     "status": "completed",
-                    "statistical_hash": statistical_hash,
+                    "stats_hash": statistical_hash,
                     "functions_generated": functions_result.get('functions_generated', 0),
                     "statistical_results": complete_statistical_result
                 }
@@ -1230,7 +1246,33 @@ class CleanAnalysisOrchestrator:
                 
                 # Execute the function with the analysis data
                 result = func(analysis_data)
-                statistical_outputs[func_name] = result
+                
+                # Convert pandas DataFrames to JSON-serializable format
+                if hasattr(result, 'to_dict'):  # pandas DataFrame
+                    statistical_outputs[func_name] = {
+                        "type": "dataframe",
+                        "data": result.to_dict('records'),
+                        "columns": list(result.columns),
+                        "index": list(result.index),
+                        "shape": result.shape
+                    }
+                elif isinstance(result, dict):
+                    # Handle nested DataFrames in dictionary results
+                    serialized_result = {}
+                    for key, value in result.items():
+                        if hasattr(value, 'to_dict'):  # pandas DataFrame
+                            serialized_result[key] = {
+                                "type": "dataframe",
+                                "data": value.to_dict('records'),
+                                "columns": list(value.columns),
+                                "index": list(value.index),
+                                "shape": value.shape
+                            }
+                        else:
+                            serialized_result[key] = value
+                    statistical_outputs[func_name] = serialized_result
+                else:
+                    statistical_outputs[func_name] = result
                 
                 self._log_progress(f"  ✅ {func_name} completed")
                 
@@ -1317,8 +1359,8 @@ class CleanAnalysisOrchestrator:
         return successful_results > 0
     
     def _validate_synthesis_assets(self, statistical_results: Dict[str, Any]) -> None:
-        """Comprehensive validation that all required assets exist on disk before synthesis."""
-        self._log_progress("🔍 Validating synthesis assets...")
+        """Comprehensive validation that all required assets exist on disk and are valid before synthesis."""
+        self._log_progress("🔍 Validating synthesis assets comprehensively...")
         
         # 1. Framework file must exist and be readable
         framework_path = self.experiment_path / self.config['framework']
@@ -1344,14 +1386,43 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot read experiment file: {e}")
         
-        # 3. Statistical results must contain actual numerical data
+        # 3. Analysis results must be valid and complete
+        if not hasattr(self, '_analysis_results') or not self._analysis_results:
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: No analysis results available")
+        
+        valid_analyses = 0
+        for i, result in enumerate(self._analysis_results):
+            if not result.get('raw_analysis_response'):
+                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing raw_analysis_response")
+            
+            raw_response = result['raw_analysis_response']
+            if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response or '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response:
+                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers")
+            
+            valid_analyses += 1
+        
+        if valid_analyses == 0:
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: No valid analysis results found")
+        
+        # 4. Derived metrics must be available and valid
+        if not hasattr(self, '_derived_metrics_results') or not self._derived_metrics_results:
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: No derived metrics results available")
+        
+        if self._derived_metrics_results.get('status') != 'completed':
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics results incomplete")
+        
+        metrics_data = self._derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {})
+        if not metrics_data or not metrics_data.get('derived_metrics'):
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics contain no actual metrics data")
+        
+        # 5. Statistical results must contain actual numerical data
         if not self._validate_statistical_results(statistical_results):
             raise CleanAnalysisError(
                 "SYNTHESIS BLOCKED: Statistical results contain no numerical data. "
                 "Cannot generate report without valid statistical analysis."
             )
         
-        # 4. Evidence artifacts must exist in artifact storage
+        # 6. Evidence artifacts must exist in artifact storage
         evidence_count = 0
         for artifact_hash, artifact_info in self.artifact_storage.registry.items():
             metadata = artifact_info.get("metadata", {})
@@ -1599,61 +1670,354 @@ class CleanAnalysisOrchestrator:
             # Assemble the prompt using the existing assembler
             self._log_progress("🔧 Assembling synthesis prompt...")
             prompt = assembler.assemble_prompt(
-                framework_path=self.experiment_path / self.config['framework'],
+                framework_path=self.experiment_path / self.config["framework"],
                 experiment_path=self.experiment_path / "experiment.md",
                 research_data_artifact_hash=research_data_hash,
                 artifact_storage=self.artifact_storage,
-                evidence_artifacts=evidence_hashes
+                evidence_artifacts=evidence_hashes,
             )
             
             # Store the assembled prompt
             prompt_hash = self.artifact_storage.put_artifact(
-                prompt.encode('utf-8'),
-                {"artifact_type": "synthesis_prompt"}
+                prompt.encode("utf-8"), {"artifact_type": "synthesis_prompt"}
             )
             
-            # Initialize synthesis agent
+            # Build the dedicated evidence-only RAG index for the synthesis agent
+            synthesis_rag_index = self._build_synthesis_evidence_index(evidence_hashes)
+
+            # Initialize synthesis agent with the RAG index
             from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
-                enhanced_mode=True
+                rag_index=synthesis_rag_index,
+                enhanced_mode=True,
             )
-            
+
             # Execute synthesis using the assembled prompt
             self._log_progress("🔧 Executing synthesis with assembled prompt...")
-            synthesis_result = synthesis_agent.generate_final_report(
-                framework_path=self.experiment_path / self.config['framework'],
+            synthesis_result_dict = synthesis_agent.generate_final_report(
+                framework_path=self.experiment_path / self.config["framework"],
                 experiment_path=self.experiment_path / "experiment.md",
                 research_data_artifact_hash=research_data_hash,
-                evidence_artifact_hashes=evidence_hashes,
-                rag_index=self.rag_index,
-                artifact_storage=self.artifact_storage
+                artifact_storage=self.artifact_storage,
             )
-            
-            final_report = synthesis_result.get("final_report")
+
+            final_report = synthesis_result_dict.get("final_report")
             if not final_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a final report.")
-            
-            # Store the final report
-            report_hash = self.artifact_storage.put_artifact(
-                final_report.encode('utf-8'),
-                {"artifact_type": "final_synthesis_report"}
+
+            # Store synthesis result
+            synthesis_hash = self.artifact_storage.put_artifact(
+                final_report.encode("utf-8"),
+                {"artifact_type": "final_synthesis_report"},
             )
-            
+
             self._log_progress(f"✅ Synthesis phase completed: {len(final_report)} characters")
-            
+
             return {
                 "status": "completed",
-                "report_hash": report_hash,
+                "report_hash": synthesis_hash,
                 "report_length": len(final_report),
-                "synthesis_result": synthesis_result,
-                "prompt_hash": prompt_hash
+                "synthesis_result": final_report, # Pass the string, not the dict
             }
             
         except Exception as e:
             self._log_progress(f"❌ Synthesis phase failed: {str(e)}")
             raise CleanAnalysisError(f"Synthesis phase failed: {str(e)}") from e
+    
+    def _run_fact_checking_phase(self, model: str, audit_logger: AuditLogger, synthesis_result: Dict[str, Any], statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Run fact-checking validation on the synthesis report."""
+        self._log_progress("🔍 Starting fact-checking phase...")
+        
+        try:
+            # Get the final report content
+            if not synthesis_result.get('report_hash'):
+                raise CleanAnalysisError("No synthesis report available for fact-checking")
+            
+            report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+            report_text = report_content.decode('utf-8')
+            
+            # Create temporary fact-checker RAG index
+            self._log_progress("🔧 Starting fact-checker RAG index construction...")
+            fact_checker_rag = self._build_fact_checker_rag_index(synthesis_result, statistical_results)
+            self._log_progress(f"✅ Fact-checker RAG index built successfully")
+            
+            # Initialize fact-checker agent
+            from ..agents.fact_checker_agent.agent import FactCheckerAgent
+            from ..gateway.llm_gateway import LLMGateway
+            from ..gateway.model_registry import ModelRegistry
+            
+            model_registry = ModelRegistry()
+            llm_gateway = LLMGateway(model_registry)
+            fact_checker = FactCheckerAgent(llm_gateway)
+            
+            # Create temporary report file for validation
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False, encoding='utf-8') as temp_file:
+                temp_file.write(report_text)
+                temp_report_path = Path(temp_file.name)
+            
+            try:
+                # Run fact-checking validation
+                validation_results = fact_checker.validate_report(temp_report_path, fact_checker_rag)
+                
+                self._log_progress(f"✅ Fact-checking completed: {len(validation_results.get('findings', []))} findings")
+                
+                return {
+                    "status": "completed",
+                    "findings": validation_results.get('findings', []),
+                    "validation_results": validation_results
+                }
+                
+            finally:
+                # Clean up temporary file
+                temp_report_path.unlink(missing_ok=True)
+                
+        except Exception as e:
+            self._log_progress(f"❌ Fact-checking phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Fact-checking phase failed: {str(e)}") from e
+    
+    def _build_fact_checker_rag_index(self, synthesis_result: Dict[str, Any], statistical_results: Dict[str, Any]):
+        """Build a comprehensive RAG index for fact-checking containing ALL experiment assets."""
+        self._log_progress("🔧 Building comprehensive fact-checker RAG index...")
+        
+        try:
+            self._log_progress("📥 Importing txtai embeddings...")
+            from txtai.embeddings import Embeddings
+            
+            # Enable txtai debug logging for better visibility
+            import logging
+            txtai_logger = logging.getLogger("txtai.embeddings")
+            txtai_logger.setLevel(logging.DEBUG)
+            self._log_progress("🔍 Enabled txtai debug logging")
+            
+            # Create a temporary fact-checker specific RAG index
+            # Use txtai directly to build a general-purpose RAG index from source documents
+            from txtai.embeddings import Embeddings
+            fact_checker_rag = Embeddings()
+            
+            # Collect ALL experiment assets for comprehensive fact-checking
+            source_documents = []
+            
+            # 1. EXPERIMENT SPECIFICATION
+            experiment_path = self.experiment_path / "experiment.md"
+            if experiment_path.exists():
+                experiment_content = self.security.secure_read_text(experiment_path)
+                source_documents.append({
+                    'content': experiment_content,
+                    'metadata': {
+                        'source_type': 'experiment_specification',
+                        'filename': 'experiment.md',
+                        'purpose': 'experiment_validation'
+                    }
+                })
+                self._log_progress(f"📋 Added experiment specification: {len(experiment_content)} chars")
+            else:
+                self._log_progress(f"⚠️ Experiment file not found: {experiment_path}")
+            
+            # 2. FRAMEWORK SPECIFICATION
+            framework_path = self.experiment_path / self.config.get('framework', 'framework.md')
+            if framework_path.exists():
+                framework_content = self.security.secure_read_text(framework_path)
+                source_documents.append({
+                    'content': framework_content,
+                    'metadata': {
+                        'source_type': 'framework_specification',
+                        'filename': framework_path.name,
+                        'purpose': 'dimension_validation'
+                    }
+                })
+                self._log_progress(f"📋 Added framework specification: {len(framework_content)} chars")
+            else:
+                self._log_progress(f"⚠️ Framework file not found: {framework_path}")
+            
+            # 3. CORPUS MANIFEST
+            corpus_path = self.experiment_path / "corpus.md"
+            if corpus_path.exists():
+                corpus_content = self.security.secure_read_text(corpus_path)
+                source_documents.append({
+                    'content': corpus_content,
+                    'metadata': {
+                        'source_type': 'corpus_manifest',
+                        'filename': 'corpus.md',
+                        'purpose': 'corpus_validation'
+                    }
+                })
+            
+            # 4. ORIGINAL CORPUS DOCUMENTS
+            self._log_progress(f"🔍 Loading corpus documents...")
+            corpus_documents = self._load_corpus_documents()
+            self._log_progress(f"📋 Loaded {len(corpus_documents)} corpus documents")
+            for doc in corpus_documents:
+                if 'content' in doc:
+                    source_documents.append({
+                        'content': doc['content'],
+                        'metadata': {
+                            'source_type': 'corpus_document',
+                            'filename': doc.get('filename', 'unknown'),
+                            'purpose': 'quote_validation'
+                        }
+                    })
+                    self._log_progress(f"📋 Added corpus document: {doc.get('filename', 'unknown')} ({len(doc['content'])} chars)")
+                else:
+                    self._log_progress(f"⚠️ Corpus document missing content: {doc}")
+            
+            # 5. RAW ANALYSIS SCORES
+            if hasattr(self, '_analysis_results') and self._analysis_results:
+                analysis_json = json.dumps(self._analysis_results, indent=2, default=str)
+                source_documents.append({
+                    'content': analysis_json,
+                    'metadata': {
+                        'source_type': 'raw_analysis_scores',
+                        'filename': 'individual_analysis_results.json',
+                        'purpose': 'score_validation'
+                    }
+                })
+            
+            # 6. DERIVED METRICS
+            if hasattr(self, '_derived_metrics_results') and self._derived_metrics_results:
+                derived_metrics_json = json.dumps(self._derived_metrics_results, indent=2, default=str)
+                source_documents.append({
+                    'content': derived_metrics_json,
+                    'metadata': {
+                        'source_type': 'derived_metrics',
+                        'filename': 'derived_metrics_results.json',
+                        'purpose': 'metrics_validation'
+                    }
+                })
+            
+            # 7. STATISTICAL RESULTS
+            if statistical_results and statistical_results.get('stats_hash'):
+                try:
+                    stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
+                    stats_text = stats_content.decode('utf-8')
+                    source_documents.append({
+                        'content': stats_text,
+                        'metadata': {
+                            'source_type': 'statistical_results',
+                            'filename': 'statistical_results.json',
+                            'purpose': 'statistic_validation'
+                        }
+                    })
+                except Exception as e:
+                    self._log_progress(f"⚠️ Could not load statistical results for fact-checking: {e}")
+            
+            # 8. EVIDENCE DATABASE (ALL evidence artifacts)
+            self._log_progress(f"🔍 Collecting evidence artifacts...")
+            evidence_hashes = []
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                self._log_progress(f"📋 Artifact registry has {len(self.artifact_storage.registry)} entries")
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                        evidence_hashes.append(artifact_hash)
+                        self._log_progress(f"📋 Found evidence artifact: {artifact_hash[:8]} - {metadata.get('artifact_type', 'unknown')}")
+            
+            self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts")
+            for evidence_hash in evidence_hashes:  # Include ALL evidence
+                try:
+                    evidence_content = self.artifact_storage.get_artifact(evidence_hash)
+                    evidence_text = evidence_content.decode('utf-8')
+                    source_documents.append({
+                        'content': evidence_text,
+                        'metadata': {
+                            'source_type': 'evidence_database',
+                            'filename': f'evidence_{evidence_hash[:8]}.json',
+                            'purpose': 'evidence_validation'
+                        }
+                    })
+                    self._log_progress(f"📋 Added evidence: {evidence_hash[:8]} ({len(evidence_text)} chars)")
+                except Exception as e:
+                    self._log_progress(f"⚠️ Could not load evidence {evidence_hash[:8]} for fact-checking: {e}")
+            
+            # 9. FINAL SYNTHESIS REPORT (the report being validated)
+            if synthesis_result and synthesis_result.get('report_hash'):
+                try:
+                    report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+                    report_text = report_content.decode('utf-8')
+                    source_documents.append({
+                        'content': report_text,
+                        'metadata': {
+                            'source_type': 'final_report',
+                            'filename': 'final_report.md',
+                            'purpose': 'self_reference_validation'
+                        }
+                    })
+                except Exception as e:
+                    self._log_progress(f"⚠️ Could not load final report for fact-checking: {e}")
+            
+            # Build the comprehensive fact-checker RAG index
+            if source_documents:
+                self._log_progress(f"🔨 Building RAG index with {len(source_documents)} source documents...")
+                
+                # DEBUG: Log each document being added
+                for i, doc in enumerate(source_documents):
+                    self._log_progress(f"📄 Document {i}: {doc['metadata']['source_type']} - {len(doc['content'])} chars")
+                
+                # Prepare documents for txtai indexing
+                documents = []
+                for i, doc in enumerate(source_documents):
+                    documents.append({
+                        'id': i,
+                        'text': doc['content'],
+                        'metadata': doc['metadata']
+                    })
+                
+                # Store documents separately for content retrieval (txtai only stores embeddings)
+                fact_checker_rag.documents = documents
+                
+                # Index the documents using txtai
+                self._log_progress(f"🔧 Calling fact_checker_rag.index() with {len(documents)} documents...")
+                fact_checker_rag.index(documents)
+                self._log_progress(f"✅ Built comprehensive fact-checker RAG index with {len(source_documents)} assets")
+                
+                # Log what was included for transparency
+                asset_types = {}
+                for doc in source_documents:
+                    source_type = doc['metadata']['source_type']
+                    asset_types[source_type] = asset_types.get(source_type, 0) + 1
+                
+                asset_summary = ", ".join([f"{count} {asset_type}" for asset_type, count in asset_types.items()])
+                self._log_progress(f"📋 Fact-checker RAG contains: {asset_summary}")
+                
+                return fact_checker_rag
+            else:
+                self._log_progress("⚠️ No experiment assets available for fact-checker RAG index")
+                raise CleanAnalysisError("Cannot build fact-checker RAG index: no source documents available")
+                
+        except Exception as e:
+            self._log_progress(f"❌ Failed to build fact-checker RAG index: {e}")
+            raise CleanAnalysisError(f"Fact-checker RAG index construction failed: {e}")
+    
+    def _apply_fact_checking_to_report(self, report_content: str, fact_check_results: Dict[str, Any]) -> str:
+        """Apply fact-checking results to the report by prepending critical findings."""
+        findings = fact_check_results.get('findings', [])
+        critical_findings = [f for f in findings if f.get('severity') == 'CRITICAL']
+        
+        if not critical_findings:
+            return report_content
+        
+        # Create warning notice
+        warning_lines = [
+            "---",
+            "**⚠️ FACT-CHECK NOTICE**",
+            "",
+            "This report contains factual issues identified by automated validation:",
+            ""
+        ]
+        
+        for finding in critical_findings:
+            warning_lines.append(f"- **{finding.get('check_name', 'Unknown Check')}**: {finding.get('description', 'No description')}")
+        
+        warning_lines.extend([
+            "",
+            "See `fact_check_results.json` for complete validation details.",
+            "---",
+            ""
+        ])
+        
+        return "\n".join(warning_lines) + report_content
     
     def _get_corpus_summary(self) -> Dict[str, Any]:
         """Get corpus summary for direct context."""
@@ -1715,7 +2079,7 @@ class CleanAnalysisOrchestrator:
         
         return "\n".join(evidence_lines)
     
-    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], synthesis_result: Dict[str, Any]) -> Path:
+    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], synthesis_result: Dict[str, Any], fact_check_results: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
         # Create run directory structure
         run_dir = self.experiment_path / "runs" / run_id
@@ -1742,9 +2106,22 @@ class CleanAnalysisOrchestrator:
         if synthesis_result.get('report_hash'):
             report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
             report_file = results_dir / "final_report.md"
-            with open(report_file, 'wb') as f:
-                f.write(report_content)
-            self._log_progress("📝 Final report saved to results")
+            
+            # Apply fact-checking results if available
+            if fact_check_results.get('status') == 'completed' and fact_check_results.get('findings'):
+                annotated_report = self._apply_fact_checking_to_report(report_content.decode('utf-8'), fact_check_results)
+                with open(report_file, 'w', encoding='utf-8') as f:
+                    f.write(annotated_report)
+                self._log_progress("📝 Annotated final report saved to results")
+            else:
+                with open(report_file, 'wb') as f:
+                    f.write(report_content)
+                self._log_progress("📝 Final report saved to results")
+        
+        # Save fact-checking results
+        fact_check_file = results_dir / "fact_check_results.json"
+        with open(fact_check_file, 'w') as f:
+            json.dump(fact_check_results, f, indent=2)
         
         # Save synthesis metadata
         synthesis_file = results_dir / "synthesis_results.json"
@@ -1939,8 +2316,46 @@ class CleanAnalysisOrchestrator:
     
     def _log_progress(self, message: str):
         """Log progress with rich console output."""
-        self.logger.info(message)
+        self.logger.debug(message)
     
     def _log_status(self, message: str):
         """Log status updates."""
         self.logger.info(f"STATUS: {message}")
+
+    def _build_synthesis_evidence_index(
+        self, evidence_hashes: List[str]
+    ) -> Optional[Embeddings]:
+        """Build a RAG index containing only the evidence for the synthesis agent."""
+        if not evidence_hashes:
+            self._log_progress("⚠️ No evidence found, skipping synthesis RAG index build.")
+            return None
+
+        try:
+            self._log_progress(
+                f"🔨 Building synthesis RAG index from {len(evidence_hashes)} evidence artifacts..."
+            )
+            evidence_documents = []
+            for e_hash in evidence_hashes:
+                content = self.artifact_storage.get_artifact(e_hash, quiet=True)
+                if content:
+                    evidence_documents.append({"content": content.decode("utf-8")})
+
+            if not evidence_documents:
+                self._log_progress(
+                    "⚠️ Evidence artifacts found, but none could be loaded. Skipping synthesis RAG index build."
+                )
+                return None
+
+            rag_manager = RAGIndexManager(artifact_storage=self.artifact_storage)
+            synthesis_rag_index = rag_manager.build_index_from_documents(
+                evidence_documents
+            )
+
+            self._log_progress("✅ Built synthesis evidence RAG index successfully.")
+            # TODO: Add caching and persistence for this index
+            return synthesis_rag_index
+
+        except Exception as e:
+            self._log_progress(f"❌ Failed to build synthesis evidence RAG index: {e}")
+            # We don't raise here; synthesis can proceed without RAG, though it will be impaired.
+            return None

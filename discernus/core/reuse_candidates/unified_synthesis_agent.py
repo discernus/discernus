@@ -31,137 +31,150 @@ class UnifiedSynthesisAgent:
     Uses proven THIN approach with txtai RAG integration for evidence-grounded reporting.
     """
     
-    def __init__(self, 
-                 model: str = "vertex_ai/gemini-2.5-pro",
-                 audit_logger: Optional[AuditLogger] = None,
-                 enhanced_mode: bool = True):
+    def __init__(
+        self,
+        model: str,
+        audit_logger: Optional[AuditLogger] = None,
+        rag_index: Optional[Embeddings] = None,
+        enhanced_mode: bool = True,
+    ):
         """
-        Initialize unified synthesis agent.
-        
+        Initialize the agent.
+
         Args:
-            model: LLM model for synthesis (Pro model for reliability)
-            audit_logger: Optional audit logger for provenance
-            enhanced_mode: Use enhanced multi-level analysis (CRIT-006)
+            model: The language model to use for synthesis.
+            audit_logger: An optional audit logger instance.
+            rag_index: An optional pre-built txtai RAG index for evidence retrieval.
+            enhanced_mode: Whether to use the enhanced prompt template.
         """
         self.model = model
-        self.llm_gateway = LLMGateway(ModelRegistry())
         self.audit_logger = audit_logger
         self.agent_name = "UnifiedSynthesisAgent"
+        self.llm_gateway = LLMGateway(ModelRegistry())
+        self.rag_index = rag_index  # Store the RAG index
         self.enhanced_mode = enhanced_mode
-        
-        # Load enhanced synthesis prompt template
-        if enhanced_mode:
-            self.enhanced_prompt_template = self._load_enhanced_prompt_template()
-        
-        if self.audit_logger:
-            self.audit_logger.log_agent_event(self.agent_name, "initialization", {
-                "model": self.model,
-                "enhanced_mode": enhanced_mode,
-                "capabilities": ["final_report_generation", "evidence_integration", "statistical_interpretation", "multi_level_analysis"]
-            })
-    
-    def generate_final_report(self,
-                            framework_path: Path,
-                            experiment_path: Path,
-                            research_data_artifact_hash: str,
-                            rag_index: Embeddings = None,
-                            artifact_storage = None,
-                            evidence_artifact_hashes: list = None) -> Dict[str, Any]:
+        self.prompt_template = (
+            self._load_enhanced_prompt_template()
+            if enhanced_mode
+            else self._load_basic_prompt_template()
+        )
+
+    def generate_final_report(
+        self,
+        framework_path: Path,
+        experiment_path: Path,
+        research_data_artifact_hash: str,
+        artifact_storage,
+    ) -> Dict[str, Any]:
         """
-        Generates publication-ready research report using RAG for evidence.
-
-        Args:
-            framework_path: Path to the framework file.
-            experiment_path: Path to the experiment file.
-            research_data_artifact_hash: Hash of the research data artifact.
-            rag_index: A queryable txtai Embeddings object for evidence retrieval.
-            artifact_storage: The artifact storage instance.
-
-        Returns:
-            A dictionary containing the final report.
+        Generate the final academic report.
+        This method now assumes the RAG index is available via self.rag_index
+        and uses it to perform targeted evidence retrieval.
         """
         if self.audit_logger:
-            self.audit_logger.log_agent_event(self.agent_name, "synthesis_start", {
-                "framework": str(framework_path),
-                "research_data_hash": research_data_artifact_hash,
-                "rag_enabled": True
-            })
-        
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "synthesis_start",
+                {
+                    "framework": str(framework_path),
+                    "research_data_hash": research_data_artifact_hash,
+                    "rag_enabled": self.rag_index is not None,
+                },
+            )
+
         try:
-            # Use both evidence sources: direct evidence artifacts AND RAG index
-            evidence_context_lines = []
-            
-            # 1. Get evidence from direct artifact hashes (like deprecated orchestrator)
-            if evidence_artifact_hashes and artifact_storage:
-                direct_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
-                for evidence in direct_evidence:
-                    quote = evidence.get('quote_text', '')
-                    doc_name = evidence.get('document_name', 'Unknown')
-                    dimension = evidence.get('dimension', 'Unknown')
-                    confidence = evidence.get('confidence', 0.0)
-                    
-                    if quote:
-                        evidence_context_lines.append(
-                            f"- **{dimension}** from {doc_name} (confidence: {confidence:.2f}): \"{quote}\""
-                        )
-            
-            # 2. Supplement with RAG index search if available
-            if rag_index:
-                try:
-                    retrieved_evidence = rag_index.search(query="general context", limit=5)
-                    
-                    # Handle txtai search results which return (id, score) tuples
-                    for result in retrieved_evidence:
-                        if isinstance(result, tuple) and len(result) >= 2:
-                            doc_id, score = result[0], result[1]
-                            # Add RAG-retrieved evidence with proper attribution
-                            evidence_context_lines.append(f"- RAG evidence from document {doc_id} (relevance: {score:.2f})")
-                        elif isinstance(result, dict):
-                            # Handle dictionary results (alternative txtai format)
-                            quote = result.get('source_quote', result.get('text', 'No content available'))
-                            evidence_context_lines.append(f"- RAG: {quote}")
-                except Exception as e:
-                    # RAG search failed, continue with direct evidence only
-                    pass
-            
-            evidence_context = "\n".join(evidence_context_lines) if evidence_context_lines else "No relevant evidence found."
-            
+            # 1. Assemble the base prompt WITHOUT the evidence database.
+            # The evidence will be injected Just-In-Time by this agent.
             assembler = SynthesisPromptAssembler()
-            synthesis_prompt = assembler.assemble_prompt(
+            base_prompt = assembler.assemble_prompt(
                 framework_path=framework_path,
                 experiment_path=experiment_path,
                 research_data_artifact_hash=research_data_artifact_hash,
                 artifact_storage=artifact_storage,
-                evidence_artifacts=evidence_artifact_hashes or [] # Use evidence hashes if provided
+                evidence_artifacts=[],  # Evidence is handled by RAG, not the assembler
             )
-            
-            enhanced_prompt = f"""{synthesis_prompt}
 
-AVAILABLE EVIDENCE (retrieved via RAG):
+            # 2. Extract statistical findings from the research data to use as RAG queries.
+            research_data = json.loads(
+                artifact_storage.get_artifact(research_data_artifact_hash).decode("utf-8")
+            )
+            statistical_findings = self._extract_findings_for_rag(
+                research_data.get("statistical_results", {})
+            )
+
+            # 3. Use the RAG index to find evidence for each finding.
+            evidence_context = self._retrieve_and_format_evidence(statistical_findings)
+
+            # 4. Construct the final, enhanced prompt with the retrieved evidence.
+            final_prompt = f"""{base_prompt}
+
+# AVAILABLE EVIDENCE (retrieved via targeted RAG queries):
 {evidence_context}
 
-Use this evidence to support your statistical interpretations."""
-            
-            # The LLM gateway returns a tuple: (final_report, metadata)
+Use the evidence above to support your statistical interpretations and generate the final report."""
+
+            # 5. Execute the LLM call.
             final_report, metadata = self.llm_gateway.execute_call(
-                model=self.model,
-                prompt=enhanced_prompt,
-                temperature=0.1
+                model=self.model, prompt=final_prompt, temperature=0.1
             )
-            
+
             if self.audit_logger:
-                self.audit_logger.log_agent_event(self.agent_name, "synthesis_complete", {
-                    "report_length": len(final_report)
-                })
-            
+                self.audit_logger.log_agent_event(
+                    self.agent_name, "synthesis_complete", {"report_length": len(final_report)}
+                )
+
             return {"final_report": final_report}
-                
+
         except Exception as e:
             if self.audit_logger:
-                self.audit_logger.log_error("synthesis_failed", str(e), {"agent": self.agent_name})
-            # Re-raise the exception to be handled by the orchestrator
+                self.audit_logger.log_error(
+                    "synthesis_failed", str(e), {"agent": self.agent_name}
+                )
             raise
-    
+
+    def _extract_findings_for_rag(self, statistical_results: Dict[str, Any]) -> List[str]:
+        """A simple method to extract key statistical findings to use as RAG queries."""
+        findings = []
+        correlations = statistical_results.get("correlation_matrix", {}).get("correlations", {})
+        for key, value in correlations.items():
+            findings.append(f"The correlation between {key.replace('_vs_', ' and ')} is {value:.2f}")
+        return findings
+
+    def _retrieve_and_format_evidence(self, queries: List[str]) -> str:
+        """Use the RAG index to retrieve and format evidence for the given queries."""
+        if not self.rag_index or not queries:
+            return "No relevant evidence found."
+
+        all_evidence_lines = []
+        for query in queries:
+            all_evidence_lines.append(f"\n## Evidence related to: '{query}'")
+            try:
+                search_results = self.rag_index.search(query, limit=3)
+                if not search_results:
+                    all_evidence_lines.append("- No direct evidence found in the database.")
+                    continue
+
+                for result in search_results:
+                    # result is a dict {'id': ..., 'text': ..., 'score': ...}
+                    quote = result.get("text", "Content not available")
+                    score = result.get("score", 0.0)
+                    # Attempt to parse the JSON content of the quote to get metadata
+                    try:
+                        evidence_data = json.loads(quote)
+                        doc_name = evidence_data.get("document_name", "Unknown")
+                        dimension = evidence_data.get("dimension", "Unknown")
+                        actual_quote = evidence_data.get("quote_text", quote)
+                        line = f"- From '{doc_name}' ({dimension}): \"{actual_quote}\" (Relevance: {score:.2f})"
+                        all_evidence_lines.append(line)
+                    except json.JSONDecodeError:
+                        # If it's not JSON, it's just plain text, use it directly
+                        all_evidence_lines.append(f"- \"{quote}\" (Relevance: {score:.2f})")
+
+            except Exception as e:
+                all_evidence_lines.append(f"- Error during RAG search for this query: {e}")
+        
+        return "\n".join(all_evidence_lines)
+
     def _load_enhanced_prompt_template(self) -> Dict[str, Any]:
         """Load enhanced synthesis prompt template."""
         try:

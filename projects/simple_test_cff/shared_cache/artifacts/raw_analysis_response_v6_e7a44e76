@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a highly polemical political speech with two distinct but thematically linked sections: the constitutional role of the judiciary and the perceived crisis of illegal immigration. The rhetoric is stark and emotionally charged, making the identification of dimensions relatively straightforward. The primary challenge was distinguishing between policy disagreement and the specific dimensional definitions (e.g., 'enmity' vs. simple opposition). The analysis focused on the rhetorical strategies used to frame these issues."
+  },
+  "document_analyses": [
+    {
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us... so that some of us, some of us will soak that up and be mobilized to do something...",
+          "confidence": 0.95,
+          "context_type": "in-group/out-group framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "The text does not contain language affirming universal human worth. Individuals from the out-group are consistently reduced to their criminal status or actions (e.g., 'an illegal criminal alien drunk driving perpetrator').",
+          "confidence": 0.95,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "this illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day...",
+          "confidence": 1.0,
+          "context_type": "graphic_threat_narrative"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "The discourse lacks any optimistic or progress-oriented vision. The focus is exclusively on threat, decay, constitutional crisis, and the need for defensive, restorative action rather than building a better future.",
+          "confidence": 0.95,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "And now most anybody that crosses that border... knows, 'If you just claim asylum, uh, you can be, you can be a refugee and this federal government will roll out the Welcome Wagon.'",
+          "confidence": 0.85,
+          "context_type": "grievance_rhetoric"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "The text contains no examples of celebrating or expressing joy in the success or achievements of others. The focus is on conflict, tragedy, and political opposition.",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean... And instead of being restored, it would be destroyed by another presidential appointment.",
+          "confidence": 0.95,
+          "context_type": "adversarial_positioning"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "There are no appeals to friendship, cooperation, common ground, or unity with any of the identified out-groups (political opponents, activist judges, immigrants). The rhetorical stance is consistently oppositional.",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "confidence": 0.95,
+          "context_type": "explicit_call_for_obstruction"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison.",
+          "confidence": 0.85,
+          "context_type": "in-group_cohesion_goal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

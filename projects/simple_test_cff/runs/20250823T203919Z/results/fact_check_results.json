@@ -1,0 +1,50 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The 'dimensions' list from the framework specification, which is essential for cross-referencing and validating the analytical dimensions mentioned in the report, was not provided. Therefore, the 'Dimension Hallucination' check cannot be fully performed as instructed.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The 'evidence database' (i.e., the content of the cited source files like `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, `bernie_sanders_2025_fighting_oligarchy.txt`, `john_mccain_2008_concession.txt`, `steve_king_2017_house_floor.txt`) was not provided. Without access to these original source texts, it is impossible to perform the requested 'Evidence Quote Mismatch' check to confirm the presence of the quoted textual evidence within them.",
+      "examples": [
+        "Quote: \"We are witnessing an oligarchy in America,\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+        "Quote: \"Our lives deserve dignity and our work deserves respect,\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+        "Quote: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration,\" (Source: bernie_sanders_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+        "Quote: \"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it,\" (Source: john_mccain_2008_concession.txt) - Cannot be verified due to missing source file.",
+        "Quote: \"This illegal alien beat this boy to death,\" (Source: steve_king_2017_house_floor.txt) - Cannot be verified due to missing source file."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The 'dimensions' list from the framework specification, which is essential for cross-referencing and validating the analytical dimensions mentioned in the report, was not provided. Therefore, the 'Dimension Hallucination' check cannot be fully performed as instructed.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The 'evidence database' (i.e., the content of the cited source files like `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, `bernie_sanders_2025_fighting_oligarchy.txt`, `john_mccain_2008_concession.txt`, `steve_king_2017_house_floor.txt`) was not provided. Without access to these original source texts, it is impossible to perform the requested 'Evidence Quote Mismatch' check to confirm the presence of the quoted textual evidence within them.",
+        "examples": [
+          "Quote: \"We are witnessing an oligarchy in America,\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+          "Quote: \"Our lives deserve dignity and our work deserves respect,\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+          "Quote: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration,\" (Source: bernie_sanders_2025_fighting_oligarchy.txt) - Cannot be verified due to missing source file.",
+          "Quote: \"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it,\" (Source: john_mccain_2008_concession.txt) - Cannot be verified due to missing source file.",
+          "Quote: \"This illegal alien beat this boy to death,\" (Source: steve_king_2017_house_floor.txt) - Cannot be verified due to missing source file."
+        ]
+      }
+    ]
+  }
+}

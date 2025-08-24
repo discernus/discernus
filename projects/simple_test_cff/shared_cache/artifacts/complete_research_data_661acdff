@@ -1,0 +1,762 @@
+{
+  "experiment_metadata": {
+    "name": "simple_test_cff",
+    "framework": "cff_v10.md",
+    "corpus_documents": 4
+  },
+  "raw_analysis_data": [
+    {
+      "analysis_id": "analysis_09ac4d6eea63",
+      "result_hash": "f7170c27d3f5927aabd2c46ead1e3da806556fb9a624b7c257f2239360011005",
+      "result_content": {
+        "analysis_id": "analysis_09ac4d6eea63",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political concession speech, which provides a very clear and explicit rhetorical context. The speaker's primary goals are to acknowledge defeat gracefully, affirm the legitimacy of the outcome, and call for national unity. This makes the speech a strong example of dimensions like Amity, Compersion, and Cohesive Goals, while being almost entirely devoid of their counterparts (Enmity, Envy, Fragmentative Goals).\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"historical context\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgement of challenges without crisis framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"praise of opponent's hopeful message\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opening statement\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"central theme\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "b7b6b7e0e4a26a229c9a356651f3237cef785659c0506e01a909981d6c14f8b9",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:32:31.991985+00:00",
+          "end_time": "2025-08-23T18:33:08.124758+00:00",
+          "duration_seconds": 36.132761
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true,
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_983692c5ceb6",
+      "result_hash": "4b5e769a236cf55d7e370f3f032c6eda7df4e89e94b03a2440dc86c9e41a51ea",
+      "result_content": {
+        "analysis_id": "analysis_983692c5ceb6",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The speech contains two primary sections: one on constitutional interpretation regarding judicial appointments, and a second, more emotional section on crimes committed by undocumented immigrants. The rhetoric is consistently adversarial and focuses on threats, making dimensions like Fear, Enmity, and Tribal Dominance highly prominent. Conversely, dimensions related to cohesion, hope, and unity are almost entirely absent.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"hope\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"we here who take an oath to support and defend the Constitution... we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Defining an in-group ('we') based on a specific constitutional belief system against an out-group (the President and his potential nominees).\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Using a visceral, tragic story of a murder to evoke fear and portray immigration policy as an immediate, mortal threat.\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets. That's, that's the ones we know of.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Quantifying a mortal threat and directly blaming a political opponent's policy for the deaths of Americans.\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"the Chief Justice of the Supreme Court decided that he could write words into ObamaCare that didn't exist. They were not passed by this Congress, not by either chamber of this Congress... They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Expressing resentment towards the perceived illegitimate power of the Supreme Court to 'make it up' and act outside of its designated authority, a form of grievance rhetoric.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Framing a political action (a presidential appointment) with hostile and destructive language, positioning it as an act of destruction against the Constitution.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Her life abruptly ended by a criminal alien who had been, and who had been encountered by a law enforcement before, whose immigration attorneys knew him... And he had been released. He'd been released onto the streets where he now had three times the blood alcohol content allowable by law, drag racing in the streets, killed Sarah Root.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Identifying a specific individual as a 'criminal alien' and an enemy responsible for the death of an American, positioning the relationship as adversarial and hostile.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Articulating a clear zero-sum objective: to completely block the political process for a presidential appointment, which is an inherently divisive goal.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Stating goals of separation, imprisonment, and deportation for a specific group of people, emphasizing division and removal rather than integration.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "56e13afe1186a4d7dd566056a801f5346dd86be8ac079a12cfe50fe98bc8bd68",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:33:08.125415+00:00",
+          "end_time": "2025-08-23T18:33:49.787534+00:00",
+          "duration_seconds": 41.662107
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true,
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_16b53a7c29ca",
+      "result_hash": "3b5c6ede4d18ea2eae6c69887437d1b91f0e52340d028299d12f91e64dd79ebe",
+      "result_content": {
+        "analysis_id": "analysis_16b53a7c29ca",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic example of populist economic rhetoric, making the dimensions of Tribal Dominance, Envy, and Enmity particularly strong and salient. The text establishes a clear 'us vs. them' narrative, pitting 'the American people' against 'oligarchs' and 'billionaires'. Cohesive elements like Hope and Amity are present but serve as a call to action for the in-group, rather than a universal appeal.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit_outgroup_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"cross_partisan_appeal\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_articulation\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"aspirational_vision_statement\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_economic_claim\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Now everybody wants to do well in life. Everybody wants to make money. But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rejection_of_outgroup_success\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... But they're not.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"adversarial_characterization\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in-group_solidarity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rejection_of_existing_structure\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"...we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"integrative_vision_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "1988e330d41ceafe6e653336f7fa5288fb7054bf25f3c8c2de82671fd9d90729",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:33:49.788228+00:00",
+          "end_time": "2025-08-23T18:34:39.055985+00:00",
+          "duration_seconds": 49.267747
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true,
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_55a47aad82e1",
+      "result_hash": "9f12cd9e395872bbf87b21774e11d09286fab8f82a45aade9d02c3f847b5dfbb",
+      "result_content": {
+        "analysis_id": "analysis_55a47aad82e1",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document is a political speech with clear, strong rhetorical themes that map well to the framework's dimensions. The analysis focuses on the explicit populist and class-based framing, which presents a strong 'us vs. them' narrative (working people vs. oligarchs). The speaker simultaneously employs rhetoric of high enmity towards the out-group and high amity towards the in-group, making this a complex text that benefits from independent dimensional scoring.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block... But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in_group_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"Our lives deserve dignity and our work deserves respect.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"...so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_perception\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"collective_vision\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"grievance_rhetoric\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"No evidence found for this dimension. The speech's focus is on the illegitimate success of an oligarchy, not celebrating the success of others. Its absence is a significant feature of the text.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"unity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them...\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_objective\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"integrative_objective\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "0d034354f445f6e6c7621218415ed4844d318834ebbb97dfc1175250080a56f4",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:34:39.056613+00:00",
+          "end_time": "2025-08-23T18:35:30.408109+00:00",
+          "duration_seconds": 51.351487
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true,
+      "document_name": "unknown"
+    }
+  ],
+  "derived_metrics_data": [
+    {
+      "analysis_id": "analysis_09ac4d6eea63",
+      "result_hash": "f7170c27d3f5927aabd2c46ead1e3da806556fb9a624b7c257f2239360011005",
+      "result_content": {
+        "analysis_id": "analysis_09ac4d6eea63",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political concession speech, which provides a very clear and explicit rhetorical context. The speaker's primary goals are to acknowledge defeat gracefully, affirm the legitimacy of the outcome, and call for national unity. This makes the speech a strong example of dimensions like Amity, Compersion, and Cohesive Goals, while being almost entirely devoid of their counterparts (Enmity, Envy, Fragmentative Goals).\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"historical context\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgement of challenges without crisis framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"praise of opponent's hopeful message\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opening statement\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"central theme\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "b7b6b7e0e4a26a229c9a356651f3237cef785659c0506e01a909981d6c14f8b9",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:32:31.991985+00:00",
+          "end_time": "2025-08-23T18:33:08.124758+00:00",
+          "duration_seconds": 36.132761
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_983692c5ceb6",
+      "result_hash": "4b5e769a236cf55d7e370f3f032c6eda7df4e89e94b03a2440dc86c9e41a51ea",
+      "result_content": {
+        "analysis_id": "analysis_983692c5ceb6",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The speech contains two primary sections: one on constitutional interpretation regarding judicial appointments, and a second, more emotional section on crimes committed by undocumented immigrants. The rhetoric is consistently adversarial and focuses on threats, making dimensions like Fear, Enmity, and Tribal Dominance highly prominent. Conversely, dimensions related to cohesion, hope, and unity are almost entirely absent.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"hope\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"we here who take an oath to support and defend the Constitution... we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Defining an in-group ('we') based on a specific constitutional belief system against an out-group (the President and his potential nominees).\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Using a visceral, tragic story of a murder to evoke fear and portray immigration policy as an immediate, mortal threat.\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets. That's, that's the ones we know of.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Quantifying a mortal threat and directly blaming a political opponent's policy for the deaths of Americans.\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"the Chief Justice of the Supreme Court decided that he could write words into ObamaCare that didn't exist. They were not passed by this Congress, not by either chamber of this Congress... They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Expressing resentment towards the perceived illegitimate power of the Supreme Court to 'make it up' and act outside of its designated authority, a form of grievance rhetoric.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Framing a political action (a presidential appointment) with hostile and destructive language, positioning it as an act of destruction against the Constitution.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Her life abruptly ended by a criminal alien who had been, and who had been encountered by a law enforcement before, whose immigration attorneys knew him... And he had been released. He'd been released onto the streets where he now had three times the blood alcohol content allowable by law, drag racing in the streets, killed Sarah Root.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Identifying a specific individual as a 'criminal alien' and an enemy responsible for the death of an American, positioning the relationship as adversarial and hostile.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Articulating a clear zero-sum objective: to completely block the political process for a presidential appointment, which is an inherently divisive goal.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Stating goals of separation, imprisonment, and deportation for a specific group of people, emphasizing division and removal rather than integration.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "56e13afe1186a4d7dd566056a801f5346dd86be8ac079a12cfe50fe98bc8bd68",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:33:08.125415+00:00",
+          "end_time": "2025-08-23T18:33:49.787534+00:00",
+          "duration_seconds": 41.662107
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_16b53a7c29ca",
+      "result_hash": "3b5c6ede4d18ea2eae6c69887437d1b91f0e52340d028299d12f91e64dd79ebe",
+      "result_content": {
+        "analysis_id": "analysis_16b53a7c29ca",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic example of populist economic rhetoric, making the dimensions of Tribal Dominance, Envy, and Enmity particularly strong and salient. The text establishes a clear 'us vs. them' narrative, pitting 'the American people' against 'oligarchs' and 'billionaires'. Cohesive elements like Hope and Amity are present but serve as a call to action for the in-group, rather than a universal appeal.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit_outgroup_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"cross_partisan_appeal\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_articulation\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"aspirational_vision_statement\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_economic_claim\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Now everybody wants to do well in life. Everybody wants to make money. But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rejection_of_outgroup_success\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... But they're not.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"adversarial_characterization\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in-group_solidarity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rejection_of_existing_structure\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"...we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"integrative_vision_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "1988e330d41ceafe6e653336f7fa5288fb7054bf25f3c8c2de82671fd9d90729",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:33:49.788228+00:00",
+          "end_time": "2025-08-23T18:34:39.055985+00:00",
+          "duration_seconds": 49.267747
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_55a47aad82e1",
+      "result_hash": "9f12cd9e395872bbf87b21774e11d09286fab8f82a45aade9d02c3f847b5dfbb",
+      "result_content": {
+        "analysis_id": "analysis_55a47aad82e1",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document is a political speech with clear, strong rhetorical themes that map well to the framework's dimensions. The analysis focuses on the explicit populist and class-based framing, which presents a strong 'us vs. them' narrative (working people vs. oligarchs). The speaker simultaneously employs rhetoric of high enmity towards the out-group and high amity towards the in-group, making this a complex text that benefits from independent dimensional scoring.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block... But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in_group_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"Our lives deserve dignity and our work deserves respect.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"...so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_perception\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"collective_vision\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"grievance_rhetoric\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"No evidence found for this dimension. The speech's focus is on the illegitimate success of an oligarchy, not celebrating the success of others. Its absence is a significant feature of the text.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"unity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them...\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_objective\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"integrative_objective\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "0d034354f445f6e6c7621218415ed4844d318834ebbb97dfc1175250080a56f4",
+        "execution_metadata": {
+          "start_time": "2025-08-23T18:34:39.056613+00:00",
+          "end_time": "2025-08-23T18:35:30.408109+00:00",
+          "duration_seconds": 51.351487
+        },
+        "input_artifacts": {
+          "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+          "document_hashes": [
+            "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_cff",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250823T183231Z_8e0e51ce"
+        }
+      },
+      "cached": true
+    }
+  ],
+  "derived_metrics_metadata": {
+    "status": "completed",
+    "derived_metrics_hash": "714eb9d3bafd4ea04ab4141b45239d865416290a8d77082c8d4899e8a0dd3a39",
+    "functions_generated": 6,
+    "derived_metrics_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 6,
+        "output_file": "automatedderivedmetricsagent_functions.py",
+        "module_size": 13712,
+        "function_code_content": "\"\"\"\nAutomated Derived Metrics Functions\n===================================\n\nGenerated by AutomatedDerivedMetricsAgent for experiment: Test Experiment\nDescription: Test experiment for derived metrics\nGenerated: 2025-08-23T17:56:35.615786+00:00\n\nThis module contains automatically generated calculation functions for derived metrics\nas specified in the framework's natural language descriptions.\n\"\"\"\n\nimport pandas as pd\nimport numpy as np\nfrom typing import Optional, Dict, Any\n\n\ndef calculate_identity_tension(data, **kwargs):\n    \"\"\"\n    Calculate identity_tension: Conflict between tribal dominance and individual dignity dimensions.\n\n    This tension is highest when both tribal dominance and individual dignity are strongly present,\n    reflecting a communication strategy that appeals to both in-group superiority and universal human worth simultaneously.\n    The calculation uses a formula related to the harmonic mean to capture this interaction, ensuring the\n    tension is low if either dimension is absent.\n\n    Formula: (2 * tribal_dominance * individual_dignity) / (tribal_dominance + individual_dignity)\n    If (tribal_dominance + individual_dignity) is 0, the result is 0.\n\n    Args:\n        data (pd.Series): A single row of data containing the necessary columns.\n        **kwargs: Additional parameters (unused in this calculation).\n\n    Returns:\n        float: The calculated identity tension score, or None if input data is missing or invalid.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # Based on the description \"Conflict between tribal dominance and individual dignity dimensions\",\n        # the logical column names are 'tribal_dominance' and 'individual_dignity'.\n        tribal_dominance = data.get('tribal_dominance')\n        individual_dignity = data.get('individual_dignity')\n\n        # Gracefully handle missing data: if columns are missing or values are NaN\n        if pd.isna(tribal_dominance) or pd.isna(individual_dignity):\n            return None\n\n        # The calculation requires both scores to be numeric\n        if not all(isinstance(i, (int, float)) for i in [tribal_dominance, individual_dignity]):\n             return None\n\n        numerator = 2 * tribal_dominance * individual_dignity\n        denominator = tribal_dominance + individual_dignity\n\n        # Avoid division by zero. If both scores are 0, there is no tension.\n        if denominator == 0:\n            return 0.0\n        else:\n            return numerator / denominator\n\n    except (TypeError, AttributeError, KeyError):\n        # Handle cases where data is not in the expected format (e.g., not a Series)\n        return None\n    except Exception:\n        # A final catch-all for any other unexpected errors\n        return None\n\ndef calculate_emotional_balance(data, **kwargs):\n    \"\"\"\n    Calculate emotional_balance: Difference between hope and fear scores\n\n    Formula: emotional_balance = hope_score - fear_score\n\n    Args:\n        data (pd.Series): A row of data with dimension scores.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        float: The calculated emotional balance, or None if required data is missing or invalid.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # Per instructions to use generic column names as none were specified in the data structure.\n        hope_score_col = 'hope_score'\n        fear_score_col = 'fear_score'\n\n        # Extract scores from the data object (e.g., a pandas Series).\n        hope_score = data[hope_score_col]\n        fear_score = data[fear_score_col]\n\n        # Gracefully handle missing data by checking for null values.\n        if pd.isna(hope_score) or pd.isna(fear_score):\n            return None\n\n        # Calculate the difference and ensure the result is a standard float.\n        result = float(hope_score) - float(fear_score)\n\n        return result\n\n    except Exception:\n        # Catch all exceptions (e.g., KeyError for missing columns, TypeError for non-numeric data)\n        # and return None for production-level robustness.\n        return None\n\ndef calculate_success_climate(data, **kwargs):\n    \"\"\"\n    Calculate success_climate: Difference between compersion and envy scores\n\n    Formula: success_climate = compersion - envy\n    \n    Args:\n        data: pandas DataFrame or Series with dimension scores.\n              This function expects columns 'compersion' and 'envy'.\n        **kwargs: Additional parameters (unused).\n        \n    Returns:\n        float: Calculated result or None if insufficient data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # Retrieve scores from the data object (which is a single row as a Series)\n        compersion_score = data['compersion']\n        envy_score = data['envy']\n        \n        # Check for missing data (NaN, None, etc.)\n        if pd.isna(compersion_score) or pd.isna(envy_score):\n            return None\n            \n        # Perform the calculation and ensure the result is a float\n        result = float(compersion_score) - float(envy_score)\n        \n        return result\n        \n    except (KeyError, TypeError, ValueError):\n        # KeyError: If 'compersion' or 'envy' columns are missing.\n        # TypeError: If data in columns is not numeric.\n        # ValueError: If casting to float fails for an unexpected reason.\n        return None\n    except Exception:\n        # A general catch-all for any other unexpected errors.\n        return None\n\ndef calculate_relational_climate(data, **kwargs):\n    \"\"\"\n    Calculate relational_climate: Difference between amity and enmity scores\n\n    Formula: relational_climate = amity - enmity\n\n    Args:\n        data (pd.Series): A single row of data containing the necessary columns.\n        **kwargs: Additional parameters (unused).\n\n    Returns:\n        float: Calculated result or None if insufficient data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # The calculation is the difference between 'amity' and 'enmity' scores.\n        # These are the required columns, derived from the calculation description.\n        amity_col = 'amity'\n        enmity_col = 'enmity'\n\n        # Use pd.to_numeric to handle non-numeric data and convert to NaN if invalid.\n        # .get() is used for safety, returning None if a column is missing.\n        amity_score = pd.to_numeric(data.get(amity_col), errors='coerce')\n        enmity_score = pd.to_numeric(data.get(enmity_col), errors='coerce')\n\n        # If either score is NaN (due to missing columns, None values, or non-numeric data),\n        # the calculation is not possible.\n        if pd.isna(amity_score) or pd.isna(enmity_score):\n            return None\n\n        # Perform the calculation and ensure the result is a standard Python float.\n        result = amity_score - enmity_score\n        return float(result)\n\n    except Exception:\n        # Catches any other unexpected errors, such as 'data' not being a\n        # pandas Series or other data access issues.\n        return None\n\ndef calculate_goal_orientation(data, **kwargs):\n    \"\"\"\n    Calculate goal_orientation: Difference between cohesive goals and fragmentative goals\n\n    Formula: goal_orientation = cohesive_goals - fragmentative_goals\n\n    Args:\n        data (pd.Series): A single row of data as a pandas Series.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        float: Calculated result or None if insufficient data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # Based on the description, we infer the necessary column names.\n        cohesive_col = 'cohesive_goals'\n        fragmentative_col = 'fragmentative_goals'\n\n        # Extract values from the data Series\n        cohesive_value = data[cohesive_col]\n        fragmentative_value = data[fragmentative_col]\n\n        # Check for missing data. If either value is null or NaN, return None.\n        if pd.isna(cohesive_value) or pd.isna(fragmentative_value):\n            return None\n\n        # Perform the calculation and ensure the result is a float\n        result = float(cohesive_value - fragmentative_value)\n\n        return result\n\n    except (KeyError, TypeError, ValueError):\n        # KeyError: A required column is missing.\n        # TypeError: Data in columns is not numeric.\n        # ValueError: Data cannot be converted to float.\n        return None\n    except Exception:\n        # Catch any other unexpected errors for production-readiness.\n        return None\n\ndef calculate_overall_cohesion_index(data, **kwargs):\n    \"\"\"\n    Calculate overall_cohesion_index: Comprehensive measure combining all dimensions.\n\n    This index provides a holistic score of a discourse's contribution to social cohesion\n    by averaging scores from key underlying dimensions.\n\n    Formula:\n        mean(social_solidarity_score, institutional_trust_score, civic_engagement_score, constructive_discourse_score)\n\n    Note: The specific dimension column names used in this formula are assumed based\n    on the Cohesive Flourishing Framework's description of its analytical goals\n    (measuring social solidarity, trust, civic engagement), as explicit column names\n    were not provided. These names should be verified and adjusted if necessary.\n\n    Args:\n        data (pd.Series or pd.DataFrame): A row (Series) or table (DataFrame)\n            containing the necessary dimension scores for calculation.\n        **kwargs: Additional parameters (not used).\n\n    Returns:\n        float or pd.Series or None:\n            - If data is a pd.Series, returns a single float score or None if\n              any required data is missing.\n            - If data is a pd.DataFrame, returns a pd.Series of scores, with None\n              for rows where data is missing.\n            - Returns None if essential columns are missing or an error occurs.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # These column names are inferred from the framework description.\n        # They represent the core dimensions that contribute to the overall index.\n        dimension_columns = [\n            'social_solidarity_score',\n            'institutional_trust_score',\n            'civic_engagement_score',\n            'constructive_discourse_score'\n        ]\n\n        # Check for presence of all required columns to avoid partial calculations.\n        # This check works for both Series (checking index) and DataFrame (checking columns).\n        required_set = set(dimension_columns)\n        available_set = set(data.index if isinstance(data, pd.Series) else data.columns)\n        if not required_set.issubset(available_set):\n            return None\n\n        relevant_data = data[dimension_columns]\n\n        # Handle a single row of data (pd.Series)\n        if isinstance(data, pd.Series):\n            # If any component score is null, the overall index is invalid.\n            if relevant_data.isnull().any():\n                return None\n            return relevant_data.mean()\n\n        # Handle multiple rows of data (pd.DataFrame)\n        elif isinstance(data, pd.DataFrame):\n            # Calculate the mean for each row.\n            # Using skipna=False ensures that if any value in a row is NaN,\n            # the resulting mean for that row will also be NaN.\n            result_series = relevant_data.mean(axis=1, skipna=False)\n            \n            # Replace NaN values with None as per the requirement for graceful handling.\n            return result_series.where(pd.notna(result_series), None)\n            \n        # Return None if the data is not a recognized pandas type\n        return None\n\n    except Exception:\n        # Catch any other errors during processing (e.g., non-numeric data)\n        # and return None for safety.\n        return None\n\ndef calculate_all_derived_metrics(data: pd.DataFrame) -> Dict[str, Optional[float]]:\n    \"\"\"\n    Calculate all derived metrics for the given dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        \n    Returns:\n        Dictionary mapping metric names to calculated values\n    \"\"\"\n    results = {}\n    \n    # Get all calculation functions from this module\n    import inspect\n    current_module = inspect.getmodule(inspect.currentframe())\n    \n    for name, obj in inspect.getmembers(current_module):\n        if (inspect.isfunction(obj) and \n            name.startswith('calculate_') and \n            name not in ['calculate_all_derived_metrics', 'calculate_derived_metrics']):\n            try:\n                results[name.replace('calculate_', '')] = obj(data)\n            except Exception as e:\n                results[name.replace('calculate_', '')] = None\n                \n    return results\n\n\ndef calculate_derived_metrics(data: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"\n    Template-compatible wrapper function for derived metrics calculation.\n    \n    This function is called by the universal notebook template and returns\n    the original data with additional derived metric columns.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        \n    Returns:\n        DataFrame with original data plus derived metric columns\n    \"\"\"\n    # Calculate all derived metrics\n    derived_metrics = calculate_all_derived_metrics(data)\n    \n    # Create a copy of the original data\n    result = data.copy()\n    \n    # Add derived metrics as new columns\n    for metric_name, metric_value in derived_metrics.items():\n        if metric_value is not None:\n            # For scalar metrics, broadcast to all rows\n            result[metric_name] = metric_value\n        else:\n            # For failed calculations, use NaN\n            result[metric_name] = np.nan\n    \n    return result\n",
+        "cached_with_code": true
+      },
+      "derived_metrics_data": {
+        "status": "success",
+        "original_count": 4,
+        "derived_count": 4,
+        "derived_metrics": [
+          {
+            "analysis_id": "analysis_09ac4d6eea63",
+            "result_hash": "f7170c27d3f5927aabd2c46ead1e3da806556fb9a624b7c257f2239360011005",
+            "result_content": {
+              "analysis_id": "analysis_09ac4d6eea63",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political concession speech, which provides a very clear and explicit rhetorical context. The speaker's primary goals are to acknowledge defeat gracefully, affirm the legitimacy of the outcome, and call for national unity. This makes the speech a strong example of dimensions like Amity, Compersion, and Cohesive Goals, while being almost entirely devoid of their counterparts (Enmity, Envy, Fragmentative Goals).\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"historical context\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgement of challenges without crisis framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"praise of opponent's hopeful message\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central theme\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opening statement\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit rejection of dimension\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call to action\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"central theme\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "b7b6b7e0e4a26a229c9a356651f3237cef785659c0506e01a909981d6c14f8b9",
+              "execution_metadata": {
+                "start_time": "2025-08-23T18:32:31.991985+00:00",
+                "end_time": "2025-08-23T18:33:08.124758+00:00",
+                "duration_seconds": 36.132761
+              },
+              "input_artifacts": {
+                "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+                "document_hashes": [
+                  "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_cff",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250823T183231Z_8e0e51ce"
+              }
+            },
+            "cached": true
+          },
+          {
+            "analysis_id": "analysis_983692c5ceb6",
+            "result_hash": "4b5e769a236cf55d7e370f3f032c6eda7df4e89e94b03a2440dc86c9e41a51ea",
+            "result_content": {
+              "analysis_id": "analysis_983692c5ceb6",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The speech contains two primary sections: one on constitutional interpretation regarding judicial appointments, and a second, more emotional section on crimes committed by undocumented immigrants. The rhetoric is consistently adversarial and focuses on threats, making dimensions like Fear, Enmity, and Tribal Dominance highly prominent. Conversely, dimensions related to cohesion, hope, and unity are almost entirely absent.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"hope\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"we here who take an oath to support and defend the Constitution... we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Defining an in-group ('we') based on a specific constitutional belief system against an out-group (the President and his potential nominees).\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Using a visceral, tragic story of a murder to evoke fear and portray immigration policy as an immediate, mortal threat.\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets. That's, that's the ones we know of.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Quantifying a mortal threat and directly blaming a political opponent's policy for the deaths of Americans.\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"the Chief Justice of the Supreme Court decided that he could write words into ObamaCare that didn't exist. They were not passed by this Congress, not by either chamber of this Congress... They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Expressing resentment towards the perceived illegitimate power of the Supreme Court to 'make it up' and act outside of its designated authority, a form of grievance rhetoric.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Framing a political action (a presidential appointment) with hostile and destructive language, positioning it as an act of destruction against the Constitution.\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Her life abruptly ended by a criminal alien who had been, and who had been encountered by a law enforcement before, whose immigration attorneys knew him... And he had been released. He'd been released onto the streets where he now had three times the blood alcohol content allowable by law, drag racing in the streets, killed Sarah Root.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Identifying a specific individual as a 'criminal alien' and an enemy responsible for the death of an American, positioning the relationship as adversarial and hostile.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Articulating a clear zero-sum objective: to completely block the political process for a presidential appointment, which is an inherently divisive goal.\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Stating goals of separation, imprisonment, and deportation for a specific group of people, emphasizing division and removal rather than integration.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "56e13afe1186a4d7dd566056a801f5346dd86be8ac079a12cfe50fe98bc8bd68",
+              "execution_metadata": {
+                "start_time": "2025-08-23T18:33:08.125415+00:00",
+                "end_time": "2025-08-23T18:33:49.787534+00:00",
+                "duration_seconds": 41.662107
+              },
+              "input_artifacts": {
+                "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+                "document_hashes": [
+                  "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_cff",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250823T183231Z_8e0e51ce"
+              }
+            },
+            "cached": true
+          },
+          {
+            "analysis_id": "analysis_16b53a7c29ca",
+            "result_hash": "3b5c6ede4d18ea2eae6c69887437d1b91f0e52340d028299d12f91e64dd79ebe",
+            "result_content": {
+              "analysis_id": "analysis_16b53a7c29ca",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic example of populist economic rhetoric, making the dimensions of Tribal Dominance, Envy, and Enmity particularly strong and salient. The text establishes a clear 'us vs. them' narrative, pitting 'the American people' against 'oligarchs' and 'billionaires'. Cohesive elements like Hope and Amity are present but serve as a call to action for the in-group, rather than a universal appeal.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit_outgroup_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"cross_partisan_appeal\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_articulation\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"aspirational_vision_statement\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_economic_claim\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"Now everybody wants to do well in life. Everybody wants to make money. But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rejection_of_outgroup_success\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... But they're not.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"adversarial_characterization\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in-group_solidarity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rejection_of_existing_structure\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"...we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"integrative_vision_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+              "evidence_hash": "1988e330d41ceafe6e653336f7fa5288fb7054bf25f3c8c2de82671fd9d90729",
+              "execution_metadata": {
+                "start_time": "2025-08-23T18:33:49.788228+00:00",
+                "end_time": "2025-08-23T18:34:39.055985+00:00",
+                "duration_seconds": 49.267747
+              },
+              "input_artifacts": {
+                "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+                "document_hashes": [
+                  "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_cff",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250823T183231Z_8e0e51ce"
+              }
+            },
+            "cached": true
+          },
+          {
+            "analysis_id": "analysis_55a47aad82e1",
+            "result_hash": "9f12cd9e395872bbf87b21774e11d09286fab8f82a45aade9d02c3f847b5dfbb",
+            "result_content": {
+              "analysis_id": "analysis_55a47aad82e1",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document is a political speech with clear, strong rhetorical themes that map well to the framework's dimensions. The analysis focuses on the explicit populist and class-based framing, which presents a strong 'us vs. them' narrative (working people vs. oligarchs). The speaker simultaneously employs rhetoric of high enmity towards the out-group and high amity towards the in-group, making this a complex text that benefits from independent dimensional scoring.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.85\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block... But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"in_group_definition\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"Our lives deserve dignity and our work deserves respect.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"...so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"threat_perception\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"collective_vision\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"grievance_rhetoric\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"No evidence found for this dimension. The speech's focus is on the illegitimate success of an oligarchy, not celebrating the success of others. Its absence is a significant feature of the text.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"unity_appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them...\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_objective\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"integrative_objective\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "0d034354f445f6e6c7621218415ed4844d318834ebbb97dfc1175250080a56f4",
+              "execution_metadata": {
+                "start_time": "2025-08-23T18:34:39.056613+00:00",
+                "end_time": "2025-08-23T18:35:30.408109+00:00",
+                "duration_seconds": 51.351487
+              },
+              "input_artifacts": {
+                "framework_hash": "38f9d352256be93465fc85e310d3a3c28ee79d88de6f2f6ba3470dbf94a70951",
+                "document_hashes": [
+                  "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_cff",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250823T183231Z_8e0e51ce"
+              }
+            },
+            "cached": true
+          }
+        ],
+        "columns_added": []
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  },
+  "statistical_results": {
+    "status": "completed",
+    "stats_hash": "63603c000acefe505308f7b9f2e3c9d029672991bc1553296f97af824f3add86",
+    "functions_generated": 3,
+    "statistical_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 3,
+        "output_file": "automatedstatisticalanalysisagent_functions.py",
+        "module_size": 18831,
+        "function_code_content": "\"\"\"\nAutomated Statistical Analysis Functions\n========================================\n\nGenerated by AutomatedStatisticalAnalysisAgent for experiment: simple_test\nDescription: Statistical analysis experiment\nGenerated: 2025-08-23T19:25:48.867355+00:00\n\nThis module contains automatically generated statistical analysis functions\nfor comprehensive data analysis including ANOVA, correlations, reliability,\nand hypothesis testing as appropriate for the research questions.\n\"\"\"\n\nimport pandas as pd\nimport numpy as np\nimport scipy.stats as stats\nfrom typing import Dict, Any, Optional, List, Tuple\nimport warnings\n\n# Suppress common statistical warnings for cleaner output\nwarnings.filterwarnings('ignore', category=RuntimeWarning)\n\n\ndef calculate_descriptive_statistics(data, **kwargs):\n    \"\"\"\n    Calculates descriptive statistics for all raw and salience scores from the CFF analysis.\n\n    This function provides a baseline understanding of the corpus by summarizing the central\n    tendency and dispersion of each primary dimension's intensity (raw score) and\n    rhetorical prominence (salience). It computes the mean, standard deviation, count,\n    minimum, and maximum for each relevant column.\n\n    Args:\n        data (pd.DataFrame): A DataFrame containing the CFF analysis data, with columns\n                             following the specified `_raw` and `_salience` naming convention.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        dict: A nested dictionary where each key is a dimension's raw or salience score\n              and the value is a dictionary of its descriptive statistics. Returns None\n              if the input data is invalid or empty.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    import json\n    import glob\n    from pathlib import Path\n\n    try:\n        if data is None or data.empty:\n            return None\n\n        results = {}\n        # Select only columns that represent raw scores or salience\n        score_columns = [col for col in data.columns if col.endswith('_raw') or col.endswith('_salience')]\n        \n        if not score_columns:\n            return {} # Return empty dict if no relevant columns found\n\n        numeric_df = data[score_columns].apply(pd.to_numeric, errors='coerce')\n\n        for col in numeric_df.columns:\n            if numeric_df[col].notna().sum() > 0:\n                results[col] = {\n                    'mean': float(numeric_df[col].mean()),\n                    'std': float(numeric_df[col].std()),\n                    'count': int(numeric_df[col].count()),\n                    'min': float(numeric_df[col].min()),\n                    '25%': float(numeric_df[col].quantile(0.25)),\n                    '50%': float(numeric_df[col].quantile(0.50)),\n                    '75%': float(numeric_df[col].quantile(0.75)),\n                    'max': float(numeric_df[col].max())\n                }\n        \n        return results\n\n    except Exception:\n        return None\n\ndef calculate_cff_derived_metrics(data, **kwargs):\n    \"\"\"\n    Calculates all derived metrics from the Cohesive Flourishing Framework v10.0.\n\n    This function implements the formulas for the framework's advanced metrics, including\n    Tension Indices, the Strategic Contradiction Index, and the three Salience-Weighted\n    Cohesion Indices. It processes the entire DataFrame to generate these metrics for each\n    document, providing a deeper layer of analysis beyond the raw scores.\n\n    Methodology:\n    - Tension Indices: Calculated using the formula `min(Score_A, Score_B) * |Salience_A - Salience_B|`\n      for each opposing pair, quantifying strategic rhetorical contradictions.\n    - Strategic Contradiction Index: The arithmetic mean of the five tension indices,\n      measuring overall message incoherence.\n    - Cohesion Indices: Salience-weighted scores normalized by the sum of relevant salience\n      values, ranging from -1.0 (fragmentative) to +1.0 (cohesive). An epsilon of 0.001\n      is added to the denominator to prevent division by zero.\n    - Note: The framework specifies 'compersion', but the provided data structure contains\n      'compassion'. This function uses the 'compassion' columns as a substitute to match\n      the actual data schema.\n\n    Args:\n        data (pd.DataFrame): A DataFrame with CFF raw and salience scores.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        pd.DataFrame: The original DataFrame with added columns for each derived metric.\n                      Returns None if required columns are missing or data is invalid.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    import json\n    import glob\n    from pathlib import Path\n\n    try:\n        if data is None or data.empty:\n            return None\n\n        df = data.copy()\n\n        required_cols = [\n            'tribal_dominance_raw', 'tribal_dominance_salience', 'individual_dignity_raw', 'individual_dignity_salience',\n            'fear_raw', 'fear_salience', 'hope_raw', 'hope_salience', 'envy_raw', 'envy_salience',\n            'compassion_raw', 'compassion_salience', 'enmity_raw', 'enmity_salience', 'amity_raw', 'amity_salience',\n            'fragmentative_goals_raw', 'fragmentative_goals_salience', 'cohesive_goals_raw', 'cohesive_goals_salience'\n        ]\n\n        if not all(col in df.columns for col in required_cols):\n            # Log or handle missing columns appropriately\n            return None\n        \n        # Convert relevant columns to numeric, coercing errors\n        for col in required_cols:\n            df[col] = pd.to_numeric(df[col], errors='coerce')\n\n        # --- 1. Tension Indices ---\n        df['identity_tension'] = np.minimum(df['tribal_dominance_raw'], df['individual_dignity_raw']) * \\\n                                 abs(df['tribal_dominance_salience'] - df['individual_dignity_salience'])\n        df['emotional_tension'] = np.minimum(df['fear_raw'], df['hope_raw']) * \\\n                                  abs(df['fear_salience'] - df['hope_salience'])\n        # NOTE: Using 'compassion' columns as a substitute for the framework's 'compersion'\n        df['success_tension'] = np.minimum(df['envy_raw'], df['compassion_raw']) * \\\n                                abs(df['envy_salience'] - df['compassion_salience'])\n        df['relational_tension'] = np.minimum(df['enmity_raw'], df['amity_raw']) * \\\n                                   abs(df['enmity_salience'] - df['amity_salience'])\n        df['goal_tension'] = np.minimum(df['fragmentative_goals_raw'], df['cohesive_goals_raw']) * \\\n                             abs(df['fragmentative_goals_salience'] - df['cohesive_goals_salience'])\n\n        # --- 2. Strategic Contradiction Index ---\n        tension_cols = ['identity_tension', 'emotional_tension', 'success_tension', 'relational_tension', 'goal_tension']\n        df['strategic_contradiction_index'] = df[tension_cols].mean(axis=1)\n\n        # --- 3. Salience-Weighted Cohesion Indices ---\n        # Intermediate cohesion components\n        identity_comp = (df['individual_dignity_raw'] * df['individual_dignity_salience'] - df['tribal_dominance_raw'] * df['tribal_dominance_salience'])\n        emotional_comp = (df['hope_raw'] * df['hope_salience'] - df['fear_raw'] * df['fear_salience'])\n        success_comp = (df['compassion_raw'] * df['compassion_salience'] - df['envy_raw'] * df['envy_salience'])\n        relational_comp = (df['amity_raw'] * df['amity_salience'] - df['enmity_raw'] * df['enmity_salience'])\n        goal_comp = (df['cohesive_goals_raw'] * df['cohesive_goals_salience'] - df['fragmentative_goals_raw'] * df['fragmentative_goals_salience'])\n\n        # Salience totals for normalization\n        descriptive_salience_total = (df['hope_salience'] + df['fear_salience'] + df['compassion_salience'] + df['envy_salience'] + df['amity_salience'] + df['enmity_salience'])\n        motivational_salience_total = descriptive_salience_total + df['cohesive_goals_salience'] + df['fragmentative_goals_salience']\n        full_salience_total = motivational_salience_total + df['individual_dignity_salience'] + df['tribal_dominance_salience']\n        \n        epsilon = 0.001\n\n        # Final Cohesion Indices\n        df['descriptive_cohesion_index'] = (emotional_comp + success_comp + relational_comp) / (descriptive_salience_total + epsilon)\n        df['motivational_cohesion_index'] = (emotional_comp + success_comp + relational_comp + goal_comp) / (motivational_salience_total + epsilon)\n        df['full_cohesion_index'] = (identity_comp + emotional_comp + success_comp + relational_comp + goal_comp) / (full_salience_total + epsilon)\n\n        # Clip values to be strictly within [-1.0, 1.0] range to handle potential floating point inaccuracies\n        cohesion_indices = ['descriptive_cohesion_index', 'motivational_cohesion_index', 'full_cohesion_index']\n        for col in cohesion_indices:\n            df[col] = df[col].clip(-1.0, 1.0)\n\n        return df\n\n    except Exception:\n        return None\n\ndef summarize_derived_metrics(data, **kwargs):\n    \"\"\"\n    Calculates and summarizes the CFF derived metrics for the entire corpus.\n\n    This function first computes the derived metrics (tensions and cohesion indices) for\n    each document and then calculates descriptive statistics (mean, std, quartiles, etc.)\n    for these newly computed metrics. This provides a high-level overview of the corpus's\n    overall rhetorical patterns, answering questions about average cohesion, tension, and\n    strategic contradiction across all documents.\n\n    Args:\n        data (pd.DataFrame): A DataFrame with CFF raw and salience scores.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        dict: A nested dictionary of descriptive statistics for each derived metric.\n              Returns None if the input data is invalid or cannot be processed.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    import json\n    import glob\n    from pathlib import Path\n\n    try:\n        # This function relies on the calculate_cff_derived_metrics logic.\n        # To maintain modularity, we define the calculation logic here again.\n        # In a real library, this would be a shared helper function.\n        \n        if data is None or data.empty:\n            return None\n\n        df = data.copy()\n\n        required_cols = [\n            'tribal_dominance_raw', 'tribal_dominance_salience', 'individual_dignity_raw', 'individual_dignity_salience',\n            'fear_raw', 'fear_salience', 'hope_raw', 'hope_salience', 'envy_raw', 'envy_salience',\n            'compassion_raw', 'compassion_salience', 'enmity_raw', 'enmity_salience', 'amity_raw', 'amity_salience',\n            'fragmentative_goals_raw', 'fragmentative_goals_salience', 'cohesive_goals_raw', 'cohesive_goals_salience'\n        ]\n\n        if not all(col in df.columns for col in required_cols):\n            return None\n        \n        for col in required_cols:\n            df[col] = pd.to_numeric(df[col], errors='coerce')\n\n        df['identity_tension'] = np.minimum(df['tribal_dominance_raw'], df['individual_dignity_raw']) * abs(df['tribal_dominance_salience'] - df['individual_dignity_salience'])\n        df['emotional_tension'] = np.minimum(df['fear_raw'], df['hope_raw']) * abs(df['fear_salience'] - df['hope_salience'])\n        df['success_tension'] = np.minimum(df['envy_raw'], df['compassion_raw']) * abs(df['envy_salience'] - df['compassion_salience'])\n        df['relational_tension'] = np.minimum(df['enmity_raw'], df['amity_raw']) * abs(df['enmity_salience'] - df['amity_salience'])\n        df['goal_tension'] = np.minimum(df['fragmentative_goals_raw'], df['cohesive_goals_raw']) * abs(df['fragmentative_goals_salience'] - df['cohesive_goals_salience'])\n        \n        tension_cols = ['identity_tension', 'emotional_tension', 'success_tension', 'relational_tension', 'goal_tension']\n        df['strategic_contradiction_index'] = df[tension_cols].mean(axis=1)\n\n        identity_comp = (df['individual_dignity_raw'] * df['individual_dignity_salience'] - df['tribal_dominance_raw'] * df['tribal_dominance_salience'])\n        emotional_comp = (df['hope_raw'] * df['hope_salience'] - df['fear_raw'] * df['fear_salience'])\n        success_comp = (df['compassion_raw'] * df['compassion_salience'] - df['envy_raw'] * df['envy_salience'])\n        relational_comp = (df['amity_raw'] * df['amity_salience'] - df['enmity_raw'] * df['enmity_salience'])\n        goal_comp = (df['cohesive_goals_raw'] * df['cohesive_goals_salience'] - df['fragmentative_goals_raw'] * df['fragmentative_goals_salience'])\n\n        descriptive_salience_total = (df['hope_salience'] + df['fear_salience'] + df['compassion_salience'] + df['envy_salience'] + df['amity_salience'] + df['enmity_salience'])\n        motivational_salience_total = descriptive_salience_total + df['cohesive_goals_salience'] + df['fragmentative_goals_salience']\n        full_salience_total = motivational_salience_total + df['individual_dignity_salience'] + df['tribal_dominance_salience']\n        \n        epsilon = 0.001\n        df['descriptive_cohesion_index'] = ((emotional_comp + success_comp + relational_comp) / (descriptive_salience_total + epsilon)).clip(-1.0, 1.0)\n        df['motivational_cohesion_index'] = ((emotional_comp + success_comp + relational_comp + goal_comp) / (motivational_salience_total + epsilon)).clip(-1.0, 1.0)\n        df['full_cohesion_index'] = ((identity_comp + emotional_comp + success_comp + relational_comp + goal_comp) / (full_salience_total + epsilon)).clip(-1.0, 1.0)\n\n        derived_metric_cols = tension_cols + ['strategic_contradiction_index', 'descriptive_cohesion_index', 'motivational_cohesion_index', 'full_cohesion_index']\n        \n        summary = {}\n        for col in derived_metric_cols:\n            if df[col].notna().sum() > 0:\n                summary[col] = {\n                    'mean': float(df[col].mean()),\n                    'std': float(df[col].std()),\n                    'count': int(df[col].count()),\n                    'min': float(df[col].min()),\n                    '25%': float(df[col].quantile(0.25)),\n                    '50%': float(df[col].quantile(0.50)),\n                    '75%': float(df[col].quantile(0.75)),\n                    'max': float(df[col].max())\n                }\n        return summary\n\n    except Exception:\n        return None\n\ndef run_complete_statistical_analysis(data: pd.DataFrame, alpha: float = 0.05) -> Dict[str, Any]:\n    \"\"\"\n    Run complete statistical analysis suite on the dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        alpha: Significance level for hypothesis tests (default: 0.05)\n        \n    Returns:\n        Dictionary with all statistical analysis results\n    \"\"\"\n    results = {\n        'analysis_metadata': {\n            'timestamp': pd.Timestamp.now().isoformat(),\n            'sample_size': len(data),\n            'alpha_level': alpha,\n            'variables_analyzed': list(data.select_dtypes(include=[np.number]).columns)\n        }\n    }\n    \n    # Get all analysis functions from this module\n    import inspect\n    current_module = inspect.getmodule(inspect.currentframe())\n    \n    for name, obj in inspect.getmembers(current_module):\n        if (inspect.isfunction(obj) and \n            name.startswith(('calculate_', 'perform_', 'test_')) and \n            name != 'run_complete_statistical_analysis'):\n            try:\n                # Pass alpha parameter to functions that might need it\n                if 'alpha' in inspect.signature(obj).parameters:\n                    results[name] = obj(data, alpha=alpha)\n                else:\n                    results[name] = obj(data)\n            except Exception as e:\n                results[name] = {'error': f'Analysis failed: {str(e)}'}\n                \n    return results\n\n\ndef perform_statistical_analysis(data: pd.DataFrame) -> Dict[str, Any]:\n    \"\"\"\n    Template-compatible wrapper function for statistical analysis.\n    \n    This function is called by the universal notebook template and performs\n    comprehensive statistical analysis on the provided dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores and derived metrics\n        \n    Returns:\n        Dictionary containing all statistical analysis results\n    \"\"\"\n    return run_complete_statistical_analysis(data)\n\n\ndef generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str:\n    \"\"\"\n    Generate a human-readable summary report from statistical analysis results.\n    \n    Args:\n        analysis_results: Results from run_complete_statistical_analysis()\n        \n    Returns:\n        String containing formatted statistical report\n    \"\"\"\n    report_lines = []\n    report_lines.append(\"STATISTICAL ANALYSIS SUMMARY REPORT\")\n    report_lines.append(\"=\" * 50)\n    \n    metadata = analysis_results.get('analysis_metadata', {})\n    report_lines.append(f\"Analysis Timestamp: {metadata.get('timestamp', 'Unknown')}\")\n    report_lines.append(f\"Sample Size: {metadata.get('sample_size', 'Unknown')}\")\n    report_lines.append(f\"Alpha Level: {metadata.get('alpha_level', 'Unknown')}\")\n    report_lines.append(f\"Variables: {len(metadata.get('variables_analyzed', []))}\")\n    report_lines.append(\"\")\n    \n    # Summarize key findings\n    for analysis_name, result in analysis_results.items():\n        if analysis_name != 'analysis_metadata' and isinstance(result, dict):\n            if 'error' not in result:\n                report_lines.append(f\"{analysis_name.replace('_', ' ').title()}:\")\n                \n                # Extract key statistics based on analysis type\n                if 'p_value' in result:\n                    p_val = result['p_value']\n                    significance = \"significant\" if p_val < metadata.get('alpha_level', 0.05) else \"not significant\"\n                    report_lines.append(f\"  - p-value: {p_val:.4f} ({significance})\")\n                \n                if 'effect_size' in result:\n                    report_lines.append(f\"  - Effect size: {result['effect_size']:.4f}\")\n                \n                if 'correlation_matrix' in result:\n                    report_lines.append(f\"  - Correlation matrix generated with {len(result['correlation_matrix'])} variables\")\n                \n                if 'cronbach_alpha' in result:\n                    alpha_val = result['cronbach_alpha']\n                    reliability = \"excellent\" if alpha_val > 0.9 else \"good\" if alpha_val > 0.8 else \"acceptable\" if alpha_val > 0.7 else \"questionable\"\n                    report_lines.append(f\"  - Cronbach's \u03b1: {alpha_val:.3f} ({reliability})\")\n                \n                report_lines.append(\"\")\n            else:\n                report_lines.append(f\"{analysis_name}: ERROR - {result['error']}\")\n                report_lines.append(\"\")\n    \n    return \"\\n\".join(report_lines)\n",
+        "cached_with_code": true
+      },
+      "statistical_data": {
+        "calculate_cff_derived_metrics": null,
+        "calculate_descriptive_statistics": {
+          "tribal_dominance_raw": {
+            "mean": 0.575,
+            "std": 0.38622100754188227,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.5249999999999999,
+            "50%": 0.75,
+            "75%": 0.8,
+            "max": 0.8
+          },
+          "tribal_dominance_salience": {
+            "mean": 0.675,
+            "std": 0.38622100754188227,
+            "count": 4,
+            "min": 0.1,
+            "25%": 0.625,
+            "50%": 0.8500000000000001,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "individual_dignity_raw": {
+            "mean": 0.45,
+            "std": 0.4654746681256314,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.07500000000000001,
+            "50%": 0.45,
+            "75%": 0.8250000000000001,
+            "max": 0.9
+          },
+          "individual_dignity_salience": {
+            "mean": 0.45,
+            "std": 0.4654746681256314,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.07500000000000001,
+            "50%": 0.45,
+            "75%": 0.8250000000000001,
+            "max": 0.9
+          },
+          "fear_raw": {
+            "mean": 0.625,
+            "std": 0.35939764421413045,
+            "count": 4,
+            "min": 0.1,
+            "25%": 0.5499999999999999,
+            "50%": 0.75,
+            "75%": 0.8250000000000001,
+            "max": 0.9
+          },
+          "fear_salience": {
+            "mean": 0.6875,
+            "std": 0.32755406678389243,
+            "count": 4,
+            "min": 0.2,
+            "25%": 0.65,
+            "50%": 0.825,
+            "75%": 0.8625,
+            "max": 0.9
+          },
+          "hope_raw": {
+            "mean": 0.425,
+            "std": 0.29860788111948194,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.5,
+            "75%": 0.55,
+            "max": 0.7
+          },
+          "hope_salience": {
+            "mean": 0.475,
+            "std": 0.3403429642777023,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.55,
+            "75%": 0.65,
+            "max": 0.8
+          },
+          "envy_raw": {
+            "mean": 0.575,
+            "std": 0.42720018726587655,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.7,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "envy_salience": {
+            "mean": 0.55,
+            "std": 0.4358898943540674,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.30000000000000004,
+            "50%": 0.65,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "compersion_raw": {
+            "mean": 0.225,
+            "std": 0.45000000000000007,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.225,
+            "max": 0.9
+          },
+          "compersion_salience": {
+            "mean": 0.225,
+            "std": 0.45000000000000007,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.225,
+            "max": 0.9
+          },
+          "enmity_raw": {
+            "mean": 0.65,
+            "std": 0.4358898943540674,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.6000000000000001,
+            "50%": 0.8500000000000001,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "enmity_salience": {
+            "mean": 0.6875,
+            "std": 0.39660013447635983,
+            "count": 4,
+            "min": 0.1,
+            "25%": 0.625,
+            "50%": 0.8500000000000001,
+            "75%": 0.9125,
+            "max": 0.95
+          },
+          "amity_raw": {
+            "mean": 0.55,
+            "std": 0.40414518843273806,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.65,
+            "75%": 0.8250000000000001,
+            "max": 0.9
+          },
+          "amity_salience": {
+            "mean": 0.5625,
+            "std": 0.41907636535600523,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.65,
+            "75%": 0.8375,
+            "max": 0.95
+          },
+          "fragmentative_goals_raw": {
+            "mean": 0.5875,
+            "std": 0.39237524556645176,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.5625,
+            "50%": 0.775,
+            "75%": 0.8,
+            "max": 0.8
+          },
+          "fragmentative_goals_salience": {
+            "mean": 0.55,
+            "std": 0.3696845502136472,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.5249999999999999,
+            "50%": 0.7,
+            "75%": 0.725,
+            "max": 0.8
+          },
+          "cohesive_goals_raw": {
+            "mean": 0.5625,
+            "std": 0.41508031351374236,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.375,
+            "50%": 0.675,
+            "75%": 0.8625,
+            "max": 0.9
+          },
+          "cohesive_goals_salience": {
+            "mean": 0.5625,
+            "std": 0.4534589286804263,
+            "count": 4,
+            "min": 0.0,
+            "25%": 0.30000000000000004,
+            "50%": 0.625,
+            "75%": 0.8875,
+            "max": 1.0
+          }
+        },
+        "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+        "perform_statistical_analysis": {
+          "analysis_metadata": {
+            "timestamp": "2025-08-23T20:58:03.607784",
+            "sample_size": 4,
+            "alpha_level": 0.05,
+            "variables_analyzed": [
+              "tribal_dominance_raw",
+              "tribal_dominance_salience",
+              "tribal_dominance_confidence",
+              "individual_dignity_raw",
+              "individual_dignity_salience",
+              "individual_dignity_confidence",
+              "fear_raw",
+              "fear_salience",
+              "fear_confidence",
+              "hope_raw",
+              "hope_salience",
+              "hope_confidence",
+              "envy_raw",
+              "envy_salience",
+              "envy_confidence",
+              "compersion_raw",
+              "compersion_salience",
+              "compersion_confidence",
+              "enmity_raw",
+              "enmity_salience",
+              "enmity_confidence",
+              "amity_raw",
+              "amity_salience",
+              "amity_confidence",
+              "fragmentative_goals_raw",
+              "fragmentative_goals_salience",
+              "fragmentative_goals_confidence",
+              "cohesive_goals_raw",
+              "cohesive_goals_salience",
+              "cohesive_goals_confidence"
+            ]
+          }
+        },
+        "run_complete_statistical_analysis": {
+          "analysis_metadata": {
+            "timestamp": "2025-08-23T20:58:03.610404",
+            "sample_size": 4,
+            "alpha_level": 0.05,
+            "variables_analyzed": [
+              "tribal_dominance_raw",
+              "tribal_dominance_salience",
+              "tribal_dominance_confidence",
+              "individual_dignity_raw",
+              "individual_dignity_salience",
+              "individual_dignity_confidence",
+              "fear_raw",
+              "fear_salience",
+              "fear_confidence",
+              "hope_raw",
+              "hope_salience",
+              "hope_confidence",
+              "envy_raw",
+              "envy_salience",
+              "envy_confidence",
+              "compersion_raw",
+              "compersion_salience",
+              "compersion_confidence",
+              "enmity_raw",
+              "enmity_salience",
+              "enmity_confidence",
+              "amity_raw",
+              "amity_salience",
+              "amity_confidence",
+              "fragmentative_goals_raw",
+              "fragmentative_goals_salience",
+              "fragmentative_goals_confidence",
+              "cohesive_goals_raw",
+              "cohesive_goals_salience",
+              "cohesive_goals_confidence"
+            ]
+          }
+        },
+        "summarize_derived_metrics": null
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  }
+}

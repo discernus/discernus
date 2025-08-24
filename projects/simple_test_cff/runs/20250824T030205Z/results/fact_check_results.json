@@ -1,0 +1,88 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The framework specification file ('cff_v10.md'), which is referenced in the experiment configuration (SOURCE 3) and is necessary to define the official 'dimensions' list, was not provided in the source materials. Therefore, it is impossible to cross-reference the capitalized dimension names mentioned in the report against the framework specification to verify against dimension hallucination.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided 'SOURCE MATERIALS FOR VALIDATION' do not contain the analytical findings, statistical results, or specific data points quoted in the report. The sources primarily consist of metadata about the experiment, corpus, and framework, or partial copies of the report's introductory sections. Therefore, none of the randomly selected quotes could be validated against the provided 'evidence database'. This indicates a complete absence of the underlying evidence in the provided validation materials.",
+      "examples": [
+        "The corpus-wide mean for the `full_cohesion_index`, the CFF's primary metric, is negative (M = -0.149)",
+        "This fragmentative tendency is driven by strong and consistent appeals to **Fear** (M = 0.65), **Enmity** (M = 0.65), and **Tribal Dominance** (M = 0.58).",
+        "particularly the near-perfect correlation between **Fear** and **Tribal Dominance** (r = 0.992).",
+        "The consistent, strong negative correlations between opposing constructs (e.g., **Tribal Dominance** vs. **Individual Dignity**, r = -0.670; **Fear** vs. **Hope**, r = -0.559) confirm the framework's construct validity.",
+        "The mean score for **Compersion** (0.23) is the lowest of all cohesive dimensions, and its rhetorical opposite, **Envy** (0.55), is more than twice as prevalent."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative and promotional claims regarding the Cohesive Flourishing Framework (CFF) and the findings from the small corpus. These claims use strong, definitive language that may require editorial review to ensure an appropriate academic tone, especially given the stated limitation of a small sample size (N=4).",
+      "examples": [
+        "Methodologically, the analysis provides strong validation for the CFF's design.",
+        "The consistent, strong negative correlations... confirm the framework's construct validity.",
+        "The CFF's derived metrics... successfully quantified... demonstrating the framework's capacity to move beyond simple sentiment analysis to reveal sophisticated meta-strategies in political communication.",
+        "Fragmentative Rhetoric Dominates the Corpus:",
+        "A powerful cluster of fragmentative dimensions operates in near-perfect unison.",
+        "The Absence of Compersion is a Defining Feature of Fragmentation:",
+        "Furthermore, the `success_tension` index is zero across the entire corpus, indicating a complete lack of rhetorical complexity on this axis.",
+        "Fragmentative speakers in this corpus do not mix appeals to envy with celebrations of legitimate success; they rely solely on narratives of illegitimate gain."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The framework specification file ('cff_v10.md'), which is referenced in the experiment configuration (SOURCE 3) and is necessary to define the official 'dimensions' list, was not provided in the source materials. Therefore, it is impossible to cross-reference the capitalized dimension names mentioned in the report against the framework specification to verify against dimension hallucination.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided 'SOURCE MATERIALS FOR VALIDATION' do not contain the analytical findings, statistical results, or specific data points quoted in the report. The sources primarily consist of metadata about the experiment, corpus, and framework, or partial copies of the report's introductory sections. Therefore, none of the randomly selected quotes could be validated against the provided 'evidence database'. This indicates a complete absence of the underlying evidence in the provided validation materials.",
+        "examples": [
+          "The corpus-wide mean for the `full_cohesion_index`, the CFF's primary metric, is negative (M = -0.149)",
+          "This fragmentative tendency is driven by strong and consistent appeals to **Fear** (M = 0.65), **Enmity** (M = 0.65), and **Tribal Dominance** (M = 0.58).",
+          "particularly the near-perfect correlation between **Fear** and **Tribal Dominance** (r = 0.992).",
+          "The consistent, strong negative correlations between opposing constructs (e.g., **Tribal Dominance** vs. **Individual Dignity**, r = -0.670; **Fear** vs. **Hope**, r = -0.559) confirm the framework's construct validity.",
+          "The mean score for **Compersion** (0.23) is the lowest of all cohesive dimensions, and its rhetorical opposite, **Envy** (0.55), is more than twice as prevalent."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative and promotional claims regarding the Cohesive Flourishing Framework (CFF) and the findings from the small corpus. These claims use strong, definitive language that may require editorial review to ensure an appropriate academic tone, especially given the stated limitation of a small sample size (N=4).",
+        "examples": [
+          "Methodologically, the analysis provides strong validation for the CFF's design.",
+          "The consistent, strong negative correlations... confirm the framework's construct validity.",
+          "The CFF's derived metrics... successfully quantified... demonstrating the framework's capacity to move beyond simple sentiment analysis to reveal sophisticated meta-strategies in political communication.",
+          "Fragmentative Rhetoric Dominates the Corpus:",
+          "A powerful cluster of fragmentative dimensions operates in near-perfect unison.",
+          "The Absence of Compersion is a Defining Feature of Fragmentation:",
+          "Furthermore, the `success_tension` index is zero across the entire corpus, indicating a complete lack of rhetorical complexity on this axis.",
+          "Fragmentative speakers in this corpus do not mix appeals to envy with celebrations of legitimate success; they rely solely on narratives of illegitimate gain."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 4,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

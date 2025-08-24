@@ -95,7 +95,7 @@ class DerivedMetricsCacheManager:
                     continue
                 
                 # Cache hit!
-                print(f"💾 Cache hit for derived metrics: {cache_key}")
+                pass  # Reduced verbosity - derived metrics cache hit
                 
                 try:
                     cached_content = self.storage.get_artifact(artifact_hash)
@@ -119,7 +119,7 @@ class DerivedMetricsCacheManager:
                     continue
         
         # No cache hit
-        print(f"🔍 No cache hit for derived metrics: {cache_key} - will generate functions...")
+        pass  # Reduced verbosity - no derived metrics cache hit
         return DerivedMetricsCacheResult(hit=False)
     
     def store_functions(self, cache_key: str, functions_result: Dict[str, Any], 

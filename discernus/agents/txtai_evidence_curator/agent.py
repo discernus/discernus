@@ -241,24 +241,29 @@ class TxtaiEvidenceCurator:
         self.logger.debug(f"Task '{task_name}' (type: {task_type}) defaulting to evidence linking")
         return True
 
-    def _build_evidence_index(self, evidence_data: bytes) -> bool:
+    def _build_evidence_index(self, evidence_data: List[Dict[str, Any]]) -> bool:
         """
-        Build txtai index from evidence data.
+        Build the txtai evidence index from a list of evidence dictionaries.
         
         Args:
-            evidence_data: JSON evidence data from analysis
+            evidence_data: A list of evidence dictionaries extracted by the analysis agent.
             
         Returns:
-            True if indexing succeeded, False otherwise
+            True if the index was built successfully, False otherwise.
         """
-        if self.audit_logger:
-            self.audit_logger.log_agent_event(self.agent_name, "indexing_start", {"evidence_count": len(json.loads(evidence_data.decode('utf-8')).get('evidence_data', []))})
         try:
-            # Parse evidence data
-            evidence_json = json.loads(evidence_data.decode('utf-8'))
-            evidence_list = evidence_json.get('evidence_data', [])
+            # DEBUGGING: Log incoming evidence data structure
+            self.logger.info(f"--- Evidence Curator: Building index from {len(evidence_data)} items ---")
             
-            if not evidence_list:
+            # Tally evidence per source document
+            evidence_tally = {}
+            for evidence_item in evidence_data:
+                doc_name = evidence_item.get("document_name", "Unknown")
+                evidence_tally[doc_name] = evidence_tally.get(doc_name, 0) + 1
+            
+            self.logger.info(f"Evidence distribution: {json.dumps(evidence_tally, indent=2)}")
+            
+            if not evidence_data:
                 self.logger.warning("No evidence data found for indexing")
                 return False
             
@@ -267,7 +272,7 @@ class TxtaiEvidenceCurator:
             
             # Prepare documents for indexing
             documents = []
-            for i, evidence in enumerate(evidence_list):
+            for i, evidence in enumerate(evidence_data):
                 # Create searchable text combining metadata and content
                 search_text = f"{evidence.get('document_name', '')} {evidence.get('dimension', '')} evidence: {evidence.get('quote_text', '')}"
                 

@@ -110,7 +110,7 @@ class StatisticalAnalysisCacheManager:
                     continue
                 
                 # Cache hit!
-                print(f"💾 Cache hit for statistical analysis: {cache_key}")
+                pass  # Reduced verbosity - statistical analysis cache hit
                 
                 try:
                     cached_content = self.storage.get_artifact(artifact_hash)
@@ -134,7 +134,7 @@ class StatisticalAnalysisCacheManager:
                     continue
         
         # No cache hit
-        print(f"🔍 No cache hit for statistical analysis: {cache_key} - will generate functions...")
+        pass  # Reduced verbosity - no statistical analysis cache hit
         return StatisticalAnalysisCacheResult(hit=False)
     
     def store_functions(self, cache_key: str, functions_result: Dict[str, Any], 

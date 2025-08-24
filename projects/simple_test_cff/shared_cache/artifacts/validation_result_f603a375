@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The experiment specification uses YAML frontmatter. The current Experiment Specification v10.0 standard has deprecated frontmatter and requires all machine-readable configuration to be placed in a single YAML appendix at the end of the markdown file.",
+    "The research questions are inconsistent between the experiment's prose and its configuration metadata. The prose asks a descriptive question ('What are the baseline cohesion and tension scores...?'), while the (now deprecated) frontmatter asks a comparative, hypothesis-driven question ('Will McCain's institutional discourse show higher cohesion than populist styles?').",
+    "The framework specification has a version mismatch between its human-readable prose and its machine-readable appendix. The prose title identifies the framework as 'v10.1', while the YAML appendix specifies `framework_version: '10.0'`.",
+    "The corpus contains a very small sample size (N=4), which is insufficient for the quantitative statistical comparisons implied by one of the research questions ('...higher cohesion than...')."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-24T03:40:19.022885+00:00"
+}

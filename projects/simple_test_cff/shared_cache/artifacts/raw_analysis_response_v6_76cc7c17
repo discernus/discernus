@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech with two distinct but thematically linked sections. The first section frames a procedural political dispute (a Supreme Court nomination) in existential terms of constitutional survival. The second, more dominant section pivots to immigration, using highly graphic and emotional victim narratives to evoke fear and anger, framing immigrants as a hostile out-group and the current administration as an adversary enabling them. The rhetorical strategy is clear and maps well to the framework's dimensions, particularly those related to fear, enmity, and tribalism. Cohesive dimensions are almost entirely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+          "confidence": 0.95,
+          "context_type": "Policy Critique"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+          "confidence": 0.98,
+          "context_type": "Victim Narrative"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And this Congress ought to speak up and we need a president that will appoint justices to the Supreme Court that will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+          "confidence": 0.9,
+          "context_type": "Call to Action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "confidence": 0.95,
+          "context_type": "Constitutional Argument"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "confidence": 0.95,
+          "context_type": "Call to Action"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "confidence": 0.85,
+          "context_type": "Constitutional Argument"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

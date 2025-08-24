@@ -1,0 +1,60 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+      "details": "A mismatch was found between the reported Full Cohesion Index for Alexandria Ocasio-Cortez's speech and the value in the `statistical_results.json` file.",
+      "examples": [
+        "Reported: Alexandria Ocasio-Cortez's Full Cohesion Index: -0.36",
+        "Statistical Results (Source 1/4): alexandria_ocasio_cortez_2025_fighting_oligarchy.txt -> full_cohesion_index: -0.3428027297254404 (rounds to -0.34)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several instances of superlative or overly definitive claims that may require editorial review for academic tone, especially given the stated small sample size (N=4) and pilot study nature. These claims use strong, promotional, or generalizing language that might overstate the certainty or universality of the findings.",
+      "examples": [
+        "\"perfect negative correlation (r = -1.00)\" (Section 2, 'Framework Construct Validity is Strongly Supported'): While a statistical result, the term 'perfect' is a superlative. Given the N=4 sample size, such a correlation is highly susceptible to being a statistical artifact rather than a robust validation, making the claim of 'validation' based on it potentially grandiose.",
+        "\"Populist Rhetoric is Defined by Strategic Contradiction\" (Section 2, 'Populist Rhetoric is Defined by Strategic Contradiction'): The phrase 'Defined by' is an overly strong and generalizing statement about 'Populist Rhetoric' as a whole, based on the analysis of only two speeches. This implies a universal characteristic that is not substantiated by the limited scope of the study.",
+        "\"Envy is a Key Driver of Rhetorical Tension\" (Section 2, 'Envy is a Key Driver of Rhetorical Tension'): The term 'Key Driver' implies a causal relationship and a superlative level of importance. While a high correlation (r = +0.98) is reported, correlation does not imply causation, and making such a definitive causal claim from a correlational finding in a small sample is an overstatement.",
+        "\"exceptionally strong positive correlation\" (Section 2, 'Envy is a Key Driver of Rhetorical Tension'): The phrase 'exceptionally strong' is a superlative used to describe a correlation. While the numerical value (r = +0.98) is indeed high, the phrasing is promotional and could be toned down for a more neutral academic presentation."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+        "details": "A mismatch was found between the reported Full Cohesion Index for Alexandria Ocasio-Cortez's speech and the value in the `statistical_results.json` file.",
+        "examples": [
+          "Reported: Alexandria Ocasio-Cortez's Full Cohesion Index: -0.36",
+          "Statistical Results (Source 1/4): alexandria_ocasio_cortez_2025_fighting_oligarchy.txt -> full_cohesion_index: -0.3428027297254404 (rounds to -0.34)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several instances of superlative or overly definitive claims that may require editorial review for academic tone, especially given the stated small sample size (N=4) and pilot study nature. These claims use strong, promotional, or generalizing language that might overstate the certainty or universality of the findings.",
+        "examples": [
+          "\"perfect negative correlation (r = -1.00)\" (Section 2, 'Framework Construct Validity is Strongly Supported'): While a statistical result, the term 'perfect' is a superlative. Given the N=4 sample size, such a correlation is highly susceptible to being a statistical artifact rather than a robust validation, making the claim of 'validation' based on it potentially grandiose.",
+          "\"Populist Rhetoric is Defined by Strategic Contradiction\" (Section 2, 'Populist Rhetoric is Defined by Strategic Contradiction'): The phrase 'Defined by' is an overly strong and generalizing statement about 'Populist Rhetoric' as a whole, based on the analysis of only two speeches. This implies a universal characteristic that is not substantiated by the limited scope of the study.",
+          "\"Envy is a Key Driver of Rhetorical Tension\" (Section 2, 'Envy is a Key Driver of Rhetorical Tension'): The term 'Key Driver' implies a causal relationship and a superlative level of importance. While a high correlation (r = +0.98) is reported, correlation does not imply causation, and making such a definitive causal claim from a correlational finding in a small sample is an overstatement.",
+          "\"exceptionally strong positive correlation\" (Section 2, 'Envy is a Key Driver of Rhetorical Tension'): The phrase 'exceptionally strong' is a superlative used to describe a correlation. While the numerical value (r = +0.98) is indeed high, the phrasing is promotional and could be toned down for a more neutral academic presentation."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 4,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

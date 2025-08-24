@@ -1,0 +1,58 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "ERROR",
+      "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+      "details": null
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "ERROR",
+      "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+      "details": null
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "ERROR",
+      "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+      "details": null
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "ERROR",
+      "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+      "details": null
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "ERROR",
+        "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+        "details": null
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "ERROR",
+        "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+        "details": null
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "ERROR",
+        "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+        "details": null
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "ERROR",
+        "description": "Check execution failed: 'LLMGateway' object has no attribute 'chat_completion'",
+        "details": null
+      }
+    ]
+  }
+}

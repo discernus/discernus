@@ -1,0 +1,80 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "Cannot perform 'Dimension Hallucination' check. The 'framework file' containing the official 'dimensions' list, which is required for cross-referencing, was not provided. Without this source material, it is impossible to verify if the dimensions mentioned in the report are defined in the framework specification.",
+      "examples": []
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+      "details": "Cannot perform 'Statistic Mismatch' validation. The required `statistical_results.json` file, which contains the ground truth for numerical values (means, correlations, etc.) cited in the report, was not provided. Without this file, it is impossible to query and verify the statistical claims made in the report against the expected values.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The 'Evidence Quote Mismatch' check could not be fully performed as the 'evidence database' (source materials) was explicitly stated as 'could not be retrieved from the RAG index'. This prevented the confirmation of the presence of any quoted textual evidence within its attributed source. Consequently, all selected quotes could not be validated against their original source. Additionally, the report only contained 4 unique evidence quotes, whereas the instructions requested a random selection of 5.",
+      "examples": [
+        "\"those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt)",
+        "\"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+        "\"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+        "\"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that\" (Source: john_mccain_2008_conces)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains a promotional phrase that describes a feature of the framework as a 'core strength' without objective substantiation or comparison, which may require editorial review for academic tone.",
+      "examples": [
+        "This is a core strength of the CFF, capturing how discourse can simultaneously engage opposing dimensions."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "Cannot perform 'Dimension Hallucination' check. The 'framework file' containing the official 'dimensions' list, which is required for cross-referencing, was not provided. Without this source material, it is impossible to verify if the dimensions mentioned in the report are defined in the framework specification.",
+        "examples": []
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+        "details": "Cannot perform 'Statistic Mismatch' validation. The required `statistical_results.json` file, which contains the ground truth for numerical values (means, correlations, etc.) cited in the report, was not provided. Without this file, it is impossible to query and verify the statistical claims made in the report against the expected values.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The 'Evidence Quote Mismatch' check could not be fully performed as the 'evidence database' (source materials) was explicitly stated as 'could not be retrieved from the RAG index'. This prevented the confirmation of the presence of any quoted textual evidence within its attributed source. Consequently, all selected quotes could not be validated against their original source. Additionally, the report only contained 4 unique evidence quotes, whereas the instructions requested a random selection of 5.",
+        "examples": [
+          "\"those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt)",
+          "\"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+          "\"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve\" (Source: bernie_sanders_2025_fighting_oligarchy.txt)",
+          "\"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that\" (Source: john_mccain_2008_conces)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains a promotional phrase that describes a feature of the framework as a 'core strength' without objective substantiation or comparison, which may require editorial review for academic tone.",
+        "examples": [
+          "This is a core strength of the CFF, capturing how discourse can simultaneously engage opposing dimensions."
+        ]
+      }
+    ]
+  }
+}

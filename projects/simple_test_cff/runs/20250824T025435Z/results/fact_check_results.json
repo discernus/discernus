@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+      "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+      "examples": []
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+      "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "CRITICAL",
+      "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+      "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "CRITICAL",
+      "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+      "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+      "examples": []
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+        "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+        "examples": []
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+        "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "CRITICAL",
+        "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+        "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "CRITICAL",
+        "description": "Check cannot execute due to RAG index failure: Critical RAG index failure: Source materials could not be retrieved from the RAG index. This indicates a critical infrastructure failure that prevents validation from proceeding.",
+        "details": "This validation check cannot proceed because the system cannot access required source materials. This indicates a critical infrastructure failure that must be resolved before validation can continue.",
+        "examples": []
+      }
+    ],
+    "summary": {
+      "total_checks": 4,
+      "critical_failures": 4,
+      "errors": 0,
+      "warnings": 0
+    }
+  }
+}

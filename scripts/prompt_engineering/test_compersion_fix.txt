@@ -1,0 +1,86 @@
+You are an expert Python developer generating calculation functions for a research framework.
+
+**FRAMEWORK SPECIFICATION:**
+The Cohesive Flourishing Framework (CFF) v10.0 specifies these dimensions:
+
+**Success Orientation:**
+- **Envy** (0.0-1.0): Resentment toward others' success, zero-sum thinking, grievance rhetoric
+- **Compersion** (0.0-1.0): Joy from others' success, abundance mindset, merit celebration
+
+**CRITICAL DATA STRUCTURE ISSUE TO RESOLVE:**
+The framework specifies "Compersion" but the actual analysis data contains "compassion" columns.
+
+**ACTUAL DATA STRUCTURE FROM ANALYSIS:**
+The analysis data contains these EXACT column names:
+- tribal_dominance_raw, tribal_dominance_salience
+- individual_dignity_raw, individual_dignity_salience  
+- fear_raw, fear_salience
+- hope_raw, hope_salience
+- envy_raw, envy_salience
+- **compassion_raw, compassion_salience** ← NOTE: This is "compassion", not "compersion"
+- enmity_raw, enmity_salience
+- amity_raw, amity_salience
+- fragmentative_goals_raw, fragmentative_goals_salience
+- cohesive_goals_raw, cohesive_goals_salience
+
+**YOUR TASK:**
+Generate Python functions that implement the CFF calculations using the EXACT column names from the analysis data.
+
+**CRITICAL REQUIREMENTS:**
+1. Use the EXACT column names from the analysis data above
+2. For the "Compersion" dimension from the framework, use the "compassion" columns from the data
+3. Do NOT try to map between different concepts - use what's actually in the data
+4. Each calculation must be implemented as a separate Python function
+5. Functions must accept a pandas DataFrame 'data' as the primary parameter
+6. Functions must handle missing data gracefully (return None if insufficient data)
+7. Functions must include proper docstrings with mathematical formulas
+
+**EXAMPLE CALCULATION:**
+For "Success Tension: Measures contradiction between envy and compersion rhetoric":
+
+```python
+def calculate_success_tension(data, **kwargs):
+    """
+    Calculate Success Tension as contradiction between envy and compersion rhetoric.
+    
+    Formula: min(envy_raw, compersion_raw) × |envy_salience - compersion_salience|
+    
+    Note: Uses 'compassion' columns from actual data (not 'compersion' from framework)
+    
+    Args:
+        data: pandas DataFrame with dimension scores
+        **kwargs: Additional parameters
+        
+    Returns:
+        float: Success tension score or None if insufficient data
+    """
+    try:
+        # Use EXACT column names from analysis data
+        if 'envy_raw' not in data.columns or 'compassion_raw' not in data.columns:
+            return None
+            
+        envy_raw = data['envy_raw']
+        compassion_raw = data['compassion_raw']  # ← Uses actual column name
+        envy_salience = data['envy_salience']
+        compassion_salience = data['compassion_salience']  # ← Uses actual column name
+        
+        # Calculate tension using framework formula
+        tension = np.minimum(envy_raw, compassion_raw) * np.abs(envy_salience - compassion_salience)
+        
+        return tension
+        
+    except Exception:
+        return None
+```
+
+**OUTPUT FORMAT:**
+Generate functions for ALL CFF calculations. Wrap each function in the proprietary delimiters:
+
+<<<DISCERNUS_FUNCTION_START>>>
+def function_name(data, **kwargs):
+    # Implementation here
+    pass
+<<<DISCERNUS_FUNCTION_END>>>
+
+**KEY POINT:**
+The framework says "Compersion" but the data has "compassion" columns. Your functions must use the actual column names from the data, not try to map between concepts.

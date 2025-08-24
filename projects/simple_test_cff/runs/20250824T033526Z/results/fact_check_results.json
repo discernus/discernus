@@ -1,0 +1,84 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+      "details": "Several statistical claims in the report do not match the values found in the `statistical_results.json` file.",
+      "examples": [
+        "The report states that the 'Cohesive Syndrome' (Individual Dignity, Amity, Compersion, and Cohesive Goals) has an 'average inter-correlation r > 0.90'. However, the calculated average inter-correlation from `statistical_results.json` is approximately 0.7710. Individual correlations within this group include 'Individual Dignity vs. Compersion' (r = 0.5748), 'Amity vs. Compersion' (r = 0.5773), and 'Compersion vs. Cohesive Goals' (r = 0.6644), all of which are significantly lower than 0.90.",
+        "The report claims that the 'Full Cohesion Index' correlates negatively with fragmentative language (r = -0.98 with Fear). The actual correlation between 'full_cohesion_index' and 'fear_raw' in `statistical_results.json` is -0.9725. When rounded to two decimal places, this value is -0.97, not -0.98."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Three out of five randomly selected evidence quotes from the report could not be found in the provided evidence database. The evidence database (SOURCE 2 and SOURCE 3) appears to be incomplete, containing only textual evidence extracted from 'steve_king_2017_house_floor.txt'. Therefore, any quotes cited from the other three documents ('alexandria_ocasio_cortez_2025_fighting_oligarchy.txt', 'bernie_sanders_2025_fighting_oligarchy.txt', 'john_mccain_2008_concession.txt') are not present in the provided database.",
+      "examples": [
+        "Quote from report: \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt, Dimension: Tribal Dominance) - NOT FOUND in database.",
+        "Quote from report: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy.txt, Dimension: Fear) - NOT FOUND in database.",
+        "Quote from report: \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\" (Source: john_mccain_2008_concession.txt, Dimension: Hope) - NOT FOUND in database."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several claims that use strong, definitive, or promotional language ('demonstrates', 'moves beyond', 'revealing', 'empirically validated', 'accurately reflects', 'confirming') which may be unsubstantiated or overly promotional given the explicitly stated 'small sample size (N=4)' and 'preliminary' nature of the findings. These claims suggest a level of certainty and generalizability that is typically not warranted by exploratory pilot studies.",
+      "examples": [
+        "The analysis demonstrates the CFF's construct validity...",
+        "It moves beyond simple sentiment to map the strategic architecture of political language, revealing how different rhetorical components are assembled to build or break down social cohesion.",
+        "The Framework's Oppositional Design is Empirically Validated:",
+        "The Full Cohesion Index Accurately Reflects Rhetorical Strategy:",
+        "...confirming it as a valid summary metric of a text's overall rhetorical impact."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+        "details": "Several statistical claims in the report do not match the values found in the `statistical_results.json` file.",
+        "examples": [
+          "The report states that the 'Cohesive Syndrome' (Individual Dignity, Amity, Compersion, and Cohesive Goals) has an 'average inter-correlation r > 0.90'. However, the calculated average inter-correlation from `statistical_results.json` is approximately 0.7710. Individual correlations within this group include 'Individual Dignity vs. Compersion' (r = 0.5748), 'Amity vs. Compersion' (r = 0.5773), and 'Compersion vs. Cohesive Goals' (r = 0.6644), all of which are significantly lower than 0.90.",
+          "The report claims that the 'Full Cohesion Index' correlates negatively with fragmentative language (r = -0.98 with Fear). The actual correlation between 'full_cohesion_index' and 'fear_raw' in `statistical_results.json` is -0.9725. When rounded to two decimal places, this value is -0.97, not -0.98."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Three out of five randomly selected evidence quotes from the report could not be found in the provided evidence database. The evidence database (SOURCE 2 and SOURCE 3) appears to be incomplete, containing only textual evidence extracted from 'steve_king_2017_house_floor.txt'. Therefore, any quotes cited from the other three documents ('alexandria_ocasio_cortez_2025_fighting_oligarchy.txt', 'bernie_sanders_2025_fighting_oligarchy.txt', 'john_mccain_2008_concession.txt') are not present in the provided database.",
+        "examples": [
+          "Quote from report: \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\" (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt, Dimension: Tribal Dominance) - NOT FOUND in database.",
+          "Quote from report: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy.txt, Dimension: Fear) - NOT FOUND in database.",
+          "Quote from report: \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\" (Source: john_mccain_2008_concession.txt, Dimension: Hope) - NOT FOUND in database."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several claims that use strong, definitive, or promotional language ('demonstrates', 'moves beyond', 'revealing', 'empirically validated', 'accurately reflects', 'confirming') which may be unsubstantiated or overly promotional given the explicitly stated 'small sample size (N=4)' and 'preliminary' nature of the findings. These claims suggest a level of certainty and generalizability that is typically not warranted by exploratory pilot studies.",
+        "examples": [
+          "The analysis demonstrates the CFF's construct validity...",
+          "It moves beyond simple sentiment to map the strategic architecture of political language, revealing how different rhetorical components are assembled to build or break down social cohesion.",
+          "The Framework's Oppositional Design is Empirically Validated:",
+          "The Full Cohesion Index Accurately Reflects Rhetorical Strategy:",
+          "...confirming it as a valid summary metric of a text's overall rhetorical impact."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 4,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}
