@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on John McCain's 2008 concession speech. The speech is characterized by its graciousness, calls for unity, and respect for the democratic process, leading to high scores in virtue dimensions (Dignity, Hope, Pragmatism, Truth, Justice) and very low scores in vice dimensions (Tribalism, Manipulation, Resentment, Fantasy, Fear). Evidence extraction focused on the most explicit representations of each dimension's definition."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "pragmatism": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of evidence. The speaker actively works against tribalism, urging unity across party lines."
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 0.95,
+          "context_type": "Explicit recognition of universal worth and shared national identity."
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of evidence. The speech is characterized by directness and lacks manipulative or deceptive framing."
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.",
+          "confidence": 0.9,
+          "context_type": "Intellectual honesty and acknowledgement of political reality without distortion."
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "we fell short, the failure is mine, not yours.",
+          "confidence": 0.95,
+          "context_type": "Direct rejection of blame-focused rhetoric, taking personal responsibility instead."
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.9,
+          "context_type": "Acknowledgement of historical injustice and the progress towards a fairer system."
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "defend our security in a dangerous world",
+          "confidence": 0.9,
+          "context_type": "A brief, low-intensity mention of external threat within a broader, pragmatic context."
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "confidence": 0.9,
+          "context_type": "A call for constructive, optimistic, and proactive effort towards a positive future."
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of evidence. The speech is grounded in the reality of the election outcome and future challenges."
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "Explicit acknowledgement of constraints and real-world challenges combined with a practical offer of help."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

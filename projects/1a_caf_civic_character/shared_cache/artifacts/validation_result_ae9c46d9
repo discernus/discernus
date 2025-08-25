@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "issues": [
+    "The experiment expects ANOVA results for comparative statistics, but the corpus contains only 8 documents (N=8). According to platform guidelines (N=4-9), analysis should focus on case studies and qualitative patterns. While ANOVA can be run, its statistical power will be low, limiting the reliability of inferential claims."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-25T12:42:28.766059+00:00"
+}

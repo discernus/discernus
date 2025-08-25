@@ -54,7 +54,7 @@ class THINComplianceChecker:
                       'evidence_quality_measurement']
         
         # Complex Integration Agents (Multiple data types, caching, RAG)
-        complex_agents = ['comprehensive_knowledge_curator', 'txtai_evidence_curator',
+        complex_agents = ['comprehensive_knowledge_curator', 'deprecated/txtai_evidence_curator',
                          'evidence_curator', 'rag_enhanced_interpreter', 'experiment_coherence_agent']
         
         # Orchestration Agents (Pipeline coordination)

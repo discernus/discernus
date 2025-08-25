@@ -23,6 +23,14 @@ Purpose: Unify provenance practices (per PROVENANCE_SYSTEM.md), dual-track loggi
   - Hash: `hashlib.sha256(bytes).hexdigest()`
 - Never use Python `hash()` for persistence (non-deterministic across processes).
 
+### Effective prompt fingerprint (normative)
+
+- For any cache that governs LLM-generated code or behavior (e.g., derived metrics, statistical analysis, coherence validation):
+  - Prefer `effective_prompt_fingerprint = sha256(assembled_prompt_string)` if an assembled prompt is passed at runtime.
+  - Otherwise include a `template_fingerprint = sha256(concatenated_source_templates)`.
+  - It is not permitted to use an "unknown" sentinel for prompt fingerprint in released builds. If an effective fingerprint cannot be computed, either compute it from the assembled prompt or treat the cache lookup as a miss (fail closed to avoid stale hits).
+  - Construct cache keys from a canonical JSON object of inputs, then sha256 the serialized JSON (avoid ad-hoc string concatenation).
+
 ---
 
 ## Run Manifest (thin, provenance-oriented)
@@ -92,13 +100,16 @@ Fields:
 - `config` (must include `{"content": true}`)
 - `doc_count` (> 0)
 - `evidence_input_hashes` (sorted, unique)
-- `index_build_fingerprint` = SHA-256 over canonical JSON of `{ "evidence_input_hashes": [...], "config": {"content": true, ...} }`
+- `index_build_fingerprint` = SHA-256 over canonical JSON of `{ "evidence_input_hashes": [...], "config": {"content": true, ...}, "cache_version": N }`
 - `created_at`
 
 Health checks before use:
 - `doc_count > 0`
 - sample retrieval returns content (at least 1 success)
 - on failure: fail fast and log structured error events
+
+Cache key alignment:
+- The cache key for any RAG index must derive from `index_build_fingerprint` to ensure changes in inputs/config invalidate the cache deterministically.
 
 ---
 
@@ -185,6 +196,21 @@ On any failure: emit `pre_synthesis_check_failed` and terminate the run with a c
   - symlink integrity
   - provenance chain consistency (deps present)
   - optional Git history check
+
+5) Code-generation cache fingerprinting standard (new)
+
+- Applicable caches: derived metrics, statistical analysis, experiment coherence validation.
+- Acceptance criteria:
+  - Cache keys include `effective_prompt_fingerprint` (sha256 of assembled prompt) when provided, else `template_fingerprint` (sha256 of concatenated templates used).
+  - Model identifier/version and a small `cache_version` integer are part of the canonical input object.
+  - Keys are computed as `sha256(canonical_json(inputs))`.
+  - If the prompt fingerprint cannot be computed, treat as cache miss (no stale reuse).
+  - Unit tests: changing only the prompt text changes the key; changing only the model changes the key; changing only unrelated inputs does not.
+
+6) Runtime cache controls (developer ergonomics)
+
+- Provide a `--no-cache` CLI flag (and `DISCERNUS_NO_CACHE=1` env var) to bypass all caches for a run. Emit a `system.jsonl` event noting cache bypass.
+- Provide `DISCERNUS_CACHE_VERSION` env var to bump `cache_version` globally when making incompatible cache changes; include `cache_version` in all cache inputs and fingerprints.
 
 ---
 

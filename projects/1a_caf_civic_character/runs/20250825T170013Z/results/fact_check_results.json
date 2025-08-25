@@ -1,0 +1,116 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The provided RAG index (evidence database) returned an error for all queries, indicating that no framework content or definitions were available for validation. Consequently, it was impossible to verify that the analytical dimensions mentioned in the report are actually defined in the framework specification, as required by the rubric. All dimensions listed in the report's framework description could not be found or validated against the provided evidence.",
+      "examples": [
+        "Dignity (definition not found in RAG index due to query failure)",
+        "Tribalism (definition not found in RAG index due to query failure)",
+        "Truth (definition not found in RAG index due to query failure)",
+        "Manipulation (definition not found in RAG index due to query failure)",
+        "Justice (definition not found in RAG index due to query failure)",
+        "Resentment (definition not found in RAG index due to query failure)",
+        "Hope (definition not found in RAG index due to query failure)",
+        "Fear (definition not found in RAG index due to query failure)",
+        "Pragmatism (definition not found in RAG index due to query failure)",
+        "Fantasy (definition not found in RAG index due to query failure)"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "Cannot validate statistical claims due to missing evidence database. The provided 'EVIDENCE DATABASE FOR VALIDATION' is empty and indicates a query failure, preventing access to the `statistical_results.json` file required to verify numerical values against the report.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided RAG evidence index (EVIDENCE DATABASE FOR VALIDATION) is non-functional. All entries within the database show 'ERROR: Query failed: too many values to unpack (expected 2)', preventing any search or confirmation of quote presence. Therefore, it was impossible to cross-reference the randomly selected quotes against a functional RAG index to confirm their presence as required by the rubric instructions. All 5 selected quotes could not be verified against the provided evidence database.",
+      "examples": [
+        "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\"",
+        "\"They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.\"",
+        "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\"",
+        "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\"",
+        "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\""
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several instances of superlative or promotional language that may require editorial review for academic tone, especially given the stated preliminary nature and small sample size of the study. These claims often overstate the current status or impact of the framework/study.",
+      "examples": [
+        "This study demonstrates that the CAF v10.0 provides a robust, nuanced, and reproducible methodology for evaluating the civic quality of political communication, offering a valuable tool for future computational social science research.",
+        "The framework provides a much-needed common vocabulary and measurement standard for discussing the 'quality' of democratic discourse.",
+        "From a methodological standpoint, the introduction of derived metrics like `Tension` and the `CCI` is a significant innovation.",
+        "This study provides a validated instrument and a set of testable hypotheses about the structure of civic discourse and the nature of pathological communication."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The provided RAG index (evidence database) returned an error for all queries, indicating that no framework content or definitions were available for validation. Consequently, it was impossible to verify that the analytical dimensions mentioned in the report are actually defined in the framework specification, as required by the rubric. All dimensions listed in the report's framework description could not be found or validated against the provided evidence.",
+        "examples": [
+          "Dignity (definition not found in RAG index due to query failure)",
+          "Tribalism (definition not found in RAG index due to query failure)",
+          "Truth (definition not found in RAG index due to query failure)",
+          "Manipulation (definition not found in RAG index due to query failure)",
+          "Justice (definition not found in RAG index due to query failure)",
+          "Resentment (definition not found in RAG index due to query failure)",
+          "Hope (definition not found in RAG index due to query failure)",
+          "Fear (definition not found in RAG index due to query failure)",
+          "Pragmatism (definition not found in RAG index due to query failure)",
+          "Fantasy (definition not found in RAG index due to query failure)"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "Cannot validate statistical claims due to missing evidence database. The provided 'EVIDENCE DATABASE FOR VALIDATION' is empty and indicates a query failure, preventing access to the `statistical_results.json` file required to verify numerical values against the report.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided RAG evidence index (EVIDENCE DATABASE FOR VALIDATION) is non-functional. All entries within the database show 'ERROR: Query failed: too many values to unpack (expected 2)', preventing any search or confirmation of quote presence. Therefore, it was impossible to cross-reference the randomly selected quotes against a functional RAG index to confirm their presence as required by the rubric instructions. All 5 selected quotes could not be verified against the provided evidence database.",
+        "examples": [
+          "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\"",
+          "\"They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.\"",
+          "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\"",
+          "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\"",
+          "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\""
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several instances of superlative or promotional language that may require editorial review for academic tone, especially given the stated preliminary nature and small sample size of the study. These claims often overstate the current status or impact of the framework/study.",
+        "examples": [
+          "This study demonstrates that the CAF v10.0 provides a robust, nuanced, and reproducible methodology for evaluating the civic quality of political communication, offering a valuable tool for future computational social science research.",
+          "The framework provides a much-needed common vocabulary and measurement standard for discussing the 'quality' of democratic discourse.",
+          "From a methodological standpoint, the introduction of derived metrics like `Tension` and the `CCI` is a significant innovation.",
+          "This study provides a validated instrument and a set of testable hypotheses about the structure of civic discourse and the nature of pathological communication."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

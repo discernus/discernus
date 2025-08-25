@@ -188,6 +188,9 @@ template: |
   - **No assumptions**: Don't assume specific dimension names or relationships
   - **Flexible analysis**: Adapt analytical depth to available data richness
   - **Universal patterns**: Look for insights applicable across frameworks
+  - **Accurate terminology**: Use the exact framework terminology from the specification (e.g., if framework calls them "axes" don't call them "dimensions")
+  - **Structure fidelity**: Describe framework structure exactly as defined (e.g., "Identity Axis: Tribalism/Dignity" not "Identity dimension")
+  - **Avoid hallucination**: Never invent framework elements not present in the specification
 
   ## Academic Quality Standards
   - **Publication-ready**: Suitable for peer-reviewed journal submission

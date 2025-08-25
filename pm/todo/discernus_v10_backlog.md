@@ -98,6 +98,60 @@
 - **Effort**: 1-2 hours
 - **Priority**: **HIGHEST** - Blocking everything
 
+#### [QUALITY-001] Fix Fact-Checker False Positive on Evidence Citations
+
+- **Description**: Fact-checker incorrectly flags legitimate evidence attribution `(Source: filename.txt)` as "Citation Violation"
+- **Impact**: 
+  - False positives on correct evidence citations
+  - Revision agent asked to "fix" legitimate provenance tracking
+  - Undermines evidence attribution which is required for academic integrity
+- **Root Cause**: Citation Violation rubric is too broad, catching internal evidence references
+- **Solution**: Refine rubric to distinguish between external academic citations and internal evidence attribution
+- **Acceptance Criteria**:
+  - [x] `(Source: filename.txt)` format is NOT flagged as citation violation
+  - [x] External academic citations like `(Author, Year)` are still flagged
+  - [x] Rubric clearly distinguishes evidence attribution from academic citations
+  - [x] False positive rate on evidence citations is zero
+- **Effort**: 30 minutes ✅ **COMPLETED**
+- **Priority**: **HIGH** - Affects report quality and revision agent effectiveness
+- **Status**: ✅ **COMPLETED**
+
+#### [QUALITY-002] Review Revision Agent Prompt for Framework Dimension Issues
+
+- **Description**: Revision agent failed to fix "Dimension Hallucination" where report incorrectly refers to "Identity", "Emotion", "Reality" as dimensions instead of axes
+- **Impact**: 
+  - Critical factual errors remain in final reports
+  - Framework-specific accuracy issues not being corrected
+  - Revision agent underperforming on framework structure corrections
+- **Root Cause**: Revision agent prompt may not be clear about handling framework-specific factual issues
+- **Solution**: Review and update revision agent prompt to better handle framework dimension vs. axis distinctions
+- **Acceptance Criteria**:
+  - [x] Revision agent successfully corrects dimension hallucination errors
+  - [x] Prompt clearly defines what constitutes framework factual issues
+  - [x] Examples include framework structure corrections
+  - [x] Framework-agnostic approach maintained
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **HIGH** - Affects report accuracy and revision agent effectiveness
+- **Status**: ✅ **COMPLETED**
+
+#### [QUALITY-003] Review Synthesis Prompt for Framework Dimension Accuracy
+
+- **Description**: Synthesis agent generated report with incorrect framework terminology (calling axes "dimensions")
+- **Impact**: 
+  - Reports contain framework-specific factual errors
+  - Undermines framework accuracy and researcher trust
+  - Creates downstream fact-checking issues
+- **Root Cause**: Synthesis prompt may not be clear about framework structure and terminology
+- **Solution**: Review synthesis prompt to ensure it generates accurate framework terminology
+- **Acceptance Criteria**:
+  - [x] Synthesis agent uses correct framework terminology (axes vs. dimensions)
+  - [x] Reports accurately reflect framework structure
+  - [x] Framework-agnostic approach maintained
+  - [x] Reduced dimension hallucination in initial reports
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Prevention is better than correction
+- **Status**: ✅ **COMPLETED**
+
 #### [OBSERVABILITY-001] MLflow Integration for txtai Observability
 
 - **Description**: Integrate MLflow with txtai for advanced observability and trace logging of RAG operations
@@ -288,7 +342,8 @@
 - **Acceptance Criteria**:
   - [ ] Caching integrated with new `RAGIndexManager` class
   - [ ] Cache stores native txtai directories without compression overhead
-  - [ ] Cache keys include RAG index configuration parameters (e.g., `{"content": True}` settings)
+  - [ ] Cache keys derive from `index_build_fingerprint` (SHA-256 over canonical JSON of evidence hashes + config + cache_version)
+  - [ ] RAG index manifest includes `config`, `doc_count`, `evidence_input_hashes`, and `index_build_fingerprint`
   - [ ] Performance improvements exceed current 10-15 second speedup
   - [ ] Caching works for both fact-checker and synthesis RAG indexes
   - [ ] Cache invalidation properly handles RAG index configuration changes
@@ -296,6 +351,50 @@
 - **Effort**: 2-3 hours
 - **Priority**: **HIGH** - Maintains development velocity improvements from [CACHE-001]
 - **Status**: **BLOCKED** - Waiting for [ARCH-RAG-01] completion
+
+#### [CACHE-003] Implement Cache Fingerprinting Standard
+
+- **Description**: Implement comprehensive cache fingerprinting to prevent stale cache hits when prompts, templates, or configurations change
+- **Dependencies**: [CACHE-002] ✅ (RAG index caching reimplemented)
+- **Root Cause**: Current cache keys don't include all behavior-affecting inputs (prompts, templates, configs), leading to stale cache hits when these change
+- **Evidence**: Statistical analysis cache hit despite prompt template changes; derived metrics cache lacks prompt fingerprinting entirely
+- **Solution**: Implement standardized cache fingerprinting for all code-generation caches
+- **Acceptance Criteria**:
+  - [ ] **Statistical Analysis Cache**: Include `effective_prompt_fingerprint` (SHA-256 of assembled prompt) or `template_fingerprint` (SHA-256 of prompt.yaml)
+  - [ ] **Derived Metrics Cache**: Add `_get_prompt_template_hash()` method and include in cache key
+  - [ ] **Validation Cache**: Include coherence agent prompt/template hash in cache key
+  - [ ] **Cache Key Construction**: Use canonical JSON (sorted keys) + SHA-256 instead of ad-hoc string concatenation
+  - [ ] **Fail-Closed Behavior**: If prompt fingerprint cannot be computed, treat as cache miss (no stale reuse)
+  - [ ] **Cache Versioning**: Include `cache_version` in all cache inputs and fingerprints
+  - [ ] **Runtime Controls**: Add `--no-cache` CLI flag and `DISCERNUS_NO_CACHE=1` env var
+  - [ ] **Unit Tests**: Changing only prompt text changes cache key; changing only model changes cache key
+- **Effort**: 4-6 hours
+- **Priority**: **HIGH** - Prevents critical stale cache issues and improves development reliability
+- **Status**: **BACKLOGGED** - Waiting for [CACHE-002] completion
+
+#### [LOGGING-001] Complete Dual-Track Logging Implementation
+
+- **Description**: Fix the incomplete dual-track logging system to ensure all 6 log files are properly populated according to architecture specification
+- **Dependencies**: [CLI-007] (CLI logging implementation)
+- **Root Cause**: Dual-track logging system is partially implemented - missing orchestrator events, artifact logging, and performance tracking
+- **Evidence from CAF Experiment Session**: 
+  - `orchestrator.jsonl` missing entirely (should contain stage transitions and execution events)
+  - `artifacts.jsonl` missing entirely (should contain artifact creation and relationships)
+  - `performance.log` empty (perf_timer() not logging to this file)
+  - `errors.log` empty (good - no errors, but should contain error context when they occur)
+  - `llm_interactions.log` empty (LLM interactions logged to agents.jsonl instead)
+- **Solution**: Complete the dual-track logging implementation with proper event emission from all components
+- **Acceptance Criteria**:
+  - [ ] **Orchestrator Events**: `CleanAnalysisOrchestrator` emits stage transition events to `orchestrator.jsonl`
+  - [ ] **Artifact Logging**: `LocalArtifactStorage` logs artifact creation/modification events to `artifacts.jsonl`
+  - [ ] **Performance Tracking**: `perf_timer()` context manager logs metrics to `performance.log`
+  - [ ] **Error Logging**: Error handling captures context and logs to `errors.log`
+  - [ ] **LLM Interactions**: Consistent logging either to `llm_interactions.log` or consolidated in `agents.jsonl`
+  - [ ] **Dual-Track Compliance**: All 6 log files properly populated according to `DUAL_TRACK_LOGGING_ARCHITECTURE.md`
+  - [ ] **Event Emission**: Stage boundaries, artifact operations, and system events properly logged
+- **Effort**: 3-4 hours
+- **Priority**: **HIGH** - Critical for complete dual-track logging implementation
+- **Status**: **BACKLOGGED** - Waiting for [CLI-007] completion
 
 ### Sprint 3: Testing & Documentation (MEDIUM PRIORITY)
 
@@ -598,11 +697,24 @@
 
 - **Description**: Add comprehensive logging and provenance tracking to CLI
 - **Dependencies**: [DX-001] ✅
+- **Root Cause**: Current dual-track logging system is partially implemented - missing orchestrator events, artifact logging, and performance tracking
+- **Evidence**: 
+  - `orchestrator.jsonl` missing entirely (should contain stage transitions and execution events)
+  - `artifacts.jsonl` missing entirely (should contain artifact creation and relationships)
+  - `performance.log` empty (perf_timer() not logging to this file)
+  - `errors.log` empty (good - no errors, but should contain error context when they occur)
+  - `llm_interactions.log` empty (LLM interactions logged to agents.jsonl instead)
+- **Solution**: Complete the dual-track logging implementation with proper event emission
 - **Acceptance Criteria**:
-  - [ ] All CLI actions are logged
-  - [ ] Provenance chain is maintained
-  - [ ] Debug information is accessible
+  - [ ] **Orchestrator Events**: `orchestrator.jsonl` contains stage transitions, execution events, and workflow orchestration
+  - [ ] **Artifact Logging**: `artifacts.jsonl` contains artifact creation, modification, and provenance chain events
+  - [ ] **Performance Logging**: `performance.log` captures timing metrics from `perf_timer()` context manager
+  - [ ] **Error Logging**: `errors.log` captures error context, failure details, and debugging information
+  - [ ] **LLM Interactions**: Either populate `llm_interactions.log` or consolidate into `agents.jsonl` consistently
+  - [ ] **Dual-Track Compliance**: All 6 log files properly populated according to architecture specification
+  - [ ] **Event Emission**: Orchestrator and artifact storage emit proper events at stage boundaries
 - **Effort**: 2-3 days
+- **Priority**: **HIGH** - Critical for complete dual-track logging implementation
 
 #### [CLI-008] Comprehensive CLI Testing
 
@@ -683,6 +795,10 @@
 - **Description**: Implement foundational academic provenance features to transform current system from basic logging to academic-grade provenance
 - **Dependencies**: [ARCH-004] ✅ (orchestrator cleanup complete)
 - **Current Status**: System has basic audit logging and results structure, needs Git integration and human-readable organization
+- **Evidence from Current Implementation**: 
+  - Dual-track logging partially implemented: `agents.jsonl` and `system.jsonl` working, but `orchestrator.jsonl` and `artifacts.jsonl` missing
+  - Performance logging not capturing `perf_timer()` metrics
+  - LLM interaction logging inconsistent (empty `llm_interactions.log`, events in `agents.jsonl`)
 - **Acceptance Criteria**:
   - [ ] **Basic Git Integration**: Add `--auto-commit` flag to CLI with basic Git commit after successful runs
   - [ ] **Force Override**: Preserve research despite .gitignore patterns
@@ -690,6 +806,8 @@
   - [ ] **README Generation**: Auto-generate README files for each run with basic audit guide
   - [ ] **Basic Validation**: Create `scripts/validate_run_integrity.py` with basic integrity checking
   - [ ] **Simple Validation Report**: Generate basic validation report for each run
+  - [ ] **Logging Completeness**: All 6 dual-track log files properly populated and accessible
+  - [ ] **Performance Tracking**: `perf_timer()` metrics captured in `performance.log`
 - **Effort**: 3-4 days
 - **Priority**: **HIGH** - Alpha blocker for academic acceptance
 - **Academic Value**: Transforms system from "basic logging" to "academic-grade provenance" with minimal effort
@@ -735,7 +853,9 @@
 ### Current Dependencies
 - **CLI-002**: [TEST-INFRA] (blocked by test infrastructure fix)
 - **CACHE-002**: [ARCH-RAG-01] (blocked by RAG index refactor)
+- **CACHE-003**: [CACHE-002] (blocked by RAG index caching reimplementation)
 - **CLI-007**: [DX-001] (blocked by developer onboarding)
+- **LOGGING-001**: [CLI-007] (blocked by CLI logging implementation)
 - **CLI-008**: [CLI-007] (blocked by CLI logging implementation)
 - **TECH-002**: [CLI-008] (blocked by CLI testing)
 
@@ -747,6 +867,7 @@
 
 ### RAG Index Refactor Dependencies
 - **CACHE-002**: [ARCH-RAG-01] (blocked by RAG index refactor completion)
+- **CACHE-003**: [CACHE-002] (blocked by RAG index caching reimplementation)
 
 ---
 
@@ -776,14 +897,168 @@
 
 ---
 
+#### [RAG-001] Fix Fact-Checker RAG Index Document Retrieval ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: Fact-checker RAG index only returns document IDs instead of actual content, causing all validation checks to fail
+- **Dependencies**: None (blocking fact-checking functionality)
+- **Root Cause**: `FactCheckerAgent._query_evidence()` method calls `str(result)` on txtai search results, which only returns "(id, score)" tuples as strings instead of document content
+- **Impact**: 
+  - All fact-checking validation returns meaningless "Document ID X maps to X" results
+  - Cannot validate framework dimensions, statistical values, or evidence quotes
+  - Fact-checker reports false failures due to inability to access content
+- **Acceptance Criteria**:
+  - [x] Fact-checker can access actual document content from RAG index
+  - [x] Framework dimensions properly validated against specification
+  - [x] Statistical values can be cross-referenced with source data
+  - [x] Evidence quotes can be verified against corpus documents
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Priority**: **CRITICAL** (fact-checking system failure)
+- **Status**: ✅ **FIXED** - Updated `_query_evidence()` to properly retrieve document content using stored documents attribute
+
+### Sprint 2: RAG Index Content Completeness (NEXT)
+
+**Timeline:** 2-3 days
+**Goal:** Ensure comprehensive fact-checker RAG index contains all necessary validation data
+
+#### [RAG-002] Complete Framework Specification in RAG Index
+
+- **Description**: RAG index missing complete framework specification content - only 2 of 10 dimensions (Dignity, Tribalism) found during validation
+- **Dependencies**: [RAG-001] ✅
+- **Root Cause**: `_build_fact_checker_rag_index()` method not properly including full framework specification content
+- **Impact**: 
+  - Dimension Hallucination checks fail for legitimate framework dimensions
+  - Cannot validate framework structure and terminology
+  - Incomplete fact-checking coverage
+- **Acceptance Criteria**:
+  - [ ] All 10 CAF dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) found in RAG index
+  - [ ] Complete framework specification text indexed and searchable
+  - [ ] Framework structure and axis definitions accessible for validation
+- **Effort**: 3-4 hours
+- **Priority**: **HIGH** (fact-checking completeness)
+
+#### [RAG-003] Include Comprehensive Statistical Results in RAG Index
+
+- **Description**: RAG index missing comprehensive `statistical_results.json` equivalent for numerical validation
+- **Dependencies**: [RAG-001] ✅
+- **Root Cause**: Statistical analysis results not being properly formatted and included in fact-checker RAG index
+- **Impact**: 
+  - Cannot validate numerical claims (means, correlations, standard deviations)
+  - Statistic Mismatch checks fail due to missing reference data
+  - No verification of calculated values against source data
+- **Acceptance Criteria**:
+  - [ ] Complete statistical results (means, correlations, std deviations) indexed
+  - [ ] Speaker-level derived metrics accessible for validation
+  - [ ] Correlation matrix and descriptive statistics searchable
+- **Effort**: 2-3 hours
+- **Priority**: **HIGH** (numerical validation)
+
+#### [RAG-004] Include Full Corpus Documents in RAG Index
+
+- **Description**: RAG index missing full text of corpus documents for quote verification
+- **Dependencies**: [RAG-001] ✅
+- **Root Cause**: Evidence Quote Mismatch checks cannot access full corpus text for quote cross-referencing
+- **Impact**: 
+  - Cannot verify evidence quotes against source documents
+  - Quote validation relies on incomplete evidence extracts
+  - Reduced confidence in evidence attribution accuracy
+- **Acceptance Criteria**:
+  - [ ] Full text of all corpus documents indexed and searchable
+  - [ ] Quote verification can cross-reference against complete source text
+  - [ ] Evidence attribution can be validated end-to-end
+- **Effort**: 2-3 hours
+- **Priority**: **MEDIUM** (evidence validation)
+
+#### [RAG-005] Consolidate RAG Construction Through RAGIndexManager ✅ **COMPLETED**
+
+- **Description**: Orchestrator bypasses RAGIndexManager for fact-checker RAG construction, creating architectural inconsistency
+- **Dependencies**: [RAG-001] ✅
+- **Root Cause**: `_build_fact_checker_rag_index()` method directly constructs txtai index instead of using dedicated `RAGIndexManager` component
+- **Impact**: 
+  - Violates THIN architecture principles (orchestrator doing specialized work)
+  - Inconsistent RAG construction patterns across codebase
+  - Duplicated txtai initialization and configuration logic
+  - Harder to maintain and debug RAG-related issues
+- **Acceptance Criteria**:
+  - [x] `_build_fact_checker_rag_index()` refactored to use `RAGIndexManager`
+  - [x] All RAG construction goes through single, consistent component
+  - [x] Remove direct txtai construction from orchestrator
+  - [x] Maintain existing functionality and performance
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** (architectural consistency)
+- **Status**: ✅ **COMPLETED** - Enhanced RAGIndexManager with comprehensive index method, refactored orchestrator to use it consistently
+
+#### [RAG-006] Deprecate txtai_evidence_curator Agent ✅ **COMPLETED**
+
+- **Description**: Remove unused `txtai_evidence_curator` agent that was implemented but never integrated into the pipeline
+- **Dependencies**: None
+- **Root Cause**: Agent was built for intelligent evidence retrieval but current system uses manual evidence loading instead
+- **Impact**: 
+  - Code maintenance overhead for unused component
+  - Architectural confusion about evidence retrieval strategy
+  - Potential security surface from unused code paths
+- **Acceptance Criteria**:
+  - [x] Move `discernus/agents/txtai_evidence_curator/` to `discernus/agents/deprecated/`
+  - [x] Remove any imports or references to txtai_evidence_curator
+  - [x] Update documentation to reflect deprecation
+  - [x] Preserve agent code for potential future reference
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **LOW** (code cleanup)
+- **Status**: ✅ **COMPLETED** - Moved agent to deprecated folder, updated import paths, verified system functionality
+
+### Sprint 3: Advanced RAG Architecture (FUTURE)
+
+**Timeline:** 1-2 weeks
+**Goal:** Implement advanced txtai features for improved performance and accuracy
+
+#### [RAG-007] Implement Sub-Indexes Architecture
+
+- **Description**: Create specialized RAG indexes for different data types (framework, statistics, evidence, corpus) for improved query performance and accuracy
+- **Dependencies**: [RAG-002], [RAG-003], [RAG-004], [RAG-005] ✅
+- **Root Cause**: Single comprehensive index may not be optimal for different query types and data characteristics
+- **Impact**: 
+  - Improved query accuracy through specialized indexing strategies
+  - Better performance for specific data type queries
+  - Reduced cross-contamination between different content types
+  - Enhanced filtering and retrieval precision
+- **Acceptance Criteria**:
+  - [ ] Framework-specific index for dimension and structure validation
+  - [ ] Statistics-specific index for numerical validation
+  - [ ] Evidence-specific index for quote verification
+  - [ ] Corpus-specific index for full-text search
+  - [ ] Unified query interface across all sub-indexes
+- **Effort**: 1-2 weeks
+- **Priority**: **MEDIUM** (performance optimization)
+
+#### [RAG-008] Implement Hybrid Search Capabilities
+
+- **Description**: Add sparse/dense hybrid search to txtai indexes for improved retrieval accuracy
+- **Dependencies**: [RAG-007] ✅
+- **Root Cause**: Pure dense vector search may miss exact matches that sparse search would find
+- **Impact**: 
+  - Improved retrieval accuracy for both semantic and exact matches
+  - Better handling of technical terms and specific phrases
+  - Enhanced fact-checking precision for numerical and textual validation
+- **Acceptance Criteria**:
+  - [ ] Hybrid search configuration in RAGIndexManager
+  - [ ] Benchmarking against current dense-only approach
+  - [ ] Configurable search strategy per index type
+  - [ ] Maintained or improved query performance
+- **Effort**: 1 week
+- **Priority**: **LOW** (advanced optimization)
+
 ## Backlog Maintenance
 
-- **Last Updated**: 2025-01-23
-- **Next Review**: After testing infrastructure fix
+- **Last Updated**: 2025-08-25
+- **Next Review**: After RAG index completeness fixes
 - **Cleanup Status**: ✅ Groomed and streamlined with sprint restructuring
-- **Completed Items Moved**: [CRITICAL-005], [CRITICAL-006], and [ARCH-004] moved to DONE.md
+- **Completed Items Moved**: [CRITICAL-005], [CRITICAL-006], [ARCH-004], [QUALITY-001], [QUALITY-002], [QUALITY-003], and [RAG-001] moved to DONE.md
 - **Redundant Items**: Informal duplicate items consolidated into formal backlog structure
 - **Sprint Restructuring**: Completed - fixed dependency conflicts and logical flow
+- **New Insights**: 
+  - Added [CACHE-003] for comprehensive cache fingerprinting standard based on stale cache analysis
+  - Added [LOGGING-001] for dual-track logging completion based on CAF experiment session analysis
+  - Enhanced [CLI-007] and [PROVENANCE-001] with specific logging implementation requirements
+  - Added [RAG-002], [RAG-003], [RAG-004] for comprehensive fact-checker RAG index completeness
 
 ## Current Priorities
 
@@ -838,3 +1113,23 @@
   - **Implementation**: Remove SynthesisFinisher, create RevisionAgent with constrained editing prompt
   - **Status**: Ready for implementation - replaces current brittle system
   - **Priority**: High (architectural improvement, reduces technical debt)
+
+- [ ] Audit production pipeline for THICK parsing anti-patterns
+  - **Problem**: Integration testing revealed brittle parsing patterns that violate THIN architecture principles
+    - CAF experiment failed due to hardcoded filename parsing (`[:-2]` index slicing)
+    - Speaker extraction logic assumed fixed filename structure, broke on multi-word names
+    - Parsing failures produce silent degradation rather than fail-fast behavior
+    - Violates project's THIN principles of avoiding parsing in favor of binary data flow
+  - **Scope**: Audit components that parse filenames, paths, or assume fixed data structures
+    - Data ingestion and metadata extraction components (HIGH priority)
+    - Analysis functions that derive grouping variables (MEDIUM priority)
+    - Output formatting and reporting functions (LOW priority)
+  - **Acceptance Criteria**:
+    - [ ] Identify all instances of brittle parsing (hardcoded indices, fixed structure assumptions)
+    - [ ] Document parsing failures discovered during integration testing
+    - [ ] Prioritize fixes based on actual failure impact vs theoretical concerns
+    - [ ] Replace brittle parsing with robust, semantic-based extraction where needed
+    - [ ] Maintain THIN architecture principles throughout
+  - **Dependencies**: Complete integration test gauntlet to surface all parsing issues
+  - **Status**: Backlogged - waiting for integration test completion
+  - **Priority**: Medium (architectural improvement, prevents future failures)

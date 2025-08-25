@@ -54,3 +54,38 @@ class RAGIndexManager:
         rag_index.index(documents_to_index)
 
         return rag_index
+
+    def build_comprehensive_index(
+        self, source_documents: List[Dict[str, Any]]
+    ) -> Embeddings:
+        """
+        Build a comprehensive RAG index with full metadata preservation.
+
+        This method is designed for fact-checking and other use cases that require
+        access to both document content and metadata for retrieval.
+
+        Args:
+            source_documents: List of document dictionaries with 'content' and 'metadata' keys.
+
+        Returns:
+            The configured and indexed txtai Embeddings object with stored documents.
+        """
+        # Initialize txtai with content storage enabled, per best practices.
+        rag_index = Embeddings({"content": True})
+
+        # Prepare documents for txtai indexing with metadata preservation
+        documents = []
+        for i, doc in enumerate(source_documents):
+            documents.append({
+                'id': i,
+                'text': doc['content'],
+                'metadata': doc.get('metadata', {})
+            })
+
+        # Store documents separately for content retrieval (txtai only stores embeddings)
+        rag_index.documents = documents
+
+        # Index the documents using txtai
+        rag_index.index(documents)
+
+        return rag_index

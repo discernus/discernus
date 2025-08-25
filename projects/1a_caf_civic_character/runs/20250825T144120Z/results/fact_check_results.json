@@ -1,0 +1,154 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions 10 core analytical dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) as part of the Civic Analysis Framework (CAF) v10.0. While the report itself defines these dimensions, the provided RAG index (evidence database) only explicitly confirms 'Dignity' (as 'individual_dignity_col') and 'Tribalism' (as 'tribal_dominance_col') through the definition of 'identity_tension'. The remaining 8 dimensions are not found or defined within the provided framework content in the RAG index.",
+      "examples": [
+        "The dimension 'Truth' is mentioned in the report's 'Truth Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Manipulation' is mentioned in the report's 'Truth Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Justice' is mentioned in the report's 'Justice Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Resentment' is mentioned in the report's 'Justice Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Hope' is mentioned in the report's 'Emotional Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Fear' is mentioned in the report's 'Emotional Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Pragmatism' is mentioned in the report's 'Reality Axis' but is not defined or listed in the RAG index.",
+        "The dimension 'Fantasy' is mentioned in the report's 'Reality Axis' but is not defined or listed in the RAG index."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the necessary 'statistical_results.json' file or equivalent comprehensive statistical output (e.g., aggregated means, standard deviations, correlations, and speaker-level derived metrics for all speakers) required to validate the numerical claims in the report. The available 'derived_metrics_results.json' contains function definitions for derived metrics, and the 'evidence_database' files contain quote-level evidence with confidence scores, not the aggregated statistical results or raw dimensional scores for all speakers. The 'raw_analysis_scores: individual_analysis_results.json' only provides raw scores for a single speaker (John Lewis), not the full dataset needed for all means, standard deviations, and correlations presented in the report's tables. Therefore, a direct comparison of the reported statistics against the source data cannot be performed as per the rubric's instructions.",
+      "examples": [
+        "Report claims: 'John McCain, CCI = +0.80', 'Hope vs. Fear, r = -0.87', 'resentment (mean = 0.71)'.",
+        "Required evidence: A comprehensive statistical output file (e.g., 'statistical_results.json') containing these calculated values for all speakers and dimensions, as well as the full correlation matrix and descriptive statistics for all variables.",
+        "Provided evidence: Only snippets of derived metric function definitions and individual quote-level evidence for a subset of speakers/dimensions, which do not contain the aggregated statistical results necessary for validation."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires cross-referencing selected evidence quotes against the provided RAG evidence index (which should contain the full text of all corpus documents). However, the 'EVIDENCE DATABASE FOR VALIDATION' provided does not contain the full text of the corpus documents from which the report's quotes are drawn (specifically, 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt'). The only 'evidence_database' provided (SOURCE 5) contains extracted quotes only from 'mitt_romney_2020_impeachment_9ebec73f.txt'. Therefore, it was impossible to cross-reference the selected quotes against the required full-text RAG index, as the relevant data was not present.",
+      "examples": [
+        "As Bernie Sanders stated: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "As Bernie Sanders stated: \"But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "As Bernie Sanders stated: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "As John McCain stated: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "As John McCain stated: \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several phrases that are either superlative, definitive, or overly promotional, which may require editorial review for academic tone, especially given the explicitly stated limitation of a small sample size (N=8) and the report's own caution that findings are 'preliminary, suggestive, and exploratory' and 'do not constitute definitive proof or generalizable conclusions.'",
+      "examples": [
+        "The data confirms that these tensions are empirically robust. (Section 5.4)",
+        "The CCI, in particular, proves to be a robust and intuitive measure of overall civic character. (Section 5.5)",
+        "The Tension Index is a methodological innovation that successfully captures the strategic complexity of using contradictory appeals... (Section 5.5)",
+        "This approach can move the field beyond subjective interpretation or simplistic keyword-based content analysis. (Section 6. Discussion)",
+        "The study demonstrates that the framework's core concepts are empirically sound, as evidenced by the strong oppositional correlations... (Section 7. Conclusion)",
+        "most notably regarding the existence of opposing 'civic' and 'pathological' meta-strategies and the uniquely complex relationship between justice and resentment in modern rhetoric. (Section 7. Conclusion)",
+        "While caution is warranted in interpreting these initial findings, the methodology shows immense promise. (Section 7. Conclusion)",
+        "It provides a pathway for researchers to move beyond impressionistic critiques of public discourse and toward a more rigorous, data-driven science of civic communication. (Section 7. Conclusion)"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains several instances of external academic authority claims, referencing specific academic theories and fields as foundational or aligning with the framework's design and findings. While not in the 'Author (Year)' format, these claims leverage external academic concepts as a form of authority or validation, which is prohibited as per the rubric's intent to exclude external academic discourse from computational analysis reports.",
+      "examples": [
+        "The CAF is grounded in Aristotelian virtue ethics and civic republican theory...",
+        "...suggests that virtue ethics provides a viable and powerful lens for deconstructing rhetoric.",
+        "...align with either deliberative or populist communication theories.",
+        "The statistical patterns align well with theories of political rhetoric that posit different persuasive modes.",
+        "By operationalizing concepts from political theory and virtue ethics..."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions 10 core analytical dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) as part of the Civic Analysis Framework (CAF) v10.0. While the report itself defines these dimensions, the provided RAG index (evidence database) only explicitly confirms 'Dignity' (as 'individual_dignity_col') and 'Tribalism' (as 'tribal_dominance_col') through the definition of 'identity_tension'. The remaining 8 dimensions are not found or defined within the provided framework content in the RAG index.",
+        "examples": [
+          "The dimension 'Truth' is mentioned in the report's 'Truth Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Manipulation' is mentioned in the report's 'Truth Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Justice' is mentioned in the report's 'Justice Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Resentment' is mentioned in the report's 'Justice Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Hope' is mentioned in the report's 'Emotional Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Fear' is mentioned in the report's 'Emotional Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Pragmatism' is mentioned in the report's 'Reality Axis' but is not defined or listed in the RAG index.",
+          "The dimension 'Fantasy' is mentioned in the report's 'Reality Axis' but is not defined or listed in the RAG index."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the necessary 'statistical_results.json' file or equivalent comprehensive statistical output (e.g., aggregated means, standard deviations, correlations, and speaker-level derived metrics for all speakers) required to validate the numerical claims in the report. The available 'derived_metrics_results.json' contains function definitions for derived metrics, and the 'evidence_database' files contain quote-level evidence with confidence scores, not the aggregated statistical results or raw dimensional scores for all speakers. The 'raw_analysis_scores: individual_analysis_results.json' only provides raw scores for a single speaker (John Lewis), not the full dataset needed for all means, standard deviations, and correlations presented in the report's tables. Therefore, a direct comparison of the reported statistics against the source data cannot be performed as per the rubric's instructions.",
+        "examples": [
+          "Report claims: 'John McCain, CCI = +0.80', 'Hope vs. Fear, r = -0.87', 'resentment (mean = 0.71)'.",
+          "Required evidence: A comprehensive statistical output file (e.g., 'statistical_results.json') containing these calculated values for all speakers and dimensions, as well as the full correlation matrix and descriptive statistics for all variables.",
+          "Provided evidence: Only snippets of derived metric function definitions and individual quote-level evidence for a subset of speakers/dimensions, which do not contain the aggregated statistical results necessary for validation."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires cross-referencing selected evidence quotes against the provided RAG evidence index (which should contain the full text of all corpus documents). However, the 'EVIDENCE DATABASE FOR VALIDATION' provided does not contain the full text of the corpus documents from which the report's quotes are drawn (specifically, 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt'). The only 'evidence_database' provided (SOURCE 5) contains extracted quotes only from 'mitt_romney_2020_impeachment_9ebec73f.txt'. Therefore, it was impossible to cross-reference the selected quotes against the required full-text RAG index, as the relevant data was not present.",
+        "examples": [
+          "As Bernie Sanders stated: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "As Bernie Sanders stated: \"But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "As Bernie Sanders stated: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "As John McCain stated: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "As John McCain stated: \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several phrases that are either superlative, definitive, or overly promotional, which may require editorial review for academic tone, especially given the explicitly stated limitation of a small sample size (N=8) and the report's own caution that findings are 'preliminary, suggestive, and exploratory' and 'do not constitute definitive proof or generalizable conclusions.'",
+        "examples": [
+          "The data confirms that these tensions are empirically robust. (Section 5.4)",
+          "The CCI, in particular, proves to be a robust and intuitive measure of overall civic character. (Section 5.5)",
+          "The Tension Index is a methodological innovation that successfully captures the strategic complexity of using contradictory appeals... (Section 5.5)",
+          "This approach can move the field beyond subjective interpretation or simplistic keyword-based content analysis. (Section 6. Discussion)",
+          "The study demonstrates that the framework's core concepts are empirically sound, as evidenced by the strong oppositional correlations... (Section 7. Conclusion)",
+          "most notably regarding the existence of opposing 'civic' and 'pathological' meta-strategies and the uniquely complex relationship between justice and resentment in modern rhetoric. (Section 7. Conclusion)",
+          "While caution is warranted in interpreting these initial findings, the methodology shows immense promise. (Section 7. Conclusion)",
+          "It provides a pathway for researchers to move beyond impressionistic critiques of public discourse and toward a more rigorous, data-driven science of civic communication. (Section 7. Conclusion)"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains several instances of external academic authority claims, referencing specific academic theories and fields as foundational or aligning with the framework's design and findings. While not in the 'Author (Year)' format, these claims leverage external academic concepts as a form of authority or validation, which is prohibited as per the rubric's intent to exclude external academic discourse from computational analysis reports.",
+        "examples": [
+          "The CAF is grounded in Aristotelian virtue ethics and civic republican theory...",
+          "...suggests that virtue ethics provides a viable and powerful lens for deconstructing rhetoric.",
+          "...align with either deliberative or populist communication theories.",
+          "The statistical patterns align well with theories of political rhetoric that posit different persuasive modes.",
+          "By operationalizing concepts from political theory and virtue ethics..."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

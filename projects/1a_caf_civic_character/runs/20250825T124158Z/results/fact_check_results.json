@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Five randomly selected textual evidence points from the 'REPORT TO VALIDATE' (an analysis report) could not be found verbatim in the provided 'SOURCE MATERIALS FOR VALIDATION'. The 'SOURCE MATERIALS FOR VALIDATION' consist of the framework definition (SOURCE 1), corpus manifest (SOURCE 2/4), and experiment definition (SOURCE 3/5). These sources define the methodology and data used, but do not contain the specific numerical results, archetypes, or the full text of the speeches from the corpus that are presented as findings or direct quotes in the analysis report. Therefore, the specific data points and direct quotes from the corpus presented in the analysis report are not verifiable against the provided source documents.",
+      "examples": [
+        "John McCain (+0.805) to Steve King (-0.480)",
+        "Pragmatism vs. Fantasy, r = -0.934",
+        "dignity and tribalism (r = -0.809)",
+        "The 'Populist Agitator' (e.g., Sanders, King) displays high vice, particularly `tribalism` (0.90) and `resentment` (0.95)",
+        "\"That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several strong, promotional claims about the framework's capabilities and impact, which may require editorial review for academic tone, especially given the acknowledged 'small sample size (N=8)' and 'preliminary' nature of the findings. These claims suggest a level of certainty or transformative impact that might be considered grandiose.",
+      "examples": [
+        "Correlation analysis strongly validates the framework's oppositional design...",
+        "It provides a robust, evidence-based methodology for moving beyond subjective interpretation to a more rigorous, data-driven understanding of civic discourse."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Five randomly selected textual evidence points from the 'REPORT TO VALIDATE' (an analysis report) could not be found verbatim in the provided 'SOURCE MATERIALS FOR VALIDATION'. The 'SOURCE MATERIALS FOR VALIDATION' consist of the framework definition (SOURCE 1), corpus manifest (SOURCE 2/4), and experiment definition (SOURCE 3/5). These sources define the methodology and data used, but do not contain the specific numerical results, archetypes, or the full text of the speeches from the corpus that are presented as findings or direct quotes in the analysis report. Therefore, the specific data points and direct quotes from the corpus presented in the analysis report are not verifiable against the provided source documents.",
+        "examples": [
+          "John McCain (+0.805) to Steve King (-0.480)",
+          "Pragmatism vs. Fantasy, r = -0.934",
+          "dignity and tribalism (r = -0.809)",
+          "The 'Populist Agitator' (e.g., Sanders, King) displays high vice, particularly `tribalism` (0.90) and `resentment` (0.95)",
+          "\"That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several strong, promotional claims about the framework's capabilities and impact, which may require editorial review for academic tone, especially given the acknowledged 'small sample size (N=8)' and 'preliminary' nature of the findings. These claims suggest a level of certainty or transformative impact that might be considered grandiose.",
+        "examples": [
+          "Correlation analysis strongly validates the framework's oppositional design...",
+          "It provides a robust, evidence-based methodology for moving beyond subjective interpretation to a more rigorous, data-driven understanding of civic discourse."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 6,
+      "critical_failures": 0,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

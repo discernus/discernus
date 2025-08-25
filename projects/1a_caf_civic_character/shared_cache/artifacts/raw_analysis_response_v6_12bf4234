@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analyzed document is a classic example of civil rights protest rhetoric. The analysis reflects the speech's strong emphasis on lived injustices and demands for specific, systemic change. The core of the speech lies on the Justice/Resentment axis, with high intensity and salience for both, reflecting a demand for justice fueled by righteous anger over grievances. The speech is also highly pragmatic, critiquing specific legislation rather than speaking in abstract terms. All scores are based on the direct rhetorical evidence in the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.85
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "pragmatism": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+          "confidence": 0.9,
+          "context_type": "Defining Opposition"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 1.0,
+          "context_type": "Explicit Value Statement"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?",
+          "confidence": 0.95,
+          "context_type": "Factual Claim"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 1.0,
+          "context_type": "Expression of Grievance"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+          "confidence": 1.0,
+          "context_type": "Demand for Systemic Change"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 0.9,
+          "context_type": "Description of Threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.85,
+          "context_type": "Vision for Future"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 0.95,
+          "context_type": "Practical Policy Critique"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

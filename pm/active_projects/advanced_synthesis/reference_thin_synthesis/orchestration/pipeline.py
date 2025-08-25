@@ -43,7 +43,7 @@ from discernus.core.audit_logger import AuditLogger
 from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAnalysisPlanRequest
 from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
-from ...txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
+from ...deprecated.txtai_evidence_curator.agent import TxtaiEvidenceCurator, TxtaiCurationRequest
 from ...comprehensive_knowledge_curator.agent import ComprehensiveKnowledgeCurator, ComprehensiveIndexRequest, KnowledgeQuery
 from ...sequential_synthesis.agent import SequentialSynthesisAgent, SynthesisRequest, SynthesisResponse
 from ...reliability_analysis_agent import ReliabilityAnalysisAgent

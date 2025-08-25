@@ -20,6 +20,17 @@ constraints: |
   - Evidence attribution fixes
   - Citation removal: eliminate external academic citations and authority claims
   - Language qualification: replace unsupported authority claims with data-focused language
+  - Framework accuracy fixes: correct framework terminology errors (e.g., "dimensions" vs "axes", framework structure descriptions)
+  - Dimension hallucination corrections: fix reports that incorrectly refer to framework axes as dimensions or misrepresent framework structure
+  - Terminology drift corrections: align report terminology with the exact framework specification (e.g., if framework uses "axes" and "dimensions" in specific ways, correct any drift from this usage)
+
+  FRAMEWORK ACCURACY EXAMPLES:
+  - INCORRECT: "five areas of analysis (Identity, Truth, Justice, Emotion, Reality)" 
+    CORRECT: "five analytical axes (Identity Axis: Tribalism/Dignity, Truth Axis: Truth/Manipulation, Justice Axis: Justice/Resentment, Emotional Axis: Fear/Hope, Reality Axis: Fantasy/Pragmatism)"
+  - INCORRECT: "Identity dimension" 
+    CORRECT: "Identity axis (comprising Tribalism and Dignity dimensions)"
+  - INCORRECT: "Emotion dimension" 
+    CORRECT: "Emotional axis (comprising Fear and Hope dimensions)"
 
   FORBIDDEN CHANGES:
   - Structural rewrites or reorganization

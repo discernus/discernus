@@ -1,0 +1,106 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "All analytical dimensions mentioned in the report are not found or defined within the provided 'framework content within the RAG index' (EVIDENCE DATABASE FOR VALIDATION). The evidence database consists solely of numerical identifiers and scores, lacking any textual content that would define the dimensions.",
+      "examples": [
+        "Dignity",
+        "Tribalism",
+        "Truth",
+        "Manipulation",
+        "Justice",
+        "Resentment",
+        "Hope",
+        "Fear",
+        "Pragmatism",
+        "Fantasy"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "Cannot perform the 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the statistical results (e.g., means, standard deviations, correlations) in a format that allows for verification against the report's claims. The rubric explicitly states to 'query the RAG index to find the corresponding value in the research data' and refers to a 'statistical_results.json' file, neither of which is provided or represented by the given evidence. The provided evidence consists of a few tuples of integers and floats that do not correspond to any of the numerous statistical values in the report.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents, which is required to 'search the provided RAG evidence index (which contains the full text of all corpus documents) to confirm the quote's presence' as per the rubric instructions. The database only lists source IDs and scores, making it impossible to cross-reference the textual quotes against the actual RAG evidence index.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative or promotional phrases that may require editorial review for academic tone, especially given the acknowledged preliminary nature and small sample size (N=8) of the study. These claims, while potentially true in a broader context, are presented with strong, unqualified language that could be perceived as unsubstantiated for the current scope of the research.",
+      "examples": [
+        "\"indicating the framework's strong discriminatory power even within a small sample.\" (Section 2. Opening Framework: Key Insights)",
+        "\"The matrix shows very strong, negative correlations between the virtues and their corresponding vices, confirming the framework's theoretical foundation.\" (Section 5.3 Correlation and Interaction Analysis)",
+        "\"The strong negative correlation between `pragmatism` and `fantasy` (r = -0.93) is the most powerful relationship in the dataset, suggesting the Reality Axis is a fundamental dividing line in rhetorical strategy.\" (Section 5.4 Pattern Recognition and Theoretical Insights)",
+        "\"The broader significance of this work lies in its demonstration of a scalable, data-driven method for analyzing the moral character of discourse.\" (Section 6. Discussion)",
+        "\"It establishes that the CAF is a potentially powerful tool for the empirical study of political communication, offering a structured, transparent, and scalable method for assessing the health and character of civic discourse.\" (Section 7. Conclusion)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "All analytical dimensions mentioned in the report are not found or defined within the provided 'framework content within the RAG index' (EVIDENCE DATABASE FOR VALIDATION). The evidence database consists solely of numerical identifiers and scores, lacking any textual content that would define the dimensions.",
+        "examples": [
+          "Dignity",
+          "Tribalism",
+          "Truth",
+          "Manipulation",
+          "Justice",
+          "Resentment",
+          "Hope",
+          "Fear",
+          "Pragmatism",
+          "Fantasy"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "Cannot perform the 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the statistical results (e.g., means, standard deviations, correlations) in a format that allows for verification against the report's claims. The rubric explicitly states to 'query the RAG index to find the corresponding value in the research data' and refers to a 'statistical_results.json' file, neither of which is provided or represented by the given evidence. The provided evidence consists of a few tuples of integers and floats that do not correspond to any of the numerous statistical values in the report.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents, which is required to 'search the provided RAG evidence index (which contains the full text of all corpus documents) to confirm the quote's presence' as per the rubric instructions. The database only lists source IDs and scores, making it impossible to cross-reference the textual quotes against the actual RAG evidence index.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative or promotional phrases that may require editorial review for academic tone, especially given the acknowledged preliminary nature and small sample size (N=8) of the study. These claims, while potentially true in a broader context, are presented with strong, unqualified language that could be perceived as unsubstantiated for the current scope of the research.",
+        "examples": [
+          "\"indicating the framework's strong discriminatory power even within a small sample.\" (Section 2. Opening Framework: Key Insights)",
+          "\"The matrix shows very strong, negative correlations between the virtues and their corresponding vices, confirming the framework's theoretical foundation.\" (Section 5.3 Correlation and Interaction Analysis)",
+          "\"The strong negative correlation between `pragmatism` and `fantasy` (r = -0.93) is the most powerful relationship in the dataset, suggesting the Reality Axis is a fundamental dividing line in rhetorical strategy.\" (Section 5.4 Pattern Recognition and Theoretical Insights)",
+          "\"The broader significance of this work lies in its demonstration of a scalable, data-driven method for analyzing the moral character of discourse.\" (Section 6. Discussion)",
+          "\"It establishes that the CAF is a potentially powerful tool for the empirical study of political communication, offering a structured, transparent, and scalable method for assessing the health and character of civic discourse.\" (Section 7. Conclusion)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}
