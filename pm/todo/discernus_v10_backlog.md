@@ -800,17 +800,22 @@
 
 **Note**: [CRITICAL-005] and [CRITICAL-006] have been completed and moved to DONE.md
 
-- [ ] Fix derived metrics and statistical analysis validation gap
+- [x] ~~Fix derived metrics and statistical analysis validation gap~~ **ATTEMPTED & REVERTED**
   - **Issue**: Current validation passes metadata-only results that contain no actual statistical outputs
-  - **Current Approach**: Complex data structure validation that's getting THICK
-  - **Proposed Solution**: Hash-based validation in code generation prompts
+  - **Attempted Solution**: Hash-based validation in code generation prompts
     - Add validation_hash field to generated functions
     - Calculate hash from actual results (e.g., hash(str(sorted(results.keys())))
     - Simple validation: just check for presence of validation_hash
     - More elegant than complex nested data structure analysis
     - Aligns with THIN principles
-  - **Status**: Backlogged for future implementation
-  - **Priority**: Medium
+  - **Result**: Architecturally sound but practically unusable
+    - LLM (Gemini 2.5 Pro) consistently failed to follow prompt instructions
+    - Despite multiple prompt refinements, functions returned simple values instead of required dictionaries with validation hashes
+    - Hash-based validation correctly rejected non-compliant functions, proving the architecture works
+    - **Root Cause**: Prompt compliance issue, not system architecture problem
+  - **Status**: Reverted (commit 6ad02c19) - system returned to operational state
+  - **Lesson Learned**: Even flagship models may not reliably follow complex prompt requirements
+  - **Alternative Approaches**: Try different models (Claude, GPT-4), post-processing, or accept current validation approach
 
 - [ ] Replace brittle placeholder system with THIN revision agent approach
   - **Problem**: Current `SynthesisFinisher` with `{corr(var1, var2)}` placeholders is architecturally fragile
