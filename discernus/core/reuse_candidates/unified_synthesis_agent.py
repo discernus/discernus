@@ -133,12 +133,44 @@ Use the evidence above to support your statistical interpretations and generate 
             raise
 
     def _extract_findings_for_rag(self, statistical_results: Dict[str, Any]) -> List[str]:
-        """A simple method to extract key statistical findings to use as RAG queries."""
+        """Extract key statistical findings to use as RAG queries."""
         findings = []
-        correlations = statistical_results.get("correlation_matrix", {}).get("correlations", {})
-        for key, value in correlations.items():
-            findings.append(f"The correlation between {key.replace('_vs_', ' and ')} is {value:.2f}")
-        return findings
+        
+        # Extract correlations from the actual structure: statistical_data.calculate_correlation_matrix
+        statistical_data = statistical_results.get("statistical_data", {})
+        correlation_matrix = statistical_data.get("calculate_correlation_matrix", {})
+        
+        # Generate queries for strong correlations (|r| > 0.7)
+        for var1, correlations in correlation_matrix.items():
+            if isinstance(correlations, dict):
+                for var2, correlation in correlations.items():
+                    if (isinstance(correlation, (int, float)) and 
+                        var1 != var2 and 
+                        abs(correlation) > 0.7):
+                        # Create readable variable names
+                        var1_clean = var1.replace('_raw', '').replace('_', ' ').title()
+                        var2_clean = var2.replace('_raw', '').replace('_', ' ').title()
+                        findings.append(f"{var1_clean} {var2_clean} correlation")
+                        
+        # Add queries for key derived metrics
+        derived_metrics = statistical_data.get("summarize_corpus_metrics", {})
+        if derived_metrics:
+            findings.extend([
+                "full cohesion index analysis",
+                "strategic contradiction patterns",
+                "tension indices interpretation",
+                "cohesive fragmentative dimensions"
+            ])
+        
+        # Ensure we have some queries even if correlations are missing
+        if not findings:
+            findings = [
+                "framework dimensions analysis",
+                "statistical results interpretation", 
+                "corpus analysis findings"
+            ]
+            
+        return findings[:10]  # Limit to avoid too many queries
 
     def _retrieve_and_format_evidence(self, queries: List[str]) -> str:
         """Use the RAG index to retrieve and format evidence for the given queries."""

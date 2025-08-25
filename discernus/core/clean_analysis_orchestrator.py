@@ -1683,6 +1683,9 @@ class CleanAnalysisOrchestrator:
                 prompt.encode("utf-8"), {"artifact_type": "synthesis_prompt"}
             )
             
+            # TRANSACTION INTEGRITY CHECK: Verify all required resources before synthesis
+            self._validate_synthesis_prerequisites(evidence_hashes, research_data_hash)
+            
             # Build the dedicated evidence-only RAG index for the synthesis agent
             synthesis_rag_index = self._build_synthesis_evidence_index(
                 evidence_artifact_hashes=evidence_hashes
@@ -2354,15 +2357,78 @@ class CleanAnalysisOrchestrator:
         """Log status updates."""
         self.logger.info(f"STATUS: {message}")
 
+    def _validate_synthesis_prerequisites(self, evidence_hashes: List[str], research_data_hash: str) -> None:
+        """
+        Transaction integrity check: Verify all required resources are present before synthesis.
+        
+        Prevents silent failures where synthesis proceeds with incomplete data.
+        """
+        errors = []
+        
+        # 1. Check evidence artifacts
+        if not evidence_hashes:
+            errors.append("No evidence artifacts available")
+        else:
+            # Verify evidence artifacts are accessible
+            inaccessible_evidence = []
+            for hash_val in evidence_hashes:
+                try:
+                    content = self.artifact_storage.get_artifact(hash_val, quiet=True)
+                    if not content:
+                        inaccessible_evidence.append(hash_val[:8])
+                except Exception:
+                    inaccessible_evidence.append(hash_val[:8])
+            
+            if inaccessible_evidence:
+                errors.append(f"Evidence artifacts inaccessible: {inaccessible_evidence}")
+        
+        # 2. Check research data
+        if not research_data_hash:
+            errors.append("No research data hash provided")
+        else:
+            try:
+                research_content = self.artifact_storage.get_artifact(research_data_hash)
+                if not research_content:
+                    errors.append("Research data artifact inaccessible")
+                else:
+                    # Verify research data contains required components
+                    research_data = json.loads(research_content.decode('utf-8'))
+                    if 'statistical_results' not in research_data:
+                        errors.append("Research data missing statistical_results")
+                    if research_data.get('status') == 'failed':
+                        errors.append("Statistical analysis failed - cannot proceed")
+            except Exception as e:
+                errors.append(f"Research data validation failed: {str(e)}")
+        
+        # 3. Check corpus manifest access
+        try:
+            corpus_path = self.experiment_path / "corpus.md"
+            if not corpus_path.exists():
+                errors.append("Corpus manifest (corpus.md) not found")
+            else:
+                corpus_content = corpus_path.read_text(encoding='utf-8')
+                if not corpus_content.strip():
+                    errors.append("Corpus manifest is empty")
+        except Exception as e:
+            errors.append(f"Corpus manifest validation failed: {str(e)}")
+        
+        # Fail fast if any prerequisites are missing
+        if errors:
+            error_msg = "Synthesis prerequisites validation failed:\n" + "\n".join(f"  - {error}" for error in errors)
+            raise CleanAnalysisError(error_msg)
+        
+        self._log_progress("✅ Synthesis prerequisites validated - all required resources present")
+
     def _build_synthesis_evidence_index(
         self, evidence_artifact_hashes: List[str]
     ) -> Optional[Embeddings]:
         """Builds a dedicated RAG index from evidence artifacts for the synthesis agent."""
         if not evidence_artifact_hashes:
-            self._log_progress(
-                "⚠️ No evidence found, skipping synthesis RAG index build."
+            # CRITICAL: Evidence is required for synthesis - fail fast
+            raise CleanAnalysisError(
+                "No evidence artifacts found for synthesis. Cannot generate report without textual evidence. "
+                "This indicates a failure in the analysis phase evidence extraction."
             )
-            return None
 
         try:
             self._log_progress(
@@ -2375,10 +2441,11 @@ class CleanAnalysisOrchestrator:
                     evidence_documents.append({"content": content.decode("utf-8")})
 
             if not evidence_documents:
-                self._log_progress(
-                    "⚠️ Evidence artifacts found, but none could be loaded. Skipping synthesis RAG index build."
+                # CRITICAL: Evidence artifacts exist but couldn't be loaded - fail fast
+                raise CleanAnalysisError(
+                    f"Evidence artifacts found ({len(evidence_artifact_hashes)} hashes) but none could be loaded. "
+                    "This indicates corrupted or inaccessible evidence artifacts."
                 )
-                return None
 
             rag_manager = RAGIndexManager(artifact_storage=self.artifact_storage)
             synthesis_rag_index = rag_manager.build_index_from_documents(
@@ -2391,8 +2458,8 @@ class CleanAnalysisOrchestrator:
 
         except Exception as e:
             self._log_progress(f"❌ Failed to build synthesis evidence RAG index: {e}")
-            # We don't raise here; synthesis can proceed without RAG, though it will be impaired.
-            return None
+            # CRITICAL: Evidence is required for synthesis - fail fast
+            raise CleanAnalysisError(f"Failed to build synthesis evidence RAG index: {e}. Cannot proceed without evidence.")
 
     def _run_fact_checker_validation(self, synthesis_report: str) -> Dict[str, Any]:
         """Run fact-checker validation on synthesis report and return structured results."""
