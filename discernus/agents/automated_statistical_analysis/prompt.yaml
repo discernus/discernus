@@ -33,7 +33,6 @@ template: |
   5. Functions must include proper docstrings with statistical methodology
   6. Functions must be production-ready with error handling
   7. Functions should follow the exact signature: def function_name(data, **kwargs):
-  8. **CRITICAL**: Functions must include validation hash for content integrity verification
 
   **WORKSPACE FILES AVAILABLE:**
   - Raw analysis data: JSON files in the current directory
@@ -115,28 +114,12 @@ template: |
                       'max': float(df[col].max())
                   }}
           
-          # CRITICAL: Add validation hash for content integrity
-          import hashlib
-          validation_content = str(sorted(results.keys())) + str(len(results))
-          validation_hash = hashlib.sha256(validation_content.encode()).hexdigest()[:8]
-          results['_validation_hash'] = validation_hash
-          
           return results
           
       except Exception:
           return None
   <<<DISCERNUS_FUNCTION_END>>>
 
-  **VALIDATION HASH REQUIREMENT:**
-  Every function MUST include a validation hash to verify content integrity:
-  ```python
-  # At the end of each function, before returning results:
-  import hashlib
-  validation_content = str(sorted(results.keys())) + str(len(results))
-  validation_hash = hashlib.sha256(validation_content.encode()).hexdigest()[:8]
-  results['_validation_hash'] = validation_hash
-  ```
-  
   Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function MUST take a 'data' parameter and can optionally read additional context from workspace files.
 
 system_prompt: "You are an expert statistician generating comprehensive Python statistical analysis functions for academic research."

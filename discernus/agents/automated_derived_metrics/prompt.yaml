@@ -28,7 +28,6 @@ template: |
   3. Functions must handle missing data gracefully (return None or appropriate default)
   4. Functions must include proper docstrings with mathematical formulas
   5. Functions must be production-ready with error handling
-  6. **CRITICAL**: Functions must include validation hash for content integrity verification
 
   **OUTPUT FORMAT:**
   Wrap each function in the proprietary delimiters exactly as shown:
@@ -76,36 +75,12 @@ template: |
           if pd.isna(tribal_dominance) or pd.isna(individual_dignity):
               return None
               
-          result = abs(tribal_dominance - individual_dignity)
-          
-          # CRITICAL: Add validation hash for content integrity
-          import hashlib
-          validation_content = f"identity_tension:{result:.6f}"
-          validation_hash = hashlib.sha256(validation_content.encode()).hexdigest()[:8]
-          
-          return {
-              'identity_tension': result,
-              '_validation_hash': validation_hash
-          }
+          return abs(tribal_dominance - individual_dignity)
           
       except Exception:
           return None
   <<<DISCERNUS_FUNCTION_END>>>
 
-  **VALIDATION HASH REQUIREMENT:**
-  Every function MUST include a validation hash to verify content integrity:
-  ```python
-  # At the end of each function, before returning results:
-  import hashlib
-  validation_content = f"function_name:{result:.6f}"  # Use actual function name and result
-  validation_hash = hashlib.sha256(validation_content.encode()).hexdigest()[:8]
-  
-  return {
-      'metric_name': result,
-      '_validation_hash': validation_hash
-  }
-  ```
-  
   Generate functions for ALL calculations listed in the framework. Make sure to import pandas as pd at the top of each function if needed.
 
 system_prompt: "You are an expert Python developer generating calculation functions for research frameworks."
