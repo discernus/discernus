@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "issues": [
+    "Five dimensions in the framework have non-contiguous scoring calibration ranges. For example, the 'elite_conspiracy_systemic_corruption' dimension defines ranges for high (0.8-1.0), medium (0.5-0.7), and low (0.1-0.4), leaving gaps such as 0.4-0.5 and 0.7-0.8 undefined. This affects 'elite_conspiracy_systemic_corruption', 'authenticity_vs_political_class', 'homogeneous_people_construction', 'nationalist_exclusion', and 'economic_populist_appeals'.",
+    "The research questions listed at the top of the 'experiment.md' file are inconsistent with the list in the 'Research Questions' section within the document's main body. The top list is missing the third question: \"How do populist conservative and progressive styles differ in their boundary construction and crisis narratives?\".",
+    "The corpus contains only four documents (N=4). According to Discernus validation guidelines, this sample size is too small for quantitative statistical analysis, such as correlation or significance testing."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-25T04:05:08.771689+00:00"
+}

@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "issues": [
-    "The research questions stated in the experiment's human-readable abstract ('What are the baseline cohesion and tension scores for the documents in the sample corpus?') do not align with the specific research question provided in the machine-readable configuration ('Will McCain's institutional discourse show higher cohesion than populist styles?'). The machine-readable question is the operational one for the experiment.",
-    "The experiment's research question, 'Will McCain's institutional discourse show higher cohesion than populist styles?', requires a comparison between a single 'institutional' document (McCain 2008) and three 'populist' documents. With N=1 for institutional discourse and N=3 for populist styles, drawing statistically robust conclusions about general 'styles' is severely limited."
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-08-24T21:03:01.579332+00:00"
-}

@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The framework's documentation (Source 3) contains a superlative and potentially unsubstantiated claim regarding its novelty and scope, which may require editorial review for academic tone.",
+      "examples": [
+        "The PDAF addresses this critical gap by providing the first comprehensive, cross-ideological framework for quantifying populist rhetorical patterns through innovative populist strategic tension analysis that captures the sophisticated ways speakers deploy populist appeals with varying emphasis and internal contradictions."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "success",
+    "findings": [
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The framework's documentation (Source 3) contains a superlative and potentially unsubstantiated claim regarding its novelty and scope, which may require editorial review for academic tone.",
+        "examples": [
+          "The PDAF addresses this critical gap by providing the first comprehensive, cross-ideological framework for quantifying populist rhetorical patterns through innovative populist strategic tension analysis that captures the sophisticated ways speakers deploy populist appeals with varying emphasis and internal contradictions."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 6,
+      "critical_failures": 0,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

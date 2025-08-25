@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "issues": [
-    "In experiment 'simple_test', the human-readable research question in the narrative section ('What are the baseline cohesion and tension scores for the documents in the sample corpus?') differs from the machine-readable research question in the YAML appendix ('Will McCain's institutional discourse show higher cohesion than populist styles?').",
-    "The corpus contains only 4 documents. According to platform standards, this sample size is too small for robust statistical significance testing and limits the generalizability of findings."
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-08-23T17:52:13.887145+00:00"
-}

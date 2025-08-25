@@ -1,0 +1,1275 @@
+{
+  "experiment_metadata": {
+    "name": "simple_test_pdaf",
+    "framework": "pdaf_v10.md",
+    "corpus_documents": 4
+  },
+  "raw_analysis_data": [
+    {
+      "analysis_id": "analysis_5b6b922707fd",
+      "result_hash": "39d5bda58342ffc3d75fc70ef804e2c7590dea9df28233a272ca7188f5deb332",
+      "duration_seconds": 31.640336,
+      "result_content": {
+        "analysis_id": "analysis_5b6b922707fd",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"The analyzed document is a presidential concession speech. This genre of political communication typically emphasizes national unity, graciousness in defeat, and support for the democratic process. As such, it is a strong counter-example to populist discourse, and most dimensional scores are expected to be at or near zero. The analysis focuses on the absence of populist tropes and the presence of rhetoric that affirms pluralism and institutional legitimacy.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_democratic_process\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgement_of_challenges\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_electoral_outcome\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_for_unity_and_cooperation\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"total_absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Today I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_political_service\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"recognition_of_group_identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_patriotic_statement\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"...and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"generic_statement_of_goals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "682468dbe984bf73ce44746b8dd664f0ef23138426710c62de1bb7fce83044ce",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:05:08.782541+00:00",
+          "end_time": "2025-08-25T04:05:40.422896+00:00",
+          "duration_seconds": 31.640336
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      },
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_a2e1ad683272",
+      "result_hash": "7c91bf2675febbfd9bf88fcc3b3ca1fdc4cf930aae31191a52c47bf25fce3515",
+      "duration_seconds": 56.451586,
+      "result_content": {
+        "analysis_id": "analysis_a2e1ad683272",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political speech with two distinct but thematically linked sections. The first section addresses judicial appointments and constitutional interpretation, while the second, more extensive section focuses on crimes committed by undocumented immigrants. This structure makes certain populist dimensions, particularly Nationalist Exclusion and Crisis-Restoration, highly salient.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"...to push Obamacare down the throats of the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_policy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We have a Constitution that's got to be restored. And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"That being one of God's children is good enough to be protected by the law, but everybody treated equally.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"closing_statement\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_tragedy_narrative\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "db479684ffd5fb1e331ed9f7bdb948bf744f9988e39981d3ec49189ce0f59b07",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:05:40.423390+00:00",
+          "end_time": "2025-08-25T04:06:36.874992+00:00",
+          "duration_seconds": 56.451586
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      },
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_f39e747e693e",
+      "result_hash": "6a8b6851a8c711877602bd6f419050437433c2221c49877b036dcde2c345859c",
+      "duration_seconds": 39.142563,
+      "result_content": {
+        "analysis_id": "analysis_f39e747e693e",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a quintessential example of left-wing economic populism. The analysis focused on identifying the core rhetorical structures defined by the framework, noting the extremely high intensity and salience of economic and anti-elite framing, while observing the complete absence of nationalist exclusion themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"moral_dichotomy_construction\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"decline_narrative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_appeal_to_popular_will\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"systemic_corruption_claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"common_sense_vs_expertise_framing\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_for_collective_unity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veteran Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_grievance_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "b1fc88a98223433be9303386812441e509935b2c7f1b84e54f12ab21cd21311d",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:06:36.875922+00:00",
+          "end_time": "2025-08-25T04:07:16.018499+00:00",
+          "duration_seconds": 39.142563
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      },
+      "document_name": "unknown"
+    },
+    {
+      "analysis_id": "analysis_dab23149d4ed",
+      "result_hash": "675849cf81687f3095819efbe9d0024cd93d2fd2b78ed3fdcf25ff9a8f68959e",
+      "duration_seconds": 53.338922,
+      "result_content": {
+        "analysis_id": "analysis_dab23149d4ed",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a potent example of left-wing economic populism. The core populist themes of a Manichaean struggle between 'the people' (defined as the working/middle class) and a corrupt 'elite' (oligarchs, billionaires) are highly intense and salient. The analysis also captures a strong emphasis on authenticity and the construction of a unified 'people' based on class solidarity, while explicitly rejecting nationalist or cultural exclusion as a divisive tactic of the elite.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"problem_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"boundary_setting\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"He\u2019s handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback. And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"accusation_of_collusion\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I believe it because I was a waitress, because I\u2019ve scrubbed toilets with my mom to afford school, because I\u2019ve worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_narrative\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"coalition_building\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who\u2019s just trying to make a better life for themselves. But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"rejection_of_othering\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"It\u2019s shorthand for the right wing\u2019s entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans\u2019 benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_argument\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "d254878d3df04fb6d1062ffe102d53c1bfd6a6382967e6dd77977213e7ae881c",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:07:16.019555+00:00",
+          "end_time": "2025-08-25T04:08:09.358491+00:00",
+          "duration_seconds": 53.338922
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      },
+      "document_name": "unknown"
+    }
+  ],
+  "derived_metrics_data": [
+    {
+      "analysis_id": "analysis_5b6b922707fd",
+      "result_hash": "39d5bda58342ffc3d75fc70ef804e2c7590dea9df28233a272ca7188f5deb332",
+      "duration_seconds": 31.640336,
+      "result_content": {
+        "analysis_id": "analysis_5b6b922707fd",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"The analyzed document is a presidential concession speech. This genre of political communication typically emphasizes national unity, graciousness in defeat, and support for the democratic process. As such, it is a strong counter-example to populist discourse, and most dimensional scores are expected to be at or near zero. The analysis focuses on the absence of populist tropes and the presence of rhetoric that affirms pluralism and institutional legitimacy.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_democratic_process\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgement_of_challenges\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_electoral_outcome\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_for_unity_and_cooperation\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"total_absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Today I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_political_service\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"recognition_of_group_identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_patriotic_statement\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"...and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"generic_statement_of_goals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "682468dbe984bf73ce44746b8dd664f0ef23138426710c62de1bb7fce83044ce",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:05:08.782541+00:00",
+          "end_time": "2025-08-25T04:05:40.422896+00:00",
+          "duration_seconds": 31.640336
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      }
+    },
+    {
+      "analysis_id": "analysis_a2e1ad683272",
+      "result_hash": "7c91bf2675febbfd9bf88fcc3b3ca1fdc4cf930aae31191a52c47bf25fce3515",
+      "duration_seconds": 56.451586,
+      "result_content": {
+        "analysis_id": "analysis_a2e1ad683272",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political speech with two distinct but thematically linked sections. The first section addresses judicial appointments and constitutional interpretation, while the second, more extensive section focuses on crimes committed by undocumented immigrants. This structure makes certain populist dimensions, particularly Nationalist Exclusion and Crisis-Restoration, highly salient.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"...to push Obamacare down the throats of the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_policy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We have a Constitution that's got to be restored. And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"That being one of God's children is good enough to be protected by the law, but everybody treated equally.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"closing_statement\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_tragedy_narrative\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "db479684ffd5fb1e331ed9f7bdb948bf744f9988e39981d3ec49189ce0f59b07",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:05:40.423390+00:00",
+          "end_time": "2025-08-25T04:06:36.874992+00:00",
+          "duration_seconds": 56.451586
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      }
+    },
+    {
+      "analysis_id": "analysis_f39e747e693e",
+      "result_hash": "6a8b6851a8c711877602bd6f419050437433c2221c49877b036dcde2c345859c",
+      "duration_seconds": 39.142563,
+      "result_content": {
+        "analysis_id": "analysis_f39e747e693e",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a quintessential example of left-wing economic populism. The analysis focused on identifying the core rhetorical structures defined by the framework, noting the extremely high intensity and salience of economic and anti-elite framing, while observing the complete absence of nationalist exclusion themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"moral_dichotomy_construction\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"decline_narrative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_appeal_to_popular_will\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"systemic_corruption_claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"common_sense_vs_expertise_framing\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_for_collective_unity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veteran Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_grievance_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+        "evidence_hash": "b1fc88a98223433be9303386812441e509935b2c7f1b84e54f12ab21cd21311d",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:06:36.875922+00:00",
+          "end_time": "2025-08-25T04:07:16.018499+00:00",
+          "duration_seconds": 39.142563
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      }
+    },
+    {
+      "analysis_id": "analysis_dab23149d4ed",
+      "result_hash": "675849cf81687f3095819efbe9d0024cd93d2fd2b78ed3fdcf25ff9a8f68959e",
+      "duration_seconds": 53.338922,
+      "result_content": {
+        "analysis_id": "analysis_dab23149d4ed",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "simple_test_pdaf",
+        "model_used": "vertex_ai/gemini-2.5-pro",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a potent example of left-wing economic populism. The core populist themes of a Manichaean struggle between 'the people' (defined as the working/middle class) and a corrupt 'elite' (oligarchs, billionaires) are highly intense and salient. The analysis also captures a strong emphasis on authenticity and the construction of a unified 'people' based on class solidarity, while explicitly rejecting nationalist or cultural exclusion as a divisive tactic of the elite.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"problem_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"boundary_setting\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"He\u2019s handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback. And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"accusation_of_collusion\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I believe it because I was a waitress, because I\u2019ve scrubbed toilets with my mom to afford school, because I\u2019ve worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_narrative\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"coalition_building\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who\u2019s just trying to make a better life for themselves. But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"rejection_of_othering\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"It\u2019s shorthand for the right wing\u2019s entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans\u2019 benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_argument\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "d254878d3df04fb6d1062ffe102d53c1bfd6a6382967e6dd77977213e7ae881c",
+        "execution_metadata": {
+          "start_time": "2025-08-25T04:07:16.019555+00:00",
+          "end_time": "2025-08-25T04:08:09.358491+00:00",
+          "duration_seconds": 53.338922
+        },
+        "input_artifacts": {
+          "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+          "document_hashes": [
+            "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "simple_test_pdaf",
+            "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250825T040428Z_6a7a4178"
+        }
+      }
+    }
+  ],
+  "derived_metrics_metadata": {
+    "status": "completed",
+    "derived_metrics_hash": "a1f2351d47811b72af15036ba86b02883025a44ca5e3e0829928d9cba3092b34",
+    "functions_generated": 6,
+    "derived_metrics_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 6,
+        "output_file": "automatedderivedmetricsagent_functions.py",
+        "module_size": 13976
+      },
+      "derived_metrics_data": {
+        "status": "success",
+        "original_count": 4,
+        "derived_count": 4,
+        "derived_metrics": [
+          {
+            "analysis_id": "analysis_5b6b922707fd",
+            "result_hash": "39d5bda58342ffc3d75fc70ef804e2c7590dea9df28233a272ca7188f5deb332",
+            "duration_seconds": 31.640336,
+            "result_content": {
+              "analysis_id": "analysis_5b6b922707fd",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test_pdaf",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"The analyzed document is a presidential concession speech. This genre of political communication typically emphasizes national unity, graciousness in defeat, and support for the democratic process. As such, it is a strong counter-example to populist discourse, and most dimensional scores are expected to be at or near zero. The analysis focuses on the absence of populist tropes and the presence of rhetoric that affirms pluralism and institutional legitimacy.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_democratic_process\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgement_of_challenges\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_electoral_outcome\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_for_unity_and_cooperation\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"total_absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Today I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_political_service\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"recognition_of_group_identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_patriotic_statement\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"...and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"generic_statement_of_goals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+              "evidence_hash": "682468dbe984bf73ce44746b8dd664f0ef23138426710c62de1bb7fce83044ce",
+              "execution_metadata": {
+                "start_time": "2025-08-25T04:05:08.782541+00:00",
+                "end_time": "2025-08-25T04:05:40.422896+00:00",
+                "duration_seconds": 31.640336
+              },
+              "input_artifacts": {
+                "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+                "document_hashes": [
+                  "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_pdaf",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250825T040428Z_6a7a4178"
+              }
+            }
+          },
+          {
+            "analysis_id": "analysis_a2e1ad683272",
+            "result_hash": "7c91bf2675febbfd9bf88fcc3b3ca1fdc4cf930aae31191a52c47bf25fce3515",
+            "duration_seconds": 56.451586,
+            "result_content": {
+              "analysis_id": "analysis_a2e1ad683272",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test_pdaf",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a political speech with two distinct but thematically linked sections. The first section addresses judicial appointments and constitutional interpretation, while the second, more extensive section focuses on crimes committed by undocumented immigrants. This structure makes certain populist dimensions, particularly Nationalist Exclusion and Crisis-Restoration, highly salient.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"...to push Obamacare down the throats of the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_policy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We have a Constitution that's got to be restored. And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_nomination\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"argument_against_judiciary\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"That being one of God's children is good enough to be protected by the law, but everybody treated equally.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"closing_statement\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_tragedy_narrative\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_dimension\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "db479684ffd5fb1e331ed9f7bdb948bf744f9988e39981d3ec49189ce0f59b07",
+              "execution_metadata": {
+                "start_time": "2025-08-25T04:05:40.423390+00:00",
+                "end_time": "2025-08-25T04:06:36.874992+00:00",
+                "duration_seconds": 56.451586
+              },
+              "input_artifacts": {
+                "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+                "document_hashes": [
+                  "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_pdaf",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250825T040428Z_6a7a4178"
+              }
+            }
+          },
+          {
+            "analysis_id": "analysis_f39e747e693e",
+            "result_hash": "6a8b6851a8c711877602bd6f419050437433c2221c49877b036dcde2c345859c",
+            "duration_seconds": 39.142563,
+            "result_content": {
+              "analysis_id": "analysis_f39e747e693e",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test_pdaf",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a quintessential example of left-wing economic populism. The analysis focused on identifying the core rhetorical structures defined by the framework, noting the extremely high intensity and salience of economic and anti-elite framing, while observing the complete absence of nationalist exclusion themes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"moral_dichotomy_construction\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"decline_narrative\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_appeal_to_popular_will\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"systemic_corruption_claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"common_sense_vs_expertise_framing\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_for_collective_unity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veteran Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_grievance_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+              "evidence_hash": "b1fc88a98223433be9303386812441e509935b2c7f1b84e54f12ab21cd21311d",
+              "execution_metadata": {
+                "start_time": "2025-08-25T04:06:36.875922+00:00",
+                "end_time": "2025-08-25T04:07:16.018499+00:00",
+                "duration_seconds": 39.142563
+              },
+              "input_artifacts": {
+                "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+                "document_hashes": [
+                  "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_pdaf",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250825T040428Z_6a7a4178"
+              }
+            }
+          },
+          {
+            "analysis_id": "analysis_dab23149d4ed",
+            "result_hash": "675849cf81687f3095819efbe9d0024cd93d2fd2b78ed3fdcf25ff9a8f68959e",
+            "duration_seconds": 53.338922,
+            "result_content": {
+              "analysis_id": "analysis_dab23149d4ed",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "simple_test_pdaf",
+              "model_used": "vertex_ai/gemini-2.5-pro",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a potent example of left-wing economic populism. The core populist themes of a Manichaean struggle between 'the people' (defined as the working/middle class) and a corrupt 'elite' (oligarchs, billionaires) are highly intense and salient. The analysis also captures a strong emphasis on authenticity and the construction of a unified 'people' based on class solidarity, while explicitly rejecting nationalist or cultural exclusion as a divisive tactic of the elite.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"problem_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"boundary_setting\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"He\u2019s handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback. And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"accusation_of_collusion\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I believe it because I was a waitress, because I\u2019ve scrubbed toilets with my mom to afford school, because I\u2019ve worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"personal_narrative\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don\u2019t know, you are welcome here.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"coalition_building\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"They want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who\u2019s just trying to make a better life for themselves. But we\u2019re smarter than that Greeley. We know better than that.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"rejection_of_othering\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"It\u2019s shorthand for the right wing\u2019s entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans\u2019 benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_economic_argument\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "d254878d3df04fb6d1062ffe102d53c1bfd6a6382967e6dd77977213e7ae881c",
+              "execution_metadata": {
+                "start_time": "2025-08-25T04:07:16.019555+00:00",
+                "end_time": "2025-08-25T04:08:09.358491+00:00",
+                "duration_seconds": 53.338922
+              },
+              "input_artifacts": {
+                "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+                "document_hashes": [
+                  "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "simple_test_pdaf",
+                  "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250825T040428Z_6a7a4178"
+              }
+            }
+          }
+        ],
+        "columns_added": []
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  },
+  "statistical_results": {
+    "status": "completed",
+    "stats_hash": "bb62fa34d8c641edd68c37342a0c4f53bbab5859bf39c66e32a3920870270cb4",
+    "functions_generated": 5,
+    "statistical_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 5,
+        "output_file": "automatedstatisticalanalysisagent_functions.py",
+        "module_size": 23234
+      },
+      "statistical_data": {
+        "calculate_correlation_matrix": {
+          "manichaean_people_elite_framing_raw": {
+            "manichaean_people_elite_framing_raw": 1.0,
+            "crisis_restoration_narrative_raw": 0.7951380181206945,
+            "popular_sovereignty_claims_raw": 0.5909317012169647,
+            "anti_pluralist_exclusion_raw": 0.4748960179502649,
+            "elite_conspiracy_systemic_corruption_raw": 0.8973154618370011,
+            "authenticity_vs_political_class_raw": 0.5525114155251143,
+            "homogeneous_people_construction_raw": 0.8636694094709483,
+            "nationalist_exclusion_raw": 0.008950360225684129,
+            "economic_populist_appeals_raw": 0.7433111162394346,
+            "democratic_authoritarian_tension": 0.7945956936164599,
+            "internal_external_focus_tension": 0.11704114719613053,
+            "crisis_elite_attribution_tension": 0.9730431582971428,
+            "populist_strategic_contradiction_index": 0.7708119910931388,
+            "salience_weighted_core_populism_index": 0.9624396233144139,
+            "salience_weighted_populism_mechanisms_index": 0.8888343873177047,
+            "salience_weighted_boundary_distinctions_index": 0.9832288279187615,
+            "salience_weighted_overall_populism_index": 0.9921507249542192
+          },
+          "crisis_restoration_narrative_raw": {
+            "manichaean_people_elite_framing_raw": 0.7951380181206945,
+            "crisis_restoration_narrative_raw": 1.0,
+            "popular_sovereignty_claims_raw": 0.7622372246172308,
+            "anti_pluralist_exclusion_raw": 0.7657048647896111,
+            "elite_conspiracy_systemic_corruption_raw": 0.4529108136578382,
+            "authenticity_vs_political_class_raw": 0.0530092012080463,
+            "homogeneous_people_construction_raw": 0.38111861230861527,
+            "nationalist_exclusion_raw": 0.5974529834860508,
+            "economic_populist_appeals_raw": 0.19611613513818393,
+            "democratic_authoritarian_tension": 0.9460998335825325,
+            "internal_external_focus_tension": 0.6793662204867575,
+            "crisis_elite_attribution_tension": 0.8983165662095404,
+            "populist_strategic_contradiction_index": 0.9991506422968518,
+            "salience_weighted_core_populism_index": 0.9250318952152479,
+            "salience_weighted_populism_mechanisms_index": 0.42920039317480235,
+            "salience_weighted_boundary_distinctions_index": 0.8882984816816297,
+            "salience_weighted_overall_populism_index": 0.8617443648193056
+          },
+          "popular_sovereignty_claims_raw": {
+            "manichaean_people_elite_framing_raw": 0.5909317012169647,
+            "crisis_restoration_narrative_raw": 0.7622372246172308,
+            "popular_sovereignty_claims_raw": 1.0,
+            "anti_pluralist_exclusion_raw": 0.19844057534446932,
+            "elite_conspiracy_systemic_corruption_raw": 0.3883786668018926,
+            "authenticity_vs_political_class_raw": -0.3282953895649804,
+            "homogeneous_people_construction_raw": 0.27374301675977647,
+            "nationalist_exclusion_raw": 0.3267006485014308,
+            "economic_populist_appeals_raw": 0.2242305278255808,
+            "democratic_authoritarian_tension": 0.9239766551809907,
+            "internal_external_focus_tension": 0.3883786668018927,
+            "crisis_elite_attribution_tension": 0.7417911867765109,
+            "populist_strategic_contradiction_index": 0.7711695586287988,
+            "salience_weighted_core_populism_index": 0.7381964739940895,
+            "salience_weighted_populism_mechanisms_index": 0.2899941841273483,
+            "salience_weighted_boundary_distinctions_index": 0.6975150455915278,
+            "salience_weighted_overall_populism_index": 0.6217375396588276
+          },
+          "anti_pluralist_exclusion_raw": {
+            "manichaean_people_elite_framing_raw": 0.4748960179502649,
+            "crisis_restoration_narrative_raw": 0.7657048647896111,
+            "popular_sovereignty_claims_raw": 0.19844057534446932,
+            "anti_pluralist_exclusion_raw": 1.0,
+            "elite_conspiracy_systemic_corruption_raw": 0.09016696346674322,
+            "authenticity_vs_political_class_raw": 0.17940516233676673,
+            "homogeneous_people_construction_raw": 0.08171082514184036,
+            "nationalist_exclusion_raw": 0.7653716435003123,
+            "economic_populist_appeals_raw": -0.1561737618886061,
+            "democratic_authoritarian_tension": 0.5179697702828128,
+            "internal_external_focus_tension": 0.8115026712006889,
+            "crisis_elite_attribution_tension": 0.5303524951187154,
+            "populist_strategic_contradiction_index": 0.765631907092639,
+            "salience_weighted_core_populism_index": 0.5860081027986517,
+            "salience_weighted_populism_mechanisms_index": 0.14284000794279975,
+            "salience_weighted_boundary_distinctions_index": 0.5495910277287978,
+            "salience_weighted_overall_populism_index": 0.5690302568463402
+          },
+          "elite_conspiracy_systemic_corruption_raw": {
+            "manichaean_people_elite_framing_raw": 0.8973154618370011,
+            "crisis_restoration_narrative_raw": 0.4529108136578382,
+            "popular_sovereignty_claims_raw": 0.3883786668018926,
+            "anti_pluralist_exclusion_raw": 0.09016696346674322,
+            "elite_conspiracy_systemic_corruption_raw": 1.0,
+            "authenticity_vs_political_class_raw": 0.7152514550874646,
+            "homogeneous_people_construction_raw": 0.9925232596048369,
+            "nationalist_exclusion_raw": -0.43334083064439444,
+            "economic_populist_appeals_raw": 0.9622504486493763,
+            "democratic_authoritarian_tension": 0.5222329678670931,
+            "internal_external_focus_tension": -0.3333333333333333,
+            "crisis_elite_attribution_tension": 0.7953982017360651,
+            "populist_strategic_contradiction_index": 0.41932190696705063,
+            "salience_weighted_core_populism_index": 0.7570364295917915,
+            "salience_weighted_populism_mechanisms_index": 0.9919460469581574,
+            "salience_weighted_boundary_distinctions_index": 0.8117741829449958,
+            "salience_weighted_overall_populism_index": 0.8351485604776829
+          },
+          "authenticity_vs_political_class_raw": {
+            "manichaean_people_elite_framing_raw": 0.5525114155251143,
+            "crisis_restoration_narrative_raw": 0.0530092012080463,
+            "popular_sovereignty_claims_raw": -0.3282953895649804,
+            "anti_pluralist_exclusion_raw": 0.17940516233676673,
+            "elite_conspiracy_systemic_corruption_raw": 0.7152514550874646,
+            "authenticity_vs_political_class_raw": 1.0,
+            "homogeneous_people_construction_raw": 0.7929596332569527,
+            "nationalist_exclusion_raw": -0.49226981241263346,
+            "economic_populist_appeals_raw": 0.7433111162394346,
+            "democratic_authoritarian_tension": -0.061122745662804845,
+            "internal_external_focus_tension": -0.4291508730524788,
+            "crisis_elite_attribution_tension": 0.35043784677246276,
+            "populist_strategic_contradiction_index": 0.012991213333030492,
+            "salience_weighted_core_populism_index": 0.3286590901136277,
+            "salience_weighted_populism_mechanisms_index": 0.7947737805625508,
+            "salience_weighted_boundary_distinctions_index": 0.4049238998548466,
+            "salience_weighted_overall_populism_index": 0.4903234354213259
+          },
+          "homogeneous_people_construction_raw": {
+            "manichaean_people_elite_framing_raw": 0.8636694094709483,
+            "crisis_restoration_narrative_raw": 0.38111861230861527,
+            "popular_sovereignty_claims_raw": 0.27374301675977647,
+            "anti_pluralist_exclusion_raw": 0.08171082514184036,
+            "elite_conspiracy_systemic_corruption_raw": 0.9925232596048369,
+            "authenticity_vs_political_class_raw": 0.7929596332569527,
+            "homogeneous_people_construction_raw": 1.0,
+            "nationalist_exclusion_raw": -0.485100962926367,
+            "economic_populist_appeals_raw": 0.9716656205775167,
+            "democratic_authoritarian_tension": 0.4281843036204587,
+            "internal_external_focus_tension": -0.3883786668018927,
+            "crisis_elite_attribution_tension": 0.7378559550164233,
+            "populist_strategic_contradiction_index": 0.3448708585172268,
+            "salience_weighted_core_populism_index": 0.6991070619366297,
+            "salience_weighted_populism_mechanisms_index": 0.9980880521249995,
+            "salience_weighted_boundary_distinctions_index": 0.7611651311394422,
+            "salience_weighted_overall_populism_index": 0.796010865416498
+          },
+          "nationalist_exclusion_raw": {
+            "manichaean_people_elite_framing_raw": 0.008950360225684129,
+            "crisis_restoration_narrative_raw": 0.5974529834860508,
+            "popular_sovereignty_claims_raw": 0.3267006485014308,
+            "anti_pluralist_exclusion_raw": 0.7653716435003123,
+            "elite_conspiracy_systemic_corruption_raw": -0.43334083064439444,
+            "authenticity_vs_political_class_raw": -0.49226981241263346,
+            "homogeneous_people_construction_raw": -0.485100962926367,
+            "nationalist_exclusion_raw": 1.0,
+            "economic_populist_appeals_raw": -0.6622661785325219,
+            "democratic_authoritarian_tension": 0.43929768510698014,
+            "internal_external_focus_tension": 0.9941348467724342,
+            "crisis_elite_attribution_tension": 0.18480140818551669,
+            "populist_strategic_contradiction_index": 0.6238790877874788,
+            "salience_weighted_core_populism_index": 0.2500589424606793,
+            "salience_weighted_populism_mechanisms_index": -0.4324114239223985,
+            "salience_weighted_boundary_distinctions_index": 0.16849905385518824,
+            "salience_weighted_overall_populism_index": 0.13376159798082132
+          },
+          "economic_populist_appeals_raw": {
+            "manichaean_people_elite_framing_raw": 0.7433111162394346,
+            "crisis_restoration_narrative_raw": 0.19611613513818393,
+            "popular_sovereignty_claims_raw": 0.2242305278255808,
+            "anti_pluralist_exclusion_raw": -0.1561737618886061,
+            "elite_conspiracy_systemic_corruption_raw": 0.9622504486493763,
+            "authenticity_vs_political_class_raw": 0.7433111162394346,
+            "homogeneous_people_construction_raw": 0.9716656205775167,
+            "nationalist_exclusion_raw": -0.6622661785325219,
+            "economic_populist_appeals_raw": 1.0,
+            "democratic_authoritarian_tension": 0.3015113445777631,
+            "internal_external_focus_tension": -0.5773502691896257,
+            "crisis_elite_attribution_tension": 0.6054728454665549,
+            "populist_strategic_contradiction_index": 0.16021033402800036,
+            "salience_weighted_core_populism_index": 0.5538721238466097,
+            "salience_weighted_populism_mechanisms_index": 0.9552738431566946,
+            "salience_weighted_boundary_distinctions_index": 0.6240107836197963,
+            "salience_weighted_overall_populism_index": 0.6539343577932731
+          },
+          "democratic_authoritarian_tension": {
+            "manichaean_people_elite_framing_raw": 0.7945956936164599,
+            "crisis_restoration_narrative_raw": 0.9460998335825325,
+            "popular_sovereignty_claims_raw": 0.9239766551809907,
+            "anti_pluralist_exclusion_raw": 0.5179697702828128,
+            "elite_conspiracy_systemic_corruption_raw": 0.5222329678670931,
+            "authenticity_vs_political_class_raw": -0.061122745662804845,
+            "homogeneous_people_construction_raw": 0.4281843036204587,
+            "nationalist_exclusion_raw": 0.43929768510698014,
+            "economic_populist_appeals_raw": 0.3015113445777631,
+            "democratic_authoritarian_tension": 1.0,
+            "internal_external_focus_tension": 0.5222329678670942,
+            "crisis_elite_attribution_tension": 0.912784658709727,
+            "populist_strategic_contradiction_index": 0.9467825712694867,
+            "salience_weighted_core_populism_index": 0.9220394666002117,
+            "salience_weighted_populism_mechanisms_index": 0.46193356716634965,
+            "salience_weighted_boundary_distinctions_index": 0.8878452161412062,
+            "salience_weighted_overall_populism_index": 0.8396280398646858
+          },
+          "internal_external_focus_tension": {
+            "manichaean_people_elite_framing_raw": 0.11704114719613053,
+            "crisis_restoration_narrative_raw": 0.6793662204867575,
+            "popular_sovereignty_claims_raw": 0.3883786668018927,
+            "anti_pluralist_exclusion_raw": 0.8115026712006889,
+            "elite_conspiracy_systemic_corruption_raw": -0.3333333333333333,
+            "authenticity_vs_political_class_raw": -0.4291508730524788,
+            "homogeneous_people_construction_raw": -0.3883786668018927,
+            "nationalist_exclusion_raw": 0.9941348467724342,
+            "economic_populist_appeals_raw": -0.5773502691896257,
+            "democratic_authoritarian_tension": 0.5222329678670942,
+            "internal_external_focus_tension": 1.0,
+            "crisis_elite_attribution_tension": 0.28877514330545034,
+            "populist_strategic_contradiction_index": 0.7029808440329967,
+            "salience_weighted_core_populism_index": 0.3524399699785557,
+            "salience_weighted_populism_mechanisms_index": -0.33332752210348376,
+            "salience_weighted_boundary_distinctions_index": 0.27368578543427546,
+            "salience_weighted_overall_populism_index": 0.24015061640730134
+          },
+          "crisis_elite_attribution_tension": {
+            "manichaean_people_elite_framing_raw": 0.9730431582971428,
+            "crisis_restoration_narrative_raw": 0.8983165662095404,
+            "popular_sovereignty_claims_raw": 0.7417911867765109,
+            "anti_pluralist_exclusion_raw": 0.5303524951187154,
+            "elite_conspiracy_systemic_corruption_raw": 0.7953982017360651,
+            "authenticity_vs_political_class_raw": 0.35043784677246276,
+            "homogeneous_people_construction_raw": 0.7378559550164233,
+            "nationalist_exclusion_raw": 0.18480140818551669,
+            "economic_populist_appeals_raw": 0.6054728454665549,
+            "democratic_authoritarian_tension": 0.912784658709727,
+            "internal_external_focus_tension": 0.28877514330545034,
+            "crisis_elite_attribution_tension": 1.0,
+            "populist_strategic_contradiction_index": 0.8823056098318809,
+            "salience_weighted_core_populism_index": 0.9975011108250593,
+            "salience_weighted_populism_mechanisms_index": 0.7684656514165038,
+            "salience_weighted_boundary_distinctions_index": 0.9979622674143052,
+            "salience_weighted_overall_populism_index": 0.9864525242289925
+          },
+          "populist_strategic_contradiction_index": {
+            "manichaean_people_elite_framing_raw": 0.7708119910931388,
+            "crisis_restoration_narrative_raw": 0.9991506422968518,
+            "popular_sovereignty_claims_raw": 0.7711695586287988,
+            "anti_pluralist_exclusion_raw": 0.765631907092639,
+            "elite_conspiracy_systemic_corruption_raw": 0.41932190696705063,
+            "authenticity_vs_political_class_raw": 0.012991213333030492,
+            "homogeneous_people_construction_raw": 0.3448708585172268,
+            "nationalist_exclusion_raw": 0.6238790877874788,
+            "economic_populist_appeals_raw": 0.16021033402800036,
+            "democratic_authoritarian_tension": 0.9467825712694867,
+            "internal_external_focus_tension": 0.7029808440329967,
+            "crisis_elite_attribution_tension": 0.8823056098318809,
+            "populist_strategic_contradiction_index": 1.0,
+            "salience_weighted_core_populism_index": 0.9105265112434291,
+            "salience_weighted_populism_mechanisms_index": 0.3933214857479019,
+            "salience_weighted_boundary_distinctions_index": 0.8703904485747241,
+            "salience_weighted_overall_populism_index": 0.8408103742998774
+          },
+          "salience_weighted_core_populism_index": {
+            "manichaean_people_elite_framing_raw": 0.9624396233144139,
+            "crisis_restoration_narrative_raw": 0.9250318952152479,
+            "popular_sovereignty_claims_raw": 0.7381964739940895,
+            "anti_pluralist_exclusion_raw": 0.5860081027986517,
+            "elite_conspiracy_systemic_corruption_raw": 0.7570364295917915,
+            "authenticity_vs_political_class_raw": 0.3286590901136277,
+            "homogeneous_people_construction_raw": 0.6991070619366297,
+            "nationalist_exclusion_raw": 0.2500589424606793,
+            "economic_populist_appeals_raw": 0.5538721238466097,
+            "democratic_authoritarian_tension": 0.9220394666002117,
+            "internal_external_focus_tension": 0.3524399699785557,
+            "crisis_elite_attribution_tension": 0.9975011108250593,
+            "populist_strategic_contradiction_index": 0.9105265112434291,
+            "salience_weighted_core_populism_index": 1.0,
+            "salience_weighted_populism_mechanisms_index": 0.7333974157636971,
+            "salience_weighted_boundary_distinctions_index": 0.9957918548218944,
+            "salience_weighted_overall_populism_index": 0.9842514989412852
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "manichaean_people_elite_framing_raw": 0.8888343873177047,
+            "crisis_restoration_narrative_raw": 0.42920039317480235,
+            "popular_sovereignty_claims_raw": 0.2899941841273483,
+            "anti_pluralist_exclusion_raw": 0.14284000794279975,
+            "elite_conspiracy_systemic_corruption_raw": 0.9919460469581574,
+            "authenticity_vs_political_class_raw": 0.7947737805625508,
+            "homogeneous_people_construction_raw": 0.9980880521249995,
+            "nationalist_exclusion_raw": -0.4324114239223985,
+            "economic_populist_appeals_raw": 0.9552738431566946,
+            "democratic_authoritarian_tension": 0.46193356716634965,
+            "internal_external_focus_tension": -0.33332752210348376,
+            "crisis_elite_attribution_tension": 0.7684656514165038,
+            "populist_strategic_contradiction_index": 0.3933214857479019,
+            "salience_weighted_core_populism_index": 0.7333974157636971,
+            "salience_weighted_populism_mechanisms_index": 1.0,
+            "salience_weighted_boundary_distinctions_index": 0.7924443899566761,
+            "salience_weighted_overall_populism_index": 0.8276635088756618
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "manichaean_people_elite_framing_raw": 0.9832288279187615,
+            "crisis_restoration_narrative_raw": 0.8882984816816297,
+            "popular_sovereignty_claims_raw": 0.6975150455915278,
+            "anti_pluralist_exclusion_raw": 0.5495910277287978,
+            "elite_conspiracy_systemic_corruption_raw": 0.8117741829449958,
+            "authenticity_vs_political_class_raw": 0.4049238998548466,
+            "homogeneous_people_construction_raw": 0.7611651311394422,
+            "nationalist_exclusion_raw": 0.16849905385518824,
+            "economic_populist_appeals_raw": 0.6240107836197963,
+            "democratic_authoritarian_tension": 0.8878452161412062,
+            "internal_external_focus_tension": 0.27368578543427546,
+            "crisis_elite_attribution_tension": 0.9979622674143052,
+            "populist_strategic_contradiction_index": 0.8703904485747241,
+            "salience_weighted_core_populism_index": 0.9957918548218944,
+            "salience_weighted_populism_mechanisms_index": 0.7924443899566761,
+            "salience_weighted_boundary_distinctions_index": 1.0,
+            "salience_weighted_overall_populism_index": 0.9948971464321006
+          },
+          "salience_weighted_overall_populism_index": {
+            "manichaean_people_elite_framing_raw": 0.9921507249542192,
+            "crisis_restoration_narrative_raw": 0.8617443648193056,
+            "popular_sovereignty_claims_raw": 0.6217375396588276,
+            "anti_pluralist_exclusion_raw": 0.5690302568463402,
+            "elite_conspiracy_systemic_corruption_raw": 0.8351485604776829,
+            "authenticity_vs_political_class_raw": 0.4903234354213259,
+            "homogeneous_people_construction_raw": 0.796010865416498,
+            "nationalist_exclusion_raw": 0.13376159798082132,
+            "economic_populist_appeals_raw": 0.6539343577932731,
+            "democratic_authoritarian_tension": 0.8396280398646858,
+            "internal_external_focus_tension": 0.24015061640730134,
+            "crisis_elite_attribution_tension": 0.9864525242289925,
+            "populist_strategic_contradiction_index": 0.8408103742998774,
+            "salience_weighted_core_populism_index": 0.9842514989412852,
+            "salience_weighted_populism_mechanisms_index": 0.8276635088756618,
+            "salience_weighted_boundary_distinctions_index": 0.9948971464321006,
+            "salience_weighted_overall_populism_index": 1.0
+          }
+        },
+        "calculate_derived_metrics": {
+          "type": "dataframe",
+          "data": [
+            {
+              "document_name": "john_mccain_2008_concession.txt",
+              "manichaean_people_elite_framing_raw": 0.0,
+              "manichaean_people_elite_framing_salience": 0.0,
+              "manichaean_people_elite_framing_confidence": 1.0,
+              "crisis_restoration_narrative_raw": 0.1,
+              "crisis_restoration_narrative_salience": 0.2,
+              "crisis_restoration_narrative_confidence": 0.95,
+              "popular_sovereignty_claims_raw": 0.0,
+              "popular_sovereignty_claims_salience": 0.0,
+              "popular_sovereignty_claims_confidence": 1.0,
+              "anti_pluralist_exclusion_raw": 0.0,
+              "anti_pluralist_exclusion_salience": 0.0,
+              "anti_pluralist_exclusion_confidence": 1.0,
+              "elite_conspiracy_systemic_corruption_raw": 0.0,
+              "elite_conspiracy_systemic_corruption_salience": 0.0,
+              "elite_conspiracy_systemic_corruption_confidence": 1.0,
+              "authenticity_vs_political_class_raw": 0.0,
+              "authenticity_vs_political_class_salience": 0.0,
+              "authenticity_vs_political_class_confidence": 1.0,
+              "homogeneous_people_construction_raw": 0.0,
+              "homogeneous_people_construction_salience": 0.0,
+              "homogeneous_people_construction_confidence": 1.0,
+              "nationalist_exclusion_raw": 0.1,
+              "nationalist_exclusion_salience": 0.1,
+              "nationalist_exclusion_confidence": 0.9,
+              "economic_populist_appeals_raw": 0.0,
+              "economic_populist_appeals_salience": 0.0,
+              "economic_populist_appeals_confidence": 1.0,
+              "democratic_authoritarian_tension": 0.0,
+              "internal_external_focus_tension": 0.0,
+              "crisis_elite_attribution_tension": 0.0,
+              "populist_strategic_contradiction_index": 0.0,
+              "salience_weighted_core_populism_index": 0.09950248756218907,
+              "salience_weighted_populism_mechanisms_index": 0.0,
+              "salience_weighted_boundary_distinctions_index": 0.09900990099009903,
+              "salience_weighted_overall_populism_index": 0.09966777408637874
+            },
+            {
+              "document_name": "steve_king_2017_house_floor.txt",
+              "manichaean_people_elite_framing_raw": 0.7,
+              "manichaean_people_elite_framing_salience": 0.8,
+              "manichaean_people_elite_framing_confidence": 0.9,
+              "crisis_restoration_narrative_raw": 0.8,
+              "crisis_restoration_narrative_salience": 0.9,
+              "crisis_restoration_narrative_confidence": 0.95,
+              "popular_sovereignty_claims_raw": 0.6,
+              "popular_sovereignty_claims_salience": 0.7,
+              "popular_sovereignty_claims_confidence": 0.9,
+              "anti_pluralist_exclusion_raw": 0.8,
+              "anti_pluralist_exclusion_salience": 0.8,
+              "anti_pluralist_exclusion_confidence": 0.9,
+              "elite_conspiracy_systemic_corruption_raw": 0.3,
+              "elite_conspiracy_systemic_corruption_salience": 0.2,
+              "elite_conspiracy_systemic_corruption_confidence": 0.8,
+              "authenticity_vs_political_class_raw": 0.0,
+              "authenticity_vs_political_class_salience": 0.0,
+              "authenticity_vs_political_class_confidence": 1.0,
+              "homogeneous_people_construction_raw": 0.2,
+              "homogeneous_people_construction_salience": 0.1,
+              "homogeneous_people_construction_confidence": 0.85,
+              "nationalist_exclusion_raw": 0.9,
+              "nationalist_exclusion_salience": 0.9,
+              "nationalist_exclusion_confidence": 1.0,
+              "economic_populist_appeals_raw": 0.0,
+              "economic_populist_appeals_salience": 0.0,
+              "economic_populist_appeals_confidence": 1.0,
+              "democratic_authoritarian_tension": 0.06000000000000005,
+              "internal_external_focus_tension": 0.16000000000000003,
+              "crisis_elite_attribution_tension": 0.21,
+              "populist_strategic_contradiction_index": 0.14333333333333334,
+              "salience_weighted_core_populism_index": 0.7310215557638238,
+              "salience_weighted_populism_mechanisms_index": 0.26578073089700993,
+              "salience_weighted_boundary_distinctions_index": 0.8990011098779135,
+              "salience_weighted_overall_populism_index": 0.7339241081572369
+            },
+            {
+              "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+              "manichaean_people_elite_framing_raw": 0.9,
+              "manichaean_people_elite_framing_salience": 0.9,
+              "manichaean_people_elite_framing_confidence": 1.0,
+              "crisis_restoration_narrative_raw": 0.6,
+              "crisis_restoration_narrative_salience": 0.5,
+              "crisis_restoration_narrative_confidence": 0.9,
+              "popular_sovereignty_claims_raw": 0.8,
+              "popular_sovereignty_claims_salience": 0.7,
+              "popular_sovereignty_claims_confidence": 1.0,
+              "anti_pluralist_exclusion_raw": 0.1,
+              "anti_pluralist_exclusion_salience": 0.1,
+              "anti_pluralist_exclusion_confidence": 0.95,
+              "elite_conspiracy_systemic_corruption_raw": 0.9,
+              "elite_conspiracy_systemic_corruption_salience": 0.9,
+              "elite_conspiracy_systemic_corruption_confidence": 1.0,
+              "authenticity_vs_political_class_raw": 0.2,
+              "authenticity_vs_political_class_salience": 0.2,
+              "authenticity_vs_political_class_confidence": 0.8,
+              "homogeneous_people_construction_raw": 0.7,
+              "homogeneous_people_construction_salience": 0.8,
+              "homogeneous_people_construction_confidence": 0.9,
+              "nationalist_exclusion_raw": 0.0,
+              "nationalist_exclusion_salience": 0.0,
+              "nationalist_exclusion_confidence": 1.0,
+              "economic_populist_appeals_raw": 1.0,
+              "economic_populist_appeals_salience": 1.0,
+              "economic_populist_appeals_confidence": 1.0,
+              "democratic_authoritarian_tension": 0.06,
+              "internal_external_focus_tension": 0.0,
+              "crisis_elite_attribution_tension": 0.24,
+              "populist_strategic_contradiction_index": 0.09999999999999999,
+              "salience_weighted_core_populism_index": 0.7632894139027716,
+              "salience_weighted_populism_mechanisms_index": 0.7417148869016308,
+              "salience_weighted_boundary_distinctions_index": 0.9990009990009991,
+              "salience_weighted_overall_populism_index": 0.8018035679278572
+            },
+            {
+              "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+              "manichaean_people_elite_framing_raw": 0.9,
+              "manichaean_people_elite_framing_salience": 0.9,
+              "manichaean_people_elite_framing_confidence": 0.95,
+              "crisis_restoration_narrative_raw": 0.5,
+              "crisis_restoration_narrative_salience": 0.5,
+              "crisis_restoration_narrative_confidence": 0.9,
+              "popular_sovereignty_claims_raw": 0.1,
+              "popular_sovereignty_claims_salience": 0.1,
+              "popular_sovereignty_claims_confidence": 0.95,
+              "anti_pluralist_exclusion_raw": 0.5,
+              "anti_pluralist_exclusion_salience": 0.4,
+              "anti_pluralist_exclusion_confidence": 0.9,
+              "elite_conspiracy_systemic_corruption_raw": 0.9,
+              "elite_conspiracy_systemic_corruption_salience": 0.9,
+              "elite_conspiracy_systemic_corruption_confidence": 1.0,
+              "authenticity_vs_political_class_raw": 0.9,
+              "authenticity_vs_political_class_salience": 0.8,
+              "authenticity_vs_political_class_confidence": 1.0,
+              "homogeneous_people_construction_raw": 0.8,
+              "homogeneous_people_construction_salience": 0.8,
+              "homogeneous_people_construction_confidence": 0.9,
+              "nationalist_exclusion_raw": 0.0,
+              "nationalist_exclusion_salience": 0.1,
+              "nationalist_exclusion_confidence": 1.0,
+              "economic_populist_appeals_raw": 1.0,
+              "economic_populist_appeals_salience": 1.0,
+              "economic_populist_appeals_confidence": 1.0,
+              "democratic_authoritarian_tension": 0.030000000000000006,
+              "internal_external_focus_tension": 0.0,
+              "crisis_elite_attribution_tension": 0.2,
+              "populist_strategic_contradiction_index": 0.07666666666666667,
+              "salience_weighted_core_populism_index": 0.6680694371383483,
+              "salience_weighted_populism_mechanisms_index": 0.8676529388244704,
+              "salience_weighted_boundary_distinctions_index": 0.9082652134423251,
+              "salience_weighted_overall_populism_index": 0.8071259770950737
+            }
+          ],
+          "columns": [
+            "document_name",
+            "manichaean_people_elite_framing_raw",
+            "manichaean_people_elite_framing_salience",
+            "manichaean_people_elite_framing_confidence",
+            "crisis_restoration_narrative_raw",
+            "crisis_restoration_narrative_salience",
+            "crisis_restoration_narrative_confidence",
+            "popular_sovereignty_claims_raw",
+            "popular_sovereignty_claims_salience",
+            "popular_sovereignty_claims_confidence",
+            "anti_pluralist_exclusion_raw",
+            "anti_pluralist_exclusion_salience",
+            "anti_pluralist_exclusion_confidence",
+            "elite_conspiracy_systemic_corruption_raw",
+            "elite_conspiracy_systemic_corruption_salience",
+            "elite_conspiracy_systemic_corruption_confidence",
+            "authenticity_vs_political_class_raw",
+            "authenticity_vs_political_class_salience",
+            "authenticity_vs_political_class_confidence",
+            "homogeneous_people_construction_raw",
+            "homogeneous_people_construction_salience",
+            "homogeneous_people_construction_confidence",
+            "nationalist_exclusion_raw",
+            "nationalist_exclusion_salience",
+            "nationalist_exclusion_confidence",
+            "economic_populist_appeals_raw",
+            "economic_populist_appeals_salience",
+            "economic_populist_appeals_confidence",
+            "democratic_authoritarian_tension",
+            "internal_external_focus_tension",
+            "crisis_elite_attribution_tension",
+            "populist_strategic_contradiction_index",
+            "salience_weighted_core_populism_index",
+            "salience_weighted_populism_mechanisms_index",
+            "salience_weighted_boundary_distinctions_index",
+            "salience_weighted_overall_populism_index"
+          ],
+          "index": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "shape": [
+            4,
+            36
+          ]
+        },
+        "calculate_descriptive_statistics": {
+          "manichaean_people_elite_framing_raw": {
+            "mean": 0.625,
+            "std": 0.42720018726587655,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "manichaean_people_elite_framing_salience": {
+            "mean": 0.65,
+            "std": 0.4358898943540674,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "manichaean_people_elite_framing_confidence": {
+            "mean": 0.9624999999999999,
+            "std": 0.0478713553878169,
+            "min": 0.9,
+            "max": 1.0,
+            "count": 4
+          },
+          "crisis_restoration_narrative_raw": {
+            "mean": 0.5,
+            "std": 0.2943920288775949,
+            "min": 0.1,
+            "max": 0.8,
+            "count": 4
+          },
+          "crisis_restoration_narrative_salience": {
+            "mean": 0.525,
+            "std": 0.2872281323269015,
+            "min": 0.2,
+            "max": 0.9,
+            "count": 4
+          },
+          "crisis_restoration_narrative_confidence": {
+            "mean": 0.9249999999999999,
+            "std": 0.028867513459481253,
+            "min": 0.9,
+            "max": 0.95,
+            "count": 4
+          },
+          "popular_sovereignty_claims_raw": {
+            "mean": 0.375,
+            "std": 0.38622100754188227,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "popular_sovereignty_claims_salience": {
+            "mean": 0.375,
+            "std": 0.37749172176353746,
+            "min": 0.0,
+            "max": 0.7,
+            "count": 4
+          },
+          "popular_sovereignty_claims_confidence": {
+            "mean": 0.9624999999999999,
+            "std": 0.0478713553878169,
+            "min": 0.9,
+            "max": 1.0,
+            "count": 4
+          },
+          "anti_pluralist_exclusion_raw": {
+            "mean": 0.35,
+            "std": 0.36968455021364727,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "anti_pluralist_exclusion_salience": {
+            "mean": 0.325,
+            "std": 0.35939764421413045,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "anti_pluralist_exclusion_confidence": {
+            "mean": 0.9374999999999999,
+            "std": 0.047871355387816894,
+            "min": 0.9,
+            "max": 1.0,
+            "count": 4
+          },
+          "elite_conspiracy_systemic_corruption_raw": {
+            "mean": 0.525,
+            "std": 0.45,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "elite_conspiracy_systemic_corruption_salience": {
+            "mean": 0.5,
+            "std": 0.469041575982343,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "elite_conspiracy_systemic_corruption_confidence": {
+            "mean": 0.95,
+            "std": 0.09999999999999998,
+            "min": 0.8,
+            "max": 1.0,
+            "count": 4
+          },
+          "authenticity_vs_political_class_raw": {
+            "mean": 0.275,
+            "std": 0.42720018726587655,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "authenticity_vs_political_class_salience": {
+            "mean": 0.25,
+            "std": 0.37859388972001823,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "authenticity_vs_political_class_confidence": {
+            "mean": 0.95,
+            "std": 0.09999999999999998,
+            "min": 0.8,
+            "max": 1.0,
+            "count": 4
+          },
+          "homogeneous_people_construction_raw": {
+            "mean": 0.425,
+            "std": 0.38622100754188227,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "homogeneous_people_construction_salience": {
+            "mean": 0.42500000000000004,
+            "std": 0.4349329450233297,
+            "min": 0.0,
+            "max": 0.8,
+            "count": 4
+          },
+          "homogeneous_people_construction_confidence": {
+            "mean": 0.9125,
+            "std": 0.06291528696058958,
+            "min": 0.85,
+            "max": 1.0,
+            "count": 4
+          },
+          "nationalist_exclusion_raw": {
+            "mean": 0.25,
+            "std": 0.4358898943540674,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "nationalist_exclusion_salience": {
+            "mean": 0.275,
+            "std": 0.41932485418030413,
+            "min": 0.0,
+            "max": 0.9,
+            "count": 4
+          },
+          "nationalist_exclusion_confidence": {
+            "mean": 0.975,
+            "std": 0.04999999999999999,
+            "min": 0.9,
+            "max": 1.0,
+            "count": 4
+          },
+          "economic_populist_appeals_raw": {
+            "mean": 0.5,
+            "std": 0.5773502691896257,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 4
+          },
+          "economic_populist_appeals_salience": {
+            "mean": 0.5,
+            "std": 0.5773502691896257,
+            "min": 0.0,
+            "max": 1.0,
+            "count": 4
+          },
+          "economic_populist_appeals_confidence": {
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 4
+          }
+        },
+        "compare_groups_on_dimensions": {
+          "error": "Mandatory 'grouping_column' not provided or not found in data."
+        },
+        "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+        "identify_top_documents_by_metric": {
+          "error": "Mandatory 'metric_name' kwarg not provided."
+        },
+        "perform_statistical_analysis": {
+          "analysis_metadata": {
+            "timestamp": "2025-08-25T00:11:50.683714",
+            "sample_size": 4,
+            "alpha_level": 0.05,
+            "variables_analyzed": [
+              "manichaean_people_elite_framing_raw",
+              "manichaean_people_elite_framing_salience",
+              "manichaean_people_elite_framing_confidence",
+              "crisis_restoration_narrative_raw",
+              "crisis_restoration_narrative_salience",
+              "crisis_restoration_narrative_confidence",
+              "popular_sovereignty_claims_raw",
+              "popular_sovereignty_claims_salience",
+              "popular_sovereignty_claims_confidence",
+              "anti_pluralist_exclusion_raw",
+              "anti_pluralist_exclusion_salience",
+              "anti_pluralist_exclusion_confidence",
+              "elite_conspiracy_systemic_corruption_raw",
+              "elite_conspiracy_systemic_corruption_salience",
+              "elite_conspiracy_systemic_corruption_confidence",
+              "authenticity_vs_political_class_raw",
+              "authenticity_vs_political_class_salience",
+              "authenticity_vs_political_class_confidence",
+              "homogeneous_people_construction_raw",
+              "homogeneous_people_construction_salience",
+              "homogeneous_people_construction_confidence",
+              "nationalist_exclusion_raw",
+              "nationalist_exclusion_salience",
+              "nationalist_exclusion_confidence",
+              "economic_populist_appeals_raw",
+              "economic_populist_appeals_salience",
+              "economic_populist_appeals_confidence"
+            ]
+          }
+        },
+        "run_complete_statistical_analysis": {
+          "analysis_metadata": {
+            "timestamp": "2025-08-25T00:11:50.687985",
+            "sample_size": 4,
+            "alpha_level": 0.05,
+            "variables_analyzed": [
+              "manichaean_people_elite_framing_raw",
+              "manichaean_people_elite_framing_salience",
+              "manichaean_people_elite_framing_confidence",
+              "crisis_restoration_narrative_raw",
+              "crisis_restoration_narrative_salience",
+              "crisis_restoration_narrative_confidence",
+              "popular_sovereignty_claims_raw",
+              "popular_sovereignty_claims_salience",
+              "popular_sovereignty_claims_confidence",
+              "anti_pluralist_exclusion_raw",
+              "anti_pluralist_exclusion_salience",
+              "anti_pluralist_exclusion_confidence",
+              "elite_conspiracy_systemic_corruption_raw",
+              "elite_conspiracy_systemic_corruption_salience",
+              "elite_conspiracy_systemic_corruption_confidence",
+              "authenticity_vs_political_class_raw",
+              "authenticity_vs_political_class_salience",
+              "authenticity_vs_political_class_confidence",
+              "homogeneous_people_construction_raw",
+              "homogeneous_people_construction_salience",
+              "homogeneous_people_construction_confidence",
+              "nationalist_exclusion_raw",
+              "nationalist_exclusion_salience",
+              "nationalist_exclusion_confidence",
+              "economic_populist_appeals_raw",
+              "economic_populist_appeals_salience",
+              "economic_populist_appeals_confidence"
+            ]
+          }
+        }
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  }
+}

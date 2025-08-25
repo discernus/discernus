@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The experiment configuration specifies `framework: \"cff_v10.md\"`, but the provided framework document is titled \"Cohesive Flourishing Framework (CFF) v10.1\" and its machine-readable metadata specifies version \"10.2\". The system will be unable to locate the specified framework file.",
+    "The research question in the experiment's human-readable abstract (\"What are the baseline cohesion and tension scores...\") is different from the machine-readable research question (\"Will McCain's institutional discourse show higher cohesion than populist styles?\"). This creates ambiguity about the experiment's primary goal.",
+    "The corpus contains only four documents (N=4). Per platform guidelines, this sample size is insufficient for statistical analysis and limits the experiment to a comparative case study. Findings cannot be generalized.",
+    "The framework document has inconsistent versioning. The human-readable title is \"v10.1\", while the `framework_version` in the machine-readable YAML appendix is \"10.2\"."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-25T03:45:13.565606+00:00"
+}

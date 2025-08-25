@@ -1,4 +1,0 @@
-{
-  "status": "failed",
-  "error": "Fact-checking phase failed: LLMGateway.__init__() missing 1 required positional argument: 'model_registry'"
-}

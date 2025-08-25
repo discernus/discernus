@@ -1,4 +1,0 @@
-{
-  "status": "failed",
-  "error": "Fact-checking phase failed: Fact-checker RAG index construction failed: Repo id must be in the form 'repo_name' or 'namespace/repo_name': 'sqlite:///fact_checker_rag.db'. Use `repo_type` argument if needed."
-}
