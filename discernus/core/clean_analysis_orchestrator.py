@@ -22,7 +22,6 @@ THIN Principles:
 - Focus on what we actually need
 """
 
-import json
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
@@ -343,7 +342,6 @@ class CleanAnalysisOrchestrator:
             test_data = {"test": "data", "timestamp": datetime.now(timezone.utc).isoformat()}
             
             # Store test data (encode as JSON bytes)
-            import json
             test_data_bytes = json.dumps(test_data).encode('utf-8')
             self.artifact_storage.put_artifact(test_data_bytes, {"artifact_type": "cache_test", "test_key": test_key})
             
@@ -1286,7 +1284,6 @@ class CleanAnalysisOrchestrator:
     def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
         """Convert individual analysis results to pandas DataFrame for statistical functions."""
         import pandas as pd
-        import json
         
         if not analysis_results or len(analysis_results) == 0:
             raise CleanAnalysisError("No analysis results to convert")
@@ -1547,7 +1544,6 @@ class CleanAnalysisOrchestrator:
                 evidence_content = self.artifact_storage.get_artifact(evidence_hash)
                 evidence_text = evidence_content.decode('utf-8')
                 # Parse the evidence JSON
-                import json
                 evidence_data = json.loads(evidence_text)
                 evidence_list = evidence_data.get('evidence_data', [])
 
@@ -1847,11 +1843,11 @@ class CleanAnalysisOrchestrator:
         try:
             self._log_progress("📥 Importing txtai embeddings...")
             from txtai.embeddings import Embeddings
-            
             # Enable txtai debug logging for better visibility
             import logging
             txtai_logger = logging.getLogger("txtai.embeddings")
             txtai_logger.setLevel(logging.DEBUG)
+            import json
             self._log_progress("🔍 Enabled txtai debug logging")
             
             # RAG index will be created by RAGIndexManager during construction
@@ -1956,7 +1952,6 @@ class CleanAnalysisOrchestrator:
                         stats_text = stats_content.decode('utf-8')
                     elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
                         # Include direct statistical results data
-                        import json
                         stats_text = json.dumps(statistical_results, indent=2)
                     else:
                         stats_text = str(statistical_results)
@@ -2647,7 +2642,6 @@ class CleanAnalysisOrchestrator:
                         stats_text = stats_content.decode('utf-8')
                     elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
                         # Include direct statistical results data
-                        import json
                         stats_text = json.dumps(statistical_results, indent=2)
                     else:
                         stats_text = str(statistical_results)
