@@ -1,0 +1,146 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The rubric requires verifying that all analytical dimensions mentioned in the report are defined in the framework specification by querying the provided RAG index. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided contains only error messages ('ERROR: Document ID X not found') and no actual framework content or definitions. Consequently, it is impossible to find definitions for any of the analytical dimensions mentioned in the report within the provided RAG index.",
+      "examples": [
+        "The dimension 'dignity' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'tribalism' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'truth' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'manipulation' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'justice' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'resentment' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'hope' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'fear' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'pragmatism' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+        "The dimension 'fantasy' is mentioned in the report but its definition cannot be found in the provided evidence database."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "Cannot perform 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the necessary `statistical_results.json` data. Instead, it consists of 'ERROR: Document ID X not found' messages, preventing the validation of numerical claims against the research data as required by the rubric.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires cross-referencing 5 randomly selected evidence quotes from the report against the provided RAG evidence index to confirm their presence. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided is empty and contains only error messages ('ERROR: Document ID X not found in 118 stored documents') instead of the actual full text of corpus documents. Therefore, it is impossible to perform the instructed validation check to confirm the presence of the quotes in the RAG evidence index.",
+      "examples": [
+        "Attempted to validate: \"That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Could not search provided evidence database.",
+        "Attempted to validate: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Could not search provided evidence database.",
+        "Attempted to validate: \"we fell short, the failure is mine, not yours\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database.",
+        "Attempted to validate: \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database.",
+        "Attempted to validate: \"though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several strong, positive, or comparative claims about the framework's capabilities and findings, which may be considered promotional in tone and could require editorial review for academic rigor, especially given the acknowledged preliminary nature and small sample size of the study. These phrases go beyond neutral description and lean towards highlighting exceptional qualities or superiority.",
+      "examples": [
+        "indicating the framework's strong discriminatory power.",
+        "provide a strong proof-of-concept for the CAF's utility in systematically evaluating political discourse",
+        "The Civic Character Index is a Potent Summary Metric:",
+        "serves as a powerful tool for ranking and comparison.",
+        "The derived metrics, particularly the CCI and the Tension Indices, are valuable innovations.",
+        "The analysis moves beyond simple topic modeling or sentiment analysis to map the underlying moral character of discourse.",
+        "successfully demonstrates the potential of the Civic Analysis Framework (CAF) v10.0 to bring systematic, quantitative rigor to the study of political character.",
+        "The framework proved effective at differentiating speaker styles",
+        "highlights the unique complexity of the Justice/Resentment axis"
+      ]
+    },
+    {
+      "check_name": "Fabricated Reference",
+      "severity": "CRITICAL",
+      "description": "Identify potentially fabricated academic references or suspicious citation patterns.",
+      "details": "The report cites specific source documents (e.g., `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`, `john_mccain_2008_concession_ff9b26f2.txt`) as the basis for direct quotes and the underlying data for the analysis. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' contains only error messages ('ERROR: Document ID X not found') and does not provide the content of these cited source documents. This makes it impossible to verify the existence or content of the primary data sources, rendering the citations unverifiable and suspicious, which aligns with the rubric's intent to identify potentially fabricated references or LLM hallucinations.",
+      "examples": [
+        "Report cites: 'Source Document: `bernie_sanders_2025_fighting_oligarchy_261b93a.txt`' and provides quotes. Evidence database provides no content for this file.",
+        "Report cites: 'Source Document: `john_mccain_2008_concession_ff9b26f2.txt`' and provides quotes. Evidence database provides no content for this file."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The rubric requires verifying that all analytical dimensions mentioned in the report are defined in the framework specification by querying the provided RAG index. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided contains only error messages ('ERROR: Document ID X not found') and no actual framework content or definitions. Consequently, it is impossible to find definitions for any of the analytical dimensions mentioned in the report within the provided RAG index.",
+        "examples": [
+          "The dimension 'dignity' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'tribalism' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'truth' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'manipulation' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'justice' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'resentment' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'hope' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'fear' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'pragmatism' is mentioned in the report but its definition cannot be found in the provided evidence database.",
+          "The dimension 'fantasy' is mentioned in the report but its definition cannot be found in the provided evidence database."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "Cannot perform 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the necessary `statistical_results.json` data. Instead, it consists of 'ERROR: Document ID X not found' messages, preventing the validation of numerical claims against the research data as required by the rubric.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires cross-referencing 5 randomly selected evidence quotes from the report against the provided RAG evidence index to confirm their presence. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided is empty and contains only error messages ('ERROR: Document ID X not found in 118 stored documents') instead of the actual full text of corpus documents. Therefore, it is impossible to perform the instructed validation check to confirm the presence of the quotes in the RAG evidence index.",
+        "examples": [
+          "Attempted to validate: \"That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Could not search provided evidence database.",
+          "Attempted to validate: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Could not search provided evidence database.",
+          "Attempted to validate: \"we fell short, the failure is mine, not yours\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database.",
+          "Attempted to validate: \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database.",
+          "Attempted to validate: \"though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Could not search provided evidence database."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several strong, positive, or comparative claims about the framework's capabilities and findings, which may be considered promotional in tone and could require editorial review for academic rigor, especially given the acknowledged preliminary nature and small sample size of the study. These phrases go beyond neutral description and lean towards highlighting exceptional qualities or superiority.",
+        "examples": [
+          "indicating the framework's strong discriminatory power.",
+          "provide a strong proof-of-concept for the CAF's utility in systematically evaluating political discourse",
+          "The Civic Character Index is a Potent Summary Metric:",
+          "serves as a powerful tool for ranking and comparison.",
+          "The derived metrics, particularly the CCI and the Tension Indices, are valuable innovations.",
+          "The analysis moves beyond simple topic modeling or sentiment analysis to map the underlying moral character of discourse.",
+          "successfully demonstrates the potential of the Civic Analysis Framework (CAF) v10.0 to bring systematic, quantitative rigor to the study of political character.",
+          "The framework proved effective at differentiating speaker styles",
+          "highlights the unique complexity of the Justice/Resentment axis"
+        ]
+      },
+      {
+        "check_name": "Fabricated Reference",
+        "severity": "CRITICAL",
+        "description": "Identify potentially fabricated academic references or suspicious citation patterns.",
+        "details": "The report cites specific source documents (e.g., `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`, `john_mccain_2008_concession_ff9b26f2.txt`) as the basis for direct quotes and the underlying data for the analysis. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' contains only error messages ('ERROR: Document ID X not found') and does not provide the content of these cited source documents. This makes it impossible to verify the existence or content of the primary data sources, rendering the citations unverifiable and suspicious, which aligns with the rubric's intent to identify potentially fabricated references or LLM hallucinations.",
+        "examples": [
+          "Report cites: 'Source Document: `bernie_sanders_2025_fighting_oligarchy_261b93a.txt`' and provides quotes. Evidence database provides no content for this file.",
+          "Report cites: 'Source Document: `john_mccain_2008_concession_ff9b26f2.txt`' and provides quotes. Evidence database provides no content for this file."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "All analytical dimensions explicitly defined and utilized in the report's 'Framework Description' section (Section 4. Methodology) are not found or defined in the provided evidence database (RAG index). The evidence database indicates errors when attempting to retrieve document IDs, implying no framework content is available for validation.",
+      "examples": [
+        "Dignity (mentioned as part of 'Identity Axis', not found in RAG index)",
+        "Tribalism (mentioned as part of 'Identity Axis', not found in RAG index)",
+        "Truth (mentioned as part of 'Truth Axis', not found in RAG index)",
+        "Manipulation (mentioned as part of 'Truth Axis', not found in RAG index)",
+        "Justice (mentioned as part of 'Justice Axis', not found in RAG index)",
+        "Resentment (mentioned as part of 'Justice Axis', not found in RAG index)",
+        "Hope (mentioned as part of 'Emotional Axis', not found in RAG index)",
+        "Fear (mentioned as part of 'Emotional Axis', not found in RAG index)",
+        "Pragmatism (mentioned as part of 'Reality Axis', not found in RAG index)",
+        "Fantasy (mentioned as part of 'Reality Axis', not found in RAG index)"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The validation could not be performed as the required `statistical_results.json` file or equivalent RAG index, which contains the ground truth for numerical values, was not provided or accessible. The 'EVIDENCE DATABASE FOR VALIDATION' explicitly states 'ERROR: Document ID X not found', indicating the absence of the necessary data to compare against the report's statistical claims. Therefore, it is impossible to verify if the numerical values cited in the report match the source data within acceptable rounding precision as per the rubric.",
+      "examples": [
+        "Cannot verify 'mean=0.51' for tribalism_raw (Table 1) against source data.",
+        "Cannot verify 'r = -0.93' for Pragmatism/Fantasy correlation (Table 3) against source data.",
+        "Cannot verify 'CCI (+0.80 and +0.50)' for John McCain and Mitt Romney (Executive Summary) against source data.",
+        "Cannot verify 'mean tension < 0.05' for John McCain and Mitt Romney (Executive Summary) against source data."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The 'Evidence Quote Mismatch' check could not be fully performed as instructed. The rubric requires cross-referencing selected quotes against the 'provided RAG evidence index' (which contains the full text of all corpus documents). However, the 'EVIDENCE DATABASE FOR VALIDATION' section provided for this purpose contains only error messages ('ERROR: Document ID X not found in 134 stored documents') and no actual textual evidence. Therefore, it was impossible to confirm the presence of any quotes within the provided RAG index. All selected quotes effectively 'cannot be found' in the non-existent evidence.",
+      "examples": [
+        "Quote selected for validation: 'Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+        "Quote selected for validation: 'we fell short, the failure is mine, not yours' (Source: john_mccain_2008_concession_ff9b26f2.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+        "Quote selected for validation: 'This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight' (Source: john_mccain_2008_concession_ff9b26f2.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+        "Quote selected for validation: 'But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+        "Quote selected for validation: 'The rich want to get richer and they don't care who they step on' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, especially given the acknowledged limitation of a very small sample size (N=8). While the report does include disclaimers about its preliminary nature, the use of such strong language can be seen as overly promotional for a pilot study.",
+      "examples": [
+        "The Pragmatism/Fantasy axis shows a near-perfect inverse correlation (r = -0.93)",
+        "The most striking finding is the consistent, strong negative correlation...",
+        "The `Reality` axis (`pragmatism` vs. `fantasy`) shows an exceptionally strong negative correlation (r = -0.93)",
+        "It suggests that the acknowledgment of complexity and constraints is fundamentally incompatible with the kind of simplistic, good-vs-evil narratives...",
+        "The framework provides a robust, theoretically grounded, and empirically validated method for quantifying the civic character of political discourse."
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains authority claims referencing external academic/philosophical concepts, which are prohibited. These claims establish theoretical grounding or support from external academic literature without providing specific, internal provenance, violating the rule against external academic citations and authority claims.",
+      "examples": [
+        "The framework is grounded in Aristotelian virtue ethics and civic republican theory.",
+        "The analysis lends empirical weight to the philosophical foundations of the CAF framework, suggesting that concepts from virtue ethics can be operationalized and measured in political texts."
+      ]
+    },
+    {
+      "check_name": "Fabricated Reference",
+      "severity": "CRITICAL",
+      "description": "Identify potentially fabricated academic references or suspicious citation patterns.",
+      "details": "The report cites specific documents from its corpus (e.g., 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', 'john_mccain_2008_concession_ff9b26f2.txt') as sources for direct quotes and analysis. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain any information about the existence or content of these specific document IDs. The database only lists error messages for other, generic document IDs (0, 3, 62). Therefore, based solely on the provided evidence, the existence of the cited source documents cannot be verified, indicating potentially fabricated or unverifiable references.",
+      "examples": [
+        "Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+        "Source: john_mccain_2008_concession_ff9b26f2.txt"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "All analytical dimensions explicitly defined and utilized in the report's 'Framework Description' section (Section 4. Methodology) are not found or defined in the provided evidence database (RAG index). The evidence database indicates errors when attempting to retrieve document IDs, implying no framework content is available for validation.",
+        "examples": [
+          "Dignity (mentioned as part of 'Identity Axis', not found in RAG index)",
+          "Tribalism (mentioned as part of 'Identity Axis', not found in RAG index)",
+          "Truth (mentioned as part of 'Truth Axis', not found in RAG index)",
+          "Manipulation (mentioned as part of 'Truth Axis', not found in RAG index)",
+          "Justice (mentioned as part of 'Justice Axis', not found in RAG index)",
+          "Resentment (mentioned as part of 'Justice Axis', not found in RAG index)",
+          "Hope (mentioned as part of 'Emotional Axis', not found in RAG index)",
+          "Fear (mentioned as part of 'Emotional Axis', not found in RAG index)",
+          "Pragmatism (mentioned as part of 'Reality Axis', not found in RAG index)",
+          "Fantasy (mentioned as part of 'Reality Axis', not found in RAG index)"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The validation could not be performed as the required `statistical_results.json` file or equivalent RAG index, which contains the ground truth for numerical values, was not provided or accessible. The 'EVIDENCE DATABASE FOR VALIDATION' explicitly states 'ERROR: Document ID X not found', indicating the absence of the necessary data to compare against the report's statistical claims. Therefore, it is impossible to verify if the numerical values cited in the report match the source data within acceptable rounding precision as per the rubric.",
+        "examples": [
+          "Cannot verify 'mean=0.51' for tribalism_raw (Table 1) against source data.",
+          "Cannot verify 'r = -0.93' for Pragmatism/Fantasy correlation (Table 3) against source data.",
+          "Cannot verify 'CCI (+0.80 and +0.50)' for John McCain and Mitt Romney (Executive Summary) against source data.",
+          "Cannot verify 'mean tension < 0.05' for John McCain and Mitt Romney (Executive Summary) against source data."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The 'Evidence Quote Mismatch' check could not be fully performed as instructed. The rubric requires cross-referencing selected quotes against the 'provided RAG evidence index' (which contains the full text of all corpus documents). However, the 'EVIDENCE DATABASE FOR VALIDATION' section provided for this purpose contains only error messages ('ERROR: Document ID X not found in 134 stored documents') and no actual textual evidence. Therefore, it was impossible to confirm the presence of any quotes within the provided RAG index. All selected quotes effectively 'cannot be found' in the non-existent evidence.",
+        "examples": [
+          "Quote selected for validation: 'Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+          "Quote selected for validation: 'we fell short, the failure is mine, not yours' (Source: john_mccain_2008_concession_ff9b26f2.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+          "Quote selected for validation: 'This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight' (Source: john_mccain_2008_concession_ff9b26f2.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+          "Quote selected for validation: 'But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index.",
+          "Quote selected for validation: 'The rich want to get richer and they don't care who they step on' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). This quote could not be cross-referenced against the provided (empty) RAG evidence index."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, especially given the acknowledged limitation of a very small sample size (N=8). While the report does include disclaimers about its preliminary nature, the use of such strong language can be seen as overly promotional for a pilot study.",
+        "examples": [
+          "The Pragmatism/Fantasy axis shows a near-perfect inverse correlation (r = -0.93)",
+          "The most striking finding is the consistent, strong negative correlation...",
+          "The `Reality` axis (`pragmatism` vs. `fantasy`) shows an exceptionally strong negative correlation (r = -0.93)",
+          "It suggests that the acknowledgment of complexity and constraints is fundamentally incompatible with the kind of simplistic, good-vs-evil narratives...",
+          "The framework provides a robust, theoretically grounded, and empirically validated method for quantifying the civic character of political discourse."
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains authority claims referencing external academic/philosophical concepts, which are prohibited. These claims establish theoretical grounding or support from external academic literature without providing specific, internal provenance, violating the rule against external academic citations and authority claims.",
+        "examples": [
+          "The framework is grounded in Aristotelian virtue ethics and civic republican theory.",
+          "The analysis lends empirical weight to the philosophical foundations of the CAF framework, suggesting that concepts from virtue ethics can be operationalized and measured in political texts."
+        ]
+      },
+      {
+        "check_name": "Fabricated Reference",
+        "severity": "CRITICAL",
+        "description": "Identify potentially fabricated academic references or suspicious citation patterns.",
+        "details": "The report cites specific documents from its corpus (e.g., 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', 'john_mccain_2008_concession_ff9b26f2.txt') as sources for direct quotes and analysis. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain any information about the existence or content of these specific document IDs. The database only lists error messages for other, generic document IDs (0, 3, 62). Therefore, based solely on the provided evidence, the existence of the cited source documents cannot be verified, indicating potentially fabricated or unverifiable references.",
+        "examples": [
+          "Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "Source: john_mccain_2008_concession_ff9b26f2.txt"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 4,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

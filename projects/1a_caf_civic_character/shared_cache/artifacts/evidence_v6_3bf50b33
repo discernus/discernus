@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-25T17:47:37.663587+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "tribalism",
+      "quote_text": "Many demanded, in their words, that I 'stand with the team.'... But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+      "confidence": 1.0,
+      "context_type": "The speaker explicitly acknowledges and rejects the pressure of group loyalty in favor of a higher principle.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663575+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "dignity",
+      "quote_text": "We are all footnotes at best in the annals of history. But in the most powerful nation on earth, the nation conceived in liberty and justice, that distinction is enough for any citizen.",
+      "confidence": 0.9,
+      "context_type": "The speaker appeals to a universal value of citizenship and justice that transcends individual or group status.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663577+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "manipulation",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "The speech is characterized by its absence of manipulative rhetoric, focusing instead on logical argumentation and explicit reasoning, making it difficult to find a direct quote demonstrating the dimension.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663578+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "truth",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+      "confidence": 1.0,
+      "context_type": "The speaker frames his decision as a commitment to evidence and intellectual honesty, even in the face of political pressure.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663579+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "resentment",
+      "quote_text": "the president is guilty of an appalling abuse of public trust.",
+      "confidence": 0.9,
+      "context_type": "The speaker assigns direct blame for a serious wrong, but the overall context is a somber verdict rather than an attempt to stoke popular grievance.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663580+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "justice",
+      "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+      "confidence": 1.0,
+      "context_type": "This statement is the central pillar of the speech, defining the speaker's role and motivation as one of procedural fairness and judicial duty.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663581+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fear",
+      "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+      "confidence": 0.9,
+      "context_type": "The speaker uses strong, threat-focused language to describe the danger the president's actions pose to the foundations of the republic.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663582+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "hope",
+      "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+      "confidence": 0.8,
+      "context_type": "The speaker expresses a positive, optimistic vision based on the enduring principles of the nation, offering a subtle counterpoint to the otherwise somber tone.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663583+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "The speech is devoid of unrealistic promises or oversimplified solutions; its tone is grounded in the acknowledgment of difficult realities, making a direct quote for this dimension's absence impossible to find.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663584+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.",
+      "confidence": 1.0,
+      "context_type": "The speaker directly acknowledges the constraints and real-world outcome of his vote, demonstrating a clear-eyed view of the political situation.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T17:47:37.663585+00:00"
+    }
+  ]
+}

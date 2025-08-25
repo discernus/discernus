@@ -1,0 +1,92 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "All analytical dimensions mentioned in the report could not be found or validated against the framework specification. The provided RAG index (evidence database) is empty and contains no retrievable content, making it impossible to query for the definitions of the dimensions.",
+      "examples": [
+        "dignity",
+        "tribalism",
+        "truth",
+        "manipulation",
+        "justice",
+        "resentment",
+        "hope",
+        "fear",
+        "pragmatism",
+        "fantasy"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "Cannot perform 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' is empty and states 'ERROR: No document content could be retrieved' for all sources. This means the necessary `statistical_results.json` file or equivalent data required to verify the numerical claims in the report is not accessible. Without this evidence, it is impossible to validate whether the statistics cited in the report match the underlying data within acceptable precision.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index. All selected quotes could not be found because the evidence database explicitly states 'ERROR: No document content could be retrieved' for all listed sources. This indicates a critical failure in accessing the underlying evidence, making validation impossible.",
+      "examples": [
+        "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided evidence database.",
+        "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided evidence database.",
+        "\"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database.",
+        "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database.",
+        "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "All analytical dimensions mentioned in the report could not be found or validated against the framework specification. The provided RAG index (evidence database) is empty and contains no retrievable content, making it impossible to query for the definitions of the dimensions.",
+        "examples": [
+          "dignity",
+          "tribalism",
+          "truth",
+          "manipulation",
+          "justice",
+          "resentment",
+          "hope",
+          "fear",
+          "pragmatism",
+          "fantasy"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "Cannot perform 'Statistic Mismatch' check. The provided 'EVIDENCE DATABASE FOR VALIDATION' is empty and states 'ERROR: No document content could be retrieved' for all sources. This means the necessary `statistical_results.json` file or equivalent data required to verify the numerical claims in the report is not accessible. Without this evidence, it is impossible to validate whether the statistics cited in the report match the underlying data within acceptable precision.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index. All selected quotes could not be found because the evidence database explicitly states 'ERROR: No document content could be retrieved' for all listed sources. This indicates a critical failure in accessing the underlying evidence, making validation impossible.",
+        "examples": [
+          "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided evidence database.",
+          "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided evidence database.",
+          "\"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database.",
+          "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database.",
+          "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided evidence database."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

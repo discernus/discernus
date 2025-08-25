@@ -198,21 +198,54 @@ Be precise and factual. Only report actual issues, not potential concerns.
             if not search_results:
                 return [{"error": "No results found for query."}]
             
-            # Extract actual document content using the stored documents
+            # Extract actual document content using txtai's built-in retrieval
             documents = []
-            for doc_id, score in search_results:
-                if hasattr(evidence_index, 'documents') and evidence_index.documents:
-                    # Find the document by ID in the stored documents
-                    for doc in evidence_index.documents:
-                        if doc['id'] == doc_id:
+            for result in search_results:
+                try:
+                    # Handle different txtai result formats
+                    if isinstance(result, tuple) and len(result) == 2:
+                        doc_id, score = result
+                    elif isinstance(result, dict):
+                        doc_id = result.get('id', result.get('document', 0))
+                        score = result.get('score', 0.0)
+                    else:
+                        # Fallback: treat as doc_id with default score
+                        doc_id = result
+                        score = 0.0
+                    
+                    # Use stored documents with index-based retrieval
+                    if hasattr(evidence_index, 'documents') and evidence_index.documents:
+                        # Fallback to stored documents with better ID matching
+                        document_found = False
+                        # Try exact ID match first
+                        for doc in evidence_index.documents:
+                            if doc['id'] == doc_id:
+                                documents.append({
+                                    "content": doc['text'],
+                                    "metadata": doc.get('metadata', {}),
+                                    "score": score
+                                })
+                                document_found = True
+                                break
+                        
+                        # If exact match fails, try index-based retrieval
+                        if not document_found and isinstance(doc_id, int) and 0 <= doc_id < len(evidence_index.documents):
+                            doc = evidence_index.documents[doc_id]
                             documents.append({
                                 "content": doc['text'],
                                 "metadata": doc.get('metadata', {}),
                                 "score": score
                             })
-                            break
-                else:
-                    documents.append({"error": f"Document {doc_id} not found in stored documents"})
+                            document_found = True
+                        
+                        if not document_found:
+                            documents.append({"error": f"Document ID {doc_id} not found in {len(evidence_index.documents)} stored documents"})
+                    else:
+                        has_docs = hasattr(evidence_index, 'documents')
+                        docs_count = len(evidence_index.documents) if has_docs and evidence_index.documents else 0
+                        documents.append({"error": f"No stored documents available (has_documents={has_docs}, count={docs_count}), cannot retrieve document {doc_id}"})
+                except Exception as e:
+                    documents.append({"error": f"Failed to process search result {result}: {e}"})
             
             return documents if documents else [{"error": "No document content could be retrieved"}]
                 

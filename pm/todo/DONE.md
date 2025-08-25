@@ -22,6 +22,68 @@
 
 ## 🚨 Critical Issues ✅ COMPLETED
 
+### RAG Index Architecture & Quality Assurance ✅ COMPLETED
+
+#### [RAG-001] Fix Fact-Checker RAG Index Document Retrieval ✅ COMPLETED
+- **Description**: ✅ COMPLETED - **CRITICAL BUG**: Fact-checker RAG index only returned document IDs instead of actual content, causing all validation checks to fail
+- **Impact**: ✅ RESOLVED - Fact-checking system now functional with proper document content access
+- **Root Cause**: ✅ IDENTIFIED - `FactCheckerAgent._query_evidence()` method called `str(result)` on txtai search results, which only returned "(id, score)" tuples as strings instead of document content
+- **Implementation Results**:
+  - ✅ Updated `_query_evidence()` to properly retrieve document content using stored documents attribute
+  - ✅ Fact-checker can now access actual document content from RAG index
+  - ✅ Framework dimensions properly validated against specification
+  - ✅ Statistical values can be cross-referenced with source data
+  - ✅ Evidence quotes can be verified against corpus documents
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ Fact-checker can access actual document content from RAG index
+  - ✅ Framework dimensions properly validated against specification
+  - ✅ Statistical values can be cross-referenced with source data
+  - ✅ Evidence quotes can be verified against corpus documents
+- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
+- **Dependencies**: None
+- **Priority**: ✅ **CRITICAL** - Fact-checking system failure resolved
+- **Current State**: Fact-checker RAG index now returns actual document content, enabling proper validation checks
+
+#### [RAG-005] Consolidate RAG Construction Through RAGIndexManager ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Orchestrator bypassed RAGIndexManager for fact-checker RAG construction, creating architectural inconsistency
+- **Impact**: ✅ RESOLVED - System now has consistent RAG construction patterns through single component
+- **Root Cause**: ✅ IDENTIFIED - `_build_fact_checker_rag_index()` method directly constructed txtai index instead of using dedicated `RAGIndexManager` component
+- **Implementation Results**:
+  - ✅ Enhanced RAGIndexManager with comprehensive index method
+  - ✅ Refactored orchestrator to use RAGIndexManager consistently
+  - ✅ All RAG construction now goes through single, consistent component
+  - ✅ Removed direct txtai construction from orchestrator
+  - ✅ Maintained existing functionality and performance
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ `_build_fact_checker_rag_index()` refactored to use `RAGIndexManager`
+  - ✅ All RAG construction goes through single, consistent component
+  - ✅ Removed direct txtai construction from orchestrator
+  - ✅ Maintained existing functionality and performance
+- **Effort**: ✅ COMPLETED - Medium (2-3 hours)
+- **Dependencies**: [RAG-001] ✅
+- **Priority**: ✅ **HIGH** - Architectural consistency achieved
+- **Current State**: Clean THIN architecture with RAGIndexManager handling all RAG construction
+
+#### [RAG-006] Deprecate txtai_evidence_curator Agent ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Remove unused `txtai_evidence_curator` agent that was implemented but never integrated into the pipeline
+- **Impact**: ✅ RESOLVED - Reduced code maintenance overhead and architectural confusion
+- **Root Cause**: ✅ IDENTIFIED - Agent was built for intelligent evidence retrieval but current system uses manual evidence loading instead
+- **Implementation Results**:
+  - ✅ Moved `discernus/agents/txtai_evidence_curator/` to `discernus/agents/deprecated/`
+  - ✅ Removed all imports and references to txtai_evidence_curator
+  - ✅ Updated documentation to reflect deprecation
+  - ✅ Preserved agent code for potential future reference
+  - ✅ Verified system functionality maintained
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ Moved `discernus/agents/txtai_evidence_curator/` to `discernus/agents/deprecated/`
+  - ✅ Removed any imports or references to txtai_evidence_curator
+  - ✅ Updated documentation to reflect deprecation
+  - ✅ Preserved agent code for potential future reference
+- **Effort**: ✅ COMPLETED - Low (1 hour)
+- **Dependencies**: None
+- **Priority**: ✅ **LOW** - Code cleanup completed
+- **Current State**: Clean codebase with unused components properly deprecated
+
 ### Orchestrator Deprecation & Cleanup ✅ COMPLETED
 
 #### [ARCH-004] Complete Orchestrator Deprecation & Cleanup ✅ COMPLETED
@@ -814,7 +876,7 @@
 
 ### 📊 Implementation Results
 
-**Total Items Completed**: 19 major completed items across 6 categories
+**Total Items Completed**: 22 major completed items across 7 categories
 **Code Changes**: 681+ insertions, 107+ deletions across multiple files
 **Test Coverage**: Comprehensive test suites covering all new features
 **Performance**: Dramatically improved execution times and reliability

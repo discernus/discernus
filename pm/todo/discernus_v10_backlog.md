@@ -22,7 +22,7 @@
 **Timeline:** 1-2 days
 **Goal:** Fix critical system issues and establish testing foundation
 
-#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase ✅ **COMPLETED**
+#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase
 
 - **Description**: **CRITICAL BUG**: Derived metrics phase failures are being silently caught and the experiment continues with degraded results instead of failing fast
 - **Dependencies**: None (blocking everything)
@@ -34,19 +34,18 @@
   - Violates THIN architecture fail-fast principles
   - Makes debugging extremely difficult
 - **Acceptance Criteria**:
-  - [x] Derived metrics phase failures cause immediate experiment termination
-  - [x] Clear error messages indicate the specific failure point
-  - [x] No graceful degradation for critical pipeline components
-  - [x] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
-- **Effort**: 1-2 hours ✅ **COMPLETED**
+  - [ ] Derived metrics phase failures cause immediate experiment termination
+  - [ ] Clear error messages indicate the specific failure point
+  - [ ] No graceful degradation for critical pipeline components
+  - [ ] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
+- **Effort**: 1-2 hours
 - **Priority**: **CRITICAL** (data integrity issue)
-- **Status**: ✅ **FIXED** - Experiment now fails fast with exit code 1 and clear error message
-- **Follow-up Issue**: Cache invalidation issue discovered - cached functions reference non-existent files
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but fail-fast behavior needs testing
 
-#### [CRITICAL-002] Fix Derived Metrics Cache Stale File References ✅ **COMPLETED**
+#### [CRITICAL-002] Fix Derived Metrics Cache Stale File References
 
 - **Description**: **CRITICAL BUG**: Cached derived metrics functions reference temporary file paths that get cleaned up, causing "functions file not found" errors on cache hits
-- **Dependencies**: [CRITICAL-001] ✅
+- **Dependencies**: [CRITICAL-001]
 - **Root Cause**: Cache stores function metadata pointing to temporary workspace files, but temporary directories are cleaned up after each run (lines 769-772)
 - **Evidence**: Cache hit shows "💾 Using cached derived metrics functions" but then fails with "Derived metrics functions file not found"
 - **Solution**: Store actual function code content in cache, recreate function files from cached content when cache hit occurs
@@ -55,18 +54,18 @@
   - Violates caching reliability principles
   - Makes development velocity worse instead of better
 - **Acceptance Criteria**:
-  - [x] Cache stores actual function code content, not just metadata
-  - [x] Cache hits recreate function files from stored content
-  - [x] Both derived metrics and statistical analysis caches fixed
-  - [x] Workspace cleanup doesn't break cached functions
-- **Effort**: 1 hour ✅ **COMPLETED**
+  - [ ] Cache stores actual function code content, not just metadata
+  - [ ] Cache hits recreate function files from stored content
+  - [ ] Both derived metrics and statistical analysis caches fixed
+  - [ ] Workspace cleanup doesn't break cached functions
+- **Effort**: 1 hour
 - **Priority**: **CRITICAL** - Blocking caching benefits
-- **Status**: ✅ **FIXED** - Cache now stores and recreates function code content
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but cache content storage needs testing
 
-#### [PERF-001] Implement Validation Caching ✅ **COMPLETED**
+#### [PERF-001] Implement Validation Caching
 
 - **Description**: Implement caching for experiment coherence validation to eliminate redundant validation when input assets haven't changed
-- **Dependencies**: [CRITICAL-002] ✅
+- **Dependencies**: [CRITICAL-002]
 - **Root Cause**: Validation runs every time even when framework, experiment, and corpus haven't changed, causing unnecessary LLM calls and delays
 - **Solution**: Cache validation results based on content hashes of framework, experiment, corpus, and model
 - **Impact**:
@@ -74,16 +73,16 @@
   - Reduces LLM API costs for development iterations
   - Maintains same validation quality and error detection
 - **Acceptance Criteria**:
-  - [x] ValidationCacheManager created with deterministic cache keys
-  - [x] Cache key based on framework + experiment + corpus + model content
-  - [x] Validation results cached with success/failure status and issues
-  - [x] Cache hits skip validation and use stored results
-  - [x] Failed validations properly cached and re-raise errors
-  - [x] Unit tests cover all caching scenarios
-  - [x] Integration with CleanAnalysisOrchestrator performance metrics
-- **Effort**: 2 hours ✅ **COMPLETED**
+  - [ ] ValidationCacheManager created with deterministic cache keys
+  - [ ] Cache key based on framework + experiment + corpus + model content
+  - [ ] Validation results cached with success/failure status and issues
+  - [ ] Cache hits skip validation and use stored results
+  - [ ] Failed validations properly cached and re-raise errors
+  - [ ] Unit tests cover all caching scenarios
+  - [ ] Integration with CleanAnalysisOrchestrator performance metrics
+- **Effort**: 2 hours
 - **Priority**: **HIGH** - Significant development velocity improvement
-- **Status**: ✅ **IMPLEMENTED** - Validation now cached with 20-30 second speedup on cache hits
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but caching behavior needs testing
 
 #### [TEST-INFRA] Fix Integration Test Infrastructure
 
@@ -108,13 +107,13 @@
 - **Root Cause**: Citation Violation rubric is too broad, catching internal evidence references
 - **Solution**: Refine rubric to distinguish between external academic citations and internal evidence attribution
 - **Acceptance Criteria**:
-  - [x] `(Source: filename.txt)` format is NOT flagged as citation violation
-  - [x] External academic citations like `(Author, Year)` are still flagged
-  - [x] Rubric clearly distinguishes evidence attribution from academic citations
-  - [x] False positive rate on evidence citations is zero
-- **Effort**: 30 minutes ✅ **COMPLETED**
+  - [ ] `(Source: filename.txt)` format is NOT flagged as citation violation
+  - [ ] External academic citations like `(Author, Year)` are still flagged
+  - [ ] Rubric clearly distinguishes evidence attribution from academic citations
+  - [ ] False positive rate on evidence citations is zero
+- **Effort**: 30 minutes
 - **Priority**: **HIGH** - Affects report quality and revision agent effectiveness
-- **Status**: ✅ **COMPLETED**
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but behavior needs testing
 
 #### [QUALITY-002] Review Revision Agent Prompt for Framework Dimension Issues
 
@@ -126,13 +125,13 @@
 - **Root Cause**: Revision agent prompt may not be clear about handling framework-specific factual issues
 - **Solution**: Review and update revision agent prompt to better handle framework dimension vs. axis distinctions
 - **Acceptance Criteria**:
-  - [x] Revision agent successfully corrects dimension hallucination errors
-  - [x] Prompt clearly defines what constitutes framework factual issues
-  - [x] Examples include framework structure corrections
-  - [x] Framework-agnostic approach maintained
-- **Effort**: 1 hour ✅ **COMPLETED**
+  - [ ] Revision agent successfully corrects dimension hallucination errors
+  - [ ] Prompt clearly defines what constitutes framework factual issues
+  - [ ] Examples include framework structure corrections
+  - [ ] Framework-agnostic approach maintained
+- **Effort**: 1 hour
 - **Priority**: **HIGH** - Affects report accuracy and revision agent effectiveness
-- **Status**: ✅ **COMPLETED**
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but behavior needs testing
 
 #### [QUALITY-003] Review Synthesis Prompt for Framework Dimension Accuracy
 
@@ -144,13 +143,13 @@
 - **Root Cause**: Synthesis prompt may not be clear about framework structure and terminology
 - **Solution**: Review synthesis prompt to ensure it generates accurate framework terminology
 - **Acceptance Criteria**:
-  - [x] Synthesis agent uses correct framework terminology (axes vs. dimensions)
-  - [x] Reports accurately reflect framework structure
-  - [x] Framework-agnostic approach maintained
-  - [x] Reduced dimension hallucination in initial reports
-- **Effort**: 1 hour ✅ **COMPLETED**
+  - [ ] Synthesis agent uses correct framework terminology (axes vs. dimensions)
+  - [ ] Reports accurately reflect framework structure
+  - [ ] Framework-agnostic approach maintained
+  - [ ] Reduced dimension hallucination in initial reports
+- **Effort**: 1 hour
 - **Priority**: **MEDIUM** - Prevention is better than correction
-- **Status**: ✅ **COMPLETED**
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but behavior needs testing
 
 #### [OBSERVABILITY-001] MLflow Integration for txtai Observability
 
@@ -173,10 +172,10 @@
 - **Priority**: **MEDIUM** - Future enhancement for production monitoring
 - **Status**: **BACKLOGGED** - Simple Python logging implemented first
 
-#### [CRITICAL-003] Fix Silent Statistical Analysis Failures ✅ **COMPLETED**
+#### [CRITICAL-003] Fix Silent Statistical Analysis Failures
 
 - **Description**: **CRITICAL BUG**: Statistical analysis phase reports success but produces no numerical results, allowing experiments to continue to synthesis with invalid data
-- **Dependencies**: [CRITICAL-001] ✅, [CRITICAL-002] ✅
+- **Dependencies**: [CRITICAL-001], [CRITICAL-002]
 - **Root Cause**: `_run_statistical_analysis_phase` method executes statistical functions but doesn't validate the output, blindly setting `"validation_passed": True"`
 - **Evidence**: Final report shows "While the analysis pipeline reported successful completion, the final output contained only metadata about the analysis run. It did not include the expected descriptive statistics or correlation coefficients."
 - **Impact**:
@@ -186,18 +185,18 @@
   - Results in qualitative-only reports when quantitative analysis was intended
 - **Solution**: Add validation to `_run_statistical_analysis_phase` using existing `_validate_statistical_results` method
 - **Acceptance Criteria**:
-  - [x] Statistical analysis phase validates output before proceeding
-  - [x] Experiments fail fast when statistical analysis produces no numerical results
-  - [x] Clear error messages indicate statistical analysis failure
-  - [x] No experiments proceed to synthesis without valid statistical data
-- **Effort**: 30 minutes ✅ **COMPLETED**
+  - [ ] Statistical analysis phase validates output before proceeding
+  - [ ] Experiments fail fast when statistical analysis produces no numerical results
+  - [ ] Clear error messages indicate statistical analysis failure
+  - [ ] No experiments proceed to synthesis without valid statistical data
+- **Effort**: 30 minutes
 - **Priority**: **CRITICAL** - Data integrity and fail-fast principles
-- **Status**: ✅ **FIXED** - Statistical analysis now validates output and fails fast on invalid results
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but fail-fast behavior needs testing
 
 #### [CRITICAL-004] Fix Missing Derived Metrics Artifact Storage
 
 - **Description**: **CRITICAL BUG**: Derived metrics artifacts are not being stored in the run results directory, unlike statistical results which are properly stored
-- **Dependencies**: [CRITICAL-003] ✅
+- **Dependencies**: [CRITICAL-003]
 - **Root Cause**: Derived metrics phase generates artifacts but doesn't save them to the results directory structure
 - **Evidence**: 
   - Statistical results are stored as `statistical_results.json` in run results directory
@@ -313,30 +312,30 @@
 - **Priority**: **HIGH** - Critical for architectural integrity and scalability.
 - **Status**: ✅ **COMPLETED**
 
-#### [CACHE-001] RAG Index Caching Implementation ✅ **COMPLETED** (Temporary)
+#### [CACHE-001] RAG Index Caching Implementation (Temporary)
 
 - **Description**: Implement caching for RAG indexes to eliminate redundant rebuilding and improve development velocity
 - **Dependencies**: [THIN-OPT] ✅
 - **Root Cause**: RAG index rebuilt from scratch every time, even when evidence artifacts are identical, causing 10-15 second delays
 - **Critical Fix Applied**: Fixed txtai directory-based index handling - txtai saves indexes as directories, not files, requiring tar.gz compression for caching
 - **Acceptance Criteria**:
-  - [x] RAG index built and cached immediately after analysis phase (Phase 4.5)
-  - [x] Cache key based on evidence artifact hashes for deterministic caching
-  - [x] Synthesis phase checks cache first, builds only if needed
-  - [x] txtai index save/load functionality integrated with LocalArtifactStorage
-  - [x] **CRITICAL**: Proper tar.gz handling for txtai directory-based indexes
-  - [x] Cache hit provides 10-15 second speed improvement over rebuild
-  - [x] Follows same caching pattern as derived metrics and statistical analysis
-  - [x] Unit tests cover tar.gz compression/decompression scenarios
-- **Effort**: 4 hours ✅ **COMPLETED**
+  - [ ] RAG index built and cached immediately after analysis phase (Phase 4.5)
+  - [ ] Cache key based on evidence artifact hashes for deterministic caching
+  - [ ] Synthesis phase checks cache first, builds only if needed
+  - [ ] txtai index save/load functionality integrated with LocalArtifactStorage
+  - [ ] **CRITICAL**: Proper tar.gz handling for txtai directory-based indexes
+  - [ ] Cache hit provides 10-15 second speed improvement over rebuild
+  - [ ] Follows same caching pattern as derived metrics and statistical analysis
+  - [ ] Unit tests cover tar.gz compression/decompression scenarios
+- **Effort**: 4 hours
 - **Priority**: **HIGH** - Significant development velocity improvement
-- **Status**: ✅ **IMPLEMENTED** - RAG index caching working with proper txtai directory handling
+- **Status**: **NEEDS VERIFICATION** - Implementation exists but caching behavior needs testing
 - **Note**: This implementation will be superseded by [ARCH-RAG-01] refactor. After refactor completion, caching will need to be reimplemented for the new directory-native architecture without tar.gz compression.
 
 #### [CACHE-002] Reimplement RAG Index Caching for New Architecture
 
 - **Description**: Reimplement RAG index caching after [ARCH-RAG-01] refactor to leverage the new directory-native architecture
-- **Dependencies**: [ARCH-RAG-01] ✅ (RAG index refactor complete)
+- **Dependencies**: [ARCH-RAG-01] ✅ (RAG index refactor complete), [CACHE-001]
 - **Root Cause**: [CACHE-001] implementation used tar.gz compression workaround that will be eliminated by the refactor
 - **Solution**: Implement caching for the new `RAGIndexManager` using native directory storage
 - **Acceptance Criteria**:
@@ -355,7 +354,7 @@
 #### [CACHE-003] Implement Cache Fingerprinting Standard
 
 - **Description**: Implement comprehensive cache fingerprinting to prevent stale cache hits when prompts, templates, or configurations change
-- **Dependencies**: [CACHE-002] ✅ (RAG index caching reimplemented)
+- **Dependencies**: [CACHE-002] (RAG index caching reimplemented)
 - **Root Cause**: Current cache keys don't include all behavior-affecting inputs (prompts, templates, configs), leading to stale cache hits when these change
 - **Evidence**: Statistical analysis cache hit despite prompt template changes; derived metrics cache lacks prompt fingerprinting entirely
 - **Solution**: Implement standardized cache fingerprinting for all code-generation caches
@@ -431,7 +430,7 @@
   - [ ] Common troubleshooting guide
 - **Effort**: 1 day
 
-#### [UX-001] Synthesis Flow Logging Cleanup ✅ **COMPLETED**
+#### [UX-001] Synthesis Flow Logging Cleanup
 
 - **Description**: Fix synthesis phase logging order to improve readability and logical flow
 - **Dependencies**: [TEST-003] ✅
@@ -441,13 +440,13 @@
   - [x] Evidence retrieval logging suppressed during bulk synthesis operations
   - [x] `UnifiedSynthesisAgent._get_all_evidence()` uses quiet mode
   - [x] `SynthesisPromptAssembler` uses quiet mode for evidence counting
-  - [x] `CleanAnalysisOrchestrator._validate_synthesis_assets()` uses quiet mode for validation
+  - [ ] `CleanAnalysisOrchestrator._validate_synthesis_assets()` uses quiet mode for validation
   - [x] `TxtaiEvidenceCurator._get_all_evidence()` uses quiet mode for RAG index building
   - [x] Individual artifact retrievals still logged when appropriate
   - [x] Clean synthesis flow without hundreds of "📥 Retrieved artifact" messages
-- **Effort**: 1.5 hours ✅ **COMPLETED**
+- **Effort**: 1.5 hours
 - **Priority**: **LOW** - Minor UX improvement
-- **Status**: ✅ **FULLY IMPLEMENTED** - All synthesis and RAG index logging now clean and readable
+- **Status**: **PARTIALLY IMPLEMENTED** - Missing critical method implementation, tests will fail
 
 #### [UX-002] Optimize Synthesis Asset Validation
 
@@ -897,23 +896,7 @@
 
 ---
 
-#### [RAG-001] Fix Fact-Checker RAG Index Document Retrieval ✅ **COMPLETED**
 
-- **Description**: **CRITICAL BUG**: Fact-checker RAG index only returns document IDs instead of actual content, causing all validation checks to fail
-- **Dependencies**: None (blocking fact-checking functionality)
-- **Root Cause**: `FactCheckerAgent._query_evidence()` method calls `str(result)` on txtai search results, which only returns "(id, score)" tuples as strings instead of document content
-- **Impact**: 
-  - All fact-checking validation returns meaningless "Document ID X maps to X" results
-  - Cannot validate framework dimensions, statistical values, or evidence quotes
-  - Fact-checker reports false failures due to inability to access content
-- **Acceptance Criteria**:
-  - [x] Fact-checker can access actual document content from RAG index
-  - [x] Framework dimensions properly validated against specification
-  - [x] Statistical values can be cross-referenced with source data
-  - [x] Evidence quotes can be verified against corpus documents
-- **Effort**: 2-3 hours ✅ **COMPLETED**
-- **Priority**: **CRITICAL** (fact-checking system failure)
-- **Status**: ✅ **FIXED** - Updated `_query_evidence()` to properly retrieve document content using stored documents attribute
 
 ### Sprint 2: RAG Index Content Completeness (NEXT)
 
@@ -923,7 +906,7 @@
 #### [RAG-002] Complete Framework Specification in RAG Index
 
 - **Description**: RAG index missing complete framework specification content - only 2 of 10 dimensions (Dignity, Tribalism) found during validation
-- **Dependencies**: [RAG-001] ✅
+- **Dependencies**: None (RAG-001 ✅ completed)
 - **Root Cause**: `_build_fact_checker_rag_index()` method not properly including full framework specification content
 - **Impact**: 
   - Dimension Hallucination checks fail for legitimate framework dimensions
@@ -939,7 +922,7 @@
 #### [RAG-003] Include Comprehensive Statistical Results in RAG Index
 
 - **Description**: RAG index missing comprehensive `statistical_results.json` equivalent for numerical validation
-- **Dependencies**: [RAG-001] ✅
+- **Dependencies**: None (RAG-001 ✅ completed)
 - **Root Cause**: Statistical analysis results not being properly formatted and included in fact-checker RAG index
 - **Impact**: 
   - Cannot validate numerical claims (means, correlations, standard deviations)
@@ -955,55 +938,22 @@
 #### [RAG-004] Include Full Corpus Documents in RAG Index
 
 - **Description**: RAG index missing full text of corpus documents for quote verification
-- **Dependencies**: [RAG-001] ✅
+- **Dependencies**: None (RAG-001 ✅ completed)
 - **Root Cause**: Evidence Quote Mismatch checks cannot access full corpus text for quote cross-referencing
 - **Impact**: 
   - Cannot verify evidence quotes against source documents
   - Quote validation relies on incomplete evidence extracts
   - Reduced confidence in evidence attribution accuracy
 - **Acceptance Criteria**:
-  - [ ] Full text of all corpus documents indexed and searchable
-  - [ ] Quote verification can cross-reference against complete source text
-  - [ ] Evidence attribution can be validated end-to-end
+  - [ ] All 10 CAF dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) found in RAG index
+  - [ ] Complete framework specification text indexed and searchable
+  - [ ] Framework structure and axis definitions accessible for validation
 - **Effort**: 2-3 hours
 - **Priority**: **MEDIUM** (evidence validation)
 
-#### [RAG-005] Consolidate RAG Construction Through RAGIndexManager ✅ **COMPLETED**
 
-- **Description**: Orchestrator bypasses RAGIndexManager for fact-checker RAG construction, creating architectural inconsistency
-- **Dependencies**: [RAG-001] ✅
-- **Root Cause**: `_build_fact_checker_rag_index()` method directly constructs txtai index instead of using dedicated `RAGIndexManager` component
-- **Impact**: 
-  - Violates THIN architecture principles (orchestrator doing specialized work)
-  - Inconsistent RAG construction patterns across codebase
-  - Duplicated txtai initialization and configuration logic
-  - Harder to maintain and debug RAG-related issues
-- **Acceptance Criteria**:
-  - [x] `_build_fact_checker_rag_index()` refactored to use `RAGIndexManager`
-  - [x] All RAG construction goes through single, consistent component
-  - [x] Remove direct txtai construction from orchestrator
-  - [x] Maintain existing functionality and performance
-- **Effort**: 2-3 hours ✅ **COMPLETED**
-- **Priority**: **HIGH** (architectural consistency)
-- **Status**: ✅ **COMPLETED** - Enhanced RAGIndexManager with comprehensive index method, refactored orchestrator to use it consistently
 
-#### [RAG-006] Deprecate txtai_evidence_curator Agent ✅ **COMPLETED**
 
-- **Description**: Remove unused `txtai_evidence_curator` agent that was implemented but never integrated into the pipeline
-- **Dependencies**: None
-- **Root Cause**: Agent was built for intelligent evidence retrieval but current system uses manual evidence loading instead
-- **Impact**: 
-  - Code maintenance overhead for unused component
-  - Architectural confusion about evidence retrieval strategy
-  - Potential security surface from unused code paths
-- **Acceptance Criteria**:
-  - [x] Move `discernus/agents/txtai_evidence_curator/` to `discernus/agents/deprecated/`
-  - [x] Remove any imports or references to txtai_evidence_curator
-  - [x] Update documentation to reflect deprecation
-  - [x] Preserve agent code for potential future reference
-- **Effort**: 1 hour ✅ **COMPLETED**
-- **Priority**: **LOW** (code cleanup)
-- **Status**: ✅ **COMPLETED** - Moved agent to deprecated folder, updated import paths, verified system functionality
 
 ### Sprint 3: Advanced RAG Architecture (FUTURE)
 
@@ -1049,16 +999,18 @@
 ## Backlog Maintenance
 
 - **Last Updated**: 2025-08-25
-- **Next Review**: After RAG index completeness fixes
+- **Next Review**: After critical infrastructure verification
 - **Cleanup Status**: ✅ Groomed and streamlined with sprint restructuring
-- **Completed Items Moved**: [CRITICAL-005], [CRITICAL-006], [ARCH-004], [QUALITY-001], [QUALITY-002], [QUALITY-003], and [RAG-001] moved to DONE.md
+- **Completed Items Moved**: [CRITICAL-005], [CRITICAL-006], [ARCH-004], [RAG-001], [RAG-005], and [RAG-006] moved to DONE.md
 - **Redundant Items**: Informal duplicate items consolidated into formal backlog structure
 - **Sprint Restructuring**: Completed - fixed dependency conflicts and logical flow
+- **Verification Required**: Multiple "completed" items unchecked due to missing implementation verification
 - **New Insights**: 
   - Added [CACHE-003] for comprehensive cache fingerprinting standard based on stale cache analysis
   - Added [LOGGING-001] for dual-track logging completion based on CAF experiment session analysis
   - Enhanced [CLI-007] and [PROVENANCE-001] with specific logging implementation requirements
   - Added [RAG-002], [RAG-003], [RAG-004] for comprehensive fact-checker RAG index completeness
+  - Unchecked [UX-001], [CRITICAL-001], [CRITICAL-002], [CRITICAL-003], [PERF-001], [CACHE-001], [QUALITY-001], [QUALITY-002], [QUALITY-003] due to missing verification
 
 ## Current Priorities
 

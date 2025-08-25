@@ -1,0 +1,144 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The RAG index (Evidence Database for Validation) is non-functional, returning an error for all queries. This prevents the validation of whether the analytical dimensions mentioned in the report are defined in the framework specification, as required by the rubric. Therefore, no definitions could be found for any of the mentioned dimensions or framework components.",
+      "examples": [
+        "Dignity",
+        "Tribalism",
+        "Truth",
+        "Manipulation",
+        "Justice",
+        "Resentment",
+        "Hope",
+        "Fear",
+        "Pragmatism",
+        "Fantasy",
+        "Salience-Weighted Civic Character Index (CCI)",
+        "Character Tension Index",
+        "Authentic Virtue",
+        "Strategic Pathology"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The 'Statistic Mismatch' check could not be performed as required by the rubric. The rubric explicitly states that for every statistical claim, the RAG index MUST be queried to find corresponding values in the `statistical_results.json` file. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' indicates that all RAG queries failed (e.g., 'ERROR: Query failed: too many values to unpack (expected 2)'). Without access to the underlying statistical data, it is impossible to verify the numerical values cited in the report against the source, thus preventing the completion of the validation task.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' is not functional. It consistently returns 'ERROR: Query failed: too many values to unpack (expected 2)' for all sources. This prevents the core instruction of the rubric, which requires searching the RAG evidence index to confirm the presence of quotes. Therefore, I am unable to cross-reference the selected quotes against a functional RAG evidence index as mandated by the rubric.",
+      "examples": [
+        "Unable to verify: 'I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "Unable to verify: 'This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "Unable to verify: 'though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "Unable to verify: 'I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "Unable to verify: 'The rich want to get richer and they don't care who they step on.' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several instances of superlative or promotional language that may require editorial review for academic tone, as per the 'Grandiose Claim' rubric. While the report often qualifies its findings as preliminary, the phrasing used in certain sections can be seen as overly strong or promotional for a pilot study.",
+      "examples": [
+        "\"This is a profound finding, suggesting that a core element of vice-based civic discourse is the rejection of complexity...\" (Section 5.4, 'Pattern Recognition and Theoretical Insights')",
+        "\"The concept of `Tension` is particularly innovative, providing a quantitative measure for the kind of strategic ambiguity or 'double-speak' that is often discussed qualitatively in political analysis.\" (Section 6.1, 'Theoretical Implications')",
+        "\"This computational analysis, though limited in scope, demonstrates that the Civic Analysis Framework (CAF) v10.0 is a powerful tool for dissecting the moral and ethical dimensions of political discourse.\" (Section 7, 'Conclusion')",
+        "\"While these results must be considered provisional pending larger-scale validation, they represent a significant step toward a more rigorous, data-driven, and ethically-grounded understanding of civic communication.\" (Section 7, 'Conclusion')"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains authority claims that refer to external academic concepts or discussions without specific attribution, which is prohibited for external academic citations in computational analysis reports.",
+      "examples": [
+        "Section 3: Theoretical Framework: 'Its theoretical foundations are rooted in Aristotelian virtue ethics and contemporary civic republican theory.' (This claims theoretical grounding in specific academic fields without citation.)",
+        "Section 6: Discussion: 'The concept of `Tension` is particularly innovative, providing a quantitative measure for the kind of strategic ambiguity or \"double-speak\" that is often discussed qualitatively in political analysis.' (This refers to existing qualitative discussions in political analysis without specific citation.)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The RAG index (Evidence Database for Validation) is non-functional, returning an error for all queries. This prevents the validation of whether the analytical dimensions mentioned in the report are defined in the framework specification, as required by the rubric. Therefore, no definitions could be found for any of the mentioned dimensions or framework components.",
+        "examples": [
+          "Dignity",
+          "Tribalism",
+          "Truth",
+          "Manipulation",
+          "Justice",
+          "Resentment",
+          "Hope",
+          "Fear",
+          "Pragmatism",
+          "Fantasy",
+          "Salience-Weighted Civic Character Index (CCI)",
+          "Character Tension Index",
+          "Authentic Virtue",
+          "Strategic Pathology"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The 'Statistic Mismatch' check could not be performed as required by the rubric. The rubric explicitly states that for every statistical claim, the RAG index MUST be queried to find corresponding values in the `statistical_results.json` file. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' indicates that all RAG queries failed (e.g., 'ERROR: Query failed: too many values to unpack (expected 2)'). Without access to the underlying statistical data, it is impossible to verify the numerical values cited in the report against the source, thus preventing the completion of the validation task.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' is not functional. It consistently returns 'ERROR: Query failed: too many values to unpack (expected 2)' for all sources. This prevents the core instruction of the rubric, which requires searching the RAG evidence index to confirm the presence of quotes. Therefore, I am unable to cross-reference the selected quotes against a functional RAG evidence index as mandated by the rubric.",
+        "examples": [
+          "Unable to verify: 'I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "Unable to verify: 'This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "Unable to verify: 'though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.' (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "Unable to verify: 'I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "Unable to verify: 'The rich want to get richer and they don't care who they step on.' (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several instances of superlative or promotional language that may require editorial review for academic tone, as per the 'Grandiose Claim' rubric. While the report often qualifies its findings as preliminary, the phrasing used in certain sections can be seen as overly strong or promotional for a pilot study.",
+        "examples": [
+          "\"This is a profound finding, suggesting that a core element of vice-based civic discourse is the rejection of complexity...\" (Section 5.4, 'Pattern Recognition and Theoretical Insights')",
+          "\"The concept of `Tension` is particularly innovative, providing a quantitative measure for the kind of strategic ambiguity or 'double-speak' that is often discussed qualitatively in political analysis.\" (Section 6.1, 'Theoretical Implications')",
+          "\"This computational analysis, though limited in scope, demonstrates that the Civic Analysis Framework (CAF) v10.0 is a powerful tool for dissecting the moral and ethical dimensions of political discourse.\" (Section 7, 'Conclusion')",
+          "\"While these results must be considered provisional pending larger-scale validation, they represent a significant step toward a more rigorous, data-driven, and ethically-grounded understanding of civic communication.\" (Section 7, 'Conclusion')"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains authority claims that refer to external academic concepts or discussions without specific attribution, which is prohibited for external academic citations in computational analysis reports.",
+        "examples": [
+          "Section 3: Theoretical Framework: 'Its theoretical foundations are rooted in Aristotelian virtue ethics and contemporary civic republican theory.' (This claims theoretical grounding in specific academic fields without citation.)",
+          "Section 6: Discussion: 'The concept of `Tension` is particularly innovative, providing a quantitative measure for the kind of strategic ambiguity or \"double-speak\" that is often discussed qualitatively in political analysis.' (This refers to existing qualitative discussions in political analysis without specific citation.)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}
