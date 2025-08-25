@@ -1536,18 +1536,40 @@ class CleanAnalysisOrchestrator:
             self.performance_metrics["cache_hits"] += 1
             return
         
-        # Build new RAG index
-        curator = TxtaiEvidenceCurator(
-            model="vertex_ai/gemini-2.5-flash",  # Use fast model for indexing
-            artifact_storage=self.artifact_storage,
-            audit_logger=audit_logger
-        )
-        
-        index = curator.build_and_load_index(
-            evidence_artifact_hashes=evidence_hashes,
-            artifact_storage=self.artifact_storage
-        )
-        
+        # Build new RAG index using the same method as fact-checking
+        # This ensures both cached and fact-checker indexes have the documents attribute
+        from .rag_index_manager import RAGIndexManager
+
+        # Prepare documents for RAGIndexManager (reuse logic from _build_fact_checker_rag_index)
+        source_documents = []
+        for evidence_hash in evidence_hashes:
+            try:
+                evidence_content = self.artifact_storage.get_artifact(evidence_hash)
+                evidence_text = evidence_content.decode('utf-8')
+                # Parse the evidence JSON
+                import json
+                evidence_data = json.loads(evidence_text)
+                evidence_list = evidence_data.get('evidence_data', [])
+
+                for evidence in evidence_list:
+                    source_documents.append({
+                        'content': evidence.get('quote_text', ''),
+                        'metadata': {
+                            'source_type': 'evidence',
+                            'filename': evidence.get('document_name', 'unknown'),
+                            'purpose': 'evidence_validation'
+                        }
+                    })
+            except Exception as e:
+                self._log_progress(f"⚠️ Failed to process evidence {evidence_hash[:8]}: {e}")
+
+        if not source_documents:
+            raise CleanAnalysisError("No source documents available for RAG indexing")
+
+        # Build the index using the same method as fact-checking
+        rag_manager = RAGIndexManager(self.artifact_storage)
+        index = rag_manager.build_comprehensive_index(source_documents)
+
         if index is None:
             raise CleanAnalysisError("Failed to build RAG index for caching")
         
