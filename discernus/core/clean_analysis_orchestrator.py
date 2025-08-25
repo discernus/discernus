@@ -1700,22 +1700,36 @@ class CleanAnalysisOrchestrator:
                 artifact_storage=self.artifact_storage,
             )
 
+            # Extract final report from synthesis agent output
             draft_report = assets_dict.get("final_report")
             if not draft_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a draft report.")
 
-            # Statistical results are required for numerical integrity
-            if "research_data_hash" not in assets_dict:
-                raise CleanAnalysisError("Statistical analysis results missing - cannot proceed with synthesis")
+            # Statistical results are required for numerical integrity  
+            # DEBUG: Show all method parameters and local variables
+            self._log_progress(f"DEBUG: All locals() items:")
+            for k, v in locals().items():
+                if not k.startswith('_') and k != 'self':
+                    self._log_progress(f"  {k}: {type(v)} = {str(v)[:100]}...")
+            
+            # The research_data_hash should be accessible in this method's scope
+            # It was passed to the synthesis agent call above
+            if 'research_data_hash' not in locals():
+                raise CleanAnalysisError("CRITICAL BUG: research_data_hash not available in method scope - this is a regression from recent refactoring")
             
             statistical_results_content = self.artifact_storage.get_artifact(
-                assets_dict["research_data_hash"]
+                research_data_hash
             ).decode("utf-8")
             statistical_results = json.loads(statistical_results_content)
             
             # Validate that statistical analysis actually succeeded
-            if statistical_results.get("status") == "failed":
-                raise CleanAnalysisError(f"Statistical analysis failed: {statistical_results.get('error', 'Unknown error')}")
+            # Statistical analysis can have various success statuses: "success_with_data", "completed", etc.
+            # Only fail if we explicitly see "failed" or missing required data
+            if (statistical_results.get("status") == "failed" or 
+                statistical_results.get("error") or
+                "statistical_results" not in statistical_results):
+                error_msg = statistical_results.get("error", "Statistical analysis incomplete or missing required data")
+                raise CleanAnalysisError(f"Statistical analysis failed: {error_msg}")
             
             finisher = SynthesisFinisher(statistical_results)
             final_report = finisher.finalize_report(draft_report)

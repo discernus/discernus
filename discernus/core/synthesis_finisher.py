@@ -9,7 +9,7 @@ class SynthesisFinisher:
 
     def __init__(self, statistical_results: Dict[str, Any]):
         self.statistical_results = statistical_results
-        self.placeholder_pattern = re.compile(r"\{\{([a-zA-Z]+)\(([^)]+)\)\}\}")
+        self.placeholder_pattern = re.compile(r"\{([a-zA-Z]+)\(([^)]+)\)\}")
 
     def _find_correlation_value(self, var1: str, var2: str) -> Any:
         # Check both orders for the key
