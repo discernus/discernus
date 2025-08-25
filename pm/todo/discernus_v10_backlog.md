@@ -976,6 +976,51 @@
 - **Priority**: **HIGH** (blocks all fact-checking functionality)
 - **Status**: ✅ **COMPLETED** - Fixed txtai string vs integer ID type mismatch in FactCheckerAgent._query_evidence()
 
+#### [RAG-008] Fix Framework Content Searchability in RAG Index
+
+- **Description**: Framework specification content is indexed but not searchable by fact-checker queries
+- **Dependencies**: [RAG-007] ✅
+- **Root Cause**: Framework content exists in RAG index but fact-checker searches fail to retrieve it for dimension validation
+- **Impact**: 
+  - Dimension Hallucination checks fail despite framework being indexed
+  - Cannot validate framework structure and terminology
+  - Fact-checker reports missing framework definitions even when content exists
+- **Current Status**: 
+  - ✅ Framework content is being indexed (651 lines, 1850-1860 in orchestrator)
+  - ❌ Fact-checker cannot find framework content during searches
+  - ❌ All 5 axes and 10 dimensions not searchable
+- **Acceptance Criteria**:
+  - [ ] Framework content searchable by dimension names (Dignity, Tribalism, Truth, etc.)
+  - [ ] Framework content searchable by axis names (Identity Axis, Truth Axis, etc.)
+  - [ ] Framework content searchable by metric names (CCI, Tension Indices, etc.)
+  - [ ] Dimension Hallucination checks can access framework definitions
+- **Effort**: 2-3 hours
+- **Priority**: **HIGH** (fact-checking completeness)
+- **Status**: 🔄 **IN PROGRESS** - Investigating why indexed framework content is not searchable
+
+#### [RAG-009] Fix Evidence Coverage Mismatch in RAG Index
+
+- **Description**: Evidence database contains limited content coverage compared to report citations
+- **Dependencies**: [RAG-007] ✅
+- **Root Cause**: RAG index evidence coverage is incomplete - only contains quotes from one source file instead of all cited sources
+- **Impact**: 
+  - Evidence Quote Mismatch checks fail due to incomplete evidence coverage
+  - Cannot verify quotes from john_mccain_2008_concession_ff9b26f2.txt
+  - Cannot verify quotes from bernie_sanders_2025_fighting_oligarchy_261b893a.txt
+  - Only cory_booker_2018_first_step_act_0c32812a.txt quotes are available
+- **Current Status**: 
+  - ✅ Evidence database is accessible and searchable
+  - ❌ Evidence coverage limited to 1 of 3 cited source files
+  - ❌ 5 out of 5 selected quotes cannot be verified
+- **Acceptance Criteria**:
+  - [ ] All cited source files have evidence coverage in RAG index
+  - [ ] Quotes from john_mccain_2008_concession_ff9b26f2.txt are verifiable
+  - [ ] Quotes from bernie_sanders_2025_fighting_oligarchy_261b893a.txt are verifiable
+  - [ ] Evidence Quote Mismatch checks can verify majority of selected quotes
+- **Effort**: 2-3 hours
+- **Priority**: **HIGH** (evidence validation completeness)
+- **Status**: 🔄 **IN PROGRESS** - Investigating why evidence coverage is incomplete
+
 
 
 
