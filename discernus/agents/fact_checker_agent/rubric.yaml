@@ -6,8 +6,8 @@ checks:
 
   - name: "Statistic Mismatch"
     severity: "CRITICAL"
-    description: "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file."
-    instructions: "For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), query the statistical results file for the corresponding value. Report any mismatches."
+    description: "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision."
+    instructions: "For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), query the statistical results file for the corresponding value. ONLY report as errors: 1) Values that differ by more than acceptable rounding (>0.01 for means/std, >0.005 for correlations); 2) Wrong variable names or completely incorrect numbers. DO NOT flag proper APA-style rounding (e.g., 0.047→0.05, 0.029→0.03) as errors."
 
   - name: "Evidence Quote Mismatch"
     severity: "WARNING"
