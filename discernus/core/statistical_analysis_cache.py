@@ -80,11 +80,26 @@ class StatisticalAnalysisCacheManager:
             json.dumps(derived_metrics_structure, sort_keys=True).encode()
         ).hexdigest()[:16]
         
+        # Include prompt template hash to invalidate cache when prompt changes
+        prompt_template_hash = self._get_prompt_template_hash()
+        
         # Combine all inputs for cache key
-        cache_content = f'{framework_content}{experiment_content}{analysis_structure_hash}{derived_metrics_structure_hash}{model}'
+        cache_content = f'{framework_content}{experiment_content}{analysis_structure_hash}{derived_metrics_structure_hash}{model}{prompt_template_hash}'
         cache_hash = hashlib.sha256(cache_content.encode()).hexdigest()[:12]
         
         return f"statistical_analysis_{cache_hash}"
+    
+    def _get_prompt_template_hash(self) -> str:
+        """Get hash of the current prompt template to invalidate cache when prompt changes."""
+        try:
+            from pathlib import Path
+            prompt_path = Path(__file__).parent.parent / "agents" / "automated_statistical_analysis" / "prompt.yaml"
+            if prompt_path.exists():
+                prompt_content = prompt_path.read_text(encoding='utf-8')
+                return hashlib.sha256(prompt_content.encode()).hexdigest()[:8]
+        except Exception:
+            pass
+        return "unknown"
     
     def check_cache(self, cache_key: str, agent_name: str = "StatisticalAnalysisAgent") -> StatisticalAnalysisCacheResult:
         """

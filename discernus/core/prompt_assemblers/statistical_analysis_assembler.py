@@ -28,6 +28,9 @@ class StatisticalAnalysisPromptAssembler:
         experiment_content = self._read_file(experiment_path)
         framework_content = self._read_file(framework_path)
         
+        # Load corpus manifest for speaker metadata
+        corpus_manifest = self._load_corpus_manifest(experiment_path)
+        
         # Sample raw data files for context
         raw_samples = self._sample_analysis_data(analysis_dir, 2)
         derived_samples = self._sample_derived_metrics_data(derived_metrics_dir, 2)
@@ -52,7 +55,8 @@ class StatisticalAnalysisPromptAssembler:
             experiment_description=experiment_description,
             research_questions=research_questions_text,
             data_columns=data_columns_info,
-            sample_data=sample_data_info
+            sample_data=sample_data_info,
+            corpus_manifest=corpus_manifest
         )
         
         # Add data structure samples for context
@@ -65,7 +69,12 @@ Raw Analysis Sample (first 2 files):
 Derived Metrics Sample (first 2 files):
 {json.dumps(derived_samples, indent=2)}
 
+**CORPUS MANIFEST FOR SPEAKER METADATA:**
+{corpus_manifest}
+
 **IMPORTANT**: The functions you generate should use the provided 'data' parameter as their primary data source, and can optionally read additional context from workspace files.
+
+**CRITICAL FOR SPEAKER ANALYSIS**: Use the corpus manifest above to identify speakers, NOT filename parsing. The manifest contains rich metadata including speaker names, political party, rhetorical style, and context.
 
 Respond with pure Python code only - no markdown, no explanations."""
 
@@ -223,3 +232,24 @@ Respond with pure Python code only - no markdown, no explanations."""
                 'description': 'No description',
                 'questions': []
             }
+
+    def _load_corpus_manifest(self, experiment_path: Path) -> str:
+        """Load corpus manifest for speaker metadata without assuming structure."""
+        try:
+            # Try to find corpus.md in the experiment directory
+            corpus_manifest_path = experiment_path / "corpus.md"
+            if corpus_manifest_path.exists():
+                return self._read_file(corpus_manifest_path)
+            
+            # Fallback: try corpus directory
+            corpus_dir = experiment_path / "corpus"
+            if corpus_dir.exists():
+                corpus_manifest_path = corpus_dir / "corpus.md"
+                if corpus_manifest_path.exists():
+                    return self._read_file(corpus_manifest_path)
+            
+            # If no manifest found, return a helpful message
+            return "No corpus manifest found. Speaker analysis functions will need to handle missing metadata gracefully."
+            
+        except Exception as e:
+            return f"Error loading corpus manifest: {str(e)}"
