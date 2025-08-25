@@ -1947,10 +1947,20 @@ class CleanAnalysisOrchestrator:
                 })
             
             # 7. STATISTICAL RESULTS
-            if statistical_results and statistical_results.get('stats_hash'):
+            if statistical_results:
                 try:
-                    stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
-                    stats_text = stats_content.decode('utf-8')
+                    # Check if we have a stats_hash (artifact reference) or direct data
+                    if statistical_results.get('stats_hash'):
+                        # Load from artifact storage
+                        stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
+                        stats_text = stats_content.decode('utf-8')
+                    elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
+                        # Include direct statistical results data
+                        import json
+                        stats_text = json.dumps(statistical_results, indent=2)
+                    else:
+                        stats_text = str(statistical_results)
+
                     source_documents.append({
                         'content': stats_text,
                         'metadata': {
@@ -1959,9 +1969,10 @@ class CleanAnalysisOrchestrator:
                             'purpose': 'statistic_validation'
                         }
                     })
+                    self._log_progress(f"📋 Added statistical results: {len(stats_text)} chars")
                 except Exception as e:
-                    self._log_progress(f"⚠️ Could not load statistical results for fact-checking: {e}")
-            
+                    self._log_progress(f"⚠️ Could not include statistical results for fact-checking: {e}")
+
             # 8. EVIDENCE DATABASE (ALL evidence artifacts)
             self._log_progress(f"🔍 Collecting evidence artifacts...")
             evidence_hashes = []
@@ -2627,10 +2638,20 @@ class CleanAnalysisOrchestrator:
                 })
             
             # 7. STATISTICAL RESULTS
-            if statistical_results and statistical_results.get('stats_hash'):
+            if statistical_results:
                 try:
-                    stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
-                    stats_text = stats_content.decode('utf-8')
+                    # Check if we have a stats_hash (artifact reference) or direct data
+                    if statistical_results.get('stats_hash'):
+                        # Load from artifact storage
+                        stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
+                        stats_text = stats_content.decode('utf-8')
+                    elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
+                        # Include direct statistical results data
+                        import json
+                        stats_text = json.dumps(statistical_results, indent=2)
+                    else:
+                        stats_text = str(statistical_results)
+
                     source_documents.append({
                         'content': stats_text,
                         'metadata': {
@@ -2639,9 +2660,10 @@ class CleanAnalysisOrchestrator:
                             'purpose': 'statistic_validation'
                         }
                     })
+                    self._log_progress(f"📋 Added statistical results: {len(stats_text)} chars")
                 except Exception as e:
-                    self._log_progress(f"⚠️ Could not load statistical results for fact-checking: {e}")
-            
+                    self._log_progress(f"⚠️ Could not include statistical results for fact-checking: {e}")
+
             # 8. EVIDENCE DATABASE (ALL evidence artifacts)
             self._log_progress(f"🔍 Collecting evidence artifacts...")
             evidence_hashes = []
