@@ -1,0 +1,60 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The report claims that the raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are 'exceptionally highly correlated (r > 0.91)'. However, the correlation matrix in `statistical_results.json` shows that the correlation between `Fear_raw` and `Envy_raw` is approximately 0.883, which is not greater than 0.91. This difference (0.91 - 0.883 = 0.027) exceeds the acceptable rounding precision for correlations (>0.005).",
+      "examples": [
+        "Report claim: 'The raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are exceptionally highly correlated (r > 0.91).'",
+        "Statistical results (Source 1/4, `calculate_correlation_matrix`): `fear_raw` vs `envy_raw` correlation is `0.8834522085987724`."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative or promotional phrases that, while often supported by data, may require editorial review to ensure a consistently neutral and objective academic tone. These claims use strong positive adjectives or adverbs that could be perceived as overly assertive for a preliminary or exploratory study.",
+      "examples": [
+        "The CFF's composite `Full Cohesion Index` proved **highly effective** at discriminating between these styles...",
+        "This suggests the framework **successfully captures** the primary axis of rhetorical variance within this specific corpus.",
+        "The raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are **exceptionally highly correlated** (r > 0.91).",
+        "This **absolute separation is a powerful statistical marker**"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The report claims that the raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are 'exceptionally highly correlated (r > 0.91)'. However, the correlation matrix in `statistical_results.json` shows that the correlation between `Fear_raw` and `Envy_raw` is approximately 0.883, which is not greater than 0.91. This difference (0.91 - 0.883 = 0.027) exceeds the acceptable rounding precision for correlations (>0.005).",
+        "examples": [
+          "Report claim: 'The raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are exceptionally highly correlated (r > 0.91).'",
+          "Statistical results (Source 1/4, `calculate_correlation_matrix`): `fear_raw` vs `envy_raw` correlation is `0.8834522085987724`."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative or promotional phrases that, while often supported by data, may require editorial review to ensure a consistently neutral and objective academic tone. These claims use strong positive adjectives or adverbs that could be perceived as overly assertive for a preliminary or exploratory study.",
+        "examples": [
+          "The CFF's composite `Full Cohesion Index` proved **highly effective** at discriminating between these styles...",
+          "This suggests the framework **successfully captures** the primary axis of rhetorical variance within this specific corpus.",
+          "The raw scores for `Tribal Dominance`, `Fear`, `Enmity`, and `Envy` are **exceptionally highly correlated** (r > 0.91).",
+          "This **absolute separation is a powerful statistical marker**"
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 6,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

@@ -76,13 +76,17 @@ class SynthesisPromptAssembler:
         total_evidence_pieces = sum(len(self._get_evidence_from_artifact(artifact_storage.get_artifact(hash, quiet=True))) 
                                   for hash in evidence_artifacts)
         
-        # 6. Assemble the comprehensive prompt
+        # 6. Load and include corpus manifest data
+        corpus_manifest = self._load_corpus_manifest()
+        
+        # 7. Assemble the comprehensive prompt
         # Use external YAML prompt template (THIN architecture)
         prompt = self.prompt_template['template'].format(
             experiment_metadata=self._create_experiment_metadata(experiment_yaml),
             framework_content=self._extract_framework_description(framework_content),
             experiment_content=self._extract_experiment_objectives(experiment_content),
             research_data=statistical_summary,
+            corpus_manifest=corpus_manifest,
             evidence_context=f"You have access to {total_evidence_pieces} pieces of textual evidence extracted during analysis. Use semantic queries to find relevant evidence for each statistical finding."
         )
 
@@ -100,6 +104,81 @@ class SynthesisPromptAssembler:
             metadata_parts.append(f"**Corpus**: {experiment_yaml['corpus']}")
         
         return "\n".join(metadata_parts) if metadata_parts else "**Experiment Metadata**: Available in experiment configuration"
+    
+    def _load_corpus_manifest(self) -> str:
+        """Load and format corpus manifest data for synthesis context."""
+        try:
+            # Corpus manifest is always at corpus.md in the experiment directory
+            # We need to get the current experiment path - use a relative approach
+            # Since this is called during synthesis, we're in the experiment context
+            import os
+            current_dir = Path(os.getcwd())
+            
+            # Look for corpus.md in current directory or parent directories
+            corpus_path = None
+            for path in [current_dir] + list(current_dir.parents):
+                potential_corpus = path / "corpus.md"
+                if potential_corpus.exists():
+                    corpus_path = potential_corpus
+                    break
+            
+            if not corpus_path:
+                return "**Corpus Manifest**: Not available - corpus.md not found"
+            
+            corpus_content = corpus_path.read_text(encoding='utf-8')
+            
+            # Extract the YAML manifest section
+            if '```yaml' in corpus_content:
+                yaml_start = corpus_content.find('```yaml') + 7
+                yaml_end = corpus_content.find('```', yaml_start)
+                if yaml_end > yaml_start:
+                    yaml_content = corpus_content[yaml_start:yaml_end].strip()
+                    try:
+                        corpus_data = yaml.safe_load(yaml_content)
+                        return self._format_corpus_manifest(corpus_data)
+                    except yaml.YAMLError:
+                        pass
+            
+            # Fallback: return the descriptive content before the YAML
+            description_end = corpus_content.find('```yaml')
+            if description_end > 0:
+                description = corpus_content[:description_end].strip()
+                return f"**Corpus Description**:\n{description}"
+            
+            return "**Corpus Manifest**: Available but could not be parsed"
+            
+        except Exception as e:
+            return f"**Corpus Manifest**: Error loading corpus data: {str(e)}"
+    
+    def _format_corpus_manifest(self, corpus_data: Dict[str, Any]) -> str:
+        """Format corpus manifest data for synthesis prompt."""
+        lines = []
+        lines.append("**Corpus Manifest**:")
+        
+        # Basic corpus info
+        if 'name' in corpus_data:
+            lines.append(f"- **Name**: {corpus_data['name']}")
+        if 'total_documents' in corpus_data:
+            lines.append(f"- **Documents**: {corpus_data['total_documents']}")
+        if 'date_range' in corpus_data:
+            lines.append(f"- **Date Range**: {corpus_data['date_range']}")
+        
+        # Document details
+        documents = corpus_data.get('documents', [])
+        if documents:
+            lines.append("\n**Document Details**:")
+            for doc in documents:
+                filename = doc.get('filename', 'Unknown')
+                metadata = doc.get('metadata', {})
+                
+                speaker = metadata.get('speaker', 'Unknown Speaker')
+                year = metadata.get('year', 'Unknown Year')
+                party = metadata.get('party', 'Unknown Party')
+                style = metadata.get('style', 'Unknown Style')
+                
+                lines.append(f"- **{filename}**: {speaker} ({party}, {year}) - {style}")
+        
+        return "\n".join(lines)
     
     def _parse_framework_yaml(self, content: str) -> Dict[str, Any]:
         """Parse YAML from framework's machine-readable appendix."""
