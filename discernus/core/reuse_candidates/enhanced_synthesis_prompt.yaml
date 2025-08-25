@@ -166,14 +166,12 @@ template: |
 
   ## Statistical Interpretation Standards
   - **No calculations**: Interpret provided statistics as definitive facts
-  - **Statistical Placeholder Mandate**: When you state a finding that requires a specific numerical value, you MUST NOT write the number itself. Instead, you MUST insert a machine-readable placeholder. The arguments for these placeholders MUST be the exact key names copied from the statistical_results input.
-  - **Placeholder Format Rules**:
-    1. **For Correlation Values**: Use `{{corr(variable1, variable2)}}`. The variable names MUST match the keys in the correlation_matrix. For a key like "fear_raw_vs_hope_raw", your placeholder would be `{{corr(fear_raw, hope_raw)}}`.
-    2. **For Descriptive Statistics**: Use `{{desc(document_name, metric_name)}}`. The document_name and metric_name MUST match the keys in the descriptive_statistics object.
-  - **Data Interpretation Process**: Use the exact numerical values from the statistical data to inform your qualitative descriptions and determine effect sizes, but replace all numerical citations with the appropriate placeholders.
+  - **Numerical Precision**: When citing statistical values, use appropriate precision (typically 2-3 decimal places for correlations, means, and standard deviations) following APA style guidelines
+  - **Data Interpretation Process**: Use the exact numerical values from the statistical data to inform your qualitative descriptions and determine effect sizes
   - **Transparency**: State analytical approach clearly (descriptive vs. inferential)  
-  - **Appropriate conclusions**: Draw strongest evidence-based conclusions possible
+  - **Appropriate conclusions**: Draw strongest evidence-based conclusions possible while avoiding grandiose or unsubstantiated claims
   - **Uncertainty acknowledgment**: Note limitations while maximizing insights
+  - **Academic Tone**: Use measured, evidence-based language rather than superlatives or overstated claims
 
   ## Framework Agnosticism Standards
   - **Dynamic adaptation**: Work with any framework's dimensional structure

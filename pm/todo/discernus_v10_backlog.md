@@ -811,3 +811,25 @@
     - Aligns with THIN principles
   - **Status**: Backlogged for future implementation
   - **Priority**: Medium
+
+- [ ] Replace brittle placeholder system with THIN revision agent approach
+  - **Problem**: Current `SynthesisFinisher` with `{corr(var1, var2)}` placeholders is architecturally fragile
+    - Single character changes in LLM output break entire numerical integrity system
+    - Brittle regex parsing violates THIN principles
+    - Over-engineered solution to hypothetical problem (no actual numerical failures observed)
+    - ~200 lines of complex code for undemonstrated need
+  - **THIN Solution**: Focused revision agent with clear boundaries
+    - Synthesis agent writes naturally (no placeholder constraints)
+    - Fact-checker validates comprehensively as it does now
+    - New RevisionAgent makes targeted corrections based on fact-checker feedback
+    - Error threshold: fail-fast if too many issues for safe revision
+  - **Revision Agent Scope**:
+    - ✅ Allowed: Numerical corrections, tone moderation (grandiose claims), factual fixes, evidence attribution
+    - ❌ Forbidden: Structural rewrites, new analysis, narrative flow changes, major section changes
+    - Constraint: Output should be 95%+ identical to input, preserving author voice
+  - **Error Thresholds**: MAX_NUMERICAL_ERRORS=10, MAX_GRANDIOSE_CLAIMS=5, MAX_TOTAL_ISSUES=15
+  - **Architecture**: Synthesis → Fact-Check → Revision (or error) → Final Validation
+  - **Benefits**: Robust, maintainable, uses LLM strengths, solves real vs hypothetical problems
+  - **Implementation**: Remove SynthesisFinisher, create RevisionAgent with constrained editing prompt
+  - **Status**: Ready for implementation - replaces current brittle system
+  - **Priority**: High (architectural improvement, reduces technical debt)

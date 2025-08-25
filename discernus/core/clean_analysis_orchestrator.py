@@ -46,7 +46,7 @@ from .statistical_analysis_cache import StatisticalAnalysisCacheManager
 from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from txtai.embeddings import Embeddings
-from ..core.synthesis_finisher import SynthesisFinisher
+from ..agents.revision_agent.agent import RevisionAgent
 
 
 class CleanAnalysisError(Exception):
@@ -1700,40 +1700,31 @@ class CleanAnalysisOrchestrator:
                 artifact_storage=self.artifact_storage,
             )
 
-            # Extract final report from synthesis agent output
+            # Extract draft report from synthesis agent output
             draft_report = assets_dict.get("final_report")
             if not draft_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a draft report.")
 
-            # Statistical results are required for numerical integrity  
-            # DEBUG: Show all method parameters and local variables
-            self._log_progress(f"DEBUG: All locals() items:")
-            for k, v in locals().items():
-                if not k.startswith('_') and k != 'self':
-                    self._log_progress(f"  {k}: {type(v)} = {str(v)[:100]}...")
+            self._log_progress("🔍 Running fact-checker validation on synthesis report...")
             
-            # The research_data_hash should be accessible in this method's scope
-            # It was passed to the synthesis agent call above
-            if 'research_data_hash' not in locals():
-                raise CleanAnalysisError("CRITICAL BUG: research_data_hash not available in method scope - this is a regression from recent refactoring")
+            # Run fact-checker on the draft report
+            fact_checker_results = self._run_fact_checker_validation(draft_report)
             
-            statistical_results_content = self.artifact_storage.get_artifact(
-                research_data_hash
-            ).decode("utf-8")
-            statistical_results = json.loads(statistical_results_content)
+            # Use RevisionAgent to apply corrections based on fact-checker feedback
+            revision_agent = RevisionAgent(model=synthesis_model, audit_logger=audit_logger)
             
-            # Validate that statistical analysis actually succeeded
-            # Statistical analysis can have various success statuses: "success_with_data", "completed", etc.
-            # Only fail if we explicitly see "failed" or missing required data
-            if (statistical_results.get("status") == "failed" or 
-                statistical_results.get("error") or
-                "statistical_results" not in statistical_results):
-                error_msg = statistical_results.get("error", "Statistical analysis incomplete or missing required data")
-                raise CleanAnalysisError(f"Statistical analysis failed: {error_msg}")
-            
-            finisher = SynthesisFinisher(statistical_results)
-            final_report = finisher.finalize_report(draft_report)
-            self._log_progress("✅ Applied APA-style numerical precision to synthesis report")
+            try:
+                revision_results = revision_agent.revise_report(draft_report, fact_checker_results)
+                final_report = revision_results["revised_report"]
+                
+                if revision_results["corrections_made"]:
+                    self._log_progress(f"✅ Applied {len(revision_results['corrections_made'])} corrections via RevisionAgent")
+                else:
+                    self._log_progress("✅ No corrections needed - synthesis report passed fact-check")
+                    
+            except ValueError as e:
+                # Too many issues for revision agent to handle
+                raise CleanAnalysisError(f"Synthesis quality insufficient for revision: {str(e)}")
 
             synthesis_hash = self.artifact_storage.put_artifact(
                 final_report.encode("utf-8"),
@@ -2386,3 +2377,29 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Failed to build synthesis evidence RAG index: {e}")
             # We don't raise here; synthesis can proceed without RAG, though it will be impaired.
             return None
+
+    def _run_fact_checker_validation(self, synthesis_report: str) -> Dict[str, Any]:
+        """Run fact-checker validation on synthesis report and return structured results."""
+        try:
+            # Import fact-checker agent
+            from ..agents.fact_checker_agent.agent import FactCheckerAgent
+            
+            # Initialize fact-checker with existing RAG index
+            fact_checker = FactCheckerAgent(
+                model="vertex_ai/gemini-2.5-flash",  # Use Flash for cost efficiency
+                audit_logger=self.audit_logger
+            )
+            
+            # Run fact-checking validation
+            validation_results = fact_checker.validate_report(
+                report_content=synthesis_report,
+                rag_index=self.fact_checker_rag,  # Use existing RAG index
+                source_documents=getattr(self.fact_checker_rag, 'documents', [])
+            )
+            
+            return validation_results
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Fact-checker validation failed: {str(e)}")
+            # Return empty results if fact-checker fails - don't block synthesis
+            return {"issues": [], "status": "fact_check_unavailable", "error": str(e)}
