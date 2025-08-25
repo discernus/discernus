@@ -794,7 +794,7 @@ class CleanAnalysisOrchestrator:
                     audit_logger
                 )
                 
-                # CRITICAL: Validate that we got actual derived metrics results
+                # CRITICAL: Validate that we got actual derived metrics results with content integrity
                 if not derived_metrics_results or not isinstance(derived_metrics_results, dict):
                     raise CleanAnalysisError(
                         "Derived metrics phase failed: No results produced. "
@@ -804,6 +804,13 @@ class CleanAnalysisOrchestrator:
                 if derived_metrics_results.get('status') != 'success':
                     raise CleanAnalysisError(
                         f"Derived metrics phase failed: {derived_metrics_results.get('error', 'Unknown error')}"
+                    )
+                
+                # Validate content integrity using hash-based validation
+                if not self._validate_derived_metrics_results(derived_metrics_results):
+                    raise CleanAnalysisError(
+                        "Derived metrics phase failed: Content integrity validation failed. "
+                        "Generated functions but validation hashes missing or invalid."
                     )
                 
                 # Store derived metrics results in artifact storage
@@ -1344,20 +1351,76 @@ class CleanAnalysisOrchestrator:
         return df
     
     def _validate_statistical_results(self, statistical_results: Dict[str, Any]) -> bool:
-        """Validate that statistical analysis produced actual numerical results."""
+        """Validate that statistical analysis produced actual numerical results with content integrity."""
         if not statistical_results:
             return False
         
         # Check that we have at least one successful statistical function result
         successful_results = 0
+        validation_hash_found = 0
+        
         for func_name, result in statistical_results.items():
             if isinstance(result, dict) and result.get('status') != 'failed':
                 # Check for numerical data in the result
-                if any(isinstance(v, (int, float, list, dict)) for v in result.values() if v is not None):
+                has_numerical_data = any(isinstance(v, (int, float, list, dict)) for v in result.values() if v is not None)
+                
+                # Check for validation hash (content integrity verification)
+                has_validation_hash = '_validation_hash' in result
+                
+                if has_numerical_data:
                     successful_results += 1
+                    
+                if has_validation_hash:
+                    validation_hash_found += 1
         
         # We need at least one successful statistical result with numerical data
-        return successful_results > 0
+        # AND at least one validation hash (indicating proper function generation)
+        if successful_results > 0 and validation_hash_found > 0:
+            return True
+        
+        # Log specific validation failure reasons for debugging
+        if successful_results == 0:
+            self._log_progress("❌ Statistical validation failed: No numerical results found")
+        if validation_hash_found == 0:
+            self._log_progress("❌ Statistical validation failed: No validation hashes found (indicates content integrity issues)")
+            
+        return False
+    
+    def _validate_derived_metrics_results(self, derived_metrics_results: Dict[str, Any]) -> bool:
+        """Validate that derived metrics produced actual results with content integrity."""
+        if not derived_metrics_results:
+            return False
+        
+        # Get the derived metrics data
+        derived_metrics_data = derived_metrics_results.get('derived_metrics', [])
+        if not derived_metrics_data:
+            self._log_progress("❌ Derived metrics validation failed: No derived metrics data found")
+            return False
+        
+        # Check for validation hashes in the derived metrics results
+        validation_hash_found = 0
+        total_metrics = 0
+        
+        for metric_record in derived_metrics_data:
+            if isinstance(metric_record, dict):
+                # Count total metrics (excluding metadata fields)
+                metric_fields = [k for k in metric_record.keys() if not k.startswith('_') and k != 'document_name']
+                total_metrics += len(metric_fields)
+                
+                # Check for validation hash
+                if '_validation_hash' in metric_record:
+                    validation_hash_found += 1
+        
+        # We need at least some validation hashes (indicating proper function generation)
+        if validation_hash_found > 0:
+            self._log_progress(f"✅ Derived metrics validation passed: {validation_hash_found} validation hashes found")
+            return True
+        
+        # Log specific validation failure reasons for debugging
+        self._log_progress(f"❌ Derived metrics validation failed: No validation hashes found (indicates content integrity issues)")
+        self._log_progress(f"   Total metric records: {len(derived_metrics_data)}, Total metrics: {total_metrics}")
+            
+        return False
     
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Comprehensive validation that all required assets exist on disk and are valid before synthesis."""
