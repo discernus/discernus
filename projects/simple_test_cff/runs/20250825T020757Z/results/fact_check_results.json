@@ -1,0 +1,54 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+      "details": "Minor discrepancies found in reported mean and standard deviation values due to rounding. All correlation coefficients match when rounded to the precision cited in the report.",
+      "examples": [
+        "Report: 'Strategic Contradiction Index' (M=0.05). Statistical Results: 'strategic_contradiction_index' mean = 0.047. (Reported value is rounded from the actual value).",
+        "Report: 'Strategic Contradiction Index' (SD=0.03). Statistical Results: 'strategic_contradiction_index' std = 0.029866369046136158. (Reported value is rounded from the actual value)."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report states that 'all findings should be considered exploratory and indicative, requiring validation with a larger dataset' due to the 'extremely small sample size (N=4)'. However, it then uses the definitive phrase 'proves to be a powerful summary metric' when describing the Full Cohesion Index. The word 'proves' suggests a level of definitive validation that contradicts the acknowledged preliminary and exploratory nature of the findings based on the limited dataset.",
+      "examples": [
+        "The composite `Full Cohesion Index` proves to be a powerful summary metric, with scores ranging from a highly cohesive +0.78 to a highly fragmentative -0.73."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "failed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file.",
+        "details": "Minor discrepancies found in reported mean and standard deviation values due to rounding. All correlation coefficients match when rounded to the precision cited in the report.",
+        "examples": [
+          "Report: 'Strategic Contradiction Index' (M=0.05). Statistical Results: 'strategic_contradiction_index' mean = 0.047. (Reported value is rounded from the actual value).",
+          "Report: 'Strategic Contradiction Index' (SD=0.03). Statistical Results: 'strategic_contradiction_index' std = 0.029866369046136158. (Reported value is rounded from the actual value)."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report states that 'all findings should be considered exploratory and indicative, requiring validation with a larger dataset' due to the 'extremely small sample size (N=4)'. However, it then uses the definitive phrase 'proves to be a powerful summary metric' when describing the Full Cohesion Index. The word 'proves' suggests a level of definitive validation that contradicts the acknowledged preliminary and exploratory nature of the findings based on the limited dataset.",
+        "examples": [
+          "The composite `Full Cohesion Index` proves to be a powerful summary metric, with scores ranging from a highly cohesive +0.78 to a highly fragmentative -0.73."
+        ]
+      }
+    ],
+    "summary": {
+      "total_checks": 6,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

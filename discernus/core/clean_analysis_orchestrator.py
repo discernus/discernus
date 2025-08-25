@@ -1767,7 +1767,7 @@ class CleanAnalysisOrchestrator:
             if not assets.get('report_hash'):
                 raise CleanAnalysisError("No synthesis report available for fact-checking")
             
-            report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
+            report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_text = report_content.decode('utf-8')
             
             # Create temporary fact-checker RAG index
