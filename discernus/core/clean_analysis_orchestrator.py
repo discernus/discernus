@@ -46,6 +46,7 @@ from .statistical_analysis_cache import StatisticalAnalysisCacheManager
 from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from txtai.embeddings import Embeddings
+from ..core.synthesis_finisher import SynthesisFinisher
 
 
 class CleanAnalysisError(Exception):
@@ -230,7 +231,7 @@ class CleanAnalysisOrchestrator:
             # Phase 8: Run synthesis with RAG integration
             phase_start = datetime.now(timezone.utc)
             try:
-                synthesis_result = self._run_synthesis(synthesis_model, audit_logger, statistical_results)
+                assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results)
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
             except Exception as e:
@@ -241,7 +242,7 @@ class CleanAnalysisOrchestrator:
             # Phase 8.5: Run fact-checking validation
             phase_start = datetime.now(timezone.utc)
             try:
-                fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, synthesis_result, statistical_results)
+                fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets, statistical_results)
                 self._log_status("Fact-checking completed")
                 self._log_phase_timing("fact_checking_phase", phase_start)
             except Exception as e:
@@ -252,7 +253,7 @@ class CleanAnalysisOrchestrator:
             # Phase 9: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
-                results_dir = self._create_clean_results_directory(run_id, statistical_results, synthesis_result, fact_check_results)
+                results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
                 self._log_status(f"Results created: {results_dir}")
                 self._log_phase_timing("results_creation", phase_start)
             except Exception as e:
@@ -1358,7 +1359,7 @@ class CleanAnalysisOrchestrator:
         # We need at least one successful statistical result with numerical data
         return successful_results > 0
     
-    def _validate_synthesis_assets(self, statistical_results: Dict[str, Any]) -> None:
+    def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Comprehensive validation that all required assets exist on disk and are valid before synthesis."""
         self._log_progress("🔍 Validating synthesis assets comprehensively...")
         
@@ -1602,7 +1603,7 @@ class CleanAnalysisOrchestrator:
         
         try:
             # Validate synthesis assets
-            self._validate_synthesis_assets(statistical_results)
+            self._validate_assets(statistical_results)
             
             # Create complete research data structure
             raw_analysis_data = []
@@ -1683,64 +1684,74 @@ class CleanAnalysisOrchestrator:
             )
             
             # Build the dedicated evidence-only RAG index for the synthesis agent
-            synthesis_rag_index = self._build_synthesis_evidence_index(evidence_hashes)
+            synthesis_rag_index = self._build_synthesis_evidence_index(
+                evidence_artifact_hashes=evidence_hashes
+            )
 
-            # Initialize synthesis agent with the RAG index
-            from .reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
                 rag_index=synthesis_rag_index,
-                enhanced_mode=True,
             )
-
-            # Execute synthesis using the assembled prompt
-            self._log_progress("🔧 Executing synthesis with assembled prompt...")
-            synthesis_result_dict = synthesis_agent.generate_final_report(
-                framework_path=self.experiment_path / self.config["framework"],
-                experiment_path=self.experiment_path / "experiment.md",
+            assets_dict = synthesis_agent.generate_final_report(
+                framework_path=Path(self.experiment_path / self.config["framework"]),
+                experiment_path=Path(self.experiment_path / "experiment.md"),
                 research_data_artifact_hash=research_data_hash,
                 artifact_storage=self.artifact_storage,
             )
 
-            final_report = synthesis_result_dict.get("final_report")
-            if not final_report:
-                raise CleanAnalysisError("Synthesis agent failed to produce a final report.")
+            draft_report = assets_dict.get("final_report")
+            if not draft_report:
+                raise CleanAnalysisError("Synthesis agent failed to produce a draft report.")
 
-            # Store synthesis result
+            # Statistical results are required for numerical integrity
+            if "research_data_hash" not in assets_dict:
+                raise CleanAnalysisError("Statistical analysis results missing - cannot proceed with synthesis")
+            
+            statistical_results_content = self.artifact_storage.get_artifact(
+                assets_dict["research_data_hash"]
+            ).decode("utf-8")
+            statistical_results = json.loads(statistical_results_content)
+            
+            # Validate that statistical analysis actually succeeded
+            if statistical_results.get("status") == "failed":
+                raise CleanAnalysisError(f"Statistical analysis failed: {statistical_results.get('error', 'Unknown error')}")
+            
+            finisher = SynthesisFinisher(statistical_results)
+            final_report = finisher.finalize_report(draft_report)
+            self._log_progress("✅ Applied APA-style numerical precision to synthesis report")
+
             synthesis_hash = self.artifact_storage.put_artifact(
                 final_report.encode("utf-8"),
-                {"artifact_type": "final_synthesis_report"},
+                {"artifact_type": "final_synthesis_report_interpolated"},
             )
-
             self._log_progress(f"✅ Synthesis phase completed: {len(final_report)} characters")
-
             return {
                 "status": "completed",
                 "report_hash": synthesis_hash,
                 "report_length": len(final_report),
-                "synthesis_result": final_report, # Pass the string, not the dict
+                "assets": final_report, # Pass the string, not the dict
             }
             
         except Exception as e:
             self._log_progress(f"❌ Synthesis phase failed: {str(e)}")
             raise CleanAnalysisError(f"Synthesis phase failed: {str(e)}") from e
     
-    def _run_fact_checking_phase(self, model: str, audit_logger: AuditLogger, synthesis_result: Dict[str, Any], statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+    def _run_fact_checking_phase(self, model: str, audit_logger: AuditLogger, assets: Dict[str, Any], statistical_results: Dict[str, Any]) -> Dict[str, Any]:
         """Run fact-checking validation on the synthesis report."""
         self._log_progress("🔍 Starting fact-checking phase...")
         
         try:
             # Get the final report content
-            if not synthesis_result.get('report_hash'):
+            if not assets.get('report_hash'):
                 raise CleanAnalysisError("No synthesis report available for fact-checking")
             
-            report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+            report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
             report_text = report_content.decode('utf-8')
             
             # Create temporary fact-checker RAG index
             self._log_progress("🔧 Starting fact-checker RAG index construction...")
-            fact_checker_rag = self._build_fact_checker_rag_index(synthesis_result, statistical_results)
+            fact_checker_rag = self._build_fact_checker_rag_index(assets, statistical_results)
             self._log_progress(f"✅ Fact-checker RAG index built successfully")
             
             # Initialize fact-checker agent
@@ -1778,7 +1789,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Fact-checking phase failed: {str(e)}")
             raise CleanAnalysisError(f"Fact-checking phase failed: {str(e)}") from e
     
-    def _build_fact_checker_rag_index(self, synthesis_result: Dict[str, Any], statistical_results: Dict[str, Any]):
+    def _build_fact_checker_rag_index(self, assets: Dict[str, Any], statistical_results: Dict[str, Any]):
         """Build a comprehensive RAG index for fact-checking containing ALL experiment assets."""
         self._log_progress("🔧 Building comprehensive fact-checker RAG index...")
         
@@ -1932,9 +1943,9 @@ class CleanAnalysisOrchestrator:
                     self._log_progress(f"⚠️ Could not load evidence {evidence_hash[:8]} for fact-checking: {e}")
             
             # 9. FINAL SYNTHESIS REPORT (the report being validated)
-            if synthesis_result and synthesis_result.get('report_hash'):
+            if assets and assets.get('report_hash'):
                 try:
-                    report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+                    report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
                     report_text = report_content.decode('utf-8')
                     source_documents.append({
                         'content': report_text,
@@ -2079,7 +2090,7 @@ class CleanAnalysisOrchestrator:
         
         return "\n".join(evidence_lines)
     
-    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], synthesis_result: Dict[str, Any], fact_check_results: Dict[str, Any]) -> Path:
+    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any], fact_check_results: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
         # Create run directory structure
         run_dir = self.experiment_path / "runs" / run_id
@@ -2103,8 +2114,8 @@ class CleanAnalysisOrchestrator:
                 f.write(stats_content)
         
         # Save synthesis report if available
-        if synthesis_result.get('report_hash'):
-            report_content = self.artifact_storage.get_artifact(synthesis_result['report_hash'])
+        if assets.get('report_hash'):
+            report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
             report_file = results_dir / "final_report.md"
             
             # Apply fact-checking results if available
@@ -2124,10 +2135,10 @@ class CleanAnalysisOrchestrator:
             json.dump(fact_check_results, f, indent=2)
         
         # Save synthesis metadata
-        synthesis_file = results_dir / "synthesis_results.json"
+        synthesis_file = results_dir / "assetss.json"
         with open(synthesis_file, 'w') as f:
             # Remove large content to keep metadata file clean
-            clean_synthesis = {k: v for k, v in synthesis_result.items() if k != 'synthesis_result'}
+            clean_synthesis = {k: v for k, v in assets.items() if k != 'assets'}
             json.dump(clean_synthesis, f, indent=2)
         
         # Create experiment summary
@@ -2139,7 +2150,7 @@ class CleanAnalysisOrchestrator:
             "completion_time": datetime.now(timezone.utc).isoformat(),
             "artifacts": {
                 "statistical_results.json": "Statistical analysis results",
-                "synthesis_results.json": "Synthesis results",
+                "assetss.json": "Synthesis results",
                 "corpus/": "Source documents for verification",
                 "evidence/": "Evidence database for quote verification",
                 "metadata/": "Source metadata for context verification"
@@ -2175,7 +2186,7 @@ class CleanAnalysisOrchestrator:
             json.dump({"error": "Statistical analysis failed", "status": "failed"}, f, indent=2)
         
         # Create a placeholder for synthesis results
-        synthesis_file = results_dir / "synthesis_results.json"
+        synthesis_file = results_dir / "assetss.json"
         with open(synthesis_file, 'w') as f:
             json.dump({"error": "Synthesis failed", "status": "failed"}, f, indent=2)
         
@@ -2323,19 +2334,21 @@ class CleanAnalysisOrchestrator:
         self.logger.info(f"STATUS: {message}")
 
     def _build_synthesis_evidence_index(
-        self, evidence_hashes: List[str]
+        self, evidence_artifact_hashes: List[str]
     ) -> Optional[Embeddings]:
-        """Build a RAG index containing only the evidence for the synthesis agent."""
-        if not evidence_hashes:
-            self._log_progress("⚠️ No evidence found, skipping synthesis RAG index build.")
+        """Builds a dedicated RAG index from evidence artifacts for the synthesis agent."""
+        if not evidence_artifact_hashes:
+            self._log_progress(
+                "⚠️ No evidence found, skipping synthesis RAG index build."
+            )
             return None
 
         try:
             self._log_progress(
-                f"🔨 Building synthesis RAG index from {len(evidence_hashes)} evidence artifacts..."
+                f"🔨 Building synthesis RAG index from {len(evidence_artifact_hashes)} evidence artifacts..."
             )
             evidence_documents = []
-            for e_hash in evidence_hashes:
+            for e_hash in evidence_artifact_hashes:
                 content = self.artifact_storage.get_artifact(e_hash, quiet=True)
                 if content:
                     evidence_documents.append({"content": content.decode("utf-8")})

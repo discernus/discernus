@@ -247,17 +247,17 @@
   - **No External DB Needed**: The internal content storage mechanism removes any need for external databases like SQLite.
   - **Future-Proofing**: The `RAGIndexManager` should be designed with future enhancements in mind, such as the potential use of hybrid (sparse/dense) search for improved accuracy.
 - **Acceptance Criteria**:
-  - [ ] `LocalArtifactStorage` is refactored to natively support storing and retrieving directories, eliminating the `.tar.gz` compression layer for RAG indexes.
-  - [ ] A new `RAGIndexManager` class is created in `discernus/core/rag_index_manager.py` that utilizes the directory-aware storage and correctly initializes `txtai` with `{"content": True}`.
-  - [ ] The `CleanAnalysisOrchestrator._build_fact_checker_rag_index` method is refactored to delegate index creation to the `RAGIndexManager`.
-  - [ ] The `CleanAnalysisOrchestrator.run_synthesis_phase` is refactored to use the `RAGIndexManager` to build a dedicated, evidence-only RAG index from `evidence_v6` artifacts.
-  - [ ] The newly created evidence-only RAG index is passed to the `UnifiedSynthesisAgent`.
-  - [ ] The `UnifiedSynthesisAgent` is refactored to accept and perform semantic queries against the provided RAG index, instead of relying on a static evidence database in its prompt.
-  - [ ] The final implementation is scalable and does not pass the entire evidence database into the LLM context window.
-  - [ ] Upon successful completion of a run, the final RAG indexes (fact-checker and synthesis) are saved as permanent artifacts in the run's `results/rag_indexes/` directory, ensuring full methodological provenance.
+  - [x] `LocalArtifactStorage` is refactored to natively support storing and retrieving directories, eliminating the `.tar.gz` compression layer for RAG indexes.
+  - [x] A new `RAGIndexManager` class is created in `discernus/core/rag_index_manager.py` that utilizes the directory-aware storage and correctly initializes `txtai` with `{"content": True}`.
+  - [x] The `CleanAnalysisOrchestrator._build_fact_checker_rag_index` method is refactored to delegate index creation to the `RAGIndexManager`.
+  - [x] The `CleanAnalysisOrchestrator.run_synthesis_phase` is refactored to use the `RAGIndexManager` to build a dedicated, evidence-only RAG index from `evidence_v6` artifacts.
+  - [x] The newly created evidence-only RAG index is passed to the `UnifiedSynthesisAgent`.
+  - [x] The `UnifiedSynthesisAgent` is refactored to accept and perform semantic queries against the provided RAG index, instead of relying on a static evidence database in its prompt.
+  - [x] The final implementation is scalable and does not pass the entire evidence database into the LLM context window.
+  - [x] Upon successful completion of a run, the final RAG indexes (fact-checker and synthesis) are saved as permanent artifacts in the run's `results/rag_indexes/` directory, ensuring full methodological provenance.
 - **Effort**: 2-3 days
 - **Priority**: **HIGH** - Critical for architectural integrity and scalability.
-- **Status**: **BACKLOGGED**
+- **Status**: ✅ **COMPLETED**
 
 #### [CACHE-001] RAG Index Caching Implementation ✅ **COMPLETED** (Temporary)
 
@@ -477,7 +477,30 @@
 - **Academic Value**: Maintains high-quality architectural documentation for researchers and developers
 - **Impact**: Prevents architectural confusion and ensures all stakeholders have accurate system understanding
 
-### Sprint 4: End-to-End Logging & Provenance Transformation (HIGH PRIORITY)
+### Sprint 4: Agent Behavior & Prompt Strategy (HIGH PRIORITY)
+
+**Timeline:** 1-2 days
+**Goal:** Refine agent prompts and logic to improve the quality and accuracy of the final research output.
+
+#### [ARCH-SYNTH-01] Implement Architecturally Enforced Numerical Integrity
+
+- **Description**: The `UnifiedSynthesisAgent` has proven unreliable at maintaining verbatim numerical accuracy, ignoring direct prompt instructions and introducing rounding/truncation errors. This architectural flaw results in `CRITICAL` data integrity failures. The solution is to remove the LLM from the responsibility chain for numerical data.
+- **Dependencies**: `[ARCH-RAG-01]` (complete)
+- **Solution**:
+  - 1. **Create a `SynthesisFinisher` Utility**: A new, dedicated component (`discernus/core/synthesis_finisher.py`) will be created. Its sole responsibility is to take a draft text with placeholders and a dictionary of statistical results, and substitute the precise values.
+  - 2. **Update Synthesis Prompt**: The `enhanced_synthesis_prompt.yaml` will be modified to instruct the LLM to insert machine-readable placeholders (e.g., `{{corr_hope_vs_fear}}`) instead of numerical values.
+  - 3. **Integrate into Orchestrator**: The `CleanAnalysisOrchestrator.run_synthesis_phase` will be updated to first call the synthesis agent to get the draft, then call the `SynthesisFinisher` to produce the final, numerically accurate report before storing the artifact.
+- **Acceptance Criteria**:
+  - [ ] A new `SynthesisFinisher` utility is created with full unit test coverage.
+  - [ ] The `UnifiedSynthesisAgent` prompt is updated to generate placeholders.
+  - [ ] The `CleanAnalysisOrchestrator` uses the `SynthesisFinisher` to create the final report.
+  - [ ] A full test run of `simple_test_cff` results in zero "Statistic Mismatch" `CRITICAL` errors in the `fact_check_results.json`.
+- **Effort**: 3-4 hours
+- **Priority**: **CRITICAL** - This is the final blocker to achieving a stable, end-to-end pipeline with full data integrity.
+- **Status**: **IN_PROGRESS**
+
+
+### Sprint 5: End-to-End Logging & Provenance Transformation (HIGH PRIORITY)
 
 **Timeline:** 1-2 weeks
 **Goal:** Transform Discernus into an academic-grade platform with comprehensive transparency

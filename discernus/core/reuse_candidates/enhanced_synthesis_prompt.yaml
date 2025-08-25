@@ -158,14 +158,20 @@ template: |
   # CRITICAL REQUIREMENTS
 
   ## Evidence Integration Standards
-  - **Every major claim** must include both statistical evidence AND textual quotes
+  - **Mandatory Citation**: For every major statistical finding or interpretation presented, you MUST cite at least one supporting textual quote retrieved from the RAG evidence database. Do not make claims without direct textual support.
+  - **Qualify, Don't Omit**: If the retrieved evidence is weak or indirect, you must still cite it and then explicitly state the weakness in your analysis (e.g., "While the textual evidence is not a direct confirmation, it suggests..."). Do not simply omit evidence and write meta-commentary about its absence.
   - **Attribution format**: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
   - **Substantial quotes**: Full sentences, not fragments
   - **Quality check**: Every Results paragraph contains at least one direct quote
 
   ## Statistical Interpretation Standards
   - **No calculations**: Interpret provided statistics as definitive facts
-  - **Transparency**: State analytical approach clearly (descriptive vs. inferential)
+  - **Statistical Placeholder Mandate**: When you state a finding that requires a specific numerical value, you MUST NOT write the number itself. Instead, you MUST insert a machine-readable placeholder. The arguments for these placeholders MUST be the exact key names copied from the statistical_results input.
+  - **Placeholder Format Rules**:
+    1. **For Correlation Values**: Use `{{corr(variable1, variable2)}}`. The variable names MUST match the keys in the correlation_matrix. For a key like "fear_raw_vs_hope_raw", your placeholder would be `{{corr(fear_raw, hope_raw)}}`.
+    2. **For Descriptive Statistics**: Use `{{desc(document_name, metric_name)}}`. The document_name and metric_name MUST match the keys in the descriptive_statistics object.
+  - **Data Interpretation Process**: Use the exact numerical values from the statistical data to inform your qualitative descriptions and determine effect sizes, but replace all numerical citations with the appropriate placeholders.
+  - **Transparency**: State analytical approach clearly (descriptive vs. inferential)  
   - **Appropriate conclusions**: Draw strongest evidence-based conclusions possible
   - **Uncertainty acknowledgment**: Note limitations while maximizing insights
 
@@ -180,7 +186,7 @@ template: |
   - **Methodological rigor**: Clear methodology and limitation acknowledgment
   - **Theoretical grounding**: Connect to relevant academic literature when possible
   - **Reproducible insights**: Clear connection from data through analysis to conclusions
-  - **Cautious Tone & Claim Strength**: Maintain a neutral, objective, and academic tone. Avoid promotional language, superlatives, and grandiose claims (e.g., "powerful," "profound," "demonstrates conclusively"). The strength of all claims must be proportional to the evidence, especially when dealing with small sample sizes or pilot studies. State findings factually and let the data speak for itself.
+  - **Cautious Tone & Claim Strength**: Maintain a neutral, objective, and academic tone. Avoid promotional language, superlatives, and grandiose claims (e.g., "powerful," "profound," "demonstrates conclusively," "validates the framework"). All claims must be proportional to the evidence. Given the small sample size of this pilot study (N=4), all findings should be presented as "preliminary," "suggestive," or "indicative" rather than "validated" or "proven." State findings factually and let the data speak for itself.
 
   # OUTPUT INSTRUCTIONS
 

@@ -1,0 +1,498 @@
+You are conducting a comprehensive computational social science analysis. Your task is to produce an academic-quality research report that extracts maximum insights from the provided data.
+
+# RESEARCH CONTEXT
+
+**Experiment Metadata:**
+**Experiment Metadata**: Available in experiment configuration
+
+**Framework Specification:**
+# Cohesive Flourishing Framework (CFF) v10.1
+
+---
+
+## Part 1: The Scholarly Document
+
+### Section 1: Abstract & *Raison d'être*
+
+**What is this framework?**
+The Cohesive Flourishing Framework (CFF) is a comprehensive tool for analyzing political and social discourse to understand its impact on community cohesion and democratic health. It moves beyond simple sentiment analysis to reveal sophisticated patterns in how language builds or undermines social solidarity, trust, and constructive civic engagement.
+
+**What problem does it solve?**
+CFF addresses a critical gap in discourse analysis by providing a methodology that preserves complex rhetorical information. Traditional analysis often forces artificial choices (e.g., a text is "hopeful" or "fearful"), losing nuance when sophisticated communication employs competing appeals simultaneously. CFF's independent scoring of opposing dimensions (e.g., Hope vs. Fear) captures this complexity, enabling a more accurate and insightful analysis of...
+
+**Experiment Configuration:**
+Research objectives not specified.
+
+**Complete Research Data:**
+Complete Statistical Results (format into Markdown tables as instructed):
+{
+  "status": "completed",
+  "stats_hash": "bb7b564613baacc19b4b417976351b8a8d722b8f4a1d0b25f0e585265fae524a",
+  "functions_generated": 2,
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 2,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 12744
+    },
+    "statistical_data": {
+      "calculate_descriptive_statistics": {
+        "tribal_dominance_raw": {
+          "mean": 0.46249999999999997,
+          "std": 0.42695628191498325,
+          "min": 0.0,
+          "max": 0.85,
+          "count": 4
+        },
+        "tribal_dominance_salience": {
+          "mean": 0.525,
+          "std": 0.45,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "individual_dignity_raw": {
+          "mean": 0.45,
+          "std": 0.4654746681256314,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "individual_dignity_salience": {
+          "mean": 0.45,
+          "std": 0.4654746681256314,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "fear_raw": {
+          "mean": 0.65,
+          "std": 0.3109126351029605,
+          "min": 0.2,
+          "max": 0.9,
+          "count": 4
+        },
+        "fear_salience": {
+          "mean": 0.7125,
+          "std": 0.34731109973624513,
+          "min": 0.2,
+          "max": 0.95,
+          "count": 4
+        },
+        "hope_raw": {
+          "mean": 0.39999999999999997,
+          "std": 0.31622776601683794,
+          "min": 0.0,
+          "max": 0.7,
+          "count": 4
+        },
+        "hope_salience": {
+          "mean": 0.45,
+          "std": 0.36968455021364727,
+          "min": 0.0,
+          "max": 0.8,
+          "count": 4
+        },
+        "envy_raw": {
+          "mean": 0.5,
+          "std": 0.469041575982343,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "envy_salience": {
+          "mean": 0.5,
+          "std": 0.469041575982343,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "compersion_raw": {
+          "mean": 0.225,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "compersion_salience": {
+          "mean": 0.225,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "enmity_raw": {
+          "mean": 0.675,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "enmity_salience": {
+          "mean": 0.675,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "max": 0.9,
+          "count": 4
+        },
+        "amity_raw": {
+          "mean": 0.6000000000000001,
+          "std": 0.282842712474619,
+          "min": 0.2,
+          "max": 0.8,
+          "count": 4
+        },
+        "amity_salience": {
+          "mean": 0.625,
+          "std": 0.35939764421413045,
+          "min": 0.1,
+          "max": 0.9,
+          "count": 4
+        },
+        "fragmentative_goals_raw": {
+          "mean": 0.6000000000000001,
+          "std": 0.4,
+          "min": 0.0,
+          "max": 0.8,
+          "count": 4
+        },
+        "fragmentative_goals_salience": {
+          "mean": 0.6000000000000001,
+          "std": 0.4,
+          "min": 0.0,
+          "max": 0.8,
+          "count": 4
+        },
+        "cohesive_goals_raw": {
+          "mean": 0.625,
+          "std": 0.37749172176353746,
+          "min": 0.1,
+          "max": 0.9,
+          "count": 4
+        },
+        "cohesive_goals_salience": {
+          "mean": 0.675,
+          "std": 0.4031128874149275,
+          "min": 0.1,
+          "max": 1.0,
+          "count": 4
+        }
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-24T15:47:50.814741",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribal_dominance_raw",
+            "tribal_dominance_salience",
+            "tribal_dominance_confidence",
+            "individual_dignity_raw",
+            "individual_dignity_salience",
+            "individual_dignity_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "envy_raw",
+            "envy_salience",
+            "envy_confidence",
+            "compersion_raw",
+            "compersion_salience",
+            "compersion_confidence",
+            "enmity_raw",
+            "enmity_salience",
+            "enmity_confidence",
+            "amity_raw",
+            "amity_salience",
+            "amity_confidence",
+            "fragmentative_goals_raw",
+            "fragmentative_goals_salience",
+            "fragmentative_goals_confidence",
+            "cohesive_goals_raw",
+            "cohesive_goals_salience",
+            "cohesive_goals_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-24T15:47:50.822334",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribal_dominance_raw",
+            "tribal_dominance_salience",
+            "tribal_dominance_confidence",
+            "individual_dignity_raw",
+            "individual_dignity_salience",
+            "individual_dignity_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "envy_raw",
+            "envy_salience",
+            "envy_confidence",
+            "compersion_raw",
+            "compersion_salience",
+            "compersion_confidence",
+            "enmity_raw",
+            "enmity_salience",
+            "enmity_confidence",
+            "amity_raw",
+            "amity_salience",
+            "amity_confidence",
+            "fragmentative_goals_raw",
+            "fragmentative_goals_salience",
+            "fragmentative_goals_confidence",
+            "cohesive_goals_raw",
+            "cohesive_goals_salience",
+            "cohesive_goals_confidence"
+          ]
+        }
+      },
+      "summarize_cohesion_and_tension_scores": {
+        "identity_tension": {
+          "mean": 0.045000000000000005,
+          "std": 0.052599112793531674,
+          "min": 0.0,
+          "max": 0.1,
+          "median": 0.04000000000000001,
+          "count": 4
+        },
+        "emotional_tension": {
+          "mean": 0.07,
+          "std": 0.08717797887081348,
+          "min": 0.0,
+          "max": 0.18000000000000002,
+          "median": 0.049999999999999996,
+          "count": 4
+        },
+        "success_tension": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0,
+          "count": 4
+        },
+        "relational_tension": {
+          "mean": 0.09000000000000002,
+          "std": 0.06831300510639733,
+          "min": 0.0,
+          "max": 0.16000000000000003,
+          "median": 0.1,
+          "count": 4
+        },
+        "goal_tension": {
+          "mean": 0.05250000000000001,
+          "std": 0.03593976442141304,
+          "min": 0.0,
+          "max": 0.07999999999999999,
+          "median": 0.06500000000000003,
+          "count": 4
+        },
+        "strategic_contradiction_index": {
+          "mean": 0.051500000000000004,
+          "std": 0.028017851452243794,
+          "min": 0.019999999999999997,
+          "max": 0.088,
+          "median": 0.049000000000000016,
+          "count": 4
+        },
+        "descriptive_cohesion_index": {
+          "mean": -0.1980988447102221,
+          "std": 0.6381653583215856,
+          "min": -0.783356578335658,
+          "max": 0.7071455016660497,
+          "median": -0.3580921510856401,
+          "count": 4
+        },
+        "motivational_cohesion_index": {
+          "mean": -0.12870252619440942,
+          "std": 0.6373741215952216,
+          "min": -0.758767617174697,
+          "max": 0.7592542556065929,
+          "median": -0.2576483716047667,
+          "count": 4
+        },
+        "full_cohesion_index": {
+          "mean": -0.11143141805019964,
+          "std": 0.6578135545418885,
+          "min": -0.7795494811440142,
+          "max": 0.7867854814170833,
+          "median": -0.2264808362369338,
+          "count": 4
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}
+
+**Available Evidence for Citation:**
+You have access to 1630 pieces of textual evidence extracted during analysis. Use semantic queries to find relevant evidence for each statistical finding.
+
+# ANALYTICAL REQUIREMENTS
+
+## Level 1: Basic Statistical Interpretation
+- Interpret descriptive statistics for all measured dimensions
+- Identify patterns in means, standard deviations, and distributions
+- Note significant correlations and their strength
+- Assess measurement quality using framework-appropriate validation:
+  * For oppositional frameworks: Interpret negative correlations as validation (opposing constructs should be negatively correlated)
+  * For unidimensional frameworks: Interpret traditional reliability metrics (Cronbach's Alpha)
+
+## Level 2: Advanced Pattern Recognition  
+- Analyze cross-dimensional relationships and interaction effects
+- Identify statistical outliers and anomalous patterns
+- Examine confidence patterns and analytical uncertainty
+- Detect framework-specific insights from derived metrics
+
+## Level 3: Cross-Dimensional Network Analysis
+- Map dimensional clustering and meta-strategies
+- Identify universal patterns across all cases
+- Analyze tension patterns and strategic contradictions
+- Assess variance decomposition and discriminatory power
+
+## Level 4: Temporal and Archetypal Analysis
+- Examine temporal progression patterns (when applicable)
+- Identify rhetorical archetypes and speaker clustering
+- Analyze normative layer gradients and trajectories
+- Assess framework effectiveness and limitations
+
+## Level 5: Meta-Analysis and Theoretical Integration
+- Connect findings to relevant theoretical frameworks
+- Identify methodological implications and innovations
+- Generate testable hypotheses for future research
+- Assess broader implications for the field
+
+# REPORT STRUCTURE REQUIREMENTS
+
+## 0. Experiment Provenance Header (REQUIRED FIRST)
+Start every report with available experiment metadata:
+
+```
+# [Framework Name] Analysis Report
+
+**Experiment**: [experiment_name]  
+**Run ID**: [run_id]  
+**Date**: [completion_date]  
+**Framework**: [framework_filename]  
+**Corpus**: [corpus_filename] ([document_count] documents)  
+
+---
+```
+
+Use only metadata that is actually available in the experiment_metadata. This header enables traceability of results.
+
+## 1. Executive Summary (2-3 paragraphs)
+- Key findings with statistical support
+- Primary insights and their significance
+- Framework effectiveness assessment
+
+## 2. Opening Framework: Key Insights (Bullet points)
+- 4-6 primary insights from the analysis
+- Each supported by specific statistical evidence
+- Clear, accessible language for broad audience
+
+## 3. Literature Review and Theoretical Framework (Optional)
+- Connect framework to relevant academic literature
+- Position analysis within scholarly discourse
+- Identify theoretical foundations
+
+## 4. Methodology
+- Framework description and analytical approach
+- Data structure and corpus description
+- Statistical methods and analytical constraints
+- Acknowledge limitations and methodological choices
+
+## 5. Comprehensive Results
+### 5.1 Descriptive Statistics
+- Present all statistical results in properly formatted Markdown tables
+- Include significance indicators: * p<0.05, ** p<0.01, *** p<0.001
+- Add effect size interpretations (Small/Medium/Large based on Cohen's conventions)
+- Use consistent decimal precision (2-3 places)
+- Dimensional means, distributions, and patterns with statistical interpretation
+
+### 5.2 Advanced Metric Analysis
+- Derived metrics interpretation
+- Tension patterns and strategic contradictions
+- Confidence-weighted analysis
+
+### 5.3 Correlation and Interaction Analysis
+- Cross-dimensional relationships with theoretical interpretation
+- Network effects and clustering patterns
+- Meta-strategy identification
+
+### 5.4 Pattern Recognition and Theoretical Insights
+- Identify the strongest correlations and explain their practical significance
+- Connect statistical patterns to theoretical frameworks and literature
+- Explain what correlation patterns reveal about the framework's construct validity
+- Highlight unexpected findings and their implications
+- Assess framework-corpus fit based on statistical patterns
+
+### 5.5 Framework Effectiveness Assessment
+- Discriminatory power analysis
+- Framework-corpus fit evaluation
+- Methodological insights
+
+## 6. Discussion
+- Theoretical implications of findings
+- Comparative analysis and archetypal patterns
+- Broader significance for the field
+- Limitations and future directions
+
+## 7. Conclusion
+- Summary of key contributions
+- Methodological validation
+- Research implications
+
+## 8. Evidence Citations
+- Complete attribution for all quoted evidence
+- Organized by source document
+- Substantial quotes with context
+
+# CRITICAL REQUIREMENTS
+
+## Evidence Integration Standards
+- **Every major claim** must include both statistical evidence AND textual quotes
+- **Attribution format**: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
+- **Substantial quotes**: Full sentences, not fragments
+- **Quality check**: Every Results paragraph contains at least one direct quote
+
+## Statistical Interpretation Standards
+- **No calculations**: Interpret provided statistics as definitive facts
+- **Verbatim Data Integrity**: You MUST use the exact numerical values for all statistics (means, correlations, etc.) as they appear in the `Complete Research Data` input. Do NOT round, truncate, or alter these numbers in any way. Present them with the same precision as provided.
+- **Transparency**: State analytical approach clearly (descriptive vs. inferential)
+- **Appropriate conclusions**: Draw strongest evidence-based conclusions possible
+- **Uncertainty acknowledgment**: Note limitations while maximizing insights
+
+## Framework Agnosticism Standards
+- **Dynamic adaptation**: Work with any framework's dimensional structure
+- **No assumptions**: Don't assume specific dimension names or relationships
+- **Flexible analysis**: Adapt analytical depth to available data richness
+- **Universal patterns**: Look for insights applicable across frameworks
+
+## Academic Quality Standards
+- **Publication-ready**: Suitable for peer-reviewed journal submission
+- **Methodological rigor**: Clear methodology and limitation acknowledgment
+- **Theoretical grounding**: Connect to relevant academic literature when possible
+- **Reproducible insights**: Clear connection from data through analysis to conclusions
+- **Cautious Tone & Claim Strength**: Maintain a neutral, objective, and academic tone. Avoid promotional language, superlatives, and grandiose claims (e.g., "powerful," "profound," "demonstrates conclusively"). The strength of all claims must be proportional to the evidence, especially when dealing with small sample sizes or pilot studies. State findings factually and let the data speak for itself.
+
+# OUTPUT INSTRUCTIONS
+
+Generate a comprehensive academic report following the structure above. Use the complete research data and evidence to extract maximum insights while maintaining scientific rigor. The report should demonstrate the analytical sophistication possible through computational social science methods.
+
+**Target Length**: 3000-5000 words for comprehensive analysis
+**Writing Style**: Academic but accessible, suitable for computational social science journals
+**Evidence Integration**: Seamless weaving of statistical and textual evidence throughout

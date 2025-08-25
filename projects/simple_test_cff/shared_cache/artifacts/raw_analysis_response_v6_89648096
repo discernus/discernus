@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a highly polarized political speech that maps clearly onto the framework's dimensions. The core rhetorical strategy involves defining an antagonistic out-group ('oligarchs') and calling for in-group solidarity ('working people') to defeat them. Opposing dimensions like Enmity/Amity and Fragmentative/Cohesive goals are used simultaneously, with hostility directed at the out-group and unity called for within the in-group. Salience scores reflect the centrality of this class-based conflict narrative."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.8,
+          "context_type": "in_group_out_group_definition"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'",
+          "confidence": 1.0,
+          "context_type": "statement_of_values"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 1.0,
+          "context_type": "threat_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "confidence": 0.85,
+          "context_type": "conditional_positive_outcome"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "delegitimization_of_wealth"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_dimension"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 1.0,
+          "context_type": "call_to_action_against_adversary"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for someone you don't know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "inclusive_coalition_building"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "...give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 1.0,
+          "context_type": "call_to_action_for_removal"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 1.0,
+          "context_type": "strategic_call_for_unity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.2",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analyzed document is a political speech with a clear populist, anti-oligarchy message. The rhetorical strategy is consistent and pronounced, involving the clear definition of an 'in-group' (the American people/working class) and an 'out-group' (the billionaire class/oligarchs). This made scoring dimensions related to conflict, such as Tribal Dominance, Envy, and Enmity, straightforward. The speech also employs a classic problem/solution structure, establishing a crisis (Fear) and then offering a unifying path forward (Hope, Amity, Cohesive Goals), leading to significant scores in these opposing dimensions. The salience scores often reflect the structural importance of a theme (e.g., Hope as a concluding call to action) even if its overall intensity throughout the text is moderate."
+  },
+  "document_analyses": [
+    {
+      "document_id": "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 1.0,
+          "context_type": "explicit_group_contrast"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "",
+          "confidence": 0.5,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "confidence": 1.0,
+          "context_type": "threat_to_social_welfare"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 1.0,
+          "context_type": "concluding_call_to_action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 1.0,
+          "context_type": "systemic_unfairness_claim"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The rich want to get richer and they don't care who they step on.",
+          "confidence": 1.0,
+          "context_type": "character_assassination"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe...",
+          "confidence": 1.0,
+          "context_type": "call_for_in-group_solidarity"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+          "confidence": 1.0,
+          "context_type": "attribution_of_divisive_aims"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "confidence": 1.0,
+          "context_type": "unifying_vision_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
