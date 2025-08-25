@@ -27,7 +27,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
-
+import json
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
