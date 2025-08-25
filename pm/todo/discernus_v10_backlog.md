@@ -22,7 +22,7 @@
 **Timeline:** 1-2 days
 **Goal:** Fix critical system issues and establish testing foundation
 
-#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase
+#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase ✅ **COMPLETED**
 
 - **Description**: **CRITICAL BUG**: Derived metrics phase failures are being silently caught and the experiment continues with degraded results instead of failing fast
 - **Dependencies**: None (blocking everything)
@@ -34,13 +34,13 @@
   - Violates THIN architecture fail-fast principles
   - Makes debugging extremely difficult
 - **Acceptance Criteria**:
-  - [ ] Derived metrics phase failures cause immediate experiment termination
-  - [ ] Clear error messages indicate the specific failure point
-  - [ ] No graceful degradation for critical pipeline components
-  - [ ] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
-- **Effort**: 1-2 hours
+  - [x] Derived metrics phase failures cause immediate experiment termination
+  - [x] Clear error messages indicate the specific failure point
+  - [x] No graceful degradation for critical pipeline components
+  - [x] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
+- **Effort**: 1-2 hours ✅ **COMPLETED**
 - **Priority**: **CRITICAL** (data integrity issue)
-- **Status**: **NEEDS VERIFICATION** - Implementation exists but fail-fast behavior needs testing
+- **Status**: ✅ **VERIFIED COMPLETE** - All acceptance criteria met, fail-fast behavior properly implemented
 
 #### [CRITICAL-002] Fix Derived Metrics Cache Stale File References
 
@@ -954,27 +954,7 @@
 - **Priority**: **MEDIUM** (evidence validation)
 - **Status**: **NEEDS VERIFICATION** - Corpus documents are included but fact-checker cannot access full text for quote verification
 
-#### [RAG-007] Fix txtai Document ID Mismatch in FactCheckerAgent ✅ **COMPLETED**
 
-- **Description**: FactCheckerAgent cannot retrieve document content due to ID mismatch between txtai search results and stored documents
-- **Dependencies**: [RAG-001] ✅, [RAG-005] ✅
-- **Root Cause**: txtai search returns document IDs that don't match the sequential IDs (0, 1, 2...) assigned during RAGIndexManager.build_comprehensive_index()
-- **Impact**: 
-  - Fact-checker reports "Document ID X not found in Y stored documents" errors
-  - Cannot access framework specifications, statistical results, or corpus content for validation
-  - All fact-checking operations fail despite comprehensive RAG index construction
-- **Current Status**: 
-  - ✅ RAG index construction working correctly (134 documents indexed)
-  - ✅ Document storage working correctly (documents preserved in rag_index.documents)
-  - ✅ Document retrieval working correctly (fixed ID type mismatch)
-- **Acceptance Criteria**:
-  - [x] txtai search results successfully map to stored documents
-  - [x] FactCheckerAgent can retrieve framework specifications for dimension validation
-  - [x] FactCheckerAgent can retrieve statistical results for numerical validation
-  - [x] FactCheckerAgent can retrieve corpus content for quote verification
-- **Effort**: 2-3 hours ✅ **COMPLETED**
-- **Priority**: **HIGH** (blocks all fact-checking functionality)
-- **Status**: ✅ **COMPLETED** - Fixed txtai string vs integer ID type mismatch in FactCheckerAgent._query_evidence()
 
 #### [RAG-008] CANCELLED - Framework Searchability Issue Resolved
 
@@ -994,18 +974,20 @@
   - Breaks core architectural principle of RAG as "first-class provenance artifacts"
 - **Current Status**:
   - ✅ RAG search works perfectly (finds documents with good scores)
-  - ❌ Document content retrieval broken (custom documents attribute lost)
-  - ❌ No persistence of complete RAG state for future use
-  - ❌ Provenance tracking incomplete
+  - ✅ Document content retrieval working (documents attribute preserved)
+  - ✅ RAG persistence implemented (documents.json saved in tar.gz)
+  - ✅ Complete RAG state persists for future use
+  - ✅ Provenance tracking enabled
+  - ✅ Conversational interfaces can query experiment results
 - **Acceptance Criteria**:
-  - [ ] RAG indexes saved as complete artifacts in experiment results directory
-  - [ ] Custom documents attribute preserved across save/load cycles
-  - [ ] Future systems can load and use experiment RAG indexes
-  - [ ] Conversational interfaces can query experiment results
-  - [ ] Complete provenance tracking of RAG state used
+  - [x] RAG indexes saved as complete artifacts in experiment results directory
+  - [x] Custom documents attribute preserved across save/load cycles
+  - [x] Future systems can load and use experiment RAG indexes
+  - [x] Conversational interfaces can query experiment results
+  - [x] Complete provenance tracking of RAG state used
 - **Effort**: 2-3 hours
 - **Priority**: **CRITICAL** (core architectural requirement)
-- **Status**: 🔄 **READY TO IMPLEMENT** - Solution designed, needs coding
+- **Status**: ✅ **COMPLETED** - RAG persistence implemented, tested, and working
 
 
 
@@ -1067,7 +1049,8 @@
   - Added [LOGGING-001] for dual-track logging completion based on CAF experiment session analysis
   - Enhanced [CLI-007] and [PROVENANCE-001] with specific logging implementation requirements
   - Added [RAG-002], [RAG-003], [RAG-004] for comprehensive fact-checker RAG index completeness
-  - Unchecked [CRITICAL-001], [CRITICAL-002], [CRITICAL-003], [PERF-001], [CACHE-001], [QUALITY-001], [QUALITY-002], [QUALITY-003] due to missing verification
+  - Unchecked [CRITICAL-002], [CRITICAL-003], [PERF-001], [CACHE-001], [QUALITY-001], [QUALITY-002], [QUALITY-003] due to missing verification
+  - ✅ [CRITICAL-001] verified complete - all acceptance criteria met, fail-fast behavior properly implemented
   - Unchecked [RAG-002], [RAG-003], [RAG-004] due to RAG index functionality issues discovered during fact-checking
   - ✅ [UX-001] verified complete - method exists with different name, all quiet mode implementations working
 
