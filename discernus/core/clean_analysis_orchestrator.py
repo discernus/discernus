@@ -1705,6 +1705,22 @@ class CleanAnalysisOrchestrator:
             if not draft_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a draft report.")
 
+            # CRITICAL: Verify statistical analysis succeeded before proceeding
+            # This prevents cross-experiment data contamination
+            if not research_data_hash:
+                raise CleanAnalysisError("Statistical analysis results missing - cannot proceed with synthesis")
+            
+            # Load and validate statistical results are from THIS experiment run
+            statistical_results_content = self.artifact_storage.get_artifact(research_data_hash).decode("utf-8")
+            statistical_results = json.loads(statistical_results_content)
+            
+            # Fail-fast if statistical analysis failed - no cross-experiment data usage allowed
+            if (statistical_results.get("status") == "failed" or 
+                statistical_results.get("error") or
+                "statistical_results" not in statistical_results):
+                error_msg = statistical_results.get("error", "Statistical analysis incomplete or missing required data")
+                raise CleanAnalysisError(f"Statistical analysis failed - cannot proceed with synthesis: {error_msg}")
+            
             self._log_progress("🔍 Running fact-checker validation on synthesis report...")
             
             # Run fact-checker on the draft report
@@ -2120,7 +2136,7 @@ class CleanAnalysisOrchestrator:
         
         # Save synthesis report if available
         if assets.get('report_hash'):
-            report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
+            report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_file = results_dir / "final_report.md"
             
             # Apply fact-checking results if available
