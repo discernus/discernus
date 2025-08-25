@@ -252,8 +252,26 @@ class RAGTestingHarness:
                 search_results = self.rag_index.search(query, limit=5)
                 self.logger.info(f"Query returned {len(search_results)} results")
                 
+                # Debug: Show what search_results actually contains
+                print(f"DEBUG: search_results type: {type(search_results)}")
+                print(f"DEBUG: search_results length: {len(search_results)}")
+                if search_results:
+                    print(f"DEBUG: first result type: {type(search_results[0])}")
+                    print(f"DEBUG: first result: {search_results[0]}")
+                    if hasattr(search_results[0], '__len__'):
+                        print(f"DEBUG: first result length: {len(search_results[0])}")
+
                 # Get the actual document content for each result
-                for j, (doc_id, score) in enumerate(search_results, 1):
+                for j, result in enumerate(search_results, 1):
+                    # Handle different result formats
+                    if isinstance(result, (list, tuple)) and len(result) >= 2:
+                        doc_id, score = result[0], result[1]
+                    elif isinstance(result, dict):
+                        doc_id = result.get('id', result.get('document', 0))
+                        score = result.get('score', 0.0)
+                    else:
+                        print(f"DEBUG: Unexpected result format: {result} (type: {type(result)})")
+                        continue
                     self.logger.info(f"\nResult {j}:")
                     self.logger.info(f"  Document ID: {doc_id}")
                     self.logger.info(f"  Score: {score:.4f}")

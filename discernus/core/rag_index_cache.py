@@ -159,13 +159,13 @@ class RAGIndexCacheManager:
     
     def store_index(self, cache_key: str, index: Embeddings, evidence_count: int = 0) -> str:
         """
-        Store RAG index in cache.
-        
+        Store RAG index in cache with complete persistence of documents attribute.
+
         Args:
             cache_key: Cache key for the index
             index: txtai Embeddings index to cache
             evidence_count: Number of evidence pieces indexed
-            
+
         Returns:
             Artifact hash of stored index
         """
@@ -173,41 +173,52 @@ class RAGIndexCacheManager:
             # Create temporary directory for index storage
             temp_dir = Path(tempfile.mkdtemp())
             index_path = temp_dir / "rag_index"
-            
+
             try:
                 # Save txtai index to temporary location
                 index.save(str(index_path))
-                
+
+                # Preserve custom documents attribute if it exists
+                documents_data = None
+                if hasattr(index, 'documents') and index.documents:
+                    documents_path = temp_dir / "documents.json"
+                    with open(documents_path, 'w', encoding='utf-8') as f:
+                        json.dump(index.documents, f, ensure_ascii=False, indent=2)
+                    documents_data = documents_path
+
                 # txtai saves indexes as directories, so we need to tar them up
                 import tarfile
                 tar_path = temp_dir / "rag_index.tar.gz"
-                
-                if index_path.exists():
-                    with tarfile.open(tar_path, 'w:gz') as tar:
+
+                with tarfile.open(tar_path, 'w:gz') as tar:
+                    if index_path.exists():
                         if index_path.is_dir():
                             # Add directory contents
                             tar.add(index_path, arcname='rag_index')
                         else:
                             # Single file (shouldn't happen with txtai but handle it)
                             tar.add(index_path, arcname='rag_index')
-                    
-                    with open(tar_path, 'rb') as f:
-                        index_data = f.read()
-                else:
-                    raise Exception(f"txtai failed to save index to {index_path}")
-                
-                # Store as artifact
-                artifact_hash = self.artifact_storage.put_artifact(
-                    index_data,
-                    {
-                        "artifact_type": "rag_index_cache",
-                        "rag_cache_key": cache_key,
-                        "evidence_count": evidence_count,
-                        "created_at": datetime.now(timezone.utc).isoformat(),
-                        "index_size_bytes": len(index_data)
-                    }
-                )
-                
+
+                    # Add documents.json if it exists (for provenance and future use)
+                    if documents_data and documents_data.exists():
+                        tar.add(documents_data, arcname='documents.json')
+
+                with open(tar_path, 'rb') as f:
+                    index_data = f.read()
+
+                # Store as artifact with enhanced metadata
+                metadata = {
+                    "artifact_type": "rag_index_cache",
+                    "rag_cache_key": cache_key,
+                    "evidence_count": evidence_count,
+                    "created_at": datetime.now(timezone.utc).isoformat(),
+                    "index_size_bytes": len(index_data),
+                    "has_documents": documents_data is not None,
+                    "documents_count": len(index.documents) if hasattr(index, 'documents') and index.documents else 0
+                }
+
+                artifact_hash = self.artifact_storage.put_artifact(index_data, metadata)
+
                 if self.audit_logger:
                     self.audit_logger.log_agent_event(
                         self.agent_name,
@@ -216,17 +227,19 @@ class RAGIndexCacheManager:
                             "cache_key": cache_key,
                             "artifact_hash": artifact_hash[:8],
                             "evidence_count": evidence_count,
-                            "size_bytes": len(index_data)
+                            "size_bytes": len(index_data),
+                            "has_documents": metadata["has_documents"],
+                            "documents_count": metadata["documents_count"]
                         }
                     )
-                
+
                 return artifact_hash
-                
+
             finally:
                 # Cleanup temporary directory
                 if temp_dir.exists():
                     shutil.rmtree(temp_dir)
-                    
+
         except Exception as e:
             if self.audit_logger:
                 self.audit_logger.log_error(
@@ -238,11 +251,11 @@ class RAGIndexCacheManager:
     
     def _load_index_from_artifact(self, artifact_hash: str) -> Optional[Embeddings]:
         """
-        Load txtai index from artifact storage.
-        
+        Load txtai index from artifact storage with complete documents attribute restoration.
+
         Args:
             artifact_hash: Hash of cached index artifact
-            
+
         Returns:
             Loaded txtai Embeddings index or None if failed
         """
@@ -251,19 +264,19 @@ class RAGIndexCacheManager:
             index_data = self.artifact_storage.get_artifact(artifact_hash)
             if not index_data:
                 return None
-            
+
             # Create temporary directory for loading
             temp_dir = Path(tempfile.mkdtemp())
-            
+
             try:
                 # All cached indexes are tar.gz files (since txtai saves as directories)
                 import tarfile
                 tar_path = temp_dir / "rag_index.tar.gz"
-                
+
                 # Write the cached data to tar file
                 with open(tar_path, 'wb') as f:
                     f.write(index_data)
-                
+
                 # Extract the tar file (with filter for Python 3.14 compatibility)
                 with tarfile.open(tar_path, 'r:gz') as tar:
                     # Use data filter for security (Python 3.12+)
@@ -272,20 +285,49 @@ class RAGIndexCacheManager:
                     except TypeError:
                         # Fallback for older Python versions
                         tar.extractall(temp_dir)
-                
+
                 index_path = temp_dir / "rag_index"
-                
+                documents_path = temp_dir / "documents.json"
+
                 # Load txtai index
                 embeddings = Embeddings()
                 embeddings.load(str(index_path))
-                
+
+                # Restore documents attribute if it exists (for provenance and future use)
+                if documents_path.exists():
+                    try:
+                        with open(documents_path, 'r', encoding='utf-8') as f:
+                            embeddings.documents = json.load(f)
+
+                        if self.audit_logger:
+                            self.audit_logger.log_agent_event(
+                                self.agent_name,
+                                "documents_restored",
+                                {
+                                    "artifact_hash": artifact_hash[:8],
+                                    "documents_count": len(embeddings.documents)
+                                }
+                            )
+                    except Exception as e:
+                        if self.audit_logger:
+                            self.audit_logger.log_error(
+                                "documents_restore_failed",
+                                str(e),
+                                {"artifact_hash": artifact_hash[:8], "agent": self.agent_name}
+                            )
+                        # Set empty documents list as fallback
+                        embeddings.documents = []
+                else:
+                    # No documents.json found - create empty list for compatibility
+                    embeddings.documents = []
+
                 return embeddings
-                
+
             finally:
                 # Cleanup temporary directory
                 if temp_dir.exists():
                     shutil.rmtree(temp_dir)
-                    
+
         except Exception as e:
             if self.audit_logger:
                 self.audit_logger.log_error(
