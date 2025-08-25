@@ -215,31 +215,42 @@ Be precise and factual. Only report actual issues, not potential concerns.
                     
                     # Use stored documents with index-based retrieval
                     if hasattr(evidence_index, 'documents') and evidence_index.documents:
-                        # Fallback to stored documents with better ID matching
-                        document_found = False
-                        # Try exact ID match first
-                        for doc in evidence_index.documents:
-                            if doc['id'] == doc_id:
+                        # Fix txtai ID type mismatch: convert string IDs to integers
+                        try:
+                            # Convert txtai string ID to integer for comparison
+                            if isinstance(doc_id, str) and doc_id.isdigit():
+                                doc_id_int = int(doc_id)
+                            elif isinstance(doc_id, int):
+                                doc_id_int = doc_id
+                            else:
+                                doc_id_int = doc_id  # Keep as-is for fallback
+                            
+                            # Try exact ID match first
+                            document_found = False
+                            for doc in evidence_index.documents:
+                                if doc['id'] == doc_id_int:
+                                    documents.append({
+                                        "content": doc['text'],
+                                        "metadata": doc.get('metadata', {}),
+                                        "score": score
+                                    })
+                                    document_found = True
+                                    break
+                            
+                            # If exact match fails, try index-based retrieval
+                            if not document_found and isinstance(doc_id_int, int) and 0 <= doc_id_int < len(evidence_index.documents):
+                                doc = evidence_index.documents[doc_id_int]
                                 documents.append({
                                     "content": doc['text'],
                                     "metadata": doc.get('metadata', {}),
                                     "score": score
                                 })
                                 document_found = True
-                                break
-                        
-                        # If exact match fails, try index-based retrieval
-                        if not document_found and isinstance(doc_id, int) and 0 <= doc_id < len(evidence_index.documents):
-                            doc = evidence_index.documents[doc_id]
-                            documents.append({
-                                "content": doc['text'],
-                                "metadata": doc.get('metadata', {}),
-                                "score": score
-                            })
-                            document_found = True
-                        
-                        if not document_found:
-                            documents.append({"error": f"Document ID {doc_id} not found in {len(evidence_index.documents)} stored documents"})
+                            
+                            if not document_found:
+                                documents.append({"error": f"Document ID {doc_id} (converted: {doc_id_int}) not found in {len(evidence_index.documents)} stored documents"})
+                        except Exception as e:
+                            documents.append({"error": f"Failed to process document ID {doc_id}: {e}"})
                     else:
                         has_docs = hasattr(evidence_index, 'documents')
                         docs_count = len(evidence_index.documents) if has_docs and evidence_index.documents else 0

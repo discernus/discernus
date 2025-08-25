@@ -1,0 +1,94 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report extensively uses and defines numerous analytical dimensions, axes, and derived metrics of the Civic Analysis Framework (CAF) v10.0. However, the provided RAG index (evidence database) does not contain the definitions for most of these core components of the framework. While some dimensions are mentioned in the context of derived metric calculations (e.g., 'tribal dominance' and 'individual dignity' within 'identity_tension'), their full definitions as analytical dimensions of the framework are absent from the RAG index. Similarly, the definitions for the five core axes and the key derived metrics are not present in the provided framework content.",
+      "examples": [
+        "The report defines the 'Identity Axis' comprising 'Dignity' and 'Tribalism'. While the RAG index defines 'identity_tension' and mentions 'tribal dominance' and 'individual dignity', it does not provide the explicit definitions for 'Identity Axis', 'Dignity', or 'Tribalism' as analytical dimensions.",
+        "The report defines the 'Truth Axis' comprising 'Truth' and 'Manipulation'. None of these terms ('Truth Axis', 'Truth', 'Manipulation') are defined in the provided RAG index.",
+        "The report defines the 'Justice Axis' comprising 'Justice' and 'Resentment'. None of these terms ('Justice Axis', 'Justice', 'Resentment') are defined in the provided RAG index.",
+        "The report defines the 'Emotional Axis' comprising 'Hope' and 'Fear'. None of these terms ('Emotional Axis', 'Hope', 'Fear') are defined in the provided RAG index.",
+        "The report defines the 'Reality Axis' comprising 'Pragmatism' and 'Fantasy'. None of these terms ('Reality Axis', 'Pragmatism', 'Fantasy') are defined in the provided RAG index.",
+        "The 'Salience-Weighted Civic Character Index (CCI)' is a central derived metric in the report, but its definition is not found in the provided RAG index.",
+        "The report discusses 'Tension Indices' and mentions 'justice_tension', but only 'identity_tension' is defined in the RAG index, not the general concept or other specific tension indices."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (`evidence_082858c5.json`). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'john_mccain_2008_concession_ff9b26f2.txt' and 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', but the provided RAG evidence index only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt'. This indicates a mismatch between the cited sources in the report and the content available in the provided evidence database for validation.",
+      "examples": [
+        "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"do all in my power to help him lead us through the many challenges we face\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"the worst and most dangerous addiction we have is the greed of the oligarchs\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains several authority claims that refer to external academic concepts, theories, or models without explicit citation, which is prohibited. These claims imply reliance on or engagement with external academic literature.",
+      "examples": [
+        "The CAF is grounded in Aristotelian virtue ethics and contemporary civic republican theory. (Section 4. Methodology)",
+        "The strong empirical validation of the CAF's oppositional structure suggests that a virtue ethics-based approach is a highly promising avenue for analysis. (Section 6. Discussion)",
+        "This finding challenges models that might treat vices simply as the absence of virtues, suggesting instead that they are actively and strategically deployed as part of an alternative rhetorical framework. (Section 6. Discussion)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report extensively uses and defines numerous analytical dimensions, axes, and derived metrics of the Civic Analysis Framework (CAF) v10.0. However, the provided RAG index (evidence database) does not contain the definitions for most of these core components of the framework. While some dimensions are mentioned in the context of derived metric calculations (e.g., 'tribal dominance' and 'individual dignity' within 'identity_tension'), their full definitions as analytical dimensions of the framework are absent from the RAG index. Similarly, the definitions for the five core axes and the key derived metrics are not present in the provided framework content.",
+        "examples": [
+          "The report defines the 'Identity Axis' comprising 'Dignity' and 'Tribalism'. While the RAG index defines 'identity_tension' and mentions 'tribal dominance' and 'individual dignity', it does not provide the explicit definitions for 'Identity Axis', 'Dignity', or 'Tribalism' as analytical dimensions.",
+          "The report defines the 'Truth Axis' comprising 'Truth' and 'Manipulation'. None of these terms ('Truth Axis', 'Truth', 'Manipulation') are defined in the provided RAG index.",
+          "The report defines the 'Justice Axis' comprising 'Justice' and 'Resentment'. None of these terms ('Justice Axis', 'Justice', 'Resentment') are defined in the provided RAG index.",
+          "The report defines the 'Emotional Axis' comprising 'Hope' and 'Fear'. None of these terms ('Emotional Axis', 'Hope', 'Fear') are defined in the provided RAG index.",
+          "The report defines the 'Reality Axis' comprising 'Pragmatism' and 'Fantasy'. None of these terms ('Reality Axis', 'Pragmatism', 'Fantasy') are defined in the provided RAG index.",
+          "The 'Salience-Weighted Civic Character Index (CCI)' is a central derived metric in the report, but its definition is not found in the provided RAG index.",
+          "The report discusses 'Tension Indices' and mentions 'justice_tension', but only 'identity_tension' is defined in the RAG index, not the general concept or other specific tension indices."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (`evidence_082858c5.json`). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'john_mccain_2008_concession_ff9b26f2.txt' and 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', but the provided RAG evidence index only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt'. This indicates a mismatch between the cited sources in the report and the content available in the provided evidence database for validation.",
+        "examples": [
+          "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"do all in my power to help him lead us through the many challenges we face\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"the worst and most dangerous addiction we have is the greed of the oligarchs\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains several authority claims that refer to external academic concepts, theories, or models without explicit citation, which is prohibited. These claims imply reliance on or engagement with external academic literature.",
+        "examples": [
+          "The CAF is grounded in Aristotelian virtue ethics and contemporary civic republican theory. (Section 4. Methodology)",
+          "The strong empirical validation of the CAF's oppositional structure suggests that a virtue ethics-based approach is a highly promising avenue for analysis. (Section 6. Discussion)",
+          "This finding challenges models that might treat vices simply as the absence of virtues, suggesting instead that they are actively and strategically deployed as part of an alternative rhetorical framework. (Section 6. Discussion)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

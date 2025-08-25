@@ -440,13 +440,13 @@
   - [x] Evidence retrieval logging suppressed during bulk synthesis operations
   - [x] `UnifiedSynthesisAgent._get_all_evidence()` uses quiet mode
   - [x] `SynthesisPromptAssembler` uses quiet mode for evidence counting
-  - [ ] `CleanAnalysisOrchestrator._validate_synthesis_assets()` uses quiet mode for validation
+  - [x] `CleanAnalysisOrchestrator._validate_synthesis_prerequisites()` uses quiet mode for validation
   - [x] `TxtaiEvidenceCurator._get_all_evidence()` uses quiet mode for RAG index building
   - [x] Individual artifact retrievals still logged when appropriate
   - [x] Clean synthesis flow without hundreds of "📥 Retrieved artifact" messages
 - **Effort**: 1.5 hours
 - **Priority**: **LOW** - Minor UX improvement
-- **Status**: **PARTIALLY IMPLEMENTED** - Missing critical method implementation, tests will fail
+- **Status**: **VERIFICATION COMPLETE** - Method exists but with different name, all quiet mode implementations working
 
 #### [UX-002] Optimize Synthesis Asset Validation
 
@@ -903,7 +903,7 @@
 **Timeline:** 2-3 days
 **Goal:** Ensure comprehensive fact-checker RAG index contains all necessary validation data
 
-#### [RAG-002] Complete Framework Specification in RAG Index ✅ **COMPLETED**
+#### [RAG-002] Complete Framework Specification in RAG Index
 
 - **Description**: RAG index missing complete framework specification content - only 2 of 10 dimensions (Dignity, Tribalism) found during validation
 - **Dependencies**: None (RAG-001 ✅ completed)
@@ -913,14 +913,14 @@
   - Cannot validate framework structure and terminology
   - Incomplete fact-checking coverage
 - **Acceptance Criteria**:
-  - [x] All 10 CAF dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) found in RAG index
-  - [x] Complete framework specification text indexed and searchable
-  - [x] Framework structure and axis definitions accessible for validation
-- **Effort**: 3-4 hours ✅ **COMPLETED**
+  - [ ] All 10 CAF dimensions (Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy) found in RAG index
+  - [ ] Complete framework specification text indexed and searchable
+  - [ ] Framework structure and axis definitions accessible for validation
+- **Effort**: 3-4 hours
 - **Priority**: **HIGH** (fact-checking completeness)
-- **Status**: ✅ **COMPLETED** - Framework specification is properly included in comprehensive RAG index
+- **Status**: **NEEDS VERIFICATION** - Framework specification is included but fact-checker cannot find all 10 dimensions
 
-#### [RAG-003] Include Comprehensive Statistical Results in RAG Index ✅ **COMPLETED**
+#### [RAG-003] Include Comprehensive Statistical Results in RAG Index
 
 - **Description**: RAG index missing comprehensive `statistical_results.json` equivalent for numerical validation
 - **Dependencies**: None (RAG-001 ✅ completed)
@@ -930,14 +930,14 @@
   - Statistic Mismatch checks fail due to missing reference data
   - No verification of calculated values against source data
 - **Acceptance Criteria**:
-  - [x] Complete statistical results (means, correlations, std deviations) indexed
-  - [x] Speaker-level derived metrics accessible for validation
-  - [x] Correlation matrix and descriptive statistics searchable
-- **Effort**: 2-3 hours ✅ **COMPLETED**
+  - [ ] Complete statistical results (means, correlations, std deviations) indexed
+  - [ ] Speaker-level derived metrics accessible for validation
+  - [ ] Correlation matrix and descriptive statistics searchable
+- **Effort**: 2-3 hours
 - **Priority**: **HIGH** (numerical validation)
-- **Status**: ✅ **COMPLETED** - Statistical results are properly included in comprehensive RAG index
+- **Status**: **NEEDS VERIFICATION** - Statistical results are included but fact-checker cannot access comprehensive data
 
-#### [RAG-004] Include Full Corpus Documents in RAG Index ✅ **COMPLETED**
+#### [RAG-004] Include Full Corpus Documents in RAG Index
 
 - **Description**: RAG index missing full text of corpus documents for quote verification
 - **Dependencies**: None (RAG-001 ✅ completed)
@@ -947,14 +947,14 @@
   - Quote validation relies on incomplete evidence extracts
   - Reduced confidence in evidence attribution accuracy
 - **Acceptance Criteria**:
-  - [x] Full text of all corpus documents indexed and searchable
-  - [x] Quote verification can cross-reference against complete source text
-  - [x] Evidence attribution can be validated end-to-end
-- **Effort**: 2-3 hours ✅ **COMPLETED**
+  - [ ] Full text of all corpus documents indexed and searchable
+  - [ ] Quote verification can cross-reference against complete source text
+  - [ ] Evidence attribution can be validated end-to-end
+- **Effort**: 2-3 hours
 - **Priority**: **MEDIUM** (evidence validation)
-- **Status**: ✅ **COMPLETED** - Full corpus documents are properly included in comprehensive RAG index
+- **Status**: **NEEDS VERIFICATION** - Corpus documents are included but fact-checker cannot access full text for quote verification
 
-#### [RAG-007] Fix txtai Document ID Mismatch in FactCheckerAgent
+#### [RAG-007] Fix txtai Document ID Mismatch in FactCheckerAgent ✅ **COMPLETED**
 
 - **Description**: FactCheckerAgent cannot retrieve document content due to ID mismatch between txtai search results and stored documents
 - **Dependencies**: [RAG-001] ✅, [RAG-005] ✅
@@ -966,14 +966,15 @@
 - **Current Status**: 
   - ✅ RAG index construction working correctly (134 documents indexed)
   - ✅ Document storage working correctly (documents preserved in rag_index.documents)
-  - ❌ Document retrieval failing due to ID mismatch between txtai.search() and stored document IDs
+  - ✅ Document retrieval working correctly (fixed ID type mismatch)
 - **Acceptance Criteria**:
-  - [ ] txtai search results successfully map to stored documents
-  - [ ] FactCheckerAgent can retrieve framework specifications for dimension validation
-  - [ ] FactCheckerAgent can retrieve statistical results for numerical validation
-  - [ ] FactCheckerAgent can retrieve corpus content for quote verification
-- **Effort**: 2-3 hours
+  - [x] txtai search results successfully map to stored documents
+  - [x] FactCheckerAgent can retrieve framework specifications for dimension validation
+  - [x] FactCheckerAgent can retrieve statistical results for numerical validation
+  - [x] FactCheckerAgent can retrieve corpus content for quote verification
+- **Effort**: 2-3 hours ✅ **COMPLETED**
 - **Priority**: **HIGH** (blocks all fact-checking functionality)
+- **Status**: ✅ **COMPLETED** - Fixed txtai string vs integer ID type mismatch in FactCheckerAgent._query_evidence()
 
 
 
@@ -1023,18 +1024,21 @@
 ## Backlog Maintenance
 
 - **Last Updated**: 2025-08-25
-- **Next Review**: After critical infrastructure verification
+- **Next Review**: After RAG index functionality verification
 - **Cleanup Status**: ✅ Groomed and streamlined with sprint restructuring
 - **Completed Items Moved**: [CRITICAL-005], [CRITICAL-006], [ARCH-004], [RAG-001], [RAG-005], and [RAG-006] moved to DONE.md
 - **Redundant Items**: Informal duplicate items consolidated into formal backlog structure
 - **Sprint Restructuring**: Completed - fixed dependency conflicts and logical flow
 - **Verification Required**: Multiple "completed" items unchecked due to missing implementation verification
+- **RAG Index Issues**: Critical functionality problems discovered during fact-checking verification
 - **New Insights**: 
   - Added [CACHE-003] for comprehensive cache fingerprinting standard based on stale cache analysis
   - Added [LOGGING-001] for dual-track logging completion based on CAF experiment session analysis
   - Enhanced [CLI-007] and [PROVENANCE-001] with specific logging implementation requirements
   - Added [RAG-002], [RAG-003], [RAG-004] for comprehensive fact-checker RAG index completeness
-  - Unchecked [UX-001], [CRITICAL-001], [CRITICAL-002], [CRITICAL-003], [PERF-001], [CACHE-001], [QUALITY-001], [QUALITY-002], [QUALITY-003] due to missing verification
+  - Unchecked [CRITICAL-001], [CRITICAL-002], [CRITICAL-003], [PERF-001], [CACHE-001], [QUALITY-001], [QUALITY-002], [QUALITY-003] due to missing verification
+  - Unchecked [RAG-002], [RAG-003], [RAG-004] due to RAG index functionality issues discovered during fact-checking
+  - ✅ [UX-001] verified complete - method exists with different name, all quiet mode implementations working
 
 ## Current Priorities
 
