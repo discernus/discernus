@@ -172,6 +172,13 @@ template: |
   - **Appropriate conclusions**: Draw strongest evidence-based conclusions possible while avoiding grandiose or unsubstantiated claims
   - **Uncertainty acknowledgment**: Note limitations while maximizing insights
   - **Academic Tone**: Use measured, evidence-based language rather than superlatives or overstated claims
+  
+  ## Citation and Reference Standards
+  - **NO EXTERNAL CITATIONS**: Do not include academic references, citations, or bibliographic entries (e.g., "Author et al., 2023")
+  - **NO AUTHORITY CLAIMS**: Avoid phrases like "research shows," "studies indicate," or "according to literature"
+  - **DATA-FOCUSED LANGUAGE**: Use "This analysis suggests," "These findings indicate," or "The data reveals"
+  - **RESEARCHER GUIDANCE**: Include phrases like "researchers may wish to explore," "future studies could investigate," or "this warrants further investigation"
+  - **COMPUTATIONAL FOCUS**: Position findings as computational analysis results, not authoritative academic claims
 
   ## Framework Agnosticism Standards
   - **Dynamic adaptation**: Work with any framework's dimensional structure

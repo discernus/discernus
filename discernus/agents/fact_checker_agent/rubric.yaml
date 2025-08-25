@@ -18,3 +18,13 @@ checks:
     severity: "WARNING"
     description: "Identify and flag unsubstantiated or overly promotional claims."
     instructions: "Scan the report for superlative or promotional phrases like 'major breakthrough,' 'first ever,' 'unprecedented,' or 'proves beyond a doubt.' Report these as claims that may require editorial review for academic tone."
+
+  - name: "Citation Violation"
+    severity: "CRITICAL"
+    description: "Detect prohibited external academic citations and authority claims."
+    instructions: "Scan the report for: 1) Academic citations in formats like 'Author et al., 2023', 'Smith & Jones (2020)', or '(Author, 2023)'; 2) Authority claims like 'research shows', 'studies indicate', 'according to literature', or 'previous research'; 3) Reference lists or bibliographies. Report any violations as these should not appear in computational analysis reports."
+
+  - name: "Fabricated Reference"
+    severity: "CRITICAL" 
+    description: "Identify potentially fabricated academic references or suspicious citation patterns."
+    instructions: "Look for academic-style references that appear fabricated, including: 1) Unusual author name patterns; 2) Citations to non-existent journals; 3) Implausible publication years; 4) Generic or vague research claims. Flag these as potential LLM hallucinations requiring removal."

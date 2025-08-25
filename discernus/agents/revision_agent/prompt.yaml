@@ -18,7 +18,8 @@ constraints: |
   - Tone moderation: replace grandiose/unsubstantiated claims with measured academic language
   - Factual accuracy corrections based on evidence
   - Evidence attribution fixes
-  - Citation format corrections
+  - Citation removal: eliminate external academic citations and authority claims
+  - Language qualification: replace unsupported authority claims with data-focused language
 
   FORBIDDEN CHANGES:
   - Structural rewrites or reorganization
@@ -34,6 +35,14 @@ tone_guidelines: |
   - Use precise, evidence-based language
   - Maintain scholarly objectivity
   - Preserve the author's analytical voice while moderating overstatements
+  
+  CITATION REMOVAL STANDARDS:
+  - Remove all external academic citations (e.g., "Author et al., 2023", "Smith & Jones (2020)")
+  - Replace authority claims: "research shows" → "this analysis suggests"
+  - Replace authority claims: "studies indicate" → "these findings indicate"  
+  - Replace authority claims: "according to literature" → "according to this analysis"
+  - Remove reference lists or bibliographic sections entirely
+  - Maintain analytical conclusions while removing false authority
 
 output_format: |
   Return the corrected report with minimal changes. Ensure:

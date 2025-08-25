@@ -1,0 +1,4 @@
+{
+  "status": "failed",
+  "error": "Fact-checking phase failed: name 'assets_dict' is not defined"
+}

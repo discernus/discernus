@@ -68,6 +68,21 @@
     "size_bytes": 5822,
     "source_run": "20250824T231238Z"
   },
+  "029dc10d3b157fe5f5a0ce1f201d2c56f7db26bfe9e98c66de4f57e2e7a8569d": {
+    "artifact_path": "evidence_v6_029dc10d",
+    "created_at": "2025-08-25T01:27:28.104420+00:00",
+    "human_filename": "evidence_v6_029dc10d",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5822,
+    "source_run": "20250825T012728Z"
+  },
   "02f39ecfbba32a8af3c2eb0c67fde20ede925ff8357bacfde4aefe138767e03a": {
     "artifact_path": "complete_research_data_02f39ecf",
     "created_at": "2025-08-24T23:06:53.057422+00:00",
@@ -357,6 +372,19 @@
     },
     "size_bytes": 19759,
     "source_run": "20250824T195143Z"
+  },
+  "1015c41aed092f66ee67cc37ec984319f1de98d968e5482fd427f04698d72fa0": {
+    "artifact_path": "complete_research_data_1015c41a",
+    "created_at": "2025-08-25T01:25:32.788533+00:00",
+    "human_filename": "complete_research_data_1015c41a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "complete_research_data",
+      "experiment_name": "simple_test_cff",
+      "ready_for_synthesis": true
+    },
+    "size_bytes": 161987,
+    "source_run": "20250825T012528Z"
   },
   "10504ee531444528ed97e85641f4d2f54f60462d4981510d2fb69cc71f8cd335": {
     "artifact_path": "artifacts/complete_research_data_10504ee5",
@@ -780,6 +808,17 @@
     "size_bytes": 29480,
     "source_run": "20250824T195143Z"
   },
+  "1dd533ac7a19542f2adf105681427decb7644bfa777f86907b500511249de965": {
+    "artifact_path": "statistical_results_with_data_1dd533ac",
+    "created_at": "2025-08-25T01:56:57.108341+00:00",
+    "human_filename": "statistical_results_with_data_1dd533ac",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_results_with_data"
+    },
+    "size_bytes": 56629,
+    "source_run": "20250825T015651Z"
+  },
   "1f52a584f8350073e9717f407f77555324d2481d05b057ee1e1a29722bada578": {
     "artifact_path": "artifacts/synthesis_prompt_1f52a584",
     "created_at": "2025-08-23T18:35:32.279054+00:00",
@@ -818,6 +857,21 @@
     },
     "size_bytes": 2624824,
     "source_run": "20250824T230834Z"
+  },
+  "2144db23d3f6396bde3cf49e918a23cdeab39f9f96af7d7a9947f7d6e7a5f2dc": {
+    "artifact_path": "evidence_v6_2144db23",
+    "created_at": "2025-08-25T01:27:28.100611+00:00",
+    "human_filename": "evidence_v6_2144db23",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5506,
+    "source_run": "20250825T012728Z"
   },
   "2147b5e9353ffb8de47632bc301064dd66c4bb5a39e641d84323386cf4135d48": {
     "artifact_path": "artifacts/derived_metrics_results_with_data_2147b5e9",
@@ -1004,6 +1058,18 @@
     },
     "size_bytes": 161987,
     "source_run": "20250825T012208Z"
+  },
+  "25ef2f212860ee43be0ca1212378198705f948f1f37b29940accb44378513655": {
+    "artifact_path": "cache_test_25ef2f21",
+    "created_at": "2025-08-25T01:56:51.760275+00:00",
+    "human_filename": "cache_test_25ef2f21",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250825T015651Z"
   },
   "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd": {
     "artifact_path": "artifacts/bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
@@ -1265,6 +1331,17 @@
     },
     "size_bytes": 6146,
     "source_run": "20250824T035343Z"
+  },
+  "2f7d830991dbf4cb4e968cea05f701ab5fb700e8c2f61657f5ee09271644f419": {
+    "artifact_path": "final_synthesis_report_interpolated_2f7d8309",
+    "created_at": "2025-08-25T01:58:21.688098+00:00",
+    "human_filename": "final_synthesis_report_interpolated_2f7d8309",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report_interpolated"
+    },
+    "size_bytes": 25254,
+    "source_run": "20250825T015651Z"
   },
   "2ff0265a8808d3cdc91b1a204fef136fc00d7fe9d09133c7bf591d8e32032912": {
     "artifact_path": "evidence_v6_2ff0265a",
@@ -1786,6 +1863,21 @@
     "size_bytes": 48257,
     "source_run": "20250824T030205Z"
   },
+  "4009f9b74cffdcda0fb349dfe89b58055794c8d4453bce5443f8d707fa8b481f": {
+    "artifact_path": "evidence_v6_4009f9b7",
+    "created_at": "2025-08-25T01:30:26.402085+00:00",
+    "human_filename": "evidence_v6_4009f9b7",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5367,
+    "source_run": "20250825T013026Z"
+  },
   "40260c029ad3e9c3ea498922889ce9407188c83853ebe26e69dec292575ced59": {
     "artifact_path": "statistical_results_with_data_40260c02",
     "created_at": "2025-08-24T23:10:51.081787+00:00",
@@ -1854,6 +1946,19 @@
     "size_bytes": 5822,
     "source_run": "20250824T230834Z"
   },
+  "420a7c90252a50381d4f6f493368688ea890eef18475df14cb47476cbf6e2c10": {
+    "artifact_path": "complete_research_data_420a7c90",
+    "created_at": "2025-08-25T01:56:57.129560+00:00",
+    "human_filename": "complete_research_data_420a7c90",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "complete_research_data",
+      "experiment_name": "simple_test_cff",
+      "ready_for_synthesis": true
+    },
+    "size_bytes": 161987,
+    "source_run": "20250825T015651Z"
+  },
   "424e4e2fc5650ff00545ff92f3308de710560663afa0b75dea36921e090ec471": {
     "artifact_path": "artifacts/derived_metrics_results_with_data_424e4e2f",
     "created_at": "2025-08-24T03:45:39.850641+00:00",
@@ -1863,6 +1968,19 @@
     },
     "size_bytes": 29083,
     "source_run": "20250824T033926Z"
+  },
+  "42848beb9942d94eb4e94942f2a0118b9ef1dbfe67c62ff6a7b12c57453ea0a4": {
+    "artifact_path": "complete_research_data_42848beb",
+    "created_at": "2025-08-25T01:30:31.377262+00:00",
+    "human_filename": "complete_research_data_42848beb",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "complete_research_data",
+      "experiment_name": "simple_test_cff",
+      "ready_for_synthesis": true
+    },
+    "size_bytes": 161987,
+    "source_run": "20250825T013026Z"
   },
   "4394f2bdd532101177489fda74f5cd5163d9dcf54d56fa1bba2b88b7925820ca": {
     "artifact_path": "artifacts/complete_research_data_4394f2bd",
@@ -1994,6 +2112,21 @@
     },
     "size_bytes": 44135,
     "source_run": "20250824T025130Z"
+  },
+  "46e27ed71697a7596be5688fe572e346ecc8bed8221657c06c48a25de3cde147": {
+    "artifact_path": "evidence_v6_46e27ed7",
+    "created_at": "2025-08-25T01:25:28.240440+00:00",
+    "human_filename": "evidence_v6_46e27ed7",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5367,
+    "source_run": "20250825T012528Z"
   },
   "4720298411d6b0ff7912782fbc05e03c465410c1ca1a5c1defd802e0f195b971": {
     "artifact_path": "artifacts/evidence_v6_47202984",
@@ -2266,6 +2399,17 @@
     },
     "size_bytes": 8357,
     "source_run": "20250823T192442Z"
+  },
+  "5066f43742e5b5162781622c04e189f21ea890f695d40c64788cf738aedbdd38": {
+    "artifact_path": "synthesis_prompt_5066f437",
+    "created_at": "2025-08-25T01:56:57.165920+00:00",
+    "human_filename": "synthesis_prompt_5066f437",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "synthesis_prompt"
+    },
+    "size_bytes": 69258,
+    "source_run": "20250825T015651Z"
   },
   "507c6c6975d6b98025e25ecbfbf789efd86e1319906ffbc5129118cfa6d015a7": {
     "artifact_path": "artifacts/evidence_v6_507c6c69",
@@ -2866,6 +3010,17 @@
     "size_bytes": 26972,
     "source_run": "20250824T005800Z"
   },
+  "641930d6d5e6f5dd39ee94585980b85d5d774403feb0d40b53bedee01768586a": {
+    "artifact_path": "final_synthesis_report_interpolated_641930d6",
+    "created_at": "2025-08-25T01:27:13.040303+00:00",
+    "human_filename": "final_synthesis_report_interpolated_641930d6",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report_interpolated"
+    },
+    "size_bytes": 28131,
+    "source_run": "20250825T012528Z"
+  },
   "649759b7137547c66bd734369e50d42873c4a4a23bb4ebc0c7a064066b506468": {
     "artifact_path": "artifacts/evidence_v6_649759b7",
     "created_at": "2025-08-24T03:02:05.074866+00:00",
@@ -3122,6 +3277,21 @@
     "size_bytes": 127495,
     "source_run": "20250823T175137Z"
   },
+  "6bb5f4cc42a5765ae2a0c24caa5a7ee658c7247d31c07361b2bf2950ddfe594e": {
+    "artifact_path": "rag_index_cache_6bb5f4cc",
+    "created_at": "2025-08-25T01:27:32.911695+00:00",
+    "human_filename": "rag_index_cache_6bb5f4cc",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "rag_index_cache",
+      "created_at": "2025-08-25T01:27:32.907557+00:00",
+      "evidence_count": 228,
+      "index_size_bytes": 3256899,
+      "rag_cache_key": "rag_index_a31bdd8f1d0ffe37"
+    },
+    "size_bytes": 3256899,
+    "source_run": "20250825T012728Z"
+  },
   "6bc1e19123dd97a4d19c22e164fd07eff0e5cbf2e608c5024dfc49f2aabaff55": {
     "artifact_path": "artifacts/rag_index_cache_6bc1e191",
     "created_at": "2025-08-24T02:51:32.900838+00:00",
@@ -3332,6 +3502,21 @@
     "size_bytes": 5506,
     "source_run": "20250824T224545Z"
   },
+  "7293dede0b92d6b79a84d69986d560aa1670967847531289de98c7bf0105373d": {
+    "artifact_path": "evidence_v6_7293dede",
+    "created_at": "2025-08-25T01:25:28.235676+00:00",
+    "human_filename": "evidence_v6_7293dede",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5796,
+    "source_run": "20250825T012528Z"
+  },
   "72b7ae71ef68bbd56322e7e4e99a598c253428634d1d0296c5215af0f91f17db": {
     "artifact_path": "artifacts/evidence_v6_72b7ae71",
     "created_at": "2025-08-24T03:11:24.318222+00:00",
@@ -3359,6 +3544,17 @@
     },
     "size_bytes": 14330,
     "source_run": "20250823T175137Z"
+  },
+  "733a34b9927d8ae8ed1ff794a795fc4abc3ad4fe32282b61416ea3f718b39ec3": {
+    "artifact_path": "synthesis_prompt_733a34b9",
+    "created_at": "2025-08-25T01:27:33.025562+00:00",
+    "human_filename": "synthesis_prompt_733a34b9",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "synthesis_prompt"
+    },
+    "size_bytes": 68595,
+    "source_run": "20250825T012728Z"
   },
   "735323a904e16e2c2bfa56fd85ecd901973fa7ba39c109e8b1be5d40ef24d732": {
     "artifact_path": "complete_research_data_735323a9",
@@ -3453,6 +3649,18 @@
     },
     "size_bytes": 5057,
     "source_run": "20250824T033926Z"
+  },
+  "76f5e947efdcf26be7bce4289cab430d94188216d72414c8c0040bf181cfa429": {
+    "artifact_path": "cache_test_76f5e947",
+    "created_at": "2025-08-25T01:27:28.062718+00:00",
+    "human_filename": "cache_test_76f5e947",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250825T012728Z"
   },
   "772d69bfecdeaec29a2b1312064314d2d36f4ce43557c2ff6d9203724c53cbd9": {
     "artifact_path": "statistical_results_with_data_772d69bf",
@@ -3669,6 +3877,17 @@
     "size_bytes": 69057,
     "source_run": "20250824T231046Z"
   },
+  "7c634b874729eb3124952bc07f4cd9480c6303f96d6aeb80658b490c801affe6": {
+    "artifact_path": "synthesis_prompt_7c634b87",
+    "created_at": "2025-08-25T01:25:32.824175+00:00",
+    "human_filename": "synthesis_prompt_7c634b87",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "synthesis_prompt"
+    },
+    "size_bytes": 68595,
+    "source_run": "20250825T012528Z"
+  },
   "7cb0e97c0cd5b59e77dd8b0fff2861ef1ae606e600ceb00e6e62e0dceec4ef2c": {
     "artifact_path": "cache_test_7cb0e97c",
     "created_at": "2025-08-24T19:24:01.423039+00:00",
@@ -3764,6 +3983,21 @@
     },
     "size_bytes": 65,
     "source_run": "20250824T231046Z"
+  },
+  "800f4104b5501cb97a3847947b97b6073015483e6342681902dd04543b8288b0": {
+    "artifact_path": "evidence_v6_800f4104",
+    "created_at": "2025-08-25T01:56:51.799641+00:00",
+    "human_filename": "evidence_v6_800f4104",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5506,
+    "source_run": "20250825T015651Z"
   },
   "80e8a2f53111cd32a8d5a4ec39eb2ed733c7cd8513064a4c4e10ddfa130fa97e": {
     "artifact_path": "cache_test_80e8a2f5",
@@ -4163,6 +4397,21 @@
     "size_bytes": 17791,
     "source_run": "20250824T194109Z"
   },
+  "8b81786dd47535be70e7c695dbb9620785b752d9d17cbe89401969b94cc43229": {
+    "artifact_path": "rag_index_cache_8b81786d",
+    "created_at": "2025-08-25T01:56:57.048888+00:00",
+    "human_filename": "rag_index_cache_8b81786d",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "rag_index_cache",
+      "created_at": "2025-08-25T01:56:57.044610+00:00",
+      "evidence_count": 236,
+      "index_size_bytes": 3337200,
+      "rag_cache_key": "rag_index_b0ddc422873bfe67"
+    },
+    "size_bytes": 3337200,
+    "source_run": "20250825T015651Z"
+  },
   "8caf8ba4801899a6c706ff59aaa295533b853a19db958802b6064ba0d55a8e30": {
     "artifact_path": "evidence_v6_8caf8ba4",
     "created_at": "2025-08-24T19:43:14.723817+00:00",
@@ -4240,6 +4489,21 @@
     },
     "size_bytes": 65,
     "source_run": "20250824T224519Z"
+  },
+  "8db60c5e3ec0ec68f348990d8a0d059fa2fef5598203327234e445afc3e7e077": {
+    "artifact_path": "evidence_v6_8db60c5e",
+    "created_at": "2025-08-25T01:56:51.801589+00:00",
+    "human_filename": "evidence_v6_8db60c5e",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5367,
+    "source_run": "20250825T015651Z"
   },
   "8e1959ac2ed36ea25068630aa9153c6c6f0bb1ca8ef30b14f3dd8ba01ed7bc06": {
     "artifact_path": "evidence_v6_8e1959ac",
@@ -5095,6 +5359,21 @@
     "size_bytes": 21019,
     "source_run": "20250823T224840Z"
   },
+  "a7db34a8a40774e2bfe18907df35fa7de5a53d840d366a7ac065339ff2539937": {
+    "artifact_path": "evidence_v6_a7db34a8",
+    "created_at": "2025-08-25T01:30:26.397712+00:00",
+    "human_filename": "evidence_v6_a7db34a8",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5796,
+    "source_run": "20250825T013026Z"
+  },
   "a868b01ce8bcb0e7f508f68bebd544ccffe55f396b7485f99984401e5ccb8d1f": {
     "artifact_path": "artifacts/complete_research_data_a868b01c",
     "created_at": "2025-08-23T22:48:43.012442+00:00",
@@ -5223,6 +5502,21 @@
     "size_bytes": 183934,
     "source_run": "20250824T192646Z"
   },
+  "af02d2d14275c16988b84068f9c86294a4badef495b2c8cb66b43fc8c12eb806": {
+    "artifact_path": "evidence_v6_af02d2d1",
+    "created_at": "2025-08-25T01:30:26.400125+00:00",
+    "human_filename": "evidence_v6_af02d2d1",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5506,
+    "source_run": "20250825T013026Z"
+  },
   "b0319156dd46d57c04b92eabf03ff7f5ffcb868b01fc024d32e62732ff894b0f": {
     "artifact_path": "artifacts/raw_analysis_response_v6_b0319156",
     "created_at": "2025-08-23T17:53:04.492591+00:00",
@@ -5252,6 +5546,17 @@
     },
     "size_bytes": 2125842,
     "source_run": "20250824T195143Z"
+  },
+  "b1962c83893ca226a8481794095c01f8902df82ece7f77f01246f1f0f4d1b705": {
+    "artifact_path": "final_synthesis_report_interpolated_b1962c83",
+    "created_at": "2025-08-25T01:31:54.703418+00:00",
+    "human_filename": "final_synthesis_report_interpolated_b1962c83",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report_interpolated"
+    },
+    "size_bytes": 26374,
+    "source_run": "20250825T013026Z"
   },
   "b1afdf95f271104ab43bebcfad6c8a039e1ecb7506c644814bab723d02e0dd3c": {
     "artifact_path": "complete_research_data_b1afdf95",
@@ -5414,6 +5719,17 @@
     "size_bytes": 918,
     "source_run": "20250824T005957Z"
   },
+  "b71e3ca3dff1dee730fad860da502e448fc7e8eeb9285ce52d3856c5d21bcb16": {
+    "artifact_path": "statistical_results_with_data_b71e3ca3",
+    "created_at": "2025-08-25T01:27:32.968540+00:00",
+    "human_filename": "statistical_results_with_data_b71e3ca3",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_results_with_data"
+    },
+    "size_bytes": 56629,
+    "source_run": "20250825T012728Z"
+  },
   "b75a8eaaf28d986df4eb3bc5f9cbf13bcdb6eb5e50d89ad65cb585ca5a451c82": {
     "artifact_path": "artifacts/evidence_v6_b75a8eaa",
     "created_at": "2025-08-24T00:58:00.716427+00:00",
@@ -5483,6 +5799,21 @@
     },
     "size_bytes": 2252314,
     "source_run": "20250824T224545Z"
+  },
+  "b85c844f0473e84a75796c755f07cb831c12e8dceef446dd9200557a3292c6ca": {
+    "artifact_path": "rag_index_cache_b85c844f",
+    "created_at": "2025-08-25T01:30:31.298031+00:00",
+    "human_filename": "rag_index_cache_b85c844f",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "rag_index_cache",
+      "created_at": "2025-08-25T01:30:31.295215+00:00",
+      "evidence_count": 232,
+      "index_size_bytes": 3313546,
+      "rag_cache_key": "rag_index_a4130a96c65957eb"
+    },
+    "size_bytes": 3313546,
+    "source_run": "20250825T013026Z"
   },
   "b8aa8624c84bd28f2ae20155c3dd3bad357b683f0cb15aed92481c0d48db8c98": {
     "artifact_path": "synthesis_prompt_b8aa8624",
@@ -5556,6 +5887,17 @@
     },
     "size_bytes": 183934,
     "source_run": "20250824T035343Z"
+  },
+  "ba0ba6d2959c8f45c9d73ae97f1ffc421388d0449d320aad3b4f459ee2f69093": {
+    "artifact_path": "final_synthesis_report_interpolated_ba0ba6d2",
+    "created_at": "2025-08-25T01:29:02.344303+00:00",
+    "human_filename": "final_synthesis_report_interpolated_ba0ba6d2",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report_interpolated"
+    },
+    "size_bytes": 31179,
+    "source_run": "20250825T012728Z"
   },
   "bae3d078662d7346fda79a7b4f23da3ee11d148d93e4d347637cc2e83eb847d1": {
     "artifact_path": "artifacts/synthesis_prompt_bae3d078",
@@ -5991,6 +6333,21 @@
     "size_bytes": 122036,
     "source_run": "20250824T005957Z"
   },
+  "c9ddcaffc9a99bcd0a3d9dca5803299aa502698133dccd0de23989966a0cb604": {
+    "artifact_path": "evidence_v6_c9ddcaff",
+    "created_at": "2025-08-25T01:30:26.404244+00:00",
+    "human_filename": "evidence_v6_c9ddcaff",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5822,
+    "source_run": "20250825T013026Z"
+  },
   "c9ecc9062b01436b3911e0feb7f7d856f803dfd1824f7ff99527cbafe5cdc7f9": {
     "artifact_path": "artifacts/synthesis_prompt_c9ecc906",
     "created_at": "2025-08-24T00:58:03.642040+00:00",
@@ -6048,6 +6405,21 @@
     },
     "size_bytes": 69057,
     "source_run": "20250825T002935Z"
+  },
+  "cbb62d803ec00c20f108e695e18a013aca1f0eb1b075fbcf5f9b036fbeba8b59": {
+    "artifact_path": "evidence_v6_cbb62d80",
+    "created_at": "2025-08-25T01:56:51.803693+00:00",
+    "human_filename": "evidence_v6_cbb62d80",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5822,
+    "source_run": "20250825T015651Z"
   },
   "cc38c1b5efc741bfa3c9e631b372a1eb20f0af7e1f315daa93b9d93deb764657": {
     "artifact_path": "artifacts/cache_test_cc38c1b5",
@@ -6249,6 +6621,21 @@
     "size_bytes": 8357,
     "source_run": "20250823T204435Z"
   },
+  "d0dabfc12690227e5f4630edb45fff62e740536b64c03c7052a95c6988a76e9a": {
+    "artifact_path": "rag_index_cache_d0dabfc1",
+    "created_at": "2025-08-25T01:25:32.714307+00:00",
+    "human_filename": "rag_index_cache_d0dabfc1",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "rag_index_cache",
+      "created_at": "2025-08-25T01:25:32.711513+00:00",
+      "evidence_count": 224,
+      "index_size_bytes": 3213027,
+      "rag_cache_key": "rag_index_121070c2a80c4e94"
+    },
+    "size_bytes": 3213027,
+    "source_run": "20250825T012528Z"
+  },
   "d189d525a8dc61a12f9eef1bf119989805879331bab949a009c437afe2acd580": {
     "artifact_path": "artifacts/statistical_results_with_data_d189d525",
     "created_at": "2025-08-23T22:55:35.303738+00:00",
@@ -6293,6 +6680,21 @@
     },
     "size_bytes": 56629,
     "source_run": "20250825T001348Z"
+  },
+  "d26d4d835b48f8df0712daaf16b2d9bd9173fdaf929eb92a3217e8c1291ffda9": {
+    "artifact_path": "evidence_v6_d26d4d83",
+    "created_at": "2025-08-25T01:25:28.242925+00:00",
+    "human_filename": "evidence_v6_d26d4d83",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5822,
+    "source_run": "20250825T012528Z"
   },
   "d28aafaa4b11eaeef45f4b1621e8275b67f7191907a7bce685162bec24522725": {
     "artifact_path": "complete_research_data_d28aafaa",
@@ -6420,6 +6822,21 @@
     "size_bytes": 65,
     "source_run": "20250824T230208Z"
   },
+  "d679de6a1f1093e476612445ac1ab436286adea9b4787011b0b8a7c435d6b2b5": {
+    "artifact_path": "evidence_v6_d679de6a",
+    "created_at": "2025-08-25T01:25:28.238163+00:00",
+    "human_filename": "evidence_v6_d679de6a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5506,
+    "source_run": "20250825T012528Z"
+  },
   "d715bd11c8c2c727828eb0abb0712e32bd72227b6d8c0a30ded3c328937bfbe8": {
     "artifact_path": "artifacts/statistical_analysis_functions_d715bd11",
     "created_at": "2025-08-24T01:07:33.601222+00:00",
@@ -6461,6 +6878,17 @@
     "size_bytes": 5367,
     "source_run": "20250825T003234Z"
   },
+  "d84da983e65470855d4c08debc27876892e45875a1ff342017d6a90e18fca9cf": {
+    "artifact_path": "statistical_results_with_data_d84da983",
+    "created_at": "2025-08-25T01:25:32.768393+00:00",
+    "human_filename": "statistical_results_with_data_d84da983",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_results_with_data"
+    },
+    "size_bytes": 56629,
+    "source_run": "20250825T012528Z"
+  },
   "d901039d8b8f83dd3e8897206976055566f2571912aa5be4a2a3aeca658cc7f9": {
     "artifact_path": "artifacts/evidence_v6_d901039d",
     "created_at": "2025-08-23T22:48:40.274567+00:00",
@@ -6488,6 +6916,17 @@
     },
     "size_bytes": 1788757,
     "source_run": "20250824T035343Z"
+  },
+  "d9892c2a223ee8e9c92cb1bcd22b53ecc7a82113d1768cbd0de224b68583e9c0": {
+    "artifact_path": "synthesis_prompt_d9892c2a",
+    "created_at": "2025-08-25T01:30:31.413906+00:00",
+    "human_filename": "synthesis_prompt_d9892c2a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "synthesis_prompt"
+    },
+    "size_bytes": 68595,
+    "source_run": "20250825T013026Z"
   },
   "d98cee421bc15589ea02fa4806870d3c2edbc5c42f3a1bf2991ad8da0cdab41e": {
     "artifact_path": "artifacts/synthesis_prompt_d98cee42",
@@ -6711,6 +7150,19 @@
     "size_bytes": 1568407,
     "source_run": "20250824T031901Z"
   },
+  "e008be29139fec9c5740b2fa015084a1e225f1656b7a3fedd82d20e08cfa5df3": {
+    "artifact_path": "complete_research_data_e008be29",
+    "created_at": "2025-08-25T01:27:32.989215+00:00",
+    "human_filename": "complete_research_data_e008be29",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "complete_research_data",
+      "experiment_name": "simple_test_cff",
+      "ready_for_synthesis": true
+    },
+    "size_bytes": 161987,
+    "source_run": "20250825T012728Z"
+  },
   "e06249faf796fec98496fa1b0bc996d84f8d4d62d56f45ac9c9d35e359952702": {
     "artifact_path": "artifacts/evidence_v6_e06249fa",
     "created_at": "2025-08-24T01:01:09.254902+00:00",
@@ -6842,6 +7294,17 @@
     "size_bytes": 6768,
     "source_run": "20250824T195143Z"
   },
+  "e45ac03c6a50e8ad49a8a6dcca0b4396beaaf2a8cc4e3b72ca0176c19067fa54": {
+    "artifact_path": "statistical_results_with_data_e45ac03c",
+    "created_at": "2025-08-25T01:30:31.355532+00:00",
+    "human_filename": "statistical_results_with_data_e45ac03c",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_results_with_data"
+    },
+    "size_bytes": 56629,
+    "source_run": "20250825T013026Z"
+  },
   "e4c3b08fbc9a8215553355ea94b9eae56e81ccd54d1b0e234e62806f4241ac97": {
     "artifact_path": "synthesis_prompt_e4c3b08f",
     "created_at": "2025-08-24T22:47:46.439064+00:00",
@@ -6891,6 +7354,21 @@
     },
     "size_bytes": 65,
     "source_run": "20250824T005800Z"
+  },
+  "e6be9de7af918d2abe728593630c0f889ce1dfa195cb57e696ae0ec80fdd1d5f": {
+    "artifact_path": "evidence_v6_e6be9de7",
+    "created_at": "2025-08-25T01:27:28.098265+00:00",
+    "human_filename": "evidence_v6_e6be9de7",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5796,
+    "source_run": "20250825T012728Z"
   },
   "e7337dd2b4149d620a68042a0badcc732fe1152f65d2c41d7d33a302d849b12e": {
     "artifact_path": "artifacts/evidence_v6_e7337dd2",
@@ -7092,6 +7570,18 @@
     },
     "size_bytes": 5641,
     "source_run": "20250824T195143Z"
+  },
+  "ecbe9c8ca98b6a1a396360aa82c458d064b84e8d178584b8e7855d7ad1878bce": {
+    "artifact_path": "cache_test_ecbe9c8c",
+    "created_at": "2025-08-25T01:30:26.361432+00:00",
+    "human_filename": "cache_test_ecbe9c8c",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250825T013026Z"
   },
   "ecc8d2a0dbbe6385704077834c8c623821ca75be7fc28ecc17199fbb5129ce68": {
     "artifact_path": "artifacts/evidence_v6_ecc8d2a0",
@@ -7522,6 +8012,21 @@
     "size_bytes": 95143,
     "source_run": "20250823T175137Z"
   },
+  "f6a04e4addff7a9aaed0f0cb4bbe87bd6635ebe94b2bfc5b45668bc818ddeefa": {
+    "artifact_path": "evidence_v6_f6a04e4a",
+    "created_at": "2025-08-25T01:27:28.102457+00:00",
+    "human_filename": "evidence_v6_f6a04e4a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5367,
+    "source_run": "20250825T012728Z"
+  },
   "f6b8854492ba4d5f480b5b22d6b745d398a372fc7fe44c9f63e01f266454eaed": {
     "artifact_path": "complete_research_data_f6b88544",
     "created_at": "2025-08-24T22:47:46.409374+00:00",
@@ -7677,6 +8182,21 @@
     "size_bytes": 1574,
     "source_run": "20250823T203448Z"
   },
+  "fb3d3276653c3d050359093629014ce83fc75256f11a5d1e646b1aa61d5464d0": {
+    "artifact_path": "evidence_v6_fb3d3276",
+    "created_at": "2025-08-25T01:56:51.797294+00:00",
+    "human_filename": "evidence_v6_fb3d3276",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5796,
+    "source_run": "20250825T015651Z"
+  },
   "fb80ce894da137403f9948bfd1b4be66d057dfc24ec180539de06901e444652b": {
     "artifact_path": "artifacts/evidence_v6_fb80ce89",
     "created_at": "2025-08-23T19:18:56.937060+00:00",
@@ -7702,6 +8222,18 @@
     },
     "size_bytes": 65,
     "source_run": "20250824T194109Z"
+  },
+  "fc651475fa59db2fabcda6d5af7a93b2faebc9c045032484e877dd9218ca1cf2": {
+    "artifact_path": "cache_test_fc651475",
+    "created_at": "2025-08-25T01:25:28.201662+00:00",
+    "human_filename": "cache_test_fc651475",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250825T012528Z"
   },
   "fc6b2248fc1766f7040159c01c5cc679655575eb8ea1312fd5ea6a86339f2751": {
     "artifact_path": "artifacts/evidence_v6_fc6b2248",
