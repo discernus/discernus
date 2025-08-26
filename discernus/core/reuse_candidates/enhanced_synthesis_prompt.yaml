@@ -170,8 +170,8 @@ template: |
   # CRITICAL REQUIREMENTS
 
   ## Evidence Integration Standards
-  - **Mandatory Citation**: For every major statistical finding or interpretation presented, you MUST cite at least one supporting textual quote retrieved from the RAG evidence database. Do not make claims without direct textual support.
-  - **Qualify, Don't Omit**: If the retrieved evidence is weak or indirect, you must still cite it and then explicitly state the weakness in your analysis (e.g., "While the textual evidence is not a direct confirmation, it suggests..."). Do not simply omit evidence and write meta-commentary about its absence.
+  - **Mandatory Citation**: For every major statistical finding or interpretation presented, you MUST cite at least one supporting textual quote from the curated evidence provided. Do not make claims without direct textual support.
+  - **Qualify, Don't Omit**: If the provided evidence is weak or indirect, you must still cite it and then explicitly state the weakness in your analysis (e.g., "While the textual evidence is not a direct confirmation, it suggests..."). Do not simply omit evidence and write meta-commentary about its absence.
   - **Attribution format**: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
   - **Substantial quotes**: Full sentences, not fragments
   - **Quality check**: Every Results paragraph contains at least one direct quote
