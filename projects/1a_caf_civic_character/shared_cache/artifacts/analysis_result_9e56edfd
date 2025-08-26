@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_242657b0aeb8",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "caf_civic_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"civic_analysis_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"McCain's concession speech is characterized by strong themes of unity, historical progress, and a forward-looking vision, with a clear absence of divisive or negative rhetoric. Scores for virtues are generally high, reflecting the gracious nature of the speech.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession_ff9b26f2.txt\",\n      \"dimensional_scores\": {\n        \"tribalism\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"truth\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"resentment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"justice\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"fear\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"The speaker emphasizes shared identity and calls for unity beyond political differences.\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Direct and unequivocal acknowledgement of electoral defeat and the will of the voters.\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"There is no better evidence of this than the election of an African-American to the presidency of the United States.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"The speaker points to the historical significance of the election as evidence of progress towards fairness and opportunity.\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Acknowledges challenges/difficulties but frames them as problems to be solved collaboratively, not to induce anxiety.\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"I urge all Americans -- I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"A strong call for a positive future, emphasizing coming together, finding solutions, and building a better nation.\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"I pledge to him tonight to do all in my power to help him lead us through the many challenges we face... to find the necessary compromises to bridge our differences.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Demonstrates a realistic approach to problem-solving by acknowledging challenges and advocating for compromise and cooperation.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "0c7f4c091856f9b067bf2bb10d62a2f56630ea986a7133b4de6be7372113f3cc",
+  "execution_metadata": {
+    "start_time": "2025-08-25T23:36:44.147957+00:00",
+    "end_time": "2025-08-25T23:37:00.715611+00:00",
+    "duration_seconds": 16.567641
+  },
+  "input_artifacts": {
+    "framework_hash": "42b4a6be21362d18179785c3b4fea060b9d8f6304ad9971def597e5cf4c33bad",
+    "document_hashes": [
+      "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250825T233613Z_0a0cd518"
+  }
+}

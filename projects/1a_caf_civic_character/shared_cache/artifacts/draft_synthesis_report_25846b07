@@ -1,0 +1,198 @@
+# Civic Analysis Framework v10.0 Analysis Report
+
+**Experiment**: caf_civic_character_pattern_analysis  
+**Date**: 2025-08-25  
+**Framework**: Civic Analysis Framework (CAF) v10.0  
+**Corpus**: Not available - corpus.md not found (8 documents)  
+
+---
+
+## 1. Executive Summary
+
+This report presents a preliminary computational analysis of the civic character of political discourse from eight speakers, utilizing the Civic Analysis Framework (CAF) v10.0. The analysis reveals the framework's potential to systematically evaluate and differentiate rhetorical styles based on Aristotelian virtue ethics. The key finding is the successful differentiation of speakers along a spectrum of civic character, from those exhibiting "Authentic Virtue" to those employing "Strategic Pathology." The **Salience-Weighted Civic Character Index (CCI)**, a core metric of the framework, effectively ranked speakers, with scores ranging from a high of 0.80 (John McCain) to a low of -0.48 (Steve King), indicating a wide variance in the civic quality of the analyzed texts.
+
+The internal structure of the CAF framework receives strong preliminary support from the data. Pearson correlation analysis of the ten core rhetorical dimensions reveals large, statistically significant negative correlations between the framework's opposing virtue and vice pairs. For instance, the analysis found a very strong negative correlation between **pragmatism** and **fantasy** (r = -0.93) and between **hope** and **fear** (r = -0.87). These results suggest that the framework's theoretical oppositions map effectively onto empirical patterns in political language, providing evidence for its construct validity. The analysis also identified distinct rhetorical archetypes, such as "The Unifier" (McCain) and "The Populist Agitator" (Sanders), characterized by unique combinations of virtue, vice, and strategic tension.
+
+Despite these promising results, the findings must be interpreted with significant caution. The analysis is based on an extremely small sample size (N=8 documents), rendering all conclusions illustrative rather than definitive. Furthermore, the absence of a corpus manifest with speaker metadata prevented a planned validation of the framework against pre-defined rhetorical styles. The available textual evidence for citation was also limited to only two of the eight speakers, constraining the qualitative grounding of the statistical findings. Future research should apply this methodology to a larger, more diverse, and well-documented corpus to validate and expand upon these preliminary insights.
+
+## 2. Opening Framework: Key Insights
+
+This analysis provides several preliminary insights into the structure of civic discourse and the utility of the CAF v10.0 framework.
+
+*   **The Civic Character Index (CCI) effectively differentiates speakers.** The analysis produced a clear gradient of civic character, with speakers like John McCain (CCI = 0.80), Cory Booker (CCI = 0.50), and Mitt Romney (CCI = 0.50) occupying the high end, while speakers like Bernie Sanders (CCI = -0.39) and Steve King (CCI = -0.48) anchor the low end. This suggests the CCI is a sensitive summary metric for overall civic orientation.
+*   **The framework's oppositional structure is empirically supported.** The analysis revealed strong negative correlations between the five virtue/vice pairs defined by the framework. The opposition between **pragmatism** and **fantasy** was the strongest (r = -0.93), followed by **hope** and **fear** (r = -0.87). This provides preliminary validation that the framework is measuring theoretically coherent and empirically distinct constructs.
+*   **Distinct rhetorical archetypes emerge from the data.** The analysis classified speakers into patterns such as "Authentic Virtue" (e.g., John McCain) and "Strategic Pathology" (e.g., Bernie Sanders). The former is characterized by high virtue, low vice, and low tension, while the latter shows high vice scores and significant tension, indicating a complex rhetorical strategy.
+*   **"Tension" metrics reveal strategic rhetorical complexity.** The analysis of Bernie Sanders' discourse, for example, shows a high `justice_tension` score (0.30), indicating the simultaneous use of high-intensity appeals to both **justice** and its pathological counterpart, **resentment**. This suggests a deliberate strategy of framing grievance as a call for justice.
+*   **Vices and virtues appear to cluster into two opposing meta-strategies.** The correlation matrix indicates that vices like **tribalism**, **manipulation**, and **fantasy** are strongly inter-correlated. Conversely, virtues like **dignity**, **truth**, and **pragmatism** also cluster together. This suggests the presence of two overarching, mutually exclusive approaches to political communication within this small corpus.
+
+## 4. Methodology
+
+### 4.1 Framework Description and Analytical Approach
+
+This study employs the Civic Analysis Framework (CAF) v10.0, a systematic methodology for evaluating the civic character of political discourse. Rooted in Aristotelian virtue ethics and contemporary civic republican theory, the CAF assesses the civic virtues and vices demonstrated by speakers through their rhetorical choices. It moves beyond simple sentiment analysis to evaluate the moral character underlying political communication.
+
+The framework is structured around five fundamental axes, each representing a tension between a core civic virtue and its corresponding vice:
+
+1.  **Identity Axis:** **Dignity** (appeals to universal human worth) vs. **Tribalism** (appeals to in-group/out-group dynamics).
+2.  **Truth Axis:** **Truth** (appeals based on evidence and intellectual honesty) vs. **Manipulation** (appeals based on deception and emotional framing).
+3.  **Justice Axis:** **Justice** (appeals to fairness and systemic equity) vs. **Resentment** (appeals to grievance and blame).
+4.  **Emotional Axis:** **Hope** (appeals to a positive, achievable future) vs. **Fear** (appeals based on threat and anxiety).
+5.  **Reality Axis:** **Pragmatism** (appeals acknowledging complexity and constraints) vs. **Fantasy** (appeals based on oversimplification and wishful thinking).
+
+For each of these ten dimensions, the analysis generates a `_raw` score (intensity) and a `_salience` score (emphasis). From these, two key derived metrics are calculated:
+
+*   **Character Tension Indices:** For each axis, `Tension = min(Virtue_Score, Vice_Score) * abs(Virtue_Salience - Vice_Salience)`. This metric quantifies strategic contradiction, identifying instances where a speaker simultaneously invokes opposing values with differing emphasis.
+*   **Salience-Weighted Civic Character Index (CCI):** Calculated as `(Sum(Virtue * Salience) - Sum(Vice * Salience)) / Total_Salience`, this index provides a single, normalized score from -1.0 (dominantly vice-based rhetoric) to +1.0 (dominantly virtue-based rhetoric).
+
+### 4.2 Data Structure and Corpus Description
+
+The analysis was conducted on a small corpus of 8 political texts, each from a different public figure. Due to a missing `corpus_manifest.json` file, metadata such as the specific context of each speech and the rhetorical style of the speaker were unavailable. Speaker identification was performed by parsing document filenames. This lack of metadata is a significant constraint on the analysis.
+
+### 4.3 Statistical Methods and Analytical Constraints
+
+The quantitative analysis involved several stages:
+1.  **Descriptive Statistics:** Calculation of mean, standard deviation, and quartiles for all 20 base scores (`_raw` and `_salience`) to understand the overall distribution of rhetorical features in the corpus.
+2.  **Correlation Analysis:** A Pearson correlation matrix was computed for the 10 `_raw` score dimensions to assess the relationships between them and to test the construct validity of the framework's oppositional axes.
+3.  **Profile Aggregation:** Scores were aggregated by speaker to calculate mean values for all base and derived metrics, creating a "character profile" for each individual.
+4.  **Rule-Based Classification:** A classification algorithm, based on the interpretive guidance of the CAF, was applied to each speaker's profile to categorize their dominant rhetorical pattern (e.g., "Authentic Virtue," "Strategic Pathology").
+
+The primary limitation of this study is its **extremely small sample size (N=8)**. Consequently, the findings cannot be generalized and should be considered preliminary and illustrative. The statistical power is insufficient for robust inferential testing, and all interpretations are descriptive. The absence of corpus metadata also prevented a planned analysis comparing scores across different rhetorical styles, as the `validate_framework_by_style` function returned an error: `"Cannot perform style validation. 'style' column not found in corpus manifest or is empty."` Finally, the available textual evidence for qualitative support was limited to only two of the eight documents analyzed.
+
+## 5. Comprehensive Results
+
+### 5.1 Descriptive Statistics
+
+An initial descriptive analysis of the 20 primary dimensions across all 8 documents reveals the general rhetorical tendencies of the corpus. The mean scores indicate which virtues and vices were most prevalent overall.
+
+**Table 1: Descriptive Statistics for Raw and Salience Scores (N=8)**
+
+| Statistic | dignity_raw | tribalism_raw | truth_raw | manipulation_raw | justice_raw | resentment_raw | hope_raw | fear_raw | pragmatism_raw | fantasy_raw |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **mean** | 0.57 | 0.51 | 0.66 | 0.34 | 0.63 | 0.71 | 0.55 | 0.46 | 0.59 | 0.20 |
+| **std** | 0.36 | 0.42 | 0.21 | 0.37 | 0.32 | 0.36 | 0.28 | 0.24 | 0.37 | 0.29 |
+| **min** | 0.00 | 0.00 | 0.30 | 0.00 | 0.00 | 0.00 | 0.10 | 0.10 | 0.00 | 0.00 |
+| **max** | 0.90 | 0.90 | 0.90 | 0.80 | 0.90 | 0.95 | 0.90 | 0.90 | 0.90 | 0.70 |
+
+The dimension with the highest average intensity across the corpus is **resentment** (mean = 0.71), suggesting that appeals to grievance and blame are a common feature in this set of texts. This is closely followed by **truth** (mean = 0.66) and **justice** (mean = 0.63). The least prevalent dimension is **fantasy** (mean = 0.20). This pattern suggests a discourse landscape that is heavily focused on perceived injustices and factual claims, but less reliant on outright denial of reality. The high mean for resentment is exemplified in the provided evidence. As Bernie Sanders stated: **"`Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.`"** (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`). This quote directly frames a past grievance and assigns blame to a "rigged economy," aligning perfectly with the definition of resentment.
+
+### 5.2 Advanced Metric Analysis
+
+Moving beyond individual dimensions, the derived metrics provide a more holistic view of each speaker's civic character. The analysis produced distinct profiles, classifying speakers into coherent rhetorical patterns.
+
+**Table 2: Speaker Character Coherence and Classification**
+
+| speaker | civic_character_index | mean_tension | pattern_classification | mean_virtue_raw | mean_vice_raw |
+|:---|---:|---:|:---|---:|---:|
+| john_mccain | 0.805 | 0.014 | Authentic Virtue | 0.82 | 0.02 |
+| cory_booker | 0.502 | 0.058 | Authentic Virtue | 0.88 | 0.24 |
+| mitt_romney | 0.500 | 0.042 | Authentic Virtue | 0.72 | 0.18 |
+| john_lewis | 0.253 | 0.020 | Virtue-Leaning | 0.78 | 0.40 |
+| alexandria_ocasio_cortez | 0.005 | 0.088 | Virtue-Leaning | 0.62 | 0.54 |
+| jd_vance | -0.275 | 0.042 | Vice-Leaning | 0.34 | 0.62 |
+| bernie_sanders | -0.394 | 0.144 | Strategic Pathology | 0.38 | 0.73 |
+| steve_king | -0.480 | 0.074 | Strategic Pathology | 0.26 | 0.82 |
+
+The **Civic Character Index (CCI)** reveals a clear hierarchy. John McCain's score of 0.805 indicates a discourse almost entirely dominated by salient virtues. His profile is classified as **"Authentic Virtue,"** supported by a very high mean virtue score (0.82), a near-zero mean vice score (0.02), and the lowest mean tension (0.014). This suggests a highly coherent, virtue-based rhetorical style. The textual evidence from his speech supports this, showing a focus on unity and dignity. As John McCain stated: **"`This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.`"** (Source: `john_mccain_2008_concession_ff9b26f2.txt`).
+
+At the other end of the spectrum, Bernie Sanders and Steve King are classified as **"Strategic Pathology."** Sanders' profile (CCI = -0.394) is characterized by a high mean vice score (0.73) and the highest mean tension in the corpus (0.144). This high tension score points to a complex strategy of blending vice-based appeals with virtue-based ones. For example, his high `justice_tension` (0.30) arises from simultaneously making strong appeals to both **justice** and **resentment**. This is evident in his rhetoric, which frames class division as both an injustice to be corrected and a grievance against an oligarchic enemy. As Bernie Sanders stated: **"`I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.`"** (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`). This quote exemplifies the **tribalism** that contributes to his negative CCI score.
+
+### 5.3 Correlation and Interaction Analysis
+
+The Pearson correlation matrix for the ten raw dimension scores provides critical insight into the framework's internal consistency and reveals underlying rhetorical strategies. The results offer strong preliminary support for the CAF's oppositional design.
+
+**Table 3: Pearson Correlation Matrix for CAF Raw Dimension Scores (N=8)**
+
+| | tribalism | dignity | manipulation | truth | resentment | justice | fear | hope | fantasy | pragmatism |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **tribalism** | 1.00 | **-0.81** | 0.91 | -0.79 | 0.80 | -0.71 | 0.40 | -0.23 | 0.72 | -0.76 |
+| **dignity** | **-0.81** | 1.00 | -0.87 | 0.67 | -0.52 | 0.87 | -0.58 | 0.50 | -0.75 | 0.67 |
+| **manipulation** | 0.91 | -0.87 | 1.00 | **-0.77** | 0.61 | -0.75 | 0.33 | -0.30 | 0.89 | -0.91 |
+| **truth** | -0.79 | 0.67 | **-0.77** | 1.00 | -0.55 | 0.84 | 0.08 | -0.16 | -0.56 | 0.52 |
+| **resentment** | 0.80 | -0.52 | 0.61 | -0.55 | 1.00 | **-0.34** | 0.41 | -0.07 | 0.48 | -0.51 |
+| **justice** | -0.71 | 0.87 | -0.75 | 0.84 | **-0.34** | 1.00 | -0.19 | 0.13 | -0.54 | 0.43 |
+| **fear** | 0.40 | -0.58 | 0.33 | 0.08 | 0.41 | -0.19 | 1.00 | **-0.87** | 0.30 | -0.30 |
+| **hope** | -0.23 | 0.50 | -0.30 | -0.16 | -0.07 | 0.13 | **-0.87** | 1.00 | -0.38 | 0.37 |
+| **fantasy** | 0.72 | -0.75 | 0.89 | -0.56 | 0.48 | -0.54 | 0.30 | -0.38 | 1.00 | **-0.93** |
+| **pragmatism** | -0.76 | 0.67 | -0.91 | 0.52 | -0.51 | 0.43 | -0.30 | 0.37 | **-0.93** | 1.00 |
+
+*Note: Correlations for the five oppositional axes are highlighted in bold.*
+
+The most significant finding is that four of the five oppositional axes show large, negative correlations, indicating that as the score for a virtue increases, the score for its corresponding vice tends to decrease.
+*   **Reality Axis (Pragmatism/Fantasy):** r = -0.93 (Very Large Effect)
+*   **Emotional Axis (Hope/Fear):** r = -0.87 (Very Large Effect)
+*   **Identity Axis (Dignity/Tribalism):** r = -0.81 (Very Large Effect)
+*   **Truth Axis (Truth/Manipulation):** r = -0.77 (Large Effect)
+
+The **Justice Axis (Justice/Resentment)** shows a weaker negative correlation (r = -0.34, Medium Effect). This suggests that, in this corpus, appeals to justice and resentment are not as mutually exclusive as the other pairs. This aligns with the high `justice_tension` score for a speaker like Sanders, who strategically combines both.
+
+The matrix also reveals two meta-clusters of rhetorical features. Vices like **tribalism**, **manipulation**, and **fantasy** are all strongly and positively correlated with each other (r > 0.72). This suggests a coherent "pathological" rhetorical strategy. Conversely, virtues like **dignity**, **truth**, and **justice** are also positively correlated (r > 0.67), indicating a "civic virtue" strategy. The strong negative correlation between **pragmatism** and **manipulation** (r = -0.91) is particularly noteworthy, suggesting that reality-based appeals are fundamentally at odds with deceptive ones. This is illustrated by contrasting McCain's pragmatic offer of cooperation with Sanders' manipulative simplification of his opponents' motives. As John McCain stated: **"`These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.`"** (Source: `john_mccain_2008_concession_ff9b26f2.txt`). This contrasts sharply with the manipulative claim that opponents are driven by a singular "greed." As Bernie Sanders stated: **"`But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.`"** (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`).
+
+### 5.4 Pattern Recognition and Theoretical Insights
+
+The statistical patterns observed in the correlation matrix provide strong preliminary evidence for the construct validity of the CAF v10.0 framework. The consistent, strong negative correlations between four of the five virtue/vice pairs suggest that the framework is successfully operationalizing the theoretical tensions it was designed to measure. The opposition between **pragmatism** and **fantasy** (r = -0.93) is the clearest empirical validation in the dataset. This indicates that speakers who ground their rhetoric in complexity and constraints are highly unlikely to engage in simplistic, wishful narratives, and vice-versa. The textual evidence supports this stark contrast. While one speaker embraces reality, another offers a simplified, villain-centric narrative. As Bernie Sanders stated: **"`The rich want to get richer and they don't care who they step on.`"** (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`). This is a classic example of the **fantasy** dimension's complexity denial, which stands in direct opposition to pragmatic discourse.
+
+The weaker opposition on the **Justice/Resentment** axis (r = -0.34) is also an important finding. It does not necessarily invalidate the axis; rather, it suggests a more complex relationship in practice. Political actors may find it strategically effective to couch appeals to **resentment** in the language of **justice**, making the two co-occur more frequently than other virtue/vice pairs. This warrants further investigation, as it points to a key site of strategic rhetorical action in contemporary politics.
+
+The unexpected strength of the negative correlation between **pragmatism** and **manipulation** (r = -0.91) is a significant insight. It suggests that a commitment to acknowledging reality may be a powerful antidote to deceptive rhetoric. This relationship is stronger than some of the framework's formal oppositions, indicating a deep structural link between intellectual honesty about complexity and the avoidance of manipulative simplification.
+
+### 5.5 Framework Effectiveness Assessment
+
+Based on this preliminary analysis, the CAF v10.0 framework demonstrates considerable effectiveness in several key areas:
+
+1.  **Discriminatory Power:** The framework, particularly through the CCI and pattern classification, successfully discriminated between different speakers, assigning them to distinct and interpretable rhetorical profiles. The wide range of CCI scores (-0.48 to 0.81) indicates high sensitivity.
+2.  **Construct Validity:** The strong negative correlations between opposing dimensions provide robust, albeit preliminary, evidence for the framework's construct validity. It appears to be measuring what it purports to measure: a set of bipolar civic virtues and vices.
+3.  **Insight Generation:** The framework's derived metrics, especially the `Tension Indices`, generated non-obvious insights into rhetorical strategy, highlighting how speakers can simultaneously leverage seemingly contradictory appeals (e.g., justice and resentment).
+
+However, the analysis also revealed a key dependency and limitation. The failure of the `validate_framework_by_style` analysis because of a missing corpus manifest underscores the framework's reliance on well-curated data for higher-order validation. Without metadata on speaker style, party affiliation, or speech context, the framework's ability to connect its findings to external variables is limited.
+
+## 6. Discussion
+
+### 6.1 Theoretical Implications of Findings
+
+These preliminary findings have several implications for the computational analysis of political discourse. The strong empirical support for the CAF's oppositional structure suggests that virtue ethics provides a viable and potent theoretical foundation for evaluating political communication. The data indicates that the tensions between virtues like dignity and vices like tribalism are not merely philosophical concepts but are reflected in the structural patterns of language used by political actors. The analysis suggests that political rhetoric may often organize itself along a primary axis of civic virtue versus civic pathology.
+
+The nuanced finding on the Justice/Resentment axis, where the opposition was weaker, points to an important area for theoretical refinement. It suggests that some vices may be more easily "disguised" as their virtuous counterparts. This aligns with theories of populist rhetoric, where grievance is often framed as a righteous demand for justice for "the people." Future research could explore whether this specific pattern holds across larger datasets and different political contexts.
+
+### 6.2 Comparative Analysis and Archetypal Patterns
+
+The analysis allows for the preliminary identification of distinct rhetorical archetypes within the small corpus, each with a unique "civic character signature."
+
+*   **The Unifier (Authentic Virtue):** Represented by John McCain, this archetype is defined by a very high CCI (> 0.80), extremely low vice scores, and minimal tension. The rhetoric is characterized by appeals to **dignity**, **truth**, **hope**, and **pragmatism**. The goal appears to be bridging divides and affirming shared national values, even in the context of political defeat. As John McCain stated: **"`I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together`"** (Source: `john_mccain_2008_concession_ff9b26f2.txt`).
+
+*   **The Populist Agitator (Strategic Pathology):** Represented by Bernie Sanders, this archetype has a negative CCI, high vice scores, and high tension. The rhetorical strategy is complex, combining strong appeals to vices like **tribalism**, **resentment**, and **manipulation** with appeals to virtues like **justice** and **hope**. The high tension score reflects a strategy of mobilizing a base through grievance while simultaneously offering a vision of corrective justice. As Bernie Sanders stated: **"`They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.`"** (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`). This use of **fear** is a core component of this pathological style.
+
+*   **The Contested Progressive (Ambivalent Profile):** Represented by Alexandria Ocasio-Cortez, this archetype has a CCI near zero (0.005) and moderate tension. The profile shows a near-equal mix of mean virtue (0.62) and vice (0.54) scores. While the classifier labeled this "Virtue-Leaning," it could also be interpreted as "Incoherent Messaging" under a slightly different threshold. This suggests a rhetorical style that is highly contested, simultaneously employing strong appeals to justice and dignity while also leveraging tribalism and resentment. This complexity warrants further study.
+
+### 6.3 Broader Significance and Future Directions
+
+This pilot study, despite its significant limitations, demonstrates the potential of computational frameworks like CAF to bring new rigor and scalability to the study of political discourse. By moving beyond simple topic modeling or sentiment analysis, this approach allows for a normative yet systematic evaluation of the character of communication, a crucial element for understanding democratic health.
+
+The most critical next step is to apply this analytical model to a large, diverse, and diachronic corpus of political texts. Such a study could:
+1.  **Validate Findings:** Confirm whether the archetypes and correlational patterns identified here hold in a larger sample.
+2.  **Perform Inferential Analysis:** With sufficient statistical power, researchers could test hypotheses about how civic character varies by political party, ideology, electoral success, or media environment.
+3.  **Track Temporal Trends:** Analyze how the civic character of political discourse has changed over time.
+4.  **Conduct Robust Style Validation:** Use a corpus with rich metadata to formally test the framework's ability to distinguish between styles like populism, institutionalism, and liberalism.
+
+## 7. Conclusion
+
+This computational analysis provides a preliminary but insightful application of the Civic Analysis Framework (CAF) v10.0. The study successfully used the framework to differentiate the civic character of eight political speakers, identifying distinct rhetorical patterns ranging from "Authentic Virtue" to "Strategic Pathology." The **Salience-Weighted Civic Character Index** proved to be a sensitive and useful summary metric.
+
+Methodologically, the analysis offers strong preliminary validation for the framework's internal structure. The large, negative correlations observed between the framework's core virtue/vice axes suggest that its theoretical underpinnings are empirically sound. The findings indicate that the CAF is a promising tool for moving political communication analysis toward a more nuanced, character-based evaluation.
+
+However, all conclusions must be tempered by the severe limitations of the study, primarily its small sample size and lack of metadata. The results presented here should be viewed as a successful proof-of-concept that generates a series of testable hypotheses for future research. The path forward requires applying this rigorous computational lens to larger, more comprehensive datasets to build a more robust understanding of the virtues and vices that shape our civic discourse.
+
+## 8. Evidence Citations
+
+The following textual evidence was used to support the statistical interpretations in this report.
+
+**Source Document: `john_mccain_2008_concession_ff9b26f2.txt`**
+*   **dignity:** "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight."
+*   **hope:** "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together"
+*   **pragmatism:** "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face."
+
+**Source Document: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`**
+*   **tribalism:** "I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%."
+*   **manipulation:** "But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs."
+*   **resentment:** "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change."
+*   **fear:** "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer."
+*   **fantasy:** "The rich want to get richer and they don't care who they step on."

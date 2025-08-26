@@ -1704,15 +1704,15 @@ class CleanAnalysisOrchestrator:
             # TRANSACTION INTEGRITY CHECK: Verify all required resources before synthesis
             self._validate_synthesis_prerequisites(evidence_hashes, research_data_hash)
             
-            # Build the dedicated evidence-only RAG index for the synthesis agent
-            synthesis_rag_index = self._build_synthesis_evidence_index(
+            # Build the intelligent evidence matching wrapper for the synthesis agent
+            synthesis_evidence_wrapper = self._build_intelligent_evidence_wrapper(
                 evidence_artifact_hashes=evidence_hashes
             )
 
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
-                rag_index=synthesis_rag_index,
+                rag_index=synthesis_evidence_wrapper,  # Pass our intelligent wrapper instead of basic RAG
             )
             assets_dict = synthesis_agent.generate_final_report(
                 framework_path=Path(self.experiment_path / self.config["framework"]),
@@ -2437,10 +2437,10 @@ class CleanAnalysisOrchestrator:
         
         self._log_progress("✅ Synthesis prerequisites validated - all required resources present")
 
-    def _build_synthesis_evidence_index(
+    def _build_synthesis_evidence_index_comprehensive(
         self, evidence_artifact_hashes: List[str]
     ) -> Optional[Embeddings]:
-        """Builds a dedicated RAG index from evidence artifacts for the synthesis agent."""
+        """Builds a comprehensive RAG index from evidence artifacts for the synthesis agent with metadata preservation."""
         if not evidence_artifact_hashes:
             # CRITICAL: Evidence is required for synthesis - fail fast
             raise CleanAnalysisError(
@@ -2450,13 +2450,32 @@ class CleanAnalysisOrchestrator:
 
         try:
             self._log_progress(
-                f"🔨 Building synthesis RAG index from {len(evidence_artifact_hashes)} evidence artifacts..."
+                f"🔨 Building comprehensive synthesis RAG index from {len(evidence_artifact_hashes)} evidence artifacts..."
             )
             evidence_documents = []
             for e_hash in evidence_artifact_hashes:
                 content = self.artifact_storage.get_artifact(e_hash, quiet=True)
                 if content:
-                    evidence_documents.append({"content": content.decode("utf-8")})
+                    # Parse the evidence JSON to extract metadata
+                    try:
+                        evidence_data = json.loads(content.decode("utf-8"))
+                        evidence_list = evidence_data.get('evidence_data', [])
+                        
+                        for evidence in evidence_list:
+                            evidence_documents.append({
+                                'content': evidence.get('quote_text', ''),
+                                'metadata': {
+                                    'document_name': evidence.get('document_name', 'Unknown'),
+                                    'dimension': evidence.get('dimension', 'Unknown'),
+                                    'confidence': evidence.get('confidence', 0.0)
+                                }
+                            })
+                    except json.JSONDecodeError:
+                        # Fallback: treat as plain text
+                        evidence_documents.append({
+                            'content': content.decode("utf-8"),
+                            'metadata': {'document_name': 'Unknown', 'dimension': 'Unknown', 'confidence': 0.0}
+                        })
 
             if not evidence_documents:
                 # CRITICAL: Evidence artifacts exist but couldn't be loaded - fail fast
@@ -2466,18 +2485,71 @@ class CleanAnalysisOrchestrator:
                 )
 
             rag_manager = RAGIndexManager(artifact_storage=self.artifact_storage)
-            synthesis_rag_index = rag_manager.build_index_from_documents(
+            synthesis_rag_index = rag_manager.build_comprehensive_index(
                 evidence_documents
             )
 
-            self._log_progress("✅ Built synthesis evidence RAG index successfully.")
-            # TODO: Add caching and persistence for this index
+            self._log_progress("✅ Built comprehensive synthesis evidence RAG index successfully.")
             return synthesis_rag_index
 
         except Exception as e:
-            self._log_progress(f"❌ Failed to build synthesis evidence RAG index: {e}")
+            self._log_progress(f"❌ Failed to build comprehensive synthesis evidence RAG index: {e}")
             # CRITICAL: Evidence is required for synthesis - fail fast
-            raise CleanAnalysisError(f"Failed to build synthesis evidence RAG index: {e}. Cannot proceed without evidence.")
+            raise CleanAnalysisError(f"Failed to build comprehensive synthesis evidence RAG index: {e}. Cannot proceed without evidence.")
+
+    def _build_intelligent_evidence_wrapper(
+        self, evidence_artifact_hashes: List[str]
+    ) -> 'EvidenceMatchingWrapper':
+        """
+        Builds an intelligent evidence matching wrapper using our EvidenceMatchingWrapper.
+        
+        This replaces the basic RAG index with intelligent evidence matching that can:
+        - Translate statistical findings into evidence queries
+        - Find evidence that actually supports the statistical narrative
+        - Provide framework-agnostic evidence matching
+        
+        Args:
+            evidence_artifact_hashes: List of evidence artifact hashes
+            
+        Returns:
+            EvidenceMatchingWrapper instance ready for intelligent evidence retrieval
+        """
+        if not evidence_artifact_hashes:
+            # CRITICAL: Evidence is required for synthesis - fail fast
+            raise CleanAnalysisError(
+                "No evidence artifacts found for synthesis. Cannot generate report without textual evidence. "
+                "This indicates a failure in the analysis phase evidence extraction."
+            )
+
+        try:
+            self._log_progress(
+                f"🧠 Building intelligent evidence matching wrapper from {len(evidence_artifact_hashes)} evidence artifacts..."
+            )
+            
+            # Import our intelligent wrapper
+            from .evidence_matching_wrapper import EvidenceMatchingWrapper
+            
+            # Initialize the wrapper with the synthesis model
+            evidence_wrapper = EvidenceMatchingWrapper(
+                model=self.synthesis_model if hasattr(self, 'synthesis_model') else "vertex_ai/gemini-2.5-pro",
+                artifact_storage=self.artifact_storage,
+                audit_logger=self.audit_logger if hasattr(self, 'audit_logger') else None
+            )
+            
+            # Build the intelligent index
+            success = evidence_wrapper.build_index(evidence_artifact_hashes)
+            if not success:
+                raise CleanAnalysisError("Failed to build intelligent evidence index")
+            
+            self._log_progress("✅ Built intelligent evidence matching wrapper successfully.")
+            self._log_progress(f"📊 Index contains {evidence_wrapper.get_index_status()['evidence_count']} evidence pieces")
+            
+            return evidence_wrapper
+
+        except Exception as e:
+            self._log_progress(f"❌ Failed to build intelligent evidence matching wrapper: {e}")
+            # CRITICAL: Evidence is required for synthesis - fail fast
+            raise CleanAnalysisError(f"Failed to build intelligent evidence matching wrapper: {e}. Cannot proceed without evidence.")
 
     def _run_fact_checking_phase(self, model: str, audit_logger: AuditLogger, assets: Dict[str, Any], statistical_results: Dict[str, Any]) -> Dict[str, Any]:
         """Run fact-checking validation on the synthesis report."""

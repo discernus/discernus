@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The report contains numerous statistical claims (means, standard deviations, minimums, maximums, and correlations) that either do not match the values provided in the evidence database within acceptable rounding precision, or are entirely absent from the provided evidence database. This indicates a fundamental mismatch between the reported statistics and the source data provided for validation.",
+      "examples": [
+        "**Descriptive Statistics Mismatch (Value):** Report states `dignity_raw` min=0.100, but evidence states `dignity_raw` min=0.45. (Difference: 0.35, tolerance: 0.01)",
+        "**Descriptive Statistics Mismatch (Value):** Report states `tribalism_raw` mean=0.513, but evidence states `tribalism_raw` mean=0.25. (Difference: 0.263, tolerance: 0.01)",
+        "**Correlation Mismatch (Value):** Report states `manipulation` vs `truth` r=-0.83, but evidence states `truth_manipulation` r=-0.78. (Difference: 0.05, tolerance: 0.005)",
+        "**Correlation Mismatch (Value):** Report states `fear` vs `hope` r=-0.72, but evidence states `hope_fear` r=-0.52. (Difference: 0.20, tolerance: 0.005)",
+        "**Statistic Not Found in Evidence:** Report states John McCain's Salience-Weighted Civic Character Index (CCI) is +0.73. The evidence database only provides mean and standard deviation for CCI, not specific speaker scores.",
+        "**Statistic Not Found in Evidence:** Report states `justice_raw` mean=0.675. The evidence database does not contain any descriptive statistics for `justice_raw`.",
+        "**Statistic Not Found in Evidence:** Report states `tribalism` vs `resentment` correlation is 0.96. The evidence database does not contain this specific correlation."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The 'Evidence Quote Mismatch' check could not be fully performed as required by the rubric. The provided 'EVIDENCE DATABASE FOR VALIDATION' (which serves as the RAG evidence index for this task) explicitly states 'ERROR: No stored documents available (has_documents=False, count=0), cannot retrieve document...' for all listed entries. This indicates that the necessary corpus documents are not accessible or provided within the evidence database, making it impossible to cross-reference any textual evidence quotes from the report against the RAG evidence index to confirm their presence. Therefore, the core instruction to 'MUST search the provided RAG evidence index' cannot be fulfilled.",
+      "examples": [
+        "Attempted to search for the quote: 'The primary finding is the emergence of two clear rhetorical poles.' - Result from provided RAG index: 'No stored documents available'.",
+        "Attempted to search for the quote: 'Virtues are negatively correlated with their corresponding vices, most notably Dignity and Tribalism (r = -0.65).' - Result from provided RAG index: 'No stored documents available'.",
+        "Attempted to search for the quote: 'The analysis was performed on the CAF Civic Character Political Speeches Corpus, which contains 8 documents from a date range of 1963-2025.' - Result from provided RAG index: 'No stored documents available'.",
+        "Attempted to search for the quote: 'The virtues of **Justice** (mean=0.675), **Truth** (mean=0.663), and **Hope** (mean=0.663) are the most frequently invoked themes in this corpus.' - Result from provided RAG index: 'No stored documents available'.",
+        "Attempted to search for the quote: 'John McCain's speech exemplifies this; it scores high on virtues like Dignity and Hope while scoring 0.0 on Tribalism, Manipulation, and Resentment.' - Result from provided RAG index: 'No stored documents available'."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The report contains numerous statistical claims (means, standard deviations, minimums, maximums, and correlations) that either do not match the values provided in the evidence database within acceptable rounding precision, or are entirely absent from the provided evidence database. This indicates a fundamental mismatch between the reported statistics and the source data provided for validation.",
+        "examples": [
+          "**Descriptive Statistics Mismatch (Value):** Report states `dignity_raw` min=0.100, but evidence states `dignity_raw` min=0.45. (Difference: 0.35, tolerance: 0.01)",
+          "**Descriptive Statistics Mismatch (Value):** Report states `tribalism_raw` mean=0.513, but evidence states `tribalism_raw` mean=0.25. (Difference: 0.263, tolerance: 0.01)",
+          "**Correlation Mismatch (Value):** Report states `manipulation` vs `truth` r=-0.83, but evidence states `truth_manipulation` r=-0.78. (Difference: 0.05, tolerance: 0.005)",
+          "**Correlation Mismatch (Value):** Report states `fear` vs `hope` r=-0.72, but evidence states `hope_fear` r=-0.52. (Difference: 0.20, tolerance: 0.005)",
+          "**Statistic Not Found in Evidence:** Report states John McCain's Salience-Weighted Civic Character Index (CCI) is +0.73. The evidence database only provides mean and standard deviation for CCI, not specific speaker scores.",
+          "**Statistic Not Found in Evidence:** Report states `justice_raw` mean=0.675. The evidence database does not contain any descriptive statistics for `justice_raw`.",
+          "**Statistic Not Found in Evidence:** Report states `tribalism` vs `resentment` correlation is 0.96. The evidence database does not contain this specific correlation."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The 'Evidence Quote Mismatch' check could not be fully performed as required by the rubric. The provided 'EVIDENCE DATABASE FOR VALIDATION' (which serves as the RAG evidence index for this task) explicitly states 'ERROR: No stored documents available (has_documents=False, count=0), cannot retrieve document...' for all listed entries. This indicates that the necessary corpus documents are not accessible or provided within the evidence database, making it impossible to cross-reference any textual evidence quotes from the report against the RAG evidence index to confirm their presence. Therefore, the core instruction to 'MUST search the provided RAG evidence index' cannot be fulfilled.",
+        "examples": [
+          "Attempted to search for the quote: 'The primary finding is the emergence of two clear rhetorical poles.' - Result from provided RAG index: 'No stored documents available'.",
+          "Attempted to search for the quote: 'Virtues are negatively correlated with their corresponding vices, most notably Dignity and Tribalism (r = -0.65).' - Result from provided RAG index: 'No stored documents available'.",
+          "Attempted to search for the quote: 'The analysis was performed on the CAF Civic Character Political Speeches Corpus, which contains 8 documents from a date range of 1963-2025.' - Result from provided RAG index: 'No stored documents available'.",
+          "Attempted to search for the quote: 'The virtues of **Justice** (mean=0.675), **Truth** (mean=0.663), and **Hope** (mean=0.663) are the most frequently invoked themes in this corpus.' - Result from provided RAG index: 'No stored documents available'.",
+          "Attempted to search for the quote: 'John McCain's speech exemplifies this; it scores high on virtues like Dignity and Hope while scoring 0.0 on Tribalism, Manipulation, and Resentment.' - Result from provided RAG index: 'No stored documents available'."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

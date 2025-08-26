@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-25T20:13:57.639455+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "tribalism",
+      "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+      "confidence": 0.9,
+      "context_type": "Defining Opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639443+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "dignity",
+      "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+      "confidence": 1.0,
+      "context_type": "Explicit Value Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639446+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "manipulation",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639447+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "truth",
+      "quote_text": "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?",
+      "confidence": 0.95,
+      "context_type": "Factual Claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639448+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+      "confidence": 1.0,
+      "context_type": "Expression of Grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639449+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "justice",
+      "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.",
+      "confidence": 1.0,
+      "context_type": "Demand for Systemic Change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639450+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fear",
+      "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+      "confidence": 0.9,
+      "context_type": "Description of Threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639451+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "hope",
+      "quote_text": "we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.85,
+      "context_type": "Vision for Future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639452+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639453+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "pragmatism",
+      "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+      "confidence": 0.95,
+      "context_type": "Practical Policy Critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-25T20:13:57.639453+00:00"
+    }
+  ]
+}

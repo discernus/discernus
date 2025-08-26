@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on Mitt Romney's 2020 impeachment speech, assessing adherence to civic virtues and vices based on textual evidence and rhetorical emphasis."
+  },
+  "document_analyses": [
+    {
+      "document_id": "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d",
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+          "confidence": 0.9,
+          "context_type": "explicit rejection of partisan loyalty"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.8,
+          "context_type": "emphasis on universal principles and duty"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president's purpose was personal and political.",
+          "confidence": 0.9,
+          "context_type": "description of others' alleged manipulative intent"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.9,
+          "context_type": "commitment to factual evidence and honesty"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so. The president delayed funds for an American ally at war with Russian invaders. The president's purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.",
+          "confidence": 0.8,
+          "context_type": "description of grievances presented as facts"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "I swore an oath before God to exercise impartial justice.",
+          "confidence": 0.9,
+          "context_type": "core justification for actions based on fairness and due process"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.7,
+          "context_type": "personal consequence acknowledgement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I love our country. I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.8,
+          "context_type": "positive vision for the future"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I knew from the outset that being tasked with judging the president, the leader of my own party, would be the most difficult decision I have ever faced. I was not wrong.",
+          "confidence": 0.8,
+          "context_type": "acknowledgment of constraints and difficult choices"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

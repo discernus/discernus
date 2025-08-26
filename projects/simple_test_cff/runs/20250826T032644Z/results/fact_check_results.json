@@ -1,0 +1,98 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions several analytical dimensions and axes as being defined within the Cohesive Flourishing Framework (CFF) v10.1 specification (Section 4.1). However, the provided evidence database, which constitutes the 'framework content within the RAG index,' does not contain definitions or explicit mentions for all of these dimensions and axes. While some derived metrics and two specific dimensions (`Individual Dignity`, `Tribal Dominance`) are present, the majority of the core dimensions and their corresponding axes are not found.",
+      "examples": [
+        "The report states the CFF measures discourse along five key axes: 'Identity', 'Emotion', 'Success', 'Relation', and 'Goals'. Of these, only 'Identity' (via 'identity_tension' calculation) is explicitly referenced in the provided RAG index content.",
+        "The report lists ten core dimensions: 'Individual Dignity', 'Tribal Dominance', 'Hope', 'Fear', 'Compersion', 'Envy', 'Amity', 'Enmity', 'Cohesive Goals', and 'Fragmentative Goals'. Only 'Individual Dignity' and 'Tribal Dominance' are explicitly mentioned in the provided RAG index content (within the `calculate_identity_tension` function's docstring). The other eight dimensions ('Hope', 'Fear', 'Compersion', 'Envy', 'Amity', 'Enmity', 'Cohesive Goals', 'Fragmentative Goals') are not found."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The majority of statistical claims in the report cannot be validated against the provided evidence database. The rubric explicitly states: 'For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), you MUST query the RAG index to find the corresponding value in the research data.' However, the provided 'statistical_results.json' (SOURCE 1, SOURCE 4) and 'derived_metrics_results.json' (SOURCE 2, SOURCE 5) files contain Python code definitions for statistical functions, not the actual statistical output (e.g., aggregate means, standard deviations, or correlation matrices). The 'individual_analysis_results.json' (SOURCE 3) only provides raw and derived scores for a single document ('john_mccain_2008_concession.txt'), making it impossible to validate claims related to other documents or aggregate statistics across the corpus. Therefore, comprehensive validation as per the rubric's instructions cannot be performed.",
+      "examples": [
+        "All mean, standard deviation, minimum, and maximum values presented in 'Table 1: Descriptive Statistics for Key CFF Dimensions and Indices (N=4)' cannot be validated as the aggregate statistical results are not present in the evidence database.",
+        "The 'Full Cohesion Index' and 'Strategic Contradiction Index' values for 'alexandria_ocasio_cortez_2025_fighting_oligarchy.txt', 'bernie_sanders_2025_fighting_oligarchy.txt', and 'steve_king_2017_house_floor.txt' in 'Table 2: Cohesion vs. Contradiction Scores by Document' cannot be validated due to missing individual document derived metrics.",
+        "All Pearson Correlation Coefficients (r) presented in 'Table 3: Pearson Correlation Coefficients (r) for Opposing CFF Dimensions' and those cited in the text (e.g., 'Fear' vs. 'Tribal Dominance' (r = +1.00), 'Amity' vs. 'Individual Dignity' (r = +0.85)) cannot be validated as the correlation matrix is not present in the evidence database.",
+        "Specific raw scores cited for individual documents, such as Steve King's 'Tribal Dominance' (0.85) and 'Fear' (0.90), or Bernie Sanders' 'Enmity' (0.90), 'Tribal Dominance' (0.80), 'Amity' (0.60), and 'Cohesive Goals' (0.60), cannot be validated as the raw scores for these documents are not provided in the evidence database.",
+        "Specific tension scores cited for Bernie Sanders' speech (e.g., 'Identity' (0.14), 'Relational' (0.18), and 'Goal' (0.12) axes) cannot be validated due to missing detailed derived metrics for this document."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires selecting 5 evidence quotes from the report to cross-reference against the RAG evidence index. However, the 'Report to Validate' explicitly states in its 'Methodology' section (4.5 Limitations and Methodological Constraints) and 'Evidence Citations' section (8) that 'no evidence was found' and 'this section is intentionally left blank' regarding textual evidence quotes. Therefore, it was not possible to select any evidence quotes from the report to perform the requested cross-referencing check.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, particularly given the acknowledged small sample size and lack of textual evidence for findings.",
+      "examples": [
+        "\"it showcases the unique value of the CFF's derived metrics\" (Section 7. Conclusion) - The term 'unique value' is a superlative claim that implies no other framework or metric offers similar benefits, without comparative evidence.",
+        "\"which together offer a more nuanced and sophisticated picture of political language than traditional methods allow.\" (Section 7. Conclusion) - This is a comparative claim of superiority ('more nuanced and sophisticated... than traditional methods allow') that is not substantiated by any discussion, definition, or analysis of 'traditional methods' within the report.",
+        "\"The strongest and most practically significant finding is the bifurcation of the corpus into two distinct strategic camps\" (Section 5.4 Pattern Recognition and Theoretical Insights) - 'strongest and most practically significant finding' is a superlative evaluation of a finding, which is subjective and may be considered overly promotional for an academic report."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions several analytical dimensions and axes as being defined within the Cohesive Flourishing Framework (CFF) v10.1 specification (Section 4.1). However, the provided evidence database, which constitutes the 'framework content within the RAG index,' does not contain definitions or explicit mentions for all of these dimensions and axes. While some derived metrics and two specific dimensions (`Individual Dignity`, `Tribal Dominance`) are present, the majority of the core dimensions and their corresponding axes are not found.",
+        "examples": [
+          "The report states the CFF measures discourse along five key axes: 'Identity', 'Emotion', 'Success', 'Relation', and 'Goals'. Of these, only 'Identity' (via 'identity_tension' calculation) is explicitly referenced in the provided RAG index content.",
+          "The report lists ten core dimensions: 'Individual Dignity', 'Tribal Dominance', 'Hope', 'Fear', 'Compersion', 'Envy', 'Amity', 'Enmity', 'Cohesive Goals', and 'Fragmentative Goals'. Only 'Individual Dignity' and 'Tribal Dominance' are explicitly mentioned in the provided RAG index content (within the `calculate_identity_tension` function's docstring). The other eight dimensions ('Hope', 'Fear', 'Compersion', 'Envy', 'Amity', 'Enmity', 'Cohesive Goals', 'Fragmentative Goals') are not found."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The majority of statistical claims in the report cannot be validated against the provided evidence database. The rubric explicitly states: 'For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), you MUST query the RAG index to find the corresponding value in the research data.' However, the provided 'statistical_results.json' (SOURCE 1, SOURCE 4) and 'derived_metrics_results.json' (SOURCE 2, SOURCE 5) files contain Python code definitions for statistical functions, not the actual statistical output (e.g., aggregate means, standard deviations, or correlation matrices). The 'individual_analysis_results.json' (SOURCE 3) only provides raw and derived scores for a single document ('john_mccain_2008_concession.txt'), making it impossible to validate claims related to other documents or aggregate statistics across the corpus. Therefore, comprehensive validation as per the rubric's instructions cannot be performed.",
+        "examples": [
+          "All mean, standard deviation, minimum, and maximum values presented in 'Table 1: Descriptive Statistics for Key CFF Dimensions and Indices (N=4)' cannot be validated as the aggregate statistical results are not present in the evidence database.",
+          "The 'Full Cohesion Index' and 'Strategic Contradiction Index' values for 'alexandria_ocasio_cortez_2025_fighting_oligarchy.txt', 'bernie_sanders_2025_fighting_oligarchy.txt', and 'steve_king_2017_house_floor.txt' in 'Table 2: Cohesion vs. Contradiction Scores by Document' cannot be validated due to missing individual document derived metrics.",
+          "All Pearson Correlation Coefficients (r) presented in 'Table 3: Pearson Correlation Coefficients (r) for Opposing CFF Dimensions' and those cited in the text (e.g., 'Fear' vs. 'Tribal Dominance' (r = +1.00), 'Amity' vs. 'Individual Dignity' (r = +0.85)) cannot be validated as the correlation matrix is not present in the evidence database.",
+          "Specific raw scores cited for individual documents, such as Steve King's 'Tribal Dominance' (0.85) and 'Fear' (0.90), or Bernie Sanders' 'Enmity' (0.90), 'Tribal Dominance' (0.80), 'Amity' (0.60), and 'Cohesive Goals' (0.60), cannot be validated as the raw scores for these documents are not provided in the evidence database.",
+          "Specific tension scores cited for Bernie Sanders' speech (e.g., 'Identity' (0.14), 'Relational' (0.18), and 'Goal' (0.12) axes) cannot be validated due to missing detailed derived metrics for this document."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires selecting 5 evidence quotes from the report to cross-reference against the RAG evidence index. However, the 'Report to Validate' explicitly states in its 'Methodology' section (4.5 Limitations and Methodological Constraints) and 'Evidence Citations' section (8) that 'no evidence was found' and 'this section is intentionally left blank' regarding textual evidence quotes. Therefore, it was not possible to select any evidence quotes from the report to perform the requested cross-referencing check.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, particularly given the acknowledged small sample size and lack of textual evidence for findings.",
+        "examples": [
+          "\"it showcases the unique value of the CFF's derived metrics\" (Section 7. Conclusion) - The term 'unique value' is a superlative claim that implies no other framework or metric offers similar benefits, without comparative evidence.",
+          "\"which together offer a more nuanced and sophisticated picture of political language than traditional methods allow.\" (Section 7. Conclusion) - This is a comparative claim of superiority ('more nuanced and sophisticated... than traditional methods allow') that is not substantiated by any discussion, definition, or analysis of 'traditional methods' within the report.",
+          "\"The strongest and most practically significant finding is the bifurcation of the corpus into two distinct strategic camps\" (Section 5.4 Pattern Recognition and Theoretical Insights) - 'strongest and most practically significant finding' is a superlative evaluation of a finding, which is subjective and may be considered overly promotional for an academic report."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

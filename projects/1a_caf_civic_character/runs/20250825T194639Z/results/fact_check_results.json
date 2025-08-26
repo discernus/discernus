@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions 10 analytical dimensions, providing a definition for each. However, the provided evidence database (RAG index) only contains explicit or implicit definitions for two of these dimensions (`Dignity` and `Tribalism`). The definitions for the remaining eight dimensions are not found in the framework content within the RAG index.",
+      "examples": [
+        "The report defines 'Truth' as 'appeals to intellectual honesty and verifiable facts', but no definition or explicit mention of 'Truth' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Justice' as 'appeals for fairness and systemic solutions', but no definition or explicit mention of 'Justice' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Hope' as 'appeals to an optimistic, achievable future', but no definition or explicit mention of 'Hope' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Pragmatism' as 'appeals acknowledging complexity and constraints', but no definition or explicit mention of 'Pragmatism' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Manipulation' as 'appeals using deception or emotional distortion', but no definition or explicit mention of 'Manipulation' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Resentment' as 'appeals based on grievance and blame', but no definition or explicit mention of 'Resentment' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Fear' as 'appeals based on threat and anxiety', but no definition or explicit mention of 'Fear' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+        "The report defines 'Fantasy' as 'appeals based on simplistic, unrealistic narratives', but no definition or explicit mention of 'Fantasy' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "Cannot complete 'Statistic Mismatch' check. The rubric explicitly states to 'Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file'. The `statistical_results.json` file was not provided in the evidence database, making it impossible to validate the statistical claims against the specified source.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents (e.g., `john_mccain_2008_concession_ff9b26f2.txt`, `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) which are cited as sources for the textual evidence quotes in the report. The database only includes manifest, framework, and analysis results files, not the actual text files from the corpus. Therefore, it is impossible to cross-reference the randomly selected quotes against the RAG evidence index (which should contain the full text of all corpus documents) as required by the rubric.",
+      "examples": [
+        "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains a few instances of superlative or promotional language that may require editorial review for academic tone, especially given the explicitly stated limitations of a small sample size and preliminary findings.",
+      "examples": [
+        "The introduction of the `Tension Indices` and the `Civic Character Index (CCI)` proves to be highly valuable. (Section 5.5)",
+        "The primary contribution is a set of testable hypotheses about the structure of civic rhetoric and a demonstration of a powerful methodology for investigating them. (Section 7)"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains references to external academic concepts and authority claims without specific internal attribution or definition, which are prohibited in computational analysis reports. These are not internal evidence attributions.",
+      "examples": [
+        "The CAF is grounded in Aristotelian virtue ethics and contemporary civic republican theory. (Section 4. Methodology)",
+        "Effect sizes for correlations are interpreted using standard conventions (small: |r| > 0.1, medium: |r| > 0.3, large: |r| > 0.5). (Section 4. Methodology and Section 5.3 Correlation and Interaction Analysis)",
+        "The strong empirical support for the oppositional structure of the CAF's axes suggests that virtue ethics provides a viable and powerful lens for the computational analysis of political language. (Section 6. Discussion)",
+        "The study successfully operationalized concepts from virtue ethics to create a quantitative measure of civic character in political discourse. (Section 7. Conclusion)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions 10 analytical dimensions, providing a definition for each. However, the provided evidence database (RAG index) only contains explicit or implicit definitions for two of these dimensions (`Dignity` and `Tribalism`). The definitions for the remaining eight dimensions are not found in the framework content within the RAG index.",
+        "examples": [
+          "The report defines 'Truth' as 'appeals to intellectual honesty and verifiable facts', but no definition or explicit mention of 'Truth' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Justice' as 'appeals for fairness and systemic solutions', but no definition or explicit mention of 'Justice' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Hope' as 'appeals to an optimistic, achievable future', but no definition or explicit mention of 'Hope' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Pragmatism' as 'appeals acknowledging complexity and constraints', but no definition or explicit mention of 'Pragmatism' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Manipulation' as 'appeals using deception or emotional distortion', but no definition or explicit mention of 'Manipulation' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Resentment' as 'appeals based on grievance and blame', but no definition or explicit mention of 'Resentment' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Fear' as 'appeals based on threat and anxiety', but no definition or explicit mention of 'Fear' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'.",
+          "The report defines 'Fantasy' as 'appeals based on simplistic, unrealistic narratives', but no definition or explicit mention of 'Fantasy' as a dimension is found in the provided 'derived_metrics_results.json' or 'experiment.md'."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "Cannot complete 'Statistic Mismatch' check. The rubric explicitly states to 'Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file'. The `statistical_results.json` file was not provided in the evidence database, making it impossible to validate the statistical claims against the specified source.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents (e.g., `john_mccain_2008_concession_ff9b26f2.txt`, `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) which are cited as sources for the textual evidence quotes in the report. The database only includes manifest, framework, and analysis results files, not the actual text files from the corpus. Therefore, it is impossible to cross-reference the randomly selected quotes against the RAG evidence index (which should contain the full text of all corpus documents) as required by the rubric.",
+        "examples": [
+          "\"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains a few instances of superlative or promotional language that may require editorial review for academic tone, especially given the explicitly stated limitations of a small sample size and preliminary findings.",
+        "examples": [
+          "The introduction of the `Tension Indices` and the `Civic Character Index (CCI)` proves to be highly valuable. (Section 5.5)",
+          "The primary contribution is a set of testable hypotheses about the structure of civic rhetoric and a demonstration of a powerful methodology for investigating them. (Section 7)"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains references to external academic concepts and authority claims without specific internal attribution or definition, which are prohibited in computational analysis reports. These are not internal evidence attributions.",
+        "examples": [
+          "The CAF is grounded in Aristotelian virtue ethics and contemporary civic republican theory. (Section 4. Methodology)",
+          "Effect sizes for correlations are interpreted using standard conventions (small: |r| > 0.1, medium: |r| > 0.3, large: |r| > 0.5). (Section 4. Methodology and Section 5.3 Correlation and Interaction Analysis)",
+          "The strong empirical support for the oppositional structure of the CAF's axes suggests that virtue ethics provides a viable and powerful lens for the computational analysis of political language. (Section 6. Discussion)",
+          "The study successfully operationalized concepts from virtue ethics to create a quantitative measure of civic character in political discourse. (Section 7. Conclusion)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

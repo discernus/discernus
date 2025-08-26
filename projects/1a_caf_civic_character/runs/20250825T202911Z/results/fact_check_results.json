@@ -1,0 +1,64 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The validation rubric for 'Statistic Mismatch' requires querying a `statistical_results.json` file to verify all numerical claims (means, correlations, etc.) within the report. This crucial file is not present in the provided 'EVIDENCE DATABASE FOR VALIDATION'. Without this data, it is impossible to perform the required fact-checking and determine if the statistical claims in the report match the underlying research data within acceptable precision.",
+      "examples": [
+        "Report claims 'mean=0.57' for dignity_raw (Table 1), but no `statistical_results.json` is available to verify this value.",
+        "Report claims 'r = -0.93' for pragmatism/fantasy correlation (Table 3), but no `statistical_results.json` is available to verify this value.",
+        "Report claims 'CCI = 0.805' for John McCain (Table 2), but no `statistical_results.json` is available to verify this value."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_080814fa.json, evidence_6db229a0.json, evidence_d97e2f45.json). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'john_mccain_2008_concession_ff9b26f2.txt' and 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', but the provided RAG evidence index only contains extracted quotes from 'mitt_romney_2020_impeachment_9ebec73f.txt'. This indicates a mismatch between the evidence cited in the report and the evidence available in the provided database.",
+      "examples": [
+        "Quote from report: \"`This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.`\" (Source: `john_mccain_2008_concession_ff9b26f2.txt`) - NOT FOUND in provided RAG evidence index.",
+        "Quote from report: \"`I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together`\" (Source: `john_mccain_2008_concession_ff9b26f2.txt`) - NOT FOUND in provided RAG evidence index.",
+        "Quote from report: \"`I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index.",
+        "Quote from report: \"`Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index.",
+        "Quote from report: \"`The rich want to get richer and they don't care who they step on.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The validation rubric for 'Statistic Mismatch' requires querying a `statistical_results.json` file to verify all numerical claims (means, correlations, etc.) within the report. This crucial file is not present in the provided 'EVIDENCE DATABASE FOR VALIDATION'. Without this data, it is impossible to perform the required fact-checking and determine if the statistical claims in the report match the underlying research data within acceptable precision.",
+        "examples": [
+          "Report claims 'mean=0.57' for dignity_raw (Table 1), but no `statistical_results.json` is available to verify this value.",
+          "Report claims 'r = -0.93' for pragmatism/fantasy correlation (Table 3), but no `statistical_results.json` is available to verify this value.",
+          "Report claims 'CCI = 0.805' for John McCain (Table 2), but no `statistical_results.json` is available to verify this value."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_080814fa.json, evidence_6db229a0.json, evidence_d97e2f45.json). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'john_mccain_2008_concession_ff9b26f2.txt' and 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt', but the provided RAG evidence index only contains extracted quotes from 'mitt_romney_2020_impeachment_9ebec73f.txt'. This indicates a mismatch between the evidence cited in the report and the evidence available in the provided database.",
+        "examples": [
+          "Quote from report: \"`This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.`\" (Source: `john_mccain_2008_concession_ff9b26f2.txt`) - NOT FOUND in provided RAG evidence index.",
+          "Quote from report: \"`I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together`\" (Source: `john_mccain_2008_concession_ff9b26f2.txt`) - NOT FOUND in provided RAG evidence index.",
+          "Quote from report: \"`I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index.",
+          "Quote from report: \"`Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index.",
+          "Quote from report: \"`The rich want to get richer and they don't care who they step on.`\" (Source: `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) - NOT FOUND in provided RAG evidence index."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 1,
+      "errors": 0,
+      "warnings": 1
+    }
+  }
+}

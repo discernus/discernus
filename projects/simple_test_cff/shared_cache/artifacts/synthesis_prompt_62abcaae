@@ -1,0 +1,1318 @@
+You are conducting a comprehensive computational social science analysis. Your task is to produce an academic-quality research report that extracts maximum insights from the provided data.
+
+# RESEARCH CONTEXT
+
+**Experiment Metadata:**
+**Experiment Metadata**: Available in experiment configuration
+
+**Framework Specification:**
+# Cohesive Flourishing Framework (CFF) v10.1
+
+---
+
+## Part 1: The Scholarly Document
+
+### Section 1: Abstract & *Raison d'être*
+
+**What is this framework?**
+The Cohesive Flourishing Framework (CFF) is a comprehensive tool for analyzing political and social discourse to understand its impact on community cohesion and democratic health. It moves beyond simple sentiment analysis to reveal sophisticated patterns in how language builds or undermines social solidarity, trust, and constructive civic engagement.
+
+**What problem does it solve?**
+CFF addresses a critical gap in discourse analysis by providing a methodology that preserves complex rhetorical information. Traditional analysis often forces artificial choices (e.g., a text is "hopeful" or "fearful"), losing nuance when sophisticated communication employs competing appeals simultaneously. CFF's independent scoring of opposing dimensions (e.g., Hope vs. Fear) captures this complexity, enabling a more accurate and insightful analysis of...
+
+**Experiment Configuration:**
+Research objectives not specified.
+
+**Corpus Information:**
+**Corpus Manifest**:
+- **Name**: Democratic Discourse Corpus
+- **Documents**: 4
+- **Date Range**: 2008-2025
+
+**Document Details**:
+- **john_mccain_2008_concession.txt**: John McCain (Republican, 2008) - institutional
+- **steve_king_2017_house_floor.txt**: Steve King (Republican, 2017) - populist_conservative
+- **bernie_sanders_2025_fighting_oligarchy.txt**: Bernie Sanders (Independent, 2025) - populist_progressive
+- **alexandria_ocasio_cortez_2025_fighting_oligarchy.txt**: Alexandria Ocasio-Cortez (Democratic, 2025) - populist_progressive
+
+**Complete Research Data:**
+Complete Statistical Results (format into Markdown tables as instructed):
+{
+  "status": "completed",
+  "stats_hash": "a7653b122400557ab1cfa876329a65c1c66eac9d99688623d1458d69595df6e5",
+  "functions_generated": 6,
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 6,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 21451
+    },
+    "statistical_data": {
+      "analyze_rhetorical_profiles_by_speaker": {
+        "status": "SKIPPED",
+        "reason": "Speaker analysis requires a 'corpus_manifest.json' file which was not found in the workspace."
+      },
+      "calculate_derived_metrics": {
+        "type": "dataframe",
+        "data": [
+          {
+            "document_name": "john_mccain_2008_concession.txt",
+            "tribal_dominance_raw": 0.0,
+            "tribal_dominance_salience": 0.0,
+            "tribal_dominance_confidence": 1.0,
+            "individual_dignity_raw": 0.8,
+            "individual_dignity_salience": 0.9,
+            "individual_dignity_confidence": 0.95,
+            "fear_raw": 0.1,
+            "fear_salience": 0.1,
+            "fear_confidence": 0.9,
+            "hope_raw": 0.8,
+            "hope_salience": 0.8,
+            "hope_confidence": 0.95,
+            "envy_raw": 0.0,
+            "envy_salience": 0.0,
+            "envy_confidence": 1.0,
+            "compersion_raw": 0.9,
+            "compersion_salience": 0.9,
+            "compersion_confidence": 1.0,
+            "enmity_raw": 0.0,
+            "enmity_salience": 0.0,
+            "enmity_confidence": 1.0,
+            "amity_raw": 0.9,
+            "amity_salience": 0.9,
+            "amity_confidence": 1.0,
+            "fragmentative_goals_raw": 0.0,
+            "fragmentative_goals_salience": 0.0,
+            "fragmentative_goals_confidence": 1.0,
+            "cohesive_goals_raw": 0.9,
+            "cohesive_goals_salience": 0.9,
+            "cohesive_goals_confidence": 1.0,
+            "identity_tension": 0.0,
+            "emotional_tension": 0.07,
+            "success_tension": 0.0,
+            "relational_tension": 0.0,
+            "goal_tension": 0.0,
+            "strategic_contradiction_index": 0.014000000000000002,
+            "descriptive_cohesion_index": 0.8330248056275453,
+            "motivational_cohesion_index": 0.8497639544570953,
+            "full_cohesion_index": 0.8398133748055987
+          },
+          {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "tribal_dominance_raw": 0.85,
+            "tribal_dominance_salience": 0.9,
+            "tribal_dominance_confidence": 1.0,
+            "individual_dignity_raw": 0.1,
+            "individual_dignity_salience": 0.1,
+            "individual_dignity_confidence": 0.9,
+            "fear_raw": 0.9,
+            "fear_salience": 0.9,
+            "fear_confidence": 1.0,
+            "hope_raw": 0.1,
+            "hope_salience": 0.1,
+            "hope_confidence": 0.9,
+            "envy_raw": 0.7,
+            "envy_salience": 0.7,
+            "envy_confidence": 0.95,
+            "compersion_raw": 0.0,
+            "compersion_salience": 0.0,
+            "compersion_confidence": 1.0,
+            "enmity_raw": 0.8,
+            "enmity_salience": 0.85,
+            "enmity_confidence": 1.0,
+            "amity_raw": 0.0,
+            "amity_salience": 0.0,
+            "amity_confidence": 1.0,
+            "fragmentative_goals_raw": 0.8,
+            "fragmentative_goals_salience": 0.8,
+            "fragmentative_goals_confidence": 0.95,
+            "cohesive_goals_raw": 0.1,
+            "cohesive_goals_salience": 0.2,
+            "cohesive_goals_confidence": 0.9,
+            "identity_tension": 0.08000000000000002,
+            "emotional_tension": 0.08000000000000002,
+            "success_tension": 0.0,
+            "relational_tension": 0.0,
+            "goal_tension": 0.06000000000000001,
+            "strategic_contradiction_index": 0.044000000000000004,
+            "descriptive_cohesion_index": -0.772246177969424,
+            "motivational_cohesion_index": -0.7293720078851029,
+            "full_cohesion_index": -0.7350032959789058
+          },
+          {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "tribal_dominance_raw": 0.8,
+            "tribal_dominance_salience": 0.9,
+            "tribal_dominance_confidence": 1.0,
+            "individual_dignity_raw": 0.2,
+            "individual_dignity_salience": 0.2,
+            "individual_dignity_confidence": 0.9,
+            "fear_raw": 0.8,
+            "fear_salience": 0.8,
+            "fear_confidence": 1.0,
+            "hope_raw": 0.7,
+            "hope_salience": 0.7,
+            "hope_confidence": 1.0,
+            "envy_raw": 0.9,
+            "envy_salience": 0.9,
+            "envy_confidence": 1.0,
+            "compersion_raw": 0.0,
+            "compersion_salience": 0.0,
+            "compersion_confidence": 1.0,
+            "enmity_raw": 0.9,
+            "enmity_salience": 0.9,
+            "enmity_confidence": 1.0,
+            "amity_raw": 0.6,
+            "amity_salience": 0.6,
+            "amity_confidence": 0.9,
+            "fragmentative_goals_raw": 0.8,
+            "fragmentative_goals_salience": 0.8,
+            "fragmentative_goals_confidence": 1.0,
+            "cohesive_goals_raw": 0.6,
+            "cohesive_goals_salience": 0.6,
+            "cohesive_goals_confidence": 0.9,
+            "identity_tension": 0.13999999999999999,
+            "emotional_tension": 0.07000000000000006,
+            "success_tension": 0.0,
+            "relational_tension": 0.18000000000000002,
+            "goal_tension": 0.12000000000000004,
+            "strategic_contradiction_index": 0.10200000000000002,
+            "descriptive_cohesion_index": -0.3614457831325302,
+            "motivational_cohesion_index": -0.3188077721184683,
+            "full_cohesion_index": -0.3702546477112952
+          },
+          {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "tribal_dominance_raw": 0.6,
+            "tribal_dominance_salience": 0.9,
+            "tribal_dominance_confidence": 0.9,
+            "individual_dignity_raw": 0.8,
+            "individual_dignity_salience": 0.7,
+            "individual_dignity_confidence": 0.95,
+            "fear_raw": 0.6,
+            "fear_salience": 0.8,
+            "fear_confidence": 0.9,
+            "hope_raw": 0.1,
+            "hope_salience": 0.2,
+            "hope_confidence": 0.8,
+            "envy_raw": 0.9,
+            "envy_salience": 0.9,
+            "envy_confidence": 0.95,
+            "compersion_raw": 0.0,
+            "compersion_salience": 0.0,
+            "compersion_confidence": 1.0,
+            "enmity_raw": 0.8,
+            "enmity_salience": 0.8,
+            "enmity_confidence": 0.95,
+            "amity_raw": 0.8,
+            "amity_salience": 0.8,
+            "amity_confidence": 0.95,
+            "fragmentative_goals_raw": 0.7,
+            "fragmentative_goals_salience": 0.8,
+            "fragmentative_goals_confidence": 0.9,
+            "cohesive_goals_raw": 0.8,
+            "cohesive_goals_salience": 0.8,
+            "cohesive_goals_confidence": 0.95,
+            "identity_tension": 0.12000000000000004,
+            "emotional_tension": 0.06000000000000001,
+            "success_tension": 0.0,
+            "relational_tension": 0.0,
+            "goal_tension": 0.0,
+            "strategic_contradiction_index": 0.03600000000000001,
+            "descriptive_cohesion_index": -0.36275349900028564,
+            "motivational_cohesion_index": -0.23328759066849636,
+            "full_cohesion_index": -0.17460080584987314
+          }
+        ],
+        "columns": [
+          "document_name",
+          "tribal_dominance_raw",
+          "tribal_dominance_salience",
+          "tribal_dominance_confidence",
+          "individual_dignity_raw",
+          "individual_dignity_salience",
+          "individual_dignity_confidence",
+          "fear_raw",
+          "fear_salience",
+          "fear_confidence",
+          "hope_raw",
+          "hope_salience",
+          "hope_confidence",
+          "envy_raw",
+          "envy_salience",
+          "envy_confidence",
+          "compersion_raw",
+          "compersion_salience",
+          "compersion_confidence",
+          "enmity_raw",
+          "enmity_salience",
+          "enmity_confidence",
+          "amity_raw",
+          "amity_salience",
+          "amity_confidence",
+          "fragmentative_goals_raw",
+          "fragmentative_goals_salience",
+          "fragmentative_goals_confidence",
+          "cohesive_goals_raw",
+          "cohesive_goals_salience",
+          "cohesive_goals_confidence",
+          "identity_tension",
+          "emotional_tension",
+          "success_tension",
+          "relational_tension",
+          "goal_tension",
+          "strategic_contradiction_index",
+          "descriptive_cohesion_index",
+          "motivational_cohesion_index",
+          "full_cohesion_index"
+        ],
+        "index": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "shape": [
+          4,
+          40
+        ]
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "get_cohesion_vs_contradiction_data": {
+        "plot_data_points": [
+          {
+            "document_name": "john_mccain_2008_concession.txt",
+            "full_cohesion_index": 0.8398133748055987,
+            "strategic_contradiction_index": 0.014000000000000002
+          },
+          {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "full_cohesion_index": -0.7350032959789058,
+            "strategic_contradiction_index": 0.044000000000000004
+          },
+          {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "full_cohesion_index": -0.3702546477112952,
+            "strategic_contradiction_index": 0.10200000000000002
+          },
+          {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "full_cohesion_index": -0.17460080584987314,
+            "strategic_contradiction_index": 0.03600000000000001
+          }
+        ]
+      },
+      "get_corpus_summary_statistics": {
+        "tribal_dominance_raw": {
+          "count": 4.0,
+          "mean": 0.5625,
+          "std": 0.39024564913226983,
+          "min": 0.0,
+          "25%": 0.44999999999999996,
+          "50%": 0.7,
+          "75%": 0.8125,
+          "max": 0.85
+        },
+        "individual_dignity_raw": {
+          "count": 4.0,
+          "mean": 0.47500000000000003,
+          "std": 0.3774917217635375,
+          "min": 0.1,
+          "25%": 0.17500000000000002,
+          "50%": 0.5,
+          "75%": 0.8,
+          "max": 0.8
+        },
+        "fear_raw": {
+          "count": 4.0,
+          "mean": 0.6,
+          "std": 0.3559026084010437,
+          "min": 0.1,
+          "25%": 0.475,
+          "50%": 0.7,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "hope_raw": {
+          "count": 4.0,
+          "mean": 0.42500000000000004,
+          "std": 0.37749172176353746,
+          "min": 0.1,
+          "25%": 0.1,
+          "50%": 0.39999999999999997,
+          "75%": 0.725,
+          "max": 0.8
+        },
+        "envy_raw": {
+          "count": 4.0,
+          "mean": 0.625,
+          "std": 0.42720018726587655,
+          "min": 0.0,
+          "25%": 0.5249999999999999,
+          "50%": 0.8,
+          "75%": 0.9,
+          "max": 0.9
+        },
+        "compersion_raw": {
+          "count": 4.0,
+          "mean": 0.225,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.225,
+          "max": 0.9
+        },
+        "enmity_raw": {
+          "count": 4.0,
+          "mean": 0.625,
+          "std": 0.4193248541803042,
+          "min": 0.0,
+          "25%": 0.6000000000000001,
+          "50%": 0.8,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "amity_raw": {
+          "count": 4.0,
+          "mean": 0.575,
+          "std": 0.4031128874149275,
+          "min": 0.0,
+          "25%": 0.44999999999999996,
+          "50%": 0.7,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "fragmentative_goals_raw": {
+          "count": 4.0,
+          "mean": 0.575,
+          "std": 0.38622100754188227,
+          "min": 0.0,
+          "25%": 0.5249999999999999,
+          "50%": 0.75,
+          "75%": 0.8,
+          "max": 0.8
+        },
+        "cohesive_goals_raw": {
+          "count": 4.0,
+          "mean": 0.6000000000000001,
+          "std": 0.3559026084010437,
+          "min": 0.1,
+          "25%": 0.475,
+          "50%": 0.7,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "tribal_dominance_salience": {
+          "count": 4.0,
+          "mean": 0.675,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "25%": 0.675,
+          "50%": 0.9,
+          "75%": 0.9,
+          "max": 0.9
+        },
+        "individual_dignity_salience": {
+          "count": 4.0,
+          "mean": 0.475,
+          "std": 0.38622100754188227,
+          "min": 0.1,
+          "25%": 0.17500000000000002,
+          "50%": 0.44999999999999996,
+          "75%": 0.75,
+          "max": 0.9
+        },
+        "fear_salience": {
+          "count": 4.0,
+          "mean": 0.65,
+          "std": 0.36968455021364727,
+          "min": 0.1,
+          "25%": 0.625,
+          "50%": 0.8,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "hope_salience": {
+          "count": 4.0,
+          "mean": 0.45,
+          "std": 0.3511884584284246,
+          "min": 0.1,
+          "25%": 0.17500000000000002,
+          "50%": 0.44999999999999996,
+          "75%": 0.725,
+          "max": 0.8
+        },
+        "envy_salience": {
+          "count": 4.0,
+          "mean": 0.625,
+          "std": 0.42720018726587655,
+          "min": 0.0,
+          "25%": 0.5249999999999999,
+          "50%": 0.8,
+          "75%": 0.9,
+          "max": 0.9
+        },
+        "compersion_salience": {
+          "count": 4.0,
+          "mean": 0.225,
+          "std": 0.45000000000000007,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.225,
+          "max": 0.9
+        },
+        "enmity_salience": {
+          "count": 4.0,
+          "mean": 0.6375,
+          "std": 0.4269562819149833,
+          "min": 0.0,
+          "25%": 0.6000000000000001,
+          "50%": 0.825,
+          "75%": 0.8625,
+          "max": 0.9
+        },
+        "amity_salience": {
+          "count": 4.0,
+          "mean": 0.575,
+          "std": 0.4031128874149275,
+          "min": 0.0,
+          "25%": 0.44999999999999996,
+          "50%": 0.7,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "fragmentative_goals_salience": {
+          "count": 4.0,
+          "mean": 0.6000000000000001,
+          "std": 0.4,
+          "min": 0.0,
+          "25%": 0.6000000000000001,
+          "50%": 0.8,
+          "75%": 0.8,
+          "max": 0.8
+        },
+        "cohesive_goals_salience": {
+          "count": 4.0,
+          "mean": 0.625,
+          "std": 0.30956959368344517,
+          "min": 0.2,
+          "25%": 0.5,
+          "50%": 0.7,
+          "75%": 0.8250000000000001,
+          "max": 0.9
+        },
+        "identity_tension": {
+          "count": 4.0,
+          "mean": 0.085,
+          "std": 0.06191391873668904,
+          "min": 0.0,
+          "25%": 0.06000000000000001,
+          "50%": 0.10000000000000003,
+          "75%": 0.12500000000000003,
+          "max": 0.13999999999999999
+        },
+        "emotional_tension": {
+          "count": 4.0,
+          "mean": 0.07000000000000002,
+          "std": 0.008164965809277263,
+          "min": 0.06000000000000001,
+          "25%": 0.0675,
+          "50%": 0.07000000000000003,
+          "75%": 0.07250000000000005,
+          "max": 0.08000000000000002
+        },
+        "success_tension": {
+          "count": 4.0,
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.0,
+          "max": 0.0
+        },
+        "relational_tension": {
+          "count": 4.0,
+          "mean": 0.045000000000000005,
+          "std": 0.09000000000000001,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.045000000000000005,
+          "max": 0.18000000000000002
+        },
+        "goal_tension": {
+          "count": 4.0,
+          "mean": 0.04500000000000001,
+          "std": 0.0574456264653803,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.030000000000000006,
+          "75%": 0.07500000000000001,
+          "max": 0.12000000000000004
+        },
+        "strategic_contradiction_index": {
+          "count": 4.0,
+          "mean": 0.04900000000000001,
+          "std": 0.03754108860080291,
+          "min": 0.014000000000000002,
+          "25%": 0.03050000000000001,
+          "50%": 0.04000000000000001,
+          "75%": 0.05850000000000001,
+          "max": 0.10200000000000002
+        },
+        "descriptive_cohesion_index": {
+          "count": 4.0,
+          "mean": -0.1658551636186736,
+          "std": 0.6934204833443469,
+          "min": -0.772246177969424,
+          "25%": -0.46512666874257025,
+          "50%": -0.3620996410664079,
+          "75%": -0.0628281359425113,
+          "max": 0.8330248056275453
+        },
+        "motivational_cohesion_index": {
+          "count": 4.0,
+          "mean": -0.10792585405374307,
+          "std": 0.6741789672905953,
+          "min": -0.7293720078851029,
+          "25%": -0.4214488310601269,
+          "50%": -0.27604768139348235,
+          "75%": 0.03747529561290153,
+          "max": 0.8497639544570953
+        },
+        "full_cohesion_index": {
+          "count": 4.0,
+          "mean": -0.11001134368361885,
+          "std": 0.6744578840820142,
+          "min": -0.7350032959789058,
+          "25%": -0.4614418097781978,
+          "50%": -0.27242772678058413,
+          "75%": 0.07900273931399482,
+          "max": 0.8398133748055987
+        }
+      },
+      "get_dimension_correlation_matrix": {
+        "tribal_dominance_raw": {
+          "tribal_dominance_raw": 1.0,
+          "tribal_dominance_salience": 0.9609331989577098,
+          "individual_dignity_raw": -0.7778143480540325,
+          "individual_dignity_salience": -0.8929298027191857,
+          "fear_raw": 0.9959960160239039,
+          "fear_salience": 0.9761938960602456,
+          "hope_raw": -0.5685115780322202,
+          "hope_salience": -0.6019711032553264,
+          "envy_raw": 0.8972504869014221,
+          "envy_salience": 0.8972504869014221,
+          "compersion_raw": -0.9609331989577096,
+          "compersion_salience": -0.9609331989577096,
+          "enmity_raw": 0.965026620965895,
+          "enmity_salience": 0.9765361364919047,
+          "amity_raw": -0.7071886261246928,
+          "amity_salience": -0.7071886261246928,
+          "fragmentative_goals_raw": 0.9869224135317315,
+          "fragmentative_goals_salience": 0.9609331989577097,
+          "cohesive_goals_raw": -0.7319970720175678,
+          "cohesive_goals_salience": -0.7622275906177156
+        },
+        "tribal_dominance_salience": {
+          "tribal_dominance_raw": 0.9609331989577098,
+          "tribal_dominance_salience": 1.0,
+          "individual_dignity_raw": -0.5739640213948523,
+          "individual_dignity_salience": -0.7336041484035754,
+          "fear_raw": 0.936585811581694,
+          "fear_salience": 0.9918365981341756,
+          "hope_raw": -0.6622661785325219,
+          "hope_salience": -0.6644105970267494,
+          "envy_raw": 0.9753428933010883,
+          "envy_salience": 0.9753428933010883,
+          "compersion_raw": -1.0,
+          "compersion_salience": -1.0,
+          "enmity_raw": 0.9936607918964552,
+          "enmity_salience": 0.995418074407504,
+          "amity_raw": -0.5374838498865699,
+          "amity_salience": -0.5374838498865699,
+          "fragmentative_goals_raw": 0.9925232596048371,
+          "fragmentative_goals_salience": 1.0000000000000002,
+          "cohesive_goals_raw": -0.5619514869490163,
+          "cohesive_goals_salience": -0.5922200922639821
+        },
+        "individual_dignity_raw": {
+          "tribal_dominance_raw": -0.7778143480540325,
+          "tribal_dominance_salience": -0.5739640213948523,
+          "individual_dignity_raw": 1.0,
+          "individual_dignity_salience": 0.9773982108484915,
+          "fear_raw": -0.8187552203212656,
+          "fear_salience": -0.6329740214450165,
+          "hope_raw": 0.14619883040935677,
+          "hope_salience": 0.2388661906948262,
+          "envy_raw": -0.44957188105093393,
+          "envy_salience": -0.44957188105093393,
+          "compersion_raw": 0.5739640213948525,
+          "compersion_salience": 0.5739640213948525,
+          "enmity_raw": -0.6054225005743158,
+          "enmity_salience": -0.6333794997024098,
+          "amity_raw": 0.8488214333774705,
+          "amity_salience": 0.8488214333774705,
+          "fragmentative_goals_raw": -0.6687461442647573,
+          "fragmentative_goals_salience": -0.5739640213948521,
+          "cohesive_goals_raw": 0.8683767488255848,
+          "cohesive_goals_salience": 0.8913803121678295
+        },
+        "individual_dignity_salience": {
+          "tribal_dominance_raw": -0.8929298027191857,
+          "tribal_dominance_salience": -0.7336041484035754,
+          "individual_dignity_raw": 0.9773982108484915,
+          "individual_dignity_salience": 1.0,
+          "fear_raw": -0.9214998704140898,
+          "fear_salience": -0.7820893263576144,
+          "hope_raw": 0.3029362875729243,
+          "hope_salience": 0.38092047420720254,
+          "envy_raw": -0.6212358910229627,
+          "envy_salience": -0.6212358910229627,
+          "compersion_raw": 0.7336041484035752,
+          "compersion_salience": 0.7336041484035752,
+          "enmity_raw": -0.7563966410757144,
+          "enmity_salience": -0.7807786646830598,
+          "amity_raw": 0.85104652580494,
+          "amity_salience": 0.85104652580494,
+          "fragmentative_goals_raw": -0.8100558659217878,
+          "fragmentative_goals_salience": -0.7336041484035752,
+          "cohesive_goals_raw": 0.8729998772344009,
+          "cohesive_goals_salience": 0.8991129950119553
+        },
+        "fear_raw": {
+          "tribal_dominance_raw": 0.9959960160239039,
+          "tribal_dominance_salience": 0.936585811581694,
+          "individual_dignity_raw": -0.8187552203212656,
+          "individual_dignity_salience": -0.9214998704140898,
+          "fear_raw": 1.0,
+          "fear_salience": 0.9627197246824659,
+          "hope_raw": -0.5706475777996699,
+          "hope_salience": -0.6133878591220646,
+          "envy_raw": 0.8550288071140955,
+          "envy_salience": 0.8550288071140955,
+          "compersion_raw": -0.936585811581694,
+          "compersion_salience": -0.936585811581694,
+          "enmity_raw": 0.9380937880089723,
+          "enmity_salience": 0.9542307849663223,
+          "amity_raw": -0.7667165388930551,
+          "amity_salience": -0.7667165388930551,
+          "fragmentative_goals_raw": 0.9699998635937787,
+          "fragmentative_goals_salience": 0.936585811581694,
+          "cohesive_goals_raw": -0.7894736842105263,
+          "cohesive_goals_salience": -0.8168701781016696
+        },
+        "fear_salience": {
+          "tribal_dominance_raw": 0.9761938960602456,
+          "tribal_dominance_salience": 0.9918365981341756,
+          "individual_dignity_raw": -0.6329740214450165,
+          "individual_dignity_salience": -0.7820893263576144,
+          "fear_raw": 0.9627197246824659,
+          "fear_salience": 1.0,
+          "hope_raw": -0.7046314578350182,
+          "hope_salience": -0.7188946323483355,
+          "envy_raw": 0.9392387910571907,
+          "envy_salience": 0.9392387910571907,
+          "compersion_raw": -0.9918365981341754,
+          "compersion_salience": -0.9918365981341754,
+          "enmity_raw": 0.9783815094281901,
+          "enmity_salience": 0.9872920766416103,
+          "amity_raw": -0.637478616791804,
+          "amity_salience": -0.637478616791804,
+          "fragmentative_goals_raw": 0.9922028767223467,
+          "fragmentative_goals_salience": 0.9918365981341755,
+          "cohesive_goals_raw": -0.6587029695195817,
+          "cohesive_goals_salience": -0.6844740842458841
+        },
+        "hope_raw": {
+          "tribal_dominance_raw": -0.5685115780322202,
+          "tribal_dominance_salience": -0.6622661785325219,
+          "individual_dignity_raw": 0.14619883040935677,
+          "individual_dignity_salience": 0.3029362875729243,
+          "fear_raw": -0.5706475777996699,
+          "fear_salience": -0.7046314578350182,
+          "hope_raw": 1.0,
+          "hope_salience": 0.9931804770995404,
+          "envy_raw": -0.5632567245350782,
+          "envy_salience": -0.5632567245350782,
+          "compersion_raw": 0.662266178532522,
+          "compersion_salience": 0.662266178532522,
+          "enmity_raw": -0.5738352396747864,
+          "enmity_salience": -0.5971863854337008,
+          "amity_raw": 0.5311979292749331,
+          "amity_salience": 0.5311979292749331,
+          "fragmentative_goals_raw": -0.6115883541566586,
+          "fragmentative_goals_salience": -0.6622661785325221,
+          "cohesive_goals_raw": 0.5210260492953508,
+          "cohesive_goals_salience": 0.506304017311327
+        },
+        "hope_salience": {
+          "tribal_dominance_raw": -0.6019711032553264,
+          "tribal_dominance_salience": -0.6644105970267494,
+          "individual_dignity_raw": 0.2388661906948262,
+          "individual_dignity_salience": 0.38092047420720254,
+          "fear_raw": -0.6133878591220646,
+          "fear_salience": -0.7188946323483355,
+          "hope_raw": 0.9931804770995404,
+          "hope_salience": 1.0,
+          "envy_raw": -0.5443436493969374,
+          "envy_salience": -0.5443436493969374,
+          "compersion_raw": 0.6644105970267494,
+          "compersion_salience": 0.6644105970267494,
+          "enmity_raw": -0.5772023444448998,
+          "enmity_salience": -0.6057893156706342,
+          "amity_raw": 0.6239613684578472,
+          "amity_salience": 0.6239613684578472,
+          "fragmentative_goals_raw": -0.6266756188570107,
+          "fragmentative_goals_salience": -0.6644105970267495,
+          "cohesive_goals_raw": 0.6133878591220647,
+          "cohesive_goals_salience": 0.5978810999151275
+        },
+        "envy_raw": {
+          "tribal_dominance_raw": 0.8972504869014221,
+          "tribal_dominance_salience": 0.9753428933010883,
+          "individual_dignity_raw": -0.44957188105093393,
+          "individual_dignity_salience": -0.6212358910229627,
+          "fear_raw": 0.8550288071140955,
+          "fear_salience": 0.9392387910571907,
+          "hope_raw": -0.5632567245350782,
+          "hope_salience": -0.5443436493969374,
+          "envy_raw": 1.0,
+          "envy_salience": 1.0,
+          "compersion_raw": -0.975342893301088,
+          "compersion_salience": -0.975342893301088,
+          "enmity_raw": 0.9815652396222592,
+          "enmity_salience": 0.9708739447368127,
+          "amity_raw": -0.3435729672075618,
+          "amity_salience": -0.3435729672075618,
+          "fragmentative_goals_raw": 0.9545819788889428,
+          "fragmentative_goals_salience": 0.9753428933010881,
+          "cohesive_goals_raw": -0.3727048646394774,
+          "cohesive_goals_salience": -0.40958343040239614
+        },
+        "envy_salience": {
+          "tribal_dominance_raw": 0.8972504869014221,
+          "tribal_dominance_salience": 0.9753428933010883,
+          "individual_dignity_raw": -0.44957188105093393,
+          "individual_dignity_salience": -0.6212358910229627,
+          "fear_raw": 0.8550288071140955,
+          "fear_salience": 0.9392387910571907,
+          "hope_raw": -0.5632567245350782,
+          "hope_salience": -0.5443436493969374,
+          "envy_raw": 1.0,
+          "envy_salience": 1.0,
+          "compersion_raw": -0.975342893301088,
+          "compersion_salience": -0.975342893301088,
+          "enmity_raw": 0.9815652396222592,
+          "enmity_salience": 0.9708739447368127,
+          "amity_raw": -0.3435729672075618,
+          "amity_salience": -0.3435729672075618,
+          "fragmentative_goals_raw": 0.9545819788889428,
+          "fragmentative_goals_salience": 0.9753428933010881,
+          "cohesive_goals_raw": -0.3727048646394774,
+          "cohesive_goals_salience": -0.40958343040239614
+        },
+        "compersion_raw": {
+          "tribal_dominance_raw": -0.9609331989577096,
+          "tribal_dominance_salience": -1.0,
+          "individual_dignity_raw": 0.5739640213948525,
+          "individual_dignity_salience": 0.7336041484035752,
+          "fear_raw": -0.936585811581694,
+          "fear_salience": -0.9918365981341754,
+          "hope_raw": 0.662266178532522,
+          "hope_salience": 0.6644105970267494,
+          "envy_raw": -0.975342893301088,
+          "envy_salience": -0.975342893301088,
+          "compersion_raw": 1.0,
+          "compersion_salience": 1.0,
+          "enmity_raw": -0.9936607918964552,
+          "enmity_salience": -0.995418074407504,
+          "amity_raw": 0.53748384988657,
+          "amity_salience": 0.53748384988657,
+          "fragmentative_goals_raw": -0.9925232596048371,
+          "fragmentative_goals_salience": -1.0000000000000002,
+          "cohesive_goals_raw": 0.5619514869490165,
+          "cohesive_goals_salience": 0.5922200922639821
+        },
+        "compersion_salience": {
+          "tribal_dominance_raw": -0.9609331989577096,
+          "tribal_dominance_salience": -1.0,
+          "individual_dignity_raw": 0.5739640213948525,
+          "individual_dignity_salience": 0.7336041484035752,
+          "fear_raw": -0.936585811581694,
+          "fear_salience": -0.9918365981341754,
+          "hope_raw": 0.662266178532522,
+          "hope_salience": 0.6644105970267494,
+          "envy_raw": -0.975342893301088,
+          "envy_salience": -0.975342893301088,
+          "compersion_raw": 1.0,
+          "compersion_salience": 1.0,
+          "enmity_raw": -0.9936607918964552,
+          "enmity_salience": -0.995418074407504,
+          "amity_raw": 0.53748384988657,
+          "amity_salience": 0.53748384988657,
+          "fragmentative_goals_raw": -0.9925232596048371,
+          "fragmentative_goals_salience": -1.0000000000000002,
+          "cohesive_goals_raw": 0.5619514869490165,
+          "cohesive_goals_salience": 0.5922200922639821
+        },
+        "enmity_raw": {
+          "tribal_dominance_raw": 0.965026620965895,
+          "tribal_dominance_salience": 0.9936607918964552,
+          "individual_dignity_raw": -0.6054225005743158,
+          "individual_dignity_salience": -0.7563966410757144,
+          "fear_raw": 0.9380937880089723,
+          "fear_salience": 0.9783815094281901,
+          "hope_raw": -0.5738352396747864,
+          "hope_salience": -0.5772023444448998,
+          "envy_raw": 0.9815652396222592,
+          "envy_salience": 0.9815652396222592,
+          "compersion_raw": -0.9936607918964552,
+          "compersion_salience": -0.9936607918964552,
+          "enmity_raw": 1.0,
+          "enmity_salience": 0.9984171630210643,
+          "amity_raw": -0.5077836246896675,
+          "amity_salience": -0.5077836246896675,
+          "fragmentative_goals_raw": 0.9930921886232168,
+          "fragmentative_goals_salience": 0.9936607918964553,
+          "cohesive_goals_raw": -0.5360535931479842,
+          "cohesive_goals_salience": -0.5713468782674813
+        },
+        "enmity_salience": {
+          "tribal_dominance_raw": 0.9765361364919047,
+          "tribal_dominance_salience": 0.995418074407504,
+          "individual_dignity_raw": -0.6333794997024098,
+          "individual_dignity_salience": -0.7807786646830598,
+          "fear_raw": 0.9542307849663223,
+          "fear_salience": 0.9872920766416103,
+          "hope_raw": -0.5971863854337008,
+          "hope_salience": -0.6057893156706342,
+          "envy_raw": 0.9708739447368127,
+          "envy_salience": 0.9708739447368127,
+          "compersion_raw": -0.995418074407504,
+          "compersion_salience": -0.995418074407504,
+          "enmity_raw": 0.9984171630210643,
+          "enmity_salience": 1.0,
+          "amity_raw": -0.5543884199246231,
+          "amity_salience": -0.5543884199246231,
+          "fragmentative_goals_raw": 0.9980827590608694,
+          "fragmentative_goals_salience": 0.995418074407504,
+          "cohesive_goals_raw": -0.5813130069335067,
+          "cohesive_goals_salience": -0.6147261168664986
+        },
+        "amity_raw": {
+          "tribal_dominance_raw": -0.7071886261246928,
+          "tribal_dominance_salience": -0.5374838498865699,
+          "individual_dignity_raw": 0.8488214333774705,
+          "individual_dignity_salience": 0.85104652580494,
+          "fear_raw": -0.7667165388930551,
+          "fear_salience": -0.637478616791804,
+          "hope_raw": 0.5311979292749331,
+          "hope_salience": 0.6239613684578472,
+          "envy_raw": -0.3435729672075618,
+          "envy_salience": -0.3435729672075618,
+          "compersion_raw": 0.53748384988657,
+          "compersion_salience": 0.53748384988657,
+          "enmity_raw": -0.5077836246896675,
+          "enmity_salience": -0.5543884199246231,
+          "amity_raw": 1.0,
+          "amity_salience": 1.0,
+          "fragmentative_goals_raw": -0.6048318076475361,
+          "fragmentative_goals_salience": -0.5374838498865698,
+          "cohesive_goals_raw": 0.9990548840121628,
+          "cohesive_goals_salience": 0.9949930393083251
+        },
+        "amity_salience": {
+          "tribal_dominance_raw": -0.7071886261246928,
+          "tribal_dominance_salience": -0.5374838498865699,
+          "individual_dignity_raw": 0.8488214333774705,
+          "individual_dignity_salience": 0.85104652580494,
+          "fear_raw": -0.7667165388930551,
+          "fear_salience": -0.637478616791804,
+          "hope_raw": 0.5311979292749331,
+          "hope_salience": 0.6239613684578472,
+          "envy_raw": -0.3435729672075618,
+          "envy_salience": -0.3435729672075618,
+          "compersion_raw": 0.53748384988657,
+          "compersion_salience": 0.53748384988657,
+          "enmity_raw": -0.5077836246896675,
+          "enmity_salience": -0.5543884199246231,
+          "amity_raw": 1.0,
+          "amity_salience": 1.0,
+          "fragmentative_goals_raw": -0.6048318076475361,
+          "fragmentative_goals_salience": -0.5374838498865698,
+          "cohesive_goals_raw": 0.9990548840121628,
+          "cohesive_goals_salience": 0.9949930393083251
+        },
+        "fragmentative_goals_raw": {
+          "tribal_dominance_raw": 0.9869224135317315,
+          "tribal_dominance_salience": 0.9925232596048371,
+          "individual_dignity_raw": -0.6687461442647573,
+          "individual_dignity_salience": -0.8100558659217878,
+          "fear_raw": 0.9699998635937787,
+          "fear_salience": 0.9922028767223467,
+          "hope_raw": -0.6115883541566586,
+          "hope_salience": -0.6266756188570107,
+          "envy_raw": 0.9545819788889428,
+          "envy_salience": 0.9545819788889428,
+          "compersion_raw": -0.9925232596048371,
+          "compersion_salience": -0.9925232596048371,
+          "enmity_raw": 0.9930921886232168,
+          "enmity_salience": 0.9980827590608694,
+          "amity_raw": -0.6048318076475361,
+          "amity_salience": -0.6048318076475361,
+          "fragmentative_goals_raw": 1.0,
+          "fragmentative_goals_salience": 0.992523259604837,
+          "cohesive_goals_raw": -0.6304999113359563,
+          "cohesive_goals_salience": -0.6621374769467888
+        },
+        "fragmentative_goals_salience": {
+          "tribal_dominance_raw": 0.9609331989577097,
+          "tribal_dominance_salience": 1.0000000000000002,
+          "individual_dignity_raw": -0.5739640213948521,
+          "individual_dignity_salience": -0.7336041484035752,
+          "fear_raw": 0.936585811581694,
+          "fear_salience": 0.9918365981341755,
+          "hope_raw": -0.6622661785325221,
+          "hope_salience": -0.6644105970267495,
+          "envy_raw": 0.9753428933010881,
+          "envy_salience": 0.9753428933010881,
+          "compersion_raw": -1.0000000000000002,
+          "compersion_salience": -1.0000000000000002,
+          "enmity_raw": 0.9936607918964553,
+          "enmity_salience": 0.995418074407504,
+          "amity_raw": -0.5374838498865698,
+          "amity_salience": -0.5374838498865698,
+          "fragmentative_goals_raw": 0.992523259604837,
+          "fragmentative_goals_salience": 1.0,
+          "cohesive_goals_raw": -0.5619514869490163,
+          "cohesive_goals_salience": -0.592220092263982
+        },
+        "cohesive_goals_raw": {
+          "tribal_dominance_raw": -0.7319970720175678,
+          "tribal_dominance_salience": -0.5619514869490163,
+          "individual_dignity_raw": 0.8683767488255848,
+          "individual_dignity_salience": 0.8729998772344009,
+          "fear_raw": -0.7894736842105263,
+          "fear_salience": -0.6587029695195817,
+          "hope_raw": 0.5210260492953508,
+          "hope_salience": 0.6133878591220647,
+          "envy_raw": -0.3727048646394774,
+          "envy_salience": -0.3727048646394774,
+          "compersion_raw": 0.5619514869490165,
+          "compersion_salience": 0.5619514869490165,
+          "enmity_raw": -0.5360535931479842,
+          "enmity_salience": -0.5813130069335067,
+          "amity_raw": 0.9990548840121628,
+          "amity_salience": 0.9990548840121628,
+          "fragmentative_goals_raw": -0.6304999113359563,
+          "fragmentative_goals_salience": -0.5619514869490163,
+          "cohesive_goals_raw": 1.0,
+          "cohesive_goals_salience": 0.9983968843464852
+        },
+        "cohesive_goals_salience": {
+          "tribal_dominance_raw": -0.7622275906177156,
+          "tribal_dominance_salience": -0.5922200922639821,
+          "individual_dignity_raw": 0.8913803121678295,
+          "individual_dignity_salience": 0.8991129950119553,
+          "fear_raw": -0.8168701781016696,
+          "fear_salience": -0.6844740842458841,
+          "hope_raw": 0.506304017311327,
+          "hope_salience": 0.5978810999151275,
+          "envy_raw": -0.40958343040239614,
+          "envy_salience": -0.40958343040239614,
+          "compersion_raw": 0.5922200922639821,
+          "compersion_salience": 0.5922200922639821,
+          "enmity_raw": -0.5713468782674813,
+          "enmity_salience": -0.6147261168664986,
+          "amity_raw": 0.9949930393083251,
+          "amity_salience": 0.9949930393083251,
+          "fragmentative_goals_raw": -0.6621374769467888,
+          "fragmentative_goals_salience": -0.592220092263982,
+          "cohesive_goals_raw": 0.9983968843464852,
+          "cohesive_goals_salience": 1.0
+        }
+      },
+      "identify_high_contradiction_documents": {
+        "high_contradiction_documents": [
+          {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "strategic_contradiction_index": 0.10200000000000002,
+            "full_cohesion_index": -0.3702546477112952
+          },
+          {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "strategic_contradiction_index": 0.044000000000000004,
+            "full_cohesion_index": -0.7350032959789058
+          },
+          {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "strategic_contradiction_index": 0.03600000000000001,
+            "full_cohesion_index": -0.17460080584987314
+          },
+          {
+            "document_name": "john_mccain_2008_concession.txt",
+            "strategic_contradiction_index": 0.014000000000000002,
+            "full_cohesion_index": 0.8398133748055987
+          }
+        ]
+      },
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-25T21:14:09.648613",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribal_dominance_raw",
+            "tribal_dominance_salience",
+            "tribal_dominance_confidence",
+            "individual_dignity_raw",
+            "individual_dignity_salience",
+            "individual_dignity_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "envy_raw",
+            "envy_salience",
+            "envy_confidence",
+            "compersion_raw",
+            "compersion_salience",
+            "compersion_confidence",
+            "enmity_raw",
+            "enmity_salience",
+            "enmity_confidence",
+            "amity_raw",
+            "amity_salience",
+            "amity_confidence",
+            "fragmentative_goals_raw",
+            "fragmentative_goals_salience",
+            "fragmentative_goals_confidence",
+            "cohesive_goals_raw",
+            "cohesive_goals_salience",
+            "cohesive_goals_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-25T21:14:09.660770",
+          "sample_size": 4,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "tribal_dominance_raw",
+            "tribal_dominance_salience",
+            "tribal_dominance_confidence",
+            "individual_dignity_raw",
+            "individual_dignity_salience",
+            "individual_dignity_confidence",
+            "fear_raw",
+            "fear_salience",
+            "fear_confidence",
+            "hope_raw",
+            "hope_salience",
+            "hope_confidence",
+            "envy_raw",
+            "envy_salience",
+            "envy_confidence",
+            "compersion_raw",
+            "compersion_salience",
+            "compersion_confidence",
+            "enmity_raw",
+            "enmity_salience",
+            "enmity_confidence",
+            "amity_raw",
+            "amity_salience",
+            "amity_confidence",
+            "fragmentative_goals_raw",
+            "fragmentative_goals_salience",
+            "fragmentative_goals_confidence",
+            "cohesive_goals_raw",
+            "cohesive_goals_salience",
+            "cohesive_goals_confidence"
+          ]
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}
+
+**Available Evidence for Citation:**
+You have access to 80 pieces of textual evidence extracted during analysis. Use semantic queries to find relevant evidence for each statistical finding.
+
+# ANALYTICAL REQUIREMENTS
+
+## Level 1: Basic Statistical Interpretation
+- Interpret descriptive statistics for all measured dimensions
+- Identify patterns in means, standard deviations, and distributions
+- Note significant correlations and their strength
+- Assess measurement quality using framework-appropriate validation:
+  * For oppositional frameworks: Interpret negative correlations as validation (opposing constructs should be negatively correlated)
+  * For unidimensional frameworks: Interpret traditional reliability metrics (Cronbach's Alpha)
+
+## Level 2: Advanced Pattern Recognition  
+- Analyze cross-dimensional relationships and interaction effects
+- Identify statistical outliers and anomalous patterns
+- Examine confidence patterns and analytical uncertainty
+- Detect framework-specific insights from derived metrics
+
+## Level 3: Cross-Dimensional Network Analysis
+- Map dimensional clustering and meta-strategies
+- Identify universal patterns across all cases
+- Analyze tension patterns and strategic contradictions
+- Assess variance decomposition and discriminatory power
+
+## Level 4: Temporal and Archetypal Analysis
+- Examine temporal progression patterns (when applicable)
+- Identify rhetorical archetypes and speaker clustering
+- Analyze normative layer gradients and trajectories
+- Assess framework effectiveness and limitations
+
+## Level 5: Meta-Analysis and Theoretical Integration
+- Connect findings to relevant theoretical frameworks
+- Identify methodological implications and innovations
+- Generate testable hypotheses for future research
+- Assess broader implications for the field
+
+# REPORT STRUCTURE REQUIREMENTS
+
+## 0. Experiment Provenance Header (REQUIRED FIRST)
+Start every report with available experiment metadata:
+
+```
+# [Framework Name] Analysis Report
+
+**Experiment**: [experiment_name]  
+**Run ID**: [run_id]  
+**Date**: [completion_date]  
+**Framework**: [framework_filename]  
+**Corpus**: [corpus_filename] ([document_count] documents)  
+
+---
+```
+
+Use only metadata that is actually available in the experiment_metadata. This header enables traceability of results.
+
+## 1. Executive Summary (2-3 paragraphs)
+- Key findings with statistical support
+- Primary insights and their significance
+- Framework effectiveness assessment
+
+## 2. Opening Framework: Key Insights (Bullet points)
+- 4-6 primary insights from the analysis
+- Each supported by specific statistical evidence
+- Clear, accessible language for broad audience
+
+## 3. Literature Review and Theoretical Framework (Optional)
+- Connect framework to relevant academic literature
+- Position analysis within scholarly discourse
+- Identify theoretical foundations
+
+## 4. Methodology
+- Framework description and analytical approach
+- Data structure and corpus description
+- Statistical methods and analytical constraints
+- Acknowledge limitations and methodological choices
+
+## 5. Comprehensive Results
+### 5.1 Descriptive Statistics
+- Present all statistical results in properly formatted Markdown tables
+- Include significance indicators: * p<0.05, ** p<0.01, *** p<0.001
+- Add effect size interpretations (Small/Medium/Large based on Cohen's conventions)
+- Use consistent decimal precision (2-3 places)
+- Dimensional means, distributions, and patterns with statistical interpretation
+
+### 5.2 Advanced Metric Analysis
+- Derived metrics interpretation
+- Tension patterns and strategic contradictions
+- Confidence-weighted analysis
+
+### 5.3 Correlation and Interaction Analysis
+- Cross-dimensional relationships with theoretical interpretation
+- Network effects and clustering patterns
+- Meta-strategy identification
+
+### 5.4 Pattern Recognition and Theoretical Insights
+- Identify the strongest correlations and explain their practical significance
+- Connect statistical patterns to theoretical frameworks and literature
+- Explain what correlation patterns reveal about the framework's construct validity
+- Highlight unexpected findings and their implications
+- Assess framework-corpus fit based on statistical patterns
+
+### 5.5 Framework Effectiveness Assessment
+- Discriminatory power analysis
+- Framework-corpus fit evaluation
+- Methodological insights
+
+## 6. Discussion
+- Theoretical implications of findings
+- Comparative analysis and archetypal patterns
+- Broader significance for the field
+- Limitations and future directions
+
+## 7. Conclusion
+- Summary of key contributions
+- Methodological validation
+- Research implications
+
+## 8. Evidence Citations
+- Complete attribution for all quoted evidence
+- Organized by source document
+- Substantial quotes with context
+
+# CRITICAL REQUIREMENTS
+
+## Evidence Integration Standards
+- **Mandatory Citation**: For every major statistical finding or interpretation presented, you MUST cite at least one supporting textual quote retrieved from the RAG evidence database. Do not make claims without direct textual support.
+- **Qualify, Don't Omit**: If the retrieved evidence is weak or indirect, you must still cite it and then explicitly state the weakness in your analysis (e.g., "While the textual evidence is not a direct confirmation, it suggests..."). Do not simply omit evidence and write meta-commentary about its absence.
+- **Attribution format**: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
+- **Substantial quotes**: Full sentences, not fragments
+- **Quality check**: Every Results paragraph contains at least one direct quote
+
+## Statistical Interpretation Standards
+- **No calculations**: Interpret provided statistics as definitive facts
+- **Numerical Precision**: When citing statistical values, use appropriate precision (typically 2-3 decimal places for correlations, means, and standard deviations) following APA style guidelines
+- **Data Interpretation Process**: Use the exact numerical values from the statistical data to inform your qualitative descriptions and determine effect sizes
+- **Transparency**: State analytical approach clearly (descriptive vs. inferential)  
+- **Appropriate conclusions**: Draw strongest evidence-based conclusions possible while avoiding grandiose or unsubstantiated claims
+- **Uncertainty acknowledgment**: Note limitations while maximizing insights
+- **Academic Tone**: Use measured, evidence-based language rather than superlatives or overstated claims
+
+## Citation and Reference Standards
+- **NO EXTERNAL CITATIONS**: Do not include academic references, citations, or bibliographic entries (e.g., "Author et al., 2023")
+- **NO AUTHORITY CLAIMS**: Avoid phrases like "research shows," "studies indicate," or "according to literature"
+- **DATA-FOCUSED LANGUAGE**: Use "This analysis suggests," "These findings indicate," or "The data reveals"
+- **RESEARCHER GUIDANCE**: Include phrases like "researchers may wish to explore," "future studies could investigate," or "this warrants further investigation"
+- **COMPUTATIONAL FOCUS**: Position findings as computational analysis results, not authoritative academic claims
+
+## Framework Agnosticism Standards
+- **Dynamic adaptation**: Work with any framework's dimensional structure
+- **No assumptions**: Don't assume specific dimension names or relationships
+- **Flexible analysis**: Adapt analytical depth to available data richness
+- **Universal patterns**: Look for insights applicable across frameworks
+- **Accurate terminology**: Use the exact framework terminology from the specification (e.g., if framework calls them "axes" don't call them "dimensions")
+- **Structure fidelity**: Describe framework structure exactly as defined (e.g., "Identity Axis: Tribalism/Dignity" not "Identity dimension")
+- **Avoid hallucination**: Never invent framework elements not present in the specification
+
+## Academic Quality Standards
+- **Publication-ready**: Suitable for peer-reviewed journal submission
+- **Methodological rigor**: Clear methodology and limitation acknowledgment
+- **Theoretical grounding**: Connect to relevant academic literature when possible
+- **Reproducible insights**: Clear connection from data through analysis to conclusions
+- **Cautious Tone & Claim Strength**: Maintain a neutral, objective, and academic tone. Avoid promotional language, superlatives, and grandiose claims (e.g., "powerful," "profound," "demonstrates conclusively," "validates the framework"). All claims must be proportional to the evidence. Given the small sample size of this pilot study (N=4), all findings should be presented as "preliminary," "suggestive," or "indicative" rather than "validated" or "proven." State findings factually and let the data speak for itself.
+
+# OUTPUT INSTRUCTIONS
+
+Generate a comprehensive academic report following the structure above. Use the complete research data and evidence to extract maximum insights while maintaining scientific rigor. The report should demonstrate the analytical sophistication possible through computational social science methods.
+
+**Target Length**: 3000-5000 words for comprehensive analysis
+**Writing Style**: Academic but accessible, suitable for computational social science journals
+**Evidence Integration**: Seamless weaving of statistical and textual evidence throughout

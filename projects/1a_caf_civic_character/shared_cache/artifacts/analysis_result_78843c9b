@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_c5e329c9edc3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "caf_civic_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"civic_analysis_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis focused on identifying specific markers for each dimension, paying close attention to the disambiguation rules for overlapping concepts, particularly for the 'us vs. them' framing and the interplay between emotional and reality axes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy_261b893a.txt\",\n      \"dimensional_scores\": {\n        \"tribalism\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"dignity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"truth\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        },\n        \"resentment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"justice\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'\",\n          \"confidence\": 0.9,\n          \"context_type\": \"group_vs_group_framing\"\n        },\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.7,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... And in your community, they make a donation to the hospital or the Boys & Girls Clubs or the food shelf. They're just very nice. But they're not.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"emotional_exploitation_and_misleading_framing\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"simplified_factual_claim\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"blame_and_grievance_explanation\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"call_for_fair_outcomes\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"We will not accept an oligarchic form of society.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"threat_focused_language\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"positive_vision_for_future\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"oversimplified_solution_or_outcome\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.7,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "35a564d098e2975eb6517a3217577b1fdb95409d914e259edcd5ed104bb61e08",
+  "execution_metadata": {
+    "start_time": "2025-08-25T23:38:35.950177+00:00",
+    "end_time": "2025-08-25T23:38:58.680435+00:00",
+    "duration_seconds": 22.730246
+  },
+  "input_artifacts": {
+    "framework_hash": "42b4a6be21362d18179785c3b4fea060b9d8f6304ad9971def597e5cf4c33bad",
+    "document_hashes": [
+      "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250825T233613Z_0a0cd518"
+  }
+}

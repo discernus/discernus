@@ -83,8 +83,12 @@ class UnifiedSynthesisAgent:
             )
 
         try:
-            # 1. Assemble the base prompt WITHOUT the evidence database.
-            # The evidence will be injected Just-In-Time by this agent.
+            # 1. Validate RAG index is available (no direct evidence access allowed)
+            if not self.rag_index:
+                raise ValueError("RAG index required for evidence retrieval. No direct evidence access allowed.")
+            
+            # 2. Assemble the base prompt WITHOUT the evidence database.
+            # The evidence will be injected Just-In-Time by this agent through RAG only.
             assembler = SynthesisPromptAssembler()
             base_prompt = assembler.assemble_prompt(
                 framework_path=framework_path,
@@ -103,15 +107,27 @@ class UnifiedSynthesisAgent:
             )
 
             # 3. Use the RAG index to find evidence for each finding.
-            evidence_context = self._retrieve_and_format_evidence(statistical_findings)
+            evidence_context = self._prepare_evidence_context_through_rag(statistical_findings, self.rag_index)
 
             # 4. Construct the final, enhanced prompt with the retrieved evidence.
             final_prompt = f"""{base_prompt}
 
-# AVAILABLE EVIDENCE (retrieved via targeted RAG queries):
+# SEQUENTIAL SYNTHESIS PROCESS - FOLLOW THESE STEPS IN ORDER:
+
+## STEP 1: EVIDENCE RETRIEVAL AND INTEGRATION
 {evidence_context}
 
-Use the evidence above to support your statistical interpretations and generate the final report."""
+## STEP 2: EVIDENCE-BASED REPORT GENERATION
+Now that you have the evidence context above, proceed to write your comprehensive report.
+
+**CRITICAL REQUIREMENTS:**
+- Every major statistical claim MUST be supported by evidence from the RAG system above
+- Use the exact format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'
+- If no evidence was found for a finding, explicitly state: "No supporting textual evidence was found for this statistical pattern"
+- Do NOT proceed to report writing until you have examined the evidence above
+
+## STEP 3: FINAL REPORT STRUCTURE
+Generate your comprehensive academic report following the structure specified in the prompt above, ensuring all claims are evidence-backed."""
 
             # 5. Execute the LLM call.
             final_report, metadata = self.llm_gateway.execute_call(
@@ -181,32 +197,68 @@ Use the evidence above to support your statistical interpretations and generate 
         for query in queries:
             all_evidence_lines.append(f"\n## Evidence related to: '{query}'")
             try:
-                search_results = self.rag_index.search(query, limit=3)
-                if not search_results:
-                    all_evidence_lines.append("- No direct evidence found in the database.")
-                    continue
+                # Check if we're using our EvidenceMatchingWrapper
+                if hasattr(self.rag_index, 'search_evidence'):
+                    # Use our wrapper's intelligent search method
+                    search_results = self.rag_index.search_evidence(query, limit=3)
+                    if not search_results:
+                        all_evidence_lines.append("- No direct evidence found in the database.")
+                        continue
 
-                for result in search_results:
-                    # result is a dict {'id': ..., 'text': ..., 'score': ...}
-                    quote = result.get("text", "Content not available")
-                    score = result.get("score", 0.0)
-                    # Attempt to parse the JSON content of the quote to get metadata
-                    try:
-                        evidence_data = json.loads(quote)
-                        doc_name = evidence_data.get("document_name", "Unknown")
-                        dimension = evidence_data.get("dimension", "Unknown")
-                        actual_quote = evidence_data.get("quote_text", quote)
-                        line = f"- From '{doc_name}' ({dimension}): \"{actual_quote}\" (Relevance: {score:.2f})"
-                        all_evidence_lines.append(line)
-                    except json.JSONDecodeError:
-                        # If it's not JSON, it's just plain text, use it directly
-                        all_evidence_lines.append(f"- \"{quote}\" (Relevance: {score:.2f})")
+                    for result in search_results:
+                        quote_text = result.get('quote_text', 'Content not available')
+                        doc_name = result.get('document_name', 'Unknown')
+                        dimension = result.get('dimension', 'Unknown')
+                        relevance_score = result.get('relevance_score', 0.0)
+                        
+                        if quote_text and quote_text.strip():
+                            line = f"- From '{doc_name}' ({dimension}): \"{quote_text}\" (Relevance: {relevance_score:.2f})"
+                            all_evidence_lines.append(line)
+                        else:
+                            all_evidence_lines.append(f"- From '{doc_name}' ({dimension}): No quote text available")
+                
+                else:
+                    # Fallback to standard txtai interface
+                    search_results = self.rag_index.search(query, limit=3)
+                    if not search_results:
+                        all_evidence_lines.append("- No direct evidence found in the database.")
+                        continue
+
+                    # Get documents if available
+                    documents = getattr(self.rag_index, 'documents', [])
+                    
+                    for result in search_results:
+                        if isinstance(result, tuple) and len(result) == 2:
+                            # txtai format: (doc_id, score)
+                            doc_id, score = result
+                            if documents and 0 <= doc_id < len(documents):
+                                doc = documents[doc_id]
+                                quote = doc.get("text", "Content not available")
+                                metadata = doc.get("metadata", {})
+                                doc_name = metadata.get("document_name", "Unknown")
+                                dimension = metadata.get("dimension", "Unknown")
+                                line = f"- From '{doc_name}' ({dimension}): \"{quote}\" (Relevance: {score:.2f})"
+                                all_evidence_lines.append(line)
+                            else:
+                                all_evidence_lines.append(f"- Document {doc_id}: Content not available (Relevance: {score:.2f})")
+                        else:
+                            # Assume dict format
+                            quote = result.get("text", "Content not available")
+                            score = result.get("score", 0.0)
+                            all_evidence_lines.append(f"- \"{quote}\" (Relevance: {score:.2f})")
 
             except Exception as e:
                 all_evidence_lines.append(f"- Error during RAG search for this query: {e}")
         
         return "\n".join(all_evidence_lines)
 
+    def _load_basic_prompt_template(self) -> Dict[str, Any]:
+        """Load basic synthesis prompt template."""
+        return {
+            "system": "You are an expert academic synthesis agent.",
+            "user": "Generate a comprehensive synthesis report."
+        }
+    
     def _load_enhanced_prompt_template(self) -> Dict[str, Any]:
         """Load enhanced synthesis prompt template."""
         try:
@@ -286,58 +338,108 @@ Use the evidence above to support your statistical interpretations and generate 
                 })
             raise
     
-    def _get_all_evidence(self, evidence_artifact_hashes: List[str], artifact_storage) -> List[Dict[str, Any]]:
-        """Retrieve and combine all evidence from artifacts."""
-        all_evidence = []
+    def _get_evidence_through_rag(self, query: str, rag_index: Any) -> List[Dict[str, Any]]:
+        """Get evidence ONLY through RAG - no direct access allowed."""
+        if not rag_index:
+            raise ValueError("RAG index required for evidence retrieval - no direct evidence access allowed")
         
-        for hash_id in evidence_artifact_hashes:
+        try:
+            # Use RAG to find evidence
+            search_results = rag_index.search(query, limit=5)
+            return self._format_rag_results(search_results)
+        except Exception as e:
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "rag_evidence_retrieval_failed", {
+                    "query": query,
+                    "error": str(e)
+                })
+            return []
+    
+    def _format_rag_results(self, search_results: List) -> List[Dict[str, Any]]:
+        """Format RAG search results into evidence format."""
+        formatted_results = []
+        
+        for result in search_results:
             try:
-                # Use quiet=True to suppress verbose logging during bulk evidence retrieval
-                evidence_content = artifact_storage.get_artifact(hash_id, quiet=True)
-                evidence_data = json.loads(evidence_content.decode('utf-8'))
-                evidence_list = evidence_data.get('evidence_data', [])
-                all_evidence.extend(evidence_list)
+                if isinstance(result, tuple) and len(result) == 2:
+                    doc_id, score = result
+                elif isinstance(result, dict):
+                    doc_id = result.get('id', result.get('document', 0))
+                    score = result.get('score', 0.0)
+                else:
+                    doc_id = result
+                    score = 0.0
+                
+                # Get document content through RAG interface
+                if hasattr(rag_index, 'documents') and rag_index.documents:
+                    if isinstance(doc_id, int) and 0 <= doc_id < len(rag_index.documents):
+                        doc = rag_index.documents[doc_id]
+                        formatted_results.append({
+                            "quote_text": doc.get('text', ''),
+                            "document_name": doc.get('metadata', {}).get('document_name', 'Unknown'),
+                            "dimension": doc.get('metadata', {}).get('dimension', 'Unknown'),
+                            "confidence": doc.get('metadata', {}).get('confidence', 0.0),
+                            "relevance_score": score
+                        })
+                else:
+                    # txtai returns content directly in search results
+                    if hasattr(result, 'get'):
+                        formatted_results.append({
+                            "quote_text": result.get('text', ''),
+                            "document_name": result.get('metadata', {}).get('document_name', 'Unknown') if result.get('metadata') else 'Unknown',
+                            "dimension": result.get('metadata', {}).get('dimension', 'Unknown') if result.get('metadata') else 'Unknown',
+                            "confidence": result.get('metadata', {}).get('confidence', 0.0) if result.get('metadata') else 0.0,
+                            "relevance_score": score
+                        })
             except Exception as e:
                 if self.audit_logger:
-                    self.audit_logger.log_agent_event(self.agent_name, "evidence_retrieval_failed", {
-                        "artifact_hash": hash_id,
+                    self.audit_logger.log_agent_event(self.agent_name, "rag_result_formatting_failed", {
+                        "result": str(result),
                         "error": str(e)
                     })
                 continue
         
-        return all_evidence
+        return formatted_results
     
-    def _prepare_evidence_context(self, evidence_artifact_hashes: List[str], artifact_storage) -> str:
-        """Prepare comprehensive evidence context with count and direct access."""
-        all_evidence = self._get_all_evidence(evidence_artifact_hashes, artifact_storage)
+    def _prepare_evidence_context_through_rag(self, statistical_findings: List[str], rag_index: Any) -> str:
+        """Prepare evidence context ONLY through RAG - no direct access allowed."""
+        if not rag_index:
+            return "ERROR: No RAG index available. Evidence retrieval requires RAG integration."
         
-        if not all_evidence:
-            return "No evidence available for citation."
-        
-        # Enhanced mode: Provide evidence count AND direct access (superior to RAG queries)
         evidence_lines = [
-            f"EVIDENCE DATABASE: {len(all_evidence)} pieces of textual evidence extracted during analysis.",
-            f"All evidence is provided below for direct citation - no queries needed.",
+            "🔍 STEP 1: EVIDENCE RETRIEVAL COMPLETED",
+            "Using RAG system to find supporting textual evidence for statistical findings.",
             "",
-            "CITATION REQUIREMENTS:",
-            "- Every major statistical claim MUST be supported by direct quotes from evidence below",
+            "📋 EVIDENCE CITATION REQUIREMENTS:",
+            "- Every major statistical claim MUST be supported by evidence retrieved through RAG",
             "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
-            "- Prioritize evidence with confidence scores >0.8",
-            "- Integrate statistical findings with textual evidence for coherent narratives",
-            "",
-            "AVAILABLE EVIDENCE FOR DIRECT CITATION:",
+            "- Evidence retrieved based on statistical finding queries",
+            "- If no evidence found, explicitly state this limitation",
             ""
         ]
         
-        for i, evidence in enumerate(all_evidence, 1):
-            doc_name = evidence.get('document_name', 'Unknown')
-            dimension = evidence.get('dimension', 'Unknown')
-            quote = evidence.get('quote_text', '')
-            confidence = evidence.get('confidence', 0.0)
-            
-            evidence_lines.append(f"{i}. **{dimension}** evidence from {doc_name} (confidence: {confidence:.2f}):")
-            evidence_lines.append(f"   \"{quote}\"")
-            evidence_lines.append("")  # Empty line for readability
+        # Add RAG-based evidence for each statistical finding
+        evidence_lines.append(f"📊 STATISTICAL FINDINGS TO SUPPORT: {len(statistical_findings)} findings identified")
+        evidence_lines.append("")
+        
+        for i, finding in enumerate(statistical_findings[:3]):  # Limit to first 3 findings
+            evidence_lines.append(f"🔍 **Finding {i+1}: {finding}**")
+            evidence = self._get_evidence_through_rag(finding, rag_index)
+            if evidence:
+                evidence_lines.append(f"✅ Evidence found: {len(evidence)} pieces")
+                for j, ev in enumerate(evidence[:2]):  # Top 2 pieces of evidence per finding
+                    quote_text = ev.get('quote_text', 'No quote')
+                    if quote_text and quote_text.strip():
+                        evidence_lines.append(f"  📝 Quote {j+1}: \"{quote_text[:150]}{'...' if len(quote_text) > 150 else ''}\"")
+                        evidence_lines.append(f"     Source: {ev.get('document_name', 'Unknown')} | Dimension: {ev.get('dimension', 'Unknown')}")
+                    else:
+                        evidence_lines.append(f"  ⚠️ Quote {j+1}: No quote text available")
+                evidence_lines.append("")
+            else:
+                evidence_lines.append(f"❌ No evidence found for this finding")
+                evidence_lines.append("")
+        
+        evidence_lines.append("🎯 **NEXT STEP**: Use the evidence above to support your statistical interpretations.")
         
         return "\n".join(evidence_lines)
     

@@ -1,0 +1,104 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions several analytical dimensions and derived metrics as being defined within the Cohesive Flourishing Framework (CFF) v10.1 specification. However, the provided RAG index (evidence database) does not contain the full framework specification (cff_v10.md). Consequently, the definitions for the core base dimensions and some specific derived metrics are not found in the provided framework content, despite being referenced in the report as defined.",
+      "examples": [
+        "The report states: 'As described in its specification, the CFF moves beyond simple sentiment analysis by independently scoring texts along five oppositional axes: 1. Identity: `Tribal Dominance` vs. `Individual Dignity`...'. However, the definitions for `Tribal Dominance` and `Individual Dignity` are not present in the RAG index.",
+        "The report frequently references dimensions such as `Hope`, `Fear`, `Amity`, `Enmity`, `Compersion`, `Envy`, `Cohesive Goals`, and `Fragmentative Goals`. While these are presented as core components of the CFF, their definitions are not found in the provided evidence database.",
+        "The report refers to 'three composite `Cohesion Indices` (`Descriptive`, `Motivational`, and `Full`)'. While 'Cohesion Indices' are generally described in the RAG, the specific definitions for `Descriptive Cohesion Index` and `Motivational Cohesion Index` are not explicitly provided by name.",
+        "The report mentions 'five `Tension Indices`' and specifically references `relational_tension` and `goal_tension`. While `identity_tension` (a type of tension index) is defined in the RAG, explicit definitions for `relational_tension` and `goal_tension` are not found."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The report claims that John McCain's fragmentative scores are 'uniformly zero', but the provided raw analysis data shows a non-zero score for 'fear_raw'. This constitutes a numerical mismatch exceeding the acceptable rounding precision (>0.01).",
+      "examples": [
+        "Report claim (Section 5.4, also implied in Section 2): 'Its fragmentative scores are uniformly zero.' (referring to John McCain's 2008 concession speech)",
+        "Evidence (Source 3: raw_analysis_scores: individual_analysis_results.json for 'john_mccain_2008_concession.txt'): 'fear': {'raw_score': 0.1}"
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires selecting 5 evidence quotes from the report and cross-referencing them against the full text of corpus documents in the RAG evidence index to confirm their presence. However, the report explicitly states in multiple sections (e.g., 5.1, 5.2, 5.3, 5.4, and 8. Evidence Citations) that: 'No supporting textual evidence was found or retrieved by the automated analysis system for the statistical patterns discussed in this report.'\n\nConsequently, the report does not contain the type of 'textual evidence quotes' from the corpus documents that the rubric instructs to verify. The 'quotes' present in the report are either statistical findings, interpretations, or statements about the study itself, not direct textual excerpts from the analyzed corpus documents.\n\nFurthermore, the 'provided RAG evidence index (which contains the full text of all corpus documents)' is not included in the 'EVIDENCE DATABASE FOR VALIDATION'. The database contains framework specifications, experiment specifications, raw analysis scores (JSON), and a corpus manifest (listing documents), but not the actual full text of the corpus documents (e.g., `john_mccain_2008_concession.txt`, `steve_king_2017_house_floor.txt`, etc.).\n\nTherefore, the 'Evidence Quote Mismatch' check, as specified, cannot be performed due to the absence of textual quotes from the corpus within the report and the lack of the corpus documents themselves in the provided evidence database.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several instances of superlative or promotional language, which may require editorial review to maintain a strictly academic tone, especially given the acknowledged small sample size (N=4) and preliminary nature of the study. Phrases like 'primary insight,' 'particularly insightful,' 'immediately establishes,' 'most critical finding,' 'key strength,' 'methodological advance,' and 'powerful tool' are used to describe the framework's capabilities and the study's findings.",
+      "examples": [
+        "The study's primary insight is the clear demarcation between a highly cohesive, institution-affirming speech...",
+        "The CFF's derived metrics proved particularly insightful.",
+        "The vast range of the `Full Cohesion Index` (-0.74 to 0.84) immediately establishes it as a metric with significant discriminatory power.",
+        "The most critical finding is the consistent, strong negative correlation between the framework's designated opposing pairs.",
+        "The framework's ability to detect this structural similarity beneath ideological difference is a key strength.",
+        "The CFF's ability to quantify this tension is a methodological advance, allowing researchers to move beyond qualitative descriptions of 'mixed messages.'",
+        "The findings suggest that the CFF is a powerful tool for moving beyond surface-level ideological labels to uncover the deeper rhetorical structures that may unite seemingly disparate political movements."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions several analytical dimensions and derived metrics as being defined within the Cohesive Flourishing Framework (CFF) v10.1 specification. However, the provided RAG index (evidence database) does not contain the full framework specification (cff_v10.md). Consequently, the definitions for the core base dimensions and some specific derived metrics are not found in the provided framework content, despite being referenced in the report as defined.",
+        "examples": [
+          "The report states: 'As described in its specification, the CFF moves beyond simple sentiment analysis by independently scoring texts along five oppositional axes: 1. Identity: `Tribal Dominance` vs. `Individual Dignity`...'. However, the definitions for `Tribal Dominance` and `Individual Dignity` are not present in the RAG index.",
+          "The report frequently references dimensions such as `Hope`, `Fear`, `Amity`, `Enmity`, `Compersion`, `Envy`, `Cohesive Goals`, and `Fragmentative Goals`. While these are presented as core components of the CFF, their definitions are not found in the provided evidence database.",
+          "The report refers to 'three composite `Cohesion Indices` (`Descriptive`, `Motivational`, and `Full`)'. While 'Cohesion Indices' are generally described in the RAG, the specific definitions for `Descriptive Cohesion Index` and `Motivational Cohesion Index` are not explicitly provided by name.",
+          "The report mentions 'five `Tension Indices`' and specifically references `relational_tension` and `goal_tension`. While `identity_tension` (a type of tension index) is defined in the RAG, explicit definitions for `relational_tension` and `goal_tension` are not found."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The report claims that John McCain's fragmentative scores are 'uniformly zero', but the provided raw analysis data shows a non-zero score for 'fear_raw'. This constitutes a numerical mismatch exceeding the acceptable rounding precision (>0.01).",
+        "examples": [
+          "Report claim (Section 5.4, also implied in Section 2): 'Its fragmentative scores are uniformly zero.' (referring to John McCain's 2008 concession speech)",
+          "Evidence (Source 3: raw_analysis_scores: individual_analysis_results.json for 'john_mccain_2008_concession.txt'): 'fear': {'raw_score': 0.1}"
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires selecting 5 evidence quotes from the report and cross-referencing them against the full text of corpus documents in the RAG evidence index to confirm their presence. However, the report explicitly states in multiple sections (e.g., 5.1, 5.2, 5.3, 5.4, and 8. Evidence Citations) that: 'No supporting textual evidence was found or retrieved by the automated analysis system for the statistical patterns discussed in this report.'\n\nConsequently, the report does not contain the type of 'textual evidence quotes' from the corpus documents that the rubric instructs to verify. The 'quotes' present in the report are either statistical findings, interpretations, or statements about the study itself, not direct textual excerpts from the analyzed corpus documents.\n\nFurthermore, the 'provided RAG evidence index (which contains the full text of all corpus documents)' is not included in the 'EVIDENCE DATABASE FOR VALIDATION'. The database contains framework specifications, experiment specifications, raw analysis scores (JSON), and a corpus manifest (listing documents), but not the actual full text of the corpus documents (e.g., `john_mccain_2008_concession.txt`, `steve_king_2017_house_floor.txt`, etc.).\n\nTherefore, the 'Evidence Quote Mismatch' check, as specified, cannot be performed due to the absence of textual quotes from the corpus within the report and the lack of the corpus documents themselves in the provided evidence database.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several instances of superlative or promotional language, which may require editorial review to maintain a strictly academic tone, especially given the acknowledged small sample size (N=4) and preliminary nature of the study. Phrases like 'primary insight,' 'particularly insightful,' 'immediately establishes,' 'most critical finding,' 'key strength,' 'methodological advance,' and 'powerful tool' are used to describe the framework's capabilities and the study's findings.",
+        "examples": [
+          "The study's primary insight is the clear demarcation between a highly cohesive, institution-affirming speech...",
+          "The CFF's derived metrics proved particularly insightful.",
+          "The vast range of the `Full Cohesion Index` (-0.74 to 0.84) immediately establishes it as a metric with significant discriminatory power.",
+          "The most critical finding is the consistent, strong negative correlation between the framework's designated opposing pairs.",
+          "The framework's ability to detect this structural similarity beneath ideological difference is a key strength.",
+          "The CFF's ability to quantify this tension is a methodological advance, allowing researchers to move beyond qualitative descriptions of 'mixed messages.'",
+          "The findings suggest that the CFF is a powerful tool for moving beyond surface-level ideological labels to uncover the deeper rhetorical structures that may unite seemingly disparate political movements."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

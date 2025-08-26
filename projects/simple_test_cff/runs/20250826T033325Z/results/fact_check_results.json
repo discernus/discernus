@@ -1,0 +1,130 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "Several analytical dimensions and derived metrics mentioned in the report are not defined or explicitly described within the provided RAG index content, which serves as the framework specification for this validation. The report refers to 'cff_v10.md' as the framework specification, but the content of this comprehensive specification is not present in the provided RAG index. The RAG content only includes limited snippets related to derived metrics calculations (from `derived_metrics_results.json` and `statistical_results.json`), which define some, but not all, of the mentioned dimensions and metrics.",
+      "examples": [
+        "The following primary dimensions, explicitly listed in Section 4. Methodology as core to the CFF, are not defined in the provided RAG index: `Hope`, `Fear`, `Compersion`, `Envy`, `Amity`, `Enmity`, `Cohesive Goals`, `Fragmentative Goals`.",
+        "Specific derived tension metrics, such as `Emotional Tension` and `Relational Tension`, are mentioned in the report (e.g., Table 1, Section 5.2) but are not explicitly defined or described in the provided RAG index content, unlike `Identity Tension` which is defined."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided evidence database (RAG index) does not contain the necessary statistical results to validate the numerical claims made in the report. The `statistical_results.json` and `derived_metrics_results.json` files in the evidence database contain only function definitions and metadata, not the actual calculated means, standard deviations, correlations, or derived metrics (like Full Cohesion Index, Strategic Contradiction Index) for the analyzed documents or the corpus as a whole. The `individual_analysis_results.json` only provides raw scores for one of the four documents, which is insufficient to verify aggregated statistics or derived metrics for all documents. Therefore, it is impossible to perform the requested 'Statistic Mismatch' check as the corresponding values cannot be found in the provided research data.",
+      "examples": [
+        "Report claims: 'Full Cohesion Index' for John McCain's 2008 speech (+0.84). The evidence database does not contain calculated 'Full Cohesion Index' values for any document.",
+        "Report claims: 'Full Cohesion Index' had a mean of -0.11 with a very large standard deviation (0.67). The evidence database does not contain aggregated descriptive statistics (means, standard deviations) for any metric across the corpus.",
+        "Report claims: 'Amity' and 'Cohesive Goals' raw scores correlate at r = +0.999. The evidence database does not contain any correlation matrices or calculated correlation values."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires selecting 5 textual evidence quotes from the report and verifying their presence in the provided RAG evidence index (which should contain the full text of corpus documents). However, the report explicitly states in multiple sections (e.g., Section 4.3 'Methodological Limitations' and Section 8 'Evidence Citations') that 'the evidence retrieval system did not return any supporting textual quotations for the quantitative findings' and 'it is not possible to provide direct textual citations to validate the quantitative interpretations.' Consequently, the report does not contain any direct textual quotes from the corpus documents (john_mccain_2008_concession.txt, steve_king_2017_house_floor.txt, bernie_sanders_2025_fighting_oligarchy.txt, alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) that could be cross-referenced against a RAG index. The provided evidence database also does not contain the full text of these corpus documents. Therefore, the specific instruction to 'confirm the quote's presence' for 'textual evidence quoted in the report' cannot be fulfilled as no such quotes exist in the report to be cross-referenced against the RAG evidence index.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several claims regarding the Cohesive Flourishing Framework (CFF) that use superlative or promotional language, suggesting novelty, innovation, or superiority over other models. These claims are presented without explicit substantiation within the provided report or evidence database, especially given the report's own stated limitations of a small sample size (N=4) and lack of qualitative evidence for broader claims. Such claims may require editorial review for academic tone and substantiation.",
+      "examples": [
+        "The framework's core innovation\u2014the independent scoring of oppositional dimensions (e.g., `Hope` vs. `Fear`)\u2014addresses a known limitation in forced-choice analytical schemes. (Section 3)",
+        "The derived metrics, particularly the `Strategic Contradiction Index`, proved to be a valuable innovation, revealing a layer of rhetorical complexity that would be invisible to simpler models. (Section 5.5)",
+        "This challenges models that treat rhetorical choices as independent or additive, suggesting instead they are part of bundled, coherent systems of meaning-making. (Section 6)",
+        "Furthermore, the Cohesion vs. Contradiction analysis proposes a new typology for political speech. (Section 6)",
+        "This distinction is a novel contribution enabled by the CFF's architecture. (Section 6)",
+        "It moved beyond simplistic sentiment analysis to reveal nuanced rhetorical structures, identifying two opposing meta-strategies\u2014one cohesive, one fragmentative\u2014that appear to govern political discourse in this small sample. (Section 7)",
+        "The framework's internal validity was strongly supported by the data, and its novel `Strategic Contradiction Index` proved effective at distinguishing between simple and complex messaging styles. (Section 7)",
+        "They highlight the potential for sophisticated computational tools to provide a new lens on the forces of cohesion and fragmentation at play in democratic life, urging a path forward that combines large-scale quantitative analysis with deep qualitative interpretation. (Section 7)"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains several instances of 'authority claims' that refer to external academic concepts, theories, or models without specific citations, which is prohibited by the rubric. These claims imply reliance on external academic literature without providing the necessary attribution.",
+      "examples": [
+        "Section 3: 'The Cohesive Flourishing Framework (CFF) v10.1 aligns with theoretical models that view political language not merely as descriptive but as performative\u2014actively constructing social realities, identities, and group boundaries.' (Implies external theoretical models without citation)",
+        "Section 3: 'The framework's core innovation\u2014the independent scoring of oppositional dimensions (e.g., `Hope` vs. `Fear`)\u2014addresses a known limitation in forced-choice analytical schemes.' (Refers to a 'known limitation' in academic schemes without citation)",
+        "Section 3: 'The concept of a `Full Cohesion Index` builds upon theories of social capital and democratic health, which posit that trust, mutual regard (`Amity`), and a focus on shared goals (`Cohesive Goals`) are essential for a functioning society.' (References 'theories of social capital and democratic health' without citation)",
+        "Section 6: 'This challenges models that treat rhetorical choices as independent or additive, suggesting instead they are part of bundled, coherent systems of meaning-making.' (Refers to existing 'models' without citation)",
+        "Section 6: 'The traditional populist/institutional axis is enriched by understanding *how* these styles are constructed.' (References a 'traditional populist/institutional axis' without citation)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "Several analytical dimensions and derived metrics mentioned in the report are not defined or explicitly described within the provided RAG index content, which serves as the framework specification for this validation. The report refers to 'cff_v10.md' as the framework specification, but the content of this comprehensive specification is not present in the provided RAG index. The RAG content only includes limited snippets related to derived metrics calculations (from `derived_metrics_results.json` and `statistical_results.json`), which define some, but not all, of the mentioned dimensions and metrics.",
+        "examples": [
+          "The following primary dimensions, explicitly listed in Section 4. Methodology as core to the CFF, are not defined in the provided RAG index: `Hope`, `Fear`, `Compersion`, `Envy`, `Amity`, `Enmity`, `Cohesive Goals`, `Fragmentative Goals`.",
+          "Specific derived tension metrics, such as `Emotional Tension` and `Relational Tension`, are mentioned in the report (e.g., Table 1, Section 5.2) but are not explicitly defined or described in the provided RAG index content, unlike `Identity Tension` which is defined."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided evidence database (RAG index) does not contain the necessary statistical results to validate the numerical claims made in the report. The `statistical_results.json` and `derived_metrics_results.json` files in the evidence database contain only function definitions and metadata, not the actual calculated means, standard deviations, correlations, or derived metrics (like Full Cohesion Index, Strategic Contradiction Index) for the analyzed documents or the corpus as a whole. The `individual_analysis_results.json` only provides raw scores for one of the four documents, which is insufficient to verify aggregated statistics or derived metrics for all documents. Therefore, it is impossible to perform the requested 'Statistic Mismatch' check as the corresponding values cannot be found in the provided research data.",
+        "examples": [
+          "Report claims: 'Full Cohesion Index' for John McCain's 2008 speech (+0.84). The evidence database does not contain calculated 'Full Cohesion Index' values for any document.",
+          "Report claims: 'Full Cohesion Index' had a mean of -0.11 with a very large standard deviation (0.67). The evidence database does not contain aggregated descriptive statistics (means, standard deviations) for any metric across the corpus.",
+          "Report claims: 'Amity' and 'Cohesive Goals' raw scores correlate at r = +0.999. The evidence database does not contain any correlation matrices or calculated correlation values."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires selecting 5 textual evidence quotes from the report and verifying their presence in the provided RAG evidence index (which should contain the full text of corpus documents). However, the report explicitly states in multiple sections (e.g., Section 4.3 'Methodological Limitations' and Section 8 'Evidence Citations') that 'the evidence retrieval system did not return any supporting textual quotations for the quantitative findings' and 'it is not possible to provide direct textual citations to validate the quantitative interpretations.' Consequently, the report does not contain any direct textual quotes from the corpus documents (john_mccain_2008_concession.txt, steve_king_2017_house_floor.txt, bernie_sanders_2025_fighting_oligarchy.txt, alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) that could be cross-referenced against a RAG index. The provided evidence database also does not contain the full text of these corpus documents. Therefore, the specific instruction to 'confirm the quote's presence' for 'textual evidence quoted in the report' cannot be fulfilled as no such quotes exist in the report to be cross-referenced against the RAG evidence index.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several claims regarding the Cohesive Flourishing Framework (CFF) that use superlative or promotional language, suggesting novelty, innovation, or superiority over other models. These claims are presented without explicit substantiation within the provided report or evidence database, especially given the report's own stated limitations of a small sample size (N=4) and lack of qualitative evidence for broader claims. Such claims may require editorial review for academic tone and substantiation.",
+        "examples": [
+          "The framework's core innovation\u2014the independent scoring of oppositional dimensions (e.g., `Hope` vs. `Fear`)\u2014addresses a known limitation in forced-choice analytical schemes. (Section 3)",
+          "The derived metrics, particularly the `Strategic Contradiction Index`, proved to be a valuable innovation, revealing a layer of rhetorical complexity that would be invisible to simpler models. (Section 5.5)",
+          "This challenges models that treat rhetorical choices as independent or additive, suggesting instead they are part of bundled, coherent systems of meaning-making. (Section 6)",
+          "Furthermore, the Cohesion vs. Contradiction analysis proposes a new typology for political speech. (Section 6)",
+          "This distinction is a novel contribution enabled by the CFF's architecture. (Section 6)",
+          "It moved beyond simplistic sentiment analysis to reveal nuanced rhetorical structures, identifying two opposing meta-strategies\u2014one cohesive, one fragmentative\u2014that appear to govern political discourse in this small sample. (Section 7)",
+          "The framework's internal validity was strongly supported by the data, and its novel `Strategic Contradiction Index` proved effective at distinguishing between simple and complex messaging styles. (Section 7)",
+          "They highlight the potential for sophisticated computational tools to provide a new lens on the forces of cohesion and fragmentation at play in democratic life, urging a path forward that combines large-scale quantitative analysis with deep qualitative interpretation. (Section 7)"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains several instances of 'authority claims' that refer to external academic concepts, theories, or models without specific citations, which is prohibited by the rubric. These claims imply reliance on external academic literature without providing the necessary attribution.",
+        "examples": [
+          "Section 3: 'The Cohesive Flourishing Framework (CFF) v10.1 aligns with theoretical models that view political language not merely as descriptive but as performative\u2014actively constructing social realities, identities, and group boundaries.' (Implies external theoretical models without citation)",
+          "Section 3: 'The framework's core innovation\u2014the independent scoring of oppositional dimensions (e.g., `Hope` vs. `Fear`)\u2014addresses a known limitation in forced-choice analytical schemes.' (Refers to a 'known limitation' in academic schemes without citation)",
+          "Section 3: 'The concept of a `Full Cohesion Index` builds upon theories of social capital and democratic health, which posit that trust, mutual regard (`Amity`), and a focus on shared goals (`Cohesive Goals`) are essential for a functioning society.' (References 'theories of social capital and democratic health' without citation)",
+          "Section 6: 'This challenges models that treat rhetorical choices as independent or additive, suggesting instead they are part of bundled, coherent systems of meaning-making.' (Refers to existing 'models' without citation)",
+          "Section 6: 'The traditional populist/institutional axis is enriched by understanding *how* these styles are constructed.' (References a 'traditional populist/institutional axis' without citation)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

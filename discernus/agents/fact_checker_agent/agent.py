@@ -252,9 +252,7 @@ Be precise and factual. Only report actual issues, not potential concerns.
                         except Exception as e:
                             documents.append({"error": f"Failed to process document ID {doc_id}: {e}"})
                     else:
-                        has_docs = hasattr(evidence_index, 'documents')
-                        docs_count = len(evidence_index.documents) if has_docs and evidence_index.documents else 0
-                        documents.append({"error": f"No stored documents available (has_documents={has_docs}, count={docs_count}), cannot retrieve document {doc_id}"})
+                        documents.append({"error": "RAG index has no stored documents - evidence retrieval failed"})
                 except Exception as e:
                     documents.append({"error": f"Failed to process search result {result}: {e}"})
             

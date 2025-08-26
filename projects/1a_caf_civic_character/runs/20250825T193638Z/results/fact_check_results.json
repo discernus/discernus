@@ -1,0 +1,106 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "Multiple analytical dimensions, their definitions, and calculation methodologies mentioned and defined within the report are not found or are inconsistently defined in the provided RAG index (framework specification).",
+      "examples": [
+        "The report defines five fundamental axes and their ten constituent virtue/vice dimensions (e.g., 'Identity Axis: dignity vs. tribalism', 'Truth Axis: truth vs. manipulation', 'Justice Axis: justice vs. resentment', 'Emotional Axis: hope vs. fear', 'Reality Axis: pragmatism vs. fantasy'). The conceptual definitions for all ten of these core dimensions (dignity, tribalism, truth, manipulation, justice, resentment, hope, fear, pragmatism, fantasy) are not present in the RAG index. While 'tribal_dominance_col' and 'individual_dignity_col' are referenced in a function within the RAG, their conceptual definitions as provided in the report are absent.",
+        "The report defines the 'Salience-Weighted Civic Character Index (CCI)' with a specific calculation formula: '(Sum(Virtue * Salience) - Sum(Vice * Salience)) / Total_Salience'. This calculation formula is not present in the RAG index.",
+        "The report defines 'Character Tension Indices' with a general calculation formula: 'Tension = min(Virtue_Score, Vice_Score) * abs(Virtue_Salience - Vice_Salience)'. While the RAG index contains a function for 'calculate_identity_tension', its formula ('2 * min(A, B)') is inconsistent with the general formula provided in the report (it lacks the 'abs(Virtue_Salience - Vice_Salience)' component). The general definition is missing from the RAG.",
+        "The report defines classification criteria for 'Authentic Virtue' ('high CCI scores (> 0.50) and low mean tension (< 0.06)') and 'Strategic Pathology' ('negative CCI scores (< -0.30) and high average vice scores (> 0.70)'). While the RAG index mentions these as 'Pattern Classifications', it does not provide their defining criteria."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided evidence database does not contain the `statistical_results.json` file, which is explicitly required by the rubric's instructions to validate numerical values (means, correlations, etc.) cited in the report. Without this crucial data source, it is impossible to perform the requested 'Statistic Mismatch' check.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index. None of the selected quotes could be found in the index because their source documents (john_mccain_2008_concession_ff9b26f2.txt and bernie_sanders_2025_fighting_oligarchy_261b893a.txt) are not present in the provided evidence database. The provided evidence database only contains entries for 'john_lewis_1963_march_on_washington_ab348df3.txt', 'cory_booker_2018_first_step_act_0c32812a.txt', and 'steve_king_2017_house_floor_738780d9.txt'.",
+      "examples": [
+        "Quote: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+        "Quote: \"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+        "Quote: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+        "Quote: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+        "Quote: \"the speech contains no acknowledgement of complexity, trade-offs, or realistic constraints, making it impossible to find a supporting quote.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative and strong promotional phrases that may require editorial review for academic tone, especially given the acknowledged limitation of a small sample size (N=8).",
+      "examples": [
+        "The most potent opposition was between `pragmatism` and `fantasy` (r = -0.93)",
+        "The most significant finding from this table is the strong negative correlation between the virtue and vice on each of the five axes",
+        "The strongest observed relationship, between `pragmatism` and `fantasy` (r = -0.93)",
+        "While constrained by its small sample size, this analysis serves as a successful proof-of-concept.",
+        "It establishes a rigorous, scalable, and theoretically grounded method for analyzing the moral substance of civic discourse."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "Multiple analytical dimensions, their definitions, and calculation methodologies mentioned and defined within the report are not found or are inconsistently defined in the provided RAG index (framework specification).",
+        "examples": [
+          "The report defines five fundamental axes and their ten constituent virtue/vice dimensions (e.g., 'Identity Axis: dignity vs. tribalism', 'Truth Axis: truth vs. manipulation', 'Justice Axis: justice vs. resentment', 'Emotional Axis: hope vs. fear', 'Reality Axis: pragmatism vs. fantasy'). The conceptual definitions for all ten of these core dimensions (dignity, tribalism, truth, manipulation, justice, resentment, hope, fear, pragmatism, fantasy) are not present in the RAG index. While 'tribal_dominance_col' and 'individual_dignity_col' are referenced in a function within the RAG, their conceptual definitions as provided in the report are absent.",
+          "The report defines the 'Salience-Weighted Civic Character Index (CCI)' with a specific calculation formula: '(Sum(Virtue * Salience) - Sum(Vice * Salience)) / Total_Salience'. This calculation formula is not present in the RAG index.",
+          "The report defines 'Character Tension Indices' with a general calculation formula: 'Tension = min(Virtue_Score, Vice_Score) * abs(Virtue_Salience - Vice_Salience)'. While the RAG index contains a function for 'calculate_identity_tension', its formula ('2 * min(A, B)') is inconsistent with the general formula provided in the report (it lacks the 'abs(Virtue_Salience - Vice_Salience)' component). The general definition is missing from the RAG.",
+          "The report defines classification criteria for 'Authentic Virtue' ('high CCI scores (> 0.50) and low mean tension (< 0.06)') and 'Strategic Pathology' ('negative CCI scores (< -0.30) and high average vice scores (> 0.70)'). While the RAG index mentions these as 'Pattern Classifications', it does not provide their defining criteria."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided evidence database does not contain the `statistical_results.json` file, which is explicitly required by the rubric's instructions to validate numerical values (means, correlations, etc.) cited in the report. Without this crucial data source, it is impossible to perform the requested 'Statistic Mismatch' check.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index. None of the selected quotes could be found in the index because their source documents (john_mccain_2008_concession_ff9b26f2.txt and bernie_sanders_2025_fighting_oligarchy_261b893a.txt) are not present in the provided evidence database. The provided evidence database only contains entries for 'john_lewis_1963_march_on_washington_ab348df3.txt', 'cory_booker_2018_first_step_act_0c32812a.txt', and 'steve_king_2017_house_floor_738780d9.txt'.",
+        "examples": [
+          "Quote: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+          "Quote: \"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+          "Quote: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+          "Quote: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+          "Quote: \"the speech contains no acknowledgement of complexity, trade-offs, or realistic constraints, making it impossible to find a supporting quote.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative and strong promotional phrases that may require editorial review for academic tone, especially given the acknowledged limitation of a small sample size (N=8).",
+        "examples": [
+          "The most potent opposition was between `pragmatism` and `fantasy` (r = -0.93)",
+          "The most significant finding from this table is the strong negative correlation between the virtue and vice on each of the five axes",
+          "The strongest observed relationship, between `pragmatism` and `fantasy` (r = -0.93)",
+          "While constrained by its small sample size, this analysis serves as a successful proof-of-concept.",
+          "It establishes a rigorous, scalable, and theoretically grounded method for analyzing the moral substance of civic discourse."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

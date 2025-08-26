@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The rubric requires verifying that all analytical dimensions mentioned in the report are defined in the framework specification. The report explicitly states that the framework used is 'Cohesive Flourishing Framework (CFF) v10.1' and refers to 'its specification' (Section 4.1). The `experiment.md` (Source 2) further specifies the framework as 'cff_v10.md'. However, the provided evidence database (RAG index) does not contain the `cff_v10.md` file or any other document that constitutes the 'framework specification' itself. While some provided JSON files (e.g., `derived_metrics_results.json`, `statistical_results.json`) mention some dimensions and derived metrics, and even describe their calculation, they do not represent the comprehensive 'framework specification' where these dimensions are formally defined. Therefore, it is impossible to verify that the dimensions are 'defined in the framework specification' as the specification document itself is absent from the RAG index.",
+      "examples": [
+        "Full Cohesion Index",
+        "individual_dignity",
+        "hope",
+        "amity",
+        "cohesive_goals",
+        "Strategic Contradiction Index",
+        "tribal_dominance_raw",
+        "individual_dignity_raw",
+        "fear",
+        "envy",
+        "enmity",
+        "compersion_salience",
+        "fragmentative_goals_salience",
+        "Identity Tension",
+        "Emotional Tension",
+        "Success Tension",
+        "Relational Tension",
+        "Goal Tension",
+        "Hope",
+        "Fear",
+        "Amity",
+        "Enmity",
+        "Individual Dignity",
+        "Tribal Dominance",
+        "Compersion",
+        "Envy",
+        "Cohesive Goals",
+        "Fragmentative Goals",
+        "Tension Indices",
+        "Cohesion Indices"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided evidence database does not contain the actual statistical results (e.g., means, standard deviations, correlations, or derived metrics for all documents) in a verifiable format. The files `statistical_results.json` and `derived_metrics_results.json` contain metadata and Python code for statistical functions, not the numerical outputs of those functions. The `individual_analysis_results.json` only provides raw scores for a single document, not the aggregated statistics or derived metrics for the entire corpus or all individual documents as presented in the report's tables and inline text. Therefore, it is impossible to validate any of the numerical claims in the report against the provided evidence.",
+      "examples": [
+        "Cannot verify 'Full Cohesion Index of +0.840' for John McCain's speech as the derived metrics for all documents are not present.",
+        "Cannot verify any 'Mean' or 'Std. Dev.' values in 'Table 1: Descriptive Statistics' as the aggregated statistical results are missing.",
+        "Cannot verify any 'Pearson correlation' values in 'Table 3: Pearson Correlation Matrix' or inline (e.g., 'r = -0.778', 'r = 0.996') as the correlation matrix data is not provided.",
+        "Cannot verify 'Strategic Contradiction Index' values for any document as the derived metrics for all documents are not present."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The report explicitly states in Section 8, 'Evidence Citations', that 'the automated evidence retrieval system did not find or return any textual quotes from the corpus.' It further notes that this 'prevents a deeper, more contextualized interpretation' and that 'a full report would cite the specific language Steve King used to generate his high `Fear` score or the phrases John McCain used to build his high `Amity` score.'\n\nTherefore, it is not possible to select 5 textual evidence quotes from the report (as instructed by the rubric) and cross-reference them against the RAG evidence index, because the report contains no such quotes from the corpus documents. This constitutes a mismatch with the rubric's expectation that such verifiable textual evidence would be present in the report.",
+      "examples": [
+        "The report states: 'For example, a full report would cite the specific language Steve King used to generate his high `Fear` score or the phrases John McCain used to build his high `Amity` score.' These are examples of the *type* of textual evidence quotes that are explicitly noted as missing from the report itself, and thus cannot be found in the RAG index."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several strong, positive claims about the framework's capabilities and impact that lean towards promotional or superlative language, which may require editorial review for academic tone.",
+      "examples": [
+        "The `Full Cohesion Index` shows excellent discriminatory power, cleanly separating the institutional speech from the three populist speeches with a large effect size. (Section 5.5)",
+        "The `Strategic Contradiction Index` proved essential for distinguishing between the 'pure' fragmentative rhetoric of King and the more complex, mixed-motive rhetoric of Sanders. (Section 5.5)",
+        "The ability to quantify not just the presence of a theme but also its `salience` and its relationship with opposing themes is a significant step forward. (Section 6.3)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The rubric requires verifying that all analytical dimensions mentioned in the report are defined in the framework specification. The report explicitly states that the framework used is 'Cohesive Flourishing Framework (CFF) v10.1' and refers to 'its specification' (Section 4.1). The `experiment.md` (Source 2) further specifies the framework as 'cff_v10.md'. However, the provided evidence database (RAG index) does not contain the `cff_v10.md` file or any other document that constitutes the 'framework specification' itself. While some provided JSON files (e.g., `derived_metrics_results.json`, `statistical_results.json`) mention some dimensions and derived metrics, and even describe their calculation, they do not represent the comprehensive 'framework specification' where these dimensions are formally defined. Therefore, it is impossible to verify that the dimensions are 'defined in the framework specification' as the specification document itself is absent from the RAG index.",
+        "examples": [
+          "Full Cohesion Index",
+          "individual_dignity",
+          "hope",
+          "amity",
+          "cohesive_goals",
+          "Strategic Contradiction Index",
+          "tribal_dominance_raw",
+          "individual_dignity_raw",
+          "fear",
+          "envy",
+          "enmity",
+          "compersion_salience",
+          "fragmentative_goals_salience",
+          "Identity Tension",
+          "Emotional Tension",
+          "Success Tension",
+          "Relational Tension",
+          "Goal Tension",
+          "Hope",
+          "Fear",
+          "Amity",
+          "Enmity",
+          "Individual Dignity",
+          "Tribal Dominance",
+          "Compersion",
+          "Envy",
+          "Cohesive Goals",
+          "Fragmentative Goals",
+          "Tension Indices",
+          "Cohesion Indices"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided evidence database does not contain the actual statistical results (e.g., means, standard deviations, correlations, or derived metrics for all documents) in a verifiable format. The files `statistical_results.json` and `derived_metrics_results.json` contain metadata and Python code for statistical functions, not the numerical outputs of those functions. The `individual_analysis_results.json` only provides raw scores for a single document, not the aggregated statistics or derived metrics for the entire corpus or all individual documents as presented in the report's tables and inline text. Therefore, it is impossible to validate any of the numerical claims in the report against the provided evidence.",
+        "examples": [
+          "Cannot verify 'Full Cohesion Index of +0.840' for John McCain's speech as the derived metrics for all documents are not present.",
+          "Cannot verify any 'Mean' or 'Std. Dev.' values in 'Table 1: Descriptive Statistics' as the aggregated statistical results are missing.",
+          "Cannot verify any 'Pearson correlation' values in 'Table 3: Pearson Correlation Matrix' or inline (e.g., 'r = -0.778', 'r = 0.996') as the correlation matrix data is not provided.",
+          "Cannot verify 'Strategic Contradiction Index' values for any document as the derived metrics for all documents are not present."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The report explicitly states in Section 8, 'Evidence Citations', that 'the automated evidence retrieval system did not find or return any textual quotes from the corpus.' It further notes that this 'prevents a deeper, more contextualized interpretation' and that 'a full report would cite the specific language Steve King used to generate his high `Fear` score or the phrases John McCain used to build his high `Amity` score.'\n\nTherefore, it is not possible to select 5 textual evidence quotes from the report (as instructed by the rubric) and cross-reference them against the RAG evidence index, because the report contains no such quotes from the corpus documents. This constitutes a mismatch with the rubric's expectation that such verifiable textual evidence would be present in the report.",
+        "examples": [
+          "The report states: 'For example, a full report would cite the specific language Steve King used to generate his high `Fear` score or the phrases John McCain used to build his high `Amity` score.' These are examples of the *type* of textual evidence quotes that are explicitly noted as missing from the report itself, and thus cannot be found in the RAG index."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several strong, positive claims about the framework's capabilities and impact that lean towards promotional or superlative language, which may require editorial review for academic tone.",
+        "examples": [
+          "The `Full Cohesion Index` shows excellent discriminatory power, cleanly separating the institutional speech from the three populist speeches with a large effect size. (Section 5.5)",
+          "The `Strategic Contradiction Index` proved essential for distinguishing between the 'pure' fragmentative rhetoric of King and the more complex, mixed-motive rhetoric of Sanders. (Section 5.5)",
+          "The ability to quantify not just the presence of a theme but also its `salience` and its relationship with opposing themes is a significant step forward. (Section 6.3)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

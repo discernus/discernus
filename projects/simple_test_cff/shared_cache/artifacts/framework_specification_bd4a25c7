@@ -1,0 +1,12 @@
+{
+  "name": "Cohesive Flourishing Framework (CFF) v10.1",
+  "description": "A comprehensive tool for analyzing political and social discourse to understand its impact on community cohesion and democratic health",
+  "dimensions": [
+    "Tribal Dominance vs Individual Dignity",
+    "Fear vs Hope",
+    "Envy vs Compersion",
+    "Enmity vs Amity",
+    "Fragmentative Goals vs Cohesive Goals"
+  ],
+  "source_file": "cff_v10.md"
+}

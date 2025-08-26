@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report explicitly defines 10 core analytical dimensions as part of the Civic Analysis Framework (CAF) v10.0: Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, and Fantasy. However, the provided evidence database (RAG index), which serves as the framework specification, does not contain the conceptual definitions for any of these dimensions. While 'tribal_dominance_col' and 'individual_dignity_col' are referenced by name in a derived metric function within the RAG index, these are merely column references and do not provide the full conceptual definitions (e.g., 'universal worth' for Dignity or 'in-group/out-group dynamics' for Tribalism) as presented in the report. The definitions for the remaining eight dimensions are entirely absent from the RAG index.",
+      "examples": [
+        "Dignity (definition 'universal worth' not found in RAG index)",
+        "Tribalism (definition 'in-group/out-group dynamics' not found in RAG index)",
+        "Truth (definition 'intellectual honesty' not found in RAG index)",
+        "Manipulation (definition 'deceptive framing' not found in RAG index)",
+        "Justice (definition 'fairness, systemic equity' not found in RAG index)",
+        "Resentment (definition 'grievance, blame' not found in RAG index)",
+        "Hope (definition 'optimistic future' not found in RAG index)",
+        "Fear (definition 'threat-based motivation' not found in RAG index)",
+        "Pragmatism (definition 'acknowledging complexity' not found in RAG index)",
+        "Fantasy (definition 'oversimplification' not found in RAG index)"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The rubric requires validation of numerical values against a `statistical_results.json` file. This file is explicitly mentioned in the rubric's instructions ('match the `statistical_results.json` file') but is not present in the provided 'EVIDENCE DATABASE FOR VALIDATION'. The provided JSON files (`derived_metrics_results.json`, `evidence_f5554d90.json`, `evidence_bac909c8.json`, `individual_analysis_results.json`) do not contain the aggregated statistical data (means, standard deviations, correlations, or speaker-level derived metrics for the entire N=8 corpus) necessary to perform the validation as specified.",
+      "examples": [
+        "The report states 'resentment_raw (mean=0.706)'. To validate this, I would need to find the mean for 'resentment_raw' in `statistical_results.json`, which is missing.",
+        "The report states 'Dignity/Tribalism axis showed a correlation of r = -0.81'. To validate this, I would need to find the correlation between 'dignity' and 'tribalism' in `statistical_results.json`, which is missing.",
+        "Table 2 lists 'john_mccain' with a 'Civic Character Index (CCI)' of '0.805'. To validate this, I would need to find John McCain's CCI in `statistical_results.json` or an equivalent aggregated speaker data file, which is missing."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires cross-referencing selected quotes against the full text of corpus documents within the provided RAG evidence index. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided for this task only contains manifest, experiment, and framework files (`corpus_manifest: corpus.md`, `experiment_specification: experiment.md`, `framework_specification: framework.md`). It *does not include* the full text of the corpus documents (e.g., `john_mccain_2008_concession_ff9b26f2.txt`, `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) which are cited as the sources for the quotes in the report. Therefore, it was impossible to confirm the presence of the selected quotes in their original source documents as instructed. All selected quotes could not be found in the provided RAG index because the relevant source files containing the full text of the speeches are missing from the index.",
+      "examples": [
+        "\"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+        "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"So if we stand together... I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+        "\"The rich want to get richer and they don't care who they step on.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, particularly given the acknowledged limitations of the pilot study (small sample size, missing corpus manifest). These phrases suggest a higher degree of impact, novelty, or certainty than is typically found in cautious academic reporting of preliminary results.",
+      "examples": [
+        "The Pragmatism/Fantasy axis showed an exceptionally strong negative correlation of r = -0.93.",
+        "John McCain's score of +0.805 is exceptionally high...",
+        "His extremely low mean tension (0.014) further suggests a highly coherent, virtue-based rhetoric.",
+        "Finally, the Tension metric introduces a crucial concept for analyzing modern political communication...",
+        "This is a vital tool for understanding politicians...",
+        "The classification of speakers into archetypes provides a powerful lens for comparative analysis.",
+        "While this study is a small-scale pilot, it demonstrates a methodology with broad significance.",
+        "If applied to a large, longitudinal corpus of political texts, the CAF could serve as a barometer for the health of civic discourse...",
+        "this research offers a new set of tools for scholars, journalists, and citizens to evaluate political communication with greater rigor and nuance.",
+        "The results of this pilot study, while preliminary, validate the CAF as a promising methodology and lay a firm foundation for future, more expansive investigations..."
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains authority claims that refer to external academic theories and philosophical concepts, which are prohibited. While not in a formal citation format, stating that the framework is 'grounded in' or 'rooted in' specific academic fields constitutes an external academic authority claim.",
+      "examples": [
+        "The CAF is grounded in Aristotelian virtue ethics and civic republican theory.",
+        "First, it suggests that the abstract concepts of civic virtue and vice, rooted in classical political philosophy, can be successfully operationalized and measured computationally."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report explicitly defines 10 core analytical dimensions as part of the Civic Analysis Framework (CAF) v10.0: Dignity, Tribalism, Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, and Fantasy. However, the provided evidence database (RAG index), which serves as the framework specification, does not contain the conceptual definitions for any of these dimensions. While 'tribal_dominance_col' and 'individual_dignity_col' are referenced by name in a derived metric function within the RAG index, these are merely column references and do not provide the full conceptual definitions (e.g., 'universal worth' for Dignity or 'in-group/out-group dynamics' for Tribalism) as presented in the report. The definitions for the remaining eight dimensions are entirely absent from the RAG index.",
+        "examples": [
+          "Dignity (definition 'universal worth' not found in RAG index)",
+          "Tribalism (definition 'in-group/out-group dynamics' not found in RAG index)",
+          "Truth (definition 'intellectual honesty' not found in RAG index)",
+          "Manipulation (definition 'deceptive framing' not found in RAG index)",
+          "Justice (definition 'fairness, systemic equity' not found in RAG index)",
+          "Resentment (definition 'grievance, blame' not found in RAG index)",
+          "Hope (definition 'optimistic future' not found in RAG index)",
+          "Fear (definition 'threat-based motivation' not found in RAG index)",
+          "Pragmatism (definition 'acknowledging complexity' not found in RAG index)",
+          "Fantasy (definition 'oversimplification' not found in RAG index)"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The rubric requires validation of numerical values against a `statistical_results.json` file. This file is explicitly mentioned in the rubric's instructions ('match the `statistical_results.json` file') but is not present in the provided 'EVIDENCE DATABASE FOR VALIDATION'. The provided JSON files (`derived_metrics_results.json`, `evidence_f5554d90.json`, `evidence_bac909c8.json`, `individual_analysis_results.json`) do not contain the aggregated statistical data (means, standard deviations, correlations, or speaker-level derived metrics for the entire N=8 corpus) necessary to perform the validation as specified.",
+        "examples": [
+          "The report states 'resentment_raw (mean=0.706)'. To validate this, I would need to find the mean for 'resentment_raw' in `statistical_results.json`, which is missing.",
+          "The report states 'Dignity/Tribalism axis showed a correlation of r = -0.81'. To validate this, I would need to find the correlation between 'dignity' and 'tribalism' in `statistical_results.json`, which is missing.",
+          "Table 2 lists 'john_mccain' with a 'Civic Character Index (CCI)' of '0.805'. To validate this, I would need to find John McCain's CCI in `statistical_results.json` or an equivalent aggregated speaker data file, which is missing."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires cross-referencing selected quotes against the full text of corpus documents within the provided RAG evidence index. However, the 'EVIDENCE DATABASE FOR VALIDATION' provided for this task only contains manifest, experiment, and framework files (`corpus_manifest: corpus.md`, `experiment_specification: experiment.md`, `framework_specification: framework.md`). It *does not include* the full text of the corpus documents (e.g., `john_mccain_2008_concession_ff9b26f2.txt`, `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`) which are cited as the sources for the quotes in the report. Therefore, it was impossible to confirm the presence of the selected quotes in their original source documents as instructed. All selected quotes could not be found in the provided RAG index because the relevant source files containing the full text of the speeches are missing from the index.",
+        "examples": [
+          "\"we fell short, the failure is mine, not yours.\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt)",
+          "\"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"So if we stand together... I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)",
+          "\"The rich want to get richer and they don't care who they step on.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt)"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several superlative and promotional phrases that may require editorial review for academic tone, particularly given the acknowledged limitations of the pilot study (small sample size, missing corpus manifest). These phrases suggest a higher degree of impact, novelty, or certainty than is typically found in cautious academic reporting of preliminary results.",
+        "examples": [
+          "The Pragmatism/Fantasy axis showed an exceptionally strong negative correlation of r = -0.93.",
+          "John McCain's score of +0.805 is exceptionally high...",
+          "His extremely low mean tension (0.014) further suggests a highly coherent, virtue-based rhetoric.",
+          "Finally, the Tension metric introduces a crucial concept for analyzing modern political communication...",
+          "This is a vital tool for understanding politicians...",
+          "The classification of speakers into archetypes provides a powerful lens for comparative analysis.",
+          "While this study is a small-scale pilot, it demonstrates a methodology with broad significance.",
+          "If applied to a large, longitudinal corpus of political texts, the CAF could serve as a barometer for the health of civic discourse...",
+          "this research offers a new set of tools for scholars, journalists, and citizens to evaluate political communication with greater rigor and nuance.",
+          "The results of this pilot study, while preliminary, validate the CAF as a promising methodology and lay a firm foundation for future, more expansive investigations..."
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains authority claims that refer to external academic theories and philosophical concepts, which are prohibited. While not in a formal citation format, stating that the framework is 'grounded in' or 'rooted in' specific academic fields constitutes an external academic authority claim.",
+        "examples": [
+          "The CAF is grounded in Aristotelian virtue ethics and civic republican theory.",
+          "First, it suggests that the abstract concepts of civic virtue and vice, rooted in classical political philosophy, can be successfully operationalized and measured computationally."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

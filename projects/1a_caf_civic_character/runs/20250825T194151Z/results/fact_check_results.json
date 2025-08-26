@@ -1,0 +1,100 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "Several analytical dimensions and classifications mentioned in the report are not defined or explicitly listed in the provided framework specification (evidence database). The rubric requires that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "examples": [
+        "The report defines and uses the following core dimensions, but they are not found in the provided evidence database: Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy.",
+        "The report mentions 'Justice-Tension' as a specific tension index, but only 'Identity-Tension' is defined in the derived metrics specification.",
+        "The report uses 'Mean Tension' as a derived metric, but its specific definition or calculation is not found in the provided evidence.",
+        "The report classifies speakers into archetypes such as 'Virtue-Leaning', 'Vice-Leaning', 'The Unifier', 'The Populist Agitator', and 'The Contested Centrist'. However, the 'experiment.md' only lists 'authentic virtue, strategic signaling, strategic pathology, or incoherent messaging patterns' as pattern classifications, omitting the others used in the report."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The required source of truth file, `statistical_results.json`, which should contain the aggregated numerical values (means, standard deviations, and correlations) for validation, is not present in the provided evidence database. The rubric explicitly states to 'match the `statistical_results.json` file'. Furthermore, the `individual_analysis_results.json` file, which could potentially serve as raw data for deriving these statistics, is incomplete and only shows scores for one document out of the eight, preventing the manual calculation and verification of the reported statistics.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_database JSON files). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt' in its 'Evidence Citations' section, but the provided RAG evidence index only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt' and 'mitt_romney_2020_impeachment_9ebec73f.txt'. This indicates a mismatch between the evidence cited in the report and the evidence available in the provided database.",
+      "examples": [
+        "Quote from report: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+        "Quote from report: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+        "Quote from report: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+        "Quote from report: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+        "Quote from report: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains promotional language and claims of novelty/significance that, while explained within the report's context, are presented as definitive without explicit comparative substantiation against the broader academic field. These phrases may require editorial review for academic tone, as per the rubric's instruction to flag 'unsubstantiated or overly promotional claims' like 'major breakthrough' or 'unprecedented'.",
+      "examples": [
+        "The framework's central innovation is its focus on the tensions between these competing values...",
+        "The concept of Tension is a significant theoretical contribution."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "Several analytical dimensions and classifications mentioned in the report are not defined or explicitly listed in the provided framework specification (evidence database). The rubric requires that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "examples": [
+          "The report defines and uses the following core dimensions, but they are not found in the provided evidence database: Truth, Manipulation, Justice, Resentment, Hope, Fear, Pragmatism, Fantasy.",
+          "The report mentions 'Justice-Tension' as a specific tension index, but only 'Identity-Tension' is defined in the derived metrics specification.",
+          "The report uses 'Mean Tension' as a derived metric, but its specific definition or calculation is not found in the provided evidence.",
+          "The report classifies speakers into archetypes such as 'Virtue-Leaning', 'Vice-Leaning', 'The Unifier', 'The Populist Agitator', and 'The Contested Centrist'. However, the 'experiment.md' only lists 'authentic virtue, strategic signaling, strategic pathology, or incoherent messaging patterns' as pattern classifications, omitting the others used in the report."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The required source of truth file, `statistical_results.json`, which should contain the aggregated numerical values (means, standard deviations, and correlations) for validation, is not present in the provided evidence database. The rubric explicitly states to 'match the `statistical_results.json` file'. Furthermore, the `individual_analysis_results.json` file, which could potentially serve as raw data for deriving these statistics, is incomplete and only shows scores for one document out of the eight, preventing the manual calculation and verification of the reported statistics.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_database JSON files). None of the selected quotes could be found in the provided RAG evidence index. The report cites quotes from 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt' in its 'Evidence Citations' section, but the provided RAG evidence index only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt' and 'mitt_romney_2020_impeachment_9ebec73f.txt'. This indicates a mismatch between the evidence cited in the report and the evidence available in the provided database.",
+        "examples": [
+          "Quote from report: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+          "Quote from report: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index.",
+          "Quote from report: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+          "Quote from report: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - Not found in provided RAG evidence index.",
+          "Quote from report: \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - Not found in provided RAG evidence index."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains promotional language and claims of novelty/significance that, while explained within the report's context, are presented as definitive without explicit comparative substantiation against the broader academic field. These phrases may require editorial review for academic tone, as per the rubric's instruction to flag 'unsubstantiated or overly promotional claims' like 'major breakthrough' or 'unprecedented'.",
+        "examples": [
+          "The framework's central innovation is its focus on the tensions between these competing values...",
+          "The concept of Tension is a significant theoretical contribution."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

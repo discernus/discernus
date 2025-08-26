@@ -1,0 +1,134 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions several capitalized analytical dimensions (axes) as part of the Civic Analysis Framework (CAF) v10.0 specification. However, the provided evidence database, which serves as the framework specification for this check, does not contain definitions or explicit listings for all of these dimensions. While the 'Identity Axis' is implicitly defined through the 'identity_tension' derived metric, the other four fundamental axes and their associated virtues/vices are not found in the RAG index.",
+      "examples": [
+        "The report states: 'Epistemic Axis: `truth` vs. `manipulation`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Epistemic Axis' or its components (`truth`, `manipulation`) is found in the provided evidence database.",
+        "The report states: 'Justice Axis: `justice` vs. `resentment`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Justice Axis' or its components (`justice`, `resentment`) is found in the provided evidence database.",
+        "The report states: 'Emotional Axis: `hope` vs. `fear`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Emotional Axis' or its components (`hope`, `fear`) is found in the provided evidence database.",
+        "The report states: 'Reality Axis: `pragmatism` vs. `fantasy`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Reality Axis' or its components (`pragmatism`, `fantasy`) is found in the provided evidence database."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided evidence database does not contain the `statistical_results.json` file or any other comprehensive statistical output (e.g., aggregated means, standard deviations, or correlation matrices for all documents/speakers). The rubric explicitly states: 'For every statistical claim in the report... you MUST query the RAG index to find the corresponding value in the research data.' Without this crucial data, it is impossible to validate the numerical claims made in the report against the source data, as required by the 'Statistic Mismatch' rubric.",
+      "examples": [
+        "Report claims: 'The derived Salience-Weighted Civic Character Index (CCI), a composite score of overall civic virtue, ranged from a high of +0.80 (John McCain) to a low of -0.48 (Steve King)'. Validation requires a comprehensive list of CCI scores for all speakers, which is not provided.",
+        "Report claims: 'correlation analysis strongly supports the framework's theoretical underpinnings, revealing a powerful negative relationship between corresponding virtues and vices (e.g., `pragmatism` vs. `fantasy`, r = -0.93)'. Validation requires the full correlation matrix, which is not provided.",
+        "Report includes 'Table 1: Descriptive Statistics for Raw and Salience Scores (N=8)' with means, stds, min, and max values for 10 dimensions. Validation of these values requires the underlying statistical results, which are absent from the evidence database."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_f2104247.json). None of the selected quotes could be found in the RAG index. The RAG evidence index provided only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt', whereas the report's citations are from 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt'.",
+      "examples": [
+        "Quote: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+        "Quote: \"But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+        "Quote: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+        "Quote: \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - NOT FOUND in evidence_f2104247.json",
+        "Quote: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - NOT FOUND in evidence_f2104247.json"
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains numerous superlative and promotional phrases that may require editorial review for academic tone, as per the 'Grandiose Claim' rubric. While some claims are supported by data, the language used is often overly strong or enthusiastic for a research report, suggesting a promotional rather than purely objective academic tone.",
+      "examples": [
+        "demonstrating the framework's significant discriminatory power.",
+        "revealing a powerful negative relationship",
+        "key methodological innovation",
+        "The CCI proved to be a highly effective and intuitive summary of a speaker's overall rhetorical profile.",
+        "The Civic Character Index as a Potent Summary Metric",
+        "The most striking pattern is the strong negative correlation between virtues and their conceptual opposites, which serves as a powerful, if preliminary, validation of the framework's oppositional design.",
+        "The relationship between `pragmatism` and `fantasy` is exceptionally strong (r = -0.93)",
+        "The near-perfect negative correlation between `pragmatism` and `fantasy` (r = -0.93)",
+        "The strong, consistent opposition between virtue and vice dimensions across the correlation matrix is the single most important finding.",
+        "Based on this preliminary analysis, the CAF v10.0 demonstrates considerable effectiveness as a tool for computational rhetorical analysis.",
+        "The ability to separate speakers like McCain, Sanders, and Ocasio-Cortez into quantitatively distinct categories highlights its analytical power.",
+        "The derived metrics proved to be particularly valuable.",
+        "This study suggests a path forward for computational social science to engage more deeply with normative questions in political communication.",
+        "The ability to quantify concepts like 'tension' and 'civic character' provides a new vocabulary for discussing the mechanics of political persuasion.",
+        "This research serves as a proof-of-concept for a new direction in computational social science, one that weds normative theory with quantitative rigor to shed light on the character of our shared political life."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions several capitalized analytical dimensions (axes) as part of the Civic Analysis Framework (CAF) v10.0 specification. However, the provided evidence database, which serves as the framework specification for this check, does not contain definitions or explicit listings for all of these dimensions. While the 'Identity Axis' is implicitly defined through the 'identity_tension' derived metric, the other four fundamental axes and their associated virtues/vices are not found in the RAG index.",
+        "examples": [
+          "The report states: 'Epistemic Axis: `truth` vs. `manipulation`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Epistemic Axis' or its components (`truth`, `manipulation`) is found in the provided evidence database.",
+          "The report states: 'Justice Axis: `justice` vs. `resentment`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Justice Axis' or its components (`justice`, `resentment`) is found in the provided evidence database.",
+          "The report states: 'Emotional Axis: `hope` vs. `fear`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Emotional Axis' or its components (`hope`, `fear`) is found in the provided evidence database.",
+          "The report states: 'Reality Axis: `pragmatism` vs. `fantasy`'. This capitalized dimension name is mentioned as part of the CAF v10.0 framework specification in the report, but no definition or explicit listing for 'Reality Axis' or its components (`pragmatism`, `fantasy`) is found in the provided evidence database."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided evidence database does not contain the `statistical_results.json` file or any other comprehensive statistical output (e.g., aggregated means, standard deviations, or correlation matrices for all documents/speakers). The rubric explicitly states: 'For every statistical claim in the report... you MUST query the RAG index to find the corresponding value in the research data.' Without this crucial data, it is impossible to validate the numerical claims made in the report against the source data, as required by the 'Statistic Mismatch' rubric.",
+        "examples": [
+          "Report claims: 'The derived Salience-Weighted Civic Character Index (CCI), a composite score of overall civic virtue, ranged from a high of +0.80 (John McCain) to a low of -0.48 (Steve King)'. Validation requires a comprehensive list of CCI scores for all speakers, which is not provided.",
+          "Report claims: 'correlation analysis strongly supports the framework's theoretical underpinnings, revealing a powerful negative relationship between corresponding virtues and vices (e.g., `pragmatism` vs. `fantasy`, r = -0.93)'. Validation requires the full correlation matrix, which is not provided.",
+          "Report includes 'Table 1: Descriptive Statistics for Raw and Salience Scores (N=8)' with means, stds, min, and max values for 10 dimensions. Validation of these values requires the underlying statistical results, which are absent from the evidence database."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "Cross-referenced 5 randomly selected evidence quotes from the report against the provided RAG evidence index (evidence_f2104247.json). None of the selected quotes could be found in the RAG index. The RAG evidence index provided only contains quotes from 'cory_booker_2018_first_step_act_0c32812a.txt', whereas the report's citations are from 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' and 'john_mccain_2008_concession_ff9b26f2.txt'.",
+        "examples": [
+          "Quote: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+          "Quote: \"But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+          "Quote: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt) - NOT FOUND in evidence_f2104247.json",
+          "Quote: \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - NOT FOUND in evidence_f2104247.json",
+          "Quote: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt) - NOT FOUND in evidence_f2104247.json"
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains numerous superlative and promotional phrases that may require editorial review for academic tone, as per the 'Grandiose Claim' rubric. While some claims are supported by data, the language used is often overly strong or enthusiastic for a research report, suggesting a promotional rather than purely objective academic tone.",
+        "examples": [
+          "demonstrating the framework's significant discriminatory power.",
+          "revealing a powerful negative relationship",
+          "key methodological innovation",
+          "The CCI proved to be a highly effective and intuitive summary of a speaker's overall rhetorical profile.",
+          "The Civic Character Index as a Potent Summary Metric",
+          "The most striking pattern is the strong negative correlation between virtues and their conceptual opposites, which serves as a powerful, if preliminary, validation of the framework's oppositional design.",
+          "The relationship between `pragmatism` and `fantasy` is exceptionally strong (r = -0.93)",
+          "The near-perfect negative correlation between `pragmatism` and `fantasy` (r = -0.93)",
+          "The strong, consistent opposition between virtue and vice dimensions across the correlation matrix is the single most important finding.",
+          "Based on this preliminary analysis, the CAF v10.0 demonstrates considerable effectiveness as a tool for computational rhetorical analysis.",
+          "The ability to separate speakers like McCain, Sanders, and Ocasio-Cortez into quantitatively distinct categories highlights its analytical power.",
+          "The derived metrics proved to be particularly valuable.",
+          "This study suggests a path forward for computational social science to engage more deeply with normative questions in political communication.",
+          "The ability to quantify concepts like 'tension' and 'civic character' provides a new vocabulary for discussing the mechanics of political persuasion.",
+          "This research serves as a proof-of-concept for a new direction in computational social science, one that weds normative theory with quantitative rigor to shed light on the character of our shared political life."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

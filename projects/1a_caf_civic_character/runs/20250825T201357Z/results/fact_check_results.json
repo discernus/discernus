@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions 10 core analytical dimensions as part of the Civic Analysis Framework (CAF) v10.0. However, the provided RAG index (evidence database) only implicitly confirms the definition/existence of 2 of these dimensions. The remaining 8 dimensions are not found or defined within the framework content provided in the RAG index.",
+      "examples": [
+        "The report states the framework operationalizes concepts into 'Truth Axis: Truth vs. Manipulation', 'Justice Axis: Justice vs. Resentment', 'Emotional Axis: Hope vs. Fear', and 'Reality Axis: Pragmatism vs. Fantasy'. However, the dimensions 'Truth', 'Manipulation', 'Justice', 'Resentment', 'Hope', 'Fear', 'Pragmatism', and 'Fantasy' are not defined or explicitly mentioned in the provided 'derived_metrics' or 'experiment_specification' files.",
+        "While 'Dignity' and 'Tribalism' are implicitly confirmed by their use as 'individual_dignity_col' and 'tribal_dominance_col' in the 'calculate_identity_tension' function within 'derived_metrics_results.json', no similar explicit references or definitions exist for the other 8 dimensions in the provided evidence."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The rubric requires validation of numerical values against `statistical_results.json`. However, the provided evidence database does not contain a file named `statistical_results.json` or any other file that presents the aggregated statistical data (means, standard deviations, correlations, Civic Character Index, or Tension scores) necessary to verify the claims made in the report's tables and text. Therefore, a comprehensive validation of statistical claims as per the rubric's instructions cannot be performed.",
+      "examples": [
+        "Report claims 'mean raw score = 0.71' for `resentment`, but the source data for this aggregated mean is missing.",
+        "Report claims 'r = -0.93' for `pragmatism` vs. `fantasy`, but the correlation matrix source data is missing.",
+        "Report claims 'John McCain's score of +0.805' for CCI, but the source data for individual CCI scores is missing."
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The rubric requires cross-referencing evidence quotes against a 'RAG evidence index' which 'contains the full text of all corpus documents'. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' only contains manifest, experiment, and framework specification files (e.g., `corpus_manifest.md`, `experiment.md`, `framework.md`). It does not include the actual full text of the corpus documents (e.g., `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`, `john_mccain_2008_concession_ff9b26f2.txt`) which are cited as sources for the quotes in the report. Therefore, it is impossible to perform the requested validation check as the necessary 'RAG evidence index' (full text of corpus documents) is not provided.",
+      "examples": [
+        "Quote to validate: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database.",
+        "Quote to validate: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt). The file 'john_mccain_2008_concession_ff9b26f2.txt' is not present in the provided evidence database.",
+        "Quote to validate: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database.",
+        "Quote to validate: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt). The file 'john_mccain_2008_concession_ff9b26f2.txt' is not present in the provided evidence database.",
+        "Quote to validate: \"The rich want to get richer and they don't care who they step on.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several phrases that, while common in academic writing, lean towards being overly promotional or making strong claims of significance/novelty, which may require editorial review for academic tone, especially given the acknowledged small sample size (N=8). These claims are not explicitly 'unsubstantiated' as they are often linked to data, but their phrasing can be considered 'grandiose' or 'superlative' in tone.",
+      "examples": [
+        "The extremely strong negative correlation between `pragmatism` and `fantasy` (r = -0.93) suggests that the **most significant rhetorical choice** a speaker makes is whether to ground their discourse in acknowledged complexity and constraints or in a simplified, often moralistic, narrative. (Section 5.4)",
+        "The CCI provides a powerful, interpretable summary of civic character, while the Tension Indices offer a **unique lens** into strategic contradiction that would be missed by analyzing dimensions in isolation. (Section 5.5)",
+        "The ability to quantitatively distinguish between rhetoric high in `dignity` and `justice` versus rhetoric high in `tribalism` and `resentment` **moves these concepts from the realm of normative theory to empirical measurement**. (Section 6)",
+        "The study's **key contribution** is the successful operationalization of the Salience-Weighted Civic Character Index (CCI) and the Tension Indices. (Section 7)",
+        "It suggests that computational social science methods, when paired with strong theoretical frameworks, can provide **powerful new tools** for understanding and evaluating the state of our civic discourse. (Section 7)"
+      ]
+    },
+    {
+      "check_name": "Citation Violation",
+      "severity": "CRITICAL",
+      "description": "Detect prohibited external academic citations and authority claims.",
+      "details": "The report contains authority claims that refer to external academic concepts and theories, which are prohibited as per the rubric. These claims establish the framework's grounding or the findings' implications by referencing established academic fields, rather than relying solely on the computational analysis itself.",
+      "examples": [
+        "The framework is grounded in Aristotelian virtue ethics and civic republican theory.",
+        "The findings from this analysis offer preliminary empirical support for theories of civic discourse rooted in civic republicanism and virtue ethics.",
+        "This aligns with the theoretical concept of virtues as a disposition that precludes its opposing vice."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions 10 core analytical dimensions as part of the Civic Analysis Framework (CAF) v10.0. However, the provided RAG index (evidence database) only implicitly confirms the definition/existence of 2 of these dimensions. The remaining 8 dimensions are not found or defined within the framework content provided in the RAG index.",
+        "examples": [
+          "The report states the framework operationalizes concepts into 'Truth Axis: Truth vs. Manipulation', 'Justice Axis: Justice vs. Resentment', 'Emotional Axis: Hope vs. Fear', and 'Reality Axis: Pragmatism vs. Fantasy'. However, the dimensions 'Truth', 'Manipulation', 'Justice', 'Resentment', 'Hope', 'Fear', 'Pragmatism', and 'Fantasy' are not defined or explicitly mentioned in the provided 'derived_metrics' or 'experiment_specification' files.",
+          "While 'Dignity' and 'Tribalism' are implicitly confirmed by their use as 'individual_dignity_col' and 'tribal_dominance_col' in the 'calculate_identity_tension' function within 'derived_metrics_results.json', no similar explicit references or definitions exist for the other 8 dimensions in the provided evidence."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The rubric requires validation of numerical values against `statistical_results.json`. However, the provided evidence database does not contain a file named `statistical_results.json` or any other file that presents the aggregated statistical data (means, standard deviations, correlations, Civic Character Index, or Tension scores) necessary to verify the claims made in the report's tables and text. Therefore, a comprehensive validation of statistical claims as per the rubric's instructions cannot be performed.",
+        "examples": [
+          "Report claims 'mean raw score = 0.71' for `resentment`, but the source data for this aggregated mean is missing.",
+          "Report claims 'r = -0.93' for `pragmatism` vs. `fantasy`, but the correlation matrix source data is missing.",
+          "Report claims 'John McCain's score of +0.805' for CCI, but the source data for individual CCI scores is missing."
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The rubric requires cross-referencing evidence quotes against a 'RAG evidence index' which 'contains the full text of all corpus documents'. However, the provided 'EVIDENCE DATABASE FOR VALIDATION' only contains manifest, experiment, and framework specification files (e.g., `corpus_manifest.md`, `experiment.md`, `framework.md`). It does not include the actual full text of the corpus documents (e.g., `bernie_sanders_2025_fighting_oligarchy_261b893a.txt`, `john_mccain_2008_concession_ff9b26f2.txt`) which are cited as sources for the quotes in the report. Therefore, it is impossible to perform the requested validation check as the necessary 'RAG evidence index' (full text of corpus documents) is not provided.",
+        "examples": [
+          "Quote to validate: \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database.",
+          "Quote to validate: \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\" (Source: john_mccain_2008_concession_ff9b26f2.txt). The file 'john_mccain_2008_concession_ff9b26f2.txt' is not present in the provided evidence database.",
+          "Quote to validate: \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database.",
+          "Quote to validate: \"Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.\" (Source: john_mccain_2008_concession_ff9b26f2.txt). The file 'john_mccain_2008_concession_ff9b26f2.txt' is not present in the provided evidence database.",
+          "Quote to validate: \"The rich want to get richer and they don't care who they step on.\" (Source: bernie_sanders_2025_fighting_oligarchy_261b893a.txt). The file 'bernie_sanders_2025_fighting_oligarchy_261b893a.txt' is not present in the provided evidence database."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several phrases that, while common in academic writing, lean towards being overly promotional or making strong claims of significance/novelty, which may require editorial review for academic tone, especially given the acknowledged small sample size (N=8). These claims are not explicitly 'unsubstantiated' as they are often linked to data, but their phrasing can be considered 'grandiose' or 'superlative' in tone.",
+        "examples": [
+          "The extremely strong negative correlation between `pragmatism` and `fantasy` (r = -0.93) suggests that the **most significant rhetorical choice** a speaker makes is whether to ground their discourse in acknowledged complexity and constraints or in a simplified, often moralistic, narrative. (Section 5.4)",
+          "The CCI provides a powerful, interpretable summary of civic character, while the Tension Indices offer a **unique lens** into strategic contradiction that would be missed by analyzing dimensions in isolation. (Section 5.5)",
+          "The ability to quantitatively distinguish between rhetoric high in `dignity` and `justice` versus rhetoric high in `tribalism` and `resentment` **moves these concepts from the realm of normative theory to empirical measurement**. (Section 6)",
+          "The study's **key contribution** is the successful operationalization of the Salience-Weighted Civic Character Index (CCI) and the Tension Indices. (Section 7)",
+          "It suggests that computational social science methods, when paired with strong theoretical frameworks, can provide **powerful new tools** for understanding and evaluating the state of our civic discourse. (Section 7)"
+        ]
+      },
+      {
+        "check_name": "Citation Violation",
+        "severity": "CRITICAL",
+        "description": "Detect prohibited external academic citations and authority claims.",
+        "details": "The report contains authority claims that refer to external academic concepts and theories, which are prohibited as per the rubric. These claims establish the framework's grounding or the findings' implications by referencing established academic fields, rather than relying solely on the computational analysis itself.",
+        "examples": [
+          "The framework is grounded in Aristotelian virtue ethics and civic republican theory.",
+          "The findings from this analysis offer preliminary empirical support for theories of civic discourse rooted in civic republicanism and virtue ethics.",
+          "This aligns with the theoretical concept of virtues as a disposition that precludes its opposing vice."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 3,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}
