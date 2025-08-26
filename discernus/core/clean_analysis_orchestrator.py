@@ -46,6 +46,7 @@ from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from txtai.embeddings import Embeddings
 from ..agents.revision_agent.agent import RevisionAgent
+from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
 
 
 class CleanAnalysisError(Exception):
@@ -213,7 +214,18 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
             
-            # Phase 7: Ensure RAG index is available for synthesis
+            # Phase 7: Run evidence retrieval to curate supporting quotes
+            phase_start = datetime.now(timezone.utc)
+            try:
+                evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results)
+                self._log_status("Evidence retrieval completed")
+                self._log_phase_timing("evidence_retrieval_phase", phase_start)
+            except Exception as e:
+                # Evidence retrieval failure is not fatal - we can still proceed with synthesis
+                self._log_progress(f"⚠️ Evidence retrieval failed, continuing with warning: {str(e)}")
+                evidence_results = {"status": "failed", "error": str(e)}
+
+            # Phase 8: Ensure RAG index is available for synthesis
             phase_start = datetime.now(timezone.utc)
             try:
                 # Check if we already have a cached RAG index, build if needed
@@ -227,10 +239,10 @@ class CleanAnalysisOrchestrator:
                 # In RAG-or-nothing mode, this is a fatal error.
                 raise CleanAnalysisError(f"Failed to prepare RAG index: {str(e)}") from e
 
-            # Phase 8: Run synthesis with RAG integration
+            # Phase 9: Run synthesis with RAG integration and curated evidence
             phase_start = datetime.now(timezone.utc)
             try:
-                assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results)
+                assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results, evidence_results)
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
             except Exception as e:
@@ -238,7 +250,7 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
-            # Phase 8.5: Run fact-checking validation
+            # Phase 10: Run fact-checking validation
             phase_start = datetime.now(timezone.utc)
             try:
                 fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets, statistical_results)
@@ -249,7 +261,7 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"⚠️ Fact-checking failed, continuing with warning: {str(e)}")
                 fact_check_results = {"status": "failed", "error": str(e)}
 
-            # Phase 9: Create results with publication readiness
+            # Phase 11: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
                 results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
@@ -1615,7 +1627,93 @@ class CleanAnalysisOrchestrator:
             self._build_rag_index(audit_logger)
             self.performance_metrics["cache_misses"] += 1
 
-    def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+    def _run_evidence_retrieval_phase(self, model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Run evidence retrieval phase using EvidenceRetrieverAgent to curate supporting quotes."""
+        self._log_progress("🔍 Starting evidence retrieval phase...")
+        
+        try:
+            # Find framework specification artifact
+            framework_hash = None
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("artifact_type") == "framework_specification":
+                        framework_hash = artifact_hash
+                        break
+            
+            if not framework_hash:
+                # Create framework specification from framework file
+                framework_path = self.experiment_path / self.config['framework']
+                if framework_path.exists():
+                    framework_content = framework_path.read_text(encoding='utf-8')
+                    framework_spec = {
+                        "name": self.config.get('framework', 'Unknown Framework'),
+                        "content": framework_content,
+                        "source_file": str(framework_path)
+                    }
+                    framework_content_json = json.dumps(framework_spec, indent=2).encode('utf-8')
+                    framework_hash = self.artifact_storage.put_artifact(
+                        framework_content_json,
+                        {"artifact_type": "framework_specification", "agent": "orchestrator"}
+                    )
+                    self._log_progress(f"✅ Created framework specification artifact: {framework_hash}")
+                else:
+                    raise CleanAnalysisError(f"Framework file not found: {framework_path}")
+            
+            # Find statistical results artifact
+            statistical_results_hash = None
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("artifact_type") == "statistical_results_with_data":
+                        statistical_results_hash = artifact_hash
+                        break
+            
+            if not statistical_results_hash:
+                # Store current statistical results
+                statistical_content = json.dumps(statistical_results, indent=2).encode('utf-8')
+                statistical_results_hash = self.artifact_storage.put_artifact(
+                    statistical_content,
+                    {"artifact_type": "statistical_results_with_data", "agent": "orchestrator"}
+                )
+                self._log_progress(f"✅ Created statistical results artifact: {statistical_results_hash}")
+            
+            # Collect evidence artifact hashes
+            evidence_artifact_hashes = []
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                        evidence_artifact_hashes.append(artifact_hash)
+            
+            if not evidence_artifact_hashes:
+                self._log_progress("⚠️ No evidence artifacts found - evidence retrieval will be limited")
+                return {"status": "no_evidence_available", "message": "No evidence artifacts found"}
+            
+            # Initialize EvidenceRetrieverAgent
+            agent_config = {
+                'experiment_path': str(self.experiment_path),
+                'run_id': datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            }
+            
+            evidence_agent = EvidenceRetrieverAgent(agent_config)
+            
+            # Run evidence retrieval
+            self._log_progress("🔍 Running evidence retrieval agent...")
+            evidence_results = evidence_agent.run(
+                framework_hash=framework_hash,
+                statistical_results_hash=statistical_results_hash,
+                evidence_artifact_hashes=evidence_artifact_hashes
+            )
+            
+            self._log_progress(f"✅ Evidence retrieval completed: {evidence_results.get('evidence_quotes_found', 0)} quotes found")
+            return evidence_results
+            
+        except Exception as e:
+            self._log_progress(f"❌ Evidence retrieval phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Evidence retrieval phase failed: {str(e)}")
+
+    def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], evidence_results: Dict[str, Any] = None) -> Dict[str, Any]:
         """Run synthesis using SynthesisPromptAssembler and UnifiedSynthesisAgent."""
         self._log_progress("📝 Starting synthesis phase...")
         
@@ -1669,18 +1767,28 @@ class CleanAnalysisOrchestrator:
                 }
             )
             
-            # Collect evidence artifact hashes
-            evidence_hashes = []
-            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                    metadata = artifact_info.get("metadata", {})
-                    if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                        evidence_hashes.append(artifact_hash)
-            
-            if not evidence_hashes:
-                self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
+            # Use curated evidence from evidence retrieval phase if available
+            if evidence_results and evidence_results.get('status') == 'success':
+                self._log_progress(f"✅ Using curated evidence: {evidence_results.get('evidence_quotes_found', 0)} quotes")
+                # Use the curated evidence artifact hash
+                curated_evidence_hash = evidence_results.get('evidence_artifact_hash')
+                if curated_evidence_hash:
+                    evidence_hashes = [curated_evidence_hash]
+                else:
+                    evidence_hashes = []
             else:
-                self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts for synthesis")
+                # Fallback to collecting all evidence artifacts
+                evidence_hashes = []
+                if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                    for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                        metadata = artifact_info.get("metadata", {})
+                        if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                            evidence_hashes.append(artifact_hash)
+                
+                if not evidence_hashes:
+                    self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
+                else:
+                    self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts for synthesis (fallback)")
             
             # Use SynthesisPromptAssembler to build the prompt
             from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
