@@ -1,0 +1,13 @@
+This is the beginning of a very long document that contains many paragraphs of text. 
+            
+            The quick brown fox jumps over the lazy dog. This famous pangram contains every letter of the alphabet at least once. 
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            
+            Here is another quote that we might want to find: "Innovation distinguishes between a leader and a follower." This is attributed to Steve Jobs.
+            
+            More text continues here with additional paragraphs and content that goes on for quite a while. 
+            
+            The future belongs to those who believe in the beauty of their dreams. This is another famous quote that might appear in our search results.
+            
+            Finally, we have the end of this document with some concluding thoughts and observations about the nature of text and search.

@@ -155,7 +155,7 @@ class TypesenseCorpusService:
     
     def search_quotes(self, quote_text: str, fuzziness: int = 1, size: int = 10) -> List[Dict[str, Any]]:
         """
-        Search for quotes using fuzzy matching.
+        Search for quotes using fuzzy matching with highlighting.
         
         Args:
             quote_text: The quote text to search for
@@ -163,14 +163,14 @@ class TypesenseCorpusService:
             size: Maximum number of results to return
             
         Returns:
-            List of search results with source file information
+            List of search results with highlighted quotes and minimal context
         """
         if not self.client:
             logger.error("No Typesense client available")
             return []
         
         try:
-            # Build search parameters
+            # Build search parameters with highlighting
             search_parameters = {
                 "q": quote_text,
                 "query_by": "content",
@@ -178,12 +178,18 @@ class TypesenseCorpusService:
                 "sort_by": "_text_match:desc",
                 "per_page": size,
                 "typo_tolerance_enabled": True,
-                "num_typos": fuzziness
+                "num_typos": fuzziness,
+                # Highlighting parameters for quote extraction
+                "highlight_full_fields": True,
+                "highlight_start_tag": "<mark>",
+                "highlight_end_tag": "</mark>",
+                "snippet_length": 150,  # Context around the match
+                "highlight_affix_num_tokens": 3  # Words before/after the match
             }
             
             response = self.client.collections[self.index_name].documents.search(search_parameters)
             
-            # Process results with calibrated raw scoring
+            # Process results with highlighted content
             results = []
             hits = response.get("hits", [])
             
@@ -198,19 +204,28 @@ class TypesenseCorpusService:
                     query_tokens = len(quote_text.split())
                     
                     # Calibrate score based on query length and token matching
-                    # This approach is based on Typesense community best practices
                     if query_tokens > 0:
-                        # Calculate base similarity from token matching
                         token_similarity = (tokens_matched / query_tokens) * 100
-                        
-                        # Apply calibration factors
-                        # Shorter queries get higher scores for partial matches
                         length_factor = min(1.2, max(0.8, 10 / query_tokens))
-                        
-                        # Calibrated score combines token similarity with length adjustment
                         calibrated_score = min(100, token_similarity * length_factor)
                     else:
                         calibrated_score = 0
+                    
+                    # Extract highlighted content (quote + minimal context)
+                    highlighted_content = hit.get("highlights", [{}])[0].get("snippet", "")
+                    if not highlighted_content:
+                        # Fallback: extract content around the match position
+                        content = document.get("content", "")
+                        match_pos = content.lower().find(quote_text.lower())
+                        if match_pos >= 0:
+                            start = max(0, match_pos - 50)
+                            end = min(len(content), match_pos + len(quote_text) + 50)
+                            highlighted_content = content[start:end]
+                        else:
+                            highlighted_content = content[:200] + "..."
+                    
+                    # Clean up highlighting tags for clean text
+                    clean_content = highlighted_content.replace("<mark>", "").replace("</mark>", "")
                     
                     result = {
                         "score": calibrated_score,  # Calibrated 0-100 score
@@ -223,8 +238,11 @@ class TypesenseCorpusService:
                         "date": document.get("date", ""),
                         "start_char": document.get("start_char", 0),
                         "end_char": document.get("end_char", 0),
-                        "highlighted_content": document.get("content", "")[:200] + "...",
-                        "full_content": document.get("content", "")
+                        # Return only the highlighted quote + minimal context
+                        "highlighted_quote": clean_content,
+                        "raw_highlighted": highlighted_content,  # With tags for debugging
+                        # Remove full content to save memory
+                        "content_length": len(document.get("content", ""))
                     }
                     results.append(result)
             

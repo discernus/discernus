@@ -162,7 +162,8 @@ class HybridCorpusService:
         # Get BM25 scores for all candidate texts
         scored_results = []
         for result in typesense_results:
-            content = result.get('content', '')
+            # Use highlighted quote for BM25 scoring
+            content = result.get('highlighted_quote', '')
             if content:
                 # Get BM25 score
                 bm25_score = bm25_index.get_scores(query_tokens)
@@ -170,11 +171,16 @@ class HybridCorpusService:
                 # Find the best matching sentence
                 best_score = max(bm25_score) if bm25_score else 0
                 
+                # Calculate token match percentage from Typesense results
+                tokens_matched = result.get('tokens_matched', 0)
+                query_tokens = result.get('query_tokens', 1)
+                token_match_pct = (tokens_matched / query_tokens) * 100 if query_tokens > 0 else 0
+                
                 # Combine Typesense and BM25 scores
                 hybrid_score = self._combine_scores(
-                    result.get('calibrated_score', 0),
+                    result.get('score', 0),  # Use 'score' instead of 'calibrated_score'
                     best_score,
-                    result.get('token_match_pct', 0)
+                    token_match_pct
                 )
                 
                 scored_results.append({
