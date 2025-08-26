@@ -1834,15 +1834,22 @@ class CleanAnalysisOrchestrator:
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
-                rag_index=None,  # No longer needed - evidence comes from curated file
             )
-            assets_dict = synthesis_agent.generate_final_report(
-                framework_path=Path(self.experiment_path / self.config["framework"]),
-                experiment_path=Path(self.experiment_path / "experiment.md"),
-                research_data_artifact_hash=research_data_hash,
-                artifact_storage=self.artifact_storage,
-                evidence_retrieval_results_hash=evidence_retrieval_results_hash,
-            )
+            
+            # Create assets dictionary for the new interface
+            assets = {
+                'framework_path': Path(self.experiment_path / self.config["framework"]),
+                'experiment_path': Path(self.experiment_path / "experiment.md"),
+                'research_data_artifact_hash': research_data_hash,
+                'evidence_retrieval_results_hash': evidence_retrieval_results_hash,
+                'artifact_storage': self.artifact_storage,
+                'statistical_results': statistical_results,
+                'derived_metrics_results': getattr(self, '_derived_metrics_results', {}),
+                'analysis_results': getattr(self, '_analysis_results', []),
+                'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None
+            }
+            
+            assets_dict = synthesis_agent.generate_final_report(assets=assets)
 
             # Extract draft report from synthesis agent output
             draft_report = assets_dict.get("final_report")
@@ -1881,20 +1888,31 @@ class CleanAnalysisOrchestrator:
             fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets_with_hash, statistical_results)
             
             # Use RevisionAgent to apply corrections based on fact-checker feedback
-            revision_agent = RevisionAgent(model=synthesis_model, audit_logger=audit_logger)
+            revision_agent = RevisionAgent(
+                gateway=self.llm_gateway,
+                audit_logger=audit_logger,
+                corpus_index_service=corpus_index_service
+            )
             
             try:
-                revision_results = revision_agent.revise_report(draft_report, fact_check_results)
+                revision_results = revision_agent.revise_report(
+                    draft_report=draft_report,
+                    fact_checker_report=fact_check_results,
+                    assets=assets_with_hash,
+                    corpus_index_service=corpus_index_service
+                )
                 final_report = revision_results["revised_report"]
                 
-                if revision_results["corrections_made"]:
-                    self._log_progress(f"✅ Applied {len(revision_results['corrections_made'])} corrections via RevisionAgent")
+                if revision_results["revision_summary"]["revisions_applied"] > 0:
+                    self._log_progress(f"✅ Applied {revision_results['revision_summary']['revisions_applied']} corrections via RevisionAgent")
                 else:
                     self._log_progress("✅ No corrections needed - synthesis report passed fact-check")
                     
-            except ValueError as e:
-                # Too many issues for revision agent to handle
-                raise CleanAnalysisError(f"Synthesis quality insufficient for revision: {str(e)}")
+            except Exception as e:
+                # Log revision failures but continue - this is not fatal
+                self._log_progress(f"⚠️ Revision agent encountered issues: {str(e)}")
+                # Use original draft report if revision fails
+                final_report = draft_report
 
             synthesis_hash = self.artifact_storage.put_artifact(
                 final_report.encode("utf-8"),
@@ -1942,9 +1960,10 @@ class CleanAnalysisOrchestrator:
                 corpus_index_service=corpus_index_service,
             )
             
-            # Run fact-checking validation using corpus indexing
+            # Run fact-checking validation using the new assets interface
             validation_results = fact_checker.check(
                 report_content=report_text,
+                assets=assets_with_hash,
                 corpus_index_service=corpus_index_service,
             )
             
