@@ -3,11 +3,10 @@
 Hybrid Corpus Service Benchmark
 
 Tests the hybrid approach (Typesense + Python BM25) against:
-1. Elasticsearch alone
-2. Typesense alone
-3. Hybrid approach
+1. Typesense alone
+2. Hybrid approach (Typesense + BM25)
 
-Measures both speed and accuracy to see if we can beat Elasticsearch.
+Measures both speed and accuracy to validate our hybrid approach.
 """
 
 import os
@@ -19,7 +18,6 @@ from typing import List, Dict, Any
 # Add the project root to the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'discernus'))
 
-from core.elasticsearch_corpus_service import CorpusIndexService
 from core.typesense_corpus_service import TypesenseCorpusService
 from core.hybrid_corpus_service import HybridCorpusService
 
@@ -93,56 +91,6 @@ def create_corpus_files_for_indexing(test_dir: str) -> List[Dict[str, Any]]:
                     print(f"Warning: Could not read {file_path}: {e}")
     
     return corpus_files
-
-
-def test_elasticsearch():
-    """Test Elasticsearch service."""
-    print("🔍 Testing Elasticsearch...")
-    
-    try:
-        es_service = CorpusIndexService(index_name="test_corpus_es")
-        test_dir = create_test_corpus()
-        corpus_files = create_corpus_files_for_indexing(test_dir)
-        
-        # Create index
-        start_time = time.time()
-        if not es_service.create_index():
-            print("❌ Failed to create Elasticsearch index")
-            return None
-        indexing_time = time.time() - start_time
-        
-        # Index corpus files
-        index_start = time.time()
-        if not es_service.index_corpus_files(corpus_files):
-            print("❌ Failed to index corpus files")
-            return None
-        index_time = time.time() - index_start
-        
-        # Test search
-        search_start = time.time()
-        results = es_service.search_quotes("quick brown fox", size=5)
-        search_time = time.time() - search_start
-        
-        # Test validation
-        validation_start = time.time()
-        validation = es_service.validate_quote("quick brown fox")
-        validation_time = time.time() - validation_start
-        
-        es_service.close()
-        
-        return {
-            'service': 'Elasticsearch',
-            'indexing_time_ms': round((indexing_time + index_time) * 1000, 2),
-            'search_time_ms': round(search_time * 1000, 2),
-            'validation_time_ms': round(validation_time * 1000, 2),
-            'total_time_ms': round((indexing_time + index_time + search_time + validation_time) * 1000, 2),
-            'results_count': len(results),
-            'validation_result': validation
-        }
-        
-    except Exception as e:
-        print(f"❌ Elasticsearch test failed: {e}")
-        return None
 
 
 def test_typesense():
@@ -371,7 +319,7 @@ def print_accuracy_results(accuracy_results: List[Dict[str, Any]]):
 def main():
     """Run the complete benchmark."""
     print("🚀 HYBRID CORPUS SERVICE BENCHMARK")
-    print("Testing Typesense + Python BM25 vs Elasticsearch vs Typesense alone")
+    print("Testing Typesense + Python BM25 vs Typesense alone")
     print("="*80)
     
     # Check if services are running
@@ -379,11 +327,6 @@ def main():
     
     # Run benchmarks
     results = []
-    
-    # Test Elasticsearch
-    es_result = test_elasticsearch()
-    if es_result:
-        results.append(es_result)
     
     # Test Typesense
     ts_result = test_typesense()
@@ -421,13 +364,11 @@ def main():
             
             if fastest['service'] == 'Hybrid (Typesense + BM25)':
                 print("🎉 Hybrid approach wins on performance!")
-            elif fastest['service'] == 'Typesense':
-                print("⚡ Typesense wins on raw speed!")
             else:
-                print("🔍 Elasticsearch wins on performance!")
+                print("⚡ Typesense wins on raw speed!")
     
     print("\n🎯 Next Steps:")
-    print("1. Analyze the results to see if hybrid beats Elasticsearch")
+    print("1. Analyze the results to see if hybrid beats Typesense alone")
     print("2. If successful, integrate hybrid service into the orchestrator")
     print("3. Run full experiment to validate end-to-end performance")
 

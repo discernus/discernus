@@ -3,13 +3,13 @@ import yaml
 from pathlib import Path
 from typing import Dict, Any, List
 from ...core.audit_logger import AuditLogger
-from ...core.corpus_index_service import CorpusIndexService
+from ...core.hybrid_corpus_service import HybridCorpusService
 
 
 class FactCheckerAgent:
-    """A multi-stage agent for fact-checking synthesis reports using Elasticsearch-based corpus indexing."""
+    """A multi-stage agent for fact-checking synthesis reports using hybrid (Typesense + BM25) corpus indexing."""
 
-    def __init__(self, gateway, audit_logger: AuditLogger, corpus_index_service: CorpusIndexService = None):
+    def __init__(self, gateway, audit_logger: AuditLogger, corpus_index_service: HybridCorpusService = None):
         self.gateway = gateway
         self.audit_logger = audit_logger
         self.corpus_index_service = corpus_index_service
@@ -29,7 +29,7 @@ class FactCheckerAgent:
     def check(
         self,
         report_content: str,
-        corpus_index_service: CorpusIndexService = None,
+        corpus_index_service: HybridCorpusService = None,
     ) -> Dict[str, Any]:
         """
         Executes the fact-checking process against the report using corpus indexing.
@@ -62,7 +62,7 @@ class FactCheckerAgent:
         return summary
 
     def _perform_check(
-        self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService
+        self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService
     ) -> List[Dict[str, str]]:
         """
         Execute a specific validation check using the LLM and corpus indexing.
@@ -81,7 +81,7 @@ class FactCheckerAgent:
         return self._parse_response(response, check)
 
     def _assemble_prompt(
-        self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService
+        self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService
     ) -> str:
         """Assembles the prompt for a specific fact-checking task using corpus indexing."""
         
@@ -133,7 +133,7 @@ You are a meticulous fact-checker. Your task is to validate a research report ba
 Be precise and factual. Only report actual issues, not potential concerns.
 """
 
-    def _get_evidence_context(self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService) -> str:
+    def _get_evidence_context(self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService) -> str:
         """Get relevant evidence context for a specific check using corpus indexing."""
         check_name = check.get('name', '')
         
@@ -196,7 +196,7 @@ Be precise and factual. Only report actual issues, not potential concerns.
         else:
             return "No relevant source materials found in corpus index."
     
-    def validate_quotes_in_report(self, report_content: str, corpus_index_service: CorpusIndexService) -> Dict[str, Any]:
+    def validate_quotes_in_report(self, report_content: str, corpus_index_service: HybridCorpusService) -> Dict[str, Any]:
         """
         Validate all quotes found in the report against the corpus index.
         

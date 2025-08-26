@@ -3391,24 +3391,16 @@ class CleanAnalysisOrchestrator:
             # Return empty results if fact-checker fails - don't block synthesis
             return {"issues": [], "status": "fact_check_unavailable", "error": str(e)}
 
-    def _build_corpus_index_service(self, assets: Dict[str, Any]):
-        """Build a corpus index service for fact-checking using Elasticsearch."""
-        self._log_progress("🔧 Building corpus index service...")
+    def _build_corpus_index_service(self) -> Any:
+        """Build a corpus index service for fact-checking using Hybrid (Typesense + BM25)."""
+        self._log_progress("🔧 Building hybrid corpus index service...")
         
         try:
-            from ..core.corpus_index_service import CorpusIndexService
+            from ..core.hybrid_corpus_service import HybridCorpusService
             import json
             
-            # Initialize corpus index service
-            corpus_index_service = CorpusIndexService(
-                elasticsearch_url="http://localhost:9200",
-                index_name=f"corpus_{self.experiment_path.name}"
-            )
-            
-            # Create index
-            if not corpus_index_service.create_index(force_recreate=True):
-                self._log_progress("⚠️ Failed to create corpus index, proceeding without indexing")
-                return corpus_index_service
+            # Initialize hybrid corpus service
+            corpus_index_service = HybridCorpusService()
             
             # Prepare corpus files for indexing
             corpus_files = []
@@ -3485,10 +3477,15 @@ class CleanAnalysisOrchestrator:
                 })
                 self._log_progress(f"📋 Added analysis results: {len(analysis_json)} chars")
             
-            # Index the corpus files
+            # Index the corpus files using Typesense
             if corpus_files:
-                if corpus_index_service.index_corpus_files(corpus_files):
-                    self._log_progress(f"✅ Successfully indexed {len(corpus_files)} files")
+                if corpus_index_service.typesense_service.index_corpus_files(corpus_files):
+                    self._log_progress(f"✅ Successfully indexed {len(corpus_files)} files in Typesense")
+                    
+                    # Build BM25 index for accurate scoring
+                    corpus_dir = str(self.experiment_path)
+                    corpus_index_service._build_bm25_index(corpus_dir, "corpus")
+                    self._log_progress("✅ Built Python BM25 index for accurate scoring")
                 else:
                     self._log_progress("⚠️ Failed to index corpus files, proceeding without indexing")
             else:
@@ -3497,36 +3494,7 @@ class CleanAnalysisOrchestrator:
             return corpus_index_service
             
         except Exception as e:
-            self._log_progress(f"❌ Error building corpus index service: {e}")
-            # Return a basic service that will handle missing index gracefully
-            from ..core.corpus_index_service import CorpusIndexService
-            return CorpusIndexService()
-    
-    def _apply_fact_checking_to_report(self, report_content: str, fact_check_results: Dict[str, Any]) -> str:
-        """Apply fact-checking results to the report by prepending critical findings."""
-        findings = fact_check_results.get('findings', [])
-        critical_findings = [f for f in findings if f.get('severity') == 'CRITICAL']
-        
-        if not critical_findings:
-            return report_content
-        
-        # Create warning notice
-        warning_lines = [
-            "---",
-            "**⚠️ FACT-CHECK NOTICE**",
-            "",
-            "This report contains factual issues identified by automated validation:",
-            ""
-        ]
-        
-        for finding in critical_findings:
-            warning_lines.append(f"- **{finding.get('check_name', 'Unknown Check')}**: {finding.get('description', 'No description')}")
-        
-        warning_lines.extend([
-            "",
-            "See `fact_check_results.json` for complete validation details.",
-            "---",
-            ""
-        ])
-        
-        return "\n".join(warning_lines) + report_content
+            self._log_progress(f"❌ Error building hybrid corpus index service: {e}")
+            # Return a basic hybrid service that will handle missing index gracefully
+            from ..core.hybrid_corpus_service import HybridCorpusService
+            return HybridCorpusService()

@@ -37,6 +37,5 @@ youtube-transcript-api>=0.6.2
 yt-dlp>=2025.6.9
 
 # Search and indexing
-elasticsearch>=8.0.0
 typesense>=0.20.0
 rank_bm25>=0.2.2
