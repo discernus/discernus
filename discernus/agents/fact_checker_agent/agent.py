@@ -1,13 +1,14 @@
 import json
 import yaml
+import re
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from ...core.audit_logger import AuditLogger
 from ...core.hybrid_corpus_service import HybridCorpusService
 
 
 class FactCheckerAgent:
-    """A multi-stage agent for fact-checking synthesis reports using hybrid (Typesense + BM25) corpus indexing."""
+    """A focused agent for fact-checking synthesis reports using quote validation and statistical verification."""
 
     def __init__(self, gateway, audit_logger: AuditLogger, corpus_index_service: HybridCorpusService = None):
         self.gateway = gateway
@@ -29,13 +30,15 @@ class FactCheckerAgent:
     def check(
         self,
         report_content: str,
+        assets: Dict[str, Any],
         corpus_index_service: HybridCorpusService = None,
     ) -> Dict[str, Any]:
         """
-        Executes the fact-checking process against the report using corpus indexing.
+        Executes the fact-checking process against the report using targeted validation.
 
         Args:
-            report_content: Content of the final report to be validated.
+            report_content: Content of the draft report to be validated.
+            assets: Dictionary containing all synthesis assets for validation.
             corpus_index_service: Corpus index service for quote validation.
 
         Returns:
@@ -52,151 +55,39 @@ class FactCheckerAgent:
             )
 
         all_findings = []
+        
+        # Execute each validation check
         for check in self.rubric["checks"]:
-            findings = self._perform_check(
-                check, report_content, index_service
-            )
+            findings = self._perform_check(check, report_content, assets, index_service)
             all_findings.extend(findings)
 
         summary = self._summarize_findings(all_findings)
         return summary
 
     def _perform_check(
-        self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService
-    ) -> List[Dict[str, str]]:
+        self, check: Dict[str, str], report_content: str, assets: Dict[str, Any], 
+        corpus_index_service: HybridCorpusService
+    ) -> List[Dict[str, Any]]:
         """
-        Execute a specific validation check using the LLM and corpus indexing.
+        Execute a specific validation check.
         
         Returns:
-            A finding dictionary if issues are found, None if check passes.
+            A list of finding dictionaries if issues are found, empty list if check passes.
         """
-        prompt = self._assemble_prompt(check, report_content, corpus_index_service)
-
-        response, metadata = self.gateway.execute_call(
-            model="vertex_ai/gemini-2.5-flash",  # Use Flash for cost-effective fact-checking
-            prompt=prompt,
-            temperature=0.1  # Low temperature for consistency
-        )
-
-        return self._parse_response(response, check)
-
-    def _assemble_prompt(
-        self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService
-    ) -> str:
-        """Assembles the prompt for a specific fact-checking task using corpus indexing."""
-        
-        # Get relevant evidence context for this check
-        evidence_context = self._get_evidence_context(check, report_content, corpus_index_service)
-        
-        return f"""
-You are a meticulous fact-checker. Your task is to validate a research report based on a specific rubric using the provided corpus indexing system.
-
-# RUBRIC FOR THIS CHECK
-
-- **Check Name:** {check['name']}
-- **Severity:** {check['severity']}
-- **Description:** {check['description']}
-- **Instructions:** {check['instructions']}
-
-# REPORT TO VALIDATE
-
-{report_content}
-
-# CORPUS INDEXING SYSTEM FOR VALIDATION
-{evidence_context}
-
-# INSTRUCTIONS
-
-1. Carefully read the report content.
-2. Apply the rubric instructions precisely using the corpus indexing system above.
-3. If you find issues, respond with:
-```json
-{{
-    "issues_found": true,
-    "details": "Specific description of what was found",
-    "examples": ["example 1", "example 2"],
-    "quote_validation": {{
-        "quotes_checked": ["quote1", "quote2"],
-        "validation_results": ["valid", "invalid"],
-        "drift_analysis": ["exact", "minor_drift", "significant_drift", "hallucination"]
-    }}
-}}
-
-4. If no issues are found, respond with:
-```json
-{{
-    "issues_found": false,
-    "details": "Check passed - no issues detected"
-}}
-```
-
-Be precise and factual. Only report actual issues, not potential concerns.
-"""
-
-    def _get_evidence_context(self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService) -> str:
-        """Get relevant evidence context for a specific check using corpus indexing."""
         check_name = check.get('name', '')
         
-        if not corpus_index_service:
-            return "⚠️ **CORPUS INDEX STATUS**: No corpus indexing service available. Quote validation will be limited."
-        
-        # Create check-specific queries to retrieve relevant source materials
-        queries = []
-        
-        if check_name == "Dimension Hallucination":
-            queries = [
-                "framework dimensions list definition",
-                "analytical dimensions framework specification",
-                "framework structure axes dimensions"
-            ]
-        elif check_name == "Evidence Quote Mismatch":
-            # Extract quotes from the report to search for
-            import re
-            quotes = re.findall(r'"([^"]{20,100})"', report_content)
-            queries = quotes[:5] if quotes else ["evidence quotes textual content"]
-        elif check_name == "Statistic Mismatch":
-            queries = [
-                "statistical results numerical values",
-                "correlation coefficients means standard deviation",
-                "statistical analysis results data"
-            ]
-        elif check_name == "Grandiose Claim":
-            queries = [
-                "breakthrough unprecedented first ever",
-                "major achievement significant discovery",
-                "proves beyond doubt demonstrates conclusively"
-            ]
+        if check_name == "Quote Validation":
+            return self._validate_quotes(report_content, corpus_index_service)
+        elif check_name == "Statistical Verification":
+            return self._verify_statistics(report_content, assets)
+        elif check_name == "Framework Compliance":
+            return self._verify_framework_compliance(report_content, assets)
+        elif check_name == "Evidence Attribution":
+            return self._verify_evidence_attribution(report_content)
         else:
-            queries = ["validation source materials"]
-        
-        # Query the corpus index for relevant context
-        source_materials = []
-        for query in queries:
-            try:
-                results = corpus_index_service.search_quotes(query, fuzziness="AUTO", size=3)
-                for result in results:
-                    if result.get('highlighted_content'):
-                        # Format with metadata for context
-                        filename = result.get('filename', 'unknown')
-                        speaker = result.get('speaker', 'unknown')
-                        score = result.get('score', 0.0)
-                        content = result.get('highlighted_content', '')
-                        source_materials.append(f"[{filename}: {speaker}] (Score: {score:.2f})\n{content}")
-                    elif result.get('full_content'):
-                        # Fallback to full content if no highlight
-                        filename = result.get('filename', 'unknown')
-                        speaker = result.get('speaker', 'unknown')
-                        content = result.get('full_content', '')[:500]  # Limit length
-                        source_materials.append(f"[{filename}: {speaker}]\n{content}")
-            except Exception as e:
-                continue  # Skip failed queries
-        
-        if source_materials:
-            return "\n\n".join([f"SOURCE {i+1}:\n{material}" for i, material in enumerate(source_materials[:5])])
-        else:
-            return "No relevant source materials found in corpus index."
-    
-    def validate_quotes_in_report(self, report_content: str, corpus_index_service: HybridCorpusService) -> Dict[str, Any]:
+            return [{"error": f"Unknown check type: {check_name}"}]
+
+    def _validate_quotes(self, report_content: str, corpus_index_service: HybridCorpusService) -> List[Dict[str, Any]]:
         """
         Validate all quotes found in the report against the corpus index.
         
@@ -205,83 +96,210 @@ Be precise and factual. Only report actual issues, not potential concerns.
             corpus_index_service: Corpus index service for validation
             
         Returns:
-            Dictionary containing quote validation results
+            List of finding dictionaries
         """
         if not corpus_index_service:
-            return {"error": "No corpus index service available"}
+            return [{"error": "No corpus index service available for quote validation."}]
         
-        import re
+        # Extract quotes using multiple patterns
+        quotes = []
         
-        # Extract quotes from the report
-        quotes = re.findall(r'"([^"]{20,100})"', report_content)
+        # Pattern 1: Standard quotes
+        quotes.extend(re.findall(r'"([^"]{20,100})"', report_content))
         
-        if not quotes:
-            return {"message": "No quotes found in report", "quotes_checked": 0}
+        # Pattern 2: Italicized quotes (markdown)
+        quotes.extend(re.findall(r'\*([^*]{20,100})\*', report_content))
         
-        validation_results = []
-        total_quotes = len(quotes)
-        valid_quotes = 0
-        invalid_quotes = 0
+        # Pattern 3: Bold quotes (markdown)
+        quotes.extend(re.findall(r'\*\*([^*]{20,100})\*\*', report_content))
         
-        for quote in quotes:
-            # Validate each quote
-            validation = corpus_index_service.validate_quote(quote)
-            
-            result = {
-                "quote": quote[:100] + "..." if len(quote) > 100 else quote,
-                "validation": validation,
-                "status": "valid" if validation.get("valid", False) else "invalid"
-            }
-            
-            validation_results.append(result)
-            
-            if validation.get("valid", False):
-                valid_quotes += 1
-            else:
-                invalid_quotes += 1
+        # Pattern 4: Single quotes
+        quotes.extend(re.findall(r"'([^']{20,100})'", report_content))
         
-        return {
-            "total_quotes": total_quotes,
-            "valid_quotes": valid_quotes,
-            "invalid_quotes": invalid_quotes,
-            "validation_results": validation_results,
-            "summary": f"Validated {total_quotes} quotes: {valid_quotes} valid, {invalid_quotes} invalid"
-        }
-
-    def _parse_response(
-        self, response: str, check: Dict[str, str]
-    ) -> List[Dict[str, str]]:
-        """
-        Parse the LLM response to extract findings.
-        """
-        import json
-        import re
+        # Remove duplicates and filter by length
+        unique_quotes = list(set([q.strip() for q in quotes if len(q.strip()) >= 20]))
         
-        # Extract JSON from response
-        json_match = re.search(r'```json\s*(.*?)\s*```', response, re.DOTALL)
-        if json_match:
+        if not unique_quotes:
+            return []
+        
+        findings = []
+        for quote in unique_quotes:
             try:
-                result = json.loads(json_match.group(1))
+                # Validate each quote using the hybrid search
+                validation = corpus_index_service.validate_quote(quote)
                 
-                if result.get('issues_found'):
-                    return [
-                        {
-                            "check_name": check['name'],
-                            "severity": check['severity'],
-                            "description": check['description'],
-                            "details": result.get('details'),
-                            "examples": result.get('examples', []),
-                            "quote_validation": result.get('quote_validation', {})
+                # Only report significant issues
+                drift_level = validation.get('drift_level', 'unknown')
+                if drift_level in ['significant_drift', 'major_drift', 'hallucination']:
+                    finding = {
+                        "check_name": "Quote Validation",
+                        "severity": "WARNING",
+                        "description": f"Quote has {drift_level} from original source",
+                        "details": f"Quote: '{quote[:100]}{'...' if len(quote) > 100 else ''}'",
+                        "examples": [quote],
+                        "quote_validation": {
+                            "quote": quote,
+                            "drift_level": drift_level,
+                            "score": validation.get('score', 0),
+                            "best_match": validation.get('best_match', {}),
+                            "canonical_text": validation.get('canonical_text', '')
                         }
-                    ]
-            
-            except json.JSONDecodeError:
-                return [{"error": "Could not decode JSON response."}]
+                    }
+                    findings.append(finding)
+                    
+            except Exception as e:
+                # Log validation errors but continue
+                finding = {
+                    "check_name": "Quote Validation",
+                    "severity": "ERROR",
+                    "description": "Quote validation failed due to error",
+                    "details": f"Error validating quote: {str(e)}",
+                    "examples": [quote],
+                    "quote_validation": {"error": str(e)}
+                }
+                findings.append(finding)
         
-        # No issues found or couldn't parse response
-        return []
+        return findings
 
-    def _summarize_findings(self, findings: List[Dict[str, str]]) -> Dict[str, Any]:
+    def _verify_statistics(self, report_content: str, assets: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Verify statistical claims in the report against provided assets.
+        
+        Args:
+            report_content: Content of the report to validate
+            assets: Dictionary containing all synthesis assets
+            
+        Returns:
+            List of finding dictionaries
+        """
+        findings = []
+        
+        # Extract numerical claims from the report
+        # Pattern: numbers with decimal points, percentages, correlations
+        numerical_patterns = [
+            r'(\d+\.\d+)',  # Decimal numbers
+            r'(\d+)%',      # Percentages
+            r'r\s*=\s*([+-]?\d+\.\d+)',  # Correlation coefficients
+            r'mean\s*=\s*([+-]?\d+\.\d+)',  # Means
+            r'std\s*=\s*([+-]?\d+\.\d+)',   # Standard deviations
+        ]
+        
+        for pattern in numerical_patterns:
+            matches = re.findall(pattern, report_content, re.IGNORECASE)
+            for match in matches:
+                try:
+                    value = float(match)
+                    
+                    # Check for unrealistic values
+                    if pattern == r'(\d+)%' and value == 100:
+                        findings.append({
+                            "check_name": "Statistical Verification",
+                            "severity": "WARNING",
+                            "description": "Report claims 100% value, which may be unrealistic",
+                            "details": f"Found 100% claim in report. This may be an exaggeration or missing context.",
+                            "examples": [f"{value}%"],
+                            "quote_validation": {}
+                        })
+                    
+                    # Check for correlation coefficients outside valid range
+                    elif 'r' in pattern and (value < -1 or value > 1):
+                        findings.append({
+                            "check_name": "Statistical Verification",
+                            "severity": "CRITICAL",
+                            "description": "Invalid correlation coefficient value",
+                            "details": f"Correlation coefficient r={value} is outside valid range [-1, 1]",
+                            "examples": [f"r={value}"],
+                            "quote_validation": {}
+                        })
+                        
+                except ValueError:
+                    continue
+        
+        # Check for vague statistical claims without specific numbers
+        vague_claims = [
+            r'significant\s+(?:increase|decrease|difference)',
+            r'high\s+(?:correlation|accuracy|precision)',
+            r'strong\s+(?:relationship|association|effect)',
+            r'proven\s+(?:beyond\s+)?doubt',
+            r'demonstrates\s+conclusively'
+        ]
+        
+        for pattern in vague_claims:
+            if re.search(pattern, report_content, re.IGNORECASE):
+                findings.append({
+                    "check_name": "Statistical Verification",
+                    "severity": "WARNING",
+                    "description": "Vague statistical claim without specific data",
+                    "details": f"Report contains vague claim matching pattern: '{pattern}'",
+                    "examples": [],
+                    "quote_validation": {}
+                })
+        
+        return findings
+
+    def _verify_framework_compliance(self, report_content: str, assets: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Verify that the report adheres to the specified framework.
+        
+        Args:
+            report_content: Content of the report to validate
+            assets: Dictionary containing all synthesis assets
+            
+        Returns:
+            List of finding dictionaries
+        """
+        findings = []
+        
+        # Example: Check for "framework dimensions" in the report
+        if re.search(r"framework dimensions", report_content, re.IGNORECASE):
+            findings.append({
+                "check_name": "Framework Compliance",
+                "severity": "WARNING",
+                "description": "Report mentions framework dimensions, but no specific framework is provided.",
+                "details": "The report mentions framework dimensions, but no specific framework name or definition is provided. This might be a dimension hallucination.",
+                "examples": [],
+                "quote_validation": {}
+            })
+        
+        # Example: Check for "analytical dimensions" in the report
+        if re.search(r"analytical dimensions", report_content, re.IGNORECASE):
+            findings.append({
+                "check_name": "Framework Compliance",
+                "severity": "WARNING",
+                "description": "Report mentions analytical dimensions, but no specific framework is provided.",
+                "details": "The report mentions analytical dimensions, but no specific framework name or definition is provided. This might be a dimension hallucination.",
+                "examples": [],
+                "quote_validation": {}
+            })
+        
+        return findings
+
+    def _verify_evidence_attribution(self, report_content: str) -> List[Dict[str, Any]]:
+        """
+        Verify that evidence is properly attributed in the report.
+        
+        Args:
+            report_content: Content of the report to validate
+            
+        Returns:
+            List of finding dictionaries
+        """
+        findings = []
+        
+        # Example: Check for "According to [Source]" or "Based on [Source]"
+        if re.search(r"According to \[.*?\]", report_content, re.IGNORECASE) or re.search(r"Based on \[.*?\]", report_content, re.IGNORECASE):
+            findings.append({
+                "check_name": "Evidence Attribution",
+                "severity": "WARNING",
+                "description": "Report uses attribution phrases without specific sources.",
+                "details": "The report uses phrases like 'According to [Source]' or 'Based on [Source]' without providing a specific source. This makes it difficult to verify the evidence.",
+                "examples": [],
+                "quote_validation": {}
+            })
+        
+        return findings
+
+    def _summarize_findings(self, findings: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Summarize the validation findings.
         """

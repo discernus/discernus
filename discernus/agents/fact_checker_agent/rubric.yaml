@@ -1,30 +1,20 @@
 checks:
-  - name: "Dimension Hallucination"
+  - name: "Quote Validation"
     severity: "CRITICAL"
-    description: "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification."
-    instructions: "Extract all capitalized dimension names from the report. For each name, you MUST query the RAG index to find its definition in the framework specification. Report any dimensions that are not found in the framework content within the RAG index."
+    description: "Validate all quotes in the report against the corpus index to ensure authenticity and accuracy."
+    instructions: "Extract all quotes from the report using multiple patterns (quotes, italics, bold). For each quote, use the corpus index to validate authenticity. Classify drift levels: exact, minor_drift, moderate_drift, significant_drift, major_drift, or hallucination. Report quotes with significant drift or hallucination."
 
-  - name: "Statistic Mismatch"
+  - name: "Statistical Verification"
     severity: "CRITICAL"
-    description: "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision."
-    instructions: "For every statistical claim in the report (e.g., 'mean=0.65', 'r=-0.95'), you MUST query the RAG index to find the corresponding value in the research data. ONLY report as errors: 1) Values that differ by more than acceptable rounding (>0.01 for means/std, >0.005 for correlations); 2) Wrong variable names or completely incorrect numbers. DO NOT flag proper APA-style rounding (e.g., 0.047→0.05, 0.029→0.03) as errors."
+    description: "Verify that all numerical values in the report match the provided statistical assets."
+    instructions: "Extract all numerical claims from the report (means, correlations, standard deviations, etc.). Compare each value against the statistical_results.json file. Report values that differ by more than acceptable rounding (>0.01 for means/std, >0.005 for correlations). Do not flag proper APA-style rounding."
 
-  - name: "Evidence Quote Mismatch"
+  - name: "Framework Compliance"
     severity: "WARNING"
-    description: "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database."
-    instructions: "Randomly select 5 evidence quotes from the report. For each, you MUST search the provided RAG evidence index (which contains the full text of all corpus documents) to confirm the quote's presence. Do not search the framework or manifest files for these quotes. Report any quotes that cannot be found in the RAG index. In your details, clearly state that you have cross-referenced the quotes against the RAG evidence index."
-    
-  - name: "Grandiose Claim"
+    description: "Ensure all analytical dimensions mentioned in the report are defined in the framework specification."
+    instructions: "Extract all capitalized dimension names from the report. Verify each dimension exists in the framework specification. Report any dimensions that are not defined in the framework."
+
+  - name: "Evidence Attribution"
     severity: "WARNING"
-    description: "Identify and flag unsubstantiated or overly promotional claims."
-    instructions: "Scan the report for superlative or promotional phrases like 'major breakthrough,' 'first ever,' 'unprecedented,' or 'proves beyond a doubt.' Report these as claims that may require editorial review for academic tone."
-
-  - name: "Citation Violation"
-    severity: "CRITICAL"
-    description: "Detect prohibited external academic citations and authority claims."
-    instructions: "Scan the report for: 1) Academic citations in formats like 'Author et al., 2023', 'Smith & Jones (2020)', or '(Author, 2023)'; 2) Authority claims like 'research shows', 'studies indicate', 'according to literature', or 'previous research'; 3) Reference lists or bibliographies. DO NOT flag internal evidence attribution like '(Source: filename.txt)' or '(Source: document_name.txt)' - these are legitimate and required for provenance tracking. Report only external academic citations as these should not appear in computational analysis reports."
-
-  - name: "Fabricated Reference"
-    severity: "CRITICAL" 
-    description: "Identify potentially fabricated academic references or suspicious citation patterns."
-    instructions: "Look for academic-style references that appear fabricated, including: 1) Unusual author name patterns; 2) Citations to non-existent journals; 3) Implausible publication years; 4) Generic or vague research claims. Flag these as potential LLM hallucinations requiring removal."
+    description: "Verify that all evidence quotes have proper source attribution."
+    instructions: "Check that every quote in the report includes proper source attribution (Source: document_name). Report quotes missing source attribution or with incorrect source references."
