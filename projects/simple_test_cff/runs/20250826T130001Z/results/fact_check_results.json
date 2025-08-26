@@ -1,0 +1,110 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions ten core analytical dimensions of the Cohesive Flourishing Framework (CFF) v10.1. While the RAG index provides definitions for derived metrics (e.g., Strategic Contradiction Index, Cohesion Indices, Tension Indices) and explicitly names 'Tribal Dominance' and 'Individual Dignity' in the context of a derived metric calculation, it does not contain explicit definitions or even direct mentions by name for the other eight core dimensions listed in the report. The RAG index refers to these generically as 'Score_A, Score_B' or 'cohesive/fragmentative dimensions' but does not name them.",
+      "examples": [
+        "The report states: 'It independently scores ten dimensions of rhetoric organized into five oppositional pairs: ... Emotion: Fear vs. Hope, Success: Envy vs. Compersion (joy in others' success), Relation: Enmity vs. Amity, Goals: Fragmentative Goals vs. Cohesive Goals.'",
+        "The provided RAG index (Source 1, 3, 4, 5) does not contain any explicit definition or direct mention by name for 'Fear', 'Hope', 'Envy', 'Compersion', 'Enmity', 'Amity', 'Fragmentative Goals', or 'Cohesive Goals'.",
+        "While 'Tribal Dominance' and 'Individual Dignity' are mentioned by name in the definition of 'identity_tension' (Source 1 & 4), their conceptual definitions are not provided, and the other eight base dimensions are entirely absent by name from the RAG content."
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The required evidence file, `statistical_results.json`, which should contain the aggregated numerical values (means, standard deviations, correlations) for the corpus, is not present in the provided evidence database. The files named `statistical_results.json` (Source 1 and Source 4) only contain metadata about the generation of statistical analysis functions, not the actual statistical output needed for validation. Therefore, the 'Statistic Mismatch' check cannot be performed as instructed.",
+      "examples": []
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents (e.g., `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, `steve_king_2017_house_floor.txt`). The rubric explicitly instructs to 'search the provided RAG evidence index (which contains the full text of all corpus documents) to confirm the quote's presence' and 'Do not search the framework or manifest files for these quotes.' Without access to the actual corpus text files, it is impossible to cross-reference the quotes as required by the rubric.",
+      "examples": [
+        "Quote: 'So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.' (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - The file 'alexandria_ocasio_cortez_2025_fighting_oligarchy.txt' is not provided in the evidence database.",
+        "Quote: 'instead of being restored, it would be destroyed by another presidential appointment' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+        "Quote: 'We have a Constitution to preserve, protect, defend, and support and defend.' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+        "Quote: 'That being one of God's children is good enough to be protected by the law, but everybody treated equally.' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+        "Quote: 'destroyed' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database."
+      ]
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several instances of superlative or overly promotional language, which may require editorial review to maintain an academic tone, especially given the acknowledged preliminary nature and small sample size (N=4) of the study.",
+      "examples": [
+        "The study's primary contribution lies in demonstrating the CFF's capacity to move beyond simple sentiment analysis, capturing the complex and often contradictory nature of political language. (Section 1. Executive Summary)",
+        "The CFF's primary innovation is its departure from single-axis measurement... (Section 4.1 Framework Description and Analytical Approach)",
+        "The derived CFF metrics provide a powerful lens for understanding rhetorical strategy. (Section 5.2 Advanced Metric Analysis: Cohesion and Contradiction)",
+        "The most important finding is the consistent negative correlation between the framework's opposing dimensions, which validates its theoretical design. (Section 5.3 Correlation and Interaction Analysis)",
+        "The framework-corpus fit is excellent. (Section 5.5 Framework Effectiveness Assessment)",
+        "...perfectly illustrating how the CFF's salience-weighting provides a more accurate picture than a simple keyword search would. (Section 5.5 Framework Effectiveness Assessment)",
+        "This analysis demonstrates the potential of computational methods like the CFF to provide objective, replicable, and nuanced insights into political communication. (Section 6.2 Broader Significance and Future Directions)",
+        "The framework's ability to quantify not just the content of speech (via raw scores) but also its internal complexity (via the `Strategic Contradiction Index`) represents a significant methodological advance. (Section 7. Conclusion)"
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions ten core analytical dimensions of the Cohesive Flourishing Framework (CFF) v10.1. While the RAG index provides definitions for derived metrics (e.g., Strategic Contradiction Index, Cohesion Indices, Tension Indices) and explicitly names 'Tribal Dominance' and 'Individual Dignity' in the context of a derived metric calculation, it does not contain explicit definitions or even direct mentions by name for the other eight core dimensions listed in the report. The RAG index refers to these generically as 'Score_A, Score_B' or 'cohesive/fragmentative dimensions' but does not name them.",
+        "examples": [
+          "The report states: 'It independently scores ten dimensions of rhetoric organized into five oppositional pairs: ... Emotion: Fear vs. Hope, Success: Envy vs. Compersion (joy in others' success), Relation: Enmity vs. Amity, Goals: Fragmentative Goals vs. Cohesive Goals.'",
+          "The provided RAG index (Source 1, 3, 4, 5) does not contain any explicit definition or direct mention by name for 'Fear', 'Hope', 'Envy', 'Compersion', 'Enmity', 'Amity', 'Fragmentative Goals', or 'Cohesive Goals'.",
+          "While 'Tribal Dominance' and 'Individual Dignity' are mentioned by name in the definition of 'identity_tension' (Source 1 & 4), their conceptual definitions are not provided, and the other eight base dimensions are entirely absent by name from the RAG content."
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The required evidence file, `statistical_results.json`, which should contain the aggregated numerical values (means, standard deviations, correlations) for the corpus, is not present in the provided evidence database. The files named `statistical_results.json` (Source 1 and Source 4) only contain metadata about the generation of statistical analysis functions, not the actual statistical output needed for validation. Therefore, the 'Statistic Mismatch' check cannot be performed as instructed.",
+        "examples": []
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The provided 'EVIDENCE DATABASE FOR VALIDATION' does not contain the full text of the corpus documents (e.g., `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`, `steve_king_2017_house_floor.txt`). The rubric explicitly instructs to 'search the provided RAG evidence index (which contains the full text of all corpus documents) to confirm the quote's presence' and 'Do not search the framework or manifest files for these quotes.' Without access to the actual corpus text files, it is impossible to cross-reference the quotes as required by the rubric.",
+        "examples": [
+          "Quote: 'So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.' (Source: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt) - The file 'alexandria_ocasio_cortez_2025_fighting_oligarchy.txt' is not provided in the evidence database.",
+          "Quote: 'instead of being restored, it would be destroyed by another presidential appointment' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+          "Quote: 'We have a Constitution to preserve, protect, defend, and support and defend.' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+          "Quote: 'That being one of God's children is good enough to be protected by the law, but everybody treated equally.' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database.",
+          "Quote: 'destroyed' (Source: steve_king_2017_house_floor.txt) - The file 'steve_king_2017_house_floor.txt' is not provided in the evidence database."
+        ]
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several instances of superlative or overly promotional language, which may require editorial review to maintain an academic tone, especially given the acknowledged preliminary nature and small sample size (N=4) of the study.",
+        "examples": [
+          "The study's primary contribution lies in demonstrating the CFF's capacity to move beyond simple sentiment analysis, capturing the complex and often contradictory nature of political language. (Section 1. Executive Summary)",
+          "The CFF's primary innovation is its departure from single-axis measurement... (Section 4.1 Framework Description and Analytical Approach)",
+          "The derived CFF metrics provide a powerful lens for understanding rhetorical strategy. (Section 5.2 Advanced Metric Analysis: Cohesion and Contradiction)",
+          "The most important finding is the consistent negative correlation between the framework's opposing dimensions, which validates its theoretical design. (Section 5.3 Correlation and Interaction Analysis)",
+          "The framework-corpus fit is excellent. (Section 5.5 Framework Effectiveness Assessment)",
+          "...perfectly illustrating how the CFF's salience-weighting provides a more accurate picture than a simple keyword search would. (Section 5.5 Framework Effectiveness Assessment)",
+          "This analysis demonstrates the potential of computational methods like the CFF to provide objective, replicable, and nuanced insights into political communication. (Section 6.2 Broader Significance and Future Directions)",
+          "The framework's ability to quantify not just the content of speech (via raw scores) but also its internal complexity (via the `Strategic Contradiction Index`) represents a significant methodological advance. (Section 7. Conclusion)"
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

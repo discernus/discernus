@@ -136,11 +136,20 @@ template: |
   - Explain what correlation patterns reveal about the framework's construct validity
   - Highlight unexpected findings and their implications
   - Assess framework-corpus fit based on statistical patterns
+  - **Evidence Integration**: Support every pattern with direct quotes from the evidence database
+  - **Quote Integration**: Weave evidence quotes naturally into your analysis, not as separate citations
 
   ### 5.5 Framework Effectiveness Assessment
   - Discriminatory power analysis
   - Framework-corpus fit evaluation
   - Methodological insights
+
+  ### 5.6 Evidence Integration and Citation
+  - **Statistical-Evidence Alignment**: Connect each major statistical finding to supporting textual evidence
+  - **Quote Quality**: Use substantial quotes (full sentences) that directly support your interpretations
+  - **Attribution Standards**: Follow format: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
+  - **Coverage Check**: Ensure every major claim has at least one supporting quote
+  - **Transparency**: Acknowledge when evidence is weak or indirect, but still cite it
 
   ## 6. Discussion
   - Theoretical implications of findings
@@ -166,6 +175,9 @@ template: |
   - **Attribution format**: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
   - **Substantial quotes**: Full sentences, not fragments
   - **Quality check**: Every Results paragraph contains at least one direct quote
+  - **Evidence Coverage**: Ensure all major statistical patterns have supporting textual evidence
+  - **Speaker Identification**: Always identify the speaker when quoting evidence
+  - **Source Attribution**: Include document name for every quote to maintain academic integrity
 
   ## Statistical Interpretation Standards
   - **No calculations**: Interpret provided statistics as definitive facts

@@ -217,7 +217,7 @@ class CleanAnalysisOrchestrator:
             # Phase 7: Run evidence retrieval to curate supporting quotes
             phase_start = datetime.now(timezone.utc)
             try:
-                evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results)
+                evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results, run_id)
                 self._log_status("Evidence retrieval completed")
                 self._log_phase_timing("evidence_retrieval_phase", phase_start)
             except Exception as e:
@@ -1627,7 +1627,7 @@ class CleanAnalysisOrchestrator:
             self._build_rag_index(audit_logger)
             self.performance_metrics["cache_misses"] += 1
 
-    def _run_evidence_retrieval_phase(self, model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any]) -> Dict[str, Any]:
+    def _run_evidence_retrieval_phase(self, model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], run_id: str = None) -> Dict[str, Any]:
         """Run evidence retrieval phase using EvidenceRetrieverAgent to curate supporting quotes."""
         self._log_progress("🔍 Starting evidence retrieval phase...")
         
@@ -1690,10 +1690,11 @@ class CleanAnalysisOrchestrator:
                 self._log_progress("⚠️ No evidence artifacts found - evidence retrieval will be limited")
                 return {"status": "no_evidence_available", "message": "No evidence artifacts found"}
             
-            # Initialize EvidenceRetrieverAgent
+            # Initialize EvidenceRetrieverAgent with shared artifact storage
             agent_config = {
                 'experiment_path': str(self.experiment_path),
-                'run_id': datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+                'run_id': run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
+                'artifact_storage': self.artifact_storage  # Share the same artifact storage instance
             }
             
             evidence_agent = EvidenceRetrieverAgent(agent_config)
@@ -1770,12 +1771,19 @@ class CleanAnalysisOrchestrator:
             # Use curated evidence from evidence retrieval phase if available
             if evidence_results and evidence_results.get('status') == 'success':
                 self._log_progress(f"✅ Using curated evidence: {evidence_results.get('evidence_quotes_found', 0)} quotes")
-                # Use the curated evidence artifact hash
-                curated_evidence_hash = evidence_results.get('evidence_artifact_hash')
-                if curated_evidence_hash:
-                    evidence_hashes = [curated_evidence_hash]
+                # For curated evidence, we need to use the original evidence_v6 artifacts
+                # that the EvidenceRetriever used to build its curated results
+                evidence_hashes = []
+                if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                    for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                        metadata = artifact_info.get("metadata", {})
+                        if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                            evidence_hashes.append(artifact_hash)
+                
+                if not evidence_hashes:
+                    self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
                 else:
-                    evidence_hashes = []
+                    self._log_progress(f"📋 Using {len(evidence_hashes)} evidence artifacts with curated guidance")
             else:
                 # Fallback to collecting all evidence artifacts
                 evidence_hashes = []
@@ -1812,21 +1820,28 @@ class CleanAnalysisOrchestrator:
             # TRANSACTION INTEGRITY CHECK: Verify all required resources before synthesis
             self._validate_synthesis_prerequisites(evidence_hashes, research_data_hash)
             
-            # Build the intelligent evidence matching wrapper for the synthesis agent
-            synthesis_evidence_wrapper = self._build_intelligent_evidence_wrapper(
-                evidence_artifact_hashes=evidence_hashes
-            )
+            # Evidence is now provided directly from EvidenceRetriever output
+            # No need to build evidence wrapper for synthesis agent
+
+            # Extract evidence retrieval results hash if available
+            evidence_retrieval_results_hash = None
+            if evidence_results and evidence_results.get('status') == 'success':
+                evidence_retrieval_results_hash = evidence_results.get('evidence_artifact_hash')
+                self._log_progress(f"📋 Using evidence retrieval results: {evidence_retrieval_results_hash}")
+            else:
+                self._log_progress("⚠️ No evidence retrieval results available - synthesis will proceed without evidence")
 
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
-                rag_index=synthesis_evidence_wrapper,  # Pass our intelligent wrapper instead of basic RAG
+                rag_index=None,  # No longer needed - evidence comes from curated file
             )
             assets_dict = synthesis_agent.generate_final_report(
                 framework_path=Path(self.experiment_path / self.config["framework"]),
                 experiment_path=Path(self.experiment_path / "experiment.md"),
                 research_data_artifact_hash=research_data_hash,
                 artifact_storage=self.artifact_storage,
+                evidence_retrieval_results_hash=evidence_retrieval_results_hash,
             )
 
             # Extract draft report from synthesis agent output
@@ -1909,10 +1924,10 @@ class CleanAnalysisOrchestrator:
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_text = report_content.decode('utf-8')
             
-            # Create temporary fact-checker RAG index
-            self._log_progress("🔧 Starting fact-checker RAG index construction...")
-            fact_checker_rag = self._build_fact_checker_rag_index(assets, statistical_results)
-            self._log_progress(f"✅ Fact-checker RAG index built successfully")
+            # Build corpus index for fact-checking
+            self._log_progress("🔧 Building corpus index for fact-checking...")
+            corpus_index_service = self._build_corpus_index_service(assets)
+            self._log_progress(f"✅ Corpus index built successfully")
             
             # Initialize fact-checker agent
             from ..agents.fact_checker_agent.agent import FactCheckerAgent
@@ -1924,12 +1939,13 @@ class CleanAnalysisOrchestrator:
             fact_checker = FactCheckerAgent(
                 gateway=self.llm_gateway,
                 audit_logger=audit_logger,
+                corpus_index_service=corpus_index_service,
             )
             
-            # Run fact-checking validation using new interface
+            # Run fact-checking validation using corpus indexing
             validation_results = fact_checker.check(
                 report_content=report_text,
-                evidence_index=fact_checker_rag,
+                corpus_index_service=corpus_index_service,
             )
             
             self._log_progress(f"✅ Fact-checking completed: {len(validation_results.get('findings', []))} findings")
@@ -3374,3 +3390,143 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"⚠️ Fact-checker validation failed: {str(e)}")
             # Return empty results if fact-checker fails - don't block synthesis
             return {"issues": [], "status": "fact_check_unavailable", "error": str(e)}
+
+    def _build_corpus_index_service(self, assets: Dict[str, Any]):
+        """Build a corpus index service for fact-checking using Elasticsearch."""
+        self._log_progress("🔧 Building corpus index service...")
+        
+        try:
+            from ..core.corpus_index_service import CorpusIndexService
+            import json
+            
+            # Initialize corpus index service
+            corpus_index_service = CorpusIndexService(
+                elasticsearch_url="http://localhost:9200",
+                index_name=f"corpus_{self.experiment_path.name}"
+            )
+            
+            # Create index
+            if not corpus_index_service.create_index(force_recreate=True):
+                self._log_progress("⚠️ Failed to create corpus index, proceeding without indexing")
+                return corpus_index_service
+            
+            # Prepare corpus files for indexing
+            corpus_files = []
+            
+            # 1. Load corpus documents
+            self._log_progress(f"🔍 Loading corpus documents for indexing...")
+            corpus_documents = self._load_corpus_documents()
+            self._log_progress(f"📋 Loaded {len(corpus_documents)} corpus documents")
+            
+            for doc in corpus_documents:
+                if 'content' in doc:
+                    corpus_files.append({
+                        'content': doc['content'],
+                        'file_path': doc.get('file_path', ''),
+                        'filename': doc.get('filename', 'unknown'),
+                        'speaker': doc.get('speaker', ''),
+                        'date': doc.get('date', ''),
+                        'source_type': 'corpus_document',
+                        'start_char': 0,
+                        'end_char': len(doc['content']),
+                        'context': doc.get('context', '')
+                    })
+                    self._log_progress(f"📋 Prepared corpus document: {doc.get('filename', 'unknown')} ({len(doc['content'])} chars)")
+                else:
+                    self._log_progress(f"⚠️ Corpus document missing content: {doc}")
+            
+            # 2. Add experiment specification
+            experiment_path = self.experiment_path / "experiment.md"
+            if experiment_path.exists():
+                experiment_content = self.security.secure_read_text(experiment_path)
+                corpus_files.append({
+                    'content': experiment_content,
+                    'file_path': str(experiment_path),
+                    'filename': 'experiment.md',
+                    'speaker': '',
+                    'date': '',
+                    'source_type': 'experiment_specification',
+                    'start_char': 0,
+                    'end_char': len(experiment_content),
+                    'context': 'Experiment configuration and parameters'
+                })
+                self._log_progress(f"📋 Added experiment specification: {len(experiment_content)} chars")
+            
+            # 3. Add framework specification
+            framework_path = self.experiment_path / self.config.get('framework', 'framework.md')
+            if framework_path.exists():
+                framework_content = self.security.secure_read_text(framework_path)
+                corpus_files.append({
+                    'content': framework_content,
+                    'file_path': str(framework_path),
+                    'filename': framework_path.name,
+                    'speaker': '',
+                    'date': '',
+                    'source_type': 'framework_specification',
+                    'start_char': 0,
+                    'end_char': len(framework_content),
+                    'context': 'Framework dimensions and methodology'
+                })
+                self._log_progress(f"📋 Added framework specification: {len(framework_content)} chars")
+            
+            # 4. Add statistical results if available
+            if hasattr(self, '_analysis_results') and self._analysis_results:
+                analysis_json = json.dumps(self._analysis_results, indent=2, default=str)
+                corpus_files.append({
+                    'content': analysis_json,
+                    'file_path': 'analysis_results.json',
+                    'filename': 'analysis_results.json',
+                    'speaker': '',
+                    'date': '',
+                    'source_type': 'statistical_results',
+                    'start_char': 0,
+                    'end_char': len(analysis_json),
+                    'context': 'Raw analysis scores and statistical data'
+                })
+                self._log_progress(f"📋 Added analysis results: {len(analysis_json)} chars")
+            
+            # Index the corpus files
+            if corpus_files:
+                if corpus_index_service.index_corpus_files(corpus_files):
+                    self._log_progress(f"✅ Successfully indexed {len(corpus_files)} files")
+                else:
+                    self._log_progress("⚠️ Failed to index corpus files, proceeding without indexing")
+            else:
+                self._log_progress("⚠️ No corpus files to index")
+            
+            return corpus_index_service
+            
+        except Exception as e:
+            self._log_progress(f"❌ Error building corpus index service: {e}")
+            # Return a basic service that will handle missing index gracefully
+            from ..core.corpus_index_service import CorpusIndexService
+            return CorpusIndexService()
+    
+    def _apply_fact_checking_to_report(self, report_content: str, fact_check_results: Dict[str, Any]) -> str:
+        """Apply fact-checking results to the report by prepending critical findings."""
+        findings = fact_check_results.get('findings', [])
+        critical_findings = [f for f in findings if f.get('severity') == 'CRITICAL']
+        
+        if not critical_findings:
+            return report_content
+        
+        # Create warning notice
+        warning_lines = [
+            "---",
+            "**⚠️ FACT-CHECK NOTICE**",
+            "",
+            "This report contains factual issues identified by automated validation:",
+            ""
+        ]
+        
+        for finding in critical_findings:
+            warning_lines.append(f"- **{finding.get('check_name', 'Unknown Check')}**: {finding.get('description', 'No description')}")
+        
+        warning_lines.extend([
+            "",
+            "See `fact_check_results.json` for complete validation details.",
+            "---",
+            ""
+        ])
+        
+        return "\n".join(warning_lines) + report_content

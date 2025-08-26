@@ -816,3 +816,65 @@ Generate exactly {max_queries} search queries, one per line, starting with a das
             txtai_documents.append(txtai_doc)
         
         return txtai_documents
+    
+    def find_supporting_evidence(
+        self,
+        statistical_finding: str,
+        framework_context: str,
+        limit: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Find evidence that directly supports a statistical finding using LLM intelligence.
+        
+        This method provides a high-level interface for finding evidence that supports
+        specific statistical findings within a framework context.
+        
+        Args:
+            statistical_finding: Description of the statistical finding
+            framework_context: Framework description for context
+            limit: Maximum number of evidence pieces to return
+            
+        Returns:
+            List of evidence dictionaries with relevance scores
+        """
+        try:
+            # Generate targeted search queries for this finding
+            queries = self.generate_search_queries([statistical_finding], max_queries=3)
+            
+            if not queries:
+                self.logger.warning(f"No search queries generated for finding: {statistical_finding}")
+                return []
+            
+            # Search for evidence using the generated queries
+            all_results = []
+            seen_quotes = set()
+            
+            for query in queries:
+                results = self.search_evidence(query, limit=limit, filters=None)
+                
+                for result in results:
+                    quote_text = result.get('quote_text', '')
+                    if quote_text and quote_text not in seen_quotes:
+                        all_results.append(result)
+                        seen_quotes.add(quote_text)
+                        
+                        if len(all_results) >= limit:
+                            break
+                
+                if len(all_results) >= limit:
+                    break
+            
+            # Sort by relevance score
+            all_results.sort(key=lambda x: x.get('relevance_score', 0.0), reverse=True)
+            
+            self.logger.info(f"Found {len(all_results)} supporting evidence pieces for finding: {statistical_finding}")
+            return all_results[:limit]
+            
+        except Exception as e:
+            self.logger.error(f"Error finding supporting evidence: {e}")
+            if self.audit_logger:
+                self.audit_logger.log_agent_event("EvidenceMatchingWrapper", "find_supporting_evidence_failed", {
+                    "finding": statistical_finding,
+                    "error": str(e)
+                })
+            return []

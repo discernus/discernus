@@ -1,0 +1,116 @@
+{
+  "status": "completed",
+  "findings": [
+    {
+      "check_name": "Dimension Hallucination",
+      "severity": "CRITICAL",
+      "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+      "details": "The report mentions several analytical dimensions and metrics that are not found or defined in the provided framework content within the RAG index. While some dimensions like 'Tribal Dominance' and 'Individual Dignity', and derived metrics like 'Strategic Contradiction Index' and 'Full Cohesion Index' are referenced in the provided code snippets (derived_metrics_results.json, statistical_results.json), their conceptual definitions are absent. More critically, a significant number of core dimensions explicitly listed in the report's framework description (Section 4.1) are not mentioned at all in the RAG index content.",
+      "examples": [
+        "Fear",
+        "Envy",
+        "Enmity",
+        "Compersion",
+        "Hope",
+        "Amity",
+        "Cohesive Goals",
+        "Fragmentative Goals"
+      ]
+    },
+    {
+      "check_name": "Statistic Mismatch",
+      "severity": "CRITICAL",
+      "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+      "details": "The provided 'evidence database' does not contain the actual statistical results (e.g., means, standard deviations, correlations, or the full set of individual document derived metrics) required to validate the numerical claims made in the report. The `statistical_results.json` and `derived_metrics_results.json` files contain metadata and function definitions, not the computed statistical data. The `individual_analysis_results.json` only provides raw and salience scores for one document (John McCain) and does not include derived metrics or aggregated statistics for the corpus. Therefore, a comprehensive validation of the numerical values against the 'research data' as per the rubric's instructions cannot be performed.",
+      "examples": [
+        "Report claim: 'Full Cohesion Index of +0.84 and a near-zero Strategic Contradiction Index (0.01)' for John McCain. (Cannot validate, derived metrics for McCain not in evidence.)",
+        "Report claim: 'negative cohesion scores (-0.74, -0.37, and -0.17, respectively)' for Steve King, Bernie Sanders, and Alexandria Ocasio-Cortez. (Cannot validate, no data for these documents in evidence.)",
+        "Report claim: 'Bernie Sanders's speech shows the highest Strategic Contradiction Index (0.10)'. (Cannot validate, no data for Sanders in evidence.)",
+        "Report claim: 'Tribal Dominance vs. Individual Dignity demonstrating robust negative correlations (r = -0.78)'. (Cannot validate, no correlation matrix or correlation values in evidence.)",
+        "Report claim: 'The mean raw score for Envy (0.63), Enmity (0.63), and Fear (0.60)'. (Cannot validate, no descriptive statistics (means, std. dev.) for any metric in evidence.)",
+        "Report claim: 'Table 1: Descriptive Statistics for Key CFF Metrics (N=4)'. (Cannot validate any values in this table, as the underlying descriptive statistics are not provided in the evidence.)",
+        "Report claim: 'Table 2: Rhetorical Postures by Cohesion and Contradiction Scores'. (Cannot validate any values in this table, as the derived metrics for all documents are not provided in the evidence.)",
+        "Report claim: 'Table 3: Key Inter-dimensional Correlations'. (Cannot validate any values in this table, as the correlation matrix is not provided in the evidence.)"
+      ]
+    },
+    {
+      "check_name": "Evidence Quote Mismatch",
+      "severity": "WARNING",
+      "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+      "details": "The report explicitly states multiple times (e.g., Executive Summary, Section 4.4 Limitations, Section 5.6 Evidence Integration and Citation, Section 8. Evidence Citations) that the automated RAG system did not return any usable textual evidence, and consequently, no textual quotes are present in the report. Therefore, it was not possible to 'randomly select 5 evidence quotes from the report' as instructed by the rubric to cross-reference against the RAG evidence index. The check for 'Evidence Quote Mismatch' could not be performed as intended due to the absence of any quotes in the report itself. This confirms the report's stated limitation regarding the lack of supporting textual evidence.",
+      "examples": []
+    },
+    {
+      "check_name": "Grandiose Claim",
+      "severity": "WARNING",
+      "description": "Identify and flag unsubstantiated or overly promotional claims.",
+      "details": "The report contains several strong positive claims about the framework's capabilities and contributions, which, while potentially supported by the internal analysis of this pilot study, use superlative or promotional language that may require editorial review for academic tone, especially given the acknowledged limitations (small sample size, lack of textual evidence).",
+      "examples": [
+        "The framework, particularly the `Full Cohesion Index`, shows excellent discriminatory power.",
+        "The CFF's derived metrics, especially the `Strategic Contradiction Index`, generated novel insights that would be missed by simpler models.",
+        "The ability to distinguish between 'coherently fragmentative' and 'strategically contradictory' rhetoric is a significant analytical advancement, allowing for a more nuanced typology of populist discourse."
+      ]
+    }
+  ],
+  "validation_results": {
+    "status": "completed",
+    "findings": [
+      {
+        "check_name": "Dimension Hallucination",
+        "severity": "CRITICAL",
+        "description": "Verify that all analytical dimensions mentioned in the report are actually defined in the framework specification.",
+        "details": "The report mentions several analytical dimensions and metrics that are not found or defined in the provided framework content within the RAG index. While some dimensions like 'Tribal Dominance' and 'Individual Dignity', and derived metrics like 'Strategic Contradiction Index' and 'Full Cohesion Index' are referenced in the provided code snippets (derived_metrics_results.json, statistical_results.json), their conceptual definitions are absent. More critically, a significant number of core dimensions explicitly listed in the report's framework description (Section 4.1) are not mentioned at all in the RAG index content.",
+        "examples": [
+          "Fear",
+          "Envy",
+          "Enmity",
+          "Compersion",
+          "Hope",
+          "Amity",
+          "Cohesive Goals",
+          "Fragmentative Goals"
+        ]
+      },
+      {
+        "check_name": "Statistic Mismatch",
+        "severity": "CRITICAL",
+        "description": "Verify that numerical values (means, correlations, etc.) cited in the report match the `statistical_results.json` file within acceptable rounding precision.",
+        "details": "The provided 'evidence database' does not contain the actual statistical results (e.g., means, standard deviations, correlations, or the full set of individual document derived metrics) required to validate the numerical claims made in the report. The `statistical_results.json` and `derived_metrics_results.json` files contain metadata and function definitions, not the computed statistical data. The `individual_analysis_results.json` only provides raw and salience scores for one document (John McCain) and does not include derived metrics or aggregated statistics for the corpus. Therefore, a comprehensive validation of the numerical values against the 'research data' as per the rubric's instructions cannot be performed.",
+        "examples": [
+          "Report claim: 'Full Cohesion Index of +0.84 and a near-zero Strategic Contradiction Index (0.01)' for John McCain. (Cannot validate, derived metrics for McCain not in evidence.)",
+          "Report claim: 'negative cohesion scores (-0.74, -0.37, and -0.17, respectively)' for Steve King, Bernie Sanders, and Alexandria Ocasio-Cortez. (Cannot validate, no data for these documents in evidence.)",
+          "Report claim: 'Bernie Sanders's speech shows the highest Strategic Contradiction Index (0.10)'. (Cannot validate, no data for Sanders in evidence.)",
+          "Report claim: 'Tribal Dominance vs. Individual Dignity demonstrating robust negative correlations (r = -0.78)'. (Cannot validate, no correlation matrix or correlation values in evidence.)",
+          "Report claim: 'The mean raw score for Envy (0.63), Enmity (0.63), and Fear (0.60)'. (Cannot validate, no descriptive statistics (means, std. dev.) for any metric in evidence.)",
+          "Report claim: 'Table 1: Descriptive Statistics for Key CFF Metrics (N=4)'. (Cannot validate any values in this table, as the underlying descriptive statistics are not provided in the evidence.)",
+          "Report claim: 'Table 2: Rhetorical Postures by Cohesion and Contradiction Scores'. (Cannot validate any values in this table, as the derived metrics for all documents are not provided in the evidence.)",
+          "Report claim: 'Table 3: Key Inter-dimensional Correlations'. (Cannot validate any values in this table, as the correlation matrix is not provided in the evidence.)"
+        ]
+      },
+      {
+        "check_name": "Evidence Quote Mismatch",
+        "severity": "WARNING",
+        "description": "Spot-check to ensure that textual evidence quoted in the report exists in the evidence database.",
+        "details": "The report explicitly states multiple times (e.g., Executive Summary, Section 4.4 Limitations, Section 5.6 Evidence Integration and Citation, Section 8. Evidence Citations) that the automated RAG system did not return any usable textual evidence, and consequently, no textual quotes are present in the report. Therefore, it was not possible to 'randomly select 5 evidence quotes from the report' as instructed by the rubric to cross-reference against the RAG evidence index. The check for 'Evidence Quote Mismatch' could not be performed as intended due to the absence of any quotes in the report itself. This confirms the report's stated limitation regarding the lack of supporting textual evidence.",
+        "examples": []
+      },
+      {
+        "check_name": "Grandiose Claim",
+        "severity": "WARNING",
+        "description": "Identify and flag unsubstantiated or overly promotional claims.",
+        "details": "The report contains several strong positive claims about the framework's capabilities and contributions, which, while potentially supported by the internal analysis of this pilot study, use superlative or promotional language that may require editorial review for academic tone, especially given the acknowledged limitations (small sample size, lack of textual evidence).",
+        "examples": [
+          "The framework, particularly the `Full Cohesion Index`, shows excellent discriminatory power.",
+          "The CFF's derived metrics, especially the `Strategic Contradiction Index`, generated novel insights that would be missed by simpler models.",
+          "The ability to distinguish between 'coherently fragmentative' and 'strategically contradictory' rhetoric is a significant analytical advancement, allowing for a more nuanced typology of populist discourse."
+        ]
+      }
+    ],
+    "validation_results": {
+      "total_checks": 6,
+      "critical_failures": 2,
+      "errors": 0,
+      "warnings": 2
+    }
+  }
+}

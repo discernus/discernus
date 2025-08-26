@@ -65,11 +65,12 @@ class UnifiedSynthesisAgent:
         experiment_path: Path,
         research_data_artifact_hash: str,
         artifact_storage,
+        evidence_retrieval_results_hash: str = None,
     ) -> Dict[str, Any]:
         """
         Generate the final academic report.
-        This method now assumes the RAG index is available via self.rag_index
-        and uses it to perform targeted evidence retrieval.
+        This method now reads curated evidence directly from EvidenceRetriever output
+        instead of using RAG index queries.
         """
         if self.audit_logger:
             self.audit_logger.log_agent_event(
@@ -78,58 +79,46 @@ class UnifiedSynthesisAgent:
                 {
                     "framework": str(framework_path),
                     "research_data_hash": research_data_artifact_hash,
-                    "rag_enabled": self.rag_index is not None,
+                    "evidence_retrieval_hash": evidence_retrieval_results_hash,
                 },
             )
 
         try:
-            # 1. Validate RAG index is available (no direct evidence access allowed)
-            if not self.rag_index:
-                raise ValueError("RAG index required for evidence retrieval. No direct evidence access allowed.")
-            
-            # 2. Assemble the base prompt WITHOUT the evidence database.
-            # The evidence will be injected Just-In-Time by this agent through RAG only.
+            # 1. Assemble the base prompt with framework, experiment, and research data
             assembler = SynthesisPromptAssembler()
             base_prompt = assembler.assemble_prompt(
                 framework_path=framework_path,
                 experiment_path=experiment_path,
                 research_data_artifact_hash=research_data_artifact_hash,
                 artifact_storage=artifact_storage,
-                evidence_artifacts=[],  # Evidence is handled by RAG, not the assembler
+                evidence_artifacts=[],  # Evidence will be added separately
             )
 
-            # 2. Extract statistical findings from the research data to use as RAG queries.
-            research_data = json.loads(
-                artifact_storage.get_artifact(research_data_artifact_hash).decode("utf-8")
-            )
-            statistical_findings = self._extract_findings_for_rag(
-                research_data.get("statistical_results", {})
+            # 2. Load and prepare curated evidence from EvidenceRetriever
+            evidence_context = self._prepare_evidence_context_from_curated_evidence(
+                evidence_retrieval_results_hash, artifact_storage
             )
 
-            # 3. Use the RAG index to find evidence for each finding.
-            evidence_context = self._prepare_evidence_context_through_rag(statistical_findings, self.rag_index)
-
-            # 4. Construct the final, enhanced prompt with the retrieved evidence.
+            # 3. Construct the final, enhanced prompt with the curated evidence
             final_prompt = f"""{base_prompt}
 
-# SEQUENTIAL SYNTHESIS PROCESS - FOLLOW THESE STEPS IN ORDER:
+# EVIDENCE INTEGRATION REQUIREMENTS
 
-## STEP 1: EVIDENCE RETRIEVAL AND INTEGRATION
+## CURATED EVIDENCE FOR SYNTHESIS
 {evidence_context}
 
-## STEP 2: EVIDENCE-BASED REPORT GENERATION
-Now that you have the evidence context above, proceed to write your comprehensive report.
-
-**CRITICAL REQUIREMENTS:**
-- Every major statistical claim MUST be supported by evidence from the RAG system above
+## CRITICAL REQUIREMENTS FOR EVIDENCE INTEGRATION
+- Every major statistical claim MUST be supported by evidence from the curated evidence above
 - Use the exact format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'
+- Include speaker identification and source document for every quote
+- Weave evidence quotes naturally into your analysis, not as separate citations
 - If no evidence was found for a finding, explicitly state: "No supporting textual evidence was found for this statistical pattern"
 - Do NOT proceed to report writing until you have examined the evidence above
 
-## STEP 3: FINAL REPORT STRUCTURE
-Generate your comprehensive academic report following the structure specified in the prompt above, ensuring all claims are evidence-backed."""
+## SYNTHESIS INSTRUCTIONS
+Generate your comprehensive academic report following the structure specified in the prompt above, ensuring all claims are evidence-backed using the curated evidence provided."""
 
-            # 5. Execute the LLM call.
+            # 4. Execute the LLM call
             final_report, metadata = self.llm_gateway.execute_call(
                 model=self.model, prompt=final_prompt, temperature=0.1
             )
@@ -371,9 +360,9 @@ Generate your comprehensive academic report following the structure specified in
                     score = 0.0
                 
                 # Get document content through RAG interface
-                if hasattr(rag_index, 'documents') and rag_index.documents:
-                    if isinstance(doc_id, int) and 0 <= doc_id < len(rag_index.documents):
-                        doc = rag_index.documents[doc_id]
+                if hasattr(self.rag_index, 'documents') and self.rag_index.documents:
+                    if isinstance(doc_id, int) and 0 <= doc_id < len(self.rag_index.documents):
+                        doc = self.rag_index.documents[doc_id]
                         formatted_results.append({
                             "quote_text": doc.get('text', ''),
                             "document_name": doc.get('metadata', {}).get('document_name', 'Unknown'),
@@ -401,47 +390,83 @@ Generate your comprehensive academic report following the structure specified in
         
         return formatted_results
     
-    def _prepare_evidence_context_through_rag(self, statistical_findings: List[str], rag_index: Any) -> str:
-        """Prepare evidence context ONLY through RAG - no direct access allowed."""
-        if not rag_index:
-            return "ERROR: No RAG index available. Evidence retrieval requires RAG integration."
+    def _prepare_evidence_context_from_curated_evidence(self, evidence_retrieval_results_hash: str, artifact_storage) -> str:
+        """Prepare evidence context from curated evidence file produced by EvidenceRetriever."""
+        if not evidence_retrieval_results_hash:
+            return "⚠️ **EVIDENCE STATUS**: No evidence retrieval results available. Proceed with synthesis using only statistical data."
         
-        evidence_lines = [
-            "🔍 STEP 1: EVIDENCE RETRIEVAL COMPLETED",
-            "Using RAG system to find supporting textual evidence for statistical findings.",
-            "",
-            "📋 EVIDENCE CITATION REQUIREMENTS:",
-            "- Every major statistical claim MUST be supported by evidence retrieved through RAG",
-            "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
-            "- Evidence retrieved based on statistical finding queries",
-            "- If no evidence found, explicitly state this limitation",
-            ""
-        ]
-        
-        # Add RAG-based evidence for each statistical finding
-        evidence_lines.append(f"📊 STATISTICAL FINDINGS TO SUPPORT: {len(statistical_findings)} findings identified")
-        evidence_lines.append("")
-        
-        for i, finding in enumerate(statistical_findings[:3]):  # Limit to first 3 findings
-            evidence_lines.append(f"🔍 **Finding {i+1}: {finding}**")
-            evidence = self._get_evidence_through_rag(finding, rag_index)
-            if evidence:
-                evidence_lines.append(f"✅ Evidence found: {len(evidence)} pieces")
-                for j, ev in enumerate(evidence[:2]):  # Top 2 pieces of evidence per finding
-                    quote_text = ev.get('quote_text', 'No quote')
-                    if quote_text and quote_text.strip():
-                        evidence_lines.append(f"  📝 Quote {j+1}: \"{quote_text[:150]}{'...' if len(quote_text) > 150 else ''}\"")
-                        evidence_lines.append(f"     Source: {ev.get('document_name', 'Unknown')} | Dimension: {ev.get('dimension', 'Unknown')}")
-                    else:
-                        evidence_lines.append(f"  ⚠️ Quote {j+1}: No quote text available")
-                evidence_lines.append("")
-            else:
-                evidence_lines.append(f"❌ No evidence found for this finding")
-                evidence_lines.append("")
-        
-        evidence_lines.append("🎯 **NEXT STEP**: Use the evidence above to support your statistical interpretations.")
-        
-        return "\n".join(evidence_lines)
+        try:
+            # Load the curated evidence from EvidenceRetriever
+            evidence_content = artifact_storage.get_artifact(evidence_retrieval_results_hash)
+            if not evidence_content:
+                return "⚠️ **EVIDENCE STATUS**: Evidence retrieval results not found. Proceed with synthesis using only statistical data."
+            
+            evidence_data = json.loads(evidence_content.decode('utf-8'))
+            
+            # Extract evidence results
+            evidence_results = evidence_data.get('evidence_results', [])
+            total_quotes = evidence_data.get('metadata', {}).get('total_quotes', 0)
+            
+            if not evidence_results or total_quotes == 0:
+                return "⚠️ **EVIDENCE STATUS**: No evidence quotes found in retrieval results. Proceed with synthesis using only statistical data."
+            
+            # Build evidence context
+            evidence_lines = [
+                "🔍 **CURATED EVIDENCE AVAILABLE FOR SYNTHESIS**",
+                f"EvidenceRetriever found {total_quotes} relevant quotes across {len(evidence_results)} statistical findings.",
+                "",
+                "📋 **EVIDENCE CITATION REQUIREMENTS**:",
+                "- Every major statistical claim MUST be supported by evidence from the curated evidence below",
+                "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
+                "- Include speaker identification and source document for every quote",
+                "- Weave evidence quotes naturally into your analysis, not as separate citations",
+                "- If no evidence was found for a finding, explicitly state this limitation",
+                ""
+            ]
+            
+            # Add curated evidence for each finding
+            for i, finding_result in enumerate(evidence_results[:5]):  # Limit to first 5 findings
+                finding_desc = finding_result.get('finding', {}).get('description', f'Finding {i+1}')
+                quotes = finding_result.get('quotes', [])
+                
+                evidence_lines.append(f"🔍 **Finding {i+1}: {finding_desc}**")
+                if quotes:
+                    evidence_lines.append(f"✅ Evidence found: {len(quotes)} pieces")
+                    for j, quote in enumerate(quotes[:3]):  # Top 3 quotes per finding
+                        quote_text = quote.get('quote_text', 'No quote')
+                        if quote_text and quote_text.strip():
+                            # Truncate long quotes for readability
+                            display_quote = quote_text[:200] + ('...' if len(quote_text) > 200 else '')
+                            evidence_lines.append(f"  📝 Quote {j+1}: \"{display_quote}\"")
+                            evidence_lines.append(f"     Source: {quote.get('document_name', 'Unknown')} | Dimension: {quote.get('dimension', 'Unknown')} | Confidence: {quote.get('confidence', 0.0):.2f}")
+                        else:
+                            evidence_lines.append(f"  ⚠️ Quote {j+1}: No quote text available")
+                    evidence_lines.append("")
+                else:
+                    evidence_lines.append(f"❌ No evidence found for this finding")
+                    evidence_lines.append("")
+            
+            # Add summary and instructions
+            evidence_lines.append(f"📈 **EVIDENCE SUMMARY**: {total_quotes} total evidence pieces available for synthesis")
+            evidence_lines.append("")
+            evidence_lines.append("🎯 **CRITICAL REQUIREMENTS FOR SYNTHESIS**:")
+            evidence_lines.append("1. **Mandatory Evidence Integration**: Every major statistical claim MUST cite evidence from above")
+            evidence_lines.append("2. **Proper Attribution**: Use exact format: 'As [Speaker] stated: \"[quote]\" (Source: [document_name])'")
+            evidence_lines.append("3. **Substantial Quotes**: Include full sentences, not fragments")
+            evidence_lines.append("4. **Quality Check**: Every Results paragraph should contain at least one direct quote")
+            evidence_lines.append("5. **Transparency**: If evidence is weak, acknowledge it but still cite it")
+            evidence_lines.append("")
+            evidence_lines.append("🚀 **PROCEED TO SYNTHESIS**: Use the curated evidence above to ground your statistical interpretations in textual reality.")
+            
+            return "\n".join(evidence_lines)
+            
+        except Exception as e:
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(self.agent_name, "evidence_context_preparation_failed", {
+                    "error": str(e),
+                    "evidence_hash": evidence_retrieval_results_hash
+                })
+            return f"⚠️ **EVIDENCE STATUS**: Error loading evidence retrieval results: {str(e)}. Proceed with synthesis using only statistical data."
     
     def _generate_report_with_evidence_integration(self, synthesis_prompt: str) -> str:
         """Generate final report using LLM with evidence integration instructions."""

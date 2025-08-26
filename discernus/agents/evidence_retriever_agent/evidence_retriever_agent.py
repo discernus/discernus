@@ -41,8 +41,14 @@ class EvidenceRetrieverAgent:
         self.experiment_path = Path(config.get('experiment_path', '.'))
         self.run_id = config.get('run_id', 'default_run')
         self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
-        # Use the existing shared cache artifacts directory
-        self.artifact_storage = LocalArtifactStorage(self.security_boundary, self.experiment_path / "shared_cache")
+        # Use shared artifact storage if provided, otherwise create new instance
+        if 'artifact_storage' in config:
+            self.artifact_storage = config['artifact_storage']
+            self.logger.info("Using shared artifact storage instance")
+        else:
+            # Use the existing shared cache artifacts directory
+            self.artifact_storage = LocalArtifactStorage(self.security_boundary, self.experiment_path / "shared_cache")
+            self.logger.info("Created new artifact storage instance")
         self.llm_gateway = LLMGateway(get_model_registry())
         self.audit_logger = AuditLogger(self.security_boundary, self.experiment_path / "session" / self.run_id)
         

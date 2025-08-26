@@ -3,14 +3,16 @@ import yaml
 from pathlib import Path
 from typing import Dict, Any, List
 from ...core.audit_logger import AuditLogger
+from ...core.corpus_index_service import CorpusIndexService
 
 
 class FactCheckerAgent:
-    """A multi-stage agent for fact-checking synthesis reports."""
+    """A multi-stage agent for fact-checking synthesis reports using Elasticsearch-based corpus indexing."""
 
-    def __init__(self, gateway, audit_logger: AuditLogger):
+    def __init__(self, gateway, audit_logger: AuditLogger, corpus_index_service: CorpusIndexService = None):
         self.gateway = gateway
         self.audit_logger = audit_logger
+        self.corpus_index_service = corpus_index_service
         self.rubric = self._load_rubric()
 
     def _load_rubric(self) -> Dict[str, Any]:
@@ -27,18 +29,21 @@ class FactCheckerAgent:
     def check(
         self,
         report_content: str,
-        evidence_index: Any,
+        corpus_index_service: CorpusIndexService = None,
     ) -> Dict[str, Any]:
         """
-        Executes the fact-checking process against the report.
+        Executes the fact-checking process against the report using corpus indexing.
 
         Args:
-            report_path: Path to the final_report.md to be validated.
-            rag_index: A pre-built RAG index containing all necessary source artifacts.
+            report_content: Content of the final report to be validated.
+            corpus_index_service: Corpus index service for quote validation.
 
         Returns:
             A dictionary containing the validation results.
         """
+        # Use provided service or fall back to instance service
+        index_service = corpus_index_service or self.corpus_index_service
+        
         if self.audit_logger:
             self.audit_logger.log_agent_event(
                 agent_name="FactCheckerAgent",
@@ -49,7 +54,7 @@ class FactCheckerAgent:
         all_findings = []
         for check in self.rubric["checks"]:
             findings = self._perform_check(
-                check, report_content, evidence_index
+                check, report_content, index_service
             )
             all_findings.extend(findings)
 
@@ -57,15 +62,15 @@ class FactCheckerAgent:
         return summary
 
     def _perform_check(
-        self, check: Dict[str, str], report_content: str, evidence_index: Any
+        self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService
     ) -> List[Dict[str, str]]:
         """
-        Execute a specific validation check using the LLM.
+        Execute a specific validation check using the LLM and corpus indexing.
         
         Returns:
             A finding dictionary if issues are found, None if check passes.
         """
-        prompt = self._assemble_prompt(check, report_content, evidence_index)
+        prompt = self._assemble_prompt(check, report_content, corpus_index_service)
 
         response, metadata = self.gateway.execute_call(
             model="vertex_ai/gemini-2.5-flash",  # Use Flash for cost-effective fact-checking
@@ -76,15 +81,15 @@ class FactCheckerAgent:
         return self._parse_response(response, check)
 
     def _assemble_prompt(
-        self, check: Dict[str, str], report_content: str, evidence_index: Any
+        self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService
     ) -> str:
-        """Assembles the prompt for a specific fact-checking task."""
+        """Assembles the prompt for a specific fact-checking task using corpus indexing."""
         
-        # Get relevant evidence from the RAG index for this check
-        evidence_context = self._get_evidence_context(check, report_content, evidence_index)
+        # Get relevant evidence context for this check
+        evidence_context = self._get_evidence_context(check, report_content, corpus_index_service)
         
         return f"""
-You are a meticulous fact-checker. Your task is to validate a research report based on a specific rubric using the provided evidence database.
+You are a meticulous fact-checker. Your task is to validate a research report based on a specific rubric using the provided corpus indexing system.
 
 # RUBRIC FOR THIS CHECK
 
@@ -97,22 +102,25 @@ You are a meticulous fact-checker. Your task is to validate a research report ba
 
 {report_content}
 
-# EVIDENCE DATABASE FOR VALIDATION
-
+# CORPUS INDEXING SYSTEM FOR VALIDATION
 {evidence_context}
 
 # INSTRUCTIONS
 
 1. Carefully read the report content.
-2. Apply the rubric instructions precisely using the evidence database above.
+2. Apply the rubric instructions precisely using the corpus indexing system above.
 3. If you find issues, respond with:
 ```json
 {{
     "issues_found": true,
     "details": "Specific description of what was found",
-    "examples": ["example 1", "example 2"]
+    "examples": ["example 1", "example 2"],
+    "quote_validation": {{
+        "quotes_checked": ["quote1", "quote2"],
+        "validation_results": ["valid", "invalid"],
+        "drift_analysis": ["exact", "minor_drift", "significant_drift", "hallucination"]
+    }}
 }}
-```
 
 4. If no issues are found, respond with:
 ```json
@@ -125,9 +133,12 @@ You are a meticulous fact-checker. Your task is to validate a research report ba
 Be precise and factual. Only report actual issues, not potential concerns.
 """
 
-    def _get_evidence_context(self, check: Dict[str, str], report_content: str, evidence_index: Any) -> str:
-        """Get relevant evidence context for a specific check."""
+    def _get_evidence_context(self, check: Dict[str, str], report_content: str, corpus_index_service: CorpusIndexService) -> str:
+        """Get relevant evidence context for a specific check using corpus indexing."""
         check_name = check.get('name', '')
+        
+        if not corpus_index_service:
+            return "⚠️ **CORPUS INDEX STATUS**: No corpus indexing service available. Quote validation will be limited."
         
         # Create check-specific queries to retrieve relevant source materials
         queries = []
@@ -139,7 +150,7 @@ Be precise and factual. Only report actual issues, not potential concerns.
                 "framework structure axes dimensions"
             ]
         elif check_name == "Evidence Quote Mismatch":
-            # Extract some quotes from the report to search for
+            # Extract quotes from the report to search for
             import re
             quotes = re.findall(r'"([^"]{20,100})"', report_content)
             queries = quotes[:5] if quotes else ["evidence quotes textual content"]
@@ -158,108 +169,84 @@ Be precise and factual. Only report actual issues, not potential concerns.
         else:
             queries = ["validation source materials"]
         
-        # Query the RAG index for relevant context
+        # Query the corpus index for relevant context
         source_materials = []
         for query in queries:
             try:
-                results = self._query_evidence(query, evidence_index)
+                results = corpus_index_service.search_quotes(query, fuzziness="AUTO", size=3)
                 for result in results:
-                    if 'content' in result:
+                    if result.get('highlighted_content'):
                         # Format with metadata for context
-                        metadata = result.get('metadata', {})
-                        source_type = metadata.get('source_type', 'unknown')
-                        filename = metadata.get('filename', 'unknown')
-                        content = result['content'][:2000]  # Limit length
-                        source_materials.append(f"[{source_type}: {filename}]\n{content}")
-                    elif 'error' in result:
-                        source_materials.append(f"ERROR: {result['error']}")
+                        filename = result.get('filename', 'unknown')
+                        speaker = result.get('speaker', 'unknown')
+                        score = result.get('score', 0.0)
+                        content = result.get('highlighted_content', '')
+                        source_materials.append(f"[{filename}: {speaker}] (Score: {score:.2f})\n{content}")
+                    elif result.get('full_content'):
+                        # Fallback to full content if no highlight
+                        filename = result.get('filename', 'unknown')
+                        speaker = result.get('speaker', 'unknown')
+                        content = result.get('full_content', '')[:500]  # Limit length
+                        source_materials.append(f"[{filename}: {speaker}]\n{content}")
             except Exception as e:
                 continue  # Skip failed queries
         
         if source_materials:
             return "\n\n".join([f"SOURCE {i+1}:\n{material}" for i, material in enumerate(source_materials[:5])])
         else:
-            return "No relevant source materials found in evidence database."
-
-    def _query_evidence(self, query: str, evidence_index: Any) -> List[Dict[str, Any]]:
+            return "No relevant source materials found in corpus index."
+    
+    def validate_quotes_in_report(self, report_content: str, corpus_index_service: CorpusIndexService) -> Dict[str, Any]:
         """
-        Get relevant source context from the RAG index for a specific check.
+        Validate all quotes found in the report against the corpus index.
         
+        Args:
+            report_content: Content of the report to validate
+            corpus_index_service: Corpus index service for validation
+            
         Returns:
-            List of document dictionaries with content and metadata.
+            Dictionary containing quote validation results
         """
-        try:
-            if not evidence_index:
-                return [{"error": "No evidence index available for query."}]
+        if not corpus_index_service:
+            return {"error": "No corpus index service available"}
+        
+        import re
+        
+        # Extract quotes from the report
+        quotes = re.findall(r'"([^"]{20,100})"', report_content)
+        
+        if not quotes:
+            return {"message": "No quotes found in report", "quotes_checked": 0}
+        
+        validation_results = []
+        total_quotes = len(quotes)
+        valid_quotes = 0
+        invalid_quotes = 0
+        
+        for quote in quotes:
+            # Validate each quote
+            validation = corpus_index_service.validate_quote(quote)
             
-            # Use the RAG index's search method to get (id, score) tuples
-            search_results = evidence_index.search(query, limit=3)
+            result = {
+                "quote": quote[:100] + "..." if len(quote) > 100 else quote,
+                "validation": validation,
+                "status": "valid" if validation.get("valid", False) else "invalid"
+            }
             
-            if not search_results:
-                return [{"error": "No results found for query."}]
+            validation_results.append(result)
             
-            # Extract actual document content using txtai's built-in retrieval
-            documents = []
-            for result in search_results:
-                try:
-                    # Handle different txtai result formats
-                    if isinstance(result, tuple) and len(result) == 2:
-                        doc_id, score = result
-                    elif isinstance(result, dict):
-                        doc_id = result.get('id', result.get('document', 0))
-                        score = result.get('score', 0.0)
-                    else:
-                        # Fallback: treat as doc_id with default score
-                        doc_id = result
-                        score = 0.0
-                    
-                    # Use stored documents with index-based retrieval
-                    if hasattr(evidence_index, 'documents') and evidence_index.documents:
-                        # Fix txtai ID type mismatch: convert string IDs to integers
-                        try:
-                            # Convert txtai string ID to integer for comparison
-                            if isinstance(doc_id, str) and doc_id.isdigit():
-                                doc_id_int = int(doc_id)
-                            elif isinstance(doc_id, int):
-                                doc_id_int = doc_id
-                            else:
-                                doc_id_int = doc_id  # Keep as-is for fallback
-                            
-                            # Try exact ID match first
-                            document_found = False
-                            for doc in evidence_index.documents:
-                                if doc['id'] == doc_id_int:
-                                    documents.append({
-                                        "content": doc['text'],
-                                        "metadata": doc.get('metadata', {}),
-                                        "score": score
-                                    })
-                                    document_found = True
-                                    break
-                            
-                            # If exact match fails, try index-based retrieval
-                            if not document_found and isinstance(doc_id_int, int) and 0 <= doc_id_int < len(evidence_index.documents):
-                                doc = evidence_index.documents[doc_id_int]
-                                documents.append({
-                                    "content": doc['text'],
-                                    "metadata": doc.get('metadata', {}),
-                                    "score": score
-                                })
-                                document_found = True
-                            
-                            if not document_found:
-                                documents.append({"error": f"Document ID {doc_id} (converted: {doc_id_int}) not found in {len(evidence_index.documents)} stored documents"})
-                        except Exception as e:
-                            documents.append({"error": f"Failed to process document ID {doc_id}: {e}"})
-                    else:
-                        documents.append({"error": "RAG index has no stored documents - evidence retrieval failed"})
-                except Exception as e:
-                    documents.append({"error": f"Failed to process search result {result}: {e}"})
-            
-            return documents if documents else [{"error": "No document content could be retrieved"}]
-                
-        except Exception as e:
-            return [{"error": f"Query failed: {e}"}]
+            if validation.get("valid", False):
+                valid_quotes += 1
+            else:
+                invalid_quotes += 1
+        
+        return {
+            "total_quotes": total_quotes,
+            "valid_quotes": valid_quotes,
+            "invalid_quotes": invalid_quotes,
+            "validation_results": validation_results,
+            "summary": f"Validated {total_quotes} quotes: {valid_quotes} valid, {invalid_quotes} invalid"
+        }
 
     def _parse_response(
         self, response: str, check: Dict[str, str]
@@ -283,7 +270,8 @@ Be precise and factual. Only report actual issues, not potential concerns.
                             "severity": check['severity'],
                             "description": check['description'],
                             "details": result.get('details'),
-                            "examples": result.get('examples', [])
+                            "examples": result.get('examples', []),
+                            "quote_validation": result.get('quote_validation', {})
                         }
                     ]
             
