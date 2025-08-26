@@ -1127,3 +1127,155 @@
   - **Dependencies**: Complete integration test gauntlet to surface all parsing issues
   - **Status**: Backlogged - waiting for integration test completion
   - **Priority**: Medium (architectural improvement, prevents future failures)
+
+---
+
+## Upcoming Sprints
+
+### Sprint 2: Agent Pipeline Refactoring (NEXT PRIORITY)
+
+**Timeline:** 3-5 days
+**Goal:** Refactor agents to align with new pipeline architecture (no RAG, search only for validation)
+
+#### [ARCH-001] Refactor Synthesis Agent to Pure Synthesis
+
+- **Description**: **CRITICAL ARCHITECTURAL MISMATCH**: Synthesis agent still has RAG index and complex evidence handling when it should be pure synthesis only
+- **Dependencies**: None (blocking pipeline alignment)
+- **Current State**: 
+  - Has `rag_index` parameter and txtai integration
+  - Complex evidence handling with `_prepare_evidence_context_from_curated_evidence`
+  - Should be pure synthesis of static assets
+- **Required State**:
+  - **Input**: Static assets only (experiment, framework, corpus, scores, evidence)
+  - **Process**: Pure synthesis, no external lookups or RAG queries
+  - **Output**: Draft report markdown file
+- **Acceptance Criteria**:
+  - [ ] Remove all RAG index dependencies and parameters
+  - [ ] Remove txtai integration and complex evidence handling
+  - [ ] Simplify to accept static asset dictionary
+  - [ ] Pure synthesis process with no external API calls
+  - [ ] Output clean draft report markdown
+  - [ ] Unit tests verify pure synthesis behavior
+- **Effort**: 1-2 days
+- **Priority**: **CRITICAL** - Pipeline architecture depends on this
+- **Status**: **NOT STARTED**
+
+#### [ARCH-002] Refactor Fact Checker Agent for Quote + Number Validation
+
+- **Description**: **CRITICAL FUNCTIONAL MISMATCH**: Fact checker uses generic search queries instead of targeted quote validation from the draft report
+- **Dependencies**: [ARCH-001] + Hybrid search infrastructure
+- **Current State**:
+  - Generic queries like "framework dimensions list definition"
+  - Wrong field references (`highlighted_content`, `full_content`)
+  - Complex rubric system not aligned with actual needs
+- **Required State**:
+  - **Input**: Draft report + all synthesis assets + search index
+  - **Process**: 
+    - Extract quotes from draft report using regex patterns
+    - Validate each quote against search index using `highlighted_quote` field
+    - Verify all numbers in report match provided statistical assets
+    - Classify quote drift levels (exact, minor, moderate, significant)
+  - **Output**: Fact checking report with specific findings
+- **Acceptance Criteria**:
+  - [ ] Extract quotes from draft report using robust regex patterns
+  - [ ] Use search index to validate each quote with `validate_quote()`
+  - [ ] Return quote validation results with drift classification
+  - [ ] Verify statistical numbers against provided assets
+  - [ ] Generate structured fact checking report
+  - [ ] Unit tests cover quote extraction and validation
+- **Effort**: 2-3 days
+- **Priority**: **CRITICAL** - Core functionality broken
+- **Status**: **NOT STARTED**
+
+#### [ARCH-003] Create Revision Agent for Corrections
+
+- **Description**: **MISSING COMPONENT**: No revision agent exists to correct issues found by fact checker
+- **Dependencies**: [ARCH-001] + [ARCH-002] + Hybrid search infrastructure
+- **Required State**:
+  - **Input**: Draft report + fact checker report + all assets + search index
+  - **Process**:
+    - Use search index to look up canonical quotes for corrections
+    - Apply corrections to draft report based on fact checker findings
+    - Prepend warning notice only if suitable revisions cannot be made
+    - Ensure all corrections are traceable to source materials
+  - **Output**: Final corrected report with revision provenance
+- **Acceptance Criteria**:
+  - [ ] Look up canonical quotes using search index `get_source_text()`
+  - [ ] Apply corrections for quote drift and statistical mismatches
+  - [ ] Generate revision provenance showing what was changed
+  - [ ] Prepend warning only when corrections fail
+  - [ ] Output final corrected report
+  - [ ] Unit tests cover correction scenarios
+- **Effort**: 2-3 days
+- **Priority**: **HIGH** - Completes the pipeline
+- **Status**: **NOT STARTED**
+
+#### [ARCH-004] Update Orchestrator for New Pipeline
+
+- **Description**: **PIPELINE MISMATCH**: Orchestrator needs to be updated to use the new 3-agent pipeline
+- **Dependencies**: [ARCH-001] + [ARCH-002] + [ARCH-003]
+- **Current State**: Uses old synthesis + fact checking approach
+- **Required State**: 
+  - **Phase 1**: Synthesis agent (pure synthesis)
+  - **Phase 2**: Fact checker agent (quote + number validation)
+  - **Phase 3**: Revision agent (corrections + warnings)
+- **Acceptance Criteria**:
+  - [ ] Orchestrator calls synthesis agent with static assets only
+  - [ ] Orchestrator passes draft report to fact checker with search index
+  - [ ] Orchestrator calls revision agent with fact checker results
+  - [ ] Pipeline produces final corrected report
+  - [ ] Integration tests verify complete pipeline flow
+- **Effort**: 1 day
+- **Priority**: **HIGH** - Pipeline orchestration
+- **Status**: **NOT STARTED**
+
+#### [ARCH-005] Update Agent Prompts for New Architecture
+
+- **Description**: **PROMPT MISMATCH**: Agent prompts need to be updated to reflect new responsibilities
+- **Dependencies**: [ARCH-001] + [ARCH-002] + [ARCH-003]
+- **Current State**: Prompts reference old RAG and search functionality
+- **Required State**: Prompts aligned with new pipeline responsibilities
+- **Acceptance Criteria**:
+  - [ ] Synthesis agent prompt focuses on pure synthesis
+  - [ ] Fact checker prompt focuses on quote + number validation
+  - [ ] Revision agent prompt focuses on corrections
+  - [ ] All prompts reference correct input/output formats
+  - [ ] Prompt testing verifies new behavior
+- **Effort**: 1 day
+- **Priority**: **MEDIUM** - Prompt alignment
+- **Status**: **NOT STARTED**
+
+---
+
+## Sprint Dependencies
+
+**Sprint 2 Dependencies:**
+- [ARCH-001] → [ARCH-002] → [ARCH-003] → [ARCH-004]
+- [ARCH-005] can be done in parallel with [ARCH-004]
+
+**Infrastructure Dependencies:**
+- Hybrid search infrastructure (Typesense + BM25) ✅ **COMPLETE**
+- Highlighting for quote extraction ✅ **COMPLETE**
+- Corpus indexing service ✅ **COMPLETE**
+
+---
+
+## Success Criteria for Sprint 2
+
+**Pipeline Alignment:**
+- [ ] Synthesis agent is pure synthesis only
+- [ ] Fact checker validates specific quotes from draft report
+- [ ] Revision agent corrects issues and provides warnings
+- [ ] Orchestrator manages 3-phase pipeline correctly
+
+**Search Integration:**
+- [ ] Agents use new `highlighted_quote` field format
+- [ ] Quote validation uses hybrid search effectively
+- [ ] Canonical quote retrieval works for corrections
+
+**Testing:**
+- [ ] Unit tests for each agent's new responsibilities
+- [ ] Integration tests for complete pipeline
+- [ ] Performance tests verify search efficiency
+
+---
