@@ -45,7 +45,8 @@ from .statistical_analysis_cache import StatisticalAnalysisCacheManager
 from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from txtai.embeddings import Embeddings
-from ..agents.revision_agent.agent import RevisionAgent
+# QA agents temporarily disabled
+# from ..agents.revision_agent.agent import RevisionAgent
 from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
 
 
@@ -214,34 +215,9 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
             
-            # Phase 7: Build corpus index for fact-checking and revision
-            phase_start = datetime.now(timezone.utc)
-            print("🔧 PHASE 7 STARTING: Corpus index building")  # Debug print
-            try:
-                self._log_progress("🔧 Building corpus index for fact-checking...")
-                corpus_index_service = self._build_corpus_index_service()
-                
-                # DEBUG: Log the service object details
-                print(f"🔍 DEBUG: corpus_index_service type: {type(corpus_index_service).__name__}")
-                print(f"🔍 DEBUG: corpus_index_service id: {id(corpus_index_service) if corpus_index_service else 'None'}")
-                print(f"🔍 DEBUG: corpus_index_service has search_quotes: {hasattr(corpus_index_service, 'search_quotes') if corpus_index_service else False}")
-                
-                if corpus_index_service:
-                    self._log_progress(f"✅ Corpus index built successfully")
-                    # Store corpus index service for later phases
-                    self._corpus_index_service = corpus_index_service
-                    
-                    # DEBUG: Verify the attribute was set correctly
-                    print(f"🔍 DEBUG: self._corpus_index_service type: {type(self._corpus_index_service).__name__}")
-                    print(f"🔍 DEBUG: self._corpus_index_service id: {id(self._corpus_index_service)}")
-                    print(f"🔍 DEBUG: self._corpus_index_service has search_quotes: {hasattr(self._corpus_index_service, 'search_quotes')}")
-                else:
-                    self._log_progress(f"❌ Failed to build corpus index service")
-                    self._corpus_index_service = None
-                self._log_phase_timing("corpus_index_building", phase_start)
-            except Exception as e:
-                self._log_progress(f"❌ Corpus index building failed: {str(e)}")
-                self._corpus_index_service = None
+            # Phase 7: Corpus index building (DISABLED - not needed without QA agents)
+            self._log_progress("📝 Skipping corpus index building (QA agents disabled)")
+            self._corpus_index_service = None
 
             # Phase 7.5: Validate Index Readiness (GATE)
             self._log_progress("🔍 Validating index readiness before proceeding...")
@@ -252,50 +228,15 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ {error_msg}")
                 raise CleanAnalysisError(error_msg)
             
-            # Validate corpus index service is operational
-            if not hasattr(self, '_corpus_index_service') or not self._corpus_index_service:
-                error_msg = "Corpus index service not available - cannot proceed to evidence retrieval"
-                self._log_progress(f"❌ {error_msg}")
-                raise CleanAnalysisError(error_msg)
+            # Corpus index service validation skipped (QA agents disabled)
             
-            # Test corpus index service functionality with detailed error reporting
-            try:
-                self._log_progress("🔍 Testing corpus index service with 'test' query...")
-                
-                # DEBUG: Log what we're about to test
-                print(f"🔍 DEBUG: About to test _corpus_index_service.search_quotes('test')")
-                print(f"🔍 DEBUG: _corpus_index_service type: {type(self._corpus_index_service).__name__}")
-                print(f"🔍 DEBUG: _corpus_index_service id: {id(self._corpus_index_service)}")
-                print(f"🔍 DEBUG: _corpus_index_service has search_quotes: {hasattr(self._corpus_index_service, 'search_quotes')}")
-                print(f"🔍 DEBUG: _corpus_index_service search_quotes method: {getattr(self._corpus_index_service, 'search_quotes', 'MISSING')}")
-                
-                test_result = self._corpus_index_service.search_quotes("test")
-                self._log_progress(f"✅ Corpus index service operational - test search completed successfully")
-                self._log_progress(f"   Test result type: {type(test_result).__name__}")
-                self._log_progress(f"   Test result length: {len(test_result) if hasattr(test_result, '__len__') else 'N/A'}")
-            except Exception as e:
-                error_msg = f"Corpus index service not operational - test failed: {str(e)}"
-                self._log_progress(f"❌ {error_msg}")
-                self._log_progress(f"   Error type: {type(e).__name__}")
-                self._log_progress(f"   Error details: {str(e)}")
-                
-                # DEBUG: Log the full exception details
-                import traceback
-                print(f"🔍 DEBUG: Full exception traceback:")
-                traceback.print_exc()
-                
-                raise CleanAnalysisError(error_msg)
-            
-            self._log_progress("✅ All indexes validated and operational - proceeding to evidence retrieval")
+            # Corpus index service testing skipped (QA agents disabled)
+            self._log_progress("✅ RAG index validated and operational - proceeding to evidence retrieval")
 
             # Phase 8: Run evidence retrieval to curate supporting quotes
             phase_start = datetime.now(timezone.utc)
             
-            # DEBUG: Check if corpus index service is still available
-            print(f"🔍 DEBUG: Phase 8 - _corpus_index_service available: {hasattr(self, '_corpus_index_service')}")
-            if hasattr(self, '_corpus_index_service'):
-                print(f"🔍 DEBUG: Phase 8 - _corpus_index_service type: {type(self._corpus_index_service).__name__}")
-                print(f"🔍 DEBUG: Phase 8 - _corpus_index_service id: {id(self._corpus_index_service)}")
+            # Corpus index service debug removed (QA agents disabled)
             
             try:
                 evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results, run_id)
@@ -312,11 +253,7 @@ class CleanAnalysisOrchestrator:
             # Phase 10: Run synthesis with RAG integration and curated evidence
             phase_start = datetime.now(timezone.utc)
             
-            # DEBUG: Check if corpus index service is still available
-            print(f"🔍 DEBUG: Phase 10 - _corpus_index_service available: {hasattr(self, '_corpus_index_service')}")
-            if hasattr(self, '_corpus_index_service'):
-                print(f"🔍 DEBUG: Phase 10 - _corpus_index_service type: {type(self._corpus_index_service).__name__}")
-                print(f"🔍 DEBUG: Phase 10 - _corpus_index_service id: {id(self._corpus_index_service)}")
+            # Corpus index service debug removed (QA agents disabled)
             
             try:
                 assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results, evidence_results)
@@ -327,16 +264,9 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
-            # Phase 11: Run fact-checking validation
-            phase_start = datetime.now(timezone.utc)
-            try:
-                fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets, statistical_results)
-                self._log_status("Fact-checking completed")
-                self._log_phase_timing("fact_checking_phase", phase_start)
-            except Exception as e:
-                # Fact-checking failure is not fatal - we can still produce results
-                self._log_progress(f"⚠️ Fact-checking failed, continuing with warning: {str(e)}")
-                fact_check_results = {"status": "failed", "error": str(e)}
+            # Phase 11: Fact-checking validation (DISABLED - QA agents in penalty box)
+            self._log_progress("📝 Skipping fact-checking validation (QA agents disabled)")
+            fact_check_results = {"status": "skipped", "findings": []}
 
             # Phase 12: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
@@ -1959,42 +1889,9 @@ class CleanAnalysisOrchestrator:
             assets_with_hash = assets_dict.copy()
             assets_with_hash["report_hash"] = draft_report_hash
             
-            self._log_progress("🔍 Running fact-checker validation on synthesis report...")
-            
-            # Run fact-checker on the draft report
-            fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets_with_hash, statistical_results)
-            
-            # Extract corpus_index_service from fact-checking results
-            corpus_index_service = fact_check_results.get('corpus_index_service')
-            if not corpus_index_service:
-                self._log_progress("⚠️ No corpus index service available for revision agent")
-            
-            # Use RevisionAgent to apply corrections based on fact-checker feedback
-            revision_agent = RevisionAgent(
-                gateway=self.llm_gateway,
-                audit_logger=audit_logger,
-                corpus_index_service=corpus_index_service
-            )
-            
-            try:
-                revision_results = revision_agent.revise_report(
-                    draft_report=draft_report,
-                    fact_checker_report=fact_check_results,
-                    assets=assets_with_hash,
-                    corpus_index_service=corpus_index_service
-                )
-                final_report = revision_results["revised_report"]
-                
-                if revision_results["revision_summary"]["revisions_applied"] > 0:
-                    self._log_progress(f"✅ Applied {revision_results['revision_summary']['revisions_applied']} corrections via RevisionAgent")
-                else:
-                    self._log_progress("✅ No corrections needed - synthesis report passed fact-check")
-                    
-            except Exception as e:
-                # Log revision failures but continue - this is not fatal
-                self._log_progress(f"⚠️ Revision agent encountered issues: {str(e)}")
-                # Use original draft report if revision fails
-                final_report = draft_report
+            # QA agents temporarily disabled - using draft report directly
+            self._log_progress("📝 Using synthesis report without QA validation (QA agents in penalty box)")
+            final_report = draft_report
 
             synthesis_hash = self.artifact_storage.put_artifact(
                 final_report.encode("utf-8"),

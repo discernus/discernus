@@ -77,7 +77,7 @@ class SynthesisPromptAssembler:
                                   for hash in evidence_artifacts)
         
         # 6. Load and include corpus manifest data
-        corpus_manifest = self._load_corpus_manifest()
+        corpus_manifest = self._load_corpus_manifest(experiment_path)
         
         # 7. Assemble the comprehensive prompt
         # Use external YAML prompt template (THIN architecture)
@@ -105,24 +105,14 @@ class SynthesisPromptAssembler:
         
         return "\n".join(metadata_parts) if metadata_parts else "**Experiment Metadata**: Available in experiment configuration"
     
-    def _load_corpus_manifest(self) -> str:
+    def _load_corpus_manifest(self, experiment_path: Path) -> str:
         """Load and format corpus manifest data for synthesis context."""
         try:
-            # Corpus manifest is always at corpus.md in the experiment directory
-            # We need to get the current experiment path - use a relative approach
-            # Since this is called during synthesis, we're in the experiment context
-            import os
-            current_dir = Path(os.getcwd())
+            # Corpus manifest should be at corpus.md in the experiment directory
+            experiment_dir = experiment_path.parent
+            corpus_path = experiment_dir / "corpus.md"
             
-            # Look for corpus.md in current directory or parent directories
-            corpus_path = None
-            for path in [current_dir] + list(current_dir.parents):
-                potential_corpus = path / "corpus.md"
-                if potential_corpus.exists():
-                    corpus_path = potential_corpus
-                    break
-            
-            if not corpus_path:
+            if not corpus_path.exists():
                 return "**Corpus Manifest**: Not available - corpus.md not found"
             
             corpus_content = corpus_path.read_text(encoding='utf-8')
