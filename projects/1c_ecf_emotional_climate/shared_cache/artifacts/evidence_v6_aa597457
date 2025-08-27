@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T17:25:20.093343+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "fear",
+      "quote_text": "This system as a whole is a cancer on the soul of our country, and it\u2019s hurting every single American.",
+      "confidence": 1.0,
+      "context_type": "problem_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093315+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "hope",
+      "quote_text": "But today we have an opportunity to do something about addressing the ills of this system.",
+      "confidence": 1.0,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093321+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "enmity",
+      "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+      "confidence": 0.8,
+      "context_type": "systemic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093325+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "amity",
+      "quote_text": "Mr. President, it\u2019s been perhaps one of the greatest honors of my life, easily one of the greatest honors as a senator, to work in a bipartisan coalition over the last five years to get to this point.",
+      "confidence": 1.0,
+      "context_type": "relationship_building",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093327+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "envy",
+      "quote_text": "As Bryan Stevenson has said, we live in a nation that treats you better if you\u2019re rich and guilty than if you\u2019re poor and innocent.",
+      "confidence": 1.0,
+      "context_type": "grievance_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093330+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "compersion",
+      "quote_text": "I want to thank Senator Dick Durbin, who has been a hero of mine on issues of criminal justice reform, as well as Mike Lee, who\u2019s been a champion.",
+      "confidence": 1.0,
+      "context_type": "acknowledgement_of_merit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T17:25:20.093338+00:00"
+    }
+  ]
+}

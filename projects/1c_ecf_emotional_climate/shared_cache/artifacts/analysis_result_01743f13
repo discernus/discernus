@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_0c8cda2edf0d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a highly emotional political speech, making the dimensions of the Emotional Climate Framework clearly identifiable. The speaker uses vivid imagery and direct address to evoke strong feelings of fear, enmity, and grievance, while simultaneously fostering hope and amity within the movement. The dimensions of Envy and Compersion are less central but still detectable. The analysis focuses on the explicit language used to create a specific psychological atmosphere for the audience.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.95\n        },\n        \"envy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"In its present form, this bill will not protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Illustrative example of vulnerability\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"It will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Direct statement of threat\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Visionary statement of positive outcome\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Call to action for a positive goal\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"General condemnation of an opposing group\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Direct naming of specific antagonists\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I appeal to all of you to get in this great revolution that is sweeping this nation.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call for collective action and unity\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"But we will march with the spirit of love and with the spirit of dignity that we have shown here today.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Statement of shared values and purpose\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Illustrative example of economic disparity and grievance\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "67f73e99a2c9d22ce96d69d4c8d86d92d539adf083859a6224d60cc77acdc9cb",
+  "execution_metadata": {
+    "start_time": "2025-08-27T17:22:52.573910+00:00",
+    "end_time": "2025-08-27T17:23:24.277189+00:00",
+    "duration_seconds": 31.703248
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T172252Z_a546778b"
+  }
+}

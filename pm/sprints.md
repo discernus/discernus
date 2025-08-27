@@ -98,25 +98,227 @@
 - **Acceptance Criteria**:
   - [ ] Integration tests run without infrastructure errors
   - [ ] Tests accurately reflect actual system status
-  - [ ] False failures are eliminated
-  - [ ] Real issues (if any) are identified
-- **Effort**: 1-2 hours
-- **Priority**: **HIGHEST** - Blocking everything
+  - [ ] Mocking doesn't bypass critical system components
+  - [ ] Test failures indicate real problems, not setup issues
+- **Effort**: 2-3 hours
+- **Priority**: **HIGH** - Blocking validation of all features
+- **Status**: **NEEDS IMPLEMENTATION**
 
-#### [QUALITY-001] Fix Fact-Checker False Positive on Evidence Citations
+#### [CRITICAL-003] Fix Evidence Planning and Integration Failures
 
-- **Description**: Fact-checker incorrectly flags legitimate evidence attribution `(Source: filename.txt)` as "Citation Violation"
-- **Impact**: 
-  - False positives on correct evidence citations
-  - Revision agent asked to "fix" legitimate provenance tracking
-  - Undermines evidence attribution which is required for academic integrity
-- **Root Cause**: Citation Violation rubric is too broad, catching internal evidence references
-- **Solution**: Refine rubric to distinguish between external academic citations and internal evidence attribution
+- **Description**: **CRITICAL BUG**: Evidence planning and integration failures are breaking the synthesis pipeline, causing reports to lack proper textual evidence support for statistical claims
+- **Dependencies**: [TEST-INFRA]
+- **Root Cause**: 
+  - LLM responses not properly formatted as JSON blocks
+  - Regex pattern too strict, causing "No JSON block found in LLM response"
+  - Evidence retrieval prompt too verbose and complex
+  - Fallback evidence retrieval provides empty results instead of useful evidence
+- **Impact**:
+  - Research integrity compromised - framework designed to link evidence to conclusions is broken
+  - Report quality degraded - synthesis reports lack textual support for statistical claims
+  - Pipeline reliability - evidence integration phase consistently fails, affecting all experiments
+- **Evidence from Terminal**:
+  - `"No JSON block found in LLM response. Could not parse plan."`
+  - `"Invalid or empty evidence plan provided. Using fallback."`
+  - `"No curated evidence artifact provided. Synthesis will proceed without curated evidence."`
+  - Evidence database contains 66 evidence pieces but synthesis can't access them
 - **Acceptance Criteria**:
-  - [ ] `(Source: filename.txt)` format is NOT flagged as citation violation
-  - [ ] External academic citations like `(Author, Year)` are still flagged
-  - [ ] Rubric clearly distinguishes evidence attribution from academic citations
-  - [ ] False positive rate on evidence citations is zero
-- **Effort**: 30 minutes
-- **Priority**: **HIGH** - Affects report quality and revision agent effectiveness
-- **Status**: **NEEDS VERIFICATION** - Implementation exists but behavior needs testing
+  - [ ] JSON parsing regex made more robust to handle various LLM response formats
+  - [ ] Evidence retrieval prompt simplified with explicit JSON formatting examples
+  - [ ] Fallback evidence retrieval provides useful evidence even when planning fails
+  - [ ] Response format validation added before parsing attempts
+  - [ ] Evidence integration phase works reliably across all experiments
+- **Effort**: 2-3 days
+- **Priority**: **CRITICAL** - Research integrity issue
+- **Status**: **NEEDS IMPLEMENTATION**
+
+#### [CRITICAL-004] Fix Orchestrator Data Structure Mismatch
+
+- **Description**: **CRITICAL BUG**: The orchestrator creates individual analysis files but the `AutomatedDerivedMetricsAgent` expects a consolidated `analysis_data.json` file, causing pipeline failures
+- **Dependencies**: [CRITICAL-003]
+- **Root Cause**: 
+  - Data flow inconsistency between orchestrator and agent expectations
+  - Missing standardized data format contract
+  - Agent's fallback mechanism insufficient for LLM generation
+  - Tight coupling between orchestrator file creation and agent expectations
+- **Impact**:
+  - Experiments fail during derived metrics phase
+  - `AutomatedDerivedMetricsAgent` cannot generate required functions
+  - Pipeline breaks with "No such file or directory" errors
+  - Temporary workspace management becomes brittle
+- **Evidence from Terminal**:
+  - `[Errno 2] No such file or directory: '.../temp_derived_metrics/automatedderivedmetricsagent_functions.py'`
+  - Agent looking for `analysis_data.json` but finding individual files
+  - Fallback to generic data structure insufficient for LLM generation
+- **Acceptance Criteria**:
+  - [ ] Data structure contracts between orchestrator and agents documented
+  - [ ] Expected file formats and naming conventions standardized
+  - [ ] All components with file structure dependencies identified
+  - [ ] Standardized data flow specifications created
+  - [ ] Pipeline works reliably with consistent data structures
+- **Effort**: 2-3 days
+- **Priority**: **CRITICAL** - Pipeline failure issue
+- **Status**: **NEEDS IMPLEMENTATION**
+
+#### [CRITICAL-005] Fix Import Chain Dependency Failures
+
+- **Description**: **CRITICAL BUG**: Multiple import failures indicate broken dependency resolution and circular import issues in the orchestration layer
+- **Dependencies**: [CRITICAL-004]
+- **Root Cause**: 
+  - Broken dependency resolution - import paths don't match actual module structure
+  - Circular import potential - components importing from each other creating dependency cycles
+  - Module structure changes - code references modules that have been moved or restructured
+  - Missing `__init__.py` files in agent directories
+- **Impact**:
+  - CLI fails to start with import errors
+  - Blocking all experiments until imports are fixed
+  - Indicates deeper architectural dependency issues
+  - Suggests module organization needs review
+- **Evidence from Terminal**:
+  - `cannot import name 'ValidationCache' from 'discernus.core.validation_cache'`
+  - `cannot import name 'FactCheckerAgent' from 'discernus.agents.fact_checker_agent'`
+  - Multiple import failures during orchestrator initialization
+- **Acceptance Criteria**:
+  - [ ] All import chains in orchestration layer mapped and documented
+  - [ ] Circular import dependencies identified and eliminated
+  - [ ] Module dependency graph documented
+  - [ ] Module organization and structure reviewed and standardized
+  - [ ] CLI starts without import errors
+- **Effort**: 1-2 days
+- **Priority**: **CRITICAL** - System startup failure
+- **Status**: **NEEDS IMPLEMENTATION**
+
+### Sprint 2: Logging Architecture & Code Quality (HIGH PRIORITY)
+
+**Timeline**: 3-5 days
+**Goal**: Fix logging configuration complexity and establish clean architecture
+
+#### [LOGGING-001] Logging Configuration Complexity Crisis
+
+- **Description**: **CRITICAL ARCHITECTURAL FLAW**: Discovered a convoluted, multi-layered logging configuration system causing verbose debug output and making experiments unreadable
+- **Dependencies**: [CRITICAL-005]
+- **Root Cause**: 
+  - Multiple logging systems coexisting (Standard Python logging, loguru, custom configurations)
+  - Orchestrator hardcoded `txtai_logger.setLevel(logging.DEBUG)` in 3 separate locations
+  - Inconsistent levels - console set to WARNING but components override with DEBUG
+  - No centralized logging policy enforcement
+- **Impact**:
+  - Experiments produce overwhelming debug output
+  - Terminal becomes unreadable during execution
+  - Researchers can't see actual progress or errors
+  - Violates "human-centric UX" principle
+- **Evidence from Terminal**:
+  - txtai embeddings debug output flooding console
+  - Multiple logging systems competing for output
+  - Console handlers being overridden by component-level settings
+- **Acceptance Criteria**:
+  - [ ] All logging configurations across codebase mapped and documented
+  - [ ] All components that override logging levels identified
+  - [ ] Logging hierarchy and override points documented
+  - [ ] Centralized logging policy and enforcement created
+  - [ ] Duplicate and conflicting logging systems eliminated
+  - [ ] Clear separation between debug (file) and user (console) output
+- **Effort**: 3-5 days
+- **Priority**: **HIGH** - Researcher experience issue
+- **Status**: **NEEDS IMPLEMENTATION**
+
+#### [LOGGING-002] Rich CLI Usage Investigation
+
+- **Description**: Investigate current use of Rich CLI library in Discernus platform to ensure optimal researcher experience
+- **Dependencies**: [LOGGING-001]
+- **Current State**:
+  - Rich CLI wrapper implemented in `discernus/cli_console.py`
+  - Extensive usage throughout main CLI for tables, panels, formatting
+  - Professional terminal interface with consistent styling
+- **Investigation Areas**:
+  - Review Rich library best practices and latest features
+  - Assess current implementation against Rich library capabilities
+  - Identify opportunities for improved user experience (progress bars, live updates, better error handling)
+  - Evaluate performance impact of current Rich usage
+- **Deliverables**:
+  - Analysis report of current Rich CLI implementation
+  - Recommendations for optimization and enhancement
+  - Implementation plan for any identified improvements
+  - Performance benchmarks if changes are proposed
+- **Effort**: 2-3 days
+- **Priority**: **MEDIUM** - Enhancement opportunity
+- **Status**: **NEEDS INVESTIGATION**
+
+#### [LOGGING-003] Loguru Implementation Investigation
+
+- **Description**: Investigate current use of loguru logging library in Discernus platform to ensure optimal logging implementation
+- **Dependencies**: [LOGGING-001]
+- **Current State**:
+  - Comprehensive logging configuration in `discernus/core/logging_config.py`
+  - Multiple log handlers: console, file, error, performance, LLM interactions
+  - Mixed usage patterns across codebase (some loguru, some standard logging)
+- **Investigation Areas**:
+  - Review loguru best practices and latest features
+  - Assess current implementation against loguru capabilities
+  - Identify opportunities for improved logging structure and performance
+  - Evaluate consistency of logging usage across codebase
+- **Deliverables**:
+  - Analysis report of current loguru implementation
+  - Recommendations for optimization and standardization
+  - Implementation plan for any identified improvements
+  - Performance analysis of current logging overhead
+- **Effort**: 2-3 days
+- **Priority**: **MEDIUM** - Enhancement opportunity
+- **Status**: **NEEDS INVESTIGATION**
+
+### Sprint 3: Architecture Refactoring & Code Quality (MEDIUM PRIORITY)
+
+**Timeline**: 5-7 days
+**Goal**: Fix architectural issues and establish clean interfaces
+
+#### [ARCH-001] Method Signature Contract Violations
+
+- **Description**: Method signature mismatches between orchestrator and agents indicate broken contracts and tight coupling
+- **Dependencies**: [LOGGING-001]
+- **Root Cause**: 
+  - Missing method implementations - code references methods that were never implemented
+  - Contract drift - method signatures changed without updating all callers
+  - Interface mismatch - components expect different method signatures
+  - Tight coupling - orchestrator depends on specific storage method implementations
+- **Impact**:
+  - Runtime errors during artifact storage operations
+  - Pipeline breaks when expected methods are missing
+  - Indicates incomplete implementation or refactoring
+  - Suggests interface contracts need formalization
+- **Evidence from Terminal**:
+  - `'LocalArtifactStorage' object has no attribute 'get_hash_by_type'`
+  - `SynthesisPromptAssembler.assemble_prompt() got an unexpected keyword argument 'evidence_artifacts'`
+- **Acceptance Criteria**:
+  - [ ] All method signatures between orchestrator and components mapped and documented
+  - [ ] Expected interfaces and contracts documented
+  - [ ] All broken method references identified and fixed
+  - [ ] Interface specification documents created
+  - [ ] Formal interface contracts established
+- **Effort**: 1-2 days
+- **Priority**: **MEDIUM** - Code quality issue
+- **Status**: **NEEDS IMPLEMENTATION**
+
+#### [ARCH-002] Temporary Workspace Management Complexity
+
+- **Description**: Complex temporary workspace creation, management, and cleanup indicates orchestrator doing too much file management work
+- **Dependencies**: [ARCH-001]
+- **Root Cause**: 
+  - Orchestrator doing too much - file management should be agent responsibility
+  - Complex state management - temporary workspace lifecycle is complex and error-prone
+  - Tight coupling - agents depend on orchestrator's file creation patterns
+  - No clear ownership - unclear who owns temporary file management
+- **Impact**:
+  - Complex error handling for file operations
+  - Agents fail when expected files don't exist
+  - Temporary workspace management becomes brittle
+  - Violates single responsibility principle
+- **Acceptance Criteria**:
+  - [ ] All temporary workspace management operations mapped and documented
+  - [ ] File lifecycle and ownership clearly defined
+  - [ ] All file dependencies between components identified
+  - [ ] File management responsibility matrix created
+  - [ ] Agents manage their own temporary files
+  - [ ] Orchestrator doesn't handle file creation details
+- **Effort**: 2-3 days
+- **Priority**: **MEDIUM** - Architecture improvement
+- **Status**: **NEEDS IMPLEMENTATION**

@@ -28,32 +28,87 @@ logger.remove()
 
 def ensure_litellm_debug_suppression():
     """
-    Ensure all LiteLLM debug suppression environment variables are set.
+    Comprehensive suppression of all LiteLLM debug output including proxy components.
     
-    This function should be called early in the application lifecycle
-    to ensure verbose debug output is suppressed.
+    This function addresses the root cause of LiteLLM Proxy debug flooding by:
+    1. Setting environment variables to ERROR level (more restrictive)
+    2. Configuring Python loggers for proxy components
+    3. Installing message filters to catch remaining output
+    
+    Must be called before any LiteLLM imports.
     """
-    # Core LiteLLM settings
-    os.environ.setdefault('LITELLM_VERBOSE', 'false')
-    os.environ.setdefault('LITELLM_LOG', 'WARNING')
-    os.environ.setdefault('LITELLM_LOG_LEVEL', 'WARNING')
+    # Environment Variables - Set to ERROR level for maximum suppression
+    env_vars = {
+        # Core LiteLLM settings - ERROR level instead of WARNING
+        'LITELLM_VERBOSE': 'false',
+        'LITELLM_LOG': 'ERROR',  # Changed from WARNING
+        'LITELLM_LOG_LEVEL': 'ERROR',  # Changed from WARNING
+        
+        # Proxy-specific settings - ERROR level
+        'LITELLM_PROXY_DEBUG': 'false',
+        'LITELLM_PROXY_LOG_LEVEL': 'ERROR',  # Changed from WARNING
+        'LITELLM_PROXY_VERBOSE': 'false',
+        'LITELLM_PROXY_DEBUG_MODE': 'false',
+        'LITELLM_PROXY_LOG_LEVEL_DEBUG': 'false',
+        
+        # JSON logging suppression
+        'JSON_LOGS': 'false',
+        
+        # Cold storage and components - ERROR level
+        'LITELLM_COLD_STORAGE_LOG_LEVEL': 'ERROR',  # Changed from WARNING
+        
+        # Discernus settings
+        'DISCERNUS_LOG_LEVEL': 'WARNING',
+        'DISCERNUS_VERBOSE': 'false',
+    }
     
-    # Proxy-specific settings
-    os.environ.setdefault('LITELLM_PROXY_DEBUG', 'false')
-    os.environ.setdefault('LITELLM_PROXY_LOG_LEVEL', 'WARNING')
-    os.environ.setdefault('LITELLM_PROXY_VERBOSE', 'false')
-    os.environ.setdefault('LITELLM_PROXY_DEBUG_MODE', 'false')
-    os.environ.setdefault('LITELLM_PROXY_LOG_LEVEL_DEBUG', 'false')
+    # Set environment variables
+    for key, value in env_vars.items():
+        os.environ.setdefault(key, value)
     
-    # Cold storage and other components
-    os.environ.setdefault('LITELLM_COLD_STORAGE_LOG_LEVEL', 'WARNING')
+    # Configure Python loggers for proxy components that cause debug flooding
+    problematic_loggers = [
+        'litellm',
+        'LiteLLM',
+        'litellm.proxy',
+        'LiteLLM Proxy',  # The main culprit from terminal output
+        'litellm.proxy.guardrails',
+        'litellm.proxy.guardrails.guardrail_registry',
+        'litellm.proxy.auth.litellm_license', 
+        'litellm.proxy.cold_storage_handler',
+        'litellm_proxy',
+    ]
     
-    # Additional Discernus-specific settings
-    os.environ.setdefault('DISCERNUS_LOG_LEVEL', 'WARNING')
-    os.environ.setdefault('DISCERNUS_VERBOSE', 'false')
+    for logger_name in problematic_loggers:
+        logger = logging.getLogger(logger_name)
+        logger.setLevel(logging.ERROR)
+        logger.disabled = True  # Completely disable problematic loggers
+        
+        # Remove handlers to prevent output
+        for handler in logger.handlers[:]:
+            logger.removeHandler(handler)
+    
+    # Install message filter to catch any remaining debug output
+    class LiteLLMDebugFilter(logging.Filter):
+        def filter(self, record):
+            message = record.getMessage().lower()
+            # Suppress specific patterns seen in terminal output
+            suppress_patterns = [
+                'litellm proxy:debug',
+                'discovering guardrails',
+                'license str value', 
+                'cold storage',
+                'guardrail_registry',
+                'litellm_license',
+                'is_premium',
+            ]
+            return not any(pattern in message for pattern in suppress_patterns)
+    
+    # Add filter to root logger
+    logging.getLogger().addFilter(LiteLLMDebugFilter())
     
     # Use print instead of logger since logger isn't configured yet
-    print("✅ LiteLLM debug suppression environment variables ensured")
+    print("✅ Comprehensive LiteLLM debug suppression configured")
 
 # Ensure LiteLLM debug suppression is configured
 ensure_litellm_debug_suppression()

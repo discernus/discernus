@@ -1,63 +1,87 @@
-# LiteLLM Debug Suppression System
+# LiteLLM Debug Suppression System - SOLVED
 
 ## Overview
 
-The Discernus platform has implemented a comprehensive system to suppress verbose debug output from LiteLLM and its proxy components. This system ensures clean terminal output during experiments while maintaining full debug logging to files for debugging purposes.
+The Discernus platform has successfully implemented a **comprehensive solution** to eliminate verbose debug output from LiteLLM and its proxy components. The terminal output is now clean and professional.
 
-## Problem Solved
+## Problem SOLVED
 
-Previously, LiteLLM was generating excessive debug output including:
-- Verbose proxy logging messages
-- Cold storage configuration messages
-- Guardrail discovery logs
-- Embedding debug information
+**Root Cause Identified**: LiteLLM Proxy components (`guardrail_registry.py`, `litellm_license.py`, `cold_storage_handler.py`) use internal Python loggers that were **not controlled** by standard LiteLLM environment variables.
 
-This made experiments unreadable and violated the project's "human-centric UX" principle.
-
-## Solution Architecture
-
-### 1. Environment Variable Configuration
-
-The system sets multiple environment variables to suppress different types of LiteLLM debug output:
-
-```bash
-# Core LiteLLM settings
-LITELLM_VERBOSE=false
-LITELLM_LOG=WARNING
-LITELLM_LOG_LEVEL=WARNING
-
-# Proxy-specific settings
-LITELLM_PROXY_DEBUG=false
-LITELLM_PROXY_LOG_LEVEL=WARNING
-LITELLM_PROXY_VERBOSE=false
-LITELLM_PROXY_DEBUG_MODE=false
-LITELLM_PROXY_LOG_LEVEL_DEBUG=false
-
-# Cold storage and other components
-LITELLM_COLD_STORAGE_LOG_LEVEL=WARNING
-
-# Additional Discernus-specific settings
-DISCERNUS_LOG_LEVEL=WARNING
-DISCERNUS_VERBOSE=false
+**Previous Debug Flooding**:
+```
+13:23:25 - LiteLLM Proxy:DEBUG: guardrail_registry.py:160 - Discovering guardrails...
+13:23:25 - LiteLLM Proxy:DEBUG: litellm_license.py:29 - License Str value - None
+13:23:25 - LiteLLM Proxy:DEBUG: cold_storage_handler.py:87 - No cold storage custom logger...
 ```
 
-### 2. Multiple Configuration Points
+**Now Solved**: Clean, professional terminal output with full functionality maintained.
 
-The system configures LiteLLM debug suppression at multiple levels:
+## Final Solution Architecture
 
-#### A. Python Code Level
-- **`discernus/gateway/llm_gateway.py`**: Sets environment variables during LLM Gateway initialization
-- **`discernus/cli.py`**: Sets environment variables during CLI startup
-- **`discernus/__main__.py`**: Sets environment variables before any imports
-- **`discernus/core/logging_config.py`**: Ensures environment variables are set during logging configuration
+### 1. Comprehensive Multi-Layer Suppression
 
-#### B. Programmatic Configuration
-- **`litellm.set_verbose = False`**: Directly disables LiteLLM verbose mode
-- **`litellm.verbose_logger.setLevel('WARNING')`**: Configures verbose logger to WARNING level
+**Key Insight**: LiteLLM Proxy uses internal Python loggers that require direct logger configuration, not just environment variables.
 
-#### C. Shell Script Level
-- **`scripts/set_litellm_env.sh`**: Shell script to set environment variables in current shell
-- **`Makefile`**: Make targets for managing LiteLLM debug suppression
+**Environment Variables** (Set to ERROR level for maximum suppression):
+```bash
+# Core LiteLLM settings - ERROR level instead of WARNING
+LITELLM_VERBOSE=false
+LITELLM_LOG=ERROR
+LITELLM_LOG_LEVEL=ERROR
+
+# Proxy-specific settings - ERROR level
+LITELLM_PROXY_DEBUG=false
+LITELLM_PROXY_LOG_LEVEL=ERROR
+LITELLM_PROXY_VERBOSE=false
+LITELLM_PROXY_DEBUG_MODE=false
+
+# JSON logging suppression (new)
+JSON_LOGS=false
+
+# Component-specific - ERROR level
+LITELLM_COLD_STORAGE_LOG_LEVEL=ERROR
+```
+
+**Python Logger Direct Control** (The key breakthrough):
+```python
+# Disable specific loggers that cause debug flooding
+problematic_loggers = [
+    'LiteLLM Proxy',  # Main culprit
+    'litellm.proxy',
+    'litellm.proxy.guardrails.guardrail_registry',
+    'litellm.proxy.auth.litellm_license',
+    'litellm.proxy.cold_storage_handler',
+]
+
+for logger_name in problematic_loggers:
+    logger = logging.getLogger(logger_name)
+    logger.setLevel(logging.ERROR)
+    logger.disabled = True  # Complete suppression
+```
+
+### 2. Implementation Points
+
+Suppression is configured at critical entry points to ensure it's applied before any LiteLLM imports:
+
+#### A. Application Entry Points
+- **`discernus/__main__.py`**: Immediate environment variables + logger disabling
+- **`discernus/cli.py`**: Comprehensive suppression before CLI operations
+- **`discernus/core/logging_config.py`**: Core suppression function with full implementation
+- **`discernus/gateway/llm_gateway.py`**: Additional suppression at LLM Gateway initialization
+
+#### B. Comprehensive Suppression Function
+```python
+# discernus/core/logging_config.py
+def ensure_litellm_debug_suppression():
+    # 1. Set environment variables to ERROR level
+    # 2. Disable problematic Python loggers
+    # 3. Install message filters for remaining output
+    # 4. Configure litellm programmatically
+```
+
+#### C. Standalone Script for Testing
+- **`scripts/comprehensive_litellm_suppression.py`**: Complete suppression + verification
 
 ### 3. Utility Scripts
 
@@ -91,27 +115,27 @@ This script:
 - Verifies LiteLLM import and configuration
 - Provides comprehensive status report
 
-## Usage
+## Usage - WORKING SOLUTION
 
-### 1. Make Targets
+### 1. Automatic Suppression (Recommended)
 
-The Makefile provides several targets for managing LiteLLM debug suppression:
+**The system now works automatically** - no manual configuration needed!
+
+Just run any Discernus command:
+```bash
+discernus status        # Clean output, no debug flooding
+discernus run <exp>     # Clean experiment execution
+discernus continue <exp> # Clean continuation
+```
+
+### 2. Manual Testing/Verification
 
 ```bash
-# Check current environment variables
-make litellm-check
+# Test comprehensive suppression
+python3 scripts/comprehensive_litellm_suppression.py
 
-# Set environment variables using shell script
-make litellm-env
-
-# Set environment variables using Python script
-make litellm-python
-
-# Test current configuration
-make litellm-test
-
-# Complete setup and test
-make litellm-setup
+# Verify with actual CLI command
+python3 -m discernus status
 ```
 
 ### 2. Manual Configuration

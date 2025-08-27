@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_99f2f609a5c8",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on a political speech advocating for the First Step Act. The speaker, Cory Booker, employs a dual rhetorical strategy: first, framing the existing criminal justice system in terms of fear and envy by highlighting its dangers and systemic inequities; second, promoting the proposed legislation through the lens of hope, amity, and compersion by celebrating bipartisan collaboration and the potential for positive change. The emotional dimensions are distinct and intentionally deployed to build a case for reform.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"cory_booker_2018_first_step_act.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"compersion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"This system as a whole is a cancer on the soul of our country, and it\u2019s hurting every single American.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"problem_framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But today we have an opportunity to do something about addressing the ills of this system.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"systemic_critique\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"Mr. President, it\u2019s been perhaps one of the greatest honors of my life, easily one of the greatest honors as a senator, to work in a bipartisan coalition over the last five years to get to this point.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"relationship_building\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"As Bryan Stevenson has said, we live in a nation that treats you better if you\u2019re rich and guilty than if you\u2019re poor and innocent.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"grievance_framing\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"I want to thank Senator Dick Durbin, who has been a hero of mine on issues of criminal justice reform, as well as Mike Lee, who\u2019s been a champion.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"acknowledgement_of_merit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "aa597457b4785672c36a68026c92af747c9f2c50849d0a2fd3ed9c6d1ca6c8a3",
+  "execution_metadata": {
+    "start_time": "2025-08-27T17:24:44.899843+00:00",
+    "end_time": "2025-08-27T17:25:20.094831+00:00",
+    "duration_seconds": 35.194932
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T172252Z_a546778b"
+  }
+}

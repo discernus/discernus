@@ -43,21 +43,13 @@ from discernus.core.exit_codes import (
 # Rich CLI integration for professional terminal interface
 from .cli_console import rich_console
 
-# Disable LiteLLM verbose output to reduce terminal clutter
+# Apply comprehensive LiteLLM debug suppression before any litellm imports
+# This prevents the debug flooding we were seeing in terminal output
+from discernus.core.logging_config import ensure_litellm_debug_suppression
+ensure_litellm_debug_suppression()
+
+# Now import litellm with suppression already configured
 import litellm
-litellm.set_verbose = False
-
-# Also configure the verbose_logger to reduce output
-if hasattr(litellm, 'verbose_logger'):
-    litellm.verbose_logger.setLevel('WARNING')
-
-# Set environment variables to ensure verbose output is disabled
-os.environ['LITELLM_VERBOSE'] = 'false'
-os.environ['LITELLM_LOG'] = 'WARNING'
-
-# Disable proxy debug logging
-os.environ['LITELLM_PROXY_DEBUG'] = 'false'
-os.environ['LITELLM_PROXY_LOG_LEVEL'] = 'WARNING'
 
 # Additional environment variables to suppress all debug output
 os.environ['LITELLM_LOG_LEVEL'] = 'WARNING'

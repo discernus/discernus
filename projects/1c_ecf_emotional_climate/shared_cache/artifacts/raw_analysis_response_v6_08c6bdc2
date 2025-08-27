@@ -1,0 +1,112 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a highly emotional political speech, making the dimensions of the Emotional Climate Framework clearly identifiable. The speaker uses vivid imagery and direct address to evoke strong feelings of fear, enmity, and grievance, while simultaneously fostering hope and amity within the movement. The dimensions of Envy and Compersion are less central but still detectable. The analysis focuses on the explicit language used to create a specific psychological atmosphere for the audience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "enmity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "In its present form, this bill will not protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 1.0,
+          "context_type": "Illustrative example of vulnerability"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "It will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 1.0,
+          "context_type": "Direct statement of threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 1.0,
+          "context_type": "Visionary statement of positive outcome"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.",
+          "confidence": 0.95,
+          "context_type": "Call to action for a positive goal"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "confidence": 1.0,
+          "context_type": "General condemnation of an opposing group"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!",
+          "confidence": 1.0,
+          "context_type": "Direct naming of specific antagonists"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "I appeal to all of you to get in this great revolution that is sweeping this nation.",
+          "confidence": 0.9,
+          "context_type": "Call for collective action and unity"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 0.95,
+          "context_type": "Statement of shared values and purpose"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+          "confidence": 1.0,
+          "context_type": "Illustrative example of economic disparity and grievance"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

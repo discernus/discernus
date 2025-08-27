@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a13e0c3d85c5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic example of populist rhetoric, making the emotional dimensions of Enmity and Envy highly salient and intense. The analysis focuses on the explicit framing of an oligarchic enemy, the grievance associated with economic inequality, and the corresponding call for collective action (Amity) as a hopeful solution. The negative dimensions are rhetorically dominant over the positive ones.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Threat Framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call to Action\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Antagonist Definition\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I don\u2019t have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%. So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"In-group Mobilization\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Grievance Framing\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of Theme\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "ff8ecd1bef7f6998b918426f2a2fa17731d7f6d1dfd097916ba9f3992d73742f",
+  "execution_metadata": {
+    "start_time": "2025-08-27T17:25:20.096570+00:00",
+    "end_time": "2025-08-27T17:25:56.841435+00:00",
+    "duration_seconds": 36.744856
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T172252Z_a546778b"
+  }
+}

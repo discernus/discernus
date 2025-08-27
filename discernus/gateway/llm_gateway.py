@@ -30,24 +30,17 @@ from ratelimit import limits, RateLimitException
 import json
 from ..core.logging_config import get_logger
 
-# Disable LiteLLM verbose output to reduce terminal clutter
+# Apply comprehensive LiteLLM debug suppression
+from discernus.core.logging_config import ensure_litellm_debug_suppression
+ensure_litellm_debug_suppression()
+
+# Disable LiteLLM verbose output programmatically
 litellm.set_verbose = False
 
-# Also configure the verbose_logger to reduce output
+# Configure the verbose_logger to ERROR level for maximum suppression
 if hasattr(litellm, 'verbose_logger'):
-    litellm.verbose_logger.setLevel('WARNING')
-
-# Set environment variables to ensure verbose output is disabled
-os.environ['LITELLM_VERBOSE'] = 'false'
-os.environ['LITELLM_LOG'] = 'WARNING'
-
-# Disable proxy debug logging
-os.environ['LITELLM_PROXY_DEBUG'] = 'false'
-os.environ['LITELLM_PROXY_LOG_LEVEL'] = 'WARNING'
-
-# Additional environment variables to suppress all debug output
-os.environ['LITELLM_LOG_LEVEL'] = 'WARNING'
-os.environ['LITELLM_COLD_STORAGE_LOG_LEVEL'] = 'WARNING'
+    litellm.verbose_logger.setLevel('ERROR')
+    litellm.verbose_logger.disabled = True
 os.environ['LITELLM_PROXY_VERBOSE'] = 'false'
 os.environ['LITELLM_PROXY_DEBUG_MODE'] = 'false'
 os.environ['LITELLM_PROXY_LOG_LEVEL_DEBUG'] = 'false'

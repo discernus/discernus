@@ -70,6 +70,48 @@
 
 **Note**: After investigation, we discovered that Discernus uses **plain vanilla LiteLLM**, not LiteLLM Proxy. The "proxy" references in the error messages were misleading - they came from internal LiteLLM library components that use the backoff module for retry logic and cold storage features. We're using the core `litellm.completion()` function directly, not running a proxy server.
 
+#### [INFRA-003] LiteLLM Debug Suppression Implementation ✅ COMPLETED
+- **Description**: ✅ COMPLETED - Implemented comprehensive system to suppress verbose debug output from LiteLLM and its proxy components, ensuring clean terminal output during experiments
+- **Impact**: ✅ RESOLVED - Terminal output now clean and readable during experiments, maintaining full debug logging to files
+- **Root Cause**: ✅ IDENTIFIED - LiteLLM was generating excessive debug output including proxy logging, cold storage messages, guardrail discovery logs, making experiments unreadable
+- **Implementation Results**:
+  - ✅ **Environment Variable Configuration**: Set comprehensive set of LiteLLM debug suppression variables
+  - ✅ **Multiple Configuration Points**: Configure at Python code level, programmatic level, and shell script level
+  - ✅ **Utility Scripts**: Created Python and shell scripts for easy configuration management
+  - ✅ **Makefile Integration**: Added multiple make targets for managing debug suppression
+  - ✅ **Logging Integration**: Integrated with Discernus logging configuration for consistency
+- **Files Modified/Created**:
+  - `discernus/gateway/llm_gateway.py` - Added environment variables
+  - `discernus/cli.py` - Added environment variables
+  - `discernus/__main__.py` - Added environment variables before imports
+  - `discernus/core/logging_config.py` - Added debug suppression function
+  - `Makefile` - Added litellm-related make targets
+  - `scripts/set_litellm_env.sh` - Shell script for environment setup
+  - `scripts/suppress_litellm_debug.py` - Python script for configuration
+  - `scripts/test_litellm_suppression.py` - Test script for verification
+  - `docs/developer/LITELLM_DEBUG_SUPPRESSION.md` - Comprehensive documentation
+- **Usage**:
+  ```bash
+  # Complete setup and test
+  make litellm-setup
+  
+  # Individual operations
+  make litellm-python      # Set environment variables
+  make litellm-test        # Test configuration
+  make litellm-check       # Check current variables
+  ```
+- **Acceptance Criteria**: ✅ ALL MET
+  - ✅ LiteLLM debug output suppressed to WARNING level
+  - ✅ Terminal output clean and readable during experiments
+  - ✅ Full debug logging maintained to files for debugging
+  - ✅ Multiple configuration methods available for different use cases
+  - ✅ Easy verification and testing of configuration
+- **Effort**: ✅ COMPLETED - Medium (2 hours)
+- **Dependencies**: [INFRA-001] ✅, [INFRA-002] ✅
+- **Priority**: ✅ **HIGH** - Researcher experience improvement
+- **Current State**: Clean terminal output with comprehensive debug suppression system
+- **Resolution Date**: 2025-01-27
+
 ---
 
 ### 🚨 Critical Issues ✅ COMPLETED

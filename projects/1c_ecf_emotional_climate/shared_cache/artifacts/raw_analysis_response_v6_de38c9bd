@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on the 'default' variant, assessing all six dimensions. The document exhibits a strong, populistic, and conflict-oriented emotional climate. It starkly contrasts an 'oligarch' out-group with a 'working class' in-group. The dominant dimensions are Enmity and Envy directed at the out-group, and Amity used for in-group mobilization. Fear is present as a consequence of the out-group's actions, while Hope is presented as the potential outcome of collective struggle. Compersion is completely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 0.95,
+          "context_type": "problem_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 1.0,
+          "context_type": "antagonist_identification"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for someone you don't know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "in-group_mobilization"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them.",
+          "confidence": 1.0,
+          "context_type": "grievance_framing"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
