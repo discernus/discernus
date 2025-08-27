@@ -21,6 +21,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Dict, Any, Optional
 from loguru import logger
+import logging
 
 # Remove default loguru handler
 logger.remove()
@@ -372,3 +373,37 @@ def perf_timer(operation_name: str, **context):
         except (ImportError, AttributeError, Exception):
             # Graceful degradation if audit logger not available
             pass
+
+def setup_logging_for_run(run_folder: Path):
+    """
+    Configures the root logger to output to both console and a file for a specific run.
+    """
+    log_dir = run_folder / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file_path = log_dir / "discernus_run.log"
+
+    # Get the root logger
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.DEBUG) # Capture everything
+
+    # Remove existing handlers to avoid duplication if this is called multiple times
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+
+    # Create file handler
+    file_handler = logging.FileHandler(log_file_path, mode='w')
+    file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(file_formatter)
+    file_handler.setLevel(logging.DEBUG) # Log everything to the file
+
+    # Create console handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_formatter = logging.Formatter('%(levelname)s: %(message)s')
+    console_handler.setFormatter(console_formatter)
+    console_handler.setLevel(logging.INFO) # Only show INFO and above on the console
+
+    # Add handlers to the root logger
+    root_logger.addHandler(file_handler)
+    root_logger.addHandler(console_handler)
+
+    return log_file_path

@@ -48,6 +48,9 @@ from txtai.embeddings import Embeddings
 # QA agents temporarily disabled
 # from ..agents.revision_agent.agent import RevisionAgent
 from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
+from ..core.validation_cache import ValidationCache
+from ..core.logging_config import setup_logging_for_run
+import logging
 
 
 class CleanAnalysisError(Exception):
@@ -67,8 +70,11 @@ class CleanAnalysisOrchestrator:
         
         # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
-        self.logger = get_logger("clean_analysis_orchestrator")
-        self.config = {}
+        
+        # Set up logging to capture output to a file within the run folder
+        self.log_file = setup_logging_for_run(self.experiment_path)
+        self.logger = logging.getLogger(__name__)
+        self.logger.info(f"Orchestrator initialized. Logging to {self.log_file}")
         
         # Testing and development mode flags
         self.test_mode = False
