@@ -990,7 +990,26 @@ class CleanAnalysisOrchestrator:
                         "This experiment cannot proceed to synthesis without valid statistical data."
                     )
                 
-                # Store statistical results in artifact storage
+                # Store individual artifacts that synthesis expects
+                
+                # 1. Store raw analysis data (from analysis_results)
+                raw_analysis_data = []
+                for result in analysis_results:
+                    if 'analysis_result' in result:
+                        raw_analysis_data.append(result['analysis_result'])
+                
+                raw_analysis_data_hash = self.artifact_storage.put_artifact(
+                    json.dumps(raw_analysis_data, indent=2).encode('utf-8'),
+                    {"artifact_type": "raw_analysis_data"}
+                )
+                
+                # 2. Store derived metrics data
+                derived_metrics_data_hash = self.artifact_storage.put_artifact(
+                    json.dumps(derived_metrics_results, indent=2).encode('utf-8'),
+                    {"artifact_type": "derived_metrics_data"}
+                )
+                
+                # 3. Store complete statistical results
                 complete_statistical_result = {
                     "generation_metadata": functions_result,
                     "statistical_data": statistical_results,
@@ -1008,8 +1027,10 @@ class CleanAnalysisOrchestrator:
                 return {
                     "status": "completed",
                     "stats_hash": statistical_hash,
+                    "raw_analysis_data_hash": raw_analysis_data_hash,
+                    "derived_metrics_data_hash": derived_metrics_data_hash,
                     "functions_generated": functions_result.get('functions_generated', 0),
-                    "statistical_results": complete_statistical_result
+                    "statistical_summary": complete_statistical_result
                 }
                 
             except Exception as e:
