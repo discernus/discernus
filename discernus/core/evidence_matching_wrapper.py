@@ -276,6 +276,7 @@ class EvidenceMatchingWrapper:
         
         try:
             # Perform semantic search
+            self.logger.info(f"Executing RAG search with query: '{query}'")
             search_results = self.index.search(query, limit=limit * 2)  # Get more results for filtering
             
             # Apply metadata filters if provided
@@ -290,7 +291,11 @@ class EvidenceMatchingWrapper:
                 if len(filtered_results) >= limit:
                     break
             
-            self.logger.debug(f"Search query '{query}' returned {len(filtered_results)} filtered results")
+            self.logger.info(f"RAG search for query '{query}' returned {len(filtered_results)} results after filtering.")
+            # Log the top N results for traceability
+            for i, result in enumerate(filtered_results[:3]): # Log top 3
+                self.logger.debug(f"  Result {i+1}: Score={result.get('relevance_score', 0.0):.4f}, Quote='{result.get('quote_text', '')[:100]}...'")
+
             return filtered_results
             
         except Exception as e:

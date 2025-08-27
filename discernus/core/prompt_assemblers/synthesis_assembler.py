@@ -16,6 +16,7 @@ import json
 import yaml
 from pathlib import Path
 from typing import Dict, Any, Optional
+import logging
 
 
 class SynthesisPromptAssembler:
@@ -24,6 +25,7 @@ class SynthesisPromptAssembler:
     def __init__(self):
         """Initialize with external YAML prompt template."""
         self.prompt_template = self._load_prompt_template()
+        self.logger = logging.getLogger(__name__)
     
     def _load_prompt_template(self) -> Dict[str, Any]:
         """Load external YAML prompt template following THIN architecture."""
@@ -74,9 +76,11 @@ class SynthesisPromptAssembler:
         
         # 5. Prepare evidence context from CURATED evidence if available
         if curated_evidence_hash:
+            self.logger.info(f"Curated evidence artifact found ({curated_evidence_hash}). Formatting for prompt.")
             evidence_context = self._format_curated_evidence(curated_evidence_hash, artifact_storage)
         else:
             # Fallback if curated evidence is not available
+            self.logger.warning("No curated evidence artifact provided. Synthesis will proceed without curated evidence.")
             evidence_context = "No curated evidence was available for this synthesis run. The report will be based on statistical findings only."
 
         # 6. Load and include corpus manifest data
@@ -258,10 +262,13 @@ class SynthesisPromptAssembler:
             
             evidence_results = curated_data.get("evidence_results", [])
             if not evidence_results:
+                self.logger.warning(f"Curated evidence artifact ({curated_evidence_hash}) was empty.")
                 return "No curated evidence was found."
 
+            self.logger.info(f"Formatting {len(evidence_results)} findings from curated evidence artifact.")
             formatted_text = ["**Curated Evidence for Key Statistical Findings:**\n"]
             
+            total_quotes = 0
             for item in evidence_results:
                 finding_desc = item.get("finding", {}).get("description", "Unnamed Finding")
                 quotes = item.get("quotes", [])
@@ -270,6 +277,7 @@ class SynthesisPromptAssembler:
                 if not quotes:
                     formatted_text.append("- *No direct evidence quotes found for this finding.*\n")
                 else:
+                    total_quotes += len(quotes)
                     for quote in quotes:
                         quote_text = quote.get('quote_text', 'N/A').strip()
                         doc_name = quote.get('document_name', 'Unknown')
@@ -277,7 +285,9 @@ class SynthesisPromptAssembler:
                         formatted_text.append(f'- "{quote_text}" (Source: {doc_name}, Relevance: {relevance:.2f})')
                 formatted_text.append("\n")
 
+            self.logger.info(f"Successfully formatted curated evidence, total quotes included: {total_quotes}.")
             return "\n".join(formatted_text)
 
         except Exception as e:
+            self.logger.error(f"Failed to load or format curated evidence artifact ({curated_evidence_hash}): {e}")
             return f"**Error:** Could not load or format curated evidence. Synthesis will proceed without it. Details: {str(e)}"
