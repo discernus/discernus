@@ -51,7 +51,7 @@ from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
 
 from ..core.logging_config import setup_logging_for_run
 import logging
-from ..agents.fact_checker_agent import FactCheckerAgent
+from ..agents.fact_checker_agent.agent import FactCheckerAgent
 
 
 class CleanAnalysisError(Exception):
