@@ -1,0 +1,795 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-27T18:01:49.506437",
+    "statistical_results_hash": "1175a9d7439f4e6d909c227af21afb7717226b4d8faa65d4fb72d223126830a2",
+    "total_findings": 15,
+    "total_quotes": 41
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Overall Tendency Towards a Slightly Negative Emotional Climate: The mean Emotional Climate Index is -0.1465, indicating a slight lean towards negative emotional atmosphere in the discourse. This is supported by a higher Negative Emotional Index mean (0.6062) compared to the Positive Emotional Index mean (0.4562)."
+      },
+      "queries_used": [
+        "tone is negative",
+        "discouraging atmosphere",
+        "overall pessimistic"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.2824530303478241,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "fear",
+          "confidence": 1.0,
+          "relevance_score": 0.17156770825386047,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "fear",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compersion",
+          "confidence": 1.0,
+          "relevance_score": 0.0909460186958313,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compersion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Low Prevalence of Compersion: Compersion (celebration of others' success) has a very low mean raw score (0.2125) and salience (0.2), despite some instances of high intensity, suggesting it is a rare emotional component in this political discourse."
+      },
+      "queries_used": [
+        "no celebration of success",
+        "lack of merit recognition",
+        "absence of compersion"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.2998235523700714,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It is a system that inflicts poverty by concentrating its attacks on low-income neighborhoods.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "enmity",
+          "confidence": 0.85,
+          "relevance_score": 0.2617901861667633,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "enmity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "enmity",
+          "confidence": 1.0,
+          "relevance_score": 0.23974263668060303,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "enmity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Variance in Resource Attitudes Balance: The balance between Compersion and Envy shows the highest standard deviation (0.6109), indicating significant divergence in how discourse addresses attitudes towards resources and others' gains."
+      },
+      "queries_used": [
+        "resentment towards others' advantages",
+        "celebrating achievements",
+        "zero-sum thinking vs abundance"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compersion",
+          "confidence": 1.0,
+          "relevance_score": 0.3185979127883911,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compersion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.3095743954181671,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But the, the thing on immigration is that no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.1623249053955078,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Raw Score Co-occurrence of Fear and Enmity: Fear and Enmity raw scores are highly positively correlated (0.72), suggesting that discourse emphasizing danger often also creates an antagonistic atmosphere towards opponents."
+      },
+      "queries_used": [
+        "threat from enemies",
+        "danger and hostility",
+        "adversaries and fear"
+      ],
+      "quotes": [
+        {
+          "quote_text": "defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.38820189237594604,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "fear",
+          "confidence": 0.95,
+          "relevance_score": 0.3682436943054199,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "fear",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Raw Score Co-occurrence of Hope and Amity: Hope and Amity raw scores show a very strong positive correlation (0.7673), indicating that discourse promoting positive possibilities often also fosters cooperation and shared purpose."
+      },
+      "queries_used": [
+        "unity for future progress",
+        "cooperation and optimism",
+        "shared hope for collaboration"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.4421897530555725,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.31825679540634155,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.2247263491153717,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Raw Score Co-occurrence of Hope and Compersion: Hope and Compersion raw scores are highly positively correlated (0.7655), suggesting that optimistic discourse often includes celebrating collective achievements or positive developments."
+      },
+      "queries_used": [
+        "future success and merit",
+        "optimism in achievements",
+        "celebrating progress"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.49092090129852295,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mr. President, it's been perhaps one of the greatest honors of my life, easily one of the greatest honors as a senator, to work in a bipartisan coalition over the last five years to get to this point.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.30600276589393616,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Raw Score Co-occurrence of Enmity and Envy: Enmity and Envy raw scores are highly positively correlated (0.6402), suggesting that discourse creating antagonism towards opponents often also expresses resentment towards their perceived advantages."
+      },
+      "queries_used": [
+        "enemies' unfair gains",
+        "hostility and grievance",
+        "rivals and resentment"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.36361902952194214,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.2733764350414276,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 1.0,
+          "relevance_score": 0.21214476227760315,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Negative Raw Score Correlation between Fear and Compersion: Fear raw scores are strongly negatively correlated with Compersion raw scores (-0.6976), implying that discourse creating anxiety rarely celebrates others' success."
+      },
+      "queries_used": [
+        "danger, not celebration",
+        "anxiety, no praise",
+        "threats, not success"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "fear",
+          "confidence": 0.95,
+          "relevance_score": 0.38228923082351685,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "fear",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.27814075350761414,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "fear",
+          "confidence": 1.0,
+          "relevance_score": 0.26032817363739014,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "fear",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Negative Raw Score Correlation between Enmity and Compersion: Enmity raw scores are strongly negatively correlated with Compersion raw scores (-0.7276), indicating that antagonistic discourse rarely includes celebrating others' achievements."
+      },
+      "queries_used": [
+        "hostility, no celebration",
+        "enemies, not shared success",
+        "conflict, no merit"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.33750486373901367,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I want to say good afternoon to everyone, and this is a moment really where I want to give open with a sense of gratitude. I don't want to thank my colleagues for their incredible work and leadership, and especially recognize the chairman of the Judiciary Committee, Senator Chuck Grassley.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "compersion",
+          "confidence": 1.0,
+          "relevance_score": 0.2678473889827728,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "compersion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.21619629859924316,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Salience Co-occurrence of Fear and Enmity: The rhetorical prominence (salience) of Fear and Enmity are highly correlated (0.7286), suggesting speakers who emphasize threats also tend to prominently feature antagonists."
+      },
+      "queries_used": [
+        "prominent danger, prominent enemies",
+        "focus on threats and opponents",
+        "rhetorical emphasis on conflict"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.326294481754303,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "fear",
+          "confidence": 0.95,
+          "relevance_score": 0.31415122747421265,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "fear",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2875238060951233,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Very Strong Salience Co-occurrence of Hope and Amity: The salience of Hope and Amity shows a very strong positive correlation (0.8445), meaning speakers who prominently feature hope also strongly emphasize positive relationships and cooperation."
+      },
+      "queries_used": [
+        "prominent hope and unity",
+        "centrality of cooperation and future",
+        "emphasis on optimism and shared purpose"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.43786364793777466,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But America is not just an idea. Though we were founded on great ideas, America is a nation. It is a group of people with a common history and a common future.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.3348924517631531,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extremely Strong Negative Salience Correlation between Enmity and Compersion: The salience of Enmity and Compersion exhibits an exceptionally strong negative correlation (-0.9056), indicating that when hostility is rhetorically emphasized, celebration of others' success is almost entirely absent in prominence."
+      },
+      "queries_used": [
+        "emphasis on enemies, no celebration",
+        "hostility outweighs merit",
+        "prominent conflict, absent support"
+      ],
+      "quotes": [
+        {
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.3490382432937622,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.3052445352077484,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I want to say good afternoon to everyone, and this is a moment really where I want to give open with a sense of gratitude. I don't want to thank my colleagues for their incredible work and leadership, and especially recognize the chairman of the Judiciary Committee, Senator Chuck Grassley.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "compersion",
+          "confidence": 1.0,
+          "relevance_score": 0.226739764213562,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "compersion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Identification of a 'Positive' Emotional Climate Cluster (Cluster 2): This cluster is characterized by high Hope (0.7), Amity (0.9), and Compersion (0.9), with very low Fear (0.2), Enmity (0.0), and Envy (0.0), representing highly positive and constructive discourse."
+      },
+      "queries_used": [
+        "optimistic, collaborative, celebratory",
+        "focus on unity and achievement",
+        "constructive and supportive language"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.24142985045909882,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.22219222784042358,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Identification of a 'Mixed-Negative Dominant' Emotional Climate Cluster (Cluster 1): This cluster shows high raw scores across Fear (0.78), Enmity (0.77), and Envy (0.8), but also moderate Hope (0.61) and Amity (0.68), suggesting a strategic blend of negative framing with some positive elements to address or provide solutions."
+      },
+      "queries_used": [
+        "challenges and shared solutions",
+        "adversaries within a framework of action",
+        "grievance with pathway to progress"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But after decades of failed federal policies, and after decades of growing in the wrong direction, we now have an opportunity to reverse course in a significant way.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "hope",
+          "confidence": 1.0,
+          "relevance_score": 0.3345748782157898,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "hope",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight. That's the Wall Street Journal editorial page approach.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.264823317527771,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "amity",
+          "confidence": 1.0,
+          "relevance_score": 0.19547048211097717,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "amity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Identification of a 'High Fear/Enmity, No Resource Attitudes' Cluster (Cluster 0): This cluster is marked by high Fear (0.8) and moderate Enmity (0.5), with minimal Hope (0.35), Amity (0.25), and notably absent Envy (0.0) and Compersion (0.0), indicating discourse primarily focused on threats and division without discussion of resources."
+      },
+      "queries_used": [
+        "pure threat and division",
+        "danger and conflict, no economic focus",
+        "hostility without resource implications"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But the, the thing on immigration is that no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.38804423809051514,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight. That's the Wall Street Journal editorial page approach.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.31939011812210083,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2790101170539856,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    }
+  ]
+}

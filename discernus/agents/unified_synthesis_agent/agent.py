@@ -93,40 +93,12 @@ class UnifiedSynthesisAgent:
                 experiment_path=assets['experiment_path'],
                 research_data_artifact_hash=assets['research_data_artifact_hash'],
                 artifact_storage=artifact_storage,
-                curated_evidence_hash=None  # Evidence will be added separately
+                curated_evidence_hash=assets.get('evidence_retrieval_results_hash')  # Pass evidence hash to assembler
             )
 
-            # 2. Load and prepare curated evidence if available
-            evidence_context = ""
-            if assets.get('evidence_retrieval_results_hash'):
-                evidence_context = self._prepare_evidence_context_from_curated_evidence(
-                    assets['evidence_retrieval_results_hash'], artifact_storage
-                )
-            else:
-                evidence_context = "⚠️ **EVIDENCE STATUS**: No curated evidence available. Proceed with synthesis using only statistical data."
-
-            # 3. Construct the final, enhanced prompt with the curated evidence
-            final_prompt = f"""{base_prompt}
-
-# EVIDENCE INTEGRATION REQUIREMENTS
-
-## CURATED EVIDENCE FOR SYNTHESIS
-{evidence_context}
-
-## CRITICAL REQUIREMENTS FOR EVIDENCE INTEGRATION
-- Every major statistical claim MUST be supported by evidence from the curated evidence above
-- Use the exact format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'
-- Include speaker identification and source document for every quote
-- Weave evidence quotes naturally into your analysis, not as separate citations
-- If no evidence was found for a finding, explicitly state: "No supporting textual evidence was found for this statistical pattern"
-- Do NOT proceed to report writing until you have examined the evidence above
-
-## SYNTHESIS INSTRUCTIONS
-Generate your comprehensive academic report following the structure specified in the prompt above, ensuring all claims are evidence-backed using the curated evidence provided."""
-
-            # 4. Execute the LLM call
+            # 2. Execute the LLM call with the complete prompt from assembler
             final_report, metadata = self.llm_gateway.execute_call(
-                model=self.model, prompt=final_prompt, temperature=0.1
+                model=self.model, prompt=base_prompt, temperature=0.2
             )
 
             if self.audit_logger:
@@ -158,7 +130,7 @@ Generate your comprehensive academic report following the structure specified in
         """Load enhanced synthesis prompt template."""
         try:
             import yaml
-            prompt_file = Path(__file__).parent / "enhanced_synthesis_prompt.yaml"
+            prompt_file = Path(__file__).parent / "prompt.yaml"
             with open(prompt_file, 'r') as f:
                 return yaml.safe_load(f)
         except Exception as e:
@@ -179,7 +151,7 @@ Generate your comprehensive academic report following the structure specified in
                 model=self.model,
                 prompt=prompt,
                 system_prompt=self.enhanced_prompt_template.get('system_prompt', ''),
-                temperature=0.1   # Low temperature for analytical consistency
+                temperature=0.2   # Low temperature for analytical consistency
             )
             
             if self.audit_logger:

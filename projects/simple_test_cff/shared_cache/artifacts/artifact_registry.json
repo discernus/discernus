@@ -804,6 +804,17 @@
     "size_bytes": 912,
     "source_run": "20250827T173456Z"
   },
+  "79c7676537e58a7e74814a304ae4a20b3bedaa59ee4328cf444b9f5ccdcd39f7": {
+    "artifact_path": "draft_synthesis_report_79c76765",
+    "created_at": "2025-08-27T17:45:38.294723+00:00",
+    "human_filename": "draft_synthesis_report_79c76765",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "draft_synthesis_report"
+    },
+    "size_bytes": 26984,
+    "source_run": "20250827T173456Z"
+  },
   "7d4905fe19731bd6db8cb58408d8cdee13c594db8ca476ae289f6fc0b5edce5b": {
     "artifact_path": "evidence_v6_7d4905fe",
     "created_at": "2025-08-27T17:38:33.512652+00:00",

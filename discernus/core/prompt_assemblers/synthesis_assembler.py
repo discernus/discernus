@@ -103,12 +103,21 @@ class SynthesisPromptAssembler:
         """Create experiment metadata section for provenance."""
         metadata_parts = []
         
+        # Handle both old and new YAML structures
         if 'name' in experiment_yaml:
             metadata_parts.append(f"**Experiment**: {experiment_yaml['name']}")
+        elif 'metadata' in experiment_yaml and 'experiment_name' in experiment_yaml['metadata']:
+            metadata_parts.append(f"**Experiment**: {experiment_yaml['metadata']['experiment_name']}")
+        
         if 'framework' in experiment_yaml:
             metadata_parts.append(f"**Framework**: {experiment_yaml['framework']}")
+        elif 'components' in experiment_yaml and 'framework' in experiment_yaml['components']:
+            metadata_parts.append(f"**Framework**: {experiment_yaml['components']['framework']}")
+        
         if 'corpus' in experiment_yaml:
             metadata_parts.append(f"**Corpus**: {experiment_yaml['corpus']}")
+        elif 'components' in experiment_yaml and 'corpus' in experiment_yaml['components']:
+            metadata_parts.append(f"**Corpus**: {experiment_yaml['components']['corpus']}")
         
         return "\n".join(metadata_parts) if metadata_parts else "**Experiment Metadata**: Available in experiment configuration"
     
@@ -194,6 +203,7 @@ class SynthesisPromptAssembler:
     def _parse_experiment_yaml(self, content: str) -> Dict[str, Any]:
         """Parse YAML from experiment's configuration appendix."""
         try:
+            # Try both possible section headers
             if '## Configuration Appendix' in content:
                 _, appendix_content = content.split('## Configuration Appendix', 1)
                 if '```yaml' in appendix_content:
@@ -201,6 +211,14 @@ class SynthesisPromptAssembler:
                     yaml_end = appendix_content.rfind('```')
                     yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
                     return yaml.safe_load(yaml_content)
+            elif '# --- Start of Machine-Readable Appendix ---' in content:
+                _, appendix_content = content.split('# --- Start of Machine-Readable Appendix ---', 1)
+                # Look for the end marker
+                if '# --- End of Machine-Readable Appendix ---' in appendix_content:
+                    yaml_content = appendix_content.split('# --- End of Machine-Readable Appendix ---')[0].strip()
+                else:
+                    yaml_content = appendix_content.strip()
+                return yaml.safe_load(yaml_content)
             return {}
         except Exception:
             return {}

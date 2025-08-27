@@ -90,11 +90,40 @@
 - **Priority**: **HIGH** - Significant development velocity improvement
 - **Status**: **NEEDS VERIFICATION** - Implementation exists but caching behavior needs testing
 
+#### [CRITICAL-005] Fix Import Chain Dependency Failures
+
+- **Description**: **CRITICAL BUG**: Multiple import failures indicate broken dependency resolution and circular import issues in the orchestration layer
+- **Dependencies**: None
+- **Root Cause**: 
+  - Broken dependency resolution - import paths don't match actual module structure
+  - Circular import potential - components importing from each other creating dependency cycles
+  - Module structure changes - code references modules that have been moved or restructured
+  - Missing `__init__.py` files in agent directories
+- **Impact**:
+  - CLI fails to start with import errors
+  - Blocking all experiments until imports are fixed
+  - Indicates deeper architectural dependency issues
+  - Suggests module organization needs review
+- **Evidence from Terminal**:
+  - `cannot import name 'ValidationCache' from 'discernus.core.validation_cache'`
+  - `cannot import name 'FactCheckerAgent' from 'discernus.agents.fact_checker_agent'`
+  - Multiple import failures during orchestrator initialization
+- **Acceptance Criteria**:
+  - [ ] All import chains in orchestration layer mapped and documented
+  - [ ] Circular import dependencies identified and eliminated
+  - [ ] Module dependency graph documented
+  - [ ] Module organization and structure reviewed and standardized
+  - [ ] CLI starts without import errors
+- **Effort**: 1-2 days
+- **Priority**: **CRITICAL** - System startup failure
+- **Status**: **NEEDS IMPLEMENTATION**
+
 #### [TEST-INFRA] Fix Integration Test Infrastructure
 
 - **Description**: Integration tests incorrectly mock critical setup, causing false failures
 - **Impact**: False test failures prevent validation of all features
 - **Root Cause**: Tests mock `_initialize_infrastructure` which bypasses `artifact_storage` setup
+- **Dependencies**: [CRITICAL-005]
 - **Acceptance Criteria**:
   - [ ] Integration tests run without infrastructure errors
   - [ ] Tests accurately reflect actual system status
@@ -135,7 +164,7 @@
 #### [CRITICAL-004] Fix Orchestrator Data Structure Mismatch
 
 - **Description**: **CRITICAL BUG**: The orchestrator creates individual analysis files but the `AutomatedDerivedMetricsAgent` expects a consolidated `analysis_data.json` file, causing pipeline failures
-- **Dependencies**: [CRITICAL-003]
+- **Dependencies**: [TEST-INFRA]
 - **Root Cause**: 
   - Data flow inconsistency between orchestrator and agent expectations
   - Missing standardized data format contract
@@ -158,34 +187,6 @@
   - [ ] Pipeline works reliably with consistent data structures
 - **Effort**: 2-3 days
 - **Priority**: **CRITICAL** - Pipeline failure issue
-- **Status**: **NEEDS IMPLEMENTATION**
-
-#### [CRITICAL-005] Fix Import Chain Dependency Failures
-
-- **Description**: **CRITICAL BUG**: Multiple import failures indicate broken dependency resolution and circular import issues in the orchestration layer
-- **Dependencies**: [CRITICAL-004]
-- **Root Cause**: 
-  - Broken dependency resolution - import paths don't match actual module structure
-  - Circular import potential - components importing from each other creating dependency cycles
-  - Module structure changes - code references modules that have been moved or restructured
-  - Missing `__init__.py` files in agent directories
-- **Impact**:
-  - CLI fails to start with import errors
-  - Blocking all experiments until imports are fixed
-  - Indicates deeper architectural dependency issues
-  - Suggests module organization needs review
-- **Evidence from Terminal**:
-  - `cannot import name 'ValidationCache' from 'discernus.core.validation_cache'`
-  - `cannot import name 'FactCheckerAgent' from 'discernus.agents.fact_checker_agent'`
-  - Multiple import failures during orchestrator initialization
-- **Acceptance Criteria**:
-  - [ ] All import chains in orchestration layer mapped and documented
-  - [ ] Circular import dependencies identified and eliminated
-  - [ ] Module dependency graph documented
-  - [ ] Module organization and structure reviewed and standardized
-  - [ ] CLI starts without import errors
-- **Effort**: 1-2 days
-- **Priority**: **CRITICAL** - System startup failure
 - **Status**: **NEEDS IMPLEMENTATION**
 
 ### Sprint 2: Logging Architecture & Code Quality (HIGH PRIORITY)
@@ -222,46 +223,19 @@
 - **Priority**: **HIGH** - Researcher experience issue
 - **Status**: **NEEDS IMPLEMENTATION**
 
-#### [LOGGING-002] Rich CLI Usage Investigation
+#### [LOGGING-002] Investigate CLI and Logging Experience
 
-- **Description**: Investigate current use of Rich CLI library in Discernus platform to ensure optimal researcher experience
-- **Dependencies**: [LOGGING-001]
-- **Current State**:
-  - Rich CLI wrapper implemented in `discernus/cli_console.py`
-  - Extensive usage throughout main CLI for tables, panels, formatting
-  - Professional terminal interface with consistent styling
+- **Description**: Investigate current use of Rich CLI and Loguru libraries in the Discernus platform to ensure optimal researcher experience and logging implementation.
+- **Dependencies**: None
 - **Investigation Areas**:
-  - Review Rich library best practices and latest features
-  - Assess current implementation against Rich library capabilities
+  - Review Rich and Loguru best practices and latest features
+  - Assess current implementation against library capabilities
   - Identify opportunities for improved user experience (progress bars, live updates, better error handling)
-  - Evaluate performance impact of current Rich usage
+  - Evaluate performance impact and consistency of logging usage
 - **Deliverables**:
-  - Analysis report of current Rich CLI implementation
-  - Recommendations for optimization and enhancement
+  - Analysis report of current implementations
+  - Recommendations for optimization, enhancement, and standardization
   - Implementation plan for any identified improvements
-  - Performance benchmarks if changes are proposed
-- **Effort**: 2-3 days
-- **Priority**: **MEDIUM** - Enhancement opportunity
-- **Status**: **NEEDS INVESTIGATION**
-
-#### [LOGGING-003] Loguru Implementation Investigation
-
-- **Description**: Investigate current use of loguru logging library in Discernus platform to ensure optimal logging implementation
-- **Dependencies**: [LOGGING-001]
-- **Current State**:
-  - Comprehensive logging configuration in `discernus/core/logging_config.py`
-  - Multiple log handlers: console, file, error, performance, LLM interactions
-  - Mixed usage patterns across codebase (some loguru, some standard logging)
-- **Investigation Areas**:
-  - Review loguru best practices and latest features
-  - Assess current implementation against loguru capabilities
-  - Identify opportunities for improved logging structure and performance
-  - Evaluate consistency of logging usage across codebase
-- **Deliverables**:
-  - Analysis report of current loguru implementation
-  - Recommendations for optimization and standardization
-  - Implementation plan for any identified improvements
-  - Performance analysis of current logging overhead
 - **Effort**: 2-3 days
 - **Priority**: **MEDIUM** - Enhancement opportunity
 - **Status**: **NEEDS INVESTIGATION**

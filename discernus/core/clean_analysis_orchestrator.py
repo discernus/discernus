@@ -1790,16 +1790,8 @@ class CleanAnalysisOrchestrator:
                 elif artifact_type == "statistical_results_with_data":
                     statistical_results_hash = h
 
-            curated_evidence_hash = None
-            if raw_evidence_hashes and framework_hash and statistical_results_hash:
-                 curated_evidence_hash = self._run_evidence_retrieval(
-                    framework_hash=framework_hash,
-                    statistical_results_hash=statistical_results_hash,
-                    evidence_artifact_hashes=raw_evidence_hashes,
-                    audit_logger=audit_logger
-                )
-            else:
-                self._log_progress("⚠️ Skipping evidence curation due to missing artifacts (raw evidence, framework, or stats).")
+            # Use evidence results from the main evidence retrieval phase
+            curated_evidence_hash = evidence_results.get('evidence_artifact_hash') if evidence_results else None
 
             # Use SynthesisPromptAssembler to build the prompt
             from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
