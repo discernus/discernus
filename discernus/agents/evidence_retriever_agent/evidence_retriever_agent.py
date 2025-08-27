@@ -244,7 +244,26 @@ Provide a structured plan for evidence retrieval that includes:
 Use the framework specification to understand what dimensions and metrics are being analyzed.
 Generate queries that make sense within the framework's analytical approach.
 
-Format your response as a structured plan that I can execute programmatically.
+## RESPONSE FORMAT
+You must wrap your response in the following delimiters:
+
+<<<DISCERNUS_EVIDENCE_PLAN>>>
+{{
+  "key_findings": [
+    {{
+      "finding": "Description of the statistical finding",
+      "queries": ["query1", "query2", "query3"]
+    }}
+  ],
+  "quality_criteria": {{
+    "min_relevance": 0.5,
+    "max_quotes_per_finding": 3
+  }},
+  "target_total_quotes": 25
+}}
+<<<END_DISCERNUS_EVIDENCE_PLAN>>>
+
+IMPORTANT: Your response must be valid JSON and must be wrapped in the exact delimiters shown above.
 """
         return prompt
     
@@ -252,20 +271,29 @@ Format your response as a structured plan that I can execute programmatically.
         """
         Parse LLM response to extract the evidence retrieval plan.
         
-        The method looks for a JSON block enclosed in ```json ... ``` and parses it.
+        The method looks for content wrapped in proprietary delimiters and parses it as JSON.
         """
         try:
-            # Use regex to find the JSON block, allowing for flexible surrounding text
-            json_match = re.search(r'```json\s*([\s\S]*?)\s*```', response)
+            # Use regex to find content between proprietary delimiters
+            start_marker = '<<<DISCERNUS_EVIDENCE_PLAN>>>'
+            end_marker = '<<<END_DISCERNUS_EVIDENCE_PLAN>>>'
             
-            if json_match:
-                json_string = json_match.group(1)
+            start_idx = response.find(start_marker)
+            end_idx = response.find(end_marker)
+            
+            if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+                # Extract content between delimiters
+                start_content = start_idx + len(start_marker)
+                json_string = response[start_content:end_idx].strip()
+                
+                # Parse the JSON content
                 plan = json.loads(json_string)
-                self.logger.info(f"Successfully parsed evidence retrieval plan with {len(plan)} findings.")
+                self.logger.info(f"Successfully parsed evidence retrieval plan with {len(plan.get('key_findings', []))} findings.")
                 return plan
             else:
-                self.logger.warning("No JSON block found in LLM response. Could not parse plan.")
-                # Fallback if no JSON block is found
+                self.logger.warning("No proprietary delimiters found in LLM response. Could not parse plan.")
+                self.logger.debug(f"Response content: {response[:500]}...")
+                # Fallback if no delimiters are found
                 return self._create_fallback_plan()
 
         except json.JSONDecodeError as e:
@@ -276,7 +304,7 @@ Format your response as a structured plan that I can execute programmatically.
             self.logger.warning(f"An unexpected error occurred while parsing LLM response, using fallback: {e}")
             return self._create_fallback_plan()
     
-    def _execute_evidence_plan(self, evidence_plan: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def _execute_evidence_plan(self, evidence_plan: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
         Execute the evidence retrieval plan by querying the RAG wrapper.
         
@@ -287,15 +315,20 @@ Format your response as a structured plan that I can execute programmatically.
             self.logger.error("Evidence wrapper is not initialized. Cannot execute plan.")
             return []
             
-        if not isinstance(evidence_plan, list) or not evidence_plan:
+        if not isinstance(evidence_plan, dict) or 'key_findings' not in evidence_plan:
             self.logger.warning("Invalid or empty evidence plan provided. Using fallback.")
             return self._fallback_evidence_retrieval({})
 
-        self.logger.info(f"Executing evidence retrieval plan with {len(evidence_plan)} findings.")
+        key_findings = evidence_plan.get('key_findings', [])
+        if not key_findings:
+            self.logger.warning("No key findings in evidence plan. Using fallback.")
+            return self._fallback_evidence_retrieval({})
+
+        self.logger.info(f"Executing evidence retrieval plan with {len(key_findings)} findings.")
         
         all_results = []
         
-        for finding_item in evidence_plan:
+        for finding_item in key_findings:
             finding_description = finding_item.get("finding")
             queries = finding_item.get("queries", [])
             
