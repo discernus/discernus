@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_81f894c61031",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The speech strongly emphasizes the conflict between the 'working class' and 'oligarchs/billionaires,' relying heavily on themes of threat, enmity, and resentment (envy). It counters this with a powerful call for solidarity and hope among the working people. Compassion, as defined by celebrating others' success, is notably absent, as the discourse actively demonizes the success of the perceived adversaries.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"compassion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"description of threat\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call to action / potential for victory\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation / hostile framing\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"invitation to unity / shared purpose\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"This idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation of theft / resentment of unearned wealth\"\n        },\n        {\n          \"dimension\": \"compassion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"not applicable\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "8dc5cc3e4b1428937fc581280f0581ce0585172522e9f9925655229376a40145",
+  "execution_metadata": {
+    "start_time": "2025-08-27T16:16:43.935362+00:00",
+    "end_time": "2025-08-27T16:17:14.238034+00:00",
+    "duration_seconds": 30.302661
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T161351Z_9a9a7f57"
+  }
+}

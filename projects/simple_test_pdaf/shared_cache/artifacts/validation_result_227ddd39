@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "issues": [
+    "The experiment aims to conduct comparative analysis between political styles (institutional, populist conservative, populist progressive), but the corpus contains only four documents (N=4). The resulting analytical groups are too small for statistical comparison: institutional (N=1), populist_conservative (N=1), and populist_progressive (N=2).",
+    "The `scoring_calibration` definitions in the framework's machine-readable appendix are inconsistent across dimensions and contain non-contiguous value ranges. For example, `elite_conspiracy_systemic_corruption` defines 'medium' as 0.5-0.7 and 'low' as 0.1-0.4, leaving the 0.4-0.5 range undefined. This pattern of inconsistency and gaps exists for five of the nine dimensions."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T13:52:36.027632+00:00"
+}

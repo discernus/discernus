@@ -21,7 +21,7 @@ The corpus includes speeches from across the political spectrum, representing di
 
 ```yaml
 name: "CAF Civic Character Political Speeches Corpus"
-version: "8.0"
+version: "10.0"
 total_documents: 8
 date_range: "1963-2025"
 description: "Diverse political speeches for testing CAF dimensional analysis"
@@ -35,7 +35,7 @@ documents:
     style: "civil_rights"
     type: "protest_speech"
     context: "March on Washington for Jobs and Freedom"
-    
+  
   - document_id: "john_mccain_2008_concession"
     filename: "john_mccain_2008_concession_ff9b26f2.txt"
     speaker: "John McCain"
@@ -44,7 +44,7 @@ documents:
     style: "institutional"
     type: "concession_speech"
     context: "2008 presidential election concession"
-    
+  
   - document_id: "steve_king_2017_immigration"
     filename: "steve_king_2017_house_floor_738780d9.txt"
     speaker: "Steve King"
@@ -53,7 +53,7 @@ documents:
     style: "populist_conservative"
     type: "floor_speech"
     context: "House floor speech on immigration"
-    
+  
   - document_id: "cory_booker_2018_first_step"
     filename: "cory_booker_2018_first_step_act_0c32812a.txt"
     speaker: "Cory Booker"
@@ -62,7 +62,7 @@ documents:
     style: "institutional_progressive"
     type: "policy_speech"
     context: "First Step Act criminal justice reform"
-    
+  
   - document_id: "mitt_romney_2020_impeachment"
     filename: "mitt_romney_2020_impeachment_9ebec73f.txt"
     speaker: "Mitt Romney"
@@ -71,7 +71,7 @@ documents:
     style: "institutional"
     type: "impeachment_speech"
     context: "Trump impeachment trial speech"
-    
+  
   - document_id: "jd_vance_2022_natcon"
     filename: "jd_vance_2022_natcon_conference_516a3c9c.txt"
     speaker: "JD Vance"
@@ -80,7 +80,7 @@ documents:
     style: "populist_conservative"
     type: "conference_speech"
     context: "National Conservatism Conference"
-    
+  
   - document_id: "bernie_sanders_2025_oligarchy"
     filename: "bernie_sanders_2025_fighting_oligarchy_261b893a.txt"
     speaker: "Bernie Sanders"
@@ -89,7 +89,7 @@ documents:
     style: "populist_progressive"
     type: "policy_statement"
     context: "Economic justice and oligarchy critique"
-    
+  
   - document_id: "aoc_2025_oligarchy"
     filename: "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt"
     speaker: "Alexandria Ocasio-Cortez"

@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis reflects a speech heavily focused on operating within and reforming existing constitutional structures. The primary themes are Systemic Continuity and Procedural Legitimacy, urging Congress to act through legislative processes. A notable, but secondary, element of Procedural Rejection is present in the conditional threat of executive action on climate change. Anti-institutional and systemic replacement rhetoric is absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can. For they know that America moves forward only when we do so together and that the responsibility of improving this Union remains the task of us all.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_bipartisanship"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But if Congress won't act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take, now and in the future, to reduce pollution, prepare our communities for the consequences of climate change, and speed the transition to more sustainable sources of energy.",
+          "confidence": 0.9,
+          "context_type": "policy_ultimatum"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+          "confidence": 0.95,
+          "context_type": "national_security_policy"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "none_available"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It is our generation's task, then, to reignite the true engine of America's economic growth: a rising, thriving middle class. It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.",
+          "confidence": 0.95,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "none_available"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

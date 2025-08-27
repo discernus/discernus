@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_5d260269d41f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis is based on President Clinton's 1993 address to Congress. The speech is a classic example of a presidential policy proposal, inherently operating within the existing constitutional and procedural framework. The discourse is heavily weighted towards procedural legitimacy, institutional respect, and systemic continuity, with virtually no evidence for the opposing 'pathology' dimensions. The salience scores reflect the central rhetorical themes of the speech: using the legislative process, working with Congress, and reforming the existing system to meet future challenges.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.98\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.98\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I am asking the United States Congress to pass a real campaign finance reform bill this year. I ask you to increase the participation of the American people by passing the motor voter bill promptly. I ask you to deal with the undue influence of special interests by passing a bill to end the tax deduction for lobbying and to act quickly to require all the people who lobby you to register as lobbyists by passing the lobbying registration bill.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"explicit call for legislative action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I did this so that we could argue about priorities with the same set of numbers. I did this so that no one could say I was estimating my way out of this difficulty. I did this because if we can agree together on the most prudent revenues we're likely to get if the recovery stays and we do right things economically, then it will turn out better for the American people than we say. In the last 12 years, because there were differences over the revenue estimates, you and I know that both parties were given greater elbow room for irresponsibility. This is tightening the rein on the Democrats as well as the Republicans.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"deference to an independent institutional process (CBO)\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course. I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"framing reform within existing values and system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "16531e2e0fc04f7f47cbaab9e65db96e35defd0571c2eb4b481e4eeaff8f6fcd",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:03:31.117841+00:00",
+    "end_time": "2025-08-27T15:04:23.453039+00:00",
+    "duration_seconds": 52.335183
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "b2472d421a7847751e9cd03fff4d80902247eb8bfad57b0b773eeff8bbcdd657"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

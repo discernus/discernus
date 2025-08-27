@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6357ab4c07af6f04b0d379f4ae2a41e24284d2ea634b1b6189a11ba8a197807c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:02:37.443352+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Now, these are the things I can do. And now, Members of Congress, let me tell you what you can do for your country. You must pass the other elements of my plan to meet our economic needs.",
+      "confidence": 1.0,
+      "context_type": "acknowledgement_of_separation_of_powers",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443343+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443346+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_respect",
+      "quote_text": "The Secretary of Defense recommended these cuts after consultation with the Joint Chiefs of Staff. And I make them with confidence.",
+      "confidence": 1.0,
+      "context_type": "deference_to_institutional_expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443347+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "I myself have sometimes thought the aging process could be delayed if it had to make its way through Congress.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_criticism_of_institutional_inefficiency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443349+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "we must reform our health care system. ... Or we can reform our own private health care system, which still gives us, for all its flaws, the best quality health care in the world.",
+      "confidence": 1.0,
+      "context_type": "advocacy_for_system_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443349+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:02:37.443350+00:00"
+    }
+  ]
+}

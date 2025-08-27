@@ -758,6 +758,10 @@ class CleanAnalysisOrchestrator:
                     analysis_file = analysis_dir / f"analysis_{i}.json"
                     analysis_file.write_text(json.dumps(result, indent=2))
                 
+                # Also create analysis_data.json for the derived metrics agent
+                analysis_data_file = temp_workspace / "analysis_data.json"
+                analysis_data_file.write_text(json.dumps(analysis_results, indent=2))
+                
                 # Use the existing DerivedMetricsPromptAssembler to build the prompt
                 from .prompt_assemblers.derived_metrics_assembler import DerivedMetricsPromptAssembler
                 assembler = DerivedMetricsPromptAssembler()
@@ -1949,12 +1953,12 @@ class CleanAnalysisOrchestrator:
         try:
             self._log_progress("📥 Importing txtai embeddings...")
             from txtai.embeddings import Embeddings
-            # Enable txtai debug logging for better visibility
+            # Set txtai logging to WARNING level to reduce verbosity
             import logging
             txtai_logger = logging.getLogger("txtai.embeddings")
-            txtai_logger.setLevel(logging.DEBUG)
+            txtai_logger.setLevel(logging.WARNING)
             import json
-            self._log_progress("🔍 Enabled txtai debug logging")
+            self._log_progress("🔍 Set txtai logging to WARNING level")
             
             # RAG index will be created by RAGIndexManager during construction
             
@@ -2668,11 +2672,11 @@ class CleanAnalysisOrchestrator:
             self._log_progress("📥 Importing txtai embeddings...")
             from txtai.embeddings import Embeddings
             
-            # Enable txtai debug logging for better visibility
+            # Set txtai logging to WARNING level to reduce verbosity
             import logging
             txtai_logger = logging.getLogger("txtai.embeddings")
-            txtai_logger.setLevel(logging.DEBUG)
-            self._log_progress("🔍 Enabled txtai debug logging")
+            txtai_logger.setLevel(logging.WARNING)
+            self._log_progress("🔍 Set txtai logging to WARNING level")
             
             # RAG index will be created by RAGIndexManager during construction
             
@@ -3386,11 +3390,11 @@ class CleanAnalysisOrchestrator:
             self._log_progress("📥 Importing txtai embeddings...")
             from txtai.embeddings import Embeddings
             
-            # Enable txtai debug logging for better visibility
+            # Set txtai logging to WARNING level to reduce verbosity
             import logging
             txtai_logger = logging.getLogger("txtai.embeddings")
-            txtai_logger.setLevel(logging.DEBUG)
-            self._log_progress("🔍 Enabled txtai debug logging")
+            txtai_logger.setLevel(logging.WARNING)
+            self._log_progress("🔍 Set txtai logging to WARNING level")
             
             # RAG index will be created by RAGIndexManager during construction
             

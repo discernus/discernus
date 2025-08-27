@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:06:19.494087+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I will submit to Congress for 1999 the first balanced budget in 30 years. And if we hold fast to fiscal discipline, we may balance the budget this year\u20144 years ahead of schedule.",
+      "confidence": 1.0,
+      "context_type": "adherence to established process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494049+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "This year, by March 6th, at long last the Senate will actually vote on bipartisan campaign finance reform proposed by Senators McCain and Feingold. Let's be clear: A vote against McCain-Feingold is a vote for soft money and for the status quo.",
+      "confidence": 1.0,
+      "context_type": "call for legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494067+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494070+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Here is what the Chief Justice of the United States wrote: \"Judicial vacancies cannot remain at such high levels indefinitely without eroding the quality of justice.\" I simply ask the United States Senate to heed this plea and vote on the highly qualified judicial nominees before you, up or down.",
+      "confidence": 1.0,
+      "context_type": "deference to institutional authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494072+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "So I call on Congress to renew America's commitment to the International Monetary Fund. And I think we should say to all the people we're trying to represent here that preparing for a far-off storm that may reach our shores is far wiser than ignoring the thunder till the clouds are just overhead.",
+      "confidence": 1.0,
+      "context_type": "support for international institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494074+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494076+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "For 5 years now, we have met the challenge of these changes, as Americans have at every turning point in our history, by renewing the very idea of America: widening the circle of opportunity, deepening the meaning of our freedom, forging a more perfect Union.",
+      "confidence": 1.0,
+      "context_type": "support for gradual improvement of existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494078+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Founders set America on a permanent course toward a more perfect Union. To all of you I say, it is a journey we can only make together, living as one community.",
+      "confidence": 1.0,
+      "context_type": "appeal to founding principles and continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494080+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:19.494082+00:00"
+    }
+  ]
+}

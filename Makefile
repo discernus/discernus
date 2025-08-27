@@ -128,3 +128,29 @@ clean-all:  ## Comprehensive cleanup (cache, artifacts, logs)
 	@find . -name "*.log" -path "*/deprecated/*" -delete
 	@echo "✅ Comprehensive cleanup complete!"
 	@echo "✅ Cleanup complete!" 
+
+litellm-check:  ## Check current LiteLLM environment variables
+	@echo "🔍 Checking current LiteLLM environment variables..."
+	@echo "LITELLM_VERBOSE: $$LITELLM_VERBOSE"
+	@echo "LITELLM_LOG_LEVEL: $$LITELLM_LOG_LEVEL"
+	@echo "LITELLM_PROXY_LOG_LEVEL: $$LITELLM_PROXY_LOG_LEVEL"
+	@echo "LITELLM_PROXY_DEBUG: $$LITELLM_PROXY_DEBUG"
+
+litellm-env:  ## Set LiteLLM debug suppression environment variables
+	@echo "🔇 Setting LiteLLM debug suppression environment variables..."
+	@bash scripts/set_litellm_env.sh
+
+litellm-python:  ## Set LiteLLM debug suppression using Python script
+	@echo "🔇 Setting LiteLLM debug suppression using Python..."
+	@python3 scripts/suppress_litellm_debug.py
+
+litellm-test:  ## Test LiteLLM debug suppression configuration
+	@echo "🧪 Testing LiteLLM debug suppression..."
+	@python3 scripts/test_litellm_suppression.py
+
+litellm-setup:  ## Complete LiteLLM debug suppression setup and test
+	@echo "🔧 Setting up complete LiteLLM debug suppression..."
+	@make litellm-python
+	@echo ""
+	@echo "🧪 Testing the setup..."
+	@make litellm-test 

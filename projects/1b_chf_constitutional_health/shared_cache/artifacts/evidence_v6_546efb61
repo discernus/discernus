@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:23:44.633043+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our Founding Fathers, faced with perils that we can scarcely imagine, drafted a charter to assure the rule of law and the rights of man, a charter expanded by the blood of generations.",
+      "confidence": 0.95,
+      "context_type": "explicit reference to foundational constitutional documents and principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633012+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633029+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank President Bush for his service to our Nation, as well as the generosity and cooperation he has shown throughout this transition.",
+      "confidence": 0.9,
+      "context_type": "explicit respect for the outgoing administration and the process of presidential transition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633032+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633034+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The time has come to reaffirm our enduring spirit, to choose our better history, to carry forward that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+      "confidence": 0.95,
+      "context_type": "central thematic call for continuity of the nation's foundational ideals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633036+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:44.633038+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e841b19feb1f217243183fa31e77f745705d60a81a8a1571cde8b6d841212b6d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:30:48.147907+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "By finally enforcing our immigration laws, we will raise wages, help the unemployed, save billions and billions of dollars, and make our communities safer for everyone. We want all Americans to succeed, but that can't happen in an environment of lawless chaos. We must restore integrity and the rule of law at our borders.",
+      "confidence": "0.9",
+      "context_type": "policy_justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147895+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "And we're imposing a new rule which mandates that for every one new regulation, two old regulations must be eliminated.",
+      "confidence": "0.9",
+      "context_type": "policy_announcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147901+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "To fill his seat, we have chosen Judge Neil Gorsuch, a man of incredible skill and deep devotion to the law. He was confirmed unanimously by the Court of Appeals, and I am asking the Senate to swiftly approve his nomination.",
+      "confidence": "0.95",
+      "context_type": "policy_action_and_request",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147902+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "But our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan's life, from reaching those in need.",
+      "confidence": "0.8",
+      "context_type": "institutional_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147903+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "The first Republican President, Abraham Lincoln, warned that the \"abandonment of the protective policy by the American Government will produce want and ruin among our people.\" Lincoln was right, and it's time we heeded his advice and his words.",
+      "confidence": "0.9",
+      "context_type": "historical_justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147904+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": "1.0",
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:48.147905+00:00"
+    }
+  ]
+}

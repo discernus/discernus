@@ -1,0 +1,12 @@
+{
+  "success": false,
+  "issues": [
+    "The corpus manifest ('corpus.md') is specified as `corpus_version`: \"7.3\" and uses a JSON format. The experiment specification requires a v8.0.1 compliant corpus manifest, which must be a Markdown file with a human-readable overview and a YAML appendix. The provided v7.3 format is deprecated and incompatible.",
+    "The experiment is explicitly scoped to analyzing \"State of the Union rhetoric\" only. However, the corpus manifest includes a large number of documents with other 'speech_type' values, such as \"Inaugural\", \"Joint Session Address\", and \"Farewell Address\".",
+    "The 'president' metadata field, a critical variable for the \"Administration Comparison\" analysis, uses inconsistent naming conventions (e.g., \"Bush\", \"George W. Bush\", \"William J. Clinton\").",
+    "The corpus manifest contains several internally inconsistent or erroneous records, including SOTU addresses attributed to presidents in years they were not in office (e.g., 'Clinton_SOTU_2001.txt', 'Obama_SOTU_2017.txt') and a document attributed to the wrong president ('Bush_SOTU_2009.txt' attributed to Obama).",
+    "The experiment abstract claims to analyze \"37+ SOTU addresses,\" but the provided manifest contains only approximately 28 SOTU addresses within the 1993-2024 period."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T14:53:37.921289+00:00"
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:12:33.925084+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You made a good start by passing that law which applies to Congress all the laws you put on the private sector, and I was proud to sign it yesterday. But we have a lot more to do before people really trust the way things work around here.",
+      "confidence": 1.0,
+      "context_type": "legislative process affirmation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925056+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925068+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "From the day I took the oath of office, I pledged that our Nation would maintain the best equipped, best trained, and best prepared military on Earth. We have, and they are.",
+      "confidence": 0.95,
+      "context_type": "support for national institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925072+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.",
+      "confidence": 0.95,
+      "context_type": "criticism of government function",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925074+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times: to Lincoln and to his Congress to preserve the Union and to end slavery; to Theodore Roosevelt and Woodrow Wilson to restrain the abuses and excesses of the industrial revolution and to assert our leadership in the world...",
+      "confidence": 1.0,
+      "context_type": "historical framing of reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925076+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:12:33.925079+00:00"
+    }
+  ]
+}

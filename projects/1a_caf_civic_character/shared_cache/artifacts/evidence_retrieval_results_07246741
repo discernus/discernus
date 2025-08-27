@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-27T14:50:02.035811",
+    "statistical_results_hash": "ee38f76de2efbe6ff671b96c6ec9e01028a6783955f637fd0d1f186b823199dd",
+    "total_findings": 5,
+    "total_quotes": 10
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for correlation analysis"
+      },
+      "queries_used": [
+        "correlation analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But it's not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+          "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+          "dimension": "truth",
+          "confidence": 0.8,
+          "relevance_score": 0.1935410350561142,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+            "dimension": "truth",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We were all caught in an inescapable network of mutuality, tied in a common garment. We cannot suffer the illusion of separation when we think this criminal justice system that is so punishing some is not hurting this country as a whole.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "dignity",
+          "confidence": 1.0,
+          "relevance_score": 0.1313328593969345,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "dignity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for statistical patterns"
+      },
+      "queries_used": [
+        "statistical patterns"
+      ],
+      "quotes": [
+        {
+          "quote_text": "And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "justice",
+          "confidence": 0.9,
+          "relevance_score": 0.20916953682899475,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "justice",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We see in the United States of America Americans getting trapped in a system that - we know the data is clear - there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "truth",
+          "confidence": 1.0,
+          "relevance_score": 0.17374804615974426,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "truth",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for framework analysis"
+      },
+      "queries_used": [
+        "framework analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "pragmatism",
+          "confidence": 1.0,
+          "relevance_score": 0.21139079332351685,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "pragmatism",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.95,
+          "relevance_score": 0.19641748070716858,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for evidence examples"
+      },
+      "queries_used": [
+        "evidence examples"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "truth",
+          "confidence": 0.95,
+          "relevance_score": 0.33326488733291626,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "truth",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "However, the Senate determines what advice is and the Senate determines that which is consent. And no nomination to the federal court can move forward without the Senate's advice and consent. It's the Senate's job then to evaluate the nominations of the President.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.9,
+          "relevance_score": 0.2929052710533142,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for key findings"
+      },
+      "queries_used": [
+        "key findings"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "pragmatism",
+          "confidence": 1.0,
+          "relevance_score": 0.27274248003959656,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "pragmatism",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "tribalism",
+          "confidence": 0.8,
+          "relevance_score": 0.24859188497066498,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "tribalism",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focused on identifying the intensity and rhetorical prominence of the ten dimensions defined in the framework. The text exhibits strong co-occurrence of opposing dimensions, particularly on the Identity, Truth, and Justice axes, reflecting a complex rhetorical strategy that combines blame-focused grievance with inclusive, aspirational appeals."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fantasy": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 1.0,
+          "context_type": "central_argument_framing"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "concluding_appeal"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "They\u2019ll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "confidence": 1.0,
+          "context_type": "accusation_of_deception"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "They voted on a budget that cuts $880 billion from the committee that\u2019s in charge of Medicaid. And so now they\u2019re trying to play a game and say, \u201cWe didn\u2019t do that,\u201d because they did by proxy. So let\u2019s set the record straight.",
+          "confidence": 1.0,
+          "context_type": "factual_claim"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "blame_assignment"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "I don\u2019t believe in healthcare, labor and human dignity, because I\u2019m an extremist or a Marxist. I believe it because I was a waitress, because I\u2019ve scrubbed toilets with my mom to afford school, because I\u2019ve worked double shifts to keep the lights on...",
+          "confidence": 0.95,
+          "context_type": "personal_narrative_for_fairness"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "...they can steal from our healthcare, Social Security, and veterans\u2019 benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+          "confidence": 0.95,
+          "context_type": "threat_identification"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it\u2019s our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 1.0,
+          "context_type": "call_for_collective_action"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "And the clever thing that these guys sell is making working people like you and me believe that we\u2019re just one step outside from that club, that we\u2019re just a little bit out from being able to be a billionaire too.",
+          "confidence": 0.9,
+          "context_type": "critique_of_unrealistic_promise"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.95,
+          "context_type": "call_for_specific_political_action"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

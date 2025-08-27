@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_fcd211411591",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a State of the Union address, a formal genre that inherently operates within and reinforces the constitutional structure. The analysis reflects this, with high scores on dimensions of legitimacy, respect, and continuity, and zero scores on their pathological counterparts. The use of 'revolution' is metaphorical for policy change, not a call for systemic replacement.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1997.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Again, I ask you to pass a real Patients' Bill of Rights. I ask you to pass commonsense gun safety legislation. I ask you to pass campaign finance reform. I ask you to vote up or down on judicial nominations and other important appointees.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Direct appeal for legislative action\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"In 1993 we began to put our fiscal house in order with the Deficit Reduction Act, which you'll all remember won passages in both Houses by just a single vote.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Recounting a specific legislative process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Dimension not present in text\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I want to thank our Secretary of Defense, Bill Cohen, for symbolizing our bipartisan commitment to national security. Thank you, sir. Even more, I want to thank his wife, Janet, who, more than any other American citizen, has tirelessly traveled this world to show the support we all feel for our troops.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Expression of respect for cabinet officials and the military\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The scientists tell us the 1990's were the hottest decade of the entire millennium.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Deference to institutional scientific expertise\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Dimension not present in text\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"The lesson of our history and the lesson of the last 7 years is that great goals are reached step by step, always building on our progress, always gaining ground.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Explicit articulation of gradual reform\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"And we will become at last what our Founders pledged us to be so long ago: One Nation, under God, indivisible, with liberty and justice for all.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Directly linking current goals to the nation's founding principles\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Dimension not present in text\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "1811026532b8a11a5e27a3de4be63d16fce3c685b6956dffc444fa21fa089f76",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:08:25.335255+00:00",
+    "end_time": "2025-08-27T15:09:32.997573+00:00",
+    "duration_seconds": 67.662305
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

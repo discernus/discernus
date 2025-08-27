@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:16:47.165080+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As President, I have a duty to nominate qualified men and women to vacancies on the Federal bench, and the United States Senate has a duty as well, to give those nominees a fair hearing and a prompt up-or-down vote on the Senate floor.",
+      "confidence": 1.0,
+      "context_type": "call_for_procedural_adherence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165061+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So let us work together to reform the budget process, expose every earmark to the light of day and to a vote in Congress, and cut the number and cost of earmarks at least in half by the end of this session.",
+      "confidence": 0.9,
+      "context_type": "call_for_procedural_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165066+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Let us have a serious, civil, and conclusive debate, so that you can pass and I can sign comprehensive immigration reform into law.",
+      "confidence": 0.9,
+      "context_type": "call_for_legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165068+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165069+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Each of us is guided by our own convictions, and to these we must stay faithful. Yet we're all held to the same standards and called to serve the same good purposes: to extend this Nation's prosperity, to spend the people's money wisely, to solve problems, not leave them to future generations, to guard America against all evil, and to keep faith with those we have sent forth to defend us.",
+      "confidence": 0.9,
+      "context_type": "statement_of_shared_responsibility",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165070+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I congratulate the Democrat majority. Congress has changed, but not our responsibilities.",
+      "confidence": 1.0,
+      "context_type": "acknowledgement_of_institutional_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165071+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Both parties and both branches should work in close consultation. It's why I've proposed to establish a special advisory council on the war on terror, made up of leaders in Congress from both political parties.",
+      "confidence": 0.9,
+      "context_type": "proposal_for_inter-branch_collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165072+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165073+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The No Child Left Behind Act has worked for America's children, and I ask Congress to reauthorize this good law.",
+      "confidence": 1.0,
+      "context_type": "call_for_reauthorization_of_existing_law",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165074+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Social Security and Medicare and Medicaid are commitments of conscience, and so it is our duty to keep them permanently sound. Yet we're failing in that duty. And this failure will one day leave our children with three bad options: huge tax increases, huge deficits, or huge and immediate cuts in benefits. ... So let us work together and do it now.",
+      "confidence": 0.9,
+      "context_type": "call_for_reform_to_preserve_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165076+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Changing the Tax Code is a vital and necessary step to making health care affordable for more Americans.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_reform_within_framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165076+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:16:47.165077+00:00"
+    }
+  ]
+}

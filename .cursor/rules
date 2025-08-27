@@ -4,7 +4,7 @@
 
 ### When Critical Regressions Are Identified
 - **IMMEDIATE STOP**: Do not attempt live debugging or expensive API-based experiments
-- **Document the Issue**: Log in `pm/todo/discernus_v10_backlog.md` with ARCH-XXX identifier
+- **Document the Issue**: Log in `pm/inbox.md` with ARCH-XXX identifier (use "inbox this" command)
 - **Create Remediation Plan**: Document detailed 6-phase TDD approach before any implementation
 
 ### 6-Phase TDD Protocol (Proven Success Pattern)
@@ -31,7 +31,7 @@
 
 ### Documentation Requirements
 - Update `docs/developer/` with detailed remediation plans
-- Update `pm/todo/discernus_v10_backlog.md` with progress and completion
+- Update `pm/sprints.md` with progress and completion (after grooming from inbox)
 - Preserve all test files for future regression detection
 - Document lessons learned in project memory
 
@@ -155,8 +155,67 @@ def load_framework(path):
 ## 🛑 IF YOU START WRITING PARSING/VALIDATION LOGIC, STOP!
 Use LLM calls instead. The software orchestrates, the LLM provides intelligence.
 
-## 🚀 SOAR 2.0 SPECIFIC:
-- Use Redis pub-sub for agent coordination
-- Framework specifications pass to LLM agents as-is
-- Store ensemble results without processing
-- Let LLMs handle framework application and validation 
+
+
+# 📋 PROJECT MANAGEMENT RULES - NEW BACKLOG STRUCTURE (January 2025)
+
+## 🎯 BACKLOG MANAGEMENT WORKFLOW
+
+### Quick Capture Commands
+- **"inbox this"** → **TRULY APPEND** new backlog item to `pm/inbox.md` with minimal formatting
+- **"inbox this: description"** → **TRULY APPEND** item without reading existing content or rewriting file
+- **CRITICAL**: Use file append operations, NOT file read-then-write operations
+- **Purpose**: Fast capture during implementation work, no context switching required
+
+### Backlog Organization Commands  
+- **"groom our sprints"** → Move all items from `pm/inbox.md` to `pm/sprints.md` with proper organization
+- **"groom our sprints"** → Organize items into appropriate sprints, map dependencies, assign priorities
+- **Purpose**: Systematic organization when ready to plan and prioritize
+
+### Completion Tracking Commands
+- **"log it to done"** → Move completed items from `pm/sprints.md` to `pm/done.md`
+- **"log it to done"** → Archive completed work with completion dates and final status
+- **Purpose**: Maintain project history and track completion progress
+
+## 📁 FILE STRUCTURE & PURPOSE
+
+### `pm/inbox.md`
+- **Content**: Raw, unformatted backlog captures
+- **Format**: Simple bullet points with minimal details
+- **Usage**: Quick capture only, no organization or sprint assignment
+
+### `pm/sprints.md` 
+- **Content**: Organized backlog with sprint planning and detailed specifications
+- **Format**: Full backlog items with sprint assignments, dependencies, acceptance criteria
+- **Usage**: Main backlog for planning and tracking active work
+
+### `pm/done.md`
+- **Content**: Archive of completed backlog items
+- **Format**: Completed items with completion dates and final status
+- **Usage**: Historical tracking and project completion records
+
+## 🔄 WORKFLOW RULES
+
+### Context Efficiency Rules
+- **Quick Capture**: **NEVER read entire `pm/inbox.md`** for "inbox this" commands
+- **Quick Capture**: Use file append operations to add new items without reading existing content
+- **Grooming**: Only parse `pm/inbox.md` and `pm/sprints.md` for "groom our sprints" commands
+- **Completion**: Only parse `pm/sprints.md` for "log it to done" commands
+- **No Full Backlog Parsing**: Avoid parsing entire `pm/sprints.md` for simple operations
+
+### Formatting Rules
+- **Inbox Items**: Simple, unformatted captures (e.g., "- [ ] Fix RAG index issue")
+- **Sprint Items**: Full format with ID, description, dependencies, acceptance criteria
+- **Done Items**: Completed format with completion date and final status
+
+### Migration Rules
+- **Inbox → Sprints**: Move all items during grooming, clear inbox after successful migration
+- **Sprints → Done**: Move completed items, maintain completion history
+- **Preserve Structure**: Maintain proper formatting and organization during migrations
+
+### Technical Implementation Rules
+- **"inbox this" Implementation**: Use `edit_file` with `append=True` or equivalent append operation
+- **NEVER use `read_file` + `edit_file`** for inbox operations - this defeats context efficiency
+- **Append Format**: Add new items under "## Inbox Items" section with simple bullet format
+- **Example Format**: "- [ ] Brief description of the item"
+- **File Size Limit**: If inbox.md exceeds 50 lines, suggest grooming instead of adding more items 

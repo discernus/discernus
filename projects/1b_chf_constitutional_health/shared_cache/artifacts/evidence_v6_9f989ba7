@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:27:14.980575+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "If this Congress is serious about winning this war and wants to send a message to our troops and the world, authorize the use of military force against ISIL. Take a vote.",
+      "confidence": 0.95,
+      "context_type": "call_to_action_within_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980554+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We have to change the system to reflect our better selves. I think we\u2019ve got to end the practice of drawing our congressional districts so that politicians can pick their voters and not the other way around. Let a bipartisan group do it.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_procedural_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980557+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980558+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Our Founders distributed power between States and branches of government and expected us to argue, just as they did, fiercely, over the size and shape of government, over commerce and foreign relations, over the meaning of liberty and the imperatives of security.",
+      "confidence": 0.95,
+      "context_type": "affirmation_of_constitutional_design",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980559+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Sixty years ago, when the Russians beat us into space, we didn\u2019t deny Sputnik was up there. We didn\u2019t argue about the science or shrink our research and development budget. We built a space program almost overnight.",
+      "confidence": 0.9,
+      "context_type": "appeal_to_respect_for_science",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980560+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "It\u2019s one of the few regrets of my Presidency: that the rancor and suspicion between the parties has gotten worse instead of better.",
+      "confidence": 0.7,
+      "context_type": "critique_of_political_actors",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980561+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Democracy breaks down when the average person feels their voice doesn\u2019t matter, that the system is rigged in favor of the rich or the powerful or some special interest.",
+      "confidence": 0.85,
+      "context_type": "critique_of_systemic_bias",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980570+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "But for my final address to this Chamber, I don\u2019t want to just talk about next year. I want to focus on the next 5 years, the next 10 years, and beyond. I want to focus on our future.",
+      "confidence": 0.9,
+      "context_type": "thematic_framing_of_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980571+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "That\u2019s why Social Security and Medicare are more important than ever. We shouldn\u2019t weaken them, we should strengthen them.",
+      "confidence": 1.0,
+      "context_type": "advocacy_for_strengthening_existing_systems",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980572+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:14.980573+00:00"
+    }
+  ]
+}

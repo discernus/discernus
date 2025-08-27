@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:18:24.218082+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 1.0,
+      "context_type": "opening_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218039+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218049+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "And now we will extend this vision by reforming great institutions to serve the needs of our time.",
+      "confidence": 0.85,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218060+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218063+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matchless value, because they bear the image of the Maker of heaven and Earth. Across the generations, we have proclaimed the imperative of self-government, because no one is fit to be a master and no one deserves to be a slave. Advancing these ideals is the mission that created our Nation. It is the honorable achievement of our fathers. Now, it is the urgent requirement of our Nation's security and the calling of our time.",
+      "confidence": 1.0,
+      "context_type": "core_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218065+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:18:24.218067+00:00"
+    }
+  ]
+}

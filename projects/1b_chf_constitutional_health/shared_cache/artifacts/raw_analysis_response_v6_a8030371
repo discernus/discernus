@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document, labeled 'Bush_SOTU_2004.txt', contains the text of the 2007 State of the Union address, delivered to a new Democratic-majority Congress. The analysis is based on the provided text content. The speech's tone is notably conciliatory and focused on bipartisan cooperation. It heavily emphasizes working within existing processes and institutions to achieve domestic policy reforms (e.g., budget, healthcare, immigration) and calls for perseverance in the ongoing war on terror, framed as a necessary defense of the existing order against those who would destroy it."
+  },
+  "document_analyses": [
+    {
+      "document_id": "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839",
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "As President, I have a duty to nominate qualified men and women to vacancies on the Federal bench, and the United States Senate has a duty as well, to give those nominees a fair hearing and a prompt up-or-down vote on the Senate floor.",
+          "confidence": 0.95,
+          "context_type": "explicit call for established process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "no evidence found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Some in this Chamber are new to the House and the Senate, and I congratulate the Democrat majority. Congress has changed, but not our responsibilities. Each of us is guided by our own convictions, and to these we must stay faithful. Yet we're all held to the same standards and called to serve the same good purposes: to extend this Nation's prosperity, to spend the people's money wisely, to solve problems, not leave them to future generations, to guard America against all evil, and to keep faith with those we have sent forth to defend us.",
+          "confidence": 0.9,
+          "context_type": "acknowledgement of institutional role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "no evidence found"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "So let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.",
+          "confidence": 0.95,
+          "context_type": "advocacy for reform within existing system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "no evidence found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

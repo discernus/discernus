@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:13:53.933278+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I challenge Congress to pass the line item veto you promised the American people.",
+      "confidence": 1.0,
+      "context_type": "legislative_call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933250+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933260+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I'd like to give you one example. His name is Richard Dean. He's a 49-year-old Vietnam veteran who's worked for the Social Security Administration for 22 years now. ... I want to recognize Richard and applaud both his public service and his extraordinary personal heroism.",
+      "confidence": 1.0,
+      "context_type": "praise_for_federal_employee",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933264+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Lobbyists for polluters have been allowed to write their own loopholes into bills to weaken laws that protect the health and safety of our children.",
+      "confidence": 0.9,
+      "context_type": "criticism_of_lobbyist_influence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933268+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 1.0,
+      "context_type": "foundational_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933271+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:53.933273+00:00"
+    }
+  ]
+}

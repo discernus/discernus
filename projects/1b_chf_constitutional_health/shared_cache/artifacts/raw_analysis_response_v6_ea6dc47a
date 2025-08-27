@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of a State of the Union address. The document's filename indicates 2009, but the content (references to recent events and future timelines) confirms the speech was delivered in early 2004. The analysis reflects the content. The speech exhibits strong support for existing US constitutional processes and institutions, while simultaneously asserting executive prerogative in national security and criticizing judicial activism."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_constitutional_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "America will never seek a permission slip to defend the security of our country.",
+          "confidence": 0.95,
+          "context_type": "rejection_of_external_constraints"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace.",
+          "confidence": 0.95,
+          "context_type": "acknowledgement_of_congressional_role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+          "confidence": 0.9,
+          "context_type": "delegitimization_of_judiciary"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America is a nation with a mission, and that mission comes from our most basic beliefs. We have no desire to dominate, no ambitions of empire. Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman.",
+          "confidence": 0.9,
+          "context_type": "affirmation_of_systemic_values"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

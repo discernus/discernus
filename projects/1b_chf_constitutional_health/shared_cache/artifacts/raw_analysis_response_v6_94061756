@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis reflects a speech operating squarely within traditional American constitutional norms. The dominant themes are procedural legitimacy and systemic continuity, advocating for bipartisan action within existing structures. Minor points of procedural rejection (via executive order) and institutional subversion (critiquing a Supreme Court decision's effect on elections) are present but are not the central rhetorical focus."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd",
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our Constitution declares that from time to time, the President shall give to the Congress information about the state of our Union. For 220 years, our leaders have fulfilled this duty.",
+          "confidence": 1.0,
+          "context_type": "opening_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Now, yesterday the Senate blocked a bill that would have created this commission, so I\u2019ll issue an Executive order that will allow us to go forward, because I refuse to pass this problem on to another generation of Americans.",
+          "confidence": 0.95,
+          "context_type": "policy_announcement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "With all due deference to separation of powers, last week, the Supreme Court reversed a century of law that I believe will open the floodgates for special interests, including foreign corporations, to spend without limit in our elections.",
+          "confidence": 1.0,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "I don\u2019t think American elections should be bankrolled by America\u2019s most powerful interests, or worse, by foreign entities. They should be decided by the American people. And I\u2019d urge Democrats and Republicans to pass a bill that helps correct some of these problems.",
+          "confidence": 0.85,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Rather than fight the same tired battles that have dominated Washington for decades, it\u2019s time to try something new. Let\u2019s invest in our people without leaving them a mountain of debt. Let\u2019s meet our responsibility to the citizens who sent us here.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "not_applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

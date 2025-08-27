@@ -1,0 +1,123 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "total_evidence_pieces": 11,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:25:55.699845+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "But when that debate prevents us from carrying out even the most basic functions of our democracy\u2014when our differences shut down Government or threaten the full faith and credit of the United States\u2014then we are not doing right by the American people.",
+      "confidence": 0.95,
+      "context_type": "Appeal for legislative cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699810+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "let\u2019s get immigration reform done this year. [Applause ] Let\u2019s get it done. It\u2019s time.",
+      "confidence": 0.9,
+      "context_type": "Call to legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699821+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But America does not stand still, and neither will I. So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that\u2019s what I\u2019m going to do.",
+      "confidence": 1.0,
+      "context_type": "Justification for executive action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699825+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "In the coming weeks, I will issue an Executive order requiring Federal contractors to pay their federally funded employees a fair wage of at least 10 dollars and 10 cents an hour.",
+      "confidence": 0.95,
+      "context_type": "Example of unilateral executive action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699827+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Because we counter terrorism not just through intelligence and military action, but by remaining true to our constitutional ideals and setting an example for the rest of the world.",
+      "confidence": 0.9,
+      "context_type": "Appeal to constitutional values",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699829+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year\u2019s severe cuts to priorities like education.",
+      "confidence": 0.9,
+      "context_type": "Recognition of bipartisan legislative achievement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699831+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Finally, if we\u2019re serious about economic growth, it is time to heed the call of business leaders, labor leaders, faith leaders, law enforcement and fix our broken immigration system.",
+      "confidence": 0.9,
+      "context_type": "Critique of policy inaction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699833+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "Absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699835+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "But for more than 200 years, we have put those things aside and placed our collective shoulder to the wheel of progress: to create and build and expand the possibilities of individual achievement, to free other nations from tyranny and fear, to promote justice and fairness and equality under the law so that the words set to paper by our Founders are made real for every citizen.",
+      "confidence": 0.95,
+      "context_type": "Appeal to historical and foundational principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699837+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "what I offer tonight is a set of concrete, practical proposals to speed up growth, strengthen the middle class, and build new ladders of opportunity into the middle class.",
+      "confidence": 0.9,
+      "context_type": "Advocacy for systemic reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699839+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:55.699841+00:00"
+    }
+  ]
+}

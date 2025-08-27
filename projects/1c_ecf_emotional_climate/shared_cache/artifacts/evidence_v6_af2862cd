@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T16:31:26.258571+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+      "confidence": 0.95,
+      "context_type": "direct statement of risk/vulnerability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258559+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 0.95,
+      "context_type": "catastrophic framing; emphasis on negative consequences",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258561+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+      "confidence": 0.8,
+      "context_type": "conditional hope for restoration, not new progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258563+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.95,
+      "context_type": "antagonistic framing of opposing political figures/judiciary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258563+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+      "confidence": 0.95,
+      "context_type": "framing of 'illegal alien' as enemy with horrific actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258564+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "amity",
+      "quote_text": "And I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological president who, I'd say to the other side of the aisle, who's not doing his job.",
+      "confidence": 0.8,
+      "context_type": "acknowledgement of shared grief, but immediately pivots to blame and conflict",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258566+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders.",
+      "confidence": 0.9,
+      "context_type": "resentment over perceived unfairness/privilege given to criminal aliens",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258567+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "He was out on $5,000 bail, which was less than it cost him to bury his daughter. And that individual absconded back out of the United States, now not to be reached again by the arm of the law, which is not long enough because they put him out on bail.",
+      "confidence": 0.9,
+      "context_type": "resentment over a 'rigged system' allowing an offender to escape justice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258568+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "compassion",
+      "quote_text": "And her mother Michelle told the story yesterday of her, of her daughter whom she loves so deeply. And all through the rest of her life and her family's life, they will carry this hole, this ache in their heart that didn't need to be.",
+      "confidence": 0.85,
+      "context_type": "expression of empathy for victim's family, used to highlight negative consequences of policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258568+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "compassion",
+      "quote_text": "And I'd ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest.",
+      "confidence": 0.8,
+      "context_type": "call for empathy for victims' families, framed within a larger political argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T16:31:26.258569+00:00"
+    }
+  ]
+}

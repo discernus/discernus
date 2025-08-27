@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:21:25.877162+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The United States will ask the U.N. Security Council to convene on February the 5th to consider the facts of Iraq's ongoing defiance of the world. Secretary of State Powell will present information and intelligence about Iraq's illegal weapons programs, its attempt to hide those weapons from inspectors, and its links to terrorist groups.",
+      "confidence": 1.0,
+      "context_type": "Foreign Policy Justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877133+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Yet the course of this Nation does not depend on the decisions of others. Whatever action is required, whenever action is necessary, I will defend the freedom and security of the American people.",
+      "confidence": 1.0,
+      "context_type": "Foreign Policy Justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877140+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We're strongly supporting the International Atomic Energy Agency in its mission to track and control nuclear materials around the world.",
+      "confidence": 0.95,
+      "context_type": "Foreign Policy Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877142+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877153+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Health care reform must begin with Medicare. Medicare is the binding commitment of a caring society. We must renew that commitment by giving seniors access to preventive medicine and new drugs that are transforming health care in America.",
+      "confidence": 1.0,
+      "context_type": "Domestic Policy Proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877155+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:21:25.877157+00:00"
+    }
+  ]
+}

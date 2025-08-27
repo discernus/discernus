@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:22:00.215759+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On an issue of such great consequence, the people's voice must be heard. If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+      "confidence": 1.0,
+      "context_type": "appealing_to_constitutional_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215734+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "America will never seek a permission slip to defend the security of our country.",
+      "confidence": 1.0,
+      "context_type": "justifying_extra-procedural_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215744+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace.",
+      "confidence": 1.0,
+      "context_type": "acknowledging_legislative_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215747+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+      "confidence": 1.0,
+      "context_type": "delegitimizing_judiciary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215750+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We've not come all this way, through tragedy and trial and war, only to falter and leave our work unfinished.",
+      "confidence": 1.0,
+      "context_type": "advocating_systemic_persistence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215752+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:22:00.215755+00:00"
+    }
+  ]
+}

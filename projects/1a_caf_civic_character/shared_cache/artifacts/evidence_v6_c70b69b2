@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T14:44:53.926000+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "tribalism",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 1.0,
+      "context_type": "central_argument_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925965+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "dignity",
+      "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+      "confidence": 1.0,
+      "context_type": "concluding_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925976+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "manipulation",
+      "quote_text": "They\u2019ll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+      "confidence": 1.0,
+      "context_type": "accusation_of_deception",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925979+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "truth",
+      "quote_text": "They voted on a budget that cuts $880 billion from the committee that\u2019s in charge of Medicaid. And so now they\u2019re trying to play a game and say, \u201cWe didn\u2019t do that,\u201d because they did by proxy. So let\u2019s set the record straight.",
+      "confidence": 1.0,
+      "context_type": "factual_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925982+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "resentment",
+      "quote_text": "They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+      "confidence": 1.0,
+      "context_type": "blame_assignment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925984+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "justice",
+      "quote_text": "I don\u2019t believe in healthcare, labor and human dignity, because I\u2019m an extremist or a Marxist. I believe it because I was a waitress, because I\u2019ve scrubbed toilets with my mom to afford school, because I\u2019ve worked double shifts to keep the lights on...",
+      "confidence": 0.95,
+      "context_type": "personal_narrative_for_fairness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925986+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fear",
+      "quote_text": "...they can steal from our healthcare, Social Security, and veterans\u2019 benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+      "confidence": 0.95,
+      "context_type": "threat_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925988+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "hope",
+      "quote_text": "Because in this house, we stand together, we know that, that it\u2019s our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+      "confidence": 1.0,
+      "context_type": "call_for_collective_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925990+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fantasy",
+      "quote_text": "And the clever thing that these guys sell is making working people like you and me believe that we\u2019re just one step outside from that club, that we\u2019re just a little bit out from being able to be a billionaire too.",
+      "confidence": 0.9,
+      "context_type": "critique_of_unrealistic_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925992+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+      "confidence": 0.95,
+      "context_type": "call_for_specific_political_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:44:53.925995+00:00"
+    }
+  ]
+}

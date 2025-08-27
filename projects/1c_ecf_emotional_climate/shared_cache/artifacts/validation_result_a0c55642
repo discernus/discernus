@@ -1,0 +1,12 @@
+{
+  "success": false,
+  "issues": [
+    "The 2\u00d73 factorial corpus design is critically unbalanced due to a missing cell for the (Conservative, Civil Rights) condition. The experiment's primary goal of conducting a two-way ANOVA for interaction effects cannot be achieved with this corpus, as this analysis requires data in every cell of the factorial design.",
+    "The total corpus size (N=8) is insufficient to provide adequate statistical power for the sophisticated analyses proposed (two-way ANOVA, cross-axis correlation, clustering). Discernus platform standards indicate a sample of this size is suitable for case-study level analysis, not robust statistical testing.",
+    "The framework's machine-readable `framework_version` in the YAML appendix of `ecf_v10.md` is '1.0.0', which is inconsistent with the framework's human-readable title ('Emotional Climate Framework v10.0') and its specification version ('10.0').",
+    "The corpus manifest in `corpus.md` is missing the required `document_id` field for each document entry. The Corpus Specification v8.0.1 states this field is mandatory.",
+    "The experiment specification text defines the 'Populist Era' as '(2022-2025)', but the corpus contains a document from 2017 (Steve King speech) assigned to this era. The corpus manifest overview correctly identifies the range as (2017-2025)."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T16:14:50.365324+00:00"
+}

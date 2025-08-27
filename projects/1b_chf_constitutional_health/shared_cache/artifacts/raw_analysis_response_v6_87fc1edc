@@ -1,0 +1,98 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a presidential inaugural address, a genre that typically reinforces constitutional norms. The analysis reflects the speech's strong emphasis on continuity, reform within the existing system, and respect for democratic processes and institutions, making the scoring relatively straightforward."
+  },
+  "document_analyses": [
+    {
+      "document_id": "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5",
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our Founders understood that well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.",
+          "confidence": 0.95,
+          "context_type": "explicit reference to democratic process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The American people returned to office a President of one party and a Congress of another. Surely they did not do this to advance the politics of petty bickering and extreme partisanship they plainly deplore. No, they call on us instead to be repairers of the breach and to move on with America's mission.",
+          "confidence": 0.95,
+          "context_type": "explicit reference to electoral outcome and institutional roles"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "To that effort I pledge all my strength and every power of my office. I ask the Members of Congress here to join in that pledge.",
+          "confidence": 0.9,
+          "context_type": "explicit reference to institutional roles and duties"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence found"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+          "confidence": 0.95,
+          "context_type": "explicit reference to maintaining and improving existing framework"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "a nation where our grandparents have secure retirement and health care and their grandchildren know we have made the reforms necessary to sustain those benefits for their time",
+          "confidence": 0.9,
+          "context_type": "advocacy for gradual reform to maintain system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

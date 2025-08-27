@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_d800b52535b9",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis is based on a State of the Union address, a genre of political discourse that inherently reinforces constitutional processes and institutional roles. The scoring reflects this context. The primary focus of the speech is on systemic continuity through the reform of major institutions like Social Security, the Tax Code, and immigration laws. Pathological dimensions are present but have very low intensity and salience, with the exception of a specific jab at 'activist judges' which elevates the 'institutional_subversion' score slightly.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2002.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 1.0\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I will work with Members of Congress to find the most effective combination of reforms. I will listen to anyone who has a good idea to offer. We must, however, be guided by some basic principles.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Legislative Process Commitment\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of Evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"As President, I have a constitutional responsibility to nominate men and women who understand the role of courts in our democracy and are well-qualified to serve on the bench, and I have done so. The Constitution also gives the Senate a responsibility: Every judicial nominee deserves an up-or-down vote.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Statement on Constitutional Roles\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Because marriage is a sacred institution and the foundation of society, it should not be redefined by activist judges.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Judicial Critique\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time. Year after year, Americans are burdened by an archaic, incoherent Federal Tax Code. I've appointed a bipartisan panel to examine the Tax Code from top to bottom.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Advocacy for Institutional Reform\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"For the good of families, children, and society, I support a constitutional amendment to protect the institution of marriage.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Constitutional Amendment Proposal\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of Evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "7d271dd5f50b12154eb10bd0c811529056e420ef7100a6cb7870397a2466bfaf",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:14:30.399947+00:00",
+    "end_time": "2025-08-27T15:15:13.387890+00:00",
+    "duration_seconds": 42.987928
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

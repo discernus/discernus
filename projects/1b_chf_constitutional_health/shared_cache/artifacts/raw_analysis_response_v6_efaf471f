@@ -1,0 +1,106 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a classic State of the Union address that strongly aligns with the 'health' dimensions of the framework. It consistently advocates for working within established governmental procedures and institutions to achieve gradual, forward-looking reforms. The rhetoric is centered on bipartisan partnership and leveraging the existing system to prepare for the future. The 'pathology' dimensions (Rejection, Subversion, Replacement) are almost entirely absent from the text, making the scoring straightforward."
+  },
+  "document_analyses": [
+    {
+      "document_id": "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7",
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Let this Congress be the Congress that finally balances the budget.",
+          "confidence": 1.0,
+          "context_type": "call_to_legislative_action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution.",
+          "confidence": 1.0,
+          "context_type": "support_for_legislative_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.",
+          "confidence": 1.0,
+          "context_type": "affirmation_of_shared_governance"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Now, Senators McCain and Feingold, Representatives Shays and Meehan have reached across party lines here to craft tough and fair reform.",
+          "confidence": 0.9,
+          "context_type": "praise_for_bipartisan_cooperation"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "action to build a more perfect Union here at home.",
+          "confidence": 1.0,
+          "context_type": "invocation_of_constitutional_principles"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "we must agree to a bipartisan process to preserve Social Security and reform Medicare for the long run, so that these fundamental programs will be as strong for our children as they are for our parents.",
+          "confidence": 0.95,
+          "context_type": "advocacy_for_reform_and_preservation"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

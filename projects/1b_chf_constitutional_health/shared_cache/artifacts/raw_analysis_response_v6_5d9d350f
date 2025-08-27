@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the clear rhetorical structure of the speech, which is divided into domestic policy proposals (primarily reflecting Systemic Continuity) and a foreign policy section heavily justifying potential military action in Iraq. The latter section contains a significant tension between stated adherence to international procedures and a clear reservation of the right to act unilaterally, scoring high on both Procedural Legitimacy and Procedural Rejection, with the latter being more salient."
+  },
+  "document_analyses": [
+    {
+      "document_id": "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The United States will ask the U.N. Security Council to convene on February the 5th to consider the facts of Iraq's ongoing defiance of the world. Secretary of State Powell will present information and intelligence about Iraq's illegal weapons programs, its attempt to hide those weapons from inspectors, and its links to terrorist groups.",
+          "confidence": 1.0,
+          "context_type": "Foreign Policy Justification"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Yet the course of this Nation does not depend on the decisions of others. Whatever action is required, whenever action is necessary, I will defend the freedom and security of the American people.",
+          "confidence": 1.0,
+          "context_type": "Foreign Policy Justification"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We're strongly supporting the International Atomic Energy Agency in its mission to track and control nuclear materials around the world.",
+          "confidence": 0.95,
+          "context_type": "Foreign Policy Statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of Evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Health care reform must begin with Medicare. Medicare is the binding commitment of a caring society. We must renew that commitment by giving seniors access to preventive medicine and new drugs that are transforming health care in America.",
+          "confidence": 1.0,
+          "context_type": "Domestic Policy Proposal"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of Evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

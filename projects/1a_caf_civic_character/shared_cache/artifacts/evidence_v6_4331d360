@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T14:39:02.966310+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "tribalism",
+      "quote_text": "Where is our party? Where is the political party that will make it unnecessary to march on Washington?",
+      "confidence": 0.9,
+      "context_type": "rhetorical question identifying a political in-group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966291+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "dignity",
+      "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+      "confidence": 1.0,
+      "context_type": "explicit statement of universal principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966296+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "manipulation",
+      "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+      "confidence": 0.8,
+      "context_type": "broad accusation of bad faith",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966298+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "truth",
+      "quote_text": "As it stands now, the voting section of this bill will not help the thousands of black people who want to vote. It will not help the citizens of Mississippi, of Alabama, and Georgia, who are qualified to vote but lack a sixth-grade education.",
+      "confidence": 1.0,
+      "context_type": "specific critique of legislation based on factual claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966300+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+      "confidence": 1.0,
+      "context_type": "expression of grievance and past wrongs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966301+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "justice",
+      "quote_text": "We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+      "confidence": 1.0,
+      "context_type": "demand for systemic fairness and equality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966302+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fear",
+      "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+      "confidence": 0.95,
+      "context_type": "description of threat and anxiety",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966304+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "hope",
+      "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.95,
+      "context_type": "positive vision for a transformed future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966305+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fantasy",
+      "quote_text": "We do not want to go to jail, but we will go to jail if this is the price we must pay for love, brotherhood, and true peace.",
+      "confidence": 1.0,
+      "context_type": "acknowledgment of costs, refuting fantastical thinking",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966306+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "pragmatism",
+      "quote_text": "It is true that we support the administration's civil rights bill. We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+      "confidence": 1.0,
+      "context_type": "specific, realistic critique of legislative policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:39:02.966308+00:00"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_05508f48b964",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a formal State of the Union address, which aligns well with the framework's intended corpus. The themes of bipartisan cooperation, institutional process, and incremental reform are central to the speech, providing clear evidence for several dimensions. The absence of rhetoric for rejection, subversion, or replacement is also clear and unambiguous.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1995.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I will submit to Congress for 1999 the first balanced budget in 30 years. And if we hold fast to fiscal discipline, we may balance the budget this year\u20144 years ahead of schedule.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Commitment to established legislative and budgetary processes\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of rhetoric; the speech consistently advocates for working within established procedures, not bypassing them.\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Here is what the Chief Justice of the United States wrote: 'Judicial vacancies cannot remain at such high levels indefinitely without eroding the quality of justice.' I simply ask the United States Senate to heed this plea and vote on the highly qualified judicial nominees before you, up or down.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Explicit deference to the authority and opinion of the judiciary\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Like every taxpayer, I'm outraged by the reports of abuses by the IRS. We need some changes there: new citizen advocacy panels, a stronger taxpayer advocate, phone lines open 24 hours a day, relief for innocent taxpayers. Last year, by an overwhelming bipartisan margin, the House of Representatives passed sweeping IRS reforms. This bill must not now languish in the Senate.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Criticism of an agency framed as a call for legislatively-driven reform, rather than a delegitimizing attack on the institution itself\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Tonight I propose that we reserve 100 percent of the surplus\u2014that's every penny of any surplus\u2014until we have taken all the necessary measures to strengthen the Social Security system for the 21st century.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Advocacy for preserving and improving a foundational systemic program through gradual reform\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of rhetoric; the entire speech is predicated on improving the existing constitutional and governmental system, not replacing it.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "caa8fa950b744d8cdad90b57eef315d504d357d91b4d344be7e86bc41677bd3b",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:06:22.994790+00:00",
+    "end_time": "2025-08-27T15:07:22.711056+00:00",
+    "duration_seconds": 59.716194
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150038Z_5a1f33f2"
+  }
+}

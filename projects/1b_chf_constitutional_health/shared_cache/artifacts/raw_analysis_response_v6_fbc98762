@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a 1999 State of the Union address, a genre of political speech that inherently operates within and reinforces the constitutional framework. The analysis focuses on differentiating calls for policy reform (e.g., healthcare, welfare) from attacks on or proposals to replace the constitutional system itself, as per framework guidelines. The language of 'revolutionize' is interpreted as policy hyperbole rather than a call for systemic replacement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b",
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.",
+          "confidence": 0.95,
+          "context_type": "explicit reference to constitutional process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+          "confidence": 0.95,
+          "context_type": "direct praise of a governmental institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Every time the special interests were powerful enough to defeat them. But not this time.",
+          "confidence": 0.85,
+          "context_type": "criticism of external influence on institutions"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Our approach protects the quality of care and people's choice. It builds on what works today in the private sector, to expand employer-based coverage, to guarantee private insurance for every American.",
+          "confidence": 0.95,
+          "context_type": "advocacy for gradual reform within existing framework"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "And just as we must transform our unemployment system, so must we also revolutionize our welfare system.",
+          "confidence": 0.9,
+          "context_type": "hyperbolic language advocating for major policy change, not constitutional replacement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

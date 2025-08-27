@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_51309463aa93",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a formal inaugural address, which aligns well with the framework's intended corpus. The rhetoric is strongly focused on foundational constitutional principles and the nation's historical mission, leading to high scores in legitimacy and continuity dimensions. The 'pathology' dimensions (rejection, subversion, replacement) are almost entirely absent, as expected for this type of text. Salience is highest for the systemic continuity theme, which forms the core justification for the speech's foreign policy argument.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2005.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"opening_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"And now we will extend this vision by reforming great institutions to serve the needs of our time.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"policy_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matchless value, because they bear the image of the Maker of heaven and Earth. Across the generations, we have proclaimed the imperative of self-government, because no one is fit to be a master and no one deserves to be a slave. Advancing these ideals is the mission that created our Nation. It is the honorable achievement of our fathers. Now, it is the urgent requirement of our Nation's security and the calling of our time.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "2cd2b1c4edbb6245bcc4fe39b039b9b75780d2fe1f3386bf1326417721a5c004",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:17:51.949196+00:00",
+    "end_time": "2025-08-27T15:18:24.219924+00:00",
+    "duration_seconds": 32.270713
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150038Z_5a1f33f2"
+  }
+}

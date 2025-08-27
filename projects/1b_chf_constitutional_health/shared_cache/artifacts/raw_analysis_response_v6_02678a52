@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the explicit themes of renewal, responsibility, and reform within the existing constitutional structure. The speaker's inaugural address is inherently a performance of procedural legitimacy and systemic continuity, which is reflected in the scores. Pathological dimensions are scored low, as the critiques presented are framed as calls for reform rather than subversion or rejection."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.5,
+          "confidence": 1.0
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself.",
+          "confidence": 0.95,
+          "context_type": "Affirmation of electoral process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No evidence found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 1.0,
+          "context_type": "Ceremonial acknowledgement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "This beautiful Capitol, like every capital since the dawn of civilization, is often a place of intrigue and calculation. Powerful people maneuver for position and worry endlessly about who is in and who is out, who is up and who is down, forgetting those people whose toil and sweat sends us here and pays our way.",
+          "confidence": 0.9,
+          "context_type": "Critique of political culture"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 1.0,
+          "context_type": "Core thesis statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "There is nothing wrong with America that cannot be cured by what is right with America.",
+          "confidence": 1.0,
+          "context_type": "Rejection of systemic failure"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

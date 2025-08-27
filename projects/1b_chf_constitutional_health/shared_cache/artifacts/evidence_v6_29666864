@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:11:44.173462+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.",
+      "confidence": 0.95,
+      "context_type": "explicit reference to constitutional process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173444+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173450+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+      "confidence": 0.95,
+      "context_type": "direct praise of a governmental institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173452+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Every time the special interests were powerful enough to defeat them. But not this time.",
+      "confidence": 0.85,
+      "context_type": "criticism of external influence on institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173454+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our approach protects the quality of care and people's choice. It builds on what works today in the private sector, to expand employer-based coverage, to guarantee private insurance for every American.",
+      "confidence": 0.95,
+      "context_type": "advocacy for gradual reform within existing framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173456+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "And just as we must transform our unemployment system, so must we also revolutionize our welfare system.",
+      "confidence": 0.9,
+      "context_type": "hyperbolic language advocating for major policy change, not constitutional replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:11:44.173458+00:00"
+    }
+  ]
+}

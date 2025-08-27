@@ -1,0 +1,90 @@
+An expert discourse analyst, I will now analyze the provided document based on the 'Constitutional Health Framework v10.0'. I will adhere strictly to the critical separation of concerns, providing only raw dimensional scores, salience assessments, confidence levels, and direct evidence extraction in the required JSON format.
+
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document's filename is 'Obama_SOTU_2012.txt' and the header indicates January 24, 2012. However, the content of the speech explicitly references events from late 2014 and uses phrases like 'it\u2019s 2015', indicating it is the 2015 State of the Union address. The analysis is based on the textual content provided, which is the 2015 address, while retaining the original filename."
+  },
+  "document_analyses": [
+    {
+      "document_id": "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731",
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "So tonight I call on this Congress to show the world that we are united in this mission by passing a resolution to authorize the use of force against ISIL.",
+          "confidence": 1.0,
+          "context_type": "appeal_to_congressional_authority"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "When what you\u2019re doing doesn\u2019t work for 50 years, it\u2019s time to try something new.",
+          "confidence": 0.8,
+          "context_type": "justification_for_policy_shift"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I\u2019m not a scientist, either. But you know what, I know a lot of really good scientists\u2014at NASA and at NOAA and at our major universities. And the best scientists in the world are all telling us that our activities are changing the climate, and if we don\u2019t act forcefully, we\u2019ll continue to see rising oceans, longer, hotter heat waves, dangerous droughts and floods...",
+          "confidence": 1.0,
+          "context_type": "deference_to_scientific_institutions"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But for far too long, lobbyists have rigged the Tax Code with loopholes that let some corporations pay nothing while others pay full freight.",
+          "confidence": 0.85,
+          "context_type": "critique_of_institutional_process"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "In fact, at every moment of economic change throughout our history, this country has taken bold action to adapt to new circumstances and to make sure everyone gets a fair shot. We set up worker protections, Social Security, Medicare, Medicaid to protect ourselves from the harshest adversity.",
+          "confidence": 1.0,
+          "context_type": "framing_policy_as_historical_adaptation"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

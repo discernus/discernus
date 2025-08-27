@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:27:59.037062+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Each time we gather to inaugurate a President we bear witness to the enduring strength of our Constitution. We affirm the promise of our democracy.",
+      "confidence": 1.0,
+      "context_type": "affirmation_of_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037039+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037047+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We will defend our people and uphold our values through strength of arms and rule of law.",
+      "confidence": 0.9,
+      "context_type": "support_for_institutional_function",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037049+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037055+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Today we continue a never-ending journey to bridge the meaning of those words with the realities of our time.",
+      "confidence": 1.0,
+      "context_type": "central_rhetorical_frame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037057+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:27:59.037059+00:00"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on a single inaugural address, a genre well-suited for this framework. The speech's central themes of continuity, responsibility, and adherence to founding principles provide clear evidence for the 'health' dimensions (legitimacy, respect, continuity), which are also the most salient. The 'pathology' dimensions (rejection, subversion, replacement) are either explicitly rejected or entirely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4",
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.2,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our Founding Fathers, faced with perils that we can scarcely imagine, drafted a charter to assure the rule of law and the rights of man, a charter expanded by the blood of generations. Those ideals still light the world, and we will not give them up for expedience's sake.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_founding_principles"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "As for our common defense, we reject as false the choice between our safety and our ideals.",
+          "confidence": 0.95,
+          "context_type": "explicit_rejection_of_expedience"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I thank President Bush for his service to our Nation, as well as the generosity and cooperation he has shown throughout this transition.",
+          "confidence": 0.9,
+          "context_type": "honoring_political_institutions"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "evidence_of_absence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The time has come to reaffirm our enduring spirit, to choose our better history, to carry forward that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+          "confidence": 0.95,
+          "context_type": "core_thematic_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "evidence_of_absence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a conventional presidential address outlining a new administration's policy agenda. It strongly aligns with the 'health' poles of the framework (legitimacy, respect, continuity) by emphasizing collaboration with Congress, honoring the Constitution, and proposing reforms within existing systems. It shows no evidence of the 'pathology' poles (rejection, subversion, replacement), making the scoring for those dimensions zero."
+  },
+  "document_analyses": [
+    {
+      "document_id": "dfca94ace2462f6476faa7bcf7d5b635c4fabca68d77a1f24b351afe4f5b2dba",
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The last time I visited the Capitol, I came to take an oath on the steps of this building. I pledged to honor our Constitution and laws, and I asked you to join me in setting a tone of civility and respect in Washington.",
+          "confidence": 0.95,
+          "context_type": "Explicit Constitutional Commitment"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Rejection Rhetoric"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I believe in local control of schools. We should not, and we will not, run public schools from Washington, DC. Yet when the Federal Government spends tax dollars, we must insist on results.",
+          "confidence": 0.95,
+          "context_type": "Respect for Federalism/Institutional Roles"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Subversive Rhetoric"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security. Medicare's finances are strained, and its coverage is outdated... Without reform, this country will one day awaken to a stark choice... There is a better way.",
+          "confidence": 0.95,
+          "context_type": "Advocacy for Systemic Reform"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of Replacement Rhetoric"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

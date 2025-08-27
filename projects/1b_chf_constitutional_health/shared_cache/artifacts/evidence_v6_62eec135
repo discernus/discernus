@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:06:22.992567+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes.",
+      "confidence": 1.0,
+      "context_type": "legislative_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992546+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992553+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.",
+      "confidence": 1.0,
+      "context_type": "appeal_for_bipartisanship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992556+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992558+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "I place my hand on that verse when I took the oath of office, on behalf of all Americans, for no matter what our differences in our faiths, our backgrounds, our politics, we must all be repairers of the breach.",
+      "confidence": 0.95,
+      "context_type": "foundational_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992560+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:06:22.992562+00:00"
+    }
+  ]
+}

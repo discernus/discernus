@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the rhetoric employed by the speaker. For dimensions like Tribalism or Resentment, scores reflect the speaker's own use of such rhetoric, not merely their description of it in others. The speech is a deliberate justification of a politically difficult vote, heavily emphasizing constitutional duty and personal conscience over partisan loyalty."
+  },
+  "document_analyses": [
+    {
+      "document_id": "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d",
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.3,
+          "confidence": 0.95
+        },
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "hope": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 1.0
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "Many demanded, in their words, that I \u201cstand with the team.\u201d",
+          "confidence": 0.95,
+          "context_type": "The speaker is referencing and rejecting a tribalistic demand from his political allies, not endorsing it. The score is low to reflect that the theme is present only as a foil to his main argument."
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "We are all footnotes at best in the annals of history. But in the most powerful nation on earth, the nation conceived in liberty and justice, that distinction is enough for any citizen.",
+          "confidence": 0.9,
+          "context_type": "The speaker appeals to the shared, universal value of citizenship in a nation founded on principles, transcending individual or party status."
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "...the president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+          "confidence": 0.9,
+          "context_type": "The speaker is not being manipulative himself, but is analyzing the actions of the President as being manipulative, hence the low score."
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+          "confidence": 1.0,
+          "context_type": "This quote demonstrates a commitment to seeking all available facts and evidence, even when hoping for a different outcome, which is a hallmark of intellectual honesty."
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "The speech is devoid of resentment rhetoric. The speaker's condemnation of the president's actions is framed in constitutional and ethical terms, not as an exploitation of grievance or a call for blame."
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "confidence": 1.0,
+          "context_type": "This is the central, explicit framing of the speaker's entire rationale, establishing the speech's primary focus on procedural fairness and adherence to his oath."
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one\u2019s oath of office that I can imagine.",
+          "confidence": 0.9,
+          "context_type": "The speaker frames the president's actions as a severe, destructive threat to fundamental democratic processes and values, inducing a sense of fear for the health of the republic."
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.85,
+          "context_type": "The speaker expresses a constructive, forward-looking vision based on fulfilling his duty, with the hope that this principled stand serves as a positive legacy and meets the country's ideals."
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+          "confidence": 1.0,
+          "context_type": "The speaker directly refutes any unrealistic or wishful thinking by acknowledging the practical outcome of his vote, grounding his decision in reality."
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I\u2019m aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+          "confidence": 0.95,
+          "context_type": "The speaker demonstrates a clear-eyed, realistic acknowledgment of the negative personal and political consequences of his decision, showing he has weighed the real-world constraints."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

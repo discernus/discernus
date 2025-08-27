@@ -1,0 +1,88 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a State of the Union address by President Bill Clinton. Although the filename is 'Clinton_SOTU_2000.txt', the content references the '104th Congress', which convened in 1995-1996. The analysis is based on the provided text. The central theme is a 'New Covenant,' which frames the entire speech as a call for reform and adaptation within the existing constitutional and social framework, emphasizing bipartisan cooperation and citizen responsibility."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c",
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You made a good start by passing that law which applies to Congress all the laws you put on the private sector, and I was proud to sign it yesterday. But we have a lot more to do before people really trust the way things work around here.",
+          "confidence": 0.95,
+          "context_type": "Endorsement of recent legislative action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence; the text consistently advocates working within established political and legislative processes rather than bypassing them."
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Especially, I recall two who struggled to fight that cold war in partnership with Congresses where the majority was of a different party: to Harry Truman, who summoned us to unparalleled prosperity at home and who built the architecture of the cold war; and to Ronald Reagan, whom we wish well tonight and who exhorted us to carry on until the twilight struggle against communism was won.",
+          "confidence": 0.9,
+          "context_type": "Acknowledgement of bipartisan presidential legacy and respect for Congress"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.",
+          "confidence": 0.85,
+          "context_type": "Critique of government functioning framed as a problem to be solved"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Over 200 years ago, our Founders changed the entire course of human history by joining together to create a new country based on a single powerful idea... It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times...",
+          "confidence": 1.0,
+          "context_type": "Core framing of the speech's central theme"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence; the speech's call for a 'New Covenant' is explicitly framed as an adaptation and reform of the existing system, not its replacement."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

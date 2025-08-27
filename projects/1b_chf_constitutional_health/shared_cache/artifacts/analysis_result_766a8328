@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_02ba4424675c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a 1999 State of the Union address, a genre of political speech that inherently operates within and reinforces the constitutional framework. The analysis focuses on differentiating calls for policy reform (e.g., healthcare, welfare) from attacks on or proposals to replace the constitutional system itself, as per framework guidelines. The language of 'revolutionize' is interpreted as policy hyperbole rather than a call for systemic replacement.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1999.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.3,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit reference to constitutional process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct praise of a governmental institution\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Every time the special interests were powerful enough to defeat them. But not this time.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"criticism of external influence on institutions\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our approach protects the quality of care and people's choice. It builds on what works today in the private sector, to expand employer-based coverage, to guarantee private insurance for every American.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy for gradual reform within existing framework\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"And just as we must transform our unemployment system, so must we also revolutionize our welfare system.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"hyperbolic language advocating for major policy change, not constitutional replacement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "29666864a6d83aed740af7d0d56e26863d59867fb793ee41ece644a834137c22",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:10:38.939721+00:00",
+    "end_time": "2025-08-27T15:11:44.174632+00:00",
+    "duration_seconds": 65.234893
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

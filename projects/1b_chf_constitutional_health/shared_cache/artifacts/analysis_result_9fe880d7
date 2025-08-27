@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2fc06ee7c0f0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a State of the Union address by President Bill Clinton. Although the filename is 'Clinton_SOTU_2000.txt', the content references the '104th Congress', which convened in 1995-1996. The analysis is based on the provided text. The central theme is a 'New Covenant,' which frames the entire speech as a call for reform and adaptation within the existing constitutional and social framework, emphasizing bipartisan cooperation and citizen responsibility.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_2000.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"You made a good start by passing that law which applies to Congress all the laws you put on the private sector, and I was proud to sign it yesterday. But we have a lot more to do before people really trust the way things work around here.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Endorsement of recent legislative action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of evidence; the text consistently advocates working within established political and legislative processes rather than bypassing them.\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Especially, I recall two who struggled to fight that cold war in partnership with Congresses where the majority was of a different party: to Harry Truman, who summoned us to unparalleled prosperity at home and who built the architecture of the cold war; and to Ronald Reagan, whom we wish well tonight and who exhorted us to carry on until the twilight struggle against communism was won.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Acknowledgement of bipartisan presidential legacy and respect for Congress\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Critique of government functioning framed as a problem to be solved\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Over 200 years ago, our Founders changed the entire course of human history by joining together to create a new country based on a single powerful idea... It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Core framing of the speech's central theme\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Absence of evidence; the speech's call for a 'New Covenant' is explicitly framed as an adaptation and reform of the existing system, not its replacement.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "b764ca90ad480f526aedf3c54a4d1e5a616b71e9e98f2e3bb323a212329ca020",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:12:13.773077+00:00",
+    "end_time": "2025-08-27T15:13:00.938014+00:00",
+    "duration_seconds": 47.164927
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150038Z_5a1f33f2"
+  }
+}

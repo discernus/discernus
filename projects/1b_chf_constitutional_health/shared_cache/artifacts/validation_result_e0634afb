@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The corpus manifest `corpus.md` is formatted using the deprecated v7.3 specification, indicated by the `corpus_version`: '7.3' key and overall structure. The current Discernus pipeline requires the v8.0.1 specification.",
+    "The 'president' metadata field in the corpus manifest is inconsistent. For example, President George W. Bush is labeled as 'George W. Bush' in some entries and 'Bush' in others. This prevents correct grouping for the 'Administration Comparison' analysis.",
+    "The experiment's scope is inconsistently defined. The abstract specifies analyzing '37+ SOTU addresses from Clinton (1993-2000) through Biden (2021-2024)', but the corpus manifest includes Inaugural and Joint Session addresses, and covers a different time period (1992-2025).",
+    "The corpus manifest contains several entries with contradictory or factually improbable metadata, which undermines research validity. Examples include: `Clinton_SOTU_2001.txt` (Clinton was not president), `Bush_SOTU_2009.txt` (listed with president 'Barack Obama'), and `Obama_SOTU_2017.txt` (Obama was not president)."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T14:54:11.584349+00:00"
+}

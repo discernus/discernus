@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:10:38.935564+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Later this spring, after the First Lady and the many good people who are helping her all across the country complete their work, I will deliver to Congress a comprehensive plan for health care reform that finally will bring costs under control and provide security to all of our families...",
+      "confidence": 1.0,
+      "context_type": "explicit call for legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935549+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935554+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I notice the announcement of the leadership today that Congress is taking similar steps to cut its costs. I think that is important. I think it will send a very clear signal to the American people.",
+      "confidence": 1.0,
+      "context_type": "acknowledgement of institutional action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935556+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+      "confidence": 0.9,
+      "context_type": "critique of systemic paralysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935557+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Later this year, we will offer a plan to end welfare as we know it... We have to end welfare as a way of life and make it a path to independence and dignity.",
+      "confidence": 1.0,
+      "context_type": "advocacy for major system reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935559+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Next, to revolutionize Government we have to ensure that we live within our means, and that should start at the top and with the White House.",
+      "confidence": 0.9,
+      "context_type": "rhetorical use of revolutionary language for operational reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:10:38.935561+00:00"
+    }
+  ]
+}

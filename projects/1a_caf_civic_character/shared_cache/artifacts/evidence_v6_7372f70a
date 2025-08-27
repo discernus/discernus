@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T14:41:19.263320+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "tribalism",
+      "quote_text": "It\u2019s another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement officers in the past, one whom I believe ICE declined, uh, to pick up and place into removal proceedings.",
+      "confidence": 1.0,
+      "context_type": "anecdotal_evidence_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263301+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.6,
+      "context_type": "principled_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263305+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "manipulation",
+      "quote_text": "On the 24th of June, the court came down with a decision King versus Burwell where the Chief Justice of the Supreme Court decided that he could write words into Obamacare that didn't exist. They were not passed by this Congress, not by either chamber of this Congress. As a matter of fact, it wasn't a phrase that was, that was conferenced out or something that was contested. It never was in the bill.",
+      "confidence": 0.95,
+      "context_type": "accusation_of_deception",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263307+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "truth",
+      "quote_text": "And we need a president that will appoint justices to the Supreme Court that will rule on the text of the Constitution, its original meaning, and on the understanding of what the text of that Constitution says.",
+      "confidence": 0.9,
+      "context_type": "principled_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263308+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "resentment",
+      "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+      "confidence": 1.0,
+      "context_type": "blame_assignment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263310+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "justice",
+      "quote_text": "And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+      "confidence": 0.9,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263311+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fear",
+      "quote_text": "And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+      "confidence": 1.0,
+      "context_type": "threat_quantification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263313+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "hope",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263314+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fantasy",
+      "quote_text": "And all through the rest of her life and her family's life, they will carry this hole, this ache in their heart that didn't need to be. Sarah Root would be alive today if the President had done his job...",
+      "confidence": 0.9,
+      "context_type": "oversimplified_causality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263316+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "pragmatism",
+      "quote_text": "However, the Senate determines what advice is and the Senate determines that which is consent. And no nomination to the federal court can move forward without the Senate's advice and consent. It's the Senate's job then to evaluate the nominations of the President.",
+      "confidence": 0.9,
+      "context_type": "procedural_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T14:41:19.263317+00:00"
+    }
+  ]
+}

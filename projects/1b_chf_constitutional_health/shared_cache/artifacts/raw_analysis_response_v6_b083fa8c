@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a presidential address to Congress outlining a legislative agenda in response to a major economic crisis. The rhetoric consistently emphasizes working through established constitutional procedures and institutions to achieve reform. Consequently, scores for procedural legitimacy, institutional respect, and systemic continuity are high, while their negative counterparts (rejection, subversion, replacement) are scored at 0.0 due to a clear absence of supporting evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "98481692a14ee07f3eaa5b45bef63e3f89d84e7e991f4efab0b3458bdc3817e6",
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "As soon as I took office, I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets, not because I believe in bigger Government--I don't--not because I'm not mindful of the massive debt we've inherited--I am.",
+          "confidence": 1.0,
+          "context_type": "Direct appeal to the legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And that's why I've asked Vice President Biden to lead a tough, unprecedented oversight effort; because nobody messes with Joe. I--am I right? They don't mess with him. I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend.",
+          "confidence": 0.95,
+          "context_type": "Utilization of institutional roles for accountability"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "And to ensure that a crisis of this magnitude never happens again, I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system. It is time to put in place tough, new, commonsense rules of the road so that our financial market rewards drive and innovation, and punishes shortcuts and abuse.",
+          "confidence": 1.0,
+          "context_type": "Call for gradual reform within the existing system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

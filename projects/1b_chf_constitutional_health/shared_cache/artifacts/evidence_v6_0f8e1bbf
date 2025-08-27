@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:29:48.774274+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "With their votes, they\u2019ve determined that governing will now be a shared responsibility between parties. New laws will only pass with support from Democrats and Republicans. We will move forward together or not at all, for the challenges we face are bigger than party and bigger than politics.",
+      "confidence": 1.0,
+      "context_type": "explicit appeal to bipartisan legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774262+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774266+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "So I say to this Chamber tonight: Instead of refighting the battles of the last 2 years, let\u2019s fix what needs fixing, and let\u2019s move forward.",
+      "confidence": 0.95,
+      "context_type": "call for collaborative institutional action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774268+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For example, over the years, a parade of lobbyists has rigged the Tax Code to benefit particular companies and industries.",
+      "confidence": 0.9,
+      "context_type": "critique of external influence on institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774269+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Sustaining the American Dream has never been about standing pat. It has required each generation to sacrifice and struggle and meet the demands of a new age.",
+      "confidence": 1.0,
+      "context_type": "explicit framing of adaptation within existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774271+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:48.774272+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:03:19.019515+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The American people have summoned the change we celebrate today. You have raised your voices in an unmistakable chorus. You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself.",
+      "confidence": 0.9,
+      "context_type": "acknowledgement_of_mandate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019503+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "n/a",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019506+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I ask the Congress to join with me. But no President, no Congress, no Government can undertake this mission alone.",
+      "confidence": 0.9,
+      "context_type": "call_for_cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019508+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "This beautiful Capitol, like every capital since the dawn of civilization, is often a place of intrigue and calculation. Powerful people maneuver for position and worry endlessly about who is in and who is out, who is up and who is down, forgetting those people whose toil and sweat sends us here and pays our way.",
+      "confidence": 0.7,
+      "context_type": "critique_and_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019510+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness. Though we marched to the music of our time, our mission is timeless.",
+      "confidence": 1.0,
+      "context_type": "historical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019511+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "n/a",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:03:19.019512+00:00"
+    }
+  ]
+}

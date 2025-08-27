@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:25:58.361978+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So tonight I call on this Congress to show the world that we are united in this mission by passing a resolution to authorize the use of force against ISIL.",
+      "confidence": 1.0,
+      "context_type": "appeal_to_congressional_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361958+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "When what you\u2019re doing doesn\u2019t work for 50 years, it\u2019s time to try something new.",
+      "confidence": 0.8,
+      "context_type": "justification_for_policy_shift",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361964+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I\u2019m not a scientist, either. But you know what, I know a lot of really good scientists\u2014at NASA and at NOAA and at our major universities. And the best scientists in the world are all telling us that our activities are changing the climate, and if we don\u2019t act forcefully, we\u2019ll continue to see rising oceans, longer, hotter heat waves, dangerous droughts and floods...",
+      "confidence": 1.0,
+      "context_type": "deference_to_scientific_institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361967+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "But for far too long, lobbyists have rigged the Tax Code with loopholes that let some corporations pay nothing while others pay full freight.",
+      "confidence": 0.85,
+      "context_type": "critique_of_institutional_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361969+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "In fact, at every moment of economic change throughout our history, this country has taken bold action to adapt to new circumstances and to make sure everyone gets a fair shot. We set up worker protections, Social Security, Medicare, Medicaid to protect ourselves from the harshest adversity.",
+      "confidence": 1.0,
+      "context_type": "framing_policy_as_historical_adaptation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361971+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:25:58.361974+00:00"
+    }
+  ]
+}

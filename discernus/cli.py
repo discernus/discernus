@@ -43,6 +43,29 @@ from discernus.core.exit_codes import (
 # Rich CLI integration for professional terminal interface
 from .cli_console import rich_console
 
+# Disable LiteLLM verbose output to reduce terminal clutter
+import litellm
+litellm.set_verbose = False
+
+# Also configure the verbose_logger to reduce output
+if hasattr(litellm, 'verbose_logger'):
+    litellm.verbose_logger.setLevel('WARNING')
+
+# Set environment variables to ensure verbose output is disabled
+os.environ['LITELLM_VERBOSE'] = 'false'
+os.environ['LITELLM_LOG'] = 'WARNING'
+
+# Disable proxy debug logging
+os.environ['LITELLM_PROXY_DEBUG'] = 'false'
+os.environ['LITELLM_PROXY_LOG_LEVEL'] = 'WARNING'
+
+# Additional environment variables to suppress all debug output
+os.environ['LITELLM_LOG_LEVEL'] = 'WARNING'
+os.environ['LITELLM_COLD_STORAGE_LOG_LEVEL'] = 'WARNING'
+os.environ['LITELLM_PROXY_VERBOSE'] = 'false'
+os.environ['LITELLM_PROXY_DEBUG_MODE'] = 'false'
+os.environ['LITELLM_PROXY_LOG_LEVEL_DEBUG'] = 'false'
+
 
 def check_infrastructure() -> Dict[str, bool]:
     """Check if required infrastructure is running"""

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:24:51.092132+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "But they do expect us to put the Nation's interests before party. They do expect us to forge reasonable compromise where we can. For they know that America moves forward only when we do so together and that the responsibility of improving this Union remains the task of us all.",
+      "confidence": 0.95,
+      "context_type": "appeal_to_bipartisanship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092098+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But if Congress won't act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take, now and in the future, to reduce pollution, prepare our communities for the consequences of climate change, and speed the transition to more sustainable sources of energy.",
+      "confidence": 0.9,
+      "context_type": "policy_ultimatum",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092105+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+      "confidence": 0.95,
+      "context_type": "national_security_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092121+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "none_available",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092123+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It is our generation's task, then, to reignite the true engine of America's economic growth: a rising, thriving middle class. It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092125+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "none_available",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:24:51.092127+00:00"
+    }
+  ]
+}

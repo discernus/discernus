@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2472d421a7847751e9cd03fff4d80902247eb8bfad57b0b773eeff8bbcdd657"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:04:23.451895+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I am asking the United States Congress to pass a real campaign finance reform bill this year. I ask you to increase the participation of the American people by passing the motor voter bill promptly. I ask you to deal with the undue influence of special interests by passing a bill to end the tax deduction for lobbying and to act quickly to require all the people who lobby you to register as lobbyists by passing the lobbying registration bill.",
+      "confidence": 0.98,
+      "context_type": "explicit call for legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451871+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451880+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_respect",
+      "quote_text": "I did this so that we could argue about priorities with the same set of numbers. I did this so that no one could say I was estimating my way out of this difficulty. I did this because if we can agree together on the most prudent revenues we're likely to get if the recovery stays and we do right things economically, then it will turn out better for the American people than we say. In the last 12 years, because there were differences over the revenue estimates, you and I know that both parties were given greater elbow room for irresponsibility. This is tightening the rein on the Democrats as well as the Republicans.",
+      "confidence": 0.95,
+      "context_type": "deference to an independent institutional process (CBO)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451883+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451886+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Nation needs a new direction. Tonight I present to you a comprehensive plan to set our Nation on that new course. I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+      "confidence": 0.98,
+      "context_type": "framing reform within existing values and system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451888+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:04:23.451891+00:00"
+    }
+  ]
+}

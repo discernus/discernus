@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:23:47.187117+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I recognize that in our democracy, no one should just take my word for it that we're doing things the right way. So, in the months ahead, I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+      "confidence": 1.0,
+      "context_type": "explicit reference to democratic process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187098+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But if Congress won't act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take, now and in the future, to reduce pollution, prepare our communities for the consequences of climate change, and speed the transition to more sustainable sources of energy.",
+      "confidence": 1.0,
+      "context_type": "conditional intent to bypass legislature",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187105+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Or we can choose to believe in the overwhelming judgment of science and act before it's too late.",
+      "confidence": 0.9,
+      "context_type": "deference to institutional expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187107+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187109+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Yes, the biggest driver of our long-term debt is the rising cost of health care for an aging population. And those of us who care deeply about programs like Medicare must embrace the need for modest reforms; otherwise, our retirement programs will crowd out the investments we need for our children and jeopardize the promise of a secure retirement for future generations.",
+      "confidence": 1.0,
+      "context_type": "advocacy for gradual reform to preserve existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187111+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:23:47.187113+00:00"
+    }
+  ]
+}

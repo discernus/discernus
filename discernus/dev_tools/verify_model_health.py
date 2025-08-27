@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 import yaml
 import litellm
+# Disable LiteLLM verbose output to reduce terminal clutter
+litellm.set_verbose = False
 from rich.console import Console
 from rich.table import Table
 

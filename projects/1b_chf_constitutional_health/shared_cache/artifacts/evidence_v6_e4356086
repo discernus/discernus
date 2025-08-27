@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:14:29.934807+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Last year this Congress applied to itself the laws it applies to everyone else. This Congress banned gifts and meals from lobbyists. This Congress forced lobbyists to disclose who pays them and what legislation they are trying to pass or kill. This Congress did that, and I applaud you for it.",
+      "confidence": 0.95,
+      "context_type": "Praise for Legislative Self-Regulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934775+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I challenge this Congress to send me a bipartisan welfare reform bill that will really move people from welfare to work and do the right thing by our children. I will sign it immediately.",
+      "confidence": 0.9,
+      "context_type": "Call for Bipartisan Legislative Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934787+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934790+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I ask all Americans to respect and support our law enforcement officers. And to our police, I say, our children need you as role models and heroes. Don't let them down.",
+      "confidence": 0.95,
+      "context_type": "Call for Public Support of Law Enforcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934792+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I compliment the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget.",
+      "confidence": 0.9,
+      "context_type": "Recognition of Oppositional Role in Congress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934794+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934796+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The era of big Government is over. But we cannot go back to the time when our citizens were left to fend for themselves. Instead, we must go forward as one America, one nation working together to meet the challenges we face together.",
+      "confidence": 0.95,
+      "context_type": "Defining a Moderate Governing Philosophy of Reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934798+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 0.9,
+      "context_type": "Invocation of Constitutional Purpose",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934800+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:14:29.934803+00:00"
+    }
+  ]
+}

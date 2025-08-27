@@ -1,0 +1,112 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the explicit themes of adapting the American system to future challenges through reform, respecting institutional roles, and adhering to constitutional processes. The text strongly emphasizes reform and continuity over rejection or replacement, with the central thesis being that the existing system must be improved, not discarded, to meet modern challenges."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If this Congress is serious about winning this war and wants to send a message to our troops and the world, authorize the use of military force against ISIL. Take a vote.",
+          "confidence": 0.95,
+          "context_type": "call_to_action_within_process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We have to change the system to reflect our better selves. I think we\u2019ve got to end the practice of drawing our congressional districts so that politicians can pick their voters and not the other way around. Let a bipartisan group do it.",
+          "confidence": 0.9,
+          "context_type": "advocacy_for_procedural_reform"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our Founders distributed power between States and branches of government and expected us to argue, just as they did, fiercely, over the size and shape of government, over commerce and foreign relations, over the meaning of liberty and the imperatives of security.",
+          "confidence": 0.95,
+          "context_type": "affirmation_of_constitutional_design"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Sixty years ago, when the Russians beat us into space, we didn\u2019t deny Sputnik was up there. We didn\u2019t argue about the science or shrink our research and development budget. We built a space program almost overnight.",
+          "confidence": 0.9,
+          "context_type": "appeal_to_respect_for_science"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "It\u2019s one of the few regrets of my Presidency: that the rancor and suspicion between the parties has gotten worse instead of better.",
+          "confidence": 0.7,
+          "context_type": "critique_of_political_actors"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Democracy breaks down when the average person feels their voice doesn\u2019t matter, that the system is rigged in favor of the rich or the powerful or some special interest.",
+          "confidence": 0.85,
+          "context_type": "critique_of_systemic_bias"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "But for my final address to this Chamber, I don\u2019t want to just talk about next year. I want to focus on the next 5 years, the next 10 years, and beyond. I want to focus on our future.",
+          "confidence": 0.9,
+          "context_type": "thematic_framing_of_reform"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "That\u2019s why Social Security and Medicare are more important than ever. We shouldn\u2019t weaken them, we should strengthen them.",
+          "confidence": 1.0,
+          "context_type": "advocacy_for_strengthening_existing_systems"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

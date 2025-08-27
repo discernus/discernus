@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a classic example of mainstream American political discourse, emphasizing reform within existing structures. This results in high scores for dimensions related to legitimacy, respect, and continuity, and zero or near-zero scores for their pathological counterparts (rejection, subversion, replacement). The rhetoric is consistently collaborative and calls for bipartisan action through established legislative processes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44",
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes.",
+          "confidence": 1.0,
+          "context_type": "legislative_appeal"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.",
+          "confidence": 1.0,
+          "context_type": "appeal_for_bipartisanship"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "I place my hand on that verse when I took the oath of office, on behalf of all Americans, for no matter what our differences in our faiths, our backgrounds, our politics, we must all be repairers of the breach.",
+          "confidence": 0.95,
+          "context_type": "foundational_principle"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

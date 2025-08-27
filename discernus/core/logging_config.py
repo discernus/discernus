@@ -26,6 +26,38 @@ import logging
 # Remove default loguru handler
 logger.remove()
 
+def ensure_litellm_debug_suppression():
+    """
+    Ensure all LiteLLM debug suppression environment variables are set.
+    
+    This function should be called early in the application lifecycle
+    to ensure verbose debug output is suppressed.
+    """
+    # Core LiteLLM settings
+    os.environ.setdefault('LITELLM_VERBOSE', 'false')
+    os.environ.setdefault('LITELLM_LOG', 'WARNING')
+    os.environ.setdefault('LITELLM_LOG_LEVEL', 'WARNING')
+    
+    # Proxy-specific settings
+    os.environ.setdefault('LITELLM_PROXY_DEBUG', 'false')
+    os.environ.setdefault('LITELLM_PROXY_LOG_LEVEL', 'WARNING')
+    os.environ.setdefault('LITELLM_PROXY_VERBOSE', 'false')
+    os.environ.setdefault('LITELLM_PROXY_DEBUG_MODE', 'false')
+    os.environ.setdefault('LITELLM_PROXY_LOG_LEVEL_DEBUG', 'false')
+    
+    # Cold storage and other components
+    os.environ.setdefault('LITELLM_COLD_STORAGE_LOG_LEVEL', 'WARNING')
+    
+    # Additional Discernus-specific settings
+    os.environ.setdefault('DISCERNUS_LOG_LEVEL', 'WARNING')
+    os.environ.setdefault('DISCERNUS_VERBOSE', 'false')
+    
+    # Use print instead of logger since logger isn't configured yet
+    print("✅ LiteLLM debug suppression environment variables ensured")
+
+# Ensure LiteLLM debug suppression is configured
+ensure_litellm_debug_suppression()
+
 def setup_logging(
     experiment_path: Path,
     run_folder: Path,
@@ -400,7 +432,7 @@ def setup_logging_for_run(run_folder: Path):
     console_handler = logging.StreamHandler(sys.stdout)
     console_formatter = logging.Formatter('%(levelname)s: %(message)s')
     console_handler.setFormatter(console_formatter)
-    console_handler.setLevel(logging.INFO) # Only show INFO and above on the console
+    console_handler.setLevel(logging.WARNING) # Only show WARNING and above on the console
 
     # Add handlers to the root logger
     root_logger.addHandler(file_handler)

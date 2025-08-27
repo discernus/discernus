@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:29:32.374185+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And to ensure that a crisis of this magnitude never happens again, I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system.",
+      "confidence": 0.95,
+      "context_type": "call_for_legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374158+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As soon as I took office, I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets...",
+      "confidence": 0.9,
+      "context_type": "adherence_to_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374173+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374175+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States--she's around here somewhere: I have come here tonight not only to address the distinguished men and women in this great Chamber, but to speak frankly and directly to the men and women who sent us here.",
+      "confidence": 0.9,
+      "context_type": "formal_acknowledgement_of_institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374177+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I've appointed a proven and aggressive Inspector General to ferret out any and all cases of waste and fraud. And we have created a new web site called recovery.gov, so that every American can find out how and where their money is being spent.",
+      "confidence": 0.9,
+      "context_type": "utilization_of_institutional_oversight",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374178+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374179+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "For history tells a different story. History reminds us that at every moment of economic upheaval and transformation, this Nation has responded with bold action and big ideas. In the midst of Civil War, we laid railroad tracks from one coast to another that spurred commerce and industry.",
+      "confidence": 0.95,
+      "context_type": "appeal_to_historical_precedent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374180+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "In each case, Government didn't supplant private enterprise; it catalyzed private enterprise. It created the conditions for thousands of entrepreneurs and new businesses to adapt and to thrive.",
+      "confidence": 0.95,
+      "context_type": "framing_as_reform_not_replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374181+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:29:32.374183+00:00"
+    }
+  ]
+}

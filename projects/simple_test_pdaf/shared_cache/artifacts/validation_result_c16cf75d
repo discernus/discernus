@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "issues": [
+    "The machine-readable `questions` list in the experiment specification contains two questions, but the human-readable \"Research Questions\" section in the same file lists three. The third question (\"How do populist conservative and progressive styles differ in their boundary construction and crisis narratives?\") is missing from the formal specification.",
+    "The experiment aims to compare communication styles and strategic patterns across groups (e.g., 'populist_conservative' vs 'populist_progressive'), but the corpus contains only 4 documents. This sample size is too small for any meaningful statistical comparison between groups."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T13:52:07.924691+00:00"
+}

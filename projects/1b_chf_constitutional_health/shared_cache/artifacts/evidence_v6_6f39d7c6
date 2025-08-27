@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:09:00.419755+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The American people returned to office a President of one party and a Congress of another. Surely they did not do this to advance the politics of petty bickering and extreme partisanship they plainly deplore. No, they call on us instead to be repairers of the breach and to move on with America's mission.",
+      "confidence": 0.9,
+      "context_type": "interpretation_of_electoral_mandate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419732+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419741+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As times change, so Government must change. We need a new Government for a new century, humble enough not to try to solve all our problems for us but strong enough to give us the tools to solve our problems for ourselves, a Government that is smaller, lives within its means, and does more with less.",
+      "confidence": 0.9,
+      "context_type": "redefinition_of_governmental_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419743+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419745+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+      "confidence": 1.0,
+      "context_type": "central_metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419747+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:09:00.419752+00:00"
+    }
+  ]
+}

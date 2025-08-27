@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6357ab4c07af6f04b0d379f4ae2a41e24284d2ea634b1b6189a11ba8a197807c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:01:45.603525+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I submit my plan tomorrow, and I'm asking you to pass it by March 20th. And I ask the American people to let you know they want this action by March 20th.",
+      "confidence": 0.95,
+      "context_type": "appeal_to_legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603497+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "I have, this evening, asked major Cabinet departments and Federal agencies to institute a 90-day moratorium on any new Federal regulations that could hinder growth.",
+      "confidence": 0.9,
+      "context_type": "executive_action_bypassing_regulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603509+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_respect",
+      "quote_text": "The Secretary of Defense recommended these cuts after consultation with the Joint Chiefs of Staff. And I make them with confidence.",
+      "confidence": 0.95,
+      "context_type": "deference_to_institutional_expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603513+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "I call upon Congress to adopt a measure that will help put an end to the annual ritual of filling the budget with pork barrel appropriations.",
+      "confidence": 0.85,
+      "context_type": "criticism_of_institutional_practice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603516+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Or we can reform our own private health care system, which still gives us, for all its flaws, the best quality health care in the world.",
+      "confidence": 0.95,
+      "context_type": "advocacy_for_system_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603518+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "And we must revolutionize America's schools.",
+      "confidence": 0.8,
+      "context_type": "revolutionary_rhetoric_for_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:01:45.603520+00:00"
+    }
+  ]
+}

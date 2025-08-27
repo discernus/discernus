@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:30:25.608204+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And when the vote comes tomorrow, the Senate should restore the pay-as-you-go law that was a big reason for why we had record surpluses in the 1990s.",
+      "confidence": 0.95,
+      "context_type": "call_for_legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608188+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Now, yesterday the Senate blocked a bill that would have created this commission, so I\u2019ll issue an Executive order that will allow us to go forward, because I refuse to pass this problem on to another generation of Americans.",
+      "confidence": 0.95,
+      "context_type": "executive_action_circumvention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608194+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "And according to the Congressional Budget Office, the independent organization that both parties have cited as the official scorekeeper for Congress, our approach would bring down the deficit by as much as $1 trillion over the next two decades.",
+      "confidence": 0.9,
+      "context_type": "deference_to_institutional_expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608196+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "With all due deference to separation of powers, last week, the Supreme Court reversed a century of law that I believe will open the floodgates for special interests, including foreign corporations, to spend without limit in our elections.",
+      "confidence": 0.9,
+      "context_type": "critique_of_judicial_decision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608198+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We find unity in our incredible diversity, drawing on the promise enshrined in our Constitution: The notion that we\u2019re all created equal; that no matter who you are or what you look like, if you abide by the law, you should be protected by it; if you adhere to our common values, you should be treated no different than anyone else.",
+      "confidence": 0.95,
+      "context_type": "appeal_to_founding_principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608200+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:30:25.608201+00:00"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Cohesive Flourishing Framework (CFF) v10.1
+# Cohesive Flourishing Framework (CFF) v10
 
 ---
 
@@ -24,6 +24,7 @@ The CFF is grounded in a multi-disciplinary body of research from social psychol
 The framework's identity dimensions (Tribal Dominance vs. Individual Dignity) are grounded in Social Identity Theory (Tajfel & Turner, 1979), which demonstrates how group membership affects intergroup behavior and attitudes. Research shows that in-group favoritism and out-group derogation are fundamental processes in social categorization (Brewer, 1999). The framework's approach to measuring group supremacy rhetoric builds on work by Sidanius & Pratto (1999) on Social Dominance Theory, which explains how societies maintain group-based hierarchies.
 
 **Key Citations**:
+
 - Tajfel, H., & Turner, J. C. (1979). An integrative theory of intergroup conflict. In W. G. Austin & S. Worchel (Eds.), *The social psychology of intergroup relations* (pp. 33-47). Brooks/Cole.
 - Brewer, M. B. (1999). The psychology of prejudice: Ingroup love and outgroup hate? *Journal of Social Issues*, 55(3), 429-444.
 - Sidanius, J., & Pratto, F. (1999). *Social dominance: An intergroup theory of social hierarchy and oppression*. Cambridge University Press.
@@ -35,6 +36,7 @@ The framework's approach to emotional climate analysis (Fear vs. Hope) draws fro
 The relational dimensions (Enmity vs. Amity) are informed by research on political polarization and democratic discourse. Jamieson & Cappella (2008) showed how media discourse patterns can increase political polarization, while Gutmann & Thompson (1996) outlined conditions for constructive democratic deliberation.
 
 **Key Citations**:
+
 - Brader, T. (2006). *Campaigning for hearts and minds: How emotional appeals in political ads work*. University of Chicago Press.
 - Marcus, G. E., Neuman, W. R., & MacKuen, M. (2000). *Affective intelligence and political judgment*. University of Chicago Press.
 - Jamieson, K. H., & Cappella, J. N. (2008). *Echo chamber: Rush Limbaugh and the conservative media establishment*. Oxford University Press.
@@ -45,6 +47,7 @@ The relational dimensions (Enmity vs. Amity) are informed by research on politic
 The framework's independent scoring approach addresses the "information loss problem" identified in traditional valence-based content analysis. Krippendorff (2004) emphasized the importance of preserving analytical complexity rather than forcing artificial binary classifications. The salience-weighting methodology builds on work by van Dijk (2008) on critical discourse analysis, which emphasizes the importance of rhetorical emphasis and structural positioning in meaning construction.
 
 **Key Citations**:
+
 - Krippendorff, K. (2004). *Content analysis: An introduction to its methodology* (2nd ed.). Sage Publications.
 - van Dijk, T. A. (2008). *Discourse and power*. Palgrave Macmillan.
 
@@ -53,6 +56,7 @@ The framework's independent scoring approach addresses the "information loss pro
 The use of salience-weighting is empirically grounded in research demonstrating that static, predetermined weights for analytical dimensions lack empirical support. Studies in computational linguistics (Pang & Lee, 2008) and political communication (Laver et al., 2003) have shown that context-dependent weighting based on textual emphasis patterns provides more accurate and reliable results than fixed weighting schemes.
 
 **Key Citations**:
+
 - Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. *Foundations and Trends in Information Retrieval*, 2(1-2), 1-135.
 - Laver, M., Benoit, K., & Garry, J. (2003). Extracting policy positions from political texts using words as data. *American Political Science Review*, 97(2), 311-331.
 
@@ -61,6 +65,7 @@ The use of salience-weighting is empirically grounded in research demonstrating 
 The framework's focus on democratic health builds on Putnam's (2000) work on social capital and civic engagement, which demonstrated the relationship between discourse patterns and community cohesion. The normative layers approach draws from deliberative democracy theory (Habermas, 1996), which provides criteria for evaluating the quality of democratic discourse.
 
 **Key Citations**:
+
 - Putnam, R. D. (2000). *Bowling alone: The collapse and revival of American community*. Simon & Schuster.
 - Habermas, J. (1996). *Between facts and norms: Contributions to a discourse theory of law and democracy*. MIT Press.
 
@@ -70,59 +75,67 @@ CFF employs a multi-layered analytical approach with transparent normative layer
 
 **Dimensions**: The framework scores ten conceptual anchors independently on a 0.0 to 1.0 scale, organized into five opposing pairs:
 
-**Identity Axis**: 
--   **Tribal Dominance** (0.0-1.0): In-group supremacy, exclusionary identity patterns, "us versus them" rhetoric
--   **Individual Dignity** (0.0-1.0): Universal human worth, inclusive recognition, equal treatment emphasis
+**Identity Axis**:
+
+- **Tribal Dominance** (0.0-1.0): In-group supremacy, exclusionary identity patterns, "us versus them" rhetoric
+- **Individual Dignity** (0.0-1.0): Universal human worth, inclusive recognition, equal treatment emphasis
 
 **Emotional Climate**:
--   **Fear** (0.0-1.0): Crisis mentality, existential threat perception, vulnerability emphasis
--   **Hope** (0.0-1.0): Progress orientation, optimistic collective vision, opportunity language
+
+- **Fear** (0.0-1.0): Crisis mentality, existential threat perception, vulnerability emphasis
+- **Hope** (0.0-1.0): Progress orientation, optimistic collective vision, opportunity language
 
 **Success Orientation**:
--   **Envy** (0.0-1.0): Resentment toward others' success, zero-sum thinking, grievance rhetoric
--   **Compersion** (0.0-1.0): Joy from others' success, abundance mindset, merit celebration
+
+- **Envy** (0.0-1.0): Resentment toward others' success, zero-sum thinking, grievance rhetoric
+- **Compersion** (0.0-1.0): Joy from others' success, abundance mindset, merit celebration
 
 **Relational Climate**:
--   **Enmity** (0.0-1.0): Hostility, adversarial positioning, conflict emphasis
--   **Amity** (0.0-1.0): Friendship appeals, cooperative framing, unity language
+
+- **Enmity** (0.0-1.0): Hostility, adversarial positioning, conflict emphasis
+- **Amity** (0.0-1.0): Friendship appeals, cooperative framing, unity language
 
 **Goal Orientation**:
--   **Fragmentative Goals** (0.0-1.0): Divisive zero-sum objectives, separation emphasis
--   **Cohesive Goals** (0.0-1.0): Integrative positive-sum objectives, building emphasis
+
+- **Fragmentative Goals** (0.0-1.0): Divisive zero-sum objectives, separation emphasis
+- **Cohesive Goals** (0.0-1.0): Integrative positive-sum objectives, building emphasis
 
 **Advanced Concepts**:
--   **Salience vs. Intensity**: A critical distinction is made between a dimension's *intensity* (its raw 0.0-1.0 score) and its *salience* (its rhetorical prominence or emphasis within the text, also scored 0.0-1.0). This dual-track analysis reveals not just *what* is being said, but *how much emphasis* it receives.
--   **Rhetorical Tension**: The framework calculates the strategic tension between opposing pairs to measure the coherence of the discourse. The formula `Tension = min(Score_A, Score_B) × |Salience_A - Salience_B|` quantifies contradictions where a speaker employs competing appeals.
+
+- **Salience vs. Intensity**: A critical distinction is made between a dimension's *intensity* (its raw 0.0-1.0 score) and its *salience* (its rhetorical prominence or emphasis within the text, also scored 0.0-1.0). This dual-track analysis reveals not just *what* is being said, but *how much emphasis* it receives.
+- **Rhetorical Tension**: The framework calculates the strategic tension between opposing pairs to measure the coherence of the discourse. The formula `Tension = min(Score_A, Score_B) × |Salience_A - Salience_B|` quantifies contradictions where a speaker employs competing appeals.
 
 **Three Analytical Layers with Normative Transparency**:
 
-| Layer | Focus | Key Questions | Normative Load | Applications |
-|-------|-------|---------------|----------------|--------------|
-| **1 - Pattern Recognition** | Rhetorical strategies | What rhetorical patterns are being used? How sophisticated is the messaging? | **Low** | Academic research, content analysis, baseline measurement |
-| **2 - Motivational Assessment** | Behavioral implications | What behaviors might this inspire? How will audiences likely respond? | **Moderate** | Strategic communication, audience analysis, campaign evaluation |
-| **3 - Social Health Evaluation** | Democratic impact | Does this strengthen or weaken democratic institutions? What are the social consequences? | **High** | Policy evaluation, intervention design, community health monitoring |
+| Layer                                  | Focus                   | Key Questions                                                                             | Normative Load     | Applications                                                        |
+| -------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------- |
+| **1 - Pattern Recognition**      | Rhetorical strategies   | What rhetorical patterns are being used? How sophisticated is the messaging?              | **Low**      | Academic research, content analysis, baseline measurement           |
+| **2 - Motivational Assessment**  | Behavioral implications | What behaviors might this inspire? How will audiences likely respond?                     | **Moderate** | Strategic communication, audience analysis, campaign evaluation     |
+| **3 - Social Health Evaluation** | Democratic impact       | Does this strengthen or weaken democratic institutions? What are the social consequences? | **High**     | Policy evaluation, intervention design, community health monitoring |
 
 Each layer builds on the previous one, adding interpretive depth while maintaining transparency about analytical assumptions. This normative transparency enables appropriate analytical depth selection while maintaining scholarly rigor.
 
 **Derived & Composite Metrics**:
 
 **Tension Indices** (0.0-1.0, higher = more contradiction):
--   **Identity Tension**: Measures contradiction between tribal dominance and individual dignity appeals
-  - **Formula**: `min(tribal_dominance_score, individual_dignity_score) × |tribal_dominance_salience - individual_dignity_salience|`
--   **Emotional Tension**: Measures contradiction between fear and hope messaging
-  - **Formula**: `min(fear_score, hope_score) × |fear_salience - hope_salience|`
--   **Success Tension**: Measures contradiction between envy and compersion rhetoric
-  - **Formula**: `min(envy_score, compersion_score) × |envy_salience - compersion_salience|`
--   **Relational Tension**: Measures contradiction between enmity and amity positioning
-  - **Formula**: `min(enmity_score, amity_score) × |enmity_salience - amity_salience|`
--   **Goal Tension**: Measures contradiction between fragmentative and cohesive objectives
-  - **Formula**: `min(fragmentative_goals_score, cohesive_goals_score) × |fragmentative_goals_salience - cohesive_goals_salience|`
+
+- **Identity Tension**: Measures contradiction between tribal dominance and individual dignity appeals
+- **Formula**: `min(tribal_dominance_score, individual_dignity_score) × |tribal_dominance_salience - individual_dignity_salience|`
+- **Emotional Tension**: Measures contradiction between fear and hope messaging
+- **Formula**: `min(fear_score, hope_score) × |fear_salience - hope_salience|`
+- **Success Tension**: Measures contradiction between envy and compersion rhetoric
+- **Formula**: `min(envy_score, compersion_score) × |envy_salience - compersion_salience|`
+- **Relational Tension**: Measures contradiction between enmity and amity positioning
+- **Formula**: `min(enmity_score, amity_score) × |enmity_salience - amity_salience|`
+- **Goal Tension**: Measures contradiction between fragmentative and cohesive objectives
+- **Formula**: `min(fragmentative_goals_score, cohesive_goals_score) × |fragmentative_goals_salience - cohesive_goals_salience|`
 
 **Strategic Contradiction Index** (0.0-1.0, higher = more incoherent):
--   **Average of all tension indices** measuring overall rhetorical coherence
--   **Formula**: `(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5`
--   **Low values** indicate consistent, coherent messaging
--   **High values** indicate strategic contradictions and mixed appeals
+
+- **Average of all tension indices** measuring overall rhetorical coherence
+- **Formula**: `(identity_tension + emotional_tension + success_tension + relational_tension + goal_tension) / 5`
+- **Low values** indicate consistent, coherent messaging
+- **High values** indicate strategic contradictions and mixed appeals
 
 **Salience-Weighted Cohesion Indices** (-1.0 to +1.0, negative = fragmentative, positive = cohesive):
 
@@ -142,10 +155,10 @@ Each layer builds on the previous one, adding interpretive depth while maintaini
 
 ### Section 4: Intended Application & Corpus Fit
 
--   **Target Corpus Description**: CFF is designed for the analysis of persuasive or strategic communication, particularly in the political and social spheres. This includes political speeches, campaign materials, policy documents, and organizational communications.
--   **Known Limitations & Scope**: The framework is less suited for analyzing purely informational, conversational, or fictional texts. The complexity of the salience and tension assessments requires a text with sufficient length and rhetorical structure to be meaningful.
--   **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro, Claude 3 Opus, GPT-4) for reliable analysis. The sophisticated dual-track analysis (intensity + salience), complex concept distinctions, and mathematical framework exceed the capabilities of basic or lightweight models.
--   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
+- **Target Corpus Description**: CFF is designed for the analysis of persuasive or strategic communication, particularly in the political and social spheres. This includes political speeches, campaign materials, policy documents, and organizational communications.
+- **Known Limitations & Scope**: The framework is less suited for analyzing purely informational, conversational, or fictional texts. The complexity of the salience and tension assessments requires a text with sufficient length and rhetorical structure to be meaningful.
+- **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro, Claude 3 Opus, GPT-4) for reliable analysis. The sophisticated dual-track analysis (intensity + salience), complex concept distinctions, and mathematical framework exceed the capabilities of basic or lightweight models.
+- **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
 
 ---
 

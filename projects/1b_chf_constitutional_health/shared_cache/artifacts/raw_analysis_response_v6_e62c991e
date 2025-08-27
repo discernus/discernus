@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a 1993 State of the Union address, a formal genre of political speech. Its content is a clear example of advocating for policy changes and reforms within established constitutional and institutional norms. The scoring reflects a strong emphasis on procedural legitimacy and systemic continuity, with a corresponding absence of rhetoric supporting rejection, subversion, or replacement of the system."
+  },
+  "document_analyses": [
+    {
+      "document_id": "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7",
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes.",
+          "confidence": 1.0,
+          "context_type": "Direct advocacy for established process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Since I took office, funding for AIDS research at the National Institutes of Health has increased dramatically to $1.5 billion. With new resources, NIH will now become the most powerful discovery engine for an AIDS vaccine, working with other scientists to finally end the threat of AIDS.",
+          "confidence": 0.95,
+          "context_type": "Support for institutional expertise and role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "Absence of evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Just a few days before my second Inauguration, one of our country's best known pastors, Reverend Robert Schuller, suggested that I read Isaiah 58:12. Here's what it says: 'Thou shalt raise up the foundations of many generations, and thou shalt be called the repairer of the breach, the restorer of paths to dwell in.' I placed my hand on that verse when I took the oath of office, on behalf of all Americans, for no matter what our differences in our faiths, our backgrounds, our politics, we must all be repairers of the breach.",
+          "confidence": 1.0,
+          "context_type": "Metaphorical and direct call for systemic preservation"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

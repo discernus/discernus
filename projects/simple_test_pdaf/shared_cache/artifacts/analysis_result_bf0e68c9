@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_5b6b922707fd",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_test_pdaf",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a presidential concession speech. Its primary rhetorical purpose is to acknowledge defeat, affirm the legitimacy of the democratic process, and call for national unity. Consequently, it is structurally antithetical to most populist themes, which are typically divisive and anti-establishment. The scores across nearly all dimensions are zero or near-zero, as the text actively promotes pluralism, respect for opponents, and institutional norms.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.3,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment_of_problems_without_populist_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"affirmation_of_institutional_process\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit_call_for_unity_and_pluralism\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Today I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"embrace_of_political_service\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"acknowledgment_of_diversity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"inclusive_civic_patriotism\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "b74d41caa6c9fa5ba18314d5d65b946faa6e6b5d8407a12afc94b0b1b9dfd2bf",
+  "execution_metadata": {
+    "start_time": "2025-08-27T13:52:07.936364+00:00",
+    "end_time": "2025-08-27T13:52:52.006110+00:00",
+    "duration_seconds": 44.069724
+  },
+  "input_artifacts": {
+    "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+    "document_hashes": [
+      "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T135125Z_0789dc56"
+  }
+}

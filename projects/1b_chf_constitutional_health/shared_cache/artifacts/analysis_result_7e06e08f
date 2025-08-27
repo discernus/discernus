@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_16be1c53d87d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document analyzed is the 2008 State of the Union address by George W. Bush, despite the filename indicating 2005. The analysis is based on the provided text content. The speech strongly emphasizes working within existing constitutional procedures and institutions (procedural legitimacy, institutional respect, systemic continuity), while containing a notable threat of executive action to bypass a specific congressional practice (earmarks), which registers as low-level procedural rejection.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2005.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"If these items are truly worth funding, Congress should debate them in the open and hold a public vote.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy_for_legislative_process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"And tomorrow I will issue an Executive order that directs Federal agencies to ignore any future earmark that is not voted on by Congress.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"threat_of_executive_action\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Any further drawdown of U.S. troops will be based on conditions in Iraq and the recommendations of our commanders.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"deference_to_military_expertise\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"criticism_of_institutional_practice\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"By trusting the people, succeeding generations transformed our fragile, young democracy into the most powerful nation on Earth and a beacon of hope for millions. And so long as we continue to trust the people, our Nation will prosper, our liberty will be secure, and the state of our Union will remain strong.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"appeal_to_founding_principles_and_tradition\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "24dcb255352dcff1ee889beed0fcf7e2d3b75fb212218ef80612ee28e4f57f7b",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:17:25.245596+00:00",
+    "end_time": "2025-08-27T15:18:16.195041+00:00",
+    "duration_seconds": 50.949422
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

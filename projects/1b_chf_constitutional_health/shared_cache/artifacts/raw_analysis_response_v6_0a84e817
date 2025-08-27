@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on the textual content of the 2008 State of the Union address, despite the provided filename 'Bush_SOTU_2005.txt'. The document is a classic example of presidential rhetoric that primarily operates within and reinforces the existing constitutional system, repeatedly calling on Congress to act. It also contains a notable challenge to a specific congressional procedure (earmarks) through the threat of an Executive Order, representing a mild form of procedural rejection."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361",
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If these items are truly worth funding, Congress should debate them in the open and hold a public vote.",
+          "confidence": 0.95,
+          "context_type": "call_for_legislative_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And tomorrow I will issue an Executive order that directs Federal agencies to ignore any future earmark that is not voted on by Congress.",
+          "confidence": 0.85,
+          "context_type": "executive_action_threat"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "General Petraeus has warned that too fast a drawdown could result in, quote, \"the disintegration of the Iraqi security forces, Al Qaida-Iraq regaining lost ground, and a marked increase in violence.\"",
+          "confidence": 0.9,
+          "context_type": "deference_to_expert_authority"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+          "confidence": 0.9,
+          "context_type": "criticism_of_institutional_practice"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "By trusting the people, our Founders wagered that a great and noble nation could be built on the liberty that resides in the hearts of all men and women. By trusting the people, succeeding generations transformed our fragile, young democracy into the most powerful nation on Earth and a beacon of hope for millions.",
+          "confidence": 1.0,
+          "context_type": "statement_of_foundational_principle"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

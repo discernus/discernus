@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_6a3a1ebaea90",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of a State of the Union address. The document's filename indicates 2009, but the content (references to recent events and future timelines) confirms the speech was delivered in early 2004. The analysis reflects the content. The speech exhibits strong support for existing US constitutional processes and institutions, while simultaneously asserting executive prerogative in national security and criticizing judicial activism.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"appeal_to_constitutional_process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"America will never seek a permission slip to defend the security of our country.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rejection_of_external_constraints\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgement_of_congressional_role\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"delegitimization_of_judiciary\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"America is a nation with a mission, and that mission comes from our most basic beliefs. We have no desire to dominate, no ambitions of empire. Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"affirmation_of_systemic_values\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "2234a86fec9dbea49c5133d9a9988f34887726b7fad7b7147b9e844ae2183ec4",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:22:19.433986+00:00",
+    "end_time": "2025-08-27T15:23:08.484023+00:00",
+    "duration_seconds": 49.050025
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150038Z_5a1f33f2"
+  }
+}

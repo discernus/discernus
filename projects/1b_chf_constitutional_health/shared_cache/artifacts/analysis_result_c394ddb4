@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_1e7e47bb8387",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic inaugural address, heavily emphasizing constitutional continuity and legitimacy. The analysis primarily reflects the positive dimensions of the framework, as themes of rejection, subversion, or replacement are absent. The scoring reflects the speech's core message of adapting founding principles to modern challenges within the existing constitutional structure.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2013.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Each time we gather to inaugurate a President we bear witness to the enduring strength of our Constitution. We affirm the promise of our democracy.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"foundational_principle_affirmation\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"My fellow Americans, the oath I have sworn before you today, like the one recited by others who serve in this Capitol, was an oath to God and country, not party or faction.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"procedural_act_explanation\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The commitments we make to each other through Medicare and Medicaid and Social Security, these things do not sap our initiative, they strengthen us. They do not make us a nation of takers; they free us to take the risks that make this country great.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"defense_of_social_programs\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"We will renew those institutions that extend our capacity to manage crisis abroad, for no one has a greater stake in a peaceful world than its most powerful nation.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"foreign_policy_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"But we have always understood that when times change, so must we; that fidelity to our founding principles requires new responses to new challenges; that preserving our individual freedoms ultimately requires collective action.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"central_thesis_statement\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Today we continue a never-ending journey to bridge the meaning of those words with the realities of our time.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"metaphorical_framing\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "9f4715e0e8b1f197ae4e7560d7c315af042191082a2543ed627cc287c7fe7b0a",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:25:58.364414+00:00",
+    "end_time": "2025-08-27T15:26:33.385007+00:00",
+    "duration_seconds": 35.020578
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

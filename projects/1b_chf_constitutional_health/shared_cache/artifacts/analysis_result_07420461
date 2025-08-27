@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_72216c892103",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic inaugural address emphasizing continuity, procedural legitimacy, and national unity. The analysis reflects the speech's strong adherence to traditional constitutional norms and its complete lack of rhetoric associated with procedural rejection, institutional subversion, or systemic replacement. Scores for the 'pathology' dimensions are uniformly zero due to the absence of any supporting evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2001.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit affirmation of constitutional process\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I thank Vice President Gore for a contest conducted with spirit and ended with grace.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"affirmation of democratic norms and electoral conclusion\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Government has great responsibilities for public safety and public health, for civil rights and common schools.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"recognition of legitimate government roles\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Church and charity, synagogue and mosque lend our communities their humanity, and they will have an honored place in our plans and in our laws.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"recognition of institutional role of civil society and faith organizations\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have a place, all of us, in a long story, a story we continue but whose end we will not see.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"metaphorical support for maintaining existing constitutional framework\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our democratic faith is more than the creed of our country. It is the inborn hope of our humanity, an ideal we carry but do not own, a trust we bear and pass along.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit support for maintaining democratic traditions\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "35164806373258efdb55e2846da643d6c6a5a1fc9e321a423abd6f2dd8f09ea5",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:12:33.928262+00:00",
+    "end_time": "2025-08-27T15:13:13.126318+00:00",
+    "duration_seconds": 39.198035
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150008Z_e488df42"
+  }
+}

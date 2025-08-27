@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a State of the Union address by President Clinton to a Republican-controlled Congress. The discourse is characterized by appeals to bipartisanship, calls for legislative action through established processes, and a central theme of reforming government to adapt to a new era (the 'New Covenant'). This results in high scores for procedural legitimacy, institutional respect, and systemic continuity. There is also a notable, but secondary, theme of institutional subversion, which frames the government as bureaucratic and captured by special interests, thus justifying the proposed reforms. Rhetoric supporting procedural rejection or systemic replacement is absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c",
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You made a good start by passing that law which applies to Congress all the laws you put on the private sector, and I was proud to sign it yesterday. But we have a lot more to do before people really trust the way things work around here.",
+          "confidence": 1.0,
+          "context_type": "legislative process affirmation"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "From the day I took the oath of office, I pledged that our Nation would maintain the best equipped, best trained, and best prepared military on Earth. We have, and they are.",
+          "confidence": 0.95,
+          "context_type": "support for national institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.",
+          "confidence": 0.95,
+          "context_type": "criticism of government function"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times: to Lincoln and to his Congress to preserve the Union and to end slavery; to Theodore Roosevelt and Woodrow Wilson to restrain the abuses and excesses of the industrial revolution and to assert our leadership in the world...",
+          "confidence": 1.0,
+          "context_type": "historical framing of reform"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

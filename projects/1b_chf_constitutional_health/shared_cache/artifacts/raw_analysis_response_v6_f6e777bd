@@ -1,0 +1,108 @@
+An expert discourse analyst, I will now analyze the provided documents based on the specified framework.
+
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on a State of the Union address, a genre characterized by appeals to legislative action and national unity. The text is a strong example of reformist rhetoric, emphasizing working within established constitutional and institutional channels to address policy challenges. Pathological dimensions are largely absent, with critiques framed as problems to be solved collaboratively rather than as delegitimizing attacks on the system itself."
+  },
+  "document_analyses": [
+    {
+      "document_id": "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b",
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Next month I will send you one of the toughest budgets ever presented to Congress. It will cut spending in more than 300 programs, eliminate 100 domestic programs, and reform the ways in which governments buy goods and services. This year we must again make the hard choices to live within the hard spending ceilings we have set.",
+          "confidence": 1.0,
+          "context_type": "explicit reference to legislative/budgetary process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.",
+          "confidence": 1.0,
+          "context_type": "assertion of a formal constitutional power (veto) within the established process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence of evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our forces are the finest military our Nation has ever had. And I have pledged that as long as I am President, they will remain the best equipped, the best trained, and the best prepared fighting force on the face of the Earth.",
+          "confidence": 1.0,
+          "context_type": "explicit praise and support for a core national institution"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+          "confidence": 1.0,
+          "context_type": "explicit praise for the legislative branch and its role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Every time the special interests were powerful enough to defeat them. But not this time.",
+          "confidence": 0.8,
+          "context_type": "criticism of external influence on institutions, which is a mild form of delegitimization"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Last year we began to put our house in order by tackling the budget deficit that was driving us toward bankruptcy. We cut $255 billion in spending, including entitlements, and over 340 separate budget items. We froze domestic spending and used honest budget numbers.",
+          "confidence": 1.0,
+          "context_type": "explicit statement of reforming and improving the existing system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "This year we will fight for a revitalized Clean Water Act and a Safe Drinking Water Act and a reformed Superfund program.",
+          "confidence": 1.0,
+          "context_type": "advocacy for reforming and updating existing legislative frameworks"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "And just as we must transform our unemployment system, so must we also revolutionize our welfare system. It doesn't work. It defies our values as a nation.",
+          "confidence": 0.9,
+          "context_type": "use of 'revolutionary' language, but the context points toward policy reform rather than constitutional replacement, hence the low score"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

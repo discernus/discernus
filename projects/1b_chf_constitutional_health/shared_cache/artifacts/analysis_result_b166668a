@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_176f32a00a59",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document, labeled 'Bush_SOTU_2004.txt', contains the text of the 2007 State of the Union address, delivered to a new Democratic-majority Congress. The analysis is based on the provided text content. The speech's tone is notably conciliatory and focused on bipartisan cooperation. It heavily emphasizes working within existing processes and institutions to achieve domestic policy reforms (e.g., budget, healthcare, immigration) and calls for perseverance in the ongoing war on terror, framed as a necessary defense of the existing order against those who would destroy it.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2004.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"As President, I have a duty to nominate qualified men and women to vacancies on the Federal bench, and the United States Senate has a duty as well, to give those nominees a fair hearing and a prompt up-or-down vote on the Senate floor.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit call for established process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Some in this Chamber are new to the House and the Senate, and I congratulate the Democrat majority. Congress has changed, but not our responsibilities. Each of us is guided by our own convictions, and to these we must stay faithful. Yet we're all held to the same standards and called to serve the same good purposes: to extend this Nation's prosperity, to spend the people's money wisely, to solve problems, not leave them to future generations, to guard America against all evil, and to keep faith with those we have sent forth to defend us.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgement of institutional role\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"So let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy for reform within existing system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"no evidence found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "16666bc745dc487bd1fe9a262589e515d753f606964cc4d597bd94267fe23092",
+  "execution_metadata": {
+    "start_time": "2025-08-27T15:17:05.969951+00:00",
+    "end_time": "2025-08-27T15:17:51.947849+00:00",
+    "duration_seconds": 45.977875
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T150038Z_5a1f33f2"
+  }
+}

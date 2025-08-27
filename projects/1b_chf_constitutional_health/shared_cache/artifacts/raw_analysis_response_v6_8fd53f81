@@ -1,0 +1,112 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on a close reading of the provided speech. The document exhibits a notable tension between advocating for action through established legislative processes (procedural_legitimacy) and a stated intent to use executive action to bypass a deadlocked Congress (procedural_rejection). The overarching theme is one of systemic_continuity, framing proposals as reforms to make the existing American system work better, rather than replace it."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f",
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.5,
+          "salience": 0.65,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year's severe cuts to priorities like education. Nobody got everything they wanted, and we can still do more to invest in this country's future while bringing down our deficit in a balanced way, but the budget compromise should leave us freer to focus on creating new jobs, not creating new crises.",
+          "confidence": 0.95,
+          "context_type": "advocacy_for_bipartisan_process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "And with the Afghan war ending, this needs to be the year Congress lifts the remaining restrictions on detainee transfers and we close the prison at Guantanamo Bay.",
+          "confidence": 0.9,
+          "context_type": "call_for_legislative_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But America does not stand still, and neither will I. So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that's what I'm going to do.",
+          "confidence": 1.0,
+          "context_type": "statement_of_intent_for_executive_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "In the coming weeks, I will issue an Executive Order requiring Federal contractors to pay their federally funded employees a fair wage of at least $10.10 an hour.",
+          "confidence": 1.0,
+          "context_type": "specific_example_of_executive_action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "American diplomacy, backed by the threat of force, is why Syria's chemical weapons are being eliminated.",
+          "confidence": 0.9,
+          "context_type": "recognition_of_institutional_role"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And the bipartisan Commission I appointed, chaired by my campaign lawyer and Governor Romney's campaign lawyer, came together and have offered reforms so that no one has to wait more than a half hour to vote. Let's support these efforts.",
+          "confidence": 0.95,
+          "context_type": "support_for_bipartisan_institutional_reform"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But when that debate prevents us from carrying out even the most basic functions of our democracy\u2014when our differences shut down Government or threaten the full faith and credit of the United States\u2014then we are not doing right by the American people.",
+          "confidence": 0.8,
+          "context_type": "criticism_of_institutional_gridlock"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "And what I believe unites the people of this Nation\u2014regardless of race or region or party, young or old, rich or poor\u2014is the simple, profound belief in opportunity for all: the notion that if you work hard and take responsibility, you can get ahead in America.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_foundational_ideals"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "...we counter terrorism not just through intelligence and military action, but by remaining true to our constitutional ideals and setting an example for the rest of the world.",
+          "confidence": 1.0,
+          "context_type": "explicit_support_for_constitutional_ideals"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

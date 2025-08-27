@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:13:35.750314+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+      "confidence": 1.0,
+      "context_type": "affirmation of democratic process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750297+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750303+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Government has great responsibilities for public safety and public health, for civil rights and common schools.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment of government role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750305+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750307+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have a place, all of us, in a long story, a story we continue but whose end we will not see. It is the American story, a story of flawed and fallible people united across the generations by grand and enduring ideals.",
+      "confidence": 1.0,
+      "context_type": "central thematic metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750309+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:13:35.750311+00:00"
+    }
+  ]
+}

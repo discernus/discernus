@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T15:26:33.382983+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Each time we gather to inaugurate a President we bear witness to the enduring strength of our Constitution. We affirm the promise of our democracy.",
+      "confidence": 1.0,
+      "context_type": "foundational_principle_affirmation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382944+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My fellow Americans, the oath I have sworn before you today, like the one recited by others who serve in this Capitol, was an oath to God and country, not party or faction.",
+      "confidence": 1.0,
+      "context_type": "procedural_act_explanation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382959+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382962+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The commitments we make to each other through Medicare and Medicaid and Social Security, these things do not sap our initiative, they strengthen us. They do not make us a nation of takers; they free us to take the risks that make this country great.",
+      "confidence": 0.9,
+      "context_type": "defense_of_social_programs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382965+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We will renew those institutions that extend our capacity to manage crisis abroad, for no one has a greater stake in a peaceful world than its most powerful nation.",
+      "confidence": 0.8,
+      "context_type": "foreign_policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382968+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382971+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "But we have always understood that when times change, so must we; that fidelity to our founding principles requires new responses to new challenges; that preserving our individual freedoms ultimately requires collective action.",
+      "confidence": 1.0,
+      "context_type": "central_thesis_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382973+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Today we continue a never-ending journey to bridge the meaning of those words with the realities of our time.",
+      "confidence": 1.0,
+      "context_type": "metaphorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382976+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T15:26:33.382978+00:00"
+    }
+  ]
+}
