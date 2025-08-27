@@ -13,6 +13,7 @@ This agent follows the THIN principle - one job, clear responsibility.
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
@@ -248,25 +249,90 @@ Format your response as a structured plan that I can execute programmatically.
         return prompt
     
     def _parse_llm_response(self, response: str) -> Dict[str, Any]:
-        """Parse LLM response to extract evidence retrieval plan."""
+        """
+        Parse LLM response to extract the evidence retrieval plan.
+        
+        The method looks for a JSON block enclosed in ```json ... ``` and parses it.
+        """
         try:
-            # Try to extract structured plan from LLM response
-            # For now, return a basic plan structure
-            return {
-                "key_findings": [],
-                "evidence_queries": [],
-                "quality_criteria": {},
-                "target_quotes": 25
-            }
+            # Use regex to find the JSON block, allowing for flexible surrounding text
+            json_match = re.search(r'```json\s*([\s\S]*?)\s*```', response)
+            
+            if json_match:
+                json_string = json_match.group(1)
+                plan = json.loads(json_string)
+                self.logger.info(f"Successfully parsed evidence retrieval plan with {len(plan)} findings.")
+                return plan
+            else:
+                self.logger.warning("No JSON block found in LLM response. Could not parse plan.")
+                # Fallback if no JSON block is found
+                return self._create_fallback_plan()
+
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to decode JSON from LLM response: {e}")
+            self.logger.debug(f"LLM Response Content: {response}")
+            return self._create_fallback_plan()
         except Exception as e:
-            self.logger.warning(f"Failed to parse LLM response, using fallback: {e}")
+            self.logger.warning(f"An unexpected error occurred while parsing LLM response, using fallback: {e}")
             return self._create_fallback_plan()
     
-    def _execute_evidence_plan(self, evidence_plan: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Execute the evidence retrieval plan."""
-        # For now, implement basic evidence retrieval
-        # This will be enhanced based on the LLM's plan
-        return self._fallback_evidence_retrieval({})
+    def _execute_evidence_plan(self, evidence_plan: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Execute the evidence retrieval plan by querying the RAG wrapper.
+        
+        This method iterates through each finding in the plan, runs the associated
+        queries, and aggregates the retrieved evidence.
+        """
+        if not self.evidence_wrapper:
+            self.logger.error("Evidence wrapper is not initialized. Cannot execute plan.")
+            return []
+            
+        if not isinstance(evidence_plan, list) or not evidence_plan:
+            self.logger.warning("Invalid or empty evidence plan provided. Using fallback.")
+            return self._fallback_evidence_retrieval({})
+
+        self.logger.info(f"Executing evidence retrieval plan with {len(evidence_plan)} findings.")
+        
+        all_results = []
+        
+        for finding_item in evidence_plan:
+            finding_description = finding_item.get("finding")
+            queries = finding_item.get("queries", [])
+            
+            if not finding_description or not queries:
+                self.logger.warning(f"Skipping invalid finding item: {finding_item}")
+                continue
+
+            self.logger.debug(f"Processing finding: '{finding_description}' with queries: {queries}")
+            
+            # Use a set to store unique quotes for this finding
+            unique_quotes_for_finding = {}
+
+            for query in queries:
+                try:
+                    # Search for evidence with a reasonable limit per query
+                    quotes = self.evidence_wrapper.search_evidence(query, limit=3)
+                    for quote in quotes:
+                        # Use quote_text as the key to ensure uniqueness
+                        unique_quotes_for_finding[quote.get('quote_text')] = quote
+                except Exception as e:
+                    self.logger.error(f"Failed to execute query '{query}' for finding '{finding_description}': {e}")
+            
+            if unique_quotes_for_finding:
+                # Sort the collected quotes by relevance score, descending
+                sorted_quotes = sorted(list(unique_quotes_for_finding.values()), 
+                                       key=lambda x: x.get('relevance_score', 0.0), 
+                                       reverse=True)
+                
+                all_results.append({
+                    "finding": {"type": "llm_generated", "description": finding_description},
+                    "queries_used": queries,
+                    "quotes": sorted_quotes,
+                    "total_quotes_found": len(sorted_quotes)
+                })
+
+        self.logger.info(f"Evidence plan execution complete. Found evidence for {len(all_results)} findings.")
+        return all_results
     
     def _fallback_evidence_retrieval(self, statistical_results: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Fallback evidence retrieval when LLM approach fails."""
