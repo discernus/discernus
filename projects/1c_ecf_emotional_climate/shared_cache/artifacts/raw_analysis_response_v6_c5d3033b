@@ -1,0 +1,124 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech advocating for the First Step Act. The speaker, Cory Booker, employs a clear rhetorical structure. He first establishes a climate of 'fear' and 'envy' by detailing the failures and injustices of the current criminal justice system. He then pivots to a climate of 'hope' and 'amity' by presenting the bipartisan bill as a collaborative first step toward redemption and reform. 'Compersion' is used at the outset to reinforce the 'amity' frame by praising colleagues across the aisle. 'Enmity' is present but directed at the abstract 'system' rather than political opponents."
+  },
+  "document_analyses": [
+    {
+      "document_id": "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "confidence": 1.0,
+          "context_type": "Metaphorical language emphasizing existential threat"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound. This bill is a step - a step towards healing.",
+          "confidence": 0.95,
+          "context_type": "Imagery of vulnerability and harm to the nation"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But after decades of failed federal policies, and after decades of growing in the wrong direction, we now have an opportunity to reverse course in a significant way.",
+          "confidence": 1.0,
+          "context_type": "Framing legislation as a positive turning point"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+          "confidence": 0.9,
+          "context_type": "Appeal to a core national ideal of progress and second chances"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "confidence": 0.9,
+          "context_type": "Framing a policy as an antagonistic force against specific groups"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "It is a system that inflicts poverty by concentrating its attacks on low-income neighborhoods.",
+          "confidence": 0.85,
+          "context_type": "Describing the system as an active, hostile aggressor"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Mr. President, it's been perhaps one of the greatest honors of my life, easily one of the greatest honors as a senator, to work in a bipartisan coalition over the last five years to get to this point.",
+          "confidence": 1.0,
+          "context_type": "Explicit declaration of successful bipartisan collaboration"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We share those common values because we still live in a a nation where the ties that bind us are stronger than the lines that divide us.",
+          "confidence": 1.0,
+          "context_type": "Appeal to unity and shared national identity over division"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "As Bryan Stevenson has said, we live in a nation that treats you better if you're rich and guilty than if you're poor and innocent.",
+          "confidence": 1.0,
+          "context_type": "Quoting an authority to frame the system as unfairly privileging the wealthy"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "confidence": 1.0,
+          "context_type": "Using statistics to highlight systemic, grievance-based disparities"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "I want to say good afternoon to everyone, and this is a moment really where I want to give open with a sense of gratitude. I don't want to thank my colleagues for their incredible work and leadership, and especially recognize the chairman of the Judiciary Committee, Senator Chuck Grassley.",
+          "confidence": 1.0,
+          "context_type": "Explicit praise and celebration of colleagues' work and leadership"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "I want to thank Senator Dick Durbin, who has been a hero of mine on issues of criminal justice reform, as well as Mike Lee, who's been a champion.",
+          "confidence": 1.0,
+          "context_type": "Celebration of specific individuals' meritorious actions"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

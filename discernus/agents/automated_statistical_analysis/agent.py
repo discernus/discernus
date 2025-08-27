@@ -337,7 +337,6 @@ class AutomatedStatisticalAnalysisAgent:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=pre_assembled_prompt,
-                max_tokens=8000,
                 temperature=0.1
             )
             

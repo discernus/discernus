@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.98,
+    "analysis_notes": "The document is a political concession speech, a genre which typically emphasizes themes of unity, respect for the democratic process, and graciousness in defeat. This heavily influences the emotional climate, leading to high scores in amity and compersion and low scores in their negative counterparts, enmity and envy. The analysis focuses on the explicit language used to create this specific emotional atmosphere."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "enmity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.9,
+          "context_type": "acknowledgement_of_challenges"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "confidence": 1.0,
+          "context_type": "call_to_action_and_belief"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences",
+          "confidence": 1.0,
+          "context_type": "call_for_unity"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "confidence": 1.0,
+          "context_type": "praise_for_opponent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

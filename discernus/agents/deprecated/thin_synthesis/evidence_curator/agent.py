@@ -221,7 +221,6 @@ Respond with a JSON array of evidence IDs only:
             response_content, _ = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                max_tokens=200,
                 json_mode=True
             )
             

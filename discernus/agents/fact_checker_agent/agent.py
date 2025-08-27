@@ -774,8 +774,7 @@ class FactCheckerAgent:
                 model=self.model,
                 prompt=full_prompt,
                 system_prompt="You are a fact-checking expert. Follow the instructions exactly and return valid JSON. Be concise but thorough - focus on the most critical issues first.",
-                temperature=0.1,  # Low temperature for consistent fact checking
-                max_tokens=16000  # Increased to allow for comprehensive fact checking results
+                temperature=0.1  # Low temperature for consistent fact checking
             )
             
             # Check for empty response - this is critical for fact checking

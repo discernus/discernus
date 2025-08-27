@@ -293,7 +293,7 @@ Respond with only the JSON object."""
             response_content, metadata = self.llm_gateway.execute_call(
                 model="vertex_ai/gemini-2.5-flash",
                 prompt=compatibility_prompt,
-                max_tokens=1000
+                # max_tokens removed - now handled by provider defaults
             )
             
             # Log cost information if audit logger available

@@ -1,0 +1,528 @@
+{
+  "generation_metadata": {
+    "status": "success",
+    "functions_generated": 5,
+    "output_file": "automatedstatisticalanalysisagent_functions.py",
+    "module_size": 19562
+  },
+  "statistical_data": {
+    "analyze_derived_metric_correlations": {
+      "descriptive_cohesion_index": {
+        "descriptive_cohesion_index": 1.0,
+        "motivational_cohesion_index": 0.9988,
+        "full_cohesion_index": 0.9986,
+        "strategic_contradiction_index": -0.6154,
+        "identity_tension": -0.2049,
+        "emotional_tension": -0.7574,
+        "success_tension": NaN,
+        "relational_tension": -0.405,
+        "goal_tension": -0.73
+      },
+      "motivational_cohesion_index": {
+        "descriptive_cohesion_index": 0.9988,
+        "motivational_cohesion_index": 1.0,
+        "full_cohesion_index": 0.9989,
+        "strategic_contradiction_index": -0.5997,
+        "identity_tension": -0.1694,
+        "emotional_tension": -0.7391,
+        "success_tension": NaN,
+        "relational_tension": -0.3928,
+        "goal_tension": -0.7608
+      },
+      "full_cohesion_index": {
+        "descriptive_cohesion_index": 0.9986,
+        "motivational_cohesion_index": 0.9989,
+        "full_cohesion_index": 1.0,
+        "strategic_contradiction_index": -0.574,
+        "identity_tension": -0.1544,
+        "emotional_tension": -0.722,
+        "success_tension": NaN,
+        "relational_tension": -0.359,
+        "goal_tension": -0.7581
+      },
+      "strategic_contradiction_index": {
+        "descriptive_cohesion_index": -0.6154,
+        "motivational_cohesion_index": -0.5997,
+        "full_cohesion_index": -0.574,
+        "strategic_contradiction_index": 1.0,
+        "identity_tension": 0.8297,
+        "emotional_tension": 0.9729,
+        "success_tension": NaN,
+        "relational_tension": 0.9636,
+        "goal_tension": 0.0846
+      },
+      "identity_tension": {
+        "descriptive_cohesion_index": -0.2049,
+        "motivational_cohesion_index": -0.1694,
+        "full_cohesion_index": -0.1544,
+        "strategic_contradiction_index": 0.8297,
+        "identity_tension": 1.0,
+        "emotional_tension": 0.7749,
+        "success_tension": NaN,
+        "relational_tension": 0.8438,
+        "goal_tension": -0.4653
+      },
+      "emotional_tension": {
+        "descriptive_cohesion_index": -0.7574,
+        "motivational_cohesion_index": -0.7391,
+        "full_cohesion_index": -0.722,
+        "strategic_contradiction_index": 0.9729,
+        "identity_tension": 0.7749,
+        "emotional_tension": 1.0,
+        "success_tension": NaN,
+        "relational_tension": 0.8758,
+        "goal_tension": 0.1981
+      },
+      "success_tension": {
+        "descriptive_cohesion_index": NaN,
+        "motivational_cohesion_index": NaN,
+        "full_cohesion_index": NaN,
+        "strategic_contradiction_index": NaN,
+        "identity_tension": NaN,
+        "emotional_tension": NaN,
+        "success_tension": NaN,
+        "relational_tension": NaN,
+        "goal_tension": NaN
+      },
+      "relational_tension": {
+        "descriptive_cohesion_index": -0.405,
+        "motivational_cohesion_index": -0.3928,
+        "full_cohesion_index": -0.359,
+        "strategic_contradiction_index": 0.9636,
+        "identity_tension": 0.8438,
+        "emotional_tension": 0.8758,
+        "success_tension": NaN,
+        "relational_tension": 1.0,
+        "goal_tension": -0.0631
+      },
+      "goal_tension": {
+        "descriptive_cohesion_index": -0.73,
+        "motivational_cohesion_index": -0.7608,
+        "full_cohesion_index": -0.7581,
+        "strategic_contradiction_index": 0.0846,
+        "identity_tension": -0.4653,
+        "emotional_tension": 0.1981,
+        "success_tension": NaN,
+        "relational_tension": -0.0631,
+        "goal_tension": 1.0
+      }
+    },
+    "analyze_speaker_summary": {
+      "status": "error",
+      "message": "Corpus manifest not found. Cannot perform speaker-level analysis.",
+      "details": "Expected manifest file at: /Volumes/code/discernus/corpus_manifest.json"
+    },
+    "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+    "get_corpus_summary_statistics": {
+      "tribal_dominance_raw": {
+        "count": 4.0,
+        "mean": 0.475,
+        "std": 0.3948,
+        "min": 0.0,
+        "25%": 0.225,
+        "50%": 0.55,
+        "75%": 0.8,
+        "max": 0.8
+      },
+      "individual_dignity_raw": {
+        "count": 4.0,
+        "mean": 0.4,
+        "std": 0.4082,
+        "min": 0.0,
+        "25%": 0.075,
+        "50%": 0.4,
+        "75%": 0.725,
+        "max": 0.8
+      },
+      "fear_raw": {
+        "count": 4.0,
+        "mean": 0.65,
+        "std": 0.3109,
+        "min": 0.2,
+        "25%": 0.575,
+        "50%": 0.75,
+        "75%": 0.825,
+        "max": 0.9
+      },
+      "hope_raw": {
+        "count": 4.0,
+        "mean": 0.425,
+        "std": 0.263,
+        "min": 0.2,
+        "25%": 0.275,
+        "50%": 0.35,
+        "75%": 0.5,
+        "max": 0.8
+      },
+      "envy_raw": {
+        "count": 4.0,
+        "mean": 0.6,
+        "std": 0.4243,
+        "min": 0.0,
+        "25%": 0.45,
+        "50%": 0.75,
+        "75%": 0.9,
+        "max": 0.9
+      },
+      "compersion_raw": {
+        "count": 4.0,
+        "mean": 0.225,
+        "std": 0.45,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.225,
+        "max": 0.9
+      },
+      "enmity_raw": {
+        "count": 4.0,
+        "mean": 0.675,
+        "std": 0.45,
+        "min": 0.0,
+        "25%": 0.675,
+        "50%": 0.9,
+        "75%": 0.9,
+        "max": 0.9
+      },
+      "amity_raw": {
+        "count": 4.0,
+        "mean": 0.475,
+        "std": 0.4425,
+        "min": 0.0,
+        "25%": 0.15,
+        "50%": 0.5,
+        "75%": 0.825,
+        "max": 0.9
+      },
+      "fragmentative_goals_raw": {
+        "count": 4.0,
+        "mean": 0.6,
+        "std": 0.4,
+        "min": 0.0,
+        "25%": 0.6,
+        "50%": 0.8,
+        "75%": 0.8,
+        "max": 0.8
+      },
+      "cohesive_goals_raw": {
+        "count": 4.0,
+        "mean": 0.5,
+        "std": 0.3559,
+        "min": 0.2,
+        "25%": 0.2,
+        "50%": 0.45,
+        "75%": 0.75,
+        "max": 0.9
+      },
+      "tribal_dominance_salience": {
+        "count": 4.0,
+        "mean": 0.575,
+        "std": 0.4272,
+        "min": 0.0,
+        "25%": 0.375,
+        "50%": 0.7,
+        "75%": 0.9,
+        "max": 0.9
+      },
+      "individual_dignity_salience": {
+        "count": 4.0,
+        "mean": 0.3875,
+        "std": 0.4049,
+        "min": 0.0,
+        "25%": 0.075,
+        "50%": 0.35,
+        "75%": 0.6625,
+        "max": 0.85
+      },
+      "fear_salience": {
+        "count": 4.0,
+        "mean": 0.65,
+        "std": 0.2517,
+        "min": 0.3,
+        "25%": 0.6,
+        "50%": 0.7,
+        "75%": 0.75,
+        "max": 0.9
+      },
+      "hope_salience": {
+        "count": 4.0,
+        "mean": 0.4,
+        "std": 0.3367,
+        "min": 0.2,
+        "25%": 0.2,
+        "50%": 0.25,
+        "75%": 0.45,
+        "max": 0.9
+      },
+      "envy_salience": {
+        "count": 4.0,
+        "mean": 0.55,
+        "std": 0.4041,
+        "min": 0.0,
+        "25%": 0.375,
+        "50%": 0.65,
+        "75%": 0.825,
+        "max": 0.9
+      },
+      "compersion_salience": {
+        "count": 4.0,
+        "mean": 0.225,
+        "std": 0.45,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.225,
+        "max": 0.9
+      },
+      "enmity_salience": {
+        "count": 4.0,
+        "mean": 0.675,
+        "std": 0.45,
+        "min": 0.0,
+        "25%": 0.675,
+        "50%": 0.9,
+        "75%": 0.9,
+        "max": 0.9
+      },
+      "amity_salience": {
+        "count": 4.0,
+        "mean": 0.4875,
+        "std": 0.4211,
+        "min": 0.0,
+        "25%": 0.225,
+        "50%": 0.5,
+        "75%": 0.7625,
+        "max": 0.95
+      },
+      "fragmentative_goals_salience": {
+        "count": 4.0,
+        "mean": 0.575,
+        "std": 0.3862,
+        "min": 0.0,
+        "25%": 0.525,
+        "50%": 0.75,
+        "75%": 0.8,
+        "max": 0.8
+      },
+      "cohesive_goals_salience": {
+        "count": 4.0,
+        "mean": 0.5375,
+        "std": 0.3497,
+        "min": 0.2,
+        "25%": 0.275,
+        "50%": 0.5,
+        "75%": 0.7625,
+        "max": 0.95
+      },
+      "identity_tension": {
+        "count": 4.0,
+        "mean": 0.0625,
+        "std": 0.1001,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.02,
+        "75%": 0.0825,
+        "max": 0.21
+      },
+      "emotional_tension": {
+        "count": 4.0,
+        "mean": 0.1425,
+        "std": 0.0171,
+        "min": 0.12,
+        "25%": 0.135,
+        "50%": 0.145,
+        "75%": 0.1525,
+        "max": 0.16
+      },
+      "success_tension": {
+        "count": 4.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.0,
+        "max": 0.0
+      },
+      "relational_tension": {
+        "count": 4.0,
+        "mean": 0.07,
+        "std": 0.0825,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.06,
+        "75%": 0.13,
+        "max": 0.16
+      },
+      "goal_tension": {
+        "count": 4.0,
+        "mean": 0.055,
+        "std": 0.064,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.05,
+        "75%": 0.105,
+        "max": 0.12
+      },
+      "strategic_contradiction_index": {
+        "count": 4.0,
+        "mean": 0.066,
+        "std": 0.0369,
+        "min": 0.024,
+        "25%": 0.042,
+        "50%": 0.067,
+        "75%": 0.091,
+        "max": 0.106
+      },
+      "descriptive_cohesion_index": {
+        "count": 4.0,
+        "mean": -0.2675,
+        "std": 0.7038,
+        "min": -0.7517,
+        "25%": -0.7028,
+        "50%": -0.5402,
+        "75%": -0.105,
+        "max": 0.762
+      },
+      "motivational_cohesion_index": {
+        "count": 4.0,
+        "mean": -0.2117,
+        "std": 0.6946,
+        "min": -0.6831,
+        "25%": -0.6694,
+        "50%": -0.4793,
+        "75%": -0.0216,
+        "max": 0.7948
+      },
+      "full_cohesion_index": {
+        "count": 4.0,
+        "mean": -0.1977,
+        "std": 0.688,
+        "min": -0.7065,
+        "25%": -0.633,
+        "50%": -0.44,
+        "75%": -0.0046,
+        "max": 0.7957
+      }
+    },
+    "get_document_rankings": {
+      "metric_ranked": "full_cohesion_index",
+      "top_ranked": [
+        {
+          "document_name": "john_mccain_2008_concession.txt",
+          "full_cohesion_index": 0.795712224283653
+        },
+        {
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "full_cohesion_index": -0.2713854943659737
+        },
+        {
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "full_cohesion_index": -0.6085633557922191
+        },
+        {
+          "document_name": "steve_king_2017_house_floor.txt",
+          "full_cohesion_index": -0.7065096645189958
+        }
+      ],
+      "bottom_ranked": [
+        {
+          "document_name": "steve_king_2017_house_floor.txt",
+          "full_cohesion_index": -0.7065096645189958
+        },
+        {
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "full_cohesion_index": -0.6085633557922191
+        },
+        {
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "full_cohesion_index": -0.2713854943659737
+        },
+        {
+          "document_name": "john_mccain_2008_concession.txt",
+          "full_cohesion_index": 0.795712224283653
+        }
+      ]
+    },
+    "perform_statistical_analysis": {
+      "analysis_metadata": {
+        "timestamp": "2025-08-27T13:43:48.191966",
+        "sample_size": 4,
+        "alpha_level": 0.05,
+        "variables_analyzed": [
+          "tribal_dominance_raw",
+          "tribal_dominance_salience",
+          "tribal_dominance_confidence",
+          "individual_dignity_raw",
+          "individual_dignity_salience",
+          "individual_dignity_confidence",
+          "fear_raw",
+          "fear_salience",
+          "fear_confidence",
+          "hope_raw",
+          "hope_salience",
+          "hope_confidence",
+          "envy_raw",
+          "envy_salience",
+          "envy_confidence",
+          "compersion_raw",
+          "compersion_salience",
+          "compersion_confidence",
+          "enmity_raw",
+          "enmity_salience",
+          "enmity_confidence",
+          "amity_raw",
+          "amity_salience",
+          "amity_confidence",
+          "fragmentative_goals_raw",
+          "fragmentative_goals_salience",
+          "fragmentative_goals_confidence",
+          "cohesive_goals_raw",
+          "cohesive_goals_salience",
+          "cohesive_goals_confidence"
+        ]
+      }
+    },
+    "run_complete_statistical_analysis": {
+      "analysis_metadata": {
+        "timestamp": "2025-08-27T13:43:48.195556",
+        "sample_size": 4,
+        "alpha_level": 0.05,
+        "variables_analyzed": [
+          "tribal_dominance_raw",
+          "tribal_dominance_salience",
+          "tribal_dominance_confidence",
+          "individual_dignity_raw",
+          "individual_dignity_salience",
+          "individual_dignity_confidence",
+          "fear_raw",
+          "fear_salience",
+          "fear_confidence",
+          "hope_raw",
+          "hope_salience",
+          "hope_confidence",
+          "envy_raw",
+          "envy_salience",
+          "envy_confidence",
+          "compersion_raw",
+          "compersion_salience",
+          "compersion_confidence",
+          "enmity_raw",
+          "enmity_salience",
+          "enmity_confidence",
+          "amity_raw",
+          "amity_salience",
+          "amity_confidence",
+          "fragmentative_goals_raw",
+          "fragmentative_goals_salience",
+          "fragmentative_goals_confidence",
+          "cohesive_goals_raw",
+          "cohesive_goals_salience",
+          "cohesive_goals_confidence"
+        ]
+      }
+    }
+  },
+  "status": "success_with_data",
+  "validation_passed": true
+}

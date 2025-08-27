@@ -261,7 +261,7 @@ def _run_synthesis_individual(self, synthesis_model: str, audit_logger, statisti
     response, metadata = self.llm_gateway.execute_call(
         model=synthesis_model,
         prompt=synthesis_prompt,
-        max_tokens=8000
+        # max_tokens removed - now handled by provider defaults
     )
     
     return {

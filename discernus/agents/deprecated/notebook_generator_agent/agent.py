@@ -225,7 +225,7 @@ The notebook should be completely self-contained and executable.
                 model=self.model,
                 prompt=prompt,
                 system_prompt=system_prompt,
-                max_tokens=4000,  # Allow for comprehensive notebook generation
+  # Allow for comprehensive notebook generation
                 temperature=0.3   # Lower temperature for more consistent code generation
             )
             

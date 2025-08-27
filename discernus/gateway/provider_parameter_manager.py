@@ -80,6 +80,9 @@ class ProviderParameterManager:
         # Now, process the base parameters provided in the call
         final_params = base_params.copy()
         
+        # Handle max_tokens intelligently - warn if too low, use safe defaults
+        self._handle_max_tokens(model_name, final_params, clean_params)
+        
         # Handle parameter mapping before forbidden parameter removal
         parameter_mapping = clean_params.get('parameter_mapping', {})
         for old_param, new_param in parameter_mapping.items():
@@ -105,6 +108,39 @@ class ProviderParameterManager:
 
         self.logger.debug(f"Final clean parameters for {model_name}: {list(final_params.keys())}")
         return final_params
+    
+    def _handle_max_tokens(self, model_name: str, final_params: Dict[str, Any], clean_params: Dict[str, Any]) -> None:
+        """
+        Intelligently handle max_tokens parameters with logging and safe defaults.
+        
+        This method:
+        1. Warns when max_tokens is too low (likely to truncate)
+        2. Uses safe_max_tokens from config when no max_tokens is specified
+        3. Logs when token limits are being applied
+        """
+        original_max_tokens = final_params.get('max_tokens')
+        safe_max_tokens = clean_params.get('safe_max_tokens')
+        
+        # Define threshold for "dangerously low" token limits
+        DANGEROUSLY_LOW_THRESHOLD = 2000
+        
+        if original_max_tokens is not None:
+            if original_max_tokens < DANGEROUSLY_LOW_THRESHOLD:
+                # Log warning for dangerously low token limits
+                print(f"⚠️  WARNING: max_tokens={original_max_tokens} for {model_name} may truncate responses")
+                self.logger.warning(f"Dangerously low max_tokens={original_max_tokens} for {model_name} - may cause truncation")
+            
+            # Keep the original value but log it
+            self.logger.info(f"Using explicit max_tokens={original_max_tokens} for {model_name}")
+        
+        elif safe_max_tokens is not None:
+            # No max_tokens specified, use safe default
+            final_params['max_tokens'] = safe_max_tokens
+            self.logger.debug(f"Applied safe max_tokens={safe_max_tokens} for {model_name}")
+        
+        else:
+            # No safe_max_tokens configured for this provider
+            self.logger.debug(f"No max_tokens configuration for {model_name} - letting provider handle defaults")
 
 # Convenience function for backward compatibility
 def get_clean_parameters(model_name: str, base_params: Dict[str, Any]) -> Dict[str, Any]:

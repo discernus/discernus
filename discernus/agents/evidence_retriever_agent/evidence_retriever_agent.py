@@ -195,8 +195,7 @@ class EvidenceRetrieverAgent:
             response, metadata = self.llm_gateway.execute_call(
                 model="vertex_ai/gemini-2.5-flash",
                 prompt=prompt,
-                system_prompt="You are an expert research analyst specializing in evidence curation and statistical interpretation.",
-                max_tokens=2000
+                system_prompt="You are an expert research analyst specializing in evidence curation and statistical interpretation."
             )
             
             # Parse the LLM response to get evidence retrieval plan

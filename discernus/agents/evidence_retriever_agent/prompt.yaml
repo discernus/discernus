@@ -6,7 +6,6 @@ version: "1.0.0"
 agent_type: "evidence_retrieval"
 model: "vertex_ai/gemini-2.5-flash"
 temperature: 0.1
-max_tokens: 1000
 
 # Agent Behavior
 behavior:

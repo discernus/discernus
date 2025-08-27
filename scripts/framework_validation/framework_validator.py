@@ -166,7 +166,7 @@ Focus on actionable, specific feedback that helps framework developers improve t
                 prompt=prompt,
                 system_prompt="You are a framework validation specialist. Provide clear, actionable feedback in JSON format.",
                 temperature=0.1,  # Low temperature for consistent validation
-                max_tokens=8000
+                # max_tokens removed - now handled by provider defaults
             )
             
             # Parse LLM response

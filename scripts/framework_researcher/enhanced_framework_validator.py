@@ -192,7 +192,7 @@ Provide a JSON response with:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.academic_model,
                 prompt=academic_prompt,
-                max_tokens=32000  # Increased from 8000 to prevent truncation
+# Increased from 8000 to prevent truncation
             )
             
             # Store raw response for verbose logging
@@ -306,7 +306,7 @@ Provide your response in markdown format with the following structure:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.academic_model,
                 prompt=research_prompt,
-                max_tokens=8000
+                # max_tokens removed - now handled by provider defaults
             )
             
             # Store raw response for verbose logging
@@ -694,7 +694,7 @@ Provide your response in valid JSON format with these keys:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.academic_model,
                 prompt=synthesis_prompt,
-                max_tokens=8000
+                # max_tokens removed - now handled by provider defaults
             )
             
             # Store raw response for verbose logging

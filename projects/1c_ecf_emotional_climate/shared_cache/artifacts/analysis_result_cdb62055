@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_71f02b0c0cd5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the speaker's pronounced use of threat narratives, particularly concerning immigration and constitutional interpretation, which drives high scores in Fear and Enmity. Positive emotional dimensions like Hope, Amity, and Compersion are either absent or very low, used only in the context of restoring a perceived lost order. The speaker's rhetoric is consistently oppositional.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"hope\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"anecdotal_narrative\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"And it's costing, it's costing in the end thousands of lives in America.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"generalized_threat_assessment\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"political_criticism\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"institutional_criticism\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Lord, wake me up with an idea on how to, how to preserve our Constitution, if the Supreme Court of the United States believes that they can write law.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"aspirational_statement\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "7ba557bc3d9bc20f705720a00867dfce6ea1104236bd44da2508075a2f3056ef",
+  "execution_metadata": {
+    "start_time": "2025-08-27T17:39:49.049967+00:00",
+    "end_time": "2025-08-27T17:40:23.147107+00:00",
+    "duration_seconds": 34.097122
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T173456Z_987f125c"
+  }
+}

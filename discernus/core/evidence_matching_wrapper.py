@@ -596,8 +596,7 @@ class EvidenceMatchingWrapper:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                system_prompt="You are an expert research analyst specializing in evidence retrieval.",
-                max_tokens=200
+                system_prompt="You are an expert research analyst specializing in evidence retrieval."
             )
             
             if response and response.strip():

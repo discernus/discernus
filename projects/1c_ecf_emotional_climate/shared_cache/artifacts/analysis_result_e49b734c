@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_03b3a6191651",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"emotional_climate_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"The document is a political concession speech, a genre which typically emphasizes themes of unity, respect for the democratic process, and graciousness in defeat. This heavily influences the emotional climate, leading to high scores in amity and compersion and low scores in their negative counterparts, enmity and envy. The analysis focuses on the explicit language used to create this specific emotional atmosphere.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"fear\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"enmity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"amity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"compersion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgement_of_challenges\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"to not despair of our present difficulties, but to believe always in the promise and greatness of America.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_to_action_and_belief\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_for_unity\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"praise_for_opponent\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "ea1ece33dfa6a78aa3e41eed4cff4d5b5de282d986833406fa52689f36c40406",
+  "execution_metadata": {
+    "start_time": "2025-08-27T17:36:14.210204+00:00",
+    "end_time": "2025-08-27T17:36:43.293458+00:00",
+    "duration_seconds": 29.083235
+  },
+  "input_artifacts": {
+    "framework_hash": "d90f41879b7ddd8e7e7937aaa2ce6aeac22f15766768e734841f517e70deefc1",
+    "document_hashes": [
+      "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T173456Z_987f125c"
+  }
+}

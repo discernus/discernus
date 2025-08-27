@@ -179,7 +179,6 @@ Generate your comprehensive academic report following the structure specified in
                 model=self.model,
                 prompt=prompt,
                 system_prompt=self.enhanced_prompt_template.get('system_prompt', ''),
-                max_tokens=8000,  # Increased for comprehensive reports
                 temperature=0.1   # Low temperature for analytical consistency
             )
             
