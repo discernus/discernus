@@ -1774,8 +1774,17 @@ class CleanAnalysisOrchestrator:
 
             # New Step: Run Evidence Retrieval Agent to get curated evidence
             raw_evidence_hashes = [h for h, info in self.artifact_storage.registry.items() if info.get("metadata", {}).get("artifact_type", "").startswith("evidence_v6")]
-            framework_hash = self.artifact_storage.get_hash_by_type("framework_specification")
-            statistical_results_hash = self.artifact_storage.get_hash_by_type("statistical_results")
+            
+            # Find framework and statistical results hashes using the same pattern
+            framework_hash = None
+            statistical_results_hash = None
+            
+            for h, info in self.artifact_storage.registry.items():
+                artifact_type = info.get("metadata", {}).get("artifact_type", "")
+                if artifact_type == "framework_specification":
+                    framework_hash = h
+                elif artifact_type == "statistical_results_with_data":
+                    statistical_results_hash = h
 
             curated_evidence_hash = None
             if raw_evidence_hashes and framework_hash and statistical_results_hash:
