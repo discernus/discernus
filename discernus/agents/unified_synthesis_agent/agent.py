@@ -93,7 +93,7 @@ class UnifiedSynthesisAgent:
                 experiment_path=assets['experiment_path'],
                 research_data_artifact_hash=assets['research_data_artifact_hash'],
                 artifact_storage=artifact_storage,
-                evidence_artifacts=[],  # Evidence will be added separately
+                curated_evidence_hash=None  # Evidence will be added separately
             )
 
             # 2. Load and prepare curated evidence if available
