@@ -155,3 +155,6 @@ experiments/**/.git/
 projects/**/.git/
 results/**/.git/
 node_modules
+
+# Logs directory
+logs/

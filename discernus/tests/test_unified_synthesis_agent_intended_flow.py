@@ -10,7 +10,7 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 import json
 
-from discernus.core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+from discernus.agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from discernus.core.audit_logger import AuditLogger
 
 

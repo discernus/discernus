@@ -86,7 +86,7 @@ class TestEnhancedEvidenceIntegration:
     
     def test_evidence_context_preparation(self):
         """Test evidence context preparation matches SynthesisPromptAssembler functionality."""
-        from discernus.core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+        from discernus.agents.unified_synthesis_agent import UnifiedSynthesisAgent
         
         # Mock artifact storage
         mock_storage = Mock()
@@ -119,7 +119,7 @@ class TestEnhancedEvidenceIntegration:
     def test_synthesis_prompt_assembly_equivalence(self):
         """Test that enhanced mode provides equivalent functionality to SynthesisPromptAssembler."""
         from discernus.core.prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
-        from discernus.core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+        from discernus.agents.unified_synthesis_agent import UnifiedSynthesisAgent
         
         # Create temporary files
         with tempfile.TemporaryDirectory() as temp_dir:

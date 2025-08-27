@@ -103,6 +103,11 @@ class RevisionAgent:
             if revision_result['success']:
                 revised_report = revision_result['revised_text']
                 revision_summary['revisions_applied'] += 1
+                
+                # Count warnings separately
+                if 'warning' in revision_result['action'].lower():
+                    revision_summary['warnings_added'] += 1
+                
                 revision_summary['revision_details'].append({
                     'finding_type': finding.get('check_name'),
                     'action': revision_result['action'],
@@ -136,23 +141,42 @@ class RevisionAgent:
         Returns:
             Dictionary with revision result
         """
-        check_name = finding.get('check_name', '')
+        # Map fact checker categories to revision strategies
+        category = finding.get('category', '')
+        severity = finding.get('severity', 'WARNING')
         
-        if check_name == "Quote Validation":
+        # Route based on category instead of hardcoded check names
+        if category == "quote_validation":
             return self._revise_quote(finding, current_report, corpus_index_service)
-        elif check_name == "Statistical Verification":
-            return self._revise_statistics(finding, current_report, assets)
-        elif check_name == "Framework Compliance":
-            return self._revise_framework(finding, current_report, assets)
-        elif check_name == "Evidence Attribution":
-            return self._revise_attribution(finding, current_report, assets)
+        elif category in ["statistical_data_integrity", "data_reference_check"]:
+            # For statistical issues, try specific revision first, then fall back to warning
+            result = self._revise_statistics(finding, current_report, assets)
+            if not result['success'] and severity in ["CRITICAL", "ERROR"]:
+                return self._add_warning_for_finding(finding, current_report)
+            return result
+        elif category == "framework_compliance":
+            # For framework issues, try specific revision first, then fall back to warning
+            result = self._revise_framework(finding, current_report, assets)
+            if not result['success'] and severity in ["CRITICAL", "ERROR"]:
+                return self._add_warning_for_finding(finding, current_report)
+            return result
+        elif category in ["missing_evidence", "interpretation_error"]:
+            # For evidence issues, try specific revision first, then fall back to warning
+            result = self._revise_attribution(finding, current_report, assets)
+            if not result['success'] and severity in ["CRITICAL", "ERROR"]:
+                return self._add_warning_for_finding(finding, current_report)
+            return result
         else:
-            return {
-                'success': False,
-                'action': 'unknown_check',
-                'details': f'Unknown check type: {check_name}',
-                'revised_text': current_report
-            }
+            # For unknown categories, apply conservative strategy based on severity
+            if severity in ["CRITICAL", "ERROR"]:
+                return self._add_warning_for_finding(finding, current_report)
+            else:
+                return {
+                    'success': False,
+                    'action': 'no_revision_needed',
+                    'details': f'Category "{category}" with severity "{severity}" does not require revision',
+                    'revised_text': current_report
+                }
 
     def _revise_quote(
         self, finding: Dict[str, Any], current_report: str, 
@@ -287,6 +311,43 @@ class RevisionAgent:
             'action': 'no_action_needed',
             'details': 'Attribution finding does not require revision',
             'revised_text': current_report
+        }
+
+    def _add_warning_for_finding(self, finding: Dict[str, Any], current_report: str) -> Dict[str, Any]:
+        """Add a warning for critical/error findings that don't have specific revision strategies."""
+        check_name = finding.get('check_name', 'Unknown Issue')
+        description = finding.get('description', 'No description provided')
+        recommended_action = finding.get('recommended_action', 'Manual review recommended')
+        
+        warning = f"""
+> **⚠️ FACT-CHECKING WARNING - {check_name}**
+> 
+> {description}
+> 
+> **Recommended Action**: {recommended_action}
+> 
+> *This warning was automatically added by the Discernus Revision Agent based on fact-checking findings.*
+
+"""
+        
+        # Add warning at the beginning of the report (after any existing headers)
+        lines = current_report.split('\n')
+        insert_position = 0
+        
+        # Find a good place to insert (after title/headers but before main content)
+        for i, line in enumerate(lines):
+            if line.strip() and not line.startswith('#') and not line.startswith('**'):
+                insert_position = i
+                break
+        
+        lines.insert(insert_position, warning)
+        revised_text = '\n'.join(lines)
+        
+        return {
+            'success': True,
+            'action': 'added_warning',
+            'details': f'Added fact-checking warning for {check_name}',
+            'revised_text': revised_text
         }
 
     def _add_revision_summary(self, report: str, revision_summary: Dict[str, Any]) -> str:

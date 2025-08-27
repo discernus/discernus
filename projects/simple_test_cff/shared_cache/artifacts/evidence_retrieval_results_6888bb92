@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-26T20:51:43.036357",
+    "statistical_results_hash": "00787456aca4acde2ea527f3600edcda2588fe75cafd02d53bb4ffc40e023738",
+    "total_findings": 5,
+    "total_quotes": 10
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for correlation analysis"
+      },
+      "queries_used": [
+        "correlation analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.14967820048332214,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.14967820048332214,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for statistical patterns"
+      },
+      "queries_used": [
+        "statistical patterns"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.12253210693597794,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.12253210693597794,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for framework analysis"
+      },
+      "queries_used": [
+        "framework analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.17163832485675812,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.17163832485675812,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for evidence examples"
+      },
+      "queries_used": [
+        "evidence examples"
+      ],
+      "quotes": [
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.2916601002216339,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.2916601002216339,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for key findings"
+      },
+      "queries_used": [
+        "key findings"
+      ],
+      "quotes": [
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 1.0,
+          "relevance_score": 0.29058539867401123,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 1.0,
+          "relevance_score": 0.29058539867401123,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}

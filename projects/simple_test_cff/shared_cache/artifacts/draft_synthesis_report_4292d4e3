@@ -1,0 +1,181 @@
+# Cohesive Flourishing Framework Analysis Report
+
+**Experiment**: simple_test  
+**Run ID**: Not available  
+**Date**: 2025-08-26T01:14:09.611842+00:00  
+**Framework**: Cohesive Flourishing Framework (CFF) v10.1  
+**Corpus**: Not available (4 documents)  
+
+---
+
+## 1. Executive Summary
+
+This report presents a preliminary computational analysis of a small corpus (N=4) of political texts using the Cohesive Flourishing Framework (CFF) v10.1. The objective is to explore the framework's capacity to extract nuanced insights into rhetorical strategies and their potential impact on social cohesion. Despite the significant limitation of the small sample size, the analysis reveals distinct and highly polarized rhetorical patterns, suggesting the CFF possesses strong discriminatory power. The findings indicate a clear bifurcation in the corpus between discourse that is overwhelmingly cohesive and discourse that is overwhelmingly fragmentative. For instance, the `full_cohesion_index`, a key CFF metric, ranged dramatically from a high of 0.840 (indicating strong cohesive rhetoric) to a low of -0.735 (indicating strong fragmentative rhetoric).
+
+Key statistical patterns support the CFF's theoretical design. Dimensions intended to be oppositional, such as `tribal_dominance` and `individual_dignity`, exhibit a strong negative correlation (r = -0.78), as expected. Conversely, dimensions within the same rhetorical valence cluster together; for example, `tribal_dominance` is almost perfectly correlated with `fear` (r = 0.996), suggesting a consistent "fragmentative" rhetorical strategy. The analysis also highlights the utility of the CFF's novel derived metrics. The `strategic_contradiction_index`, which measures the use of competing rhetorical appeals, identified texts that employ complex, mixed messaging, distinct from those that are consistently cohesive or fragmentative.
+
+While these results must be considered illustrative rather than generalizable, they successfully demonstrate the potential of the CFF to move beyond simple sentiment analysis. The framework effectively quantifies not only the valence of discourse (cohesive vs. fragmentative) but also its internal complexity and strategic orientation. The preliminary archetypes identified—ranging from "Cohesive Unifier" to "Fragmentative Polarizer" and "Conflict-Oriented Agitator"—provide a promising foundation for future, larger-scale research into the linguistic drivers of social cohesion and political polarization.
+
+## 2. Opening Framework: Key Insights
+
+This pilot analysis yielded several preliminary insights into the rhetorical dynamics of the corpus and the effectiveness of the Cohesive Flourishing Framework.
+
+*   **Extreme Rhetorical Polarization:** The corpus is characterized by starkly opposing rhetorical styles. The `full_cohesion_index` scores show a wide chasm between the most cohesive document (McCain, 0.840) and the most fragmentative (King, -0.735), indicating the framework's ability to differentiate between unifying and divisive language.
+*   **Strong Construct Validity of the Framework:** The statistical relationships between CFF dimensions align with its theoretical design. Cohesive dimensions (e.g., `individual_dignity`, `amity`) are positively correlated with each other and negatively correlated with their fragmentative counterparts (e.g., `tribal_dominance`, `enmity`). For example, `compersion_raw` and `tribal_dominance_salience` are perfectly negatively correlated (r = -1.00).
+*   **Identification of Coherent Rhetorical Strategies:** The analysis reveals two dominant and opposing rhetorical clusters. A "Fragmentative Cluster" links appeals to `tribal_dominance`, `fear`, `enmity`, and `envy`, while a "Cohesive Cluster" links `individual_dignity`, `hope`, `amity`, and `compersion`. This suggests that speakers in this corpus tend to employ consistent, rather than mixed, rhetorical strategies.
+*   **The `Strategic Contradiction Index` Uncovers Nuance:** The analysis demonstrates that low cohesion is not synonymous with high contradiction. The document with the highest `strategic_contradiction_index` (Sanders, 0.102) is not the one with the lowest cohesion score. This metric successfully identifies a distinct strategy of using competing appeals simultaneously, offering a more nuanced view than a simple cohesion score alone.
+*   **Fragmentative Rhetoric is Tightly Integrated:** The correlations among fragmentative dimensions are exceptionally high. The relationship between `tribal_dominance_raw` and `fear_raw` (r = 0.996), and `enmity_raw` and `fragmentative_goals_raw` (r = 0.993) suggests that, in this corpus, these appeals form a tightly-knit, almost inseparable rhetorical package. This is exemplified by language focused on destruction, as one speaker noted, "And instead of being restored, it would be destroyed by another presidential appointment" (Source: `steve_king_2017_house_floor.txt`).
+*   **Cohesive Rhetoric Aligns with Pro-Social Goals:** Cohesive dimensions show extremely strong correlations with pro-social aims. The near-perfect correlation between `amity_raw` and `cohesive_goals_raw` (r = 0.999) indicates that expressions of friendship and goodwill are directly tied to the articulation of unifying objectives. This is reflected in calls for unity, such as, "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity" (Source: `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`).
+
+## 4. Methodology
+
+### Framework Description and Analytical Approach
+
+This study employs the Cohesive Flourishing Framework (CFF) v10.1, a computational tool designed to analyze political and social discourse. As described in its specification, the CFF moves beyond simple positive/negative sentiment analysis by scoring texts along ten independent dimensions organized into five oppositional pairs:
+*   **Identity:** Tribal Dominance vs. Individual Dignity
+*   **Emotion:** Fear vs. Hope
+*   **Success:** Envy vs. Compersion
+*   **Relation:** Enmity vs. Amity
+*   **Goals:** Fragmentative Goals vs. Cohesive Goals
+
+A key innovation of the CFF is its ability to capture rhetorical complexity by scoring each dimension independently for both its intensity (`_raw` score) and its prominence (`_salience` score). This allows the framework to model sophisticated communication where opposing appeals (e.g., Hope and Fear) may be used simultaneously. From these base scores, the analysis calculates several derived metrics, including five **Tension Indices**, a **Strategic Contradiction Index** (the mean of the tension indices), and three composite **Cohesion Indices** (Descriptive, Motivational, and Full) that provide an overall measure of a document's orientation toward social cohesion.
+
+### Data Structure and Corpus Description
+
+The dataset for this analysis consists of CFF scores for a small corpus of four political documents. The data was provided in a structured format containing raw scores, salience scores, and model confidence scores for each of the ten base dimensions for each document. The analysis was performed on this pre-scored data; no new natural language processing was conducted. The documents analyzed are: `john_mccain_2008_concession.txt`, `steve_king_2017_house_floor.txt`, `bernie_sanders_2025_fighting_oligarchy.txt`, and `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`.
+
+### Statistical Methods and Analytical Constraints
+
+The analysis utilized descriptive statistics and correlation analysis to explore the data.
+1.  **Descriptive Statistics:** Mean, standard deviation, and quartiles were calculated for all base scores and derived metrics to establish baseline characteristics of the corpus.
+2.  **Pearson Correlation:** A Pearson correlation matrix was computed for all raw and salience scores to identify relationships between rhetorical dimensions. This method was chosen to assess both the strength and direction of linear relationships, which is central to validating the CFF's oppositional structure.
+
+The primary and most significant limitation of this study is its **extremely small sample size (N=4)**. Consequently, the results are not statistically generalizable and should be interpreted as **preliminary and illustrative**. The findings serve to demonstrate the analytical potential of the CFF and to generate hypotheses for future research on larger corpora, rather than to make definitive claims about political discourse at large. Furthermore, a planned analysis of speaker profiles could not be completed because a required `corpus_manifest.json` file was not available, limiting the ability to systematically compare speakers.
+
+## 5. Comprehensive Results
+
+### 5.1 Descriptive Statistics
+
+An initial examination of the descriptive statistics reveals a corpus with high variability, indicating significant rhetorical differences among the four documents. The standard deviations for most raw and salience scores are large relative to their means, confirming the presence of polarized content.
+
+The `full_cohesion_index`, the most comprehensive measure of a document's rhetorical effect, has a mean of -0.110 but a very large standard deviation of 0.674. The scores span a wide range from a minimum of -0.735 to a maximum of 0.840, underscoring the deep divide between the most fragmentative and most cohesive texts in this small sample. Similarly, the `strategic_contradiction_index` shows notable variance, suggesting that documents differ not only in their cohesive or fragmentative orientation but also in their degree of rhetorical complexity.
+
+**Table 1: Descriptive Statistics for CFF Derived Metrics (N=4)**
+
+| Metric                          | Mean    | Std. Dev. | Min     | Max     |
+| ------------------------------- | ------- | --------- | ------- | ------- |
+| Full Cohesion Index             | -0.110  | 0.674     | -0.735  | 0.840   |
+| Strategic Contradiction Index   | 0.049   | 0.038     | 0.014   | 0.102   |
+| Identity Tension                | 0.085   | 0.062     | 0.000   | 0.140   |
+| Emotional Tension               | 0.070   | 0.008     | 0.060   | 0.080   |
+| Success Tension                 | 0.000   | 0.000     | 0.000   | 0.000   |
+| Relational Tension              | 0.045   | 0.090     | 0.000   | 0.180   |
+| Goal Tension                    | 0.045   | 0.057     | 0.000   | 0.120   |
+
+**Table 2: Descriptive Statistics for Select CFF Base Dimensions (Raw Scores, N=4)**
+
+| Dimension               | Mean    | Std. Dev. | Min     | Max     |
+| ----------------------- | ------- | --------- | ------- | ------- |
+| Tribal Dominance Raw    | 0.563   | 0.390     | 0.000   | 0.850   |
+| Individual Dignity Raw  | 0.475   | 0.377     | 0.100   | 0.800   |
+| Fear Raw                | 0.600   | 0.356     | 0.100   | 0.900   |
+| Hope Raw                | 0.425   | 0.377     | 0.100   | 0.800   |
+| Enmity Raw              | 0.625   | 0.419     | 0.000   | 0.900   |
+| Amity Raw               | 0.575   | 0.403     | 0.000   | 0.900   |
+
+### 5.2 Advanced Metric Analysis
+
+The CFF's derived metrics provide insights beyond the base scores. The `strategic_contradiction_index` is particularly revealing. The document with the highest score is `bernie_sanders_2025_fighting_oligarchy.txt` (0.102), which also has a negative cohesion score (-0.370). This indicates a rhetorical style that is both fragmentative and internally complex, simultaneously leveraging opposing appeals. In contrast, `john_mccain_2008_concession.txt` has the lowest contradiction score (0.014) and the highest cohesion score (0.840), suggesting a message that is consistently and coherently unifying. This demonstrates that the contradiction index is not merely an inverse of the cohesion index but measures a distinct rhetorical property.
+
+The relationship between cohesion and contradiction is visualized by plotting the `full_cohesion_index` against the `strategic_contradiction_index`. The data points suggest a potential negative relationship, where highly cohesive or highly fragmentative documents tend to have low contradiction, while those in the middle ground of cohesion exhibit higher contradiction. For example, the Steve King document, while extremely fragmentative, is rhetorically consistent, as shown by its low contradiction score (0.044). This document's focus on destruction, as seen in the statement, "And instead of being restored, it would be destroyed by another presidential appointment" (Source: `steve_king_2017_house_floor.txt`), is a clear, unconflicted fragmentative goal.
+
+### 5.3 Correlation and Interaction Analysis
+
+The Pearson correlation matrix (Table 3) offers strong preliminary evidence for the CFF's construct validity and reveals coherent rhetorical strategies within the corpus.
+
+**Construct Validity:** The framework's oppositional design is supported by strong negative correlations between opposing dimensions.
+*   `tribal_dominance_raw` is strongly negatively correlated with `individual_dignity_raw` (r = -0.778).
+*   `compersion_salience` is perfectly negatively correlated with `tribal_dominance_salience` (r = -1.000) and `envy_salience` (r = -0.975).
+*   `fear_raw` is negatively correlated with `hope_raw` (r = -0.571).
+
+These relationships indicate that, as intended, the framework measures these dimensions as competing constructs.
+
+**Rhetorical Clustering:** The analysis identifies two powerful, opposing clusters of rhetorical appeals.
+1.  **The Fragmentative Cluster:** `tribal_dominance`, `fear`, `envy`, `enmity`, and `fragmentative_goals` are all very strongly and positively inter-correlated. The correlation between `tribal_dominance_raw` and `fear_raw` is exceptionally high (r = 0.996), as is the correlation between `enmity_salience` and `fragmentative_goals_salience` (r = 0.995). This suggests a unified rhetorical strategy where appeals to in-group dominance are packaged with fear-mongering, resentment, and the articulation of divisive goals.
+2.  **The Cohesive Cluster:** `individual_dignity`, `hope`, `compersion`, `amity`, and `cohesive_goals` are also positively inter-correlated. The correlation between `amity_salience` and `cohesive_goals_salience` is nearly perfect (r = 0.995), as is the link between `individual_dignity_salience` and `cohesive_goals_salience` (r = 0.899). This indicates a cohesive strategy where respect for individuals is linked with expressions of hope, goodwill, and unifying objectives. This is exemplified by language aiming for broad solidarity, as one speaker urged, "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity" (Source: `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`).
+
+**Table 3: Abridged Pearson Correlation Matrix for Select CFF Raw Scores**
+
+| Dimension | Tribal Dom. | Ind. Dignity | Fear | Hope | Enmity | Amity | Frag. Goals | Cohesive Goals |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Tribal Dom.** | 1.00 | -0.78 | **0.996** | -0.57 | **0.97** | -0.71 | **0.99** | -0.73 |
+| **Ind. Dignity** | | 1.00 | -0.82 | 0.15 | -0.61 | **0.85** | -0.67 | **0.87** |
+| **Fear** | | | 1.00 | -0.57 | **0.94** | -0.77 | **0.97** | -0.79 |
+| **Hope** | | | | 1.00 | -0.57 | 0.53 | -0.61 | 0.52 |
+| **Enmity** | | | | | 1.00 | -0.51 | **0.99** | -0.54 |
+| **Amity** | | | | | | 1.00 | -0.60 | **0.999** |
+| **Frag. Goals** | | | | | | | 1.00 | -0.63 |
+| **Cohesive Goals**| | | | | | | | 1.00 |
+*Note: Correlations > |0.80| are bolded to highlight strong relationships.*
+
+### 5.4 Pattern Recognition and Theoretical Insights
+
+The statistical patterns reveal a profound ideological and rhetorical cleavage in the corpus. The documents do not exist on a simple continuum but appear to fall into distinct archetypes defined by their combination of CFF scores. The strong negative correlation between the two clusters suggests that these are not just collections of rhetorical tactics but deeply ingrained, opposing worldviews.
+
+The "Fragmentative Cluster" appears to represent a rhetoric of threat and grievance. The tight coupling of `fear` and `tribal_dominance` suggests a strategy of mobilizing an in-group by emphasizing external threats. The further link to `enmity` and `envy` points to a narrative that defines the "other" as both a threat and an object of resentment. The articulation of `fragmentative_goals` is the logical conclusion of this strategy, often framed in defensive or destructive terms. For example, one speaker's rhetoric, which scored high on these dimensions, includes the stark warning, "And instead of being restored, it would be destroyed by another presidential appointment" (Source: `steve_king_2017_house_floor.txt`), directly embodying a fragmentative goal.
+
+Conversely, the "Cohesive Cluster" represents a rhetoric of aspiration and unity. The strong link between `individual_dignity` and `amity` suggests a foundation built on mutual respect. While the provided textual evidence for this cluster is limited, the statement, "That being one of God's children is good enough to be protected by the law, but everybody treated equally" (Source: `steve_king_2017_house_floor.txt`), exemplifies the language of `individual_dignity`. The fact that this quote comes from a document that scores very low on this dimension (0.1) highlights the complexity of discourse; even highly fragmentative texts may contain isolated cohesive elements, a nuance the CFF is designed to capture. The cluster's connection to `hope` and `cohesive_goals` indicates a forward-looking, constructive orientation. The call for "class solidarity" over "partisan labels" is a clear example of a `cohesive_goal` that seeks to transcend existing divisions (Source: `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`).
+
+### 5.5 Framework Effectiveness Assessment
+
+Based on this preliminary analysis, the Cohesive Flourishing Framework demonstrates considerable potential as an analytical tool.
+
+*   **Discriminatory Power:** The framework effectively distinguishes between different rhetorical styles. The wide variance in the `full_cohesion_index` and other metrics across just four documents indicates that the CFF is sensitive to the phenomena it is designed to measure. It successfully separated the highly cohesive concession speech from the highly fragmentative floor speech.
+*   **Framework-Corpus Fit:** The strong statistical patterns that align with the CFF's theoretical structure (negative correlations between opposites, positive correlations between similar valences) suggest a good fit between the framework's constructs and the rhetorical patterns present in this political corpus. The framework appears to be measuring real, coherent rhetorical strategies.
+*   **Methodological Insights:** The analysis validates the CFF's core design principle: moving beyond a single sentiment score. The `strategic_contradiction_index` provides a genuinely novel layer of information, allowing researchers to distinguish between rhetorically simple and complex texts. This is a significant advance over traditional methods that might force a text into a single "cohesive" or "fragmentative" category, losing crucial nuance.
+
+## 6. Discussion
+
+### Theoretical Implications and Rhetorical Archetypes
+
+The findings from this pilot study, while needing validation on a larger scale, suggest the existence of distinct rhetorical archetypes.
+1.  **The Cohesive Unifier (e.g., McCain):** Characterized by very high cohesion, very low contradiction, and a dominance of the "Cohesive Cluster" dimensions. This style is rhetorically simple, consistent, and focused on themes of amity, dignity, and shared goals.
+2.  **The Fragmentative Polarizer (e.g., King):** Characterized by very low cohesion, low contradiction, and a dominance of the "Fragmentative Cluster" dimensions. This style is also rhetorically simple and consistent, but its focus is on threat, enmity, and in-group protection. The language is clear in its divisive aims, as when discussing a goal that would be "destroyed" rather than "restored" (Source: `steve_king_2017_house_floor.txt`).
+3.  **The Conflict-Oriented Agitator (e.g., Sanders, Ocasio-Cortez):** Characterized by negative-to-low cohesion and moderate-to-high contradiction. This more complex style blends fragmentative appeals (often `envy` and `enmity` directed at an "oligarchy" or powerful out-group) with cohesive appeals to a different, broader in-group ("class solidarity"). This archetype's higher contradiction score reflects its dual strategy of dividing society along one axis (class) while attempting to unify it along another. The call for "class solidarity" is a `cohesive_goal`, but it is framed within a conflict narrative that scores high on fragmentative dimensions like `envy` and `tribal_dominance`.
+
+These archetypes provide a useful heuristic for understanding different modes of political communication and their potential effects. The CFF allows for the operationalization and testing of these patterns, moving from qualitative description to quantitative measurement.
+
+### Limitations and Future Directions
+
+The foremost limitation is the **N=4 sample size**, which makes all findings highly preliminary. The patterns observed are suggestive, not definitive, and require validation across a much larger and more diverse corpus of texts, speakers, and contexts.
+
+Second, the analysis was hampered by the **absence of a corpus manifest**, which prevented the `analyze_rhetorical_profiles_by_speaker` function from running. A systematic, speaker-level analysis would be a critical next step to determine if these rhetorical styles are consistent for individual speakers over time.
+
+Third, while the statistical patterns are strong, the **available textual evidence is sparse**. Future work should integrate a more robust evidence retrieval system to provide richer qualitative support for quantitative findings. For instance, no direct textual evidence was found to exemplify the strong statistical link between `compersion` and `amity`, which limits a full interpretation of that finding.
+
+Future research should proceed in several directions:
+*   **Scale Up:** Apply the CFF to a large, longitudinal corpus of political speech to test the stability and prevalence of the identified rhetorical archetypes.
+*   **Audience Reception Studies:** Design experiments to test the causal effects of these rhetorical patterns. Do high-contradiction speeches confuse audiences, or do they appeal to different segments simultaneously?
+*   **Cross-Cultural Analysis:** Apply the framework to political discourse from different countries to explore whether these rhetorical clusters are universal or culturally specific.
+
+## 7. Conclusion
+
+This computational research report has detailed a pilot analysis of four political texts using the Cohesive Flourishing Framework v10.1. Despite the significant constraint of a small sample, the analysis successfully demonstrates the framework's analytical value. The CFF proves effective at discriminating between highly cohesive and highly fragmentative discourse, and its internal structure shows strong construct validity, with dimensional correlations aligning with theoretical expectations.
+
+The study's primary contribution is the illustration of the CFF's ability to uncover nuanced rhetorical strategies that would be missed by simpler analytical tools. The identification of coherent "Cohesive" and "Fragmentative" rhetorical clusters, and the distinct measurement of rhetorical complexity via the `strategic_contradiction_index`, represent significant methodological advancements. The preliminary archetypes of the "Unifier," "Polarizer," and "Agitator" provide a testable set of hypotheses for future, larger-scale research.
+
+Ultimately, this analysis serves as a proof-of-concept. It establishes that the CFF is a promising tool for computational social science, capable of generating rich, interpretable, and theoretically grounded insights into the linguistic construction of social reality. The findings warrant further investigation with more extensive data to validate these initial patterns and explore their broader implications for democratic health and social cohesion.
+
+## 8. Evidence Citations
+
+The following textual evidence was used to support the interpretations in this report.
+
+**Source: `alexandria_ocasio_cortez_2025_fighting_oligarchy.txt`**
+*   Speaker: Alexandria Ocasio-Cortez
+*   Quote: "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity." (Dimension: cohesive_goals)
+
+**Source: `steve_king_2017_house_floor.txt`**
+*   Speaker: Steve King
+*   Quote: "We have a Constitution to preserve, protect, defend, and support and defend." (Dimension: cohesive_goals)
+*   Quote: "That being one of God's children is good enough to be protected by the law, but everybody treated equally." (Dimension: individual_dignity)
+*   Quote: "And instead of being restored, it would be destroyed by another presidential appointment." (Dimension: fragmentative_goals)

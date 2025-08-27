@@ -1,0 +1,35 @@
+{
+  "status": "completed",
+  "findings": [],
+  "validation_results": {
+    "status": "completed",
+    "findings": [],
+    "summary": {
+      "total_issues": 0,
+      "critical": 0,
+      "errors": 0,
+      "warnings": 0,
+      "verified_claims": 0
+    },
+    "raw_llm_response": "",
+    "parsing_warning": "Failed to parse structured response from LLM",
+    "resources_used": {
+      "synthesis_report": true,
+      "evidence_data": true,
+      "framework_spec": true,
+      "corpus_index": true,
+      "search_wrappers": [
+        "validate_quote",
+        "search_documents",
+        "get_context",
+        "corpus_search",
+        "quote_validation",
+        "semantic_search"
+      ],
+      "raw_analysis_data": true,
+      "derived_metrics_data": true,
+      "statistical_results_data": true
+    }
+  },
+  "corpus_index_service_status": "operational"
+}

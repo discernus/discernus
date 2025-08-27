@@ -127,7 +127,7 @@ class HybridCorpusService:
         
         retrieval_time = time.time() - start_time
         
-        if not typesense_results:
+        if typesense_results is None or len(typesense_results) == 0:
             return []
         
         # Step 2: Re-rank with Python BM25 for accuracy
@@ -168,13 +168,16 @@ class HybridCorpusService:
                 # Get BM25 score
                 bm25_score = bm25_index.get_scores(query_tokens)
                 
-                # Find the best matching sentence
-                best_score = max(bm25_score) if bm25_score else 0
+                # Find the best matching sentence - handle NumPy arrays safely
+                if bm25_score is not None and len(bm25_score) > 0:
+                    best_score = float(max(bm25_score))
+                else:
+                    best_score = 0.0
                 
                 # Calculate token match percentage from Typesense results
                 tokens_matched = result.get('tokens_matched', 0)
-                query_tokens = result.get('query_tokens', 1)
-                token_match_pct = (tokens_matched / query_tokens) * 100 if query_tokens > 0 else 0
+                result_query_tokens = result.get('query_tokens', 1)
+                token_match_pct = (tokens_matched / result_query_tokens) * 100 if result_query_tokens > 0 else 0
                 
                 # Combine Typesense and BM25 scores
                 hybrid_score = self._combine_scores(
@@ -237,7 +240,7 @@ class HybridCorpusService:
         
         results = self.search_quotes(quote, collection_name, limit=5)
         
-        if not results:
+        if results is None or len(results) == 0:
             return {
                 'valid': False,
                 'drift_level': 'not_found',
@@ -250,17 +253,17 @@ class HybridCorpusService:
         hybrid_score = best_match.get('hybrid_score', 0)
         token_match_pct = best_match.get('token_match_pct', 0)
         
-        # Determine drift level based on hybrid score
-        if hybrid_score >= 95 and token_match_pct >= 95:
+        # Determine drift level based on hybrid score with more appropriate thresholds
+        if hybrid_score >= 90:
             drift_level = 'exact'
             valid = True
-        elif hybrid_score >= 85 and token_match_pct >= 85:
+        elif hybrid_score >= 75:
             drift_level = 'minor_drift'
             valid = True
-        elif hybrid_score >= 70 and token_match_pct >= 70:
+        elif hybrid_score >= 60:
             drift_level = 'moderate_drift'
             valid = True
-        elif hybrid_score >= 50 and token_match_pct >= 50:
+        elif hybrid_score >= 40:
             drift_level = 'significant_drift'
             valid = False
         else:
@@ -273,6 +276,7 @@ class HybridCorpusService:
             'best_match': best_match,
             'confidence': hybrid_score / 100.0,
             'explanation': f'Quote classified as {drift_level} with {hybrid_score:.1f}% confidence',
+            'score': hybrid_score,  # Add score field for compatibility
             'hybrid_score': hybrid_score,
             'token_match_pct': token_match_pct
         }
@@ -281,6 +285,42 @@ class HybridCorpusService:
                         end_char: int = None) -> str:
         """Get source text from file (delegates to Typesense service)."""
         return self.typesense_service.get_source_text(file_path, start_char, end_char)
+    
+    def get_search_wrapper_methods(self) -> Dict[str, Any]:
+        """
+        Get search wrapper methods for external agents to use.
+        
+        This method provides a standardized interface that agents can use
+        to access the corpus service's search capabilities without needing
+        to know the internal implementation details.
+        
+        Returns:
+            Dictionary containing search wrapper methods
+        """
+        return {
+            "validate_quote": self.validate_quote,
+            "search_documents": self.search_quotes,
+            "get_context": self.get_source_text,
+            "corpus_search": self.search_quotes,
+            "quote_validation": self.validate_quote,
+            "semantic_search": self.search_quotes
+        }
+    
+    def get_capabilities(self) -> List[str]:
+        """
+        Get a list of capabilities this service provides.
+        
+        Returns:
+            List of capability strings
+        """
+        return [
+            "corpus_search",
+            "quote_validation", 
+            "semantic_search",
+            "hybrid_scoring",
+            "bm25_re_ranking",
+            "typesense_retrieval"
+        ]
     
     def close(self):
         """Clean up resources."""

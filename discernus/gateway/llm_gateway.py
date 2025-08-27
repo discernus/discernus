@@ -130,8 +130,9 @@ class LLMGateway(BaseGateway):
                 completion_func = self._get_rate_limited_completion(current_model)
                 response = completion_func(model=current_model, messages=messages, stream=False, **clean_params)
                 
+                # Extract content from response
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
-
+                
                 # If the response is a JSON string, parse it for structured output
                 if isinstance(content, str) and content.strip().startswith('{'):
                     try:

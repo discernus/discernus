@@ -30,7 +30,7 @@ class SynthesisPromptAssembler:
         import yaml
         
         # Load the enhanced synthesis prompt template
-        prompt_file = Path(__file__).parent.parent / "reuse_candidates" / "enhanced_synthesis_prompt.yaml"
+        prompt_file = Path(__file__).parent.parent.parent / "agents" / "unified_synthesis_agent" / "prompt.yaml"
         
         if not prompt_file.exists():
             raise FileNotFoundError(f"Enhanced synthesis prompt template not found: {prompt_file}")

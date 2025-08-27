@@ -13,7 +13,7 @@ from pathlib import Path
 import tempfile
 import shutil
 
-from discernus.core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+from discernus.agents.unified_synthesis_agent import UnifiedSynthesisAgent
 
 
 class TestRAGSynthesisBug(unittest.TestCase):

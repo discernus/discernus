@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T02:06:21.478616+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of evidence. The speech actively counters this dimension by emphasizing shared national identity over partisan divides.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478602+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 1.0,
+      "context_type": "Explicit recognition of overcoming historical injustice and affirming the citizenship and inclusion of a group within the national fabric.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478605+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fear",
+      "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.9,
+      "context_type": "Acknowledgement of national challenges ('difficult times'), which contains a hint of concern, but immediately pivots to a constructive, non-fear-based response.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478607+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "We never surrender. We never hide from history. We make history.",
+      "confidence": 1.0,
+      "context_type": "The speech's concluding inspirational statement, framing American identity around progress and resilience.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478608+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of evidence. The speech is a model of gracious concession, explicitly admiring and commending the opponent's success.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478609+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "compersion",
+      "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans... is something I deeply admire and commend him for achieving.",
+      "confidence": 1.0,
+      "context_type": "Direct and explicit expression of admiration for the opponent's achievement, celebrating it as a positive outcome for the nation.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478610+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "enmity",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of evidence. The speaker refers to his opponent as 'my president' and pledges cooperation, directly countering any sense of hostility.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478611+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 1.0,
+      "context_type": "An explicit appeal to a shared, friendly identity ('fellow Americans') that transcends political disagreement.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478612+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "Absence of evidence. The entire thrust of the speech is toward unity and bridging divides, the opposite of fragmentation.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478613+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences...",
+      "confidence": 1.0,
+      "context_type": "A direct call to action for his own supporters to engage in integrative, positive-sum actions aimed at national unity and problem-solving.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T02:06:21.478613+00:00"
+    }
+  ]
+}

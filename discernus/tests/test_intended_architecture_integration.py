@@ -12,7 +12,7 @@ import json
 
 from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
 from discernus.core.prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
-from discernus.core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+from discernus.agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 
 

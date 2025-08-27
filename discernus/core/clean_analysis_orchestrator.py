@@ -37,7 +37,7 @@ from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
 from ..agents.deprecated.txtai_evidence_curator.agent import TxtaiEvidenceCurator
-from ..core.reuse_candidates.unified_synthesis_agent import UnifiedSynthesisAgent
+from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 from .rag_index_cache import RAGIndexCacheManager
@@ -214,8 +214,89 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
             
-            # Phase 7: Run evidence retrieval to curate supporting quotes
+            # Phase 7: Build corpus index for fact-checking and revision
             phase_start = datetime.now(timezone.utc)
+            print("🔧 PHASE 7 STARTING: Corpus index building")  # Debug print
+            try:
+                self._log_progress("🔧 Building corpus index for fact-checking...")
+                corpus_index_service = self._build_corpus_index_service()
+                
+                # DEBUG: Log the service object details
+                print(f"🔍 DEBUG: corpus_index_service type: {type(corpus_index_service).__name__}")
+                print(f"🔍 DEBUG: corpus_index_service id: {id(corpus_index_service) if corpus_index_service else 'None'}")
+                print(f"🔍 DEBUG: corpus_index_service has search_quotes: {hasattr(corpus_index_service, 'search_quotes') if corpus_index_service else False}")
+                
+                if corpus_index_service:
+                    self._log_progress(f"✅ Corpus index built successfully")
+                    # Store corpus index service for later phases
+                    self._corpus_index_service = corpus_index_service
+                    
+                    # DEBUG: Verify the attribute was set correctly
+                    print(f"🔍 DEBUG: self._corpus_index_service type: {type(self._corpus_index_service).__name__}")
+                    print(f"🔍 DEBUG: self._corpus_index_service id: {id(self._corpus_index_service)}")
+                    print(f"🔍 DEBUG: self._corpus_index_service has search_quotes: {hasattr(self._corpus_index_service, 'search_quotes')}")
+                else:
+                    self._log_progress(f"❌ Failed to build corpus index service")
+                    self._corpus_index_service = None
+                self._log_phase_timing("corpus_index_building", phase_start)
+            except Exception as e:
+                self._log_progress(f"❌ Corpus index building failed: {str(e)}")
+                self._corpus_index_service = None
+
+            # Phase 7.5: Validate Index Readiness (GATE)
+            self._log_progress("🔍 Validating index readiness before proceeding...")
+            
+            # Validate RAG index is operational
+            if not hasattr(self, 'rag_index') or not self.rag_index:
+                error_msg = "RAG index not available - cannot proceed to evidence retrieval"
+                self._log_progress(f"❌ {error_msg}")
+                raise CleanAnalysisError(error_msg)
+            
+            # Validate corpus index service is operational
+            if not hasattr(self, '_corpus_index_service') or not self._corpus_index_service:
+                error_msg = "Corpus index service not available - cannot proceed to evidence retrieval"
+                self._log_progress(f"❌ {error_msg}")
+                raise CleanAnalysisError(error_msg)
+            
+            # Test corpus index service functionality with detailed error reporting
+            try:
+                self._log_progress("🔍 Testing corpus index service with 'test' query...")
+                
+                # DEBUG: Log what we're about to test
+                print(f"🔍 DEBUG: About to test _corpus_index_service.search_quotes('test')")
+                print(f"🔍 DEBUG: _corpus_index_service type: {type(self._corpus_index_service).__name__}")
+                print(f"🔍 DEBUG: _corpus_index_service id: {id(self._corpus_index_service)}")
+                print(f"🔍 DEBUG: _corpus_index_service has search_quotes: {hasattr(self._corpus_index_service, 'search_quotes')}")
+                print(f"🔍 DEBUG: _corpus_index_service search_quotes method: {getattr(self._corpus_index_service, 'search_quotes', 'MISSING')}")
+                
+                test_result = self._corpus_index_service.search_quotes("test")
+                self._log_progress(f"✅ Corpus index service operational - test search completed successfully")
+                self._log_progress(f"   Test result type: {type(test_result).__name__}")
+                self._log_progress(f"   Test result length: {len(test_result) if hasattr(test_result, '__len__') else 'N/A'}")
+            except Exception as e:
+                error_msg = f"Corpus index service not operational - test failed: {str(e)}"
+                self._log_progress(f"❌ {error_msg}")
+                self._log_progress(f"   Error type: {type(e).__name__}")
+                self._log_progress(f"   Error details: {str(e)}")
+                
+                # DEBUG: Log the full exception details
+                import traceback
+                print(f"🔍 DEBUG: Full exception traceback:")
+                traceback.print_exc()
+                
+                raise CleanAnalysisError(error_msg)
+            
+            self._log_progress("✅ All indexes validated and operational - proceeding to evidence retrieval")
+
+            # Phase 8: Run evidence retrieval to curate supporting quotes
+            phase_start = datetime.now(timezone.utc)
+            
+            # DEBUG: Check if corpus index service is still available
+            print(f"🔍 DEBUG: Phase 8 - _corpus_index_service available: {hasattr(self, '_corpus_index_service')}")
+            if hasattr(self, '_corpus_index_service'):
+                print(f"🔍 DEBUG: Phase 8 - _corpus_index_service type: {type(self._corpus_index_service).__name__}")
+                print(f"🔍 DEBUG: Phase 8 - _corpus_index_service id: {id(self._corpus_index_service)}")
+            
             try:
                 evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results, run_id)
                 self._log_status("Evidence retrieval completed")
@@ -225,22 +306,18 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"⚠️ Evidence retrieval failed, continuing with warning: {str(e)}")
                 evidence_results = {"status": "failed", "error": str(e)}
 
-            # Phase 8: Ensure RAG index is available for synthesis
-            phase_start = datetime.now(timezone.utc)
-            try:
-                # Check if we already have a cached RAG index, build if needed
-                if not hasattr(self, 'rag_index') or self.rag_index is None:
-                    self._build_rag_index_with_cache(audit_logger)
-                    self._log_status("RAG index prepared for synthesis")
-                else:
-                    self._log_status("RAG index already available from cache")
-                self._log_phase_timing("rag_index_prepare", phase_start)
-            except Exception as e:
-                # In RAG-or-nothing mode, this is a fatal error.
-                raise CleanAnalysisError(f"Failed to prepare RAG index: {str(e)}") from e
+            # Phase 9: RAG index already built in Phase 7
+            self._log_progress("✅ RAG index already built in Phase 7")
 
-            # Phase 9: Run synthesis with RAG integration and curated evidence
+            # Phase 10: Run synthesis with RAG integration and curated evidence
             phase_start = datetime.now(timezone.utc)
+            
+            # DEBUG: Check if corpus index service is still available
+            print(f"🔍 DEBUG: Phase 10 - _corpus_index_service available: {hasattr(self, '_corpus_index_service')}")
+            if hasattr(self, '_corpus_index_service'):
+                print(f"🔍 DEBUG: Phase 10 - _corpus_index_service type: {type(self._corpus_index_service).__name__}")
+                print(f"🔍 DEBUG: Phase 10 - _corpus_index_service id: {id(self._corpus_index_service)}")
+            
             try:
                 assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results, evidence_results)
                 self._log_status("Synthesis completed")
@@ -250,7 +327,7 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
-            # Phase 10: Run fact-checking validation
+            # Phase 11: Run fact-checking validation
             phase_start = datetime.now(timezone.utc)
             try:
                 fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets, statistical_results)
@@ -261,7 +338,7 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"⚠️ Fact-checking failed, continuing with warning: {str(e)}")
                 fact_check_results = {"status": "failed", "error": str(e)}
 
-            # Phase 11: Create results with publication readiness
+            # Phase 12: Create results with publication readiness
             phase_start = datetime.now(timezone.utc)
             try:
                 results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
@@ -1849,7 +1926,7 @@ class CleanAnalysisOrchestrator:
                 'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None
             }
             
-            assets_dict = synthesis_agent.generate_final_report(assets=assets)
+            assets_dict = synthesis_agent.generate_final_report(assets=assets, artifact_storage=self.artifact_storage)
 
             # Extract draft report from synthesis agent output
             draft_report = assets_dict.get("final_report")
@@ -1886,6 +1963,11 @@ class CleanAnalysisOrchestrator:
             
             # Run fact-checker on the draft report
             fact_check_results = self._run_fact_checking_phase(synthesis_model, audit_logger, assets_with_hash, statistical_results)
+            
+            # Extract corpus_index_service from fact-checking results
+            corpus_index_service = fact_check_results.get('corpus_index_service')
+            if not corpus_index_service:
+                self._log_progress("⚠️ No corpus index service available for revision agent")
             
             # Use RevisionAgent to apply corrections based on fact-checker feedback
             revision_agent = RevisionAgent(
@@ -1942,37 +2024,46 @@ class CleanAnalysisOrchestrator:
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_text = report_content.decode('utf-8')
             
-            # Build corpus index for fact-checking
-            self._log_progress("🔧 Building corpus index for fact-checking...")
-            corpus_index_service = self._build_corpus_index_service(assets)
-            self._log_progress(f"✅ Corpus index built successfully")
+            # Use pre-built corpus index service from analysis phase
+            print(f"🔍 DEBUG: Fact-checking phase - _corpus_index_service available: {hasattr(self, '_corpus_index_service')}")
+            if hasattr(self, '_corpus_index_service'):
+                print(f"🔍 DEBUG: Fact-checking phase - _corpus_index_service type: {type(self._corpus_index_service).__name__}")
+                print(f"🔍 DEBUG: Fact-checking phase - _corpus_index_service id: {id(self._corpus_index_service)}")
+            
+            corpus_index_service = getattr(self, '_corpus_index_service', None)
+            if corpus_index_service:
+                self._log_progress(f"✅ Using pre-built corpus index service")
+            else:
+                self._log_progress("⚠️ No pre-built corpus index service available - building on-demand")
+                corpus_index_service = self._build_corpus_index_service()
+                if corpus_index_service:
+                    self._log_progress(f"✅ Corpus index built on-demand")
+                else:
+                    self._log_progress("❌ Failed to build corpus index service")
             
             # Initialize fact-checker agent
             from ..agents.fact_checker_agent.agent import FactCheckerAgent
-            from ..gateway.llm_gateway import LLMGateway
-            from ..gateway.model_registry import ModelRegistry
             
-            model_registry = ModelRegistry()
-            llm_gateway = LLMGateway(model_registry)
             fact_checker = FactCheckerAgent(
                 gateway=self.llm_gateway,
                 audit_logger=audit_logger,
                 corpus_index_service=corpus_index_service,
+                artifact_storage=self.artifact_storage,
             )
             
-            # Run fact-checking validation using the new assets interface
-            validation_results = fact_checker.check(
-                report_content=report_text,
-                assets=assets_with_hash,
-                corpus_index_service=corpus_index_service,
-            )
+            # Run fact-checking validation using the new self-directed interface
+            validation_results = fact_checker.run()
+            
+            if validation_results.get('status') == 'failed':
+                raise CleanAnalysisError(f"Fact-checking failed: {validation_results.get('error', 'Unknown error')}")
             
             self._log_progress(f"✅ Fact-checking completed: {len(validation_results.get('findings', []))} findings")
             
             return {
                 "status": "completed",
                 "findings": validation_results.get('findings', []),
-                "validation_results": validation_results
+                "validation_results": validation_results,
+                "corpus_index_service_status": "operational" if corpus_index_service else "unavailable"
             }
                 
         except Exception as e:
@@ -2694,52 +2785,8 @@ class CleanAnalysisOrchestrator:
             # CRITICAL: Evidence is required for synthesis - fail fast
             raise CleanAnalysisError(f"Failed to build intelligent evidence matching wrapper: {e}. Cannot proceed without evidence.")
 
-    def _run_fact_checking_phase(self, model: str, audit_logger: AuditLogger, assets: Dict[str, Any], statistical_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run fact-checking validation on the synthesis report."""
-        self._log_progress("🔍 Starting fact-checking phase...")
-        
-        try:
-            # Get the final report content
-            if not assets.get('report_hash'):
-                raise CleanAnalysisError("No synthesis report available for fact-checking")
-            
-            report_content = self.artifact_storage.get_artifact(assets['report_hash'])
-            report_text = report_content.decode('utf-8')
-            
-            # Create temporary fact-checker RAG index
-            self._log_progress("🔧 Starting fact-checker RAG index construction...")
-            fact_checker_rag = self._build_fact_checker_rag_index(assets, statistical_results)
-            self._log_progress(f"✅ Fact-checker RAG index built successfully")
-            
-            # Initialize fact-checker agent
-            from ..agents.fact_checker_agent.agent import FactCheckerAgent
-            from ..gateway.llm_gateway import LLMGateway
-            from ..gateway.model_registry import ModelRegistry
-            
-            model_registry = ModelRegistry()
-            llm_gateway = LLMGateway(model_registry)
-            fact_checker = FactCheckerAgent(
-                gateway=self.llm_gateway,
-                audit_logger=audit_logger,
-            )
-            
-            # Run fact-checking validation using new interface
-            validation_results = fact_checker.check(
-                report_content=report_text,
-                evidence_index=fact_checker_rag,
-            )
-            
-            self._log_progress(f"✅ Fact-checking completed: {len(validation_results.get('findings', []))} findings")
-            
-            return {
-                "status": "completed",
-                "findings": validation_results.get('findings', []),
-                "validation_results": validation_results
-            }
-                
-        except Exception as e:
-            self._log_progress(f"❌ Fact-checking phase failed: {str(e)}")
-            raise CleanAnalysisError(f"Fact-checking phase failed: {str(e)}") from e
+    # REMOVED: Duplicate _run_fact_checking_phase method that was overriding the correct one
+    # This was legacy code that ignored the corpus index service
     
     def _build_fact_checker_rag_index(self, assets: Dict[str, Any], statistical_results: Dict[str, Any]):
         """Build a comprehensive RAG index for fact-checking containing ALL experiment assets."""
@@ -3409,6 +3456,26 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"⚠️ Fact-checker validation failed: {str(e)}")
             # Return empty results if fact-checker fails - don't block synthesis
             return {"issues": [], "status": "fact_check_unavailable", "error": str(e)}
+
+    def _build_evidence_index(self) -> str:
+        """Build evidence index for synthesis using RAG capabilities."""
+        self._log_progress("🔧 Building evidence index for synthesis...")
+        
+        try:
+            # Check if we already have a cached RAG index, build if needed
+            if not hasattr(self, 'rag_index') or self.rag_index is None:
+                self._build_rag_index_with_cache(None)  # No audit logger needed here
+            
+            if hasattr(self, 'rag_index') and self.rag_index:
+                self._log_progress("✅ Evidence index built successfully")
+                return self.rag_index
+            else:
+                self._log_progress("⚠️ Failed to build evidence index")
+                return None
+                
+        except Exception as e:
+            self._log_progress(f"❌ Error building evidence index: {e}")
+            return None
 
     def _build_corpus_index_service(self) -> Any:
         """Build a corpus index service for fact-checking using Hybrid (Typesense + BM25)."""
