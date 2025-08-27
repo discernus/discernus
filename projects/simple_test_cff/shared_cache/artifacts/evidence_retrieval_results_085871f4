@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-27T05:09:30.171772",
+    "statistical_results_hash": "134d0266186c78e2188becdd65af342942559bf0eb5fbc7554559d2acec6727a",
+    "total_findings": 5,
+    "total_quotes": 10
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for correlation analysis"
+      },
+      "queries_used": [
+        "correlation analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.14967820048332214,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.14967820048332214,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for statistical patterns"
+      },
+      "queries_used": [
+        "statistical patterns"
+      ],
+      "quotes": [
+        {
+          "quote_text": "...in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.95,
+          "relevance_score": 0.12851059436798096,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.95,
+          "relevance_score": 0.12851059436798096,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for framework analysis"
+      },
+      "queries_used": [
+        "framework analysis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.16699515283107758,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.16699515283107758,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for evidence examples"
+      },
+      "queries_used": [
+        "evidence examples"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 1.0,
+          "relevance_score": 0.2626691162586212,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 1.0,
+          "relevance_score": 0.2626691162586212,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "fallback",
+        "description": "Evidence for key findings"
+      },
+      "queries_used": [
+        "key findings"
+      ],
+      "quotes": [
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.24493630230426788,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.24493630230426788,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}
