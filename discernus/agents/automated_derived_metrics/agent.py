@@ -38,7 +38,7 @@ class AutomatedDerivedMetricsAgent:
     2. Pass to LLM with calculation generation prompt
     3. Extract clean functions using proprietary delimiters
     4. Validate and save to transactional workspace
-    """
+        """
     
     def __init__(self, 
                  model: str = "vertex_ai/gemini-2.5-flash",
