@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.2",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a highly rhetorical political speech. The analysis focused on the explicit framing of a class-based conflict between 'oligarchs/billionaires' and 'working people'. The speaker uses strong, often oppositional language, making most dimensions clearly present and salient. The primary challenge was distinguishing between the speaker's own goals and the goals she attributes to her opponents, which was handled by scoring both as present in the discourse."
+  },
+  "document_analyses": [
+    {
+      "document_id": "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 1.0,
+          "context_type": "description_of_antagonist"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "statement_of_values"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 1.0,
+          "context_type": "threat_assessment"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because in this house, we stand together, we know that, that it\u2019s our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 1.0,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Now it\u2019s this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren\u2019t earned really. They aren\u2019t working for these billions. They\u2019re stealing them. They\u2019re stealing them. They\u2019re stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "delegitimization_of_success"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 1.0,
+          "context_type": "adversarial_call_to_action"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "coalition_building_statement"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+          "confidence": 1.0,
+          "context_type": "description_of_antagonist_strategy"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "This isn\u2019t just about Republicans. We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "confidence": 0.9,
+          "context_type": "statement_of_shared_objective"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
