@@ -1728,83 +1728,38 @@ class CleanAnalysisOrchestrator:
         try:
             # Validate synthesis assets
             self._validate_assets(statistical_results)
-            
+
             # Create complete research data structure
-            raw_analysis_data = []
-            derived_metrics_data = []
+            raw_analysis_data = self.artifact_storage.get_artifact(statistical_results['raw_analysis_data_hash']).decode('utf-8')
+            derived_metrics_data = self.artifact_storage.get_artifact(statistical_results['derived_metrics_data_hash']).decode('utf-8')
             
-            # Extract raw analysis data from individual results
-            for result in getattr(self, '_analysis_results', []):
-                if isinstance(result, dict) and 'analysis_result' in result:
-                    analysis_data = result['analysis_result'].copy()
-                    analysis_data['document_name'] = result.get('document_name', 'unknown')
-                    raw_analysis_data.append(analysis_data)
-            
-            # Use actual derived metrics results if available, otherwise fall back to raw analysis
-            if hasattr(self, '_derived_metrics_results') and self._derived_metrics_results.get('status') == 'completed':
-                derived_metrics_data = self._derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
-                
-                if not derived_metrics_data:
-                    # Fallback to raw analysis data
-                    derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
-            else:
-                # Fallback to raw analysis data
-                derived_metrics_data = [result['analysis_result'].copy() for result in getattr(self, '_analysis_results', []) if isinstance(result, dict) and 'analysis_result' in result]
-            
-            # Create complete research data structure
             research_data = {
-                'experiment_metadata': {
-                    'name': getattr(self.security, 'experiment_name', 'unknown_experiment'),
-                    'framework': self.config.get('framework', 'unknown_framework'),
-                    'corpus_documents': len(raw_analysis_data),
-                },
-                'raw_analysis_data': raw_analysis_data,
-                'derived_metrics_data': derived_metrics_data,
-                'derived_metrics_metadata': getattr(self, '_derived_metrics_results', {}),
-                'statistical_results': statistical_results
+                "raw_analysis_results": json.loads(raw_analysis_data),
+                "derived_metrics_results": json.loads(derived_metrics_data),
+                "statistical_results": statistical_results['statistical_summary']
             }
             
-            # Store research data for the assembler
-            research_data_json = json.dumps(research_data, indent=2, default=str)
             research_data_hash = self.artifact_storage.put_artifact(
-                research_data_json.encode('utf-8'),
-                {
-                    "artifact_type": "complete_research_data",
-                    "experiment_name": getattr(self.security, 'experiment_name', 'unknown'),
-                    "ready_for_synthesis": True
-                }
+                json.dumps(research_data, indent=2).encode('utf-8'),
+                {"artifact_type": "complete_research_data"}
             )
-            
-            # Use curated evidence from evidence retrieval phase if available
-            if evidence_results and evidence_results.get('status') == 'success':
-                self._log_progress(f"✅ Using curated evidence: {evidence_results.get('evidence_quotes_found', 0)} quotes")
-                # For curated evidence, we need to use the original evidence_v6 artifacts
-                # that the EvidenceRetriever used to build its curated results
-                evidence_hashes = []
-                if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                    for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                        metadata = artifact_info.get("metadata", {})
-                        if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                            evidence_hashes.append(artifact_hash)
-                
-                if not evidence_hashes:
-                    self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
-                else:
-                    self._log_progress(f"📋 Using {len(evidence_hashes)} evidence artifacts with curated guidance")
+
+            # New Step: Run Evidence Retrieval Agent to get curated evidence
+            raw_evidence_hashes = [h for h, info in self.artifact_storage.registry.items() if info.get("metadata", {}).get("artifact_type", "").startswith("evidence_v6")]
+            framework_hash = self.artifact_storage.get_hash_by_type("framework_specification")
+            statistical_results_hash = self.artifact_storage.get_hash_by_type("statistical_results")
+
+            curated_evidence_hash = None
+            if raw_evidence_hashes and framework_hash and statistical_results_hash:
+                 curated_evidence_hash = self._run_evidence_retrieval(
+                    framework_hash=framework_hash,
+                    statistical_results_hash=statistical_results_hash,
+                    evidence_artifact_hashes=raw_evidence_hashes,
+                    audit_logger=audit_logger
+                )
             else:
-                # Fallback to collecting all evidence artifacts
-                evidence_hashes = []
-                if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                    for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                        metadata = artifact_info.get("metadata", {})
-                        if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                            evidence_hashes.append(artifact_hash)
-                
-                if not evidence_hashes:
-                    self._log_progress("⚠️ No evidence artifacts found - synthesis will proceed without evidence")
-                else:
-                    self._log_progress(f"📋 Found {len(evidence_hashes)} evidence artifacts for synthesis (fallback)")
-            
+                self._log_progress("⚠️ Skipping evidence curation due to missing artifacts (raw evidence, framework, or stats).")
+
             # Use SynthesisPromptAssembler to build the prompt
             from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
             assembler = SynthesisPromptAssembler()
@@ -1816,28 +1771,11 @@ class CleanAnalysisOrchestrator:
                 experiment_path=self.experiment_path / "experiment.md",
                 research_data_artifact_hash=research_data_hash,
                 artifact_storage=self.artifact_storage,
-                evidence_artifacts=evidence_hashes,
+                curated_evidence_hash=curated_evidence_hash
             )
-            
-            # Store the assembled prompt
-            prompt_hash = self.artifact_storage.put_artifact(
-                prompt.encode("utf-8"), {"artifact_type": "synthesis_prompt"}
-            )
-            
-            # TRANSACTION INTEGRITY CHECK: Verify all required resources before synthesis
-            self._validate_synthesis_prerequisites(evidence_hashes, research_data_hash)
-            
-            # Evidence is now provided directly from EvidenceRetriever output
-            # No need to build evidence wrapper for synthesis agent
 
-            # Extract evidence retrieval results hash if available
-            evidence_retrieval_results_hash = None
-            if evidence_results and evidence_results.get('status') == 'success':
-                evidence_retrieval_results_hash = evidence_results.get('evidence_artifact_hash')
-                self._log_progress(f"📋 Using evidence retrieval results: {evidence_retrieval_results_hash}")
-            else:
-                self._log_progress("⚠️ No evidence retrieval results available - synthesis will proceed without evidence")
-
+            # Create synthesis agent
+            self._log_progress("🤖 Initializing synthesis agent...")
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,
                 audit_logger=audit_logger,
@@ -1848,7 +1786,7 @@ class CleanAnalysisOrchestrator:
                 'framework_path': Path(self.experiment_path / self.config["framework"]),
                 'experiment_path': Path(self.experiment_path / "experiment.md"),
                 'research_data_artifact_hash': research_data_hash,
-                'evidence_retrieval_results_hash': evidence_retrieval_results_hash,
+                'evidence_retrieval_results_hash': evidence_results.get('evidence_artifact_hash') if evidence_results else None,
                 'artifact_storage': self.artifact_storage,
                 'statistical_results': statistical_results,
                 'derived_metrics_results': getattr(self, '_derived_metrics_results', {}),
@@ -3481,3 +3419,36 @@ class CleanAnalysisOrchestrator:
             # Return a basic hybrid service that will handle missing index gracefully
             from ..core.hybrid_corpus_service import HybridCorpusService
             return HybridCorpusService()
+
+    def _run_evidence_retrieval(self, framework_hash: str, statistical_results_hash: str, evidence_artifact_hashes: List[str], audit_logger: AuditLogger) -> str:
+        """Run the EvidenceRetrieverAgent to curate evidence for synthesis."""
+        self._log_progress("🔍 Curating evidence for synthesis...")
+        
+        try:
+            from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
+            
+            agent_config = {
+                'experiment_path': str(self.experiment_path),
+                'run_id': self.run_id,
+                'artifact_storage': self.artifact_storage,
+            }
+            retriever_agent = EvidenceRetrieverAgent(agent_config)
+            
+            retrieval_results = retriever_agent.run(
+                framework_hash=framework_hash,
+                statistical_results_hash=statistical_results_hash,
+                evidence_artifact_hashes=evidence_artifact_hashes
+            )
+            
+            curated_evidence_hash = retrieval_results.get("evidence_artifact_hash")
+            if not curated_evidence_hash:
+                raise CleanAnalysisError("EvidenceRetrieverAgent did not return an artifact hash.")
+
+            self._log_progress(f"✅ Evidence curation complete. Curated evidence stored in artifact: {curated_evidence_hash}")
+            return curated_evidence_hash
+
+        except Exception as e:
+            self._log_progress(f"❌ Evidence retrieval and curation phase failed: {str(e)}")
+            # For now, we will allow synthesis to proceed without curated evidence.
+            # In a stricter future version, this might raise an exception.
+            return None

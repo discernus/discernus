@@ -43,7 +43,7 @@ class SynthesisPromptAssembler:
                        experiment_path: Path, 
                        research_data_artifact_hash: str,
                        artifact_storage,
-                       evidence_artifacts: list) -> str:
+                       curated_evidence_hash: Optional[str]) -> str:
         """
         Assemble comprehensive synthesis prompt for final report generation.
         
@@ -52,7 +52,7 @@ class SynthesisPromptAssembler:
             experiment_path: Path to experiment file
             research_data_artifact_hash: Hash of complete research data artifact
             artifact_storage: Storage instance to retrieve artifacts
-            evidence_artifacts: List of evidence artifact hashes
+            curated_evidence_hash: Hash of the curated evidence artifact from EvidenceRetrieverAgent.
             
         Returns:
             Complete synthesis prompt
@@ -72,10 +72,13 @@ class SynthesisPromptAssembler:
         # 4. Prepare statistical summary for context
         statistical_summary = self._create_statistical_summary(research_data['statistical_results'])
         
-        # 5. Prepare evidence count for RAG context (use quiet=True to suppress verbose logging)
-        total_evidence_pieces = sum(len(self._get_evidence_from_artifact(artifact_storage.get_artifact(hash, quiet=True))) 
-                                  for hash in evidence_artifacts)
-        
+        # 5. Prepare evidence context from CURATED evidence if available
+        if curated_evidence_hash:
+            evidence_context = self._format_curated_evidence(curated_evidence_hash, artifact_storage)
+        else:
+            # Fallback if curated evidence is not available
+            evidence_context = "No curated evidence was available for this synthesis run. The report will be based on statistical findings only."
+
         # 6. Load and include corpus manifest data
         corpus_manifest = self._load_corpus_manifest(experiment_path)
         
@@ -87,7 +90,7 @@ class SynthesisPromptAssembler:
             experiment_content=self._extract_experiment_objectives(experiment_content),
             research_data=statistical_summary,
             corpus_manifest=corpus_manifest,
-            evidence_context=f"You have access to {total_evidence_pieces} pieces of textual evidence extracted during analysis. Use semantic queries to find relevant evidence for each statistical finding."
+            evidence_context=evidence_context
         )
 
         return prompt
@@ -246,3 +249,35 @@ class SynthesisPromptAssembler:
             return evidence_data.get('evidence_data', [])
         except Exception:
             return []
+
+    def _format_curated_evidence(self, curated_evidence_hash: str, artifact_storage) -> str:
+        """Load and format the curated evidence artifact into a string for the prompt."""
+        try:
+            content = artifact_storage.get_artifact(curated_evidence_hash)
+            curated_data = json.loads(content.decode('utf-8'))
+            
+            evidence_results = curated_data.get("evidence_results", [])
+            if not evidence_results:
+                return "No curated evidence was found."
+
+            formatted_text = ["**Curated Evidence for Key Statistical Findings:**\n"]
+            
+            for item in evidence_results:
+                finding_desc = item.get("finding", {}).get("description", "Unnamed Finding")
+                quotes = item.get("quotes", [])
+                
+                formatted_text.append(f"**Finding:** {finding_desc}\n")
+                if not quotes:
+                    formatted_text.append("- *No direct evidence quotes found for this finding.*\n")
+                else:
+                    for quote in quotes:
+                        quote_text = quote.get('quote_text', 'N/A').strip()
+                        doc_name = quote.get('document_name', 'Unknown')
+                        relevance = quote.get('relevance_score', 0.0)
+                        formatted_text.append(f'- "{quote_text}" (Source: {doc_name}, Relevance: {relevance:.2f})')
+                formatted_text.append("\n")
+
+            return "\n".join(formatted_text)
+
+        except Exception as e:
+            return f"**Error:** Could not load or format curated evidence. Synthesis will proceed without it. Details: {str(e)}"
