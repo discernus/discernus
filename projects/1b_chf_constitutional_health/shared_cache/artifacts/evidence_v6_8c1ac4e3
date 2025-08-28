@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T03:16:00.882341+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "In 2 weeks, I will send this Congress a budget filled with ideas that are practical, not partisan.",
+      "confidence": 0.9,
+      "context_type": "supporting",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882332+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "lacking",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882336+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans: We are 15 years into this new century.",
+      "confidence": 0.9,
+      "context_type": "supporting",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882337+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "lacking",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882338+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The shadow of crisis has passed, and the State of the Union is strong.",
+      "confidence": 0.9,
+      "context_type": "supporting",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882339+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "lacking",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.882339+00:00"
+    }
+  ]
+}

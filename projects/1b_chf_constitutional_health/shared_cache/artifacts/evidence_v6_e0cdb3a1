@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T03:28:12.020067+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As long as I\u2019m President, I will work with anyone in this Chamber to build on this momentum. But I intend to fight obstruction with action, and I will oppose any effort to return to the very same policies that brought on this economic crisis in the first place.",
+      "confidence": 0.9,
+      "context_type": "support for established processes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020057+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "In the next few weeks, I will sign an Executive order clearing away the red tape that slows down too many construction projects.",
+      "confidence": 0.8,
+      "context_type": "process bypassing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020060+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As long as I\u2019m President, I will work with anyone in this Chamber to build on this momentum.",
+      "confidence": 0.9,
+      "context_type": "recognition of institutional authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020061+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Nothing will get done in Washington this year or next year or maybe even the year after that, because Washington is broken.",
+      "confidence": 0.8,
+      "context_type": "criticism of institutional dysfunction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020062+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The state of our Union is getting stronger. And we\u2019ve come too far to turn back now.",
+      "confidence": 0.9,
+      "context_type": "support for existing framework and gradual reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020063+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:28:12.020065+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T04:10:09.140327+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "new laws will only pass with support from Democrats and Republicans. We will move forward together or not at all, for the challenges we face are bigger than party and bigger than politics.",
+      "confidence": 0.95,
+      "context_type": "explicit call for adherence to legislative process and democratic norms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140320+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140322+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "In the coming year, we'll also work to rebuild people's faith in the institution of Government.",
+      "confidence": 0.9,
+      "context_type": "explicit statement of intent to foster respect for government institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140323+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "over the years, a parade of lobbyists has rigged the Tax Code to benefit particular companies and industries.",
+      "confidence": 0.7,
+      "context_type": "critique of internal flaws or external influence on institutions, rather than delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140324+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The 21st-century Government that's open and competent, a government that lives within its means, an economy that's driven by new skills and new ideas--our success in this new and changing world will require reform, responsibility, and innovation.",
+      "confidence": 0.95,
+      "context_type": "calls for reform and improvement within the existing governmental and economic system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140325+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.140326+00:00"
+    }
+  ]
+}

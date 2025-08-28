@@ -1,0 +1,280 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed Trump's 2019 SOTU address. The speech exhibits a strong blend of nationalistic unity, optimistic progress, and a clear articulation of threats, reflecting a rhetorical strategy that simultaneously seeks to unify the in-group ('Americans') while identifying external and internal 'enemies'."
+  },
+  "document_analyses": [
+    {
+      "document_id": "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a",
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "compassion": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "enmity": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "cohesive_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "no people on Earth are so fearless or daring or determined as Americans.",
+          "confidence": 0.9,
+          "context_type": "direct statement of superiority"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "real Americans",
+          "confidence": 0.8,
+          "context_type": "in-group/out-group distinction"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "Our Nation has lost its wealth, but we're getting it back so fast.",
+          "confidence": 0.8,
+          "context_type": "zero-sum framing of national success"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "All Americans deserve accountability and respect, and that's what we are giving to our wonderful heroes, our veterans.",
+          "confidence": 0.6,
+          "context_type": "conditional recognition of respect"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "So tonight I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed.",
+          "confidence": 0.7,
+          "context_type": "inclusive rhetoric, albeit within the 'citizen' framework"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "We want every American to know the dignity of a hard day's work.",
+          "confidence": 0.7,
+          "context_type": "dignity linked to labor, specific to Americans"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities.",
+          "confidence": 0.9,
+          "context_type": "existential threat framing"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The era of economic surrender is totally over.",
+          "confidence": 0.8,
+          "context_type": "past threat, now overcome"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "It is terrifying.",
+          "confidence": 0.9,
+          "context_type": "direct expression of crisis"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "North Korea\u2019s reckless pursuit of nuclear missiles could very soon threaten our homeland.",
+          "confidence": 0.9,
+          "context_type": "imminent threat"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "In the age of terrorism, these programs present risks we can just no longer afford.",
+          "confidence": 0.9,
+          "context_type": "high risk, crisis language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "A new tide of optimism was already sweeping across our land. Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.",
+          "confidence": 0.9,
+          "context_type": "optimistic vision and mission statement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "If you work hard, if you believe in yourself, if you believe in America, then you can dream anything, you can be anything, and together, we can achieve absolutely anything.",
+          "confidence": 0.9,
+          "context_type": "future-oriented, possibility language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "There has never been a better time to start living the American Dream.",
+          "confidence": 0.9,
+          "context_type": "opportunity language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "In the end, we will succeed. We will prevail.",
+          "confidence": 0.9,
+          "context_type": "declaration of future success"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth.",
+          "confidence": 0.8,
+          "context_type": "resentment over perceived unfairness/loss"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Our Nation has lost its wealth, but we're getting it back so fast.",
+          "confidence": 0.8,
+          "context_type": "zero-sum thinking about wealth"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "For many years, companies and jobs were only leaving us. But now they are roaring back. They\u2019re coming back.",
+          "confidence": 0.7,
+          "context_type": "reversal of perceived loss"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "Because of tax reform, they are handing out raises, hiring an additional 14 people, and expanding into the building next door. It\u2019s a good feeling.",
+          "confidence": 0.6,
+          "context_type": "celebration of others' economic success and positive impact"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "We want our poor to have their chance to rise.",
+          "confidence": 0.7,
+          "context_type": "joy from others' advancement, upward mobility"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values.",
+          "confidence": 0.9,
+          "context_type": "designation of adversaries"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "Terrorists who do things like place bombs in civilian hospitals are evil. When possible, we have no choice but to annihilate them.",
+          "confidence": 0.9,
+          "context_type": "moral condemnation and aggressive action"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "terrorists are not merely criminals, they are unlawful enemy combatants.",
+          "confidence": 0.9,
+          "context_type": "dehumanization and adversarial positioning"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "But no regime has oppressed its own citizens more totally or brutally than the cruel dictatorship in North Korea.",
+          "confidence": 0.8,
+          "context_type": "strong condemnation of opposing regime"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "In the aftermath of that terrible shooting, we came together, not as Republicans or Democrats, but as representatives of the people.",
+          "confidence": 0.8,
+          "context_type": "appeal for unity and cooperation"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+          "confidence": 0.9,
+          "context_type": "call for cooperative framing"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "All of us, together, as one team, one people, and one American family can do anything.",
+          "confidence": 0.9,
+          "context_type": "unity language"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written",
+          "confidence": 0.7,
+          "context_type": "mention of inter-branch cooperation"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Today, he lives in Seoul, where he rescues other defectors and broadcasts into North Korea what the regime fears most: the truth.",
+          "confidence": 0.6,
+          "context_type": "indirect reference to undermining an opposing system"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "It\u2019s time to begin moving toward a merit-based immigration system, one that admits people who are skilled, who want to work, who will contribute to our society, and who will love and respect our country.",
+          "confidence": 0.7,
+          "context_type": "exclusionary objective based on criteria, implicitly fragmenting from current system"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "This vital reform is necessary, not just for our economy, but for our security and for the future of America.",
+          "confidence": 0.7,
+          "context_type": "justification for policy that leads to division or exclusion"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "And together, we are building a safe, strong, and proud America.",
+          "confidence": 0.9,
+          "context_type": "integrative, positive-sum objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "America is a nation of builders. We built the Empire State Building in just 1 year.",
+          "confidence": 0.8,
+          "context_type": "emphasis on collective achievement and shared heritage"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Together, we can reclaim our great building heritage. We will build gleaming new roads, bridges, highways, railways, and waterways all across our land.",
+          "confidence": 0.9,
+          "context_type": "vision for collective national development"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "We want every American to know the dignity of a hard day's work. We want every child to be safe in their home at night. And we want every citizen to be proud of this land that we all love so much.",
+          "confidence": 0.8,
+          "context_type": "shared benefits and aspirations for all Americans"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focuses on how the inaugural address frames constitutional health by emphasizing a shift of power from the establishment to the people, indicative of systemic and institutional challenges."
+  },
+  "document_analyses": [
+    {
+      "document_id": "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f",
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "procedural_rejection": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "systemic_replacement": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Every 4 years, we gather on these steps to carry out the orderly and peaceful transfer of power, and we are grateful to President Obama and First Lady Michelle Obama for their gracious aid throughout this transition.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Today\u2019s ceremony, however, has very special meaning. Because today we are not merely transferring power from one administration to another, or from one party to another, but we are transferring power from Washington, D.C. and giving it back to you, the people.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_claim"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Chief Justice Roberts, President Carter, President Clinton, President Bush, President Obama, fellow Americans, and people of the world: Thank you.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_claim"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+          "confidence": 0.8,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "January 20, 2017, will be remembered as the day the people became the rulers of this Nation again. ... From this day forward, a new vision will govern our land. From this day forward, it\u2019s going to be only America first. America first.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_claim"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

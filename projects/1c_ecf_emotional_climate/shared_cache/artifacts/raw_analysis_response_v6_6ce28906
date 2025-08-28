@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "emotional_climate_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on the speaker's emotional framing of his decision and the impeachment context, emphasizing duty, threats to institutions, and calls for collegiality amidst strong disagreement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "enmity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "envy": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.6
+        },
+        "compassion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "fear",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one\u2019s oath of office that I can imagine.",
+          "confidence": 0.9,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I believe that our Constitution was inspired by Providence. I\u2019m convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.7,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "confidence": 0.9,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We have arrived at different judgments, but I hope we respect each other\u2019s good faith.",
+          "confidence": 0.8,
+          "context_type": "rhetorical_device"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "With regards to Hunter Biden, taking excessive advantage of his father\u2019s name is unsavory but also not a crime.",
+          "confidence": 0.6,
+          "context_type": "thematic_reference"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "absent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

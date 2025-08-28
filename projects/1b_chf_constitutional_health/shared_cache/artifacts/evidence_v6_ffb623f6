@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:22:04.381414+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight I come before you to announce that the Federal deficit, once so incomprehensibly large that it had 11 zeroes, will be, simply, zero. I will submit to Congress for 1999 the first balanced budget in 30 years. And if we hold fast to fiscal discipline, we may balance the budget this year\u20144 years ahead of schedule. You can all be proud of that, because turning a sea of red ink into black is no miracle. It is the product of hard work by the American people and of two visionary actions in Congress: the courageous vote in 1993 that led to a cut in the deficit of 90 percent, and the truly historic bipartisan balanced budget agreement passed by this Congress.",
+      "confidence": 0.95,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381406+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381408+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank the Vice President for his leadership and the Congress for its support in building a Government that is leaner, more flexible, a catalyst for new ideas, and most of all, a Government that gives the American people the tools they need to make the most of their own lives.",
+      "confidence": 0.95,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381410+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381411+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Founders set America on a permanent course toward a more perfect Union. To all of you I say, it is a journey we can only make together, living as one community. First, we have to continue to reform our Government, the instrument of our national community.",
+      "confidence": 0.95,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381412+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:22:04.381413+00:00"
+    }
+  ]
+}

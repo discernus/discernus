@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "issues": [
+    "The experiment plans to conduct statistical tests for significance, compare contexts, and analyze complex relationships, but the corpus contains only 6 documents (N=6). Per Discernus standards, a sample of this size is only suitable for qualitative case study analysis, not robust statistical inference.",
+    "The 'Populist Discourse Dimensions' section in the corpus manifest prose lists dimensions (e.g., 'Anti-Establishment Rhetoric', 'Mobilization Appeals', 'Simplification') that do not exist in the specified `pdaf_v10.md` framework. The framework will analyze its own nine dimensions, creating a disconnect between the corpus design rationale and the actual analysis.",
+    "The temporal design is severely unbalanced, with group sizes of N=2 (Early), N=3 (Mid), and N=1 (Recent). It is statistically invalid to compare a group with a single data point ('Recent' period) to other groups.",
+    "The `scoring_calibration` schema in the `pdaf_v10.md` framework is inconsistent. Some dimensions (e.g., `manichaean_people_elite_framing`) use a detailed 6-level scale, while others (e.g., `elite_conspiracy_systemic_corruption`) use a less granular 4-level scale."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-28T02:08:37.662654+00:00"
+}

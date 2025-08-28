@@ -1,0 +1,193 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "total_evidence_pieces": 18,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:23:54.612729+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I stand here ready to work with you to achieve historic breakthroughs for all Americans.",
+      "confidence": 0.9,
+      "context_type": "policy_advocacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612708+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight I am also asking you to pass the United States Reciprocal Trade Act so that if another country places an unfair tariff on an American product, we can charge them the exact same tariff on the exact same product that they sell to us.",
+      "confidence": 0.9,
+      "context_type": "legislative_call",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612710+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We can make our communities safer, our families stronger, our culture richer, our faith deeper, and our middle class bigger and more prosperous than ever before.",
+      "confidence": 0.8,
+      "context_type": "general_political_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612711+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation. It just doesn\u2019t work that way.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612712+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "My administration has cut more regulations in a short period of time than any other administration during its entire tenure.",
+      "confidence": 0.7,
+      "context_type": "policy_justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612713+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "In the past, most of the people in this room voted for a wall, but the proper wall never got built. I will get it built.",
+      "confidence": 0.7,
+      "context_type": "executive_action_justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612714+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans: We meet tonight at a moment of unlimited potential.",
+      "confidence": 0.9,
+      "context_type": "formal_address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612716+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We are joined tonight by one of those law enforcement heroes: ICE Special Agent Elvin Hernandez.",
+      "confidence": 0.8,
+      "context_type": "recognition_of_public_servant",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612717+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I will always support the brave men and women of law enforcement, and I pledge to you tonight that I will never abolish our heroes from ICE.",
+      "confidence": 0.8,
+      "context_type": "statement_of_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612717+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation. It just doesn\u2019t work that way.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612720+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The Senate has failed to act on these nominations, which is unfair to the nominees and very unfair to our country.",
+      "confidence": 0.7,
+      "context_type": "criticism_of_institutional_inaction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612721+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards.",
+      "confidence": 0.7,
+      "context_type": "delegitimizing_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612722+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have launched an unprecedented economic boom, a boom that has rarely been seen before. There\u2019s been nothing like it.",
+      "confidence": 0.9,
+      "context_type": "achievement_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612723+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our country is vibrant, and our economy is thriving like never before.",
+      "confidence": 0.8,
+      "context_type": "positive_assessment_of_status_quo",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612724+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "After 24 months of rapid progress, our economy is the envy of the world, our military is the most powerful on Earth, by far, and America is again winning each and every day.",
+      "confidence": 0.8,
+      "context_type": "restoration_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612724+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+      "confidence": 0.7,
+      "context_type": "call_for_political_change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612725+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We must choose between greatness or gridlock, results or resistance, vision or vengeance, incredible progress or pointless destruction.",
+      "confidence": 0.6,
+      "context_type": "binary_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612726+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "America was founded on liberty and independence and not Government coercion, domination, and control. We are born free, and we will stay free. Tonight we renew our resolve that America will never be a socialist country.",
+      "confidence": 0.7,
+      "context_type": "ideological_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.612728+00:00"
+    }
+  ]
+}

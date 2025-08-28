@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T20:21:38.896388+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "tribalism",
+      "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+      "confidence": 0.8,
+      "context_type": "critique_of_division",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896374+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "We were all caught in an inescapable network of mutuality, tied in a common garment. We cannot suffer the illusion of separation when we think this criminal justice system that is so punishing some is not hurting this country as a whole.",
+      "confidence": 1.0,
+      "context_type": "central_thesis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896376+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "manipulation",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896377+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "truth",
+      "quote_text": "We see in the United States of America Americans getting trapped in a system that - we know the data is clear - there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+      "confidence": 1.0,
+      "context_type": "statistical_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896378+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+      "confidence": 1.0,
+      "context_type": "systemic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896379+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+      "confidence": 1.0,
+      "context_type": "central_thesis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896380+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fear",
+      "quote_text": "Our criminal justice system, as it stands right now, is a gaping self-inflicted wound.",
+      "confidence": 0.85,
+      "context_type": "metaphorical_warning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896381+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+      "confidence": 1.0,
+      "context_type": "statement_of_values",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896384+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896385+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+      "confidence": 1.0,
+      "context_type": "acknowledgement_of_constraints",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T20:21:38.896386+00:00"
+    }
+  ]
+}

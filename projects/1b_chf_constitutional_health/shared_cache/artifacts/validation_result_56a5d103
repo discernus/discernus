@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "issues": [
+    "The experiment file 'experiment.md' contains top-level sections (Hypotheses, Methodology, Significance) that are not compliant with the Discernus v10.0 experiment specification. The v10.0 standard requires a structure limited to 'Abstract', 'Research Questions', and an optional 'Expected Outcomes' section.",
+    "The 'total_documents' field in the corpus manifest preamble is set to 48, but the document list contains 50 entries. This creates a metadata-content mismatch.",
+    "The experiment's stated scope in the Abstract is 'Clinton (1993-2000) through Biden (2021-2024)', but the corpus contains documents from outside this range (e.g., a 1992 speech and multiple 2025 speeches).",
+    "Several corpus filenames are inconsistent with their corresponding metadata. For example, 'Bush_SOTU_2009.txt' lists 'Barack Obama' as the speaker, and 'Trump_SOTU_2025.txt' is identified as a 'Joint Session Address' in its metadata.",
+    "The framework's human-readable title is 'Constitutional Health Framework v10.0', but its machine-readable metadata specifies 'framework_version: \"1.0.0\"'.",
+    "The experiment proposes ANOVA tests across 5 administrations, but the groups are unbalanced and some are small (e.g., Trump N=7, Biden N=8). The Abstract's claim of 'robust data for administration comparison' is an overstatement."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-27T21:00:35.048610+00:00"
+}

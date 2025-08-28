@@ -1,0 +1,116 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis focuses on how the discourse reflects upon or impacts constitutional health dimensions, considering the context of a State of the Union address, which is inherently part of established procedures."
+  },
+  "document_analyses": [
+    {
+      "document_id": "6357ab4c07af6f04b0d379f4ae2a41e24284d2ea634b1b6189a11ba8a197807c",
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Mr. Speaker and Mr. President, distinguished Members of Congress, honored guests, and fellow citizens:",
+          "confidence": 0.95,
+          "context_type": "opening_salutation"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You must pass the other elements of my plan to meet our economic needs.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Congress, pass my comprehensive crime bill.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "There are certain things that a President can do without Congress, and I'm going to do them.",
+          "confidence": 0.8,
+          "context_type": "executive_action_assertion"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker and Mr. President, distinguished Members of Congress, honored guests, and fellow citizens:",
+          "confidence": 0.95,
+          "context_type": "opening_salutation"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The Secretary of Defense recommended these cuts after consultation with the Joint Chiefs of Staff. And I make them with confidence.",
+          "confidence": 0.9,
+          "context_type": "consultation_with_experts"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "If you read the papers and watch TV, you know there's been a rise these days in a certain kind of ugliness: racist comments, anti-Semitism, an increased sense of division. Really, this is not us. This is not who we are. And this is not acceptable.",
+          "confidence": 0.9,
+          "context_type": "condemnation_of_divisive_rhetoric"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We must make it easier for people to invest money and create new products, new industries, and new jobs. We must clear away the obstacles to growth: high taxes, high regulation, redtape, and yes, wasteful Government spending.",
+          "confidence": 0.9,
+          "context_type": "policy_proposal_reform"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Or we can reform our own private health care system, which still gives us, for all its flaws, the best quality health care in the world.",
+          "confidence": 0.9,
+          "context_type": "policy_proposal_reform"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It's time we rediscovered a home truth the American people have never forgotten: This Government is too big and spends too much.",
+          "confidence": 0.85,
+          "context_type": "critique_within_framework"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

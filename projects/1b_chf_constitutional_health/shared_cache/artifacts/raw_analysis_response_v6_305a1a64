@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Obama's 2011 State of the Union address. The speech strongly emphasizes working within and improving existing democratic and constitutional structures through bipartisan cooperation and gradual reform. There is no rhetoric advocating for rejection or replacement of the system or its institutions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a",
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "new laws will only pass with support from Democrats and Republicans. We will move forward together or not at all, for the challenges we face are bigger than party and bigger than politics.",
+          "confidence": 0.95,
+          "context_type": "explicit call for adherence to legislative process and democratic norms"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct evidence found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "In the coming year, we'll also work to rebuild people's faith in the institution of Government.",
+          "confidence": 0.9,
+          "context_type": "explicit statement of intent to foster respect for government institutions"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "over the years, a parade of lobbyists has rigged the Tax Code to benefit particular companies and industries.",
+          "confidence": 0.7,
+          "context_type": "critique of internal flaws or external influence on institutions, rather than delegitimization"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The 21st-century Government that's open and competent, a government that lives within its means, an economy that's driven by new skills and new ideas--our success in this new and changing world will require reform, responsibility, and innovation.",
+          "confidence": 0.95,
+          "context_type": "calls for reform and improvement within the existing governmental and economic system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct evidence found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T02:54:48.738652+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "care",
+      "quote_text": "My interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+      "confidence": 0.9,
+      "context_type": "restrictive_in_group_care",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738636+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "harm",
+      "quote_text": "No one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+      "confidence": 0.9,
+      "context_type": "negative_consequences_of_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738639+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "fairness",
+      "quote_text": "Those people can still do it. They just want to get proper wages in the process.",
+      "confidence": 0.8,
+      "context_type": "demand_for_equitable_compensation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738640+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "cheating",
+      "quote_text": "through the abuse of asylum laws and through Joe Biden's massive paroles, they are now no longer technically illegal aliens.",
+      "confidence": 0.9,
+      "context_type": "manipulation_of_rules",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738642+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "loyalty",
+      "quote_text": "America is not just an idea... America is a nation. It is a group of people with a common history and a common future... they go and fight and die for their home, for their families, and for the future of their children.",
+      "confidence": 0.9,
+      "context_type": "national_group_cohesion_and_defense",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738642+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "betrayal",
+      "quote_text": "Our leaders have forgotten that... our elites don't seem to care about it... they actually don't really like the people who make up the domestic populations of their own country.",
+      "confidence": 0.9,
+      "context_type": "leadership_disregard_for_citizens",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738643+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "authority",
+      "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+      "confidence": 0.7,
+      "context_type": "endorsement_of_preferred_leader",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738645+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "subversion",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "challenge_to_political_establishment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738646+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "sanctity",
+      "quote_text": "This is like a fundamental broken translation function in our, in our sacred democracy that our elites don't seem to care about.",
+      "confidence": 0.8,
+      "context_type": "invocation_of_sacred_institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738647+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "degradation",
+      "quote_text": "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight.",
+      "confidence": 0.8,
+      "context_type": "criticism_leading_to_decline",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738648+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "liberty",
+      "quote_text": "America is an idea... America has really good ideas at the founding of our country. It was created by very brilliant men. The Constitution... has this incredible influence and political theory and that's why it has stood the test of time.",
+      "confidence": 0.7,
+      "context_type": "reference_to_founding_principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738649+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimension": "oppression",
+      "quote_text": "They're the people, by the way, who are not allowed to have an opinion about what's going on in their country because they will be silenced. They will be censored. They will be called every name in the book.",
+      "confidence": 0.8,
+      "context_type": "suppression_of_public_opinion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:48.738650+00:00"
+    }
+  ]
+}

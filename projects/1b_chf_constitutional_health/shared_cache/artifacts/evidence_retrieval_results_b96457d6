@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-28T03:28:42.882824",
+    "statistical_results_hash": "7fc1ccc2bf245fdce80a629552ca5a65e1f01f4e628e7cb96ba68be32e1368e5",
+    "total_findings": 10,
+    "total_quotes": 21
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extreme Constitutional Pathology and Lowest Health in Donald Trump's Inaugural and SOTU Addresses: The documents `Trump_Inaugural_2017.txt`, `Trump_Inaugural_2025.txt`, and `Trump_SOTU_2025.txt` are identified as significant anomalies with the lowest Constitutional Health Index (e.g., -0.789) and highest Constitutional Pathology Index (e.g., 0.806), indicating a strong rhetoric of undermining constitutional health across multiple dimensions."
+      },
+      "queries_used": [
+        "document:\"Trump_Inaugural_2017.txt\" (\"broken system\" OR \"corrupt institutions\" OR \"new system\")",
+        "document:\"Trump_SOTU_2025.txt\" (\"illegitimate authority\" OR \"bypass the system\" OR \"complete overhaul\")",
+        "document:\"Trump_Inaugural_2025.txt\" (\"failed establishment\" OR \"revolutionary change\" OR \"extraordinary measures\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The presidential election of November 5th was a mandate like has not been seen in many decades.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.8,
+          "relevance_score": 0.6152529716491699,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "First, I will declare a national emergency at our southern border. All illegal entry will immediately be halted, and we will begin the process of returning millions and millions of criminal aliens back to the places from which they came. We will reinstate my 'Remain in Mexico' policy. I will end the practice of catch-and-release. And I will send troops to the Southern Border to repel the disastrous invasion of our country.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.95,
+          "relevance_score": 0.5945624709129333,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.95,
+          "relevance_score": 0.5528604388237,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Inaugural Addresses Exhibit Lower Constitutional Health and Higher Pathology: Across the corpus, Inaugural Addresses (average CHI 0.49, CPI 0.17) consistently score lower on constitutional health and higher on pathology compared to State of the Union or Joint Session addresses."
+      },
+      "queries_used": [
+        "\"Inaugural Address\" (\"rejecting procedures\" OR \"delegitimizing authority\")",
+        "\"Inaugural Address\" (\"system replacement\" OR \"radical transformation\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+          "document_name": "Bush_Inaugural_2001.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.98,
+          "relevance_score": 0.5135048031806946,
+          "metadata": {
+            "document_name": "Bush_Inaugural_2001.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Now, we must shape a 21st century American revolution of opportunity, responsibility, and community.",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.6,
+          "relevance_score": 0.4134339392185211,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "State of the Union (SOTU) and Joint Session Addresses Show Higher Constitutional Health: These speech contexts (average CHI ~0.70, CPI ~0.05-0.06) demonstrate a more pronounced and consistent rhetorical commitment to constitutional health."
+      },
+      "queries_used": [
+        "\"State of the Union\" (\"respect for institutions\" OR \"constitutional process\")",
+        "\"Joint Session\" (\"systemic continuity\" OR \"gradual reform\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "My fellow Americans, the state of our Union is the strongest it has ever been.",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.49501222372055054,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present.",
+          "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.49332886934280396,
+          "metadata": {
+            "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Variability in Institutional Subversion Rhetoric: This dimension (raw_score_std 0.275) shows the highest relative variation, suggesting speakers' rhetoric regarding attacking institutional authority is highly inconsistent across texts."
+      },
+      "queries_used": [
+        "\"corrupt institutions\" OR \"illegitimate authority\"",
+        "\"biased system\" OR \"deep state\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "I\u2019ve appointed a proven and aggressive Inspector General to ferret out any and all cases of waste and fraud.",
+          "document_name": "Obama_SOTU_2014.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.8,
+          "relevance_score": 0.46646177768707275,
+          "metadata": {
+            "document_name": "Obama_SOTU_2014.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+          "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.2865627706050873,
+          "metadata": {
+            "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Significant Variability in Systemic Replacement Rhetoric: With a raw_score_std of 0.251, calls for fundamental constitutional replacement show high variability, indicating it's a rhetorically prominent theme when present, but not consistently across the corpus."
+      },
+      "queries_used": [
+        "\"new system\" OR \"complete overhaul\"",
+        "\"revolutionary change\" OR \"new constitution\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "As times change, so Government must change. We need a new Government for a new century, humble enough not to try to solve all our problems for us but strong enough to give us the tools to solve our problems for ourselves, a Government that is smaller, lives within its means, and does more with less.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.48525190353393555,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Switching away from this current system of lower-skilled immigration, and instead adopting a merit-based system, we will have so many more benefits.",
+          "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+          "dimension": "systemic_replacement",
+          "confidence": 0.75,
+          "relevance_score": 0.365243524312973,
+          "metadata": {
+            "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+            "dimension": "systemic_replacement",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Pronounced Variability in Procedural Rejection Rhetoric: This dimension (raw_score_std 0.245) also exhibits high relative variation, highlighting significant differences in the emphasis placed on rejecting established procedures or advocating extra-constitutional action."
+      },
+      "queries_used": [
+        "\"bypass the system\" OR \"emergency powers\"",
+        "\"broken system\" OR \"people's will\" (in context of process rejection)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.35142844915390015,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A Government-run health care system is the wrong prescription. By keeping costs under control, expanding access, and helping more Americans afford coverage, we will preserve the system of private medicine that makes America's health care the best in the world.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.30623045563697815,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Consistent Support for Procedural Legitimacy: This dimension (raw_score_mean 0.831, raw_score_std 0.168) shows high average scores and low variability, indicating a general and stable rhetorical commitment to established processes and democratic norms across the corpus."
+      },
+      "queries_used": [
+        "\"constitutional process\" OR \"due process\"",
+        "\"electoral mandate\" OR \"legislative process\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.45228806138038635,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The presidential election of November 5th was a mandate like has not been seen in many decades.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.8,
+          "relevance_score": 0.4481399655342102,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Consistent Support for Systemic Continuity: With a high mean (0.845) and low standard deviation (0.174), rhetoric supporting the maintenance and gradual improvement of the existing constitutional framework is a stable feature of the discourse."
+      },
+      "queries_used": [
+        "\"constitutional stability\" OR \"democratic tradition\"",
+        "\"gradual reform\" OR \"institutional continuity\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.6023072600364685,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agreed with us.",
+          "document_name": "Obama_SOTU_2013.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.46419763565063477,
+          "metadata": {
+            "document_name": "Obama_SOTU_2013.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Intercorrelation Among Constitutional Health Dimensions: Rhetoric emphasizing one 'health' dimension (Procedural Legitimacy, Institutional Respect, Systemic Continuity) strongly correlates with emphasizing the others, suggesting a coherent rhetorical pattern for supporting constitutional health."
+      },
+      "queries_used": [
+        "\"respect for institutions\" AND \"democratic norms\"",
+        "\"constitutional process\" AND \"checks and balances\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We will respect historic institutions, but we will respect the sovereign rights of all nations, and they have to respect our rights as a nation also.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.7,
+          "relevance_score": 0.597743570804596,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5008991360664368,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Intercorrelation Among Constitutional Pathology Dimensions: Similarly, rhetoric focused on one 'pathology' dimension (Procedural Rejection, Institutional Subversion, Systemic Replacement) strongly correlates with the others, indicating a cohesive rhetorical strategy for undermining constitutional norms."
+      },
+      "queries_used": [
+        "\"attack institutions\" AND \"reject procedures\"",
+        "\"subvert authority\" AND \"bypass system\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "These institutions, these unseen pillars of civilization, must remain strong in America, and we will defend them.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.44265949726104736,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In State after State, new laws have been passed not only to suppress the vote\u2014we've been there before\u2014but to subvert the entire election. We can't let this happen.",
+          "document_name": "Biden_SOTU_2023.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.4162675142288208,
+          "metadata": {
+            "document_name": "Biden_SOTU_2023.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}

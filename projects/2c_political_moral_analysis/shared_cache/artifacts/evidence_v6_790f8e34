@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T02:54:20.432640+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "care",
+      "quote_text": "Overwhelmingly, in the United States of America, our prisons and jails are full of those Americans who are already hurting and struggling and often need more help than a system that hurts them. Our prisons and jails have become warehouses for people that are struggling with trauma, struggling with disease, struggling with illness.",
+      "confidence": 0.9,
+      "context_type": "nurturing/support for vulnerable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432616+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "harm",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation... We are using our resources to compound hurt and harm that people have already endured, to incarcerate more Americans than ever before in our history, and ultimately makes our neighborhoods and communities -- ones like mine -- less safe, not more.",
+      "confidence": 0.9,
+      "context_type": "criticism of inflicted suffering",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432618+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "fairness",
+      "quote_text": "We profess -- we actually swear an oath to the flag -- that we are a nation of liberty and justice for all. But our criminal justice system violates those values... This is a system that hurts people, and it hurts people that are often already struggling, often already hurt. There's ways to make this system more fair.",
+      "confidence": 0.9,
+      "context_type": "appeal to justice and equality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432619+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "cheating",
+      "quote_text": "a kid in a more privileged community or on a college campus gets a chance to stumble, to learn a lesson, wide margin for error. But a kid living in a community that's low-income or black and brown, they get trapped by a system that disproportionately impacts their lives.",
+      "confidence": 0.9,
+      "context_type": "critique of unfair advantage and exploitation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432620+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "loyalty",
+      "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us. This bill is a recognition of the fact that we are bound together as a people by the most precious ideals in humanity.",
+      "confidence": 0.8,
+      "context_type": "appeal to national unity and collective identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432621+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "betrayal",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "absence of direct reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432622+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "authority",
+      "quote_text": "This bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back \u2013 not legislators, but judges who sit and see all the totality of the facts.",
+      "confidence": 0.8,
+      "context_type": "working within the existing legal system to empower judges",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432623+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "subversion",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation... we now have an opportunity to reverse course in a significant way.",
+      "confidence": 0.8,
+      "context_type": "challenge to the existing system and call for reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432624+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "sanctity",
+      "quote_text": "This bill is a recognition of the fact that we are bound together as a people by the most precious ideals in humanity \u2013 the ideals that were put forth by our founders and that have been aspired to in every generation and have been worked on in every generation, making us a more perfect union.",
+      "confidence": 0.8,
+      "context_type": "appeal to foundational sacred principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432625+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "degradation",
+      "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American. But our criminal justice system violates those values.",
+      "confidence": 0.9,
+      "context_type": "description of moral decay and violation of principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432625+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "liberty",
+      "quote_text": "We profess -- we actually swear an oath to the flag -- that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+      "confidence": 0.9,
+      "context_type": "emphasis on freedom and individual rights",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432637+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimension": "oppression",
+      "quote_text": "This is a system in our country that feeds upon certain communities and not others... The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people -- on certain people in certain communities and not on others. It is a system that still subjects young people to what other countries and human rights activists in this nation call torture -- juvenile solitary confinement.",
+      "confidence": 0.9,
+      "context_type": "description of systemic control and tyranny",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:54:20.432638+00:00"
+    }
+  ]
+}

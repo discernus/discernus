@@ -1,0 +1,1 @@
+../../../corpus/political/us/presidential/Trump_Inaugural_2017.txt

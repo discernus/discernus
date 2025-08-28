@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_9feda6282e57",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis focused on the constitutional health implications of President Bush's 2001 Inaugural Address. The speech strongly emphasizes continuity, respect for established processes and institutions, and gradual improvement within the existing framework.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2001.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Americans are called to enact this promise in our lives and in our laws.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absent\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Thank you, all. Chief Justice Rehnquist, President Carter, President Bush, President Clinton, distinguished guests, and my fellow citizens.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I am honored and humbled to stand here where so many of America's leaders have come before me, and so many will follow.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absent\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have a place, all of us, in a long story, a story we continue but whose end we will not see.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Together we will reclaim America's schools before ignorance and apathy claim more young lives. We will reform Social Security and Medicare, sparing our children from struggles we have the power to prevent.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"call for gradual reform\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absent\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "058c6b14a9f4f6379316daba401f111130677244adee195fc764409dce283867",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:04:58.486134+00:00",
+    "end_time": "2025-08-27T21:05:09.130358+00:00",
+    "duration_seconds": 10.644197
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

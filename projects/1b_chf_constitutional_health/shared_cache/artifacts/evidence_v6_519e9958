@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:23:54.599754+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families. So I hope we can work together this year on some bipartisan priorities like criminal justice reform and helping people who are battling prescription drug abuse and heroin abuse.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599743+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But the American people should know that with or without congressional action, ISIL will learn the same lessons as terrorists before them.",
+      "confidence": 0.7,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599747+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Our Founders distributed power between States and branches of government and expected us to argue, just as they did, fiercely, over the size and shape of government, over commerce and foreign relations, over the meaning of liberty and the imperatives of security.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599748+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agreed with us.",
+      "confidence": 0.8,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599749+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "That\u2019s how we recovered from the worst economic crisis in generations. That\u2019s how we reformed our health care system and reinvented our energy sector. That\u2019s how we delivered more care and benefits to our troops coming home and our veterans. That\u2019s how we secured the freedom in every State to marry the person we love.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599750+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We have to change the system to reflect our better selves. I think we\u2019ve got to end the practice of drawing our congressional districts so that politicians can pick their voters and not the other way around. Let a bipartisan group do it.",
+      "confidence": 0.85,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.599752+00:00"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e841b19feb1f217243183fa31e77f745705d60a81a8a1571cde8b6d841212b6d"
+    ],
+    "total_evidence_pieces": 17,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:31:10.960698+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I am sending Congress a budget that rebuilds the military, eliminates the defense sequester, and calls for one of the largest increases in national defense spending in American history.",
+      "confidence": 0.9,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960677+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "To any in Congress who do not believe we should enforce our laws, I would ask you this one question: What would you say to the American family that loses their jobs, their income, or their loved one because America refused to uphold its laws and defend its borders?",
+      "confidence": 0.85,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960681+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I have kept my promise to appoint a Justice to the United States Supreme Court, from my list of 20 judges, who will defend our Constitution.",
+      "confidence": 0.9,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960682+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+      "confidence": 0.8,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960683+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "Our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan's life, from reaching those in need. If we slash the restraints, not just at the FDA, but across our Government, then we will be blessed with far more miracles just like Megan.",
+      "confidence": 0.8,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960683+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "Thank you very much. Mr. Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and citizens of America",
+      "confidence": 0.9,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960684+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "I am asking all Members of Congress to join me in dreaming big and bold, and daring things for our country.",
+      "confidence": 0.85,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960685+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "I have kept my promise to appoint a Justice to the United States Supreme Court, from my list of 20 judges, who will defend our Constitution.",
+      "confidence": 0.9,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960686+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+      "confidence": 0.8,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960687+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "My administration has answered the pleas of the American people for immigration enforcement and border security. By finally enforcing our immigration laws, we will raise wages, help the unemployed, save billions and billions of dollars, and make our communities safer for everyone.",
+      "confidence": 0.75,
+      "context_type": "implied critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960689+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "We are providing a voice to those who have been ignored by our media and silenced by special interests.",
+      "confidence": 0.7,
+      "context_type": "implied critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960690+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present.",
+      "confidence": 0.9,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960691+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "What we are witnessing today is the renewal of the American spirit. Our allies will find that America is once again ready to lead. All the nations of the world\u2014friend or foe\u2014will find that America is strong, America is proud, and America is free.",
+      "confidence": 0.85,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960692+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "I believe that real and positive immigration reform is possible, as long as we focus on the following goals: to improve jobs and wages for Americans, to strengthen our Nation\u2019s security, and to restore respect for our laws.",
+      "confidence": 0.85,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960693+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly Make America Great Again.",
+      "confidence": 0.85,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960694+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "I am calling on this Congress to repeal and replace Obamacare with reforms that expand choice, increase access, lower costs, and at the same time, provide better health care.",
+      "confidence": 0.8,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960695+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "Switching away from this current system of lower-skilled immigration, and instead adopting a merit-based system, we will have so many more benefits.",
+      "confidence": 0.75,
+      "context_type": "direct support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:31:10.960696+00:00"
+    }
+  ]
+}

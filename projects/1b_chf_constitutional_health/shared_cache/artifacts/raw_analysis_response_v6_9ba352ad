@@ -1,0 +1,104 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document, a State of the Union address, consistently emphasizes working within established political and constitutional processes, reforming existing institutions, and maintaining systemic continuity. There is no language suggesting rejection of procedures, subversion of institutions, or systemic replacement. The focus is on responsible governance and incremental improvement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+          "confidence": 0.95,
+          "context_type": "direct statement of cooperation with legislative body"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our new governing vision says Government should be active but limited, engaged but not overbearing.",
+          "confidence": 0.9,
+          "context_type": "statement about the proper role and function of government within its defined bounds"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "absence of evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I challenge and invite Congress to work with me...",
+          "confidence": 0.9,
+          "context_type": "explicit call for collaboration with legislative branch"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Government has a role, and an important role.",
+          "confidence": 0.85,
+          "context_type": "acknowledgment of legitimate governmental function"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "absence of evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.",
+          "confidence": 0.95,
+          "context_type": "advocacy for reform within existing systems, implying continuity"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "By confronting the tough challenge of reform, by being responsible with our budget, we can earn the trust of the American people. And we can add to that trust by enacting fair and balanced election and campaign reforms.",
+          "confidence": 0.9,
+          "context_type": "emphasis on improving existing frameworks and processes"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

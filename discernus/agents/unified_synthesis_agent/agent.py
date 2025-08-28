@@ -17,8 +17,8 @@ from typing import Dict, Any, List, Optional
 
 from ...gateway.llm_gateway import LLMGateway
 from ...gateway.model_registry import ModelRegistry
-from ...core.prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
 from ...core.audit_logger import AuditLogger
+import yaml
 
 
 class UnifiedSynthesisAgent:
@@ -86,17 +86,57 @@ class UnifiedSynthesisAgent:
             )
 
         try:
-            # 1. Assemble the base prompt with framework, experiment, and research data
-            assembler = SynthesisPromptAssembler()
-            base_prompt = assembler.assemble_prompt(
-                framework_path=assets['framework_path'],
-                experiment_path=assets['experiment_path'],
-                research_data_artifact_hash=assets['research_data_artifact_hash'],
-                artifact_storage=artifact_storage,
-                curated_evidence_hash=assets.get('evidence_retrieval_results_hash')  # Pass evidence hash to assembler
+            # 1. Load all content directly (THIN approach - no complex parsing)
+            framework_content = Path(assets['framework_path']).read_text(encoding='utf-8')
+            experiment_content = Path(assets['experiment_path']).read_text(encoding='utf-8')
+            
+            # 2. Load research data from artifact (THIN approach - direct Python repr)
+            research_data_content = artifact_storage.get_artifact(assets['research_data_artifact_hash'])
+            research_data_str = research_data_content.decode('utf-8')
+            
+            # Handle transition from JSON to Python repr format
+            try:
+                # Try Python repr first (new format)
+                research_data = eval(research_data_str)
+            except (NameError, SyntaxError):
+                # Fallback to JSON (old format during transition)
+                research_data = json.loads(research_data_str)
+            
+            research_data_repr = repr(research_data['statistical_results'])
+            
+            # 3. Load evidence if available
+            evidence_hash = assets.get('evidence_retrieval_results_hash')
+            if evidence_hash:
+                evidence_content = artifact_storage.get_artifact(evidence_hash)
+                evidence_str = evidence_content.decode('utf-8')
+                
+                # Handle transition from JSON to Python repr format
+                try:
+                    # Try Python repr first (new format)
+                    evidence_data = eval(evidence_str)
+                except (NameError, SyntaxError):
+                    # Fallback to JSON (old format during transition)
+                    evidence_data = json.loads(evidence_str)
+                
+                evidence_context = repr(evidence_data)
+            else:
+                evidence_context = "No curated evidence was available for this synthesis run."
+            
+            # 4. Load corpus manifest (simple file read)
+            corpus_path = Path(assets['experiment_path']).parent / "corpus.md"
+            corpus_manifest = corpus_path.read_text(encoding='utf-8') if corpus_path.exists() else "Corpus manifest not available"
+            
+            # 5. Assemble prompt using template (no complex assembler needed)
+            base_prompt = self.prompt_template['template'].format(
+                experiment_metadata="See experiment configuration below",
+                framework_content=framework_content,
+                experiment_content=experiment_content,
+                corpus_manifest=corpus_manifest,
+                research_data=f"Complete Statistical Results:\n{research_data_repr}",
+                evidence_context=evidence_context
             )
 
-            # 2. Execute the LLM call with the complete prompt from assembler
+            # 6. Execute the LLM call
             final_report, metadata = self.llm_gateway.execute_call(
                 model=self.model, prompt=base_prompt, temperature=0.2
             )

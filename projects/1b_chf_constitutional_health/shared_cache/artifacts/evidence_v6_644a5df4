@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T00:36:03.668830+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Again we are here in the sanctuary of democracy, and once again our democracy has spoken. So let me begin by congratulating all of you here in the 104th Congress and congratulating you, Mr. Speaker.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668821+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You made a good start by passing that law which applies to Congress all the laws you put on the private sector, and I was proud to sign it yesterday.",
+      "confidence": 0.85,
+      "context_type": "supporting legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668822+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "So tonight I ask you to just stop taking the lobbyists' perks. Just stop. We don't have to wait for legislation to pass to send a strong signal to the American people that things are really changing.",
+      "confidence": 0.7,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668823+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "For we are the keepers of a sacred trust, and we must be faithful to it in this new and very demanding era.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668824+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I applaud your desire to get rid of costly and unnecessary regulations. But when we deregulate, let's remember what national action in the national interest has given us: safer food for our families, safer toys for our children, safer nursing homes for our parents, safer cars and highways, and safer workplaces, cleaner air, and cleaner water.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment of institutional purpose",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668825+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.",
+      "confidence": 0.6,
+      "context_type": "criticism of institutional performance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668826+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times:",
+      "confidence": 0.9,
+      "context_type": "historical context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668826+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our New Covenant is a new set of understandings for how we can equip our people to meet the challenges of a new economy, how we can change the way our Government works to fit a different time, and, above all, how we can repair the damaged bonds in our society and come together behind our common purpose.",
+      "confidence": 0.9,
+      "context_type": "vision statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668827+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The reinventing Government report is getting results. And we're not through. There's going to be a second round of reinventing Government.",
+      "confidence": 0.85,
+      "context_type": "description of ongoing reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668828+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We've got to have a Government that can be a real partner in making this new economy work for all of our people, a Government that helps each and every one of us to get an education and to have the opportunity to renew our skills.",
+      "confidence": 0.7,
+      "context_type": "call for adaptation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T00:36:03.668829+00:00"
+    }
+  ]
+}

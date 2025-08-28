@@ -1,0 +1,303 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "total_evidence_pieces": 29,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T02:29:00.127853+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "From this day forward, a new vision will govern our land. From this day forward, it\u2019s going to be only America first. America first.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127803+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation\u2019s Capital, there was little to celebrate for struggling families all across our land.",
+      "confidence": 0.95,
+      "context_type": "problem_diagnosis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127808+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+      "confidence": 0.9,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127810+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people.",
+      "confidence": 0.8,
+      "context_type": "inclusive_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127814+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "The forgotten men and women of our country will be forgotten no longer. Everyone is listening to you now.",
+      "confidence": 0.85,
+      "context_type": "restoration_of_value",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127815+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Whether we are Black or Brown or White, we all bleed the same red blood of patriots, we all enjoy the same glorious freedoms, and we all salute the same great American flag.",
+      "confidence": 0.85,
+      "context_type": "inclusive_statement_within_group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127816+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fear",
+      "quote_text": "Mothers and children trapped in poverty in our inner cities; rusted-out factories scattered like tombstones across the landscape of our Nation; an education system, flush with cash, but which leaves our young and beautiful students deprived of all knowledge; and the crime and the gangs and the drugs that have stolen too many lives and robbed our country of so much unrealized potential. This American carnage stops right here and stops right now.",
+      "confidence": 0.9,
+      "context_type": "crisis_description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127818+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fear",
+      "quote_text": "We will reinforce old alliances and form new ones and unite the civilized world against radical Islamic terrorism, which we will eradicate completely from the face of the Earth.",
+      "confidence": 0.9,
+      "context_type": "threat_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127819+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fear",
+      "quote_text": "There should be no fear: We are protected, and we will always be protected. We will be protected by the great men and women of our military and law enforcement, and most importantly, we will be protected by God.",
+      "confidence": 0.85,
+      "context_type": "reassurance_in_response_to_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127820+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "hope",
+      "quote_text": "Together, we will determine the course of America and the world for many, many years to come. We will face challenges, we will confront hardships, but we will get the job done.",
+      "confidence": 0.95,
+      "context_type": "future_orientation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127822+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "hope",
+      "quote_text": "America will start winning again, winning like never before. We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.",
+      "confidence": 0.95,
+      "context_type": "vision_for_restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127823+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "hope",
+      "quote_text": "Our country will thrive and prosper again. We stand at the birth of a new millennium, ready to unlock the mysteries of space, to free the Earth from the miseries of disease, and to harness the energies, industries, and technologies of tomorrow.",
+      "confidence": 0.9,
+      "context_type": "optimistic_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127825+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "envy",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth.",
+      "confidence": 0.9,
+      "context_type": "zero_sum_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127826+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "envy",
+      "quote_text": "The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation\u2019s Capital, there was little to celebrate for struggling families all across our land.",
+      "confidence": 0.9,
+      "context_type": "grievance_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127828+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "envy",
+      "quote_text": "The wealth of our middle class has been ripped from their homes and then redistributed all across the world.",
+      "confidence": 0.85,
+      "context_type": "perceived_injustice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127830+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "compersion",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127832+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "enmity",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost.",
+      "confidence": 0.9,
+      "context_type": "adversarial_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127833+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "enmity",
+      "quote_text": "We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+      "confidence": 0.95,
+      "context_type": "threat_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127836+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "enmity",
+      "quote_text": "We will reinforce old alliances and form new ones and unite the civilized world against radical Islamic terrorism, which we will eradicate completely from the face of the Earth.",
+      "confidence": 0.95,
+      "context_type": "enemy_designation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127837+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "amity",
+      "quote_text": "We, the citizens of America, are now joined in a great national effort to rebuild our country...Together, we will determine the course of America...",
+      "confidence": 0.9,
+      "context_type": "call_for_internal_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127838+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "amity",
+      "quote_text": "We share one heart, one home, and one glorious destiny.",
+      "confidence": 0.9,
+      "context_type": "unity_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127840+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "amity",
+      "quote_text": "The Bible tells us, 'How good and pleasant it is when God's people live together in unity.' We must speak our minds openly, debate our disagreements honestly, but always pursue solidarity. When America is united, America is totally unstoppable.",
+      "confidence": 0.9,
+      "context_type": "appeal_for_solidarity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127841+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Today\u2019s ceremony, however, has very special meaning. Because today we are not merely transferring power from one administration to another, or from one party to another, but we are transferring power from Washington, D.C. and giving it back to you, the people.",
+      "confidence": 0.9,
+      "context_type": "dismantling_existing_power",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127842+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "This American carnage stops right here and stops right now.",
+      "confidence": 0.85,
+      "context_type": "stopping_current_state",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127843+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+      "confidence": 0.85,
+      "context_type": "zero_sum_economic_strategy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127844+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people. Together, we will determine the course of America...",
+      "confidence": 0.95,
+      "context_type": "national_rebuilding",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127846+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "America will start winning again, winning like never before. We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.",
+      "confidence": 0.95,
+      "context_type": "shared_national_triumph",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127847+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+      "confidence": 0.9,
+      "context_type": "infrastructure_development",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127848+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "A new national pride will stir our souls, lift our sights, and heal our divisions.",
+      "confidence": 0.9,
+      "context_type": "unity_through_pride",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:00.127849+00:00"
+    }
+  ]
+}

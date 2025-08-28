@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_d5ad56733397",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of a State of the Union address, which typically emphasizes stability, existing processes, and national strength. Identified key themes of upholding democratic norms, respecting institutions, and pursuing gradual improvements.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.85\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.45,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Our law enforcement needs this vital legislation to protect our citizens. You need to renew the PATRIOT Act.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"critique of action bypassing process\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Tonight Members of Congress can take pride in the great works of compassion and reform that skeptics had thought impossible.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"praise for institution\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"These institutions, these unseen pillars of civilization, must remain strong in America, and we will defend them.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"affirmation of institutional value\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Some want to undermine the No Child Left Behind Act by weakening standards and accountability.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"critique of undermining institutional norms\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We must continue to pursue an aggressive, progrowth economic agenda.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy recommendation for existing system\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"A Government-run health care system is the wrong prescription. By keeping costs under control, expanding access, and helping more Americans afford coverage, we will preserve the system of private medicine that makes America's health care the best in the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy for preserving existing system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"no direct evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "f1af6c7fbcaaaa88e05d23a3d1da1205489778192ebadd7b4806540aaea43fe5",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:10:53.820954+00:00",
+    "end_time": "2025-08-27T21:11:13.476232+00:00",
+    "duration_seconds": 19.655252
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

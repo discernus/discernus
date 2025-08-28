@@ -1,0 +1,515 @@
+{
+  "062adda02368e975c171d67f207a28dce8b3f2936e1cc6393033cfdd9f014315": {
+    "artifact_path": "raw_analysis_response_v6_062adda0",
+    "created_at": "2025-08-28T02:11:40.870374+00:00",
+    "human_filename": "raw_analysis_response_v6_062adda0",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 6246,
+    "source_run": "20250828T020906Z"
+  },
+  "0c7cbcc03265cd3020e75c00f6c65efd3ae4fd3b72893b036f23a002a2795a3e": {
+    "artifact_path": "evidence_v6_0c7cbcc0",
+    "created_at": "2025-08-28T02:10:57.934429+00:00",
+    "human_filename": "evidence_v6_0c7cbcc0",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5841,
+    "source_run": "20250828T020906Z"
+  },
+  "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f": {
+    "artifact_path": "Trump_Inaugural_2017_0e0bb704.txt",
+    "created_at": "2025-08-28T02:09:06.604258+00:00",
+    "human_filename": "Trump_Inaugural_2017_0e0bb704.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4516164763c6",
+      "artifact_type": "corpus_document",
+      "original_filename": "Trump_Inaugural_2017.txt"
+    },
+    "size_bytes": 8954,
+    "source_run": "20250828T020906Z"
+  },
+  "0e2cf5f0a1cd247815889a3e277e987b7e9c78e9cfd9676b5dbc2fed20943a80": {
+    "artifact_path": "analysis_result_0e2cf5f0",
+    "created_at": "2025-08-28T02:10:57.936526+00:00",
+    "human_filename": "analysis_result_0e2cf5f0",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_3ac4736e1a83",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 7207,
+    "source_run": "20250828T020906Z"
+  },
+  "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722": {
+    "artifact_path": "trump_sotu_2017_14ad8f3e.txt",
+    "created_at": "2025-08-28T02:09:32.253325+00:00",
+    "human_filename": "trump_sotu_2017_14ad8f3e.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_0af55f0dda4b",
+      "artifact_type": "corpus_document",
+      "original_filename": "trump_sotu_2017.txt"
+    },
+    "size_bytes": 30280,
+    "source_run": "20250828T020906Z"
+  },
+  "1eb1172e8f30ce195ec38bba5762a5b46bd9854da5cdb3973744ed075892a0a0": {
+    "artifact_path": "analysis_result_1eb1172e",
+    "created_at": "2025-08-28T02:09:56.026513+00:00",
+    "human_filename": "analysis_result_1eb1172e",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_0af55f0dda4b",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 8825,
+    "source_run": "20250828T020906Z"
+  },
+  "20801652b193993d46ff11b80229baecbd91bd5b77983d8eff45863cb8441650": {
+    "artifact_path": "analysis_result_20801652",
+    "created_at": "2025-08-28T02:09:32.251950+00:00",
+    "human_filename": "analysis_result_20801652",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4516164763c6",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 7848,
+    "source_run": "20250828T020906Z"
+  },
+  "24024cf939e70637e7730460c7c33e48cc1eedb78eacfaf86afe2056f3cf1bdc": {
+    "artifact_path": "evidence_v6_24024cf9",
+    "created_at": "2025-08-28T02:11:40.870736+00:00",
+    "human_filename": "evidence_v6_24024cf9",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 6452,
+    "source_run": "20250828T020906Z"
+  },
+  "251eb543801db3ae5c3cc59bad756dcbe632bb53af028df4a7f00a2beabdc274": {
+    "artifact_path": "raw_analysis_response_v6_251eb543",
+    "created_at": "2025-08-28T02:09:32.247922+00:00",
+    "human_filename": "raw_analysis_response_v6_251eb543",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 6445,
+    "source_run": "20250828T020906Z"
+  },
+  "2b5ab0d5e4c328477e1ba44fbb2e1f51c9e3e830f6bbcb8e080018902db90f37": {
+    "artifact_path": "evidence_v6_2b5ab0d5",
+    "created_at": "2025-08-28T02:09:32.249040+00:00",
+    "human_filename": "evidence_v6_2b5ab0d5",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 6340,
+    "source_run": "20250828T020906Z"
+  },
+  "34fe50369971ad5d298c33a8b4b362d565581ec1752872dab1bc61985629371f": {
+    "artifact_path": "raw_analysis_response_v6_34fe5036",
+    "created_at": "2025-08-28T02:12:15.338852+00:00",
+    "human_filename": "raw_analysis_response_v6_34fe5036",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 6221,
+    "source_run": "20250828T020906Z"
+  },
+  "38c46ae784905e4acc674d1f595dbf6d2948c340de4dce0c3abc6d40c448cdc0": {
+    "artifact_path": "evidence_v6_38c46ae7",
+    "created_at": "2025-08-28T02:09:56.023892+00:00",
+    "human_filename": "evidence_v6_38c46ae7",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 7496,
+    "source_run": "20250828T020906Z"
+  },
+  "4827abb535a214c4c04229d9c47a339fc74fa7ba703e3ffd3908b1f1af416fdd": {
+    "artifact_path": "evidence_retrieval_results_4827abb5",
+    "created_at": "2025-08-28T02:16:59.629016+00:00",
+    "human_filename": "evidence_retrieval_results_4827abb5",
+    "is_directory": false,
+    "metadata": {
+      "agent": "EvidenceRetriever",
+      "artifact_type": "evidence_retrieval_results",
+      "type": "evidence_retrieval"
+    },
+    "size_bytes": 72155,
+    "source_run": "20250828T020906Z"
+  },
+  "4ece8d8eb68d9f080a2c4334b3ae56e7c1f0152a4de86884d2e9dd354b6e2991": {
+    "artifact_path": "validation_result_4ece8d8e",
+    "created_at": "2025-08-28T02:08:37.662918+00:00",
+    "human_filename": "validation_result_4ece8d8e",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "validation_result",
+      "cache_key": "validation_274a7b58f561",
+      "cached_at": "2025-08-28T02:08:37.662666+00:00",
+      "success": true,
+      "validation_model": "vertex_ai/gemini-2.5-pro"
+    },
+    "size_bytes": 1306,
+    "source_run": "20250828T020759Z"
+  },
+  "4f68ad304da6fa80c2f0bbb472b19c2c1f6ad177d5d72ae79bad8d814df5d388": {
+    "artifact_path": "statistical_analysis_functions_4f68ad30",
+    "created_at": "2025-08-28T02:16:19.079782+00:00",
+    "human_filename": "statistical_analysis_functions_4f68ad30",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_analysis_functions",
+      "cache_key": "statistical_analysis_141c19441d9e",
+      "functions_generated": 6,
+      "generation_model": "unknown",
+      "has_function_code": true
+    },
+    "size_bytes": 21729,
+    "source_run": "20250828T020906Z"
+  },
+  "5190a602256f0debe52ca456931d7f1b684c89306ed7132fe8bd88fb7dd13505": {
+    "artifact_path": "rag_index_cache_5190a602",
+    "created_at": "2025-08-28T02:12:16.738059+00:00",
+    "human_filename": "rag_index_cache_5190a602",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "rag_index_cache",
+      "created_at": "2025-08-28T02:12:16.737697+00:00",
+      "documents_count": 54,
+      "evidence_count": 6,
+      "has_documents": true,
+      "index_size_bytes": 90431,
+      "rag_cache_key": "rag_index_b8adc3e50a4f7835"
+    },
+    "size_bytes": 90431,
+    "source_run": "20250828T020906Z"
+  },
+  "53a0aace918a10a644134099fed227ae773b2f23838e2befc3be86a9ebe50012": {
+    "artifact_path": "complete_research_data_53a0aace",
+    "created_at": "2025-08-28T02:16:59.638695+00:00",
+    "human_filename": "complete_research_data_53a0aace",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "complete_research_data"
+    },
+    "size_bytes": 134502,
+    "source_run": "20250828T020906Z"
+  },
+  "57e70a5cbff73ddcfd2644264365f83a21bb4c79c4b9760b4f31c37392ceaff6": {
+    "artifact_path": "evidence_v6_57e70a5c",
+    "created_at": "2025-08-28T02:12:15.339301+00:00",
+    "human_filename": "evidence_v6_57e70a5c",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 6321,
+    "source_run": "20250828T020906Z"
+  },
+  "659452490fb32b4640d63c94cc6938c4f5d1f9088c415812344a0ee1030ca5d7": {
+    "artifact_path": "framework_specification_65945249",
+    "created_at": "2025-08-28T02:16:19.138509+00:00",
+    "human_filename": "framework_specification_65945249",
+    "is_directory": false,
+    "metadata": {
+      "agent": "orchestrator",
+      "artifact_type": "framework_specification"
+    },
+    "size_bytes": 45230,
+    "source_run": "20250828T020906Z"
+  },
+  "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15": {
+    "artifact_path": "Trump_SOTU_2018_6b6f4ea6.txt",
+    "created_at": "2025-08-28T02:09:56.029229+00:00",
+    "human_filename": "Trump_SOTU_2018_6b6f4ea6.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_737fe89d1864",
+      "artifact_type": "corpus_document",
+      "original_filename": "Trump_SOTU_2018.txt"
+    },
+    "size_bytes": 29242,
+    "source_run": "20250828T020906Z"
+  },
+  "75bc6fb43c68b571f9a5e79cc449dd619cd3bdb1fd13ec7b8ab5825ec5708ffe": {
+    "artifact_path": "analysis_result_75bc6fb4",
+    "created_at": "2025-08-28T02:12:15.339920+00:00",
+    "human_filename": "analysis_result_75bc6fb4",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_b06a9c0e5e75",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 7623,
+    "source_run": "20250828T020906Z"
+  },
+  "855a1145f9bd7bcfe92efc170999d2cf893ee9106b0e4722927fd33d429c8a61": {
+    "artifact_path": "statistical_results_with_data_855a1145",
+    "created_at": "2025-08-28T02:16:19.136557+00:00",
+    "human_filename": "statistical_results_with_data_855a1145",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_results_with_data"
+    },
+    "size_bytes": 33820,
+    "source_run": "20250828T020906Z"
+  },
+  "890165fd92d4003d03f1faac87b9fb0cd5db151fd3b8be9327a90f7b8611b66f": {
+    "artifact_path": "raw_analysis_response_v6_890165fd",
+    "created_at": "2025-08-28T02:10:21.398305+00:00",
+    "human_filename": "raw_analysis_response_v6_890165fd",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 5735,
+    "source_run": "20250828T020906Z"
+  },
+  "89b1dd583ae86df51262c46189cfe321383d43f00971479f0b60e31dc3243f91": {
+    "artifact_path": "derived_metrics_functions_89b1dd58",
+    "created_at": "2025-08-28T02:15:12.763153+00:00",
+    "human_filename": "derived_metrics_functions_89b1dd58",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics_functions",
+      "cache_key": "derived_metrics_2a42a1b0a071",
+      "functions_generated": 6,
+      "generation_model": "unknown",
+      "has_function_code": true
+    },
+    "size_bytes": 12417,
+    "source_run": "20250828T020906Z"
+  },
+  "8ddc52a166385aac1979d47078c52da4af0810aec90ca27e61e31d58af78d23e": {
+    "artifact_path": "cache_test_8ddc52a1",
+    "created_at": "2025-08-28T02:09:06.565692+00:00",
+    "human_filename": "cache_test_8ddc52a1",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250828T020906Z"
+  },
+  "9b86d7803343f481379f1cf38e7dace9f04376257796ac789daca4ccf8fcc050": {
+    "artifact_path": "derived_metrics_data_9b86d780",
+    "created_at": "2025-08-28T02:16:19.136100+00:00",
+    "human_filename": "derived_metrics_data_9b86d780",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics_data"
+    },
+    "size_bytes": 50047,
+    "source_run": "20250828T020906Z"
+  },
+  "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a": {
+    "artifact_path": "Trump_SOTU_2019_b2f29f4c.txt",
+    "created_at": "2025-08-28T02:10:21.399642+00:00",
+    "human_filename": "Trump_SOTU_2019_b2f29f4c.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_3ac4736e1a83",
+      "artifact_type": "corpus_document",
+      "original_filename": "Trump_SOTU_2019.txt"
+    },
+    "size_bytes": 34726,
+    "source_run": "20250828T020906Z"
+  },
+  "c6a9f54ac29ce62e17c2b6f839b60abaeef2c9c254fcac8993c71a77f3d4b6ff": {
+    "artifact_path": "analysis_result_c6a9f54a",
+    "created_at": "2025-08-28T02:10:21.399037+00:00",
+    "human_filename": "analysis_result_c6a9f54a",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_737fe89d1864",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 7137,
+    "source_run": "20250828T020906Z"
+  },
+  "c8e83412f035496ced10be3f813fbcfae699c7acca835c8f0015d1a60487e401": {
+    "artifact_path": "draft_synthesis_report_c8e83412",
+    "created_at": "2025-08-28T02:18:20.789051+00:00",
+    "human_filename": "draft_synthesis_report_c8e83412",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "draft_synthesis_report"
+    },
+    "size_bytes": 24924,
+    "source_run": "20250828T020906Z"
+  },
+  "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18": {
+    "artifact_path": "Trump_SOTU_2025_c97acead.txt",
+    "created_at": "2025-08-28T02:11:40.872664+00:00",
+    "human_filename": "Trump_SOTU_2025_c97acead.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_b06a9c0e5e75",
+      "artifact_type": "corpus_document",
+      "original_filename": "Trump_SOTU_2025.txt"
+    },
+    "size_bytes": 56275,
+    "source_run": "20250828T020906Z"
+  },
+  "ccbcce318ea080d6c0a761d3abe6c67c0251f6c0a0b6fa1bbfd36259bb4c48f9": {
+    "artifact_path": "raw_analysis_response_v6_ccbcce31",
+    "created_at": "2025-08-28T02:09:56.022287+00:00",
+    "human_filename": "raw_analysis_response_v6_ccbcce31",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 7422,
+    "source_run": "20250828T020906Z"
+  },
+  "d101beb18b3e70fae1a9928f5090aca3c0c44bb74b32f6a35eb1fea8ce40efe4": {
+    "artifact_path": "raw_analysis_data_d101beb1",
+    "created_at": "2025-08-28T02:16:19.135572+00:00",
+    "human_filename": "raw_analysis_data_d101beb1",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_data"
+    },
+    "size_bytes": 48173,
+    "source_run": "20250828T020906Z"
+  },
+  "d5afb1375aced3c5d2283c404c2093ddc97405478d3569ddf7d32b15330fe720": {
+    "artifact_path": "derived_metrics_results_with_data_d5afb137",
+    "created_at": "2025-08-28T02:15:12.815528+00:00",
+    "human_filename": "derived_metrics_results_with_data_d5afb137",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics_results_with_data"
+    },
+    "size_bytes": 49413,
+    "source_run": "20250828T020906Z"
+  },
+  "dc8cd244901fc7d5fbf938a0cec3048c8c48d88e8db59ca2d96234a137039de7": {
+    "artifact_path": "cache_test_dc8cd244",
+    "created_at": "2025-08-28T02:07:59.214970+00:00",
+    "human_filename": "cache_test_dc8cd244",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250828T020759Z"
+  },
+  "e5fd2405f3361c087fe2b056128db6416a54aaafc16e1c12f7f60e50ee2cbebe": {
+    "artifact_path": "evidence_v6_e5fd2405",
+    "created_at": "2025-08-28T02:10:21.398655+00:00",
+    "human_filename": "evidence_v6_e5fd2405",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_v6",
+      "document_hashes": [
+        "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15"
+      ],
+      "extraction_method": "analysis_time_extraction"
+    },
+    "size_bytes": 5893,
+    "source_run": "20250828T020906Z"
+  },
+  "e649292a28d903cd9b4c96e990b2f18adbc60cf7260703c4a2d18666670324e3": {
+    "artifact_path": "raw_analysis_response_v6_e649292a",
+    "created_at": "2025-08-28T02:10:57.932891+00:00",
+    "human_filename": "raw_analysis_response_v6_e649292a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "raw_analysis_response_v6",
+      "document_hashes": [
+        "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+      ],
+      "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+      "framework_version": "v6.0"
+    },
+    "size_bytes": 5803,
+    "source_run": "20250828T020906Z"
+  },
+  "f0d76863f5a3c751bb5a9ea0b2c4bac41f47420b04d0aa3857483d019f5bedf8": {
+    "artifact_path": "analysis_result_f0d76863",
+    "created_at": "2025-08-28T02:11:40.871249+00:00",
+    "human_filename": "analysis_result_f0d76863",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_2157e9d05c8d",
+      "artifact_type": "analysis_result"
+    },
+    "size_bytes": 7649,
+    "source_run": "20250828T020906Z"
+  },
+  "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936": {
+    "artifact_path": "Trump_SOTU_2020_fbaf4dc2.txt",
+    "created_at": "2025-08-28T02:10:57.939208+00:00",
+    "human_filename": "Trump_SOTU_2020_fbaf4dc2.txt",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_2157e9d05c8d",
+      "artifact_type": "corpus_document",
+      "original_filename": "Trump_SOTU_2020.txt"
+    },
+    "size_bytes": 35140,
+    "source_run": "20250828T020906Z"
+  }
+}

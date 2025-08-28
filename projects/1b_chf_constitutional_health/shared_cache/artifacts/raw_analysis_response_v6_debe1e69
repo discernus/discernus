@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a presidential State of the Union address, focusing on the speaker's rhetorical stance towards constitutional health. The speech emphasizes working within established systems and gradual improvement, with calls for political actors to uphold democratic norms rather than subvert them. Criticism is directed at political inaction and partisanship, not institutional legitimacy itself."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.15,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families. So I hope we can work together this year on some bipartisan priorities like criminal justice reform and helping people who are battling prescription drug abuse and heroin abuse.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But the American people should know that with or without congressional action, ISIL will learn the same lessons as terrorists before them.",
+          "confidence": 0.7,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our Founders distributed power between States and branches of government and expected us to argue, just as they did, fiercely, over the size and shape of government, over commerce and foreign relations, over the meaning of liberty and the imperatives of security.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agreed with us.",
+          "confidence": 0.8,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "That\u2019s how we recovered from the worst economic crisis in generations. That\u2019s how we reformed our health care system and reinvented our energy sector. That\u2019s how we delivered more care and benefits to our troops coming home and our veterans. That\u2019s how we secured the freedom in every State to marry the person we love.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "We have to change the system to reflect our better selves. I think we\u2019ve got to end the practice of drawing our congressional districts so that politicians can pick their voters and not the other way around. Let a bipartisan group do it.",
+          "confidence": 0.85,
+          "context_type": "direct quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

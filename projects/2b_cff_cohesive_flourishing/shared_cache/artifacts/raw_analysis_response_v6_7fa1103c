@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Trump's 2017 State of the Union address, focusing on rhetorical patterns, explicit policy statements, and thematic centrality. Salience was determined by frequency, structural positioning, and the use of strong rhetorical devices."
+  },
+  "document_analyses": [
+    {
+      "document_id": "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722",
+      "document_name": "trump_sotu_2017.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "compassion": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.75
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "cohesive_goals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+          "confidence": 0.95,
+          "context_type": "rhetorical"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+          "confidence": 0.9,
+          "context_type": "rhetorical"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Recent threats targeting Jewish community centers and vandalism of Jewish cemeteries, as well as last week\u2019s shooting in Kansas City, remind us that while we may be a nation divided on policies, we are a country that stands united in condemning hate and evil in all of its very ugly forms.",
+          "confidence": 0.9,
+          "context_type": "descriptive"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.95,
+          "context_type": "rhetorical"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "We are not going to let America and its great companies and workers be taken advantage of us any longer. They have taken advantage of our country. No longer.",
+          "confidence": 0.9,
+          "context_type": "rhetorical"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "Today is Rare Disease Day, and joining us in the gallery is a rare disease survivor, Megan Crowley. Megan's story is about the unbounded power of a father's love for a daughter.",
+          "confidence": 0.8,
+          "context_type": "descriptive"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "I directed the Department of Defense to develop a plan to demolish and destroy ISIS, a network of lawless savages that have slaughtered Muslims and Christians, and men and women and children of all faiths and all beliefs.",
+          "confidence": 0.95,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "confidence": 0.9,
+          "context_type": "rhetorical"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We have withdrawn the United States from the job-killing Trans-Pacific Partnership.",
+          "confidence": 0.9,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "We will replace crumbling infrastructure with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land.",
+          "confidence": 0.9,
+          "context_type": "policy_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:23:54.608461+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Every 4 years, we gather on these steps to carry out the orderly and peaceful transfer of power, and we are grateful to President Obama and First Lady Michelle Obama for their gracious aid throughout this transition.",
+      "confidence": 0.8,
+      "context_type": "acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608453+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Today\u2019s ceremony, however, has very special meaning. Because today we are not merely transferring power from one administration to another, or from one party to another, but we are transferring power from Washington, D.C. and giving it back to you, the people.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608455+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Chief Justice Roberts, President Carter, President Clinton, President Bush, President Obama, fellow Americans, and people of the world: Thank you.",
+      "confidence": 0.8,
+      "context_type": "acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608456+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608456+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+      "confidence": 0.8,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608457+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "January 20, 2017, will be remembered as the day the people became the rulers of this Nation again. ... From this day forward, a new vision will govern our land. From this day forward, it\u2019s going to be only America first. America first.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:23:54.608458+00:00"
+    }
+  ]
+}

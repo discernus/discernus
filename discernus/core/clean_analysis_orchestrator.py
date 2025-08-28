@@ -1234,7 +1234,7 @@ class CleanAnalysisOrchestrator:
             }
             
             stats_hash = self.artifact_storage.put_artifact(
-                json.dumps(complete_stats_result, indent=2).encode('utf-8'),
+                repr(complete_stats_result).encode('utf-8'),
                 {"artifact_type": "statistical_results_with_data"}
             )
             
@@ -1287,6 +1287,7 @@ class CleanAnalysisOrchestrator:
                          and callable(getattr(stats_module, name))
                          and name not in type_annotations]
         
+
         self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
         
         for func_name in function_names:
@@ -1297,32 +1298,8 @@ class CleanAnalysisOrchestrator:
                 # Execute the function with the analysis data
                 result = func(analysis_data)
                 
-                # Convert pandas DataFrames to JSON-serializable format
-                if hasattr(result, 'to_dict'):  # pandas DataFrame
-                    statistical_outputs[func_name] = {
-                        "type": "dataframe",
-                        "data": result.to_dict('records'),
-                        "columns": list(result.columns),
-                        "index": list(result.index),
-                        "shape": result.shape
-                    }
-                elif isinstance(result, dict):
-                    # Handle nested DataFrames in dictionary results
-                    serialized_result = {}
-                    for key, value in result.items():
-                        if hasattr(value, 'to_dict'):  # pandas DataFrame
-                            serialized_result[key] = {
-                                "type": "dataframe",
-                                "data": value.to_dict('records'),
-                                "columns": list(value.columns),
-                                "index": list(value.index),
-                                "shape": value.shape
-                            }
-                        else:
-                            serialized_result[key] = value
-                    statistical_outputs[func_name] = serialized_result
-                else:
-                    statistical_outputs[func_name] = result
+                # Store result directly as Python object (THIN approach - no JSON conversion needed)
+                statistical_outputs[func_name] = result
                 
                 self._log_progress(f"  ✅ {func_name} completed")
                 
@@ -1793,21 +1770,7 @@ class CleanAnalysisOrchestrator:
             # Use evidence results from the main evidence retrieval phase
             curated_evidence_hash = evidence_results.get('evidence_artifact_hash') if evidence_results else None
 
-            # Use SynthesisPromptAssembler to build the prompt
-            from .prompt_assemblers.synthesis_assembler import SynthesisPromptAssembler
-            assembler = SynthesisPromptAssembler()
-            
-            # Assemble the prompt using the existing assembler
-            self._log_progress("🔧 Assembling synthesis prompt...")
-            prompt = assembler.assemble_prompt(
-                framework_path=self.experiment_path / self.config["framework"],
-                experiment_path=self.experiment_path / "experiment.md",
-                research_data_artifact_hash=research_data_hash,
-                artifact_storage=self.artifact_storage,
-                curated_evidence_hash=curated_evidence_hash
-            )
-
-            # Create synthesis agent
+            # Create synthesis agent (THIN approach - no assembler needed)
             self._log_progress("🤖 Initializing synthesis agent...")
             synthesis_agent = UnifiedSynthesisAgent(
                 model=synthesis_model,

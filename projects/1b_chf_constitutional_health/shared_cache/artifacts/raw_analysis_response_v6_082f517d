@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed a State of the Union address, which typically emphasizes systemic continuity, institutional respect, and procedural legitimacy, reflecting a common desire for stability and gradual improvement within the existing constitutional framework. No evidence of systemic replacement, institutional subversion, or procedural rejection was found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839",
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "We can work through our differences, and we can achieve big things for the American people.",
+          "confidence": 0.9,
+          "context_type": "advocacy for working within established political processes"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madame Speaker, Vice President Cheney, Members of Congress, distinguished guests, and fellow citizens: The rite of custom brings us together at a defining hour when decisions are hard and courage is needed.",
+          "confidence": 0.9,
+          "context_type": "formal recognition and validation of institutional roles and customs"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Now the task is to build on the success without watering down standards, without taking control from local communities, and without backsliding and calling it reform.",
+          "confidence": 0.9,
+          "context_type": "emphasis on improving the existing system rather than replacing it"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_49ba880f39ed",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed President Clinton's 1995 State of the Union address, focusing on the emphasis on working within established procedures, respecting institutions, and strengthening the existing systemic framework through reform and collaboration.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1995.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Tonight I come before you to announce that the Federal deficit, once so incomprehensibly large that it had 11 zeroes, will be, simply, zero. I will submit to Congress for 1999 the first balanced budget in 30 years. And if we hold fast to fiscal discipline, we may balance the budget this year\u20144 years ahead of schedule. You can all be proud of that, because turning a sea of red ink into black is no miracle. It is the product of hard work by the American people and of two visionary actions in Congress: the courageous vote in 1993 that led to a cut in the deficit of 90 percent, and the truly historic bipartisan balanced budget agreement passed by this Congress.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct support\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I thank the Vice President for his leadership and the Congress for its support in building a Government that is leaner, more flexible, a catalyst for new ideas, and most of all, a Government that gives the American people the tools they need to make the most of their own lives.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct support\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our Founders set America on a permanent course toward a more perfect Union. To all of you I say, it is a journey we can only make together, living as one community. First, we have to continue to reform our Government, the instrument of our national community.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct support\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "655458085de69e3e9bf2cfbe3231bb5b7dbc83fb3df6bef1bff5ddb8e236c2aa",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:02:16.815258+00:00",
+    "end_time": "2025-08-27T21:02:36.135630+00:00",
+    "duration_seconds": 19.320357
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

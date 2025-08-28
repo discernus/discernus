@@ -1,0 +1,1089 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-28T02:37:22.873043",
+    "statistical_results_hash": "0d53b447b8454fb62087919f9d07b0251eff9e24fb3a082f8aef54b3d22ebe4e",
+    "total_findings": 10,
+    "total_quotes": 67
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Dominance of Tribal Identity & High Enmity: The discourse consistently emphasizes in-group supremacy and adversarial positioning, and these elements are strongly correlated (e.g., `tribal_dominance_raw` with `enmity_raw` (0.918))."
+      },
+      "queries_used": [
+        "\"Tribal Dominance\" AND (supremacy OR exclusionary)",
+        "\"Enmity\" AND (hostility OR adversarial)",
+        "\"us vs them\" AND (conflict OR enemy)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "real Americans",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.8,
+          "relevance_score": 0.5560708045959473,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.5281873941421509,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nothing anywhere in the world that can compete with America. Now we must step boldly and bravely into the next chapter of this great American adventure, and we must create a new standard of living for the 21st century.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.5157648324966431,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "no people on Earth are so fearless or daring or determined as Americans.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.46657857298851013,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.3738645911216736,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "terrorists are not merely criminals, they are unlawful enemy combatants.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.35663366317749023,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.26647618412971497,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 7
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Low Individual Dignity: There is a general lack of emphasis on universal human worth or inclusive recognition in the discourse (mean `individual_dignity_raw` is 0.33)."
+      },
+      "queries_used": [
+        "\"Individual Dignity\" AND (absence OR low emphasis)",
+        "\"universal human worth\" NOT (present OR emphasized)",
+        "\"inclusive recognition\" (lacking OR minimal)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We want every American to know the dignity of a hard day's work.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.7,
+          "relevance_score": 0.39090704917907715,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "All Americans deserve accountability and respect, and that's what we are giving to our wonderful heroes, our veterans.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.6,
+          "relevance_score": 0.38794466853141785,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.3628234267234802,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have undertaken a historic effort to massively reduce job-crushing regulations... for every one new regulation, two old regulations must be eliminated.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.85,
+          "relevance_score": 0.22652648389339447,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nothing anywhere in the world that can compete with America. Now we must step boldly and bravely into the next chapter of this great American adventure, and we must create a new standard of living for the 21st century.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.20221096277236938,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The forgotten men and women of our country will be forgotten no longer. Everyone is listening to you now.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.85,
+          "relevance_score": 0.19291767477989197,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Pervasive Fear Messaging: The communication heavily relies on language of crisis, existential threat, and vulnerability (mean `fear_raw` is 0.79)."
+      },
+      "queries_used": [
+        "\"Fear\" AND (crisis OR threat)",
+        "\"existential threat\" OR \"vulnerability emphasis\"",
+        "\"impending danger\" OR \"catastrophe\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "There should be no fear: We are protected, and we will always be protected. We will be protected by the great men and women of our military and law enforcement, and most importantly, we will be protected by God.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "fear",
+          "confidence": 0.85,
+          "relevance_score": 0.39386457204818726,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "fear",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "North Korea\u2019s reckless pursuit of nuclear missiles could very soon threaten our homeland.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.3937445878982544,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In the age of terrorism, these programs present risks we can just no longer afford.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.3418671488761902,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It is terrifying.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.31996849179267883,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Simultaneous High Hope and High Fear: The discourse employs both optimistic visions for the future and warnings of dire consequences (mean `hope_raw` is 0.86, mean `fear_raw` is 0.79)."
+      },
+      "queries_used": [
+        "\"Hope\" AND \"Fear\" (simultaneous OR co-occurring)",
+        "\"optimistic vision\" AND \"dire consequences\"",
+        "\"bright future\" AND \"under attack\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "A new tide of optimism was already sweeping across our land. Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.49028825759887695,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It is terrifying.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.37844863533973694,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.3775058388710022,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "North Korea\u2019s reckless pursuit of nuclear missiles could very soon threaten our homeland.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.32398176193237305,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As commander in chief, my focus is on building the most powerful military of the future.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.301604300737381,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.29989317059516907,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Coexistence of Cohesive and Fragmentative Goals: Objectives presented include both unifying, positive-sum aims and divisive, zero-sum outcomes (mean `cohesive_goals_raw` is 0.76, mean `fragmentative_goals_raw` is 0.71)."
+      },
+      "queries_used": [
+        "\"Cohesive Goals\" AND \"Fragmentative Goals\"",
+        "\"unity objectives\" AND \"division aims\"",
+        "\"build bridges\" AND \"tear down\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "And together, we are building a safe, strong, and proud America.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.5133737921714783,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America\u2019s future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.5089722275733948,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we can reclaim our great building heritage. We will build gleaming new roads, bridges, highways, railways, and waterways all across our land.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.4530074894428253,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will replace crumbling infrastructure with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.4375806450843811,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.40423500537872314,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.362710565328598,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As commander in chief, my focus is on building the most powerful military of the future.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.36103302240371704,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new national pride will stir our souls, lift our sights, and heal our divisions.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3587366044521332,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Envy, Low Compersion: Resentment towards others' success is more common than celebration of shared abundance (mean `envy_raw` is 0.65, `compersion_raw` is 0.1, noting limited compersion data)."
+      },
+      "queries_used": [
+        "\"Envy\" AND (resentment OR \"zero-sum\")",
+        "\"others' success\" AND (grievance OR \"didn't earn it\")",
+        "\"Compersion\" NOT (found OR expressed)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.3703317642211914,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new national pride will stir our souls, lift our sights, and heal our divisions.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.33274441957473755,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have withdrawn the United States from the job-killing Trans-Pacific Partnership.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.30585968494415283,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Among my very highest priorities is to rescue our economy and get dramatic and immediate relief to working families.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3040038049221039,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "envy",
+          "confidence": 0.8,
+          "relevance_score": 0.2754146158695221,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "envy",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.23660126328468323,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.2067439705133438,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.18643763661384583,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Unexpected Correlation: Envy and Individual Dignity: Documents showing high envy also exhibit high individual dignity (e.g., `envy_raw` with `individual_dignity_raw` (0.870)). This paradox needs textual examples."
+      },
+      "queries_used": [
+        "\"Envy\" AND \"Individual Dignity\" (paradoxical OR co-occurring)",
+        "\"Our dignity\" AND \"their success resentment\"",
+        "\"universal human worth\" AND \"unfair advantage\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.538182258605957,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "All Americans deserve accountability and respect, and that's what we are giving to our wonderful heroes, our veterans.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.6,
+          "relevance_score": 0.47006136178970337,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We want every American to know the dignity of a hard day's work.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.7,
+          "relevance_score": 0.3595113456249237,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that whether you are a doctor, an accountant, a lawyer or an air traffic controller, you should be hired and promoted based on skill and competence, not race or gender.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.35460972785949707,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nothing anywhere in the world that can compete with America. Now we must step boldly and bravely into the next chapter of this great American adventure, and we must create a new standard of living for the 21st century.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.35045358538627625,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The forgotten men and women of our country will be forgotten no longer. Everyone is listening to you now.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.85,
+          "relevance_score": 0.3437509536743164,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Alignment: Amity and Cohesive Goals, yet Overall Fragmentative Tilt: Appeals to friendship/cooperation are linked to unifying goals (e.g., `amity_raw` with `cohesive_goals_raw` (0.945)), but the available cohesion indices (`full_cohesion_index` mean -0.055) suggest the overall discourse still leans fragmentative. This implies positive appeals may be selective or overshadowed."
+      },
+      "queries_used": [
+        "\"Amity\" AND \"Cohesive Goals\" (selective OR limited)",
+        "\"Cooperation\" AND \"fragmentation\" (overall)",
+        "\"Friendship appeals\" AND \"divisive outcomes\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America\u2019s future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.4173447787761688,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And together, we are building a safe, strong, and proud America.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.40908586978912354,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will replace crumbling infrastructure with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3030628263950348,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.2942327857017517,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.2516176104545593,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Among my very highest priorities is to rescue our economy and get dramatic and immediate relief to working families.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.23427867889404297,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Low Overall Strategic Contradiction: Despite co-occurring opposing dimensions, the rhetorical tension derived from salience differences is generally low (mean `strategic_contradiction_index` is 0.105), suggesting rhetorically consistent messaging on average."
+      },
+      "queries_used": [
+        "\"rhetorical tension\" (low OR subtle)",
+        "\"consistent messaging\" AND \"mixed appeals\"",
+        "\"salience difference\" (small OR minimal)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I am here tonight to deliver a message of unity and strength, and it is a message deeply delivered from my heart.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.3116343021392822,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We want every American to know the dignity of a hard day's work.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.7,
+          "relevance_score": 0.2793971300125122,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.27255895733833313,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America\u2019s future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.24878466129302979,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.24780771136283875,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "no people on Earth are so fearless or daring or determined as Americans.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.15455320477485657,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Among my very highest priorities is to rescue our economy and get dramatic and immediate relief to working families.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.1402943879365921,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.12403082847595215,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Critical Inconsistency: Cohesion Indices Positively Correlated with Tension Indices. The statistical findings (`descriptive_cohesion_index` correlated with `emotional_tension` (1.0)) suggest that higher cohesion is associated with higher contradiction, which directly conflicts with the framework's definitions. This needs quotes that illustrate such paradoxical rhetoric."
+      },
+      "queries_used": [
+        "\"cohesive language\" AND \"contradictory rhetoric\"",
+        "\"unity through division\" OR \"paradoxical coherence\"",
+        "\"building by tearing down\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.48568490147590637,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we can reclaim our great building heritage. We will build gleaming new roads, bridges, highways, railways, and waterways all across our land.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.46362578868865967,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America is a nation of builders. We built the Empire State Building in just 1 year.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.43417277932167053,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will replace crumbling infrastructure with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.38348495960235596,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And together, we are building a safe, strong, and proud America.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3721359670162201,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America\u2019s future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3612014055252075,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.30136147141456604,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are one people, with one destiny. We all bleed the same blood. We all salute the same great American flag. And we are all made by the same God.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.2565130293369293,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    }
+  ]
+}

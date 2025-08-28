@@ -1,0 +1,627 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-28T04:16:48.033843",
+    "statistical_results_hash": "155575865c2e826771d1411bf57786059adbed52da5990a97e790454883f3a39",
+    "total_findings": 11,
+    "total_quotes": 33
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong internal consistency of the 'Constitutional Health' construct (Cronbach's Alpha = 0.983), suggesting Procedural Legitimacy, Institutional Respect, and Systemic Continuity frequently co-occur in discourse."
+      },
+      "queries_used": [
+        "procedural_legitimacy raw_score:0.7-1.0 AND institutional_respect raw_score:0.7-1.0 AND systemic_continuity raw_score:0.7-1.0",
+        "salience:procedural_legitimacy salience:institutional_respect salience:systemic_continuity",
+        "evidence:\"support for established procedures\" AND evidence:\"recognition of institutional authority\" AND evidence:\"maintaining existing framework\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Government has a role, and an important role.",
+          "document_name": "Bush_SOTU_2006.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.85,
+          "relevance_score": 0.634508490562439,
+          "metadata": {
+            "document_name": "Bush_SOTU_2006.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.4624116122722626,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Now the task is to build on the success without watering down standards, without taking control from local communities, and without backsliding and calling it reform.",
+          "document_name": "Bush_SOTU_2004.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.3579002320766449,
+          "metadata": {
+            "document_name": "Bush_SOTU_2004.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong internal consistency of the 'Constitutional Pathology' construct (Cronbach's Alpha = 0.938), indicating Procedural Rejection, Institutional Subversion, and Systemic Replacement tend to appear together."
+      },
+      "queries_used": [
+        "procedural_rejection raw_score:0.7-1.0 AND institutional_subversion raw_score:0.7-1.0 AND systemic_replacement raw_score:0.7-1.0",
+        "salience:procedural_rejection salience:institutional_subversion salience:systemic_replacement",
+        "evidence:\"bypass the system\" AND evidence:\"corrupt institutions\" AND evidence:\"new system\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.5712478160858154,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.7,
+          "relevance_score": 0.4146801233291626,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Some want to undermine the No Child Left Behind Act by weakening standards and accountability.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.3273806571960449,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Discourse exemplifying high Procedural Legitimacy and Institutional Respect, showcasing a respect for both processes and institutions."
+      },
+      "queries_used": [
+        "procedural_legitimacy raw_score:0.8-1.0 AND institutional_respect raw_score:0.8-1.0",
+        "evidence:\"constitutional process\" AND evidence:\"separation of powers\"",
+        "salience:procedural_legitimacy salience:institutional_respect"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We're not changing the Constitution; we're being reasonable.",
+          "document_name": "Biden_SOTU_2022.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.5160232782363892,
+          "metadata": {
+            "document_name": "Biden_SOTU_2022.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Government has a role, and an important role.",
+          "document_name": "Bush_SOTU_2006.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.85,
+          "relevance_score": 0.4780804216861725,
+          "metadata": {
+            "document_name": "Bush_SOTU_2006.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Some want to undermine the No Child Left Behind Act by weakening standards and accountability.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.33842456340789795,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Discourse exemplifying high Procedural Rejection and Institutional Subversion, demonstrating rhetoric that bypasses processes and attacks institutions."
+      },
+      "queries_used": [
+        "procedural_rejection raw_score:0.8-1.0 AND institutional_subversion raw_score:0.8-1.0",
+        "evidence:\"emergency powers\" AND evidence:\"illegitimate authority\"",
+        "salience:procedural_rejection salience:institutional_subversion"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I have authorized a terrorist surveillance program based on authority given to me by the Constitution and by statute. Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority. Appropriate Members of Congress have been kept informed.",
+          "document_name": "Bush_SOTU_2003.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.5543370842933655,
+          "metadata": {
+            "document_name": "Bush_SOTU_2003.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I\u2019ve appointed a proven and aggressive Inspector General to ferret out any and all cases of waste and fraud.",
+          "document_name": "Obama_SOTU_2014.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.8,
+          "relevance_score": 0.5256730318069458,
+          "metadata": {
+            "document_name": "Obama_SOTU_2014.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Some want to undermine the No Child Left Behind Act by weakening standards and accountability.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.42393869161605835,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For over 30 years, Washington has tried and failed to solve this problem.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.7,
+          "relevance_score": 0.3451404869556427,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Texts where Systemic Continuity is prominent alongside strong Procedural Legitimacy, highlighting gradual reform within established norms."
+      },
+      "queries_used": [
+        "systemic_continuity raw_score:0.7-1.0 AND procedural_legitimacy raw_score:0.7-1.0",
+        "evidence:\"gradual reform\" AND evidence:\"due process\"",
+        "salience:systemic_continuity AND salience:procedural_legitimacy"
+      ],
+      "quotes": [
+        {
+          "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.567922055721283,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Now the task is to build on the success without watering down standards, without taking control from local communities, and without backsliding and calling it reform.",
+          "document_name": "Bush_SOTU_2004.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.4199581444263458,
+          "metadata": {
+            "document_name": "Bush_SOTU_2004.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Texts where Systemic Replacement is prominent alongside strong Procedural Rejection, indicating calls for revolutionary change via extra-constitutional means."
+      },
+      "queries_used": [
+        "systemic_replacement raw_score:0.7-1.0 AND procedural_rejection raw_score:0.7-1.0",
+        "evidence:\"complete overhaul\" AND evidence:\"broken system\"",
+        "salience:systemic_replacement AND salience:procedural_rejection"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The reinventing Government report is getting results. And we're not through. There's going to be a second round of reinventing Government.",
+          "document_name": "Clinton_SOTU_2000.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.540205717086792,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2000.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.7,
+          "relevance_score": 0.39294931292533875,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Switching away from this current system of lower-skilled immigration, and instead adopting a merit-based system, we will have so many more benefits.",
+          "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+          "dimension": "systemic_replacement",
+          "confidence": 0.75,
+          "relevance_score": 0.30336394906044006,
+          "metadata": {
+            "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+            "dimension": "systemic_replacement",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Discourse with high overall Constitutional Health Index, representing a comprehensive positive orientation towards the constitutional system."
+      },
+      "queries_used": [
+        "constitutional_health_index:0.7-1.0",
+        "procedural_legitimacy raw_score:0.6+ AND institutional_respect raw_score:0.6+ AND systemic_continuity raw_score:0.6+",
+        "evidence:\"uphold the constitution\" OR evidence:\"strengthen our institutions\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "On matters of justice, we must trust in the wisdom of our Founders and empower judges who understand that the Constitution means what it says.",
+          "document_name": "Bush_SOTU_2005.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.628007173538208,
+          "metadata": {
+            "document_name": "Bush_SOTU_2005.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Or we can reform our own private health care system, which still gives us, for all its flaws, the best quality health care in the world.",
+          "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.40982475876808167,
+          "metadata": {
+            "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Now the task is to build on the success without watering down standards, without taking control from local communities, and without backsliding and calling it reform.",
+          "document_name": "Bush_SOTU_2004.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.3674107491970062,
+          "metadata": {
+            "document_name": "Bush_SOTU_2004.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Discourse with high overall Constitutional Pathology Index, representing a comprehensive negative orientation and threat to the constitutional system."
+      },
+      "queries_used": [
+        "constitutional_pathology_index:0.7-1.0",
+        "procedural_rejection raw_score:0.6+ AND institutional_subversion raw_score:0.6+ AND systemic_replacement raw_score:0.6+",
+        "evidence:\"deep state\" OR evidence:\"corrupt system\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+          "document_name": "Bush_SOTU_2005.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.46856898069381714,
+          "metadata": {
+            "document_name": "Bush_SOTU_2005.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I support a constitutional amendment to protect the institution of marriage.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.8,
+          "relevance_score": 0.38120296597480774,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Some want to undermine the No Child Left Behind Act by weakening standards and accountability.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.3377205729484558,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Examples where a single axis shows high salience, but divergent raw scores (e.g., high salience for Procedural axis, but both Legitimacy and Rejection present)."
+      },
+      "queries_used": [
+        "procedural_legitimacy salience:0.7-1.0 AND procedural_rejection salience:0.7-1.0 AND NOT (procedural_legitimacy raw_score:0.0-0.1 OR procedural_rejection raw_score:0.0-0.1)",
+        "evidence:\"reform the process\" confidence:0.5-0.7",
+        "boundary_cases:\"reform the process\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.",
+          "document_name": "Bush_SOTU_2006.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.4693533182144165,
+          "metadata": {
+            "document_name": "Bush_SOTU_2006.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I believe that real and positive immigration reform is possible, as long as we focus on the following goals: to improve jobs and wages for Americans, to strengthen our Nation\u2019s security, and to restore respect for our laws.",
+          "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.4000176191329956,
+          "metadata": {
+            "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "When necessary, we must be able to detain and question them.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.6,
+          "relevance_score": 0.3289886713027954,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Examples where salience is high for a dimension, but raw score is moderate, showing rhetorical emphasis on a nuanced position."
+      },
+      "queries_used": [
+        "procedural_legitimacy salience:0.7-1.0 AND procedural_legitimacy raw_score:0.4-0.6",
+        "institutional_respect salience:0.7-1.0 AND institutional_respect raw_score:0.4-0.6",
+        "systemic_continuity salience:0.7-1.0 AND systemic_continuity raw_score:0.4-0.6"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We will respect historic institutions, but we will respect the sovereign rights of all nations, and they have to respect our rights as a nation also.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.7,
+          "relevance_score": 0.5028051733970642,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We can repair, to restore, to heal, to build, and to gain.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.40353530645370483,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "democracy has prevailed.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.37144994735717773,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Cases demonstrating the framework's disambiguation capabilities for 'Constructive criticism can coexist with institutional respect'."
+      },
+      "queries_used": [
+        "institutional_respect raw_score:0.5-0.8 AND institutional_subversion raw_score:0.1-0.3 AND evidence:\"institutional reform needed\"",
+        "evidence:\"accountability measures\" AND institutional_respect raw_score:0.6+",
+        "boundary_cases:\"institutional reform\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Government has a role, and an important role.",
+          "document_name": "Bush_SOTU_2006.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.85,
+          "relevance_score": 0.5755305886268616,
+          "metadata": {
+            "document_name": "Bush_SOTU_2006.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Some want to undermine the No Child Left Behind Act by weakening standards and accountability.",
+          "document_name": "Bush_SOTU_2009.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.48310258984565735,
+          "metadata": {
+            "document_name": "Bush_SOTU_2009.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+          "document_name": "Bush_SOTU_2002.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.85,
+          "relevance_score": 0.4536976218223572,
+          "metadata": {
+            "document_name": "Bush_SOTU_2002.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    }
+  ]
+}

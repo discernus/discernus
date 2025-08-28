@@ -54,6 +54,7 @@ class StatisticalAnalysisPromptAssembler:
             experiment_name=experiment_name,
             experiment_description=experiment_description,
             research_questions=research_questions_text,
+            experiment_content=experiment_content,
             data_columns=data_columns_info,
             sample_data=sample_data_info,
             corpus_manifest=corpus_manifest

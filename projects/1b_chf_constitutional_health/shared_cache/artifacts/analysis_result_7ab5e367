@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_f729cccc588a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed Biden's 2025 State of the Union address, focusing on his rhetoric's impact on constitutional system health across six dimensions. Scored intensity (raw_score) and rhetorical prominence (salience) for each.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2025.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Remember your oath of office to defend against all threats foreign and domestic. Respect free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2014no place\u2014in America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core argument\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. Speaker, Madam Vice President, Members of Congress, my fellow Americans: In January 1941, Franklin Roosevelt came to this Chamber to speak to the Nation.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opening remarks\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"What makes our moment rare is that freedom and democracy are under attack\u2014both at home and overseas at the very same time. Overseas, Putin of Russia is on the march... But January 6 lies about the 2020 election and the plots to steal the election posed a great\u2014gravest threat to U.S. democracy since the Civil War.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"problem framing\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"America\u2019s comeback is building a future of American possibilities; building an economy from the middle out and the bottom up, not the top down; investing in all of America, in all Americans to make every\u2014sure everyone has a fair shot and we leave no one\u2014no one\u2014behind.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"vision statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "854dacf0137f2a3113978e455683b0fb43f59e1e19965bb37739b5d89dcc8a98",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:19:57.308744+00:00",
+    "end_time": "2025-08-27T21:20:30.754642+00:00",
+    "duration_seconds": 33.445879
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

@@ -1,0 +1,104 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a State of the Union address, which typically emphasizes governmental achievements and proposed policies within the existing constitutional framework. This inherently leans towards scores favoring legitimacy, respect, and continuity."
+  },
+  "document_analyses": [
+    {
+      "document_id": "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.7
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.",
+          "confidence": 0.9,
+          "context_type": "call to action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The United States will ask the U.N. Security Council to convene on February the 5th to consider the facts of Iraq's ongoing defiance of the world.",
+          "confidence": 0.9,
+          "context_type": "policy advocacy"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence of evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The American system of medicine is a model of skill and innovation, with a pace of discovery that is adding good years to our lives.",
+          "confidence": 0.9,
+          "context_type": "statement of praise"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center, to merge and analyze all threat information in a single location.",
+          "confidence": 0.9,
+          "context_type": "statement of executive action"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Instead of bureaucrats and trial lawyers and HMOs, we must put doctors and nurses and patients back in charge of American medicine.",
+          "confidence": 0.7,
+          "context_type": "policy advocacy"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "To lift the standards of our public schools, we achieved historic education reform...",
+          "confidence": 0.95,
+          "context_type": "statement of achievement"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "My budget will commit an additional $400 billion over the next decade to reform and strengthen Medicare.",
+          "confidence": 0.95,
+          "context_type": "policy advocacy"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -245,32 +245,82 @@
 **Timeline**: 5-7 days
 **Goal**: Fix architectural issues and establish clean interfaces
 
-#### [ARCH-001] Method Signature Contract Violations
+#### [ARCH-001] Comprehensive Agent Architecture Audit & THIN Compliance
 
-- **Description**: Method signature mismatches between orchestrator and agents indicate broken contracts and tight coupling
+- **Description**: **EXPANDED SCOPE**: Comprehensive audit of all agents and orchestration code to eliminate unnecessary complexity, assembler anti-patterns, and ensure THIN architecture compliance where orchestrator = traffic cop, agents = intelligence, LLMs = heavy lifting
 - **Dependencies**: [LOGGING-001]
 - **Root Cause**: 
-  - Missing method implementations - code references methods that were never implemented
-  - Contract drift - method signatures changed without updating all callers
-  - Interface mismatch - components expect different method signatures
-  - Tight coupling - orchestrator depends on specific storage method implementations
+  - **Anti-THIN patterns**: Complex assemblers doing work that LLMs should do directly
+  - **Orchestrator overreach**: Orchestrator doing agent work instead of traffic management
+  - **Agent underutilization**: Agents not leveraging LLM intelligence effectively
+  - **Parsing complexity**: Complex parsing logic instead of letting LLMs read natural language
+  - **Tight coupling**: Components depending on complex intermediate processing layers
+- **Progress Made**:
+  - ✅ **SynthesisPromptAssembler eliminated** - 306 lines of parsing complexity removed
+  - ✅ **UnifiedSynthesisAgent refactored** - now reads files directly, LLM handles all parsing
+  - ✅ **THIN principles applied** - experiment/framework content passed raw to LLM
+  - ✅ **Evidence integration fixed** - proper artifact handoff without assembler complexity
+- **Remaining Audit Scope**:
+  - [ ] **EvidenceRetrieverAgent**: Audit for unnecessary parsing/formatting complexity
+  - [ ] **AutomatedStatisticalAnalysisAgent**: Check if LLM can handle data structures directly
+  - [ ] **AutomatedDerivedMetricsAgent**: Audit prompt assembly vs direct LLM interaction
+  - [ ] **FactCheckerAgent**: Review for assembler patterns or complex preprocessing
+  - [ ] **RevisionAgent**: Check for unnecessary intermediate processing
+  - [ ] **All prompt assemblers**: Audit remaining assemblers (statistical, derived metrics) for THIN violations
+  - [ ] **Orchestrator audit**: Ensure orchestrator only does traffic management, not agent work
+- **THIN Architecture Principles**:
+  - **Orchestrator**: Traffic cop only - route requests, manage artifacts, coordinate flow
+  - **Agents**: Intelligence layer - make decisions, handle business logic, interface with LLMs
+  - **LLMs**: Heavy lifting - read raw content, understand context, generate outputs
+  - **No assemblers**: LLMs read raw files directly, no complex parsing/formatting layers
 - **Impact**:
-  - Runtime errors during artifact storage operations
-  - Pipeline breaks when expected methods are missing
-  - Indicates incomplete implementation or refactoring
-  - Suggests interface contracts need formalization
-- **Evidence from Terminal**:
-  - `'LocalArtifactStorage' object has no attribute 'get_hash_by_type'`
-  - `SynthesisPromptAssembler.assemble_prompt() got an unexpected keyword argument 'evidence_artifacts'`
+  - **Maintainability**: Eliminate complex parsing code that breaks with format changes
+  - **Reliability**: Remove fragile intermediate processing layers
+  - **Performance**: Reduce unnecessary processing overhead
+  - **Flexibility**: LLMs handle format variations better than rigid parsers
+- **Evidence from Previous Issues**:
+  - ✅ **FIXED**: `SynthesisPromptAssembler.assemble_prompt() got an unexpected keyword argument 'evidence_artifacts'`
+  - ✅ **FIXED**: "Research objectives not specified" due to rigid section header parsing
+  - **REMAINING**: `'LocalArtifactStorage' object has no attribute 'get_hash_by_type'`
 - **Acceptance Criteria**:
-  - [ ] All method signatures between orchestrator and components mapped and documented
-  - [ ] Expected interfaces and contracts documented
-  - [ ] All broken method references identified and fixed
-  - [ ] Interface specification documents created
-  - [ ] Formal interface contracts established
+  - [ ] **Agent audit matrix**: All agents audited for THIN compliance (orchestrator/agent/LLM responsibility)
+  - [ ] **Assembler elimination plan**: All remaining assemblers evaluated for necessity vs THIN alternatives
+  - [ ] **Orchestrator scope audit**: Orchestrator responsibilities limited to traffic management only
+  - [ ] **LLM utilization audit**: Agents leverage LLM intelligence instead of complex preprocessing
+  - [ ] **Interface contracts**: Simple, clean interfaces between orchestrator and agents
+  - [ ] **Documentation**: THIN architecture principles documented with examples
+  - [ ] **Validation**: All experiments work with simplified architecture
+- **Effort**: 3-5 days (expanded scope)
+- **Priority**: **HIGH** - Architecture foundation issue
+- **Status**: **DEFERRED** - Wait for experiment gauntlet completion and system snapshot before continuing audit
+
+#### [ARCH-001B] Immediate Agent Audit: Remaining Assemblers & Complexity
+
+- **Description**: **IMMEDIATE FOLLOW-UP**: Audit remaining prompt assemblers and agents for THIN violations following successful SynthesisPromptAssembler elimination
+- **Dependencies**: [ARCH-001] + Experiment Gauntlet Completion + System Snapshot
+- **Priority Targets**:
+  1. **StatisticalAnalysisPromptAssembler** - 255 lines, complex experiment parsing
+  2. **DerivedMetricsPromptAssembler** - Complex framework parsing and data sampling
+  3. **EvidenceRetrieverAgent** - Check for unnecessary evidence formatting complexity
+  4. **Orchestrator synthesis methods** - Remove remaining assembler dependencies
+- **THIN Audit Questions for Each Component**:
+  - **Can the LLM read the raw input directly?** (framework.md, experiment.md, data files)
+  - **Is parsing adding value or just complexity?** (section extraction, YAML parsing, formatting)
+  - **Is the orchestrator doing agent work?** (file creation, data formatting, prompt building)
+  - **Are agents leveraging LLM intelligence?** (or doing manual processing)
+- **Immediate Actions**:
+  - [ ] **Audit StatisticalAnalysisPromptAssembler**: Can LLM read framework + experiment + data samples directly?
+  - [ ] **Audit DerivedMetricsPromptAssembler**: Can LLM read framework + analysis files directly?
+  - [ ] **Check EvidenceRetrieverAgent**: Remove unnecessary evidence formatting if LLM can handle raw evidence
+  - [ ] **Clean orchestrator**: Remove any remaining assembler instantiation code
+- **Success Metrics**:
+  - [ ] Lines of parsing code eliminated
+  - [ ] Number of assemblers removed
+  - [ ] Experiments still work with simplified architecture
+  - [ ] Reduced maintenance burden (fewer files to break)
 - **Effort**: 1-2 days
-- **Priority**: **MEDIUM** - Code quality issue
-- **Status**: **NEEDS IMPLEMENTATION**
+- **Priority**: **HIGH** - Continue momentum from SynthesisPromptAssembler success  
+- **Status**: **DEFERRED** - Wait for experiment gauntlet and system snapshot before starting
 
 #### [ARCH-002] Temporary Workspace Management Complexity
 

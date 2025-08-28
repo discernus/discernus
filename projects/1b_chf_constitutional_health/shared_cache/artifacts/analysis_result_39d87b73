@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_3cf19745cab2",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of President Biden's 2024 State of the Union address, focusing on constitutional health dimensions. The speech strongly emphasizes working within established democratic processes and institutions, aiming for continuity and improvement rather than radical change or rejection.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2024.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"we\u2019ve proved the cynics and naysayers wrong. Yes, we disagreed plenty. And yes, there were times when Democrats went alone. But time and again, Democrats and Republicans came together. Came together to defend a stronger and safer Europe. You came together to pass one-in-a-generation\u2014once-in-a-generation infrastructure law\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_support\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"fighting for the sake of fighting, power for the sake of power, conflict for the sake of conflict gets us nowhere.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"implicit_reference\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Members of the Cabinet, leaders of our military, Chief Justice, Associate Justices, and retired Justices of the Supreme Court, and to you, my fellow Americans: You know, I start tonight by congratulating the 118th Congress and the new Speaker of the House, Kevin McCarthy.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Over the last few years, our democracy has been threatened and attacked, put at risk\u2014put to the test in this very room on January the 6th. And then, just a few months ago, an unhinged 'big lie' assailant unleashed a political violence at the home of the then-Speaker of the House of Representatives, using the very same language the insurrectionists used as they stalked these halls and chanted on January 6.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"argument_support\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"The story of America is a story of progress and resilience, of always moving forward, of never, ever giving up. It\u2019s a story unique among all nations. We\u2019re the only country that has emerged from every crisis we\u2019ve ever entered stronger than we got into it. Look, folks, that\u2019s what we\u2019re doing again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"no_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "beb7eb5ace754aad1ef575c6096307bf4d8fa54ee8427fd205d52c64c497cb8e",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:19:35.943363+00:00",
+    "end_time": "2025-08-27T21:19:57.305671+00:00",
+    "duration_seconds": 21.362276
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

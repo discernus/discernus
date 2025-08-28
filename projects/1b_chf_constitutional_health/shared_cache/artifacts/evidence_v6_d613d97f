@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T03:16:00.792838+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My budget supports three great goals for America: We will win this war; we will protect our homeland; and we will revive our economy. September the 11th brought out the best in America and the best in this Congress. And I join the American people in applauding your unity and resolve. Now Americans deserve to have this same spirit directed toward addressing problems here at home. I'm a proud member of my party. Yet as we act to win the war, protect our people, and create jobs in America, we must act, first and foremost, not as Republicans, not as Democrats but as Americans.",
+      "confidence": 0.9,
+      "context_type": "argumentative claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792823+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We'll be deliberate; yet, time is not on our side. I will not wait on events while dangers gather. I will not stand by as peril draws closer and closer.",
+      "confidence": 0.6,
+      "context_type": "declarative statement/call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792830+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "My budget supports three great goals for America: We will win this war; we will protect our homeland; and we will revive our economy. September the 11th brought out the best in America and the best in this Congress. And I join the American people in applauding your unity and resolve.",
+      "confidence": 0.9,
+      "context_type": "declarative statement/foundational principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792832+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792833+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Nation will continue to be steadfast and patient and persistent in the pursuit of two great objectives. First, we will shut down terrorist camps, disrupt terrorist plans, and bring terrorists to justice. And second, we must prevent the terrorists and regimes who seek chemical, biological, or nuclear weapons from threatening the United States and the world.",
+      "confidence": 0.9,
+      "context_type": "policy agenda/declarative statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792835+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T03:16:00.792836+00:00"
+    }
+  ]
+}

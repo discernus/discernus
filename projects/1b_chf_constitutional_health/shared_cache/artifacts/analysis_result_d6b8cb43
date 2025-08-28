@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_deaba931b60d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed President Clinton's 1994 State of the Union address, focusing on rhetoric concerning constitutional processes, institutional roles, and systemic change. The speech overwhelmingly emphasizes working within existing frameworks and institutions for continuous improvement.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1994.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes. Let us at least agree, we should not pass any measure\u2014no measure should be passed that threatens Social Security. Whatever your view on that, we all must concede: We don't need a constitutional amendment; we need action.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Direct statement on legislative process vs. constitutional change.\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call for cooperation within institutional roles.\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"So tonight I issue a call to action: action by this Congress, action by our States, by our people, to prepare America for the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build stronger families and stronger communities and a safer environment; action to keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Overarching strategic goal.\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "d4af2863e74e1bb18cf321f33a8711016caf359d9c1093365dc9d9538a176a97",
+  "execution_metadata": {
+    "start_time": "2025-08-27T21:01:56.722053+00:00",
+    "end_time": "2025-08-27T21:02:16.814853+00:00",
+    "duration_seconds": 20.092795
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250827T205929Z_bd58c083"
+  }
+}

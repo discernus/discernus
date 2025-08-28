@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed Biden's 2023 State of the Union address, focusing on the speaker's stance regarding constitutional health dimensions. The speech consistently emphasizes working within established democratic and institutional frameworks, advocating for reform and improvement rather than fundamental change or rejection. Mentions of 'negative' dimensions (rejection, subversion) are framed as problems to be countered, not policies to be enacted by the speaker."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547",
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the American people, and to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+          "confidence": 0.95,
+          "context_type": "Thematic Statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "He rejected repeated\u2014repeated\u2014efforts at diplomacy.",
+          "confidence": 0.8,
+          "context_type": "Condemnation of external action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madam Speaker, Madam Vice President, and our First Lady and Second Gentleman, Members of Congress and the Cabinet, Justices of the Supreme Court, my fellow Americans:",
+          "confidence": 0.95,
+          "context_type": "Formal Address Opening"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "In State after State, new laws have been passed not only to suppress the vote\u2014we've been there before\u2014but to subvert the entire election. We can't let this happen.",
+          "confidence": 0.8,
+          "context_type": "Warning against harmful actions"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "My economic vision for America: invest in America; educate Americans; grow the workforce; build the economy from the bottom up and the middle out, not from the top down.",
+          "confidence": 0.95,
+          "context_type": "Policy Proposal"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "Not applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

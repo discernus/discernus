@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T21:04:40.094901+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "This Congress produced a budget that cut the deficit by half a trillion dollars, cut spending, and raised income taxes on only the wealthiest Americans. This Congress produced tax relief for millions of low-income workers to reward work over welfare. It produced NAFTA. It produced the Brady bill, now the Brady law. And thank you, Jim Brady, for being here, and God bless you, sir. This Congress produced tax cuts to reduce the taxes of 9 out of 10 small businesses who use the money to invest more and create more jobs. It produced more research and treatment for AIDS, more childhood immunizations, more support for women's health research, more affordable college loans for the middle class, a new national service program for those who want to give something back to their country and their communities for higher education, a dramatic increase in high-tech investments to move us from a defense to a domestic high-tech economy. This Congress produced a new law, the motor voter bill, to help millions of people register to vote. It produced family and medical leave. All passed; all signed into law with not one single veto.",
+      "confidence": 0.95,
+      "context_type": "legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094846+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "These accomplishments were all commitments I made when I sought this office. And in fairness, they all had to be passed by you in this Congress.",
+      "confidence": 0.9,
+      "context_type": "constitutional process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094870+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094874+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+      "confidence": 0.95,
+      "context_type": "recognition of authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094877+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I applaud the bipartisan support this Congress provided last year for our initiatives to help Russia, Ukraine, and the other states through their epic transformations.",
+      "confidence": 0.9,
+      "context_type": "recognition of authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094880+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "I know that facing up to these interests will require courage. It will raise critical questions about the way we finance our campaigns and how lobbyists yield their influence. The work of change, frankly, will never get any easier until we limit the influence of well-financed interests who profit from this current system.",
+      "confidence": 0.8,
+      "context_type": "critique of external influence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094883+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So tonight, let us resolve to continue the journey of renewal, to create more and better jobs, to guarantee health security for all, to reward work over welfare, to promote democracy abroad, and to begin to reclaim our streets from violent crime and drugs and gangs, to renew our own American community.",
+      "confidence": 0.95,
+      "context_type": "gradual reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094886+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Last year we began to put our house in order by tackling the budget deficit that was driving us toward bankruptcy.",
+      "confidence": 0.9,
+      "context_type": "improving existing framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094889+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So this year, we will make history by reforming the health care system.",
+      "confidence": 0.9,
+      "context_type": "gradual reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094892+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T21:04:40.094895+00:00"
+    }
+  ]
+}

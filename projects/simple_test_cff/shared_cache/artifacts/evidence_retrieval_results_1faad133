@@ -1,0 +1,768 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-28T00:34:38.671815",
+    "statistical_results_hash": "0038b1c0545a1c9242430be3a1dbde2705d60968422d4c1af0f91e8e0a4e0969",
+    "total_findings": 10,
+    "total_quotes": 44
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Overall corpus exhibits a tendency towards fragmentative discourse, with the average Full Cohesion Index being negative (-0.1977)."
+      },
+      "queries_used": [
+        "us versus them rhetoric",
+        "crisis mentality",
+        "divisive zero-sum objectives"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "enmity",
+          "confidence": 1.0,
+          "relevance_score": 0.35514605045318604,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "enmity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America, because nothing is inevitable here.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.2998344302177429,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye and pour that forth into the Congressional Record so that some of us, some of us will soak that up and be mobilized to do something, something more to resist the President's policy of amnesty, de facto amnesty, amnesty by executive edict, that has been part and parcel of the Obama policy since the beginning of his time here in office. And it's been getting worse and worse every month.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 0.95,
+          "relevance_score": 0.28700733184814453,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2503017783164978,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.24054081737995148,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Significant variance in cohesion across documents (Full Cohesion Index Std Dev: 0.688), indicating diverse rhetorical strategies within the corpus."
+      },
+      "queries_used": [
+        "high cohesion discourse",
+        "low cohesion discourse",
+        "rhetorical strategy variation"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.37570124864578247,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3524826169013977,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3388700485229492,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.28320226073265076,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "John McCain's 2008 concession speech stands out with a very high Full Cohesion Index (0.7957), indicating highly cohesive and unifying language."
+      },
+      "queries_used": [
+        "McCain common humanity",
+        "McCain together we will",
+        "McCain optimistic future"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity...",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 1.0,
+          "relevance_score": 0.6561557054519653,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America, because nothing is inevitable here.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.6353037357330322,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.95,
+          "relevance_score": 0.6142037510871887,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.5657960176467896,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.95,
+          "relevance_score": 0.5647439956665039,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Steve King's 2017 House floor speech has the lowest Full Cohesion Index (-0.7065), demonstrating highly fragmentative and divisive rhetoric."
+      },
+      "queries_used": [
+        "Steve King tribal dominance",
+        "Steve King existential threat",
+        "Steve King destroy opponents"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement officers in the past, one whom I believe ICE declined, uh, to pick up and place into removal proceedings.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.95,
+          "relevance_score": 0.4352439343929291,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "enmity",
+          "confidence": 0.95,
+          "relevance_score": 0.42072445154190063,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "enmity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 1.0,
+          "relevance_score": 0.3706771731376648,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Envy, Fear, Enmity, and Fragmentative Goals are dominant rhetorical elements in the corpus (high average raw scores/salience)."
+      },
+      "queries_used": [
+        "resentment toward others' success",
+        "under attack",
+        "enemy designation",
+        "tear down structures"
+      ],
+      "quotes": [
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3376675248146057,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.33141517639160156,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2483178973197937,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.23443463444709778,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "enmity",
+          "confidence": 0.95,
+          "relevance_score": 0.2336605340242386,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "enmity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.1942935585975647,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Compersion is notably low (mean raw score 0.225, salience 0.225) and Success Tension is consistently zero, suggesting a general absence of joy from others' success or simultaneous positive/negative framing of success."
+      },
+      "queries_used": [
+        "celebrate success",
+        "abundance mindset",
+        "lack of compersion"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans... is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 1.0,
+          "relevance_score": 0.38527947664260864,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us...",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.95,
+          "relevance_score": 0.2708812952041626,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.95,
+          "relevance_score": 0.2597431242465973,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country in sector after sector... small number of extraordinarily large corporations who charge us outrageous prices for the products that we have to buy.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.95,
+          "relevance_score": 0.17827194929122925,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Individual Dignity is low (mean raw score 0.4, salience 0.3875), indicating limited emphasis on universal human worth."
+      },
+      "queries_used": [
+        "inherent dignity",
+        "everyone belongs",
+        "universal human worth"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.5163607597351074,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.34328287839889526,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us...",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.95,
+          "relevance_score": 0.3397112488746643,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.30964750051498413,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Emotional Tension (mean 0.1425) suggests that texts frequently employ both fear and hope appeals simultaneously."
+      },
+      "queries_used": [
+        "crisis and opportunity",
+        "threats and progress",
+        "fear hope simultaneous"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America, because nothing is inevitable here.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.3472207486629486,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.34558501839637756,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3422510325908661,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't want us to live like this anymore",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.7,
+          "relevance_score": 0.33302614092826843,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.26312902569770813,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strategic Contradiction Index is strongly driven by Emotional Tension (0.9729) and Relational Tension (0.9636), indicating these are key sources of rhetorical incoherence."
+      },
+      "queries_used": [
+        "contradiction fear hope",
+        "contradiction enmity amity",
+        "conflicting emotional appeals"
+      ],
+      "quotes": [
+        {
+          "quote_text": "to not despair of our present difficulties, but to believe always in the promise and greatness of America, because nothing is inevitable here.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.95,
+          "relevance_score": 0.5001028180122375,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "enmity",
+          "confidence": 1.0,
+          "relevance_score": 0.3715461194515228,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "enmity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.24508540332317352,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And now this court has twisted it into a command that there's not a difference between a man and a woman when it comes to joining them together in matrimony. Well, there is a difference.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "enmity",
+          "confidence": 0.95,
+          "relevance_score": 0.23916968703269958,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "enmity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Full Cohesion Index shows strong negative correlations with Emotional Tension (-0.722) and Goal Tension (-0.7581), highlighting their detrimental impact on overall cohesion."
+      },
+      "queries_used": [
+        "emotional tension leading to fragmentation",
+        "fragmentative goals undermining unity",
+        "disruptive emotional rhetoric"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Donald Trump... his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.85,
+          "relevance_score": 0.3463321924209595,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.30734536051750183,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans... to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "enmity",
+          "confidence": 1.0,
+          "relevance_score": 0.2423359751701355,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "enmity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.24081368744373322,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    }
+  ]
+}

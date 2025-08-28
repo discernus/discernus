@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75e39125f1a2d911bf21e2c7004e48be04edc0cdf24354534ebbfb939a8c9ac5"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-27T22:29:28.997348+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our Founders understood that well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.",
+      "confidence": 0.9,
+      "context_type": "direct_reference_to_founding_principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997337+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "To that effort I pledge all my strength and every power of my office. I ask the Members of Congress here to join in that pledge.",
+      "confidence": 0.85,
+      "context_type": "adherence_to_official_duties_and_collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997339+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997340+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We have resolved for our time a great debate over the role of Government. Today we can declare: Government is not the problem, and Government is not the solution. We\u2014the American people\u2014we are the solution.",
+      "confidence": 0.8,
+      "context_type": "defining_legitimate_government_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997341+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The American people returned to office a President of one party and a Congress of another. Surely they did not do this to advance the politics of petty bickering and extreme partisanship they plainly deplore. No, they call on us instead to be repairers of the breach and to move on with America\u2019s mission.",
+      "confidence": 0.85,
+      "context_type": "call_for_inter-branch_cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997342+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997343+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+      "confidence": 0.9,
+      "context_type": "call_for_renewal_within_existing_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997344+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "As times change, so Government must change. We need a new Government for a new century, humble enough not to try to solve all our problems for us but strong enough to give us the tools to solve our problems for ourselves, a Government that is smaller, lives within its means, and does more with less.",
+      "confidence": 0.85,
+      "context_type": "advocacy_for_reform_and_efficiency_within_government",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997345+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-27T22:29:28.997346+00:00"
+    }
+  ]
+}

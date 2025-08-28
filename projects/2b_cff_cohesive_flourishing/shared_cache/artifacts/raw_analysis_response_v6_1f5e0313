@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on the Cohesive Flourishing Framework v10.0, focusing on raw dimensional scores, salience, confidence, and direct textual evidence. The speech exhibits strong nationalistic and 'us vs. them' rhetoric, with prominent appeals to fear and hope, while also containing calls for unity that are often undercut by adversarial framing."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "compassion": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "cohesive_goals": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "Nothing anywhere in the world that can compete with America. Now we must step boldly and bravely into the next chapter of this great American adventure, and we must create a new standard of living for the 21st century.",
+          "confidence": 0.9,
+          "context_type": "Thematic statement/Rhetorical framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "To defend the dignity of every person, I am asking Congress to pass legislation to prohibit the late-term abortion of children who can feel pain in the mother\u2019s womb.",
+          "confidence": 0.8,
+          "context_type": "Policy proposal"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The lawless state of our southern border is a threat to the safety, security, and financial well-being of all Americans.",
+          "confidence": 0.9,
+          "context_type": "Problem description"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We meet tonight at a moment of unlimited potential. As we begin a new Congress, I stand here ready to work with you to achieve historic breakthroughs for all Americans.",
+          "confidence": 0.9,
+          "context_type": "Opening statement/Vision"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "But I don\u2019t blame China for taking advantage of us; I blame our leaders and representatives for allowing this travesty to happen.",
+          "confidence": 0.8,
+          "context_type": "Blame/Economic rhetoric"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "When Grace completed treatment last fall, her doctors and nurses cheered\u2014they loved her; they still love her\u2014with tears in their eyes as she hung up a poster that read: 'Last day of chemo.'",
+          "confidence": 0.7,
+          "context_type": "Anecdote/Emotional appeal (specific instance)"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "We will not avert our eyes from a regime that chants 'Death to America' and threatens genocide against the Jewish people.",
+          "confidence": 0.9,
+          "context_type": "Foreign policy stance/Adversarial framing"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "confidence": 0.8,
+          "context_type": "Call to action/Rhetorical contrast"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation.",
+          "confidence": 0.8,
+          "context_type": "Political criticism/Zero-sum framing"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America\u2019s future.",
+          "confidence": 0.8,
+          "context_type": "Call to action/Vision"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

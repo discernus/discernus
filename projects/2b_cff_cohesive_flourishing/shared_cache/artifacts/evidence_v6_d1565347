@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T02:29:42.997529+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+      "confidence": 0.95,
+      "context_type": "rhetorical",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997508+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+      "confidence": 0.9,
+      "context_type": "rhetorical",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997511+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "fear",
+      "quote_text": "Recent threats targeting Jewish community centers and vandalism of Jewish cemeteries, as well as last week\u2019s shooting in Kansas City, remind us that while we may be a nation divided on policies, we are a country that stands united in condemning hate and evil in all of its very ugly forms.",
+      "confidence": 0.9,
+      "context_type": "descriptive",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997513+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "hope",
+      "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+      "confidence": 0.95,
+      "context_type": "rhetorical",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997515+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "envy",
+      "quote_text": "We are not going to let America and its great companies and workers be taken advantage of us any longer. They have taken advantage of our country. No longer.",
+      "confidence": 0.9,
+      "context_type": "rhetorical",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997517+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "compassion",
+      "quote_text": "Today is Rare Disease Day, and joining us in the gallery is a rare disease survivor, Megan Crowley. Megan's story is about the unbounded power of a father's love for a daughter.",
+      "confidence": 0.8,
+      "context_type": "descriptive",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997518+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "enmity",
+      "quote_text": "I directed the Department of Defense to develop a plan to demolish and destroy ISIS, a network of lawless savages that have slaughtered Muslims and Christians, and men and women and children of all faiths and all beliefs.",
+      "confidence": 0.95,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997520+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "amity",
+      "quote_text": "We must build bridges of cooperation and trust, not drive the wedge of disunity, and really, it's what it is\u2014division. It's pure, unadulterated division. We have to unify.",
+      "confidence": 0.9,
+      "context_type": "rhetorical",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997522+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "We have withdrawn the United States from the job-killing Trans-Pacific Partnership.",
+      "confidence": 0.9,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997523+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We will replace crumbling infrastructure with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land.",
+      "confidence": 0.9,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T02:29:42.997525+00:00"
+    }
+  ]
+}

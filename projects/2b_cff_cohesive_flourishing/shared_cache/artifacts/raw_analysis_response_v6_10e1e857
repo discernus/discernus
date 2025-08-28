@@ -1,0 +1,174 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "coherent_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "The speech strongly employs 'us vs. them' rhetoric, emphasizing in-group superiority and national revival achieved by dismantling perceived threats and past failures. Fear and hope are heavily leveraged, with a clear focus on adversarial positioning and fragmentative goals, occasionally softened by vague appeals to unity or a positive future that is built on the destruction of the old."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "compassion": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "amity": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "America is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "confidence": 0.9,
+          "context_type": "Thematic statement"
+        },
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "We've ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military. And our country will be woke no longer.",
+          "confidence": 0.9,
+          "context_type": "Policy action/Value statement"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "We believe that whether you are a doctor, an accountant, a lawyer or an air traffic controller, you should be hired and promoted based on skill and competence, not race or gender.",
+          "confidence": 0.8,
+          "context_type": "Policy statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country...",
+          "confidence": 0.9,
+          "context_type": "Action/Problem framing"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Over the past four years, 21 million people poured into the United States, many of them were murderers, human traffickers, gang members, and other criminals from the streets of dangerous cities all throughout the world because of Joe Biden\u2019s insane and very dangerous open border policies.",
+          "confidence": 0.9,
+          "context_type": "Description of threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "confidence": 0.9,
+          "context_type": "Vision statement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "My fellow Americans, get ready for an incredible future, because the golden Age of America has only just begun. It will be like nothing that has ever been seen before.",
+          "confidence": 0.9,
+          "context_type": "Future promise"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Other countries have used tariffs against us for decades, and now it's our turn to start using them against those other countries... China's average tariff on our products is twice what we charge them. And South Korea's average tariff is four times higher.",
+          "confidence": 0.8,
+          "context_type": "Grievance/Comparison"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "Just listen to some of the appalling waste we have already identified: $22 billion from HHS to provide free housing and cars for illegal aliens, $45 million for diversity, equity and inclusion scholarships in Burma, $40 million to improve the social and economic inclusion of sedentary migrants.",
+          "confidence": 0.8,
+          "context_type": "Criticism of spending"
+        },
+        {
+          "dimension": "compassion",
+          "quote_text": "Jeff Denard has been working at the same steel plant for 27 years in a job that has allowed him to serve as the captain of his local volunteer fire department, raise seven children with his beautiful wife, Nicole, and over the years provide a loving home for more than 40 foster children. So great, Jeff.",
+          "confidence": 0.7,
+          "context_type": "Celebration of individual achievement"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "In comparison, under Joe Biden, the worst president in American history, there were hundreds of thousands of illegal crossings a month, and virtually all of them, including murderers, drug dealers, gang members and people from mental institutions and insane asylums, were released into our country.",
+          "confidence": 0.9,
+          "context_type": "Adversarial framing"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "The cartels are waging war in America, and it's time for America to wage war on the cartels.",
+          "confidence": 0.9,
+          "context_type": "Call to conflict"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let's work together and let's truly make America great again.",
+          "confidence": 0.8,
+          "context_type": "Call for cooperation"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "Upon taking office, I imposed an immediate freeze on all federal hiring, a freeze on all new federal regulations, and a freeze on all foreign aid. I terminated the ridiculous green new scam. I withdrew from the unfair Paris Climate Accord...",
+          "confidence": 0.9,
+          "context_type": "Policy actions"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "I also signed an executive order to cut off all taxpayer funding to any institution that engages in the sexual mutilation of our youth.",
+          "confidence": 0.9,
+          "context_type": "Policy action"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Among my very highest priorities is to rescue our economy and get dramatic and immediate relief to working families.",
+          "confidence": 0.8,
+          "context_type": "Stated objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "As commander in chief, my focus is on building the most powerful military of the future.",
+          "confidence": 0.8,
+          "context_type": "Stated objective"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

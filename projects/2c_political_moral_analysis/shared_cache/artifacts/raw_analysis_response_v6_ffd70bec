@@ -1,0 +1,152 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "moral_foundations_theory_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on the speaker's emphasis on constitutional adherence, rule of law, and the perceived consequences of policy decisions on public safety and moral integrity, particularly concerning immigration and judicial overreach."
+  },
+  "document_analyses": [
+    {
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "care": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "harm": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fairness": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "cheating": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "loyalty": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "betrayal": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "authority": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "sanctity": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "degradation": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "liberty": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "oppression": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "care",
+          "quote_text": "I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological president who, I'd say to the other side of the aisle, who's not doing his job. In fact, he's ordering law enforcement officers not to do their job.",
+          "confidence": 0.9,
+          "context_type": "nurturing appeal/suffering prevention"
+        },
+        {
+          "dimension": "harm",
+          "quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+          "confidence": 0.9,
+          "context_type": "violence prevention/victim advocacy"
+        },
+        {
+          "dimension": "fairness",
+          "quote_text": "And when you have justices to the Supreme Court that, that embody that belief and act on that belief, then we here who take an oath to support and defend the Constitution\u2014and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter\u2014we recognize that if we're going to support and defend the Constitution, encouraging the, the nomination and the advice and the consent, the confirmation of the Senate and encouraging then a presidential appointment to the Supreme Court of someone whom the President is incapable of nominating anyone to the Supreme Court that what the Constitution says and what was understood to mean at the time of its ratification, he's demonstrated that in the past with his appointments to the court. He will demonstrate that again.",
+          "confidence": 0.8,
+          "context_type": "justice language/equal rights"
+        },
+        {
+          "dimension": "cheating",
+          "quote_text": "The phrase that said, 'or federal government.' And that's the, that's the component that had it been in Obamacare, then the federal government could have gone into the states and established the exchanges in the states that ref establish exchanges to comply with the suggestion that came from this Congress, by the way, that came from this Congress by hook, by crook, by legislative shenanigan, just to quote some Democrats that lamented at the methodology they had to go through to push Obamacare down the throats of the American people. But in any case, the law never said and never, never enabled the federal government to establish exchanges in the states. And the Constitution doesn't allow that authority, in my opinion. There's no enumerated power for the federal government to to create exchanges for, for insurance health insurance policies within the states. But the Supreme Court ruled with the majority opinion written by the Chief Justice of the Supreme Court, but they could add words into the Obamacare where it says, 'the states may establish exchanges.' They, they added, 'the states or federal government may establish exchanges.' They made it up.",
+          "confidence": 0.9,
+          "context_type": "corruption concern/abuse of power"
+        },
+        {
+          "dimension": "loyalty",
+          "quote_text": "And so our obligation then is to say, 'Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.'",
+          "confidence": 0.8,
+          "context_type": "group solidarity/in-group commitment"
+        },
+        {
+          "dimension": "betrayal",
+          "quote_text": "Not because of the policy decision, but because they had not kept their oath of office to support and defend the Constitution.",
+          "confidence": 0.9,
+          "context_type": "treachery concerns/breaking trust"
+        },
+        {
+          "dimension": "authority",
+          "quote_text": "All legislative power, power, all legislative, all legislative powers herein granted shall be vested in a Congress of the United States. That's here. The House and the Senate.",
+          "confidence": 0.9,
+          "context_type": "respect for hierarchy/institutional order"
+        },
+        {
+          "dimension": "subversion",
+          "quote_text": "And on the 24th of June, the court came down with a decision King versus Burwell where the Chief Justice of the Supreme Court decided that he could write words into Obamacare that didn't exist.",
+          "confidence": 0.9,
+          "context_type": "authority challenge/hierarchy disruption"
+        },
+        {
+          "dimension": "sanctity",
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "confidence": 0.8,
+          "context_type": "sacred values"
+        },
+        {
+          "dimension": "degradation",
+          "quote_text": "But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+          "confidence": 0.9,
+          "context_type": "sacred violation/moral decay"
+        },
+        {
+          "dimension": "liberty",
+          "quote_text": "Those are the kind of things that if the states want to establish same-sex marriage, so be it. That's a voice of the people. It's constitutional and it fits the structure of our our United States Constitution along with the various state constitutions and the structure of the rule of law.",
+          "confidence": 0.7,
+          "context_type": "individual choice/autonomy"
+        },
+        {
+          "dimension": "oppression",
+          "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America.",
+          "confidence": 0.9,
+          "context_type": "control concern/tyranny resistance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

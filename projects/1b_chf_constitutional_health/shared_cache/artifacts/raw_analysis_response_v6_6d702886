@@ -1,0 +1,234 @@
+<ctrl94>thought
+The user wants me to analyze a document using the "Constitutional Health Framework" (CHF) v10.0.
+I need to produce a JSON output following the specified structure.
+The analysis should focus on raw dimensional scores, salience, confidence, and extracted evidence.
+I must score ALL dimensions listed in `dimension_groups` (from the framework config) on a 0.0-1.0 scale.
+I must NOT perform any mathematical calculations or compute derived metrics.
+For `quote_text`, I must provide a direct quote or an empty string if no direct quote supports the analysis.
+
+Let's break down the process:
+1.  **Decode the Framework:** First, I need to decode the base64 encoded framework to understand its structure, dimensions, analysis prompt, and scoring guidelines.
+2.  **Decode the Documents:** Then, decode the base64 encoded document.
+3.  **Analyze Each Document:** For each document, I will:
+    *   Read the document content.
+    *   Go through each dimension defined in the framework: `procedural_legitimacy`, `procedural_rejection`, `institutional_respect`, `institutional_subversion`, `systemic_continuity`, `systemic_replacement`.
+    *   For each dimension, determine a `raw_score` (0.0-1.0) based on the presence and strength of indicators.
+    *   Determine a `salience` score (0.0-1.0) based on rhetorical prominence (frequency, structural positioning, thematic centrality, rhetorical devices).
+    *   Determine a `confidence` score (0.0-1.0) for my scoring.
+    *   Extract the `quote_text` (direct quote) and its `context_type`.
+    *   Assess `confidence` for the evidence.
+4.  **Construct JSON Output:** Assemble all the collected data into the specified JSON format.
+
+**Framework Decoding:**
+The framework is `Constitutional Health Framework (CHF) v10.0`.
+Dimensions:
+*   **Procedural Axis:**
+    *   `procedural_legitimacy`: Support for established procedures, constitutional processes, democratic norms.
+        *   Positive markers: "constitutional process", "due process", "proper channels", "electoral mandate", "legislative process".
+    *   `procedural_rejection`: Rejecting established procedures, circumvention, extra-constitutional action, emergency power claims, process bypassing.
+        *   Positive markers: "bypass the system", "emergency powers", "broken system", "people's will", "extraordinary measures".
+*   **Institutional Axis:**
+    *   `institutional_respect`: Recognition of institutional authority, expertise, legitimate governance role, checks and balances.
+        *   Positive markers: "institutional authority", "expert analysis", "separation of powers", "constitutional duty", "judicial review".
+    *   `institutional_subversion`: Attacking institutional authority, expertise, delegitimizing democratic institutions.
+        *   Positive markers: "corrupt institutions", "illegitimate authority", "failed establishment", "biased system", "deep state".
+*   **Systemic Axis:**
+    *   `systemic_continuity`: Support for maintaining/improving existing constitutional framework, gradual reform.
+        *   Positive markers: "constitutional stability", "democratic tradition", "institutional continuity", "gradual reform", "constitutional amendment".
+    *   `systemic_replacement`: Advocating fundamental replacement, revolutionary change rhetoric.
+        *   Positive markers: "new system", "radical transformation", "complete overhaul", "revolutionary change", "new constitution".
+
+**Disambiguation Rules:**
+*   **Procedural Axis:**
+    *   `procedural_legitimacy` vs `procedural_rejection`: If primary function is supporting established processes -> Legitimacy. If advocating bypass/circumvention -> Rejection. Intent and proposed method are key. "Reform the process" (Legitimacy) vs. "circumvention attempt" (Rejection). "Emergency action needed" (Rejection) vs. "constitutional bypass" (Rejection).
+*   **Institutional Axis:**
+    *   `institutional_respect` vs `institutional_subversion`: Respect recognizes legitimate authority/expertise. Subversion attacks/delegitimizes. Constructive criticism can coexist with respect.
+*   **Systemic Axis:**
+    *   `systemic_continuity` vs `systemic_replacement`: Both may use "change" language. Continuity: gradual reform within existing framework. Replacement: fundamental overhaul, revolutionary. Scope and radicalism are key differentiators.
+
+**Salience Assessment:**
+*   Frequency and repetition.
+*   Structural positioning (opening, closing, thesis statements).
+*   Thematic centrality.
+*   Rhetorical devices (metaphors, imagery, emotional appeals).
+*   Salience != Intensity.
+
+**Document to Analyze:** `Bush_SOTU_2003.txt`
+
+Let's start the analysis of `Bush_SOTU_2003.txt`.
+
+**Overall Impression:**
+The speech is a State of the Union address, typically a formal, ceremonial, and strategic speech. It's likely to emphasize unity, national strength, and policy initiatives within the existing system. There will be themes of protecting the nation (war on terror), economic improvement, and social programs. The language is expected to be largely supportive of American institutions and processes.
+
+**Analysis of Bush_SOTU_2003.txt:**
+
+**`procedural_legitimacy`**:
+*   **Presence**: The speech frequently refers to working within established processes (Congress, Supreme Court, elections, legislative process). Mentions "due process" (implied), "proper channels" (implied through working with Congress), "electoral mandate" (implied through "elected branches").
+*   **Markers**: "system of two parties, two chambers, and two elected branches", "conducted in a civil tone", "respect for one another", "legislative process" (implied by asking Congress to pass bills), "I urge Congress to act responsibly and make the tax cuts permanent", "be good stewards of tax dollars", "you passed bills that cut this spending", "Congress did not act last year on my proposal to save Social Security", "I ask you to join me in creating a commission to examine the full impact of baby boom retirements on Social Security, Medicare, and Medicaid", "members of Congress of both parties and offer bipartisan solutions", "proper channels" (implied by working with Congress for budget cuts, earmark reform).
+*   **Strongest Evidence**: "To confront the great issues before us, we must act in a spirit of good will and respect for one another, and I will do my part. Tonight the state of our Union is strong, and together we will make it stronger." (Emphasizes respect for process and collaboration). Also, "elections are vital, but they are only the beginning. Raising up a democracy requires the rule of law and protection of minorities and strong, accountable institutions that last longer than a single vote." (Directly links democracy to rule of law and institutions, signifying procedural adherence).
+*   **Raw Score**: High (0.8-0.9). There's a consistent appeal to working within the established political system and processes.
+*   **Salience**: High (0.8). It's a recurring theme, particularly in discussions about domestic policy and how political action should occur.
+
+**`procedural_rejection`**:
+*   **Presence**: Very little to none. The speech is about strengthening existing systems, not bypassing them. Even strong presidential actions (e.g., surveillance program) are justified by existing authority ("authority given to me by the Constitution and by statute").
+*   **Markers**: No explicit calls for bypassing, emergency powers used as justification for circumvention.
+*   **Raw Score**: Low (0.0-0.1). No indicators found.
+*   **Salience**: Low (0.0). No rhetorical emphasis on bypassing procedures.
+
+**`institutional_respect`**:
+*   **Presence**: Strong respect for various institutions: Congress, Supreme Court, military, law enforcement, intelligence agencies, democratic institutions abroad, scientific community, etc. Mentions "separation of powers" implicitly by addressing different branches, "constitutional duty" ("authority given to me by the Constitution"), "judicial review" (by mentioning Supreme Court confirmations).
+*   **Markers**: "Mr. Speaker, Vice President Cheney, Members of Congress, Members of the Supreme Court and diplomatic corps", "system of two parties, two chambers, and two elected branches", "responsible criticism that aims for success", "superb professionals in law enforcement, intelligence, the military, and homeland security", "authority given to me by the Constitution and by statute", "Federal courts have approved the use of that authority", "Appropriate Members of Congress have been kept informed", "Supreme Court now has two superb new members on its bench, Chief Justice John Roberts and Justice Sam Alito. I thank the Senate for confirming both of them.", "judges must be servants of the law and not legislate from the bench", "institutions of science and medicine that do not cut ethical corners".
+*   **Strongest Evidence**: "I have authorized a terrorist surveillance program based on authority given to me by the Constitution and by statute. Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority. Appropriate Members of Congress have been kept informed." (Directly links actions to constitutional authority, judicial approval, and Congressional oversight). Also, "elections are vital, but they are only the beginning. Raising up a democracy requires the rule of law and protection of minorities and strong, accountable institutions that last longer than a single vote."
+*   **Raw Score**: High (0.9-1.0). Consistently validates and relies on existing institutions.
+*   **Salience**: High (0.9). Central to the speech's themes of national unity, security, and global leadership.
+
+**`institutional_subversion`**:
+*   **Presence**: Minimal. There's a subtle critique of "defeatism" and "second-guessing" which might be interpreted as undermining, but it's framed as counterproductive criticism, not delegitimization of institutions themselves. The language about "irresponsible criticism that refuses to acknowledge anything but failure" could be seen as a mild form of subversion, but it targets behavior, not the legitimacy of the critic's *institution*.
+*   **Markers**: "There is a difference between responsible criticism that aims for success and defeatism that refuses to acknowledge anything but failure. Hindsight alone is not wisdom, and second-guessing is not a strategy." (This critiques *behavior*, not the legitimacy of critics as an institution). "They're concerned about unethical conduct by public officials and discouraged by activist courts that try to redefine marriage." (Critiques specific actions/decisions, not the courts' fundamental legitimacy).
+*   **Raw Score**: Low (0.1-0.2). The critical statements are directed at certain *behaviors* or *interpretations* of institutions rather than a full-scale delegitimization.
+*   **Salience**: Low (0.2). These points are mentioned, but not emphasized as strongly as the positive institutional framing.
+
+**`systemic_continuity`**:
+*   **Presence**: Very strong. The speech emphasizes building on existing foundations, gradual reform, maintaining traditions, and improving within the current framework. Examples include economic policies, healthcare reform, energy policy, education ("No Child Left Behind Act is raising standards").
+*   **Markers**: "state of our Union is strong, and together we will make it stronger", "build our prosperity by strengthening our economic leadership in the world", "continue to lead the world in human talent and creativity", "America has become a more hopeful nation", "wise policies, such as welfare reform and drug education", "renew the promise of our institutions".
+*   **Strongest Evidence**: "Tonight the state of our Union is strong, and together we will make it stronger." (Core message of continuity and improvement). Also, "our economy is healthy and vigorous and growing faster than other major industrialized nations." and "We will lead freedom's advance. We will compete and excel in the global economy. We will renew the defining moral commitments of this land. And so we move forward, optimistic about our country, faithful to its cause, and confident of the victories to come."
+*   **Raw Score**: High (0.9-1.0). The speech is saturated with themes of maintaining and improving the existing American system.
+*   **Salience**: High (0.9). A pervasive message throughout the address, especially in domestic policy sections.
+
+**`systemic_replacement`**:
+*   **Presence**: None. The speech advocates for progress and improvement *within* the existing system, not a revolutionary overthrow or fundamental replacement. The only "change" discussed is gradual and aimed at strengthening, not replacing.
+*   **Markers**: No language suggesting a need for a new constitution, complete overhaul, or revolutionary transformation of the American system.
+*   **Raw Score**: Low (0.0-0.1). No indicators found.
+*   **Salience**: Low (0.0). No rhetorical emphasis on systemic replacement.
+
+**Final Review of Scores and Evidence:**
+
+*   `procedural_legitimacy`: High score, strong evidence of respecting established processes.
+*   `procedural_rejection`: Very low score, no evidence of rejecting processes.
+*   `institutional_respect`: High score, strong evidence of respecting various institutions.
+*   `institutional_subversion`: Low score, very mild criticisms are not full delegitimization.
+*   `systemic_continuity`: High score, strong evidence of commitment to gradual improvement within the existing system.
+*   `systemic_replacement`: Very low score, no evidence of advocating radical systemic change.
+
+Confidence in analysis: High, the speech is quite clear in its themes.
+Analyst confidence: 0.9
+
+Document ID: `f72be900ec79` (first 12 characters as per instruction)
+Document Name: `Bush_SOTU_2003.txt`
+
+Now, structure this into the JSON output.<ctrl95><<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focuses on how President Bush's 2003 State of the Union address engages with constitutional health dimensions, emphasizing support for existing institutions and processes, and gradual improvement rather than radical change."
+  },
+  "document_analyses": [
+    {
+      "document_id": "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1",
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.15,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.05,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "To confront the great issues before us, we must act in a spirit of good will and respect for one another, and I will do my part. Tonight the state of our Union is strong, and together we will make it stronger.",
+          "confidence": 0.9,
+          "context_type": "Thematic statement on political conduct"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "elections are vital, but they are only the beginning. Raising up a democracy requires the rule of law and protection of minorities and strong, accountable institutions that last longer than a single vote.",
+          "confidence": 0.9,
+          "context_type": "Definition of democratic development"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "No direct evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I have authorized a terrorist surveillance program based on authority given to me by the Constitution and by statute. Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority. Appropriate Members of Congress have been kept informed.",
+          "confidence": 0.95,
+          "context_type": "Justification of executive action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The Supreme Court now has two superb new members on its bench, Chief Justice John Roberts and Justice Sam Alito. I thank the Senate for confirming both of them. I will continue to nominate men and women who understand that judges must be servants of the law and not legislate from the bench.",
+          "confidence": 0.9,
+          "context_type": "Judicial appointments and role definition"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "There is a difference between responsible criticism that aims for success and defeatism that refuses to acknowledge anything but failure. Hindsight alone is not wisdom, and second-guessing is not a strategy.",
+          "confidence": 0.7,
+          "context_type": "Critique of political opposition"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "They're concerned about unethical conduct by public officials and discouraged by activist courts that try to redefine marriage.",
+          "confidence": 0.7,
+          "context_type": "Addressing public concerns about institutions"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Tonight the state of our Union is strong, and together we will make it stronger.",
+          "confidence": 0.95,
+          "context_type": "Opening statement and core message"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We will lead freedom's advance. We will compete and excel in the global economy. We will renew the defining moral commitments of this land. And so we move forward, optimistic about our country, faithful to its cause, and confident of the victories to come.",
+          "confidence": 0.9,
+          "context_type": "Vision for national progress"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Wise policies, such as welfare reform and drug education and support for abstinence and adoption have made a difference in the character of our country.",
+          "confidence": 0.9,
+          "context_type": "Examples of successful policies"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "No direct evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

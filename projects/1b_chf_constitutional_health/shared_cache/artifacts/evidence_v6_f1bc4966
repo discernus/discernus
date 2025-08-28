@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T04:10:09.172381+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the American people, and to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+      "confidence": 0.95,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172373+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "He rejected repeated\u2014repeated\u2014efforts at diplomacy.",
+      "confidence": 0.8,
+      "context_type": "Condemnation of external action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172375+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Madam Vice President, and our First Lady and Second Gentleman, Members of Congress and the Cabinet, Justices of the Supreme Court, my fellow Americans:",
+      "confidence": 0.95,
+      "context_type": "Formal Address Opening",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172376+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "In State after State, new laws have been passed not only to suppress the vote\u2014we've been there before\u2014but to subvert the entire election. We can't let this happen.",
+      "confidence": 0.8,
+      "context_type": "Warning against harmful actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172377+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My economic vision for America: invest in America; educate Americans; grow the workforce; build the economy from the bottom up and the middle out, not from the top down.",
+      "confidence": 0.95,
+      "context_type": "Policy Proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172378+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "Not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T04:10:09.172379+00:00"
+    }
+  ]
+}
