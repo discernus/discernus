@@ -15,10 +15,11 @@ This experiment tests whether the constitutional_health_index of presidential ad
 ## Hypotheses
 
 ### Primary Hypothesis
-**H₀**: μ_bush_hw = μ_clinton = μ_bush_w = μ_obama = μ_trump = μ_biden (All administrations have equal constitutional health scores)
+**H₀**: μ_clinton = μ_bush_w = μ_obama = μ_trump = μ_biden (All modern administrations have equal constitutional health scores)
 **H₁**: At least one administration differs significantly from the others in constitutional health scores
 
-**Test**: One-way ANOVA across 6 presidential administrations (including Bush H.W. 1992 baseline)
+**Test**: One-way ANOVA across 5 presidential administrations (Clinton, Bush W., Obama, Trump, Biden)
+**Baseline**: Bush H.W. (1992) serves as historical reference point but excluded from ANOVA due to n=1
 **Threshold**: p < 0.05, F > F_critical
 
 ### Secondary Hypotheses
@@ -32,11 +33,12 @@ This experiment tests whether the constitutional_health_index of presidential ad
 **H₇**: Biden's constitutional health profile is more similar to Trump than to Clinton/Obama (cluster analysis or distance metrics)
 
 ### Statistical Testing Strategy
-- **Primary Analysis**: One-way ANOVA comparing Constitutional Direction Index across administrations
+- **Primary Analysis**: One-way ANOVA comparing Constitutional Health Index across 5 administrations (excluding Bush H.W. baseline)
 - **Post-hoc Testing**: Tukey HSD for pairwise administration comparisons (H₂-H₅)
 - **Variance Testing**: Levene's test for homogeneity of variance (H₆ - Trump outlier hypothesis)
 - **Distance Analysis**: Euclidean distance between administration profiles in 6-dimensional space (H₇)
 - **Cluster Analysis**: Hierarchical clustering to test Biden-Trump similarity vs. Biden-Democrat similarity
+- **Baseline Comparison**: Descriptive comparison of Bush H.W. (1992) against modern administration means
 - **Effect Size**: η² (eta-squared) for administration effects
 - **Reliability**: Cronbach's alpha for each dimension across administrations
 
@@ -98,8 +100,57 @@ This experiment will produce empirical findings on constitutional health differe
 - **Context**: Post-Trump institutional restoration
 - **Focus**: Infrastructure, climate action, democratic institutions
 
+## Administration Mapping
+
+### Rationale
+This experiment analyzes constitutional health across **presidential administrations** rather than individual speakers or terms. Some presidents served non-consecutive terms (Trump 2017-2021, 2025-present) while others served consecutive terms. This mapping defines how corpus speakers are grouped into administrations for statistical analysis.
+
+### Speaker-to-Administration Mapping
+```yaml
+administration_mapping:
+  "Bush H.W.":
+    speakers: ["George H.W. Bush"]
+    years: [1992]
+    context: "Cold War transition baseline"
+    
+  "Clinton":
+    speakers: ["William J. Clinton", "Bill Clinton"]
+    years: [1993-2001]
+    context: "Post-Cold War governance"
+    
+  "Bush W.":
+    speakers: ["George W. Bush"]
+    years: [2001-2009]
+    context: "Post-9/11 security focus"
+    
+  "Obama":
+    speakers: ["Barack Obama", "Barack H. Obama"]
+    years: [2009-2017]
+    context: "Financial crisis recovery"
+    
+  "Trump":
+    speakers: ["Donald Trump", "Donald J. Trump"]
+    years: [2017-2021, 2025-present]
+    context: "Populist anti-establishment (combined terms)"
+    note: "Combines both Trump presidencies for constitutional health analysis"
+    
+  "Biden":
+    speakers: ["Joe Biden", "Joseph R. Biden", "Joseph Biden"]
+    years: [2021-2025]
+    context: "Post-Trump institutional restoration"
+```
+
+### Statistical Grouping Instructions
+- **Primary Analysis Variable**: `administration` (5 groups for ANOVA: Clinton, Bush W., Obama, Trump, Biden)
+- **Baseline Reference**: Bush H.W. (1992) serves as historical baseline for comparison but excluded from ANOVA due to n=1
+- **Secondary Variables**: `speech_type`, `year`, `party`
+- **Corpus Manifest Mapping**: Use `speaker` field to determine `administration` via above mapping
+- **Missing Speaker Handling**: Log warning and exclude from administration-based analyses
+
+This explicit mapping eliminates ambiguity about how multi-term presidents and speaker name variations should be handled in statistical analysis.
+
 ### Enhanced Statistical Analysis
-- **Administration Comparison**: One-way ANOVA analysis of constitutional_health_index across administrations
+- **Administration Comparison**: One-way ANOVA analysis of constitutional_health_index across 5 administrations (Clinton, Bush W., Obama, Trump, Biden)
 - **Statistical Significance Testing**: F-test for administration effects (p < 0.05)
 - **Effect Size Analysis**: η² (eta-squared) for administration effects on constitutional health
 - **Post-hoc Testing**: Tukey HSD for pairwise administration comparisons

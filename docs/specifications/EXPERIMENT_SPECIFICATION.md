@@ -33,26 +33,80 @@ A list of the specific, answerable research questions that the experiment is des
 **(Optional but Recommended)**
 A description of the anticipated results or the types of analysis that will be conducted (e.g., "A comparative statistical analysis of cohesion scores between the two speakers.").
 
+### Section 4: Data Grouping and Custom Variable Mapping
+
+**(Required for Statistical Analysis)**
+If your experiment requires statistical analysis using grouping variables not explicitly present in the corpus manifest (e.g., `time_period`, `category`, `group_type`), you MUST define them explicitly.
+
+#### 4.1 Corpus Manifest Integration
+- Statistical analyses must use corpus manifest metadata as the primary data source
+- Standard manifest fields vary by domain but commonly include: `speaker`, `author`, `year`, `category`, `type`, `format`
+
+#### 4.2 Custom Grouping Variables
+When your experiment requires grouping variables beyond the corpus manifest:
+
+**Example: Time Period Mapping**
+```yaml
+time_period_mapping:
+  "Early Period":
+    speakers: ["Author A", "Speaker 1"]
+    years: [1990-1995]
+    context: "Initial development phase"
+    
+  "Middle Period":
+    speakers: ["Author B", "Author C"]
+    years: [1996-2005]
+    context: "Expansion and growth"
+    
+  "Recent Period":
+    speakers: ["Author D", "Speaker 2", "Author E"]
+    years: [2006-present]
+    context: "Modern developments"
+    note: "Combines multiple recent contributors"
+```
+
+**Statistical Grouping Instructions:**
+- **Primary Analysis Variable**: Specify the main grouping variable and number of groups
+- **Baseline References**: Groups excluded from inferential tests (e.g., n=1 groups)
+- **Secondary Variables**: Additional grouping variables for analysis
+- **Corpus Manifest Mapping**: How to derive custom variables from manifest fields
+- **Missing Data Handling**: How to handle unmatched or missing cases
+
+#### 4.3 Statistical Executability Requirements
+- **ANOVA Groups**: All groups must have n≥2 for inferential testing
+- **Baseline Groups**: Single-observation groups (n=1) must be designated as baselines, excluded from ANOVA
+- **Variance Tests**: Groups must have sufficient variance for homogeneity testing
+- **Missing Data**: Specify handling of speakers/documents that don't match the mapping
+
+#### 4.4 Coherence Validation
+The coherence agent will validate that:
+1. All statistical analyses reference either explicit corpus manifest fields OR properly defined custom groupings
+2. Custom groupings are statistically executable (no n=1 groups in ANOVA unless designated as baselines)
+3. Mapping logic is unambiguous and complete
+4. All referenced grouping variables are defined
+
+**Experiments that reference undefined grouping variables will fail coherence validation.**
+
 ---
 
 ## Part 2: The Machine-Readable Appendix
 
 This is a single YAML block at the end of the document containing the precise configuration for the orchestrator.
 
-### Section 4: Configuration Appendix
+### Section 5: Configuration Appendix
 
 **(Required)**
 
 ```yaml
 # --- Start of Machine-Readable Appendix ---
 
-# 4.1: Metadata (Required)
+# 5.1: Metadata (Required)
 metadata:
   experiment_name: "your_experiment_name_in_snake_case"
   author: "Your Name or Organization"
   spec_version: "10.0"
 
-# 4.2: Components (Required)
+# 5.2: Components (Required)
 components:
   # The filename of the v10.0 Framework file.
   # Must be in the same directory as this experiment.md.
@@ -69,8 +123,15 @@ components:
 
 ## Validation Rules
 
+### Basic Requirements
 -   The file must be named `experiment.md`.
 -   It must contain a valid YAML appendix.
 -   All required fields (`experiment_name`, `spec_version`, `framework`, `corpus`) must be present.
 -   The `spec_version` in the experiment must be compatible with the `spec_version` in the referenced framework.
 -   The files specified in `framework` and `corpus` must exist in the same directory as the `experiment.md` file.
+
+### Statistical Analysis Requirements (New in v10.0)
+-   **Custom Grouping Variables**: If statistical analyses reference grouping variables not in the corpus manifest (e.g., `time_period`, `category`, `group_type`), they MUST be defined in a **Data Grouping and Custom Variable Mapping** section.
+-   **Statistical Executability**: All ANOVA groups must have n≥2. Single-observation groups (n=1) must be designated as baselines and excluded from inferential testing.
+-   **Semantic Alignment**: The experiment, corpus manifest, and framework must use consistent terminology. Custom mappings must eliminate ambiguity about how corpus metadata maps to analysis variables.
+-   **Coherence Validation**: The coherence agent will validate that all statistical requirements are met and that the experiment design is executable with the provided corpus data.
