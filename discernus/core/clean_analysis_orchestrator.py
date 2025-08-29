@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
 import json
+import pickle
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
@@ -292,6 +293,9 @@ class CleanAnalysisOrchestrator:
             # Get performance summary
             performance_summary = self._get_performance_summary()
             
+            # Get session costs from audit logger
+            session_costs = audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+            
             return {
                 "run_id": run_id,
                 "results_directory": str(results_dir),
@@ -299,7 +303,8 @@ class CleanAnalysisOrchestrator:
                 "status": "completed",
                 "warnings": self._get_warnings(),
                 "duration_seconds": duration,
-                "performance_metrics": performance_summary
+                "performance_metrics": performance_summary,
+                "costs": session_costs
             }
             
         except Exception as e:
@@ -915,6 +920,10 @@ class CleanAnalysisOrchestrator:
                 framework_content = framework_path.read_text(encoding='utf-8')
                 (temp_workspace / "framework_content.md").write_text(framework_content)
                 
+                # THIN ARCHITECTURE: Corpus manifest is passed as context in the prompt, not as a file
+                # The LLM understands the relationships directly - no parsing needed
+                self._log_progress("📋 Corpus manifest passed as prompt context (THIN approach)")
+                
                 experiment_content = experiment_path.read_text(encoding='utf-8')
                 experiment_spec = {
                     "name": self.config.get('name', 'Unknown Experiment'),
@@ -1003,13 +1012,13 @@ class CleanAnalysisOrchestrator:
                         raw_analysis_data.append(result['analysis_result'])
                 
                 raw_analysis_data_hash = self.artifact_storage.put_artifact(
-                    json.dumps(raw_analysis_data, indent=2).encode('utf-8'),
+                    json.dumps(raw_analysis_data, indent=2, default=str).encode('utf-8'),
                     {"artifact_type": "raw_analysis_data"}
                 )
                 
                 # 2. Store derived metrics data
                 derived_metrics_data_hash = self.artifact_storage.put_artifact(
-                    json.dumps(derived_metrics_results, indent=2).encode('utf-8'),
+                    json.dumps(derived_metrics_results, indent=2, default=str).encode('utf-8'),
                     {"artifact_type": "derived_metrics_data"}
                 )
                 
@@ -1021,8 +1030,59 @@ class CleanAnalysisOrchestrator:
                     "validation_passed": True
                 }
                 
+                # Convert numpy objects to regular Python types for safe repr() serialization
+                def convert_numpy_types(obj):
+                    """Recursively convert numpy types to regular Python types"""
+                    if hasattr(obj, 'item'):  # numpy scalar types
+                        return obj.item()
+                    elif hasattr(obj, 'tolist'):  # numpy arrays
+                        return obj.tolist()
+                    elif isinstance(obj, dict):
+                        # Convert tuple keys to strings to avoid "keys must be str, int, float, bool or None, not tuple" error
+                        converted_dict = {}
+                        for k, v in obj.items():
+                            if isinstance(k, tuple):
+                                # Convert tuple key to string representation
+                                converted_key = str(k)
+                            else:
+                                converted_key = k
+                            converted_dict[converted_key] = convert_numpy_types(v)
+                        return converted_dict
+                    elif isinstance(obj, list):
+                        return [convert_numpy_types(item) for item in obj]
+                    elif isinstance(obj, tuple):
+                        return tuple(convert_numpy_types(item) for item in obj)
+                    elif str(obj) == 'nan':  # Handle nan strings
+                        return float('nan')
+                    else:
+                        return obj
+                
+                def safe_repr(obj):
+                    try:
+                        # First convert numpy types, then use repr
+                        self._log_progress(f"🔍 Converting object for safe_repr, type: {type(obj)}")
+                        converted_obj = convert_numpy_types(obj)
+                        self._log_progress(f"✅ Conversion complete, checking for tuple keys...")
+                        
+                        # Double-check for any remaining tuple keys
+                        def check_for_tuple_keys(obj, path=""):
+                            if isinstance(obj, dict):
+                                for k, v in obj.items():
+                                    if isinstance(k, tuple):
+                                        self._log_progress(f"⚠️ Found tuple key at {path}: {k}")
+                                    check_for_tuple_keys(v, f"{path}.{k}")
+                            elif isinstance(obj, list):
+                                for i, item in enumerate(obj):
+                                    check_for_tuple_keys(item, f"{path}[{i}]")
+                        
+                        check_for_tuple_keys(converted_obj)
+                        return repr(converted_obj)
+                    except Exception as e:
+                        self._log_progress(f"❌ safe_repr failed: {e}")
+                        return str(obj)
+                
                 statistical_hash = self.artifact_storage.put_artifact(
-                    json.dumps(complete_statistical_result, indent=2).encode('utf-8'),
+                    safe_repr(complete_statistical_result).encode('utf-8'),
                     {"artifact_type": "statistical_results_with_data"}
                 )
                 
@@ -1196,13 +1256,17 @@ class CleanAnalysisOrchestrator:
         )
         
         # Create temporary workspace for statistical analysis
-        temp_workspace = self.experiment_path / "temp_stats"
+        temp_workspace = self.experiment_path / "temp_statistical_analysis"
         temp_workspace.mkdir(exist_ok=True)
         
         try:
             # Write framework content and experiment spec
             (temp_workspace / "framework_content.md").write_text(framework_content)
             (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
+            
+            # THIN ARCHITECTURE: Corpus manifest is passed as context in the prompt, not as a file
+            # The LLM understands the relationships directly - no parsing needed
+            self._log_progress("📋 Corpus manifest passed as prompt context (THIN approach)")
             
             # Write analysis results for data structure discovery
             (temp_workspace / "individual_analysis_results.json").write_text(json.dumps(analysis_results, indent=2))
@@ -1263,51 +1327,83 @@ class CleanAnalysisOrchestrator:
         import numpy as np
         import sys
         import importlib.util
+        import os
         
-        # Load the generated statistical functions module
-        functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
-        if not functions_file.exists():
-            raise CleanAnalysisError("Statistical functions file not found")
-        
-        # Import the generated module
-        spec = importlib.util.spec_from_file_location("statistical_functions", functions_file)
-        stats_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(stats_module)
-        
-        # Convert analysis results to DataFrame format expected by statistical functions
-        analysis_data = self._convert_analysis_to_dataframe(analysis_results)
-        
-        # Execute each statistical function and collect results
-        statistical_outputs = {}
-        
-        # Get all functions from the module that don't start with underscore and aren't type annotations
-        type_annotations = {'Any', 'Dict', 'List', 'Optional', 'Tuple', 'Union', 'Callable', 'TypeVar', 'Generic'}
-        function_names = [name for name in dir(stats_module) 
-                         if not name.startswith('_') 
-                         and callable(getattr(stats_module, name))
-                         and name not in type_annotations]
-        
+        try:
+            
+            # Load the generated statistical functions module
+            functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
+            if not functions_file.exists():
+                raise CleanAnalysisError("Statistical functions file not found")
+            
+            # Import the generated module
+            spec = importlib.util.spec_from_file_location("statistical_functions", functions_file)
+            stats_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(stats_module)
+            
+            # Convert analysis results to DataFrame format expected by statistical functions
+            analysis_data = self._convert_analysis_to_dataframe(analysis_results)
+            
+            # Execute each statistical function and collect results
+            statistical_outputs = {}
+            
+            # Get all functions from the module that don't start with underscore and aren't type annotations
+            type_annotations = {'Any', 'Dict', 'List', 'Optional', 'Tuple', 'Union', 'Callable', 'TypeVar', 'Generic'}
+            function_names = [name for name in dir(stats_module) 
+                             if not name.startswith('_') 
+                             and callable(getattr(stats_module, name))
+                             and name not in type_annotations]
+            
 
-        self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
+            self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
+            
+            for func_name in function_names:
+                try:
+                    func = getattr(stats_module, func_name)
+                    self._log_progress(f"  📊 Running {func_name}...")
+                    
+                    # Execute the function with the analysis data
+                    result = func(analysis_data)
+                    
+                    # Store result with THIN approach - handle DataFrames specially
+                    if hasattr(result, 'to_dict'):  # pandas DataFrame
+                        statistical_outputs[func_name] = {
+                            "type": "dataframe",
+                            "data": result.to_dict('records'),
+                            "columns": list(result.columns),
+                            "index": list(result.index),
+                            "shape": result.shape
+                        }
+                    elif isinstance(result, dict):
+                        # Handle nested DataFrames in dictionary results
+                        serialized_result = {}
+                        for key, value in result.items():
+                            if hasattr(value, 'to_dict'):  # pandas DataFrame
+                                serialized_result[key] = {
+                                    "type": "dataframe", 
+                                    "data": value.to_dict('records'),
+                                    "columns": list(value.columns),
+                                    "index": list(value.index),
+                                    "shape": value.shape
+                                }
+                            else:
+                                serialized_result[key] = value
+                        statistical_outputs[func_name] = serialized_result
+                    else:
+                        # Store simple objects directly
+                        statistical_outputs[func_name] = result
+                    
+                    self._log_progress(f"  ✅ {func_name} completed")
+                    
+                except Exception as e:
+                    self._log_progress(f"  ⚠️ {func_name} failed: {str(e)}")
+                    statistical_outputs[func_name] = {"error": str(e), "status": "failed"}
         
-        for func_name in function_names:
-            try:
-                func = getattr(stats_module, func_name)
-                self._log_progress(f"  📊 Running {func_name}...")
-                
-                # Execute the function with the analysis data
-                result = func(analysis_data)
-                
-                # Store result directly as Python object (THIN approach - no JSON conversion needed)
-                statistical_outputs[func_name] = result
-                
-                self._log_progress(f"  ✅ {func_name} completed")
-                
-            except Exception as e:
-                self._log_progress(f"  ⚠️ {func_name} failed: {str(e)}")
-                statistical_outputs[func_name] = {"error": str(e), "status": "failed"}
+            return statistical_outputs
         
-        return statistical_outputs
+        except Exception as e:
+            self._log_progress(f"❌ Statistical execution failed: {str(e)}")
+            raise CleanAnalysisError(f"Failed to execute statistical functions: {str(e)}")
     
     def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
         """Convert individual analysis results to pandas DataFrame for statistical functions."""
@@ -1384,6 +1480,24 @@ class CleanAnalysisOrchestrator:
         # We need at least one successful statistical result with numerical data
         return successful_results > 0
     
+    def _convert_tuple_keys_for_json(self, obj):
+        """Convert tuple keys to strings for safe JSON serialization."""
+        if isinstance(obj, dict):
+            converted = {}
+            for k, v in obj.items():
+                if isinstance(k, tuple):
+                    converted_key = str(k)
+                else:
+                    converted_key = k
+                converted[converted_key] = self._convert_tuple_keys_for_json(v)
+            return converted
+        elif isinstance(obj, list):
+            return [self._convert_tuple_keys_for_json(item) for item in obj]
+        elif isinstance(obj, tuple):
+            return tuple(self._convert_tuple_keys_for_json(item) for item in obj)
+        else:
+            return obj
+    
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Comprehensive validation that all required assets exist on disk and are valid before synthesis."""
         self._log_progress("🔍 Validating synthesis assets comprehensively...")
@@ -1423,7 +1537,42 @@ class CleanAnalysisOrchestrator:
             
             raw_response = result['raw_analysis_response']
             if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response or '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response:
-                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers")
+                # Debug: Show what we actually have
+                print(f"DEBUG: Analysis result {i+1} missing markers")
+                print(f"DEBUG: Result keys: {list(result.keys())}")
+                print(f"DEBUG: Raw response length: {len(raw_response)}")
+                print(f"DEBUG: Raw response start: {repr(raw_response[:200])}")
+                print(f"DEBUG: Raw response end: {repr(raw_response[-200:])}")
+                
+                # Try to fix incomplete responses by adding missing end marker
+                if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response and '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response:
+                    print(f"DEBUG: Attempting to fix incomplete response for analysis result {i+1}")
+                    # Find the last complete JSON object and add end marker
+                    try:
+                        # Look for the last complete brace
+                        brace_count = 0
+                        last_complete_pos = -1
+                        for pos, char in enumerate(raw_response):
+                            if char == '{':
+                                brace_count += 1
+                            elif char == '}':
+                                brace_count -= 1
+                                if brace_count == 0:
+                                    last_complete_pos = pos
+                        
+                        if last_complete_pos > 0:
+                            # Add end marker after the last complete JSON object
+                            fixed_response = raw_response[:last_complete_pos + 1] + '\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                            result['raw_analysis_response'] = fixed_response
+                            print(f"DEBUG: Fixed incomplete response for analysis result {i+1}")
+                            raw_response = fixed_response
+                        else:
+                            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} has incomplete JSON that cannot be fixed")
+                    except Exception as fix_error:
+                        print(f"DEBUG: Failed to fix incomplete response: {fix_error}")
+                        raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers and cannot be fixed")
+                else:
+                    raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers")
             
             valid_analyses += 1
         
@@ -1687,7 +1836,8 @@ class CleanAnalysisOrchestrator:
             
             if not statistical_results_hash:
                 # Store current statistical results
-                statistical_content = json.dumps(statistical_results, indent=2).encode('utf-8')
+                json_safe_statistical_results = self._convert_tuple_keys_for_json(statistical_results)
+                statistical_content = json.dumps(json_safe_statistical_results, indent=2).encode('utf-8')
                 statistical_results_hash = self.artifact_storage.put_artifact(
                     statistical_content,
                     {"artifact_type": "statistical_results_with_data", "agent": "orchestrator"}
@@ -1748,8 +1898,11 @@ class CleanAnalysisOrchestrator:
                 "statistical_results": statistical_results['statistical_summary']
             }
             
+            # Convert tuple keys before JSON serialization
+            json_safe_research_data = self._convert_tuple_keys_for_json(research_data)
+            
             research_data_hash = self.artifact_storage.put_artifact(
-                json.dumps(research_data, indent=2).encode('utf-8'),
+                json.dumps(json_safe_research_data, indent=2).encode('utf-8'),
                 {"artifact_type": "complete_research_data"}
             )
 
@@ -2017,7 +2170,9 @@ class CleanAnalysisOrchestrator:
                         stats_text = stats_content.decode('utf-8')
                     elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
                         # Include direct statistical results data
-                        stats_text = json.dumps(statistical_results, indent=2)
+                        json_safe_statistical_results = self._convert_tuple_keys_for_json(statistical_results)
+
+                        stats_text = json.dumps(json_safe_statistical_results, indent=2)
                     else:
                         stats_text = str(statistical_results)
 
@@ -2735,7 +2890,9 @@ class CleanAnalysisOrchestrator:
                         stats_text = stats_content.decode('utf-8')
                     elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
                         # Include direct statistical results data
-                        stats_text = json.dumps(statistical_results, indent=2)
+                        json_safe_statistical_results = self._convert_tuple_keys_for_json(statistical_results)
+
+                        stats_text = json.dumps(json_safe_statistical_results, indent=2)
                     else:
                         stats_text = str(statistical_results)
 
@@ -3453,7 +3610,9 @@ class CleanAnalysisOrchestrator:
                         stats_text = stats_content.decode('utf-8')
                     elif statistical_results.get('statistical_data') or statistical_results.get('analysis_metadata'):
                         # Include direct statistical results data
-                        stats_text = json.dumps(statistical_results, indent=2)
+                        json_safe_statistical_results = self._convert_tuple_keys_for_json(statistical_results)
+
+                        stats_text = json.dumps(json_safe_statistical_results, indent=2)
                     else:
                         stats_text = str(statistical_results)
 

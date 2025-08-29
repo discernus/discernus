@@ -102,7 +102,28 @@ class UnifiedSynthesisAgent:
                 # Fallback to JSON (old format during transition)
                 research_data = json.loads(research_data_str)
             
-            research_data_repr = repr(research_data['statistical_results'])
+            # Convert tuple keys to strings for safe repr() serialization
+            def convert_tuple_keys_for_repr(obj):
+                """Convert tuple keys to strings for safe repr() serialization."""
+                if isinstance(obj, dict):
+                    converted = {}
+                    for k, v in obj.items():
+                        if isinstance(k, tuple):
+                            converted_key = str(k)
+                        else:
+                            converted_key = k
+                        converted[converted_key] = convert_tuple_keys_for_repr(v)
+                    return converted
+                elif isinstance(obj, list):
+                    return [convert_tuple_keys_for_repr(item) for item in obj]
+                elif isinstance(obj, tuple):
+                    return tuple(convert_tuple_keys_for_repr(item) for item in obj)
+                else:
+                    return obj
+            
+            # Convert tuple keys before calling repr()
+            safe_statistical_results = convert_tuple_keys_for_repr(research_data['statistical_results'])
+            research_data_repr = repr(safe_statistical_results)
             
             # 3. Load evidence if available
             evidence_hash = assets.get('evidence_retrieval_results_hash')

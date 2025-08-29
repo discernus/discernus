@@ -172,7 +172,25 @@ class EvidenceRetrieverAgent:
             if not content:
                 raise ValueError(f"Statistical results artifact not found: {statistical_results_hash}")
             
-            return json.loads(content.decode('utf-8'))
+            # Try pickle format first (for binary data), then repr format, then JSON
+            try:
+                # Try pickle first (for binary data)
+                import pickle
+                return pickle.loads(content)
+            except (pickle.UnpicklingError, EOFError, AttributeError):
+                # Try Python repr format (THIN approach)
+                try:
+                    content_str = content.decode('utf-8')
+                    # Use ast.literal_eval for safer evaluation of repr() strings
+                    import ast
+                    return ast.literal_eval(content_str)
+                except (ValueError, SyntaxError, UnicodeDecodeError):
+                    # Fallback to JSON format for backward compatibility
+                    try:
+                        return json.loads(content.decode('utf-8'))
+                    except json.JSONDecodeError:
+                        # If JSON fails, try eval as last resort (for complex Python objects)
+                        return eval(content_str)
             
         except Exception as e:
             self.logger.error(f"Failed to load statistical results: {e}")
@@ -233,6 +251,28 @@ class EvidenceRetrieverAgent:
     def _create_evidence_retrieval_prompt(self, framework_spec: Dict[str, Any], statistical_results: Dict[str, Any]) -> str:
         """Create natural language prompt for evidence retrieval."""
         
+        # Convert tuple keys to strings to avoid JSON serialization errors
+        def convert_tuple_keys(obj):
+            """Recursively convert tuple keys to strings for JSON serialization"""
+            if isinstance(obj, dict):
+                converted = {}
+                for k, v in obj.items():
+                    if isinstance(k, tuple):
+                        converted_key = str(k)
+                    else:
+                        converted_key = k
+                    converted[converted_key] = convert_tuple_keys(v)
+                return converted
+            elif isinstance(obj, list):
+                return [convert_tuple_keys(item) for item in obj]
+            elif isinstance(obj, tuple):
+                return tuple(convert_tuple_keys(item) for item in obj)
+            else:
+                return obj
+        
+        # Convert statistical results to JSON-safe format
+        json_safe_statistical_results = convert_tuple_keys(statistical_results)
+        
         prompt = f"""
 Hi. Here is a framework and statistical results of scoring data based on that framework.
 
@@ -240,7 +280,7 @@ Hi. Here is a framework and statistical results of scoring data based on that fr
 {json.dumps(framework_spec, indent=2)}
 
 ## STATISTICAL RESULTS
-{json.dumps(statistical_results, indent=2)}
+{json.dumps(json_safe_statistical_results, indent=2)}
 
 Your job is to query this RAG index to curate evidence quotes that correspond to the statistical findings.
 
@@ -361,8 +401,8 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
 
             for query in queries:
                 try:
-                    # Search for evidence with a reasonable limit per query
-                    quotes = self.evidence_wrapper.search_evidence(query, limit=3)
+                    # Search for evidence with higher limit for richer context (was 3, now 12)
+                    quotes = self.evidence_wrapper.search_evidence(query, limit=12)
                     for quote in quotes:
                         # Use quote_text as the key to ensure uniqueness
                         unique_quotes_for_finding[quote.get('quote_text')] = quote
@@ -399,7 +439,7 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
             
             evidence_results = []
             for query in basic_queries:
-                quotes = self.evidence_wrapper.search_evidence(query, limit=2)
+                quotes = self.evidence_wrapper.search_evidence(query, limit=8)
                 if quotes:
                     evidence_results.append({
                         "finding": {"type": "fallback", "description": f"Evidence for {query}"},
