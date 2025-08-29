@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:43:21.786051+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "No issue better illustrates the divide between America's working class and America's political class than illegal immigration. Wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards.",
+      "confidence": 0.9,
+      "context_type": "moral dichotomy; explicit us-vs-them",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786041+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+      "confidence": 0.9,
+      "context_type": "crisis framing; problem-solution narrative; historical comparison",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786042+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people. Many of us have campaigned on the same core promises: to defend American jobs and demand fair trade for American workers",
+      "confidence": 0.7,
+      "context_type": "implicit popular will; bypass institutional labels",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786043+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.",
+      "confidence": 0.8,
+      "context_type": "delegitimization of opposition; partisan investigations as obstacles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786044+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "I don't blame China for taking advantage of us; I blame our leaders and representatives for allowing this travesty to happen.",
+      "confidence": 0.8,
+      "context_type": "blame attribution to political leadership; systemic failure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786045+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. ...For years, politicians promised them they would renegotiate for a better deal, but no one ever tried, until now.",
+      "confidence": 0.9,
+      "context_type": "contrast with traditional politicians; claims of unique effectiveness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786046+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "govern not as two parties, but as one Nation. ...We must choose whether we are defined by our differences or whether we dare to transcend them.",
+      "confidence": 0.8,
+      "context_type": "call for national unity; transcendence of internal divisions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786047+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "I have ordered another 3,750 troops to our southern border to prepare for this tremendous onslaught. ...Tonight we renew our resolve that America will never be a socialist country. ...We must keep America first in our hearts, we must keep freedom alive in our souls, and we must always keep faith in America's destiny that one Nation, under God, must be the hope and the promise and the light and the glory among all the nations of the world.",
+      "confidence": 0.9,
+      "context_type": "external threat framing; national identity defense; America First ideology",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786048+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "to defend American jobs and demand fair trade for American workers... Meanwhile, working-class Americans are left to pay the price for mass illegal immigration: reduced jobs, lower wages... It's unacceptable that Americans pay vastly more than people in other countries for the exact same drugs... This is wrong, this is unfair, and together, we will stop it, and we'll stop it fast.",
+      "confidence": 0.9,
+      "context_type": "economic grievance framing; blame on external actors/elites; promises of economic benefit for the people",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:43:21.786049+00:00"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "metadata_summary": {
+    "total_documents": 6,
+    "collection_time": "2025-08-29T04:45:18.785308+00:00"
+  },
+  "document_metadata": [
+    {
+      "filename": "Trump_Inaugural_2017.txt",
+      "document_id": ""
+    },
+    {
+      "filename": "trump_sotu_2017.txt",
+      "document_id": ""
+    },
+    {
+      "filename": "Trump_SOTU_2018.txt",
+      "document_id": ""
+    },
+    {
+      "filename": "Trump_SOTU_2019.txt",
+      "document_id": ""
+    },
+    {
+      "filename": "Trump_SOTU_2020.txt",
+      "document_id": ""
+    },
+    {
+      "filename": "Trump_SOTU_2025.txt",
+      "document_id": ""
+    }
+  ]
+}
