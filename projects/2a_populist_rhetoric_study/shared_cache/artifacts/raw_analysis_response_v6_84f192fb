@@ -1,0 +1,119 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a hypothetical speech that exhibits a very high intensity and salience of populist rhetoric across nearly all dimensions defined by the framework. The language is explicit and consistently reinforces populist themes, making the identification and scoring of dimensions straightforward and leading to high confidence levels. The analysis focused on matching the text's recurring rhetorical strategies to the framework's dimensional definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 1.0
+        },
+        "nationalist_exclusion": {
+          "raw_score": 1.0,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Because we are draining the swamp, it\u2019s very simple, and the days of rule by unelected bureaucrats are over.",
+          "confidence": 1.0,
+          "context_type": "central_argument"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "as you know, we inherited from the last administration an economic catastrophe and an inflation nightmare. Their policies drove up energy prices, pushed up grocery costs, and drove the necessities of life out of reach for millions and millions of Americans, they\u2019ve never had anything like it.",
+          "confidence": 1.0,
+          "context_type": "narrative_framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The presidential election of November 5th was a mandate like has not been seen in many decades.",
+          "confidence": 1.0,
+          "context_type": "justification_of_authority"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "I could find a cure to the most devastating disease, a disease that would wipe out entire nations, or announce the answers to the greatest economy in history or the stoppage of crime to the lowest levels ever recorded, and these people sitting right here will not clap, will not stand and certainly will not cheer for these astronomical achievements.",
+          "confidence": 1.0,
+          "context_type": "delegitimization_of_opposition"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "We have ended weaponized government, where, as an example, a sitting president is allowed to viciously prosecute his political opponent like me. How did that work out? Not too good, not too good.",
+          "confidence": 1.0,
+          "context_type": "accusation_of_malfeasance"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "And to that end I have created the brand new Department of Government Efficiency. DOGE! Perhaps you\u2019ve heard of it, perhaps. Which is headed by Elon Musk, who is in the gallery tonight. Thank you, Elon, you\u2019re working very hard. He didn\u2019t need this, he didn\u2019t need this. Thank you very much. We appreciate it.",
+          "confidence": 0.9,
+          "context_type": "demonstration_of_outsider_status"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Our ancestors crossed a vast ocean, strode into the unknown wilderness, and carved their fortunes from the rock and soil of a perilous and very dangerous frontier.",
+          "confidence": 1.0,
+          "context_type": "historical_narrative"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country, and what a job they\u2019ve done.",
+          "confidence": 1.0,
+          "context_type": "policy_announcement"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "If you don\u2019t make your product in America, however, under the Trump administration, you will pay a tariff and in some cases a rather large one. Other countries have used tariffs against us for decades, and now it\u2019s our turn to start using them against those other countries.",
+          "confidence": 1.0,
+          "context_type": "policy_announcement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

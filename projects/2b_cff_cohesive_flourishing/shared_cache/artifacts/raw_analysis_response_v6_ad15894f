@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analyzed document is a strong example of political rhetoric that simultaneously employs high levels of seemingly contradictory dimensions, such as Fear and Hope, or Enmity and Tribal Dominance. The framework's ability to score these independently is crucial for capturing the text's complex persuasive strategy. The evidence for most dimensions is explicit and rhetorically central."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "compersion": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "This is my fifth such speech to Congress, and once again, I look at the Democrats in front of me, and I realize there is absolutely nothing I can say to make them happy or to make them stand or smile or applaud, nothing I can do.",
+          "confidence": 0.95,
+          "context_type": "direct_adversarial_framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absence_of_theme"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The cartels are waging war in America, and it\u2019s time for America to wage war on the cartels.",
+          "confidence": 0.95,
+          "context_type": "crisis_and_threat_declaration"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "My fellow Americans, get ready for an incredible future, because the golden Age of America has only just begun.",
+          "confidence": 0.95,
+          "context_type": "optimistic_vision_statement"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "We\u2019ve been ripped off for decades by nearly every country on Earth, and we will not let that happen any longer.",
+          "confidence": 0.95,
+          "context_type": "grievance_rhetoric"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "Jeff Denard has been working at the same steel plant for 27 years in a job that has allowed him to serve as the captain of his local volunteer fire department, raise seven children with his beautiful wife, Nicole, and over the years provide a loving home for more than 40 foster children.",
+          "confidence": 0.9,
+          "context_type": "individual_success_story"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "In comparison, under Joe Biden, the worst president in American history, there were hundreds of thousands of illegal crossings a month, and virtually all of them, including murderers, drug dealers, gang members and people from mental institutions and insane asylums, were released into our country.",
+          "confidence": 0.95,
+          "context_type": "hostile_characterization_of_opponent"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let\u2019s work together and let\u2019s truly make America great again.",
+          "confidence": 0.9,
+          "context_type": "conditional_appeal_for_unity"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "I withdrew from the unfair Paris Climate Accord, which was costing us trillions of dollars that other countries were not paying. I withdrew from the corrupt World Health Organization, and I also withdrew from the anti-American U.N. Human Rights Council.",
+          "confidence": 0.95,
+          "context_type": "policy_of_separation"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "In my first term, we achieved one of the most groundbreaking peace agreements in generations: the Abraham Accords. And now we\u2019re going to build on that foundation, to create a more peaceful and prosperous future for the entire region.",
+          "confidence": 0.9,
+          "context_type": "integrative_policy_achievement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

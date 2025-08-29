@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "issues": [
+    "The machine-readable appendix of the experiment specification includes a 'questions' field. This field is not defined in the Experiment Specification v10.0 standard. Research questions must be defined exclusively in the human-readable narrative part of the document.",
+    "The framework's human-readable narrative refers to 'Cohesive Flourishing Framework (v10.0)', but the machine-readable appendix specifies 'framework_version: \"10.2\"'. This is a minor version inconsistency between the prose and the configuration.",
+    "The research goal of comparing 'institutional' vs. 'populist' styles is statistically limited by the corpus composition. The 'institutional' group contains only one document (N=1), which, per Discernus v10.0 standards, prevents inferential statistical tests like ANOVA that require group sizes of N>=2."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-29T15:29:37.851543+00:00"
+}

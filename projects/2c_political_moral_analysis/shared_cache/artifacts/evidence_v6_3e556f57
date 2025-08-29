@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T12:55:39.952593+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "care",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "Absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952583+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "harm",
+      "quote_text": "The president delayed funds for an American ally at war with Russian invaders.",
+      "confidence": 0.95,
+      "context_type": "Description of harmful action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952584+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "fairness",
+      "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+      "confidence": 1.0,
+      "context_type": "Statement of principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952585+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "cheating",
+      "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one\u2019s oath of office that I can imagine.",
+      "confidence": 1.0,
+      "context_type": "Characterization of action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952586+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "loyalty",
+      "quote_text": "Many demanded, in their words, that I 'stand with the team.' I can assure you that that thought has been very much in my mind.",
+      "confidence": 1.0,
+      "context_type": "Acknowledgement of external pressure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952586+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "betrayal",
+      "quote_text": "I\u2019m aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+      "confidence": 0.95,
+      "context_type": "Anticipation of accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952587+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "authority",
+      "quote_text": "The Constitution is at the foundation of our Republic\u2019s success, and we each strive not to lose sight of our promise to defend it.",
+      "confidence": 1.0,
+      "context_type": "Guiding principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952588+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "subversion",
+      "quote_text": "The president asked a foreign government to investigate his political rival.",
+      "confidence": 0.9,
+      "context_type": "Description of subversive action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952589+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "sanctity",
+      "quote_text": "I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 1.0,
+      "context_type": "Statement of personal conviction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952590+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "degradation",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history\u2019s rebuke and the censure of my own conscience.",
+      "confidence": 0.9,
+      "context_type": "Avoidance of personal moral degradation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952590+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "liberty",
+      "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+      "confidence": 0.9,
+      "context_type": "Defense of rights",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952591+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimension": "oppression",
+      "quote_text": "The president withheld vital military funds from that government to press it to do so.",
+      "confidence": 0.95,
+      "context_type": "Description of coercive action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T12:55:39.952592+00:00"
+    }
+  ]
+}

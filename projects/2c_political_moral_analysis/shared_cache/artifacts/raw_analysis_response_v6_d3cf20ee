@@ -1,0 +1,154 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "moral_foundations_theory_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis follows the sequential process outlined in the framework, evaluating each moral foundation group independently. The document, a political concession speech, strongly emphasizes themes of national unity, respect for the democratic process, and graciousness. Consequently, the binding foundations (especially Loyalty and Authority) and the individualizing foundation of Fairness are highly salient. Other dimensions are either absent or serve as historical context rather than a primary rhetorical appeal."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "care": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.95
+        },
+        "harm": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "fairness": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "cheating": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "loyalty": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "betrayal": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "authority": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "sanctity": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "degradation": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "liberty": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "oppression": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "care",
+          "quote_text": "I applaud him for it, and I offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+          "confidence": 1.0,
+          "context_type": "expression_of_empathy"
+        },
+        {
+          "dimension": "harm",
+          "quote_text": "But we both recognize that though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "confidence": 0.9,
+          "context_type": "historical_reflection"
+        },
+        {
+          "dimension": "fairness",
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "confidence": 1.0,
+          "context_type": "acknowledgement_of_outcome"
+        },
+        {
+          "dimension": "cheating",
+          "quote_text": "America today is a world away from the cruel and prideful bigotry of that time.",
+          "confidence": 0.8,
+          "context_type": "historical_reflection_on_past_unfairness"
+        },
+        {
+          "dimension": "loyalty",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 1.0,
+          "context_type": "statement_of_shared_identity"
+        },
+        {
+          "dimension": "betrayal",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "authority",
+          "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 1.0,
+          "context_type": "pledge_of_support_to_new_leader"
+        },
+        {
+          "dimension": "subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "sanctity",
+          "quote_text": "Thank you, and God bless you, and God bless America.",
+          "confidence": 1.0,
+          "context_type": "rhetorical_benediction"
+        },
+        {
+          "dimension": "degradation",
+          "quote_text": "...we have come a long way from the old injustices that once stained our nation's reputation...",
+          "confidence": 0.9,
+          "context_type": "historical_reflection_on_moral_stain"
+        },
+        {
+          "dimension": "liberty",
+          "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it.",
+          "confidence": 0.9,
+          "context_type": "statement_of_belief"
+        },
+        {
+          "dimension": "oppression",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 1.0,
+          "context_type": "acknowledgement_of_historical_significance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

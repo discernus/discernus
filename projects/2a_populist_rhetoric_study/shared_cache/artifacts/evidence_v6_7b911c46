@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T11:28:00.457546+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "No issue better illustrates the divide between America\u2019s working class and America\u2019s political class than illegal immigration. Wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards.",
+      "confidence": 1.0,
+      "context_type": "explicit framing of class antagonism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457507+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Over the last 2 years, my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades.",
+      "confidence": 1.0,
+      "context_type": "narrative of correcting past elite failure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457522+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It\u2019s the agenda of the American people.",
+      "confidence": 1.0,
+      "context_type": "claim to represent the unified will of the people",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457525+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.",
+      "confidence": 1.0,
+      "context_type": "delegitimization of political opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457527+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards.",
+      "confidence": 0.9,
+      "context_type": "implication of coordinated elite self-interest",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457530+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "If I had not been elected President of the United States, we would right now, in my opinion, be in a major war with North Korea.",
+      "confidence": 0.9,
+      "context_type": "claim of unique effectiveness contrasting with standard politicians",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457533+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "homogenous_people_construction",
+      "quote_text": "Millions of our fellow citizens are watching us now, gathered in this great Chamber, hoping that we will govern not as two parties, but as one Nation.",
+      "confidence": 1.0,
+      "context_type": "rhetorical construction of a unified national body",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457535+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Year after year, countless Americans are murdered by criminal illegal aliens.",
+      "confidence": 1.0,
+      "context_type": "framing of an external group as a lethal threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457538+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "But I don\u2019t blame China for taking advantage of us; I blame our leaders and representatives for allowing this travesty to happen.",
+      "confidence": 1.0,
+      "context_type": "blaming domestic elites for economic harm by an external power",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:28:00.457540+00:00"
+    }
+  ]
+}

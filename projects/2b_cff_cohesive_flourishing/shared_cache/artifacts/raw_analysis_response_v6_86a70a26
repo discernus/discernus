@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document contains strong, simultaneous appeals to opposing dimensions, particularly Hope/Fear and Amity/Enmity. Hope is the most salient frame, used for economic messaging, while Fear is used for immigration and national security. Amity is directed internally towards bipartisan cooperation, while Enmity is directed externally at foreign regimes and internal threats like gangs. This strategic use of contradictory frames is a key feature of the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a",
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "compersion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities. They've allowed millions of low-wage workers to compete for jobs and wages against the poorest Americans.",
+          "confidence": 0.95,
+          "context_type": "immigration_policy"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "So tonight I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed.",
+          "confidence": 0.9,
+          "context_type": "bipartisan_appeal"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Six members of the savage MS-13 gang have been charged with Kayla and Nisa's murders. Many of these gang members took advantage of glaring loopholes in our laws to enter the country as illegal, unaccompanied alien minors, and wound up in Kayla and Nisa's high school.",
+          "confidence": 0.95,
+          "context_type": "immigration_threat_narrative"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "This, in fact, is our new American moment. There has never been a better time to start living the American Dream.",
+          "confidence": 0.95,
+          "context_type": "economic_vision"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we're getting it back so fast.",
+          "confidence": 0.9,
+          "context_type": "trade_policy"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "Like many hard-working Americans, Corey plans to invest his tax cut raise into his new home and his two daughters' education. Corey, please stand. And he's a great welder.",
+          "confidence": 0.95,
+          "context_type": "celebration_of_individual_success"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "But no regime has oppressed its own citizens more totally or brutally than the cruel dictatorship in North Korea.",
+          "confidence": 0.95,
+          "context_type": "foreign_policy_adversary"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "But it is not enough to come together only in times of tragedy. Tonight I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+          "confidence": 0.95,
+          "context_type": "bipartisan_appeal"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "The fourth and final pillar protects the nuclear family by ending chain migration. Under the current broken system, a single immigrant can bring in virtually unlimited numbers of distant relatives.",
+          "confidence": 0.9,
+          "context_type": "immigration_policy_objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Tonight I'm calling on Congress to produce a bill that generates at least $1.5 trillion for the new infrastructure investment that our country so desperately needs.",
+          "confidence": 0.95,
+          "context_type": "policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

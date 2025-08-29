@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.2",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech characterized by strong, unambiguous rhetoric. The dominant dimensions of Fear, Enmity, and Tribal Dominance are exceptionally clear and well-evidenced, making confidence in their scoring very high. Conversely, the cohesive dimensions (Amity, Compersion, Cohesive Goals) are almost entirely absent, which is also scored with high confidence. The analysis focuses on the explicit rhetorical strategies and emotionally charged narratives used throughout the speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "to push Obamacare down the throats of the American people.",
+          "confidence": 0.95,
+          "context_type": "in-group/out-group framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "confidence": 0.7,
+          "context_type": "isolated appeal to universal principle"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+          "confidence": 1.0,
+          "context_type": "existential threat perception"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+          "confidence": 0.9,
+          "context_type": "conditional vision of restoration"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "The Chief Justice of the Supreme Court decided that he could write words into Obamacare that didn\u2019t exist... They made it up.",
+          "confidence": 0.9,
+          "context_type": "grievance over illegitimate power"
+        },
+        {
+          "dimension": "compersion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absent dimension"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "This is the face of one of these perpetrators, Mauricio Hernandez. What did he do? Mauricio Hernandez, a sexual predator who impregnated a 13-year-old daughter of his living girlfriend.",
+          "confidence": 1.0,
+          "context_type": "adversarial characterization"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absent dimension"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "confidence": 1.0,
+          "context_type": "explicit zero-sum objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives.",
+          "confidence": 0.8,
+          "context_type": "goal framed as restoration and enforcement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

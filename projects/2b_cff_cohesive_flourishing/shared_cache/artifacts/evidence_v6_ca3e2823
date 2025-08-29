@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T11:37:24.366062+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities. They've allowed millions of low-wage workers to compete for jobs and wages against the poorest Americans.",
+      "confidence": 0.95,
+      "context_type": "immigration_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.365979+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "So tonight I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed.",
+      "confidence": 0.9,
+      "context_type": "bipartisan_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366002+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "fear",
+      "quote_text": "Six members of the savage MS-13 gang have been charged with Kayla and Nisa's murders. Many of these gang members took advantage of glaring loopholes in our laws to enter the country as illegal, unaccompanied alien minors, and wound up in Kayla and Nisa's high school.",
+      "confidence": 0.95,
+      "context_type": "immigration_threat_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366006+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "hope",
+      "quote_text": "This, in fact, is our new American moment. There has never been a better time to start living the American Dream.",
+      "confidence": 0.95,
+      "context_type": "economic_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366009+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "envy",
+      "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we're getting it back so fast.",
+      "confidence": 0.9,
+      "context_type": "trade_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366035+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "compersion",
+      "quote_text": "Like many hard-working Americans, Corey plans to invest his tax cut raise into his new home and his two daughters' education. Corey, please stand. And he's a great welder.",
+      "confidence": 0.95,
+      "context_type": "celebration_of_individual_success",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366043+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "enmity",
+      "quote_text": "But no regime has oppressed its own citizens more totally or brutally than the cruel dictatorship in North Korea.",
+      "confidence": 0.95,
+      "context_type": "foreign_policy_adversary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366047+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "amity",
+      "quote_text": "But it is not enough to come together only in times of tragedy. Tonight I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+      "confidence": 0.95,
+      "context_type": "bipartisan_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366050+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "The fourth and final pillar protects the nuclear family by ending chain migration. Under the current broken system, a single immigrant can bring in virtually unlimited numbers of distant relatives.",
+      "confidence": 0.9,
+      "context_type": "immigration_policy_objective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366053+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "Tonight I'm calling on Congress to produce a bill that generates at least $1.5 trillion for the new infrastructure investment that our country so desperately needs.",
+      "confidence": 0.95,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:37:24.366055+00:00"
+    }
+  ]
+}

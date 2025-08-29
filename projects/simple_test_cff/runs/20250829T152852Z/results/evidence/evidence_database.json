@@ -1,0 +1,1429 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 142,
+    "total_files_processed": 4,
+    "collection_time": "2025-08-29T15:36:54.284947+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.6,
+      "context_type": "opening_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949478+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And by [applause] inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+      "confidence": 0.6,
+      "context_type": "praise_for_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949483+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_historic_nature",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949486+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+      "confidence": 0.7,
+      "context_type": "shared_belief",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949488+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+      "confidence": 0.7,
+      "context_type": "civic_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949489+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.7,
+      "context_type": "empathy_and_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949491+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Whatsoever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.8,
+      "context_type": "statement_of_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949493+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "To all my campaign comrades, from Rick Davis and Steve Schmidtt and Mark Salter to every last volunteer who fought so hard and valiant month after month in what at times seemed to be the most challenging campaign in modern times - thank you so much.",
+      "confidence": 0.7,
+      "context_type": "gratitude_to_supporters",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949494+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "A lost election will never mean more to me than the privilege of your faith and friendship.",
+      "confidence": 0.8,
+      "context_type": "prioritization_of_relationships",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949496+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I'm especially grateful to my wife Cindy, my children, my dear mother, and all my family, and to the many old and dear friends who have stood by my side through the many ups and downs of this long campaign.",
+      "confidence": 0.8,
+      "context_type": "family_and_friend_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949498+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "You know, campaigns are often harder on a candidate's family than on the candidate, and that's been true in this campaign.",
+      "confidence": 0.6,
+      "context_type": "acknowledgement_of_family_sacrifice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949499+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+      "confidence": 0.8,
+      "context_type": "endorsement_and_praise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949502+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "To all my campaign comrades, from Rick Davis and Steve Schmidtt and Mark Salter to every last volunteer who fought so hard and valiant month after month in what at times seemed to be the most challenging campaign in modern times - thank you so much.",
+      "confidence": 0.7,
+      "context_type": "gratitude_to_supporters",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949504+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I do not know what more we could have done to try to win this election.",
+      "confidence": 0.5,
+      "context_type": "reflection_on_effort",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949505+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "This campaign was and will remain the great honor of my life, and my heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.8,
+      "context_type": "statement_of_gratitude_and_honor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949507+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "I was not an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+      "confidence": 0.8,
+      "context_type": "statement_of_service_and_humility",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949509+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Tonight I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.",
+      "confidence": 0.8,
+      "context_type": "dedication_to_country",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949510+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "That is blessing enough for anyone, and I thank the people of Arizona for it.",
+      "confidence": 0.7,
+      "context_type": "gratitude_to_region",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949512+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrendered. We never hid from history. We make history.",
+      "confidence": 0.9,
+      "context_type": "statement_of_resilience",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949514+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "His success alone commands my respect for his ability and perseverance.",
+      "confidence": 0.8,
+      "context_type": "acknowledgement_of_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949515+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+      "confidence": 0.8,
+      "context_type": "admiration_for_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949517+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+      "confidence": 0.8,
+      "context_type": "acknowledgement_of_group_significance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949519+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it.",
+      "confidence": 0.7,
+      "context_type": "belief_in_opportunity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949520+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.7,
+      "context_type": "familial_pride",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949522+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_disagreement_and_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949523+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.8,
+      "context_type": "pledge_of_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949525+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.8,
+      "context_type": "call_for_unity_and_collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949526+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Whatsoever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.8,
+      "context_type": "statement_of_shared_identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949528+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "call_to_move_forward",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949529+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+      "confidence": 0.8,
+      "context_type": "expression_of_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949531+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I cannot adequately express how deeply indebted I am to you.",
+      "confidence": 0.8,
+      "context_type": "expression_of_indebtedness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949532+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I'm especially grateful to my wife Cindy, my children, my dear mother, and all my family, and to the many old and dear friends who have stood by my side through the many ups and downs of this long campaign.",
+      "confidence": 0.8,
+      "context_type": "gratitude_to_support_network",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949534+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "All I can offer in compensation is my love and gratitude and the promise of more peaceful years ahead.",
+      "confidence": 0.7,
+      "context_type": "promise_of_future_peace",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949538+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+      "confidence": 0.8,
+      "context_type": "praise_for_colleague",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949541+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Her husband Todd and their five beautiful children, for their tireless dedication to our cause and the courage and grace they showed in the rough and tumble of a presidential campaign.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_family_dedication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949542+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We can all look forward with great interest to her future service to Alaska, the Republican Party, and our country.",
+      "confidence": 0.7,
+      "context_type": "anticipation_of_future_service",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949544+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.6,
+      "context_type": "admission_of_mistakes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949545+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.7,
+      "context_type": "forward_looking_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949547+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "My heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.8,
+      "context_type": "gratitude_for_opportunity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949548+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I would not be an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+      "confidence": 0.9,
+      "context_type": "statement_of_privilege_and_service",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949550+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Tonight I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.",
+      "confidence": 0.9,
+      "context_type": "dedication_to_service",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949551+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "That is blessing enough for anyone, and I thank the people of Arizona for it.",
+      "confidence": 0.7,
+      "context_type": "gratitude_for_blessing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949553+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Thank you, and God bless you, and God bless America. Thank you all very much.",
+      "confidence": 0.8,
+      "context_type": "closing_blessings",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949555+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fear",
+      "quote_text": "defend our security in a dangerous world",
+      "confidence": 0.6,
+      "context_type": "security_concern",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949556+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fear",
+      "quote_text": "though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.2,
+      "context_type": "familial_worry",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949558+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "inspiring the hopes of so many millions of Americans",
+      "confidence": 0.8,
+      "context_type": "opponent_hope",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949559+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.8,
+      "context_type": "collective_aspirations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949561+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "call_to_action_for_future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949562+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "All I can offer in compensation is my love and gratitude and the promise of more peaceful years ahead.",
+      "confidence": 0.7,
+      "context_type": "personal_promise_for_future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949564+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "We can all look forward with great interest to her future service to Alaska, the Republican Party, and our country.",
+      "confidence": 0.7,
+      "context_type": "anticipation_of_future_service",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949565+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "My heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.8,
+      "context_type": "gratitude_for_opportunity_and_future_leadership",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949567+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "hope",
+      "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrendered. We never hid from history. We make history.",
+      "confidence": 0.9,
+      "context_type": "statement_of_resilience_and_agency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949568+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.2,
+      "context_type": "familial_pride_observation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949570+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "His success alone commands my respect for his ability and perseverance.",
+      "confidence": 0.5,
+      "context_type": "acknowledgement_of_success",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949572+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+      "confidence": 0.5,
+      "context_type": "admiration_for_opponent_achievement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949573+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country.",
+      "confidence": 0.6,
+      "context_type": "acknowledgement_of_opponent_achievement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949575+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "I am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+      "confidence": 0.5,
+      "context_type": "praise_for_colleague's_strength",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949576+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "Her husband Todd and their five beautiful children, for their tireless dedication to our cause and the courage and grace they showed in the rough and tumble of a presidential campaign.",
+      "confidence": 0.5,
+      "context_type": "praise_for_family_dedication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949578+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "envy",
+      "quote_text": "We can all look forward with great interest to her future service to Alaska, the Republican Party, and our country.",
+      "confidence": 0.5,
+      "context_type": "anticipation_of_future_service",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949579+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_difference_and_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949581+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "No doubt many of those differences remain.",
+      "confidence": 0.6,
+      "context_type": "acknowledgement_of_persisting_differences",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949582+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "The road was a difficult one from the outset, but your support and friendship never wavered.",
+      "confidence": 0.7,
+      "context_type": "contrast_of_challenges_and_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949584+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "I cannot adequately express how deeply indebted I am to you.",
+      "confidence": 0.5,
+      "context_type": "expression_of_indebtedness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949585+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.5,
+      "context_type": "admission_of_personal_mistakes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949587+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.6,
+      "context_type": "forward_looking_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949588+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "This campaign was and will remain the great honor of my life, and my heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.7,
+      "context_type": "reflection_on_campaign_honor_and_future_leadership",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949590+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "I was not an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+      "confidence": 0.8,
+      "context_type": "statement_of_privilege_and_service_vs_regret",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949592+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "Tonight I was a candidate for the highest office in the country I love so much, and tonight I remain her servant.",
+      "confidence": 0.8,
+      "context_type": "statement_of_current_role_vs_past_ambition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949593+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "comparison",
+      "quote_text": "To all my campaign comrades, from Rick Davis and Steve Schmidtt and Mark Salter to every last volunteer who fought so hard and valiant month after month in what at times seemed to be the most challenging campaign in modern times - thank you so much.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_effort_vs_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949595+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "emnity",
+      "quote_text": "The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.2,
+      "context_type": "statement_of_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949597+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "emnity",
+      "quote_text": "I do not know what more we could have done to try to win this election. I'll leave that to others to determine.",
+      "confidence": 0.3,
+      "context_type": "reflection_on_effort_and_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949598+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "emnity",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.3,
+      "context_type": "admission_of_mistakes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949600+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "emnity",
+      "quote_text": "But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.3,
+      "context_type": "forward_looking_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949601+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "emnity",
+      "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+      "confidence": 0.3,
+      "context_type": "gratitude_to_supporters",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949603+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Thank you, my friends. Thank you for coming here on this beautiful Arizona evening.",
+      "confidence": 0.7,
+      "context_type": "greeting_and_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949604+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Thank you, my friends. Thank you for coming here on this beautiful Arizona evening.",
+      "confidence": 0.7,
+      "context_type": "greeting_and_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949606+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I admire and commend him for achieving.",
+      "confidence": 0.7,
+      "context_type": "praise_and_commendation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949607+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+      "confidence": 0.8,
+      "context_type": "shared_belief_in_opportunity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949609+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.7,
+      "context_type": "familial_pride_and_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949611+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_differences_and_outcome_with_respect",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949612+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+      "confidence": 0.8,
+      "context_type": "pledge_of_support_and_cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949614+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.8,
+      "context_type": "call_for_unity_and_collaboration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949615+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Whatsoever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.8,
+      "context_type": "statement_of_shared_identity_and_value",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949617+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "call_to_move_forward_together",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949618+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+      "confidence": 0.8,
+      "context_type": "deep_gratitude_for_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949620+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I'm especially grateful to my wife Cindy, my children, my dear mother, and all my family, and to the many old and dear friends who have stood by my side through the many ups and downs of this long campaign.",
+      "confidence": 0.8,
+      "context_type": "gratitude_to_family_and_friends",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949621+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "All I can offer in compensation is my love and gratitude and the promise of more peaceful years ahead.",
+      "confidence": 0.7,
+      "context_type": "promise_of_peace_and_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949623+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "I am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+      "confidence": 0.8,
+      "context_type": "thankfulness_and_praise_for_colleague",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949626+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Her husband Todd and their five beautiful children, for their tireless dedication to our cause and the courage and grace they showed in the rough and tumble of a presidential campaign.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement_of_family_dedication_and_grace",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949628+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "We can all look forward with great interest to her future service to Alaska, the Republican Party, and our country.",
+      "confidence": 0.7,
+      "context_type": "anticipation_of_future_cooperation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949629+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "My heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.8,
+      "context_type": "gratitude_for_experience_and_future_leadership",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949631+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrendered. We never hid from history. We make history.",
+      "confidence": 0.9,
+      "context_type": "statement_of_shared_resilience_and_historical_agency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949632+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "amity",
+      "quote_text": "Thank you, and God bless you, and God bless America. Thank you all very much.",
+      "confidence": 0.8,
+      "context_type": "closing_blessings_and_gratitude",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949634+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "I do not know what more we could have done to try to win this election.",
+      "confidence": 0.3,
+      "context_type": "reflection_on_effort",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949635+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+      "confidence": 0.3,
+      "context_type": "admission_of_mistakes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949637+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.4,
+      "context_type": "forward_looking_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949638+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "My heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.4,
+      "context_type": "gratitude_and_acceptance_of_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949640+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "I was not an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+      "confidence": 0.4,
+      "context_type": "statement_of_service_and_privilege",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949641+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.8,
+      "context_type": "vision_for_future",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949643+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "call_for_collective_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949644+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrendered. We never hid from history. We make history.",
+      "confidence": 0.9,
+      "context_type": "statement_of_national_resilience_and_agency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949646+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "Thank you, and God bless you, and God bless America.",
+      "confidence": 0.7,
+      "context_type": "blessing_for_nation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:29:57.949647+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And so I'd like to put this backs in perspective here. We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it was understood to mean at the time of its ratification.",
+      "confidence": 0.9,
+      "context_type": "interpretation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176316+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "So the, if we're going to support and defend the Constitution, and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter",
+      "confidence": 0.8,
+      "context_type": "support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176323+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "All legislative powers, powers, all legislative powers herein granted shall be vested in a Congress of the United States. That's here. The House and the Senate. Article one, first words of our Constitution, all legislative powers.",
+      "confidence": 0.5,
+      "context_type": "reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176325+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "This was a hearing that had witnesses, um, a fine Sheriff Jenkins from Frederick County, Maryland, who has been enforcing immigration law, standing up for the rule of law. He's been prudently using the legal and justifiable, uh, evidence that he had before him, and he's been criticized for his effectiveness by the people that don't want to enforce the law. It's a good witness, uh, Sheriff Jenkins. But additionally there also we had witnesses from two families that were suffering tragically. One of them was a mother of Joshua Wilkerson, her name is Laura Wilkerson.",
+      "confidence": 0.85,
+      "context_type": "example",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176328+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "And this girl was then hauled home. The baby was left to die. That baby died. Mauricio Hernandez is the perpetrator. He's another illegal alien.",
+      "confidence": 0.9,
+      "context_type": "example",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176329+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "And I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.",
+      "confidence": 0.5,
+      "context_type": "speculation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176332+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "They're become the Welcome Wagon on the southern border. And now most anybody that crosses that border and makes it across the Rio Grande River, across the land border that stretches from Texas all the way, uh, across through New Mexico, Arizona, and California to the Pacific Ocean.",
+      "confidence": 0.7,
+      "context_type": "observation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176334+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "But it was shift change and they helped one of the coyotes get out of the raft. The other one stabilized it, helped the pregnant lady out of the raft onto this, onto US shores. And then handed her her two little ditty bags and he got back into the raft and the two coyotes went back across the river, deflated the raft, folded it up, put it in the trunk of their car, the car that we'd watched go around and around over there knowing that it was a coyote car because they recognized it from the US side of the river.",
+      "confidence": 0.6,
+      "context_type": "narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176336+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "competition",
+      "quote_text": "And then he went and bought gasoline and burned his body. He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went into a porta pot and had the baby that was alive. And that baby was left to die. That baby died.",
+      "confidence": 0.4,
+      "context_type": "description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176338+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, 'Mr. President, you're lame duck.' Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+      "confidence": 0.9,
+      "context_type": "rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176340+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "People like Joe Biden and Harry Reid and Chuck Schumer all would agree with Senator Chuck Grassley. No hearing, no, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+      "confidence": 0.85,
+      "context_type": "political_stance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176342+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "But it's not longer possible to look at this Supreme Court and discern what a likely decision of the court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws. They go and discover what they would call a new right in the 14th Amendment to the Constitution, equal protection under the law.",
+      "confidence": 0.9,
+      "context_type": "critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176344+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marbury versus Madison and a whole series of presumable precedent cases along the line. And that was June 24th on Thursday and it would kick the breath out of your gut to hear that if you're a constitutionalist.",
+      "confidence": 0.85,
+      "context_type": "critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176346+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "And so I can stand here, Mr. Speaker, every night I could come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.",
+      "confidence": 0.3,
+      "context_type": "unclear",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:05.176348+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.\nThe same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245759+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "They want us to think that our lives are suffering because of the L G B T kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves. But we're smarter than that.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245763+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "So to all of those who came here today to assure of whether this is where you belong, you do. You do. Honestly, no matter who you vote for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245765+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "And the clever thing that these guys sell is making working people like you and me believe that we're just one step outside from that club, that we're just a little bit out from being able to be a billionaire too. Any billionaires in this room? I didn't think so.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245767+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245768+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245770+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245771+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245773+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "competition",
+      "quote_text": "Donald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245774+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "enmity",
+      "quote_text": "And the same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how greedles... is costing the lives of everyone else.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245776+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "enmity",
+      "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, you do. You do. Honestly, no matter who you vote for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245778+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, you do. You do. Honestly, no matter who you vote for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245779+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245780+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how greedles... is costing the lives of everyone else.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245782+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245783+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:16.245784+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.",
+      "confidence": 0.9,
+      "context_type": "explicit assertion of group superiority and exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990297+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Now everybody wants to do well in life. Everybody wants to make money. But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.",
+      "confidence": 0.7,
+      "context_type": "contrast between wealth accumulation and impact on less fortunate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990300+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fear",
+      "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses. It's a serious problem in my state.",
+      "confidence": 0.9,
+      "context_type": "emphasis on critical threats and negative consequences",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990302+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "hope",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.6,
+      "context_type": "forward-looking statement of collective progress and desired outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990303+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "envy",
+      "quote_text": "The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.9,
+      "context_type": "resentment towards the wealthy's actions and lack of empathy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990305+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "competition",
+      "quote_text": "But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer.",
+      "confidence": 0.7,
+      "context_type": "indication of competitive drive for wealth at the expense of others",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990306+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "enity",
+      "quote_text": "",
+      "confidence": 0.1,
+      "context_type": "no direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990308+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "amity",
+      "quote_text": "And in your community, they make a donation to the hospital or the Boys & Girls Clubs or the food shelf. They're just very nice.",
+      "confidence": 0.5,
+      "context_type": "reference to community support and positive group affiliations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990309+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "They own mansions all over the world. They go on vacations to their own private islands. When they want to go someplace, they don't go into their car. They go into the planes or the helicopters that they own.",
+      "confidence": 0.9,
+      "context_type": "emphasis on division and separation of objectives",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990311+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.6,
+      "context_type": "call for unity and collective action towards a shared vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T15:30:09.990312+00:00"
+    }
+  ]
+}

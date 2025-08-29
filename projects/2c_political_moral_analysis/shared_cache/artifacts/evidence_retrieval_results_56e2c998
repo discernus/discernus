@@ -1,0 +1,1957 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T12:56:15.546868",
+    "framework_hash": "68072e5cccbaf8587ef1b67bb3c344f773aa247f8105400069bb951308a8da19",
+    "total_findings": 9,
+    "total_quotes": 130
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Progressive ideological profiles demonstrate a significantly higher emphasis and salience on **Individualizing Foundations (Care/Harm, Fairness/Cheating)** and **Oppression** concerns compared to Conservatives (p < 0.05)."
+      },
+      "queries_used": [
+        "Progressive ideology documents for 'compassion for victims' OR 'prevent suffering' AND 'equality' OR 'fair treatment'",
+        "'Alexandria Ocasio-Cortez' OR 'Bernie Sanders' 'fight oppression' OR 'protect the vulnerable' AND 'justice for all'",
+        "'John Lewis' 'equal rights' OR 'self-determination' AND 'end harm'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.6579437255859375,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.5808443427085876,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.5586953163146973,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.5514492988586426,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.5251650214195251,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.5187461376190186,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.44497379660606384,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.4223276376724243,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "degradation",
+          "confidence": 0.85,
+          "relevance_score": 0.4197911322116852,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "degradation",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I appeal to all of you to get in this great revolution that is sweeping this nation.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.41330230236053467,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "subversion",
+          "confidence": 0.95,
+          "relevance_score": 0.3996969163417816,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "subversion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "sanctity",
+          "confidence": 0.9,
+          "relevance_score": 0.39231932163238525,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "sanctity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They\u2019re the people, by the way, who are not allowed to have an opinion about what\u2019s going on in their country because they will be silenced. They will be censored. They will be called every name in the book.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3466402292251587,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Dr. King said justice is indivisible, and he was right. We cannot separate a system of oppression in our country and think that it won't affect us all as a whole.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3240830600261688,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Those are the kind of things that if the states want to establish same-sex marriage, so be it. That's a voice of the people. It's constitutional and it fits the structure of our our United States Constitution along with the various state constitutions and the structure of the rule of law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "liberty",
+          "confidence": 0.8,
+          "relevance_score": 0.3232688307762146,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "liberty",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Conservative ideological profiles exhibit a significantly higher emphasis and salience on **Loyalty** and **Authority** foundations compared to Progressives (p < 0.05)."
+      },
+      "queries_used": [
+        "Conservative ideology documents for 'group solidarity' OR 'national unity' AND 'respect authority' OR 'follow rules'",
+        "'Mitt Romney' OR 'John McCain' 'fidelity to country' OR 'chain of command' AND 'established order'",
+        "'JD Vance' OR 'Steve King' 'loyalty to traditions' OR 'institutional wisdom' AND NOT 'challenge power'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.44841089844703674,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "liberty",
+          "confidence": 0.9,
+          "relevance_score": 0.4329812824726105,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "liberty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Many demanded, in their words, that I 'stand with the team.' I can assure you that that thought has been very much in my mind.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.4242337644100189,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "subversion",
+          "confidence": 0.95,
+          "relevance_score": 0.4134098291397095,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "subversion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Those are the kind of things that if the states want to establish same-sex marriage, so be it. That's a voice of the people. It's constitutional and it fits the structure of our our United States Constitution along with the various state constitutions and the structure of the rule of law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "liberty",
+          "confidence": 0.8,
+          "relevance_score": 0.4045957326889038,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "liberty",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we have come a long way from the old injustices that once stained our nation's reputation...",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "degradation",
+          "confidence": 0.9,
+          "relevance_score": 0.4000822901725769,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "degradation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.39666977524757385,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.38969743251800537,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.37443655729293823,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "loyalty",
+          "confidence": 0.95,
+          "relevance_score": 0.3730677366256714,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "loyalty",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They\u2019re the people, by the way, who are not allowed to have an opinion about what\u2019s going on in their country because they will be silenced. They will be censored. They will be called every name in the book.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.36964476108551025,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "authority",
+          "confidence": 1.0,
+          "relevance_score": 0.35659167170524597,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "authority",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.34538593888282776,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we both recognize that though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "harm",
+          "confidence": 0.9,
+          "relevance_score": 0.3372257649898529,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "harm",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Overall, the analyzed discourse demonstrates **Moral Coherence** (Mean MSCI = 0.0683, which is < 0.3), suggesting relatively low strategic contradictions across all foundation pairs."
+      },
+      "queries_used": [
+        "Documents where 'care for vulnerable' AND 'prevent harm' are both prominent, showing alignment within individualizing foundations.",
+        "Documents showing appeals to 'justice' AND 'earned rewards', indicating coherence in fairness.",
+        "Documents that combine 'loyalty' with 'authority' or 'sanctity' appeals, with low presence of their opposing foundations (betrayal, subversion, degradation)."
+      ],
+      "quotes": [
+        {
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "loyalty",
+          "confidence": 0.95,
+          "relevance_score": 0.48494744300842285,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "loyalty",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The scales of justice in America are not balanced.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.4584142565727234,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.44394490122795105,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.428696870803833,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.4236975312232971,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.4022173583507538,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.39234527945518494,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "care",
+          "confidence": 0.95,
+          "relevance_score": 0.38554656505584717,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "care",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our prisons and jails have become warehouses for people that are struggling with trauma, struggling with disease, struggling with illness.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.3789907991886139,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But the Supreme Court, wrapped in the cloak of Marberry versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.36064866185188293,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.3371080756187439,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.33422335982322693,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fairness",
+          "confidence": 0.9,
+          "relevance_score": 0.32865265011787415,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fairness",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back - not legislators, but judges who sit and see all the totality of the facts.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "authority",
+          "confidence": 0.9,
+          "relevance_score": 0.32245346903800964,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "authority",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And when you have justices to the Supreme Court that, that embody that belief and act on that belief, then we here who take an oath to support and defend the Constitution\u2014and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter\u2014we recognize that if we're going to support and defend the Constitution...",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.3223619759082794,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.31951069831848145,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The dataset indicates that speakers tend to have a **Focused Moral Identity** (Mean MSC = 0.3025, which is > 0.3), meaning they prioritize specific moral dimensions rather than engaging broadly."
+      },
+      "queries_used": [
+        "Documents with high 'loyalty' or 'fairness' salience, but very low 'liberty' or 'sanctity' salience.",
+        "Speaker: 'JD Vance' 'loyalty' OR 'authority' with low salience for 'care' OR 'liberty'",
+        "Speaker: 'Alexandria Ocasio-Cortez' 'fairness' OR 'harm' with low salience for 'authority' OR 'sanctity'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.5528445839881897,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.5149155259132385,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.46317464113235474,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.45401158928871155,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.4537162780761719,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.45116087794303894,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.43770039081573486,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.4330676198005676,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.42969149351119995,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.3945024907588959,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But my interest is not in protecting the good people of another country. I\u2019m a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.3878013491630554,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And when you have justices to the Supreme Court that, that embody that belief and act on that belief, then we here who take an oath to support and defend the Constitution\u2014and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter\u2014we recognize that if we're going to support and defend the Constitution...",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.38367515802383423,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "loyalty",
+          "confidence": 0.95,
+          "relevance_score": 0.376720666885376,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "loyalty",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I applaud him for it, and I offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.37481749057769775,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fairness",
+          "confidence": 0.9,
+          "relevance_score": 0.3425905406475067,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fairness",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "There is a very strong positive correlation between **Harm, Cheating, and Subversion** (correlations > 0.74), suggesting that concerns about damage, unfairness, and challenging established systems often appear together."
+      },
+      "queries_used": [
+        "Documents mentioning 'prevent suffering' AND 'stop corruption' AND 'challenge power'",
+        "'systemic injustice' 'resist control' 'end exploitation'",
+        "'harmful practices' 'rigged game' 'overthrow system'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "And Greeley, there's a word for this kind of thing, corruption.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cheating",
+          "confidence": 1.0,
+          "relevance_score": 0.40204519033432007,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cheating",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.390624463558197,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "degradation",
+          "confidence": 0.8,
+          "relevance_score": 0.3788876235485077,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "degradation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Dr. King said justice is indivisible, and he was right. We cannot separate a system of oppression in our country and think that it won't affect us all as a whole.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3788052201271057,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "authority",
+          "confidence": 1.0,
+          "relevance_score": 0.3679104447364807,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "authority",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.3515068590641022,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "degradation",
+          "confidence": 1.0,
+          "relevance_score": 0.3412129282951355,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "degradation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.3408108949661255,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.3335689902305603,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one\u2019s oath of office that I can imagine.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "cheating",
+          "confidence": 1.0,
+          "relevance_score": 0.32730740308761597,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "cheating",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They\u2019re the people, by the way, who are not allowed to have an opinion about what\u2019s going on in their country because they will be silenced. They will be censored. They will be called every name in the book.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3206624686717987,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 11
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong negative correlations exist between **Loyalty and Liberty** (-0.746), and between **Authority and Oppression** (-0.8254), highlighting fundamental tensions between group cohesion/hierarchy and individual freedom/resistance to control."
+      },
+      "queries_used": [
+        "Documents emphasizing 'group loyalty' with minimal discussion of 'individual freedom' or 'autonomy'.",
+        "Conservative ideology documents for 'respect authority' AND very low 'fight tyranny' or 'resist control'.",
+        "Documents where 'national unity' is highly salient and 'personal choice' is low or absent."
+      ],
+      "quotes": [
+        {
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "loyalty",
+          "confidence": 0.95,
+          "relevance_score": 0.4566250443458557,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "loyalty",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.43036171793937683,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.3965005874633789,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.39570432901382446,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They\u2019re the people, by the way, who are not allowed to have an opinion about what\u2019s going on in their country because they will be silenced. They will be censored. They will be called every name in the book.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3814085125923157,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for someone you don\u2019t know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.37867289781570435,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.3624511957168579,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Constitution is at the foundation of our Republic\u2019s success, and we each strive not to lose sight of our promise to defend it.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "authority",
+          "confidence": 1.0,
+          "relevance_score": 0.3607817590236664,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "authority",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And when you have justices to the Supreme Court that, that embody that belief and act on that belief, then we here who take an oath to support and defend the Constitution\u2014and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter\u2014we recognize that if we're going to support and defend the Constitution...",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.35133516788482666,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America today is a world away from the cruel and prideful bigotry of that time.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cheating",
+          "confidence": 0.8,
+          "relevance_score": 0.33967089653015137,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cheating",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Those are the kind of things that if the states want to establish same-sex marriage, so be it. That's a voice of the people. It's constitutional and it fits the structure of our our United States Constitution along with the various state constitutions and the structure of the rule of law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "liberty",
+          "confidence": 0.8,
+          "relevance_score": 0.3330393433570862,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "liberty",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.3179517984390259,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But America is not just an idea. Though we were founded on great ideas, America is a nation. It is a group of people with a common history and a common future.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "sanctity",
+          "confidence": 0.9,
+          "relevance_score": 0.3025830388069153,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "sanctity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But my interest is not in protecting the good people of another country. I\u2019m a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.2986968755722046,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "they seem to really not like their own fellow citizens, even though the wars that they want are going to be, of course, fought by the people in the heartland and not by the people who are walking down the streets of Washington D.C.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "betrayal",
+          "confidence": 1.0,
+          "relevance_score": 0.268877238035202,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "betrayal",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.2678528428077698,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A very strong positive correlation between **Sanctity and Degradation** (0.8916) implies that when sacred values are invoked, there is often a corresponding concern about their violation or corruption."
+      },
+      "queries_used": [
+        "Documents mentioning 'sacred principles' AND 'moral decay'",
+        "'holy values' AND 'corrupt ideals' OR 'defile sacred'",
+        "'pure ideals' AND 'tainted principles' OR 'degraded standards'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "sanctity",
+          "confidence": 1.0,
+          "relevance_score": 0.39097267389297485,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "sanctity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "degradation",
+          "confidence": 0.85,
+          "relevance_score": 0.280868798494339,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "degradation",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "sanctity",
+          "confidence": 0.9,
+          "relevance_score": 0.2729188799858093,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "sanctity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.2724909484386444,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.26796072721481323,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "liberty",
+          "confidence": 0.9,
+          "relevance_score": 0.26487210392951965,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "liberty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.2593299150466919,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.2573545575141907,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And Greeley, there's a word for this kind of thing, corruption.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cheating",
+          "confidence": 1.0,
+          "relevance_score": 0.250180184841156,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cheating",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Dr. King said justice is indivisible, and he was right. We cannot separate a system of oppression in our country and think that it won't affect us all as a whole.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.2479199469089508,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But the Supreme Court, wrapped in the cloak of Marberry versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.24728436768054962,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The scales of justice in America are not balanced.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.24602779746055603,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history\u2019s rebuke and the censure of my own conscience.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "degradation",
+          "confidence": 0.9,
+          "relevance_score": 0.24238349497318268,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "degradation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one\u2019s oath of office that I can imagine.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "cheating",
+          "confidence": 1.0,
+          "relevance_score": 0.18817217648029327,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "cheating",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "harm",
+          "confidence": 0.95,
+          "relevance_score": 0.18280769884586334,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "harm",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "document_name": "mitt_romney_2020_impeachment.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.1814974844455719,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "There is a very strong negative correlation between **Moral Salience Concentration (MSC)** and the mean raw scores of **Binding Foundations** (-0.9175). This suggests that speakers with a more focused moral identity tend to place less overall emphasis on binding moral concerns."
+      },
+      "queries_used": [
+        "Documents from Progressive speakers where individualizing or liberty foundations are highly salient, and binding foundations (loyalty, authority, sanctity) are low in raw score.",
+        "'Bernie Sanders' 'social justice' AND NOT 'team unity' OR 'traditional values'",
+        "'John Lewis' 'equality' OR 'freedom' AND NOT 'obey rules' OR 'sacred traditions'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.5012525320053101,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.46546441316604614,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.45210057497024536,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.4486880898475647,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "subversion",
+          "confidence": 0.95,
+          "relevance_score": 0.43656113743782043,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "subversion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "care",
+          "confidence": 0.95,
+          "relevance_score": 0.42414844036102295,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "care",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference.txt",
+          "dimension": "loyalty",
+          "confidence": 1.0,
+          "relevance_score": 0.41011106967926025,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference.txt",
+            "dimension": "loyalty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "sanctity",
+          "confidence": 0.9,
+          "relevance_score": 0.40421685576438904,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "sanctity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "degradation",
+          "confidence": 0.85,
+          "relevance_score": 0.40358588099479675,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "degradation",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We share those common values because we still live in a nation where the ties that bind us are stronger than the lines that divide us.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "loyalty",
+          "confidence": 0.95,
+          "relevance_score": 0.3977072238922119,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "loyalty",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I appeal to all of you to get in this great revolution that is sweeping this nation.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "loyalty",
+          "confidence": 0.9,
+          "relevance_score": 0.3684057295322418,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "loyalty",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.36691200733184814,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The scales of justice in America are not balanced.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.36142897605895996,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A strong positive correlation exists between **Fairness and Liberty** (0.7072), indicating that appeals for justice and equality often co-occur with a focus on individual freedom and autonomy."
+      },
+      "queries_used": [
+        "Documents advocating for 'justice' AND 'freedom'",
+        "'equal rights' AND 'self-determination'",
+        "'fair treatment' AND 'individual choice'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "But the Supreme Court, wrapped in the cloak of Marberry versus Madison and their imagination of what precedents and star decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.45619580149650574,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.4258807599544525,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.4070967435836792,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "care",
+          "confidence": 0.95,
+          "relevance_score": 0.39868003129959106,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "care",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The scales of justice in America are not balanced.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "fairness",
+          "confidence": 1.0,
+          "relevance_score": 0.3709435760974884,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "fairness",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Dr. King said justice is indivisible, and he was right. We cannot separate a system of oppression in our country and think that it won't affect us all as a whole.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "oppression",
+          "confidence": 1.0,
+          "relevance_score": 0.3536996841430664,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "oppression",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fairness",
+          "confidence": 0.9,
+          "relevance_score": 0.3485352396965027,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fairness",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "his answer is an America that operates on the principle of every man for himself, divide and conquer.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "oppression",
+          "confidence": 0.95,
+          "relevance_score": 0.32451099157333374,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "oppression",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "sanctity",
+          "confidence": 0.7,
+          "relevance_score": 0.3231047987937927,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "sanctity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Those are the kind of things that if the states want to establish same-sex marriage, so be it. That's a voice of the people. It's constitutional and it fits the structure of our our United States Constitution along with the various state constitutions and the structure of the rule of law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "liberty",
+          "confidence": 0.8,
+          "relevance_score": 0.3151792287826538,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "liberty",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "document_name": "john_lewis_1963_march_on_washington.txt",
+          "dimension": "liberty",
+          "confidence": 1.0,
+          "relevance_score": 0.2611212730407715,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington.txt",
+            "dimension": "liberty",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our prisons and jails have become warehouses for people that are struggling with trauma, struggling with disease, struggling with illness.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "care",
+          "confidence": 1.0,
+          "relevance_score": 0.25433382391929626,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "care",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "harm",
+          "confidence": 1.0,
+          "relevance_score": 0.24953466653823853,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "harm",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As Bryan Stevenson has said, we live in a nation that treats you better if you're rich and guilty than if you're poor and innocent.",
+          "document_name": "cory_booker_2018_first_step_act.txt",
+          "dimension": "cheating",
+          "confidence": 1.0,
+          "relevance_score": 0.23313403129577637,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act.txt",
+            "dimension": "cheating",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    }
+  ]
+}

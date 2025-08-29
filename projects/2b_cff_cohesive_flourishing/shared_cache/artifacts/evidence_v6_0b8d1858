@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T11:34:30.994654+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost.",
+      "confidence": 1.0,
+      "context_type": "central_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994620+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "whether we are Black or Brown or White, we all bleed the same red blood of patriots, we all enjoy the same glorious freedoms, and we all salute the same great American flag.",
+      "confidence": 1.0,
+      "context_type": "unifying_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994632+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fear",
+      "quote_text": "This American carnage stops right here and stops right now.",
+      "confidence": 1.0,
+      "context_type": "problem_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994636+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "hope",
+      "quote_text": "We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.",
+      "confidence": 1.0,
+      "context_type": "promise_and_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994638+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "envy",
+      "quote_text": "The wealth of our middle class has been ripped from their homes and then redistributed all across the world.",
+      "confidence": 1.0,
+      "context_type": "grievance_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994640+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "compersion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absent_theme",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994642+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "enmity",
+      "quote_text": "we will unite the civilized world against radical Islamic terrorism, which we will eradicate completely from the face of the Earth.",
+      "confidence": 1.0,
+      "context_type": "adversarial_declaration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994644+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "amity",
+      "quote_text": "through our loyalty to our country, we will rediscover our loyalty to each other. When you open your heart to patriotism, there is no room for prejudice.",
+      "confidence": 1.0,
+      "context_type": "call_for_internal_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994646+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "From this day forward, it\u2019s going to be only America first. America first.",
+      "confidence": 1.0,
+      "context_type": "policy_declaration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994647+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We will build new roads and highways and bridges and airports and tunnels and railways all across our wonderful Nation.",
+      "confidence": 1.0,
+      "context_type": "collective_project",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T11:34:30.994649+00:00"
+    }
+  ]
+}
