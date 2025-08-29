@@ -67,29 +67,35 @@ def process_json_response(
     THIN approach: Extract evidence during analysis time, not post-processing.
     This eliminates the need for LLM calls during evidence extraction.
     """
-    # Replace placeholder artifact_id with the actual document hash
+    # Replace placeholder document ID with the actual document hash
     # This is a critical fix for data integrity. The LLM is instructed to use
     # a placeholder, which we replace here with the content-addressable hash.
-    
+
     json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
     json_match = re.search(json_pattern, result_content, re.DOTALL)
-    
+
     if json_match:
         try:
-            analysis_data = json.loads(json_match.group(1).strip())
+            json_str = json_match.group(1).strip()
+            analysis_data = json.loads(json_str)
             document_analyses = analysis_data.get('document_analyses', [])
 
             if len(document_analyses) == len(document_hashes):
                 for i, doc_analysis in enumerate(document_analyses):
-                    doc_analysis['document_id'] = document_hashes[i]
+                    # Replace the placeholder with the actual document hash
+                    if doc_analysis.get('document_id') == '[DOCUMENT_ID_PLACEHOLDER]':
+                        doc_analysis['document_id'] = document_hashes[i]
                 
                 # Re-serialize the JSON with the correct document IDs
                 updated_json_str = json.dumps(analysis_data, indent=2)
                 result_content = result_content.replace(json_match.group(1).strip(), updated_json_str)
 
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
             # If JSON is malformed, we proceed with the original content
             pass
+        except Exception as e:
+            # Re-raise the exception so it bubbles up
+            raise
 
 
     raw_response_hash = storage.put_artifact(

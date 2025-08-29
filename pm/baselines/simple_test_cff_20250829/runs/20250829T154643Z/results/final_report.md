@@ -8,6 +8,7 @@
 
 **Analysis Model**: Gemini 2.5 Pro
 **Synthesis Model**: Gemini 2.5 Pro
+**Method**: Single Run
 
 ---
 

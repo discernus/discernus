@@ -31,12 +31,13 @@ def create_analysis_prompt(
     """Create the full analysis prompt."""
     framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
 
-    return prompt_template.format(
-        analysis_id=analysis_id,
-        frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-        documents=format_documents_for_prompt(documents),
-        num_frameworks=1,
-        num_documents=len(documents)
-    )
+    # Use string replacement instead of format() to avoid conflicts with JSON content
+    result = prompt_template
+    result = result.replace("{analysis_id}", analysis_id)
+    result = result.replace("{frameworks}", f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n")
+    result = result.replace("{documents}", format_documents_for_prompt(documents))
+    result = result.replace("{num_frameworks}", "1")
+    result = result.replace("{num_documents}", str(len(documents)))
+    return result
 
 

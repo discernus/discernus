@@ -76,7 +76,9 @@ class EnhancedAnalysisAgent:
 
         cached_result = self.cache.check_cache(analysis_id)
         if cached_result:
+            self.audit.log_agent_event(self.agent_name, "cache_hit_processing", {"analysis_id": analysis_id})
             document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
+            self.audit.log_agent_event(self.agent_name, "cache_hit_document_hashes", {"analysis_id": analysis_id, "document_hashes": document_hashes})
             new_scores_hash, new_evidence_hash = process_json_response(
                 cached_result['raw_analysis_response'],
                 document_hashes,
@@ -87,10 +89,12 @@ class EnhancedAnalysisAgent:
                 json.dumps(cached_result, indent=2).encode('utf-8'),
                 {"artifact_type": "analysis_result", "analysis_id": analysis_id, "cached": True}
             )
-            return {
+            result = {
                 "analysis_result": {"analysis_id": analysis_id, "result_hash": result_hash, "result_content": cached_result, "cached": True},
                 "scores_hash": new_scores_hash, "evidence_hash": new_evidence_hash
             }
+            self.audit.log_agent_event(self.agent_name, "cache_hit_return", {"analysis_id": analysis_id, "result_keys": list(result.keys())})
+            return result
 
         documents, document_hashes = self._prepare_documents(corpus_documents, analysis_id)
         prompt_text = create_analysis_prompt(self.prompt_template, analysis_id, framework_content, documents)

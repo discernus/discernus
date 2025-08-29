@@ -44,7 +44,7 @@ You MUST include the exact delimiters shown below. Do NOT use markdown code bloc
   },
   "document_analyses": [
     {
-      "document_id": "{{artifact_id}}",
+      "document_id": "[DOCUMENT_ID_PLACEHOLDER]",
       "document_name": "[document filename]",
       "dimensional_scores": {
         "[dimension_name]": {
@@ -95,7 +95,7 @@ You MUST include the exact delimiters shown below. Do NOT use markdown code bloc
 
 ---
 
-Begin analysis now for analysis `{analysis_id}`. Follow these steps in order:
+Begin analysis now for analysis `{analysis_id}`. Apply the framework to all {num_documents} documents using THREE INDEPENDENT ANALYTICAL APPROACHES. Follow these steps in order:
 
 STEP 1: Apply the framework to all {num_documents} documents using THREE INDEPENDENT ANALYTICAL APPROACHES
 STEP 2: Calculate the MEDIAN score for each dimension across all three approaches  

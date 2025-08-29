@@ -258,3 +258,25 @@
 - [ ] License implemented across full codebase
 - [ ] Legal review completed
 - [ ] License documentation and notices in place- [PROVENANCE-001] Add model information to final reports for provenance tracking - user shouldn't need to consult logs to know which models were used for analysis/synthesis
+
+## [THIN-004] Audit All Agents for YAML Parsing Antipatterns - IMMEDIATE
+- **Task**: Comprehensive audit of all agents to identify and eliminate YAML parsing code
+- **Status**: Ready for implementation
+- **Priority**: HIGH - YAML parsing violates THIN architecture principles
+- **Context**: Recent testing on Sprint 2 (analysis variance reduction) revealed multiple YAML parsing issues that are THICK antipatterns
+- **Rationale**: YAML parsing adds unnecessary complexity and violates the project's THIN architecture principle of direct LLM consumption
+- **Scope**: 
+  - Audit all agent files in `discernus/agents/` directory
+  - Identify any YAML parsing code (yaml.safe_load, yaml.load, PyYAML imports)
+  - Convert to direct YAML file delivery to LLM with no parsing
+  - Ensure agents consume YAML content directly as text
+- **Acceptance Criteria**:
+  - [ ] All YAML parsing code identified and documented
+  - [ ] All agents converted to consume YAML files directly as text
+  - [ ] No yaml.safe_load, yaml.load, or PyYAML imports in agent code
+  - [ ] LLMs receive YAML content directly without preprocessing
+  - [ ] System maintains functionality while eliminating parsing complexity
+- **Effort**: 2-3 hours
+- **Dependencies**: None
+- **Impact**: Eliminates THICK antipatterns, improves system reliability, maintains THIN architecture principles
+[ARCH-001] Refactor all agents to use plain text prompts (.txt) instead of parsed YAML prompts (.yaml) to align with THIN principles and prevent template parsing errors.

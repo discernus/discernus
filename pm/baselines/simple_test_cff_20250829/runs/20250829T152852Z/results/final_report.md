@@ -8,6 +8,7 @@
 
 **Analysis Model**: Gemini 2.5 Flash Lite
 **Synthesis Model**: Gemini 2.5 Pro
+**Method**: Single Run
 
 ---
 
