@@ -257,4 +257,4 @@
 - [ ] License selected and approved by stakeholders
 - [ ] License implemented across full codebase
 - [ ] Legal review completed
-- [ ] License documentation and notices in place
+- [ ] License documentation and notices in place- [PROVENANCE-001] Add model information to final reports for provenance tracking - user shouldn't need to consult logs to know which models were used for analysis/synthesis
