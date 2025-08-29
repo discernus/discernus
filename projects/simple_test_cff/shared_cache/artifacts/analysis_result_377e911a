@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_e183eef92a4d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis reflects a strong convergence across all three independent approaches (Evidence-First, Context-Weighted, Pattern-Based). The text's rhetorical strategy is heavily reliant on a clear 'us vs. them' class-based conflict, which is reflected in the high scores for Tribal Dominance, Envy, and Enmity, contrasted with calls for in-group Amity and Cohesive Goals. The absence of Individual Dignity and Compersion is also consistently noted.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"261b893a3844...\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"compersion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rhetorical_parallelism\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"threat_framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"closing_statement\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"grievance_rhetoric\"\n        },\n        {\n          \"dimension\": \"compersion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"The rich want to get richer and they don't care who they step on.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"cooperative_framing\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"zero_sum_objective\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"integrative_objective\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "d2092bc618f43d43e2edb06fd45309d9cf5a3b0fcfdd1b1f0972a219820694f5",
+  "execution_metadata": {
+    "start_time": "2025-08-29T18:04:12.983602+00:00",
+    "end_time": "2025-08-29T18:05:18.411197+00:00",
+    "duration_seconds": 65.427583
+  },
+  "input_artifacts": {
+    "framework_hash": "77e927d6773a3131ec6b0fa5ef666cbcd957859357ebe6ae80efaeb7be557b12",
+    "document_hashes": [
+      "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test_cff",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250829T180054Z_10c07edc"
+  }
+}

@@ -1,0 +1,65 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "entman_framing_functions",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "This corporate apology clearly addresses all four framing functions with high intensity and salience, which is typical for such a communication. The language used is direct and explicit for problem definition, causal attribution, moral evaluation, and treatment recommendations.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "5fbf6a44ce54...",
+      "document_name": "corporate_apology.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "causal_attribution": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "moral_evaluation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "the environmental incident that occurred at our facility",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "confidence": 0.9,
+          "context_type": "direct explanation of cause and responsibility"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "confidence": 0.9,
+          "context_type": "statement of values and regret"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "confidence": 0.9,
+          "context_type": "list of specific actions"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

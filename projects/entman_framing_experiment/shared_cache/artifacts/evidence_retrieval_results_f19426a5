@@ -1,0 +1,1391 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T19:05:39.356407",
+    "framework_hash": "bdc9a3a96217a438391fe34fef68c1effdd588f35245e3c08be42d138bdef632",
+    "total_findings": 7,
+    "total_quotes": 92
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "1. Extremely Strong Positive Correlation (r=0.978) between Causal Attribution and Moral Evaluation. This is the most significant finding challenging Entman's independence hypothesis, suggesting these two functions are highly interdependent in this dataset."
+      },
+      "queries_used": [
+        "Provide textual evidence from all documents where strong causal attribution is immediately followed or accompanied by strong moral evaluation.",
+        "Identify specific quotations illustrating the tight coupling of blame assignment and ethical judgment across the corpus.",
+        "Extract phrases or sentences that simultaneously assign responsibility and invoke moral principles."
+      ],
+      "quotes": [
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.38613376021385193,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.3580753803253174,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.35679614543914795,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "detected unauthorized access to our customer database",
+          "document_name": "crisis_management.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.280617356300354,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.24555395543575287,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.24032920598983765,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.23686781525611877,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.9,
+          "relevance_score": 0.23680616915225983,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.2359175831079483,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.20661093294620514,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.19859835505485535,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 1.0,
+          "relevance_score": 0.17775370180606842,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.165763258934021,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "2. Overall Low Framing Independence (mean score ~0.11), suggesting a general lack of independence among framing functions in this dataset, which challenges Entman's theory. The lowest score is 0.0 for 'corporate_apology.txt'."
+      },
+      "queries_used": [
+        "For 'corporate_apology.txt', provide evidence demonstrating how problem definition, causal attribution, moral evaluation, and treatment recommendation are highly interlinked or indistinguishable, resulting in zero independence.",
+        "Identify textual patterns across documents that show framing functions operating in highly correlated or overlapping ways, rather than independently."
+      ],
+      "quotes": [
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.5214628577232361,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.49139416217803955,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.27219462394714355,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.2452007532119751,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.22327405214309692,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.19426949322223663,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.15559113025665283,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.13954110443592072,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.13822518289089203,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "detected unauthorized access to our customer database",
+          "document_name": "crisis_management.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.12695083022117615,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.12210185825824738,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.11074291169643402,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.9,
+          "relevance_score": 0.09312045574188232,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.08239555358886719,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "3. 'crisis_management.txt' exhibits the highest (though still relatively low) Framing Independence Score (0.287). This implies it's the text that comes closest to showcasing functional independence within the dataset."
+      },
+      "queries_used": [
+        "From 'crisis_management.txt', provide evidence that differentiates the four framing functions, showing how each might be expressed with some distinctness.",
+        "Extract examples from 'crisis_management.txt' where one framing function is emphasized or present without strong explicit reliance on others."
+      ],
+      "quotes": [
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.4229656457901001,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.3888717591762543,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.37232664227485657,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.3655738830566406,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.32883405685424805,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "detected unauthorized access to our customer database",
+          "document_name": "crisis_management.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.3251841366291046,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.2770880460739136,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.22724038362503052,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.21727438271045685,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.2022642195224762,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.1906454861164093,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.17781668901443481,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 12
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "4. Uniformly High Problem Definition (raw score 0.9 for all documents). This suggests problem identification is a consistently strong and emphasized aspect across all strategic communications in the corpus."
+      },
+      "queries_used": [
+        "Provide examples from each document (`crisis_management.txt`, `political_attack_ad.txt`, `corporate_apology.txt`, `policy_advocacy.txt`) showcasing a high degree of problem definition.",
+        "Extract strong opening statements or recurring themes that establish issues and conceptualize problems across the corpus."
+      ],
+      "quotes": [
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.42617595195770264,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.35464930534362793,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.32965537905693054,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.2975178360939026,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 1.0,
+          "relevance_score": 0.28101280331611633,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.2632705569267273,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.2521303594112396,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.22801163792610168,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.18070177733898163,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.17570437490940094,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "detected unauthorized access to our customer database",
+          "document_name": "crisis_management.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.15748752653598785,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.15274877846240997,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.1520412266254425,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "5. Significant Difference in Treatment Recommendation by Document Type, specifically lower (0.75) in the 'Campaign' communication ('political_attack_ad.txt') compared to 'Crisis Management' and 'Policy Advocacy' types (0.9)."
+      },
+      "queries_used": [
+        "From 'political_attack_ad.txt', identify evidence for its comparatively lower emphasis on clear-cut treatment recommendations.",
+        "Contrast the advocacy for solutions in 'political_attack_ad.txt' with the strong treatment recommendations found in 'policy_advocacy.txt' or 'corporate_apology.txt'."
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.5372897982597351,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.49382150173187256,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.48597580194473267,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.4438056945800781,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.4414086937904358,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.3988347053527832,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.38585373759269714,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.37544891238212585,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 1.0,
+          "relevance_score": 0.3708314895629883,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.3569875657558441,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.35542136430740356,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.3506937026977539,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.25484490394592285,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "6. Strategic Framing Profile pattern: 'Campaign' type ('political_attack_ad.txt') is Cause-focused, while 'Crisis Management' ('crisis_management.txt', 'corporate_apology.txt') and 'Policy Advocacy' ('policy_advocacy.txt') are Problem-focused."
+      },
+      "queries_used": [
+        "For 'political_attack_ad.txt', provide evidence illustrating its primary focus on causal attribution (blame, responsibility) as its dominant strategic frame.",
+        "For 'crisis_management.txt', 'corporate_apology.txt', and 'policy_advocacy.txt', provide evidence demonstrating their primary strategic focus on problem definition."
+      ],
+      "quotes": [
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.6189383864402771,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.6158583164215088,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.5645341277122498,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.5532331466674805,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.5387746691703796,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "detected unauthorized access to our customer database",
+          "document_name": "crisis_management.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.48812687397003174,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.8,
+          "relevance_score": 0.47502994537353516,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.9,
+          "relevance_score": 0.4551345407962799,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.4487559199333191,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.42111068964004517,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.40393996238708496,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.3790993094444275,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.35240113735198975,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 1.0,
+          "relevance_score": 0.3213249444961548,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "7. Generally High Message Completeness (mean ~0.84) and Framing Coherence (mean ~0.83) across the dataset, indicating comprehensive and balanced message construction."
+      },
+      "queries_used": [
+        "Provide examples across various documents that show a comprehensive addressing of all four framing functions (Problem, Cause, Moral, Treatment).",
+        "Extract passages demonstrating a balanced deployment of different framing functions within a single message, contributing to high coherence."
+      ],
+      "quotes": [
+        {
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "causal_attribution",
+          "confidence": 1.0,
+          "relevance_score": 0.3052673637866974,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "causal_attribution",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.2658158242702484,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.2647206485271454,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 1.0,
+          "relevance_score": 0.24964174628257751,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the environmental incident that occurred at our facility",
+          "document_name": "corporate_apology.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.24314650893211365,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "document_name": "crisis_management.txt",
+          "dimension": "problem_definition",
+          "confidence": 0.9,
+          "relevance_score": 0.2251637578010559,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "problem_definition",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.2228091061115265,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "document_name": "policy_advocacy.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.1884842962026596,
+          "metadata": {
+            "document_name": "policy_advocacy.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "document_name": "crisis_management.txt",
+          "dimension": "moral_evaluation",
+          "confidence": 0.9,
+          "relevance_score": 0.1871182918548584,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "moral_evaluation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "document_name": "corporate_apology.txt",
+          "dimension": "causal_attribution",
+          "confidence": 0.9,
+          "relevance_score": 0.17388813197612762,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "causal_attribution",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "document_name": "corporate_apology.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.1736864596605301,
+          "metadata": {
+            "document_name": "corporate_apology.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "document_name": "crisis_management.txt",
+          "dimension": "treatment_recommendation",
+          "confidence": 0.9,
+          "relevance_score": 0.16641759872436523,
+          "metadata": {
+            "document_name": "crisis_management.txt",
+            "dimension": "treatment_recommendation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "document_name": "political_attack_ad.txt",
+          "dimension": "problem_definition",
+          "confidence": 1.0,
+          "relevance_score": 0.16329330205917358,
+          "metadata": {
+            "document_name": "political_attack_ad.txt",
+            "dimension": "problem_definition",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    }
+  ]
+}

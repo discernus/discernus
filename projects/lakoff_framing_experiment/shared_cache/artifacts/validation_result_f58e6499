@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The corpus manifest `corpus.md` is non-compliant with the current `v8.0.2` standard. It incorrectly claims `spec_version: \"10.0\"` and uses a YAML structure with a nested `metadata` object, which is not supported by the v8.0.2 parser.",
+    "The corpus manifest `corpus.md` has a critical discrepancy between its human-readable description and its machine-readable manifest. The prose section details 12 documents, but the YAML manifest specifies `total_documents: 4` and lists only 4 document files.",
+    "The experiment specification `experiment.md` is missing the required 'Data Grouping and Custom Variable Mapping' section. According to the `v10.0` standard, this section is mandatory for experiments that require statistical analysis, which this experiment's hypotheses (H1, H2, H3) clearly imply (correlation, pattern comparison).",
+    "There is a fundamental mismatch between the experiment's statistical ambitions and the corpus size. The hypotheses require correlation analysis (H1) and comparison of distinct ideological patterns (H2). The corpus, even if expanded to the described 12 documents, provides insufficient sample sizes for robust statistical testing (e.g., groups with n=1 or n=2 for some ideologies). With the current 4-document manifest, such analysis is impossible."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-29T18:48:27.375070+00:00"
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_5e60389b77aa",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "lakoff_framing_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"The document consistently aligns with the Strict Father model across all three dimensions, emphasizing authority, competition, and self-reliance.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"4247af655023...\",\n      \"document_name\": \"conservative_family_values.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"Parents must have the authority to raise their children according to their values, not according to some government bureaucrat's idea of what's best.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Competition in the marketplace, competition in education, competition in every aspect of American life - this is what drives excellence.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic emphasis\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"When families take responsibility for their own well-being, when parents teach their children to be self-reliant, when we encourage personal initiative rather than government dependency - that's when America thrives.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explanation of societal benefit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "3fc1365a047f3fa1f7e1eb4d7a7d7191e9b6955b6130180bb962a9418895520b",
+  "execution_metadata": {
+    "start_time": "2025-08-29T18:48:27.384541+00:00",
+    "end_time": "2025-08-29T18:48:44.630345+00:00",
+    "duration_seconds": 17.245791
+  },
+  "input_artifacts": {
+    "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+    "document_hashes": [
+      "4247af6550239ddb8d24aac131cdd36c18a3d1315804c732d6f00b32960cb057"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "lakoff_framing_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250829T184732Z_b9ae953d"
+  }
+}

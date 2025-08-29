@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Business Ethics Framework",
+    "framework_version": "10.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document, an Annual CSR Report, is highly focused on positive ethical dimensions, particularly sustainable purpose, employee development, and stakeholder accountability. It explicitly disavows short-term profit motives and lacks any language indicative of negative ethical practices.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "corporate_social_responsibility.txt",
+      "dimensional_scores": {
+        "customer_service": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "customer_exploitation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "employee_development": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "employee_exploitation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "accountability": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "opacity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "financial_responsibility": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "financial_manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "sustainable_purpose": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "short_term_extraction": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "customer_service",
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "confidence": 0.7,
+          "context_type": "product_benefit"
+        },
+        {
+          "dimension": "customer_exploitation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "employee_development",
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "confidence": 0.9,
+          "context_type": "specific_investment"
+        },
+        {
+          "dimension": "employee_exploitation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "accountability",
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "confidence": 0.9,
+          "context_type": "governance_mechanism"
+        },
+        {
+          "dimension": "opacity",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "financial_responsibility",
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "confidence": 0.8,
+          "context_type": "investment_strategy"
+        },
+        {
+          "dimension": "financial_manipulation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "sustainable_purpose",
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "confidence": 1.0,
+          "context_type": "mission_statement"
+        },
+        {
+          "dimension": "short_term_extraction",
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "confidence": 0.9,
+          "context_type": "explicit_refutation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

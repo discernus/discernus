@@ -1,0 +1,129 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 12,
+    "total_files_processed": 4,
+    "collection_time": "2025-08-29T18:55:38.621029+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "We reject the notion that government knows what's best for families. Parents know what's best for their children. Individuals know what's best for themselves.",
+      "confidence": 0.9,
+      "context_type": "rejection of external guidance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205553+00:00"
+    },
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Competition in the marketplace, competition in ideas, competition in every aspect of life - this is what drives progress.",
+      "confidence": 0.9,
+      "context_type": "foundational principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205557+00:00"
+    },
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "individual liberty and personal responsibility.",
+      "confidence": 1.0,
+      "context_type": "guiding principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205559+00:00"
+    },
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "Parents must have the authority to raise their children according to their values, not according to some government bureaucrat's idea of what's best.",
+      "confidence": 1.0,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629485+00:00"
+    },
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Competition in the marketplace, competition in education, competition in every aspect of American life - this is what drives excellence.",
+      "confidence": 1.0,
+      "context_type": "thematic emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629490+00:00"
+    },
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "When families take responsibility for their own well-being, when parents teach their children to be self-reliant, when we encourage personal initiative rather than government dependency - that's when America thrives.",
+      "confidence": 1.0,
+      "context_type": "explanation of societal benefit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629494+00:00"
+    },
+    {
+      "document_name": "centrist_bipartisan_appeal.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "The conservative emphasis on family authority and individual responsibility has merit - strong families do need strong parents who can make decisions for their children. But the progressive emphasis on community support and collective assistance also has value - families succeed best when they have access to quality education, healthcare, and economic opportunities.",
+      "confidence": 0.9,
+      "context_type": "explicit framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:46.368030+00:00"
+    },
+    {
+      "document_name": "centrist_bipartisan_appeal.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Our approach emphasizes cooperation over competition, but recognizes that healthy competition drives excellence.",
+      "confidence": 0.9,
+      "context_type": "explicit framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:46.368034+00:00"
+    },
+    {
+      "document_name": "centrist_bipartisan_appeal.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "Individual responsibility and collective support are not mutually exclusive - they're complementary.",
+      "confidence": 1.0,
+      "context_type": "explicit framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:46.368037+00:00"
+    },
+    {
+      "document_name": "progressive_family_support.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "We need to approach family challenges with empathy, not judgment.",
+      "confidence": 0.9,
+      "context_type": "direct_statement_and_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:00.378840+00:00"
+    },
+    {
+      "document_name": "progressive_family_support.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Our approach is based on cooperation, not competition.",
+      "confidence": 1.0,
+      "context_type": "explicit_core_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:00.378843+00:00"
+    },
+    {
+      "document_name": "progressive_family_support.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "We understand that no family can do it alone. We're all interconnected, and the success of one family benefits us all.",
+      "confidence": 1.0,
+      "context_type": "thematic_statement_and_rejection_of_alternative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:00.378844+00:00"
+    }
+  ]
+}

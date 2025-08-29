@@ -1,0 +1,142 @@
+[
+  {
+    "analysis_id": "analysis_5e60389b77aa",
+    "result_hash": "dba2e076f10dad8a3018e585ae88721aa9043ed8a3ae6b9aaeb6ffa51aa06caa",
+    "duration_seconds": 17.245791,
+    "result_content": {
+      "analysis_id": "analysis_5e60389b77aa",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "lakoff_framing_experiment",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"The document consistently aligns with the Strict Father model across all three dimensions, emphasizing authority, competition, and self-reliance.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"4247af655023...\",\n      \"document_name\": \"conservative_family_values.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"Parents must have the authority to raise their children according to their values, not according to some government bureaucrat's idea of what's best.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Competition in the marketplace, competition in education, competition in every aspect of American life - this is what drives excellence.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic emphasis\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"When families take responsibility for their own well-being, when parents teach their children to be self-reliant, when we encourage personal initiative rather than government dependency - that's when America thrives.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explanation of societal benefit\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "3fc1365a047f3fa1f7e1eb4d7a7d7191e9b6955b6130180bb962a9418895520b",
+      "execution_metadata": {
+        "start_time": "2025-08-29T18:48:27.384541+00:00",
+        "end_time": "2025-08-29T18:48:44.630345+00:00",
+        "duration_seconds": 17.245791
+      },
+      "input_artifacts": {
+        "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+        "document_hashes": [
+          "4247af6550239ddb8d24aac131cdd36c18a3d1315804c732d6f00b32960cb057"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "lakoff_framing_experiment",
+          "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250829T184732Z_b9ae953d"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_697dc6b49404",
+    "result_hash": "e9ae4de4fb8d3bcbe79d9ced569fc9ffb04f06e0a14521328ffef498992da5c4",
+    "duration_seconds": 15.748167,
+    "result_content": {
+      "analysis_id": "analysis_697dc6b49404",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "lakoff_framing_experiment",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document consistently employs Nurturant Parent framing, explicitly rejecting Strict Father values across all three dimensions. The language is direct and unambiguous in its advocacy for empathy, cooperation, and interdependence.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"529772e0aec9...\",\n      \"document_name\": \"progressive_family_support.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"We need to approach family challenges with empathy, not judgment.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement_and_contrast\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Our approach is based on cooperation, not competition.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit_core_principle\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"We understand that no family can do it alone. We're all interconnected, and the success of one family benefits us all.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_statement_and_rejection_of_alternative\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "7252595d3d5b6d1249007d127ff7cb7a94d2e2821fa6c58f4f52e8e7421380e3",
+      "execution_metadata": {
+        "start_time": "2025-08-29T18:48:44.631068+00:00",
+        "end_time": "2025-08-29T18:49:00.379242+00:00",
+        "duration_seconds": 15.748167
+      },
+      "input_artifacts": {
+        "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+        "document_hashes": [
+          "529772e0aec9e5349b104479ccc3665cab82a07e1a28e4e2ebfec07c2f48ac80"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "lakoff_framing_experiment",
+          "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250829T184732Z_b9ae953d"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_3db6ea8f8079",
+    "result_hash": "56df8a017053e6c4c0be40a68db98c7dd069de7470c7159af2760950bf7ffd1e",
+    "duration_seconds": 25.827439,
+    "result_content": {
+      "analysis_id": "analysis_3db6ea8f8079",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "lakoff_framing_experiment",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using a 3-run median aggregation approach, combining evidence-first, context-weighted, and pattern-based perspectives for robust scoring.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"libertarian_individual_rights.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"We reject the notion that government knows what's best for families. Parents know what's best for their children. Individuals know what's best for themselves.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rejection of external guidance\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Competition in the marketplace, competition in ideas, competition in every aspect of life - this is what drives progress.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"foundational principle\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"individual liberty and personal responsibility.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"guiding principle\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "d8f5b724c34ba28100b440fc6badf786b530b642663faaaa9bc98fd4cf7fcdb5",
+      "execution_metadata": {
+        "start_time": "2025-08-29T18:49:00.379649+00:00",
+        "end_time": "2025-08-29T18:49:26.207113+00:00",
+        "duration_seconds": 25.827439
+      },
+      "input_artifacts": {
+        "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+        "document_hashes": [
+          "a50b50ea079c6d058b17b5591c4f219a5ea4fcfea70aed0aaba4f66e2f42b6fb"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "lakoff_framing_experiment",
+          "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250829T184732Z_b9ae953d"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_b6dde32142fe",
+    "result_hash": "7c31a6b79d822ccf5b9c3f6fef8a47dd66cce047f3b7d7aca277bcdcd75f0a4b",
+    "duration_seconds": 20.160549,
+    "result_content": {
+      "analysis_id": "analysis_b6dde32142fe",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "lakoff_framing_experiment",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document consistently employs language that aims to reconcile seemingly opposing moral frameworks, explicitly presenting a 'balanced approach' and arguing that 'individual responsibility and collective support are not mutually exclusive - they're complementary.' This centrist framing leads to scores generally centered around the 0.5 mark, reflecting an active attempt to synthesize Strict Father and Nurturant Parent models, rather than fully embracing one or the other.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"centrist_bipartisan_appeal.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"The conservative emphasis on family authority and individual responsibility has merit - strong families do need strong parents who can make decisions for their children. But the progressive emphasis on community support and collective assistance also has value - families succeed best when they have access to quality education, healthcare, and economic opportunities.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit framing\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Our approach emphasizes cooperation over competition, but recognizes that healthy competition drives excellence.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit framing\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"Individual responsibility and collective support are not mutually exclusive - they're complementary.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "e71804ff14dd3b83cc2e74ad55a89c8d6dc0c4944c1212c3b5e5d9ce3417be55",
+      "execution_metadata": {
+        "start_time": "2025-08-29T18:49:26.208153+00:00",
+        "end_time": "2025-08-29T18:49:46.368710+00:00",
+        "duration_seconds": 20.160549
+      },
+      "input_artifacts": {
+        "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+        "document_hashes": [
+          "7b73a8575631b4fbfe127e7877f3904a3e0995817ddec8fa4187978b3fc50c81"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "lakoff_framing_experiment",
+          "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250829T184732Z_b9ae953d"
+      }
+    }
+  }
+]

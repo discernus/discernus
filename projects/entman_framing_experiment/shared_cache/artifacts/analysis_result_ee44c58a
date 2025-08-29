@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_976144690fdd",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "entman_framing_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"entman_framing_functions\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis focused on identifying the four framing functions as distinct dimensions. Scores reflect intensity of framing, salience of the frame, and analyst confidence. Median aggregation applied across three independent analytical perspectives: Evidence-First, Context-Weighted, and Pattern-Based.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"d0a474fc58a4...\",\n      \"document_name\": \"crisis_management.txt\",\n      \"dimensional_scores\": {\n        \"problem_definition\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"causal_attribution\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"moral_evaluation\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"treatment_recommendation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"problem_definition\",\n          \"quote_text\": \"We are writing to inform you of a serious data security incident that occurred on September 14, 2025.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit statement\"\n        },\n        {\n          \"dimension\": \"causal_attribution\",\n          \"quote_text\": \"detected unauthorized access to our customer database\",\n          \"confidence\": 0.8,\n          \"context_type\": \"causal explanation\"\n        },\n        {\n          \"dimension\": \"moral_evaluation\",\n          \"quote_text\": \"We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"apology and commitment\"\n        },\n        {\n          \"dimension\": \"treatment_recommendation\",\n          \"quote_text\": \"Our response includes:\\n- Immediate system lockdown and security audit\\n- Notification to law enforcement and cybersecurity experts\\n- Implementation of enhanced security measures\\n- Free credit monitoring for affected customers\\n- 24/7 customer support hotline\",\n          \"confidence\": 0.9,\n          \"context_type\": \"action plan\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "a66511c4537cfaa2fdab07f4b665e05e3220f6649c8be1df43966a88d626a2a8",
+  "execution_metadata": {
+    "start_time": "2025-08-29T18:59:14.262351+00:00",
+    "end_time": "2025-08-29T18:59:32.377284+00:00",
+    "duration_seconds": 18.114923
+  },
+  "input_artifacts": {
+    "framework_hash": "01c5ffecbcd44077de74fcbfc318c4ec563b684a8b3250885f2ba85dd35f2430",
+    "document_hashes": [
+      "d0a474fc58a406ed35bd034a4c33e69ffb79ec9f9b431f36e346668062e25505"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "entman_framing_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/entman_framing_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250829T185822Z_3cc3e2d6"
+  }
+}

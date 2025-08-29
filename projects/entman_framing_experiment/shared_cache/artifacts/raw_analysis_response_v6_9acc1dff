@@ -1,0 +1,65 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "entman_framing_functions",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed political advocacy speech using Entman's four framing functions, aggregating scores and evidence from three independent analytical perspectives.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "5d70053d9254...",
+      "document_name": "policy_advocacy.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "causal_attribution": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "moral_evaluation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "confidence": 0.9,
+          "context_type": "opening_statement_and_theme_setting"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "confidence": 0.8,
+          "context_type": "systemic_causal_framing"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "confidence": 0.9,
+          "context_type": "ethical_justification_and_value_invocation"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "confidence": 0.9,
+          "context_type": "specific_policy_proposals"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Business Ethics Framework",
+    "framework_version": "10.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The document, titled 'Shareholder Primacy Quarterly Report,' exhibits a strong and consistent focus on short-term financial performance and shareholder returns. Language heavily emphasizes efficiency, cost optimization, and capital return. Other stakeholder considerations (customers, employees, societal impact) are largely absent or framed in terms of their contribution to cost reduction and profit maximization. Regulatory compliance is mentioned as a baseline, not a proactive engagement.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "8598eb69e4bd...",
+      "document_name": "shareholder_primacy_report.txt",
+      "dimensional_scores": {
+        "customer_service": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "customer_exploitation": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "employee_development": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "employee_exploitation": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "accountability": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "opacity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "financial_responsibility": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "financial_manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "sustainable_purpose": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "short_term_extraction": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "customer_service",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "customer_exploitation",
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "confidence": 0.8,
+          "context_type": "implied_by_profit_focus"
+        },
+        {
+          "dimension": "employee_development",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "employee_exploitation",
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "confidence": 0.9,
+          "context_type": "direct_implication"
+        },
+        {
+          "dimension": "accountability",
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "confidence": 0.9,
+          "context_type": "limited_scope_statement"
+        },
+        {
+          "dimension": "opacity",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "financial_responsibility",
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "confidence": 0.8,
+          "context_type": "shareholder_centric_focus"
+        },
+        {
+          "dimension": "financial_manipulation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "sustainable_purpose",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence"
+        },
+        {
+          "dimension": "short_term_extraction",
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "confidence": 0.9,
+          "context_type": "central_theme_explicit"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,2545 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T19:16:30.220396",
+    "framework_hash": "44f01fa52c21e963d109fe129758c9b78d7bde3e598cc6eda9f19bb6e0c5c66b",
+    "total_findings": 12,
+    "total_quotes": 169
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Correlation: Stakeholder Focus Index & Strategic Ethics Index (0.99) - Indicating that a strong emphasis on stakeholder capitalism is highly associated with a long-term ethical orientation."
+      },
+      "queries_used": [
+        "\"customer success\" AND \"sustainable impact\"",
+        "\"employee growth\" AND \"long-term value\"",
+        "\"stakeholder capitalism\" AND \"meaningful mission\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.5273109078407288,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.45677614212036133,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.3940533995628357,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.3888623118400574,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.38656991720199585,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.3339095413684845,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.3121768832206726,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.3067072033882141,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.2763780355453491,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.27633005380630493,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.2723087668418884,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.25533851981163025,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.22977936267852783,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.22162732481956482,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.1701287031173706,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Correlation: Operational Ethics Index & Strategic Ethics Index (0.927) - Suggesting that organizations demonstrating strong operational integrity also tend to articulate a long-term ethical vision."
+      },
+      "queries_used": [
+        "\"transparent governance\" AND \"societal benefit\"",
+        "\"fiscal responsibility\" AND \"sustainable purpose\"",
+        "\"accountable leadership\" AND \"positive contribution\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.3774930238723755,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.3390233814716339,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.3198074400424957,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.3089234232902527,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.29750320315361023,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.2867319583892822,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.2774060070514679,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.25911155343055725,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.25545647740364075,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.22419792413711548,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.19491374492645264,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.17098253965377808,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.1440422683954239,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.11101574450731277,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Negative Correlation: Customer Exploitation & Accountability (-0.993) - Demonstrating that high accountability is strongly associated with the absence of customer exploitation, and vice-versa."
+      },
+      "queries_used": [
+        "\"transparent governance\" AND NOT (\"hidden fees\" OR \"dark patterns\")",
+        "\"accountable leadership\" AND NOT (\"manipulative marketing\" OR \"planned obsolescence\")",
+        "\"responsible practices\" AND NOT \"maximize extraction\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.4844259023666382,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.409055233001709,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.4082724153995514,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.404025137424469,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.3877149224281311,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.37072357535362244,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.31316351890563965,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.3008430600166321,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.3006829619407654,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.29244309663772583,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.29220476746559143,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.278460830450058,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.2708466649055481,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.23747596144676208,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1307879388332367,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Positive Correlation: Customer Exploitation & Employee Exploitation (1.0) - Highlighting that these two forms of stakeholder exploitation consistently co-occur."
+      },
+      "queries_used": [
+        "\"hidden fees\" AND \"cost cutting\"",
+        "\"dark patterns\" AND \"expendable workforce\"",
+        "\"profit maximization\" AND \"reduce labor costs\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.38298386335372925,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.2935329079627991,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.21139195561408997,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.17602494359016418,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.1526581346988678,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.15032655000686646,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.1225132867693901,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.11553259193897247,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.11383946239948273,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.10970071703195572,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.10757839679718018,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.10029595345258713,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.06251002103090286,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.05558944493532181,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Positive Correlation: Customer Exploitation & Short Term Extraction (1.0) - Indicating a direct link between exploiting customers and a focus on short-term profit extraction."
+      },
+      "queries_used": [
+        "\"vendor lock-in\" AND \"quarterly results\"",
+        "\"manipulative marketing\" AND \"shareholder value\"",
+        "\"bait and switch\" AND \"margin expansion\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.2719729542732239,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.23418955504894257,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.1950286626815796,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.17441913485527039,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.15138721466064453,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.12689034640789032,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1255350261926651,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.1168566644191742,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.08013280481100082,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.06684989482164383,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.05564890429377556,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.053959719836711884,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.047254279255867004,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.040971457958221436,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Positive Correlation: Employee Exploitation & Short Term Extraction (1.0) - Revealing that treating employees as disposable resources is consistently linked to a short-term, profit-driven focus."
+      },
+      "queries_used": [
+        "\"lean operations\" AND \"quarterly results\"",
+        "\"workforce optimization\" AND \"shareholder value\"",
+        "\"expendable workforce\" AND \"profit maximization\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.4713455140590668,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.34706437587738037,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.30919796228408813,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.2692232131958008,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.24288628995418549,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.2300442010164261,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.2214253842830658,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.21863821148872375,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.20375847816467285,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1787528544664383,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.16487619280815125,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.14160336554050446,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.13840949535369873,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1365630030632019,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Negative Correlation: Sustainable Purpose & Short Term Extraction (-0.956) - Confirming that a long-term societal purpose is largely antithetical to a short-term extraction focus."
+      },
+      "queries_used": [
+        "\"sustainable impact\" NOT \"quarterly results\"",
+        "\"meaningful mission\" NOT \"shareholder value\"",
+        "\"societal benefit\" NOT \"profit maximization\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.3523828387260437,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.3234703838825226,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.307622492313385,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.30493393540382385,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.30274099111557007,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.28847652673721313,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.2764092981815338,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.27592888474464417,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.2283564805984497,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.18258440494537354,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.16880324482917786,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.14606976509094238,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.08474957942962646,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Correlation: Employee Development & Sustainable Purpose (0.957) - Showing that investment in employee growth and well-being is highly correlated with an articulation of long-term societal impact."
+      },
+      "queries_used": [
+        "\"professional development\" AND \"sustainable impact\"",
+        "\"work-life balance\" AND \"societal benefit\"",
+        "\"career advancement\" AND \"meaningful mission\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.29473593831062317,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.27384209632873535,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.2560618221759796,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.23265446722507477,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.1583472043275833,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.1531698852777481,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.14983315765857697,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.13378065824508667,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.12746140360832214,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.114659883081913,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.1126440018415451,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.1037384420633316,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.10090372711420059,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.09294598549604416,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Absence/Minimal Presence of Opacity and Financial Manipulation (Mean 0.0, Std 0.0 for raw scores & salience) - Suggesting these negative operational ethics dimensions are consistently absent or minimally present in the analyzed texts."
+      },
+      "queries_used": [
+        "\"transparent governance\"",
+        "\"financial responsibility\"",
+        "\"open decision-making\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.4558534026145935,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.3091195225715637,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.3031771183013916,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.28133314847946167,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.24459682404994965,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.23282182216644287,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.1708613634109497,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.1649159938097,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.14741067588329315,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.14673039317131042,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.14309920370578766,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.13131532073020935,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.12705790996551514,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.12227760255336761,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.11926083266735077,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Salience-Intensity Alignment for Exploitation and Strategic Dimensions (Correlation 1.0, p=0.0 for Customer Exploitation, Employee Exploitation, Sustainable Purpose, Short Term Extraction) - Indicating that when these concepts appear, their rhetorical prominence (salience) directly matches their intensity."
+      },
+      "queries_used": [
+        "\"planned obsolescence\" OR \"expendable workforce\"",
+        "\"environmental stewardship\" OR \"societal benefit\"",
+        "\"quarterly results\" OR \"margin expansion\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.38605692982673645,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.27408528327941895,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.27392154932022095,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.24076053500175476,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.19449616968631744,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.19405841827392578,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1682896763086319,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.10267423093318939,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.09335693717002869,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.09310705959796906,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.08358070254325867,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.06581711024045944,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.04183105751872063,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.03794808313250542,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Relatively Low Mean for Customer Exploitation (0.03) and High Mean for Customer Service (0.43) - Suggesting a general lean towards genuine customer service over exploitative practices."
+      },
+      "queries_used": [
+        "\"customer success\"",
+        "\"genuine value\"",
+        "\"customer-first\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.4350566267967224,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Customer safety remains our absolute priority. We have established a dedicated hotline and replacement program to ensure all affected customers receive safe replacement products immediately.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "customer_service",
+          "confidence": 0.9,
+          "relevance_score": 0.3532038927078247,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "customer_service",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.2547057271003723,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.243522047996521,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.24044309556484222,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.2254897952079773,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.20928546786308289,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.2080824226140976,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.17827683687210083,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1677727997303009,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.1571023017168045,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.1542477011680603,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We take full responsibility for this situation and want to assure you that we are taking immediate and comprehensive action to address all concerns.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.1430918276309967,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.11190918833017349,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Moderate Mean for Short Term Extraction (0.33) and Sustainable Purpose (0.56), with high variability - Indicating that both strategic visions are present across the corpus, with a slight average lean towards sustainable purpose, but significant differences between texts."
+      },
+      "queries_used": [
+        "\"sustainable purpose\" OR \"long-term value\"",
+        "\"short-term extraction\" OR \"shareholder value\"",
+        "\"societal benefit\" OR \"profit maximization\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "We believe that sustainable business practices create long-term value for all stakeholders while protecting the planet for future generations.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 1.0,
+          "relevance_score": 0.3482619822025299,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $20 million in employee training programs focused on environmental best practices, sustainable innovation, and community engagement.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "employee_development",
+          "confidence": 0.9,
+          "relevance_score": 0.29510408639907837,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "employee_development",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "streamlined our workforce, resulting in $45 million in annualized cost savings.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "employee_exploitation",
+          "confidence": 0.9,
+          "relevance_score": 0.2887018322944641,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "employee_exploitation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "maintained pricing discipline while expanding our customer base",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "customer_exploitation",
+          "confidence": 0.8,
+          "relevance_score": 0.28754472732543945,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "customer_exploitation",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our products now use 40% less energy than industry standards, helping our customers reduce their environmental impact.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "customer_service",
+          "confidence": 0.7,
+          "relevance_score": 0.2839054763317108,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "customer_service",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our regulatory compliance remains impeccable, with zero violations across all operating units.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.2832934856414795,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is not just about compliance or reputation - it's about our core values and our vision for the future.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.27003297209739685,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've invested $50 million in renewable energy projects, reducing our carbon footprint by 65% since 2020.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.2615114450454712,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our commitment to safety and quality is unwavering, and we are working tirelessly to prevent any future occurrences.",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "sustainable_purpose",
+          "confidence": 0.9,
+          "relevance_score": 0.21281027793884277,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "sustainable_purpose",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We maintain open dialogue with all our stakeholders through regular forums, surveys, and collaborative initiatives.",
+          "document_name": "corporate_social_responsibility.txt",
+          "dimension": "accountability",
+          "confidence": 0.9,
+          "relevance_score": 0.19759687781333923,
+          "metadata": {
+            "document_name": "corporate_social_responsibility.txt",
+            "dimension": "accountability",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "confident in our ability to deliver continued earnings growth and superior shareholder returns.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "financial_responsibility",
+          "confidence": 0.8,
+          "relevance_score": 0.17909756302833557,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "financial_responsibility",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Board has approved a 15% increase in our quarterly dividend, reflecting our confidence in future cash flow generation and our commitment to returning capital to shareholders.",
+          "document_name": "shareholder_primacy_report.txt",
+          "dimension": "short_term_extraction",
+          "confidence": 0.9,
+          "relevance_score": 0.1446383148431778,
+          "metadata": {
+            "document_name": "shareholder_primacy_report.txt",
+            "dimension": "short_term_extraction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "- Enhanced employee training on safety protocols",
+          "document_name": "crisis_management_apology.txt",
+          "dimension": "employee_development",
+          "confidence": 0.8,
+          "relevance_score": 0.09351043403148651,
+          "metadata": {
+            "document_name": "crisis_management_apology.txt",
+            "dimension": "employee_development",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "metadata_summary": {
+    "total_documents": 4,
+    "collection_time": "2025-08-29T19:06:45.132720+00:00"
+  },
+  "document_metadata": [
+    {
+      "filename": "crisis_management.txt",
+      "document_id": "crisis_management",
+      "organization": "TechCorp Inc",
+      "context": "crisis_response",
+      "framing_focus": "problem_definition_treatment"
+    },
+    {
+      "filename": "political_attack_ad.txt",
+      "document_id": "political_attack_ad",
+      "speaker": "Senator Johnson Campaign",
+      "context": "campaign_advertisement",
+      "framing_focus": "problem_cause_moral"
+    },
+    {
+      "filename": "corporate_apology.txt",
+      "document_id": "corporate_apology",
+      "organization": "GreenEnergy Corp",
+      "context": "apology_statement",
+      "framing_focus": "cause_moral_treatment"
+    },
+    {
+      "filename": "policy_advocacy.txt",
+      "document_id": "policy_advocacy",
+      "speaker": "Congresswoman Davis",
+      "context": "policy_advocacy",
+      "framing_focus": "problem_treatment"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "success": false,
+  "issues": [
+    "The corpus manifest `corpus.md` specifies `spec_version: \"10.0\"` in its YAML appendix. The current standard for corpus manifests is v8.x (the provided reference is v8.0.2), while v10.0 is the standard for Experiment and Framework specifications.",
+    "The machine-readable manifest in `corpus.md` defines only 4 documents, each with a unique 'context' metadata field ('annual_report', 'quarterly_report', 'crisis_response', 'csr_report'). Hypothesis H2 requires statistical comparison between these document types. With a group size of n=1 for each context, statistical tests like ANOVA cannot be performed, violating the `n>=2` requirement for inferential testing in the v10.0 Experiment specification.",
+    "There is a severe discrepancy between the human-readable narrative of `corpus.md`, which describes a rich 18-document corpus designed for 'maximum analytical leverage', and its machine-readable YAML manifest, which lists only 4 documents.",
+    "The `framework.md` narrative describes the 'Stakeholder Relations Domain' as covering 'customer service vs exploitation, employee welfare vs extraction, community engagement vs disengagement'. However, the framework provides no dimensions to measure 'community engagement vs disengagement'.",
+    "The `framework.md` narrative states the 'Operational Integrity Domain' covers 'regulatory compliance'. However, this concept is only mentioned as a 'boundary case' for the 'Accountability' dimension, not as a distinct measurable concept."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-29T19:07:46.592764+00:00"
+}

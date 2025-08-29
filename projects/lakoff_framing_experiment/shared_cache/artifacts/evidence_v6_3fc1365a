@@ -1,0 +1,43 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "4247af6550239ddb8d24aac131cdd36c18a3d1315804c732d6f00b32960cb057"
+    ],
+    "total_evidence_pieces": 3,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T18:48:44.629498+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "Parents must have the authority to raise their children according to their values, not according to some government bureaucrat's idea of what's best.",
+      "confidence": 1.0,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629485+00:00"
+    },
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Competition in the marketplace, competition in education, competition in every aspect of American life - this is what drives excellence.",
+      "confidence": 1.0,
+      "context_type": "thematic emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629490+00:00"
+    },
+    {
+      "document_name": "conservative_family_values.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "When families take responsibility for their own well-being, when parents teach their children to be self-reliant, when we encourage personal initiative rather than government dependency - that's when America thrives.",
+      "confidence": 1.0,
+      "context_type": "explanation of societal benefit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:48:44.629494+00:00"
+    }
+  ]
+}

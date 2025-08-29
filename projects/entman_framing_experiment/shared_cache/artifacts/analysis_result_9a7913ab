@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_995b851c5323",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "entman_framing_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"entman_framing_functions\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed political advocacy speech using Entman's four framing functions, aggregating scores and evidence from three independent analytical perspectives.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"5d70053d9254...\",\n      \"document_name\": \"policy_advocacy.txt\",\n      \"dimensional_scores\": {\n        \"problem_definition\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"causal_attribution\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"moral_evaluation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"treatment_recommendation\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"problem_definition\",\n          \"quote_text\": \"My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opening_statement_and_theme_setting\"\n        },\n        {\n          \"dimension\": \"causal_attribution\",\n          \"quote_text\": \"My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"systemic_causal_framing\"\n        },\n        {\n          \"dimension\": \"moral_evaluation\",\n          \"quote_text\": \"Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"ethical_justification_and_value_invocation\"\n        },\n        {\n          \"dimension\": \"treatment_recommendation\",\n          \"quote_text\": \"Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"specific_policy_proposals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "78f19d9d41aa15fa002827813adaaef722510ad36f696c3084dd34e30d118444",
+  "execution_metadata": {
+    "start_time": "2025-08-29T19:00:05.999855+00:00",
+    "end_time": "2025-08-29T19:00:26.189178+00:00",
+    "duration_seconds": 20.189309
+  },
+  "input_artifacts": {
+    "framework_hash": "01c5ffecbcd44077de74fcbfc318c4ec563b684a8b3250885f2ba85dd35f2430",
+    "document_hashes": [
+      "5d70053d9254a8401301e9cf34261c6391f39fb9b4da63d2c85eb7f9df516cfe"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "entman_framing_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/entman_framing_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250829T185822Z_3cc3e2d6"
+  }
+}

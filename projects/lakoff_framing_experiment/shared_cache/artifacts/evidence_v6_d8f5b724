@@ -1,0 +1,43 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a50b50ea079c6d058b17b5591c4f219a5ea4fcfea70aed0aaba4f66e2f42b6fb"
+    ],
+    "total_evidence_pieces": 3,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T18:49:26.205562+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "authority_vs_empathy",
+      "quote_text": "We reject the notion that government knows what's best for families. Parents know what's best for their children. Individuals know what's best for themselves.",
+      "confidence": 0.9,
+      "context_type": "rejection of external guidance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205553+00:00"
+    },
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "competition_vs_cooperation",
+      "quote_text": "Competition in the marketplace, competition in ideas, competition in every aspect of life - this is what drives progress.",
+      "confidence": 0.9,
+      "context_type": "foundational principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205557+00:00"
+    },
+    {
+      "document_name": "libertarian_individual_rights.txt",
+      "dimension": "self_reliance_vs_interdependence",
+      "quote_text": "individual liberty and personal responsibility.",
+      "confidence": 1.0,
+      "context_type": "guiding principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T18:49:26.205559+00:00"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The experiment file (`experiment.md`) specifies hypotheses (H2) that require statistical comparison between groups of documents (e.g., campaign vs. policy vs. crisis) but fails to include the mandatory 'Data Grouping and Custom Variable Mapping' section required by the Experiment Specification v10.0. This section is required to formally define how corpus metadata maps to analytical groups.",
+    "The machine-readable corpus manifest (`corpus.md`) lists only 4 documents. This sample size (N=4) is statistically insufficient for the correlation analysis (H1) and group comparisons (H2) proposed in the experiment. According to platform standards, a corpus of this size is only suitable for qualitative case-study analysis.",
+    "The `corpus.md` file contains a major inconsistency. The human-readable prose section describes a 15-document corpus, while the machine-readable YAML manifest explicitly states 'total_documents: 4' and lists only four documents.",
+    "The framework's `framing_independence_score` is calculated as the standard deviation of the four function scores within a single document. While this correctly measures the unevenness of emphasis, the primary hypothesis (H1) on framing independence requires a corpus-level correlation analysis *between* dimensions (e.g., correlating all Problem Definition scores with all Causal Attribution scores). The current metric is a per-document proxy, not the direct statistical test of the hypothesis."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-29T18:59:14.253103+00:00"
+}

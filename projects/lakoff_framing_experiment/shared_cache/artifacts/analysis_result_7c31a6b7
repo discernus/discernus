@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_b6dde32142fe",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "lakoff_framing_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"lakoff_framing_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document consistently employs language that aims to reconcile seemingly opposing moral frameworks, explicitly presenting a 'balanced approach' and arguing that 'individual responsibility and collective support are not mutually exclusive - they're complementary.' This centrist framing leads to scores generally centered around the 0.5 mark, reflecting an active attempt to synthesize Strict Father and Nurturant Parent models, rather than fully embracing one or the other.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"centrist_bipartisan_appeal.txt\",\n      \"dimensional_scores\": {\n        \"authority_vs_empathy\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"competition_vs_cooperation\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"self_reliance_vs_interdependence\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"authority_vs_empathy\",\n          \"quote_text\": \"The conservative emphasis on family authority and individual responsibility has merit - strong families do need strong parents who can make decisions for their children. But the progressive emphasis on community support and collective assistance also has value - families succeed best when they have access to quality education, healthcare, and economic opportunities.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit framing\"\n        },\n        {\n          \"dimension\": \"competition_vs_cooperation\",\n          \"quote_text\": \"Our approach emphasizes cooperation over competition, but recognizes that healthy competition drives excellence.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit framing\"\n        },\n        {\n          \"dimension\": \"self_reliance_vs_interdependence\",\n          \"quote_text\": \"Individual responsibility and collective support are not mutually exclusive - they're complementary.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "e71804ff14dd3b83cc2e74ad55a89c8d6dc0c4944c1212c3b5e5d9ce3417be55",
+  "execution_metadata": {
+    "start_time": "2025-08-29T18:49:26.208153+00:00",
+    "end_time": "2025-08-29T18:49:46.368710+00:00",
+    "duration_seconds": 20.160549
+  },
+  "input_artifacts": {
+    "framework_hash": "02c97aacf2b8fe33ad493e79f418e7e62b5c65ee34476180941c62689ee96f87",
+    "document_hashes": [
+      "7b73a8575631b4fbfe127e7877f3904a3e0995817ddec8fa4187978b3fc50c81"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "lakoff_framing_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/lakoff_framing_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250829T184732Z_b9ae953d"
+  }
+}
