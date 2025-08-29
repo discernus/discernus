@@ -11,22 +11,29 @@
 ## Current Status
 
 **Date**: 2025-01-27
-**Status**: Testing Infrastructure Fix Required - CLI v10 Compliance Complete
-**Next Priority**: Fix integration test infrastructure to unblock validation
+**Status**: Critical Infrastructure Complete - Ready for Variance Reduction
+**Next Priority**: Implement 3-run internal self-consistency for analysis stability
 
 **CLI v10 Compliance**: ✅ **COMPLETE**
 **Statistical Analysis Pipeline**: ✅ **COMPLETE**
 **Framework Validation**: ✅ **COMPLETE**
-**Current Blocker**: Integration tests failing due to incorrect mocking
+**Critical Infrastructure**: ✅ **COMPLETE** - All fail-fast and caching issues resolved
+**Current Focus**: Analysis variance reduction through internal self-consistency
 
 ---
 
 ## Current Sprint Planning
 
-### Sprint 1: Critical Infrastructure & Quality Assurance (IMMEDIATE)
+### Sprint 1: Critical Infrastructure & Quality Assurance (IMMEDIATE) ✅ **COMPLETED**
 
-**Timeline**: 1-2 days
-**Goal**: Fix critical system issues and establish testing foundation
+**Timeline**: 1-2 days ✅ **COMPLETED**
+**Goal**: Fix critical system issues and establish testing foundation ✅ **COMPLETED**
+
+**🎯 Sprint 1 Complete**: All critical infrastructure issues resolved. System now has:
+- ✅ Fail-fast behavior for critical pipeline components
+- ✅ Stable caching system with function code content storage
+- ✅ Validation caching eliminating redundant LLM calls
+- ✅ Ready for variance reduction implementation
 
 #### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase ✅ **COMPLETED**
 
@@ -89,6 +96,41 @@
 - **Effort**: 2 hours
 - **Priority**: **HIGH** - Significant development velocity improvement
 - **Status**: **NEEDS VERIFICATION** - Implementation exists but caching behavior needs testing
+
+### Sprint 2: Analysis Variance Reduction (IMMEDIATE) 🔄 **ACTIVE**
+
+**Timeline**: 3-5 days 🔄 **IN PROGRESS**
+**Goal**: Implement 3-run internal self-consistency to stabilize analysis variance without system changes 🔄 **READY TO START**
+
+**🎯 Sprint 2 Ready**: Caching stability verified, ready to implement variance reduction:
+- ✅ Analysis caching working reliably
+- ✅ Derived metrics caching stable with function code storage
+- ✅ Validation caching eliminating redundant checks
+- 🔄 Next: Implement 3-run internal self-consistency for analysis stability
+
+#### [VARIANCE-001] Implement 3-Run Internal Self-Consistency Analysis
+
+- **Description**: Implement internal self-consistency approach using 3 independent analysis runs with median aggregation to reduce variance in analysis scores
+- **Dependencies**: [CRITICAL-002] (caching must be stable first)
+- **Root Cause**: Single-run analysis produces variable results due to LLM stochasticity, causing correlation coefficients and derived metrics to vary between runs
+- **Solution**: Modify analysis prompts to request 3 independent analytical approaches, then aggregate results using median values for numerical scores
+- **Impact**:
+  - Reduces analysis variance without requiring orchestrator changes
+  - Improves statistical reliability of experiment results
+  - Maintains caching benefits for subsequent runs
+  - Cost-effective: 3x Gemini Flash Lite may outperform 1x Gemini Pro
+- **Acceptance Criteria**:
+  - [ ] Analysis prompts request 3 independent analytical approaches
+  - [ ] Results include 3 sets of scores with different analytical perspectives
+  - [ ] Median aggregation applied to numerical scores (raw, salience, confidence)
+  - [ ] Evidence from all runs combined for comprehensive coverage
+  - [ ] Conflicts resolved by selecting most strongly supported findings
+  - [ ] Caching system works with aggregated results
+  - [ ] Unit tests cover median aggregation logic
+- **Effort**: 2-3 hours
+- **Priority**: **HIGH** - Addresses main source of variance with low implementation risk
+- **Status**: 🔄 **READY TO START** - Caching stability verified, ready for implementation
+
 
 #### [CRITICAL-005] Fix Import Chain Dependency Failures
 
