@@ -1752,7 +1752,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress("🔍 Running evidence retrieval agent...")
             evidence_results = evidence_agent.run(
                 framework_hash=framework_hash,
-                statistical_results_hash=statistical_results_hash,
+                statistical_results=statistical_results,  # Pass parsed results directly
                 evidence_artifact_hashes=evidence_artifact_hashes
             )
             

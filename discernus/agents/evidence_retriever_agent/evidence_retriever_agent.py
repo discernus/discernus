@@ -62,7 +62,7 @@ class EvidenceRetrieverAgent:
         
         Args:
             framework_hash: Hash of framework specification artifact
-            statistical_results_hash: Hash of statistical results artifact
+            statistical_results: Parsed statistical results dictionary (not hash)
             evidence_artifact_hashes: List of evidence artifact hashes
             
         Returns:
@@ -73,20 +73,20 @@ class EvidenceRetrieverAgent:
             
             # Extract parameters
             framework_hash = kwargs.get('framework_hash')
-            statistical_results_hash = kwargs.get('statistical_results_hash')
+            statistical_results = kwargs.get('statistical_results')  # Now expecting parsed dict, not hash
             evidence_artifact_hashes = kwargs.get('evidence_artifact_hashes', [])
             
             if not framework_hash:
                 raise ValueError("framework_hash is required")
-            if not statistical_results_hash:
-                raise ValueError("statistical_results_hash is required")
+            if not statistical_results:
+                raise ValueError("statistical_results is required")
             if not evidence_artifact_hashes:
                 raise ValueError("evidence_artifact_hashes list is required")
             
-            # Step 1: Load framework and statistical results
-            self.logger.info("Step 1: Loading framework and statistical results...")
+            # Step 1: Load framework and use statistical results directly
+            self.logger.info("Step 1: Loading framework and using statistical results...")
             framework_spec = self._load_framework_specification(framework_hash)
-            statistical_results = self._load_statistical_results(statistical_results_hash)
+            # statistical_results is already parsed, no loading needed
             self.logger.info("Successfully loaded framework and statistical results")
             
             # Step 2: Build evidence wrapper
@@ -102,7 +102,7 @@ class EvidenceRetrieverAgent:
             
             # Step 4: Store evidence results
             self.logger.info("Step 4: Storing evidence results...")
-            evidence_artifact_hash = self._store_evidence_results(evidence_results, statistical_results_hash)
+            evidence_artifact_hash = self._store_evidence_results(evidence_results, framework_hash)  # Use framework_hash for metadata
             
             # Log success
             if self.audit_logger:
@@ -147,40 +147,7 @@ class EvidenceRetrieverAgent:
             self.logger.error(f"Failed to load framework specification: {e}")
             raise
     
-    def _load_statistical_results(self, statistical_results_hash: str) -> Dict[str, Any]:
-        """Load statistical results from artifact storage."""
-        try:
-            content = self.artifact_storage.get_artifact(statistical_results_hash)
-            if not content:
-                raise ValueError(f"Statistical results artifact not found: {statistical_results_hash}")
-            
-            # Try pickle format first (for binary data), then repr format, then JSON
-            try:
-                # Try pickle first (for binary data)
-                import pickle
-                return pickle.loads(content)
-            except (pickle.UnpicklingError, EOFError, AttributeError):
-                # Try Python repr format (THIN approach)
-                try:
-                    content_str = content.decode('utf-8')
-                    # Preprocess nan values before ast.literal_eval
-                    content_str = content_str.replace('nan', 'float("nan")')
-                    # Use ast.literal_eval for safer evaluation of repr() strings
-                    import ast
-                    return ast.literal_eval(content_str)
-                except (ValueError, SyntaxError, UnicodeDecodeError):
-                    # Fallback to JSON format for backward compatibility
-                    try:
-                        return json.loads(content.decode('utf-8'))
-                    except json.JSONDecodeError:
-                        # If JSON fails, try eval as last resort (for complex Python objects)
-                        # But first handle nan values
-                        content_str = content_str.replace('nan', 'float("nan")')
-                        return eval(content_str)
-            
-        except Exception as e:
-            self.logger.error(f"Failed to load statistical results: {e}")
-            raise
+
     
     def _build_evidence_wrapper(self, evidence_artifact_hashes: List[str]) -> Optional[EvidenceMatchingWrapper]:
         """Build the evidence wrapper from artifact hashes."""
@@ -450,7 +417,7 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
         }
     
     def _store_evidence_results(self, evidence_results: List[Dict[str, Any]], 
-                               statistical_results_hash: str) -> str:
+                               framework_hash: str) -> str:
         """Store evidence results in a content-addressable file."""
         try:
             # Create evidence artifact
@@ -458,7 +425,7 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
                 "metadata": {
                     "agent": self.agent_name,
                     "timestamp": datetime.utcnow().isoformat(),
-                    "statistical_results_hash": statistical_results_hash,
+                    "framework_hash": framework_hash,
                     "total_findings": len(evidence_results),
                     "total_quotes": sum(len(result['quotes']) for result in evidence_results)
                 },

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "14ad8f3eb6b70a1d238a3b27c44fc7d4b6e5c419cb779b5b99cce880a5988722"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:21:37.032367+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The corrupt political establishment has betrayed the American people",
+      "confidence": 0.9,
+      "context_type": "direct statement of elite corruption",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032356+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+      "confidence": 0.95,
+      "context_type": "detailed crisis description followed by a call for restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032358+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+      "confidence": 0.85,
+      "context_type": "assertion of direct popular will as political mandate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032359+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "To any in Congress who do not believe we should enforce our laws, I would ask you this one question: What would you say to the American family that loses their jobs, their income, or their loved one because America refused to uphold its laws and defend its borders?",
+      "confidence": 0.8,
+      "context_type": "framing of opposition as detrimental to the nation and implying illegitimate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032360+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+      "confidence": 0.85,
+      "context_type": "explicit mention of 'draining the swamp' and systemic corruption measures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032361+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I just met with officials and workers from a great American company, Harley-Davidson. In fact, they proudly displayed five of their magnificent motorcycles, made in the U.S.A., on the front lawn of the White House. And they wanted me to ride one, and I said, 'No, thank you.' At our meeting, I asked them, how are you doing, how is business? They said that it's good. I asked them further, how are you doing with other countries, mainly international sales? They told me\u2014without even complaining, because they have been so mistreated for so long that they've become used to it\u2014that it's very hard to do business with other countries because they tax our goods at such a high rate.",
+      "confidence": 0.7,
+      "context_type": "depiction of direct engagement with 'ordinary' Americans' grievances, contrasting with implied previous political class inaction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032362+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "While we may be a nation divided on policies, we are a country that stands united in condemning hate and evil in all of its very ugly forms. ... We are one people with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+      "confidence": 0.9,
+      "context_type": "strong assertion of national unity and shared identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032363+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Our obligation is to serve, protect, and defend the citizens of the United States. We are also taking strong measures to protect our Nation from radical Islamic terrorism. ... We cannot allow a beachhead of terrorism to form inside America. We cannot allow our Nation to become a sanctuary for extremists.",
+      "confidence": 0.9,
+      "context_type": "emphasis on national protection from external threats and exclusionary rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032364+00:00"
+    },
+    {
+      "document_name": "trump_sotu_2017.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+      "confidence": 0.9,
+      "context_type": "framing of economic decline as a result of external forces and betrayal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:21:37.032365+00:00"
+    }
+  ]
+}
