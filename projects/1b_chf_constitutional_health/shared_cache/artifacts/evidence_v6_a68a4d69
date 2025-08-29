@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:03:53.834873+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Again we are here in the sanctuary of democracy, and once again our democracy has spoken. So let me begin by congratulating all of you here in the 104th Congress and congratulating you, Mr. Speaker.",
+      "confidence": 1.0,
+      "context_type": "opening_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834861+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "This year I'll ask the Senate to approve START II to eliminate weapons that carry 5,000 more warheads.",
+      "confidence": 0.9,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834862+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834864+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We must not ask Government to do what we should do for ourselves. We should rely on Government as a partner to help us to do more for ourselves and for each other.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834865+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "But to make sure our military is ready for action and to provide the pay and the quality of life the military and their families deserve, I'm asking the Congress to add $25 billion in defense spending over the next 6 years.",
+      "confidence": 0.9,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834866+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The American people look at their Capital, and they see a city where the well-connected and the well-protected can work the system, but the interests of ordinary citizens are often left out.",
+      "confidence": 0.9,
+      "context_type": "critique_of_government",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834867+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Our Government, once a champion of national purpose, is now seen by many as simply a captive of narrow interests, putting more burdens on our citizens rather than equipping them to get ahead.",
+      "confidence": 0.85,
+      "context_type": "critique_of_government",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834868+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times...",
+      "confidence": 1.0,
+      "context_type": "historical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834869+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So tonight we must forge a new social compact to meet the challenges of this time. As we enter a new era, we need a new set of understandings, not just with Government but, even more important, with one another as Americans.",
+      "confidence": 0.9,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834870+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:03:53.834871+00:00"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:49:51.190804+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 0.9,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190789+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "freedom, by its nature, must be chosen and defended by citizens and sustained by the rule of law and the protection of minorities.",
+      "confidence": 0.9,
+      "context_type": "Thematic Reinforcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190791+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Yet rights must be more than the grudging concessions of dictators. They are secured by free dissent and the participation of the governed.",
+      "confidence": 0.8,
+      "context_type": "Supporting Argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190792+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190793+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Vice President Cheney, Mr. Chief Justice, President Carter, President Clinton, Members of the United States Congress, reverend clergy, distinguished guests, fellow citizens:",
+      "confidence": 0.8,
+      "context_type": "Formal Address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190794+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "we celebrate the durable wisdom of our Constitution",
+      "confidence": 0.9,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190795+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190797+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "On this day... we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 0.9,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190797+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America has need of idealism and courage because we have essential work at home, the unfinished work of American freedom.",
+      "confidence": 0.8,
+      "context_type": "Call to Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190798+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "And now we will extend this vision by reforming great institutions to serve the needs of our time.",
+      "confidence": 0.9,
+      "context_type": "Policy Stance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190800+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Americans move forward in every generation by reaffirming all that is good and true that came before, ideals of justice and conduct that are the same yesterday, today, and forever.",
+      "confidence": 0.9,
+      "context_type": "Thematic Reinforcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190801+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.190802+00:00"
+    }
+  ]
+}

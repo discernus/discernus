@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:02:27.522273+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Again, I ask you to pass a real Patients' Bill of Rights. I ask you to pass commonsense gun safety legislation. I ask you to pass campaign finance reform. I ask you to vote up or down on judicial nominations and other important appointees. And again, I ask you\u2014I implore you to raise the minimum wage.",
+      "confidence": 1.0,
+      "context_type": "direct appeal to legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522264+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522266+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "First, I want to thank our Secretary of Defense, Bill Cohen, for symbolizing our bipartisan commitment to national security. Thank you, sir. Even more, I want to thank his wife, Janet, who, more than any other American citizen, has tirelessly traveled this world to show the support we all feel for our troops.",
+      "confidence": 1.0,
+      "context_type": "explicit recognition of institutional role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522268+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522269+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The lesson of our history and the lesson of the last 7 years is that great goals are reached step by step, always building on our progress, always gaining ground.",
+      "confidence": 1.0,
+      "context_type": "advocacy for gradual reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522270+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.522271+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "5b94e74c506174c0d896282c89875b3ab5c530f0d83ec86f93852c71985241c3"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:21.962812+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Mr. Speaker, at your swearing-in, you asked us all to work together in a spirit of civility and bipartisanship. Mr. Speaker, let's do exactly that.",
+      "confidence": 0.98,
+      "context_type": "Direct Appeal for Bipartisanship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962804+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No Evidence Found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962806+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Now, I ask this Congress to resist the tobacco lobby, to reaffirm the FDA's authority to protect our children from tobacco, and to hold tobacco companies accountable while protecting tobacco farmers.",
+      "confidence": 0.95,
+      "context_type": "Policy Appeal to Institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962807+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No Evidence Found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962808+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So with these four measures\u2014saving Social Security, strengthening Medicare, establishing the USA accounts, supporting long-term care\u2014 we can begin to meet our generation's historic responsibility to establish true security for 21st century seniors.",
+      "confidence": 1.0,
+      "context_type": "Policy Summary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962809+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No Evidence Found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.962810+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e841b19feb1f217243183fa31e77f745705d60a81a8a1571cde8b6d841212b6d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:05:14.309072+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Finally, I have kept my promise to appoint a Justice to the United States Supreme Court, from my list of 20 judges, who will defend our Constitution.",
+      "confidence": 0.95,
+      "context_type": "policy_action_justification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309063+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "And we're imposing a new rule which mandates that for every one new regulation, two old regulations must be eliminated.",
+      "confidence": 0.7,
+      "context_type": "policy_announcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309066+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "To launch our national rebuilding, I will be asking Congress to approve legislation that produces a $1 trillion investment in the infrastructure of the United States\u2014financed through both public and private capital\u2014creating millions of new jobs.",
+      "confidence": 0.95,
+      "context_type": "legislative_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309067+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "But our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan's life, from reaching those in need.",
+      "confidence": 0.9,
+      "context_type": "institutional_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309068+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309069+00:00"
+    },
+    {
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns.",
+      "confidence": 0.95,
+      "context_type": "narrative_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.309070+00:00"
+    }
+  ]
+}

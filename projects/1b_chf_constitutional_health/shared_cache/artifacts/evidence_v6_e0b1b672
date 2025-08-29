@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:06:37.087593+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So I ask this Congress to join me in doing whatever proves necessary, because we cannot consign our Nation to an open-ended recession. And to ensure that a crisis of this magnitude never happens again, I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system.",
+      "confidence": 0.95,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087584+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087587+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "And that's why I've asked Vice President Biden to lead a tough, unprecedented oversight effort; because nobody messes with Joe.",
+      "confidence": 0.9,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087588+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "This time, CEOs won't be able to use taxpayer money to pad their paychecks or buy fancy drapes or disappear on a private jet. Those days are over.",
+      "confidence": 0.85,
+      "context_type": "thematic_implication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087589+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "In each case, Government didn't supplant private enterprise; it catalyzed private enterprise. It created the conditions for thousands of entrepreneurs and new businesses to adapt and to thrive.",
+      "confidence": 0.95,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087590+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.087591+00:00"
+    }
+  ]
+}

@@ -1,0 +1,430 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T05:03:06.679622",
+    "framework_hash": "d05cc2e5d8c1a0f4a0ffe96d323f2e67a17d711a9e88de05c631ee4ef5c771c3",
+    "total_findings": 5,
+    "total_quotes": 25
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Trump administration's extreme Constitutional Pathology and significantly lower Constitutional Health Index across multiple speeches (e.g., Inaugural 2017, simulated 2025). This discourse distinctly deviates from all other administrations (Tukey HSD, Descriptive Stats)."
+      },
+      "queries_used": [
+        "Trump_Inaugural_2017 AND (\"bypass the system\" OR \"illegitimate authority\" OR \"new system\")",
+        "Trump_SOTU_2025 AND (\"broken system\" OR \"radical transformation\" OR \"complete overhaul\")",
+        "Trump_SOTU_2020 AND (\"emergency powers\" OR \"failed establishment\" OR \"deep state\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.6108388900756836,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good. Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5937977433204651,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.9,
+          "relevance_score": 0.5801845788955688,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Think of this Capitol. Think of this very Chamber, where lawmakers before you voted to end slavery, to build the railroads and the highways and defeat fascism, to secure civil rights, and to face down evil empires. Here tonight, we have legislators from across this magnificent republic. You have come from the rocky shores of Maine and the volcanic peaks of Hawaii; from the snowy woods of Wisconsin and the red deserts of Arizona; from the green farms of Kentucky and the golden beaches of California. Together, we represent the most extraordinary nation in all of history.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.5743424892425537,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The Institutional Health Index is the most significant differentiator among administrations (ANOVA p=1.93e-08), highlighting the contrasting rhetoric on institutional respect versus subversion."
+      },
+      "queries_used": [
+        "Trump AND (\"corrupt institutions\" OR \"biased system\" OR \"illegitimate authority\")",
+        "Clinton AND (\"institutional authority\" OR \"separation of powers\" OR \"judicial review\")",
+        "Obama AND (\"institutional respect\" OR \"expertise recognition\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations. They\u2019re not consumed with personal ambition. They don\u2019t obsess over their differences. They focus on the mission at hand. They work together.",
+          "document_name": "Obama_SOTU_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.6905659437179565,
+          "metadata": {
+            "document_name": "Obama_SOTU_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans:",
+          "document_name": "Obama_SOTU_2012.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.6048814058303833,
+          "metadata": {
+            "document_name": "Obama_SOTU_2012.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority. Appropriate Members of Congress have been kept informed.",
+          "document_name": "Bush_SOTU_2003.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.547908365726471,
+          "metadata": {
+            "document_name": "Bush_SOTU_2003.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thanks to the leadership of Vice President Gore, we have a Government for the information age, once again, a Government that is a progressive instrument of the common good\u2014rooted in our oldest values of opportunity, responsibility, and community; devoted to fiscal responsibility; determined to give our people the tools they need to make the most of their own lives in the 21st century\u2014a 21st century Government for 21st century America.",
+          "document_name": "Clinton_SOTU_1996.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.5335967540740967,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1996.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.5262777805328369,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban...",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.5189468264579773,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Consistent high Constitutional Health and low Pathology in discourse from traditional administrations (Clinton, Bush W., Obama, Biden), which cluster together."
+      },
+      "queries_used": [
+        "Biden_Inaugural_2021 AND (\"constitutional process\" OR \"democratic norms\")",
+        "Obama_SOTU_2012 AND (\"respect for institutions\" OR \"gradual reform\")",
+        "Clinton_SOTU_1996 AND (\"constitutional stability\" OR \"legislative process\")",
+        "Bush_SOTU_2004 AND (\"due process\" OR \"checks and balances\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations. They\u2019re not consumed with personal ambition. They don\u2019t obsess over their differences. They focus on the mission at hand. They work together.",
+          "document_name": "Obama_SOTU_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.7193336486816406,
+          "metadata": {
+            "document_name": "Obama_SOTU_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans:",
+          "document_name": "Obama_SOTU_2012.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.6541934013366699,
+          "metadata": {
+            "document_name": "Obama_SOTU_2012.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I will defend the Constitution. I will defend our democracy. I will defend America.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.6527305245399475,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Again, I ask you to pass a real Patients' Bill of Rights. I ask you to pass commonsense gun safety legislation. I ask you to pass campaign finance reform. I ask you to vote up or down on judicial nominations and other important appointees.",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.98,
+          "relevance_score": 0.6498017907142639,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The people\u2014the will of the people has been heard, and the will of the people has been heeded. We\u2019ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.6416728496551514,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I will submit to Congress for 1999 the first balanced budget in 30 years.",
+          "document_name": "Clinton_SOTU_1995.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.6094142198562622,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1995.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution.",
+          "document_name": "Clinton_SOTU_1993.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.5995277166366577,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1993.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 7
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Trump administration's Constitutional Health Index exhibits significantly higher variance (Levene's Test p<0.001), indicating more volatile and unpredictable shifts in constitutional rhetoric compared to other administrations."
+      },
+      "queries_used": [
+        "Trump_SOTU_2018 AND (\"process criticism\" OR \"institutional attacks\")",
+        "Trump_SOTU_2019 AND (\"procedural rejection\" OR \"institutional subversion\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban...",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.5627598762512207,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good. Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5524227619171143,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation. It just doesn\u2019t work that way.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.95,
+          "relevance_score": 0.5319114327430725,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Procedural and Systemic axes also show significant differences across administrations, contributing to the overall divergence (ANOVA p<0.001 for both)."
+      },
+      "queries_used": [
+        "Trump AND (\"procedural rejection\" OR \"systemic replacement\")",
+        "Biden AND (\"procedural legitimacy\" OR \"systemic continuity\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We\u2019ll meet the test, protect freedom and liberty, expand fairness and opportunity. And we will save democracy.",
+          "document_name": "Biden_SOTU_2023.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.6307870745658875,
+          "metadata": {
+            "document_name": "Biden_SOTU_2023.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And today, though bruised, our democracy remains unbowed and unbroken.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.6104955673217773,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have to prove democracy still works, that our Government still works and we can deliver for our people.",
+          "document_name": "Biden_SOTU_2022.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 1.0,
+          "relevance_score": 0.5812476277351379,
+          "metadata": {
+            "document_name": "Biden_SOTU_2022.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "To restore competence and effectiveness to our Federal Government, my administration will establish the brandnew Department of Government Efficiency.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 1.0,
+          "relevance_score": 0.4687703251838684,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because today we are not merely transferring power from one administration to another or from one party to another, but we are transferring power from Washington, DC, and giving it back to you, the people.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.9,
+          "relevance_score": 0.4653084874153137,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    }
+  ]
+}

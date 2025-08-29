@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:22.180800+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The people\u2014the will of the people has been heard, and the will of the people has been heeded. We\u2019ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+      "confidence": 0.95,
+      "context_type": "direct_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180791+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "here we stand, just days after a riotous mob thought they could use violence to silence the will of the people, to stop the work of our democracy, to drive us from this sacred ground. It did not happen. It will never happen, not today, not tomorrow, not ever\u2014not ever.",
+      "confidence": 1.0,
+      "context_type": "rejection_of_dimension_concept",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180794+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank my predecessors of both parties for their presence here today. I thank them from the bottom of my heart. And I know the resilience of our Constitution and the strength, the strength of our Nation...",
+      "confidence": 0.95,
+      "context_type": "direct_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180795+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "And we must reject the culture in which facts themselves are manipulated and even manufactured.",
+      "confidence": 0.9,
+      "context_type": "rejection_of_dimension_concept",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180796+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We\u2019ll press forward with speed and urgency, for we have much to do in this winter of peril and significant possibilities: much to repair, much to restore, much to heal, much to build, and much to gain.",
+      "confidence": 0.95,
+      "context_type": "direct_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180797+00:00"
+    },
+    {
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "And when we do, we will write the next great chapter in the history of the United States of America: the American story, a story that might sound something like a song that means a lot to me.",
+      "confidence": 1.0,
+      "context_type": "rejection_of_dimension_concept",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.180799+00:00"
+    }
+  ]
+}

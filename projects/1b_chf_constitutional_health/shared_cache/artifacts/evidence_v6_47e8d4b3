@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:05:14.248638+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 1.0,
+      "context_type": "explicit affirmation of constitutional process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248630+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248632+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "And now we will extend this vision by reforming great institutions to serve the needs of our time.",
+      "confidence": 0.9,
+      "context_type": "advocacy for constructive institutional reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248633+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248634+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Americans move forward in every generation by reaffirming all that is good and true that came before, ideals of justice and conduct that are the same yesterday, today, and forever.",
+      "confidence": 1.0,
+      "context_type": "explicit affirmation of historical and systemic continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248635+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.248636+00:00"
+    }
+  ]
+}

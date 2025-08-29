@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:06:37.125063+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So that\u2019s why I\u2019m calling on Congress to pass the Protect the Right to Organize Act\u2014the PRO Act\u2014and send it to my desk so we can support the right to unionize.",
+      "confidence": 0.95,
+      "context_type": "call_for_legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125047+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.",
+      "confidence": 1.0,
+      "context_type": "call_for_legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125049+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125051+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The National Institute of Health\u2014the NIH\u2014I believe, should create a similar Advanced Research Projects Agency for Health.",
+      "confidence": 0.9,
+      "context_type": "deference_to_institutional_model",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125052+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "And we won\u2019t ignore what our intelligence agencies have determined to be the most lethal terrorist threat to the homeland today: White supremacy is terrorism.",
+      "confidence": 0.9,
+      "context_type": "deference_to_institutional_expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125053+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125057+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have to prove democracy still works, that our Government still works and we can deliver for our people.",
+      "confidence": 1.0,
+      "context_type": "thematic_statement_of_purpose",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125059+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "I\u2019m not looking to punish anybody. But I will not add a tax burden\u2014an additional tax burden to the middle class in this country. They\u2019re already paying enough.",
+      "confidence": 0.8,
+      "context_type": "advocacy_for_reform_within_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125060+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "He\u2019s deadly earnest about becoming the most significant, consequential nation in the world. He and others\u2014autocrats\u2014think that democracy can\u2019t compete in the 21st century with autocracies because it takes too long to get consensus.",
+      "confidence": 0.95,
+      "context_type": "rejection_of_alternative_systems",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.125061+00:00"
+    }
+  ]
+}

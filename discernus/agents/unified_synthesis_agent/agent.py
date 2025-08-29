@@ -123,9 +123,9 @@ class UnifiedSynthesisAgent:
                 else:
                     return obj
             
-            # Convert tuple keys before calling repr()
-            safe_statistical_results = convert_tuple_keys_for_repr(research_data['statistical_results'])
-            research_data_repr = repr(safe_statistical_results)
+            # Convert tuple keys before calling repr() - apply to entire research_data
+            safe_research_data = convert_tuple_keys_for_repr(research_data)
+            research_data_repr = repr(safe_research_data)
             
             # 3. Load evidence if available
             evidence_hash = assets.get('evidence_retrieval_results_hash')

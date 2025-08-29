@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:21.983612+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+      "confidence": 1.0,
+      "context_type": "explicit_statement_of_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983603+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_supporting_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983606+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Government has great responsibilities for public safety and public health, for civil rights and common schools.",
+      "confidence": 0.9,
+      "context_type": "acknowledgement_of_institutional_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983607+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_supporting_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983608+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have a place, all of us, in a long story, a story we continue but whose end we will not see.",
+      "confidence": 1.0,
+      "context_type": "central_metaphorical_theme",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983609+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_supporting_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.983610+00:00"
+    }
+  ]
+}

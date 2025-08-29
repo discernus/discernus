@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6357ab4c07af6f04b0d379f4ae2a41e24284d2ea634b1b6189a11ba8a197807c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:21.941915+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I submit my plan tomorrow, and I'm asking you to pass it by March 20th. And I ask the American people to let you know they want this action by March 20th.",
+      "confidence": 1.0,
+      "context_type": "direct_appeal_to_legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941904+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "There are certain things that a President can do without Congress, and I'm going to do them.",
+      "confidence": 0.9,
+      "context_type": "assertion_of_unilateral_executive_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941908+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_respect",
+      "quote_text": "And we did it together. There were honest differences right here in this Chamber. But when the war began, you put partisanship aside, and we supported our troops.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment_and_praise_of_congressional_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941910+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "This Government is too big and spends too much. And I call upon Congress to adopt a measure that will help put an end to the annual ritual of filling the budget with pork barrel appropriations.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_governmental_practice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941911+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must make a choice. Now, some pretend we can have it both ways. They call it \"play or pay,\" but that expensive approach is unstable. It will mean higher taxes, fewer jobs, and eventually a system under complete Government control.",
+      "confidence": 0.9,
+      "context_type": "rejection_of_systemic_change_in_favor_of_reforming_existing_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941912+00:00"
+    },
+    {
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:21.941913+00:00"
+    }
+  ]
+}

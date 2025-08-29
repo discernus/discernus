@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:22.173839+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight, I\u2019m calling on Congress to produce a bill that generates at least $1.5 trillion for the new infrastructure investment that our country so desperately needs.",
+      "confidence": 0.95,
+      "context_type": "explicit call for legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173826+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Over the next few weeks, the House and Senate will be voting on an immigration reform package.",
+      "confidence": 0.9,
+      "context_type": "acknowledgement of legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173829+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Isn\u2019t it a disgrace that it can now take 10 years just to get a minor permit approved for the building of a simple road?",
+      "confidence": 0.7,
+      "context_type": "criticism of procedural efficiency",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173830+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "we have proposed new legislation that will fix our immigration laws and support our ICE and Border Patrol agents\u2014these are great people; these are great, great people\u2014that work so hard in the midst of such danger so that this can never happen again.",
+      "confidence": 0.95,
+      "context_type": "praise for law enforcement institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173831+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written, including a great new Supreme Court Justice and more circuit court judges than any new administration in the history of our country.",
+      "confidence": 0.9,
+      "context_type": "affirmation of judicial appointment process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173833+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "In the past, we have foolishly released hundreds and hundreds of dangerous terrorists, only to meet them again on the battlefield, including the ISIS leader, al-Baghdadi, who we captured, who we had, who we released.",
+      "confidence": 0.9,
+      "context_type": "criticism of past institutional action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173833+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For over 30 years, Washington has tried and failed to solve this problem. This Congress can be the one that finally makes it happen.",
+      "confidence": 0.8,
+      "context_type": "criticism of past institutional failure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173834+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "this Capitol\u2014this living monument\u2014this is the monument to the American people.",
+      "confidence": 0.9,
+      "context_type": "symbolic endorsement of systemic institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173835+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Together, we are rediscovering the American way. In America, we know that faith and family, not government and bureaucracy, are the center of American life. The motto is, \"In God We Trust.\"",
+      "confidence": 0.85,
+      "context_type": "appeal to tradition and foundational values",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173836+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.173837+00:00"
+    }
+  ]
+}

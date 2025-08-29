@@ -1719,8 +1719,27 @@ class CleanAnalysisOrchestrator:
                         break
             
             if not statistical_results_hash:
-                # Store current statistical results
-                statistical_content = json.dumps(statistical_results, indent=2).encode('utf-8')
+                # Store current statistical results - convert tuple keys to strings for JSON serialization
+                def convert_tuple_keys_for_json(obj):
+                    """Convert tuple keys to strings for safe JSON serialization."""
+                    if isinstance(obj, dict):
+                        converted = {}
+                        for k, v in obj.items():
+                            if isinstance(k, tuple):
+                                converted_key = str(k)
+                            else:
+                                converted_key = k
+                            converted[converted_key] = convert_tuple_keys_for_json(v)
+                        return converted
+                    elif isinstance(obj, list):
+                        return [convert_tuple_keys_for_json(item) for item in obj]
+                    elif isinstance(obj, tuple):
+                        return tuple(convert_tuple_keys_for_json(item) for item in obj)
+                    else:
+                        return obj
+                
+                safe_statistical_results = convert_tuple_keys_for_json(statistical_results)
+                statistical_content = json.dumps(safe_statistical_results, indent=2).encode('utf-8')
                 statistical_results_hash = self.artifact_storage.put_artifact(
                     statistical_content,
                     {"artifact_type": "statistical_results_with_data", "agent": "orchestrator"}
@@ -1781,8 +1800,28 @@ class CleanAnalysisOrchestrator:
                 "statistical_results": statistical_results['statistical_summary']
             }
             
+            # Convert tuple keys to strings for safe JSON serialization
+            def convert_tuple_keys_for_json(obj):
+                """Convert tuple keys to strings for safe JSON serialization."""
+                if isinstance(obj, dict):
+                    converted = {}
+                    for k, v in obj.items():
+                        if isinstance(k, tuple):
+                            converted_key = str(k)
+                        else:
+                            converted_key = k
+                        converted[converted_key] = convert_tuple_keys_for_json(v)
+                    return converted
+                elif isinstance(obj, list):
+                    return [convert_tuple_keys_for_json(item) for item in obj]
+                elif isinstance(obj, tuple):
+                    return tuple(convert_tuple_keys_for_json(item) for item in obj)
+                else:
+                    return obj
+            
+            safe_research_data = convert_tuple_keys_for_json(research_data)
             research_data_hash = self.artifact_storage.put_artifact(
-                json.dumps(research_data, indent=2).encode('utf-8'),
+                json.dumps(safe_research_data, indent=2).encode('utf-8'),
                 {"artifact_type": "complete_research_data"}
             )
 
@@ -1820,7 +1859,6 @@ class CleanAnalysisOrchestrator:
                 'research_data_artifact_hash': research_data_hash,
                 'evidence_retrieval_results_hash': evidence_results.get('evidence_artifact_hash'),
                 'artifact_storage': self.artifact_storage,
-                'statistical_results': statistical_results,
                 'derived_metrics_results': getattr(self, '_derived_metrics_results', {}),
                 'analysis_results': getattr(self, '_analysis_results', []),
                 'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:49:51.219481+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I will send this Congress a budget filled with ideas that are practical, not partisan.",
+      "confidence": 0.95,
+      "context_type": "statement_of_intent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219473+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But new sanctions passed by this Congress, at this moment in time, will all but guarantee that diplomacy fails: alienating America from its allies, making it harder to maintain sanctions, and ensuring that Iran starts up its nuclear program again.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_policy_outcome",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219475+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans:",
+      "confidence": 0.95,
+      "context_type": "formal_address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219476+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "But for far too long, lobbyists have rigged the Tax Code with loopholes that let some corporations pay nothing while others pay full freight.",
+      "confidence": 0.85,
+      "context_type": "critique_of_corruption",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219478+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The shadow of crisis has passed, and the State of the Union is strong.",
+      "confidence": 0.95,
+      "context_type": "affirmation_of_status",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219479+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.219480+00:00"
+    }
+  ]
+}

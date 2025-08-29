@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:49:51.247676+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written, including a great new Supreme Court Justice and more circuit court judges than any new administration in the history of our country.",
+      "confidence": 0.9,
+      "context_type": "direct_reference_to_constitutional_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247667+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But we must be clear: Terrorists are not merely criminals, they are unlawful enemy combatants. And when captured overseas, they should be treated like the terrorists they are. In the past, we have foolishly released hundreds and hundreds of dangerous terrorists, only to meet them again on the battlefield, including the ISIS leader, al-Baghdadi, who we captured, who we had, who we released. So today I'm keeping another promise. I just signed, prior to walking in, an order directing Secretary Mattis\u2014who is doing a great job, thank you\u2014to reexamine our military detention policy and to keep open the detention facilities in Guantanamo Bay.",
+      "confidence": 0.7,
+      "context_type": "argument_for_extra-judicial_measures_for_specific_group",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247669+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans: Less than 1 year has passed since I first stood at this podium, in this majestic Chamber, to speak on behalf of the American people and to address their concerns, their hopes, and their dreams.",
+      "confidence": 0.9,
+      "context_type": "formal_acknowledgement_of_institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247671+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247672+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Tonight I am calling on Congress to finally close the deadly loopholes that have allowed MS-13 and other criminal gangs to break into our country. We have proposed new legislation that will fix our immigration laws and support our ICE and Border Patrol agents\u2014these are great people, these are great, great people\u2014that work so hard in the midst of such danger so that this can never happen again.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_reform_and_improvement_within_existing_framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247673+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:49:51.247674+00:00"
+    }
+  ]
+}

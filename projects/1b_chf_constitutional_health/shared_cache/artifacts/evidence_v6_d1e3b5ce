@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:05:14.258046+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Good jobs begin with good schools, and here we've made a fine start. Republicans and Democrats worked together to achieve historic education reform so that no child is left behind.",
+      "confidence": 0.9,
+      "context_type": "explicit reference to legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258038+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "I will not wait on events while dangers gather. I will not stand by as peril draws closer and closer. The United States of America will not permit the world's most dangerous regimes to threaten us with the world's most destructive weapons.",
+      "confidence": 0.9,
+      "context_type": "assertion of extra-procedural executive action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258040+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Our progress is a tribute to the spirit of the Afghan people, to the resolve of our coalition, and to the might of the United States military.",
+      "confidence": 0.9,
+      "context_type": "praise for institutional role and effectiveness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258041+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258042+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America will always stand firm for the nonnegotiable demands of human dignity: the rule of law; limits on the power of the state; respect for women; private property; free speech; equal justice; and religious tolerance.",
+      "confidence": 0.9,
+      "context_type": "affirmation of core constitutional principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258043+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:05:14.258044+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T04:50:22.003457+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+      "confidence": 0.95,
+      "context_type": "Appeal to constitutional duty",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003448+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And tomorrow I will issue an Executive order that directs Federal agencies to ignore any future earmark that is not voted on by Congress.",
+      "confidence": 0.85,
+      "context_type": "Executive action on legislative procedure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003450+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "General Petraeus has warned that too fast a drawdown could result in, quote, \"the disintegration of the Iraqi security forces, Al Qaida-Iraq regaining lost ground, and a marked increase in violence.\"",
+      "confidence": 0.95,
+      "context_type": "Deference to military expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003451+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+      "confidence": 0.8,
+      "context_type": "Critique of legislative practice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003452+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "By trusting the people, our Founders wagered that a great and noble nation could be built on the liberty that resides in the hearts of all men and women. By trusting the people, succeeding generations transformed our fragile, young democracy into the most powerful nation on Earth and a beacon of hope for millions.",
+      "confidence": 0.95,
+      "context_type": "Appeal to founding principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003453+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T04:50:22.003455+00:00"
+    }
+  ]
+}

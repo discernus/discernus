@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:02:27.603151+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Every 4 years, we gather on these steps to carry out the orderly and peaceful transfer of power, and we are grateful to President Obama and First Lady Michelle Obama for their gracious aid throughout this transition.",
+      "confidence": 0.95,
+      "context_type": "opening_formality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603143+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "What truly matters is not which party controls our Government, but whether our Government is controlled by the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.",
+      "confidence": 0.98,
+      "context_type": "core_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603145+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We will be protected by the great men and women of our military and law enforcement, and most importantly, we will be protected by God.",
+      "confidence": 0.8,
+      "context_type": "supporting_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603146+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.",
+      "confidence": 1.0,
+      "context_type": "core_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603147+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603148+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "That all changes, starting right here and right now, because this moment is your moment: It belongs to you.",
+      "confidence": 0.95,
+      "context_type": "thesis_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:02:27.603149+00:00"
+    }
+  ]
+}

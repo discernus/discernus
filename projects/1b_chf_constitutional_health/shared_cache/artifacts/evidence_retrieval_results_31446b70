@@ -1,0 +1,665 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T05:06:03.577035",
+    "framework_hash": "d05cc2e5d8c1a0f4a0ffe96d323f2e67a17d711a9e88de05c631ee4ef5c771c3",
+    "total_findings": 8,
+    "total_quotes": 39
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Donald Trump's presidential discourse consistently exhibits significantly lower constitutional health and higher pathology compared to all other administrations, positioning him as a clear outlier."
+      },
+      "queries_used": [
+        "Trump 'broken system'",
+        "Trump 'corrupt institutions'",
+        "Trump 'only I can fix it'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban...",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 1.0,
+          "relevance_score": 0.569242000579834,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.5560464859008789,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have to change the system to reflect our better selves.",
+          "document_name": "Obama_SOTU_2013.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.4491511881351471,
+          "metadata": {
+            "document_name": "Obama_SOTU_2013.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.",
+          "document_name": "Bush_SOTU_2004.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.4425037205219269,
+          "metadata": {
+            "document_name": "Bush_SOTU_2004.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.7,
+          "relevance_score": 0.4091981053352356,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Trump's speeches demonstrate a notably wider variability in constitutional health scores (higher standard deviation) compared to other presidents, indicating fluctuating or inconsistent adherence to constitutional norms."
+      },
+      "queries_used": [
+        "Trump 'procedural rejection' intensity",
+        "Trump 'institutional subversion' intensity"
+      ],
+      "quotes": [
+        {
+          "quote_text": "And we must reject the culture in which facts themselves are manipulated and even manufactured.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.9,
+          "relevance_score": 0.6204111576080322,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We face a deficit of trust, deep and corrosive doubts about how Washington works that have been growing for years.",
+          "document_name": "Obama_SOTU_2015.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.6187268495559692,
+          "metadata": {
+            "document_name": "Obama_SOTU_2015.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan's life, from reaching those in need. If we slash the restraints, not just at the FDA, but across our Government, then we will be blessed with far more miracles just like Megan.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.7,
+          "relevance_score": 0.4535873532295227,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In all these efforts, however, America's purpose is more than to follow a process; it is to achieve a result, the end of terrible threats to the civilized world.",
+          "document_name": "Bush_SOTU_2008.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.7,
+          "relevance_score": 0.4453079104423523,
+          "metadata": {
+            "document_name": "Bush_SOTU_2008.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The Clinton administration's discourse consistently maintains a high and stable Constitutional Health Index, reflecting strong support for established constitutional processes and institutions."
+      },
+      "queries_used": [
+        "Clinton 'constitutional process'",
+        "Clinton 'institutional respect'",
+        "Clinton 'systemic continuity'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times",
+          "document_name": "Clinton_SOTU_2000.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.7473902106285095,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2000.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to prepare our people for the bold new world of the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build stronger families and stronger communities and a safer environment; action to keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.",
+          "document_name": "Clinton_SOTU_1994.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.7461855411529541,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1994.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Again, I ask you to pass a real Patients' Bill of Rights. I ask you to pass commonsense gun safety legislation. I ask you to pass campaign finance reform. I ask you to vote up or down on judicial nominations and other important appointees.",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.98,
+          "relevance_score": 0.626623809337616,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I salute your service, and so do the American people.",
+          "document_name": "Clinton_SOTU_2001.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.6226119995117188,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2001.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must not ask Government to do what we should do for ourselves. We should rely on Government as a partner to help us to do more for ourselves and for each other.",
+          "document_name": "Clinton_SOTU_2000.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.6211879253387451,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2000.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution.",
+          "document_name": "Clinton_SOTU_1993.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.6167358160018921,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1993.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The Biden administration's discourse shows consistently high constitutional health scores, characterized by adherence to democratic norms and respect for governmental structures."
+      },
+      "queries_used": [
+        "Biden 'democratic norms'",
+        "Biden 'separation of powers'",
+        "Biden 'gradual reform'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "My lifetime has taught me to embrace freedom and democracy, a future based on core values that have defined America\u2026honesty, decency, dignity, and equality\u2026to respect everyone; to give everyone a fair shot; to give hate no safe harbor.",
+          "document_name": "Biden_SOTU_2025.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5710786581039429,
+          "metadata": {
+            "document_name": "Biden_SOTU_2025.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And today, though bruised, our democracy remains unbowed and unbroken.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5661768913269043,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We\u2019ll press forward with speed and urgency, for we have much to do in this winter of peril and significant possibilities: much to repair, much to restore, much to heal, much to build, and much to gain.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5415242910385132,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America is moving\u2014moving forward\u2014but we can't stop now. We're in competition with China and other countries to win the 21st century. We're at a great inflection point in history. We have to do more than just build back better\u2014I mean, 'build back.' We have to build back better.",
+          "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.5265766382217407,
+          "metadata": {
+            "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "fighting for the sake of fighting, power for the sake of power, conflict for the sake of conflict gets us nowhere.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.85,
+          "relevance_score": 0.49346980452537537,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But time and again, Democrats and Republicans came together. Came together to defend a stronger and safer Europe. You came together to pass a one-in-a-generation once-in-a-generation infrastructure law building bridges connecting our Nation and our people.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.4739941954612732,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The Bush W. and Obama administrations generally exhibit high and stable Constitutional Health Indices, aligning with a pattern of consistent support for constitutional frameworks."
+      },
+      "queries_used": [
+        "Bush W. 'legitimate authority'",
+        "Obama 'adherence to norms'",
+        "Obama 'institutional duty'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations. They\u2019re not consumed with personal ambition. They don\u2019t obsess over their differences. They focus on the mission at hand. They work together.",
+          "document_name": "Obama_SOTU_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.7355815768241882,
+          "metadata": {
+            "document_name": "Obama_SOTU_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority. Appropriate Members of Congress have been kept informed.",
+          "document_name": "Bush_SOTU_2003.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.6509270071983337,
+          "metadata": {
+            "document_name": "Bush_SOTU_2003.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And those of us who manage the public's dollars will be held to account to spend wisely, reform bad habits, and do our business in the light of day, because only then can we restore the vital trust between a people and their government.",
+          "document_name": "Obama_Inaugural_2009.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.6280168294906616,
+          "metadata": {
+            "document_name": "Obama_Inaugural_2009.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I have authorized a terrorist surveillance program to aggressively pursue the international communications of suspected Al Qaeda operatives and affiliates to and from America. Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority.",
+          "document_name": "Bush_SOTU_2003.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5921427011489868,
+          "metadata": {
+            "document_name": "Bush_SOTU_2003.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+          "document_name": "Bush_Inaugural_2001.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5896146297454834,
+          "metadata": {
+            "document_name": "Bush_Inaugural_2001.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But those values upon which our success depends--honesty and hard work, courage and fair play, tolerance and curiosity, loyalty and patriotism--these things are old. These things are true. They have been the quiet force of progress throughout our history. What is demanded then is a return to these truths.",
+          "document_name": "Obama_Inaugural_2009.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 1.0,
+          "relevance_score": 0.5670440196990967,
+          "metadata": {
+            "document_name": "Obama_Inaugural_2009.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Differences in rhetoric concerning institutional respect versus institutional subversion are a highly significant factor distinguishing administrations, particularly highlighting Trump's unique stance."
+      },
+      "queries_used": [
+        "'institutional subversion' examples Trump",
+        "'institutional respect' examples non-Trump"
+      ],
+      "quotes": [
+        {
+          "quote_text": "And we must reject the culture in which facts themselves are manipulated and even manufactured.",
+          "document_name": "Biden_Inaugural_2021.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.9,
+          "relevance_score": 0.6746912002563477,
+          "metadata": {
+            "document_name": "Biden_Inaugural_2021.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Regulators had looked the other way, or didn\u2019t have the authority to stop the bad behavior.",
+          "document_name": "Obama_SOTU_2017.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.6423265337944031,
+          "metadata": {
+            "document_name": "Obama_SOTU_2017.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations. They\u2019re not consumed with personal ambition. They don\u2019t obsess over their differences. They focus on the mission at hand. They work together.",
+          "document_name": "Obama_SOTU_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.632341742515564,
+          "metadata": {
+            "document_name": "Obama_SOTU_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We face a deficit of trust, deep and corrosive doubts about how Washington works that have been growing for years.",
+          "document_name": "Obama_SOTU_2015.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.8,
+          "relevance_score": 0.607353925704956,
+          "metadata": {
+            "document_name": "Obama_SOTU_2015.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America will always stand firm for the nonnegotiable demands of human dignity: the rule of law; limits on the power of the state; respect for women; private property; free speech; equal justice; and religious tolerance.",
+          "document_name": "Bush_SOTU_2007.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.95,
+          "relevance_score": 0.5951505899429321,
+          "metadata": {
+            "document_name": "Bush_SOTU_2007.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Variations in the adherence to or rejection of established procedural legitimacy significantly differentiate administrations' constitutional discourse."
+      },
+      "queries_used": [
+        "'procedural rejection' rhetoric",
+        "'procedural legitimacy' discourse"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We must restore integrity and the rule of law at our borders.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5753360986709595,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In all these efforts, however, America's purpose is more than to follow a process; it is to achieve a result, the end of terrible threats to the civilized world.",
+          "document_name": "Bush_SOTU_2008.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.7,
+          "relevance_score": 0.4548211097717285,
+          "metadata": {
+            "document_name": "Bush_SOTU_2008.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What I'm not willing to do--what I'm not willing to do--is go back to the days when insurance companies could deny someone coverage because of a preexisting condition.",
+          "document_name": "Obama_SOTU_2016.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.8,
+          "relevance_score": 0.42158636450767517,
+          "metadata": {
+            "document_name": "Obama_SOTU_2016.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The degree of support for systemic continuity versus calls for fundamental systemic replacement also plays a significant role in distinguishing administrations."
+      },
+      "queries_used": [
+        "'systemic replacement' advocacy",
+        "'systemic continuity' support"
+      ],
+      "quotes": [
+        {
+          "quote_text": "That\u2019s what Americans have done for over 200 years: reinvented ourselves.",
+          "document_name": "Obama_SOTU_2016.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.98,
+          "relevance_score": 0.6120861172676086,
+          "metadata": {
+            "document_name": "Obama_SOTU_2016.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And now we will extend this vision by reforming great institutions to serve the needs of our time.",
+          "document_name": "Bush_Inaugural_2005.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.6059633493423462,
+          "metadata": {
+            "document_name": "Bush_Inaugural_2005.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must have dramatic change in our economy, our Government, and ourselves.",
+          "document_name": "Clinton_SOTU_2000.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.6,
+          "relevance_score": 0.5729463696479797,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2000.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have to change the system to reflect our better selves.",
+          "document_name": "Obama_SOTU_2013.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5567453503608704,
+          "metadata": {
+            "document_name": "Obama_SOTU_2013.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    }
+  ]
+}

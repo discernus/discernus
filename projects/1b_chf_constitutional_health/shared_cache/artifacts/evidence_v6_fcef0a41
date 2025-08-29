@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:06:36.992193+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment_of_electoral_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992172+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "When George Washington first took the oath I have just sworn to uphold, news traveled slowly across the land by horseback and across the ocean by boat.",
+      "confidence": 0.9,
+      "context_type": "affirmation_of_constitutional_tradition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992175+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992176+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+      "confidence": 0.95,
+      "context_type": "respect_for_predecessor_and_office",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992177+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I ask the Congress to join with me. But no President, no Congress, no Government can undertake this mission alone.",
+      "confidence": 0.85,
+      "context_type": "recognition_of_separated_powers",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992183+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "This beautiful Capitol, like every capital since the dawn of civilization, is often a place of intrigue and calculation. Powerful people maneuver for position and worry endlessly about who is in and who is out, forgetting those people whose toil and sweat sends us here and pays our way.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_political_practice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992187+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+      "confidence": 1.0,
+      "context_type": "central_thesis_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992188+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "There is nothing wrong with America that cannot be cured by what is right with America.",
+      "confidence": 0.9,
+      "context_type": "affirmation_of_systemic_resilience",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992189+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no_evidence_found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:36.992190+00:00"
+    }
+  ]
+}

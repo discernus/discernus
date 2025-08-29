@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9283d5a577d505fccb0b1cbc1b334f84085488cf1a8579a7056cc2b67a861314"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T05:06:37.121096+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.",
+      "confidence": 0.95,
+      "context_type": "Call for Legislative Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121087+00:00"
+    },
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121090+00:00"
+    },
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "The National Institute of Health\u2014the NIH\u2014I believe, should create a similar Advanced Research Projects Agency for Health.",
+      "confidence": 0.9,
+      "context_type": "Policy Proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121091+00:00"
+    },
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "we have to come together to rebuild trust between law enforcement and the people they serve, to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd's name that passed the House already.",
+      "confidence": 0.85,
+      "context_type": "Call for Reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121092+00:00"
+    },
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have to prove democracy still works, that our Government still works and we can deliver for our people.",
+      "confidence": 1.0,
+      "context_type": "Thematic Statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121093+00:00"
+    },
+    {
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No Evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T05:06:37.121094+00:00"
+    }
+  ]
+}
