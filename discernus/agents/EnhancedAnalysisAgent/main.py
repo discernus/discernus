@@ -10,7 +10,6 @@ prompt building, and response parsing.
 import json
 import base64
 import hashlib
-import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -51,11 +50,11 @@ class EnhancedAnalysisAgent:
 
     def _load_prompt_template(self) -> str:
         """Load prompt template."""
-        prompt_path = Path(__file__).parent / "prompt.yaml"
+        prompt_path = Path(__file__).parent / "prompt.txt"
         if not prompt_path.exists():
-            raise FileNotFoundError("Could not find prompt.yaml for EnhancedAnalysisAgent")
+            raise FileNotFoundError("Could not find prompt.txt for EnhancedAnalysisAgent")
         with open(prompt_path, 'r') as f:
-            return yaml.safe_load(f)['template']
+            return f.read()
 
     def analyze_documents(self,
                          framework_content: str,
