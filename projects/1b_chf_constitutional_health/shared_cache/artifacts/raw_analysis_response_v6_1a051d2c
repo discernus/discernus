@@ -1,0 +1,130 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Clinton's 2001 State of the Union address, focusing on the emphasis on established procedures, institutional integrity, and systemic stability. The speech consistently promotes working within the existing framework and incremental improvements."
+  },
+  "document_analyses": [
+    {
+      "document_id": "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566",
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+          "confidence": 0.95,
+          "context_type": "framing statement of purpose rooted in constitutional principles"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Here, in this place, our responsibility begins with balancing the budget in a way that is fair to all Americans.",
+          "confidence": 0.9,
+          "context_type": "call for legislative action within established processes"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I compliment the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget. And I thank the Democrats for passing the largest deficit reduction plan in history in 1993, which has already cut the deficit nearly in half in 3 years.",
+          "confidence": 0.9,
+          "context_type": "praise for bipartisan legislative effort"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.5,
+          "context_type": "No direct evidence found for bypassing procedures. The tone consistently emphasizes working within the system. Score is minimal due to the possibility of implied necessity for action that *might* be interpreted as bypassing, but it's not explicit."
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I salute your service, and so do the American people.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment and praise for military personnel"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Community policing also requires bonds of trust between citizens and police. I ask all Americans to respect and support our law enforcement officers. And to our police, I say, our children need you as role models and heroes. Don't let them down.",
+          "confidence": 0.95,
+          "context_type": "call for support and respect for law enforcement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Last year this Congress applied to itself the laws it applies to everyone else. This Congress banned gifts and meals from lobbyists. This Congress forced lobbyists to disclose who pays them and what legislation they are trying to pass or kill. This Congress did that, and I applaud you for it.",
+          "confidence": 0.95,
+          "context_type": "praise for Congress upholding principles and increasing transparency"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.5,
+          "context_type": "No direct evidence of attacks on institutional authority or delegitimizing rhetoric."
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The state of the Union is strong. Our economy is the healthiest it has been in three decades. We have the lowest combined rates of unemployment and inflation in 27 years. We have completed\u2014created nearly 8 million new jobs, over a million of them in basic industries like construction and automobiles.",
+          "confidence": 0.95,
+          "context_type": "opening statement emphasizing national strength and progress within the existing system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We live in an age of possibility. A hundred years ago we moved from farm to factory. Now we move to an age of technology, information, and global competition. These changes have opened vast new opportunities for our people, but they have also presented them with stiff challenges.",
+          "confidence": 0.9,
+          "context_type": "describing societal evolution as continuous progress with new challenges"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The era of big Government is over. But we cannot go back to the time when our citizens were left to fend for themselves. Instead, we must go forward as one America, one nation working together to meet the challenges we face together. Self-reliance and teamwork are not opposing virtues; we must have both.",
+          "confidence": 0.9,
+          "context_type": "advocacy for an updated but continuous approach to governance, emphasizing unity within the existing national identity"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America has always sought and always risen to every challenge. Who would say that having come so far together, we will not go forward from here?",
+          "confidence": 0.9,
+          "context_type": "rhetorical question emphasizing historical continuity and future progress"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.5,
+          "context_type": "No direct evidence of calls for revolutionary change or fundamental system replacement."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

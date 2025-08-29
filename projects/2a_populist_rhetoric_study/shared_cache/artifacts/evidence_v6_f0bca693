@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-29T03:22:10.851241+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.",
+      "confidence": 0.95,
+      "context_type": "rhetorical framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851226+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.",
+      "confidence": 0.95,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851229+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Today's ceremony, however, has very special meaning. Because today we are not merely transferring power from one administration to another, or from one party to another, but we are transferring power from Washington, DC, and giving it back to you, the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.",
+      "confidence": 1.0,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851231+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We will no longer accept politicians who are all talk and no action, constantly complaining, but never doing anything about it. The time for empty talk is over. Now arrives the hour of action.",
+      "confidence": 0.7,
+      "context_type": "criticism and implied rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851232+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+      "confidence": 0.9,
+      "context_type": "descriptive language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851235+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "We will no longer accept politicians who are all talk and no action, constantly complaining, but never doing anything about it.",
+      "confidence": 0.8,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851236+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Whether we are Black or Brown or White, we all bleed the same red blood of patriots, we all enjoy the same glorious freedoms, and we all salute the same great American flag. When America is united, America is totally unstoppable.",
+      "confidence": 0.95,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851237+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "From this day forward, it\u2019s going to be only America First. America First. Every decision on trade, on taxes, on immigration, on foreign affairs, will be made to benefit American workers and American families. We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+      "confidence": 0.95,
+      "context_type": "policy statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851238+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The wealth of our middle class has been ripped from their homes and then redistributed all across the world. America will start winning again, winning like never before. We will bring back our jobs. We will bring back our wealth.",
+      "confidence": 0.95,
+      "context_type": "descriptive language and promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-29T03:22:10.851239+00:00"
+    }
+  ]
+}

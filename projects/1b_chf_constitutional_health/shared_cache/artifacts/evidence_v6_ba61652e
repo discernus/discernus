@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "5b94e74c506174c0d896282c89875b3ab5c530f0d83ec86f93852c71985241c3"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:47:44.939324+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Mr. Speaker, at your swearing-in, you asked us all to work together in a spirit of civility and bipartisanship. Mr. Speaker, let's do exactly that.",
+      "confidence": 0.95,
+      "context_type": "thematic_overview",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939313+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939317+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong. Thanks to the leadership of Vice President Gore, we have a Government for the information age, once again, a Government that is a progressive instrument of the common good\u2014rooted in our oldest values of opportunity, responsibility, and community; devoted to fiscal responsibility; determined to give our people the tools they need to make the most of their own lives in the 21st century\u2014a 21st century Government for 21st century America.",
+      "confidence": 0.9,
+      "context_type": "thematic_overview",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939318+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939320+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "So first, and above all, we must save Social Security for the 21st century. ... The best way to keep Social Security a rocksolid guaranteed is not to make drastic cuts in benefits, not to raise payroll tax rates, not to drain resources from Social Security in the name of saving it. Instead, I propose that we make the historic decision to invest the surplus to save Social Security.",
+      "confidence": 0.95,
+      "context_type": "thematic_overview",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939321+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:44.939322+00:00"
+    }
+  ]
+}

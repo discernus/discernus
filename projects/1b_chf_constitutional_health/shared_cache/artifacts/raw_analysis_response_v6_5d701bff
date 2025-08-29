@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Biden's address to Congress focusing on the positive and negative dimensions of constitutional health. The speech emphasizes continuity, legitimacy, and institutional respect, with concerns about external attacks and systemic issues framed as requiring reform within the existing framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "9283d5a577d505fccb0b1cbc1b334f84085488cf1a8579a7056cc2b67a861314",
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Together we passed the American Rescue Plan, one of the most consequential rescue packages in American history.",
+          "confidence": 0.9,
+          "context_type": "policy_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "n/a"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I stand here tonight, 1 day shy of the hundredth day of my administration, hundred days since I took the oath of office and lifted my hand off our family Bible and inherited a Nation\u2014we all did\u2014that was in crisis...",
+          "confidence": 0.9,
+          "context_type": "institutional_acknowledgment"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "the worst attack on our democracy since the Civil War.",
+          "confidence": 0.8,
+          "context_type": "threat_assessment"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Tonight I come to talk about crisis and opportunity, about rebuilding the Nation, revitalizing our democracy, and winning the future for America.",
+          "confidence": 0.9,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "n/a"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

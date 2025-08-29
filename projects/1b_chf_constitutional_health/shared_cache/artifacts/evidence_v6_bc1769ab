@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:03.903675+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The American people don\u2019t expect government to solve every problem. They don\u2019t expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation\u2019s interests before party. They do expect us to forge reasonable compromise where we can.",
+      "confidence": 0.95,
+      "context_type": "Thematic statement about government function and compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903664+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I realize that tax reform and entitlement reform will not be easy. The politics will be hard for both sides. None of us will get a hundred percent of what we want. But the alternative will cost us jobs, hurt our economy, and visit hardship on millions of hard-working Americans. So let\u2019s set party interests aside and work to pass a budget that replaces reckless cuts with smart savings and wise investments in our future.",
+      "confidence": 0.9,
+      "context_type": "Call for legislative action and compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903665+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I recognize that in our democracy, no one should just take my word for it that we\u2019re doing things the right way. So, in the months ahead, I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+      "confidence": 0.9,
+      "context_type": "Commitment to transparency and adherence to laws/checks and balances",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903666+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "If Congress won\u2019t act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take, now and in the future, to reduce pollution, prepare our communities for the consequences of climate change, and speed the transition to more sustainable sources of energy.",
+      "confidence": 0.7,
+      "context_type": "Stated intent to use executive action if Congress fails to act; borderline case but leans towards using legitimate executive powers rather than bypassing.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903667+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, fellow Americans",
+      "confidence": 0.95,
+      "context_type": "Formal address, indicating respect for institutions and their representatives.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903668+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I recognize that in our democracy, no one should just take my word for it that we\u2019re doing things the right way. So, in the months ahead, I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+      "confidence": 0.9,
+      "context_type": "Acknowledgement of checks and balances and democratic accountability.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903669+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903670+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Fifty-one years ago, John F. Kennedy declared to this Chamber that 'the Constitution makes us not rivals for power, but partners for progress.'",
+      "confidence": 0.9,
+      "context_type": "Evoking historical continuity and foundational constitutional principles.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903670+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It is our generation\u2019s task, then, to reignite the true engine of America\u2019s economic growth: a rising, thriving middle class.",
+      "confidence": 0.9,
+      "context_type": "Language of 'reigniting' and 'restoring' existing systems rather than replacing them.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903671+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Let\u2019s agree right here, right now to keep the people\u2019s Government open and pay our bills on time and always uphold the full faith and credit of the United States of America.",
+      "confidence": 0.9,
+      "context_type": "Call to maintain fundamental governmental functions and financial stability.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903672+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It\u2019s a word that doesn\u2019t just describe our nationality or legal status. It describes the way we\u2019re made. It describes what we believe. It captures the enduring idea that this country only works when we accept certain obligations to one another and to future generations; that our rights are wrapped up in the rights of others; and that well into our third century as a nation, it remains the task of us all, as citizens of these United States, to be the authors of the next great chapter of our American story.",
+      "confidence": 0.95,
+      "context_type": "Strong emphasis on enduring national identity, shared obligations, and continuing the American story through collective action.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903673+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.903674+00:00"
+    }
+  ]
+}

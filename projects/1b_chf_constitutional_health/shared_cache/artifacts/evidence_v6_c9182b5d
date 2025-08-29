@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2472d421a7847751e9cd03fff4d80902247eb8bfad57b0b773eeff8bbcdd657"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:50:47.422499+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I am asking the United States Congress to pass a real campaign finance reform bill this year. I ask you to increase the participation of the American people by passing the motor voter bill promptly. I ask you to deal with the undue influence of special interests by passing a bill to end the tax deduction for lobbying and to act quickly to require all the people who lobby you to register as lobbyists by passing the lobbying registration bill.",
+      "confidence": 1.0,
+      "context_type": "Direct appeal for legislative action through established channels",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422471+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422484+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_respect",
+      "quote_text": "Well, you can laugh, my fellow Republicans, but I'll point out that the Congressional Budget Office was normally more conservative in what was going to happen and closer to right than previous Presidents have been.",
+      "confidence": 1.0,
+      "context_type": "Explicit deference to institutional expertise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422487+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "I think it is clear to every American, including every Member of Congress of both parties, that the confidence of the people who pay our bills in our institutions in Washington is not high. We must restore it.",
+      "confidence": 0.9,
+      "context_type": "Critique of institutional performance aimed at restoration, not subversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422489+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+      "confidence": 1.0,
+      "context_type": "Appeal to traditional values and system continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422491+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "No evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:50:47.422494+00:00"
+    }
+  ]
+}

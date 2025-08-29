@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed President Obama's 2015 State of the Union address, focusing on his rhetoric regarding procedural integrity, institutional norms, and systemic stability. The speech predominantly advocates for continuity and respect within the existing constitutional framework, while acknowledging and seeking to reform areas of dysfunction and gridlock. Executive actions are framed as responses to legislative inaction rather than rejections of fundamental procedures."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd",
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our Constitution declares that from time to time, the President shall give to Congress information about the state of our Union.",
+          "confidence": 0.9,
+          "context_type": "explicit reference to constitutional process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "yesterday the Senate blocked a bill that would have created this commission, so I\u2019ll issue an Executive order that will allow us to go forward, because I refuse to pass this problem on to another generation of Americans.",
+          "confidence": 0.8,
+          "context_type": "circumvention due to legislative inaction"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madam Speaker, Vice President Biden, Members of Congress, distinguished guests, and fellow Americans: Our Constitution declares that from time to time, the President shall give to Congress information about the state of our Union.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of institutional roles and constitutional basis"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "We face a deficit of trust, deep and corrosive doubts about how Washington works that have been growing for years.",
+          "confidence": 0.8,
+          "context_type": "critique of institutional dysfunction leading to distrust"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "our Union is strong. We do not give up. We do not quit. We do not allow fear or division to break our spirit.",
+          "confidence": 0.9,
+          "context_type": "affirmation of national strength and resilience"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

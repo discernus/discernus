@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_4ae12105f312",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "An enhanced computational research analysis agent, I have analyzed the provided documents using the specified framework. My analysis, including raw dimensional scores, salience assessments, confidence levels, and evidence, is presented in the structured JSON format below.\n\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the President's explicit calls for legislative action, respect for governmental institutions, and the overarching theme of proving the efficacy of American democracy through reform, not replacement. The speech is strongly oriented towards procedural legitimacy and systemic continuity.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Call for Legislative Action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"No Evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The National Institute of Health\u2014the NIH\u2014I believe, should create a similar Advanced Research Projects Agency for Health.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Policy Proposal\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"we have to come together to rebuild trust between law enforcement and the people they serve, to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd's name that passed the House already.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Call for Reform\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have to prove democracy still works, that our Government still works and we can deliver for our people.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Thematic Statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"No Evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "37845c24719b21b5dcd25266f7b8a03716458466a5cba53015ceb3e4c111535e",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:19:14.689934+00:00",
+    "end_time": "2025-08-28T23:20:09.824861+00:00",
+    "duration_seconds": 55.134922
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "9283d5a577d505fccb0b1cbc1b334f84085488cf1a8579a7056cc2b67a861314"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

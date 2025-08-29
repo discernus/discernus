@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_701e83f98930",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document, a State of the Union address, consistently emphasizes themes of improving existing systems, fostering collaboration within established institutions, and adhering to democratic processes. There is no rhetoric advocating for rejection of procedures, subversion of institutions, or systemic replacement. Criticisms are directed at current dysfunction rather than the legitimacy of the framework itself.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2011.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"As President, I\u2019m committed to making Washington work better and rebuilding the trust of the people who sent us here. And I believe most of you are too. Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year\u2019s severe cuts to priorities like education.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans: Today in America, a teacher spent extra time with a student who needed it and did her part to lift America\u2019s graduation rate to its highest levels in more than three decades.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct address and acknowledgement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"So our job is to reverse these trends. It won\u2019t happen right away, and we won\u2019t agree on everything. But what I offer tonight is a set of concrete, practical proposals to speed up growth, strengthen the middle class, and build new ladders of opportunity into the middle class.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct statement of purpose\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "9bcc86905aeaa0db9662871563093618420333612481271ee08c42cb0ea53385",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:58:31.767431+00:00",
+    "end_time": "2025-08-28T20:58:53.309467+00:00",
+    "duration_seconds": 21.542024
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T204458Z_1a58c9cc"
+  }
+}

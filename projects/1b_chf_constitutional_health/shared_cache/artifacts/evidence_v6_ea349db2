@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2472d421a7847751e9cd03fff4d80902247eb8bfad57b0b773eeff8bbcdd657"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:38:59.565041+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I call on Congress to enact an immediate package of jobs investments",
+      "confidence": 0.95,
+      "context_type": "advocacy for formal legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565032+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "Our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+      "confidence": 0.9,
+      "context_type": "critique of internal dysfunction, not rejection of process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565034+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. President, Mr. Speaker, Members of the House and the Senate, distinguished Americans here as visitors in this Chamber, as am I. It is nice to have a fresh excuse for giving a long speech.",
+      "confidence": 0.95,
+      "context_type": "formal address and acknowledgement of institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565035+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "The confidence of the people who pay our bills in our institutions in Washington is not high. We must restore it.",
+      "confidence": 0.9,
+      "context_type": "acknowledging lack of public confidence and calling for its restoration, not active subversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565036+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+      "confidence": 0.95,
+      "context_type": "framing change within a continuum of existing values and framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565037+00:00"
+    },
+    {
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.565039+00:00"
+    }
+  ]
+}

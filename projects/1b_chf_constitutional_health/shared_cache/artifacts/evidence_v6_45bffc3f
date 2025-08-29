@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:33.575993+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Raising up a democracy requires the rule of law and protection of minorities and strong, accountable institutions that last longer than a single vote.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575985+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575987+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I will continue to nominate men and women who understand that judges must be servants of the law and not legislate from the bench.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575988+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575989+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "As we renew the promise of our institutions, let us also show the character of America in our compassion and care for one another.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575990+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.575991+00:00"
+    }
+  ]
+}

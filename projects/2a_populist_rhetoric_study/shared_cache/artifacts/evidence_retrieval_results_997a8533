@@ -1,0 +1,1663 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-29T03:23:56.099589",
+    "statistical_results_hash": "855a1145f9bd7bcfe92efc170999d2cf893ee9106b0e4722927fd33d429c8a61",
+    "total_findings": 13,
+    "total_quotes": 105
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "1. Consistently High Emphasis on 'Manichaean People-Elite Framing' across documents (Mean Raw Score: 0.88, Salience: 0.86). This suggests a core and prominent populist rhetoric."
+      },
+      "queries_used": [
+        "corrupt elite OR pure people",
+        "us vs them OR rigged system",
+        "establishment swamp"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Because we are draining the swamp, it\u2019s very simple, and the days of rule by unelected bureaucrats are over.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.5818545818328857,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.480060875415802,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.43940258026123047,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3595058023929596,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't blame China for taking advantage of us; I blame our leaders and representatives for allowing this travesty to happen.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.28643468022346497,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The presidential election of November 5th was a mandate like has not been seen in many decades. We won all seven swing states, giving us an Electoral College victory of 312 votes. We won the popular vote by big numbers and won counties in our country 2,700 to 525 on a map that reads almost completely red for Republican.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.26780933141708374,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Soon afterward, dozens of countries voted in the United Nations General Assembly against America\u2019s sovereign right to make this decision... tonight I am asking Congress to pass legislation to help ensure American foreign-assistance dollars always serve American interests and only go to friends of America, not enemies of America.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.24602456390857697,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 7
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "2. Very High Prevalence of 'Crisis-Restoration Narrative' (Mean Raw Score: 0.94). This indicates a dominant theme of societal crisis needing populist redemption."
+      },
+      "queries_used": [
+        "emergency OR crisis OR disaster",
+        "make great again OR take back",
+        "decline AND restoration"
+      ],
+      "quotes": [
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.31901225447654724,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.3161235451698303,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I will not allow the mistakes of recent decades past to define the course of our future. For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3086095452308655,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp. What we are witnessing today is the renewal of the American spirit.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.30623748898506165,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3052843511104584,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America is back. Six weeks ago, I stood beneath the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.2926982045173645,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "crisis_restoration_temporal_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.26851731538772583,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "crisis_restoration_temporal_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 7
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "3. High 'Economic Populist Appeals' (Mean Raw Score: 0.91). Economic grievances are a significant and consistent part of the discourse."
+      },
+      "queries_used": [
+        "economic elite OR rigged economy",
+        "economic betrayal OR economic fairness",
+        "economic justice"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The wealth of our middle class has been ripped from their homes and then redistributed all across the world. America will start winning again, winning like never before. We will bring back our jobs. We will bring back our wealth.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.45628175139427185,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to defend American jobs and demand fair trade for American workers... Meanwhile, working-class Americans are left to pay the price for mass illegal immigration: reduced jobs, lower wages... It's unacceptable that Americans pay vastly more than people in other countries for the exact same drugs... This is wrong, this is unfair, and together, we will stop it, and we'll stop it fast.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3871331810951233,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3536626696586609,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3321898579597473,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we\u2019re getting it back so fast. The era of economic surrender is totally over.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.3292466700077057,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.3280819356441498,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.32578760385513306,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. ...For years, politicians promised them they would renegotiate for a better deal, but no one ever tried, until now.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.309963583946228,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "4. Relatively Lower Emphasis on 'Authenticity vs. Political Class' (Mean Raw Score: 0.69). While present, it's less central than other populist dimensions."
+      },
+      "queries_used": [
+        "not a politician OR real person",
+        "outsider OR ordinary citizen",
+        "genuine AND politician"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I\u2019m not a politician, I\u2019m a real person.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.7,
+          "relevance_score": 0.6296429634094238,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will no longer accept politicians who are all talk and no action, constantly complaining, but never doing anything about it.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.8,
+          "relevance_score": 0.5206679701805115,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. ...For years, politicians promised them they would renegotiate for a better deal, but no one ever tried, until now.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4019968509674072,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "govern not as two parties, but as one Nation. ...We must choose whether we are defined by our differences or whether we dare to transcend them.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.3243199288845062,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "To any in Congress who do not believe we should enforce our laws, I would ask you this one question: What would you say to the American family that loses their jobs, their income, or their loved one because America refused to uphold its laws and defend its borders?",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.29621750116348267,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will no longer accept politicians who are all talk and no action, constantly complaining, but never doing anything about it. The time for empty talk is over. Now arrives the hour of action.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.27915024757385254,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities... Most tragically, they have caused the loss of many innocent lives.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.263420045375824,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 7
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "5. Strong Positive Correlation between 'Manichaean People-Elite Framing' and 'Popular Sovereignty Claims' (R=0.872). Speakers often link the corrupt elite to undermining the people's will."
+      },
+      "queries_used": [
+        "corrupt elite AND people's will",
+        "us vs them AND voice of the people",
+        "rigged system AND people decide"
+      ],
+      "quotes": [
+        {
+          "quote_text": "My fellow citizens: America is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3932446837425232,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The presidential election of November 5th was a mandate like has not been seen in many decades. We won all seven swing states, giving us an Electoral College victory of 312 votes. We won the popular vote by big numbers and won counties in our country 2,700 to 525 on a map that reads almost completely red for Republican.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.3689456880092621,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.85,
+          "relevance_score": 0.36773839592933655,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.3602907955646515,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "govern not as two parties, but as one Nation. ...We must choose whether we are defined by our differences or whether we dare to transcend them.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.35931628942489624,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3033140301704407,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because we are draining the swamp, it\u2019s very simple, and the days of rule by unelected bureaucrats are over.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.30171820521354675,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.289997398853302,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "6. Strong Positive Correlation between 'Nationalist Exclusion' and 'Economic Populist Appeals' (R=0.856). Cultural/ethnic boundary drawing is closely tied to economic grievance framing."
+      },
+      "queries_used": [
+        "foreign threats AND economic elite",
+        "cultural invasion AND rigged economy",
+        "national identity AND economic betrayal"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I will not allow the mistakes of recent decades past to define the course of our future. For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4755730628967285,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.43939271569252014,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.43437013030052185,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.43331634998321533,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we\u2019re getting it back so fast. The era of economic surrender is totally over.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.4152003526687622,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.41019660234451294,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.400498628616333,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities... Most tragically, they have caused the loss of many innocent lives.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.37438398599624634,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "7. Strong Negative Correlation between 'Elite Conspiracy/Systemic Corruption' and 'Crisis-Restoration Narrative' (R=-0.786). This suggests these themes might not be emphasized simultaneously or may even be inversely related."
+      },
+      "queries_used": [
+        "conspiracy OR deep state",
+        "rigged system OR establishment collusion",
+        "emergency OR make great again"
+      ],
+      "quotes": [
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.4208488464355469,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp. What we are witnessing today is the renewal of the American spirit.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.39331308007240295,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.39157959818840027,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.38665997982025146,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because we are draining the swamp, it\u2019s very simple, and the days of rule by unelected bureaucrats are over.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.38073351979255676,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "crisis_restoration_temporal_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.37057337164878845,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "crisis_restoration_temporal_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.36973822116851807,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.31202787160873413,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 8
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "8. Strong Negative Correlation between 'Economic Populist Appeals' and 'Homogeneous People Construction' (R=-0.728). High economic populism might coincide with less emphasis on internal unity, or vice-versa."
+      },
+      "queries_used": [
+        "economic elite OR rigged economy",
+        "economic justice OR economic fairness",
+        "one people OR united people"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We are one people, with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.5040146708488464,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we\u2019re getting it back so fast. The era of economic surrender is totally over.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.49200502038002014,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "While we may be a nation divided on policies, we are a country that stands united in condemning hate and evil in all of its very ugly forms. ... We are one people with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.47972676157951355,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "All of us, together, as one team, one people, and one American family can do anything. We all share the same home, the same heart, the same destiny, and the same great American flag.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.46855056285858154,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.4672253131866455,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The wealth of our middle class has been ripped from their homes and then redistributed all across the world. America will start winning again, winning like never before. We will bring back our jobs. We will bring back our wealth.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.45628175139427185,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to defend American jobs and demand fair trade for American workers... Meanwhile, working-class Americans are left to pay the price for mass illegal immigration: reduced jobs, lower wages... It's unacceptable that Americans pay vastly more than people in other countries for the exact same drugs... This is wrong, this is unfair, and together, we will stop it, and we'll stop it fast.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.44341880083084106,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3122271001338959,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our massive tax cuts provide tremendous relief for the middle class and small businesses. To lower tax rates for hard-working Americans, we nearly doubled the standard deduction for everyone.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.27148371934890747,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.2547360360622406,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 10
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "9. Inaugural Speech (Trump_Inaugural_2017.txt) shows the Highest Overall Populism (SWOPI: 0.88) and Core Populism (0.91) compared to SOTU speeches, indicating a stronger initial populist tone."
+      },
+      "queries_used": [
+        "\"Trump_Inaugural_2017.txt\" \"American carnage\"",
+        "\"Trump_Inaugural_2017.txt\" \"transferring power from Washington\"",
+        "\"Trump_Inaugural_2017.txt\" \"America First\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "From this day forward, it\u2019s going to be only America First. America First. Every decision on trade, on taxes, on immigration, on foreign affairs, will be made to benefit American workers and American families. We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.6782081723213196,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Today's ceremony, however, has very special meaning. Because today we are not merely transferring power from one administration to another, or from one party to another, but we are transferring power from Washington, DC, and giving it back to you, the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 1.0,
+          "relevance_score": 0.6143947839736938,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5898644328117371,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.5821080207824707,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The wealth of our middle class has been ripped from their homes and then redistributed all across the world. America will start winning again, winning like never before. We will bring back our jobs. We will bring back our wealth.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.5102689266204834,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.466994047164917,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "10. Inaugural Speech (Trump_Inaugural_2017.txt) exhibits the Highest 'Populist Strategic Contradiction Index' (0.175), suggesting more rhetorical tension in foundational messages."
+      },
+      "queries_used": [
+        "\"Trump_Inaugural_2017.txt\" (\"people's will\" AND \"anti-pluralist\")",
+        "\"Trump_Inaugural_2017.txt\" (\"one people\" AND \"foreign threats\")",
+        "\"Trump_Inaugural_2017.txt\" (\"crisis\" AND \"hidden networks\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "From this day forward, it\u2019s going to be only America First. America First. Every decision on trade, on taxes, on immigration, on foreign affairs, will be made to benefit American workers and American families. We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.5605939626693726,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.5011643171310425,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will no longer accept politicians who are all talk and no action, constantly complaining, but never doing anything about it. The time for empty talk is over. Now arrives the hour of action.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.4901280701160431,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country. Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.46837010979652405,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.4599848985671997,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4585772156715393,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "11. 'Crisis-Elite Attribution Tension' is the highest of the tension indices (Mean: 0.199). This indicates a recurring strategic choice to blame elites for crises."
+      },
+      "queries_used": [
+        "crisis AND conspiracy",
+        "emergency AND rigged system",
+        "betrayal AND deep state"
+      ],
+      "quotes": [
+        {
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land. We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate. And we've spent trillions and trillions of dollars overseas, while our infrastructure at home has so badly crumbled. Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.48462915420532227,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "crisis_restoration_temporal_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.45654964447021484,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "crisis_restoration_temporal_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.40726327896118164,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.33676570653915405,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp. What we are witnessing today is the renewal of the American spirit.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.3323732018470764,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth. Our Nation has lost its wealth, but we\u2019re getting it back so fast. The era of economic surrender is totally over.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.85,
+          "relevance_score": 0.32485103607177734,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because we are draining the swamp, it\u2019s very simple, and the days of rule by unelected bureaucrats are over.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.21514615416526794,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For too long, a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost. The establishment protected itself, but not the citizens of our country.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.19162964820861816,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.85,
+          "relevance_score": 0.17277342081069946,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 9
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "12. SOTU speeches generally show Lower Strategic Contradiction (Mean PSCI: 0.096) compared to the Inaugural, suggesting a more coherent or less overtly conflicting rhetorical approach over time."
+      },
+      "queries_used": [
+        "\"SOTU\" (NOT \"tension\" AND \"unity\")",
+        "\"SOTU\" (\"progress\" AND \"future\")",
+        "\"SOTU\" (\"Americans\" AND \"opportunity\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4211750328540802,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.38970690965652466,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "crisis_restoration_temporal_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3651142120361328,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "crisis_restoration_temporal_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My fellow citizens: America is back. Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3434635400772095,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp. What we are witnessing today is the renewal of the American spirit.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.3410925567150116,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people. Many of us have campaigned on the same core promises: to defend American jobs and demand fair trade for American workers",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.7,
+          "relevance_score": 0.31282785534858704,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are one people, with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3093256950378418,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I will not allow the mistakes of recent decades past to define the course of our future. For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.2910209596157074,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "All of us, together, as one team, one people, and one American family can do anything. We all share the same home, the same heart, the same destiny, and the same great American flag.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.95,
+          "relevance_score": 0.28233641386032104,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 9
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "13. Consistently high confidence scores across all dimensions (e.g., Manichaean Confidence Mean: 0.93), indicating strong human or model certainty in the scoring."
+      },
+      "queries_used": [
+        "evidence for manichaean people-elite framing",
+        "evidence for crisis-restoration narrative",
+        "evidence for nationalist exclusion"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We\u2019ve defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.600121259689331,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.5749534964561462,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt political establishment has betrayed the American people and to address their concerns, their hopes, and their dreams.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5620422959327698,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp. What we are witnessing today is the renewal of the American spirit.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.5182815790176392,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "crisis_restoration_temporal_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.4889656901359558,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "crisis_restoration_temporal_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country, and what a job they\u2019ve done. As a result, illegal border crossings last month were by far the lowest ever recorded, ever. They heard my words and they chose not to come.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.47220900654792786,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities... Most tragically, they have caused the loss of many innocent lives.",
+          "document_name": "Trump_SOTU_2019.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.4613438844680786,
+          "metadata": {
+            "document_name": "Trump_SOTU_2019.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No issue better illustrates the divide between America's working class and America's political class than illegal immigration. Wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards.",
+          "document_name": "Trump_SOTU_2020.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4581899642944336,
+          "metadata": {
+            "document_name": "Trump_SOTU_2020.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This American carnage stops right here and stops right now. We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.4324931502342224,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our obligation is to serve, protect, and defend the citizens of the United States. We are also taking strong measures to protect our Nation from radical Islamic terrorism. ... We cannot allow a beachhead of terrorism to form inside America. We cannot allow our Nation to become a sanctuary for extremists.",
+          "document_name": "trump_sotu_2017.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4323652684688568,
+          "metadata": {
+            "document_name": "trump_sotu_2017.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "America is back. Six weeks ago, I stood beneath the dome of this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "document_name": "Trump_SOTU_2025.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 1.0,
+          "relevance_score": 0.414206326007843,
+          "metadata": {
+            "document_name": "Trump_SOTU_2025.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I will not allow the mistakes of recent decades past to define the course of our future. For too long, we\u2019ve watched our middle class shrink as we\u2019ve exported our jobs and wealth to foreign countries. We\u2019ve financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "document_name": "Trump_SOTU_2018.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4023652672767639,
+          "metadata": {
+            "document_name": "Trump_SOTU_2018.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 12
+    }
+  ]
+}

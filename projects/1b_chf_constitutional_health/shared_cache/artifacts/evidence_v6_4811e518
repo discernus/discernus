@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:56:22.367597+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "In 2 weeks, I will send this Congress a budget filled with ideas that are practical, not partisan.",
+      "confidence": 0.95,
+      "context_type": "explicit call for legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367587+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We can't slow down businesses or put our economy at risk with Government shutdowns or fiscal showdowns.",
+      "confidence": 0.9,
+      "context_type": "statement opposing disruption of established processes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367589+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans",
+      "confidence": 0.95,
+      "context_type": "formal address and recognition of institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367591+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "How ironic, they say, that our politics seems more divided than ever. It's held up as proof not just of my own flaws\u2014of which there are many\u2014but also as proof that the vision itself is misguided, naive, that there are too many people in this town who actually benefit from partisanship and gridlock for us to ever do anything about it.",
+      "confidence": 0.85,
+      "context_type": "acknowledgement of critique while arguing against cynical delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367592+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have laid a new foundation. A brighter future is ours to write. Let\u2019s begin this new chapter together, and let\u2019s start the work right now.",
+      "confidence": 0.95,
+      "context_type": "emphasis on building upon existing structures and gradual progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367593+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:56:22.367594+00:00"
+    }
+  ]
+}

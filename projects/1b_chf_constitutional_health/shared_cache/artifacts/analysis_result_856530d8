@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_4ae1bbd4935d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "An enhanced computational research analysis agent is performing the analysis. Please stand by.\n```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a formal State of the Union address, a genre of political discourse that aligns well with the framework's intended corpus. The themes are explicit, making the identification and scoring of dimensions straightforward. The discourse consistently advocates for action within existing governmental structures, leading to high scores in legitimacy, respect, and continuity, and zero scores for their pathological counterparts.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2023.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Tonight I call on the Senate to pass the Freedom To Vote act. Pass the John Lewis Act\u2014Voting Rights Act. And while you\u2019re at it, pass the DISCLOSE Act so Americans know who is funding our elections.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"legislative_call_to_action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"And we all know\u2014no matter what your ideology, we all know one of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"institutional_address\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We\u2019ll meet the test, protect freedom and liberty, expand fairness and opportunity. And we will save democracy.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical_flourish\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "da5f669df901e782ab01d84ec1088edd37acb30f983cd61a4e6b0b477e167ca8",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:20:56.008572+00:00",
+    "end_time": "2025-08-28T23:21:51.590617+00:00",
+    "duration_seconds": 55.58204
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

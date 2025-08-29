@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The analysis reflects the speech's rhetorical strategy of simultaneously invoking traditional institutions and processes (e.g., calls for Congress to legislate) while also delegitimizing elements of the political and administrative establishment ('the swamp', FDA). This results in significant scores on seemingly contradictory dimensions like institutional_respect/institutional_subversion and systemic_continuity/systemic_replacement, which is consistent with the framework's design to capture such tensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "e841b19feb1f217243183fa31e77f745705d60a81a8a1571cde8b6d841212b6d",
+      "document_name": "donald_j_trump_1st_term_2017_address_before_a_joint_session_of_the_congress.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Finally, I have kept my promise to appoint a Justice to the United States Supreme Court, from my list of 20 judges, who will defend our Constitution.",
+          "confidence": 0.95,
+          "context_type": "policy_action_justification"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And we're imposing a new rule which mandates that for every one new regulation, two old regulations must be eliminated.",
+          "confidence": 0.7,
+          "context_type": "policy_announcement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "To launch our national rebuilding, I will be asking Congress to approve legislation that produces a $1 trillion investment in the infrastructure of the United States\u2014financed through both public and private capital\u2014creating millions of new jobs.",
+          "confidence": 0.95,
+          "context_type": "legislative_proposal"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan's life, from reaching those in need.",
+          "confidence": 0.9,
+          "context_type": "institutional_critique"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_framing"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns.",
+          "confidence": 0.95,
+          "context_type": "narrative_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -92,6 +92,137 @@ class TestEvidenceRetrieverAgent(unittest.TestCase):
         # This assertion will fail, driving the implementation.
         self.assertEqual(parsed_plan, expected_plan)
 
+    def test_create_evidence_retrieval_prompt_with_tuple_keys(self):
+        """
+        Test that the agent can handle statistical results with tuple keys without crashing.
+        
+        This test reproduces the "keys must be str, int, float, bool or None, not tuple" error
+        that was occurring during evidence retrieval.
+        """
+        # Create mock statistical results with tuple keys (like pandas groupby().agg() produces)
+        mock_statistical_results = {
+            'calculate_descriptive_stats_by_admin': {
+                'administration_stats': {
+                    ('constitutional_health_index', 'mean'): {'Biden': 0.661, 'Trump': -0.048},
+                    ('constitutional_health_index', 'std'): {'Biden': 0.241, 'Trump': 0.699},
+                    ('constitutional_health_index', 'count'): {'Biden': 6, 'Trump': 7}
+                }
+            },
+            'other_stats': {
+                'simple_key': 'simple_value',
+                'nested': {
+                    ('another_tuple', 'key'): 'nested_value'
+                }
+            }
+        }
+        
+        # Create a mock framework spec
+        mock_framework_spec = {
+            'name': 'Test Framework',
+            'description': 'A test framework'
+        }
+        
+        # This should not crash with the tuple key error
+        try:
+            prompt = self.agent._create_evidence_retrieval_prompt(
+                mock_framework_spec, 
+                mock_statistical_results
+            )
+            
+            # Verify the prompt was created successfully
+            self.assertIsInstance(prompt, str)
+            self.assertIn('Test Framework', prompt)
+            self.assertIn('Biden', prompt)
+            self.assertIn('Trump', prompt)
+            
+            # Verify that tuple keys were converted to strings
+            self.assertIn("('constitutional_health_index', 'mean')", prompt)
+            self.assertIn("('constitutional_health_index', 'std')", prompt)
+            
+        except Exception as e:
+            self.fail(f"Evidence retrieval prompt creation failed with error: {e}")
+
+    def test_evidence_retrieval_with_tuple_keys_end_to_end(self):
+        """
+        Test the complete evidence retrieval flow with tuple keys in statistical results.
+        
+        This test verifies that the entire evidence retrieval process can handle
+        tuple keys without crashing, from loading results to creating prompts.
+        """
+        # Create mock statistical results with tuple keys
+        mock_statistical_results = {
+            'calculate_descriptive_stats_by_admin': {
+                'administration_stats': {
+                    ('constitutional_health_index', 'mean'): {'Biden': 0.661, 'Trump': -0.048},
+                    ('constitutional_health_index', 'std'): {'Biden': 0.241, 'Trump': 0.699}
+                }
+            }
+        }
+        
+        # Mock the LLM gateway to return a valid response
+        with patch.object(self.agent, 'llm_gateway') as mock_gateway:
+            mock_gateway.execute_call.return_value = (
+                '{"findings": [{"finding": "Test finding", "queries": ["test query"]}]}',
+                {}
+            )
+            
+            # Mock the evidence wrapper
+            with patch.object(self.agent, '_build_evidence_wrapper') as mock_build:
+                mock_wrapper = Mock()
+                mock_wrapper.search.return_value = [{'quote': 'Test quote', 'score': 0.8}]
+                mock_build.return_value = mock_wrapper
+                
+                # This should not crash with tuple keys
+                try:
+                    results = self.agent._llm_driven_evidence_retrieval(
+                        {'name': 'Test Framework'}, 
+                        mock_statistical_results
+                    )
+                    
+                    # Verify the method completed successfully
+                    self.assertIsInstance(results, list)
+                    
+                except Exception as e:
+                    self.fail(f"Evidence retrieval failed with error: {e}")
+
+    def test_load_statistical_results_with_tuple_keys(self):
+        """
+        Test that statistical results with tuple keys can be loaded and processed.
+        
+        This test verifies that the _load_statistical_results method can handle
+        tuple keys in the stored data without crashing.
+        """
+        # Create mock statistical results with tuple keys
+        mock_statistical_results = {
+            'calculate_descriptive_stats_by_admin': {
+                'administration_stats': {
+                    ('constitutional_health_index', 'mean'): {'Biden': 0.661, 'Trump': -0.048},
+                    ('constitutional_health_index', 'std'): {'Biden': 0.241, 'Trump': 0.699}
+                }
+            }
+        }
+        
+        # Store the results in artifact storage
+        import pickle
+        content = pickle.dumps(mock_statistical_results)
+        hash_value = self.artifact_storage.put_artifact(content, {"artifact_type": "test"})
+        
+        # Try to load the results back
+        try:
+            loaded_results = self.agent._load_statistical_results(hash_value)
+            
+            # Verify the results were loaded correctly
+            self.assertIn('calculate_descriptive_stats_by_admin', loaded_results)
+            self.assertIn('administration_stats', loaded_results['calculate_descriptive_stats_by_admin'])
+            
+            # Verify tuple keys are preserved
+            admin_stats = loaded_results['calculate_descriptive_stats_by_admin']['administration_stats']
+            self.assertIn(('constitutional_health_index', 'mean'), admin_stats)
+            self.assertIn(('constitutional_health_index', 'std'), admin_stats)
+            
+        except Exception as e:
+            self.fail(f"Loading statistical results with tuple keys failed: {e}")
+
     def test_execute_evidence_plan_calls_search_correctly(self):
         """
         Test that the agent executes a plan by calling the evidence wrapper with the correct queries.

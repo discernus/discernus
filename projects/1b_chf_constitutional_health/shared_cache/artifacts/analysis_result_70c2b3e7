@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_8c8dec4e51dd",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis is based on the textual content provided. There is a discrepancy between the document's filename ('Clinton_SOTU_2001.txt') and the date in the header ('January 23, 2001') versus the actual content and references (e.g., '104th Congress', post-1994 Crime Bill), which identify the speech as President Clinton's State of the Union Address from January 23, 1996. The analysis proceeds based on the 1996 content.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_2001.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I challenge this Congress to send me a bipartisan welfare reform bill that will really move people from welfare to work and do the right thing by our children. I will sign it immediately.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct Call for Legislative Action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"No Evidence Found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I compliment the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct Statement of Respect for Institution\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"No Evidence Found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Direct Statement of Principle\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"No Evidence Found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "99857e7a6d1206f2b4a8042c338645ea34db6e0bdc6a173631e27f0e0604b753",
+  "execution_metadata": {
+    "start_time": "2025-08-28T22:57:37.220506+00:00",
+    "end_time": "2025-08-28T22:58:25.360992+00:00",
+    "duration_seconds": 48.140475
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2a46739d80a5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed President Trump's 2019 State of the Union address, focusing on the rhetorical emphasis on procedural adherence, institutional roles, and systemic evolution. The speech consistently promotes strengthening and improving the existing system through established processes, with no discernible rhetoric advocating for radical systemic replacement or institutional subversion.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2019.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Over the next few weeks, the House and Senate will be voting on an immigration reform package. In recent months, my administration has met extensively with both Democrats and Republicans to craft a bipartisan approach to immigration reform.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_reference_to_legislative_process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"We repealed the core of the disastrous Obamacare. The individual mandate is now gone, thank heavens.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"policy_overturn_with_strong_negative_framing\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Working with the Senate, we are appointing judges who will interpret the Constitution as written, including a great new Supreme Court Justice and more circuit court judges than any new administration in the history of our country.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"recognition_of_judicial_branch_and_constitutional_role\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"In America, we know that faith and family, not government and bureaucracy, are the center of American life.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"philosophical_statement_on_limited_government_role\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"reforming_and_strengthening_existing_system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"not_applicable\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "773786fb3847c084414b6deeca9865cc763535203d4e76c93ebab66a823fb289",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:00:16.739630+00:00",
+    "end_time": "2025-08-28T20:00:41.120023+00:00",
+    "duration_seconds": 24.380364
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

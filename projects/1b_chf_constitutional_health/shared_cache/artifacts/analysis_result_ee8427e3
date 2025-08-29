@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_36e50a7ea8db",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document consistently emphasizes reform and progress within the existing constitutional and governmental framework, rather than advocating for any form of radical departure or overthrow. The language is strongly aligned with maintaining and improving the current system, highlighting collaboration and adherence to established processes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1993.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes. Let us at least agree, we should not pass any measure\u2014no measure should be passed that threatens Social Security. Whatever your view on that, we all must concede: We don't need a constitutional amendment; we need action.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit rejection of bypassing constitutional processes\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"It does not require us to rewrite our Constitution.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit statement against bypassing constitutional processes\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Almost exactly 50 years ago, in the first winter of the cold war, President Truman stood before a Republican Congress and called upon our country to meet its responsibilities of leadership... That Congress, led by Republicans like Senator Arthur Vandenberg, answered President Truman's call. Together, they made the commitments that strengthened our country for 50 years.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"praise for institutional collaboration and effectiveness\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"To prepare America for the 21st century, we must master the forces of change in the world and keep American leadership strong and sure for an uncharted time. Fifty years ago, a farsighted America led in creating the institutions that secured victory in the cold war and built a growing world economy. As a result, today more people than ever embrace our ideals and share our interests... Now we stand at another moment of change and choice and another time to be farsighted, to bring America 50 more years of security and prosperity.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"vision for future built on existing strengths and institutions\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence of evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "aac8c4675f951ca46319131e640e73cd493d3cedc24dcb55bc504c5055e3ae77",
+  "execution_metadata": {
+    "start_time": "2025-08-28T19:45:34.533052+00:00",
+    "end_time": "2025-08-28T19:46:12.580649+00:00",
+    "duration_seconds": 38.047577
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

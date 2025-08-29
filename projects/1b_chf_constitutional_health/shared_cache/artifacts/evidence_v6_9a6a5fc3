@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:38:59.562490+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "When George Washington first took the oath I have just sworn to uphold, news traveled slowly across the land by horseback and across the ocean by boat.",
+      "confidence": 0.95,
+      "context_type": "declarative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562479+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I ask the Congress to join with me.",
+      "confidence": 0.9,
+      "context_type": "declarative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562481+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562482+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+      "confidence": 0.95,
+      "context_type": "declarative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562483+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Let us resolve to reform our politics so that power and privilege no longer shout down the voice of the people.",
+      "confidence": 0.85,
+      "context_type": "argumentative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562484+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562485+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "This ceremony is held in the depth of winter, but by the words we speak and the faces we show the world, we force the spring, a spring reborn in the world's oldest democracy that brings forth the vision and courage to reinvent America.",
+      "confidence": 0.95,
+      "context_type": "thematic",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562486+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Thomas Jefferson believed that to preserve the very foundations of our Nation, we would need dramatic change from time to time.",
+      "confidence": 0.95,
+      "context_type": "thematic",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562487+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.562488+00:00"
+    }
+  ]
+}

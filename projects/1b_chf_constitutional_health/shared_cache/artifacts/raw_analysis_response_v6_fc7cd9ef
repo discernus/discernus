@@ -1,0 +1,118 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Biden's 2025 State of the Union Address. The speech strongly emphasizes systemic continuity, institutional respect, and procedural legitimacy while frequently criticizing past actions and rhetoric of political opponents that are framed as subverting these principles. There is no advocacy for procedural rejection or systemic replacement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672",
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.05,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Remember your oath of office to defend against all threats foreign and domestic. Respect free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2014no place\u2014in America. Zero place.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you\u2014if you, the American people\u2014send me a Congress that supports the right to choose, I promise you I will restore Roe v. Wade as the law of the land again.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Now my predecessor, a former Republican President, tells Putin, quote, 'Do whatever the hell you want.'",
+          "confidence": 0.8,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Many of you in this Chamber and my predecessor are promising to pass a national ban on reproductive freedom. My God, what freedom else would you take away?",
+          "confidence": 0.7,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Good evening, Mr. Speaker, Madam Vice President, Members of Congress, my fellow Americans:",
+          "confidence": 0.95,
+          "context_type": "formal address"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "America is a founding member of NATO, the military alliance of democratic nations created after World War II to prevent war and keep the peace. And today we've made NATO stronger than ever.",
+          "confidence": 0.9,
+          "context_type": "affirmation"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "January 6 lies about the 2020 election and the plots to steal the election posed a great\u2014gravest threat to U.S. democracy since the Civil War.",
+          "confidence": 0.85,
+          "context_type": "description of threat"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "My predecessor came to office determined to see Roe v. Wade overturned. He's the reason it was overturned, and he boasts about it. Look at the chaos that has resulted.",
+          "confidence": 0.8,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America stood. America stood strong, and democracy prevailed. We must be honest: The threat to democracy must be defended [defeated; White House correction].",
+          "confidence": 0.95,
+          "context_type": "affirmation of resilience"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America cannot go back. I am here tonight to show what I believe is the way forward, because I know how far we've come.",
+          "confidence": 0.9,
+          "context_type": "vision statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

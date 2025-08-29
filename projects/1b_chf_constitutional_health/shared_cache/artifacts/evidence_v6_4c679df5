@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:50:56.323062+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "as a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+      "confidence": 1.0,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323046+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I urge Congress to pass legal reforms this year.",
+      "confidence": 1.0,
+      "context_type": "policy recommendation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323048+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "judges have a duty to faithfully interpret the law, not legislate from the bench. As President, I have a constitutional responsibility to nominate men and women who understand the role of courts in our democracy and are well-qualified to serve on the bench, and I have done so. The Constitution also gives the Senate a responsibility: Every judicial nominee deserves an up-or-down vote.",
+      "confidence": 1.0,
+      "context_type": "statement of constitutional duty",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323050+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323052+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Vice President Cheney, Members of Congress, fellow citizens: As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+      "confidence": 1.0,
+      "context_type": "addressing institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323053+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I welcome the bipartisan enthusiasm for spending discipline. I will send you a budget that holds the growth of discretionary spending below inflation, makes tax relief permanent, and stays on track to cut the deficit in half by 2009.",
+      "confidence": 1.0,
+      "context_type": "collaborative approach",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323054+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "One of America's most important institutions, a symbol of the trust between generations, is also in need of wise and effective reform. Social Security was a great moral success of the 20th century, and we must honor its great purposes in this new century.",
+      "confidence": 1.0,
+      "context_type": "valuing existing institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323055+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Because courts must always deliver impartial justice, judges have a duty to faithfully interpret the law, not legislate from the bench.",
+      "confidence": 0.8,
+      "context_type": "critique of institutional overreach",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323056+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "we must update institutions that were created to meet the needs of an earlier time.",
+      "confidence": 1.0,
+      "context_type": "call for reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323057+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must make Social Security permanently sound, not leave that task for another day.",
+      "confidence": 1.0,
+      "context_type": "goal statement for reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323058+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must ensure that any changes in the system are gradual, so younger workers have years to prepare and plan for their future.",
+      "confidence": 1.0,
+      "context_type": "policy principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323059+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:50:56.323060+00:00"
+    }
+  ]
+}

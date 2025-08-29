@@ -1,0 +1,163 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4"
+    ],
+    "total_evidence_pieces": 15,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:40:37.786482+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I ask you to pass a real Patients' Bill of Rights. I ask you to pass commonsense gun safety legislation. I ask you to pass campaign finance reform. I ask you to vote up or down on judicial nominations and other important appointees.",
+      "confidence": 0.95,
+      "context_type": "Direct call for legislative action through established channels",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786464+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "In 1993 we began to put our fiscal house in order with the Deficit Reduction Act, which you'll all remember won passage in both Houses by just a single vote.",
+      "confidence": 0.9,
+      "context_type": "Highlighting adherence to the legislative process, even with a close vote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786467+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "work with me to make a bipartisan downpayment on Social Security reform by crediting the interest savings from debt reduction to the Social Security Trust Fund so that it will be strong and sound for the next 50 years.",
+      "confidence": 0.9,
+      "context_type": "Advocating for reform through bipartisan legislative effort",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786468+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "For too long this Congress has been standing still on some of our most pressing national priorities.",
+      "confidence": 0.8,
+      "context_type": "Criticism of legislative inaction, not a rejection of the process itself",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786469+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The Senate faced down the gun lobby, stood up for the American people, and passed this legislation. But the House failed to follow suit.",
+      "confidence": 0.7,
+      "context_type": "Critique of one chamber's failure to act on a bill, implying a breakdown in legislative progress, but not a call to bypass it",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786471+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, honored guests, my fellow Americans:",
+      "confidence": 0.95,
+      "context_type": "Formal and respectful address to the legislative and executive institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786472+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "My gratitude also goes to those of you in this Chamber who have worked with us to put progress over partisanship.",
+      "confidence": 0.9,
+      "context_type": "Acknowledging and thanking members of Congress for their efforts",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786473+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I have sent Congress a reform plan based on that formula. It holds States and school districts accountable for progress and rewards them for results.",
+      "confidence": 0.9,
+      "context_type": "Respecting Congress's role in considering and implementing policy reforms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786474+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Then our Nation was gripped by economic distress, social decline, political gridlock. The title of a best-selling book asked: 'America: What Went Wrong?'",
+      "confidence": 0.8,
+      "context_type": "Historical description of past challenges (gridlock), which the speech frames as overcome, not a current attack on institutions.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786475+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No direct quote found advocating for delegitimizing or subverting democratic institutions or authority.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786476+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We are fortunate to be alive at this moment in history. Never before has our Nation enjoyed, at once, so much prosperity and social progress with so little internal crisis and so few external threats. Never before have we had such a blessed opportunity and, therefore, such a profound obligation to build the more perfect Union of our Founders' dreams.",
+      "confidence": 0.95,
+      "context_type": "Emphasizes continuity of national progress and the goal of perfecting the existing union.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786477+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The lesson of our history and the lesson of the last 7 years is that great goals are reached step by step, always building on our progress, always gaining ground.",
+      "confidence": 0.95,
+      "context_type": "Explicitly advocates for gradual, continuous progress within the existing system.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786478+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "After 224 years, the American revolution continues. We remain a new nation. And as long as our dreams outweigh our memories, America will be forever young. That is our destiny. And this is our moment.",
+      "confidence": 0.9,
+      "context_type": "Framing national development as an ongoing 'revolution' within the established framework, not a rupture.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786479+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Now, we must shape a 21st century American revolution of opportunity, responsibility, and community.",
+      "confidence": 0.7,
+      "context_type": "The term 'revolution' is used metaphorically for significant progress and reform within the existing American system, not a call for overthrow. It follows 'We have crossed the bridge we built to the 21st century,' implying continuation.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786479+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1997.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No other explicit or implicit advocacy for fundamental replacement or overthrow of the constitutional framework found.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.786480+00:00"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "total_evidence_pieces": 11,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:47:27.945085+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "For 209 years, it has been the President's duty to report to you on the state of the Union.",
+      "confidence": 1.0,
+      "context_type": "statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945042+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I will submit to Congress for 1999 the first balanced budget in 30 years.",
+      "confidence": 1.0,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945055+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "One year from now, I will convene the leaders of Congress to craft historic, bipartisan legislation to achieve a landmark for our generation: a Social Security system that is strong in the 21st century.",
+      "confidence": 1.0,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945058+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "none",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945061+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank the Vice President for his leadership and the Congress for its support in building a Government that is leaner, more flexible, a catalyst for new ideas, and most of all, a Government that gives the American people the tools they need to make the most of their own lives.",
+      "confidence": 1.0,
+      "context_type": "praise_of_institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945064+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The Chief Justice of the United States wrote: \u201cJudicial vacancies cannot remain at such high levels indefinitely without eroding the quality of justice.\u201d I simply ask the United States Senate to heed this plea and vote on the highly qualified judicial nominees before you, up or down.",
+      "confidence": 1.0,
+      "context_type": "appeal_to_institutional_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945067+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Like every taxpayer, I'm outraged by the reports of abuses by the IRS. We need some changes there: new citizen advocacy panels, a stronger taxpayer advocate, phone lines open 24 hours a day, relief for innocent taxpayers.",
+      "confidence": 0.9,
+      "context_type": "call_for_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945069+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "For 209 years, it has been the President's duty to report to you on the state of the Union.",
+      "confidence": 1.0,
+      "context_type": "historical_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945072+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We are moving steadily toward an even stronger America in the 21st century: an economy that offers opportunity, a society rooted in responsibility, and a nation that lives as a community.",
+      "confidence": 1.0,
+      "context_type": "vision_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945074+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Founders set America on a permanent course toward a more perfect Union. To all of you I say, it is a journey we can only make together, living as one community.",
+      "confidence": 1.0,
+      "context_type": "foundational_principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945077+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We have moved past the sterile debate between those who say government is the enemy and those who say government is the answer. My fellow Americans, we have found a third way. We have the smallest Government in 35 years, but a more progressive one. We have a smaller Government, but a stronger Nation.",
+      "confidence": 0.9,
+      "context_type": "governance_philosophy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:47:27.945080+00:00"
+    }
+  ]
+}

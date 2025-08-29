@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Obama's SOTU speech consistently emphasizes adapting and strengthening existing American institutions and processes through cooperation and gradual reform, rather than radical overhaul or rejection. The core message is one of continuity and progress built upon historical resilience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families. So I hope we can work together this year on some bipartisan priorities",
+          "confidence": 0.95,
+          "context_type": "support for constitutional processes"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our Founders distributed power between States and branches of government and expected us to argue, just as they did, fiercely, over the size and shape of government, over commerce and foreign relations, over the meaning of liberty and the imperatives of security.",
+          "confidence": 0.95,
+          "context_type": "recognition of institutional authority"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Democracy breaks down when the average person feels their voice doesn't matter, that the system is rigged in favor of the rich or the powerful or some special interest.",
+          "confidence": 0.85,
+          "context_type": "criticism of systemic issues affecting institutions, not outright delegitimization"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights. Each time, there have been those who told us to fear the future; who claimed we could slam the brakes on change; who promised to restore past glory if we just got some group or idea that was threatening America under control. And each time, we overcame those fears... We made change work for us, always extending America’s promise outward, to the next frontier, to more people. And because we did... we emerged stronger and better than before.",
+          "confidence": 0.95,
+          "context_type": "historical narrative of continuous improvement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        }
+      ]
+    }
+  }
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

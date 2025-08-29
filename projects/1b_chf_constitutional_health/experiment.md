@@ -100,54 +100,33 @@ This experiment will produce empirical findings on constitutional health differe
 - **Context**: Post-Trump institutional restoration
 - **Focus**: Infrastructure, climate action, democratic institutions
 
-## Administration Mapping
+## Data Grouping and Statistical Analysis
 
 ### Rationale
-This experiment analyzes constitutional health across **presidential administrations** rather than individual speakers or terms. Some presidents served non-consecutive terms (Trump 2017-2021, 2025-present) while others served consecutive terms. This mapping defines how corpus speakers are grouped into administrations for statistical analysis.
+This experiment analyzes constitutional health across **presidential administrations** rather than individual speakers or terms. The corpus manifest contains an explicit `administration` field for each document, ensuring consistent grouping across all analyses.
 
-### Speaker-to-Administration Mapping
-```yaml
-administration_mapping:
-  "Bush H.W.":
-    speakers: ["George H.W. Bush"]
-    years: [1992]
-    context: "Cold War transition baseline"
-    
-  "Clinton":
-    speakers: ["William J. Clinton", "Bill Clinton"]
-    years: [1993-2001]
-    context: "Post-Cold War governance"
-    
-  "Bush W.":
-    speakers: ["George W. Bush"]
-    years: [2001-2009]
-    context: "Post-9/11 security focus"
-    
-  "Obama":
-    speakers: ["Barack Obama", "Barack H. Obama"]
-    years: [2009-2017]
-    context: "Financial crisis recovery"
-    
-  "Trump":
-    speakers: ["Donald Trump", "Donald J. Trump"]
-    years: [2017-2021, 2025-present]
-    context: "Populist anti-establishment (combined terms)"
-    note: "Combines both Trump presidencies for constitutional health analysis"
-    
-  "Biden":
-    speakers: ["Joe Biden", "Joseph R. Biden", "Joseph Biden"]
-    years: [2021-2025]
-    context: "Post-Trump institutional restoration"
-```
+### Corpus Metadata Integration
+All statistical grouping uses metadata fields directly from the corpus manifest:
+- **Primary Field**: `administration` - Pre-assigned in corpus manifest for each document
+- **Secondary Fields**: `speech_type`, `year`, `party` - All from corpus manifest metadata
+- **Data Integrity**: No filename parsing or speaker name mapping required
 
-### Statistical Grouping Instructions
-- **Primary Analysis Variable**: `administration` (5 groups for ANOVA: Clinton, Bush W., Obama, Trump, Biden)
-- **Baseline Reference**: Bush H.W. (1992) serves as historical baseline for comparison but excluded from ANOVA due to n=1
-- **Secondary Variables**: `speech_type`, `year`, `party`
-- **Corpus Manifest Mapping**: Use `speaker` field to determine `administration` via above mapping
-- **Missing Speaker Handling**: Log warning and exclude from administration-based analyses
+### Statistical Grouping Structure
+The corpus contains the following administration groups:
+- **Bush H.W.** (n=1): 1992 baseline reference, excluded from inferential tests
+- **Clinton** (n=12): 1993-2001 addresses
+- **Bush W.** (n=11): 2001-2009 addresses  
+- **Obama** (n=12): 2009-2017 addresses
+- **Trump** (n=7): 2017-2021 and 2025 addresses (combined terms)
+- **Biden** (n=6): 2021-2025 addresses
 
-This explicit mapping eliminates ambiguity about how multi-term presidents and speaker name variations should be handled in statistical analysis.
+### Statistical Analysis Parameters
+- **Primary Analysis Variable**: `administration` (directly from corpus manifest)
+- **ANOVA Groups**: 5 administrations with n>1 (Clinton, Bush W., Obama, Trump, Biden)
+- **Baseline Reference**: Bush H.W. excluded from ANOVA due to n=1
+- **Compliance**: Follows Experiment Specification v10.0 corpus metadata linkage requirements
+
+This approach ensures all statistical agents use the same, unambiguous grouping data directly from the corpus manifest.
 
 ### Enhanced Statistical Analysis
 - **Administration Comparison**: One-way ANOVA analysis of constitutional_health_index across 5 administrations (Clinton, Bush W., Obama, Trump, Biden)

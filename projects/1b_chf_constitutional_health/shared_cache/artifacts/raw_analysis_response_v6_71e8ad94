@@ -1,0 +1,124 @@
+An expert discourse analyst, I will now analyze the provided document using the Constitutional Health Framework (CHF) v10.0. My analysis will adhere strictly to the provided framework and constraints.
+
+I will decode the framework and document, analyze the text for the six required dimensions, and then structure the raw scores, salience assessments, confidence levels, and evidence into the specified JSON format.
+
+My analysis will focus solely on providing the raw data as requested, without performing any downstream calculations or interpretations.
+
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The document's filename suggests it is from 2017, but the content and the citation at the end ('2012 State Of The Union Address') strongly indicate it is President Obama's 2012 State of the Union speech. This analysis proceeds based on the content being from the 2012 address. The analysis identifies a strong emphasis on systemic continuity and reform, coupled with calls for procedural legitimacy through legislative action. This is counterbalanced by threats of procedural rejection via executive action if Congress remains inactive, and moderate criticism of institutional dysfunction in Washington."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Send me a bill that bans insider trading by Members of Congress. I will sign it tomorrow.",
+          "confidence": 1.0,
+          "context_type": "call_for_legislative_action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "With the bipartisan trade agreements we signed into law, we\u2019re on track to meet that goal ahead of schedule.",
+          "confidence": 0.95,
+          "context_type": "support_for_bipartisan_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "With or without this Congress, I will keep taking actions that help the economy grow.",
+          "confidence": 1.0,
+          "context_type": "threat_of_unilateral_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "In the next few weeks, I will sign an Executive Order clearing away the redtape that slows down too many construction projects.",
+          "confidence": 1.0,
+          "context_type": "intent_to_use_executive_power"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "These achievements are a testament to the courage, selflessness, and teamwork of America\u2019s Armed Forces. At a time when too many of our institutions have let us down, they exceeded all expectations.",
+          "confidence": 1.0,
+          "context_type": "praise_for_military_institution"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And tonight I\u2019m asking my Attorney General to create a special unit of Federal prosecutors and leading state attorneys general to expand our investigations into the abusive lending and packaging of risky mortgages that led to the housing crisis.",
+          "confidence": 0.95,
+          "context_type": "empowerment_of_justice_department"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But the divide between this city and the rest of the country is at least as bad, and it seems to get worse every year.",
+          "confidence": 0.9,
+          "context_type": "critique_of_political_dysfunction"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Regulators had looked the other way, or didn\u2019t have the authority to stop the bad behavior.",
+          "confidence": 0.8,
+          "context_type": "historical_critique_of_institutional_failure"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We can either settle for a country where a shrinking number of people do really well while a growing number of Americans barely get by, or we can restore an economy where everyone gets a fair shot and everyone does their fair share and everyone plays by the same set of rules.",
+          "confidence": 1.0,
+          "context_type": "central_theme_of_economic_restoration"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "That\u2019s why our health care law relies on a reformed private market, not a Government program.",
+          "confidence": 1.0,
+          "context_type": "argument_for_reform_over_replacement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_evidence_found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

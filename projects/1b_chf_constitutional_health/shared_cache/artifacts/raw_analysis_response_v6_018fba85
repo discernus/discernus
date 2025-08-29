@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on identifying adherence to or rejection of constitutional processes and institutions, as well as advocacy for systemic continuity or replacement. The document, a State of the Union address, inherently leans towards reinforcing existing frameworks and processes while proposing reforms within them."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.75,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Send me these tax reforms, and I will sign them right away.",
+          "confidence": 0.9,
+          "context_type": "policy proposal"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.7,
+          "context_type": "absent"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We need to end the notion that the two parties must be locked in a perpetual campaign of mutual destruction, that politics is about clinging to rigid ideologies instead of building consensus around common-sense ideas.",
+          "confidence": 0.85,
+          "context_type": "call for institutional cooperation and proper function"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Nothing will get done in Washington this year or next year or maybe even the year after that, because Washington is broken.",
+          "confidence": 0.8,
+          "context_type": "critique of institutional dysfunction, but with reformist intent"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The state of our Union is getting stronger. And we\u2019ve come too far to turn back now.",
+          "confidence": 0.95,
+          "context_type": "overarching theme of progress and reform within existing system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

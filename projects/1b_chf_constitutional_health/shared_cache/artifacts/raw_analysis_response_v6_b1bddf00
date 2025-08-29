@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed Clinton's 1993 Inaugural Address for its stance on constitutional health dimensions. The speech heavily emphasizes renewal and reform within the existing democratic and institutional frameworks."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Today we do more than celebrate America. We rededicate ourselves to the very idea of America, an idea born in revolution and renewed through two centuries of challenge; an idea tempered by the knowledge that, but for fate, we, the fortunate, and the unfortunate might have been each other; an idea ennobled by the faith that our Nation can summon from its myriad diversity the deepest measure of unity; and an idea infused with the conviction that America's long, heroic journey must go forever upward.",
+          "confidence": 0.95,
+          "context_type": "thematic statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

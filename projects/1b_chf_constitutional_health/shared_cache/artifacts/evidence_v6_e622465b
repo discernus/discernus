@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:21:28.548417+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets...Tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.",
+      "confidence": 0.95,
+      "context_type": "explicit support for legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548402+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548405+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend.",
+      "confidence": 0.95,
+      "context_type": "recognition of institutional accountability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548408+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548410+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "History reminds us that at every moment of economic upheaval and transformation, this Nation has responded with bold action and big ideas.",
+      "confidence": 0.95,
+      "context_type": "appeal to historical precedent and national resilience",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548412+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:21:28.548413+00:00"
+    }
+  ]
+}

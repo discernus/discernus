@@ -1,0 +1,108 @@
+An expert discourse analyst, I will now analyze the provided documents using the specified framework.
+
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the speaker's own rhetoric, distinguishing between the speaker's advocacy and their criticism of opponents' alleged actions. The document, a political speech, provides clear and repeated evidence for dimensions related to upholding existing constitutional norms and processes, and a near-total absence of rhetoric rejecting or subverting them. Salience scores reflect the thematic centrality of these dimensions to the overall speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672",
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you\u2026the American people\u2026send me a Congress that supports the right to choose, I promise you I will restore Roe v. Wade as the law of the land again.",
+          "confidence": 0.95,
+          "context_type": "pledge_for_legislative_action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I say this to Congress: We have to stand up to Putin. Send me a bipartisan national security bill. History is literally watching.",
+          "confidence": 0.95,
+          "context_type": "direct_appeal_to_legislature"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The Border Patrol union has endorsed this bill.",
+          "confidence": 0.9,
+          "context_type": "deference_to_institutional_endorsement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Respect\u2026free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2026in America.",
+          "confidence": 0.95,
+          "context_type": "direct_appeal_for_institutional_trust"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "My lifetime has taught me to embrace freedom and democracy, a future based on core values that have defined America\u2026honesty, decency, dignity, and equality\u2026to respect everyone; to give everyone a fair shot; to give hate no safe harbor.",
+          "confidence": 0.95,
+          "context_type": "statement_of_personal_philosophy"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Not since President Lincoln and the Civil War have freedom and democracy been under assault at home as they are today.",
+          "confidence": 0.9,
+          "context_type": "historical_analogy_for_system_defense"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

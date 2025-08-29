@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document, a presidential address to Congress, consistently emphasizes cooperation, adherence to constitutional processes, respect for existing institutions, and incremental reform within the established framework. There is no rhetoric advocating for bypassing procedures, subverting institutions, or fundamentally replacing the system."
+  },
+  "document_analyses": [
+    {
+      "document_id": "dfca94ace2462f6476faa7bcf7d5b635c4fabca68d77a1f24b351afe4f5b2dba",
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I pledged to honor our Constitution and laws, and I asked you to join me in setting a tone of civility and respect in Washington.",
+          "confidence": 0.95,
+          "context_type": "direct statement of adherence"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress: It's a great privilege to be here to outline a new budget and a new approach for governing our great country. I thank you for your invitation to speak here tonight.",
+          "confidence": 0.95,
+          "context_type": "acknowledgment of institutional roles and processes"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.",
+          "confidence": 0.95,
+          "context_type": "advocacy for reform within existing systems"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "N/A"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

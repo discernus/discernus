@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_9feda6282e57",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed an inaugural address, which inherently tends to emphasize themes of continuity, legitimacy, and respect for institutions. The document strongly aligns with the 'positive' dimensions of the framework.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_Inaugural_2001.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct statement of adherence to process\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"As I begin, I thank President Clinton for his service to our Nation, and I thank Vice President Gore for a contest conducted with spirit and ended with grace.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of legitimate electoral process and peaceful transfer\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Thank you, all. Chief Justice Rehnquist, President Carter, President Bush, President Clinton, distinguished guests, and my fellow citizens.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgment and respect for office holders\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Government has great responsibilities for public safety and public health, for civil rights and common schools.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"statement recognizing legitimate role and responsibility of government institutions\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have a place, all of us, in a long story, a story we continue but whose end we will not see. It is a story of a new world that became a friend and liberator of the old, the story of a slaveholding society that became a servant of freedom, the story of a power that went into the world to protect but not possess, to defend but not to conquer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"narrative emphasizing ongoing historical development and evolution within existing framework\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"This work continues, the story goes on, and an angel still rides in the whirlwind and directs this storm.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit affirmation of continuation and ongoing progress\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "560a20078b8aea47eea8b7d60b11a311c84e2efa1ff4d4ca2037493054398629",
+  "execution_metadata": {
+    "start_time": "2025-08-28T19:13:01.321671+00:00",
+    "end_time": "2025-08-28T19:13:19.376788+00:00",
+    "duration_seconds": 18.055094
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T190753Z_44c2d972"
+  }
+}

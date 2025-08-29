@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2bc928e68e2b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis based on the default configuration of the Constitutional Health Framework v10.0. The speech predominantly focuses on national security, foreign policy, and domestic initiatives, framing all actions within the existing constitutional and institutional framework. There is strong emphasis on procedural legitimacy, institutional respect, and systemic continuity, with no evidence of procedural rejection, institutional subversion, or systemic replacement rhetoric related to US domestic governance.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2007.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kennedy. [Laughter] I know the folks at the Crawford coffee shop couldn't believe I'd say such a thing\u2014[laughter]\u2014but our work on this bill shows what is possible if we set aside posturing and focus on results.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of cooperation\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kennedy.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of cooperation\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our Nation will continue to be steadfast and patient and persistent in the pursuit of two great objectives. First, we will shut down terrorist camps, disrupt terrorist plans, and bring terrorists to justice. And second, we must prevent the terrorists and regimes who seek chemical, biological, or nuclear weapons from threatening the United States and the world.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"N/A\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "488168024a27c1390b59cb79f6b3631dba19fdfe3bb64d01f50969b8cd729229",
+  "execution_metadata": {
+    "start_time": "2025-08-28T19:53:23.585614+00:00",
+    "end_time": "2025-08-28T19:53:52.922137+00:00",
+    "duration_seconds": 29.336514
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

@@ -1,0 +1,251 @@
+<ctrl94>thought
+The user wants me to analyze a document using the "Constitutional Health Framework" v10.0.
+I need to output the analysis in a structured JSON format, adhering to the `CRITICAL_SEPARATION_OF_CONCERNS` and `CRITICAL_DIMENSIONAL_COMPLETENESS_REQUIREMENT`.
+
+Here's a plan:
+1.  **Decode the Framework:** Decode the base64 encoded framework to understand the dimensions, their definitions, and scoring calibration.
+2.  **Decode the Document:** Decode the base64 encoded document content.
+3.  **Analyze Document against Dimensions:**
+    *   For each dimension in `dimension_groups` (procedural_legitimacy, procedural_rejection, institutional_respect, institutional_subversion, systemic_continuity, systemic_replacement):
+        *   Read through the document, looking for text segments that align with the dimension's definition and markers.
+        *   Determine a `raw_score` (0.0-1.0) based on the intensity/frequency of the theme.
+        *   Determine a `salience` score (0.0-1.0) based on rhetorical prominence (frequency, structural positioning, thematic centrality, rhetorical devices).
+        *   Select the `strongest supporting quote`. If no direct quote, use "".
+        *   Assess `confidence` (0.0-1.0) for both the score and the evidence.
+        *   Determine `context_type` for the quote. (This isn't explicitly defined in the framework, so I will default to "direct quote" or similar if a more specific type isn't evident from the prompt). The prompt says "context_type": "[quote context classification]", which is vague. I will use "direct quote" if it's a direct quote, and "summary" if it's a summary of the passage. However, the instruction "For the "quote_text" field, you MUST provide a direct quote from the document. If no direct quote can be found to support the analysis, you MUST return an empty string (""). Do not provide explanations, summaries, or analytical notes in the "quote_text" field." means `context_type` will likely always be "direct quote" or similar. I'll use "direct quote" if I find one, and then `quote_text` will be `""` if not, so `context_type` will only be relevant if a quote is found.
+
+4.  **Construct JSON Output:** Assemble all the scores, salience, confidence, and evidence into the specified JSON structure.
+
+**Framework Details (from decoded content):**
+
+*   **Framework Name:** "constitutional_health_framework"
+*   **Framework Version:** "1.0.0"
+*   **Dimensions:**
+    *   `procedural_legitimacy`: Support for established procedures, respect for constitutional processes, adherence to democratic norms.
+    *   `procedural_rejection`: Rejecting established procedures, extra-constitutional action, emergency power claims, process bypassing.
+    *   `institutional_respect`: Recognition of institutional authority, expertise, legitimate governance role, support for checks and balances.
+    *   `institutional_subversion`: Attacking institutional authority, expertise, delegitimizing democratic institutions.
+    *   `systemic_continuity`: Support for maintaining/improving existing constitutional framework, gradual reform.
+    *   `systemic_replacement`: Advocating fundamental replacement rather than reform, revolutionary change rhetoric.
+
+**Disambiguation Rules:**
+*   **Procedural Axis:**
+    *   `procedural_legitimacy` vs. `procedural_rejection`: If primary function is supporting established processes, score Legitimacy. If bypassing or circumventing, score Rejection.
+    *   `Boundary Cases`: "Reform the process" -> Legitimacy vs. Circumvention (Rejection). "Emergency action needed" -> Crisis response (Legitimacy) vs. Constitutional bypass (Rejection).
+*   **Institutional Axis:**
+    *   `institutional_respect` vs. `institutional_subversion`: Respect recognizes legitimate authority/expertise. Subversion attacks/delegitimizes.
+    *   `Boundary Cases`: "Institutional reform needed" -> constructive criticism (Respect) vs. delegitimizing attack (Subversion). "Corrupt establishment" -> legitimate concern vs. institutional delegitimization.
+*   **Systemic Axis:**
+    *   `systemic_continuity` vs. `systemic_replacement`: Continuity supports gradual reform within framework. Replacement advocates fundamental, revolutionary change.
+    *   `Boundary Cases`: "Major constitutional reform" -> improvement (Continuity) vs. system replacement (Replacement). "New system needed" -> reform rhetoric vs. revolutionary replacement.
+
+**Salience Assessment:**
+*   Frequency and repetition
+*   Structural positioning (opening, closing, thesis)
+*   Thematic centrality
+*   Rhetorical devices
+
+**Document: Bush_SOTU_2003.txt**
+
+I'll read through the document with these dimensions in mind.
+
+**Initial Scan for Themes:**
+
+*   **Unity/Bipartisanship:** "system of two parties... differences and debate... conducted in a civil tone... respect for one another." -> `procedural_legitimacy`, `institutional_respect`
+*   **Fight against terrorism/Iraq war:** "act confidently in pursuing the enemies of freedom", "end of tyranny", "future security of America depends on it", "dictatorships shelter terrorists", "fight against terror", "Iraq", "Afghan", "North Korea, Iran", "Saddam Hussein", "weapons of mass murder". -> This is a core theme, but how does it relate to constitutional health? It frames national security as linked to spreading democracy, which might touch on systemic continuity/replacement by *others*, and institutional respect for US institutions that lead this.
+*   **Economic policies:** "build our prosperity by leading the world economy", "economic retreat leads to a stagnant and second-rate economy". Tax cuts, spending cuts, earmark reform, entitlements (Social Security, Medicare, Medicaid). -> Focus on economic policy, less on constitutional processes, institutions, or systemic change within the US constitutional framework itself.
+*   **Social issues/Values:** "compassionate, decent, hopeful society", "violent crime rates have fallen", "welfare cases have dropped", "drug use among youth is down", "fewer abortions", "rising generation finding personal responsibility", "wise policies", "culture is unraveling", "unethical conduct by public officials", "courts that try to redefine marriage". "human cloning", "embryos for experiments", "human-animal hybrids", "selling human embryos". "gift from our Creator". -> These touch on values and societal health, not directly constitutional health. "courts that try to redefine marriage" might hint at `institutional_subversion` if framed as undermining judicial role or proper process, but it's more about judicial *outcomes* than process or legitimacy.
+*   **Call for unity/cooperation:** "join me in creating a commission to examine the full impact of baby boom retirements", "put aside partisan politics and work together". -> `procedural_legitimacy`, `institutional_respect`.
+*   **Specific actions for national security:** PATRIOT Act reauthorization, terrorist surveillance program "authorized by Constitution and by statute". "Federal courts have approved the use of that authority". "Appropriate Members of Congress have been kept informed". -> Strong `procedural_legitimacy` and `institutional_respect` here, defending actions as legitimate and within bounds.
+*   **Role of US in the world:** "continue to lead", "protect our people... secure the peace... control our destiny... by our leadership", "end of tyranny in our world". "advance of freedom is the great story of our time". "democracies replace resentment with hope". "America rejects the false comfort of isolationism." -> This frames US global action within a broader historical and moral context. It relates more to US foreign policy doctrine than internal constitutional health.
+*   **Iraq progress:** "from dictatorship to liberation, to sovereignty, to a Constitution, to national elections." -> This is about building a *new* constitutional system elsewhere, not impacting the US one directly.
+*   **Iraq decision-making:** "decisions will be made by our military commanders, not by politicians in Washington, DC." -> This is more about operational control than constitutional principles.
+*   **Criticism:** "responsible criticism that aims for success and defeatism that refuses to acknowledge anything but failure." -> This distinguishes legitimate critique from destructive one. Supports `institutional_respect` and rejects `institutional_subversion` implicitly.
+
+**Scoring Strategy:**
+
+*   **procedural_legitimacy:** Strong. Emphasis on working within existing processes (Congress, Courts), respect for debate, call for bipartisanship, justification of surveillance based on constitutional/statutory authority.
+*   **procedural_rejection:** Very low. No explicit calls to bypass or reject processes. The closest might be the surveillance program, but it's framed as *authorized* by existing law and constitution.
+*   **institutional_respect:** Strong. Deference to Congress ("seek your good advice"), Supreme Court (new members, O'Connor), law enforcement/military, justification for actions based on "institutional authority." Explicitly distinguishes responsible criticism from delegitimizing defeatism.
+*   **institutional_subversion:** Very low. No calls to undermine US institutions. Criticisms are of other nations' institutions or vague "activist courts" but not framed as a general attack on US democratic institutions.
+*   **systemic_continuity:** Moderate to Strong. Emphasis on "strengthening our economic leadership", "continuing to lead the world in human talent and creativity", "preparing our Nation to compete in the world". Suggests improvement and strengthening *within* the existing system. Economic agenda is about improving the current system, not replacing it. Health care, energy, education reforms are all framed as improvements within the existing framework.
+*   **systemic_replacement:** Very low. No language suggesting a fundamental overhaul or revolutionary change to the US constitutional system. The focus on "new system" is external (Iraq).
+
+**Refining Scores and Salience:**
+
+**Procedural Legitimacy:**
+*   Mentions working with Congress, respect for debate, "civil tone," "good will and respect for one another."
+*   Justifies surveillance program as "based on authority given to me by the Constitution and by statute" and "Federal courts have approved the use of that authority."
+*   Call for commission to address entitlements ("put aside partisan politics and work together").
+*   Reauthorization of PATRIOT Act.
+*   Overall, consistent emphasis on working within the established system.
+*   *Score:* 0.8 (high intensity, frequent mentions, central to political discourse)
+*   *Salience:* 0.7 (discussed in various sections, particularly concerning national security actions and domestic policy)
+
+**Procedural Rejection:**
+*   No explicit advocacy for bypassing or rejecting procedures. The closest, the surveillance program, is framed as *legal* and *constitutional*.
+*   *Score:* 0.0 (absent)
+*   *Salience:* 0.0 (not prominent)
+
+**Institutional Respect:**
+*   Expresses gratitude to Supreme Court members, the Senate for confirmations.
+*   Highlights role of law enforcement, intelligence, military ("superb professionals").
+*   States that military decisions are made by commanders, not politicians.
+*   Distinguishes between "responsible criticism" and "defeatism."
+*   Recognizes institutional obligations ("Our Government has a responsibility to provide health care for the poor and the elderly").
+*   Call for reforms to strengthen "ethical standards of Washington" - implies respect for the institution itself, seeking to improve its integrity.
+*   *Score:* 0.8 (high recognition and support for various government branches and their roles)
+*   *Salience:* 0.7 (recurs throughout, particularly in national security and domestic sections)
+
+**Institutional Subversion:**
+*   No direct attacks on US institutional authority.
+*   Criticism of "activist courts that try to redefine marriage" is present, but framed as a policy disagreement or a belief in judicial overreach, not a wholesale delegitimization of the judiciary itself. It's about outcomes vs. process.
+*   The framework's definition for `institutional_subversion` ("attacking institutional authority, expertise, or legitimate governance role, delegitimizing democratic institutions") is not met by this particular criticism. It's a critique of specific *judicial actions* not a general delegitimization of the court's role or authority.
+*   *Score:* 0.1 (very weak, indirect hint from the 'activist courts' comment, but not a central theme)
+*   *Salience:* 0.1 (minimal rhetorical prominence for this specific type of critique, it's a brief mention)
+
+**Systemic Continuity:**
+*   Emphasis on "strengthening our economic leadership," "improving our environment," "make our dependence on Middle Eastern oil a thing of the past."
+*   Advocates for "gradual reform" in social security/medicare through a commission, not immediate drastic change.
+*   Mentions "No Child Left Behind Act" for educational improvement.
+*   "We will renew the defining moral commitments of this land."
+*   Overall theme is improvement and strengthening the existing US system.
+*   *Score:* 0.9 (very strong, dominant theme of progress and reform within the existing framework)
+*   *Salience:* 0.8 (pervasive, forms the basis for numerous policy proposals and positive outlooks)
+
+**Systemic Replacement:**
+*   No language advocating for a fundamental replacement of the US constitutional system.
+*   The "new system" rhetoric applies to Iraq, not the US.
+*   *Score:* 0.0 (absent)
+*   *Salience:* 0.0 (not prominent)
+
+Confidence: Overall high confidence in the analysis. The speech is quite direct and the themes are clear.
+
+Final check on JSON structure and constraints.
+- All 6 dimensions scored.
+- Raw scores 0.0-1.0.
+- Salience 0.0-1.0.
+- Confidence 0.0-1.0.
+- Evidence provided with `quote_text`, `confidence`, and `context_type`. If no quote, `quote_text` is empty string.
+- No mathematical calculations.
+- `document_id` and `document_name` placeholders are used correctly.
+- `analyst_confidence` is overall.
+- `analysis_notes` for methodological notes.
+- Verify dimension names match exactly.
+
+Looks good.<ctrl95><<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on identifying the speaker's rhetorical emphasis on constitutional and institutional principles. The speech exhibits strong support for existing frameworks and institutions, with a clear distinction between constructive criticism and delegitimizing rhetoric. Policy proposals are framed as improvements within the current system, not as advocating for systemic replacement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "f72be900ec79314b2b8e0af22b2bdca0f5fa41ed9c34d2fe26c08418479f6ca1",
+      "document_name": "Bush_SOTU_2003.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "But even though debates can be conducted in a civil tone, and our differences cannot be allowed to harden into anger. To confront the great issues before us, we must act in a spirit of good will and respect for one another, and I will do my part.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I have authorized a terrorist surveillance program to aggressively pursue the international communications of suspected Al Qaeda operatives and affiliates to and from America. Previous Presidents have used the same constitutional authority I have, and Federal courts have approved the use of that authority.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": ""
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I am pleased that Members of Congress are working on earmark reform, because the Federal budget has too many special interest projects. And we can tackle this problem together, if you pass the line-item veto.",
+          "confidence": 0.85,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I thank the Senate for confirming both of them. I will continue to nominate men and women who understand that judges must be servants of the law and not legislate from the bench.",
+          "confidence": 0.85,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Yet there is a difference between responsible criticism that aims for success and defeatism that refuses to acknowledge anything but failure. Hindsight alone is not wisdom, and second-guessing is not a strategy.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "They're concerned about unethical conduct by public officials and discouraged by activist courts that try to redefine marriage.",
+          "confidence": 0.7,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Tonight I will set out a better path: an agenda for a nation that competes with confidence; an agenda that will raise standards of living and generate new jobs.",
+          "confidence": 0.95,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "These gains are evidence of a quiet transformation, a revolution of conscience, in which a rising generation is finding that a life of personal responsibility is a life of fulfillment. Government has played a role. Wise policies, such as welfare reform and drug education and support for abstinence and adoption have made a difference in the character of our country.",
+          "confidence": 0.95,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "And to keep America competitive, one commitment is necessary above all: We must continue to lead the world in human talent and creativity.",
+          "confidence": 0.9,
+          "context_type": "direct quote"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": ""
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

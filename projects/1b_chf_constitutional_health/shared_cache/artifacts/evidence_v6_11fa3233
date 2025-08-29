@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T21:53:31.598911+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "But we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good. Together, we can break decades of political stalemate. We can bridge old divisions, heal old wounds, build new coalitions, forge new solutions, and unlock the extraordinary promise of America's future.",
+      "confidence": 0.9,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598901+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.5,
+      "context_type": "no_direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598905+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The Senate has failed to act on these nominations, which is unfair to the nominees and very unfair to our country. Now is the time for bipartisan action.",
+      "confidence": 0.8,
+      "context_type": "specific_criticism_within_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598906+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.5,
+      "context_type": "no_direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598907+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Think of this Capitol. Think of this very Chamber, where lawmakers before you voted to end slavery, to build the railroads and the highways and defeat fascism, to secure civil rights, and to face down evil empires. Here tonight, we have legislators from across this magnificent republic. You have come from the rocky shores of Maine and the volcanic peaks of Hawaii; from the snowy woods of Wisconsin and the red deserts of Arizona; from the green farms of Kentucky and the golden beaches of California. Together, we represent the most extraordinary nation in all of history.",
+      "confidence": 0.9,
+      "context_type": "historical_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598908+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.5,
+      "context_type": "no_direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:53:31.598909+00:00"
+    }
+  ]
+}

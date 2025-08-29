@@ -1,0 +1,88 @@
+An enhanced computational research analysis agent, I have analyzed the provided documents using the specified framework. My analysis, including raw dimensional scores, salience assessments, confidence levels, and evidence, is presented in the structured JSON format below.
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the President's explicit calls for legislative action, respect for governmental institutions, and the overarching theme of proving the efficacy of American democracy through reform, not replacement. The speech is strongly oriented towards procedural legitimacy and systemic continuity."
+  },
+  "document_analyses": [
+    {
+      "document_id": "9283d5a577d505fccb0b1cbc1b334f84085488cf1a8579a7056cc2b67a861314",
+      "document_name": "joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.",
+          "confidence": 0.95,
+          "context_type": "Call for Legislative Action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The National Institute of Health\u2014the NIH\u2014I believe, should create a similar Advanced Research Projects Agency for Health.",
+          "confidence": 0.9,
+          "context_type": "Policy Proposal"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "we have to come together to rebuild trust between law enforcement and the people they serve, to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd's name that passed the House already.",
+          "confidence": 0.85,
+          "context_type": "Call for Reform"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We have to prove democracy still works, that our Government still works and we can deliver for our people.",
+          "confidence": 1.0,
+          "context_type": "Thematic Statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

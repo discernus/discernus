@@ -85,27 +85,9 @@ class EvidenceRetrieverAgent:
             
             # Step 1: Load framework and statistical results
             self.logger.info("Step 1: Loading framework and statistical results...")
-            try:
-                framework_spec = self._load_framework_specification(framework_hash)
-                statistical_results = self._load_statistical_results(statistical_results_hash)
-                self.logger.info("Successfully loaded framework and statistical results")
-            except Exception as e:
-                self.logger.error(f"Failed to load framework or statistical results: {e}")
-                self.logger.info("Falling back to basic evidence retrieval due to artifact loading failure")
-                # Still need to build evidence wrapper for fallback
-                self.evidence_wrapper = self._build_evidence_wrapper(evidence_artifact_hashes)
-                if not self.evidence_wrapper:
-                    raise RuntimeError("Failed to build evidence wrapper")
-                # Fall back to basic evidence retrieval
-                evidence_results = self._fallback_evidence_retrieval({})
-                evidence_artifact_hash = self._store_evidence_results(evidence_results, statistical_results_hash)
-                return {
-                    "status": "success_fallback",
-                    "framework": "unknown_due_to_loading_failure",
-                    "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
-                    "evidence_artifact_hash": evidence_artifact_hash,
-                    "evidence_results": evidence_results
-                }
+            framework_spec = self._load_framework_specification(framework_hash)
+            statistical_results = self._load_statistical_results(statistical_results_hash)
+            self.logger.info("Successfully loaded framework and statistical results")
             
             # Step 2: Build evidence wrapper
             self.logger.info("Step 2: Building evidence wrapper...")
@@ -181,6 +163,8 @@ class EvidenceRetrieverAgent:
                 # Try Python repr format (THIN approach)
                 try:
                     content_str = content.decode('utf-8')
+                    # Preprocess nan values before ast.literal_eval
+                    content_str = content_str.replace('nan', 'float("nan")')
                     # Use ast.literal_eval for safer evaluation of repr() strings
                     import ast
                     return ast.literal_eval(content_str)
@@ -190,6 +174,8 @@ class EvidenceRetrieverAgent:
                         return json.loads(content.decode('utf-8'))
                     except json.JSONDecodeError:
                         # If JSON fails, try eval as last resort (for complex Python objects)
+                        # But first handle nan values
+                        content_str = content_str.replace('nan', 'float("nan")')
                         return eval(content_str)
             
         except Exception as e:

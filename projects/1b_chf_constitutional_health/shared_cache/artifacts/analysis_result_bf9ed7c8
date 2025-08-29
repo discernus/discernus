@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_6d5e0f1121ad",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analyzed speech consistently advocates for achieving policy goals through established governmental processes. It frames its agenda as a way to prove the efficacy of American democracy ('systemic_continuity'). There is strong evidence of 'procedural_legitimacy' and 'institutional_respect', with repeated calls for Congress to pass legislation and deference to institutional expertise. The corresponding negative dimensions ('procedural_rejection', 'institutional_subversion', 'systemic_replacement') are absent; the speaker instead condemns actions and ideologies that embody them, such as the January 6th insurrection and autocracy.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2022.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"So that\u2019s why I\u2019m calling on Congress to pass the Protect the Right to Organize Act\u2014the PRO Act\u2014and send it to my desk so we can support the right to unionize.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"call_for_legislative_action\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"call_for_legislative_action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The National Institute of Health\u2014the NIH\u2014I believe, should create a similar Advanced Research Projects Agency for Health.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"deference_to_institutional_model\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"And we won\u2019t ignore what our intelligence agencies have determined to be the most lethal terrorist threat to the homeland today: White supremacy is terrorism.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"deference_to_institutional_expertise\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We have to prove democracy still works, that our Government still works and we can deliver for our people.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_statement_of_purpose\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"I\u2019m not looking to punish anybody. But I will not add a tax burden\u2014an additional tax burden to the middle class in this country. They\u2019re already paying enough.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"advocacy_for_reform_within_system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"He\u2019s deadly earnest about becoming the most significant, consequential nation in the world. He and others\u2014autocrats\u2014think that democracy can\u2019t compete in the 21st century with autocracies because it takes too long to get consensus.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rejection_of_alternative_systems\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "5b7b011b977fd33a991341c3b4cc8383205edc5a966c1aa28959952f2d622efd",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:20:09.826825+00:00",
+    "end_time": "2025-08-28T23:20:56.007139+00:00",
+    "duration_seconds": 46.180309
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

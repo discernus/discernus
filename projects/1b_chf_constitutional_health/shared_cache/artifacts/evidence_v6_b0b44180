@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:22:01.779117+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "New laws will only pass with support from Democrats and Republicans. We will move forward together or not at all, for the challenges we face are bigger than party and bigger than politics.",
+      "confidence": 0.95,
+      "context_type": "explicit call for adherence to democratic norms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779070+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Race to the Top is the most meaningful reform of our public schools in a generation. For less than 1 percent of what we spend on education each year, it has led over 40 States to raise their standards for teaching and learning.",
+      "confidence": 0.9,
+      "context_type": "example of working within established processes for reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779088+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779091+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Maintaining our leadership in research and technology is crucial to America's success. But if we want to win the future, if we want innovation to produce jobs in America and not overseas, then we also have to win the race to educate our kids.",
+      "confidence": 0.9,
+      "context_type": "recognition of institutional roles in national success",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779094+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I ask Congress to eliminate the billions in taxpayer dollars we currently give to oil companies. I don't know if you've noticed, but they're doing just fine on their own. [Laughter] So instead of subsidizing yesterday's energy, let's invest in tomorrow's.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment of Congress's role and call for action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779096+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "We live and do business in the Information Age, but the last major reorganization of the Government happened in the age of black-and-white TV. There are 12 different agencies that deal with exports. There are at least five different agencies that deal with housing policy. Then there's my favorite example: The Interior Department is in charge of salmon while they\u2019re in fresh water, but the Commerce Department handles them when they\u2019re in saltwater. [Laughter] I hear it gets even more complicated once they\u2019re smoked. [Laughter]",
+      "confidence": 0.7,
+      "context_type": "critique of institutional inefficiency, framed as a call for reform rather than subversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779099+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "If a bill comes to my desk with earmarks inside, I will veto it. I will veto it.",
+      "confidence": 0.6,
+      "context_type": "action against perceived institutional misuse, not outright subversion of the institution itself",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779102+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "This is our generation's Sputnik moment. Two years ago, I said that we needed to reach a level of research and development we haven't seen since the height of the space race. And in a few weeks, I will be sending a budget to Congress that helps us meet that goal.",
+      "confidence": 0.9,
+      "context_type": "framing current efforts as part of ongoing national progress and improvement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779105+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Sustaining the American Dream has never been about standing pat. It has required each generation to sacrifice and struggle and meet the demands of a new age.",
+      "confidence": 0.95,
+      "context_type": "emphasis on continuous effort and adaptation within the existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779108+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:22:01.779110+00:00"
+    }
+  ]
+}

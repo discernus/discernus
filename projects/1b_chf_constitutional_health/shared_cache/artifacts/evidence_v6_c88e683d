@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T21:06:38.306724+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I signed 80 bipartisan bills into law last year, from preventing Government shutdowns, to protecting Asian Americans from still-too-common hate crimes, to reforming military justice.",
+      "confidence": 0.9,
+      "context_type": "direct statement of adherence to established legislative processes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306701+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306711+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madame Speaker, Madame Vice President, and our First Lady and Second Gentleman, Members of Congress and the Cabinet, Justices of the Supreme Court, my fellow Americans:",
+      "confidence": 0.8,
+      "context_type": "acknowledgment and respect for institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306714+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "no direct evidence of institutional delegitimization, critiques are focused on policy outcomes or behaviors leading to calls for reform within the system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306716+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Tonight I\u2019m offering a unity agenda for the Nation: four big things we can do together, in my view.",
+      "confidence": 0.9,
+      "context_type": "statement of intent for collaborative improvement within the existing national framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306718+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:06:38.306720+00:00"
+    }
+  ]
+}

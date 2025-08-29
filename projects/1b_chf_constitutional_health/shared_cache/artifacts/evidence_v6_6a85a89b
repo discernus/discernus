@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:59:35.288306+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+      "confidence": 0.95,
+      "context_type": "explicit acknowledgement of electoral process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288271+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "The Constitution also gives the Senate a responsibility: Every judicial nominee deserves an up-or-down vote.",
+      "confidence": 0.9,
+      "context_type": "call for adherence to established procedural norms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288281+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288284+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "As President, I have a constitutional responsibility to nominate men and women who understand the role of courts in our democracy and are well-qualified to serve on the bench, and I have done so.",
+      "confidence": 0.95,
+      "context_type": "acknowledgement of constitutional roles and duties",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288287+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+      "confidence": 0.85,
+      "context_type": "framing institutional reform as stewardship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288290+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Because marriage is a sacred institution and the foundation of society, it should not be redefined by activist judges.",
+      "confidence": 0.8,
+      "context_type": "critique of judicial actions as overreach",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288293+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "And we must take care that any changes in the system are gradual, so younger workers have years to prepare and plan for their future.",
+      "confidence": 1.0,
+      "context_type": "explicit advocacy for gradual reform within the existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288296+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "For the good of families, children, and society, I support a constitutional amendment to protect the institution of marriage.",
+      "confidence": 0.9,
+      "context_type": "utilizing existing constitutional mechanisms for change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288298+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:59:35.288301+00:00"
+    }
+  ]
+}

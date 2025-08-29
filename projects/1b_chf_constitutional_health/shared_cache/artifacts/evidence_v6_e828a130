@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:03.881164+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 0.9,
+      "context_type": "thematic statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881151+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Here, in this place, our responsibility begins with balancing the budget in a way that is fair to all Americans. There is now broad bipartisan agreement that permanent deficit spending must come to an end.",
+      "confidence": 0.9,
+      "context_type": "policy recommendation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881153+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I call on Congress to pass the requirement for a V-chip in TV sets so that parents can screen out programs they believe are inappropriate for their children.",
+      "confidence": 0.9,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881154+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881155+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I commend the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget. And I thank the Democrats for passing the largest deficit reduction plan in history in 1993, which has already cut the deficit nearly in half in 3 years.",
+      "confidence": 0.9,
+      "context_type": "praise and recognition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881156+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I call on all Americans to respect and support our law enforcement officers. And to our police, I say, our children need you as role models and heroes. Don't let them down.",
+      "confidence": 0.85,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881157+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I'd like to give you one example. His name is Richard Dean. He's a 49-year-old Vietnam veteran who's worked for the Social Security Administration for 22 years now. Last year he was hard at work in the Federal Building in Oklahoma City when the blast killed 169 people and brought the rubble down all around him. He reentered that building four times. He saved the lives of three women.",
+      "confidence": 0.9,
+      "context_type": "anecdotal evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881158+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881159+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 0.9,
+      "context_type": "thematic statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881160+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Second, how do we preserve our old and enduring values as we move into the future? And third, how do we meet these challenges together, as one America?",
+      "confidence": 0.85,
+      "context_type": "rhetorical question",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881161+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To improve the state of our Union, we must ask more of ourselves, we must expect more of each other, and we must face our challenges together.",
+      "confidence": 0.8,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881162+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.881163+00:00"
+    }
+  ]
+}

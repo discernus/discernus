@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_0f493f694b38",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the content of the provided speech, which is President Obama's 2014 State of the Union Address. The text exhibits a significant rhetorical tension between calls for legislative action (procedural_legitimacy) and vows to use executive action to bypass a deadlocked Congress (procedural_rejection). The speech is strongly oriented towards reform within the existing constitutional system (systemic_continuity) with no evidence of subversive or replacement rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2011.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year\u2019s severe cuts to priorities like education. Nobody got everything they wanted, and we can still do more to invest in this country\u2019s future while bringing down our deficit in a balanced way, but the budget compromise should leave us freer to focus on creating new jobs, not creating new crises.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"praise_for_bipartisan_legislative_process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"But America does not stand still, and neither will I. So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that\u2019s what I\u2019m going to do.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"statement_of_intent_to_use_executive_action\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Last year, part of the Voting Rights Act was weakened, but conservative Republicans and liberal Democrats are working together to strengthen it. And the bipartisan Commission I appointed, chaired by my campaign lawyer and Governor Romney\u2019s campaign lawyer, came together and have offered reforms so that no one has to wait more than a half hour to vote. Let's support these efforts. It should be the power of our vote, not the size of our bank accounts, that drives our democracy.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"support_for_legislative_and_commission-based_solutions\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Finally, if we\u2019re serious about economic growth, it is time to heed the call of business leaders, labor leaders, faith leaders, law enforcement and fix our broken immigration system. Republicans and Democrats in the Senate have acted, and I know that members of both parties in the House want to do the same.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"call_for_legislative_reform_of_an_existing_system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "9f451adb7b5dea904c1600b721a6f0e321a53869a9e0ad9453b0f8eb7a2b159c",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:07:54.985226+00:00",
+    "end_time": "2025-08-28T23:08:42.797063+00:00",
+    "duration_seconds": 47.811814
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

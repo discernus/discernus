@@ -96,11 +96,13 @@ class UnifiedSynthesisAgent:
             
             # Handle transition from JSON to Python repr format
             try:
-                # Try Python repr first (new format)
-                research_data = eval(research_data_str)
-            except (NameError, SyntaxError):
-                # Fallback to JSON (old format during transition)
+                # Try JSON first (current format)
                 research_data = json.loads(research_data_str)
+            except json.JSONDecodeError:
+                # Fallback to Python repr (old format during transition)
+                # Preprocess nan values before eval
+                research_data_str = research_data_str.replace('nan', 'float("nan")')
+                research_data = eval(research_data_str)
             
             # Convert tuple keys to strings for safe repr() serialization
             def convert_tuple_keys_for_repr(obj):
@@ -133,11 +135,13 @@ class UnifiedSynthesisAgent:
                 
                 # Handle transition from JSON to Python repr format
                 try:
-                    # Try Python repr first (new format)
-                    evidence_data = eval(evidence_str)
-                except (NameError, SyntaxError):
-                    # Fallback to JSON (old format during transition)
+                    # Try JSON first (current format)
                     evidence_data = json.loads(evidence_str)
+                except json.JSONDecodeError:
+                    # Fallback to Python repr (old format during transition)
+                    # Preprocess nan values before eval
+                    evidence_str = evidence_str.replace('nan', 'float("nan")')
+                    evidence_data = eval(evidence_str)
                 
                 evidence_context = repr(evidence_data)
             else:

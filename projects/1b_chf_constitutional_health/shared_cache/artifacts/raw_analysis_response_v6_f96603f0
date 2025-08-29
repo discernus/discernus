@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Obama's 2010 State of the Union Address, focusing on the framework's six dimensions related to constitutional health. The speech strongly emphasizes systemic continuity, procedural legitimacy, and institutional respect, with very minimal or no indicators of their opposing dimensions. The tone is collaborative and focused on strengthening the existing framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The Constitution makes us not rivals for power, but partners for progress. It is my task, he said, to report the state of the Union; to improve it is the task of us all.",
+          "confidence": 0.95,
+          "context_type": "direct statement of constitutional adherence and collaborative legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Now, some in Congress have proposed preventing only the defense cuts by making even bigger cuts to things like education and job training, Medicare, and Social Security benefits. That idea is even worse.",
+          "confidence": 0.8,
+          "context_type": "criticism of specific legislative proposal, framed as poor policy choice rather than outright rejection of process"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our efforts... consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+          "confidence": 0.95,
+          "context_type": "explicit reference to and affirmation of institutional checks and balances"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "After all, why would we choose to make deeper cuts to education and Medicare just to protect special interest tax breaks? How is that fair?",
+          "confidence": 0.8,
+          "context_type": "rhetorical question critiquing policy choices favoring special interests, not directly undermining institutional legitimacy"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It is our generation\u2019s task, then, to reignite the true engine of America\u2019s economic growth: a rising, thriving middle class. It is our unfinished task to restore the basic bargain that built this country:",
+          "confidence": 0.95,
+          "context_type": "call for strengthening and restoring fundamental American principles and economic structures"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no evidence found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

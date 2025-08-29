@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis distinguishes between the speaker's advocacy of a dimension (raw_score) and the prominence of the topic of that dimension (salience), especially for 'institutional_subversion' where the President condemns subversion rather than enacting it. The speech consistently advocates for strengthening existing democratic and institutional frameworks rather than proposing their replacement."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565",
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away. The country supports it. The Congress should act now.",
+          "confidence": 0.95,
+          "context_type": "Call to action within legislative framework"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "The images of a violent mob assaulting this Capitol, desecrating our democracy, remain vivid in all our minds.",
+          "confidence": 0.9,
+          "context_type": "Description of past event being condemned"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I know Republicans have their own ideas and are engaged in very productive discussions with Democrats in the Senate. We need to work together to find a consensus.",
+          "confidence": 0.95,
+          "context_type": "Call for inter-institutional collaboration"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The images of a violent mob assaulting this Capitol, desecrating our democracy, remain vivid in all our minds.",
+          "confidence": 0.9,
+          "context_type": "Description of an act of institutional subversion"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America is moving\u2014moving forward\u2014but we can't stop now. We're in competition with China and other countries to win the 21st century. We're at a great inflection point in history. We have to do more than just build back better\u2014I mean, \"build back.\" We have to build back better.",
+          "confidence": 0.95,
+          "context_type": "Policy goal statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "We're not changing the Constitution; we're being reasonable.",
+          "confidence": 0.9,
+          "context_type": "Explicit statement against radical change"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

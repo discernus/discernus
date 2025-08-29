@@ -95,6 +95,46 @@ metadata:
         assert orchestrator.mock_llm_calls is False
         assert orchestrator.performance_monitoring is True
     
+    def test_tuple_key_handling_in_fact_checker_rag(self, orchestrator):
+        """
+        Test that the orchestrator can handle tuple keys in statistical results
+        when building fact-checker RAG indexes.
+        
+        This test verifies that the _build_fact_checker_rag_index method
+        can handle tuple keys without crashing.
+        """
+        # Create mock statistical results with tuple keys
+        mock_statistical_results = {
+            'stats_hash': 'test_hash',
+            'calculate_descriptive_stats_by_admin': {
+                'administration_stats': {
+                    ('constitutional_health_index', 'mean'): {'Biden': 0.661, 'Trump': -0.048},
+                    ('constitutional_health_index', 'std'): {'Biden': 0.241, 'Trump': 0.699}
+                }
+            }
+        }
+        
+        # Mock the artifact storage
+        with patch.object(orchestrator, 'artifact_storage') as mock_storage:
+            mock_storage.registry = {
+                'test_hash': {'metadata': {'artifact_type': 'statistical_results_with_data'}},
+                'evidence_hash': {'metadata': {'artifact_type': 'evidence_v6_test'}}
+            }
+            mock_storage.get_artifact.return_value = b'{"test": "data"}'
+            
+            # This should not crash with tuple keys
+            try:
+                result = orchestrator._build_fact_checker_rag_index(
+                    mock_statistical_results, 
+                    {'report_hash': 'test_report'}
+                )
+                
+                # Verify the method completed successfully
+                assert result is not None
+                
+            except Exception as e:
+                pytest.fail(f"Fact-checker RAG building failed with error: {e}")
+    
     def test_get_test_configuration(self, orchestrator):
         """Test test configuration retrieval."""
         config = orchestrator.get_test_configuration()

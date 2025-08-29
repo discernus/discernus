@@ -1,0 +1,143 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "total_evidence_pieces": 13,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:57:46.422196+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight Members of Congress can take pride in the great works of compassion and reform that skeptics had thought impossible. You're raising the standards for our public schools, and you are giving our senior citizens prescription drug coverage under Medicare.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422141+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our law enforcement needs this vital legislation to protect our citizens. You need to renew the PATRIOT Act.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422157+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Last January, Iraq's only law was the whim of one brutal man. Today, our coalition is working with the Iraqi Governing Council to draft a basic law with a bill of rights.",
+      "confidence": 0.85,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422161+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives. On an issue of such great consequence, the people's voice must be heard. If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422164+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Tonight Members of Congress can take pride in the great works of compassion and reform that skeptics had thought impossible.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422167+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace. Our closest allies have been unwavering. America's intelligence personnel and diplomats have been skilled and tireless. And the men and women of the American military--they have taken the hardest duty.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422170+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "It's also important to strengthen our communities by unleashing the compassion of America's religious institutions.",
+      "confidence": 0.85,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422173+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+      "confidence": 0.8,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422177+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We can press on with economic growth and reforms in education and Medicare, or we can turn back to old policies and old divisions.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422180+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "This Nation will not go back to the days of simply shuffling children along from grade to grade without them learning the basics.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422183+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "By keeping costs under control, expanding access, and helping more Americans afford coverage, we will preserve the system of private medicine that makes America's health care the best in the world.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422185+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Yet some things endure: courage and compassion, reverence and integrity, respect for differences of faith and race. The values we try to live by never change, and they are instilled in us by fundamental institutions such as families and schools and religious congregations. These institutions, these unseen pillars of civilization, must remain strong in America, and we will defend them.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422188+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:46.422191+00:00"
+    }
+  ]
+}

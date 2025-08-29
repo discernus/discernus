@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed political discourse focusing on procedural, institutional, and systemic dimensions of constitutional health. The speech emphasizes rapid, decisive action and a radical departure from past policies and perceived institutional failures, advocating for a 'common sense revolution'."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18",
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "procedural_rejection": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.5
+        },
+        "systemic_replacement": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Once it passes the House, I look forward to signing that bill into law.",
+          "confidence": 0.8,
+          "context_type": "legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country",
+          "confidence": 0.9,
+          "context_type": "extra-constitutional action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "My administration has acted swiftly and decisively to restore fair, equal and impartial justice under the constitutional rule of law. Starting at the FBI and the DOJ...",
+          "confidence": 0.8,
+          "context_type": "desire for proper institutional function"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "My administration will reclaim power from this unaccountable bureaucracy, and we will restore true democracy to America again. Any federal bureaucrat who resists this change will be removed from office immediately.",
+          "confidence": 0.9,
+          "context_type": "attack on institutional authority"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "",
+          "confidence": 0.5,
+          "context_type": "absence of evidence"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "This is only a small fraction of the common sense revolution that is now because of us sweeping the entire world, common sense has become a common theme, and we will never go back. Never, never going to let that happen.",
+          "confidence": 0.9,
+          "context_type": "revolutionary change rhetoric"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

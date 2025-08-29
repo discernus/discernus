@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:41:14.630436+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I start tonight by congratulating the 118th Congress and the new Speaker of the House, Kevin McCarthy.",
+      "confidence": 0.95,
+      "context_type": "recognition of democratic process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630421+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And, in fact, I signed over 300 bipartisan pieces of legislation since becoming President, from reauthorizing the Violence Against Women Act to the Electoral Count Reform Act, the Respect for Marriage Act that protects the right to marry the person you love.",
+      "confidence": 0.95,
+      "context_type": "adherence to legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630423+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Some Members here are threatening\u2014and I know it's not an official party position, so I'm not going to exaggerate\u2014but threatening to repeal the Inflation Reduction Act.",
+      "confidence": 0.9,
+      "context_type": "criticism of undermining legislative outcomes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630424+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Make no mistake, if you try anything to raise the cost of prescription drugs, I will veto it.",
+      "confidence": 0.85,
+      "context_type": "opposition to specific policy reversal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630425+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Madam Vice President, our First Lady and Second Gentleman\u2014good to see you guys up there\u2014[applause] Members of Congress. and by the way, Chief Justice, I may need a court order.",
+      "confidence": 0.95,
+      "context_type": "formal recognition of institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630426+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We have to uphold the rule of law and restore trust in our institutions of democracy.",
+      "confidence": 0.95,
+      "context_type": "call for adherence to institutional norms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630427+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "So my\u2014many of\u2014some of my Republican friends want to take the economy hostage\u2014I get it\u2014unless I agree to their economic plans. All of you at home should know what those plans are. Instead of making the wealthy pay their fair share, some Republicans want Medicare and Social Security to sunset.",
+      "confidence": 0.7,
+      "context_type": "critique of proposals to undermine social programs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630428+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Liar, liar!",
+      "confidence": 0.8,
+      "context_type": "interjection by opposing member, context for President's response",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630429+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The story of America is a story of progress and resilience, of always moving forward, of never, ever giving up. It's a story unique among all nations.",
+      "confidence": 0.95,
+      "context_type": "emphasis on national resilience and progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630430+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Two years ago, our democracy faced its greatest threat since the Civil War. And today, though bruised, our democracy remains unbowed and unbroken.",
+      "confidence": 0.95,
+      "context_type": "reaffirmation of democratic endurance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630431+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "I ran for President to fundamentally change things. To make sure our economy works for everyone so we can all feel that pride in what we do. To build an economy from the bottom up and the middle out, not from the top down.",
+      "confidence": 0.6,
+      "context_type": "advocacy for economic policy shift, not systemic overthrow",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630433+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We are not powerless before the forces that confront us. It's within our power of 'We the People.'",
+      "confidence": 0.5,
+      "context_type": "empowering rhetoric within existing constitutional framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.630434+00:00"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_513ae522594c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed President Obama's 2015 State of the Union address, focusing on his rhetoric regarding procedural integrity, institutional norms, and systemic stability. The speech predominantly advocates for continuity and respect within the existing constitutional framework, while acknowledging and seeking to reform areas of dysfunction and gridlock. Executive actions are framed as responses to legislative inaction rather than rejections of fundamental procedures.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2015.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Our Constitution declares that from time to time, the President shall give to Congress information about the state of our Union.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit reference to constitutional process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"yesterday the Senate blocked a bill that would have created this commission, so I\u2019ll issue an Executive order that will allow us to go forward, because I refuse to pass this problem on to another generation of Americans.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"circumvention due to legislative inaction\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Madam Speaker, Vice President Biden, Members of Congress, distinguished guests, and fellow Americans: Our Constitution declares that from time to time, the President shall give to Congress information about the state of our Union.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of institutional roles and constitutional basis\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"We face a deficit of trust, deep and corrosive doubts about how Washington works that have been growing for years.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"critique of institutional dysfunction leading to distrust\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"our Union is strong. We do not give up. We do not quit. We do not allow fear or division to break our spirit.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"affirmation of national strength and resilience\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "729d7009d82d18555d7bd51849ec17b949b05822c1b839d3966d135030549a19",
+  "execution_metadata": {
+    "start_time": "2025-08-28T21:00:41.126835+00:00",
+    "end_time": "2025-08-28T21:01:00.523788+00:00",
+    "duration_seconds": 19.396936
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "d5b41a65a749f8f1d828d02c3cf7c4ba2df6b7bc665e8a3715223323b78b81dd"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T204458Z_1a58c9cc"
+  }
+}

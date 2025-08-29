@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0cf4f45731857a56687142043d6a8f5c4f12e873033114da1ffd0f7cbabe690d"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:38:59.573783+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "To create jobs and guarantee a strong recovery, I call on Congress to enact an immediate package of jobs investments of over $30 billion to put people to work now...",
+      "confidence": 0.9,
+      "context_type": "advocacy of legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573777+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573778+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I think it is clear to every American, including every Member of Congress of both parties, that the confidence of the people who pay our bills in our institutions in Washington is not high. We must restore it.",
+      "confidence": 0.9,
+      "context_type": "call for institutional restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573779+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573780+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+      "confidence": 0.9,
+      "context_type": "emphasis on foundational values and gradual progress",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573781+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1998.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.573782+00:00"
+    }
+  ]
+}

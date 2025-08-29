@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed George W. Bush's 2008 State of the Union address, focusing on rhetoric regarding constitutional health. The speech largely emphasizes systemic continuity and institutional respect for domestic policy, while exhibiting strong procedural rejection and some institutional subversion concerning foreign policy, particularly regarding Iraq and the UN."
+  },
+  "document_analyses": [
+    {
+      "document_id": "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "procedural_rejection": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.",
+          "confidence": 0.9,
+          "context_type": "call to legislative action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But let there be no misunderstanding: If Saddam Hussein does not fully disarm, for the safety of our people and for the peace of the world, we will lead a coalition to disarm him.",
+          "confidence": 0.9,
+          "context_type": "threat of unilateral action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Tonight I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center, to merge and analyze all threat information in a single location.",
+          "confidence": 0.8,
+          "context_type": "reliance on government agencies"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "He has shown instead utter contempt for the United Nations and for the opinion of the world.",
+          "confidence": 0.7,
+          "context_type": "criticism of international body"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America is a strong nation and honorable in the use of our strength. We exercise power without conquest, and we sacrifice for the liberty of strangers.",
+          "confidence": 0.9,
+          "context_type": "affirmation of national values and existing order"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "These problems will not be solved with a nationalized health care system that dictates coverage and rations care.",
+          "confidence": 0.8,
+          "context_type": "rejection of alternative system model"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

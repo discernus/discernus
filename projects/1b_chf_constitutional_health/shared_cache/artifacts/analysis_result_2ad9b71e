@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_de441d57b52a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed a formal State of the Union address. The discourse heavily emphasizes continuity, reform within existing structures, and respect for institutions and procedures, consistent with the nature of such a speech. No indications of subversion or rejection rhetoric were found.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2014.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.75,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets...Tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit support for legislative process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"recognition of institutional accountability\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"History reminds us that at every moment of economic upheaval and transformation, this Nation has responded with bold action and big ideas.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"appeal to historical precedent and national resilience\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "e622465bc77c5ec8bc211dd076091ce734bdd9a8ed334f06f85cf937ede8af1e",
+  "execution_metadata": {
+    "start_time": "2025-08-28T19:21:08.992698+00:00",
+    "end_time": "2025-08-28T19:21:28.549619+00:00",
+    "duration_seconds": 19.55691
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T190753Z_44c2d972"
+  }
+}

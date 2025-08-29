@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_81a7b3c16e9e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"The document is a formal presidential address to Congress during a time of national crisis. The rhetoric consistently emphasizes working through established constitutional procedures and with key institutions (Congress, federal agencies) to enact significant reforms. The aim is clearly to repair and strengthen the existing American system, not to reject, subvert, or replace it. Consequently, scores are high for the 'health' dimensions and absent for the 'pathology' dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"barack_obama_2009_address_before_a_joint_session_of_the_congress.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"As soon as I took office, I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets... And tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit reference to and approval of the legislative process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"And to ensure that a crisis of this magnitude never happens again, I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit request for action by another branch of government\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"For history tells a different story. History reminds us that at every moment of economic upheaval and transformation, this Nation has responded with bold action and big ideas.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"framing current reforms as part of a historical tradition of systemic adaptation\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "35ba74418b3ae2255dd69bf98c0bb0e28a2cbd0976ab0926c751cfc8ac9cab4e",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:04:32.356324+00:00",
+    "end_time": "2025-08-28T23:05:34.310766+00:00",
+    "duration_seconds": 61.954419
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "98481692a14ee07f3eaa5b45bef63e3f89d84e7e991f4efab0b3458bdc3817e6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

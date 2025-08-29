@@ -1,0 +1,375 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-28T22:31:40.397917",
+    "statistical_results_hash": "23ac3b239f5a0bd5939f0276d37dbca3dc48bf9a6a268f9cb258e4e5e004c95d",
+    "total_findings": 5,
+    "total_quotes": 21
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Trump's rhetoric consistently exhibits the lowest Constitutional Health and highest Constitutional Pathology across all measured speeches, demonstrating a significant statistical outlier compared to other presidential eras."
+      },
+      "queries_used": [
+        "document_name:\"Trump_Inaugural_2017.txt\" AND (dimension:\"procedural_rejection\" OR dimension:\"institutional_subversion\" OR dimension:\"systemic_replacement\")",
+        "document_name:\"Trump_SOTU_2025.txt\" AND (dimension:\"procedural_rejection\" OR dimension:\"institutional_subversion\" OR dimension:\"systemic_replacement\")",
+        "document_name:\"Trump_SOTU_2018.txt\" AND (dimension:\"institutional_subversion\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We must keep our old democracy forever young.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.456965833902359,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.9,
+          "relevance_score": 0.4487311542034149,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, honored guests, my fellow Americans:",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.98,
+          "relevance_score": 0.4372429847717285,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I've submitted judicial nominees who will rule by the letter of the law, not the whim of the gavel.",
+          "document_name": "Bush_SOTU_2005.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.85,
+          "relevance_score": 0.40858203172683716,
+          "metadata": {
+            "document_name": "Bush_SOTU_2005.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Mainstream presidential discourse (Clinton, Bush W., Obama) consistently demonstrates high Constitutional Health and low Constitutional Pathology, indicating a strong adherence to constitutional norms."
+      },
+      "queries_used": [
+        "document_name:\"Clinton_Inaugural_1993.txt\" AND (dimension:\"procedural_legitimacy\" OR dimension:\"institutional_respect\" OR dimension:\"systemic_continuity\")",
+        "document_name:\"Obama_SOTU_2014.txt\" AND (dimension:\"procedural_legitimacy\" OR dimension:\"institutional_respect\" OR dimension:\"systemic_continuity\")",
+        "document_name:\"Bush_SOTU_2005.txt\" AND (dimension:\"procedural_legitimacy\" OR dimension:\"institutional_respect\" OR dimension:\"systemic_continuity\")"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our Founders taught us that the preservation of our liberty and our Union depends upon responsible citizenship.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.546644926071167,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must keep our old democracy forever young.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5087944269180298,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times",
+          "document_name": "Clinton_SOTU_2000.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.9,
+          "relevance_score": 0.4984055161476135,
+          "metadata": {
+            "document_name": "Clinton_SOTU_2000.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 3
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Biden's hypothetical 2025 SOTU speech presents an anomalous shift towards lower Constitutional Health and higher Constitutional Pathology, particularly in procedural and institutional dimensions, deviating from his otherwise normative pattern."
+      },
+      "queries_used": [
+        "document_name:\"Biden_SOTU_2025.txt\" AND (dimension:\"procedural_rejection\" OR dimension:\"institutional_subversion\")",
+        "document_name:\"Biden_SOTU_2025.txt\" AND (dimension:\"procedural_rejection\" AND salience:>=0.7)",
+        "document_name:\"Biden_SOTU_2025.txt\" AND (dimension:\"institutional_subversion\" AND salience:>=0.8)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "fighting for the sake of fighting, power for the sake of power, conflict for the sake of conflict gets us nowhere.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.85,
+          "relevance_score": 0.48941218852996826,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Make no mistake, if you try anything to raise the cost of prescription drugs, I will veto it.",
+          "document_name": "Biden_SOTU_2024.txt",
+          "dimension": "procedural_rejection",
+          "confidence": 0.8,
+          "relevance_score": 0.42620986700057983,
+          "metadata": {
+            "document_name": "Biden_SOTU_2024.txt",
+            "dimension": "procedural_rejection",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Madame Speaker, Madame Vice President, and our First Lady and Second Gentleman, Members of Congress and the Cabinet, Justices of the Supreme Court, my fellow Americans:",
+          "document_name": "Biden_SOTU_2023.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.8,
+          "relevance_score": 0.4200435280799866,
+          "metadata": {
+            "document_name": "Biden_SOTU_2023.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, honored guests, my fellow Americans:",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.98,
+          "relevance_score": 0.41492021083831787,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High salience of negative constitutional dimensions (rejection, subversion, replacement) in outlier speeches like Trump's 2017 Inaugural significantly drives the overall Constitutional Pathology Index."
+      },
+      "queries_used": [
+        "document_name:\"Trump_Inaugural_2017.txt\" AND dimension:\"procedural_rejection\" AND salience:>=0.7",
+        "document_name:\"Trump_Inaugural_2017.txt\" AND dimension:\"institutional_subversion\" AND salience:>=0.9",
+        "document_name:\"Trump_Inaugural_2017.txt\" AND dimension:\"systemic_replacement\" AND salience:>=0.8"
+      ],
+      "quotes": [
+        {
+          "quote_text": "They have been magnificent. Thank you.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.8,
+          "relevance_score": 0.5510068535804749,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We must keep our old democracy forever young.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.5315543413162231,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "institutional_subversion",
+          "confidence": 0.9,
+          "relevance_score": 0.5225200057029724,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "institutional_subversion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "With these actions, we will begin the complete restoration of America and the revolution of common sense.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "systemic_replacement",
+          "confidence": 0.9,
+          "relevance_score": 0.5056307315826416,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "systemic_replacement",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.",
+          "document_name": "Trump_Inaugural_2025.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.8,
+          "relevance_score": 0.46177488565444946,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2025.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Conversely, high salience of positive constitutional dimensions (legitimacy, respect, continuity) defines the consistently high Constitutional Health observed in speeches from Presidents Clinton, Bush W., and Obama."
+      },
+      "queries_used": [
+        "document_name:\"Clinton_SOTU_1996.txt\" AND dimension:\"procedural_legitimacy\" AND salience:>=0.9",
+        "document_name:\"Obama_Inaugural_2013.txt\" AND dimension:\"institutional_respect\" AND salience:>=0.8",
+        "document_name:\"Bush_Inaugural_2001.txt\" AND dimension:\"systemic_continuity\" AND salience:>=0.9"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We must keep our old democracy forever young.",
+          "document_name": "Clinton_Inaugural_1997.txt",
+          "dimension": "systemic_continuity",
+          "confidence": 0.95,
+          "relevance_score": 0.6411449909210205,
+          "metadata": {
+            "document_name": "Clinton_Inaugural_1997.txt",
+            "dimension": "systemic_continuity",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They have been magnificent. Thank you.",
+          "document_name": "Trump_Inaugural_2017.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.8,
+          "relevance_score": 0.6398794651031494,
+          "metadata": {
+            "document_name": "Trump_Inaugural_2017.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "we celebrate the durable wisdom of our Constitution",
+          "document_name": "Bush_Inaugural_2005.txt",
+          "dimension": "institutional_respect",
+          "confidence": 0.9,
+          "relevance_score": 0.5849555730819702,
+          "metadata": {
+            "document_name": "Bush_Inaugural_2005.txt",
+            "dimension": "institutional_respect",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We restored the vital center, replacing outmoded ideologies with a new vision anchored in basic, enduring values: opportunity for all, responsibility from all, a community of all Americans. We reinvented Government, transforming it into a catalyst for new ideas that stress both opportunity and responsibility and give our people the tools they need to solve their own problems.",
+          "document_name": "Clinton_SOTU_1997.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.9,
+          "relevance_score": 0.5825953483581543,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1997.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I am asking the United States Congress to pass a real campaign finance reform bill this year. I ask you to increase the participation of the American people by passing the motor voter bill promptly. I ask you to deal with the undue influence of special interests by passing a bill to end the tax deduction for lobbying and to act quickly to require all the people who lobby you to register as lobbyists by passing the lobbying registration bill.",
+          "document_name": "Clinton_SOTU_1998.txt",
+          "dimension": "procedural_legitimacy",
+          "confidence": 0.95,
+          "relevance_score": 0.5662986040115356,
+          "metadata": {
+            "document_name": "Clinton_SOTU_1998.txt",
+            "dimension": "procedural_legitimacy",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    }
+  ]
+}

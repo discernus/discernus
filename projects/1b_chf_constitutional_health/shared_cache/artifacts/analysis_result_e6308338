@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_176f32a00a59",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis reflects a speech delivered in the context of a newly divided government. The text is overwhelmingly characterized by appeals for bipartisan cooperation, adherence to legislative and constitutional processes, and respect for institutional roles. The dominant themes are procedural legitimacy and institutional respect, with a strong undercurrent of systemic continuity through proposed reforms. There is a near-total absence of rhetoric associated with procedural rejection, institutional subversion, or systemic replacement.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2004.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Let us have a serious, civil, and conclusive debate, so that you can pass and I can sign comprehensive immigration reform into law.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"call_for_legislative_action\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"So let us work together to reform the budget process, expose every earmark to the light of day and to a vote in Congress, and cut the number and cost of earmarks at least in half by the end of this session.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_for_process_reform\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"As President, I have a duty to nominate qualified men and women to vacancies on the Federal bench, and the United States Senate has a duty as well, to give those nominees a fair hearing and a prompt up-or-down vote on the Senate floor.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"affirmation_of_constitutional_roles\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I've proposed to establish a special advisory council on the war on terror, made up of leaders in Congress from both political parties.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"proposal_for_inter-branch_collaboration\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"let us work together and do it now. With enough good sense and good will, you and I can fix Medicare and Medicaid and save Social Security.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_for_systemic_reform\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Changing the Tax Code is a vital and necessary step to making health care affordable for more Americans.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"proposal_for_systemic_reform\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "71b2da1fa334b0d285d11afa56fed210a729b96971e514cfd454f6d7b7a72f66",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:00:19.747160+00:00",
+    "end_time": "2025-08-28T23:00:58.965236+00:00",
+    "duration_seconds": 39.218056
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

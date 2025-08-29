@@ -1,0 +1,173 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb"
+    ],
+    "total_evidence_pieces": 16,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:41:14.636662+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal... to give the people back their faith, their wealth, their democracy, and indeed, their freedom. From this moment on, America\u2019s decline is over.",
+      "confidence": 0.8,
+      "context_type": "implicit reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636644+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Under my leadership, we will restore fair, equal, and impartial justice under the constitutional rule of law.",
+      "confidence": 0.8,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636646+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "First, I will declare a national emergency at our southern border. All illegal entry will immediately be halted, and we will begin the process of returning millions and millions of criminal aliens back to the places from which they came.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636647+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "I will immediately sign a series of historic Executive orders.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636648+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636650+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Vice President Vance, Speaker Johnson, Senator Thune, Chief Justice Roberts, Justices of the Supreme Court of the United States, President Clinton, President Bush, President Obama, President Biden, Vice President Harris, and my fellow citizens: The golden age of America begins right now.",
+      "confidence": 0.8,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636651+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "We will immediately restore the integrity, competency, and loyalty of America\u2019s Government.",
+      "confidence": 0.7,
+      "context_type": "implicit reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636652+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636653+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For many years, a radical and corrupt establishment has extracted power and wealth from our citizens while the pillars of our society lay broken and seemingly in complete despair.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636653+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Never again will the immense power of the state be weaponized to persecute political opponents, something I know something about.",
+      "confidence": 0.9,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636654+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+      "confidence": 0.7,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636655+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "With your help, we will restore America promise and we will rebuild the Nation that we love, and we love it so much.",
+      "confidence": 0.7,
+      "context_type": "implicit reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636656+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom. From this moment on, America\u2019s decline is over.",
+      "confidence": 0.8,
+      "context_type": "framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636657+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "With these actions, we will begin the complete restoration of America and the revolution of common sense.",
+      "confidence": 0.8,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636658+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "a short time from now, we are going to be changing the name of the Gulf of Mexico to the Gulf of America, and we will restore the name of a great President, William McKinley, to Mount McKinley, where it should be and where it belongs.",
+      "confidence": 0.8,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636659+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "And above all, China is operating the Panama Canal. And we didn\u2019t give it to China. We gave it to Panama, and we\u2019re taking it back.",
+      "confidence": 0.8,
+      "context_type": "explicit mention",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.636660+00:00"
+    }
+  ]
+}

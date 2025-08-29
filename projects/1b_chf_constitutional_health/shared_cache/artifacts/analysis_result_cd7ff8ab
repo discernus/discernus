@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_86e031debdda",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the 'default' variant of the Constitutional Health Framework v10.0, focusing on the three bipolar axes of constitutional health: Procedural, Institutional, and Systemic. Scores reflect raw intensity and rhetorical salience based on textual evidence from the State of the Union address.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2020.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I stand here ready to work with you to achieve historic breakthroughs for all Americans. Congress has 10 days left to pass a bill that will fund our Government, protect our homeland, and secure our very dangerous southern border. Now is the time for Congress to show the world that America is committed to ending illegal immigration and putting the ruthless coyotes, cartels, drug dealers, and human traffickers out of business.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Madame Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans: We meet tonight at a moment of unlimited potential.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards. Meanwhile, working-class Americans are left to pay the price for mass illegal immigration: reduced jobs, lower wages, overburdened schools, hospitals that are so crowded you can't get in, increased crime, and a depleted social safety net. Tolerance for illegal immigration is not compassionate; it is actually very cruel.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"My administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before. There's been nothing like it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"America was founded on liberty and independence and not Government coercion, domination, and control. We are born free, and we will stay free. Tonight we renew our resolve that America will never be a socialist country.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"direct_quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "05734edf78d69b2fcc5c202cb50b3d676874c31f98362a5e20b36741a55547e4",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:00:41.122510+00:00",
+    "end_time": "2025-08-28T20:01:13.426757+00:00",
+    "duration_seconds": 32.304238
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

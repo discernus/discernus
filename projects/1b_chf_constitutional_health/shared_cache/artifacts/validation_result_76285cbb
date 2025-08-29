@@ -1,0 +1,14 @@
+{
+  "success": false,
+  "issues": [
+    "The experiment's 'Document Summary Table' and 'Statistical Grouping Structure' both state n=11 for the 'Bush W.' administration. However, the corpus manifest ('corpus.md') only contains n=10 documents where the metadata field 'administration' is 'Bush W.'.",
+    "The experiment's 'Document Summary Table' specifies incorrect speech type counts for the 'Trump' administration, listing 4 SOTU and 1 Joint Session. The corpus manifest metadata shows this group actually contains 3 SOTU and 2 Joint Session addresses.",
+    "The experiment's 'Document Summary Table' contains an internal arithmetic error. The individual administration counts as listed (1 + 12 + 11 + 12 + 7 + 6) sum to 49, but the table's 'Total' is stated as 48, which matches the corpus manifest.",
+    "The prose description in `corpus.md` refers to a 'Washington (1789): First Inaugural' document. This document is not listed in the machine-readable YAML manifest and is therefore not part of the executable corpus.",
+    "Several documents in the corpus manifest have misleading filenames or identifiers that conflict with their authoritative metadata. For example, `Bush_SOTU_2009.txt` is assigned to the 'Obama' administration, and the file `Trump_SOTU_2025.txt` has a `document_id` of `trump_2025_joint_session` and `speech_type` of 'Joint Session Address'.",
+    "The group sizes for the 'Trump' (n=7) and 'Biden' (n=6) administrations are small. This reduces the statistical power of the planned ANOVA and subsequent pairwise comparisons (Tukey HSD) and variance tests (Levene's test).",
+    "The framework file is named `chf_v10.md` and correctly uses `spec_version: \"10.0\"`, but its internal metadata specifies `framework_version: \"1.0.0\"`."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-28T19:44:50.352203+00:00"
+}

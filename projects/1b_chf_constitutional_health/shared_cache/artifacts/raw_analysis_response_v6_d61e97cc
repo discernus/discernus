@@ -1,0 +1,122 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of presidential address focusing on the speaker's stance on constitutional processes, institutional authority, and systemic change through policy proposals. The speech consistently supports existing frameworks and institutions, advocating for reforms within them rather than replacement or subversion."
+  },
+  "document_analyses": [
+    {
+      "document_id": "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "And tonight I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+          "confidence": 0.95,
+          "context_type": "explicit call for collaboration within legislative process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My budget is based on that philosophy. It is reasonable, and it is responsible. It meets our obligations and funds our growing needs. We increase spending next year for Social Security and Medicare and other entitlement programs by $81 billion.",
+          "confidence": 0.9,
+          "context_type": "adherence to established budget and spending norms"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "This spring I will form a Presidential commission to reform Social Security. The commission will make its recommendations by next fall. Reform should be based on these principles: It must preserve the benefits of all current retirees and those nearing retirement; it must return Social Security to sound financial footing; and it must offer personal savings accounts to younger workers who want them.",
+          "confidence": 0.95,
+          "context_type": "use of established commission process for reform"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct evidence of procedural rejection"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And tonight I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+          "confidence": 0.95,
+          "context_type": "recognition of Congress's role and invitation to partnership"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Government has a role, and an important role. Yet, too much Government crowds out initiative and hard work, private charity and the private economy. Our new governing vision says Government should be active but limited, engaged but not overbearing.",
+          "confidence": 0.9,
+          "context_type": "defining and respecting a legitimate, balanced role for government"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I asked John Ashcroft, the Attorney General, to develop specific recommendations to end racial profiling. It's wrong, and we will end it in America.",
+          "confidence": 0.85,
+          "context_type": "delegating authority to institutional office holder"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct evidence of institutional subversion"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security. Medicare's finances are strained, and its coverage is outdated.",
+          "confidence": 0.95,
+          "context_type": "acknowledging issues within existing systems and calling for reform"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The framework for reform has been developed by Senators Frist and Breaux and Congressman Thomas, and now is the time to act. Medicare must be modernized, and we must make sure that every senior on Medicare can choose a health care plan that offers prescription drugs.",
+          "confidence": 0.95,
+          "context_type": "advocating for modernization and choice within existing Medicare system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Social Security now offers workers a return of less than 2 percent on the money they pay into the system. To save the system, we must increase that by allowing younger workers to make safe, sound investments that yield a higher rate of return.",
+          "confidence": 0.9,
+          "context_type": "proposing changes to 'save' and improve the existing Social Security system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct evidence of systemic replacement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

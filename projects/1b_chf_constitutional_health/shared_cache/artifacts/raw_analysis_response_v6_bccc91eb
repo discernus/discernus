@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of Trump's 2020 State of the Union address, focusing on procedural, institutional, and systemic dimensions of constitutional health. The speech emphasizes working within existing frameworks for improvement and strongly rejects systemic alternatives."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "As we begin a new Congress, I stand here ready to work with you to achieve historic breakthroughs for all Americans.",
+          "confidence": 0.9,
+          "context_type": "direct statement of intent"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation.",
+          "confidence": 0.7,
+          "context_type": "implicit criticism of established process"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madame Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans",
+          "confidence": 0.9,
+          "context_type": "formal address and acknowledgement of roles"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations.",
+          "confidence": 0.7,
+          "context_type": "rhetorical attack on institutional oversight"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "In the 20th century, America saved freedom, transformed science, redefined the middle class, and when you get down to it, there\u2019s nothing anywhere in the world that can compete with America. Now we must step boldly and bravely into the next chapter of this great American adventure, and we must create a new standard of living for the 21st century.",
+          "confidence": 0.9,
+          "context_type": "historical affirmation and call for incremental progress"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct support for advocacy of systemic replacement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

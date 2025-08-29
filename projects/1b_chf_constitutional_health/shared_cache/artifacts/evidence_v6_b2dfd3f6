@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:40:37.812541+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Our law enforcement needs this vital legislation to protect our citizens. You need to renew the PATRIOT Act.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812533+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "It is not enough to serve our enemies with legal papers. The terrorists and their supporters declared war on the United States, and war is what they got.",
+      "confidence": 0.7,
+      "context_type": "justification_for_extra-legal_response",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812534+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment_of_institutional_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812536+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_judicial_overreach",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812537+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "By computerizing health records, we can avoid dangerous medical mistakes, reduce costs, and improve care. To protect the doctor-patient relationship and keep good doctors doing good work, we must eliminate wasteful and frivolous medical lawsuits.",
+      "confidence": 0.95,
+      "context_type": "advocacy_for_reform_within_existing_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812538+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "A Government-run health care system is the wrong prescription.",
+      "confidence": 0.95,
+      "context_type": "explicit_rejection_of_systemic_change",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.812540+00:00"
+    }
+  ]
+}

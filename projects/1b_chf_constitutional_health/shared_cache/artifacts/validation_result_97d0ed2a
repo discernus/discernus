@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "issues": [
+    "The 'Document Summary Table' in the experiment specification does not match the document counts per administration derived from the corpus manifest. The table incorrectly lists 11 documents for 'Bush W.' (vs. 10 in manifest) and miscategorizes speeches for 'Trump' (listing 4 SOTU / 1 Joint Session vs. 3 SOTU / 2 Joint Session in manifest).",
+    "The corpus manifest contains a document with `filename: \"Bush_SOTU_2009.txt\"` that is attributed to `speaker: \"Barack Obama\"` and `administration: \"Obama\"`. The filename directly contradicts the metadata.",
+    "The manifest entry for document_id 'trump_2025_joint_session' has a filename `Trump_SOTU_2025.txt` but its metadata `speech_type` is 'Joint Session Address'. The filename's implication of it being a SOTU address contradicts the explicit metadata type.",
+    "The prose 'Current Coverage' section of `corpus.md` lists documents and counts (e.g., Washington 1789, Bush W. SOTU counts) that are inconsistent with the machine-readable YAML manifest below it. The prose is not an accurate reflection of the analytical corpus."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-28T19:08:59.388684+00:00"
+}

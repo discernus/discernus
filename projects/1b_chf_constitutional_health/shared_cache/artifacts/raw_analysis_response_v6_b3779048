@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focuses on how President Bush's 1992 State of the Union address engages with constitutional health dimensions. The speech strongly emphasizes systemic continuity, institutional respect, and working within procedural legitimacy to address national challenges, particularly economic ones. Rhetoric advocating for systemic replacement, institutional subversion, or procedural rejection is minimal to non-existent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "6357ab4c07af6f04b0d379f4ae2a41e24284d2ea634b1b6189a11ba8a197807c",
+      "document_name": "george_bush_1992_address_before_a_joint_session_of_the_congress_on_the_state_of_the_union.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "You must pass the other elements of my plan to meet our economic needs. Everyone knows that investment spurs recovery.",
+          "confidence": 0.9,
+          "context_type": "call to action to legislature"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "There are certain things that a President can do without Congress, and I'm going to do them.",
+          "confidence": 0.8,
+          "context_type": "assertion of executive power"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And we did it together. There were honest differences right here in this Chamber. But when the war began, you put partisanship aside, and we supported our troops.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of congressional cooperation"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "I know and you know that my plan is unveiled in a political season. Everything I propose will be viewed by some in merely partisan terms.",
+          "confidence": 0.85,
+          "context_type": "commentary on political environment"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We must strengthen the family because it is the family that has the greatest bearing on our future.",
+          "confidence": 0.95,
+          "context_type": "advocacy for existing social structure"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absence of evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

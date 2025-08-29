@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The analysis focuses on a 2008 State of the Union address by George W. Bush, although the content appears to be from the 2003 address leading up to the Iraq War. The document exhibits a significant tension between adhering to established international procedures (procedural_legitimacy) and asserting the right to unilateral action if those procedures fail to produce the desired outcome (procedural_rejection). This tension is central to the foreign policy arguments. The domestic policy sections primarily advocate for reform within existing systems (systemic_continuity)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The United States will ask the U.N. Security Council to convene on February the 5th to consider the facts of Iraq's ongoing defiance of the world.",
+          "confidence": 0.9,
+          "context_type": "explicit reference to using established international processes"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Yet the course of this Nation does not depend on the decisions of others. Whatever action is required, whenever action is necessary, I will defend the freedom and security of the American people.",
+          "confidence": 0.95,
+          "context_type": "assertion of unilateral authority irrespective of international process"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We're strongly supporting the International Atomic Energy Agency in its mission to track and control nuclear materials around the world.",
+          "confidence": 0.9,
+          "context_type": "explicit support for an international institution's role and expertise"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Instead of bureaucrats and trial lawyers and HMOs, we must put doctors and nurses and patients back in charge of American medicine.",
+          "confidence": 0.9,
+          "context_type": "delegitimizing institutional actors within the healthcare system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Health care reform must begin with Medicare. Medicare is the binding commitment of a caring society. We must renew that commitment by giving seniors access to preventive medicine and new drugs that are transforming health care in America.",
+          "confidence": 0.9,
+          "context_type": "advocacy for reforming and strengthening an existing governmental system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence of evidence; no rhetoric supporting fundamental systemic replacement was found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of President Bush's 2004 State of the Union Address, focusing on how political discourse impacts constitutional system health across procedural, institutional, and systemic axes. The speech strongly emphasizes continuity, reform within existing structures, and institutional respect, while subtly rejecting certain judicial actions and alternative approaches to national security."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.35,
+          "salience": 0.25,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.95,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Our law enforcement needs this vital legislation to protect our citizens. You need to renew the PATRIOT Act.",
+          "confidence": 0.9,
+          "context_type": "advocacy_for_legislative_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "It is not enough to serve our enemies with legal papers. The terrorists and their supporters declared war on the United States, and war is what they got.",
+          "confidence": 0.7,
+          "context_type": "justification_for_extra-legal_response"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "You in the Congress have provided the resources for our defense and cast the difficult votes of war and peace.",
+          "confidence": 0.95,
+          "context_type": "acknowledgment_of_institutional_role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+          "confidence": 0.8,
+          "context_type": "criticism_of_judicial_overreach"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "By computerizing health records, we can avoid dangerous medical mistakes, reduce costs, and improve care. To protect the doctor-patient relationship and keep good doctors doing good work, we must eliminate wasteful and frivolous medical lawsuits.",
+          "confidence": 0.95,
+          "context_type": "advocacy_for_reform_within_existing_system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "A Government-run health care system is the wrong prescription.",
+          "confidence": 0.95,
+          "context_type": "explicit_rejection_of_systemic_change"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

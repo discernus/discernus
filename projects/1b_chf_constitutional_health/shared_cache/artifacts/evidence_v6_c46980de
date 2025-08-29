@@ -1,0 +1,143 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 13,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:41:14.612359+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "working with the Senate, we are appointing judges who will interpret the Constitution as written",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612341+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "These are the people we were elected to serve.",
+      "confidence": 0.8,
+      "context_type": "supporting detail",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612347+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "this will be the last time you will ever file under the old and very broken system",
+      "confidence": 0.8,
+      "context_type": "criticism of process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612348+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "finally close the deadly loopholes that have allowed MS-13 and other criminal gangs to break into our country.",
+      "confidence": 0.7,
+      "context_type": "criticism of process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612349+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States",
+      "confidence": 0.9,
+      "context_type": "formal address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612350+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "working with the Senate, we are appointing judges",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612351+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "So tonight I call on Congress to empower every Cabinet Secretary with the authority to reward good workers and to remove Federal employees who undermine the public trust or fail the American people.",
+      "confidence": 0.8,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612352+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "We repealed the core of the disastrous Obamacare. The individual mandate is now gone, thank heavens.",
+      "confidence": 0.7,
+      "context_type": "policy criticism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612352+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities.",
+      "confidence": 0.6,
+      "context_type": "policy criticism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612353+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "to make America great again for all Americans.",
+      "confidence": 0.9,
+      "context_type": "overarching theme",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612354+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "As we rebuild America's strength and confidence at home, we are also restoring our strength and standing abroad.",
+      "confidence": 0.9,
+      "context_type": "overarching theme",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612355+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Let's open great vocational schools so our future workers can learn a craft and realize their full potential. And let's support working families by supporting paid family leave.",
+      "confidence": 0.8,
+      "context_type": "reform proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612356+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.612357+00:00"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0"
+    ],
+    "total_evidence_pieces": 14,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:53:23.581957+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I challenge and invite Congress to work with me to use the resources of one picture to repaint the other, to direct the advantages of our time to solve the problems of our people.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581904+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My budget is based on that philosophy. It is reasonable, and it is responsible. It meets our obligations and funds our growing needs.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581912+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "This spring I will form a Presidential commission to reform Social Security. The commission will make its recommendations by next fall. Reform should be based on these principles: It must preserve the benefits of all current retirees and those nearing retirement; it must return Social Security to sound financial footing; and it must offer personal savings accounts to younger workers who want them.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581915+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Last year Government spending shot up 8 percent. That\u2019s far more than our economy grew, far more than personal income grew, and far more than the rate of inflation. If you continue on that road, you will spend the surplus and have to dip into Social Security to pay other bills. Unrestrained Government spending is a dangerous road to deficits, so we must take a different path.",
+      "confidence": 0.8,
+      "context_type": "implied_negative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581918+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Some say my tax plan is too big. Others say it\u2019s too small. I respectfully disagree. [laughter] This plan is just right. I didn\u2019t throw darts at a board to come up with a number for tax relief. I didn\u2019t take a poll or develop an arbitrary formula that might sound good. I looked at problems in the Tax Code and calculated the cost to fix them.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581920+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Government has a role, and an important role. Yet, too much Government crowds out initiative and hard work, private charity and the private economy.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581923+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Earlier today I asked John Ashcroft, the Attorney General, to develop specific recommendations to end racial profiling. It's wrong, and we will end it in America.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581925+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "No one can speak in this Capitol and not be awed by its history.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581938+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Medicare\u2019s finances are strained, and its coverage is outdated.",
+      "confidence": 0.8,
+      "context_type": "constructive_criticism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581941+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "By stopping the abuses of a few, we will add to the public confidence our police officers earn and deserve.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581944+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our new governing vision says Government should be active but limited, engaged but not overbearing.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581946+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Medicare must be modernized, and we must make sure that every senior on Medicare can choose a health care plan that offers prescription drugs.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581948+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To save the system, we must increase that by allowing younger workers to make safe, sound investments that yield a higher rate of return.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581951+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:53:23.581953+00:00"
+    }
+  ]
+}

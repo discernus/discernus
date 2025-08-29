@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The speech strongly emphasizes restoring past greatness, making reforms, and working within established legislative and judicial processes. Criticism is directed at specific policies or past failures rather than the fundamental constitutional framework or institutions. There is no advocacy for systemic replacement or broad procedural rejection, though certain foreign policy/detention rhetorics lean toward circumvention for specific threats."
+  },
+  "document_analyses": [
+    {
+      "document_id": "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a",
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written, including a great new Supreme Court Justice and more circuit court judges than any new administration in the history of our country.",
+          "confidence": 0.9,
+          "context_type": "direct_reference_to_constitutional_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But we must be clear: Terrorists are not merely criminals, they are unlawful enemy combatants. And when captured overseas, they should be treated like the terrorists they are. In the past, we have foolishly released hundreds and hundreds of dangerous terrorists, only to meet them again on the battlefield, including the ISIS leader, al-Baghdadi, who we captured, who we had, who we released. So today I'm keeping another promise. I just signed, prior to walking in, an order directing Secretary Mattis\u2014who is doing a great job, thank you\u2014to reexamine our military detention policy and to keep open the detention facilities in Guantanamo Bay.",
+          "confidence": 0.7,
+          "context_type": "argument_for_extra-judicial_measures_for_specific_group"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans: Less than 1 year has passed since I first stood at this podium, in this majestic Chamber, to speak on behalf of the American people and to address their concerns, their hopes, and their dreams.",
+          "confidence": 0.9,
+          "context_type": "formal_acknowledgement_of_institutions"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not_applicable"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Tonight I am calling on Congress to finally close the deadly loopholes that have allowed MS-13 and other criminal gangs to break into our country. We have proposed new legislation that will fix our immigration laws and support our ICE and Border Patrol agents\u2014these are great people, these are great, great people\u2014that work so hard in the midst of such danger so that this can never happen again.",
+          "confidence": 0.9,
+          "context_type": "advocacy_for_reform_and_improvement_within_existing_framework"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not_applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

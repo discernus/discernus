@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e4bc4715a1619e3adbbe615442cacb814ab4dc26117feb84d01e1f13a904e91c"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:17:03.871392+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 0.95,
+      "context_type": "explicit reference to constitutional process and law",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871340+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I am grateful for the honor of this hour, mindful of the consequential times in which we live, and determined to fulfill the oath that I have sworn and you have witnessed.",
+      "confidence": 0.9,
+      "context_type": "commitment to procedural oath",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871351+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Freedom, by its nature, must be chosen and defended by citizens and sustained by the rule of law and the protection of minorities.",
+      "confidence": 0.95,
+      "context_type": "support for rule of law",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871354+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "no direct evidence of rejecting established procedures; the closest is acknowledgment of 'force of arms when necessary' for defense, not internal circumvention.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871357+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 0.95,
+      "context_type": "respect for the Constitution as an institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871360+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matchless value, because they bear the image of the Maker of heaven and Earth. Across the generations, we have proclaimed the imperative of self-government, because no one is fit to be a master and no one deserves to be a slave.",
+      "confidence": 0.9,
+      "context_type": "respect for foundational principles leading to institutional forms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871363+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "When the soul of a nation finally speaks, the institutions that arise may reflect customs and traditions very different from our own. America will not impose our own style of government on the unwilling. Our goal instead is to help others find their own voice, attain their own freedom, and make their own way.",
+      "confidence": 0.85,
+      "context_type": "acknowledgment and respect for diverse legitimate institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871366+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "no evidence of attacking or delegitimizing democratic institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871375+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+      "confidence": 0.95,
+      "context_type": "emphasis on the 'durable wisdom' of the existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871378+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "This is the broader definition of liberty that motivated the Homestead Act, the Social Security Act, and the GI bill of rights. And now we will extend this vision by reforming great institutions to serve the needs of our time.",
+      "confidence": 0.9,
+      "context_type": "advocacy for 'reforming great institutions' implies continuity and improvement, not replacement.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871381+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Americans move forward in every generation by reaffirming all that is good and true that came before, ideals of justice and conduct that are the same yesterday, today, and forever.",
+      "confidence": 0.95,
+      "context_type": "explicit statement of reaffirming past ideals and generational continuity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871384+00:00"
+    },
+    {
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "So it is the policy of the United States to seek and support the growth of democratic movements and institutions in every nation and culture, with the ultimate goal of ending tyranny in our world.",
+      "confidence": 0.85,
+      "context_type": "advocacy for systemic change (ending tyranny) in other nations, not the US.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:03.871386+00:00"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analyzed inaugural address focusing on the speaker's articulation of constitutional health dimensions. Strong emphasis on systemic and institutional transformation, often via extra-procedural means, countered by very limited recognition of existing legitimate processes or institutions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb",
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "procedural_rejection": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "systemic_replacement": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.",
+          "confidence": 0.8,
+          "context_type": "rhetorical claim"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+          "confidence": 0.7,
+          "context_type": "rhetorical flourish"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "With these actions, we will begin the complete restoration of America and the revolution of common sense.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

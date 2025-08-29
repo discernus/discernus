@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a presidential address to Congress focusing on economic and social reforms, emphasizing calls for legislative action and collaboration within the existing system."
+  },
+  "document_analyses": [
+    {
+      "document_id": "b2472d421a7847751e9cd03fff4d80902247eb8bfad57b0b773eeff8bbcdd657",
+      "document_name": "william_j_clinton_1993_address_before_a_joint_session_of_congress_on_administration_goals.md",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I call on Congress to enact an immediate package of jobs investments",
+          "confidence": 0.95,
+          "context_type": "advocacy for formal legislative action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Our political system so often has seemed paralyzed by special interest groups, by partisan bickering, and by the sheer complexity of our problems.",
+          "confidence": 0.9,
+          "context_type": "critique of internal dysfunction, not rejection of process"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. President, Mr. Speaker, Members of the House and the Senate, distinguished Americans here as visitors in this Chamber, as am I. It is nice to have a fresh excuse for giving a long speech.",
+          "confidence": 0.95,
+          "context_type": "formal address and acknowledgement of institutional roles"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The confidence of the people who pay our bills in our institutions in Washington is not high. We must restore it.",
+          "confidence": 0.9,
+          "context_type": "acknowledging lack of public confidence and calling for its restoration, not active subversion"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "I believe we will find our new direction in the basic old values that brought us here over the last two centuries: a commitment to opportunity, to individual responsibility, to community, to work, to family, and to faith.",
+          "confidence": 0.95,
+          "context_type": "framing change within a continuum of existing values and framework"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

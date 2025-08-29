@@ -1,0 +1,106 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on a formal State of the Union address, which aligns well with the framework's intended corpus. The document exhibits strong themes of legislative process, institutional cooperation, and systemic renewal, making the positive dimensions highly evident. Conversely, rhetoric associated with the negative dimensions (rejection, subversion, replacement) is largely absent. The primary challenge was disambiguating strong calls for policy reform (e.g., 'revolutionize our welfare system') from calls for systemic replacement, but the context consistently indicated reform within the existing constitutional structure."
+  },
+  "document_analyses": [
+    {
+      "document_id": "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b",
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Next month I will send you one of the toughest budgets ever presented to Congress. It will cut spending in more than 300 programs, eliminate 100 domestic programs, and reform the ways in which governments buy goods and services. This year we must again make the hard choices to live within the hard spending ceilings we have set. We must do it.",
+          "confidence": 0.95,
+          "context_type": "advocacy_for_legislative_action"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.",
+          "confidence": 0.9,
+          "context_type": "assertion_of_constitutional_process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+          "confidence": 0.95,
+          "context_type": "praise_for_institutional_cooperation"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Our forces are the finest military our Nation has ever had. And I have pledged that as long as I am President, they will remain the best equipped, the best trained, and the best prepared fighting force on the face of the Earth.",
+          "confidence": 0.9,
+          "context_type": "support_for_national_institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Our American heritage has always been to master such change, to use it to expand opportunity at home and our leadership abroad. But for too long and in too many ways, that heritage was abandoned, and our country drifted.",
+          "confidence": 0.95,
+          "context_type": "appeal_to_foundational_principles"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Ultimately, the best strategy to ensure our security and to build a durable peace is to support the advance of democracy elsewhere. Democracies don't attack each other. They make better trading partners and partners in diplomacy.",
+          "confidence": 0.9,
+          "context_type": "affirmation_of_systemic_values"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

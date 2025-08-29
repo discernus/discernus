@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:17:26.537623+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537598+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Let us show them that Republicans and Democrats can compete for votes and cooperate for results at the same time.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537603+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And tomorrow I will issue an Executive order that directs Federal agencies to ignore any future earmark that is not voted on by Congress. If these items are truly worth funding, Congress should debate them in the open and hold a public vote.",
+      "confidence": 0.85,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537606+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "If any bill raises taxes reaches my desk, I will veto it.",
+      "confidence": 0.8,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537607+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537609+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I've submitted judicial nominees who will rule by the letter of the law, not the whim of the gavel.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537611+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+      "confidence": 0.8,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537613+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "As Americans, we believe in the power of individuals to determine their destiny and shape the course of history. We believe that the most reliable guide for our country is the collective wisdom of ordinary citizens.",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537615+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "By trusting the people, succeeding generations transformed our fragile, young democracy into the most powerful nation on Earth and a beacon of hope for millions. And so long as we continue to trust the people, our Nation will prosper, our liberty will be secure, and the state of our Union will remain strong.",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537617+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:17:26.537619+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T23:25:24.689564+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And once it passes the House, I look forward to signing that bill into law.",
+      "confidence": 0.95,
+      "context_type": "process_acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689535+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The media and our friends in the Democrat Party kept saying we needed new legislation, we must have legislation to secure the border. But it turned out that all we really needed was a new president.",
+      "confidence": 1.0,
+      "context_type": "process_dismissal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689547+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "You should be hired based on merit, and the Supreme Court in a brave and very powerful decision has allowed us to do so.",
+      "confidence": 0.9,
+      "context_type": "conditional_praise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689551+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "My administration will reclaim power from this unaccountable bureaucracy, and we will restore true democracy to America again. Any federal bureaucrat who resists this change will be removed from office immediately.",
+      "confidence": 1.0,
+      "context_type": "institutional_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689554+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "And the next phase of our plan to deliver the greatest economy in history is for this Congress to pass tax cuts for everybody.",
+      "confidence": 0.85,
+      "context_type": "legislative_call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689556+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "What I have just described is only a small fraction of the common sense revolution that is now because of us sweeping the entire world, common sense has become a common theme, and we will never go back.",
+      "confidence": 1.0,
+      "context_type": "revolutionary_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:25:24.689559+00:00"
+    }
+  ]
+}

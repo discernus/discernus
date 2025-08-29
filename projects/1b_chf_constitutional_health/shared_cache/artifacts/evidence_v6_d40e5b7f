@@ -1,0 +1,123 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565"
+    ],
+    "total_evidence_pieces": 11,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:25:49.539979+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Together we passed the American Rescue Plan, one of the most consequential rescue packages in American history.",
+      "confidence": 0.9,
+      "context_type": "Direct support for working within established legislative processes.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539932+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "On day one of my Presidency, I kept my commitment and sent a comprehensive immigration bill to the United States Congress.",
+      "confidence": 0.9,
+      "context_type": "Demonstrates adherence to proper legislative channels.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539950+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "The worst attack on our democracy since the Civil War.",
+      "confidence": 0.9,
+      "context_type": "Refers to an act of procedural rejection by others (Jan 6th), not an advocacy for it by the speaker.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539954+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Congress should pass H.R. 1 and the John Lewis Voting Rights Act and send it to my desk right away.",
+      "confidence": 0.8,
+      "context_type": "A call for legislative action within the established system, not a bypass.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539956+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Thanks to the extraordinary leadership of Speaker Pelosi; Majority Leader Schumer; and the overwhelming support of the American people\u2014Democrats, Independents, and Republicans\u2014we did act.",
+      "confidence": 0.9,
+      "context_type": "Explicitly acknowledges and respects institutional leadership and process.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539959+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The Defense Department has an agency called DARPA\u2014the Defense Advanced Research Project Agency. The people who set up before I came here\u2014and that's been a long time ago\u2014to develop breakthroughs that enhance our national security\u2014that's their only job.",
+      "confidence": 0.9,
+      "context_type": "Recognizes and values the legitimate role and expertise of a governmental institution.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539961+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The images of a violent mob assaulting this Capitol, desecrating our democracy, remain vivid in all our minds.",
+      "confidence": 0.8,
+      "context_type": "Condemns a past act of subversion against democratic institutions, framing it as a negative event.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539964+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "White supremacy is terrorism. We're not going to ignore that either.",
+      "confidence": 0.7,
+      "context_type": "Identifies an ideology that often leads to institutional subversion, indicating a commitment to defend against such threats.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539966+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America is on the move again, turning peril into possibility, crisis to opportunity, setbacks into strength.",
+      "confidence": 0.9,
+      "context_type": "Emphasizes resilience and progress within the existing national system.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539968+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We have to do more than just build back better\u2014I mean, \"build back.\" We have to build back better.",
+      "confidence": 0.9,
+      "context_type": "Directly advocates for improving and strengthening the current system rather than replacing it.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539971+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "No direct evidence found in the document advocating for a fundamental replacement or revolutionary change of the constitutional framework or political system.",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:25:49.539974+00:00"
+    }
+  ]
+}

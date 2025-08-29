@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_04a2d7eddca1",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the explicit rhetorical commitments made by the speaker. The document, an early address by President Bush to Congress, is characterized by a strong, consistent emphasis on bipartisanship, adherence to established processes, and respect for governmental institutions. The scores reflect this clearly, with high values for positive dimensions and zero for negative/pathology dimensions, as there is no evidence of rejection, subversion, or replacement rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"The last time I visited the Capitol, I came to take an oath on the steps of this building. I pledged to honor our Constitution and laws, and I asked you to join me in setting a tone of civility and respect in Washington.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit reference to constitutional duty\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I will continue to meet with you and ask for your input. You have been kind and candid, and I thank you for making a new President feel welcome.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit statement of respect for legislative branch\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"This spring I will form a Presidential commission to reform Social Security. The commission will make its recommendations by next fall. Reform should be based on these principles: It must preserve the benefits of all current retirees and those nearing retirement; it must return Social Security to sound financial footing; and it must offer personal savings accounts to younger workers who want them.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy for gradual reform of an existing system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no evidence found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "842c6ff6dd527d5e2892c545767749ea4755a030e8d5b92ffab10f30e2db0a93",
+  "execution_metadata": {
+    "start_time": "2025-08-28T22:58:25.364249+00:00",
+    "end_time": "2025-08-28T22:58:59.554297+00:00",
+    "duration_seconds": 34.190034
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "dfca94ace2462f6476faa7bcf7d5b635c4fabca68d77a1f24b351afe4f5b2dba"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

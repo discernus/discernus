@@ -1,0 +1,134 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President George W. Bush's 2005 State of the Union address. The speech strongly emphasizes upholding established democratic processes, institutional integrity, and the continuity of the American system. Criticisms are framed as calls for reform within the existing framework rather than advocating for rejection or subversion."
+  },
+  "document_analyses": [
+    {
+      "document_id": "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361",
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.15,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+          "confidence": 0.95,
+          "context_type": "Thematic statement"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I've submitted judicial nominees who will rule by the letter of the law, not the whim of the gavel. Many of these nominees are being unfairly delayed. They are worthy of confirmation, and the Senate should give each of them a prompt up-or-down vote.",
+          "confidence": 0.9,
+          "context_type": "Specific policy proposal"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If you send me an appropriations bill that does not cut the number and cost of earmarks in half, I'll send it back to you with my veto.",
+          "confidence": 0.9,
+          "context_type": "Specific policy proposal"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Some in Washington argue that letting tax relief expire is not a tax increase. Try explaining that to 116 million American taxpayers who would see their taxes rise by an average of $1,800.",
+          "confidence": 0.7,
+          "context_type": "Argumentative rhetoric"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "No direct quote found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madam Speaker, Vice President Cheney, Members of Congress, distinguished guests, and fellow citizens",
+          "confidence": 0.95,
+          "context_type": "Opening address"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+          "confidence": 0.85,
+          "context_type": "Critique with implied ideal"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We must trust patients and doctors to make medical decisions and empower them with better information and better options.",
+          "confidence": 0.9,
+          "context_type": "Policy justification"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+          "confidence": 0.75,
+          "context_type": "Critique of process"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Many of these nominees are being unfairly delayed.",
+          "confidence": 0.7,
+          "context_type": "Critique of process"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Yet history will record that amid our differences, we acted with purpose, and together we showed the world the power and resilience of American self-government.",
+          "confidence": 0.95,
+          "context_type": "Historical reflection"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "In the work ahead, we must be guided by the philosophy that made our Nation great. As Americans, we believe in the power of individuals to determine their destiny and shape the course of history.",
+          "confidence": 0.9,
+          "context_type": "Guiding principles"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "And so long as we continue to trust the people, our Nation will prosper, our liberty will be secure, and the state of our Union will remain strong.",
+          "confidence": 0.95,
+          "context_type": "Concluding statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "No direct quote found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

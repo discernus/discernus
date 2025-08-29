@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c97acead50bf9aefba8815d1d15ba1b9215631a88ae8486eeb075ac87969ae18"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:28:31.125048+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Once it passes the House, I look forward to signing that bill into law.",
+      "confidence": 0.8,
+      "context_type": "legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125023+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country",
+      "confidence": 0.9,
+      "context_type": "extra-constitutional action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125033+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "My administration has acted swiftly and decisively to restore fair, equal and impartial justice under the constitutional rule of law. Starting at the FBI and the DOJ...",
+      "confidence": 0.8,
+      "context_type": "desire for proper institutional function",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125037+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "My administration will reclaim power from this unaccountable bureaucracy, and we will restore true democracy to America again. Any federal bureaucrat who resists this change will be removed from office immediately.",
+      "confidence": 0.9,
+      "context_type": "attack on institutional authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125039+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "",
+      "confidence": 0.5,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125042+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "This is only a small fraction of the common sense revolution that is now because of us sweeping the entire world, common sense has become a common theme, and we will never go back. Never, never going to let that happen.",
+      "confidence": 0.9,
+      "context_type": "revolutionary change rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:28:31.125044+00:00"
+    }
+  ]
+}

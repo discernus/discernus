@@ -1,0 +1,88 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on the textual content provided. There is a discrepancy between the document's filename ('Clinton_SOTU_2001.txt') and the date in the header ('January 23, 2001') versus the actual content and references (e.g., '104th Congress', post-1994 Crime Bill), which identify the speech as President Clinton's State of the Union Address from January 23, 1996. The analysis proceeds based on the 1996 content."
+  },
+  "document_analyses": [
+    {
+      "document_id": "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566",
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I challenge this Congress to send me a bipartisan welfare reform bill that will really move people from welfare to work and do the right thing by our children. I will sign it immediately.",
+          "confidence": 0.95,
+          "context_type": "Direct Call for Legislative Action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I compliment the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget.",
+          "confidence": 0.95,
+          "context_type": "Direct Statement of Respect for Institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+          "confidence": 1.0,
+          "context_type": "Direct Statement of Principle"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

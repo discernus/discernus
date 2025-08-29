@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a9ee8ede8a58",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed inaugural address focusing on the speaker's articulation of constitutional health dimensions. Strong emphasis on systemic and institutional transformation, often via extra-procedural means, countered by very limited recognition of existing legitimate processes or institutions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_Inaugural_2025.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.7\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"rhetorical claim\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"not applicable\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"We will not forget our country, we will not forget our Constitution, and we will not forget our God.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"rhetorical flourish\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"With these actions, we will begin the complete restoration of America and the revolution of common sense.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "f17c61b496bc2914bac8bc62e46aa21e9067b5f020d4ccfeffab05b727fb8e46",
+  "execution_metadata": {
+    "start_time": "2025-08-28T21:17:03.667072+00:00",
+    "end_time": "2025-08-28T21:17:40.605822+00:00",
+    "duration_seconds": 36.938725
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T211444Z_f504eaf7"
+  }
+}

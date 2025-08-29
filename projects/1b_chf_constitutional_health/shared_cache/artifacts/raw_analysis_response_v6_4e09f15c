@@ -1,0 +1,110 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The speech strongly emphasizes working within established processes and institutions, focusing on incremental improvements and strengthening the existing system. There are no indications of procedural rejection, institutional subversion, or calls for systemic replacement. The discourse promotes unity and effective governance within the constitutional framework."
+  },
+  "document_analyses": [
+    {
+      "document_id": "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731",
+      "document_name": "Obama_SOTU_2012.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "In 2 weeks, I will send this Congress a budget filled with ideas that are practical, not partisan.",
+          "confidence": 0.95,
+          "context_type": "policy proposal"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "And if a bill comes to my desk that tries to do any of these things, I will veto it. It will have earned my veto.",
+          "confidence": 0.95,
+          "context_type": "constitutional process defense"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "My first duty as Commander in Chief is to defend the United States of America.",
+          "confidence": 0.9,
+          "context_type": "role affirmation"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "The Pentagon says that climate change poses immediate risks to our national security. We should act like it.",
+          "confidence": 0.9,
+          "context_type": "deference to expertise"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "We can\u2019t slow down businesses or put our economy at risk with Government shutdowns or fiscal showdowns.",
+          "confidence": 0.7,
+          "context_type": "critique of political behavior"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "How ironic, they say, that our politics seems more divided than ever. It\u2019s held up as proof not just of my own flaws\u2014of which there are many\u2014but also as proof that the vision itself is misguided, naive, that there are too many people in this town who actually benefit from partisanship and gridlock for us to ever do anything about it.",
+          "confidence": 0.6,
+          "context_type": "acknowledgment of political dysfunction"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The shadow of crisis has passed, and the State of the Union is strong.",
+          "confidence": 0.95,
+          "context_type": "statement of national condition"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We have laid a new foundation. A brighter future is ours to write. Let\u2019s begin this new chapter together, and let\u2019s start the work right now.",
+          "confidence": 0.95,
+          "context_type": "call for progressive action"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "not applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

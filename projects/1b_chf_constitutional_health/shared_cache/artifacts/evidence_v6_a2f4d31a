@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:33:45.969592+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I ask this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets... And tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.",
+      "confidence": 0.9,
+      "context_type": "support_for_legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969581+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969585+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend.",
+      "confidence": 0.9,
+      "context_type": "support_for_institutional_accountability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969586+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969588+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Now is the time to act boldly and wisely to not only revive this economy, but to build a new foundation for lasting prosperity. Now is the time to jump-start job creation, restart lending, and invest in areas like energy, health care, and education that will grow our economy, even as we make hard choices to bring our deficit down.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_gradual_reform_and_improvement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969589+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:33:45.969590+00:00"
+    }
+  ]
+}

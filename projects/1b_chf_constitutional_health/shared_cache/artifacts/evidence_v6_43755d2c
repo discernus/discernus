@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:13:37.771006+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 0.9,
+      "context_type": "Thematic statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770942+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Now it is time to finish the job and balance the budget.",
+      "confidence": 0.85,
+      "context_type": "Call to action on legislative process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770970+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I call on Congress to pass the requirement for a V-chip in TV sets so that parents can screen out programs they believe are inappropriate for their children.",
+      "confidence": 0.85,
+      "context_type": "Specific legislative request",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770974+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770978+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Thank you very much. Mr. Speaker, Mr. Vice President, Members of the 104th Congress, distinguished guests, my fellow Americans all across our land:",
+      "confidence": 0.9,
+      "context_type": "Formal address to institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770980+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I compliment the Republican leadership and the membership for the energy and determination you have brought to this task of balancing the budget. And I thank the Democrats for passing the largest deficit reduction plan in history in 1993, which has already cut the deficit nearly in half in 3 years.",
+      "confidence": 0.85,
+      "context_type": "Recognition of inter-party and inter-branch work",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770982+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I say to our police, our children need you as role models and heroes. Don't let them down.",
+      "confidence": 0.8,
+      "context_type": "Acknowledgment of institutional role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770985+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770989+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My duty tonight is to report on the state of the Union, not the state of our Government but of our American community, and to set forth our responsibilities, in the words of our Founders, to form a more perfect Union.",
+      "confidence": 0.9,
+      "context_type": "Foundational statement of purpose and national identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770992+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Instead, we must go forward as one America, one Nation working together to meet the challenges we face together. Self-reliance and teamwork are not opposing virtues; we must have both. I believe our new, smaller Government must work in an old-fashioned American way, together with all of our citizens through State and local governments, in the workplace, in religious, charitable, and civic associations.",
+      "confidence": 0.85,
+      "context_type": "Advocacy for unity and traditional governance within the existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770994+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must preserve the full faith and credit of the United States, to honor the obligations of this great Nation as we have for 220 years, to rise above partisanship and pass a straightforward extension of the debt limit and show people America keeps its word.",
+      "confidence": 0.9,
+      "context_type": "Commitment to enduring national principles and fiscal stability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770997+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2001.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "No direct evidence found",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:13:37.770999+00:00"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis focuses on how political discourse impacts constitutional system health across procedural, institutional, and systemic axes, weighted by rhetorical prominence. The speech consistently advocates for strengthening existing democratic institutions and processes while sharply criticizing perceived attacks on them."
+  },
+  "document_analyses": [
+    {
+      "document_id": "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672",
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Remember your oath of office to defend against all threats foreign and domestic. Respect free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2014no place\u2014in America. Zero place.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "January 6 lies about the 2020 election and the plots to steal the election posed a grave\u2014gravest threat to U.S. democracy since the Civil War.",
+          "confidence": 0.9,
+          "context_type": "narrative"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "America is a founding member of NATO, the military alliance of democratic nations created after World War II to prevent war and keep the peace. And today we\u2019ve made NATO stronger than ever.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Now my predecessor, a former Republican President, tells Putin, quote, \u201cDo whatever the hell you want.\u201d... I think it\u2019s outrageous, it\u2019s dangerous, and it\u2019s unacceptable.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "America\u2019s comeback is building a future of American possibilities; building an economy from the middle out and the bottom up, not the top down; investing in all of America, in all Americans to make sure everyone has a fair shot and we leave no one\u2014no one\u2014behind.",
+          "confidence": 0.95,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

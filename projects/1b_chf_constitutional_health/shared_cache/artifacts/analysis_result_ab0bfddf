@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a1661f416063",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document, a presidential address to Congress, consistently emphasizes cooperation, adherence to constitutional processes, respect for existing institutions, and incremental reform within the established framework. There is no rhetoric advocating for bypassing procedures, subverting institutions, or fundamentally replacing the system.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I pledged to honor our Constitution and laws, and I asked you to join me in setting a tone of civility and respect in Washington.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct statement of adherence\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. Speaker, Mr. Vice President, Members of Congress: It's a great privilege to be here to outline a new budget and a new approach for governing our great country. I thank you for your invitation to speak here tonight.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgment of institutional roles and processes\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"advocacy for reform within existing systems\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "d0a0e3a0837411b0da955042791a03413cc3e2a5fc436345a5351a4820714996",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:51:51.021398+00:00",
+    "end_time": "2025-08-28T20:52:19.437570+00:00",
+    "duration_seconds": 28.416158
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "dfca94ace2462f6476faa7bcf7d5b635c4fabca68d77a1f24b351afe4f5b2dba"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T204458Z_1a58c9cc"
+  }
+}

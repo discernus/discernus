@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:27:00.522564+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution.",
+      "confidence": 0.95,
+      "context_type": "explicit support for established process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522555+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes.",
+      "confidence": 0.9,
+      "context_type": "argument against proposed procedural bypass",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522557+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of the 105th Congress, distinguished guests, and my fellow Americans: I think I should start by saying thanks for inviting me back.",
+      "confidence": 0.95,
+      "context_type": "formal address and recognition of institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522559+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522560+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.",
+      "confidence": 0.95,
+      "context_type": "affirmation of national strength and commitment to improvement within existing framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522561+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.522562+00:00"
+    }
+  ]
+}

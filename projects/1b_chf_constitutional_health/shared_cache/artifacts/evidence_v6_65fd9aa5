@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:18:29.801277+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.",
+      "confidence": 0.9,
+      "context_type": "call to legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801246+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But let there be no misunderstanding: If Saddam Hussein does not fully disarm, for the safety of our people and for the peace of the world, we will lead a coalition to disarm him.",
+      "confidence": 0.9,
+      "context_type": "threat of unilateral action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801259+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Tonight I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center, to merge and analyze all threat information in a single location.",
+      "confidence": 0.8,
+      "context_type": "reliance on government agencies",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801264+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "He has shown instead utter contempt for the United Nations and for the opinion of the world.",
+      "confidence": 0.7,
+      "context_type": "criticism of international body",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801266+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America is a strong nation and honorable in the use of our strength. We exercise power without conquest, and we sacrifice for the liberty of strangers.",
+      "confidence": 0.9,
+      "context_type": "affirmation of national values and existing order",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801269+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "These problems will not be solved with a nationalized health care system that dictates coverage and rations care.",
+      "confidence": 0.8,
+      "context_type": "rejection of alternative system model",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:18:29.801272+00:00"
+    }
+  ]
+}

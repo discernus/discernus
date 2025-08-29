@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a387a15bb02f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed President Biden's address to Congress focusing on the positive and negative dimensions of constitutional health. The speech emphasizes continuity, legitimacy, and institutional respect, with concerns about external attacks and systemic issues framed as requiring reform within the existing framework.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"joseph_r_biden_jr_2021_address_before_a_joint_session_of_the_congress.md\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Together we passed the American Rescue Plan, one of the most consequential rescue packages in American history.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy_action\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"n/a\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"I stand here tonight, 1 day shy of the hundredth day of my administration, hundred days since I took the oath of office and lifted my hand off our family Bible and inherited a Nation\u2014we all did\u2014that was in crisis...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"institutional_acknowledgment\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"the worst attack on our democracy since the Civil War.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"threat_assessment\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Tonight I come to talk about crisis and opportunity, about rebuilding the Nation, revitalizing our democracy, and winning the future for America.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"n/a\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "4a160beeff1a5ba22d980a9d9ab1d8619cb2b3f73427e1e1265ca36bdfbd865a",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:01:27.966483+00:00",
+    "end_time": "2025-08-28T20:01:44.404844+00:00",
+    "duration_seconds": 16.438315
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "9283d5a577d505fccb0b1cbc1b334f84085488cf1a8579a7056cc2b67a861314"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

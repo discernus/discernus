@@ -62,11 +62,15 @@ template: |
 
   **CRITICAL:** Use the EXACT column names shown in the actual data structure above. Do NOT assume or invent column names.
 
-  **SPEAKER IDENTIFICATION REQUIREMENTS:**
-  - Use the corpus manifest above to identify speakers and metadata, not filename parsing
-  - The manifest can be in any format - discover its structure and extract available metadata
-  - Create speaker mappings from whatever metadata is available (speaker names, parties, styles, years, etc.)
-  - Handle missing or incomplete metadata gracefully
+  **CRITICAL: THIN ARCHITECTURE FOR METADATA**
+  - You have been provided with the COMPLETE corpus manifest content below
+  - The analysis data has a 'document_name' column that corresponds to filenames in the corpus manifest
+  - DO NOT generate code to parse corpus.md - you already have the information
+  - When you need to group by administration, party, or any metadata field:
+    1. Look at the corpus manifest content provided to understand the mapping
+    2. Generate functions that create the grouping directly based on document names
+    3. Example: If grouping by administration, your function should map document names to administrations based on the manifest data you've been given
+  - The LLM has already understood the corpus structure - trust this understanding
 
   **CRITICAL REQUIREMENTS:**
   1. Each analysis must be implemented as a separate Python function
@@ -76,13 +80,16 @@ template: |
   5. Functions must include proper docstrings with statistical methodology
   6. Functions must be production-ready with error handling
   7. Functions should follow the exact signature: def function_name(data, **kwargs):
-  8. For speaker-based analysis, use corpus manifest metadata, NOT filename parsing
+  8. **MANDATORY**: Create grouping mappings based on the corpus manifest content already provided to you
+  9. **MANDATORY**: Map document names to metadata fields directly in your functions - you have all the information needed
 
   **WORKSPACE FILES AVAILABLE:**
-  - Raw analysis data: JSON files in the current directory
-  - Derived metrics data: JSON files in the current directory
+  - Raw analysis data: JSON files in the current directory (full dataset)
+  - Derived metrics data: JSON files in the current directory (full dataset)
   - Framework content: framework_content.md in the current directory
   - Experiment spec: experiment_spec.json in the current directory
+  
+  Note: The corpus manifest has been provided to you in full above. You don't need to read it from disk.
 
   **OUTPUT FORMAT:**
   Wrap each function in the proprietary delimiters exactly as shown:
@@ -116,7 +123,7 @@ template: |
 
   Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function MUST take a 'data' parameter and can optionally read additional context from workspace files.
 
-  **REMEMBER**: Use corpus manifest metadata for speaker identification, not filename parsing.
+  **REMEMBER**: You have the complete corpus manifest above. Create direct mappings from document names to metadata fields based on this information. Do not generate code to parse files - you are the intelligence that understands the relationships.
 
 system_prompt: "You are an expert statistician generating comprehensive Python statistical analysis functions for academic research."
 

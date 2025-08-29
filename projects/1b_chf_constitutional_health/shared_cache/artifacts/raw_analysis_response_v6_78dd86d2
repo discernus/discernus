@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis focused on identifying language supporting or rejecting established constitutional processes, institutional authority, and systemic frameworks. The speech consistently advocates for maintaining and improving existing systems and institutions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2259323cd8b1d9021addb10fe9d205b56a32e308cebe2dc4d8649df55f261757",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.75
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "If judges insist on forcing their arbitrary will upon the people, the only alternative left to the people would be the constitutional process.",
+          "confidence": 0.9,
+          "context_type": "direct statement of support"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence of explicit support"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "These institutions, these unseen pillars of civilization, must remain strong in America, and we will defend them.",
+          "confidence": 0.95,
+          "context_type": "direct statement of support"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Activist judges, however, have begun redefining marriage by court order, without regard for the will of the people and their elected representatives.",
+          "confidence": 0.75,
+          "context_type": "criticism of institutional overreach"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "yet some things endure: courage and compassion, reverence and integrity, respect for differences of faith and race. The values we try to live by never change, and they are instilled in us by fundamental institutions such as families and schools and religious congregations.",
+          "confidence": 0.95,
+          "context_type": "direct statement of support"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "A Government-run health care system is the wrong prescription.",
+          "confidence": 0.9,
+          "context_type": "explicit rejection of alternative system"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

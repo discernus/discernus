@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on the explicit constitutional and democratic themes within the inaugural address. The scores reflect the speech's strong emphasis on procedural legitimacy, institutional respect, and systemic continuity, particularly in the context of recent challenges to the democratic process. Negative dimensions are scored at zero as the speaker actively condemns these concepts rather than advocating for them."
+  },
+  "document_analyses": [
+    {
+      "document_id": "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The people\u2014the will of the people has been heard, and the will of the people has been heeded. We\u2019ve learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.",
+          "confidence": 0.95,
+          "context_type": "direct_expression"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "here we stand, just days after a riotous mob thought they could use violence to silence the will of the people, to stop the work of our democracy, to drive us from this sacred ground. It did not happen. It will never happen, not today, not tomorrow, not ever\u2014not ever.",
+          "confidence": 1.0,
+          "context_type": "rejection_of_dimension_concept"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I thank my predecessors of both parties for their presence here today. I thank them from the bottom of my heart. And I know the resilience of our Constitution and the strength, the strength of our Nation...",
+          "confidence": 0.95,
+          "context_type": "direct_expression"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "And we must reject the culture in which facts themselves are manipulated and even manufactured.",
+          "confidence": 0.9,
+          "context_type": "rejection_of_dimension_concept"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We\u2019ll press forward with speed and urgency, for we have much to do in this winter of peril and significant possibilities: much to repair, much to restore, much to heal, much to build, and much to gain.",
+          "confidence": 0.95,
+          "context_type": "direct_expression"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "And when we do, we will write the next great chapter in the history of the United States of America: the American story, a story that might sound something like a song that means a lot to me.",
+          "confidence": 1.0,
+          "context_type": "rejection_of_dimension_concept"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

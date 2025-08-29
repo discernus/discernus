@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_698b510e2dbc",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed a State of the Union address. The formal nature of the speech inherently emphasizes procedural legitimacy, institutional respect, and systemic continuity. Direct rejection or subversion of the existing framework is highly unlikely and indeed largely absent from this type of discourse. Critiques are generally framed as calls for improvement within the system or preference for alternative policy methods, rather than outright rejection of process or institutions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2008.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.99\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.99\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct appeal to legislative process\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"In this century, the greatest environmental progress will come about not through endless lawsuits or command-and-control regulations but through technology and innovation.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Critique of specific methods\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Tonight I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center, to merge and analyze all threat information in a single location.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct statement of institutional collaboration\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"My budget will commit an additional $400 billion over the next decade to reform and strengthen Medicare.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct proposal for improvement within existing system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"N/A\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "85394b2d9ba374142bc50c864173d45b566889b96444525127907acbf58daf99",
+  "execution_metadata": {
+    "start_time": "2025-08-28T19:53:52.922797+00:00",
+    "end_time": "2025-08-28T19:54:20.203332+00:00",
+    "duration_seconds": 27.280529
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T194325Z_05a39813"
+  }
+}

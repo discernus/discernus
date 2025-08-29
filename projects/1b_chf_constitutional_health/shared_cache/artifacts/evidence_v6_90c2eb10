@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:31:12.864034+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes.",
+      "confidence": 0.9,
+      "context_type": "policy proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864024+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "balancing the budget requires only your vote and my signature. It does not require us to rewrite our Constitution. I believe it is both unnecessary and unwise to adopt a balanced budget amendment that could cripple our country in time of economic crisis and force unwanted results, such as judges halting Social Security checks or increasing taxes. Let us at least agree, we should not pass any measure\u2014no measure should be passed that threatens Social Security.",
+      "confidence": 0.9,
+      "context_type": "policy proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864026+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of the 105th Congress, distinguished guests, and my fellow Americans: I think I should start by saying thanks for inviting me back.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864028+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864029+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "to prepare our people for the bold new world of the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build stronger families and stronger communities and a safer environment; action to keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.",
+      "confidence": 0.9,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864030+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1994.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.864032+00:00"
+    }
+  ]
+}

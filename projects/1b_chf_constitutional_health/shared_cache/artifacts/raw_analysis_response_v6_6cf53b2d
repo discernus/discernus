@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis focuses on a traditional inaugural address. The text strongly emphasizes themes of continuity, unity, and respect for established democratic processes, which is reflected in the high scores for legitimacy, respect, and continuity dimensions. Conversely, themes of rejection, subversion, and replacement are entirely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "7f545f5f106cbc0ec94b359b6c26b14f31c3ff725afc59a8da77ddb1d3d0472f",
+      "document_name": "Bush_Inaugural_2001.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The peaceful transfer of authority is rare in history, yet common in our country. With a simple oath, we affirm old traditions and make new beginnings.",
+          "confidence": 1.0,
+          "context_type": "explicit_statement_of_principle"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_supporting_evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Government has great responsibilities for public safety and public health, for civil rights and common schools.",
+          "confidence": 0.9,
+          "context_type": "acknowledgement_of_institutional_role"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_supporting_evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We have a place, all of us, in a long story, a story we continue but whose end we will not see.",
+          "confidence": 1.0,
+          "context_type": "central_metaphorical_theme"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "no_supporting_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

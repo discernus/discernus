@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "de6bd482bbecfd294533f264c3223f73c9e83e2ae17214c3985e2fdb3d6db26a"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T23:13:45.496614+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "With their votes, they've determined that governing will now be a shared responsibility between parties. New laws will only pass with support from Democrats and Republicans. We will move forward together or not at all, for the challenges we face are bigger than party and bigger than politics.",
+      "confidence": 1.0,
+      "context_type": "legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496596+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "If a bill comes to my desk with earmarks inside, I will veto it. I will veto it.",
+      "confidence": 0.9,
+      "context_type": "executive_oversight",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496604+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496605+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The Secretary of Defense has also agreed to cut tens of billions of dollars in spending that he and his generals believe our military can do without.",
+      "confidence": 1.0,
+      "context_type": "executive_decision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496606+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Thanks to our intelligence and law enforcement professionals, we're disrupting plots and securing our cities and skies.",
+      "confidence": 1.0,
+      "context_type": "institutional_praise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496608+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For example, over the years, a parade of lobbyists has rigged the Tax Code to benefit particular companies and industries.",
+      "confidence": 0.9,
+      "context_type": "policy_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496609+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "If you have ideas about how to improve this law by making care better or more affordable, I am eager to work with you. We can start right now by correcting a flaw in the legislation that has placed an unnecessary bookkeeping burden on small businesses.",
+      "confidence": 1.0,
+      "context_type": "legislative_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496610+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "In the coming months, my administration will develop a proposal to merge, consolidate, and reorganize the Federal Government in a way that best serves the goal of a more competitive America. I will submit that proposal to Congress for a vote, and we will push to get it passed.",
+      "confidence": 1.0,
+      "context_type": "governmental_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496611+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2016.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T23:13:45.496612+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:33.618656+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I stand here ready to work with you to achieve historic breakthroughs for all Americans. Congress has 10 days left to pass a bill that will fund our Government, protect our homeland, and secure our very dangerous southern border. Now is the time for Congress to show the world that America is committed to ending illegal immigration and putting the ruthless coyotes, cartels, drug dealers, and human traffickers out of business.",
+      "confidence": 0.95,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618650+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations. If there is going to be peace and legislation, there cannot be war and investigation.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618651+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madame Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States, and my fellow Americans: We meet tonight at a moment of unlimited potential.",
+      "confidence": 0.95,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618652+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "wealthy politicians and donors push for open borders while living their lives behind walls and gates and guards. Meanwhile, working-class Americans are left to pay the price for mass illegal immigration: reduced jobs, lower wages, overburdened schools, hospitals that are so crowded you can't get in, increased crime, and a depleted social safety net. Tolerance for illegal immigration is not compassionate; it is actually very cruel.",
+      "confidence": 0.95,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618653+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades. In just over 2 years since the election, we have launched an unprecedented economic boom, a boom that has rarely been seen before. There's been nothing like it.",
+      "confidence": 0.95,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618654+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "America was founded on liberty and independence and not Government coercion, domination, and control. We are born free, and we will stay free. Tonight we renew our resolve that America will never be a socialist country.",
+      "confidence": 0.75,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.618655+00:00"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2aa330e3f641f63a54abc79faf9554d8b396a2144ce12cebb71ebcf20378eec4"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T21:49:38.255450+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Forty-four Americans have now taken the Presidential oath. The words have been spoken during rising tides of prosperity and the still waters of peace. Yet every so often, the oath is taken amidst gathering clouds and raging storms. At these moments, America has carried on not simply because of the skill or vision of those in high office, but because we the people have remained faithful to the ideals of our forebears and true to our founding documents.",
+      "confidence": 0.95,
+      "context_type": "explicit statement of adherence to constitutional process and founding principles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255444+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "On this day, we gather because we have chosen hope over fear, unity of purpose over conflict and discord. On this day, we come to proclaim an end to the petty grievances and false promises, the recriminations and worn-out dogmas that for far too long have strangled our politics.",
+      "confidence": 0.8,
+      "context_type": "critique of unproductive political habits rather than rejection of constitutional procedures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255445+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank President Bush for his service to our Nation, as well as the generosity and cooperation he has shown throughout this transition. ... We will restore science to its rightful place and wield technology's wonders to raise health care's quality and lower its cost.",
+      "confidence": 0.9,
+      "context_type": "explicit respect for institutional authority (outgoing president and expertise)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255446+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "To those who cling to power through corruption and deceit and the silencing of dissent, know that you are on the wrong side of history, but that we will extend a hand if you are willing to unclench your fist.",
+      "confidence": 0.8,
+      "context_type": "condemnation of corrupt behavior by actors within the system, not a delegitimization of the institutions themselves",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255447+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We remain a young nation, but in the words of Scripture, the time has come to set aside childish things. The time has come to reaffirm our enduring spirit, to choose our better history, to carry forward that precious gift, that noble idea passed on from generation to generation: the God-given promise that all are equal, all are free, and all deserve a chance to pursue their full measure of happiness.",
+      "confidence": 0.95,
+      "context_type": "strong emphasis on reaffirming enduring national spirit and carrying forward existing foundational ideas",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255448+00:00"
+    },
+    {
+      "document_name": "Obama_Inaugural_2009.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Now, there are some who question the scale of our ambitions, who suggest that our system cannot tolerate too many big plans. Their memories are short, for they have forgotten what this country has already done, what free men and women can achieve when imagination is joined to common purpose and necessity to courage.",
+      "confidence": 0.9,
+      "context_type": "explicitly refutes the idea that the existing system is incapable, thereby countering a need for replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:49:38.255449+00:00"
+    }
+  ]
+}

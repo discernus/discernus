@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on the default configuration of the Constitutional Health Framework v10.0. The speech predominantly focuses on national security, foreign policy, and domestic initiatives, framing all actions within the existing constitutional and institutional framework. There is strong emphasis on procedural legitimacy, institutional respect, and systemic continuity, with no evidence of procedural rejection, institutional subversion, or systemic replacement rhetoric related to US domestic governance."
+  },
+  "document_analyses": [
+    {
+      "document_id": "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d",
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kennedy. [Laughter] I know the folks at the Crawford coffee shop couldn't believe I'd say such a thing\u2014[laughter]\u2014but our work on this bill shows what is possible if we set aside posturing and focus on results.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of cooperation"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Republicans and Democrats worked together to achieve historic education reform so that no child is left behind. I was proud to work with members of both parties: Chairman John Boehner and Congressman George Miller; Senator Judd Gregg. And I was so proud of our work, I even had nice things to say about my friend Ted Kennedy.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of cooperation"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Our Nation will continue to be steadfast and patient and persistent in the pursuit of two great objectives. First, we will shut down terrorist camps, disrupt terrorist plans, and bring terrorists to justice. And second, we must prevent the terrorists and regimes who seek chemical, biological, or nuclear weapons from threatening the United States and the world.",
+          "confidence": 0.9,
+          "context_type": "policy statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "N/A"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

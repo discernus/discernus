@@ -1,0 +1,118 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed President Obama's 2017 State of the Union address, focusing on the emphasis on working within existing constitutional and institutional frameworks, calls for reform and accountability, and a vision of systemic improvement rather than revolutionary change. Identified instances where executive action is presented as a workaround for legislative gridlock, but not as a rejection of process."
+  },
+  "document_analyses": [
+    {
+      "document_id": "c5a53b6ab5ff43056a76b479cb4c8501eb29e978ef338ba5e4ff155b3bd1bf21",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "As long as I\u2019m President, I will work with anyone in this Chamber to build on this momentum.",
+          "confidence": 0.95,
+          "context_type": "direct statement of intent"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I ask the Senate to pass a simple rule that all judicial and public service nominations receive a simple up-or-down vote within 90 days.",
+          "confidence": 0.9,
+          "context_type": "call for adherence to proper process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "In the next few weeks, I will sign an Executive order clearing away the red tape that slows down too many construction projects.",
+          "confidence": 0.8,
+          "context_type": "action taken to bypass legislative slowness"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But I intend to fight obstruction with action, and I will oppose any effort to return to the very same policies that brought on this economic crisis in the first place.",
+          "confidence": 0.75,
+          "context_type": "rhetoric indicating action despite obstruction"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We gather tonight knowing that this generation of heroes has made the United States safer and more respected around the world.",
+          "confidence": 0.95,
+          "context_type": "praise for military institution"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We've put in place new rules to hold Wall Street accountable so a crisis like this never happens again.",
+          "confidence": 0.9,
+          "context_type": "action to strengthen institutional oversight"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations.",
+          "confidence": 0.85,
+          "context_type": "acknowledgment of institutional failure, not delegitimization"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The executive branch also needs to change. Too often, it\u2019s inefficient, outdated, and remote.",
+          "confidence": 0.85,
+          "context_type": "criticism of inefficiency, not legitimacy"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The state of our Union is getting stronger.",
+          "confidence": 0.95,
+          "context_type": "direct statement affirming existing system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "An economy built to last, an economy built on American manufacturing, American energy, skills for American workers, and a renewal of American values.",
+          "confidence": 0.9,
+          "context_type": "vision of strengthening the existing system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

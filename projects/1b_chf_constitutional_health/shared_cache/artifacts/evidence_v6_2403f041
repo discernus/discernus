@@ -1,0 +1,133 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "04bce17677457888b2b3800c8d7c31670f86c271f994babc2d0ed22436db0270"
+    ],
+    "total_evidence_pieces": 12,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:14:26.091148+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment of democratic process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091110+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I ask Congress to pass legal reforms this year.",
+      "confidence": 0.9,
+      "context_type": "policy proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091117+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Four years of debate is enough. I urge Congress to pass legislation that makes America more secure and less dependent on foreign energy.",
+      "confidence": 0.8,
+      "context_type": "call to action within legislative process (not bypassing)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091120+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091123+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "When action was needed, the Congress delivered, and the Nation is grateful.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment of institutional effectiveness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091126+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Because courts must always deliver impartial justice, judges have a duty to faithfully interpret the law, not legislate from the bench.",
+      "confidence": 0.9,
+      "context_type": "statement on institutional role and duty",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091128+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no direct evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091131+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To build the prosperity of future generations, we must update institutions that were created to meet the needs of an earlier time.",
+      "confidence": 0.95,
+      "context_type": "call for improvement within existing system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091133+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We must make Social Security permanently sound, not leave that task for another day.",
+      "confidence": 0.9,
+      "context_type": "commitment to strengthen existing program",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091135+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "And we must take care that any changes in the system are gradual, so younger workers have years to prepare and plan for their future.",
+      "confidence": 0.95,
+      "context_type": "explicit statement on gradual reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091137+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Personal retirement accounts should be familiar to Federal employees, because you already have something similar called the Thrift Savings Plan, which lets workers deposit a portion of their paychecks into any of five different broadly based investment funds. It's time to extend the same security and choice and ownership to young Americans.",
+      "confidence": 0.85,
+      "context_type": "proposal framed as extension of existing system, not replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091140+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no strong evidence for complete replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:14:26.091142+00:00"
+    }
+  ]
+}

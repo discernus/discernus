@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:40:37.836357+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Over the next few weeks, the House and Senate will be voting on an immigration reform package. In recent months, my administration has met extensively with both Democrats and Republicans to craft a bipartisan approach to immigration reform.",
+      "confidence": 0.9,
+      "context_type": "direct_reference_to_legislative_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836351+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We repealed the core of the disastrous Obamacare. The individual mandate is now gone, thank heavens.",
+      "confidence": 0.8,
+      "context_type": "policy_overturn_with_strong_negative_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836352+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Working with the Senate, we are appointing judges who will interpret the Constitution as written, including a great new Supreme Court Justice and more circuit court judges than any new administration in the history of our country.",
+      "confidence": 0.9,
+      "context_type": "recognition_of_judicial_branch_and_constitutional_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836353+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "In America, we know that faith and family, not government and bureaucracy, are the center of American life.",
+      "confidence": 0.7,
+      "context_type": "philosophical_statement_on_limited_government_role",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836354+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.",
+      "confidence": 0.9,
+      "context_type": "reforming_and_strengthening_existing_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836355+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:40:37.836356+00:00"
+    }
+  ]
+}

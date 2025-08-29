@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:33.603785+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families. So I hope we can work together this year on some bipartisan priorities...",
+      "confidence": 0.9,
+      "context_type": "support for established processes and norms",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603776+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of evidence for advocacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603778+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Our unique strengths as a nation\u2014our optimism and work ethic, our spirit of discovery, our diversity, our commitment to rule of law\u2014these things give us everything we need to ensure prosperity and security for generations to come.",
+      "confidence": 0.9,
+      "context_type": "recognition of institutional authority and rule of law",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603780+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Democracy breaks down when the average person feels their voice doesn\u2019t matter, that the system is rigged in favor of the rich or the powerful or some special interest.",
+      "confidence": 0.8,
+      "context_type": "acknowledgment of perceived threat, but not endorsement of subversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603781+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We made change work for us, always extending America\u2019s promise outward, to the next frontier, to more people. And because we did, because we saw opportunity where others saw peril, we emerged stronger and better than before.",
+      "confidence": 0.9,
+      "context_type": "advocacy for gradual reform and adaptation within existing framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603782+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence of evidence for advocacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.603782+00:00"
+    }
+  ]
+}

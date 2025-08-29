@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c3c591512bd6c69ce1dde36e18224f674e09a642f2122399150af706539c8648"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:31:12.857694+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself. Yes, you, my fellow Americans, have forced the spring. Now we must do the work the season demands. To that work I now turn with all the authority of my office. I ask the Congress to join with me.",
+      "confidence": 1.0,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857687+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857688+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America. And I thank the millions of men and women whose steadfastness and sacrifice triumphed over depression, fascism, and communism.",
+      "confidence": 1.0,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857689+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "This beautiful Capital, like every capital since the dawn of civilization, is often a place of intrigue and calculation. Powerful people maneuver for position and worry endlessly about who is in and who is out, who is up and who is down, forgetting those people whose toil and sweat sends us here and pays our way. Americans deserve better. And in this city today there are people who want to do better.",
+      "confidence": 0.9,
+      "context_type": "criticism framed as call for reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857690+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+      "confidence": 1.0,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857691+00:00"
+    },
+    {
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:31:12.857692+00:00"
+    }
+  ]
+}

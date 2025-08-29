@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:33.632451+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Under my leadership, we will restore fair, equal, and impartial justice under the constitutional rule of law.",
+      "confidence": 0.7,
+      "context_type": "direct statement of principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632444+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks...",
+      "confidence": 0.9,
+      "context_type": "specific proposed action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632446+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Vice President Vance, Speaker Johnson, Senator Thune, Chief Justice Roberts, Justices of the Supreme Court of the United States,...",
+      "confidence": 0.6,
+      "context_type": "formal acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632447+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "As we gather today, our Government confronts a crisis of trust. For many years, a radical and corrupt establishment has extracted power and wealth from our citizens...",
+      "confidence": 0.9,
+      "context_type": "critique of current state",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632448+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+      "confidence": 0.7,
+      "context_type": "affirmation of existing framework",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632449+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "From this moment on, America's decline is over. Our liberties and our Nation's glorious destiny will no longer be denied. And we will immediately restore the integrity, competency, and loyalty of America's Government.",
+      "confidence": 0.8,
+      "context_type": "vision of radical transformation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.632449+00:00"
+    }
+  ]
+}

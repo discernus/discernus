@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:41:14.578917+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Now, as President, I'm committed to making Washington work better and rebuilding the trust of the people who sent us here. And I believe most of you are too. Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year's severe cuts to priorities like education.",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578908+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But I'll act on my own to slash bureaucracy and streamline the permitting process for key projects so we can get more construction workers on the job as fast as possible.",
+      "confidence": 0.9,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578910+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans:",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578912+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578913+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The defining project of our generation must be to restore that promise. We know where to start: The best measure of opportunity is access to a good job.",
+      "confidence": 0.95,
+      "context_type": "direct quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578914+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.578915+00:00"
+    }
+  ]
+}

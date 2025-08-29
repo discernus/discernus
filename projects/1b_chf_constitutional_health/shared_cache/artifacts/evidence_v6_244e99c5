@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:03.876002+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "This Congress produced a budget that cut the deficit by half a trillion dollars, cut spending, and raised income taxes on only the wealthiest Americans.",
+      "confidence": 0.9,
+      "context_type": "description of past actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.875995+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "all passed; all signed into law with not one single veto.",
+      "confidence": 0.9,
+      "context_type": "description of past actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.875996+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.",
+      "confidence": 0.9,
+      "context_type": "rhetorical appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.875998+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "our health care initiative has been designed to strengthen what is good about our health care system: the world's best health care professionals, cutting-edge research and wonderful research institutions, Medicare for older Americans.",
+      "confidence": 0.8,
+      "context_type": "policy statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.875998+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Let us resolve to continue the journey of renewal, to create more and better jobs, to guarantee health security for all, to reward work over welfare, to promote democracy abroad, and to begin to reclaim our streets from violent crime and drugs and gangs, to renew our own American community.",
+      "confidence": 0.9,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.876000+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We replaced drift and deadlock with renewal and reform.",
+      "confidence": 0.9,
+      "context_type": "description of past actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.876001+00:00"
+    }
+  ]
+}

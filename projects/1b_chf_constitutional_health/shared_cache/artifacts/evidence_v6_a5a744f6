@@ -1,0 +1,143 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "total_evidence_pieces": 13,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T22:27:00.564362+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564348+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You, the Congress, have already passed all these reductions and promised them for future years.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564349+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I urge the Congress to pass medical liability reform.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564350+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "In all these efforts, however, America's purpose is more than to follow a process; it is to achieve a result, the end of terrible threats to the civilized world.",
+      "confidence": 0.7,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564351+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Some have said we must not act until the threat is imminent. Since when have terrorists and tyrants announced their intentions, politely putting up on notice before they strike? If this threat is permitted to fully and suddenly emerge, all actions, all words, and all recriminations would come too late.",
+      "confidence": 0.6,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564352+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "To protect our country, we reorganized our Government and created the Department of Homeland Security, which is mobilizing against the threats of a new era.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564353+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center, to merge and analyze all threat information in a single location.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564354+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The United Nations Security Council gave Saddam Hussein his final chance to disarm.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564355+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Instead of bureaucrats and trial lawyers and HMOs, we must put doctors and nurses and patients back in charge of American medicine.",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564356+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To lift the standards of our public schools, we achieved historic education reform, which must now be carried out in every school and in every classroom so that every child in America can read and learn and succeed in life.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564357+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "A growing economy and a focus on essential priorities will be crucial to the future of Social Security. As we continue to work together to keep Social Security sound and reliable, we must offer younger workers a chance to invest in retirement accounts that they will control and they will own.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564358+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To improve our health care system, we must address one of the prime causes of higher cost, the constant threat that physicians and hospitals will be unfairly sued.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564359+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T22:27:00.564360+00:00"
+    }
+  ]
+}

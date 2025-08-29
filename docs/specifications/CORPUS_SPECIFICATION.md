@@ -1,8 +1,9 @@
-# Corpus Specification (v8.0.1)
+# Corpus Specification (v8.0.2)
 
-**Version**: 8.0.1  
+**Version**: 8.0.2  
 **Status**: Current Standard  
-**Replaces**: v8.0
+**Replaces**: v8.0.1
+**Change**: Added custom analytical groupings requirement for statistical analysis
 
 The `corpus.md` file defines a collection of documents for analysis in the v8.0 Discernus system. It serves as the **manifest and metadata source** for all textual materials in an experiment, providing human-readable descriptions with structured YAML metadata.
 
@@ -120,6 +121,7 @@ documents:
     style: "institutional"
     type: "concession_speech"
     political_phase: "campaign_2008"
+    administration: "Bush W."  # Custom analytical grouping
     
   - filename: "policy_2025/sanders_oligarchy.txt"
     speaker: "Bernie Sanders"
@@ -128,6 +130,7 @@ documents:
     style: "populist_progressive"
     type: "policy_statement"
     political_phase: "policy_2025"
+    administration: "Biden"  # Custom analytical grouping
 ```
 ```
 
@@ -157,6 +160,8 @@ documents:
 - ✅ If present, metadata must be valid YAML
 - ✅ Metadata should provide useful context for analysis
 - ✅ Document metadata keys must match actual filenames
+- ✅ **Custom analytical groupings** (e.g., `administration`, `time_period`, `category`) should be included as metadata fields
+- ✅ **Grouping variables referenced in experiments** MUST exist in corpus metadata
 
 ---
 
@@ -239,6 +244,14 @@ Each document listed in the manifest must exist as a plain text (`.txt`) file wi
 - **Scalable**: Handles small focused corpora or large document collections
 - **Organized Structure**: Supports nested directories for logical organization
 - **Explicit Semantics**: All analytical meaning comes from metadata, not structure
+
+### Custom Analytical Groupings (v8.0.2)
+When experiments require statistical analysis using grouping variables:
+- **Define in Corpus Metadata**: Add custom fields like `administration`, `time_period`, `category` to document metadata
+- **Consistent Application**: Apply grouping variables consistently across all documents
+- **Experiment Alignment**: Ensure grouping variables match those referenced in experiment specifications
+- **Statistical Validity**: Ensure sufficient documents per group for statistical tests (n≥2 for ANOVA)
+- **No Filename Parsing**: Statistical agents MUST use corpus metadata, never parse filenames
 
 ---
 

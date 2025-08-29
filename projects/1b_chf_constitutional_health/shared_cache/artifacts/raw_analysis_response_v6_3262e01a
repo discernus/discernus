@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document, President Biden's Inaugural Address, overwhelmingly emphasizes themes of unity, continuity, and respect for democratic processes and institutions, while strongly condemning actions that undermine them. There is a clear rejection of procedural circumvention, institutional subversion, and systemic replacement, despite prominent discussion of these threats."
+  },
+  "document_analyses": [
+    {
+      "document_id": "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The right to dissent peacefully, within the guardrails of our Republic, is perhaps this Nation\u2019s greatest strength.",
+          "confidence": 0.95,
+          "context_type": "direct statement of adherence to democratic norms and constitutional processes"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct advocacy for procedural rejection; rather, its condemnation is prominent"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "leaders who have pledged to honor our Constitution and protect our Nation\u2014to defend the truth and defeat the lies.",
+          "confidence": 0.9,
+          "context_type": "statement of duty to uphold institutional integrity and facts"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "no direct advocacy for institutional subversion; rather, its condemnation is prominent"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "I will defend the Constitution. I will defend our democracy. I will defend America.",
+          "confidence": 0.95,
+          "context_type": "explicit pledge to uphold and maintain the existing constitutional and democratic system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "no advocacy for fundamental systemic replacement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

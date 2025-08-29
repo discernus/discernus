@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The analysis focused on the explicit rhetorical strategies used in the speech. The text contains strong, often contradictory, appeals to both constitutional health and pathology, particularly concerning procedural and institutional dimensions. Salience scores reflect the rhetorical emphasis placed on these themes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fbaf4dc27b9b9df22b059b00015ceea78723b514bc8c39a31e1d2c9d7c10a936",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "In the last Congress, both parties came together to pass unprecedented legislation to confront the opioid crisis, a sweeping new farm bill, historic VA reforms.",
+          "confidence": 0.95,
+          "context_type": "Highlighting successful bipartisan legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "If there is going to be peace and legislation, there cannot be war and investigation. It just doesn\u2019t work that way.",
+          "confidence": 0.95,
+          "context_type": "Framing legitimate oversight as an invalid process"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "We will always support the brave men and women of law enforcement, and I pledge to you tonight that I will never abolish our heroes from ICE.",
+          "confidence": 0.95,
+          "context_type": "Direct expression of support for a government institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations.",
+          "confidence": 0.9,
+          "context_type": "Delegitimizing a core institutional function (congressional oversight)"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "And exactly one century after Congress passed the constitutional amendment giving women the right to vote, we also have more women serving in Congress than at any time before.",
+          "confidence": 0.9,
+          "context_type": "Celebrating successful systemic reform via constitutional amendment"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "Absence of rhetoric; the speech instead argues against systemic replacement (e.g., socialism) rather than advocating for it."
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

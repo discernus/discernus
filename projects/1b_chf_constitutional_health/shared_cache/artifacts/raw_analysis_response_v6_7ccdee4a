@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a hypothetical inaugural address with highly explicit and rhetorically charged language. This allows for high confidence in scoring across all dimensions. The primary rhetorical strategy is to frame the existing system as corrupt and failed (high institutional_subversion) to justify the use of extra-procedural powers (high procedural_rejection) and systemic changes (high systemic_replacement). Dimensions related to health (legitimacy, respect, continuity) are present but are rhetorically subordinate and have low salience."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb",
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.",
+          "confidence": 0.9,
+          "context_type": "justification_of_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.",
+          "confidence": 1.0,
+          "context_type": "policy_proposal"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Under my leadership, we will restore fair, equal, and impartial justice under the constitutional rule of law.",
+          "confidence": 0.8,
+          "context_type": "stated_goal"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The vicious, violent, and unfair weaponization of the Justice Department and our Government will end.",
+          "confidence": 1.0,
+          "context_type": "critique_of_status_quo"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_framing"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "To restore competence and effectiveness to our Federal Government, my administration will establish the brandnew Department of Government Efficiency.",
+          "confidence": 1.0,
+          "context_type": "policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,153 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "total_evidence_pieces": 14,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:41:14.626988+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the American people, and to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+      "confidence": 0.9,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626971+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "one of the first things I did as President was fight to pass the American Rescue Plan, because people were hurting. We needed to act, and we did.",
+      "confidence": 0.9,
+      "context_type": "legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626973+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "That\u2019s why it was so important to pass the bipartisan infrastructure law. And I thank my Republican friends who joined to invest and rebuild America, the single biggest investment in history.",
+      "confidence": 0.9,
+      "context_type": "legislative_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626975+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "In State after State, new laws have been passed not only to suppress the vote\u2014we\u2019ve been there before\u2014but to subvert the entire election. We can\u2019t let this happen.",
+      "confidence": 0.8,
+      "context_type": "critique_of_others",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626976+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "That\u2019s why the NATO alliance was created: to secure peace and stability in Europe after World War II.",
+      "confidence": 0.9,
+      "context_type": "affirmation_of_institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626977+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "In my administration, the watchdogs are back. And we\u2019re going after the criminals who stole billions of relief money meant for small business and millions of Americans.",
+      "confidence": 0.9,
+      "context_type": "affirmation_of_institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626978+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The most fundamental right in America is the right to vote and have it counted. And, look, it\u2019s under assault.",
+      "confidence": 0.9,
+      "context_type": "defense_of_institution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626979+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I\u2019ve nominated a Circuit Court of Appeals\u2014Ketanji Brown Jackson. One of our Nation\u2019s top legal minds who will continue in Justice Breyer\u2019s legacy of excellence. A former top litigator in private practice, a former Federal public defender from a family of public-school educators and police officers, she\u2019s a consensus builder.",
+      "confidence": 0.9,
+      "context_type": "support_for_institutional_appointment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626980+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "the previous administration not only ballooned the deficit with those tax cuts for the very wealthy and corporations, it undermined the watchdogs\u2014the job of those to keep pandemic relief funds from being wasted.",
+      "confidence": 0.8,
+      "context_type": "condemnation_of_past_actions_by_others",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626981+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The economy grew at a rate of 5.7 last year, the strongest growth rate in 40 years and the first step in bringing fundamental change to our economy that hasn\u2019t worked for working people in this Nation for too long.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626982+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We\u2019re done talking about infrastructure weeks. We\u2019re now talking about an infrastructure decade.",
+      "confidence": 0.9,
+      "context_type": "advocacy_for_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626983+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Let\u2019s not abandon our streets or choose between safety and equal justice. Let\u2019s come together and protect our communities, restore trust, and hold law enforcement accountable.",
+      "confidence": 0.9,
+      "context_type": "call_for_unity_and_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626984+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Tonight I\u2019m offering a unity agenda for the Nation: four big things we can do together, in my view.",
+      "confidence": 0.9,
+      "context_type": "call_for_unity_and_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626985+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The state of the Union is strong because you, the American people, are strong.",
+      "confidence": 0.9,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:41:14.626986+00:00"
+    }
+  ]
+}

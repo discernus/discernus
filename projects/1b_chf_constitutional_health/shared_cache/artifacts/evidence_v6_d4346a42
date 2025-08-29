@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "dfca94ace2462f6476faa7bcf7d5b635c4fabca68d77a1f24b351afe4f5b2dba"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T21:48:30.819825+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I pledged to honor our Constitution and laws, and I asked you to join me in setting a tone of civility and respect in Washington.",
+      "confidence": 0.95,
+      "context_type": "direct statement of adherence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819817+00:00"
+    },
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819819+00:00"
+    },
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress: It's a great privilege to be here to outline a new budget and a new approach for governing our great country. I thank you for your invitation to speak here tonight.",
+      "confidence": 0.95,
+      "context_type": "acknowledgment of institutional roles and processes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819820+00:00"
+    },
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819821+00:00"
+    },
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.",
+      "confidence": 0.95,
+      "context_type": "advocacy for reform within existing systems",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819822+00:00"
+    },
+    {
+      "document_name": "george_w_bush_2001_address_before_a_joint_session_of_the_congress_on_administration_goals.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T21:48:30.819823+00:00"
+    }
+  ]
+}

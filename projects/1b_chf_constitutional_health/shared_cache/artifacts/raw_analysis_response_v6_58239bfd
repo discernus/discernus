@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The inaugural address heavily emphasizes the need for radical change and 'restoration' by largely bypassing existing structures and delegitimizing current institutions. While it pays some lip service to constitutional principles, the dominant rhetoric advocates for a 'revolution' and 'extraordinary measures' to address a perceived 'corrupt establishment'."
+  },
+  "document_analyses": [
+    {
+      "document_id": "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb",
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "procedural_rejection": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "institutional_subversion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.4,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "systemic_replacement": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Under my leadership, we will restore fair, equal, and impartial justice under the constitutional rule of law.",
+          "confidence": 0.7,
+          "context_type": "direct statement of principle"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks...",
+          "confidence": 0.9,
+          "context_type": "specific proposed action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Vice President Vance, Speaker Johnson, Senator Thune, Chief Justice Roberts, Justices of the Supreme Court of the United States,...",
+          "confidence": 0.6,
+          "context_type": "formal acknowledgement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "As we gather today, our Government confronts a crisis of trust. For many years, a radical and corrupt establishment has extracted power and wealth from our citizens...",
+          "confidence": 0.9,
+          "context_type": "critique of current state"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We will not forget our country, we will not forget our Constitution, and we will not forget our God.",
+          "confidence": 0.7,
+          "context_type": "affirmation of existing framework"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "From this moment on, America's decline is over. Our liberties and our Nation's glorious destiny will no longer be denied. And we will immediately restore the integrity, competency, and loyalty of America's Government.",
+          "confidence": 0.8,
+          "context_type": "vision of radical transformation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

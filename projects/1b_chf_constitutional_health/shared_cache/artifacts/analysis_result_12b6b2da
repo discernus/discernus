@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a33a3dbf9423",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis focused on identifying direct and indirect support for or rejection of constitutional processes, institutional roles, and the systemic framework. Salience was determined by frequency, emphasis, and thematic centrality. The speech consistently advocates for reform and improvement within the existing system.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1999.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Well, we did. We replaced drift and deadlock with renewal and reform. And I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct statement of procedural success and collaboration\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"If you send me legislation that does not guarantee every American private health insurance that can never be taken away, you will force me to take this pen, veto the legislation, and we'll come right back here and start all over again.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"conditional threat to use legitimate procedural tool (veto) to force desired legislative outcome, not abandonment of process\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"And I want to thank every one of you here who heard the American people, who broke gridlock, who gave them the most successful teamwork between a President and a Congress in 30 years.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"explicit praise for inter-branch cooperation and successful governance\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"The work of change, frankly, will never get any easier until we limit the influence of well-financed interests who profit from this current system.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"criticism of external influences on the system, framed as a problem to be solved by legislative action, not inherent institutional illegitimacy\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Tonight, my fellow Americans, we are summoned to answer a question as old as the Republic itself: What is the state of our Union? It is growing stronger, but it must be stronger still. With your help and God's help, it will be.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct affirmation of the strength and ongoing improvement of the existing system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no direct or implied evidence found\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "73f0af63b2c68f578a985687133aead33253706fbceedb263ede4b4dc7d7dcdf",
+  "execution_metadata": {
+    "start_time": "2025-08-28T20:49:59.801494+00:00",
+    "end_time": "2025-08-28T20:50:49.127841+00:00",
+    "duration_seconds": 49.32634
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "a511e6e678c64457c5aad9ed5cd608608fc723403fda672f8ede460e9dea3f2b"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T204458Z_1a58c9cc"
+  }
+}

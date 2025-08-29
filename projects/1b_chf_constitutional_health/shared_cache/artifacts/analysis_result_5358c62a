@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2235afe60d0f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the explicit rhetorical themes of the inaugural address. The document presents a strong and consistent populist message that frames the existing political system and its institutions as having failed and betrayed the populace, necessitating a radical shift in governance. This results in high scores for dimensions related to rejection, subversion, and replacement, and low scores for their counterparts (legitimacy, respect, continuity). The salience scores reflect that these themes are not just present but are the central, repeated, and emphasized arguments of the speech.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_Inaugural_2017.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.98\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Every 4 years, we gather on these steps to carry out the orderly and peaceful transfer of power, and we are grateful to President Obama and First Lady Michelle Obama for their gracious aid throughout this transition.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opening_formality\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"What truly matters is not which party controls our Government, but whether our Government is controlled by the people. January 20, 2017, will be remembered as the day the people became the rulers of this Nation again.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"We will be protected by the great men and women of our military and law enforcement, and most importantly, we will be protected by God.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"supporting_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"For too long, a small group in our Nation\u2019s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth. Politicians prospered, but the jobs left, and the factories closed. The establishment protected itself, but not the citizens of our country.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core_argument\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence_found\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"That all changes, starting right here and right now, because this moment is your moment: It belongs to you.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"thesis_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "e656275d9f663147e4cf77f47524010ba52796448733f548b326e1cf690db5d6",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:15:19.179269+00:00",
+    "end_time": "2025-08-28T23:15:49.955280+00:00",
+    "duration_seconds": 30.776005
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "0e0bb70476957f2f484aff88f9dd6f48cba34bae416637db25feb91d86982f5f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

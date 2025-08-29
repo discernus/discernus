@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "78a0fba5c1f8ca45a81a71cf3047057de0a0bc67fe8f411b841400dbe60be839"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:03.888790+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I have a duty to nominate qualified men and women to vacancies on the Federal bench, and the United States Senate has a duty as well, to give those nominees a fair hearing and a prompt up-or-down vote on the Senate floor.",
+      "confidence": 1.0,
+      "context_type": "Statement of duty and call to action for legislative body",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888782+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888783+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Vice President Cheney, Members of Congress, distinguished guests, and fellow citizens: The rite of custom brings us together at a defining hour when decisions are hard and courage is needed.",
+      "confidence": 1.0,
+      "context_type": "Formal opening and acknowledgment of institutional roles",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888785+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888786+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Now the task is to build on that success without watering down standards, without taking control from local communities, and without backsliding and calling it reform.",
+      "confidence": 1.0,
+      "context_type": "Policy proposal regarding education reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888787+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2004.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:03.888788+00:00"
+    }
+  ]
+}

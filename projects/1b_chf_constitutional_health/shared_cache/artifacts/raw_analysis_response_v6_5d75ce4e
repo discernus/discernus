@@ -1,0 +1,86 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed a formal State of the Union address. The discourse heavily emphasizes continuity, reform within existing structures, and respect for institutions and procedures, consistent with the nature of such a speech. No indications of subversion or rejection rhetoric were found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced",
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.85,
+          "salience": 0.75,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets...Tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.",
+          "confidence": 0.95,
+          "context_type": "explicit support for legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct quote"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend.",
+          "confidence": 0.95,
+          "context_type": "recognition of institutional accountability"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct quote"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "History reminds us that at every moment of economic upheaval and transformation, this Nation has responded with bold action and big ideas.",
+          "confidence": 0.95,
+          "context_type": "appeal to historical precedent and national resilience"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "no direct quote"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

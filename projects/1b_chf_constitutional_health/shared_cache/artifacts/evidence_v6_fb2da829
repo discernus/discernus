@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:41:33.630217+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "join together and defend democracy. Remember your oath of office to defend against all threats foreign and domestic. Respect free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2014no place\u2014in America. Zero place.",
+      "confidence": 0.95,
+      "context_type": "Argumentation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630209+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "January 6 lies about the 2020 election and the plots to steal the election posed a great\u2014gravest threat to U.S. democracy since the Civil War.",
+      "confidence": 0.9,
+      "context_type": "Critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630211+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Madam Vice President, Members of Congress, my fellow Americans: In January 1941, Franklin Roosevelt came to this Chamber to speak to the Nation.",
+      "confidence": 0.95,
+      "context_type": "Acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630212+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "My predecessor and some of you here seek to bury the truth about January 6. I will not do that.",
+      "confidence": 0.9,
+      "context_type": "Critique / Condemnation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630213+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America stood strong, and democracy prevailed. We must be honest: The threat to democracy must be defended.",
+      "confidence": 0.95,
+      "context_type": "Call to action / Vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630214+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "N/A",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:41:33.630215+00:00"
+    }
+  ]
+}

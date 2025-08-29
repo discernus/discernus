@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_55a024d96184",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "An expert discourse analyst, I will now analyze the provided documents using the specified framework.\n\n```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the speaker's own rhetoric, distinguishing between the speaker's advocacy and their criticism of opponents' alleged actions. The document, a political speech, provides clear and repeated evidence for dimensions related to upholding existing constitutional norms and processes, and a near-total absence of rhetoric rejecting or subverting them. Salience scores reflect the thematic centrality of these dimensions to the overall speech.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2025.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"If you\u2026the American people\u2026send me a Congress that supports the right to choose, I promise you I will restore Roe v. Wade as the law of the land again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"pledge_for_legislative_action\"\n        },\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I say this to Congress: We have to stand up to Putin. Send me a bipartisan national security bill. History is literally watching.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_appeal_to_legislature\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"The Border Patrol union has endorsed this bill.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"deference_to_institutional_endorsement\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Respect\u2026free and fair elections, restore trust in our institutions, and make clear political violence has absolutely no place\u2026in America.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_appeal_for_institutional_trust\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"My lifetime has taught me to embrace freedom and democracy, a future based on core values that have defined America\u2026honesty, decency, dignity, and equality\u2026to respect everyone; to give everyone a fair shot; to give hate no safe harbor.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"statement_of_personal_philosophy\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Not since President Lincoln and the Civil War have freedom and democracy been under assault at home as they are today.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"historical_analogy_for_system_defense\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "evidence_hash": "ad73262942757a1cc1e354e3cf505296285c8105d264ca54467df37368acbe6b",
+  "execution_metadata": {
+    "start_time": "2025-08-28T23:22:43.111774+00:00",
+    "end_time": "2025-08-28T23:23:50.280409+00:00",
+    "duration_seconds": 67.16862
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "4391dfa9d97988c977789dc27ce622bc268814819a6c8eb6f72556382fd45672"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250828T224756Z_efa8742e"
+  }
+}

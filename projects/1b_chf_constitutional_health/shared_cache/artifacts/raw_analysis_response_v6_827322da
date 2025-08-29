@@ -1,0 +1,110 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analyzed Barack Obama's 2011 State of the Union address for constitutional health dimensions. The speech heavily emphasizes cooperation, gradual reform, and respect for institutions, while only sparingly alluding to unilateral executive action as a fallback, and largely avoiding delegitimizing rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "fdf60b47893cba04f2f3cf5b7e16a57dff2dc20728588615839f9c6d41993d3f",
+      "document_name": "Obama_SOTU_2011.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.85
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Now, as President, I'm committed to making Washington work better and rebuilding the trust of the people who sent us here. And I believe most of you are too. Last month, thanks to the work of Democrats and Republicans, Congress finally produced a budget that undoes some of last year's severe cuts to priorities like education.",
+          "confidence": 0.9,
+          "context_type": "call for cooperation and adherence to process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Some require congressional action, and I am eager to work with all of you.",
+          "confidence": 0.85,
+          "context_type": "acknowledgment of legislative process"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "So wherever and whenever I can take steps without legislation to expand opportunity for more American families, that's what I'm going to do.",
+          "confidence": 0.8,
+          "context_type": "statement of intent for unilateral action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But I'll act on my own to slash bureaucracy and streamline the permitting process for key projects so we can get more construction workers on the job as fast as possible.",
+          "confidence": 0.8,
+          "context_type": "policy proposal for executive bypass"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans:",
+          "confidence": 0.95,
+          "context_type": "formal address and recognition of institutional roles"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "With the support of the FCC and companies like Apple, Microsoft, Sprint, and Verizon, we\u2019ve got a down payment to start connecting more than 15,000 schools and 20 million students over the next 2 years, without adding a dime to the deficit.",
+          "confidence": 0.9,
+          "context_type": "acknowledgment of institutional partnership"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "But when that debate prevents us from carrying out even the most basic functions of our democracy\u2014when our differences shut down Government or threaten the full faith and credit of the United States\u2014then we are not doing right by the American people.",
+          "confidence": 0.85,
+          "context_type": "critique of institutional dysfunction, not delegitimization"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "So our job is to reverse these trends. It won\u2019t happen right away, and we won\u2019t agree on everything. But what I offer tonight is a set of concrete, practical proposals to speed up growth, strengthen the middle class, and build new ladders of opportunity into the middle class.",
+          "confidence": 0.9,
+          "context_type": "advocacy for reform and improvement within existing system"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The point is, there are millions of Americans outside of Washington who are tired of stale political arguments and are moving this country forward. They believe\u2014and I believe\u2014that here in America, our success should depend not on accident of birth, but the strength of our work ethic and the scope of our dreams.",
+          "confidence": 0.9,
+          "context_type": "affirmation of core American ideals within the system"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "no evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

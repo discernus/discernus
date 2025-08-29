@@ -1,0 +1,110 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The speech strongly emphasizes working within established constitutional and democratic processes, respecting institutional roles, and pursuing gradual reform within the existing system. There is no rhetoric advocating for procedural bypass, institutional subversion, or systemic replacement. The themes of bipartisanship, congressional action, and national unity are highly salient."
+  },
+  "document_analyses": [
+    {
+      "document_id": "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I urge this Congress to pass the rest. But tonight I'll lay out additional proposals that are fully paid for and fully consistent with the budget framework both parties agreed to just 18 months ago.",
+          "confidence": 0.9,
+          "context_type": "Thematic centrality"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "They don\u2019t expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation\u2019s interests before party. They do expect us to forge reasonable compromise where we can.",
+          "confidence": 0.9,
+          "context_type": "Thematic centrality"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "But if Congress won't act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take, now and in the future, to reduce pollution, prepare our communities for the consequences of climate change, and speed the transition to more sustainable sources of energy.",
+          "confidence": 0.7,
+          "context_type": "Implicit circumvention due to inaction"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, fellow Americans: Fifty-one years ago, John F. Kennedy declared to this Chamber that 'the Constitution makes us not rivals for power, but partners for progress.'",
+          "confidence": 0.9,
+          "context_type": "Structural positioning"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I recognize that in our democracy, no one should just take my word for it that we\u2019re doing things the right way. So, in the months ahead, I will continue to engage Congress to ensure not only that our targeting, detention, and prosecution of terrorists remains consistent with our laws and system of checks and balances, but that our efforts are even more transparent to the American people and to the world.",
+          "confidence": 0.9,
+          "context_type": "Thematic centrality"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "Absent"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Tonight, thanks to the grit and determination of the American people, there is much progress to report. After a decade of grinding war, our brave men and women in uniform are coming home. After years of grueling recession, our businesses have created over 6 million new jobs. We buy more American cars than we have in 5 years and less foreign oil than we have in 20. Our housing market is healing, our stock market is rebounding, and consumers, patients, and homeowners enjoy stronger protections than ever before.",
+          "confidence": 0.9,
+          "context_type": "Structural positioning"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It is our generation\u2019s task, then, to reignite the true engine of America\u2019s economic growth: a rising, thriving middle class.",
+          "confidence": 0.8,
+          "context_type": "Thematic centrality"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "It captures the enduring idea that this country only works when we accept certain obligations to one another and to future generations; that our rights are wrapped up in the rights of others; and that well into our third century as a nation, it remains the task of us all, as citizens of these United States, to be the authors of the next great chapter of our American story.",
+          "confidence": 0.9,
+          "context_type": "Structural positioning"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "Absent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

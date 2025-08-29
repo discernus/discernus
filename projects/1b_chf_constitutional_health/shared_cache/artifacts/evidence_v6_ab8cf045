@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T19:38:59.568364+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I will submit to Congress for 1999 the first balanced budget in 30 years.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568353+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "by bipartisan campaign finance reform proposed by Senators McCain and Feingold.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568355+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "We have moved past the sterile debate between those who say government is the enemy and those who say government is the answer. My fellow Americans, we have found a third way.",
+      "confidence": 0.9,
+      "context_type": "implied_rejection_of_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568356+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I thank the Vice President for his leadership and the Congress for its support in building a Government that is leaner, more flexible, a catalyst for new ideas, and most of all, a Government that gives the American people the tools they need to make the most of their own lives.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568357+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I simply ask the United States Senate to heed this plea and vote on the highly qualified judicial nominees before you, up or down.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568358+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "I'm outraged by the reports of abuses by the IRS. We need some changes there: new citizen advocacy panels, a stronger taxpayer advocate, phone lines open 24 hours a day, relief for innocent taxpayers.",
+      "confidence": 0.8,
+      "context_type": "constructive_criticism_not_subversion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568359+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Let us strengthen our Nation for the 21st century.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568360+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Our Founders set America on a permanent course toward a more perfect Union. To all of you I say, it is a journey we can only make together, living as one community.",
+      "confidence": 0.9,
+      "context_type": "direct",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568361+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "We shaped a new kind of Government for the information age. I thank the Vice President for his leadership and the Congress for its support in building a Government that is leaner, more flexible, a catalyst for new ideas, and most of all, a Government that gives the American people the tools they need to make the most of their own lives.",
+      "confidence": 0.8,
+      "context_type": "contextualized_new_system_as_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T19:38:59.568362+00:00"
+    }
+  ]
+}

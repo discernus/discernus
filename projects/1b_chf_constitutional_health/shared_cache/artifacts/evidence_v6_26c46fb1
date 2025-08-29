@@ -1,0 +1,183 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "98481692a14ee07f3eaa5b45bef63e3f89d84e7e991f4efab0b3458bdc3817e6"
+    ],
+    "total_evidence_pieces": 17,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-28T20:57:29.922268+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States--she's around here somewhere: I have come here tonight not only to address the distinguished men and women in this great Chamber, but to speak frankly and directly to the men and women who sent us here.",
+      "confidence": 0.9,
+      "context_type": "opening statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922235+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "As soon as I took office, I asked this Congress to send me a recovery plan by President's Day that would put people back to work and put money in their pockets... And tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.",
+      "confidence": 0.9,
+      "context_type": "legislative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922240+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I ask Congress to move quickly on legislation that will finally reform our outdated regulatory system. It is time to put in place tough, new, commonsense rules of the road so that our financial market rewards drive and innovation, and punishes shortcuts and abuse.",
+      "confidence": 0.8,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922242+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "In the next few days, I will submit a budget to Congress. So often, we've come to view these documents as simply numbers on a page or a laundry list of programs. I see this document differently. I see it as a vision for America, as a blueprint for our future.",
+      "confidence": 0.8,
+      "context_type": "policy proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922244+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "procedural_rejection",
+      "quote_text": "Now, I understand that on any given day, Wall Street may be more comforted by an approach that gives bank bailouts with no strings attached and that holds nobody accountable for their reckless decisions. But such an approach won't solve the problem, and our goal is to quicken the day when we restart lending to the American people and American business and end this crisis once and for all.",
+      "confidence": 0.8,
+      "context_type": "counter-argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922245+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States--she's around here somewhere: I have come here tonight not only to address the distinguished men and women in this great Chamber, but to speak frankly and directly to the men and women who sent us here.",
+      "confidence": 0.9,
+      "context_type": "opening address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922247+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "I've asked Vice President Biden to lead a tough, unprecedented oversight effort; because nobody messes with Joe.",
+      "confidence": 0.9,
+      "context_type": "administrative action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922249+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "I have told each of my Cabinet, as well as mayors and Governors across the country, that they will be held accountable by me and the American people for every dollar they spend. I've appointed a proven and aggressive Inspector General to ferret out any and all cases of waste and fraud. And we have created a new web site called recovery.gov, so that every American can find out how and where their money is being spent.",
+      "confidence": 0.9,
+      "context_type": "accountability measures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922250+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_respect",
+      "quote_text": "act with the full force of the Federal Government to ensure that the major banks that Americans depend on have enough confidence and enough money to lend even in more difficult times... assure the continuity of a strong, viable institution that can serve our people and our economy.",
+      "confidence": 0.8,
+      "context_type": "policy statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922252+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "If we're honest with ourselves, we'll admit that for too long, we have not always met these responsibilities as a Government or as a people. I say this not to lay blame or to look backwards, but because it is only by understanding how we arrived at this moment that we'll be able to lift ourselves out of this predicament.",
+      "confidence": 0.8,
+      "context_type": "critique of past",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922254+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "institutional_subversion",
+      "quote_text": "This time, CEOs won't be able to use taxpayer money to pad their paychecks or buy fancy draperies or disappear on a private jet. Those days are over.",
+      "confidence": 0.7,
+      "context_type": "accountability statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922256+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "We will rebuild, we will recover, and the United States of America will emerge stronger than before.",
+      "confidence": 0.9,
+      "context_type": "thesis statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922257+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "The weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth. Those qualities that have made America the greatest force of progress and prosperity in human history, we still possess in ample measure.",
+      "confidence": 0.9,
+      "context_type": "statement of national strength",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922259+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "Now is the time to act boldly and wisely -- to not only revive this economy, but to build a new foundation for lasting prosperity.",
+      "confidence": 0.8,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922260+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "This Nation has responded with bold action and big ideas. In the midst of Civil War, we laid railroad tracks from one coast to another... In each case, Government didn't supplant private enterprise; it catalyzed private enterprise. It created the conditions for thousands of entrepreneurs and new businesses to adapt and to thrive.",
+      "confidence": 0.9,
+      "context_type": "historical examples",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922262+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_continuity",
+      "quote_text": "We are a nation that has seen promise amid peril and claimed opportunity from ordeal. Now we must be that nation again, and that is why, even as it cuts back on programs we don't need, the budget I submit will invest in the three areas that are absolutely critical to our economic future: energy, health care, and education.",
+      "confidence": 0.9,
+      "context_type": "vision statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922263+00:00"
+    },
+    {
+      "document_name": "barack_obama_2009_address_before_a_joint_session_of_the_congress.md",
+      "dimension": "systemic_replacement",
+      "quote_text": "Now is the time to act boldly and wisely -- to not only revive this economy, but to build a new foundation for lasting prosperity.",
+      "confidence": 0.7,
+      "context_type": "call to action (nuance)",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-28T20:57:29.922265+00:00"
+    }
+  ]
+}

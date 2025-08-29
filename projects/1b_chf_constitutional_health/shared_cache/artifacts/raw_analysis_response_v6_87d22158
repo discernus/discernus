@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.98,
+    "analysis_notes": "The document is a State of the Union address, a genre that inherently reinforces existing political structures. The discourse is overwhelmingly characterized by calls for bipartisan cooperation, working through established legislative processes, and strengthening existing governmental systems (Social Security, Medicare) for the future. Consequently, dimensions related to constitutional health (legitimacy, respect, continuity) are high, while those related to pathology (rejection, subversion, replacement) are absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "5b94e74c506174c0d896282c89875b3ab5c530f0d83ec86f93852c71985241c3",
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "Mr. Speaker, at your swearing-in, you asked us all to work together in a spirit of civility and bipartisanship. Mr. Speaker, let's do exactly that.",
+          "confidence": 0.98,
+          "context_type": "Direct Appeal for Bipartisanship"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Now, I ask this Congress to resist the tobacco lobby, to reaffirm the FDA's authority to protect our children from tobacco, and to hold tobacco companies accountable while protecting tobacco farmers.",
+          "confidence": 0.95,
+          "context_type": "Policy Appeal to Institution"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "So with these four measures\u2014saving Social Security, strengthening Medicare, establishing the USA accounts, supporting long-term care\u2014 we can begin to meet our generation's historic responsibility to establish true security for 21st century seniors.",
+          "confidence": 1.0,
+          "context_type": "Policy Summary"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "No Evidence Found"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
