@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T01:17:09.095777+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+      "confidence": 0.9,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095756+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+      "confidence": 0.9,
+      "context_type": "rhetorical appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095761+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.",
+      "confidence": 0.8,
+      "context_type": "explicit contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095763+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+      "confidence": 0.8,
+      "context_type": "characterization of opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095765+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command.",
+      "confidence": 0.9,
+      "context_type": "accusation of fabrication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095767+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+      "confidence": 0.5,
+      "context_type": "implicit self-positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095768+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Because after all, the legislature is the voice of the people.",
+      "confidence": 0.7,
+      "context_type": "collective identity framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095770+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+      "confidence": 0.9,
+      "context_type": "narrative of external threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095771+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+      "confidence": 0.2,
+      "context_type": "indirect social cost framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:17:09.095773+00:00"
+    }
+  ]
+}

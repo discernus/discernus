@@ -1,0 +1,93 @@
+{
+  "status": "completed",
+  "derived_metrics_hash": "13740987b67271b3473502c18770deaf3dab11d06227510f5cdcf95cbab199ec",
+  "functions_generated": 6,
+  "derived_metrics_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 6,
+      "output_file": "automatedderivedmetricsagent_functions.py",
+      "module_size": 11991
+    },
+    "derived_metrics_data": {
+      "status": "success",
+      "original_count": 2,
+      "derived_count": 2,
+      "derived_metrics": [
+        {
+          "analysis_id": "analysis_2101dc6e8361",
+          "result_hash": "2b8a7938c0a37f5f3aee48ccbc790b30fe366d40f7974b5a95012e2a144665ec",
+          "duration_seconds": 12.774701,
+          "result_content": {
+            "analysis_id": "analysis_2101dc6e8361",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "nano_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Clear, designed test case for sentiment analysis, resulting in highly consistent scores across all three independent approaches.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14...\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "fa7467a32eb4b72b67b5442879b58f9caed8e698efa61d7604901fd17b4c5caf",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:20:41.697303+00:00",
+              "end_time": "2025-08-30T02:20:54.472029+00:00",
+              "duration_seconds": 12.774701
+            },
+            "input_artifacts": {
+              "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+              "document_hashes": [
+                "6950ccbc6b14eabf43508448cf888b2c590f44e549a32b8ae60e943710e74019"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "nano_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T022041Z_f3dc06d7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_4bc6d8eb51af",
+          "result_hash": "0d1ba0ea1c1d7635082df4b21305a556fd5830852f6c90c2052bd267566441fa",
+          "duration_seconds": 10.078681,
+          "result_content": {
+            "analysis_id": "analysis_4bc6d8eb51af",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "nano_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Aggregated from three independent analytical passes focusing on explicit evidence, rhetorical context, and linguistic patterns.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"1df25093a747...\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"This is a terrible situation.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "0fad04b8d9149f05001dd4794821c67f1efa2dc4d532a22ce1f19fdac21e27e5",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:20:54.475197+00:00",
+              "end_time": "2025-08-30T02:21:04.553896+00:00",
+              "duration_seconds": 10.078681
+            },
+            "input_artifacts": {
+              "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+              "document_hashes": [
+                "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "nano_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T022041Z_f3dc06d7"
+            }
+          }
+        }
+      ],
+      "columns_added": []
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

@@ -1,0 +1,3287 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-30T01:23:09.480400",
+    "framework_hash": "ebfacf768ddadc042b42e219263f2d7bcd1c6d99afb136788b362409ec92668a",
+    "total_findings": 11,
+    "total_quotes": 223
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Populist documents consistently exhibit higher overall populist scores across core dimensions (Manichaean People-Elite Framing, Elite Conspiracy, Anti-Pluralist Exclusion, Economic Populist Appeals) compared to the institutional document, highlighting a clear distinction in rhetorical strategy."
+      },
+      "queries_used": [
+        "Steve King's overall populist rhetoric",
+        "Bernie Sanders' core populist appeals",
+        "John McCain's lack of Manichaean framing"
+      ],
+      "quotes": [
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.6317542791366577,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5293238162994385,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.5139732956886292,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.5064073801040649,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.4880252182483673,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4863770306110382,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.4845365881919861,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.4477843642234802,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.444753497838974,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.4339756369590759,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.4208495318889618,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.41499361395835876,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4144214391708374,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4087292551994324,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.38887476921081543,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3867868185043335,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3835975229740143,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.38004398345947266,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.7,
+          "relevance_score": 0.3663269877433777,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.36342325806617737,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.3465259075164795,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3308837115764618,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3219659626483917,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.29193615913391113,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.25609123706817627,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 25
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Manichaean People-Elite Framing, Crisis-Restoration Temporal Narrative, and Elite Conspiracy/Systemic Corruption are consistently highly scored and salient in populist texts, indicating their foundational role in populist discourse across different ideological variants."
+      },
+      "queries_used": [
+        "Evidence of moral dichotomy between people and elites (high salience)",
+        "Quotes emphasizing crisis and restoration from elite betrayal",
+        "Claims of elite coordination or systemic corruption with high scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.44985511898994446,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.44895264506340027,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3965633511543274,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3862350583076477,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3717597723007202,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.37094777822494507,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.36948132514953613,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... And in your community, they make a donation to the hospital or the Boys & Girls Clubs or the food shelf. They're just very nice. But they're not.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.8,
+          "relevance_score": 0.3653586506843567,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.35866618156433105,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.3581390380859375,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.34090322256088257,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.3354952931404114,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3324972987174988,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.31545859575271606,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3057791590690613,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.3027935028076172,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.2887016534805298,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.2883757948875427,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.27933210134506226,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 19
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "There is a notable ideological divergence within populist discourse: Steve King's text shows high Nationalist Exclusion, while Bernie Sanders' and AOC's texts exhibit very high Economic Populist Appeals, with low scores on the inverse dimension for each."
+      },
+      "queries_used": [
+        "Steve King: direct quotes on nationalist exclusion",
+        "Bernie Sanders: examples of strong economic populist appeals",
+        "Alexandria Ocasio-Cortez: economic populist framing with low nationalism"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.6620765924453735,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.6476809978485107,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.6440041065216064,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.6162165999412537,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.6155053973197937,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.5850876569747925,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5698784589767456,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.5661560297012329,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.5504618883132935,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5431758165359497,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.49735337495803833,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.48973768949508667,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.4863678514957428,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.48581212759017944,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.48488885164260864,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4612862169742584,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.46037858724594116,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4588550925254822,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.43652424216270447,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4295310974121094,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.4071705937385559,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4042993485927582,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.37041106820106506,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3511737287044525,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.3285742402076721,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 25
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Homogeneous People Construction is present at high levels in both institutional (McCain) and populist documents, suggesting that the rhetoric of a unified 'people' may not be exclusive to populist discourse or is broadly leveraged."
+      },
+      "queries_used": [
+        "John McCain: quotes on unified people",
+        "Evidence of homogeneous people construction in non-populist context",
+        "Phrases emphasizing internal unity without explicit populism"
+      ],
+      "quotes": [
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.5349342823028564,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5260134935379028,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.5063450336456299,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4464511275291443,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.7,
+          "relevance_score": 0.4356229305267334,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.4215286374092102,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.39711424708366394,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.39300933480262756,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.369845986366272,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.36237505078315735,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.35576415061950684,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3546352982521057,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.34514743089675903,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3416198790073395,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.34077805280685425,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.34031742811203003,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.33912408351898193,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3350531756877899,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.33176812529563904,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.32828038930892944,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.32256725430488586,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3143848180770874,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 22
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A very strong negative correlation (-0.949) exists between Homogeneous People Construction and Nationalist Exclusion, implying an inverse relationship where strong emphasis on internal unity often corresponds with a de-emphasis on external cultural/ethnic threats, or vice-versa."
+      },
+      "queries_used": [
+        "Text demonstrating high homogeneous people construction and low nationalist exclusion (Sanders/AOC)",
+        "Text with high nationalist exclusion and lower homogeneous people construction (King)",
+        "Quotes showing a focus on internal solidarity, avoiding external boundary-drawing"
+      ],
+      "quotes": [
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.41915345191955566,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.3901834189891815,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.37989240884780884,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3670862913131714,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.3630942702293396,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.3455616235733032,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.33971089124679565,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3326036334037781,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.33005499839782715,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.31868383288383484,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.31757593154907227,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.3123183846473694,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3043009042739868,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.3040107488632202,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.30184701085090637,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.2838495373725891,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A very strong positive correlation (0.949) between Elite Conspiracy/Systemic Corruption and Anti-Pluralist Exclusion suggests that claims of hidden elite coordination against the people frequently coincide with the rejection of legitimate political opposition."
+      },
+      "queries_used": [
+        "Quotes linking 'rigged system' to 'enemies of the people'",
+        "Evidence of anti-pluralist rhetoric combined with systemic corruption claims",
+        "Text suggesting elite plots and opposition illegitimacy"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.4838818609714508,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.4735393822193146,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.46200549602508545,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.45744380354881287,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.44950979948043823,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.41888248920440674,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.41531866788864136,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.4150916337966919,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.3945326805114746,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3927004337310791,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.38716861605644226,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.38523629307746887,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.37970149517059326,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3771384656429291,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3603992462158203,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.34774303436279297,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.33935973048210144,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.28961992263793945,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.28225022554397583,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 19
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A very strong positive correlation (0.949) between Authenticity vs. Political Class and Economic Populist Appeals indicates that leaders presenting themselves as genuine outsiders often employ economic grievance-based populist rhetoric."
+      },
+      "queries_used": [
+        "Outsider claims alongside economic populist appeals",
+        "Quotes combining 'not a politician' with 'economic elite rigged system'",
+        "Text emphasizing authenticity and economic fairness for the people"
+      ],
+      "quotes": [
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.5135841369628906,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.46995025873184204,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.4613378047943115,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.4414013624191284,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4316635727882385,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4143402874469757,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4078734219074249,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.40767207741737366,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.39801663160324097,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.3874592185020447,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3451966643333435,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3344825804233551,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.32130569219589233,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.31571149826049805,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.3104909658432007,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.30532607436180115,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.2995779812335968,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.28615298867225647,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.28572240471839905,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... And in your community, they make a donation to the hospital or the Boys & Girls Clubs or the food shelf. They're just very nice. But they're not.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.8,
+          "relevance_score": 0.2822517156600952,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.28181156516075134,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 21
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Populist documents generally exhibit higher Populist Strategic Contradiction Index scores, with Bernie Sanders' speech showing the highest (0.133), suggesting a greater tendency to employ rhetorically contradictory populist appeals simultaneously."
+      },
+      "queries_used": [
+        "Sanders' speech: examples of strategic contradictions",
+        "Textual evidence of rhetorical tension in populist messaging",
+        "Overall contradictory appeals in populist texts"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.47286683320999146,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.4256880283355713,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.40607619285583496,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.38105762004852295,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.38048920035362244,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.3788052797317505,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.3715516924858093,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.36625880002975464,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.3627696931362152,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.354432612657547,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3509142994880676,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.34887275099754333,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.34775298833847046,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.33574438095092773,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3344503343105316,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3309629559516907,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.3174651265144348,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Bernie Sanders' speech shows the highest Crisis-Elite Attribution Tension (0.24), indicating a significant balancing act between framing a broad crisis and specifically attributing its cause to elite conspiracies."
+      },
+      "queries_used": [
+        "Sanders' text: crisis framing and elite conspiracy blame in the same context",
+        "Quotes showing both a sense of crisis and specific elite responsibility",
+        "Evidence of balancing decline narrative with causal attribution to elites in Sanders' speech"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.49460509419441223,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.4755654036998749,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.47218066453933716,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.458699494600296,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4463568329811096,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.43948644399642944,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4059670567512512,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4002218246459961,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3992338180541992,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3962956368923187,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.3958946764469147,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.39347177743911743,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3871707320213318,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.375857949256897,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.37351346015930176,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3642168939113617,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3577601909637451,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.35428088903427124,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.3495419919490814,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 19
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Both Steve King's and AOC's texts exhibit notable Internal-External Focus Tension (0.14-0.15), suggesting that even when one pole is dominant, there's still some interplay or mild contradiction with the other (e.g., King balancing nationalism with internal unity)."
+      },
+      "queries_used": [
+        "Steve King: quotes on internal unity alongside external threat",
+        "AOC's text: internal unity and hints of external distinction",
+        "Subtle tension between in-group cohesion and out-group threats in populist discourse"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.4776996076107025,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.455030620098114,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4357178211212158,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.39997053146362305,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.39867985248565674,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.39320552349090576,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.3835899829864502,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3654438853263855,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.3647151589393616,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.35844552516937256,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.35396063327789307,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3515694737434387,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.34685051441192627,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is appalling to me, Mr. Speaker, because I can read this Constitution and understand what it means.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.5,
+          "relevance_score": 0.33048903942108154,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.5,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3275138735771179,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.2,
+          "relevance_score": 0.30442020297050476,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.2,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.30143582820892334,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.29326656460762024,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.2771990895271301,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people. The judges are not. They\u2019re unelected. They\u2019re appointed for life. They\u2019re unaccountable.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.2675473392009735,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Because after all, the legislature is the voice of the people.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.7,
+          "relevance_score": 0.2599099278450012,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.22152870893478394,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 22
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The institutional document (John McCain) exhibits negligible scores (0.0) for Manichaean People-Elite Framing, Anti-Pluralist Exclusion, and Elite Conspiracy/Systemic Corruption, confirming its non-populist nature on these key dimensions."
+      },
+      "queries_used": [
+        "John McCain: absence of Manichaean framing",
+        "John McCain: lack of anti-pluralist exclusion",
+        "John McCain: no elite conspiracy claims"
+      ],
+      "quotes": [
+        {
+          "quote_text": "millions of Americans who had once wrongly believed that they had little at stake or little influence in the election",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.6622443795204163,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5631104707717896,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.522357702255249,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Let there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.48102641105651855,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.47813865542411804,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.8,
+          "relevance_score": 0.46788474917411804,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4574251174926758,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He\u2019s been criticized for his effectiveness by the people that don\u2019t want to enforce the law.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4496324062347412,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.44794392585754395,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.4446968734264374,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.414797306060791,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend. And so our obligation then is to say, \u201cMr. President, you\u2019re lame duck. Let\u2019s stick with the tradition. Let\u2019s stick with the practice. Let\u2019s stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.4033706486225128,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.7,
+          "relevance_score": 0.3774668574333191,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.36853694915771484,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3633439242839813,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3577766418457031,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 1.0,
+          "relevance_score": 0.3439098000526428,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3247039318084717,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    }
+  ]
+}

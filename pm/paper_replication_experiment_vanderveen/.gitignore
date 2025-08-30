@@ -1,0 +1,30 @@
+# Document files
+*.doc
+*.docx
+*.pdf
+*.rtf
+*.odt
+
+# Spreadsheet files
+*.xlsx
+*.xls
+
+# Text files (if they are generated/derived)
+*.txt
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Archive files
+*.zip
+*.rar
+*.7z
+
+# Log files
+*.log

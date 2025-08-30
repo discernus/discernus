@@ -1,0 +1,43 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "sentiment_binary_v1",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of document negative_test.txt using the sentiment_binary_v1 framework.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "1df25093a747",
+      "document_name": "negative_test.txt",
+      "dimensional_scores": {
+        "positive_sentiment": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "negative_sentiment": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "positive_sentiment",
+          "quote_text": "",
+          "confidence": 0.0,
+          "context_type": "No positive sentiment detected"
+        },
+        {
+          "dimension": "negative_sentiment",
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us.",
+          "confidence": 1.0,
+          "context_type": "Strong negative sentiment indicators"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

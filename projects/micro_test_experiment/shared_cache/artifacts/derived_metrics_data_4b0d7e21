@@ -1,0 +1,163 @@
+{
+  "status": "completed",
+  "derived_metrics_hash": "b3809ad133735f6b47bc435519e475c4d5ddfe134f683c4dbe9f68b997aada4a",
+  "functions_generated": 6,
+  "derived_metrics_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 6,
+      "output_file": "automatedderivedmetricsagent_functions.py",
+      "module_size": 14303
+    },
+    "derived_metrics_data": {
+      "status": "success",
+      "original_count": 4,
+      "derived_count": 4,
+      "derived_metrics": [
+        {
+          "analysis_id": "analysis_4c9226bba4f7",
+          "result_hash": "e36ef59c1725fc85d67d7bd1279c36806b466be90006503675f8016641c6d7b3",
+          "duration_seconds": 2.395078,
+          "result_content": {
+            "analysis_id": "analysis_4c9226bba4f7",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "micro_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches (evidence-first, context-weighted, pattern-based) and aggregated via median scores. Confidence is high due to clear sentiment indicators.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"positive_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"overall_document_sentiment\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+            "evidence_hash": "28266385e9330313c53277efb19283736e2990a6cec2029cfe9a835f24939f21",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:06:14.031317+00:00",
+              "end_time": "2025-08-30T02:06:16.426410+00:00",
+              "duration_seconds": 2.395078
+            },
+            "input_artifacts": {
+              "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+              "document_hashes": [
+                "26c27e1e47385f483ab2ef36e82b95f807d9fa48154395bcf45f9489ef3ed1ba"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "micro_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T020613Z_b30a0bff"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_dffbaa4b69c5",
+          "result_hash": "acfee85cef6aab66de1fdaf4e49c8060f32fd95a794acfadc0b108cf1c5da93f",
+          "duration_seconds": 1.608231,
+          "result_content": {
+            "analysis_id": "analysis_dffbaa4b69c5",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "micro_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches to ensure robustness. Median scores aggregated for final output. Framework applied as per specified dimensions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"3671de4a6c31...\",\n      \"document_name\": \"positive_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"dominant\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"absent\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "82f7ada50bd241ee67dd736bba1e82fc651538820685cc0f1a2af11f327baf3a",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:06:16.427607+00:00",
+              "end_time": "2025-08-30T02:06:18.035847+00:00",
+              "duration_seconds": 1.608231
+            },
+            "input_artifacts": {
+              "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+              "document_hashes": [
+                "3671de4a6c31fc2bb356ceed5589d1b4bb2288df674bf0d827dc973872b462a3"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "micro_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T020613Z_b30a0bff"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_69d6f26ead7f",
+          "result_hash": "6ca7df641020d0318c4d677f2b46096b154665eb58e4d3e9635474ece212fdae",
+          "duration_seconds": 1.519396,
+          "result_content": {
+            "analysis_id": "analysis_69d6f26ead7f",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "micro_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for final scores. Framework aims to measure positive and negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.1\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"No explicit positive language detected\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"Dominant negative language and sentiment\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "e876966ffb63fe301f04f8360f7637ad980f9c6df48c637b75182ac368a83c6c",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:06:18.036425+00:00",
+              "end_time": "2025-08-30T02:06:19.555827+00:00",
+              "duration_seconds": 1.519396
+            },
+            "input_artifacts": {
+              "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+              "document_hashes": [
+                "123e5c9fe4425f26d19c815d8f4b304e6c211e38014847dc087f108396aa6134"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "micro_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T020613Z_b30a0bff"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_c2f4d3bf4f3d",
+          "result_hash": "c55eb394d51edc38799ce0992a9e9c64fabbb6fe00c20b473610c8651847bb15",
+          "duration_seconds": 1.515525,
+          "result_content": {
+            "analysis_id": "analysis_c2f4d3bf4f3d",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "micro_test_experiment",
+            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed across three independent approaches, with median scores aggregated for final output. Framework applied as per 'sentiment_binary_v1' definition.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 0.98\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"What an awful prediction. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"high_intensity_negative\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "977c880eac451ebae3ccacef878da2840412e067dc09caf2c7da44a723b227de",
+            "execution_metadata": {
+              "start_time": "2025-08-30T02:06:19.556273+00:00",
+              "end_time": "2025-08-30T02:06:21.071805+00:00",
+              "duration_seconds": 1.515525
+            },
+            "input_artifacts": {
+              "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+              "document_hashes": [
+                "68b092892a2216aa8ebd70a470a361c86d2bf3ceb23469275acd0fb85d9367a9"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "micro_test_experiment",
+                "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250830T020613Z_b30a0bff"
+            }
+          }
+        }
+      ],
+      "columns_added": []
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

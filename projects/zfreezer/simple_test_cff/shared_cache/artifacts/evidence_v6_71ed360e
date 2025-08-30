@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T01:58:00.556396+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.",
+      "confidence": 0.9,
+      "context_type": "us_vs_them_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556379+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.8,
+      "context_type": "legal_equality_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556382+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fear",
+      "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+      "confidence": 0.9,
+      "context_type": "existential_threat_quantified",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556384+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "hope",
+      "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution",
+      "confidence": 0.7,
+      "context_type": "defensive_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556385+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "envy",
+      "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+      "confidence": 0.9,
+      "context_type": "illegitimate_gains_criticism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556387+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "compassion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not_present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556388+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "enmity",
+      "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement already and released onto the streets of America, one whom law enforcement already had picked up at least once. This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+      "confidence": 0.9,
+      "context_type": "demonization_of_other",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556389+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "amity",
+      "quote_text": "Thank you, Mr. Speaker.",
+      "confidence": 0.8,
+      "context_type": "formal_address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556390+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+      "confidence": 0.9,
+      "context_type": "destruction_of_current_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556392+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+      "confidence": 0.8,
+      "context_type": "restorative_cohesion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:58:00.556393+00:00"
+    }
+  ]
+}

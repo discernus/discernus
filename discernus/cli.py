@@ -48,7 +48,7 @@ from discernus.core.exit_codes import (
 )
 
 # Rich CLI integration for professional terminal interface
-from .cli_console import rich_console
+from .cli_console import rich_console, ExperimentProgressManager
 
 # Apply comprehensive LiteLLM debug suppression before any litellm imports
 # This prevents the debug flooding we were seeing in terminal output
@@ -311,12 +311,14 @@ def cli(ctx, verbose, quiet, no_color, config):
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', help='Show what would be done without executing')
-@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL', 
-              default='vertex_ai/gemini-2.5-pro',
+@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL',
+              default='vertex_ai/gemini-2.5-flash',
               help='LLM model for analysis (e.g., vertex_ai/gemini-2.5-flash, openai/gpt-4o)')
-@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL', 
+@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
               help='LLM model for synthesis (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
               help='LLM model for validation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
@@ -413,19 +415,36 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
             
         # Use CleanAnalysisOrchestrator (THIN architecture)
         click.echo("🔬 Using Clean Analysis Orchestrator (THIN architecture)")
-        orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path))
-        
-        # Execute experiment with status indication
+
+        # Initialize progress manager
+        progress_manager = ExperimentProgressManager(rich_console)
+
+        # Execute experiment with enhanced progress tracking
         rich_console.print_info("Experiment execution started - this may take several minutes...")
-        rich_console.echo("⏳ Processing corpus documents and generating analysis...")
-        
-        # Execute experiment with orchestrator
-        result = orchestrator.run_experiment(
-            analysis_model=analysis_model,
-            synthesis_model=synthesis_model,
-            validation_model=validation_model,
-            skip_validation=skip_validation
-        )
+
+        orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path), progress_manager=progress_manager)
+        experiment_name = experiment.get('name', Path(experiment_path).name)
+
+        with progress_manager:
+            # Start main experiment progress
+            live_display = progress_manager.start_experiment_progress(experiment_name)
+
+            try:
+                # Execute experiment with orchestrator
+                result = orchestrator.run_experiment(
+                    analysis_model=analysis_model,
+                    synthesis_model=synthesis_model,
+                    validation_model=validation_model,
+                    skip_validation=skip_validation
+                )
+
+                # Mark experiment as completed
+                progress_manager.complete_experiment()
+
+            except Exception as e:
+                # Mark experiment as failed
+                progress_manager.stop()
+                raise e
         
         # Show completion with enhanced details
         rich_console.print_success("Experiment completed successfully!")
@@ -650,6 +669,109 @@ def validate(experiment_path: str, dry_run: bool, strict: bool):
         click.echo("   💡 For comprehensive validation, use --strict flag")
         click.echo("   💡 Full coherence validation will occur during experiment execution")
 
+    sys.exit(0)
+
+
+@cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--stats', is_flag=True, help='Show cache statistics')
+@click.option('--cleanup', is_flag=True, help='Clean up old cache entries')
+@click.option('--cleanup-failed', is_flag=True, help='Clean up failed validation cache entries')
+@click.option('--efficiency', is_flag=True, help='Show cache efficiency report')
+@click.option('--max-age-hours', type=int, default=24, help='Maximum age in hours for cleanup (default: 24)')
+@click.pass_context
+def cache(ctx, experiment_path: str, stats: bool, cleanup: bool, cleanup_failed: bool, efficiency: bool, max_age_hours: int):
+    """Manage validation cache for an experiment. Defaults to current directory."""
+    exp_path = Path(experiment_path).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
+    
+    click.echo(f"💾 Cache Management for: {experiment_path}")
+    
+    try:
+        # Initialize artifact storage and validation cache
+        from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
+        from discernus.core.validation_cache import ValidationCacheManager
+        
+        # Create orchestrator to get artifact storage
+        orchestrator = CleanAnalysisOrchestrator(exp_path)
+        
+        # Initialize artifact storage if not already done
+        if orchestrator.artifact_storage is None:
+            from discernus.core.local_artifact_storage import LocalArtifactStorage
+            shared_cache_dir = exp_path / "shared_cache"
+            shared_cache_dir.mkdir(exist_ok=True)
+            orchestrator.artifact_storage = LocalArtifactStorage(
+                security_boundary=orchestrator.security,
+                run_folder=shared_cache_dir,
+                run_name="cache_management"
+            )
+        
+        # Initialize validation cache manager with a mock audit logger if needed
+        audit_logger = getattr(orchestrator, 'audit_logger', None)
+        if audit_logger is None:
+            # Create a minimal mock audit logger
+            class MockAuditLogger:
+                def log_agent_event(self, *args, **kwargs):
+                    pass
+            
+            audit_logger = MockAuditLogger()
+        
+        cache_manager = ValidationCacheManager(orchestrator.artifact_storage, audit_logger)
+        
+        # Show cache statistics
+        if stats or not any([cleanup, cleanup_failed, efficiency]):
+            click.echo("📊 Cache Statistics:")
+            stats_data = cache_manager.get_cache_statistics()
+            click.echo(f"   Total validation artifacts: {stats_data['total_validation_artifacts']}")
+            click.echo(f"   Total size: {stats_data['total_size_mb']:.2f} MB")
+            
+            if stats_data['artifacts']:
+                click.echo("   Recent entries:")
+                for artifact in stats_data['artifacts'][:5]:  # Show top 5
+                    click.echo(f"     • {artifact['cache_key']} ({artifact['validation_model']}) - {artifact['cached_at']}")
+        
+        # Show efficiency report
+        if efficiency:
+            click.echo("\n📈 Cache Efficiency Report:")
+            efficiency_data = cache_manager.get_cache_efficiency_report()
+            click.echo(f"   Status: {efficiency_data['status']}")
+            click.echo(f"   Efficiency: {efficiency_data['efficiency']}")
+            click.echo(f"   Size efficiency: {efficiency_data['size_efficiency']}")
+            click.echo(f"   Recent entries: {efficiency_data['recent_entries']}")
+            click.echo(f"   Old entries: {efficiency_data['old_entries']}")
+            
+            if efficiency_data['recommendations']:
+                click.echo("   Recommendations:")
+                for rec in efficiency_data['recommendations']:
+                    click.echo(f"     • {rec}")
+        
+        # Clean up old cache entries
+        if cleanup:
+            click.echo(f"\n🧹 Cleaning up cache entries older than {max_age_hours} hours...")
+            cleaned_count = cache_manager.cleanup_old_cache_entries(max_age_hours)
+            click.echo(f"   Cleaned up {cleaned_count} old entries")
+        
+        # Clean up failed validations
+        if cleanup_failed:
+            click.echo("\n🧹 Cleaning up failed validation cache entries...")
+            cleaned_count = cache_manager.cleanup_failed_validations()
+            click.echo(f"   Cleaned up {cleaned_count} failed validation entries")
+        
+        if not any([stats, cleanup, cleanup_failed, efficiency]):
+            click.echo("\n💡 Use --stats, --efficiency, --cleanup, or --cleanup-failed to see specific information")
+        
+    except Exception as e:
+        click.echo(f"❌ Cache management failed: {e}")
+        sys.exit(1)
+    
     sys.exit(0)
 
 

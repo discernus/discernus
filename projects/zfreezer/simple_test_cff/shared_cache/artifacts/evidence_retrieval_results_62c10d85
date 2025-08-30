@@ -1,0 +1,2881 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-08-30T02:07:57.508857",
+    "framework_hash": "f9ca9157f75760f89502e26deddf1a67b15ea971f900178dc20f3fc415fb6575",
+    "total_findings": 10,
+    "total_quotes": 195
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong inverse relationship between Tribal Dominance and Individual Dignity raw scores (-0.996 correlation), indicating discourse tends to emphasize one at the expense of the other, despite the framework allowing for co-occurrence."
+      },
+      "queries_used": [
+        "tribal_dominance_raw high AND individual_dignity_raw low evidence",
+        "individual_dignity_raw high AND tribal_dominance_raw low evidence",
+        "\"us versus them\" rhetoric OR \"universal human worth\" evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.41125959157943726,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.37614375352859497,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.36898642778396606,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.34489285945892334,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.34107130765914917,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3274296820163727,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.3211748003959656,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3106042742729187,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.31043657660484314,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.30904388427734375,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.30568984150886536,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.30017226934432983,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.2934739589691162,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2914525270462036,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2857111096382141,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2761223614215851,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.2623899281024933,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High positive correlations among 'Fear', 'Envy', 'Enmity', and 'Fragmentative Goals' raw scores (e.g., Fear-Enmity: 0.975), suggesting a strong 'negative' rhetorical cluster."
+      },
+      "queries_used": [
+        "fear_raw high AND enmity_raw high evidence",
+        "\"crisis mentality\" AND \"adversarial positioning\" evidence",
+        "fragmentative_goals_raw high AND envy_raw high evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3930591344833374,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3471639156341553,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.32330501079559326,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3072492480278015,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.29888278245925903,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.296867698431015,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.29106593132019043,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.28627288341522217,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.2753738760948181,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.2751910090446472,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2730352580547333,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2712289094924927,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The failure is mine, not yours.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.25813817977905273,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2573954463005066,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.25657758116722107,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.25395122170448303,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2485525906085968,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.24519580602645874,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compassion",
+          "confidence": 0.9,
+          "relevance_score": 0.2446601390838623,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compassion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.24392317235469818,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.2414151132106781,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.22797563672065735,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2242680937051773,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 23
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High positive correlations among 'Hope', 'Compersion' (referred to as 'compassion_raw' in stats), 'Amity', and 'Cohesive Goals' raw scores (e.g., Hope-Cohesive Goals: 0.952), suggesting a strong 'positive' rhetorical cluster."
+      },
+      "queries_used": [
+        "hope_raw high AND amity_raw high evidence",
+        "\"optimistic collective vision\" AND \"cooperative framing\" evidence",
+        "cohesive_goals_raw high AND compersion_raw high evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.475238174200058,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.45145535469055176,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.39808300137519836,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.36694878339767456,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3645121157169342,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.3643939197063446,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.3523363471031189,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.3031333088874817,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.3020501136779785,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2871701717376709,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.28405559062957764,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2821686863899231,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.271746426820755,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.26728659868240356,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.26695528626441956,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2647556960582733,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.26149362325668335,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.2515958845615387,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.24296614527702332,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "hope",
+          "confidence": 0.7,
+          "relevance_score": 0.23775368928909302,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "hope",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 20
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Near-perfect inverse correlation between 'Strategic Contradiction Index' and 'Cohesive Goals' raw score (-0.998), implying that texts promoting cohesive goals exhibit high rhetorical consistency."
+      },
+      "queries_used": [
+        "strategic_contradiction_index low AND cohesive_goals_raw high evidence",
+        "consistent messaging AND \"unity building\" evidence",
+        "rhetorical coherence AND \"positive-sum objectives\" evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3082873225212097,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.29006534814834595,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "hope",
+          "confidence": 0.7,
+          "relevance_score": 0.2851243317127228,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "hope",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.27800822257995605,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.26771384477615356,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2675934135913849,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.25919854640960693,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.24738307297229767,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.24524392187595367,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compassion",
+          "confidence": 0.9,
+          "relevance_score": 0.24417197704315186,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compassion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The failure is mine, not yours.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2398413121700287,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2379889041185379,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.23591205477714539,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.23447969555854797,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.22123265266418457,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.22115428745746613,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.21958106756210327,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.21880923211574554,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.20315027236938477,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.19913317263126373,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 20
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong positive correlation between 'Strategic Contradiction Index' and 'Tribal Dominance' raw score (0.961), indicating discourse emphasizing in-group supremacy often contains significant internal rhetorical inconsistencies."
+      },
+      "queries_used": [
+        "strategic_contradiction_index high AND tribal_dominance_raw high evidence",
+        "\"mixed appeals\" AND \"in-group supremacy\" evidence",
+        "rhetorical tension AND \"exclusionary identity\" evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.3523736000061035,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.3435862362384796,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.32120266556739807,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2977702021598816,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.285261332988739,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2803778350353241,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.27765172719955444,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.2767285704612732,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.27399012446403503,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.2615432143211365,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.2591148912906647,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.2536870539188385,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2500801086425781,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.2462954819202423,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.24231106042861938,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.23889099061489105,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2387143075466156,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.23200035095214844,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.23193541169166565,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 19
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Zero 'Success Tension' (mean 0.0, std 0.0), suggesting that texts either emphasize Envy or Compersion, but very rarely both significantly enough to create rhetorical tension."
+      },
+      "queries_used": [
+        "success_tension 0.0 evidence",
+        "envy_raw high AND compersion_raw low evidence",
+        "compersion_raw high AND envy_raw low evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.3372480273246765,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.30560654401779175,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.2785331606864929,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.27053841948509216,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.26774561405181885,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2649662494659424,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.2535735070705414,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.25174689292907715,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2516922056674957,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.2470414936542511,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.24233679473400116,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2397955060005188,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The failure is mine, not yours.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.2375543713569641,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.23741964995861053,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.23296573758125305,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.23273169994354248,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.22604933381080627,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.2129327952861786,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.21172288060188293,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.2076188325881958,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 20
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The average 'Full Cohesion Index' is negative (-0.1687), indicating an overall tendency towards fragmentation and undermining of democratic health in the analyzed corpus."
+      },
+      "queries_used": [
+        "full_cohesion_index negative evidence",
+        "discourse undermining \"democratic health\" examples",
+        "overall social fragmentation rhetoric"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.4219997525215149,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.38686254620552063,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.3537648618221283,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.34610697627067566,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.3243626058101654,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.3091174364089966,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.30031171441078186,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.29224395751953125,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2862117290496826,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.28144583106040955,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.28134939074516296,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.2803073525428772,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.2790333032608032,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.27800872921943665,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.2728957235813141,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2604788839817047,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.22188261151313782,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.20772886276245117,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Emotional Tension' (mean 0.1525) is among the highest tension indices, suggesting a notable degree of rhetorical tension between fear and hope appeals."
+      },
+      "queries_used": [
+        "emotional_tension high evidence",
+        "\"fear appeals\" AND \"hope appeals\" co-occurrence evidence",
+        "\"crisis mentality\" AND \"progress orientation\" tension"
+      ],
+      "quotes": [
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.271511971950531,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.24575041234493256,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.2429731786251068,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "individual_dignity",
+          "confidence": 0.8,
+          "relevance_score": 0.23697099089622498,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "individual_dignity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.2357144057750702,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.22820164263248444,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The failure is mine, not yours.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.21873041987419128,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.21015127003192902,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.20996315777301788,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compassion",
+          "confidence": 0.9,
+          "relevance_score": 0.20983654260635376,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compassion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.20941801369190216,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.20819462835788727,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2042848765850067,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.19694116711616516,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.19502970576286316,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.1905454695224762,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.1872272491455078,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement already and released onto the streets of America, one whom law enforcement already had picked up at least once. This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.18308483064174652,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.18186049163341522,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.17528921365737915,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.1649261862039566,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.16171479225158691,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.15939977765083313,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 23
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Goal Tension' (mean 0.1425) is also high, indicating that texts frequently present conflicting or mixed objectives (fragmentative vs. cohesive)."
+      },
+      "queries_used": [
+        "goal_tension high evidence",
+        "\"fragmentative goals\" AND \"cohesive goals\" co-occurrence evidence",
+        "\"divisive objectives\" AND \"integrative objectives\" tension"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.32630693912506104,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.2520516812801361,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.2509540617465973,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.24824538826942444,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.245963454246521,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.23288027942180634,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.22102966904640198,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.20790190994739532,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compassion",
+          "confidence": 0.9,
+          "relevance_score": 0.20372803509235382,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compassion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.2014290988445282,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.2001771330833435,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "hope",
+          "confidence": 0.9,
+          "relevance_score": 0.19465434551239014,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "hope",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.1884572058916092,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The failure is mine, not yours.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.16845032572746277,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That is what a rigged economy is about, and that is what we are going to change.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.16067534685134888,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.15576717257499695,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.15479347109794617,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And instead of being restored, it would be destroyed by another presidential appointment.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.1433160901069641,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High correlations among all Cohesion Indices (Descriptive, Motivational, Full) (>0.99), confirming that the assessment of cohesion is consistent across different layers of analysis."
+      },
+      "queries_used": [
+        "descriptive_cohesion_index high AND motivational_cohesion_index high AND full_cohesion_index high evidence",
+        "consistent positive cohesion scores evidence",
+        "unified cohesive discourse across analytical layers"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We have a Constitution to preserve, protect, defend, and support and defend.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.36420196294784546,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.27905040979385376,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.27692997455596924,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.7,
+          "relevance_score": 0.2741316556930542,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "in this house, we stand together... class solidarity.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.25527748465538025,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "hope",
+          "confidence": 0.7,
+          "relevance_score": 0.23088383674621582,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "hope",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "...we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "cohesive_goals",
+          "confidence": 0.8,
+          "relevance_score": 0.21646201610565186,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "cohesive_goals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "envy",
+          "confidence": 0.9,
+          "relevance_score": 0.21552424132823944,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "envy",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "enmity",
+          "confidence": 0.9,
+          "relevance_score": 0.21491548418998718,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "enmity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we stand together, it is the only way that we can win.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.20604082942008972,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "amity",
+          "confidence": 0.7,
+          "relevance_score": 0.19613099098205566,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "amity",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not accept an oligarchic form of society.",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.19519416987895966,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "tribal_dominance",
+          "confidence": 0.9,
+          "relevance_score": 0.18057194352149963,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "tribal_dominance",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "compassion",
+          "confidence": 0.9,
+          "relevance_score": 0.17103877663612366,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "compassion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences",
+          "document_name": "john_mccain_2008_concession.txt",
+          "dimension": "amity",
+          "confidence": 0.9,
+          "relevance_score": 0.17040666937828064,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession.txt",
+            "dimension": "amity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Thank you, Mr. Speaker.",
+          "document_name": "steve_king_2017_house_floor.txt",
+          "dimension": "amity",
+          "confidence": 0.8,
+          "relevance_score": 0.16258838772773743,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor.txt",
+            "dimension": "amity",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+          "dimension": "fragmentative_goals",
+          "confidence": 0.9,
+          "relevance_score": 0.15613581240177155,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+            "dimension": "fragmentative_goals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    }
+  ]
+}

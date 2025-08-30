@@ -66,23 +66,26 @@ class CleanAnalysisOrchestrator:
     No notebook generation, no complex agent chains, just what we need.
     """
     
-    def __init__(self, experiment_path: Path):
+    def __init__(self, experiment_path: Path, progress_manager=None):
         """Initialize clean analysis orchestrator."""
         self.experiment_path = Path(experiment_path).resolve()
-        
+
         # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
-        
+
         # Set up logging to capture output to a file within the run folder
         self.log_file = setup_logging_for_run(self.experiment_path)
         self.logger = logging.getLogger(__name__)
         self.logger.info(f"Orchestrator initialized. Logging to {self.log_file}")
-        
+
+        # Progress manager for UI feedback
+        self.progress_manager = progress_manager
+
         # Testing and development mode flags
         self.test_mode = False
         self.mock_llm_calls = False
         self.performance_monitoring = True
-        
+
         # Initialize performance monitoring
         self.performance_metrics = {
             "start_time": datetime.now(timezone.utc),
@@ -90,7 +93,7 @@ class CleanAnalysisOrchestrator:
             "cache_hits": 0,
             "cache_misses": 0
         }
-        
+
         self.logger.info(f"Clean orchestrator initialized for: {self.security.experiment_name}")
         self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
         self.artifact_storage = None
@@ -141,6 +144,8 @@ class CleanAnalysisOrchestrator:
             
             # Phase 1: Load specifications
             self._log_progress("📋 Loading specifications...")
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Load specifications")
             phase_start = datetime.now(timezone.utc)
             try:
                 self.config = self._load_specs()
@@ -175,6 +180,8 @@ class CleanAnalysisOrchestrator:
                 raise CleanAnalysisError(f"Corpus validation failed: {str(e)}")
             
             # Phase 4: Run analysis
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Analysis")
             phase_start = datetime.now(timezone.utc)
             try:
                 analysis_results = self._run_analysis_phase(analysis_model, audit_logger)
@@ -200,6 +207,8 @@ class CleanAnalysisOrchestrator:
                 raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
             
             # Phase 5: Run derived metrics
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Derived metrics")
             phase_start = datetime.now(timezone.utc)
             try:
                 derived_metrics_results = self._run_derived_metrics_phase(synthesis_model, audit_logger, analysis_results)
@@ -264,6 +273,8 @@ class CleanAnalysisOrchestrator:
             self._log_progress("✅ RAG index already built in Phase 7")
 
             # Phase 10: Run synthesis with RAG integration and curated evidence
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Synthesis")
             phase_start = datetime.now(timezone.utc)
             
             # Corpus index service debug removed (QA agents disabled)
@@ -282,6 +293,8 @@ class CleanAnalysisOrchestrator:
             fact_check_results = {"status": "skipped", "findings": []}
 
             # Phase 12: Create results with publication readiness
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Results creation")
             phase_start = datetime.now(timezone.utc)
             try:
                 results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
@@ -301,6 +314,16 @@ class CleanAnalysisOrchestrator:
             # Get session costs from audit logger
             session_costs = audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
             
+            # Log final performance summary including cache metrics
+            self._log_final_performance_summary()
+
+            # Finalize manifest if it exists
+            if self.manifest:
+                try:
+                    self.manifest.finalize()
+                except Exception as e:
+                    self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
+
             return {
                 "run_id": run_id,
                 "results_directory": str(results_dir),
@@ -309,7 +332,8 @@ class CleanAnalysisOrchestrator:
                 "warnings": self._get_warnings(),
                 "duration_seconds": duration,
                 "performance_metrics": performance_summary,
-                "costs": session_costs
+                "costs": session_costs,
+                "cache_performance": self._generate_cache_performance_report()
             }
             
         except Exception as e:
@@ -403,6 +427,59 @@ class CleanAnalysisOrchestrator:
         duration = (datetime.now(timezone.utc) - start_time).total_seconds()
         self.performance_metrics["phase_timings"][phase_name] = duration
         self._log_progress(f"⏱️ {phase_name} completed in {duration:.2f} seconds")
+    
+    def _generate_cache_performance_report(self) -> Dict[str, Any]:
+        """Generate comprehensive cache performance report."""
+        total_requests = self.performance_metrics["cache_hits"] + self.performance_metrics["cache_misses"]
+        
+        if total_requests == 0:
+            return {
+                "cache_performance": "No cache requests made",
+                "hit_rate": 0.0,
+                "total_requests": 0,
+                "cache_hits": 0,
+                "cache_misses": 0
+            }
+        
+        hit_rate = (self.performance_metrics["cache_hits"] / total_requests) * 100
+        
+        return {
+            "cache_performance": f"Cache hit rate: {hit_rate:.1f}%",
+            "hit_rate": hit_rate,
+            "total_requests": total_requests,
+            "cache_hits": self.performance_metrics["cache_hits"],
+            "cache_misses": self.performance_metrics["cache_misses"],
+            "efficiency": "High" if hit_rate >= 80 else "Medium" if hit_rate >= 50 else "Low"
+        }
+    
+    def _log_cache_performance_summary(self):
+        """Log cache performance summary to progress output."""
+        if self.performance_monitoring:
+            cache_report = self._generate_cache_performance_report()
+            self._log_progress(f"📊 Cache Performance: {cache_report['cache_performance']}")
+            self._log_progress(f"   Hits: {cache_report['cache_hits']}, Misses: {cache_report['cache_misses']}")
+            self._log_progress(f"   Efficiency: {cache_report['efficiency']}")
+    
+    def _log_final_performance_summary(self):
+        """Log final performance summary including cache metrics."""
+        if self.performance_monitoring:
+            total_duration = (datetime.now(timezone.utc) - self.performance_metrics["start_time"]).total_seconds()
+            
+            self._log_progress("=" * 60)
+            self._log_progress("📈 FINAL PERFORMANCE SUMMARY")
+            self._log_progress("=" * 60)
+            self._log_progress(f"⏱️ Total Duration: {total_duration:.2f}s")
+            
+            # Log phase timings
+            if self.performance_metrics["phase_timings"]:
+                self._log_progress("📋 Phase Breakdown:")
+                for phase, duration in self.performance_metrics["phase_timings"].items():
+                    self._log_progress(f"   {phase}: {duration:.2f}s")
+            
+            # Log cache performance
+            self._log_cache_performance_summary()
+            
+            self._log_progress("=" * 60)
     
     def _get_performance_summary(self) -> Dict[str, Any]:
         """Get performance summary for the experiment run."""
@@ -580,7 +657,22 @@ class CleanAnalysisOrchestrator:
         )
         
         validation_result = coherence_agent.validate_experiment(self.experiment_path)
-        
+
+        # Update manifest with validation cost information
+        if hasattr(validation_result, 'llm_metadata') and validation_result.llm_metadata and self.manifest:
+            llm_metadata = validation_result.llm_metadata
+            if "usage" in llm_metadata and "response_cost_usd" in llm_metadata["usage"]:
+                cost = llm_metadata["usage"]["response_cost_usd"]
+                self.manifest.record_llm_interaction(
+                    interaction_hash="",
+                    model=llm_metadata.get("model", "unknown"),
+                    agent_name="ExperimentCoherenceAgent",
+                    stage="validation",
+                    prompt_length=0,  # We don't have this info
+                    response_length=0,  # We don't have this info
+                    metadata={"cost": cost, "agent": "ExperimentCoherenceAgent", "tokens_used": llm_metadata["usage"].get("total_tokens", 0)}
+                )
+
         # Prepare validation result for caching
         validation_data = {
             "success": validation_result.success,
@@ -617,6 +709,25 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"📁 Validated: {filename}")
         
         return missing_files
+    
+    def _generate_validation_cache_key(self, validation_model: str) -> str:
+        """Generate cache key for validation results."""
+        framework_path = self.experiment_path / self.config['framework']
+        corpus_path = self.experiment_path / self.config['corpus']
+        experiment_path = self.experiment_path / "experiment.md"
+        
+        framework_content = framework_path.read_text(encoding='utf-8')
+        corpus_content = corpus_path.read_text(encoding='utf-8')
+        experiment_content = experiment_path.read_text(encoding='utf-8')
+        
+        # Initialize validation caching
+        from .validation_cache import ValidationCacheManager
+        validation_cache_manager = ValidationCacheManager(self.artifact_storage, self.audit_logger)
+        
+        # Generate cache key based on all validation inputs
+        return validation_cache_manager.generate_cache_key(
+            framework_content, experiment_content, corpus_content, validation_model
+        )
     
     def _load_corpus_documents(self) -> List[Dict[str, Any]]:
         """Load corpus documents from manifest."""
@@ -677,8 +788,18 @@ class CleanAnalysisOrchestrator:
         
         # Process documents individually for scalability and caching
         analysis_results = []
+
+        # Start document progress tracking if progress manager available
+        if self.progress_manager:
+            self.progress_manager.start_document_progress(len(prepared_documents), "Analyzing documents")
+
         for i, prepared_doc in enumerate(prepared_documents):
-            self._log_progress(f"📄 Processing document {i+1}/{len(prepared_documents)}: {prepared_doc.get('filename', 'Unknown')}")
+            doc_name = prepared_doc.get('filename', 'Unknown')
+            self._log_progress(f"📄 Processing document {i+1}/{len(prepared_documents)}: {doc_name}")
+
+            # Update document progress
+            if self.progress_manager:
+                self.progress_manager.update_document_progress(advance=0)  # Don't advance yet
             
             try:
                 # Load framework content (not just filename)
@@ -722,11 +843,15 @@ class CleanAnalysisOrchestrator:
                     self._log_progress(f"✅ Analysis completed for: {prepared_doc.get('filename', 'Unknown')}")
                 else:
                     self._log_progress(f"⚠️ Analysis failed for: {prepared_doc.get('filename', 'Unknown')}")
-                    
+
             except Exception as e:
                 self._log_progress(f"❌ Analysis failed for {prepared_doc.get('filename', 'Unknown')}: {str(e)}")
                 # Continue with other documents
-                continue
+                # continue
+
+            # Advance document progress after processing (successful or failed)
+            if self.progress_manager:
+                self.progress_manager.update_document_progress(advance=1)
         
         if not analysis_results:
             raise CleanAnalysisError("No documents were successfully analyzed")
@@ -1871,6 +1996,21 @@ class CleanAnalysisOrchestrator:
             if not draft_report:
                 raise CleanAnalysisError("Synthesis agent failed to produce a draft report.")
 
+            # Update manifest with synthesis cost information
+            if "llm_metadata" in assets_dict and self.manifest:
+                llm_metadata = assets_dict["llm_metadata"]
+                if "usage" in llm_metadata and "response_cost_usd" in llm_metadata["usage"]:
+                    cost = llm_metadata["usage"]["response_cost_usd"]
+                    self.manifest.record_llm_interaction(
+                        interaction_hash="",
+                        model=llm_metadata.get("model", "unknown"),
+                        agent_name="UnifiedSynthesisAgent",
+                        stage="synthesis",
+                        prompt_length=0,  # We don't have this info
+                        response_length=0,  # We don't have this info
+                        metadata={"cost": cost, "agent": "UnifiedSynthesisAgent", "tokens_used": llm_metadata["usage"].get("total_tokens", 0)}
+                    )
+
             # CRITICAL: Verify statistical analysis succeeded before proceeding
             # This prevents cross-experiment data contamination
             if not research_data_hash:
@@ -1982,11 +2122,11 @@ class CleanAnalysisOrchestrator:
         try:
             self._log_progress("📥 Importing txtai embeddings...")
             from txtai.embeddings import Embeddings
+            
             # Set txtai logging to WARNING level to reduce verbosity
             import logging
             txtai_logger = logging.getLogger("txtai.embeddings")
             txtai_logger.setLevel(logging.WARNING)
-            import json
             self._log_progress("🔍 Set txtai logging to WARNING level")
             
             # RAG index will be created by RAGIndexManager during construction

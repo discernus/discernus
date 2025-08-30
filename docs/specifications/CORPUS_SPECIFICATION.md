@@ -160,8 +160,8 @@ documents:
 - ✅ If present, metadata must be valid YAML
 - ✅ Metadata should provide useful context for analysis
 - ✅ Document metadata keys must match actual filenames
-- ✅ **Custom analytical groupings** (e.g., `administration`, `time_period`, `category`) should be included as metadata fields
-- ✅ **Grouping variables referenced in experiments** MUST exist in corpus metadata
+- ✅ **Custom Analytical Groupings**: For experiments involving statistical comparisons, custom grouping variables (e.g., `administration`, `political_phase`, `speaker_category`) MUST be included as metadata fields for each document. These variables are essential for statistical agents and coherence validation.
+- ✅ **Mandatory for Statistical Analysis**: If an experiment's statistical analysis depends on grouping variables, those variables MUST be present in every document's metadata within this corpus. The Coherence Agent will enforce this rule.
 
 ---
 
@@ -245,13 +245,14 @@ Each document listed in the manifest must exist as a plain text (`.txt`) file wi
 - **Organized Structure**: Supports nested directories for logical organization
 - **Explicit Semantics**: All analytical meaning comes from metadata, not structure
 
-### Custom Analytical Groupings (v8.0.2)
-When experiments require statistical analysis using grouping variables:
-- **Define in Corpus Metadata**: Add custom fields like `administration`, `time_period`, `category` to document metadata
-- **Consistent Application**: Apply grouping variables consistently across all documents
-- **Experiment Alignment**: Ensure grouping variables match those referenced in experiment specifications
-- **Statistical Validity**: Ensure sufficient documents per group for statistical tests (n≥2 for ANOVA)
-- **No Filename Parsing**: Statistical agents MUST use corpus metadata, never parse filenames
+### Custom Analytical Groupings for Statistical Analysis
+
+For experiments that require statistical analysis (e.g., ANOVA, t-tests), the corpus manifest MUST provide the necessary grouping variables in each document's metadata. This is a critical requirement for coherence and valid statistical execution.
+
+- **Defining Grouping Variables**: Add custom key-value pairs to each document's metadata. The key represents the grouping variable (e.g., `administration`), and the value is the group assignment (e.g., `"Trump"`).
+- **Consistency is Key**: The grouping variable must be applied consistently to all documents in the corpus.
+- **Experiment Coherence**: The grouping variables defined here MUST align with the variables requested in the `experiment.md` file. The Coherence Agent will validate this linkage.
+- **No Implied Metadata**: Statistical agents are strictly forbidden from parsing filenames or directory structures to infer analytical groups. All grouping information must be explicit in the manifest.
 
 ---
 

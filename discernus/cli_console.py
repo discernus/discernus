@@ -9,13 +9,15 @@ Provides zero-breaking-change wrapper around existing Click output.
 
 from rich.console import Console
 from rich.table import Table
-
 from rich.panel import Panel
 from rich.text import Text
 from rich.markup import escape
+from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TaskID
+from rich.live import Live
 from rich import print as rich_print
 from typing import Optional, List, Dict, Any
 import sys
+import time
 
 # Global console instance
 console = Console()
@@ -97,20 +99,54 @@ class DiscernusConsole:
     def print_cost_summary(self, costs: Dict[str, Any]):
         """Print cost summary in a professional format."""
         table = self.create_table("Cost Summary", ["Metric", "Value"])
-        
+
         total_cost = costs.get("total_cost_usd", 0.0)
         total_tokens = costs.get("total_tokens", 0)
-        
+
         table.add_row("Total Cost", f"${total_cost:.4f} USD")
         table.add_row("Total Tokens", f"{total_tokens:,}")
-        
+
         # Add operation breakdown if available
         if "operations" in costs:
             for operation, details in costs["operations"].items():
                 if isinstance(details, dict) and "cost" in details:
                     table.add_row(f"  {operation}", f"${details['cost']:.4f}")
-        
+
         self.print_table(table)
+
+    def create_experiment_progress(self) -> Progress:
+        """Create a progress bar for experiment execution."""
+        return Progress(
+            SpinnerColumn(),
+            TextColumn("[bold blue]{task.description}", justify="right"),
+            BarColumn(complete_style="green", finished_style="green"),
+            TextColumn("[progress.percentage]{task.percentage:>3.1f}%"),
+            TimeElapsedColumn(),
+            TimeRemainingColumn(),
+            console=self.console,
+            refresh_per_second=2,
+        )
+
+    def create_phase_progress(self) -> Progress:
+        """Create a progress bar for phase-level operations."""
+        return Progress(
+            TextColumn("[bold cyan]{task.description}"),
+            BarColumn(complete_style="cyan", finished_style="green"),
+            TextColumn("[progress.percentage]{task.percentage:>3.1f}%"),
+            TimeRemainingColumn(),
+            console=self.console,
+            refresh_per_second=4,
+        )
+
+    def create_document_progress(self) -> Progress:
+        """Create a progress bar for document processing."""
+        return Progress(
+            TextColumn("[dim]{task.description}"),
+            BarColumn(complete_style="yellow", finished_style="green"),
+            TextColumn("{task.completed}/{task.total} documents"),
+            console=self.console,
+            refresh_per_second=10,
+        )
 
 # Global console instance for easy import
 rich_console = DiscernusConsole()
@@ -124,6 +160,138 @@ def setup_rich_cli():
     """
     # Rich is ready to use through rich_console
     pass
+
+class ExperimentProgressManager:
+    """
+    Manages multiple levels of progress bars for experiment execution.
+
+    Provides a clean interface for tracking:
+    - Main experiment progress (12 phases)
+    - Phase-level progress (within each phase)
+    - Document processing progress (within analysis)
+    """
+
+    def __init__(self, console: DiscernusConsole):
+        self.console = console
+        self.main_progress: Optional[Progress] = None
+        self.phase_progress: Optional[Progress] = None
+        self.doc_progress: Optional[Progress] = None
+        self.live_display: Optional[Live] = None
+
+        # Progress state
+        self.main_task_id: Optional[TaskID] = None
+        self.phase_task_id: Optional[TaskID] = None
+        self.doc_task_id: Optional[TaskID] = None
+
+        # Phase definitions
+        self.phases = [
+            "Load specifications",
+            "Validation",
+            "Corpus validation",
+            "Analysis",
+            "RAG index caching",
+            "Derived metrics",
+            "Statistics",
+            "Index building",
+            "Index validation",
+            "Evidence retrieval",
+            "Synthesis",
+            "Results creation"
+        ]
+
+    def start_experiment_progress(self, experiment_name: str) -> Live:
+        """Start the main experiment progress tracking."""
+        self.main_progress = self.console.create_experiment_progress()
+        self.main_task_id = self.main_progress.add_task(
+            f"Running {experiment_name}",
+            total=len(self.phases)
+        )
+
+        self.live_display = Live(self.main_progress, console=self.console.console, refresh_per_second=2)
+        self.live_display.start()
+        return self.live_display
+
+    def update_main_progress(self, phase_name: str):
+        """Update main progress bar to next phase."""
+        if self.main_progress and self.main_task_id:
+            self.main_progress.update(self.main_task_id, description=f"Phase: {phase_name}")
+            self.main_progress.advance(self.main_task_id)
+
+    def start_phase_progress(self, phase_name: str, total_steps: int = 100):
+        """Start a sub-progress bar for the current phase."""
+        if self.live_display and self.phase_progress:
+            # Stop existing phase progress
+            self.live_display.stop()
+
+        self.phase_progress = self.console.create_phase_progress()
+        self.phase_task_id = self.phase_progress.add_task(
+            f"{phase_name} in progress...",
+            total=total_steps
+        )
+
+        if self.main_progress:
+            # Create a combined display
+            from rich.layout import Layout
+            layout = Layout()
+            layout.split_row(
+                Layout(self.main_progress, name="main"),
+                Layout(self.phase_progress, name="phase")
+            )
+            self.live_display = Live(layout, console=self.console.console, refresh_per_second=4)
+        else:
+            self.live_display = Live(self.phase_progress, console=self.console.console, refresh_per_second=4)
+
+        self.live_display.start()
+
+    def update_phase_progress(self, description: str, advance: int = 1):
+        """Update phase progress bar."""
+        if self.phase_progress and self.phase_task_id:
+            self.phase_progress.update(self.phase_task_id, description=description)
+            self.phase_progress.advance(self.phase_task_id, advance)
+
+    def start_document_progress(self, total_docs: int, description: str = "Processing documents"):
+        """Start document processing progress bar."""
+        self.doc_progress = self.console.create_document_progress()
+        self.doc_task_id = self.doc_progress.add_task(description, total=total_docs)
+
+        # Update the existing live display to show document progress instead of creating a new one
+        if self.live_display:
+            self.live_display.update(self.doc_progress)
+        else:
+            self.live_display = Live(self.doc_progress, console=self.console.console, refresh_per_second=10)
+            self.live_display.start()
+
+    def update_document_progress(self, advance: int = 1):
+        """Update document progress bar."""
+        if self.doc_progress and self.doc_task_id is not None:
+            self.doc_progress.advance(self.doc_task_id, advance)
+
+    def complete_phase(self):
+        """Mark current phase as completed."""
+        if self.phase_progress and self.phase_task_id:
+            self.phase_progress.update(self.phase_task_id, completed=self.phase_progress.tasks[self.phase_task_id].total)
+
+    def complete_experiment(self):
+        """Mark entire experiment as completed."""
+        if self.main_progress and self.main_task_id:
+            self.main_progress.update(self.main_task_id, completed=len(self.phases))
+
+        if self.live_display:
+            self.live_display.stop()
+
+    def stop(self):
+        """Stop all progress displays."""
+        if self.live_display:
+            self.live_display.stop()
+
+    def __enter__(self):
+        """Context manager entry."""
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit."""
+        self.stop()
+
 
 def get_console() -> DiscernusConsole:
     """Get the global Rich console instance."""

@@ -171,7 +171,7 @@ class UnifiedSynthesisAgent:
                     self.agent_name, "synthesis_complete", {"report_length": len(final_report)}
                 )
 
-            return {"final_report": final_report}
+            return {"final_report": final_report, "llm_metadata": metadata}
 
         except Exception as e:
             if self.audit_logger:

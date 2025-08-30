@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using a three-independent-approach median aggregation strategy to enhance robustness. The speech exhibits strong populist characteristics, particularly in economic framing and elite critique.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "261b893a3844",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "economic_populist_appeals": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.'",
+          "confidence": 1.0,
+          "context_type": "opening_statement_central_theme"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism. We have people who were addicted to tobacco. My father smoked two packs of cigarettes a day and he died before he was 60. People addicted to food. But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+          "confidence": 0.9,
+          "context_type": "problem_description_causal_attribution"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 0.9,
+          "context_type": "historical_contrast_rhetorical_appeal"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "The American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "confidence": 1.0,
+          "context_type": "rejection_of_opposing_system"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "confidence": 1.0,
+          "context_type": "specific_evidence_of_elite_control"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys. I know on TV they come across... And in your community, they make a donation to the hospital or the Boys & Girls Clubs or the food shelf. They're just very nice. But they're not.",
+          "confidence": 0.8,
+          "context_type": "personal_anecdote_character_critique"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "confidence": 1.0,
+          "context_type": "collective_identity_assertion"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "not_applicable"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "wage today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 1.0,
+          "context_type": "core_economic_grievance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

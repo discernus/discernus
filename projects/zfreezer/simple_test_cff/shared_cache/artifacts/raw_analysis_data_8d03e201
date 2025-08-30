@@ -1,0 +1,142 @@
+[
+  {
+    "analysis_id": "analysis_77cad64bf278",
+    "result_hash": "7d37d272410b57f114e16248f296f7aeb00564dd2d87beb2ecb216a6d795b006",
+    "duration_seconds": 33.045744,
+    "result_content": {
+      "analysis_id": "analysis_77cad64bf278",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "simple_test",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analyzed John McCain's 2008 concession speech using a 3-run median aggregation approach, focusing on distinct analytical perspectives for robust scoring.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"ff9b26f20ad6...\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"compassion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 1.0,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of collective decision\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"recognition of universal human worth through historical progress\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"acknowledgment of national challenges\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"tomorrow we must move beyond it and work together to get our country moving again.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call for forward-looking action\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"The failure is mine, not yours.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"personal responsibility, disavowing resentment\"\n        },\n        {\n          \"dimension\": \"compassion\",\n          \"quote_text\": \"But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"celebration of opponent's positive impact and success\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Senator Obama and I have had and argued our differences, and he has prevailed.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of past differences without hostility\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct appeal for unity and cooperation\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence of evidence\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"articulation of shared national objectives\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "c40d76ea91c1a17d04809354fd901e2b768d5c525c28b4e2fe4bdca1367a66ac",
+      "execution_metadata": {
+        "start_time": "2025-08-30T01:56:56.738702+00:00",
+        "end_time": "2025-08-30T01:57:29.784455+00:00",
+        "duration_seconds": 33.045744
+      },
+      "input_artifacts": {
+        "framework_hash": "77e927d6773a3131ec6b0fa5ef666cbcd957859357ebe6ae80efaeb7be557b12",
+        "document_hashes": [
+          "ff9b26f20ad6dfa10cbf8ce4b7353fddab5e7cce5879e6b4603b8af60d0a9e35"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "simple_test_cff",
+          "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250830T015559Z_f9411a5a"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_f7e930e9f2a2",
+    "result_hash": "b1414e167365efb30ff35900769a55709f09fd490a162607faa44ab6d2b77912",
+    "duration_seconds": 30.7715,
+    "result_content": {
+      "analysis_id": "analysis_f7e930e9f2a2",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "simple_test",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis highlights strong adversarial, fear-based, and fragmentative rhetoric focused on perceived threats to constitutional order and national safety, primarily from judicial overreach and immigration policy. Emphasis on 'us vs. them' narratives with very limited hope or compassion.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"738780d93cc3\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"fear\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.7\n        },\n        \"envy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"compassion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkinson's body and then he went and took a shower and went to a movie as if it was just another day in the life of. Well, Mr. Speaker, it was another day in, in the life of America and Americans. It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"us_vs_them_narrative\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"That being one of God's children is good enough to be protected by the law, but everybody treated equally.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"legal_equality_argument\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"existential_threat_quantified\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Lord, wake me up with an idea on how to, how to preserve our Constitution\",\n          \"confidence\": 0.7,\n          \"context_type\": \"defensive_vision\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They made it up. And they wrapped themselves in the cloak of constitutional authority in Marberry versus Madison and a whole series of presumably precedent cases along the line.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"illegitimate_gains_criticism\"\n        },\n        {\n          \"dimension\": \"compassion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"not_present\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here, one who had been encountered by law enforcement already and released onto the streets of America, one whom law enforcement already had picked up at least once. This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"demonization_of_other\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"Thank you, Mr. Speaker.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"formal_address\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"And instead of being restored, it would be destroyed by another presidential appointment.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"destruction_of_current_system\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"We have a Constitution to preserve, protect, defend, and support and defend.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"restorative_cohesion\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "71ed360e8a03cad77d232f2ff5e33e82efcc6ed5417c1c6a7b8f6c474cb14793",
+      "execution_metadata": {
+        "start_time": "2025-08-30T01:57:29.785243+00:00",
+        "end_time": "2025-08-30T01:58:00.556754+00:00",
+        "duration_seconds": 30.7715
+      },
+      "input_artifacts": {
+        "framework_hash": "77e927d6773a3131ec6b0fa5ef666cbcd957859357ebe6ae80efaeb7be557b12",
+        "document_hashes": [
+          "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "simple_test_cff",
+          "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250830T015559Z_f9411a5a"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_dcc16de9a2ae",
+    "result_hash": "0edce25041c266840fc34f2e4a8d963eb0d3ab599a2887ac4907425a563b1550",
+    "duration_seconds": 34.340766,
+    "result_content": {
+      "analysis_id": "analysis_dcc16de9a2ae",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "simple_test",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a 3-run median aggregation approach, ensuring robust consistency and selection of representative evidence.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"261b893a3844...\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.75\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"compassion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.7\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington...'\",\n          \"confidence\": 0.9,\n          \"context_type\": \"central framing\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.75,\n          \"context_type\": \"not applicable\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"threat and crisis\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"future-oriented vision\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic injustice framing\"\n        },\n        {\n          \"dimension\": \"compassion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.7,\n          \"context_type\": \"not applicable\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"The worst and most dangerous addiction we have is the greed of the oligarchs.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"adversarial designation\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"in-group solidarity\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"We will not accept an oligarchic form of society.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"dismantling objective\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"...we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"aspirational outcome\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "f25854d4fa96534b9cc4baf08a58a41f0f2079004d06cf1bee4a11347832c69a",
+      "execution_metadata": {
+        "start_time": "2025-08-30T01:58:00.557204+00:00",
+        "end_time": "2025-08-30T01:58:34.897976+00:00",
+        "duration_seconds": 34.340766
+      },
+      "input_artifacts": {
+        "framework_hash": "77e927d6773a3131ec6b0fa5ef666cbcd957859357ebe6ae80efaeb7be557b12",
+        "document_hashes": [
+          "261b893a384411f76907e78e7997860cd9be5d959334a6b9ae1386ea1ba6cbdd"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "simple_test_cff",
+          "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250830T015559Z_f9411a5a"
+      }
+    }
+  },
+  {
+    "analysis_id": "analysis_c61b5bb2e7f8",
+    "result_hash": "782bd814c29019a9deecca1d95658a513620f318727811a5c127136bd2cec367",
+    "duration_seconds": 260.807637,
+    "result_content": {
+      "analysis_id": "analysis_c61b5bb2e7f8",
+      "agent_name": "EnhancedAnalysisAgent",
+      "agent_version": "enhanced_v2.1_raw_output",
+      "experiment_name": "simple_test",
+      "model_used": "vertex_ai/gemini-2.5-flash",
+      "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for final scores. Focus on identifying specific textual markers for each dimension.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"1121e4ae679c...\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"envy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"compassion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"amity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"They specialize in getting us to turn on one another... along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted...\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Critical analysis of opposition tactics\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Climactic appeal, unifying statement\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Problem statement, initial framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"if we stand together, it is the only way that we can win.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Call to action, optimistic framing\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Accusation, rhetorical amplification\"\n        },\n        {\n          \"dimension\": \"compassion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"N/A\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Donald Trump... Elon Musk... Dave Evans... Lauren Boebert... those folks may best find a home somewhere else.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Direct attack, call for removal\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"in this house, we stand together... class solidarity.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Unifying language, motivational appeal\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Policy objective, electoral strategy\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Vision statement, movement definition\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+      "evidence_hash": "16c14275b47d94fd8165ef43b79b83eb692290004c1114a30b9e234142bb7c8a",
+      "execution_metadata": {
+        "start_time": "2025-08-30T01:58:34.898372+00:00",
+        "end_time": "2025-08-30T02:02:55.706022+00:00",
+        "duration_seconds": 260.807637
+      },
+      "input_artifacts": {
+        "framework_hash": "77e927d6773a3131ec6b0fa5ef666cbcd957859357ebe6ae80efaeb7be557b12",
+        "document_hashes": [
+          "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+        ],
+        "num_documents": 1
+      },
+      "provenance": {
+        "security_boundary": {
+          "experiment_name": "simple_test_cff",
+          "experiment_root": "/Volumes/code/discernus/projects/simple_test_cff",
+          "boundary_type": "filesystem",
+          "security_level": "experiment_scoped"
+        },
+        "audit_session_id": "20250830T015559Z_f9411a5a"
+      }
+    }
+  }
+]

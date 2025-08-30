@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "1121e4ae679ce6e6c08c6d2d9aa4ce0c6e5040e8b13405fcfd9ea725b8ad5ff6"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T01:37:26.443273+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+      "confidence": 0.9,
+      "context_type": "core_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443263+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power.",
+      "confidence": 0.8,
+      "context_type": "problem_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443265+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+      "confidence": 0.8,
+      "context_type": "policy_recommendation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443266+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443267+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+      "confidence": 0.9,
+      "context_type": "causal_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443268+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after.",
+      "confidence": 0.9,
+      "context_type": "personal_testimony",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443269+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "If you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+      "confidence": 0.9,
+      "context_type": "call_to_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443270+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.8,
+      "context_type": "threat_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443270+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.",
+      "confidence": 0.9,
+      "context_type": "economic_grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T01:37:26.443271+00:00"
+    }
+  ]
+}

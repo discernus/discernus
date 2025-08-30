@@ -88,10 +88,9 @@ time_period_mapping:
 
 #### 4.4 Coherence Validation
 The coherence agent will validate that:
-1. All statistical analyses reference either explicit corpus manifest fields OR properly defined custom groupings
-2. Custom groupings are statistically executable (no n=1 groups in ANOVA unless designated as baselines)
-3. Mapping logic is unambiguous and complete
-4. All referenced grouping variables are defined
+1. **Grouping Variable Existence**: Every grouping variable requested for statistical analysis in this experiment MUST exist as a metadata field in the associated `corpus.md` manifest for all documents.
+2. **Statistical Executability**: All groups intended for comparative statistical analysis (e.g., ANOVA) must contain a sufficient number of documents (n≥2). Single-document groups must be explicitly designated as baselines.
+3. **Mapping Logic**: If custom variable mappings are used, the logic must be unambiguous and complete.
 
 **Experiments that reference undefined grouping variables will fail coherence validation.**
 
@@ -146,6 +145,6 @@ components:
 -   **Statistical Executability**: All ANOVA groups must have n≥2. Single-observation groups (n=1) must be designated as baselines and excluded from inferential testing.
 -   **Semantic Alignment**: The experiment, corpus manifest, and framework must use consistent terminology. Custom mappings must eliminate ambiguity about how corpus metadata maps to analysis variables.
 -   **Coherence Validation**: The coherence agent will validate that:
-    - All referenced grouping variables exist in corpus manifest or are properly mapped
-    - Statistical requirements are met (group sizes, variance, etc.)
-    - The experiment design is executable with the provided corpus data
+    - **Grouping Variable Presence**: All grouping variables referenced in the experiment exist in the corpus manifest's metadata for every document.
+    - **Statistical Requirements**: Group sizes and variance meet the minimum requirements for the specified statistical tests.
+    - **Executability**: The overall experiment design is coherent and executable with the provided corpus data.

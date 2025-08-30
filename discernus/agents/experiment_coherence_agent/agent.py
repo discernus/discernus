@@ -12,7 +12,7 @@ Follows THIN architecture with externalized YAML prompts.
 import json
 import yaml
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -39,6 +39,7 @@ class ValidationResult:
     success: bool
     issues: List[ValidationIssue]
     suggestions: List[str]
+    llm_metadata: Optional[Dict[str, Any]] = None
     
     def has_blocking_issues(self) -> bool:
         """Check if any issues are blocking."""
@@ -269,7 +270,8 @@ class ExperimentCoherenceAgent:
             combined_result = ValidationResult(
                 success=result.success,
                 issues=all_issues,
-                suggestions=result.suggestions
+                suggestions=result.suggestions,
+                llm_metadata=metadata
             )
             
             # Log validation completion

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_dffbaa4b69c5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "micro_test_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches to ensure robustness. Median scores aggregated for final output. Framework applied as per specified dimensions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"3671de4a6c31...\",\n      \"document_name\": \"positive_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"dominant\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"absent\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "82f7ada50bd241ee67dd736bba1e82fc651538820685cc0f1a2af11f327baf3a",
+  "execution_metadata": {
+    "start_time": "2025-08-30T02:06:16.427607+00:00",
+    "end_time": "2025-08-30T02:06:18.035847+00:00",
+    "duration_seconds": 1.608231
+  },
+  "input_artifacts": {
+    "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+    "document_hashes": [
+      "3671de4a6c31fc2bb356ceed5589d1b4bb2288df674bf0d827dc973872b462a3"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "micro_test_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250830T020613Z_b30a0bff"
+  }
+}

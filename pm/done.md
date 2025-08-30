@@ -8,6 +8,381 @@
 
 ---
 
+## Completed Sprints & Items
+
+### 🎯 **SPRINT 1: Critical Infrastructure & Quality Assurance** ✅ **COMPLETED**
+
+**Timeline**: 1-2 days ✅ **COMPLETED**
+**Goal**: Fix critical system issues and establish testing foundation ✅ **COMPLETED**
+
+**🎯 Sprint 1 Complete**: All critical infrastructure issues resolved. System now has:
+
+- ✅ Fail-fast behavior for critical pipeline components
+- ✅ Stable caching system with function code content storage
+- ✅ Validation caching eliminating redundant LLM calls
+- ✅ Ready for variance reduction implementation
+
+**📊 Sprint 1 Summary**: Both critical issues successfully resolved:
+
+- **CRITICAL-001**: ✅ **COMPLETED** - Fail-fast behavior implemented
+- **CRITICAL-002**: ✅ **COMPLETED** - Derived metrics cache stale file references fixed
+
+#### [CRITICAL-001] Fix Graceful Degradation in Derived Metrics Phase ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: Derived metrics phase failures are being silently caught and the experiment continues with degraded results instead of failing fast
+- **Dependencies**: None (blocking everything)
+- **Root Cause**: Lines 197-201 in CleanAnalysisOrchestrator catch derived metrics failures and continue with `{"error": str(e), "status": "failed"}` instead of propagating the error
+- **Evidence**: Terminal shows "Derived metrics phase failed, attempting to continue: Derived metrics functions file not found" but experiment completes successfully
+- **Impact**:
+  - Masks critical LLM generation failures
+  - Produces unreliable experiment results
+  - Violates THIN architecture fail-fast principles
+  - Makes debugging extremely difficult
+- **Acceptance Criteria**:
+  - [X] Derived metrics phase failures cause immediate experiment termination
+  - [X] Clear error messages indicate the specific failure point
+  - [X] No graceful degradation for critical pipeline components
+  - [X] Statistical analysis phase depends on derived metrics and should also fail if derived metrics fail
+- **Effort**: 1-2 hours ✅ **COMPLETED**
+- **Priority**: **CRITICAL** (data integrity issue)
+- **Status**: ✅ **VERIFIED COMPLETE** - All acceptance criteria met, fail-fast behavior properly implemented
+
+#### [CRITICAL-002] Fix Derived Metrics Cache Stale File References ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: Cached derived metrics functions reference temporary file paths that get cleaned up, causing "functions file not found" errors on cache hits
+- **Dependencies**: [CRITICAL-001] ✅ **COMPLETED**
+- **Root Cause**: Cache stores function metadata pointing to temporary workspace files, but temporary directories are cleaned up after each run (lines 769-772)
+- **Evidence**: Cache hit shows "💾 Using cached derived metrics functions" but then fails with "Derived metrics functions file not found"
+- **Solution**: Store actual function code content in cache, recreate function files from cached content when cache hit occurs
+- **Impact**:
+  - Cache hits cause experiment failures instead of performance improvements
+  - Violates caching reliability principles
+  - Makes development velocity worse instead of better
+- **Acceptance Criteria**:
+  - [X] Cache stores actual function code content, not just metadata
+  - [X] Cache hits recreate function files from stored content
+  - [X] Both derived metrics and statistical analysis caches fixed
+  - [X] Workspace cleanup doesn't break cached functions
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **CRITICAL** - Blocking caching benefits
+- **Status**: ✅ **VERIFIED COMPLETE** - All acceptance criteria met, cache now stores function code content and successfully recreates files on cache hits
+
+#### [PERF-001] Implement Validation Caching ✅ **COMPLETED**
+
+- **Description**: Implement caching for experiment coherence validation to eliminate redundant validation when input assets haven't changed
+- **Dependencies**: [CRITICAL-002] ✅ **COMPLETED**
+- **Root Cause**: Validation runs every time even when framework, experiment, and corpus haven't changed, causing unnecessary LLM calls and delays
+- **Solution**: Cache validation results based on content hashes of framework, experiment, corpus, and model
+- **Impact**:
+  - Eliminates 20-30 second validation delays on repeated runs
+  - Reduces LLM API costs for development iterations
+  - Maintains same validation quality and error detection
+- **Acceptance Criteria**:
+  - [X] ValidationCacheManager created with deterministic cache keys ✅ **COMPLETED**
+  - [X] Cache key based on framework + experiment + corpus + model content ✅ **COMPLETED**
+  - [X] Validation results cached with success/failure status and issues ✅ **COMPLETED**
+  - [X] Cache hits skip validation and use stored results ✅ **COMPLETED**
+  - [X] Failed validations properly cached and re-raise errors ✅ **COMPLETED**
+  - [X] Unit tests cover all caching scenarios ✅ **COMPLETED**
+  - [X] Integration with CleanAnalysisOrchestrator performance metrics ✅ **COMPLETED**
+- **Effort**: 2 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** - Significant development velocity improvement
+- **Status**: ✅ **COMPLETED** - Full implementation and testing complete
+- **Completion Details**:
+  - **ValidationCacheManager**: Fully implemented with deterministic cache key generation using SHA-256 hashes
+  - **Orchestrator Integration**: Validation caching integrated into CleanAnalysisOrchestrator with performance metrics tracking
+  - **Cache Management**: CLI commands for cache statistics, cleanup, and efficiency reporting
+  - **Integration Testing**: Comprehensive test suite validates caching workflow, cache hits/misses, and persistence
+  - **Performance Monitoring**: Cache hits/misses tracked and reported in orchestrator performance metrics
+- **Deliverables**:
+  - `discernus/core/validation_cache.py` - Core caching implementation with management features
+  - `discernus/tests/test_validation_caching_integration.py` - Integration tests (5/5 passing)
+  - `discernus/cli.py` - Cache management CLI commands (stats, cleanup, efficiency)
+  - Enhanced orchestrator with cache performance reporting and final summary
+- **Results**:
+  - Cache hit rate: 100% for repeated validations (0s vs 30s validation time)
+  - Performance metrics: Cache hits/misses properly tracked and reported
+  - Cache management: CLI tools for monitoring, cleanup, and efficiency analysis
+  - Integration tests: All 5 tests passing, validating end-to-end functionality
+  - Cache efficiency: High efficiency with well-optimized cache management
+
+### 🎯 **SPRINT 2: Analysis Variance Reduction** ✅ **COMPLETED**
+
+**Timeline**: 3-5 days ✅ **COMPLETED**
+**Goal**: Implement 3-run internal self-consistency to stabilize analysis variance without system changes ✅ **COMPLETED**
+
+**🎯 Sprint 2 Complete**: All objectives successfully implemented and validated:
+
+- ✅ Analysis caching working reliably
+- ✅ Derived metrics caching stable with function code storage
+- ✅ Validation caching eliminating redundant checks
+- ✅ 3-run internal self-consistency implemented and tested
+- ✅ Import chain dependency failures resolved
+
+#### [VARIANCE-001] Implement 3-Run Internal Self-Consistency Analysis
+
+- **Description**: Implement internal self-consistency approach using 3 independent analysis runs with median aggregation to reduce variance in analysis scores
+- **Dependencies**: [CRITICAL-002] (caching must be stable first) ✅ **COMPLETED**
+- **Research-Based Rationale**:
+  - **Literature Support**: Academic research shows 3-5 runs provide optimal cost-performance balance for Phase 2 structured experimentation
+  - **Median Aggregation**: Studies demonstrate median consistently outperforms mean-based approaches for LLM ensembles with non-normal distributions
+  - **Self-Consistency Evidence**: Multiple independent analytical perspectives significantly outperform single-run approaches for complex analytical tasks
+  - **Problem Alignment**: Addresses our specific variance issue (interpretive consistency) rather than accuracy improvement
+- **Technical Approach**:
+  - Prompt engineering only - no orchestrator changes required
+  - LLM generates three independent analyses (Evidence-First, Context-Weighted, Pattern-Based), then calculates median
+  - Returns final aggregated result in existing format (not three separate approaches)
+  - Maintains compatibility with current pipeline and caching system
+- **Acceptance Criteria**:
+  - [X] Analysis prompts request 3 independent analytical approaches ✅ **COMPLETED**
+  - [X] LLM performs internal median aggregation and returns standard format ✅ **COMPLETED**
+  - [X] Test run validates output structure and variance reduction ✅ **COMPLETED**
+
+- [X] Baseline comparison shows reduced variance vs single-run approach ✅ **COMPLETED**
+- [X] No breaking changes to existing system architecture ✅ **COMPLETED**
+
+- **Future Scaling**: Can implement adaptive scaling (3-5 runs based on consensus) if initial results show high variance cases
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** - Addresses main source of variance with low implementation risk
+- **Status**: ✅ **COMPLETED** - Full implementation and testing complete
+- **Completion Date**: 2025-01-27
+- **Deliverables**: Full variance reduction analysis report available at `/Volumes/code/discernus/pm/reports/variance_reduction_analysis_20250829`
+- **Results**: 3-run internal self-consistency successfully implemented with median aggregation, variance reduction validated through comprehensive testing
+
+#### [CRITICAL-005] Fix Import Chain Dependency Failures ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: Multiple import failures indicate broken dependency resolution and circular import issues in the orchestration layer
+- **Dependencies**: None
+- **Root Cause**:
+  - Broken dependency resolution - import paths don't match actual module structure
+  - Circular import potential - components importing from each other creating dependency cycles
+  - Module structure changes - code references modules that have been moved or restructured
+  - Missing `__init__.py` files in agent directories
+- **Impact**:
+  - CLI fails to start with import errors
+  - Blocking all experiments until imports are fixed
+  - Indicates deeper architectural dependency issues
+  - Suggests module organization needs review
+- **Evidence from Terminal**:
+  - `cannot import name 'ValidationCache' from 'discernus.core.validation_cache'`
+  - `cannot import name 'FactCheckerAgent' from 'discernus.agents.fact_checker_agent'`
+  - Multiple import failures during orchestrator initialization
+- **Acceptance Criteria**:
+  - [X] All import chains in orchestration layer mapped and documented
+  - [X] Circular import dependencies identified and eliminated
+  - [X] Module dependency graph documented
+  - [X] Module organization and structure reviewed and standardized
+  - [X] CLI starts without import errors
+- **Effort**: 1-2 days ✅ **COMPLETED**
+- **Priority**: **CRITICAL** - System startup failure
+- **Status**: ✅ **VERIFIED COMPLETE** - All import dependency issues resolved, CLI and orchestrator import successfully, no recent import errors
+
+#### [TEST-INFRA] Fix Integration Test Infrastructure ✅ **COMPLETED**
+
+- **Description**: Integration tests incorrectly mock critical setup, causing false failures
+- **Impact**: False test failures prevent validation of all features
+- **Root Cause**: Tests mock `_initialize_infrastructure` which bypasses `artifact_storage` setup
+- **Dependencies**: [CRITICAL-005]
+- **Acceptance Criteria**:
+  - [X] Integration tests run without infrastructure errors
+  - [X] Tests accurately reflect actual system status
+  - [X] Mocking doesn't bypass critical system components
+  - [X] Test failures indicate real problems, not setup issues
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Priority**: **HIGH** - Blocking validation of all features
+- **Status**: ✅ **COMPLETED** - Core infrastructure mocking issue resolved
+- **Completion Notes**:
+  - Infrastructure mocking bypassing artifact storage setup has been fixed
+  - Tests now properly set `orchestrator.artifact_storage = mock_storage`
+  - Some tests pass, others need method name updates to match current orchestrator
+- **Deliverables**:
+  - Fixed test infrastructure mocking patterns
+  - Resolved artifact storage setup bypass issue
+- **Results**: Core TEST-INFRA issue resolved, test suite modernization needed
+
+#### [CRITICAL-003] Fix Evidence Planning and Integration Failures ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: Evidence planning and integration failures are breaking the synthesis pipeline, causing reports to lack proper textual evidence support for statistical claims
+- **Dependencies**: [TEST-INFRA]
+- **Root Cause**:
+  - LLM responses not properly formatted as JSON blocks
+  - Regex pattern too strict, causing "No JSON block found in LLM response"
+  - Evidence retrieval prompt too verbose and complex
+  - Fallback evidence retrieval provides empty results instead of useful evidence
+- **Impact**:
+  - Research integrity compromised - framework designed to link evidence to conclusions is broken
+  - Report quality degraded - synthesis reports lack textual support for statistical claims
+  - Pipeline reliability - evidence integration phase consistently fails, affecting all experiments
+- **Evidence from Terminal**:
+  - `"No JSON block found in LLM response. Could not parse plan."`
+  - `"Invalid or empty evidence plan provided. Using fallback."`
+  - `"No curated evidence artifact provided. Synthesis will proceed without curated evidence."`
+  - Evidence database contains 66 evidence pieces but synthesis can't access them
+- **Acceptance Criteria**:
+  - [X] JSON parsing regex made more robust to handle various LLM response formats
+  - [X] Evidence retrieval prompt simplified with explicit JSON formatting examples
+  - [X] Fallback evidence retrieval provides useful evidence even when planning fails
+  - [X] Response format validation added before parsing attempts
+  - [X] Evidence integration phase works reliably across all experiments
+- **Effort**: 2-3 days ✅ **COMPLETED**
+- **Priority**: **CRITICAL** - Research integrity issue
+- **Status**: ✅ **VERIFIED COMPLETE** - Evidence retrieval working reliably, JSON parsing robust, database populated with 7,787 evidence pieces, no recent errors
+
+#### [CRITICAL-004] Fix Orchestrator Data Structure Mismatch ✅ **COMPLETED**
+
+- **Description**: **CRITICAL BUG**: The orchestrator creates individual analysis files but the `AutomatedDerivedMetricsAgent` expects a consolidated `analysis_data.json` file, causing pipeline failures
+- **Dependencies**: [TEST-INFRA]
+- **Root Cause**:
+  - Data flow inconsistency between orchestrator and agent expectations
+  - Missing standardized data format contract
+  - Agent's fallback mechanism insufficient for LLM generation
+  - Tight coupling between orchestrator file creation and agent expectations
+- **Impact**:
+  - Experiments fail during derived metrics phase
+  - `AutomatedDerivedMetricsAgent` cannot generate required functions
+  - Pipeline breaks with "No such file or directory" errors
+  - Temporary workspace management becomes brittle
+- **Evidence from Terminal**:
+  - `[Errno 2] No such file or directory: '.../temp_derived_metrics/automatedderivedmetricsagent_functions.py'`
+  - Agent looking for `analysis_data.json` but finding individual files
+  - Fallback to generic data structure insufficient for LLM generation
+- **Acceptance Criteria**:
+  - [X] Data structure contracts between orchestrator and agents documented
+  - [X] Expected file formats and naming conventions standardized
+  - [X] All components with file structure dependencies identified
+  - [X] Standardized data flow specifications created
+  - [X] Pipeline works reliably with consistent data structures
+- **Effort**: 2-3 days ✅ **COMPLETED**
+- **Priority**: **CRITICAL** - Pipeline failure issue
+- **Status**: ✅ **VERIFIED COMPLETE** - Orchestrator creates analysis_data.json correctly, agent reads it successfully, derived metrics phase working in recent experiments
+
+### 🎯 **SPRINT 3: Data Quality & Evidence Enhancement** ✅ **COMPLETED**
+
+**Timeline**: 2-3 days
+**Goal**: Improve statistical data mapping and evidence retrieval for higher quality synthesis reports
+
+#### [DATA-001] Explicit Administration/Grouping in Corpus Manifests ✅ **COMPLETED**
+
+- **Description**: Statistical agent generates fragile filename parsing logic instead of using corpus metadata, causing "Unknown" categorization in ANOVA
+- **Root Cause**:
+  - Statistical agent's `_get_administration_mapping` function parses filenames instead of using corpus manifest
+  - No explicit analytical grouping variables in corpus manifest
+  - Experiment specification doesn't enforce manifest-based grouping
+- **Impact**:
+  - Documents categorized as "Unknown" in statistical analyses
+  - ANOVA and other group-based tests compromised
+  - Fragile coupling between filename conventions and statistical logic
+- **Solution**:
+  - Add explicit analytical grouping fields to corpus manifest (e.g., `administration: "Trump"`)
+  - Update statistical agent prompt to mandate corpus manifest usage
+  - Never parse filenames for metadata extraction
+- **Acceptance Criteria**:
+  - [X] Corpus manifest format supports explicit analytical groupings
+  - [X] Statistical agent prompt requires manifest-based metadata extraction
+  - [X] No filename parsing in generated statistical functions
+  - [X] All documents properly categorized in statistical analyses
+- **Effort**: 1-2 days ✅ **COMPLETED**
+- **Priority**: **HIGH** - Data integrity issue
+- **Status**: ✅ **VERIFIED COMPLETE** - Corpus manifests contain explicit grouping variables, statistical agent uses manifest-based categorization, documents properly grouped by administration in ANOVA
+
+#### [DATA-002] Increase Evidence Retrieval Limits ✅ **COMPLETED**
+
+- **Description**: Evidence retriever limited to 3 quotes per query is a premature optimization reducing report quality
+- **Root Cause**: Conservative hard-coded limit in evidence_retriever_agent.py line 365
+- **Impact**:
+  - Synthesis reports lack sufficient evidence support
+  - Statistical findings under-documented
+  - Report quality unnecessarily constrained
+- **Solution**:
+  - Increase limit from 3 to 10-15 quotes per query
+  - Consider making limit configurable or adaptive
+  - RAG queries are cheap - optimize for quality over minor cost savings
+- **Acceptance Criteria**:
+  - [X] Evidence retrieval limit increased to 10+ quotes per query
+  - [X] Synthesis reports show richer evidence support
+  - [X] Consider making limit configurable via experiment spec
+- **Effort**: 1 hour ✅ **COMPLETED**
+- **Priority**: **HIGH** - Quick win for quality improvement
+- **Status**: ✅ **VERIFIED COMPLETE** - Evidence retrieval limit increased to 12 quotes per query, system retrieving 5-8 quotes per finding, providing rich evidence support for statistical claims
+
+#### [DATA-003] Update Specifications for Coherence Validation ✅ **COMPLETED**
+
+- **Description**: Specifications need updates to ensure coherence agent (Helen) validates custom grouping variables.
+- **Dependencies**: [DATA-001]
+- **Impact**: Prevents experiments with metadata mismatches from running, saving compute time and providing clearer error messages.
+- **Solution**:
+  - Updated `CORPUS_SPECIFICATION.md` to formally define how custom analytical grouping variables are declared.
+  - Updated `EXPERIMENT_SPECIFICATION.md` to mandate that the coherence agent validates the presence of these variables.
+- **Acceptance Criteria**:
+  - [X] Corpus spec defines how to add custom analytical variables.
+  - [X] Experiment spec requires grouping variables exist in corpus.
+  - [X] Coherence agent validates grouping variable presence.
+  - [X] Validation catches metadata mismatches before runtime.
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Prevents future issues.
+- **Status**: ✅ **VERIFIED COMPLETE** - Both specification documents have been updated to enforce coherence validation for custom grouping variables.
+
+### 🎯 **SPRINT 4: Logging Architecture & Code Quality** ✅ **COMPLETED**
+
+**Timeline**: 3-5 days ✅ **COMPLETED**
+**Goal**: Fix logging configuration complexity and establish clean architecture ✅ **COMPLETED**
+
+**🎯 Sprint 4 Complete**: All major logging configuration issues resolved:
+
+- ✅ Logging configuration complexity crisis addressed
+- ✅ Unified logging system with proper debug suppression
+- ✅ Clean console output without overwhelming debug messages
+- ✅ Centralized logging policy enforcement established
+
+#### [LOGGING-001] Logging Configuration Complexity Crisis ✅ **COMPLETED**
+
+- **Description**: **CRITICAL ARCHITECTURAL FLAW**: Discovered a convoluted, multi-layered logging configuration system causing verbose debug output and making experiments unreadable
+- **Dependencies**: [CRITICAL-005]
+- **Root Cause**:
+  - Multiple logging systems coexisting (Standard Python logging, loguru, custom configurations)
+  - Orchestrator hardcoded `txtai_logger.setLevel(logging.DEBUG)` in 3 separate locations
+  - Inconsistent levels - console set to WARNING but components override with DEBUG
+  - No centralized logging policy enforcement
+- **Impact**:
+  - Experiments produce overwhelming debug output
+  - Terminal becomes unreadable during execution
+  - Researchers can't see actual progress or errors
+  - Violates "human-centric UX" principle
+- **Evidence from Terminal**:
+  - txtai embeddings debug output flooding console
+  - Multiple logging systems competing for output
+  - Console handlers being overridden by component-level settings
+- **Acceptance Criteria**:
+  - [X] All logging configurations across codebase mapped and documented
+  - [X] All components that override logging levels identified
+  - [X] Logging hierarchy and override points documented
+  - [X] Centralized logging policy and enforcement created
+  - [X] Duplicate and conflicting logging systems eliminated
+  - [X] Clear separation between debug (file) and user (console) output
+- **Effort**: 3-5 days ✅ **COMPLETED**
+- **Priority**: **HIGH** - Researcher experience issue
+- **Status**: ✅ **VERIFIED COMPLETE** - Unified Loguru-based logging system with comprehensive debug suppression, clean console output, and proper separation between user and debug logging
+
+#### [LOGGING-002] Investigate CLI and Logging Experience. ✅ **COMPLETED**
+
+- **Description**: Investigate current use of Rich CLI and Loguru libraries in the Discernus platform to ensure optimal researcher experience and logging implementation.
+- **Dependencies**: None
+- **Investigation Areas**:
+  - Review Rich and Loguru best practices and latest features
+  - Assess current implementation against library capabilities
+  - Identify opportunities for improved user experience (progress bars, live updates, better error handling)
+  - Evaluate performance impact and consistency of logging usage
+- **Deliverables**:
+  - Analysis report of current implementations ✅ **COMPLETED**
+  - Recommendations for optimization, enhancement, and standardization ✅ **COMPLETED**
+  - Implementation plan for any identified improvements ✅ **COMPLETED**
+  - **Bonus**: Progress bars implementation ✅ **COMPLETED**
+- **Effort**: 2-3 days ✅ **COMPLETED** (2 days + progress bars)
+- **Priority**: **MEDIUM** - Enhancement opportunity ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Comprehensive CLI UX assessment and progress bars implemented
+
+---
+
 ## Completed Items
 
 ### 🏆 Major Achievements Summary
@@ -21,6 +396,7 @@
 - ✅ **Framework Library Compliance**: Comprehensive framework ecosystem with automated validation
 - ✅ **Clean Orchestrator Foundation**: Enterprise-grade features with graceful degradation
 - ✅ **Enhanced Synthesis**: Multi-level analytical architecture with literature integration
+- ✅ **Sprints 1-4 Complete**: All major infrastructure issues resolved (moved from sprints.md)
 
 **CURRENT CAPABILITY**: 7-line experiment specification → 3,000-word academic analysis with sophisticated statistical tables, literature review, and evidence integration using proper THIN architecture.
 
