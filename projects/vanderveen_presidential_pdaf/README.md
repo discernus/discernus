@@ -4,6 +4,13 @@
 
 This dedicated project replicates the presidential campaign portion of Van der Veen et al. (2024) "Classifying populist language in American presidents" using the PDAF v10.0 framework instead of their original methodology.
 
+## ✅ **Experiment Status: COMPLETED**
+
+**Run ID**: 20250830T054450Z  
+**Status**: Successfully completed  
+**Results**: All primary hypotheses confirmed, PDAF v10.0 framework validated on 57 presidential speeches  
+**Summary**: The experiment successfully replicated van der Veen et al. (2024) methodology using PDAF v10.0, confirming significant differences in populist rhetoric across candidates (ANOVA, p < .05). Trump (M = 0.84) and Sanders (M = 0.81) scored highest on populism, with Republicans higher on Nationalist Exclusion and Democrats higher on Economic Populist Appeals. Full results available in `runs/20250830T054450Z/results/final_report.md`.
+
 ## 📊 **Strategic Rationale**
 
 ### **Why This Approach?**
@@ -13,14 +20,15 @@ This dedicated project replicates the presidential campaign portion of Van der V
 - **✅ Risk Reduction**: No data collection challenges or quality concerns
 - **✅ Research Value**: Establishes PDAF credibility on established populism data
 
-### **Phase 1 vs. Phase 2 Strategy**
-| **Phase 1 (Current)** | **Phase 2 (Future)** |
-|----------------------|---------------------|
-| 23 existing speeches | 180+ expanded corpus |
-| Established data quality | New data collection |
-| Framework validation | Longitudinal analysis |
-| 3-day execution | 6-8 week timeline |
-| Low risk, high certainty | Higher risk, broader scope |
+### **Three-Phase Strategy**
+| **Phase 1 (Completed)** | **Phase 2 (In Progress)** | **Phase 3 (Planned)** |
+|------------------------|---------------------------|----------------------|
+| 57 speeches (2016) | 200+ speeches (2008-2024) | Multi-framework analysis |
+| PDAF v10.0 only | PDAF v10.0 validation | CFF + MFT + Lakoff Framing |
+| Framework validation | Corpus expansion | Cross-framework comparison |
+| 3-day execution | 2-week timeline | 2-week timeline |
+
+*For detailed project planning and current status, see `/pm/vanderveen_replication_extension/vdv_pm/`*
 
 ## 📁 **Project Structure**
 
@@ -31,8 +39,10 @@ projects/vanderveen_presidential_pdaf/
 ├── 🔧 pdaf_v10.md               # Framework specification (inherited)
 ├── 📊 corpus/                   # Converted speech files
 │   ├── manifest.json           # Speech metadata and statistics
-│   └── *.txt                   # Individual speech files (23 total)
+│   └── *.txt                   # Individual speech files (57 total)
 ├── 📈 runs/                    # PDAF analysis results
+│   └── 20250830T054450Z/      # Completed experiment run
+│       └── results/            # Analysis outputs and reports
 ├── 📜 scripts/                 # Processing and analysis scripts
 │   └── convert_docx_to_text.py # DOCX to text conversion
 └── 📚 docs/                    # Analysis reports and findings
@@ -40,147 +50,141 @@ projects/vanderveen_presidential_pdaf/
 
 ## 🚀 **Execution Plan**
 
-### **Day 1: Data Processing**
-1. **Convert DOCX files** to plain text using `scripts/convert_docx_to_text.py`
-2. **Create manifest.json** with speech metadata
-3. **Validate conversion quality** and text formatting
-4. **Prepare PDAF analysis input** files
+### **Phase 1: Initial Experiment (COMPLETED)**
+1. **Data Processing**: Convert and validate 57 presidential speeches
+2. **PDAF Analysis**: Execute PDAF v10.0 on full corpus
+3. **Results Generation**: Statistical analysis and hypothesis testing
+4. **Framework Validation**: Confirm PDAF performance on presidential discourse
 
-### **Day 2: PDAF Analysis**
-1. **Execute PDAF v10.0** on all 23 speeches
-2. **Generate dimension scores** and salience ratings
-3. **Calculate strategic tension** metrics
-4. **Create per-speech analysis** reports
-
-### **Day 3: Results & Insights**
-1. **Aggregate campaign trajectory** analysis
-2. **Compare with original study** methodology
-3. **Document methodological insights** and PDAF advantages
-4. **Generate research findings** report
+### **Additional Runs (Planned)**
+- **Refinement Runs**: Additional experiment executions with tweaked experiment parameters and corpus metadata to refine the analytical approach
+- **Validation Runs**: Cross-validation of results and framework performance
+- **Extension Runs**: Preparation for Phase 2 corpus expansion
 
 ## 📊 **Data Overview**
 
 ### **Source Material**
 - **Study**: Van der Veen et al. (2024) "Classifying populist language in American presidents"
-- **Speaker**: Donald Trump
-- **Context**: 2016 Republican presidential nomination campaign
-- **Format**: 23 Microsoft Word documents (.docx)
+- **Corpus**: 57 speeches from 6 major 2016 presidential candidates
+- **Format**: Plain text files with standardized metadata
 - **Date Range**: June 16, 2015 - November 8, 2016
 
-### **Key Speeches**
-- **Campaign Announcement** (June 16, 2015)
-- **RNC Acceptance Speech** (July 21, 2016)
-- **Election Night Speech** (November 8, 2016)
-- **Primary victory speeches** (multiple dates)
-- **Policy addresses** and rally speeches
+### **Key Candidates**
+- **Trump** (n=22): Republican nominee, outsider candidate
+- **Clinton** (n=21): Democratic nominee, establishment candidate
+- **Sanders** (n=5): Democratic primary challenger, progressive populist
+- **Cruz** (n=3): Republican primary challenger, conservative populist
+- **Rubio** (n=4): Republican establishment candidate
+- **Kasich** (n=2): Republican moderate, baseline reference
 
 ### **Processing Requirements**
-- **Input**: DOCX files with speech transcripts
-- **Output**: Plain text files for PDAF analysis
-- **Metadata**: Dates, titles, word counts, context
-- **Quality**: Clean conversion without formatting artifacts
+- **Input**: Standardized text files with metadata
+- **Output**: PDAF analysis results with statistical validation
+- **Metadata**: Dates, titles, word counts, context, candidate type
+- **Quality**: Validated transcription and consistent formatting
 
 ## 🔬 **PDAF Analysis Scope**
 
 ### **Framework Application**
 - **9 Core Dimensions**: All PDAF v10.0 dimensions applicable
 - **Salience Weighting**: Rhetorical prominence analysis
-- **Strategic Tension**: Internal contradiction detection
+- **Strategic Tension**: Internal contradiction detection (PSCI calculation)
 - **Context**: 2016 presidential campaign rhetoric
 
-### **Expected Insights**
-- **Campaign Evolution**: Populism changes across primary/general phases
-- **Rhetorical Patterns**: Most effective populist appeals
-- **Strategic Dynamics**: Tension between different populist dimensions
-- **Methodological Comparison**: PDAF vs. traditional coding approaches
+### **Key Insights Achieved**
+- **Candidate Differentiation**: Clear populism patterns identified across candidates
+- **Partisan Patterns**: Republicans higher on Nationalist Exclusion, Democrats on Economic Populist Appeals
+- **Strategic Analysis**: Strategic tension analysis reveals rhetorical sophistication
+- **Framework Validation**: PDAF successfully discriminates between candidate types
 
 ## 📈 **Success Metrics**
 
-### **Technical Success**
-- ✅ All 23 speeches successfully converted and processed
-- ✅ PDAF analysis completes without errors
+### **Technical Success** ✅ **ACHIEVED**
+- ✅ All 57 speeches successfully processed and analyzed
+- ✅ PDAF analysis completed without errors
 - ✅ Results format suitable for research dissemination
 - ✅ Processing time under 2 hours total
 
-### **Research Success**
+### **Research Success** ✅ **ACHIEVED**
 - ✅ Clear populism patterns identified across campaign
-- ✅ Meaningful evolution tracked over 17 months
+- ✅ All primary hypotheses confirmed with statistical significance
 - ✅ Strategic tension analysis reveals rhetorical dynamics
-- ✅ Results provide basis for framework validation
+- ✅ Results provide basis for framework validation and Phase 2 expansion
 
 ## 🔗 **Integration Points**
 
 ### **Related Projects**
 - **Main Trump Project**: `/projects/2d_trump_populism/` (PDAF framework source)
-- **Source Data**: `/pm/paper_replication_experiment_vanderveen/` (original speeches)
+- **Project Management**: `/pm/vanderveen_replication_extension/vdv_pm/` (current planning)
 - **Analysis Tools**: `/corpus/tools/` (processing utilities)
 
 ### **Dependencies**
-- **Python Environment**: Compatible with PDAF v10.0 and python-docx
+- **Python Environment**: Compatible with PDAF v10.0
 - **File Access**: Read access to source directory, write access to output
-- **External Libraries**: python-docx for DOCX processing
+- **Framework**: PDAF v10.0 specification and analysis pipeline
 
 ## ⚠️ **Prerequisites**
 
 ### **System Requirements**
 ```bash
-pip install python-docx  # For DOCX processing
 # PDAF v10.0 environment already configured
+# Analysis pipeline functional and validated
 ```
 
 ### **Data Access**
-- ✅ Source speeches available at specified path
+- ✅ Source speeches available and processed
 - ✅ Write access to output directories
-- ✅ Sufficient disk space for converted files
+- ✅ Sufficient disk space for analysis results
 
 ### **Framework Readiness**
 - ✅ PDAF v10.0 specification available
-- ✅ Analysis pipeline functional
-- ✅ Output validation procedures ready
+- ✅ Analysis pipeline functional and tested
+- ✅ Output validation procedures established
 
 ## 📋 **Quick Start Guide**
 
-### **1. Convert Speech Data**
+### **1. Review Completed Results**
 ```bash
 cd projects/vanderveen_presidential_pdaf
-python scripts/convert_docx_to_text.py
+cat runs/20250830T054450Z/results/final_report.md
 ```
 
-### **2. Verify Conversion**
+### **2. Examine Statistical Results**
 ```bash
-ls corpus/*.txt | wc -l  # Should show 23
-cat corpus/manifest.json # Review speech metadata
+cat runs/20250830T054450Z/results/statistical_results.json
 ```
 
-### **3. Execute PDAF Analysis**
+### **3. Access Analysis Artifacts**
 ```bash
-# Use existing PDAF analysis pipeline
-# Results will be stored in runs/ directory
+ls runs/20250830T054450Z/results/  # View all outputs
+ls runs/20250830T054450Z/results/corpus/  # Access source documents
 ```
 
-### **4. Review Results**
+### **4. Prepare for Additional Runs**
 ```bash
-# Check runs/ directory for analysis outputs
-# Review docs/ for aggregated findings
+# Modify experiment.md for parameter tweaks
+# Update corpus.md for metadata refinements
+# Execute new experiment runs as needed
 ```
 
 ## 🎯 **Next Steps**
 
 ### **Immediate Actions**
-1. **Run conversion script** to process DOCX files
-2. **Review manifest.json** for speech metadata accuracy
-3. **Execute PDAF analysis** on converted corpus
-4. **Analyze results** for populism patterns and evolution
+1. **Review completed results** from Run 20250830T054450Z
+2. **Plan refinement runs** with tweaked parameters and metadata
+3. **Prepare for Phase 2** corpus expansion (200+ speeches)
+4. **Execute additional validation runs** to refine analytical approach
 
-### **Post-Analysis**
-1. **Compare methodologies** (PDAF vs. original study)
-2. **Document insights** and framework advantages
-3. **Plan Phase 2 expansion** based on validated approach
-4. **Publish findings** as methodological contribution
+### **Phase 2 Preparation**
+1. **Corpus expansion planning** for 2008-2024 election cycles
+2. **PDAF validation** on expanded corpus
+3. **Longitudinal analysis** preparation across election cycles
+4. **Phase 3 transition** planning for multi-framework analysis
 
 ---
 
-**Project Status**: **READY FOR EXECUTION** 🚀
-**Estimated Duration**: 3 days
-**Success Probability**: High (focused scope, established data, validated framework)
-**Impact**: Framework validation + methodological insights + Phase 2 foundation
+**Project Status**: **PHASE 1 COMPLETED** ✅  
+**Next Phase**: **CORPUS EXTENSION** 🎯  
+**Estimated Duration**: Phase 2 (2 weeks), Phase 3 (2 weeks)  
+**Success Probability**: High (Phase 1 validated, clear path forward)  
+**Impact**: Framework validation + methodological insights + Phase 2/3 foundation
